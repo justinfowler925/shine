@@ -142,9 +142,43 @@ for (const [lane, { modes, gates, advisory, assertions = [] }] of Object.entries
   const src = existsSync(localSrc) ? localSrc : new URL(`../src/${lane}.tokens.json`, import.meta.url);
   if (existsSync(localSrc)) console.log(`[${lane}] gating the private lane (tokens/local/)`);
   const tokens = flatten(JSON.parse(readFileSync(src, 'utf8')));
+
+  // A private lane can legitimately need a threshold this repo's placeholder
+  // palette does not: a brand book fixes a fill, and every way of clearing the
+  // public gate measures worse than the shortfall. That case is real, and the
+  // wrong answers to it are both worse than this — edit the gate in a fork
+  // (it drifts, invisibly), or let the build fail forever (which teaches the
+  // team to stop reading it).
+  //
+  // So: tokens/local/<lane>.gates.json, gitignored, alongside the palette it
+  // belongs to. Every override MUST carry a `why`, the run prints each one as
+  // EXCEPT with its reason, and a missing `why` is a hard failure — an
+  // exception nobody has to justify in writing is just a lower gate.
+  // Assertions still run, so the premise behind the number stays falsifiable.
+  const gateFile = new URL(`../local/${lane}.gates.json`, import.meta.url);
+  let laneGates = gates;
+  if (existsSync(gateFile)) {
+    const { overrides = [] } = JSON.parse(readFileSync(gateFile, 'utf8'));
+    for (const o of overrides) {
+      if (!o.why?.trim()) {
+        console.error(`FAIL [${lane}] gate override ${o.fg} on ${o.bg} has no "why" — refusing to lower a gate anonymously.`);
+        failures++;
+        continue;
+      }
+      const i = laneGates.findIndex(([f, b]) => f === o.fg && b === o.bg);
+      if (i === -1) {
+        console.error(`FAIL [${lane}] gate override targets a pair this lane does not gate: ${o.fg} on ${o.bg}`);
+        failures++;
+        continue;
+      }
+      const [, , was] = laneGates[i];
+      laneGates = laneGates.map((g, n) => (n === i ? [o.fg, o.bg, o.min] : g));
+      console.log(`EXCEPT [${lane}] ${o.fg} on ${o.bg}: gate ${was} → ${o.min} — ${o.why}`);
+    }
+  }
   for (const mode of modes) {
     const label = mode === '.' ? 'default' : mode;
-    for (const [fgId, bgId, min] of gates) {
+    for (const [fgId, bgId, min] of laneGates) {
       const fg = toChroma(resolve(tokens, fgId, mode));
       const bg = toChroma(resolve(tokens, bgId, mode));
       const wcag = chroma.contrast(fg, bg);

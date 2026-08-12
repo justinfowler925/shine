@@ -47,7 +47,37 @@ a private brand with no flag to remember. `sync-consumers` prefers `local/dist` 
 it exists.
 
 The guard is the point: **there is no code path that writes a real brand palette into
-`src/` or `dist/`.** It does not depend on anyone remembering the rule at commit time.
+`src/` or `dist/`.**
+
+### When a private lane needs a different gate
+
+A brand book can fix a value that cannot clear the public gate — and the two
+obvious responses are both worse than the problem: editing the gate in a fork
+drifts invisibly, and a build that fails forever teaches the team to stop reading
+it. So a private lane may declare an exception in `tokens/local/<lane>.gates.json`
+(gitignored, next to the palette it belongs to):
+
+```json
+{
+  "overrides": [
+    { "fg": "color.primary-fg", "bg": "color.primary", "min": 3.0,
+      "why": "why the public threshold cannot be met, what the alternatives measured, and the residual risk" }
+  ]
+}
+```
+
+Three things keep this from becoming a way to turn the gate off:
+
+- **`why` is mandatory.** A blank one fails the run — an exception nobody has to
+  justify in writing is just a lower gate.
+- **Every run prints it** as an `EXCEPT` line with the reason attached, so the
+  exception is visible in the same output as the passes rather than buried.
+- **Assertions still run.** The lane's `assertions` guard the *premise* behind the
+  number, so an exception fails the moment its reasoning stops holding instead of
+  being inherited by whoever edits the palette next.
+
+An override that targets a pair the lane does not gate is a hard failure too —
+otherwise a typo silently gates nothing. It does not depend on anyone remembering the rule at commit time.
 
 Distributing a private lane to teammates means shipping three small files — the palette
 JSON, a brand-specific twin of `skill/references/brand.md`, and the built
