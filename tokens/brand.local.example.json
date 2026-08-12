@@ -1,0 +1,26 @@
+{
+  "//": "Copy anywhere OUTSIDE this repo, fill in your real palette, then build with:",
+  "//build": "SHINE_BRAND_OVERRIDE=/abs/path/to/brand.json node scripts/gen-source.mjs && npm run build",
+  "//writes": "The brand lane then lands in tokens/local/ (gitignored), never tokens/src/.",
+  "//shape": "Hexes and font stacks only — the generator lifts them into DTCG nodes.",
+
+  "color": {
+    "brand": {
+      "canvas": "#ffffff",
+      "canvas-subtle": "#eeeeee",
+      "navy": "#222244",
+      "anchor": "#111122",
+      "action": "#005555",
+      "action-hover": "#004444",
+      "tint": "#eeeeff",
+      "hairline": "#dddddd",
+      "text": "#111111",
+      "text-muted": "#555555"
+    }
+  },
+  "font": {
+    "display": ["Your Display", "Helvetica Neue", "Arial", "sans-serif"],
+    "body": ["Your Text", "Helvetica Neue", "Arial", "sans-serif"],
+    "ui": ["Your UI", "Helvetica Neue", "Arial", "sans-serif"]
+  }
+}

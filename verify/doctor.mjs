@@ -1,0 +1,676 @@
+#!/usr/bin/env node
+// shine-lint: off color spacing type shadow — this file holds the fixtures the gates are
+// fed (a raw hex, an off-scale padding, a literal font-size and a hand-rolled shadow,
+// below). A checker cannot prove a rule bites without stating the violation, so it is
+// exempt by pragma rather than by hiding the literal from itself. Named rules, not a bare
+// `off`: the point of the scoped form is that the file's own exemption is auditable, and
+// this file is the one that has to model it.
+//
+// shine doctor — is the design authority actually in force?
+//
+// Every shine failure so far has been a wiring failure, not a taste failure: the
+// skill scoped to six file extensions so it never loaded for UI inside a .py; the
+// per-edit lint keyed on the same extensions; Cursor never wired that lint at all;
+// the stop sweep wired on one surface only, with its own stale copy of the file
+// list; and the lint blocking the token layer it depends on. None of those printed
+// an error. They all looked like "no findings".
+//
+// So this is the routine for changing shine: make the change, then run
+//   node verify/doctor.mjs
+// and read the FAIL lines. It checks the wiring, proves the gates bite by feeding
+// them a known violation, and checks the token layer reached every consumer.
+//
+// Usage: node verify/doctor.mjs [--ci] [--quiet]
+//   --ci     skip machine-local checks (hook wirings, skill symlinks, vendored copies)
+//   --quiet  print only failures (for a sessionStart hook)
+
+import { readFileSync, readdirSync, existsSync, realpathSync, mkdtempSync, writeFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+import { join, dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { tmpdir, homedir } from "node:os";
+import { NODE_PATH } from "./deps.mjs";
+
+const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const HOME = homedir();
+const args = process.argv.slice(2);
+const CI = args.includes("--ci");
+const QUIET = args.includes("--quiet");
+
+const results = [];
+const ok = (name, detail = "") => results.push({ pass: true, name, detail });
+const fail = (name, detail) => results.push({ pass: false, name, detail });
+
+const readJSON = (p) => JSON.parse(readFileSync(p, "utf8"));
+const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
+
+// ---- 1. the skill can load at all -----------------------------------------
+{
+  const p = join(SHINE, "skill/SKILL.md");
+  const text = readFileSync(p, "utf8");
+  const fm = text.split(/^---$/m)[1] ?? "";
+  const gate = /^\s*(paths|globs)\s*:/m.exec(fm);
+  if (gate) {
+    fail("skill frontmatter", `\`${gate[1]}:\` scopes the skill to matching files, so Cursor withholds it everywhere else. Remove it.`);
+  } else if (!/^\s*name\s*:/m.test(fm) || !/^\s*description\s*:/m.test(fm)) {
+    fail("skill frontmatter", "needs name + description");
+  } else {
+    ok("skill frontmatter", "name + description, unscoped");
+  }
+}
+
+// ---- 2. the skill is deployed to both surfaces ----------------------------
+if (!CI) {
+  for (const [surface, p] of [
+    ["Cursor", join(HOME, ".cursor/skills/shine")],
+    ["Claude Code", join(HOME, ".claude/skills/shine")],
+  ]) {
+    const want = join(SHINE, "skill");
+    if (!existsSync(p)) fail(`${surface} skill deployed`, `missing: ln -s ${want} ${p}`);
+    else if (realpathSync(p) !== realpathSync(want))
+      fail(`${surface} skill deployed`, `points at ${realpathSync(p)}, not ${want}`);
+    else ok(`${surface} skill deployed`, p.replace(HOME, "~"));
+  }
+}
+
+// ---- 2b. shine-ux subagent on both surfaces (thin executor over the skill) -
+if (!CI) {
+  const want = join(SHINE, "agents/shine-ux.md");
+  if (!existsSync(want)) fail("shine-ux agent source", `missing ${want}`);
+  else {
+    ok("shine-ux agent source", "agents/shine-ux.md");
+    for (const [surface, p] of [
+      ["Cursor", join(HOME, ".cursor/agents/shine-ux.md")],
+      ["Claude Code", join(HOME, ".claude/agents/shine-ux.md")],
+    ]) {
+      if (!existsSync(p)) fail(`${surface} shine-ux agent`, `missing: ln -s ${want} ${p}`);
+      else if (realpathSync(p) !== realpathSync(want))
+        fail(`${surface} shine-ux agent`, `points at ${realpathSync(p)}, not ${want}`);
+      else ok(`${surface} shine-ux agent`, p.replace(HOME, "~"));
+    }
+  }
+}
+
+// ---- 2c. wireframe assets (gray-box mode) ---------------------------------
+{
+  const css = join(SHINE, "skill/assets/wireframe.css");
+  const fixture = join(SHINE, "verify/fixtures/wireframe-sample.html");
+  if (!existsSync(css)) fail("wireframe.css", `missing ${css}`);
+  else ok("wireframe.css", "skill/assets/wireframe.css");
+  if (!existsSync(fixture)) fail("wireframe fixture", `missing ${fixture}`);
+  else {
+    const html = readFileSync(fixture, "utf8");
+    const checks = [
+      [/data-shine-wireframe/, "data-shine-wireframe"],
+      [/data-primary/, "data-primary"],
+      [/data-job=/, "data-job"],
+      [/data-cite=/, "data-cite"],
+      [/color-scheme:\s*light/, "color-scheme: light"],
+    ];
+    const missing = checks.filter(([re]) => !re.test(html)).map(([, name]) => name);
+    if (missing.length) fail("wireframe fixture", `missing: ${missing.join(", ")}`);
+    else ok("wireframe fixture", "structural markers present");
+  }
+  // Craft exemption must actually work — a fixture that fails measure while the
+  // docs claim exemption is the same lie as a gate that never bites.
+  if (!CI && existsSync(fixture)) {
+    const r = spawnSync(process.execPath, [join(SHINE, "verify/measure.mjs"), fixture], {
+      encoding: "utf8",
+      env: { ...process.env, NODE_PATH },
+    });
+    if (r.status === 0) ok("wireframe measure exempt", "craft hard-fails skipped; structure held");
+    else {
+      fail(
+        "wireframe measure exempt",
+        (r.stderr || r.stdout || "").trim().split("\n").filter((l) => l.includes("✗") || l.includes("FAIL")).slice(0, 4).join(" · ") ||
+          `measure exited ${r.status}`,
+      );
+    }
+  }
+}
+
+// ---- 2d. root install scripts match the README ---------------------------
+{
+  const pkg = JSON.parse(readFileSync(join(SHINE, "package.json"), "utf8"));
+  const need = ["build", "verify", "doctor", "measure"];
+  const missing = need.filter((s) => !pkg.scripts?.[s]);
+  if (missing.length) fail("root npm scripts", `package.json missing: ${missing.join(", ")}`);
+  else ok("root npm scripts", need.join(", "));
+  const regIndex = join(SHINE, "site/r/index.html");
+  if (!existsSync(regIndex)) fail("registry /r/", "site/r/index.html missing (bare /r/ 404s)");
+  else ok("registry /r/", "site/r/index.html present");
+}
+
+// ---- 3. four hook wirings: per-edit and turn-end, on both surfaces --------
+if (!CI) {
+  const wirings = [
+    {
+      name: "Claude Code per-edit lint",
+      file: join(HOME, ".claude/settings.json"),
+      key: "PostToolUse",
+      pat: /design-lint\.mjs/,
+    },
+    {
+      name: "Claude Code stop sweep",
+      file: join(HOME, ".claude/settings.json"),
+      key: "Stop",
+      pat: /stop-sweep\.mjs/,
+    },
+    {
+      name: "Cursor per-edit lint",
+      file: join(HOME, ".cursor/hooks.json"),
+      key: "afterFileEdit",
+      pat: /design-lint\.mjs/,
+    },
+    {
+      name: "Cursor stop sweep",
+      file: join(HOME, ".cursor/hooks.json"),
+      key: "stop",
+      pat: /stop-sweep\.mjs/,
+    },
+    // This script, at session start, so a broken wiring is reported before the
+    // agent makes design decisions rather than after someone notices bad output.
+    {
+      name: "Claude Code doctor at session start",
+      file: join(HOME, ".claude/settings.json"),
+      key: "SessionStart",
+      pat: /doctor\.mjs/,
+    },
+    {
+      name: "Cursor doctor at session start",
+      file: join(HOME, ".cursor/hooks.json"),
+      key: "sessionStart",
+      pat: /doctor\.mjs/,
+    },
+  ];
+  for (const w of wirings) {
+    if (!existsSync(w.file)) {
+      fail(w.name, `${w.file.replace(HOME, "~")} does not exist`);
+      continue;
+    }
+    let conf;
+    try {
+      conf = readJSON(w.file);
+    } catch (e) {
+      fail(w.name, `${w.file.replace(HOME, "~")} is not valid JSON: ${e.message}`);
+      continue;
+    }
+    const branch = conf.hooks?.[w.key];
+    if (branch && has(branch, w.pat)) ok(w.name, `${w.key} in ${w.file.replace(HOME, "~")}`);
+    else fail(w.name, `no ${w.pat.source} under hooks.${w.key} in ${w.file.replace(HOME, "~")}`);
+  }
+
+  // The plugin-shipped copy, for anyone installing shine as a Claude Code plugin.
+  const plugin = join(SHINE, "hooks/hooks.json");
+  const conf = readJSON(plugin);
+  const missing = [
+    ["PostToolUse", /design-lint\.mjs/],
+    ["Stop", /stop-sweep\.mjs/],
+  ].filter(([k, pat]) => !has(conf.hooks?.[k], pat));
+  if (missing.length) fail("plugin hooks.json", `missing ${missing.map(([k]) => k).join(", ")}`);
+  else ok("plugin hooks.json", "PostToolUse + Stop");
+}
+
+// ---- 4. the gates actually bite -------------------------------------------
+// A gate never observed failing is decoration. Feed each one a known violation
+// inside a .py, which is the shape that slipped past every earlier version.
+{
+  const dir = mkdtempSync(join(tmpdir(), "shine-doctor-"));
+  const lint = join(SHINE, "hooks/design-lint.mjs");
+  const bad = join(dir, "ui.py");
+  const good = join(dir, "clean.py");
+  const plain = join(dir, "plain.py");
+  writeFileSync(bad, 'H = """<style>.a{color:#ff0044;padding:13px}</style>"""\n');
+  writeFileSync(good, 'H = """<style>.a{color:var(--shine-color-fg)}</style>"""\n');
+  writeFileSync(plain, "def f():\n    return 1  # 13px in a comment, not UI\n");
+
+  // Shadow and tracking got tokens on 2026-08-09, and a token nothing enforces is a
+  // suggestion. The negative cases matter as much: a focus ring and an inset highlight
+  // are not elevation, and blocking them would send people straight to a pragma —
+  // which is the failure this whole change exists to remove.
+  const shadowBad = join(dir, "elev.css");
+  const shadowOk = join(dir, "elev-ok.css");
+  const trackBad = join(dir, "track.css");
+  const scoped = join(dir, "scoped.css");
+  writeFileSync(shadowBad, ".c{box-shadow:0 2px 8px var(--shine-color-border)}\n");
+  writeFileSync(
+    shadowOk,
+    ".c{box-shadow:var(--shine-shadow-md)}\n" +
+      ".r{box-shadow:0 0 0 2px var(--shine-color-ring)}\n" +
+      ".i{box-shadow:inset 0 1px 0 var(--shine-color-border)}\n",
+  );
+  writeFileSync(trackBad, ".t{letter-spacing:0.08em}\n");
+  // Prose that documents a rule quotes the value it forbids — shine's own site explains
+  // why `text-[#1a1a1a]` erodes a token contract and was reported for it. Masking
+  // <code>/<pre> content and HTML comments must not also mask a real violation, so this
+  // fixture carries both in one file and expects exactly the real one to block.
+  const prose = join(dir, "prose.html");
+  writeFileSync(
+    prose,
+    "<p>Never write <code>text-[#1a1a1a]</code> in markup.</p>\n" +
+      "<!-- a comment mentioning #ff0000 -->\n" +
+      '<code class="text-[#1a1a1a]">still blocks</code>\n',
+  );
+  writeFileSync(
+    scoped,
+    "/* shine-lint: off shadow — doctor fixture */\n" +
+      ".c{box-shadow:0 2px 8px var(--shine-color-border)}\n" +
+      ".bad{color:#ff0044}\n",
+  );
+
+  const run = (file) => spawnSync("node", [lint, file], { encoding: "utf8" });
+  const cases = [
+    ["blocks embedded raw hex in .py", bad, 1],
+    ["passes a tokenized .py", good, 0],
+    ["ignores a .py with no UI in it", plain, 0],
+    ["blocks a hand-rolled box-shadow", shadowBad, 1],
+    ["passes shadow token, focus ring and inset", shadowOk, 0],
+    ["blocks a literal letter-spacing", trackBad, 1],
+  ];
+  for (const [name, file, want] of cases) {
+    const r = run(file);
+    if (r.status === want) ok(`per-edit lint ${name}`);
+    else fail(`per-edit lint ${name}`, `exit ${r.status}, expected ${want}${r.stderr ? `: ${r.stderr.split("\n")[0]}` : ""}`);
+  }
+
+  // The scoped pragma is the whole point: a bare `shine-lint: off` is what let
+  // mobile.css run with no colour or type checking for months on a stated reason of
+  // widget geometry. Naming one rule must silence that rule and nothing else.
+  const pr = run(prose);
+  const quotedIgnored = (pr.stderr.match(/text-\[#1a1a1a\]/g) ?? []).length === 1;
+  const attrBlocks = /prose\.html:3/.test(pr.stderr);
+  const commentIgnored = !/#ff0000/.test(pr.stderr);
+  if (pr.status === 1 && quotedIgnored && attrBlocks && commentIgnored)
+    ok("per-edit lint ignores quoted values in <code> but not in an attribute");
+  else
+    fail(
+      "per-edit lint ignores quoted values in <code> but not in an attribute",
+      `exit ${pr.status}, ${JSON.stringify(pr.stderr.slice(0, 160))}`,
+    );
+
+  const sc = run(scoped);
+  const silenced = !/box-shadow/.test(sc.stderr);
+  const stillBites = /raw hex/.test(sc.stderr) && sc.status === 1;
+  if (silenced && stillBites) ok("per-edit lint scoped pragma silences only the named rule");
+  else
+    fail(
+      "per-edit lint scoped pragma silences only the named rule",
+      `exit ${sc.status}, shadow ${silenced ? "silenced" : "STILL REPORTED"}, colour ${stillBites ? "still bites" : "ALSO SILENCED"}`,
+    );
+
+  // Stop sweep, both surfaces, over a real git repo.
+  const git = (...a) => spawnSync("git", a, { cwd: dir, encoding: "utf8" });
+  git("init", "-q", ".");
+  git("add", "-A");
+  const sweep = join(SHINE, "hooks/stop-sweep.mjs");
+  const feed = (event) =>
+    spawnSync("node", [sweep], { input: JSON.stringify({ ...event, cwd: dir }), encoding: "utf8" });
+
+  const cursor = feed({ hook_event_name: "stop", conversation_id: "doctor" });
+  if (cursor.status === 2 && /BLOCK/.test(cursor.stderr)) ok("stop sweep blocks (Cursor contract)");
+  else fail("stop sweep blocks (Cursor contract)", `exit ${cursor.status}, stderr ${JSON.stringify(cursor.stderr.slice(0, 120))}`);
+
+  const claude = feed({ hook_event_name: "Stop", stop_hook_active: false });
+  if (claude.status === 0 && /"decision"\s*:\s*"block"/.test(claude.stdout))
+    ok("stop sweep blocks (Claude Code contract)");
+  else fail("stop sweep blocks (Claude Code contract)", `exit ${claude.status}, stdout ${JSON.stringify(claude.stdout.slice(0, 120))}`);
+}
+
+// ---- 4b. the composition gate bites, and does not cry wolf ----------------
+// Skipped by default: this one launches Chromium, and the doctor runs at session start.
+// Run `node verify/doctor.mjs --full` when changing measure.mjs.
+//
+// Both directions matter equally. The composition checks exist because a prior surface passed
+// every per-element gate — axe clean, 6.85:1 worst contrast, spacing on scale — on a
+// screen whose largest region was an empty void. But the first version of the void check
+// flagged shine's own site screenshots (an <img> has no text and no children), and a gate
+// with false positives is a gate someone switches off.
+if (args.includes("--full")) {
+  const dir = mkdtempSync(join(tmpdir(), "shine-compose-"));
+  const measure = join(SHINE, "verify/measure.mjs");
+  const page = (body, head = "") =>
+    `<!doctype html><html><head><meta charset="utf-8"><style>` +
+    `:root{color-scheme:dark}body{background:#0c0a09;color:#fafaf9;font:15px/1.5 system-ui;margin:0;padding:16px}` +
+    `${head}</style></head><body>${body}</body></html>`;
+
+  // A void: one region over 15% of the viewport with nothing in it.
+  const badFile = join(dir, "void.html");
+  writeFileSync(badFile, page(`<h1>Title</h1><div id="panel" style="width:900px;height:600px"></div>`));
+  // Clean: same geometry, but the region carries an empty state + one filled primary.
+  const goodFile = join(dir, "clean.html");
+  writeFileSync(
+    goodFile,
+    page(
+      `<h1>Title</h1><div id="panel" style="width:900px;height:600px">` +
+        `<p>Nothing here yet</p><p>Captured ideas will land in this panel.</p>` +
+        `<button style="background:#a8a29e;color:#0c0a09;border:0;padding:10px 16px;font:inherit">Add one</button></div>`,
+    ),
+  );
+
+  const run = (f) =>
+    spawnSync("node", [measure, f], {
+      encoding: "utf8",
+      env: { ...process.env, NODE_PATH },
+    });
+
+  // measure.mjs prints verdicts on stderr and the summary on stdout. Asserting against
+  // stdout made the catch-case look broken and the clean-case pass vacuously — a check
+  // reading the wrong stream cannot fail for the right reason.
+  const bad = run(badFile);
+  if (bad.status === 1 && /composition: div#panel is \d/.test(bad.stderr)) ok("compose gate catches a void region");
+  else fail("compose gate catches a void region", `exit ${bad.status}; stderr ${JSON.stringify(bad.stderr.slice(-160))}`);
+
+  const good = run(goodFile);
+  if (!/composition:/.test(good.stderr)) ok("compose gate passes a region with an empty state");
+  else fail("compose gate passes a region with an empty state", good.stderr.match(/composition:.*/)?.[0] ?? "");
+
+  // The contrast probe samples the background under a text rect. Which rect it
+  // picks is the whole game: selectNodeContents(el) spans child elements, so a
+  // flex header reported 1.11:1 for legible stone-400 because its box was a
+  // 1038px row of background. Loosening that must not stop it seeing real
+  // low-contrast text, so both cases are pinned.
+  const dimFile = join(dir, "dim.html");
+  writeFileSync(dimFile, page(`<p style="color:#2a2825">Barely visible against the page</p>`));
+  const dim = run(dimFile);
+  if (/contrast: <p>/.test(dim.stderr)) ok("contrast gate still catches unreadable text");
+  else fail("contrast gate still catches unreadable text", `exit ${dim.status}; stderr ${JSON.stringify(dim.stderr.slice(-160))}`);
+
+  // The same unreadable text, authored in OKLCH. `getComputedStyle().color` comes back in
+  // the author's colour space, and the probe used to parse it with an rgb()-only regex —
+  // so every OKLCH page skipped every element through a silent `continue` and printed
+  // "0 text elements measured" above a PASS. OKLCH is the colour space rule 1 is about,
+  // which made the contrast gate absent on precisely the pages built to this skill.
+  // Two assertions, because either alone can pass while the gate is broken: it must FAIL,
+  // and it must have measured something.
+  const oklchFile = join(dir, "oklch.html");
+  writeFileSync(
+    oklchFile,
+    page(`<p style="color:oklch(0.28 0.01 235)">Barely visible, authored in OKLCH</p>`),
+  );
+  const okl = run(oklchFile);
+  const measuredSome = !/contrast: 0 text elements measured/.test(okl.stdout);
+  if (/contrast: <p>/.test(okl.stderr) && measuredSome) ok("contrast gate reads OKLCH text colour");
+  else
+    fail(
+      "contrast gate reads OKLCH text colour",
+      measuredSome
+        ? `exit ${okl.status}; no contrast failure reported`
+        : `measured 0 elements — the colour never resolved`,
+    );
+
+  // And the silence itself is now a failure: targets found, none measured, is not a pass.
+  const blindFile = join(dir, "blind.html");
+  writeFileSync(blindFile, page(`<p style="color:color(display-p3 0.9 0.9 0.9)">Wide-gamut text</p>`));
+  const blind = run(blindFile);
+  if (!/contrast: \d+ text elements found and 0 measured/.test(blind.stderr))
+    ok("contrast gate measures a wide-gamut colour rather than skipping it");
+  else fail("contrast gate measures a wide-gamut colour rather than skipping it", blind.stderr.match(/contrast: .*/)?.[0] ?? "");
+
+  // A wide flex header whose own text is legible: the false positive this fixes.
+  const flexFile = join(dir, "flex.html");
+  writeFileSync(
+    flexFile,
+    page(
+      `<h2 style="display:flex;justify-content:space-between;align-items:center;width:1000px;color:#a8a29e">` +
+        `Queue<span style="color:#fb923c">drafting</span><span>238</span></h2>`,
+    ),
+  );
+  const flex = run(flexFile);
+  if (!/contrast: <h2>/.test(flex.stderr)) ok("contrast gate does not fail a wide flex header");
+  else fail("contrast gate does not fail a wide flex header", flex.stderr.match(/contrast: <h2>.*/)?.[0] ?? "");
+
+  // Truncated text: a range reports the FULL text extent, not the painted part,
+  // so a 240px ellipsised cell returned a 700px box that ran across the bright
+  // text beside it and sampled those glyphs as its own background.
+  const clipFile = join(dir, "clipped.html");
+  writeFileSync(
+    clipFile,
+    page(
+      `<div style="display:flex;gap:12px;width:1000px">` +
+        `<p class="cell" style="width:240px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#a8a29e">` +
+        `A deliberately long line of legible secondary text that cannot fit inside its own column and is truncated</p>` +
+        `<p style="color:#fafaf9;font-weight:700">BRIGHT NEIGHBOUR TEXT</p></div>`,
+    ),
+  );
+  const clipped = run(clipFile);
+  if (!/contrast: <p>/.test(clipped.stderr)) ok("contrast gate clips a run to the painted box");
+  else fail("contrast gate clips a run to the painted box", clipped.stderr.match(/contrast: <p>.*/)?.[0] ?? "");
+
+  // Hierarchy: interactive controls with no filled primary must fail.
+  const noPrimaryFile = join(dir, "no-primary.html");
+  writeFileSync(
+    noPrimaryFile,
+    page(
+      `<h1>Queue</h1><p>Three peer actions, none filled.</p>` +
+        `<button style="background:transparent;color:#fafaf9;border:1px solid #444;padding:10px 16px;font:inherit">Edit</button> ` +
+        `<button style="background:transparent;color:#fafaf9;border:1px solid #444;padding:10px 16px;font:inherit">Share</button> ` +
+        `<button style="background:transparent;color:#fafaf9;border:1px solid #444;padding:10px 16px;font:inherit">Archive</button>`,
+    ),
+  );
+  const noPrimary = run(noPrimaryFile);
+  if (noPrimary.status === 1 && /hierarchy: .*0 filled/.test(noPrimary.stderr))
+    ok("compose gate catches missing primary action");
+  else
+    fail(
+      "compose gate catches missing primary action",
+      `exit ${noPrimary.status}; stderr ${JSON.stringify(noPrimary.stderr.slice(-200))}`,
+    );
+
+  // Hierarchy: more than two filled treatments must fail.
+  const multiPrimaryFile = join(dir, "multi-primary.html");
+  writeFileSync(
+    multiPrimaryFile,
+    page(
+      `<h1>Queue</h1>` +
+        `<button style="background:#a8a29e;color:#0c0a09;border:0;padding:10px 16px;font:inherit">Save</button> ` +
+        `<button style="background:#78716c;color:#fafaf9;border:0;padding:10px 16px;font:inherit">Publish</button> ` +
+        `<button style="background:#57534e;color:#fafaf9;border:0;padding:10px 16px;font:inherit">Deploy</button>`,
+    ),
+  );
+  const multiPrimary = run(multiPrimaryFile);
+  if (multiPrimary.status === 1 && /hierarchy: .*competing filled/.test(multiPrimary.stderr))
+    ok("compose gate catches competing primaries");
+  else
+    fail(
+      "compose gate catches competing primaries",
+      `exit ${multiPrimary.status}; stderr ${JSON.stringify(multiPrimary.stderr.slice(-200))}`,
+    );
+
+  // One filled primary — hierarchy clean (may still pass other gates).
+  const onePrimaryFile = join(dir, "one-primary.html");
+  writeFileSync(
+    onePrimaryFile,
+    page(
+      `<h1>Queue</h1><p>One clear next action.</p>` +
+        `<button style="background:#a8a29e;color:#0c0a09;border:0;padding:10px 16px;font:inherit">Save</button> ` +
+        `<button style="background:transparent;color:#fafaf9;border:1px solid #444;padding:10px 16px;font:inherit">Cancel</button>`,
+    ),
+  );
+  const onePrimary = run(onePrimaryFile);
+  if (!/hierarchy:/.test(onePrimary.stderr)) ok("compose gate passes a single primary");
+  else fail("compose gate passes a single primary", onePrimary.stderr.match(/hierarchy:.*/)?.[0] ?? "");
+
+  // Type-step collision: 14px and 15px both used heavily (real failure).
+  const collideFile = join(dir, "type-collide.html");
+  const collideBody =
+    `<h1 style="font-size:24px">Title</h1>` +
+    Array.from({ length: 8 }, (_, i) => `<p style="font-size:14px">Row ${i} secondary</p>`).join("") +
+    Array.from({ length: 8 }, (_, i) => `<p style="font-size:15px">Row ${i} body copy here</p>`).join("");
+  writeFileSync(collideFile, page(collideBody));
+  const collide = run(collideFile);
+  if (collide.status === 1 && /type scale: 14px and 15px/.test(collide.stderr))
+    ok("compose gate catches colliding type steps");
+  else
+    fail(
+      "compose gate catches colliding type steps",
+      `exit ${collide.status}; stderr ${JSON.stringify(collide.stderr.slice(-200))}`,
+    );
+
+  // Density: app-shell probe with chrome dominating an empty main.
+  const densityBad = join(dir, "density-bad.html");
+  writeFileSync(
+    densityBad,
+    `<!doctype html><html lang="en" data-shine-probe="app-shell"><head><meta charset="utf-8"><title>Density bad</title><style>` +
+      `:root{color-scheme:dark}body{margin:0;background:#0c0a09;color:#fafaf9;font:15px/1.5 system-ui;display:flex}` +
+      `aside{width:420px;height:100vh;border-right:1px solid #333;padding:16px}` +
+      `main{flex:1;padding:16px}</style></head><body>` +
+      `<aside><p>Nav</p><p>Item</p><p>Item</p></aside>` +
+      `<main><h1>Almost empty</h1></main></body></html>`,
+  );
+  const densBad = run(densityBad);
+  if (densBad.status === 1 && /density: app-shell content share/.test(densBad.stderr))
+    ok("compose gate catches app-shell density failure");
+  else
+    fail(
+      "compose gate catches app-shell density failure",
+      `exit ${densBad.status}; stderr ${JSON.stringify(densBad.stderr.slice(-220))}`,
+    );
+
+  // Density clean: opted-in shell with a real main job.
+  const densityGood = join(dir, "density-good.html");
+  writeFileSync(
+    densityGood,
+    `<!doctype html><html lang="en" data-shine-probe="app-shell"><head><meta charset="utf-8"><title>Density good</title><style>` +
+      `:root{color-scheme:dark}body{margin:0;background:#0c0a09;color:#fafaf9;font:15px/1.5 system-ui;display:flex}` +
+      `aside{width:200px;height:100vh;border-right:1px solid #333;padding:16px}` +
+      `main{flex:1;padding:24px}button{background:#a8a29e;color:#0c0a09;border:0;padding:10px 16px;font:inherit}` +
+      `</style></head><body>` +
+      `<aside><p>Nav</p></aside>` +
+      `<main><h1>Inbox</h1>` +
+      `<p>Twelve threads need a reply before the Monday forecast call. Each row names the account, the stall reason, and the next step.</p>` +
+      `<table style="width:100%;border-collapse:collapse">` +
+      Array.from({ length: 10 }, (_, i) =>
+        `<tr><td style="padding:8px;border-bottom:1px solid #333">Account ${i}</td>` +
+          `<td style="padding:8px;border-bottom:1px solid #333">No activity 21d</td></tr>`,
+      ).join("") +
+      `</table><p><button>Open next</button></p></main></body></html>`,
+  );
+  const densGood = run(densityGood);
+  if (!/density:/.test(densGood.stderr)) ok("compose gate passes a dense app shell");
+  else fail("compose gate passes a dense app shell", densGood.stderr.match(/density:.*/)?.[0] ?? "");
+}
+
+// ---- 5. every token reached every emit target -----------------------------
+{
+  const lanes = [
+    ["personal", join(SHINE, "tokens/src/personal.tokens.json")],
+    ["brand", join(SHINE, "tokens/src/brand.tokens.json")],
+  ];
+  for (const [lane, src] of lanes) {
+    const ids = [];
+    const walk = (node, path = []) => {
+      for (const [k, v] of Object.entries(node)) {
+        if (k.startsWith("$")) continue;
+        if (v && typeof v === "object" && "$value" in v) ids.push([...path, k].join("-"));
+        else if (v && typeof v === "object") walk(v, [...path, k]);
+      }
+    };
+    walk(readJSON(src));
+    const targets = ["tokens.css", "artifact.css", "theme.css", "tokens.py"].filter((f) =>
+      existsSync(join(SHINE, "tokens/dist", lane, f)),
+    );
+    const stale = [];
+    for (const t of targets) {
+      const text = readFileSync(join(SHINE, "tokens/dist", lane, t), "utf8");
+      // theme.css bridges only the namespaces Tailwind has; tokens.css is the full set.
+      // This list is the Tailwind bridge's NAMESPACE map, restated. It has to grow with
+      // it: tracking and shadow were bridged on 2026-08-09, and until this line named
+      // them the doctor would have passed a bridge that silently dropped both.
+      const required =
+        t === "theme.css"
+          ? ids.filter((i) => /^(color|font|radius|space|easing|text|leading|tracking|shadow)-/.test(i))
+          : ids;
+      // tokens.py emits CONSTANT_CASE; the CSS targets keep the dashed id.
+      const spell = (id) => (t === "tokens.py" ? id.replace(/-/g, "_").toUpperCase() : id);
+      const miss = required.filter((id) => !text.includes(spell(id)));
+      if (miss.length) stale.push(`${t} missing ${miss.length} (${miss.slice(0, 3).join(", ")})`);
+    }
+    if (stale.length) fail(`${lane} tokens emitted`, `${stale.join("; ")} — run: (cd tokens && npm run build)`);
+    else ok(`${lane} tokens emitted`, `${ids.length} tokens → ${targets.length} targets`);
+
+    // Presence catches "added a token, forgot to build". This catches the other half:
+    // *changed a value* and forgot, which leaves every name in place and every consumer
+    // on the old number. Dimensions and numbers only — colours are transformed on the
+    // way out, so their literal form legitimately differs from the source.
+    const src2 = readJSON(src);
+    const drift = [];
+    const walkVals = (node, path = []) => {
+      for (const [k, v] of Object.entries(node)) {
+        if (k.startsWith("$")) continue;
+        if (v && typeof v === "object" && "$value" in v) {
+          const id = [...path, k].join("-");
+          const val = v.$value;
+          let want = null;
+          if (val && typeof val === "object" && "value" in val && "unit" in val) want = `${val.value}${val.unit}`;
+          else if (typeof val === "number") want = String(val);
+          if (!want) continue;
+          const css = readFileSync(join(SHINE, "tokens/dist", lane, "tokens.css"), "utf8");
+          const m = new RegExp(`--shine-${id}:\\s*([^;]+);`).exec(css);
+          if (m && m[1].trim() !== want) drift.push(`${id} is ${m[1].trim()} in dist, ${want} in src`);
+        } else if (v && typeof v === "object") walkVals(v, [...path, k]);
+      }
+    };
+    walkVals(src2);
+    if (drift.length) fail(`${lane} token values current`, `${drift.slice(0, 3).join("; ")} — run: (cd tokens && npm run build)`);
+    else ok(`${lane} token values current`, "dist matches src");
+  }
+}
+
+// ---- 5b. the generator still describes src --------------------------------
+// The chain is gen-source.mjs -> src -> dist, but `npm run build` starts at src,
+// so a value edited in the generator alone changes nothing and every check above
+// stays green: dist matches src, src is fully emitted, contrast passes. The
+// generator's existing guard only refuses to DROP a token, so a disagreeing
+// value is silent until someone runs gen and it reverts src underneath them.
+{
+  const r = spawnSync("node", ["scripts/gen-source.mjs", "--check"], {
+    cwd: join(SHINE, "tokens"),
+    encoding: "utf8",
+  });
+  if (r.status === 0) ok("generator agrees with src", (r.stdout || "").trim().split("\n")[0]);
+  else fail("generator agrees with src", (r.stderr || r.stdout || "").trim().split("\n").slice(0, 2).join(" — "));
+}
+
+// ---- 6. (reserved) optional consumer sync ---------------------------------
+// Private apps vendor tokens via a local `consumers.local` map (see
+// `consumers.example`). The public doctor does not probe private checkouts.
+
+
+// ---- 7. every reference is reachable from the map, and vice versa ---------
+// A reference file the map never names is a file the agent never reads on demand — the
+// same failure as a skill that exists on disk and never loads. A map row with no file
+// behind it sends the agent to read nothing and report the gap as absent guidance.
+{
+  const skill = readFileSync(join(SHINE, "skill/SKILL.md"), "utf8");
+  const mapped = new Set([...skill.matchAll(/`references\/([\w.-]+\.md)`/g)].map((m) => m[1]));
+  const onDisk = new Set(readdirSync(join(SHINE, "skill/references")).filter((f) => f.endsWith(".md")));
+  const unmapped = [...onDisk].filter((f) => !mapped.has(f));
+  const missing = [...mapped].filter((f) => !onDisk.has(f));
+  if (unmapped.length || missing.length) {
+    fail("reference map complete", [
+      unmapped.length ? `on disk, never named in SKILL.md: ${unmapped.join(", ")}` : "",
+      missing.length ? `named in SKILL.md, no such file: ${missing.join(", ")}` : "",
+    ].filter(Boolean).join("; "));
+  } else {
+    ok("reference map complete", `${onDisk.size} references, all reachable`);
+  }
+}
+
+// ---- report ---------------------------------------------------------------
+const failures = results.filter((r) => !r.pass);
+if (!QUIET) {
+  for (const r of results) {
+    const tag = r.pass ? "PASS" : "FAIL";
+    console.log(`${tag}  ${r.name}${r.detail ? `  — ${r.detail}` : ""}`);
+  }
+  console.log("");
+}
+if (failures.length) {
+  // stdout, not stderr: a sessionStart hook's stdout is what reaches the agent's
+  // context, and an unenforced design authority is exactly what the agent needs
+  // told before it starts making design decisions.
+  if (QUIET) for (const f of failures) console.log(`shine doctor FAIL  ${f.name} — ${f.detail}`);
+  else console.error(`${failures.length} of ${results.length} checks FAILED — shine is not fully in force.`);
+  process.exit(1);
+}
+if (!QUIET) console.log(`shine is in force: ${results.length} checks pass.`);

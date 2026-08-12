@@ -1,0 +1,8 @@
+.vercel
+.DS_Store
+node_modules
+.worktrees
+__pycache__
+consumers.local
+tokens/local/
+tokens/brand.local.json

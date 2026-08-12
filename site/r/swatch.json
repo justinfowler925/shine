@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "swatch",
+  "type": "registry:ui",
+  "title": "Token Swatch",
+  "description": "Renders every semantic token as a labeled swatch. Install to eyeball a theme in situ.",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/swatch.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/swatch.tsx",
+      "content": "// Token swatch — renders every semantic token as a labeled chip.\n// Install into any @shine project to eyeball the active theme in situ.\n\nconst TOKENS = [\n  \"background\",\n  \"foreground\",\n  \"card\",\n  \"popover\",\n  \"primary\",\n  \"secondary\",\n  \"muted\",\n  \"accent\",\n  \"destructive\",\n  \"border\",\n  \"input\",\n  \"ring\",\n  \"chart-1\",\n  \"chart-2\",\n  \"chart-3\",\n  \"chart-4\",\n  \"chart-5\",\n] as const;\n\nexport function Swatch() {\n  return (\n    <div className=\"grid grid-cols-2 gap-2 p-4 sm:grid-cols-3 md:grid-cols-4\">\n      {TOKENS.map((name) => (\n        <div\n          key={name}\n          data-token={name}\n          className=\"flex items-center gap-2 rounded-md border border-border bg-card p-2\"\n        >\n          <span\n            aria-hidden\n            className=\"size-8 shrink-0 rounded-sm border border-border\"\n            style={{ background: `var(--${name})` }}\n          />\n          <code className=\"text-xs text-muted-foreground\">{name}</code>\n        </div>\n      ))}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

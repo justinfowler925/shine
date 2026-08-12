@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@shine registry</title>
+  <style>
+    :root { color-scheme: dark; --bg: #0c0c0e; --fg: #f4f4f5; --muted: #a1a1aa; --line: #27272a; --accent: #f97316; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; padding: 48px 24px;
+      font: 15px/1.5 ui-sans-serif, system-ui, sans-serif;
+      background: var(--bg); color: var(--fg);
+    }
+    main { max-width: 40rem; margin: 0 auto; }
+    h1 { font-size: 1.75rem; letter-spacing: -0.02em; margin: 0 0 8px; }
+    p { color: var(--muted); margin: 0 0 28px; }
+    code { font-family: ui-monospace, "JetBrains Mono", monospace; font-size: 0.9em; }
+    ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+    li { border-bottom: 1px solid var(--line); }
+    a {
+      display: flex; justify-content: space-between; gap: 16px;
+      padding: 14px 0; color: var(--fg); text-decoration: none;
+    }
+    a:hover { color: var(--accent); }
+    .desc { color: var(--muted); font-size: 0.9rem; }
+    footer { margin-top: 36px; color: var(--muted); font-size: 0.85rem; }
+    footer a { color: var(--muted); text-decoration: underline; padding: 0; display: inline; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>@shine registry</h1>
+    <p>
+      Public shadcn registry for the shine design system.
+      Init with <code>npx shadcn init https://shine-blond.vercel.app/r/shine.json</code>,
+      then <code>npx shadcn add @shine/&lt;item&gt;</code>.
+    </p>
+    <ul>
+      <li><a href="./registry.json"><span>registry.json</span><span class="desc">catalog</span></a></li>
+      <li><a href="./shine.json"><span>shine</span><span class="desc">base · wipe + fonts</span></a></li>
+      <li><a href="./personal.json"><span>personal</span><span class="desc">@shine/personal theme</span></a></li>
+      <li><a href="./brand.json"><span>brand</span><span class="desc">@shine/brand theme</span></a></li>
+      <li><a href="./swatch.json"><span>swatch</span><span class="desc">ui demo</span></a></li>
+    </ul>
+    <footer>
+      Generated from <code>tokens/dist</code> by <code>registry/build.mjs</code>.
+      Spec: <a href="/">shine</a>.
+    </footer>
+  </main>
+</body>
+</html>

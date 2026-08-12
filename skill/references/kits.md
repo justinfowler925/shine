@@ -1,0 +1,111 @@
+# Kits — when to pull which corpus, and worked recipes
+
+Shine tokens are the visual system. Kits supply **behavior, completeness, and structure**.
+Never paste Material/Carbon/Fluent pixels into a shine surface.
+
+Before any library API: `rg` the corpus (`corpus.md`). Cite `file:line` in the fix.
+
+## Decision table
+
+| Need | Primary kit | Also | Avoid |
+|---|---|---|---|
+| Headless primitives (dialog, menu, popover, tabs) | **Base UI** or **Radix** (website docs) | React Aria for complex a11y | Inventing focus traps |
+| Shadcn-shaped React components | **shadcn-registry** JSON | Base UI underneath | Thin demos without contract states |
+| Data table / virtualized list | **TanStack Table ^8** + **TanStack Virtual** | Carbon DataTable / Ant Table for chrome density | TanStack Table v9 |
+| Charts | **Recharts** (React) + **D3** (math/SSR) | Observable Plot for grammar | nivo (drifting), visx except custom |
+| Motion primitives (MIT) | **motion** + **motion-primitives** | — | GSAP, Aceternity, Animate UI |
+| Marketing blocks (MIT) | **magicui** / **cult-ui** | — | Origin UI (AGPL) |
+| Dense enterprise filters / DataTable chrome | **Carbon** | Ant Design table/filter matrices | Copying IBM colors |
+| Form/table completeness matrices | **Ant Design** `components/` | MUI docs/data examples | Blind Ant styling |
+| Material behavior / API completeness | **mui-material** + `docs/data` | — | MUI default theme as brand |
+| Interaction/a11y SSOT | **react-spectrum** (`@react-aria`, RAC) + **aria-practices** | Radix website | Skipping APG for custom widgets |
+| Fluent patterns | **fluentui** `react-components` | — | Fluent brand paint |
+| Admin / settings grammar | **Polaris** (query only) | — | Republishing Polaris components |
+| Icons | **lucide** (default) / **phosphor** | — | Mixing two sets |
+| Native Apple patterns | WebFetch **Apple HIG** | — | Inventing UIKit APIs |
+
+## Wireframe → recipe
+
+When Wireframe (`wireframe.md`) matches a screen type, start from this kit — then confirm
+with corpus `file:line` before locking the brief.
+
+| Wireframe pattern | Lead kit / recipe |
+|---|---|
+| App shell | shadcn sidebar + Carbon density cues — § App shell below |
+| Dashboard | Recharts/D3 + `dashboards.md` focal object — § Dashboard |
+| Queue / insight stream | ranked rows; Carbon/Ant chrome for toolbar density |
+| Data table | § DataGrid |
+| Form / settings | Ant/MUI completeness; Polaris query-only for admin grammar |
+| Landing | hero budget; magicui/cult-ui MIT; motion-primitives |
+| AI surface | `ai-surfaces.md` first — then Base UI/Radix for chrome |
+| Dialog | § Dialog / sheet |
+
+## Worked recipes
+
+### DataGrid (app)
+
+1. **Behavior:** TanStack Table ^8 — sort, filter, pagination, selection, column visibility.
+   Confirm APIs in `~/design-corpus/tanstack-table`.
+2. **Chrome:** shadcn table / data-table registry item as structure; upgrade to full
+   `contracts.md` Table MUST (toolbar, sticky header, empty/loading/error, keyboard).
+3. **Density / filters:** read Carbon DataTable + filter patterns
+   (`~/design-corpus/carbon/packages/react`) for toolbar layout and batch actions — re-skin
+   with shine tokens.
+4. **Virtualize** when rows ≫ viewport — TanStack Virtual examples.
+5. Cite: tanstack file:line + carbon pattern + contracts Table MUST.
+
+### Dialog / sheet
+
+1. Base UI or Radix Dialog — focus trap, restore, Escape, portal (`radix-website/data` or
+   `base-ui/.../dialog`).
+2. APG dialog pattern in `aria-practices/content` if behavior is non-standard.
+3. Motion: enter ~150–250ms ease-out from scale 0.95; exit faster; `prefers-reduced-motion`.
+4. Contract: title, description, primary + secondary, destructive confirm separate.
+
+### Form
+
+1. Completeness from Ant Form / MUI form examples (`ant-design/components/form`,
+   `mui-material/docs/data`) — labels, helper, error association, disabled semantics.
+2. Implement with shine inputs + Base UI where needed.
+3. Never placeholder-only labels; never disable submit before interaction without inline errors.
+
+### App shell
+
+1. shadcn sidebar blocks for structure; Polaris / Carbon for admin nav density cues.
+2. Active state, mobile drawer, page header (title, description, one primary).
+3. Adoption pass if internal (`adoption.md`).
+
+### Dashboard
+
+1. Structure from `patterns.md` / `dashboards.md` — context bar, KPI row, **one focal
+   object**, queue.
+2. Charts: Recharts + `dataviz.md` encoding rules; D3 for custom/SSR.
+3. KPI decidability over decoration.
+
+### Marketing hero
+
+1. Hero budget from `patterns.md` — brand, one headline, one line, CTA, one full-bleed visual.
+2. Motion: motion-primitives MIT only; grain technique from research/motion if needed.
+3. No equal three-card feature grid as the whole page (taste failure 28–29).
+
+### Custom widget (combobox, grid, tree)
+
+1. Start at **aria-practices** content for roles/keyboard.
+2. Prefer **React Aria** components/hooks over hand-rolled.
+3. Only then skin with shine.
+
+## License reminders (hard)
+
+| Kit | Redistribute into registry? |
+|---|---|
+| shadcn, Radix, Base UI, Ark, TanStack, D3, Recharts, motion, magicui, cult-ui, lucide, phosphor, Carbon, Ant, MUI, React Spectrum, Fluent, APG | Yes if SPDX allows (usually MIT/Apache) — still prefer depend, don't vendor wholesale |
+| **Polaris** | **No** — query only; Shopify visual-distinctness clause |
+| Origin UI | **No** — AGPL |
+| Aceternity / React Bits / Animate UI / GSAP | **No** — missing or Commons Clause / no redistribution |
+
+## Citation form
+
+```
+Kit: Carbon DataTable batch-actions layout (carbon/packages/react/.../DataTable:LINE)
+Mapped to: shine toolbar + destructive behind menu (contracts Table SHOULD)
+```

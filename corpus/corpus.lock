@@ -1,0 +1,39 @@
+#name	mode	url	branch	sha	paths
+shadcn-registry	json	https://ui.shadcn.com/r/styles/new-york-v4/{name}.json	main	d14b6e69a91f0fc99e31a7adb26a48d661df9911	411/411 items
+shadcn-docs	sparse	https://github.com/shadcn-ui/ui.git	main	d14b6e69a91f0fc99e31a7adb26a48d661df9911	apps/v4/content apps/v4/registry
+visx	sparse	https://github.com/airbnb/visx.git	master	485c0359664ee8e612992defb16e1f035ed40b23	packages
+nivo	sparse	https://github.com/plouc/nivo.git	master	0dae2c32052a573f9f1d66ec1b453b572119b265	packages website/src/data
+d3	sparse	https://github.com/d3/d3.git	main	ca958d45217b4c15332d971b935451a6d4c978f4	docs src
+observable-plot	sparse	https://github.com/observablehq/plot.git	main	356f579b1d947ee05a914420eddff0f29cee300a	docs src
+recharts	sparse	https://github.com/recharts/recharts.git	main	5fd768f3fa684eb91d958f4855bb87044d656cf4	src storybook www/src/docs
+d3-scale	full	https://github.com/d3/d3-scale.git	main	d6904a4bde09e16005e0ad8ca3e25b10ce54fa0d	*
+d3-shape	full	https://github.com/d3/d3-shape.git	main	a82254af78f08799c71d7ab25df557c4872a3c51	*
+d3-force	full	https://github.com/d3/d3-force.git	main	c3e73cf641813c1d6490e6acc8b8f5aa3c239ea9	*
+d3-hierarchy	full	https://github.com/d3/d3-hierarchy.git	main	c4ae7066d5a52e8aeaab24b3f7113e25c38183f2	*
+d3-array	full	https://github.com/d3/d3-array.git	main	be0ae0d2b36ab91b833294ad2cfc5d5905acbd0f	*
+d3-interpolate	full	https://github.com/d3/d3-interpolate.git	main	2eeffc0d02f2947552cf0a0b73bdf26fe90e1c28	*
+d3-color	full	https://github.com/d3/d3-color.git	main	71c7f100f9fa85a1c70fcbaeb5f803ee8db5620d	*
+d3-selection	full	https://github.com/d3/d3-selection.git	main	d8ea8005f87ca72496d748a91ab6e0ccbe1a2011	*
+d3-transition	full	https://github.com/d3/d3-transition.git	main	7a3b625d8613762dda495485e09bfe2d351b1206	*
+d3-geo	sparse	https://github.com/d3/d3-geo.git	main	8c53a90ae70c94bace73ecb02f2c792c649c86ba	src
+radix-primitives	sparse	https://github.com/radix-ui/primitives.git	main	f7ecd5ab16f5e1e820eb5786a1419a98a2d594ae	packages
+radix-website	sparse	https://github.com/radix-ui/website.git	main	bb424082fd33fadc244a6dd276d3ced55caa6234	data
+base-ui	sparse	https://github.com/mui/base-ui.git	master	f7af9e14dddb1e323386471b31ef0abd97e69ada	packages/react/src docs/src/app
+ark	sparse	https://github.com/chakra-ui/ark.git	main	496d299d2ce721a2936453b696070c21527e259c	packages/react/src website/src
+tanstack-table	sparse	https://github.com/TanStack/table.git	main	d9cca007c015b0253a17c30b75b602445782ed12	packages docs examples
+tanstack-virtual	sparse	https://github.com/TanStack/virtual.git	main	d2cf98beea1696c7187c06b57c9e724d1957963c	packages docs examples
+motion	sparse	https://github.com/motiondivision/motion.git	main	adaf7a4e5368d704ea350669f6ac674fb26ff270	packages/framer-motion/src packages/motion/src packages/motion-dom/src dev/react
+motion-primitives	full	https://github.com/ibelick/motion-primitives.git	main	92586e62a951eb9b6bfd1cc7c8a4e6e2ab6ba17d	*
+lucide	sparse	https://github.com/lucide-icons/lucide.git	main	a7c781bd43dbf295a4c2ab07d25d544dd7879bf9	icons docs
+phosphor-core	sparse	https://github.com/phosphor-icons/core.git	main	2b75f3ad12b420c9504ef05df8d2564a28f8500e	assets src
+radix-colors	full	https://github.com/radix-ui/colors.git	main	dbdb85470547c7d34b9001f48fddb08ded335979	*
+tailwindcss	sparse	https://github.com/tailwindlabs/tailwindcss.git	main	16e94cbf7f965c5ad697e90e940b5e178efad67c	packages/tailwindcss
+magicui	sparse	https://github.com/magicuidesign/magicui.git	main	5543371f99eaa6d1549a8dec864e78ee0b4515f2	apps/www/registry apps/www/content
+cult-ui	sparse	https://github.com/nolly-studio/cult-ui.git	main	3b855612fb524cb042cc91b65f0cd575057471cc	apps/www/registry apps/www/content
+carbon	sparse	https://github.com/carbon-design-system/carbon.git	main	82f04fbfdb385323883f4f8e3ce97a14865a744a	packages/react packages/styles packages/themes packages/layout packages/type packages/colors
+ant-design	sparse	https://github.com/ant-design/ant-design.git	master	5ea586b559f47a72bb7d812b1d4c8174610b64a6	components
+mui-material	sparse	https://github.com/mui/material-ui.git	master	81e94061ca393d4eaf238e6f77c283b2edd9ef7e	packages/mui-material packages/mui-system docs/data
+react-spectrum	sparse	https://github.com/adobe/react-spectrum.git	main	7c0765468a1d161ab9ac88ca9f1b54d3603a275c	packages/@react-aria packages/@react-spectrum packages/@react-stately packages/react-aria-components packages/dev/docs
+fluentui	sparse	https://github.com/microsoft/fluentui.git	master	c83bfa7666778640350f54991c8ebe712a8f389b	packages/react-components
+aria-practices	sparse	https://github.com/w3c/aria-practices.git	main	7e4034b262bc0d25332e330d8a582aaf34113829	content
+polaris	sparse	https://github.com/Shopify/polaris.git	main	af6ffb66a5b1d20f6c2c898b334a1ebb53728ba2	polaris-react polaris-tokens documentation

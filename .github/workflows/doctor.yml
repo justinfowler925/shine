@@ -1,0 +1,31 @@
+name: shine
+
+# Self-hosted runner labels: self-hosted, macOS, ARM64, shine
+# Swap to ubuntu-latest when account-hosted runners are available.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  doctor:
+    runs-on: [self-hosted, macOS, ARM64, shine]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: shine doctor (--ci)
+        run: node verify/doctor.mjs --ci
+
+      - name: tokens build is committed
+        working-directory: tokens
+        run: |
+          npm ci
+          node scripts/gen-source.mjs
+          npm run build
+          git diff --exit-code -- src dist || {
+            echo "::error::tokens/src or tokens/dist differ after a rebuild — run (cd tokens && node scripts/gen-source.mjs && npm run build) and commit"
+            exit 1
+          }

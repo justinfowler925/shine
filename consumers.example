@@ -1,0 +1,15 @@
+# Optional local consumer map for `npm run sync-consumers`.
+# Copy to `consumers.local` (gitignored) and edit paths.
+#
+# Format: name|src_key|absolute-or-~/dest
+# src_key one of:
+#   personal-artifact   tokens/dist/personal/artifact.css
+#   personal-site       tokens/dist/personal/personal-site.css
+#   brand-artifact tokens/dist/brand/artifact.css
+#   brand-theme    tokens/dist/brand/theme.css
+#   brand-tokens   tokens/dist/brand/tokens.css
+#
+# Examples:
+# my-site|personal-site|~/Projects/my-site/assets/tokens.css
+# my-app|personal-artifact|~/Projects/my-app/src/styles/shine-tokens.css
+# brand-app|brand-theme|~/Projects/brand-app/src/styles/shine-theme.css

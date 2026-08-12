@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Brand CTA — 14px label contrast</title>
+    <!--
+      Why this fixture exists
+      -----------------------
+      tokens/scripts/contrast-gate.mjs gates color.primary-fg on color.primary at
+      3.0 in a brand lane and at 4.5 in the personal lane. That divergence
+      is a decision, not an oversight, and a decision needs a measured artifact
+      that outlives the comment explaining it.
+
+      The pair below is the brand-lane CTA per skill/references/brand.md:
+      "Primary button: the action color, solid, in the brand UI face". The size is 14px
+      because that is what a shadcn Button renders at — `text-sm font-medium` in
+      the base variant, design-corpus/shadcn-docs/apps/v4/registry/new-york-v4/ui/button.tsx:8
+      — and the @shine registry feeds shadcn. 14px/500 is normal text under
+      WCAG 2, not large text, so 3.0 is not the applicable threshold for it.
+
+      Both candidate foregrounds are rendered so the measure loop reports them
+      side by side. WCAG 2 says the navy label wins; APCA says the white label
+      wins by a wide margin. Read both before touching either token.
+
+      The tokens are LINKED, not retyped: a fixture holding its own copy of the
+      palette measures the copy, and reports PASS on a lane whose real values
+      have moved underneath it.
+
+      Run: node verify/measure.mjs verify/fixtures/brand-cta.html
+
+      This fixture is a measurement rig, not a screen, and measure.mjs is
+      EXPECTED to exit 1 on it. Its three failures are the finding itself and
+      must not be "fixed" — as of 2026-08-11 the run reads exactly:
+
+        axe: color-contrast(serious,1)          — the rest state, per axe
+        contrast <button> "Book a demo" 3.47:1  — the rest state, per-pixel
+        hierarchy: 3 competing filled treatments — three fills is the comparison
+
+      A FOURTH failure, or a serious count above 1, is a regression. In
+      particular the primary-hover button must not appear among the contrast
+      failures: it reads 5.01:1 and is gated at 4.5 in
+      tokens/scripts/contrast-gate.mjs. It read 4.43:1 and was ungated until
+      this fixture was written.
+    -->
+    <link rel="stylesheet" href="../../tokens/dist/brand/tokens.css" />
+    <style>
+      /* Light-only lane: the single mode is a stated choice, not an omission. */
+      :root {
+        color-scheme: light;
+      }
+
+      body {
+        margin: 0;
+        padding: var(--shine-space-6);
+        background: var(--shine-color-bg);
+        color: var(--shine-color-fg);
+        font-family: var(--shine-font-body);
+        font-size: var(--shine-text-base);
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        gap: var(--shine-space-5);
+        margin-bottom: var(--shine-space-5);
+      }
+
+      .cta {
+        font-family: var(--shine-font-ui);
+        /* 14px is the measurement. Do not "fix" this fixture by enlarging it —
+           enlarging it is one of the decisions this fixture exists to inform. */
+        font-size: var(--shine-text-sm);
+        font-weight: 600;
+        letter-spacing: var(--shine-tracking-caps);
+        text-transform: uppercase;
+        border: 0;
+        border-radius: var(--shine-radius-full);
+        padding: var(--shine-space-3) var(--shine-space-5);
+        cursor: pointer;
+      }
+
+      .cta--brand {
+        background: var(--shine-color-primary);
+        color: var(--shine-color-primary-fg);
+      }
+
+      .cta--brand-hover {
+        background: var(--shine-color-primary-hover);
+        color: var(--shine-color-primary-fg);
+      }
+
+      .cta--navy-label {
+        background: var(--shine-color-primary);
+        color: var(--shine-color-brand-anchor);
+      }
+
+      .caption {
+        font-size: var(--shine-text-sm);
+        color: var(--shine-color-fg);
+        margin: 0;
+      }
+
+      .title {
+        font-family: var(--shine-font-display);
+        font-size: var(--shine-text-xl);
+        line-height: var(--shine-leading-tight);
+        margin: 0 0 var(--shine-space-6);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 class="title">Brand CTA label contrast at 14px</h1>
+      <div class="row">
+        <button type="button" class="cta cta--brand">Book a demo</button>
+        <p class="caption">shipped: primary-fg on primary</p>
+      </div>
+      <div class="row">
+        <button type="button" class="cta cta--brand-hover">Book a demo</button>
+        <p class="caption">shipped: primary-fg on primary-hover</p>
+      </div>
+      <div class="row">
+        <button type="button" class="cta cta--navy-label">Book a demo</button>
+        <p class="caption">rejected candidate: anchor navy label on primary</p>
+      </div>
+    </main>
+  </body>
+</html>

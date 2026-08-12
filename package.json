@@ -1,0 +1,22 @@
+{
+  "name": "@shine/root",
+  "version": "1.0.0",
+  "private": "true",
+  "type": "module",
+  "description": "shine — design authority. Root deps are the ones the verification loop needs; the token pipeline has its own package.json under tokens/.",
+  "scripts": {
+    "build": "npm run build --prefix tokens",
+    "verify": "npm run verify --prefix tokens",
+    "gen": "npm run gen --prefix tokens",
+    "doctor": "node verify/doctor.mjs",
+    "doctor:full": "node verify/doctor.mjs --full",
+    "measure": "node verify/measure.mjs",
+    "sync-consumers": "bash scripts/sync-consumers.sh"
+  },
+  "devDependencies": {
+    "axe-core": "^4.12.1",
+    "playwright": "^1.62.1",
+    "sharp": "^0.35.3"
+  },
+  "license": "ISC"
+}

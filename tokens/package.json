@@ -1,0 +1,28 @@
+{
+  "name": "@shine/tokens",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen": "node scripts/gen-source.mjs",
+    "build": "npx terrazzo build --config terrazzo.personal.mjs && npx terrazzo build --config terrazzo.brand.mjs && node scripts/contrast-gate.mjs",
+    "verify": "node scripts/verify-propagation.mjs",
+    "sitediff": "node scripts/sitediff.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "private": "true",
+  "devDependencies": {
+    "@salesforce-ux/design-tokens": "^4.0.0",
+    "@tailwindcss/cli": "^4.3.3",
+    "@terrazzo/cli": "^2.5.0",
+    "@terrazzo/plugin-css": "^2.5.0",
+    "@terrazzo/plugin-tailwind": "^2.5.0",
+    "chroma-js": "^3.2.0",
+    "culori": "^4.0.2",
+    "tailwindcss": "^4.3.3"
+  }
+}
