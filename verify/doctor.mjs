@@ -645,7 +645,12 @@ if (args.includes("--full")) {
   const mapped = new Set([...skill.matchAll(/`references\/([\w.-]+\.md)`/g)].map((m) => m[1]));
   const onDisk = new Set(readdirSync(join(SHINE, "skill/references")).filter((f) => f.endsWith(".md")));
   const unmapped = [...onDisk].filter((f) => !mapped.has(f));
-  const missing = [...mapped].filter((f) => !onDisk.has(f));
+  // `*.local.md` is an optional private override — gitignored, installed by a
+  // brand pack, absent on a clean clone. SKILL.md has to name it or the model
+  // never learns to look for it, so the map check has to know the difference
+  // between "named and missing" and "named and optional". Everything else that
+  // SKILL.md names still has to exist.
+  const missing = [...mapped].filter((f) => !onDisk.has(f) && !f.endsWith(".local.md"));
   if (unmapped.length || missing.length) {
     fail("reference map complete", [
       unmapped.length ? `on disk, never named in SKILL.md: ${unmapped.join(", ")}` : "",
