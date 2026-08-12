@@ -182,7 +182,7 @@ Light derived from the same token source. Lanes: `brand` (brand-locked) and `per
 | `references/salesforce.md` | SLDS 2 overrides. |
 | `references/foundations.md` | Semantic vars, 8pt rhythm, elevation, a11y floor. |
 | `references/inspiration.md` | Research protocol when no cite exists (required then). |
-| `references/brand.md` | Brand-mode adapter. |
+| `references/brand.md` | Brand-mode adapter. **If `references/brand.local.md` exists, read that instead** — a private brand pack drops its real rules there, gitignored. |
 | `references/imagegen.md` | On-demand graphics — ask high/medium/low; map to mflux. |
 | `references/voice.md` | Speak/listen surfaces. |
 | `references/copy.md` | Persuasion / instructional copy. |
