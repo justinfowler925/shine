@@ -1,5 +1,10 @@
 # Brand Mode
 
+> **A private brand pack may install `brand.local.md` beside this file.** It is
+> gitignored, and it wins: read it instead of this one, which is the generic
+> adapter. Installing a real brand must never mean editing a tracked file — that
+> is how a brand value ends up in a public diff.
+
 Activate when the user names a brand, says "on-brand", or the work is clearly
 brand-facing (marketing site, demos, client decks-as-web, product UI carrying a
 company's identity).
