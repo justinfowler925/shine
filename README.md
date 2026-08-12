@@ -497,7 +497,7 @@ surface with its own stale copy of the file list; the lint blocking the token la
 depends on. All of them looked like "no findings". So:
 
 ```sh
-node verify/doctor.mjs          # 20 checks: wiring, both gates fed a known violation, token propagation
+node verify/doctor.mjs          # 35 checks: wiring, both gates fed a known violation, token propagation
 node verify/doctor.mjs --ci     # the machine-independent subset
 ```
 
