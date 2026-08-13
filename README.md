@@ -576,7 +576,7 @@ Design rules → `agent-rules/always/80-design-*.md` (four required frontmatter 
    (+ `--restore`), lockfile pins every SHA. Query guide: `skill/references/corpus.md`.
 5. **Registry.** `registry:base` published; `npx shadcn add` works into a clean project.
    ✅ shipped 2026-08-05 — `registry/build.mjs` generates `registry.json` + `site/r/*.json`
-   from `tokens/dist` (a fifth emit target that cannot drift). Proven: init + add into a
+   from `tokens/dist` so it cannot drift. Proven: init + add into a
    clean Vite project, computed values match source in light and dark.
 6. **Enforcement, then the measure loop.** ✅ shipped 2026-08-05 — `hooks/design-lint.mjs`
    (PostToolUse) + `hooks/stop-sweep.mjs` (Stop), both proven to block bad writes and pass
@@ -598,7 +598,7 @@ Only step 2 blocks anything downstream.
 
    Budget for "our brand colors on Salesforce's design system," not "our design system on Salesforce." Roughly a day of emitter work. Full detail and this org's actual state in `research/salesforce.md`. ✅ shipped 2026-08-05 — `tokens/plugins/salesforce.mjs` emits the transcription spec (`salesforce.md`), the LWC `:host` fallback block (`salesforce.css`), and machine-readable `salesforce.json`. Authority is `@salesforce-ux/design-tokens@4.0.0` flat.json; the 17 brand steps keep Cosmos's lightness ladder re-seeded from `color.primary`, and the 23 recolored g-hooks are resolved from the authority file's own `var()` chains — no hand-maintained mapping.
 2. **Google Docs first, Office second.** Reversed from my original ordering. Docs has no CSS and no token API — the emit target is an Apps Script that applies named paragraph/character styles, plus a template doc carrying the palette. Office (`.pptx`/`.docx`/`.pdf`) follows the same shape via the existing brand-plugin writers, pointed at the shared token source instead of hardcoded hexes. ✅ shipped 2026-08-05 — `docs.gs` (both lanes; fonts + colors only, because no type-scale tokens exist and an emitter must not invent one) and `office.json` (brand lane: OOXML theme slots + full literal map, the seam the writers consume).
-3. **Email — in.** A fifth emit target: tables, inline styles, no custom properties, no flexbox in Outlook. Tokens compile to a literal-value inliner; the constraint is the renderer, not the design. ✅ shipped 2026-08-05 — `email.json` (inliner map) + `email.html` (bulletproof 600px starter, CTA copy rules baked into the placeholder text). The plugin asserts its own constraints at build, and `npm run verify` renders the emitted starter and reads the CTA's computed background.
+3. **Email — in.** One of nine emit targets: tables, inline styles, no custom properties, no flexbox in Outlook. Tokens compile to a literal-value inliner; the constraint is the renderer, not the design. ✅ shipped 2026-08-05 — `email.json` (inliner map) + `email.html` (bulletproof 600px starter, CTA copy rules baked into the placeholder text). The plugin asserts its own constraints at build, and `npm run verify` renders the emitted starter and reads the CTA's computed background.
 4. **Migration — active.** Consumer apps vendor shine tokens via `npm run sync-consumers` and a local `consumers.local` map (`consumers.example`). Alias bridges keep app-local names pointed at `--shine-*`.
 5. **Interface copy — in.** Cheap and high-leverage: a reference file of label, error, empty-state and loading conventions. Vague button labels are among the loudest amateur tells and cost nothing to fix. ✅ shipped 2026-08-05 as `skill/references/copy.md`, and it grew past label conventions into a fourth skill mode: the whole presentation layer read as an argument, with Hormozi's five buyer beliefs as the first principle and the microcopy conventions folded into its element checklist.
 6. **Keyboard choreography — in, as contracts.** Most of it already exists in the ported component contracts (focus order, traps, escape behavior). Automation catches 2.49%, so this stays a written standard checked by review, not a linter.
@@ -613,7 +613,7 @@ Two of them, and the second is the one that matters day to day.
 
 **Context budget — the answer to "does this raw-dog my agent window."** It does not, by construction.
 
-Only the skill *index* is ever resident: roughly 2 KB, always in context. Everything else sits on disk and is read on demand, one file at a time, only when the task touches it. A typical UI task pulls the index plus one reference — call it 8 KB. The full corpus is ~1.2 GB on disk (49 pins after AdminLTE-list expansion) and contributes **zero tokens** until ripgrep returns a specific match, which is why retrieval beat embeddings here.
+Only the skill *index* is ever resident: 252 lines, ~14 KB, still inside the 5,000-token window that survives compaction. Everything else sits on disk and is read on demand, one file at a time, only when the task touches it. A typical UI task pulls the index plus one reference. The full corpus is ~1.2 GB on disk (49 pins after AdminLTE-list expansion) and contributes **zero tokens** until ripgrep returns a specific match, which is why retrieval beat embeddings here.
 
 Hard caps, from the platform's own limits: `SKILL.md` under 500 lines, non-negotiables in the first 5,000 tokens because that's all that survives compaction, 25,000 tokens total across all re-attached skills. Detail belongs in `research/`, never in the index.
 
@@ -625,7 +625,7 @@ Everything the plan compressed out, kept whole. Loaded only when relevant.
 
 | File | What's in it |
 | --- | --- |
-| `research/taste.md` | The positive authority. Measured token values from 18 shipped products, 40 checkable rules, and the 90-item failure taxonomy — each written so a program can detect it. |
+| `research/taste.md` | The positive authority. Measured token values from 18 shipped products, 40 checkable rules, and the 84-item failure taxonomy — each written so a program can detect it. |
 | `research/motion.md` | Duration and easing token set, Material 3's actual published values, browser Baseline status per feature, and the correct `prefers-reduced-motion` implementation (reduced, not none). |
 | `research/color-type.md` | OKLCH palette method, contrast policy, the size-and-weight tracking curve, fluid scales, typeface shortlist, and the icon stroke-to-grid ratio rule. |
 | `research/ecosystem.md` | Registry map with license status, the primitive-layer comparison, charting maintenance data, and the design systems worth mining ranked by numeric density. |

@@ -138,7 +138,17 @@ if (!CI) {
   else ok("root npm scripts", need.join(", "));
   const regIndex = join(SHINE, "site/r/index.html");
   if (!existsSync(regIndex)) fail("registry /r/", "site/r/index.html missing (bare /r/ 404s)");
-  else ok("registry /r/", "site/r/index.html present");
+  else {
+    const html = readFileSync(regIndex, "utf8");
+    const problems = [];
+    if (!/data-cite=/.test(html)) problems.push("no catalog cite");
+    if (/#f97316|#0c0c0e|#f4f4f5|#a1a1aa|#27272a/.test(html)) {
+      problems.push("raw zinc/orange hex — the public registry page is off-token");
+    }
+    if (!/var\(--bg\)/.test(html)) problems.push("no shine token vars");
+    if (problems.length) fail("registry /r/", problems.join("; "));
+    else ok("registry /r/", "present, cited, tokenised");
+  }
 }
 
 // ---- 3. four hook wirings: per-edit and turn-end, on both surfaces --------
