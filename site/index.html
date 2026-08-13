@@ -420,11 +420,11 @@
     </section>
 
     <section class="stack">
-      <h2>It became a skill</h2>
+      <h2>The skill</h2>
       <div class="stack">
-        <p>The plan was six layers of infrastructure. Step one was kill the zero-state: port the knowledge, make <code>/shine</code> answer. Then the knowledge turned out to be the product — a 252-line index plus twenty-seven references, one git-tracked directory that Claude Code and Cursor both symlink. Two agents, one authority. A path-gated skill is an absent skill: this one used to list <code>tsx,jsx,css,html</code>, so it never loaded for UI inside Python, and Brutus shipped 56 raw hex values one glob away from the design authority. Frontmatter is <code>name</code> + <code>description</code> only. Never <code>paths:</code>.</p>
-        <p>The file is shaped by the agent’s memory model. After a long session compacts, only the first 5,000 tokens of a skill are re-attached, so catalog cite and the non-negotiables sit at the top. About 2 KB stays resident. Everything else loads from disk when a task touches it — the template catalog, contracts, screen patterns, adoption, the audit rubric, 40 checkable rules, a failure taxonomy of 84 tells written so a program can detect each one.</p>
-        <p>Six modes: <strong>Wireframe</strong> (new surface → gray-box from a catalog id → locked brief), <strong>Build</strong> (honour the brief; catalog cite then contracts), <strong>Polish</strong>, <strong>Audit</strong>, <strong>Copy</strong>, <strong>Adoption</strong> (ritual and persona before pixels, first on any internal tool). Voice is a layer on a surface that speaks, not a seventh mode. Dedicated executor: <code>shine-ux</code>, wired on both surfaces. Ambiguity defaults to Wireframe if there is no UI yet, otherwise Build. Two lanes, <span class="mono">brand</span> and <span class="mono">personal</span> — brand and mode swap in the token layer, never in markup. House style: dark-first, dense, instrumental, editorial type. Light is derived, never hand-authored.</p>
+        <p>One git-tracked directory both Claude Code and Cursor symlink. The index is 252 lines, ~14 KB — still inside the 5,000-token window that survives compaction — so catalog cite and the non-negotiables sit at the top. Twenty-seven references load from disk when a task touches them: catalog, contracts, techniques, adoption, the audit rubric, 40 checkable rules, a failure taxonomy of 84 tells written so a program can detect each one. Dedicated executor: <code>shine-ux</code>. Five wirings: per-edit lint, stop-sweep, and the doctor, each on both surfaces. A gate that is not in the doctor does not exist.</p>
+        <p>A path-gated skill is an absent skill. This one used to list <code>tsx,jsx,css,html</code>, so it never loaded for UI inside Python, and Brutus shipped 56 raw hex values one glob away from the design authority. Frontmatter is <code>name</code> + <code>description</code> only. Never <code>paths:</code>. Design-lint keys on content, not extension — HTML inside a <code>.py</code> counts.</p>
+        <p>New surfaces start in <strong>Wireframe</strong> (interactive discovery → gray-box from a catalog id → locked brief). Existing surfaces run diagnose → cite → fix → remeasure. Six modes: Wireframe, Build, Polish, Audit, Copy, Adoption. Voice is a layer on a surface that speaks, not a seventh mode. Ambiguity defaults to Wireframe if there is no UI yet, otherwise Build. Two lanes, <span class="mono">brand</span> and <span class="mono">personal</span> — brand and mode swap in the token layer, never in markup. The committed brand lane is placeholder values on purpose; a real palette arrives via <code>SHINE_BRAND_OVERRIDE</code> / <code>brand.local.md</code>, never this tree. House style: dark-first, dense, instrumental, editorial type. Light is derived, never hand-authored.</p>
       </div>
 
       <figure class="files">
@@ -463,7 +463,7 @@
       </figure>
 
       <ul class="ticks">
-        <li><strong>Catalog cite required.</strong> A new page names a <code>templates.md</code> id before a pixel is drawn. Copy that template’s structure; shine-paint. Inventing a layout is incomplete — same status as shipping no measure numbers. 117 rows (MUI free templates, 97 shadcn blocks, Tremor, Ant Design Pro, Mantine, Chakra, HeroUI, …); no row → fill the catalog, then build.</li>
+        <li><strong>Catalog cite required.</strong> A new page names a <code>templates.md</code> id before a pixel is drawn. Copy that template’s structure; shine-paint. Inventing a layout is incomplete — same status as shipping no measure numbers. A build that cannot name a catalog id is not done. 117 rows (98 shadcn-registry, 10 MUI, plus Tremor, Ant Design Pro, Mantine, Chakra, HeroUI, …); no row → fill the catalog, then build.</li>
         <li><strong>New surfaces start in Wireframe.</strong> Gray-box HTML from the catalog id, then a locked <code>*.brief.md</code>. Build honours the brief and does not re-open structure unless you say <code>unlock structure</code>.</li>
         <li><strong>Internal tools get Adoption before pixels.</strong> Name the meeting the screen runs, what each persona learns here that they cannot get by asking a person, and the path from notification to committed change. A surface nobody opens is a design defect.</li>
         <li><strong>A component name is a complete contract.</strong> “Table” means toolbar, sorting, pagination, sticky header, selection, empty, loading and error states, keyboard access — not bare markup. Opting out takes an explicit “simple”.</li>
@@ -475,7 +475,7 @@
     </section>
 
     <section class="stack">
-      <h2>The six-layer plan, audited</h2>
+      <h2>What’s in force</h2>
       <ol class="steps">
         <li><strong>Corpus.</strong> Real library source on disk, so the model never invents a prop signature. Queried with ripgrep — these are exact symbol lookups, not a semantic-search problem. 49 pins, ~1.2 GB sparse. <em>Shipped</em>.</li>
         <li><strong>Tokens.</strong> One DTCG source emitting to nine targets: CSS custom properties, a Tailwind v4 <code>@theme</code> block, an inline <code>&lt;style&gt;</code> for CSP-locked artifacts, a constant for a Python-served app, an email inliner map plus a bulletproof table-based starter, a Google Docs Apps Script, OOXML theme slots for the Office writers, and a Salesforce brand-palette spec whose 17 reference steps keep SLDS’s own lightness ladder re-seeded with the brand hue. Proven the honest way: mutate one token, watch every target change by <em>computed value</em> — the email starter is rendered and measured, not grepped — then migrate a multi-page site's duplicated <code>:root</code> blocks to one import, screenshot-diffed to zero differing pixels.</li>
@@ -487,11 +487,13 @@
     </section>
 
     <section class="stack">
-      <h2>Three non-negotiables</h2>
+      <h2>Constraints</h2>
       <div class="stack">
-        <p><strong>Never ship a raw value where a token exists.</strong> No hex, no <code>rgb()</code>, no bracketed one-off utilities, no off-scale spacing. A missing token is a gap to report, not a license to freelance.</p>
-        <p><strong>Wipe the default palette — and the default scales.</strong> In Tailwind v4, <code>--color-*</code>, <code>--text-*</code>, <code>--tracking-*</code>, and <code>--shadow-*</code> all go to <code>initial</code>. <code>text-4xl</code> and <code>shadow-lg</code> are the anti-pattern wearing a token-shaped name. The standard objection to Tailwind — that <code>text-[#1a1a1a]</code> erodes the contract one bracket at a time — dissolves when there is no off-system value left to reach for. A missing token is a hole in the gate: fill it in <code>gen-source.mjs</code> and add the rule that reads the property, in the same change.</p>
-        <p><strong>Split primitives from semantics, bridged by <code>@theme inline</code>.</strong> Raw palette in one block, semantic aliases in an <code>inline</code> block, mode mapping in plain custom properties that generate no utilities of their own. Components then only ever say <code>bg-surface text-fg</code>, and brand and mode swap underneath without touching markup. Omitting <code>inline</code> is the single most common cause of “dark mode doesn’t switch.”</p>
+        <p><strong>Never ship a raw value where a token exists.</strong> No hex, no <code>rgb()</code>, no arbitrary Tailwind, no off-scale spacing, no ad-hoc font size, letter-spacing, or <code>box-shadow</code>. Token gap → fill <code>gen-source.mjs</code> and add the rule that reads the property, in the same change. Pragmas name the one rule (<code>shine-lint: off shadow</code>); a bare <code>off</code> is almost never right.</p>
+        <p><strong>Wipe the default palette — and the default scales.</strong> In Tailwind v4, <code>--color-*</code>, <code>--text-*</code>, <code>--tracking-*</code>, and <code>--shadow-*</code> all go to <code>initial</code>. <code>text-4xl</code> and <code>shadow-lg</code> are the anti-pattern wearing a token-shaped name.</p>
+        <p><strong>Do not vendor that wipe into an app already built on Tailwind defaults.</strong> It deletes the product — every <code>bg-blue-600</code> and <code>text-4xl</code> becomes a missing utility. Keep shine token values; skip the wipe file. Restoring the defaults is the repair. Shine-painting the existing screens is not.</p>
+        <p><strong>Split primitives from semantics, bridged by <code>@theme inline</code>.</strong> Components only ever say <code>bg-surface text-fg</code>. Omitting <code>inline</code> is the single most common cause of “dark mode doesn’t switch.”</p>
+        <p><strong>Per-element checks can pass while the screen is broken.</strong> Composition is a separate gate: voids, colliding type steps, undeclared theme, missing or competing filled primaries. Wireframe gray-boxes are exempt from craft hard-fails until Build; structure still applies.</p>
         <p>A consequence: <strong>single-file artifacts get hand-written CSS, not a framework.</strong> Nesting and <code>:has()</code> went Baseline in June 2026, <code>light-dark()</code> halves the theming code, and <code>data-variant</code> attributes give a variant API identical at the call site. Zero build, zero FOUC, and the tokens are the artifact.</p>
         <p class="small subtle">This page is built to those rules. Both themes come from one token set; the toggle swaps a single attribute.</p>
       </div>
@@ -537,8 +539,8 @@
       <h2>Measure the box</h2>
       <div class="stack">
         <p>Grepping generated CSS for a token name proves nothing. The string can sit there — present, correct, completely inert — while the browser computes something else. Read the box, not the source.</p>
-        <p>The loop: render in Playwright, read <code>getComputedStyle</code> and <code>getBoundingClientRect</code> across every visible element, assert scale membership and cardinality — every spacing value on the 4px scale, no more than five distinct font sizes, at most three radii. Composition hard-fails independently: voids, colliding type steps, undeclared theme, missing or competing filled primaries, app-shell density. Then accessibility, then contrast, then a screenshot critique capped at three passes. Zero measurements is a fail — a probe that finds targets and measures none of them is reporting that it is broken. Resolve colour by painting it, never by parsing a string; this page is OKLCH throughout and a regex that only sees <code>rgb()</code> would skip every element and print PASS.</p>
-        <p class="small subtle"><code>node verify/doctor.mjs</code> is the gate. GitHub Actions on this repo is dormant; a green CI check that never started is not a pass. The doctor feeds each hook a known violation and watches it bite.</p>
+        <p>The loop: render in Playwright, read <code>getComputedStyle</code> and <code>getBoundingClientRect</code> across every visible element. UI-band font sizes are capped at the six-step token scale; display sizes (≥32px) are counted separately, max two. Off-scale spacing values are capped at three. Composition hard-fails independently: voids, colliding type steps, undeclared theme, missing or competing filled primaries, app-shell density. Then accessibility, then contrast, then a screenshot critique capped at three passes. <code>--shot</code> is required on Build; the report names the catalog id. Zero measurements is a fail — a probe that finds targets and measures none of them is reporting that it is broken. Resolve colour by painting it, never by parsing a string; this page is OKLCH throughout and a regex that only sees <code>rgb()</code> would skip every element and print PASS.</p>
+        <p class="small subtle"><code>node verify/doctor.mjs</code> is the gate. <code>--ci</code> is 26 checks; the session-start doctor also proves both surfaces’ skill, <code>shine-ux</code>, and hooks. <code>--full</code> runs composition fixtures (launches Chromium). GitHub Actions on this repo is dormant; a green CI check that never started is not a pass.</p>
       </div>
 
       <div class="flag stack">
@@ -575,7 +577,7 @@
         </figure>
         <figure>
           <img src="img/catalog/shadcn-blocks.png" alt="shadcn blocks gallery — dashboard, sidebar, and form block previews" width="1280" height="900" decoding="async">
-          <figcaption>shadcn blocks · 97 rows in the catalog</figcaption>
+          <figcaption>shadcn-registry · 98 of 117 catalog rows</figcaption>
         </figure>
         <figure>
           <img src="img/catalog/mui-free-gallery.png" alt="MUI free templates gallery covering dashboard, blog, checkout, and sign-in" width="1280" height="900" decoding="async">
@@ -589,16 +591,16 @@
     </section>
 
     <section class="stack">
-      <h2>What the open list became</h2>
-      <p class="muted">The first version of this page ended here, with seven problems it couldn’t solve. All seven have rulings now. In the original order:</p>
+      <h2>Scope, decided</h2>
+      <p class="muted">These looked like holes when the page was a plan. They have rulings. In the original order:</p>
       <ul class="ticks">
         <li><strong>Imposed design systems.</strong> In, as a palette target — proven against the hardest case. Under SLDS 2 the old Salesforce design tokens are deprecated, overriding global styling hooks is prohibited, and there is no org-wide CSS injection point. But the token chain resolves through ~17 brand reference steps, and overriding those recolors the accent system across every component. Salesforce publishes the contract itself: DTCG JSON, 717 tokens, dark values, per-token allowlists. The deliverable is a palette spec an admin transcribes. Our colors on their system, never our system on theirs.</li>
         <li><strong>Office formats.</strong> In, Google Docs first. Docs has no CSS and no token API, so the emit target is an Apps Script applying named paragraph and character styles, plus a template doc carrying the palette. The Office writers follow, repointed at the shared token source instead of hardcoded hexes.</li>
-        <li><strong>Email.</strong> In. A fifth emit target: tables, inline styles, no custom properties, no flexbox in Outlook. Tokens compile through a literal-value inliner. The renderer is the constraint, not the design.</li>
+        <li><strong>Email.</strong> In. One of nine emit targets: tables, inline styles, no custom properties, no flexbox in Outlook. Tokens compile through a literal-value inliner. The renderer is the constraint, not the design.</li>
         <li><strong>Interface copy.</strong> In. A conventions file for labels, errors, empty and loading states. Cheapest fix here, and one of the loudest tells.</li>
         <li><strong>Keyboard choreography.</strong> In, as contracts checked by review. Focus order, traps and escape behavior were already in the ported component contracts. Automation catches <span class="mono">2.49%</span> of keyboard issues — a linter can’t hold this standard; a document can.</li>
         <li><strong>Illustration and imagery.</strong> Filled. Anti-stock by rule: real product surfaces, generated texture, data as ornament, typographic covers — no people pointing at laptops. Generation runs locally when a surface needs texture — 4-bit schnell for drafts, 8-bit dev for finals. Plates on this page sit beside the claim they prove, not as a masthead hero. Catalog shots are structure sources; shine-paint is ours. A generated hero with no claim next to it is the tell the rest of the skill exists to kill.</li>
-        <li><strong>A performance budget.</strong> In, twice over. CSS ≤ 20 KB gzip; JS ≤ 40 KB for an app route, zero for a document. The same discipline is the context budget: a ~2 KB resident index, references at zero token cost until read.</li>
+        <li><strong>A performance budget.</strong> In, twice over. CSS ≤ 20 KB gzip; JS ≤ 40 KB for an app route, zero for a document. The same discipline is the context budget: a 252-line index (~14 KB) still fits the 5,000-token reattach window; references cost zero tokens until read.</li>
       </ul>
       <p>Nothing on that list is still open. The registry — the thing this page used to leave hanging — shipped 2026-08-05. An app still on its own palette is that app’s migration (<code>sync-consumers</code> vendors the tokens). Shine does not become unfinished because a consumer hasn’t imported them.</p>
     </section>
@@ -607,7 +609,7 @@
 </main>
 
 <footer class="stack">
-    <p>Working notes, August 2026 — first published as the plan, revised the day the skill shipped, revised the day catalog cite shipped, revised again when the plates and catalog samples landed. Every number here was measured or verified against a primary source; where something couldn’t be verified it isn’t stated.</p>
+    <p>Working notes, August 2026. Product description matches <code>skill/SKILL.md</code>. Every number here was measured or verified against a primary source; where something couldn’t be verified it isn’t stated.</p>
     <p class="subtle small">This page is a single HTML file with no external requests, built to the rules it describes — OKLCH throughout, two-ratio type scale, size-and-weight-dependent tracking, nested radii, tabular numerals, 150ms transitions, both themes from one token set. Cite: <code>mui-blog</code>.</p>
   </footer>
 
