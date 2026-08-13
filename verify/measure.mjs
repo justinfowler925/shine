@@ -377,7 +377,17 @@ const compose = await page.evaluate(() => {
   }
 
   // 3. Button treatment census — is there a primary, and how many peers dilute it?
-  const rgb = (s) => (s.match(/[\d.]+/g) ?? []).slice(0, 3).map(Number);
+  // Paint the colour, don't parse it. Chrome returns getComputedStyle in the author's
+  // space (oklch on this skill's own pages); slicing numbers out of `oklch(0.22 …)`
+  // and treating them as sRGB made a dark-on-light filled CTA look identical to the
+  // page (channel delta 0.8, threshold 60) and hard-failed shine's explainer.
+  const paintRgb = (css) => {
+    const c = new OffscreenCanvas(1, 1);
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = css;
+    ctx.fillRect(0, 0, 1, 1);
+    return [...ctx.getImageData(0, 0, 1, 1).data];
+  };
   const pageBg = getComputedStyle(document.body).backgroundColor;
   const treatments = new Map();
   const controls = [...document.querySelectorAll("button,[role=button],a.btn,input[type=submit]")].filter(vis);
@@ -391,9 +401,10 @@ const compose = await page.evaluate(() => {
   }
   // A "filled" treatment paints a background meaningfully different from the page.
   const filled = [...treatments.values()].filter((t) => {
-    const [r, g, bl] = rgb(t.bg);
-    const [pr, pg, pb] = rgb(pageBg);
     if (t.bg === "rgba(0, 0, 0, 0)" || t.bg === "transparent") return false;
+    const [r, g, bl, a] = paintRgb(t.bg);
+    const [pr, pg, pb] = paintRgb(pageBg);
+    if (a < 16) return false;
     return Math.abs(r - pr) + Math.abs(g - pg) + Math.abs(bl - pb) > 60;
   });
 
@@ -404,8 +415,8 @@ const compose = await page.evaluate(() => {
   // from orange is that red's green and blue channels are near-equal (239,68,68 → g/b 1.0)
   // while orange's green runs well ahead of its blue (g/b 2.4).
   const reddish = (s) => {
-    const [r, g, b] = rgb(s);
-    if (r === undefined || r <= 100) return false;
+    const [r, g, b, a] = paintRgb(s);
+    if (a < 16 || r <= 100) return false;
     if (r < g * 1.8 || r < b * 1.8) return false;
     const gb = g / Math.max(b, 1);
     return gb < 1.35;

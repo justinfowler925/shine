@@ -6,7 +6,7 @@
      Scoped to `color`, which is the only rule the :root block trips. Type, tracking,
      shadow and spacing stay enforced here — the bare `off` this used to carry was
      switching off four checks to excuse one. -->
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-cite="mui-blog">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -102,9 +102,10 @@
     --shadow: inset 0 1px 0 oklch(1 0 0 / 0.04), 0 1px 2px oklch(0 0 0 / 0.16), 0 8px 24px -8px oklch(0 0 0 / 0.32);
 
     --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: ui-serif, "Iowan Old Style", "Apple Garamond", Palatino, Georgia, serif;
     --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, monospace;
 
-    --measure: 68ch;
+    --measure: 65ch;
   }
 
   :root[data-theme="light"] {
@@ -136,7 +137,13 @@
   }
 
   h1, h2, h3 { text-wrap: balance; font-weight: 590; }
-  h1 { font-size: var(--t-4xl); line-height: 1.05; letter-spacing: var(--tr-3xl); }
+  h1 {
+    font-family: var(--serif);
+    font-size: var(--t-4xl);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: var(--tr-3xl);
+  }
   h2 { font-size: var(--t-2xl); line-height: 1.20; letter-spacing: var(--tr-2xl); }
   h3 { font-size: var(--t-lg);  line-height: 1.35; letter-spacing: var(--tr-lg); }
 
@@ -168,65 +175,83 @@
 }
 
 @layer layout {
-  .wrap { max-width: 62rem; margin-inline: auto; padding-inline: var(--s-6); }
-  main > section { padding-block: var(--s-16); border-top: 1px solid var(--border); }
-  main > section:first-of-type { border-top: 0; }
-  .stack   { display: flex; flex-direction: column; gap: var(--s-4); }
-  .stack-6 { display: flex; flex-direction: column; gap: var(--s-6); }
-
-  /* wide viewports: section numbers move to a margin gutter, notes-style */
-  @media (min-width: 76rem) {
-    .wrap { max-width: 72rem; }
-    main > section.stack-6, header.masthead {
-      display: grid;
-      grid-template-columns: 9rem minmax(0, 1fr);
-      column-gap: var(--s-6);
-      row-gap: var(--s-6);
-    }
-    main > section.stack-6 > *, header.masthead > * { grid-column: 2; }
-    main > section.stack-6 > .sec-num {
-      grid-column: 1; grid-row: 1;
-      position: sticky; top: var(--s-6); align-self: start;
-      margin-top: 0.45em;   /* optical: align with the h2 cap height */
-    }
-    header.masthead > .eyebrow { grid-column: 1; grid-row: 1; margin-top: 0.6em; }
+  .bar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-4);
+    min-height: 48px;
+    padding: var(--s-2) var(--s-6);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
   }
+  .bar a.brand {
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    letter-spacing: var(--tr-caps);
+    text-transform: uppercase;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .bar nav {
+    display: flex; align-items: center; gap: var(--s-3);
+    font-size: var(--t-sm);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .bar nav a { color: var(--fg-muted); text-decoration: none; }
+  @media (hover: hover) { .bar nav a:hover { color: var(--fg); } }
+
+  article {
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: var(--s-12) var(--s-6) var(--s-16);
+  }
+  article > header { display: flex; flex-direction: column; gap: var(--s-4); margin-bottom: var(--s-12); }
+  article > section { padding-block: var(--s-8); border-top: 1px solid var(--border); }
+  article > section:first-of-type { border-top: 0; padding-top: 0; }
+  .stack { display: flex; flex-direction: column; gap: var(--s-4); }
 }
 
 @layer components {
-  header.masthead { padding-block: var(--s-24) var(--s-12); }
-
-  .eyebrow {
+  .meta {
     font-family: var(--mono);
     font-size: var(--t-xs);
-    letter-spacing: var(--tr-caps);            /* positive tracking on caps */
+    letter-spacing: var(--tr-caps);
     text-transform: uppercase;
     color: var(--fg-subtle);
   }
 
-  .lede { font-size: var(--t-xl); line-height: 1.45; letter-spacing: var(--tr-xl); color: var(--fg-muted); }
+  .lede { font-size: var(--t-lg); line-height: 1.45; letter-spacing: var(--tr-lg); color: var(--fg-muted); }
 
-  .sec-num {
-    font-family: var(--mono);
-    font-size: var(--t-xs);
-    color: var(--accent);
-    letter-spacing: var(--tr-caps);
+  .cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 40px;
+    padding: 0 var(--s-4);
+    background: var(--fg);
+    color: var(--bg);
+    font-size: var(--t-sm);
+    font-weight: 590;
+    text-decoration: none;
+    border-radius: var(--r-sm);
   }
+  .cta:hover { color: var(--bg); }
 
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r-lg);
-    padding: var(--s-4);
-    box-shadow: var(--shadow);
+  .toggle {
+    font-family: var(--mono); font-size: var(--t-xs); letter-spacing: var(--tr-caps-loose);
+    color: var(--fg-muted); background: transparent; cursor: pointer;
+    border: 1px solid var(--border); border-radius: var(--r-sm);
+    min-height: 40px; padding: 0 var(--s-3);
+    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
   }
+  @media (hover: hover) { .toggle:hover { color: var(--fg); border-color: var(--border-strong); } }
 
   .files {
     border: 1px solid var(--border);
-    border-radius: var(--r-lg);
+    border-radius: var(--r-md);
     background: var(--surface);
-    padding: var(--s-4) var(--s-6);
+    padding: var(--s-4);
     overflow-x: auto;
+    max-inline-size: none;
   }
   .files pre {
     font-family: var(--mono);
@@ -238,36 +263,7 @@
   .files pre strong { font-weight: 590; color: var(--fg); }
   .files figcaption { margin-top: var(--s-3); }
 
-  .plate {
-    border: 1px solid var(--border);
-    border-radius: var(--r-lg);
-    overflow: hidden;
-    background: var(--surface);
-    box-shadow: var(--shadow);
-  }
-  .plate img { display: block; width: 100%; height: auto; }
-  .plate figcaption {
-    font-family: var(--mono);
-    font-size: var(--t-xs);
-    letter-spacing: var(--tr-mono);
-    color: var(--fg-subtle);
-    padding: var(--s-3) var(--s-4);
-    border-top: 1px solid var(--border);
-  }
-
-  .grid { display: grid; gap: var(--s-3); }
-  @container (min-width: 34rem) { .grid-2 { grid-template-columns: 1fr 1fr; } }
-  .cols { container-type: inline-size; }
-
-  .stat { display: flex; flex-direction: column; gap: var(--s-1); }
-  .stat dt { font-size: var(--t-xs); color: var(--fg-muted); letter-spacing: var(--tr-caps-tight); text-transform: uppercase; }
-  .stat dd { font-family: var(--mono); font-size: var(--t-2xl); line-height: 1.1; letter-spacing: var(--tr-2xl); color: var(--accent); }
-  /* Prose description of the same term. Was a <p>, which is not a permitted child of
-     <dl> — axe's definition-list rule, serious, on all four cards. A second <dd> is the
-     structurally valid form. It has to undo the mono/accent/2xl the sibling <dd> sets. */
-  .stat dd.note { font-family: var(--font); font-size: var(--t-sm); color: var(--fg-muted); line-height: 1.5; letter-spacing: var(--tr-sm); max-inline-size: none; }
-
-  .tbl-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-lg); }
+  .tbl-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-md); max-inline-size: none; }
   table { border-collapse: collapse; width: 100%; font-size: var(--t-sm); }
   th, td { text-align: left; padding: var(--s-3) var(--s-4); border-bottom: 1px solid var(--border); vertical-align: top; }
   thead th {
@@ -288,7 +284,7 @@
   ul.ticks li { padding-left: var(--s-6); position: relative; color: var(--fg-muted); }
   ul.ticks li::before {
     content: ""; position: absolute; left: 0; top: 0.62em;
-    width: 10px; height: 1px; background: var(--accent);
+    width: 8px; height: 1px; background: var(--accent);
   }
   ul.ticks strong { color: var(--fg); }
 
@@ -301,17 +297,14 @@
   }
   ol.steps strong { color: var(--fg); }
 
-  .toggle {
-    position: fixed; top: var(--s-4); right: var(--s-4); z-index: 10;
-    font-family: var(--mono); font-size: var(--t-xs); letter-spacing: var(--tr-caps-loose);
-    color: var(--fg-muted); background: var(--surface); cursor: pointer;
-    border: 1px solid var(--border); border-radius: var(--r-md);
-    padding: var(--s-2) var(--s-3);
-    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  footer {
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: var(--s-8) var(--s-6) var(--s-16);
+    border-top: 1px solid var(--border);
+    color: var(--fg-subtle);
+    font-size: var(--t-sm);
   }
-  @media (hover: hover) { .toggle:hover { color: var(--fg); border-color: var(--border-strong); } }
-
-  footer { padding-block: var(--s-12) var(--s-24); border-top: 1px solid var(--border); color: var(--fg-subtle); font-size: var(--t-sm); }
 }
 
 @layer utilities {
@@ -323,25 +316,25 @@
 </head>
 <body>
 
-<button class="toggle" id="t" aria-label="Toggle color scheme">LIGHT</button>
+<header class="bar">
+  <a class="brand" href="/">SHINE</a>
+  <nav aria-label="Site">
+    <a href="/r/">Registry</a>
+    <a class="btn cta" href="https://github.com/justinfowler925/shine">Get the skill</a>
+    <button class="toggle" id="t" aria-label="Toggle color scheme">LIGHT</button>
+  </nav>
+</header>
 
-<div class="wrap">
+<main>
+<article>
 
-  <header class="masthead stack-6">
-    <p class="eyebrow">SHINE — design system / working notes</p>
+  <header>
+    <p class="meta">Working notes · 12 Aug 2026</p>
     <h1>A design system agents can’t deviate&nbsp;from</h1>
     <p class="lede">Everyone tries to give the model taste. Cheaper and more reliable: take away its room to be wrong.</p>
-    <p class="small subtle">Drafted as the plan. Revised 2026-08-12, the day catalog cite shipped: start from a real template, shine-paint.</p>
-    <figure class="plate">
-      <img src="img/hero.jpg" alt="Long-exposure phosphor waveform sweeping over a receding hairline measurement grid, cyan on blue-black" width="1536" height="640" decoding="async">
-      <figcaption>FLUX.1-dev 8-bit · 28 steps · seed 7 · 1536×640 · generated locally on the Studio in ~3 min</figcaption>
-    </figure>
   </header>
 
-  <main>
-
-    <section class="stack-6">
-      <p class="sec-num">01 — PREMISE</p>
+    <section class="stack">
       <h2>The tokens are the tell, not the components</h2>
       <div class="stack">
         <p>Generated UI has a look, and everybody blames the wrong suspect. The component library is fine. The look is every project on earth shipping the same <em>default token values</em>.</p>
@@ -350,30 +343,20 @@
       </div>
     </section>
 
-    <section class="stack-6">
-      <p class="sec-num">02 — WHAT WAS MEASURED</p>
+    <section class="stack">
       <h2>4.5 MB of production CSS</h2>
       <p class="muted">Linear, Stripe, Vercel, Notion, Raycast, Clerk, Resend, Superhuman, Things, Liveblocks, Dia, Observable and more — stylesheets fetched, tokens extracted, statistics run. Numbers don’t have opinions. These are the ones that survived verification.</p>
 
-      <div class="cols">
-        <div class="grid grid-2">
-          <div class="card"><dl class="stat">
-            <dt>Duration mode</dt><dd>150ms</dd>
-            <dd class="note">The single most common transition duration across the entire corpus. Micro-feedback clusters at 50–80ms; overlays at 200–300ms. Exits run about 20% faster than entrances.</dd>
-          </dl></div>
-          <div class="card"><dl class="stat">
-            <dt>Adjacent surface delta</dt><dd>~2pp</dd>
-            <dd class="note">Lightness difference between stacked surfaces, measured range 1.6–3.9 percentage points. Separation is carried by the border, not the fill. Six or more is a smell.</dd>
-          </dl></div>
-          <div class="card"><dl class="stat">
-            <dt>Type scale</dt><dd>2 ratios</dd>
-            <dd class="note">About 1.12 through the UI band (11–24px) and 1.22 for display sizes. Not one ratio. A single 1.25 applied from 12px up produces the broken 12→15→18.75 ladder that reads as generated.</dd>
-          </dl></div>
-          <div class="card"><dl class="stat">
-            <dt>Top shadow alpha</dt><dd>≤6%</dd>
-            <dd class="note">In light mode. Two layers minimum; any layer blurred 8px or more carries a negative spread of roughly −blur/4. Dark mode is the same geometry at about 4× the alpha.</dd>
-          </dl></div>
-        </div>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">Finding</th><th scope="col" class="num">Value</th><th scope="col">Why it matters</th></tr></thead>
+          <tbody>
+            <tr><td>Duration mode</td><td class="num">150ms</td><td>The single most common transition duration across the entire corpus. Micro-feedback clusters at 50–80ms; overlays at 200–300ms. Exits run about 20% faster than entrances.</td></tr>
+            <tr><td>Adjacent surface delta</td><td class="num">~2pp</td><td>Lightness difference between stacked surfaces, measured range 1.6–3.9 percentage points. Separation is carried by the border, not the fill. Six or more is a smell.</td></tr>
+            <tr><td>Type scale</td><td class="num">2 ratios</td><td>About 1.12 through the UI band (11–24px) and 1.22 for display sizes. Not one ratio. A single 1.25 applied from 12px up produces the broken 12→15→18.75 ladder that reads as generated.</td></tr>
+            <tr><td>Top shadow alpha</td><td class="num">≤6%</td><td>In light mode. Two layers minimum; any layer blurred 8px or more carries a negative spread of roughly −blur/4. Dark mode is the same geometry at about 4× the alpha.</td></tr>
+          </tbody>
+        </table>
       </div>
 
       <ul class="ticks">
@@ -385,8 +368,7 @@
       </ul>
     </section>
 
-    <section class="stack-6">
-      <p class="sec-num">03 — SHIPPED</p>
+    <section class="stack">
       <h2>It became a skill</h2>
       <div class="stack">
         <p>The plan was six layers of infrastructure. Step one was kill the zero-state: port the knowledge, make <code>/shine</code> answer. Then the knowledge turned out to be the product — a 252-line index plus twenty-seven references, one git-tracked directory that Claude Code and Cursor both symlink. Two agents, one authority, no drift, no repeat of the Cursor-only failure that started this whole thing.</p>
@@ -439,8 +421,7 @@
       </ul>
     </section>
 
-    <section class="stack-6">
-      <p class="sec-num">04 — ARCHITECTURE</p>
+    <section class="stack">
       <h2>The six-layer plan, audited</h2>
       <ol class="steps">
         <li><strong>Corpus.</strong> Real library source on disk, so the model never invents a prop signature. Queried with ripgrep — these are exact symbol lookups, not a semantic-search problem. 49 pins, ~1.2 GB sparse. <em>Shipped</em>.</li>
@@ -452,8 +433,7 @@
       </ol>
     </section>
 
-    <section class="stack-6">
-      <p class="sec-num">05 — TOKENS</p>
+    <section class="stack">
       <h2>Three non-negotiables</h2>
       <div class="stack">
         <p><strong>Never ship a raw value where a token exists.</strong> No hex, no <code>rgb()</code>, no bracketed one-off utilities, no off-scale spacing. A missing token is a gap to report, not a license to freelance.</p>
@@ -464,8 +444,7 @@
       </div>
     </section>
 
-    <section class="stack-6">
-      <p class="sec-num">06 — LICENSING</p>
+    <section class="stack">
       <h2>Using is not redistributing</h2>
       <p class="muted">Everyone assumes component kits are MIT. The popular ones increasingly aren’t, and the difference only bites on the day you ship one inside something you publish.</p>
       <div class="tbl-scroll">
@@ -483,8 +462,7 @@
       <p class="small subtle">Clean to build on: shadcn/ui, Radix, Base UI, D3, Recharts, visx, nivo, Magic UI, Motion Primitives, Kibo, Tremor.</p>
     </section>
 
-    <section class="stack-6">
-      <p class="sec-num">07 — CHARTING</p>
+    <section class="stack">
       <h2>Three of the four defaults are drifting</h2>
       <p class="muted">Reputation and maintenance have come apart here. Checked against release history and commit authorship, not stars.</p>
       <div class="tbl-scroll">
@@ -502,18 +480,12 @@
       <p>visx and nivo occupy the same slot — React chart libraries over d3, differing only in how opinionated they are. Owning both buys two theming systems and two bundles. The call: depend on D3 for math and server-side rendering plus Recharts for React, and hold visx in reserve for genuinely custom work. Vendor all of them for reference regardless; vendoring is not depending.</p>
     </section>
 
-    <section class="stack-6">
-      <p class="sec-num">08 — VERIFICATION</p>
+    <section class="stack">
       <h2>Measure the box</h2>
       <div class="stack">
         <p>Grepping generated CSS for a token name proves nothing. The string can sit there — present, correct, completely inert — while the browser computes something else. Read the box, not the source.</p>
         <p>The loop: render in Playwright, read <code>getComputedStyle</code> and <code>getBoundingClientRect</code> across every visible element, assert scale membership and cardinality — every spacing value on the 4px scale, no more than five distinct font sizes, at most three radii. Then accessibility, then contrast, then a screenshot critique capped at three passes.</p>
       </div>
-
-      <figure class="plate">
-        <img src="img/measure.jpg" alt="Macro of a display subpixel matrix, one sharp focal row of cyan subpixels with a small cluster of dead red ones" width="1536" height="512" loading="lazy" decoding="async">
-        <figcaption>the failure the tool declines to judge, rendered literally · FLUX.1-dev 8-bit · seed 7</figcaption>
-      </figure>
 
       <div class="flag stack">
         <h3>The finding that justifies the whole loop</h3>
@@ -530,8 +502,7 @@
       </ul>
     </section>
 
-    <section class="stack-6">
-      <p class="sec-num">09 — INSPIRATION</p>
+    <section class="stack">
       <h2>Start from a real page, not a poster</h2>
       <div class="stack">
         <p>A Linear tracking cite is paint. It does not authorize inventing a dashboard. New pages start from a row in <code>templates.md</code> — copy the regions, shine-paint, never clone vendor pixels. Technique numbers (15px body, 150ms, chroma 0.13–0.24) still come from measuring what shipped. Structure comes from a catalog id.</p>
@@ -541,8 +512,7 @@
       </div>
     </section>
 
-    <section class="stack-6">
-      <p class="sec-num">10 — RESOLUTIONS</p>
+    <section class="stack">
       <h2>What the open list became</h2>
       <p class="muted">The first version of this page ended here, with seven problems it couldn’t solve. All seven have rulings now. In the original order:</p>
       <ul class="ticks">
@@ -551,20 +521,19 @@
         <li><strong>Email.</strong> In. A fifth emit target: tables, inline styles, no custom properties, no flexbox in Outlook. Tokens compile through a literal-value inliner. The renderer is the constraint, not the design.</li>
         <li><strong>Interface copy.</strong> In. A conventions file for labels, errors, empty and loading states. Cheapest fix here, and one of the loudest tells.</li>
         <li><strong>Keyboard choreography.</strong> In, as contracts checked by review. Focus order, traps and escape behavior were already in the ported component contracts. Automation catches <span class="mono">2.49%</span> of keyboard issues — a linter can’t hold this standard; a document can.</li>
-        <li><strong>Illustration and imagery.</strong> Filled. Anti-stock by rule: real product surfaces, generated texture, data as ornament, typographic covers — no people pointing at laptops. Generation runs locally now, a 4-bit FLUX schnell for drafts in ~21 seconds and an 8-bit dev for finals in ~2.5 minutes, which retired the hosted free tier and its three-images-a-month ceiling. The plates on this page are that rule, executed.</li>
+        <li><strong>Illustration and imagery.</strong> Filled. Anti-stock by rule: real product surfaces, generated texture, data as ornament, typographic covers — no people pointing at laptops. Generation runs locally when a surface needs texture or a typographic cover — a 4-bit FLUX schnell for drafts in ~21 seconds and an 8-bit dev for finals in ~2.5 minutes. This page is type, not generated plates; a FLUX hero is the tell the rest of the skill exists to kill.</li>
         <li><strong>A performance budget.</strong> In, twice over. CSS ≤ 20 KB gzip; JS ≤ 40 KB for an app route, zero for a document. The same discipline is the context budget: a ~2 KB resident index, references at zero token cost until read.</li>
       </ul>
       <p>Still open: the registry — a private component namespace — and migrating leftover visual languages that have not yet been pulled onto these tokens.</p>
     </section>
 
-  </main>
+</article>
+</main>
 
-  <footer class="stack">
+<footer class="stack">
     <p>Working notes, August 2026 — first published as the plan, revised the day the skill shipped, revised again the day catalog cite shipped. Every number here was measured or verified against a primary source; where something couldn’t be verified it isn’t stated.</p>
     <p class="subtle small">This page is a single HTML file with no external requests, built to the rules it describes — OKLCH throughout, two-ratio type scale, size-and-weight-dependent tracking, nested radii, tabular numerals, 150ms transitions, both themes from one token set.</p>
   </footer>
-
-</div>
 
 <script>
   const root = document.documentElement;
