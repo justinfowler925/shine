@@ -1,52 +1,264 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<!-- shine-lint: off color — single-file artifact: the :root block below IS the token
+     source (primitives defined once, consumed as var() everywhere else), and the
+     theme-color hexes are rendered-pixel readbacks of --bg. Nothing here bypasses
+     a token; this file is where the tokens live.
+     Scoped to `color`, which is the only rule the :root block trips. -->
+<html lang="en" data-theme="dark" data-cite="mui-blog">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>@shine registry</title>
-  <style>
-    :root { color-scheme: dark; --bg: #0c0c0e; --fg: #f4f4f5; --muted: #a1a1aa; --line: #27272a; --accent: #f97316; }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; min-height: 100vh; padding: 48px 24px;
-      font: 15px/1.5 ui-sans-serif, system-ui, sans-serif;
-      background: var(--bg); color: var(--fg);
-    }
-    main { max-width: 40rem; margin: 0 auto; }
-    h1 { font-size: 1.75rem; letter-spacing: -0.02em; margin: 0 0 8px; }
-    p { color: var(--muted); margin: 0 0 28px; }
-    code { font-family: ui-monospace, "JetBrains Mono", monospace; font-size: 0.9em; }
-    ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
-    li { border-bottom: 1px solid var(--line); }
-    a {
-      display: flex; justify-content: space-between; gap: 16px;
-      padding: 14px 0; color: var(--fg); text-decoration: none;
-    }
-    a:hover { color: var(--accent); }
-    .desc { color: var(--muted); font-size: 0.9rem; }
-    footer { margin-top: 36px; color: var(--muted); font-size: 0.85rem; }
-    footer a { color: var(--muted); text-decoration: underline; padding: 0; display: inline; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@shine registry</title>
+<meta name="description" content="Public shadcn registry for shine — registry:base plus personal and brand theme lanes.">
+<meta name="theme-color" content="#080e12">
+<style>
+@layer reset, base, layout, components;
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --g-99: oklch(0.990 0.002 235);
+    --g-97: oklch(0.972 0.003 235);
+    --g-95: oklch(0.952 0.004 235);
+    --g-90: oklch(0.900 0.005 235);
+    --g-82: oklch(0.820 0.006 235);
+    --g-72: oklch(0.720 0.008 235);
+    --g-40: oklch(0.400 0.010 235);
+    --g-33: oklch(0.330 0.010 235);
+    --g-27: oklch(0.270 0.010 235);
+    --g-22: oklch(0.220 0.011 235);
+    --g-19: oklch(0.190 0.011 235);
+    --g-16: oklch(0.160 0.012 235);
+    --g-22-fg: oklch(0.220 0.010 235);
+    --cyan: oklch(0.780 0.140 200);
+    --cyan-lo: oklch(0.500 0.120 220);
+    --bg: var(--g-16);
+    --surface: var(--g-19);
+    --surface-2: var(--g-22);
+    --border: var(--g-27);
+    --border-strong: var(--g-33);
+    --fg: var(--g-95);
+    --fg-muted: var(--g-72);
+    --fg-subtle: oklch(0.635 0.010 235);
+    --accent: var(--cyan);
+    --ring: var(--cyan);
+    --t-xs: 0.6875rem;
+    --t-sm: 0.8125rem;
+    --t-base: 0.9375rem;
+    --t-lg: 1.0625rem;
+    --t-2xl: 1.625rem;
+    --t-4xl: clamp(2.0625rem, 1.55rem + 2.4vw, 2.625rem);
+    --tr-sm: 0;
+    --tr-base: -0.011em;
+    --tr-lg: -0.012em;
+    --tr-2xl: -0.019em;
+    --tr-3xl: -0.028em;
+    --tr-caps: 0.08em;
+    --tr-caps-loose: 0.06em;
+    --tr-mono: 0.02em;
+    --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem;
+    --s-6: 1.5rem; --s-8: 2rem; --s-12: 3rem; --s-16: 4rem;
+    --r-sm: 4px; --r-md: 6px;
+    --dur: 150ms;
+    --ease: cubic-bezier(0.2, 0, 0, 1);
+    --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: ui-serif, "Iowan Old Style", "Apple Garamond", Palatino, Georgia, serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+    --measure: 65ch;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: var(--g-99);
+    --surface: var(--g-97);
+    --surface-2: var(--g-95);
+    --border: var(--g-90);
+    --border-strong: var(--g-82);
+    --fg: var(--g-22-fg);
+    --fg-muted: var(--g-40);
+    --fg-subtle: oklch(0.495 0.011 235);
+    --accent: var(--cyan-lo);
+    --ring: var(--cyan-lo);
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font);
+    font-size: var(--t-base);
+    line-height: 1.6;
+    letter-spacing: var(--tr-base);
+    -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums lining-nums;
+    text-wrap: pretty;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: var(--t-4xl);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: var(--tr-3xl);
+    text-wrap: balance;
+  }
+  p { max-inline-size: var(--measure); }
+  a { color: var(--accent); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  a:hover { color: var(--fg); }
+  code {
+    font-family: var(--mono); font-size: var(--t-sm); font-variant-numeric: tabular-nums;
+    color: var(--fg-muted); background: var(--surface-2);
+    padding: 2px 4px; border-radius: var(--r-sm);
+  }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: var(--r-sm); }
+  .no-anim *, .no-anim *::before, .no-anim *::after { transition: none !important; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@layer layout {
+  .bar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-4);
+    min-height: 48px;
+    padding: var(--s-2) var(--s-6);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .bar a.brand {
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    letter-spacing: var(--tr-caps);
+    text-transform: uppercase;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .bar nav {
+    display: flex; align-items: center; gap: var(--s-3);
+    font-size: var(--t-sm);
+  }
+  .bar nav a { color: var(--fg-muted); text-decoration: none; }
+  @media (hover: hover) { .bar nav a:hover { color: var(--fg); } }
+  .bar nav a[aria-current="page"] { color: var(--fg); }
+  article {
+    max-width: 44rem;
+    margin-inline: auto;
+    padding: var(--s-12) var(--s-6) var(--s-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  article > header { display: flex; flex-direction: column; gap: var(--s-4); }
+}
+
+@layer components {
+  .meta {
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    letter-spacing: var(--tr-caps);
+    text-transform: uppercase;
+    color: var(--fg-subtle);
+  }
+  .lede { font-size: var(--t-lg); line-height: 1.45; letter-spacing: var(--tr-lg); color: var(--fg-muted); }
+  .cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 40px;
+    padding: 0 var(--s-4);
+    background: var(--fg);
+    color: var(--bg);
+    font-size: var(--t-sm);
+    font-weight: 590;
+    text-decoration: none;
+    border-radius: var(--r-sm);
+  }
+  .cta:hover { color: var(--bg); }
+  .toggle {
+    font-family: var(--mono); font-size: var(--t-xs); letter-spacing: var(--tr-caps-loose);
+    color: var(--fg-muted); background: transparent; cursor: pointer;
+    border: 1px solid var(--border); border-radius: var(--r-sm);
+    min-height: 40px; padding: 0 var(--s-3);
+  }
+  @media (hover: hover) { .toggle:hover { color: var(--fg); border-color: var(--border-strong); } }
+  .items { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--border); max-inline-size: none; }
+  .items li { border-bottom: 1px solid var(--border); }
+  .items a {
+    display: flex; justify-content: space-between; gap: var(--s-4);
+    padding: var(--s-4) 0;
+    color: var(--fg);
+    text-decoration: none;
+    max-inline-size: none;
+  }
+  @media (hover: hover) { .items a:hover { color: var(--accent); } }
+  .items .desc {
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    letter-spacing: var(--tr-mono);
+    color: var(--fg-subtle);
+  }
+  footer {
+    max-width: 44rem;
+    margin-inline: auto;
+    padding: 0 var(--s-6) var(--s-12);
+    color: var(--fg-subtle);
+    font-size: var(--t-sm);
+  }
+  footer a { color: var(--fg-muted); }
+}
+</style>
 </head>
 <body>
-  <main>
-    <h1>@shine registry</h1>
-    <p>
-      Public shadcn registry for the shine design system.
-      Init with <code>npx shadcn init https://shine-blond.vercel.app/r/shine.json</code>,
-      then <code>npx shadcn add @shine/&lt;item&gt;</code>.
-    </p>
-    <ul>
-      <li><a href="./registry.json"><span>registry.json</span><span class="desc">catalog</span></a></li>
-      <li><a href="./shine.json"><span>shine</span><span class="desc">base · wipe + fonts</span></a></li>
-      <li><a href="./personal.json"><span>personal</span><span class="desc">@shine/personal theme</span></a></li>
-      <li><a href="./brand.json"><span>brand</span><span class="desc">@shine/brand theme</span></a></li>
-      <li><a href="./swatch.json"><span>swatch</span><span class="desc">ui demo</span></a></li>
-    </ul>
-    <footer>
-      Generated from <code>tokens/dist</code> by <code>registry/build.mjs</code>.
-      Spec: <a href="/">shine</a>.
-    </footer>
-  </main>
+
+<header class="bar">
+  <a class="brand" href="/">SHINE</a>
+  <nav aria-label="Site">
+    <a href="/r/" aria-current="page">Registry</a>
+    <a class="btn cta" href="https://github.com/justinfowler925/shine">Get the skill</a>
+    <button class="toggle" id="t" aria-label="Toggle color scheme">LIGHT</button>
+  </nav>
+</header>
+
+<main>
+<article>
+  <header>
+    <p class="meta">@shine · generated from tokens/dist</p>
+    <h1>Registry</h1>
+    <p class="lede">Init with <code>npx shadcn init https://shine-blond.vercel.app/r/shine.json</code>, then <code>npx shadcn add @shine/&lt;item&gt;</code>.</p>
+  </header>
+  <ul class="items">
+    <li><a href="./registry.json"><span>registry.json</span><span class="desc">catalog</span></a></li>
+    <li><a href="./shine.json"><span>shine</span><span class="desc">registry:base · wipe + fonts</span></a></li>
+    <li><a href="./personal.json"><span>personal</span><span class="desc">@shine/personal theme</span></a></li>
+    <li><a href="./brand.json"><span>brand</span><span class="desc">@shine/brand theme · placeholder values</span></a></li>
+    <li><a href="./swatch.json"><span>swatch</span><span class="desc">token swatch UI</span></a></li>
+  </ul>
+</article>
+</main>
+
+<footer>
+  <p>Item JSON is generated from <code>tokens/dist</code> by <code>registry/build.mjs</code>. Spec: <a href="/">the notes</a>.</p>
+</footer>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById('t');
+  const set = (m) => {
+    root.classList.add('no-anim');
+    root.dataset.theme = m;
+    btn.textContent = m === 'dark' ? 'LIGHT' : 'DARK';
+    document.querySelector('meta[name=theme-color]').content = m === 'dark' ? '#080e12' : '#fafcfd';
+    try { localStorage.setItem('theme', m); } catch (e) {}
+    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('no-anim')));
+  };
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved) set(saved);
+    else if (matchMedia('(prefers-color-scheme: light)').matches) set('light');
+  } catch (e) {}
+  btn.addEventListener('click', () => set(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+</script>
 </body>
 </html>
