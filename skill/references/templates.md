@@ -1,7 +1,8 @@
 # Templates — start from a real page
 
 **catalog cite required.** Inventing a page is a Critical completeness hole.
-Pick a row, copy its structure, shine-paint. Never clone vendor pixels.
+Run `node corpus/cite.mjs <screen|id>`, open every file it lists, copy structure, shine-paint.
+Naming an id without opening those files is inventing. Never clone vendor pixels.
 Generated from `corpus/templates.json` — do not hand-edit; run `node corpus/index-templates.mjs`.
 
 ## Default start-from
@@ -19,13 +20,20 @@ First match by `startFrom` wins unless the user names another id.
 
 ## How to cite
 
+```sh
+node ~/Projects/shine/corpus/cite.mjs mui-crud-dashboard
+```
+
+Open every file it prints. Then:
+
 ```
 Template: mui-crud-dashboard
 Path: mui-material/docs/data/material/getting-started/templates/crud-dashboard
+Opened: ~/design-corpus/…/Dashboard.tsx (and the rest cite.mjs listed)
 Paint: shine tokens. Structure cloned; Material purple is not.
 ```
 
-No row for this screen → `inspiration.md` (fill the catalog) then build. Do not invent.
+Naming the id without running `cite.mjs` is not a cite. No row for this screen → `inspiration.md` (fill the catalog) then cite. Do not invent.
 
 ## Full catalog
 

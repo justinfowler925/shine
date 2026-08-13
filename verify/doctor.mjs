@@ -132,7 +132,7 @@ if (!CI) {
 // ---- 2d. root install scripts match the README ---------------------------
 {
   const pkg = JSON.parse(readFileSync(join(SHINE, "package.json"), "utf8"));
-  const need = ["build", "verify", "doctor", "measure"];
+  const need = ["build", "verify", "doctor", "measure", "cite"];
   const missing = need.filter((s) => !pkg.scripts?.[s]);
   if (missing.length) fail("root npm scripts", `package.json missing: ${missing.join(", ")}`);
   else ok("root npm scripts", need.join(", "));
@@ -656,6 +656,26 @@ if (args.includes("--full")) {
   if (!/catalog cite required/i.test(skill))
     fail("SKILL.md catalog cite", "missing the string `catalog cite required` — deleting it is how inventing a page becomes legal again");
   else ok("SKILL.md catalog cite", "catalog cite required");
+
+  if (!/corpus\/cite\.mjs/.test(skill))
+    fail("SKILL.md cite command", "missing `corpus/cite.mjs` — naming an id without opening corpus files is how inventing a page becomes legal again");
+  else ok("SKILL.md cite command", "corpus/cite.mjs");
+
+  const cite = join(SHINE, "corpus/cite.mjs");
+  if (!existsSync(cite)) fail("cite.mjs exists", "corpus/cite.mjs missing");
+  else {
+    const unknown = spawnSync(process.execPath, [cite, "definitely-not-a-template"], { encoding: "utf8" });
+    if (unknown.status !== 1) fail("cite.mjs unknown id", `expected exit 1, got ${unknown.status}`);
+    else ok("cite.mjs unknown id", "exit 1");
+    if (!CI && existsSync(join(HOME, "design-corpus"))) {
+      const blog = spawnSync(process.execPath, [cite, "mui-blog"], { encoding: "utf8" });
+      const out = `${blog.stdout || ""}${blog.stderr || ""}`;
+      if (blog.status !== 0) fail("cite.mjs mui-blog", `exit ${blog.status}: ${(blog.stderr || "").slice(0, 200)}`);
+      else if (!/Template: mui-blog/.test(out) || !/design-corpus/.test(out) || !/Blog\.tsx/.test(out))
+        fail("cite.mjs mui-blog", "did not print Template: mui-blog + a design-corpus Blog.tsx to open");
+      else ok("cite.mjs mui-blog", "lists corpus files to open");
+    }
+  }
 
   if (!/A page with no template cite is incomplete/.test(diagnose))
     fail("diagnose.md catalog hole", "missing `A page with no template cite is incomplete`");

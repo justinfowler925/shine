@@ -53,21 +53,23 @@ Mandatory for Build, Polish, and Audit-that-fixes. Audit-only stops after the re
 Details: `references/diagnose.md`. If a locked wireframe brief exists for this surface,
 read it first and treat structure as given.
 
-0. **Catalog cite required.** Pick a row in `references/templates.md` /
-   `corpus/templates.json` before drawing anything. Copy that template's structure;
-   shine-paint. Inventing a page is incomplete — same status as no measure numbers.
-   No row for this screen → `inspiration.md` (add a row) then build. Do not invent.
+0. **Catalog cite required.** Run `node corpus/cite.mjs <screen|id>` (from the
+   shine repo). Read **every file it lists** from `~/design-corpus`. Copy that
+   structure; shine-paint. Naming an id you did not open is inventing — same
+   status as no measure numbers. No row → `inspiration.md` (add a row) then cite.
+   Do not invent. Do not load all 27 references; cite first, then the one file
+   the surface needs.
 1. **Surface** — marketing / product / brand-locked / AI / voice / native. Internal tools:
    `adoption.md` **before** pixels.
 2. **Defects** — inventory at three layers: completeness (`contracts.md`), composition
    (hierarchy, density, voids, path length), craft (tokens, type, motion).
 3. **Cite before edit** — every material fix names a source:
-   - catalog template → `templates.md` id (mandatory on new pages)
+   - catalog template → `templates.md` id **and** the `corpus/cite.mjs` files you opened
    - product technique → `references/techniques.md` (Linear, Vercel, Notion, Stripe, …)
    - kit pattern → `references/kits.md` + `~/design-corpus` `file:line`
    - novel → `references/inspiration.md` (fill a missing catalog row, not skip it)
    - native → Apple HIG URL + principle (not in corpus)
-4. **Apply** — clone **structure** from the cited template; map paint onto shine tokens
+4. **Apply** — clone **structure** from the files `cite.mjs` listed; map paint onto shine tokens
    + house style + contracts. Never clone brand pixels from Linear/Carbon/Material.
 5. **Remeasure** — `verify/measure.mjs <path> --shot out.png`. Hard fails block.
    Screenshot the output against the template preview. Fail if regions are missing,
@@ -170,7 +172,7 @@ Light derived from the same token source. Lanes: `brand` (brand-locked) and `per
 | `references/wireframe.md` | **New surface / sketch** — discovery, gray-box HTML, locked brief before Build. |
 | `references/diagnose.md` | **Start here** for Build/Polish — surface, defects, cite, apply, remeasure. |
 | `references/techniques.md` | Symptom → product technique transfer (Linear, Vercel, Notion, …). |
-| `references/templates.md` | **Start here for any new page** — catalog cite required; copy structure, shine-paint. |
+| `references/templates.md` | Catalog ids. **Do not cite from this table alone** — run `corpus/cite.mjs` and open the files. |
 | `references/kits.md` | Which corpus kit; worked recipes (DataGrid, dialog, form, shell). |
 | `references/contracts.md` | MUST/SHOULD/ASK per primitive. |
 | `references/taste.md` | Measurement SSOT — token values, 40 rules, 84-item taxonomy. |
@@ -222,6 +224,7 @@ sharp). `verify/deps.mjs` falls back to a sibling checkout only if root deps are
 
 ```sh
 cd ~/Projects/shine && npm install   # once
+node corpus/cite.mjs dashboard        # open every file it lists, then draw
 node verify/measure.mjs /abs/path/to/page.html
 ```
 
@@ -247,6 +250,6 @@ HTTP 200 can be an auth wall. Fail axe `incomplete` too.
 
 ## Reporting
 
-Environment · **catalog id** · citations (technique/kit/file:line) · before/after
-numbers · `--shot` path · what you did **not** do. Never "looks good now." A build
-that cannot name a catalog id is not done.
+Environment · **catalog id** · corpus files opened · citations (technique/kit/file:line) · before/after
+numbers · `--shot` path. Never "looks good now." A build that cannot name a catalog id
+**and** the corpus files it opened is incomplete — go open them.

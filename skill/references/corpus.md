@@ -95,7 +95,7 @@ rg -n "IndexTable" ~/design-corpus/polaris/polaris-react/src/components
 ## Rules
 
 - **Start from a catalog template**, not from memory. `templates.md` /
-  `corpus/templates.json` — catalog cite required before Build.
+  `corpus/templates.json` — catalog cite required before Build. Run `corpus/cite.mjs` and open the files; naming an id is not a cite.
 - **Query with `rg`/Read/Glob, never from memory.** Exact symbol lookups, file:line cites.
 - **Vendoring is not depending.** Depend on D3 + Recharts for charts; visx is vendored
   for custom work only. Check `references/ecosystem.md` before adding any dependency.

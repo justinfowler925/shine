@@ -18,11 +18,12 @@ structure as given — do not invent a competing IA unless the user says `unlock
 ## 0.5 Catalog cite required
 
 A new page without a `templates.md` / `corpus/templates.json` id is a **Critical
-completeness hole** — ranked with missing a11y, not with craft. Pick the default
-start-from for the screen type (or the id the user named). Copy structure, shine-paint.
-A page with no template cite is incomplete, same as a table with no empty state.
+completeness hole** — ranked with missing a11y, not with craft. Run
+`node corpus/cite.mjs <screen|id>` and **read every file it lists** from
+`~/design-corpus`. Copy structure, shine-paint. Naming an id you did not open is
+inventing. A page with no template cite is incomplete, same as a table with no empty state.
 
-No row → `inspiration.md` (add a row) then build. Do not invent.
+No row → `inspiration.md` (add a row) then cite. Do not invent.
 
 ---
 

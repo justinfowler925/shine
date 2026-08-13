@@ -422,14 +422,14 @@
     <section class="stack">
       <h2>The skill</h2>
       <div class="stack">
-        <p>One git-tracked directory both Claude Code and Cursor symlink. The index is 252 lines, ~14 KB — still inside the 5,000-token window that survives compaction — so catalog cite and the non-negotiables sit at the top. Twenty-seven references load from disk when a task touches them: catalog, contracts, techniques, adoption, the audit rubric, 40 checkable rules, a failure taxonomy of 84 tells written so a program can detect each one. Dedicated executor: <code>shine-ux</code>. Five wirings: per-edit lint, stop-sweep, and the doctor, each on both surfaces. A gate that is not in the doctor does not exist.</p>
+        <p>One git-tracked directory both Claude Code and Cursor symlink. The index is 255 lines, ~14 KB — still inside the 5,000-token window that survives compaction — so catalog cite and the non-negotiables sit at the top. Do not load all twenty-seven references: run <code>corpus/cite.mjs</code>, open the files it lists from <code>~/design-corpus</code>, then the one reference the surface needs. Dedicated executor: <code>shine-ux</code>. Five wirings: per-edit lint, stop-sweep, and the doctor, each on both surfaces. A gate that is not in the doctor does not exist.</p>
         <p>A path-gated skill is an absent skill. This one used to list <code>tsx,jsx,css,html</code>, so it never loaded for UI inside Python, and Brutus shipped 56 raw hex values one glob away from the design authority. Frontmatter is <code>name</code> + <code>description</code> only. Never <code>paths:</code>. Design-lint keys on content, not extension — HTML inside a <code>.py</code> counts.</p>
         <p>New surfaces start in <strong>Wireframe</strong> (interactive discovery → gray-box from a catalog id → locked brief). Existing surfaces run diagnose → cite → fix → remeasure. Six modes: Wireframe, Build, Polish, Audit, Copy, Adoption. Voice is a layer on a surface that speaks, not a seventh mode. Ambiguity defaults to Wireframe if there is no UI yet, otherwise Build. Two lanes, <span class="mono">brand</span> and <span class="mono">personal</span> — brand and mode swap in the token layer, never in markup. The committed brand lane is placeholder values on purpose; a real palette arrives via <code>SHINE_BRAND_OVERRIDE</code> / <code>brand.local.md</code>, never this tree. House style: dark-first, dense, instrumental, editorial type. Light is derived, never hand-authored.</p>
       </div>
 
       <figure class="files">
 <pre>skill/                        lines
-  <strong>SKILL.md</strong>                    252
+  <strong>SKILL.md</strong>                    255
   references/
     adoption.md                158
     ai-surfaces.md             160
@@ -442,7 +442,7 @@
     corpus.md                  109
     dashboards.md              220
     dataviz.md                 126
-    diagnose.md                144
+    diagnose.md                145
     ecosystem.md               154
     foundations.md             193
     imagegen.md                 60
@@ -454,16 +454,16 @@
     salesforce.md              196
     taste.md                   224
     techniques.md               90
-    templates.md               152
+    templates.md               160
     verification.md            280
     voice.md                   119
-    wireframe.md               195
-                            <strong>4,598</strong></pre>
+    wireframe.md               196
+                            <strong>4,611</strong></pre>
         <figcaption class="small subtle">The whole thing. The index is the only part an agent keeps in context.</figcaption>
       </figure>
 
       <ul class="ticks">
-        <li><strong>Catalog cite required.</strong> A new page names a <code>templates.md</code> id before a pixel is drawn. Copy that template’s structure; shine-paint. Inventing a layout is incomplete — same status as shipping no measure numbers. A build that cannot name a catalog id is not done. 117 rows (98 shadcn-registry, 10 MUI, plus Tremor, Ant Design Pro, Mantine, Chakra, HeroUI, …); no row → fill the catalog, then build.</li>
+        <li><strong>Catalog cite required.</strong> Run <code>node corpus/cite.mjs &lt;screen|id&gt;</code> and open every file it lists from <code>~/design-corpus</code>. Copy that structure; shine-paint. Naming an id you did not open is inventing — same status as shipping no measure numbers. 117 rows (98 shadcn-registry, 10 MUI, plus Tremor, Ant Design Pro, Mantine, Chakra, HeroUI, …); no row → fill the catalog, then cite.</li>
         <li><strong>New surfaces start in Wireframe.</strong> Gray-box HTML from the catalog id, then a locked <code>*.brief.md</code>. Build honours the brief and does not re-open structure unless you say <code>unlock structure</code>.</li>
         <li><strong>Internal tools get Adoption before pixels.</strong> Name the meeting the screen runs, what each persona learns here that they cannot get by asking a person, and the path from notification to committed change. A surface nobody opens is a design defect.</li>
         <li><strong>A component name is a complete contract.</strong> “Table” means toolbar, sorting, pagination, sticky header, selection, empty, loading and error states, keyboard access — not bare markup. Opting out takes an explicit “simple”.</li>
@@ -565,7 +565,7 @@
     <section class="stack">
       <h2>Start from a real page, not a poster</h2>
       <div class="stack">
-        <p>A Linear tracking cite is paint. It does not authorize inventing a dashboard. New pages start from a row in <code>templates.md</code> — copy the regions, shine-paint, never clone vendor pixels. Technique numbers (15px body, 150ms, chroma 0.13–0.24) still come from measuring what shipped. Structure comes from a catalog id.</p>
+        <p>A Linear tracking cite is paint. It does not authorize inventing a dashboard. New pages start with <code>node corpus/cite.mjs &lt;screen&gt;</code> — open the files, copy the regions, shine-paint, never clone vendor pixels. Technique numbers (15px body, 150ms, chroma 0.13–0.24) still come from measuring what shipped. Structure comes from the corpus files, not from naming an id.</p>
         <p>Dribbble and Behance stay out. Partly the terms — scraping is prohibited and each shot is copyrighted by an individual designer, so there is nobody who could grant rights even in principle. But mostly because <strong>shots are posters, not software</strong>. No empty states, no error states, no 200-row tables, no keyboard navigation, fake data at conveniently perfect lengths. Training on that produces work that photographs well and falls apart on contact with real content.</p>
         <p>The catalog is SPDX-clean source already on disk: MUI free templates, shadcn blocks, Tremor, Ant Design Pro, Mantine, Chakra, HeroUI. Paid stores without a license (Haze, Prime, MUI Store, AdminLTE commercial) are query-only screenshots, never clones. No row for this screen → add one, then build. Do not invent.</p>
         <p>Facts still aren’t copyrightable: “this product’s body text is 15px at 1.6 line-height with −0.011em tracking” is an observation, not an appropriation. Design systems that publish real numbers under real licenses — IBM Carbon, GitHub Primer, Material 3, the US Web Design System — remain the richest sources for those numbers. They do not skip the catalog.</p>
@@ -600,7 +600,7 @@
         <li><strong>Interface copy.</strong> In. A conventions file for labels, errors, empty and loading states. Cheapest fix here, and one of the loudest tells.</li>
         <li><strong>Keyboard choreography.</strong> In, as contracts checked by review. Focus order, traps and escape behavior were already in the ported component contracts. Automation catches <span class="mono">2.49%</span> of keyboard issues — a linter can’t hold this standard; a document can.</li>
         <li><strong>Illustration and imagery.</strong> Filled. Anti-stock by rule: real product surfaces, generated texture, data as ornament, typographic covers — no people pointing at laptops. Generation runs locally when a surface needs texture — 4-bit schnell for drafts, 8-bit dev for finals. Plates on this page sit beside the claim they prove, not as a masthead hero. Catalog shots are structure sources; shine-paint is ours. A generated hero with no claim next to it is the tell the rest of the skill exists to kill.</li>
-        <li><strong>A performance budget.</strong> In, twice over. CSS ≤ 20 KB gzip; JS ≤ 40 KB for an app route, zero for a document. The same discipline is the context budget: a 252-line index (~14 KB) still fits the 5,000-token reattach window; references cost zero tokens until read.</li>
+        <li><strong>A performance budget.</strong> In, twice over. CSS ≤ 20 KB gzip; JS ≤ 40 KB for an app route, zero for a document. The same discipline is the context budget: a 255-line index (~14 KB) still fits the 5,000-token reattach window; references cost zero tokens until read. Do not load all twenty-seven.</li>
       </ul>
       <p>Nothing on that list is still open. The registry — the thing this page used to leave hanging — shipped 2026-08-05. An app still on its own palette is that app’s migration (<code>sync-consumers</code> vendors the tokens). Shine does not become unfinished because a consumer hasn’t imported them.</p>
     </section>

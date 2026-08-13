@@ -34,7 +34,7 @@ draft gray-box — do not interview to death.
 | Turns | Goal |
 |---|---|
 | 1–2 | Intent: job of the screen; who opens it; ritual if internal (`adoption.md` lite) |
-| 2–3 | **Catalog pick** from `templates.md` (default start-from) + pattern from `patterns.md` |
+| 2–3 | **Catalog pick** — `node corpus/cite.mjs <screen>` (default start-from) + pattern from `patterns.md`. Open the files it lists. |
 | 3–6 | Structure forks still undecided after the template (nav collapse, states) |
 | ≤8 | Emit/update gray-box; keep iterating on the HTML |
 | Lock | Write `*.brief.md`; hand off to Build |
@@ -155,7 +155,8 @@ Write `shine-wireframe/<slug>.brief.md` on lock:
 # Wireframe brief: <name>
 Status: LOCKED
 Pattern: <patterns.md section>
-Template: <templates.md id>
+Template: <templates.md id> via `node corpus/cite.mjs <id>`
+Opened: <paths cite.mjs listed>
 Primary action: <label>
 Regions:
 - nav — job — templates.md <id>
