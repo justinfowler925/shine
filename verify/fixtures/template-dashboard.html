@@ -1,0 +1,221 @@
+<!doctype html>
+<!-- Template: mui-crud-dashboard
+     Path: mui-material/docs/data/material/getting-started/templates/crud-dashboard
+     Paint: shine tokens. Structure cloned (sidebar + header + employee grid); Material purple is not.
+     catalog cite required. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employees — CRUD dashboard</title>
+  <link rel="stylesheet" href="../../tokens/dist/personal/artifact.css" />
+  <style>
+    html { color-scheme: dark; }
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; }
+    body {
+      min-height: 100vh;
+      background: var(--shine-color-bg);
+      color: var(--shine-color-fg);
+      font-family: var(--shine-font-sans);
+      font-size: var(--shine-text-base);
+      line-height: var(--shine-leading-normal);
+      letter-spacing: var(--shine-tracking-base);
+    }
+    .shell {
+      display: flex;
+      min-height: 100vh;
+    }
+    nav {
+      width: 200px;
+      flex-shrink: 0;
+      background: var(--shine-color-bg-subtle);
+      border-right: 1px solid var(--shine-color-border);
+      padding: var(--shine-space-4);
+    }
+    nav p {
+      font-size: var(--shine-text-xs);
+      letter-spacing: var(--shine-tracking-caps);
+      text-transform: uppercase;
+      color: var(--shine-color-fg-muted);
+      margin-bottom: var(--shine-space-3);
+    }
+    nav a {
+      display: block;
+      padding: var(--shine-space-2) var(--shine-space-3);
+      min-height: 40px;
+      color: var(--shine-color-fg);
+      text-decoration: none;
+      border-radius: var(--shine-radius-sm);
+      font-size: var(--shine-text-sm);
+    }
+    nav a[aria-current="page"] {
+      background: var(--shine-color-border);
+    }
+    main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    header.page {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--shine-space-4);
+      padding: var(--shine-space-4) var(--shine-space-5);
+      border-bottom: 1px solid var(--shine-color-border);
+    }
+    h1 {
+      font-size: var(--shine-text-xl);
+      letter-spacing: var(--shine-tracking-xl);
+      font-weight: 590;
+      text-wrap: balance;
+    }
+    .lede {
+      font-size: var(--shine-text-sm);
+      color: var(--shine-color-fg-muted);
+      margin-top: var(--shine-space-1);
+    }
+    .primary {
+      background: var(--shine-color-primary);
+      color: var(--shine-color-primary-fg);
+      border: 0;
+      border-radius: var(--shine-radius-sm);
+      padding: var(--shine-space-3) var(--shine-space-4);
+      min-height: 40px;
+      font: inherit;
+      font-size: var(--shine-text-sm);
+      font-weight: 590;
+      cursor: pointer;
+    }
+    .primary:focus-visible {
+      outline: 2px solid var(--shine-color-ring);
+      outline-offset: 2px;
+    }
+    .ghost {
+      background: transparent;
+      color: var(--shine-color-fg);
+      border: 1px solid var(--shine-color-border);
+      border-radius: var(--shine-radius-sm);
+      padding: var(--shine-space-2) var(--shine-space-3);
+      min-height: 40px;
+      font: inherit;
+      font-size: var(--shine-text-sm);
+      cursor: pointer;
+    }
+    .ghost:focus-visible {
+      outline: 2px solid var(--shine-color-ring);
+      outline-offset: 2px;
+    }
+    .toolbar {
+      display: flex;
+      gap: var(--shine-space-3);
+      padding: var(--shine-space-4) var(--shine-space-5);
+      align-items: center;
+    }
+    label {
+      font-size: var(--shine-text-sm);
+      color: var(--shine-color-fg-muted);
+    }
+    input {
+      background: var(--shine-color-bg-subtle);
+      color: var(--shine-color-fg);
+      border: 1px solid var(--shine-color-border);
+      border-radius: var(--shine-radius-sm);
+      padding: var(--shine-space-2) var(--shine-space-3);
+      min-height: 40px;
+      font: inherit;
+      font-size: var(--shine-text-sm);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--shine-text-sm);
+    }
+    th, td {
+      text-align: left;
+      padding: var(--shine-space-3) var(--shine-space-4);
+      border-bottom: 1px solid var(--shine-color-border);
+    }
+    th {
+      font-size: var(--shine-text-xs);
+      letter-spacing: var(--shine-tracking-caps);
+      text-transform: uppercase;
+      color: var(--shine-color-fg-muted);
+      font-weight: 500;
+    }
+    td.num {
+      font-family: var(--shine-font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+    .row-action {
+      background: none;
+      border: 0;
+      color: var(--shine-color-fg-muted);
+      font: inherit;
+      font-size: var(--shine-text-sm);
+      cursor: pointer;
+      min-height: 40px;
+      padding: var(--shine-space-2);
+    }
+    .row-action:focus-visible {
+      outline: 2px solid var(--shine-color-ring);
+      outline-offset: 2px;
+    }
+    .status {
+      font-size: var(--shine-text-xs);
+      color: var(--shine-color-fg-muted);
+      padding: var(--shine-space-3) var(--shine-space-5);
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+  </style>
+</head>
+<body data-shine-probe="app-shell" data-shine-template="mui-crud-dashboard">
+  <div class="shell">
+    <nav aria-label="App">
+      <p>Sitemark</p>
+      <a href="#employees" aria-current="page">Employees</a>
+      <a href="#orders">Orders</a>
+      <a href="#settings">Settings</a>
+    </nav>
+    <main>
+      <header class="page">
+        <div>
+          <h1>Employees</h1>
+          <p class="lede">Directory for the ops ritual — add, filter, open a row.</p>
+        </div>
+        <button type="button" class="primary">Add employee</button>
+      </header>
+      <div class="toolbar">
+        <label for="q">Search</label>
+        <input id="q" type="search" name="q" placeholder="Name or email" />
+        <button type="button" class="ghost">Refresh</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Title</th>
+            <th scope="col">Department</th>
+            <th scope="col"><span class="visually-hidden">Row actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Josephine Williams</td><td class="num">34</td><td>Operations lead</td><td>Ops</td><td><button type="button" class="row-action">Edit</button></td></tr>
+          <tr><td>Marcus Chen</td><td class="num">41</td><td>Analyst</td><td>RevOps</td><td><button type="button" class="row-action">Edit</button></td></tr>
+          <tr><td>Priya Nair</td><td class="num">29</td><td>Coordinator</td><td>Ops</td><td><button type="button" class="row-action">Edit</button></td></tr>
+          <tr><td>Elena Rossi</td><td class="num">38</td><td>Manager</td><td>People</td><td><button type="button" class="row-action">Edit</button></td></tr>
+          <tr><td>Jonah Blake</td><td class="num">52</td><td>Director</td><td>Ops</td><td><button type="button" class="row-action">Edit</button></td></tr>
+          <tr><td>Amira Haddad</td><td class="num">31</td><td>Specialist</td><td>RevOps</td><td><button type="button" class="row-action">Edit</button></td></tr>
+          <tr><td>Theo Park</td><td class="num">27</td><td>Associate</td><td>People</td><td><button type="button" class="row-action">Edit</button></td></tr>
+          <tr><td>Sofia Alvarez</td><td class="num">45</td><td>Lead</td><td>Ops</td><td><button type="button" class="row-action">Edit</button></td></tr>
+        </tbody>
+      </table>
+      <p class="status">Showing 8 of 8 · empty and error states live behind this grid</p>
+    </main>
+  </div>
+</body>
+</html>

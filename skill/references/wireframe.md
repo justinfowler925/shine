@@ -3,9 +3,10 @@
 Default for a **new** surface with no existing UI. Explicit triggers: “wireframe”,
 “sketch”, “low-fi”, “discover the layout”, “new screen”.
 
-Wireframe discovers **structure** with the user, citing kits and measured products. It
-emits a gray-box HTML artifact, then a **locked brief**. Build paints under shine tokens
-and does not invent a competing IA unless the user says `unlock structure`.
+Wireframe discovers **structure** with the user by picking a catalog template, then
+citing kits. It emits a gray-box HTML artifact whose regions come from that template,
+then a **locked brief**. Build paints under shine tokens and does not invent a
+competing IA unless the user says `unlock structure`.
 
 **Not Wireframe:** craft (chroma, tracking, shadows), brand paint, real charts, or
 shipping React. Craft hard-fails in `measure.mjs` wait until Build.
@@ -33,8 +34,8 @@ draft gray-box — do not interview to death.
 | Turns | Goal |
 |---|---|
 | 1–2 | Intent: job of the screen; who opens it; ritual if internal (`adoption.md` lite) |
-| 2–3 | Pattern match from `patterns.md` + kit from `kits.md` |
-| 3–6 | Structure forks (nav, focal object, primary action, states) |
+| 2–3 | **Catalog pick** from `templates.md` (default start-from) + pattern from `patterns.md` |
+| 3–6 | Structure forks still undecided after the template (nav collapse, states) |
 | ≤8 | Emit/update gray-box; keep iterating on the HTML |
 | Lock | Write `*.brief.md`; hand off to Build |
 
@@ -42,12 +43,15 @@ draft gray-box — do not interview to death.
 
 | Kind | Form |
 |---|---|
+| Catalog template | `templates.md` id — **required on every region** |
 | Pattern | `patterns.md` § name |
 | Kit recipe | `kits.md` + `~/design-corpus/…` `file:line` |
 | Technique | `techniques.md` § + product |
-| Novel only | `inspiration.md` protocol — required when nothing cites |
+| Novel only | `inspiration.md` — add a catalog row, then cite it |
 
-Banned: “we could do a sidebar” with no source.
+Banned: “we could do a sidebar” with no source. Gray-box regions come from the
+chosen template, not from anonymous layout ideas. `data-cite` on every region
+includes the `templates.json` id.
 
 ### Recommendation format (every fork)
 
@@ -111,7 +115,7 @@ Or a path the user names. Keep HTML + brief adjacent.
     <div class="wf-shell">
       <aside class="wf-region wf-nav" data-label="nav" data-job="…" data-cite="kits.md App shell">…</aside>
       <main class="wf-main">
-        <header class="wf-region wf-header" data-label="page-header" data-job="…" data-cite="…">
+        <header class="wf-region wf-header" data-label="page-header" data-job="…" data-cite="templates.md mui-crud-dashboard">
           <div>
             <h1 class="wf-title">…</h1>
             <p class="wf-desc">…</p>
@@ -151,9 +155,10 @@ Write `shine-wireframe/<slug>.brief.md` on lock:
 # Wireframe brief: <name>
 Status: LOCKED
 Pattern: <patterns.md section>
+Template: <templates.md id>
 Primary action: <label>
 Regions:
-- nav — job — cite
+- nav — job — templates.md <id>
 - page-header — …
 - focal — …
 States: empty / loading / error / …
@@ -178,13 +183,13 @@ Unlock: only if user says "unlock structure"
 
 | Pattern (`patterns.md`) | Lead with |
 |---|---|
-| App shell | shadcn sidebar / Carbon chrome density — `kits.md` App shell |
-| Dashboard / metrics | `dashboards.md` + Recharts/D3; one focal object |
-| Insight stream / queue | ranked rows + rationale; Carbon/Ant table density for chrome |
-| Data table | TanStack Table ^8 + Carbon filters — `kits.md` DataGrid |
-| Form / settings | Ant/MUI completeness; Polaris settings grammar (query only) |
-| Landing / marketing | hero budget; motion-primitives MIT only |
-| AI surface | `ai-surfaces.md` topology first — chat is usually wrong |
+| App shell | `templates.md` `shadcn-sidebar-07` (or MUI dashboard) |
+| Dashboard / metrics | `templates.md` `shadcn-dashboard-01` (Tremor when pinned) |
+| Insight stream / queue | ranked rows; start from app-shell template chrome |
+| Data table | `templates.md` `mui-crud-dashboard` |
+| Form / settings | Ant/MUI completeness on the cited shell |
+| Landing / marketing | `templates.md` `mui-marketing-page` |
+| AI surface | `ai-surfaces.md` topology first — then an app-shell template |
 | Dialog / sheet | Base UI / Radix + APG |
 
-See also `kits.md` § Wireframe → recipe.
+See `templates.md` for the ranked catalog. `kits.md` is behavior, not a substitute page.

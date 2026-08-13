@@ -37,3 +37,14 @@ react-spectrum	sparse	https://github.com/adobe/react-spectrum.git	main	7c0765468
 fluentui	sparse	https://github.com/microsoft/fluentui.git	master	c83bfa7666778640350f54991c8ebe712a8f389b	packages/react-components
 aria-practices	sparse	https://github.com/w3c/aria-practices.git	main	7e4034b262bc0d25332e330d8a582aaf34113829	content
 polaris	sparse	https://github.com/Shopify/polaris.git	main	af6ffb66a5b1d20f6c2c898b334a1ebb53728ba2	polaris-react polaris-tokens documentation
+mantine	sparse	https://github.com/mantinedev/mantine.git	master	4430b6f592155c8b6ddcd78d44cb758a9d4a31a9	packages/@mantine apps/mantine.dev
+chakra-ui	sparse	https://github.com/chakra-ui/chakra-ui.git	main	13692aee261402d0f4fd6eeab3a3857afcaae67b	packages/react apps/compositions apps/www
+heroui	sparse	https://github.com/heroui-inc/heroui.git	v3	683c8666bbe39f6c93fe712938d0517ae6d58249	packages/react packages/styles apps/docs
+heroui-next-app	full	https://github.com/heroui-inc/next-app-template.git	main	925320a82bf14cad2a87b4791b0de9fac0f71877	*
+headlessui	sparse	https://github.com/tailwindlabs/headlessui.git	main	eea57cf46fd6767ed1059012f7073b88eb159fba	packages/@headlessui-react
+tremor	sparse	https://github.com/tremorlabs/tremor.git	main	ca4d588f47820ff3d514d37fa4ee08a4222dec11	src
+blueprint	sparse	https://github.com/palantir/blueprint.git	develop	933c7de6151665168ffc051045da67ecc1fb39af	packages/core packages/table packages/select packages/datetime2
+park-ui	sparse	https://github.com/chakra-ui/park-ui.git	main	102769cc91a9d36753dbc5893c74b7954b495efe	components/react packages
+rsuite	sparse	https://github.com/rsuite/rsuite.git	main	d5e12c76bd46f48b762cf95b8524bd3d60cadf8a	src docs
+grommet	sparse	https://github.com/grommet/grommet.git	master	035651f9a5c2a5481290b3f90bce9dd70113bdd8	src storybook
+ant-design-pro	sparse	https://github.com/ant-design/ant-design-pro.git	master	bb40867ae3ef943e06e48da6911ccc5900e638a1	src config docs

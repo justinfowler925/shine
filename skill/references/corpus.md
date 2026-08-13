@@ -17,7 +17,7 @@ vendor kits inform behavior and structure.
 Refresh or first-time acquire: `corpus/acquire.sh ~/design-corpus` in the shine repo.
 Pin back to the committed state: `corpus/acquire.sh --restore ~/design-corpus`
 (reads `corpus.lock` — the repo's copy at `corpus/corpus.lock` is the canonical pin).
-~690 MB total, 38 repos, sparse-cloned to value dirs only.
+~1.2 GB total after the 2026-08-12 AdminLTE-list expansion, sparse-cloned to value dirs only.
 
 ## Query patterns
 
@@ -73,6 +73,18 @@ rg -n "IndexTable" ~/design-corpus/polaris/polaris-react/src/components
 | `fluentui/` | Fluent UI `react-components` | Fluent patterns without cloning the world |
 | `aria-practices/` | W3C ARIA Authoring Practices `content/` | APG patterns as greppable truth |
 | `polaris/` | Shopify Polaris react + tokens + documentation | admin/settings grammar (**query only** — see license) |
+| `mantine/` | Mantine core + docs | hooks, components, templates |
+| `chakra-ui/` | Chakra v3 react + compositions | prop API, composition recipes |
+| `heroui/` | HeroUI (ex-NextUI) react + styles + docs | Tailwind + React Aria styled kit |
+| `heroui-next-app/` | HeroUI Next.js app template | full app shell |
+| `headlessui/` | Tailwind Headless UI React | unstyled Menu/Listbox/Dialog |
+| `tremor/` | Tremor dashboard components | KPI blocks, charts |
+| `blueprint/` | Palantir Blueprint core/table/select | dense desktop chrome |
+| `park-ui/` | Park UI (Ark + Panda) | styled Ark alternative |
+| `rsuite/` | React Suite | enterprise table/date pickers |
+| `grommet/` | HPE Grommet | a11y-first layout |
+| `ant-design-pro/` | Ant Design Pro | actual admin templates |
+| `query-only/` | Playwright screenshots of paid stores | layout ideas; **no source copy** |
 
 ## Not in the corpus — protocol
 
@@ -82,6 +94,8 @@ rg -n "IndexTable" ~/design-corpus/polaris/polaris-react/src/components
 
 ## Rules
 
+- **Start from a catalog template**, not from memory. `templates.md` /
+  `corpus/templates.json` — catalog cite required before Build.
 - **Query with `rg`/Read/Glob, never from memory.** Exact symbol lookups, file:line cites.
 - **Vendoring is not depending.** Depend on D3 + Recharts for charts; visx is vendored
   for custom work only. Check `references/ecosystem.md` before adding any dependency.

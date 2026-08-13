@@ -53,20 +53,27 @@ Mandatory for Build, Polish, and Audit-that-fixes. Audit-only stops after the re
 Details: `references/diagnose.md`. If a locked wireframe brief exists for this surface,
 read it first and treat structure as given.
 
+0. **Catalog cite required.** Pick a row in `references/templates.md` /
+   `corpus/templates.json` before drawing anything. Copy that template's structure;
+   shine-paint. Inventing a page is incomplete — same status as no measure numbers.
+   No row for this screen → `inspiration.md` (add a row) then build. Do not invent.
 1. **Surface** — marketing / product / brand-locked / AI / voice / native. Internal tools:
    `adoption.md` **before** pixels.
 2. **Defects** — inventory at three layers: completeness (`contracts.md`), composition
    (hierarchy, density, voids, path length), craft (tokens, type, motion).
 3. **Cite before edit** — every material fix names a source:
+   - catalog template → `templates.md` id (mandatory on new pages)
    - product technique → `references/techniques.md` (Linear, Vercel, Notion, Stripe, …)
    - kit pattern → `references/kits.md` + `~/design-corpus` `file:line`
-   - novel → `references/inspiration.md` research protocol (**required** when no cite exists)
+   - novel → `references/inspiration.md` (fill a missing catalog row, not skip it)
    - native → Apple HIG URL + principle (not in corpus)
-4. **Apply** — map onto shine tokens + house style + contracts. Never clone brand pixels
-   from Linear/Carbon/Material. Kits inform behavior; shine owns the paint.
-5. **Remeasure** — `verify/measure.mjs`. Hard fails block; notes do not. Report
-   before/after numbers. Max 3 multimodal critique passes, **last**.
-6. **Stop** — Critical completeness before craft polish. Do not claim done on vibes.
+4. **Apply** — clone **structure** from the cited template; map paint onto shine tokens
+   + house style + contracts. Never clone brand pixels from Linear/Carbon/Material.
+5. **Remeasure** — `verify/measure.mjs <path> --shot out.png`. Hard fails block.
+   Screenshot the output against the template preview. Fail if regions are missing,
+   primaries don't match, or the layout was invented rather than derived. Notes do
+   not block. Report catalog id + before/after numbers.
+6. **Stop** — Critical completeness (including catalog cite) before craft polish.
 
 **Banned report language:** "tighten spacing", "make it cleaner", "more modern" with no
 citation and no numbers.
@@ -78,8 +85,8 @@ citation and no numbers.
 **Wireframe** — interactive discovery → gray-box HTML → locked brief. Default for new
 surfaces. `references/wireframe.md`.
 **Audit** — score, cite, report; change nothing. `references/audit.md`.
-**Build** — loop above; contracts first, then composition. Honours locked brief.
-`contracts.md`, `patterns.md`, `kits.md`.
+**Build** — loop above; catalog cite, then contracts, then composition. Honours locked brief.
+`templates.md`, `contracts.md`, `patterns.md`, `kits.md`.
 **Polish** — upgrade stubs in place; still cite + remeasure.
 **Copy** — presentation as argument. `references/copy.md`.
 **Adoption** — will anyone open it? `references/adoption.md` — first for internal tools
@@ -163,6 +170,7 @@ Light derived from the same token source. Lanes: `brand` (brand-locked) and `per
 | `references/wireframe.md` | **New surface / sketch** — discovery, gray-box HTML, locked brief before Build. |
 | `references/diagnose.md` | **Start here** for Build/Polish — surface, defects, cite, apply, remeasure. |
 | `references/techniques.md` | Symptom → product technique transfer (Linear, Vercel, Notion, …). |
+| `references/templates.md` | **Start here for any new page** — catalog cite required; copy structure, shine-paint. |
 | `references/kits.md` | Which corpus kit; worked recipes (DataGrid, dialog, form, shell). |
 | `references/contracts.md` | MUST/SHOULD/ASK per primitive. |
 | `references/taste.md` | Measurement SSOT — token values, 40 rules, 84-item taxonomy. |
@@ -178,10 +186,10 @@ Light derived from the same token source. Lanes: `brand` (brand-locked) and `per
 | `references/motion.md` | Duration/easing, reduced-motion. |
 | `references/verification.md` | Measure loop traps. |
 | `references/ecosystem.md` | Library choice, licenses. |
-| `references/corpus.md` | `~/design-corpus` query map (38 pins including vendor DS). |
+| `references/corpus.md` | `~/design-corpus` query map (49 pins including vendor DS). |
 | `references/salesforce.md` | SLDS 2 overrides. |
 | `references/foundations.md` | Semantic vars, 8pt rhythm, elevation, a11y floor. |
-| `references/inspiration.md` | Research protocol when no cite exists (required then). |
+| `references/inspiration.md` | Fill a missing catalog row. Technique cites do not skip this. |
 | `references/brand.md` | Brand-mode adapter. **If `references/brand.local.md` exists, read that instead** — a private brand pack drops its real rules there, gitignored. |
 | `references/imagegen.md` | On-demand graphics — ask high/medium/low; map to mflux. |
 | `references/voice.md` | Speak/listen surfaces. |
@@ -224,7 +232,7 @@ a11y        axe-core
 contrast    per-pixel (p5 gated)
 lint        scale + cardinality on COMPUTED values
 compose     voids, type-step collisions, hierarchy, density, theme
-critique    screenshot → multimodal, max 3, LAST
+template    --shot required on Build; fail if not derived from the catalog cite
 ```
 
 Hard-failing (among others): void regions, colliding type steps, unswitching undeclared
@@ -239,5 +247,6 @@ HTTP 200 can be an auth wall. Fail axe `incomplete` too.
 
 ## Reporting
 
-Environment · what changed · **citations** (technique/kit/file:line) · before/after
-numbers · what you did **not** do. Never "looks good now."
+Environment · **catalog id** · citations (technique/kit/file:line) · before/after
+numbers · `--shot` path · what you did **not** do. Never "looks good now." A build
+that cannot name a catalog id is not done.

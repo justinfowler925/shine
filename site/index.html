@@ -396,7 +396,7 @@
 
       <figure class="files">
 <pre>skill/                        lines
-  <strong>SKILL.md</strong>                    243
+  <strong>SKILL.md</strong>                    252
   references/
     adoption.md                158
     ai-surfaces.md             160
@@ -406,25 +406,26 @@
     color-type.md              217
     contracts.md               371
     copy.md                    148
-    corpus.md                   95
+    corpus.md                  109
     dashboards.md              220
     dataviz.md                 126
-    diagnose.md                131
+    diagnose.md                144
     ecosystem.md               154
     foundations.md             193
     imagegen.md                 60
-    inspiration.md              51
-    kits.md                    111
+    inspiration.md              53
+    kits.md                    115
     motion.md                  223
     patterns.md                213
     performance.md             121
     salesforce.md              196
     taste.md                   224
     techniques.md               90
+    templates.md               152
     verification.md            280
     voice.md                   119
-    wireframe.md               190
-                            <strong>4,399</strong></pre>
+    wireframe.md               195
+                            <strong>4,598</strong></pre>
         <figcaption class="small subtle">The whole thing. The index is the only part an agent keeps in context.</figcaption>
       </figure>
 
@@ -441,7 +442,7 @@
       <p class="sec-num">04 — ARCHITECTURE</p>
       <h2>The six-layer plan, audited</h2>
       <ol class="steps">
-        <li><strong>Corpus.</strong> Real library source on disk, so the model never invents a prop signature. Queried with ripgrep — these are exact symbol lookups, not a semantic-search problem. 38 pins, ~690 MB sparse. <em>Shipped</em>.</li>
+        <li><strong>Corpus.</strong> Real library source on disk, so the model never invents a prop signature. Queried with ripgrep — these are exact symbol lookups, not a semantic-search problem. 49 pins, ~1.2 GB sparse. <em>Shipped</em>.</li>
         <li><strong>Tokens.</strong> One DTCG source emitting to nine targets: CSS custom properties, a Tailwind v4 <code>@theme</code> block, an inline <code>&lt;style&gt;</code> for CSP-locked artifacts, a constant for a Python-served app, an email inliner map plus a bulletproof table-based starter, a Google Docs Apps Script, OOXML theme slots for the Office writers, and a Salesforce brand-palette spec whose 17 reference steps keep SLDS’s own lightness ladder re-seeded with the brand hue. Proven the honest way: mutate one token, watch every target change by <em>computed value</em> — the email starter is rendered and measured, not grepped — then migrate a multi-page site's duplicated <code>:root</code> blocks to one import, screenshot-diffed to zero differing pixels.</li>
         <li><strong>Registry.</strong> A private component namespace. This is the part that means “owning” the design rather than borrowing it. Still <em>roadmap</em>.</li>
         <li><strong>Knowledge.</strong> Component contracts, plus the positive taste reference the measurements produced. <em>Shipped</em> — the section above.</li>
