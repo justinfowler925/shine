@@ -3,6 +3,9 @@
 Shine tokens are the visual system. Kits supply **behavior, completeness, and structure**.
 Never paste Material/Carbon/Fluent pixels into a shine surface.
 
+**Do clone structure** from a `templates.md` catalog row, then shine-paint. Inventing a
+page is a Critical hole (`diagnose.md` §0.5). Kits are not a substitute for a catalog id.
+
 Before any library API: `rg` the corpus (`corpus.md`). Cite `file:line` in the fix.
 
 ## Decision table
@@ -26,19 +29,20 @@ Before any library API: `rg` the corpus (`corpus.md`). Cite `file:line` in the f
 
 ## Wireframe → recipe
 
-When Wireframe (`wireframe.md`) matches a screen type, start from this kit — then confirm
-with corpus `file:line` before locking the brief.
+When Wireframe (`wireframe.md`) matches a screen type, pick the `templates.md`
+default start-from first — then confirm kit behavior with corpus `file:line`
+before locking the brief.
 
-| Wireframe pattern | Lead kit / recipe |
-|---|---|
-| App shell | shadcn sidebar + Carbon density cues — § App shell below |
-| Dashboard | Recharts/D3 + `dashboards.md` focal object — § Dashboard |
-| Queue / insight stream | ranked rows; Carbon/Ant chrome for toolbar density |
-| Data table | § DataGrid |
-| Form / settings | Ant/MUI completeness; Polaris query-only for admin grammar |
-| Landing | hero budget; magicui/cult-ui MIT; motion-primitives |
-| AI surface | `ai-surfaces.md` first — then Base UI/Radix for chrome |
-| Dialog | § Dialog / sheet |
+| Wireframe pattern | Catalog default | Lead kit / recipe |
+|---|---|---|
+| App shell | `shadcn-sidebar-07` | shadcn sidebar + Carbon density — § App shell |
+| Dashboard | `shadcn-dashboard-01` (Tremor when pinned) | Recharts/D3 + `dashboards.md` |
+| Queue / insight stream | app-shell template chrome | ranked rows; Carbon/Ant toolbar density |
+| Data table | `mui-crud-dashboard` | § DataGrid |
+| Form / settings | cited shell | Ant/MUI completeness; Polaris query-only |
+| Landing | `mui-marketing-page` | hero budget; magicui/cult-ui MIT |
+| AI surface | app-shell template | `ai-surfaces.md` first |
+| Dialog | — (component, not a page) | § Dialog / sheet |
 
 ## Worked recipes
 

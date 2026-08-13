@@ -55,10 +55,25 @@ One anomaly: for `cult-ui`, `--depth 1` (458 MB) is *larger* than a full clone (
 | microsoft/fluentui | MIT (file; API NOASSERTION) | 846,170 | `packages/react-components` | sparse |
 | w3c/aria-practices | W3C Software and Document License | 38,068 | `content/` | sparse |
 | Shopify/polaris | MIT + Shopify integration / visual-distinctness restrictions | — | `polaris-react`, `polaris-tokens`, `documentation` | sparse, **query only** |
+| mantinedev/mantine | MIT | — | `packages/@mantine`, `apps/mantine.dev` | sparse |
+| chakra-ui/chakra-ui | MIT | — | `packages/react`, `apps/compositions`, `apps/www` | sparse |
+| heroui-inc/heroui | Apache-2.0 | — | `packages/react`, `packages/styles`, `apps/docs` | sparse |
+| heroui-inc/next-app-template | MIT | — | full app | clone fully |
+| tailwindlabs/headlessui | MIT | — | `packages/@headlessui-react` | sparse |
+| tremorlabs/tremor | Apache-2.0 | — | `src/` | sparse |
+| palantir/blueprint | Apache-2.0 | — | `packages/{core,table,select,datetime2}` | sparse |
+| rsuite/rsuite | MIT | — | `src/`, `docs/` | sparse |
 
-**Footprint after 2026-08-10 vendor expansion:** ~690 MB on disk (was ~256 MB).
+| grommet/grommet | Apache-2.0 | — | `src/`, `storybook/` | sparse |
+| ant-design/ant-design-pro | MIT | — | `src/`, `config/`, `docs/` | sparse |
+| chakra-ui/park-ui | MIT | — | `components/react`, `packages/` | sparse |
 
-**Excluded:**
+**Footprint after 2026-08-12 AdminLTE-list expansion:** ~1.2 GB on disk (was ~690 MB).
+
+**Excluded (no source clone):**
+- Haze Dashboard — paid
+- PrimeReact v11+ — commercial (query-only PrimeBlocks screenshots)
+- MUI Store premium / AdminLTE commercial / Tremor paid blocks — unless Atlas has a license (checked 2026-08-12: none)
 - `origin-space/originui` → redirects to `cosscom/coss`, **AGPL-3.0**
 - `tailwindlabs/tailwindcss.com` → **no license file**, 964 MB
 - Aceternity → no public repo, unverifiable license

@@ -15,6 +15,15 @@ If there is **no existing UI** to polish or audit (new screen/page/tool), **stop
 If a `shine-wireframe/<slug>.brief.md` exists with `Status: LOCKED`, read it and treat
 structure as given — do not invent a competing IA unless the user says `unlock structure`.
 
+## 0.5 Catalog cite required
+
+A new page without a `templates.md` / `corpus/templates.json` id is a **Critical
+completeness hole** — ranked with missing a11y, not with craft. Pick the default
+start-from for the screen type (or the id the user named). Copy structure, shine-paint.
+A page with no template cite is incomplete, same as a table with no empty state.
+
+No row → `inspiration.md` (add a row) then build. Do not invent.
+
 ---
 
 ## 1. Name the surface
@@ -70,7 +79,7 @@ Ref: SKILL ten rules, `taste.md`, `color-type.md`, `motion.md`, `foundations.md`
 
 ## 3. Prioritize
 
-1. Completeness Critical (a11y blockers, data triad, wrong primary action)
+1. Completeness Critical — including **a page with no template cite** (a11y blockers, data triad, wrong primary, invented layout)
 2. Composition that causes wrong actions or abandonment (void, no primary, path dead-ends)
 3. Adoption blockers on internal tools (no ritual, persona clone, push with nowhere to act)
 4. Craft that reads as slop (chroma, Inter+tracking-0, purple gradient, equal cards)
@@ -84,7 +93,7 @@ Every material fix names a source. Acceptable citations:
 
 | Kind | Form | Example |
 |---|---|---|
-| Measured product technique | `techniques.md` row + product | "Vercel composite elevation — techniques.md §Depth" |
+| Catalog template | `templates.md` id + path | "mui-crud-dashboard — copy sidebar+header+grid, shine-paint" |
 | Corpus kit pattern | path + file:line from `~/design-corpus` | `carbon/.../DataTable.tsx:120` filter chrome |
 | Contract / APG | `contracts.md` or `aria-practices/content/...` | Dialog focus restore |
 | Apple HIG | URL + principle name | HIG Layout → alignment |
@@ -94,31 +103,35 @@ Every material fix names a source. Acceptable citations:
 **Banned:** "tighten spacing", "make it cleaner", "more modern", threshold-only prose with
 no product or kit named.
 
-If diagnose cannot cite a corpus or product technique, run the research protocol in
-`inspiration.md` (required, not optional) — then cite the principle extracted.
+If diagnose cannot cite a catalog row, run `inspiration.md` and **add the row** before
+building. Technique cites in `techniques.md` do not skip the catalog.
 
 ## 5. Apply
 
-Map the cited technique onto **shine tokens and house style**. Never clone brand pixels
-from Linear/Stripe/Carbon/Material. Completeness and interaction come from kits;
-chroma, type curve, shadows, radii come from shine.
+Map the cited **template structure** onto **shine tokens and house style**. Clone
+layout regions; never clone brand pixels from Linear/Stripe/Carbon/Material.
+Completeness and interaction come from kits; chroma, type curve, shadows, radii
+come from shine.
 
 Upgrade stubs to the contract ladder. Prefer one composition change over ten craft tweaks.
 
 ## 6. Remeasure
 
 ```sh
-cd ~/Projects/shine && node verify/measure.mjs /abs/path/or/http-url
+cd ~/Projects/shine && node verify/measure.mjs /abs/path/or/http-url --shot /tmp/shine-shot.png
 ```
 
-Hard fails block. Notes do not. Report before/after numbers for every Critical/Major you
-claimed to fix. Max 3 multimodal critique passes, and critique is **last** — never first.
+Hard fails block. Notes do not. Report catalog id, `--shot` path, and before/after
+numbers for every Critical/Major you claimed to fix. Fail the build if the screenshot
+is not derived from the cited template (missing regions, invented equal-card hero,
+competing primaries the template does not have).
 
 ## Quick defect → next file
 
 | You see… | Open |
 |---|---|
-| No UI yet / need a sketch | `wireframe.md` |
+| No UI yet / need a sketch | `wireframe.md` + `templates.md` |
+| Invented page / no catalog id | `templates.md` — pick a row; do not draw |
 | Nobody will open this | `adoption.md` |
 | Table/form missing states | `contracts.md` |
 | Wrong hierarchy / equal peers | `techniques.md` §Hierarchy, `kits.md` |

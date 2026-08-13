@@ -1,51 +1,53 @@
 # Inspiration & Research
 
-Contracts, techniques, and kits are SSOT. External galleries are for **novel patterns**
-when diagnose cannot cite a product technique (`techniques.md`) or corpus kit (`kits.md`).
+Visual identity always starts from the **template catalog** (`templates.md` /
+`corpus/templates.json`). Technique cites in `techniques.md` are for craft
+(tracking, elevation, chroma). They do not skip the catalog and they do not
+authorize inventing a page.
 
 ## When research is required
 
-Run this protocol when **any** of these is true — not only when the user asks for
-inspiration:
+Run this protocol when **any** of these is true:
 
-1. Diagnose named a defect and no row in `techniques.md` / recipe in `kits.md` covers it.
-2. Corpus `rg` found no analogous pattern in pinned kits.
+1. No catalog row covers this screen type — **add a row** before building.
+2. The cited template is query-only (screenshot/URL) and you need a second
+   example to lock regions.
 3. The user explicitly asks for inspiration or competitive UI research.
 
-If a citation already exists, skip galleries and apply the cite → fix → remeasure loop.
+Do **not** skip galleries because a Linear/Vercel technique cite exists. That
+cite is paint. Structure still comes from a catalog id.
 
 ## Platform map
 
 | Source | Use for | Do not use for |
 |---|---|---|
-| **Untitled UI / Plus UI** | Visual grammar, density, component variant matrices, token→Tailwind mapping | Interaction SSOT (pair with contracts) |
-| **Mobbin / Refero / SaaSFrame** | Real product flows: onboarding, settings, empty states, table chrome | Blind visual copy |
+| **`templates.md` catalog** | Default start-from for every new page | Skipping it |
+| **Query-only previews** (`~/design-corpus/query-only/`) | Layout ideas from paid stores | Copying source you do not own |
+| **Untitled UI / Plus UI** | Visual grammar, density, variant matrices | Interaction SSOT (pair with contracts) |
+| **Mobbin / Refero / SaaSFrame** | Real product flows | Blind visual copy |
 | **Land-book / SaaS Landing Page** | Marketing heroes, pricing, CTA bands | App DataGrid behavior |
 | **Awwwards / Godly** | Motion/craft ceiling, distinctive marketing | Default product chrome |
-| **Dribbble / Behance** | Mood exploration | Completeness, a11y, states — concepts often skip them |
-| **Corpus vendor docs** (Carbon / Ant / MUI / Spectrum / Fluent / Polaris / APG) | Behavior and API completeness — prefer disk over web | Pixel brand |
-| **Apple HIG** (WebFetch only) | Native/macOS/iOS layout and interaction principles | Web component APIs |
-| **shadcn/ui + TanStack** | Implementation recipes agents ship | Blindly accepting thin demos — extend to contracts |
-| **OpenAI Apps SDK UI** | Chat/composer, card-in-chat density | Full enterprise DataGrid |
+| **Dribbble / Behance** | Mood exploration | Completeness, a11y, states |
+| **Corpus vendor docs** | Behavior and API completeness | Pixel brand |
+| **Apple HIG** (WebFetch only) | Native layout and interaction | Web component APIs |
+| **shadcn/ui + TanStack** | Implementation recipes | Thin demos without contracts |
 
-## Research protocol
+## Research protocol (missing catalog row)
 
-1. Name the **screen type** (e.g. “billing settings”, “filtered empty table”).
-2. Pick **one** primary source from the map above (prefer corpus vendor docs before
-   paywalled galleries).
-3. WebFetch or browse 2–3 examples max — or `rg` corpus for the same pattern.
-4. Extract **principles** (hierarchy, density, state handling) — do not clone styling.
-5. Map principles onto `contracts.md` + `foundations.md` + a new cite string you will
-   put in the report.
-6. Implement; do not leave “inspired by X” half-finished stubs.
-7. Remeasure.
+1. Name the **screen type**.
+2. Find 2–3 real pages (catalog kit, query-only preview, or one gallery).
+3. Extract **regions** (nav, header, focal, primary) — do not clone styling.
+4. Add a row to `corpus/templates.json` via `index-templates.mjs` (or a
+   query-only screenshot) so the next session can cite it.
+5. Cite the new id; copy structure; shine-paint; remeasure with `--shot`.
 
 ## Completeness still wins
 
-A beautiful Dribbble table missing sort, filter, pagination, and empty states **fails**
-this skill. Upgrade the pattern to the contract ladder before shipping.
+A beautiful Dribbble table missing sort, filter, pagination, and empty states
+**fails** this skill. Upgrade the pattern to the contract ladder before shipping.
 
 ## Paywalls
 
-Mobbin and some galleries are subscription-gated. Do not block work on access — fall back
-to corpus (Carbon/Ant/MUI/Spectrum/APG) + shadcn recipes + `techniques.md`.
+Mobbin and store templates are subscription-gated. Do not block on access —
+fall back to SPDX-clean catalog rows (MUI free templates, shadcn blocks) plus
+query-only screenshots. Never copy paid source without an Atlas-owned license.

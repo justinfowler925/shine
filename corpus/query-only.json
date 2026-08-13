@@ -1,0 +1,64 @@
+{
+  "templates": [
+    {
+      "id": "query-mui-store",
+      "screen": "app-shell",
+      "kit": "mui-store",
+      "title": "MUI Store premium templates (query-only)",
+      "path": "query-only/query-mui-store.png",
+      "preview": "https://mui.com/store/",
+      "license": "proprietary",
+      "startFrom": 90
+    },
+    {
+      "id": "query-mui-free-gallery",
+      "screen": "marketing",
+      "kit": "mui-material",
+      "title": "MUI free templates gallery (query-only preview)",
+      "path": "query-only/query-mui-free-gallery.png",
+      "preview": "https://mui.com/material-ui/getting-started/templates/",
+      "license": "MIT",
+      "startFrom": 80
+    },
+    {
+      "id": "query-adminlte",
+      "screen": "app-shell",
+      "kit": "adminlte",
+      "title": "AdminLTE v3 (query-only)",
+      "path": "query-only/query-adminlte.png",
+      "preview": "https://adminlte.io/themes/v3/",
+      "license": "proprietary",
+      "startFrom": 91
+    },
+    {
+      "id": "query-primeblocks",
+      "screen": "app-shell",
+      "kit": "primeblocks",
+      "title": "PrimeBlocks (query-only)",
+      "path": "query-only/query-primeblocks.png",
+      "preview": "https://primeblocks.org/",
+      "license": "proprietary",
+      "startFrom": 92
+    },
+    {
+      "id": "query-haze",
+      "screen": "dashboard",
+      "kit": "haze",
+      "title": "Haze Dashboard listing (query-only)",
+      "path": "query-only/query-haze.png",
+      "preview": "https://adminlte.io/blog/react-ui-frameworks/",
+      "license": "proprietary",
+      "startFrom": 90
+    },
+    {
+      "id": "query-shadcn-blocks",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "shadcn blocks gallery (query-only preview)",
+      "path": "query-only/query-shadcn-blocks.png",
+      "preview": "https://ui.shadcn.com/blocks",
+      "license": "MIT",
+      "startFrom": 80
+    }
+  ]
+}

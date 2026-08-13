@@ -173,6 +173,31 @@ sparse_clone aria-practices   w3c/aria-practices         main   content
 sparse_clone polaris          Shopify/polaris            main \
   polaris-react polaris-tokens documentation
 
+# AdminLTE-list expansion 2026-08-12 — SPDX-clean source; shine tokens stay the paint.
+# No source clone: Haze (paid), PrimeReact v11+ (commercial), MUI Store premium,
+# AdminLTE commercial, Tremor paid blocks. Those are query-only screenshots.
+sparse_clone mantine          mantinedev/mantine         master \
+  packages/@mantine apps/mantine.dev
+sparse_clone chakra-ui        chakra-ui/chakra-ui        main \
+  packages/react apps/compositions apps/www
+sparse_clone heroui           heroui-inc/heroui          v3 \
+  packages/react packages/styles apps/docs
+full_clone   heroui-next-app  heroui-inc/next-app-template main
+sparse_clone headlessui       tailwindlabs/headlessui    main \
+  packages/@headlessui-react
+sparse_clone tremor           tremorlabs/tremor          main   src
+sparse_clone blueprint        palantir/blueprint         develop \
+  packages/core packages/table packages/select packages/datetime2
+sparse_clone park-ui          chakra-ui/park-ui          main \
+  components/react packages
+sparse_clone rsuite           rsuite/rsuite              main   src docs
+sparse_clone grommet          grommet/grommet            master src storybook
+sparse_clone ant-design-pro   ant-design/ant-design-pro  master src config docs
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 mv "$LOCK_TMP" "$LOCK"; trap - EXIT
+cp "$LOCK" "$ROOT/corpus/corpus.lock"
 log "lockfile: $LOCK"
+log "repo pin: $ROOT/corpus/corpus.lock"
+node "$ROOT/corpus/index-templates.mjs"
 log "on disk:  $(du -sh "$TARGET" | cut -f1)"

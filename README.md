@@ -4,7 +4,7 @@
 [![Site](https://img.shields.io/badge/site-shine--blond.vercel.app-0c0a09.svg)](https://shine-blond.vercel.app)
 [![Skill](https://img.shields.io/badge/skill-%2Fshine-a8a29e.svg)](./skill/SKILL.md)
 [![Doctor](https://img.shields.io/badge/doctor-local%20gate-16a34a.svg)](./verify/doctor.mjs)
-[![Corpus](https://img.shields.io/badge/corpus-~690MB%20sparse-3f3f46.svg)](./skill/references/corpus.md)
+[![Corpus](https://img.shields.io/badge/corpus-~1.2GB%20sparse-3f3f46.svg)](./skill/references/corpus.md)
 
 **A design system agents can’t deviate from — and a UI/UX agent that discovers, cites, builds, and proves it.**
 
@@ -191,7 +191,7 @@ consumes `@shine` CSS or `npx shadcn add` — that is the **design system**, not
 ./corpus/acquire.sh --restore ~/design-corpus
 ```
 
-~690 MB sparse. Query with `rg` — see
+~1.2 GB sparse. Query with `rg` — see
 `skill/references/corpus.md`.
 
 ### 6. Prove it is deployed
@@ -334,15 +334,15 @@ One plugin, `shine`. Iterate as a skills-dir plugin (`claude plugin init shine -
 
 ### 1. Corpus
 
-Full clones **5.1 GB** → shallow **1.5 GB** → **sparse ~690 MB** (vendor DS expansion
-2026-08-10: Carbon, Ant, MUI, React Spectrum/Aria, Fluent, APG, Polaris). Recharts and
-Motion dominate history; value dirs stay sparse.
+Full clones **5.1 GB** → shallow **1.5 GB** → **sparse ~1.2 GB** (AdminLTE-list expansion
+2026-08-12: Mantine, Chakra, HeroUI, Headless UI, Tremor, Blueprint, Park UI, RSuite,
+Grommet, Ant Design Pro). Recharts and Motion dominate history; value dirs stay sparse.
 
 shadcn specifically: the repo is 67 MB, the actual component set is **372 KB of TSX** or **550 KB as registry JSON**. Don't clone it — fetch the JSON. Docs come as raw markdown by appending `.md` to any docs URL.
 
 **Acquisition gotchas.** shadcn's `/r/index.json` lists only 62 `registry:ui` items; the full 411-item manifest is the in-repo `apps/v4/registry.json`. Radix docs live in `radix-ui/website`, not `primitives`. Skip `tailwindcss.com` — 964 MB, no license. Motion and Recharts ship no in-repo docs.
 
-**Home:** any machine with disk headroom for ~690 MB sparse clones.
+**Home:** any machine with disk headroom for ~1.2 GB sparse clones.
 
 **Query with ripgrep, not embeddings.** The real questions are "what props does `<XAxis>` take" — exact symbol lookups, which `rg` answers in milliseconds with file:line and zero staleness. Curated to source only the corpus is ~50–150 MB of real `.ts`/`.tsx`. Semantic search solves a problem that doesn't exist here.
 
@@ -572,7 +572,7 @@ Design rules → `agent-rules/always/80-design-*.md` (four required frontmatter 
 2. **One token source.** DTCG + Terrazzo → CSS vars + Tailwind `@theme`. Prove on a real multi-page site: nine `:root` blocks → one import, screenshot-diffed. ✅ shipped 2026-08-05 — `tokens/`, both lanes; pages pixel-identical after migration. Verified findings in `tokens/README.md`.
 3. **`taste.md`.** ✅ shipped (`skill/references/taste.md`).
 4. **Corpus.** Acquisition script + `corpus.lock` committed. ✅ shipped 2026-08-05 —
-   38 pins at ~690 MB on the laptop, shadcn as 411 registry JSON items, `corpus/acquire.sh`
+   49 pins at ~1.2 GB on the laptop, shadcn as 411 registry JSON items, `corpus/acquire.sh`
    (+ `--restore`), lockfile pins every SHA. Query guide: `skill/references/corpus.md`.
 5. **Registry.** `registry:base` published; `npx shadcn add` works into a clean project.
    ✅ shipped 2026-08-05 — `registry/build.mjs` generates `registry.json` + `site/r/*.json`
@@ -613,7 +613,7 @@ Two of them, and the second is the one that matters day to day.
 
 **Context budget — the answer to "does this raw-dog my agent window."** It does not, by construction.
 
-Only the skill *index* is ever resident: roughly 2 KB, always in context. Everything else sits on disk and is read on demand, one file at a time, only when the task touches it. A typical UI task pulls the index plus one reference — call it 8 KB. The full corpus is ~690 MB on disk (38 pins after vendor DS expansion) and contributes **zero tokens** until ripgrep returns a specific match, which is why retrieval beat embeddings here.
+Only the skill *index* is ever resident: roughly 2 KB, always in context. Everything else sits on disk and is read on demand, one file at a time, only when the task touches it. A typical UI task pulls the index plus one reference — call it 8 KB. The full corpus is ~1.2 GB on disk (49 pins after AdminLTE-list expansion) and contributes **zero tokens** until ripgrep returns a specific match, which is why retrieval beat embeddings here.
 
 Hard caps, from the platform's own limits: `SKILL.md` under 500 lines, non-negotiables in the first 5,000 tokens because that's all that survives compaction, 25,000 tokens total across all re-attached skills. Detail belongs in `research/`, never in the index.
 

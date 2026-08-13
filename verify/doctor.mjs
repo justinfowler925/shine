@@ -635,6 +635,51 @@ if (args.includes("--full")) {
 // Private apps vendor tokens via a local `consumers.local` map (see
 // `consumers.example`). The public doctor does not probe private checkouts.
 
+// ---- 6b. template catalog — inventing a page is incomplete ----------------
+{
+  const catalogPath = join(SHINE, "corpus/templates.json");
+  const skill = readFileSync(join(SHINE, "skill/SKILL.md"), "utf8");
+  const diagnose = readFileSync(join(SHINE, "skill/references/diagnose.md"), "utf8");
+  const acquire = readFileSync(join(SHINE, "corpus/acquire.sh"), "utf8");
+  const CORPUS = join(HOME, "design-corpus");
+
+  if (!/catalog cite required/i.test(skill))
+    fail("SKILL.md catalog cite", "missing the string `catalog cite required` — deleting it is how inventing a page becomes legal again");
+  else ok("SKILL.md catalog cite", "catalog cite required");
+
+  if (!/A page with no template cite is incomplete/.test(diagnose))
+    fail("diagnose.md catalog hole", "missing `A page with no template cite is incomplete`");
+  else ok("diagnose.md catalog hole", "inventing a page is Critical");
+
+  const pins = [
+    "mantine", "chakra-ui", "heroui", "heroui-next-app", "headlessui",
+    "tremor", "blueprint", "park-ui", "rsuite", "grommet", "ant-design-pro",
+  ];
+  const missingPins = pins.filter((p) => !new RegExp(`sparse_clone ${p}\\b|full_clone\\s+${p}\\b`).test(acquire));
+  if (missingPins.length) fail("acquire.sh AdminLTE-list pins", `missing: ${missingPins.join(", ")}`);
+  else ok("acquire.sh AdminLTE-list pins", pins.join(", "));
+
+  if (!existsSync(catalogPath)) fail("templates.json", `missing ${catalogPath}`);
+  else {
+    const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
+    const required = catalog.requiredScreenTypes ?? ["dashboard", "marketing", "auth", "checkout", "app-shell", "crud"];
+    const missingScreens = required.filter((s) => !(catalog.templates ?? []).some((t) => t.screen === s));
+    if (missingScreens.length) fail("catalog required screens", `no start-from for: ${missingScreens.join(", ")}`);
+    else ok("catalog required screens", required.join(", "));
+
+    if (!CI && existsSync(CORPUS)) {
+      const missingPaths = (catalog.templates ?? [])
+        .filter((t) => t.kind === "source")
+        .map((t) => ({ id: t.id, path: join(CORPUS, t.path) }))
+        .filter((t) => !existsSync(t.path));
+      if (missingPaths.length)
+        fail("catalog paths exist", missingPaths.slice(0, 5).map((t) => `${t.id} → ${t.path}`).join("; "));
+      else ok("catalog paths exist", `${(catalog.templates ?? []).filter((t) => t.kind === "source").length} source rows`);
+    } else if (!CI) {
+      fail("catalog paths exist", `no ~/design-corpus — run corpus/acquire.sh`);
+    }
+  }
+}
 
 // ---- 7. every reference is reachable from the map, and vice versa ---------
 // A reference file the map never names is a file the agent never reads on demand — the
