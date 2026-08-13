@@ -613,7 +613,7 @@ Two of them, and the second is the one that matters day to day.
 
 **Context budget — the answer to "does this raw-dog my agent window."** It does not, by construction.
 
-Only the skill *index* is ever resident: 252 lines, ~14 KB, still inside the 5,000-token window that survives compaction. Everything else sits on disk and is read on demand, one file at a time, only when the task touches it. A typical UI task pulls the index plus one reference. The full corpus is ~1.2 GB on disk (49 pins after AdminLTE-list expansion) and contributes **zero tokens** until ripgrep returns a specific match, which is why retrieval beat embeddings here.
+Only the skill *index* is ever resident: 255 lines, ~14 KB, still inside the 5,000-token window that survives compaction. Everything else sits on disk and is read on demand, one file at a time, only when the task touches it. A typical UI task runs `node corpus/cite.mjs <screen>`, opens those corpus files, then one reference. Do not load all 27. The full corpus is ~1.2 GB on disk (49 pins after AdminLTE-list expansion) and contributes **zero tokens** until ripgrep returns a specific match, which is why retrieval beat embeddings here.
 
 Hard caps, from the platform's own limits: `SKILL.md` under 500 lines, non-negotiables in the first 5,000 tokens because that's all that survives compaction, 25,000 tokens total across all re-attached skills. Detail belongs in `research/`, never in the index.
 

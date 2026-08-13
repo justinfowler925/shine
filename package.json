@@ -11,6 +11,7 @@
     "doctor": "node verify/doctor.mjs",
     "doctor:full": "node verify/doctor.mjs --full",
     "measure": "node verify/measure.mjs",
+    "cite": "node corpus/cite.mjs",
     "sync-consumers": "bash scripts/sync-consumers.sh"
   },
   "devDependencies": {

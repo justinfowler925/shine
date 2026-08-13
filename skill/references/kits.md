@@ -29,8 +29,8 @@ Before any library API: `rg` the corpus (`corpus.md`). Cite `file:line` in the f
 
 ## Wireframe → recipe
 
-When Wireframe (`wireframe.md`) matches a screen type, pick the `templates.md`
-default start-from first — then confirm kit behavior with corpus `file:line`
+When Wireframe (`wireframe.md`) matches a screen type, run `node corpus/cite.mjs <screen>`
+and open the files it lists — then confirm kit behavior with corpus `file:line`
 before locking the brief.
 
 | Wireframe pattern | Catalog default | Lead kit / recipe |
