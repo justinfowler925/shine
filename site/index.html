@@ -202,7 +202,7 @@
   @media (hover: hover) { .bar nav a:hover { color: var(--fg); } }
 
   article {
-    max-width: 40rem;
+    max-width: 44rem;
     margin-inline: auto;
     padding: var(--s-12) var(--s-6) var(--s-16);
   }
@@ -222,6 +222,47 @@
   }
 
   .lede { font-size: var(--t-lg); line-height: 1.45; letter-spacing: var(--tr-lg); color: var(--fg-muted); }
+
+  .plate {
+    margin: 0;
+    max-inline-size: none;
+  }
+  .plate img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--surface);
+  }
+  .plate figcaption {
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    letter-spacing: var(--tr-mono);
+    color: var(--fg-subtle);
+    margin-top: var(--s-2);
+  }
+
+  .catalog {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-3);
+    max-inline-size: none;
+  }
+  .catalog figure { margin: 0; }
+  .catalog img {
+    display: block; width: 100%; height: 16rem; object-fit: cover; object-position: top;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--surface);
+  }
+  .catalog figcaption {
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    color: var(--fg-subtle);
+    margin-top: var(--s-2);
+  }
+  @media (max-width: 40rem) {
+    .catalog { grid-template-columns: 1fr; }
+  }
 
   .cta {
     display: inline-flex; align-items: center; justify-content: center;
@@ -298,7 +339,7 @@
   ol.steps strong { color: var(--fg); }
 
   footer {
-    max-width: 40rem;
+    max-width: 44rem;
     margin-inline: auto;
     padding: var(--s-8) var(--s-6) var(--s-16);
     border-top: 1px solid var(--border);
@@ -329,9 +370,9 @@
 <article>
 
   <header>
-    <p class="meta">Working notes · 12 Aug 2026</p>
+    <p class="meta">Working notes · 12 Aug 2026 · catalog cite required</p>
     <h1>A design system agents can’t deviate&nbsp;from</h1>
-    <p class="lede">Everyone tries to give the model taste. Cheaper and more reliable: take away its room to be wrong.</p>
+    <p class="lede">Everyone tries to give the model taste. Cheaper: take away its room to be wrong. New pages start from a real template. Paint is shine tokens. Proof is a measured box.</p>
   </header>
 
     <section class="stack">
@@ -339,8 +380,12 @@
       <div class="stack">
         <p>Generated UI has a look, and everybody blames the wrong suspect. The component library is fine. The look is every project on earth shipping the same <em>default token values</em>.</p>
         <p>Across eighteen products whose production CSS I pulled apart, every reference-grade accent sits between OKLCH chroma 0.13 and 0.24. Tailwind’s <code>-600</code> row runs 0.245–0.288 — hotter than the entire set. That gap is the “unearned saturation” tell, and every generated page you’ve winced at is wearing it.</p>
-        <p>You can’t prompt taste into a default. You can delete the default. Wipe the palette, own the token layer, enforce it against rendered pixels — never against source code.</p>
+        <p>You can’t prompt taste into a default. You can delete the default. Wipe the palette <em>and</em> the default type/tracking/shadow scales, own the token layer, enforce it against rendered pixels — never against source code.</p>
       </div>
+      <figure class="plate">
+        <img src="img/chroma.png" alt="Painted gouache chips in a cyan-to-indigo chroma ramp on dark paper" width="1536" height="640" decoding="async">
+        <figcaption>Accent chroma lives in a tight OKLCH band (0.13–0.24). Tailwind’s -600 row sits past the hot end. High · seed 7</figcaption>
+      </figure>
     </section>
 
     <section class="stack">
@@ -363,6 +408,12 @@
         <li><strong>Tracking is a function of size and weight, not size alone.</strong> At 32px, regular weight takes about 1.6× more negative tracking than bold — lighter strokes leave more apparent counter-space and need pulling tighter. Tracking crosses to negative around 20–24px and reaches −0.02 to −0.035em by 48px. Uniform <code>letter-spacing: 0</code> across every size is one of the loudest tells there is.</li>
         <li><strong>Line-height peaks at body size and falls in both directions.</strong> Roughly 1.33 at 12px, 1.5–1.6 at 15–16px, 1.0 at 64px. The floor holds at about 1.33 — dense interfaces cut padding, never leading.</li>
         <li><strong>Radii nest as <code>child = parent − padding</code>,</strong> and this ships as literal <code>calc()</code> in production. Corners that don’t run parallel are visible even when nobody can say why.</li>
+      </ul>
+      <figure class="plate">
+        <img src="img/radius.png" alt="Macro of nested rounded metal rectangles whose inner corners run parallel to the outer" width="1536" height="640" decoding="async">
+        <figcaption>Nested radius is a measured rule, not a vibe. High · seed 11</figcaption>
+      </figure>
+      <ul class="ticks">
         <li><strong>Elevation is a hairline ring plus blur layers plus a background-colored ring.</strong> A bare drop shadow leaves a mushy edge no amount of blur tuning fixes.</li>
         <li><strong>The hypothesis that grays must be tinted is only 7-of-12 true.</strong> Vercel and Observable run chroma of exactly zero, deliberately. The real invariant is hue <em>consistency</em> across the ramp, not hue presence. Where ramps are tinted, saturation <em>rises</em> as lightness falls.</li>
       </ul>
@@ -371,9 +422,9 @@
     <section class="stack">
       <h2>It became a skill</h2>
       <div class="stack">
-        <p>The plan was six layers of infrastructure. Step one was kill the zero-state: port the knowledge, make <code>/shine</code> answer. Then the knowledge turned out to be the product — a 252-line index plus twenty-seven references, one git-tracked directory that Claude Code and Cursor both symlink. Two agents, one authority, no drift, no repeat of the Cursor-only failure that started this whole thing.</p>
-        <p>The file is shaped by the agent’s memory model. After a long session compacts, only the first 5,000 tokens of a skill are re-attached, so the non-negotiables sit at the top and the ten measured rules ride just under them. About 2 KB stays resident. Everything else loads from disk when a task touches it — the template catalog, contracts, screen patterns, the audit rubric, 40 checkable rules, a failure taxonomy of 84 tells written so a program can detect each one.</p>
-        <p>Six modes (incl. Wireframe / Voice): Audit scores and changes nothing, Build starts from a catalog template then contracts, Polish upgrades a stub in place, and Copy reads the whole presentation layer — language, layout order, artifacts — as an argument that must answer the questions in a reader’s head. Ambiguity defaults to Build. Two lanes, <span class="mono">brand</span> and <span class="mono">personal</span>, one engine underneath — brand and mode swap in the token layer, never in markup. The house style: dark-first, dense, instrumental, with editorial type discipline. Light mode is derived from the same tokens, never hand-authored.</p>
+        <p>The plan was six layers of infrastructure. Step one was kill the zero-state: port the knowledge, make <code>/shine</code> answer. Then the knowledge turned out to be the product — a 252-line index plus twenty-seven references, one git-tracked directory that Claude Code and Cursor both symlink. Two agents, one authority. A path-gated skill is an absent skill: this one used to list <code>tsx,jsx,css,html</code>, so it never loaded for UI inside Python, and Brutus shipped 56 raw hex values one glob away from the design authority. Frontmatter is <code>name</code> + <code>description</code> only. Never <code>paths:</code>.</p>
+        <p>The file is shaped by the agent’s memory model. After a long session compacts, only the first 5,000 tokens of a skill are re-attached, so catalog cite and the non-negotiables sit at the top. About 2 KB stays resident. Everything else loads from disk when a task touches it — the template catalog, contracts, screen patterns, adoption, the audit rubric, 40 checkable rules, a failure taxonomy of 84 tells written so a program can detect each one.</p>
+        <p>Six modes: <strong>Wireframe</strong> (new surface → gray-box from a catalog id → locked brief), <strong>Build</strong> (honour the brief; catalog cite then contracts), <strong>Polish</strong>, <strong>Audit</strong>, <strong>Copy</strong>, <strong>Adoption</strong> (ritual and persona before pixels, first on any internal tool). Voice is a layer on a surface that speaks, not a seventh mode. Dedicated executor: <code>shine-ux</code>, wired on both surfaces. Ambiguity defaults to Wireframe if there is no UI yet, otherwise Build. Two lanes, <span class="mono">brand</span> and <span class="mono">personal</span> — brand and mode swap in the token layer, never in markup. House style: dark-first, dense, instrumental, editorial type. Light is derived, never hand-authored.</p>
       </div>
 
       <figure class="files">
@@ -412,7 +463,9 @@
       </figure>
 
       <ul class="ticks">
-        <li><strong>Catalog cite required.</strong> A new page names a <code>templates.md</code> id before a pixel is drawn. Copy that template’s structure; shine-paint. Inventing a layout is incomplete — same status as shipping no measure numbers. 117 rows (MUI free templates, 97 shadcn blocks, Tremor, Ant Design Pro, …); no row → fill the catalog, then build.</li>
+        <li><strong>Catalog cite required.</strong> A new page names a <code>templates.md</code> id before a pixel is drawn. Copy that template’s structure; shine-paint. Inventing a layout is incomplete — same status as shipping no measure numbers. 117 rows (MUI free templates, 97 shadcn blocks, Tremor, Ant Design Pro, Mantine, Chakra, HeroUI, …); no row → fill the catalog, then build.</li>
+        <li><strong>New surfaces start in Wireframe.</strong> Gray-box HTML from the catalog id, then a locked <code>*.brief.md</code>. Build honours the brief and does not re-open structure unless you say <code>unlock structure</code>.</li>
+        <li><strong>Internal tools get Adoption before pixels.</strong> Name the meeting the screen runs, what each persona learns here that they cannot get by asking a person, and the path from notification to committed change. A surface nobody opens is a design defect.</li>
         <li><strong>A component name is a complete contract.</strong> “Table” means toolbar, sorting, pagination, sticky header, selection, empty, loading and error states, keyboard access — not bare markup. Opting out takes an explicit “simple”.</li>
         <li><strong>Reports state the numbers used.</strong> “Improved the spacing” doesn’t qualify. “Moved 13px → 12px onto the 4px scale; contrast 4.05:1 → 7.2:1” does.</li>
         <li><strong>Every surface is an argument.</strong> The Copy mode renders Hormozi’s value equation as five beliefs a buyer must feel — it gets me the outcome, it will work for <em>me</em>, I’ll see results soon, it’s easy to implement, it’s worth it and I trust who’s behind it — and demands the element that carries each one. A belief with no carrying element is a copy gap, the same status as a token gap. Ten copy slop tells sit beside the twelve visual ones.</li>
@@ -437,7 +490,7 @@
       <h2>Three non-negotiables</h2>
       <div class="stack">
         <p><strong>Never ship a raw value where a token exists.</strong> No hex, no <code>rgb()</code>, no bracketed one-off utilities, no off-scale spacing. A missing token is a gap to report, not a license to freelance.</p>
-        <p><strong>Wipe the default palette.</strong> In Tailwind v4, <code>--color-*: initial</code> removes every built-in color. The standard objection to Tailwind for design systems — that <code>text-[#1a1a1a]</code> erodes the token contract one bracket at a time — largely dissolves when there is no off-system value left to reach for.</p>
+        <p><strong>Wipe the default palette — and the default scales.</strong> In Tailwind v4, <code>--color-*</code>, <code>--text-*</code>, <code>--tracking-*</code>, and <code>--shadow-*</code> all go to <code>initial</code>. <code>text-4xl</code> and <code>shadow-lg</code> are the anti-pattern wearing a token-shaped name. The standard objection to Tailwind — that <code>text-[#1a1a1a]</code> erodes the contract one bracket at a time — dissolves when there is no off-system value left to reach for. A missing token is a hole in the gate: fill it in <code>gen-source.mjs</code> and add the rule that reads the property, in the same change.</p>
         <p><strong>Split primitives from semantics, bridged by <code>@theme inline</code>.</strong> Raw palette in one block, semantic aliases in an <code>inline</code> block, mode mapping in plain custom properties that generate no utilities of their own. Components then only ever say <code>bg-surface text-fg</code>, and brand and mode swap underneath without touching markup. Omitting <code>inline</code> is the single most common cause of “dark mode doesn’t switch.”</p>
         <p>A consequence: <strong>single-file artifacts get hand-written CSS, not a framework.</strong> Nesting and <code>:has()</code> went Baseline in June 2026, <code>light-dark()</code> halves the theming code, and <code>data-variant</code> attributes give a variant API identical at the call site. Zero build, zero FOUC, and the tokens are the artifact.</p>
         <p class="small subtle">This page is built to those rules. Both themes come from one token set; the toggle swaps a single attribute.</p>
@@ -459,7 +512,7 @@
           </tbody>
         </table>
       </div>
-      <p class="small subtle">Clean to build on: shadcn/ui, Radix, Base UI, D3, Recharts, visx, nivo, Magic UI, Motion Primitives, Kibo, Tremor.</p>
+      <p class="small subtle">Clean to build on: shadcn/ui, Radix, Base UI, Mantine, Chakra, HeroUI, Headless UI, Blueprint, D3, Recharts, visx, nivo, Magic UI, Motion Primitives, Kibo, Tremor. Polaris is query-only (Shopify visual-distinctness). Paid stores without an Atlas license — Haze, Prime, MUI Store, AdminLTE commercial — stay query-only screenshots, never clones.</p>
     </section>
 
     <section class="stack">
@@ -484,7 +537,8 @@
       <h2>Measure the box</h2>
       <div class="stack">
         <p>Grepping generated CSS for a token name proves nothing. The string can sit there — present, correct, completely inert — while the browser computes something else. Read the box, not the source.</p>
-        <p>The loop: render in Playwright, read <code>getComputedStyle</code> and <code>getBoundingClientRect</code> across every visible element, assert scale membership and cardinality — every spacing value on the 4px scale, no more than five distinct font sizes, at most three radii. Then accessibility, then contrast, then a screenshot critique capped at three passes.</p>
+        <p>The loop: render in Playwright, read <code>getComputedStyle</code> and <code>getBoundingClientRect</code> across every visible element, assert scale membership and cardinality — every spacing value on the 4px scale, no more than five distinct font sizes, at most three radii. Composition hard-fails independently: voids, colliding type steps, undeclared theme, missing or competing filled primaries, app-shell density. Then accessibility, then contrast, then a screenshot critique capped at three passes. Zero measurements is a fail — a probe that finds targets and measures none of them is reporting that it is broken. Resolve colour by painting it, never by parsing a string; this page is OKLCH throughout and a regex that only sees <code>rgb()</code> would skip every element and print PASS.</p>
+        <p class="small subtle"><code>node verify/doctor.mjs</code> is the gate. GitHub Actions on this repo is dormant; a green CI check that never started is not a pass. The doctor feeds each hook a known violation and watches it bite.</p>
       </div>
 
       <div class="flag stack">
@@ -492,6 +546,10 @@
         <p>Given text over a gradient, axe-core returns <code>incomplete</code> — not pass, not fail. It declines to answer, because it cannot resolve a single background color. Which means the most common contrast failure in real design work is precisely the case the accessibility tool refuses to judge.</p>
         <p>The fix is to hide the text, screenshot clipped to its exact box to capture pure background pixels, decode in-page, and contrast the known foreground against every pixel. Report worst case and 5th percentile, never the mean — a gradient that passes on average still has an unreadable end. On a real page this returned <span class="mono">1.00:1</span> where axe had said nothing at all.</p>
       </div>
+      <figure class="plate">
+        <img src="img/gradient.png" alt="Pale type losing contrast as it crosses a cyan-to-navy gradient" width="1536" height="640" decoding="async">
+        <figcaption>axe says incomplete. The pixels say 1.00:1. High · seed 13</figcaption>
+      </figure>
 
       <ul class="ticks">
         <li><strong>Wait for <code>document.fonts.ready</code> before measuring anything,</strong> or you measure fallback-font geometry and every number is wrong.</li>
@@ -510,6 +568,24 @@
         <p>The catalog is SPDX-clean source already on disk: MUI free templates, shadcn blocks, Tremor, Ant Design Pro, Mantine, Chakra, HeroUI. Paid stores without a license (Haze, Prime, MUI Store, AdminLTE commercial) are query-only screenshots, never clones. No row for this screen → add one, then build. Do not invent.</p>
         <p>Facts still aren’t copyrightable: “this product’s body text is 15px at 1.6 line-height with −0.011em tracking” is an observation, not an appropriation. Design systems that publish real numbers under real licenses — IBM Carbon, GitHub Primer, Material 3, the US Web Design System — remain the richest sources for those numbers. They do not skip the catalog.</p>
       </div>
+      <div class="catalog">
+        <figure>
+          <img src="img/catalog/mui-crud-dashboard.png" alt="Shine-painted CRUD dashboard derived from the MUI CRUD dashboard template" width="1280" height="900" decoding="async">
+          <figcaption>mui-crud-dashboard · structure from MUI, shine-paint</figcaption>
+        </figure>
+        <figure>
+          <img src="img/catalog/shadcn-blocks.png" alt="shadcn blocks gallery — dashboard, sidebar, and form block previews" width="1280" height="900" decoding="async">
+          <figcaption>shadcn blocks · 97 rows in the catalog</figcaption>
+        </figure>
+        <figure>
+          <img src="img/catalog/mui-free-gallery.png" alt="MUI free templates gallery covering dashboard, blog, checkout, and sign-in" width="1280" height="900" decoding="async">
+          <figcaption>MUI free templates · this page cites mui-blog</figcaption>
+        </figure>
+        <figure>
+          <img src="img/catalog/wireframe-sample.png" alt="Gray-box wireframe with labeled regions and one filled primary" width="1280" height="800" decoding="async">
+          <figcaption>Wireframe gray-box · lock this, then Build</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section class="stack">
@@ -521,7 +597,7 @@
         <li><strong>Email.</strong> In. A fifth emit target: tables, inline styles, no custom properties, no flexbox in Outlook. Tokens compile through a literal-value inliner. The renderer is the constraint, not the design.</li>
         <li><strong>Interface copy.</strong> In. A conventions file for labels, errors, empty and loading states. Cheapest fix here, and one of the loudest tells.</li>
         <li><strong>Keyboard choreography.</strong> In, as contracts checked by review. Focus order, traps and escape behavior were already in the ported component contracts. Automation catches <span class="mono">2.49%</span> of keyboard issues — a linter can’t hold this standard; a document can.</li>
-        <li><strong>Illustration and imagery.</strong> Filled. Anti-stock by rule: real product surfaces, generated texture, data as ornament, typographic covers — no people pointing at laptops. Generation runs locally when a surface needs texture or a typographic cover — a 4-bit FLUX schnell for drafts in ~21 seconds and an 8-bit dev for finals in ~2.5 minutes. This page is type, not generated plates; a FLUX hero is the tell the rest of the skill exists to kill.</li>
+        <li><strong>Illustration and imagery.</strong> Filled. Anti-stock by rule: real product surfaces, generated texture, data as ornament, typographic covers — no people pointing at laptops. Generation runs locally when a surface needs texture — 4-bit schnell for drafts, 8-bit dev for finals. Plates on this page sit beside the claim they prove, not as a masthead hero. Catalog shots are structure sources; shine-paint is ours. A generated hero with no claim next to it is the tell the rest of the skill exists to kill.</li>
         <li><strong>A performance budget.</strong> In, twice over. CSS ≤ 20 KB gzip; JS ≤ 40 KB for an app route, zero for a document. The same discipline is the context budget: a ~2 KB resident index, references at zero token cost until read.</li>
       </ul>
       <p>Still open: the registry — a private component namespace — and migrating leftover visual languages that have not yet been pulled onto these tokens.</p>
@@ -531,8 +607,8 @@
 </main>
 
 <footer class="stack">
-    <p>Working notes, August 2026 — first published as the plan, revised the day the skill shipped, revised again the day catalog cite shipped. Every number here was measured or verified against a primary source; where something couldn’t be verified it isn’t stated.</p>
-    <p class="subtle small">This page is a single HTML file with no external requests, built to the rules it describes — OKLCH throughout, two-ratio type scale, size-and-weight-dependent tracking, nested radii, tabular numerals, 150ms transitions, both themes from one token set.</p>
+    <p>Working notes, August 2026 — first published as the plan, revised the day the skill shipped, revised the day catalog cite shipped, revised again when the plates and catalog samples landed. Every number here was measured or verified against a primary source; where something couldn’t be verified it isn’t stated.</p>
+    <p class="subtle small">This page is a single HTML file with no external requests, built to the rules it describes — OKLCH throughout, two-ratio type scale, size-and-weight-dependent tracking, nested radii, tabular numerals, 150ms transitions, both themes from one token set. Cite: <code>mui-blog</code>.</p>
   </footer>
 
 <script>
