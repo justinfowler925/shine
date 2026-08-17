@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-13",
+  "generated": "2026-08-17",
   "corpus": "/Users/justinfowler/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
@@ -10,6 +10,50 @@
     "crud"
   ],
   "templates": [
+    {
+      "id": "shadcn-input-group-textarea",
+      "screen": "ai-generate",
+      "kit": "shadcn-registry",
+      "title": "shadcn input-group-textarea (prompt composer + submit addon)",
+      "path": "shadcn-registry/items/input-group-textarea.json",
+      "preview": "https://ui.shadcn.com/docs/components/input-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1
+    },
+    {
+      "id": "shadcn-field-choice-card",
+      "screen": "ai-generate",
+      "kit": "shadcn-registry",
+      "title": "shadcn field-choice-card (quality tier as radio cards)",
+      "path": "shadcn-registry/items/field-choice-card.json",
+      "preview": "https://ui.shadcn.com/docs/components/input-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2
+    },
+    {
+      "id": "shadcn-empty-icon",
+      "screen": "ai-generate",
+      "kit": "shadcn-registry",
+      "title": "shadcn empty-icon (no-result / failure state)",
+      "path": "shadcn-registry/items/empty-icon.json",
+      "preview": "https://ui.shadcn.com/docs/components/input-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3
+    },
+    {
+      "id": "shadcn-item-image",
+      "screen": "ai-generate",
+      "kit": "shadcn-registry",
+      "title": "shadcn item-image (history strip row)",
+      "path": "shadcn-registry/items/item-image.json",
+      "preview": "https://ui.shadcn.com/docs/components/input-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 4
+    },
     {
       "id": "shadcn-sidebar-07",
       "screen": "app-shell",

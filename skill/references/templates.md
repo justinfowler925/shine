@@ -39,6 +39,10 @@ Naming the id without running `cite.mjs` is not a cite. No row for this screen â
 
 | Id | Screen | Rank | Kit | Kind | Path |
 |---|---|---|---|---|---|
+| `shadcn-input-group-textarea` | ai-generate | 1 | shadcn-registry | source | `shadcn-registry/items/input-group-textarea.json` |
+| `shadcn-field-choice-card` | ai-generate | 2 | shadcn-registry | source | `shadcn-registry/items/field-choice-card.json` |
+| `shadcn-empty-icon` | ai-generate | 3 | shadcn-registry | source | `shadcn-registry/items/empty-icon.json` |
+| `shadcn-item-image` | ai-generate | 4 | shadcn-registry | source | `shadcn-registry/items/item-image.json` |
 | `shadcn-sidebar-07` | app-shell | 1 | shadcn-registry | source | `shadcn-registry/items/sidebar-07.json` |
 | `mui-dashboard` | app-shell | 2 | mui-material | source | `mui-material/docs/data/material/getting-started/templates/dashboard` |
 | `antd-pro-app` | app-shell | 3 | ant-design-pro | source | `ant-design-pro/src` |
@@ -157,4 +161,4 @@ Naming the id without running `cite.mjs` is not a cite. No row for this screen â
 | `mui-marketing-page` | marketing | 1 | mui-material | source | `mui-material/docs/data/material/getting-started/templates/marketing-page` |
 | `query-mui-free-gallery` | marketing | 80 | mui-material | query-only | `query-only/query-mui-free-gallery.png` |
 
-Indexed 117 templates from /Users/justinfowler/design-corpus.
+Indexed 121 templates from /Users/justinfowler/design-corpus.

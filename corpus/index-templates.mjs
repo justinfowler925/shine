@@ -87,6 +87,29 @@ if (existsSync(shadcnReg)) {
   }
 }
 
+// ---- ai-generate: prompt → run → review a produced artefact ----------------
+// No single block covers this screen. The regions come from four shadcn examples
+// (all registry:example, so the block loop above skips them). Cite the set, not one.
+// Topology per ai-surfaces.md: instrumented session + inbox, never chat.
+for (const t of [
+  { name: "input-group-textarea", rank: 1, title: "shadcn input-group-textarea (prompt composer + submit addon)" },
+  { name: "field-choice-card", rank: 2, title: "shadcn field-choice-card (quality tier as radio cards)" },
+  { name: "empty-icon", rank: 3, title: "shadcn empty-icon (no-result / failure state)" },
+  { name: "item-image", rank: 4, title: "shadcn item-image (history strip row)" },
+]) {
+  push({
+    id: `shadcn-${t.name}`,
+    screen: "ai-generate",
+    kit: "shadcn-registry",
+    title: t.title,
+    path: `shadcn-registry/items/${t.name}.json`,
+    preview: "https://ui.shadcn.com/docs/components/input-group",
+    license: "MIT",
+    kind: "source",
+    startFrom: t.rank,
+  });
+}
+
 // ---- kits added in the AdminLTE-list expansion (index if present) ----------
 if (exists("tremor/src")) {
   push({
