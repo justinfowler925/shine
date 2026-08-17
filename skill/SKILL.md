@@ -105,6 +105,12 @@ before craft (and before Wireframe lock if the ritual is unknown).
 These bound every fix inside the loop. Wireframe is exempt from craft hard-fails until
 Build; structure rules (one primary, labeled regions, no voids) still apply.
 
+0. **Measure what your consumers ship, not just this repo.** `npm run measure-consumers`
+   (registry: `consumers.pages.local`). shine once reported 43 of 43 checks passing while
+   the site it governs failed AA on fourteen pages — every check was about shine, none
+   loaded a page a reader sees. `npm run doctor:full` includes it; the default doctor does
+   not, because consumers carry real migration debt and a permanently red gate gets ignored.
+
 1. **Never ship a raw value where a token exists — and never a token that fails as text.**
    No hex, no `rgb()`, no arbitrary Tailwind, no off-scale spacing, no ad-hoc font size,
    letter-spacing or `box-shadow`. Token gap → fill `tokens/scripts/gen-source.mjs` or say

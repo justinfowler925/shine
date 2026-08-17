@@ -13,7 +13,8 @@
     "measure": "node verify/measure.mjs",
     "cite": "node corpus/cite.mjs",
     "sync-consumers": "bash scripts/sync-consumers.sh",
-    "skill-listing": "node site/scripts/skill-listing.mjs"
+    "skill-listing": "node site/scripts/skill-listing.mjs",
+    "measure-consumers": "node verify/measure-consumers.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.12.1",

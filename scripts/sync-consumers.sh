@@ -74,9 +74,14 @@ while IFS= read -r line || [[ -n "$line" ]]; do
   case "$key" in
     personal-artifact) src="$PERSONAL_ARTIFACT" ;;
     personal-site) src="$PERSONAL_SITE" ;;
-    brand-artifact) src="$CS_ARTIFACT" ;;
-    brand-theme) src="$CS_THEME" ;;
-    brand-tokens) src="$CS_TOKENS" ;;
+    # The brand lane was called "clearspeed" before it was generalised. A local
+    # consumers file written under the old names silently hit the *) branch below and
+    # never vendored at all — four consumers sat unsynced that way, reported only by a
+    # script nobody ran, while the doctor exited 0. Accept both spellings rather than
+    # break configs on a rename; brand-* stays canonical.
+    brand-artifact|clearspeed-artifact) src="$CS_ARTIFACT" ;;
+    brand-theme|clearspeed-theme) src="$CS_THEME" ;;
+    brand-tokens|clearspeed-tokens) src="$CS_TOKENS" ;;
     *) bad "$name" "unknown src_key '$key'"; continue ;;
   esac
   if [[ ! -d "$(dirname "$dest")" ]]; then
