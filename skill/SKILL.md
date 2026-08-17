@@ -105,10 +105,16 @@ before craft (and before Wireframe lock if the ritual is unknown).
 These bound every fix inside the loop. Wireframe is exempt from craft hard-fails until
 Build; structure rules (one primary, labeled regions, no voids) still apply.
 
-1. **Never ship a raw value where a token exists.** No hex, no `rgb()`, no arbitrary
-   Tailwind, no off-scale spacing, no ad-hoc font size, letter-spacing or `box-shadow`.
-   Token gap → fill `tokens/scripts/gen-source.mjs` or say so. Pragmas name the one rule
-   (`shine-lint: off shadow`); bare `off` is almost never right.
+1. **Never ship a raw value where a token exists — and never a token that fails as text.**
+   No hex, no `rgb()`, no arbitrary Tailwind, no off-scale spacing, no ad-hoc font size,
+   letter-spacing or `box-shadow`. Token gap → fill `tokens/scripts/gen-source.mjs` or say
+   so. Pragmas name the one rule (`shine-lint: off shadow`); bare `off` is almost never
+   right. **Using a token is not the same as using the right one:** `--mute` is 4.12:1 and
+   `--mute-2` is 2.59:1 against the ground, so both fail AA for normal text while linting
+   clean under every earlier version of this rule. Body text and labels take
+   `--shine-color-fg` or `--shine-color-fg-muted`; the dim aliases are for large display
+   type only. The lint now computes this from the emitted palette and names the
+   replacement.
 
 2. **Wipe the default palette — and the default scales.** Tailwind v4: `--color-*`,
    `--text-*`, `--tracking-*`, `--shadow-*` → `initial`. Tailwind's `shadow-lg` is the
