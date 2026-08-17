@@ -254,6 +254,17 @@ if (!CI) {
   // why `text-[#1a1a1a]` erodes a token contract and was reported for it. Masking
   // <code>/<pre> content and HTML comments must not also mask a real violation, so this
   // fixture carries both in one file and expects exactly the real one to block.
+  // A LEGAL token that produces illegible text. Until 2026-08-16 the colour rule asked
+  // only whether a token was used, never whether the chosen one works — so --mute
+  // (4.12:1) and --mute-2 (2.59:1) linted clean and 130 such declarations shipped across
+  // a consumer site while this doctor reported every check passing. The safe-token
+  // fixture matters as much: if the rule fired on the *replacement* it recommends,
+  // everyone would reach for a pragma and be worse off than before.
+  const dimText = join(dir, "dim.css");
+  const dimOk = join(dir, "dim-ok.css");
+  writeFileSync(dimText, ".cap{color:var(--mute-2)}\n");
+  writeFileSync(dimOk, ".cap{color:var(--shine-color-fg-muted)}\n");
+
   const prose = join(dir, "prose.html");
   writeFileSync(
     prose,
@@ -276,6 +287,8 @@ if (!CI) {
     ["blocks a hand-rolled box-shadow", shadowBad, 1],
     ["passes shadow token, focus ring and inset", shadowOk, 0],
     ["blocks a literal letter-spacing", trackBad, 1],
+    ["blocks an AA-failing token used as text", dimText, 1],
+    ["passes the safe token it recommends", dimOk, 0],
   ];
   for (const [name, file, want] of cases) {
     const r = run(file);
