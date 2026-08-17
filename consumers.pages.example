@@ -1,0 +1,12 @@
+# Pages your shine consumers actually ship, measured by verify/measure-consumers.mjs.
+# Copy to consumers.pages.local (gitignored) and edit.
+#
+# Format: name|path-or-url
+#
+# A local file is measured directly. Use an http URL when the page loads
+# root-absolute assets (/assets/tokens.css) — those do not resolve over file://,
+# and measuring a page whose stylesheet never loaded tells you nothing about the
+# design. Start your own server first.
+#
+# my-site|~/Projects/my-site/index.html
+# my-app|http://127.0.0.1:3000/

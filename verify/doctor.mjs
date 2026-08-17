@@ -40,6 +40,10 @@ const QUIET = args.includes("--quiet");
 const results = [];
 const ok = (name, detail = "") => results.push({ pass: true, name, detail });
 const fail = (name, detail) => results.push({ pass: false, name, detail });
+// A third state, because "not configured" is not "verified". Counting an unrun check as
+// a pass is how a suite reports 43/43 while the thing it governs is broken; NOTE keeps
+// the run green without ever claiming the check happened.
+const note = (name, detail) => results.push({ pass: true, note: true, name, detail });
 
 const readJSON = (p) => JSON.parse(readFileSync(p, "utf8"));
 const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
@@ -772,11 +776,67 @@ if (args.includes("--full")) {
   }
 }
 
+// The header of this file has claimed since it was written that it "checks the token
+// layer reached every consumer." It did not — there was no such check, and on
+// 2026-08-16 the doctor exited 0 while FIVE of seven consumers were broken: four had
+// never been vendored at all because consumers.local used the pre-rename clearspeed-*
+// keys and hit the unknown-key branch, and one was simply stale. A claim in a comment
+// is not a check.
+//
+// Machine-local: consumers.local is gitignored (private paths), so this is skipped
+// under --ci. "Not configured" is reported as its own state, never as a pass — a
+// verdict on zero consumers is not a clean bill of health.
+if (!CI) {
+  const local = join(SHINE, "consumers.local");
+  if (!existsSync(local)) {
+    note("consumer token layers", "no consumers.local — nothing to check (this is not a pass)");
+  } else {
+    const r = spawnSync("bash", [join(SHINE, "scripts/sync-consumers.sh"), "--check"], {
+      encoding: "utf8",
+      cwd: SHINE,
+    });
+    const out = `${r.stdout}${r.stderr}`;
+    const lines = out.split("\n").filter((l) => /^(OK|FAIL)\s/.test(l));
+    const bad = lines.filter((l) => l.startsWith("FAIL"));
+    if (!lines.length) {
+      fail("consumer token layers", "sync-consumers --check produced no verdicts — the check itself is broken");
+    } else if (bad.length) {
+      const names = bad.map((l) => l.replace(/^FAIL\s+/, "").split(" —")[0]);
+      fail(
+        "consumer token layers",
+        `${bad.length} of ${lines.length} stale or unresolved: ${names.join(", ")} — npm run sync-consumers`,
+      );
+    } else {
+      ok("consumer token layers", `${lines.length} consumers in sync`);
+    }
+  }
+}
+
+// Consumer pages, under --full only. This is the check whose absence let shine report
+// 43 of 43 passing while the site it governs failed AA on fourteen pages: every other
+// check here is about shine itself, and none of them ever loaded a page a reader sees.
+//
+// Deliberately not in the default run. Consumers carry real, known debt — a type scale
+// mid-migration, structural landmarks — and a permanently red doctor gets ignored, which
+// costs more than the check buys. `npm run doctor:full` is the deliberate act; the
+// default stays green-when-good so a FAIL still means something.
+if (args.includes("--full") && !CI) {
+  const r = spawnSync(process.execPath, [join(SHINE, "verify/measure-consumers.mjs"), "--quiet"], {
+    encoding: "utf8",
+    timeout: 600_000,
+  });
+  const out = `${r.stdout}${r.stderr}`;
+  const summary = (out.match(/measure-consumers: ([^\n]+)/) ?? [])[1] ?? "no verdict";
+  if (r.status === 2) note("consumer pages measured", summary);
+  else if (r.status === 0) ok("consumer pages measured", summary);
+  else fail("consumer pages measured", `${summary} — node verify/measure-consumers.mjs`);
+}
+
 // ---- report ---------------------------------------------------------------
 const failures = results.filter((r) => !r.pass);
 if (!QUIET) {
   for (const r of results) {
-    const tag = r.pass ? "PASS" : "FAIL";
+    const tag = r.note ? "NOTE" : r.pass ? "PASS" : "FAIL";
     console.log(`${tag}  ${r.name}${r.detail ? `  — ${r.detail}` : ""}`);
   }
   console.log("");
@@ -789,4 +849,9 @@ if (failures.length) {
   else console.error(`${failures.length} of ${results.length} checks FAILED — shine is not fully in force.`);
   process.exit(1);
 }
-if (!QUIET) console.log(`shine is in force: ${results.length} checks pass.`);
+const notes = results.filter((r) => r.note);
+if (!QUIET)
+  console.log(
+    `shine is in force: ${results.length - notes.length} checks pass` +
+      (notes.length ? `, ${notes.length} not configured (see NOTE).` : "."),
+  );
