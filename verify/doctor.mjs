@@ -745,32 +745,17 @@ if (args.includes("--full")) {
 // `*.local.md` is excluded on purpose — a private override must never be named
 // on a public page.
 {
-  const site = readFileSync(join(SHINE, "site/index.html"), "utf8");
-  const block = site.match(/<pre>skill\/[\s\S]*?<\/pre>/);
-  if (!block) {
-    fail("site skill listing current", "no skill tree block found in site/index.html");
+  // Delegated to the generator so the comparison exists in exactly one place. The
+  // block is derived from disk by site/scripts/skill-listing.mjs; this only asks it
+  // whether the committed page still matches. Fix with --write, never by hand.
+  const r = spawnSync(process.execPath, [join(SHINE, "site/scripts/skill-listing.mjs"), "--check"], {
+    encoding: "utf8",
+  });
+  if (r.status === 0) {
+    ok("site skill listing current", (r.stdout.trim().split("— ")[1] ?? "matches disk"));
   } else {
-    const claimed = new Map(
-      [...block[0].matchAll(/^\s{4}([\w.-]+\.md)\s+([\d,]+)$/gm)].map((m) => [m[1], Number(m[2].replace(/,/g, ""))]),
-    );
-    const lines = (rel) => readFileSync(join(SHINE, rel), "utf8").split("\n").length - 1;
-    const actual = new Map(
-      readdirSync(join(SHINE, "skill/references"))
-        .filter((f) => f.endsWith(".md") && !f.endsWith(".local.md"))
-        .sort()
-        .map((f) => [f, lines(`skill/references/${f}`)]),
-    );
-    const problems = [];
-    for (const [f, n] of actual) {
-      if (!claimed.has(f)) problems.push(`${f} missing from the listing`);
-      else if (claimed.get(f) !== n) problems.push(`${f} says ${claimed.get(f)}, is ${n}`);
-    }
-    for (const f of claimed.keys()) if (!actual.has(f)) problems.push(`${f} listed but not on disk`);
-    const claimedTotal = Number((block[0].match(/<strong>([\d,]+)<\/strong><\/pre>/) ?? [])[1]?.replace(/,/g, ""));
-    const actualTotal = lines("skill/SKILL.md") + [...actual.values()].reduce((a, b) => a + b, 0);
-    if (claimedTotal !== actualTotal) problems.push(`total says ${claimedTotal}, is ${actualTotal}`);
-    if (problems.length) fail("site skill listing current", problems.slice(0, 6).join("; ") + (problems.length > 6 ? ` (+${problems.length - 6} more)` : ""));
-    else ok("site skill listing current", `${actual.size} files, ${actualTotal} lines`);
+    const why = (r.stderr || r.stdout).trim().split("\n")[0].replace(/^skill-listing: (STALE — )?/, "");
+    fail("site skill listing current", `${why} — fix: npm run skill-listing -- --write`);
   }
 }
 
