@@ -1,10 +1,19 @@
 name: shine
 
-# Runs on a GitHub-hosted runner. This lane previously targeted
-# `[self-hosted, macOS, ARM64, shine]`, and no such runner was ever registered —
-# so every run sat queued until GitHub expired it. 34 runs, 0 successes.
-# `--ci` skips every machine-local check (hook wirings, skill symlinks, vendored
-# copies), so nothing here needs a Mac or a populated ~/design-corpus.
+# Self-hosted: runner `justin-macbook-shine`, labels [self-hosted, macOS, ARM64, shine].
+#
+# Do not "simplify" this to ubuntu-latest. Hosted runners refuse to start on this
+# account — every job dies in ~4s with "your account is locked due to a billing
+# issue", readable only via `gh api repos/O/R/check-runs/<id>/annotations`.
+# Self-hosted minutes are not billable, so this lane works regardless.
+#
+# It broke once for an unrelated reason worth knowing: when shine was scrubbed and
+# the repo recreated at the same name, the runner registration followed the OLD
+# repo object (renamed to shine-archive) while the runner's own .runner config
+# still read `.../shine`. Every local check said "healthy, pointed at shine" while
+# it served the archive, and this repo had 0 runners — so runs queued for 24h and
+# expired. 25 cancelled, 9 stuck, 0 successes. Verify a runner by the repo it is
+# registered to (`gh api repos/O/R/actions/runners`), never by its config string.
 on:
   push:
     branches: [main]
@@ -13,7 +22,7 @@ on:
 
 jobs:
   doctor:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, ARM64, shine]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
