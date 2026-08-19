@@ -6,9 +6,9 @@
 [![Doctor](https://img.shields.io/badge/doctor-local%20gate-16a34a.svg)](./verify/doctor.mjs)
 [![Corpus](https://img.shields.io/badge/corpus-~1.2GB%20sparse-3f3f46.svg)](./skill/references/corpus.md)
 
-**A design system agents can’t deviate from — and a UI/UX agent that discovers, cites, builds, and proves it.**
+**A design system agents can’t deviate from — and a UI/UX director that retrieves a real page, applies its DNA, and proves likeness.**
 
-Shine owns the token layer, the design corpus, the agent skill, and the measure loop. New screens start in **Wireframe** (interactive discovery → gray-box HTML → locked brief). Existing surfaces run **diagnose → cite technique/kit → fix → remeasure**. Hooks block off-token writes on Cursor and Claude Code; `doctor.mjs` proves the wiring bites.
+Shine owns the token layer, the design corpus, the agent skill, and the measure loop. New screens start in **Wireframe** (interactive discovery → gray-box HTML → locked brief). Existing surfaces run **job → diagnose → retrieve → apply DNA → prove**. House style is the fallback voice, not the only paint. Hooks block off-token writes on Cursor and Claude Code; `doctor.mjs` proves the wiring bites.
 
 **Site:** [shine-blond.vercel.app](https://shine-blond.vercel.app) · **Registry:** [`npx shadcn add`](https://shine-blond.vercel.app/r/) · **Repo:** [`justinfowler925/shine`](https://github.com/justinfowler925/shine)
 
@@ -66,7 +66,15 @@ npm run build   # wraps tokens/ — emit both lanes
 npm run verify  # wraps tokens/ — prove emit targets by computed value
 ```
 
-Keep the checkout on `main` and pull often — both IDEs read this tree via symlink.
+Keep the tree the IDEs load on `main` and pull often. If `~/Projects/shine` is on a feature branch, add a detached live worktree and point **skill, agent, and hook commands** at it — otherwise both surfaces load whatever you were last building:
+
+```sh
+git -C ~/Projects/shine worktree add --detach ~/Projects/shine-live origin/main
+# then ln -sfn ~/Projects/shine-live/skill (and agents/shine-ux.md) into
+# ~/.claude and ~/.cursor as in steps 2–3. Hook `command` paths must use
+# ~/Projects/shine-live for design-lint, stop-sweep, and doctor.
+git -C ~/Projects/shine-live fetch origin && git -C ~/Projects/shine-live checkout --detach origin/main
+```
 
 ### 2. Claude Code
 
@@ -313,7 +321,7 @@ Multiple products, multiple visual languages, zero shared code. Brand tokens han
 The `shine` skill is the design authority on both surfaces (`~/.claude/skills/shine` ↔
 `~/Projects/shine/skill`; Cursor skill symlink). The `shine-ux` subagent
 (`agents/shine-ux.md`, linked into `~/.cursor/agents` and `~/.claude/agents`) runs the
-diagnose → cite → fix → remeasure loop. Knowledge is not a checklist — techniques transfer
+director loop (job → diagnose → retrieve → apply DNA → prove). Knowledge is not a checklist — techniques transfer
 from measured products and `~/design-corpus` kits.
 
 **The organizing insight:** shadcn's *default token values*, not its components, produce the homogeneous "AI look." Measured: every reference-grade accent sits at OKLCH chroma 0.13–0.24; Tailwind's `-600` row is 0.245–0.288. The tokens are the tell. So: wipe the defaults, own the token layer, enforce against rendered pixels.

@@ -11,7 +11,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SHINE — a design system agents can’t deviate from</title>
-<meta name="description" content="Notes from building SHINE, a design system an AI agent cannot deviate from — shipped as a skill. Measured from 4.5 MB of production CSS.">
+<meta name="description" content="Notes from building SHINE, a design system an AI agent cannot deviate from — shipped as a skill. The agent is a director: cite a job, apply kit DNA, prove likeness. Measured from 4.5 MB of production CSS.">
 <meta name="theme-color" content="#080e12">
 <style>
 @layer reset, base, layout, components, utilities;
@@ -370,10 +370,39 @@
 <article>
 
   <header>
-    <p class="meta">Working notes · 12 Aug 2026 · catalog cite required</p>
+    <p class="meta">Working notes · 19 Aug 2026 · director loop</p>
     <h1>A design system agents can’t deviate&nbsp;from</h1>
-    <p class="lede">Everyone tries to give the model taste. Cheaper: take away its room to be wrong. New pages start from a real template. Paint is shine tokens. Proof is a measured box.</p>
+    <p class="lede">Everyone tries to give the model taste. Cheaper: take away its room to be wrong. Name the job, retrieve a real page, apply that page’s DNA, measure the box.</p>
   </header>
+
+    <section class="stack">
+      <h2>The agent is a director</h2>
+      <div class="stack">
+        <p>The skill used to retrieve a template and sand it into one house look. That is a painter. It now names the job, retrieves a real corpus page, applies that page’s structure <em>and</em> visual DNA, and proves both completeness and likeness. House style is the fallback voice, not the only legal paint.</p>
+        <p>Three voices, picked from the job: <strong>kit-faithful</strong> (default — retune shine tokens to the cite DNA), <strong>house</strong> (shine-native when you ask, or when there is no DNA), <strong>brand</strong> (kit structure, brand chrome). The file is <code>skill/references/voices.md</code>.</p>
+      </div>
+      <ol class="steps">
+        <li><strong>Name the job.</strong> Internal tools run Adoption before pixels. Everyone else: one line — dashboard, queue, settings, record, chat, wizard, marketing hero.</li>
+        <li><strong>Cite it.</strong> <code>node corpus/cite.mjs &lt;job|screen|id&gt;</code>. Open every listed file and the Preview. The banner prints DNA: family, density, type, radius, chroma, elevation, motion. Naming an id you did not open is inventing.</li>
+        <li><strong>Diagnose, then apply.</strong> Usability first, then contracts (named Table / Form / Dialog / Select load <code>contracts.md</code> in the same pass), then composition, then craft of the chosen voice. Clone regions and DNA. Do not overwrite Carbon density or MUI marketing type with house defaults.</li>
+        <li><strong>Prove it.</strong> <code>node verify/measure.mjs &lt;path&gt; --shot out.png</code>. Hard-fails: missing contract states, a cite that still looks like shadcn zinc, craft. Report catalog id + DNA + numbers.</li>
+      </ol>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">Job</th><th scope="col">Command</th><th scope="col">Default retrieve</th></tr></thead>
+          <tbody>
+            <tr><td>Dashboard</td><td class="mono">cite.mjs dashboard</td><td>shadcn dashboard-01 — full page, not a chart widget</td></tr>
+            <tr><td>Work queue</td><td class="mono">cite.mjs queue</td><td>Carbon DataTable</td></tr>
+            <tr><td>Settings</td><td class="mono">cite.mjs settings</td><td>Ant Design Pro account settings</td></tr>
+            <tr><td>Record / detail</td><td class="mono">cite.mjs record</td><td>Ant Design Pro profile</td></tr>
+            <tr><td>Chat</td><td class="mono">cite.mjs chat</td><td>React Spectrum AI chat</td></tr>
+            <tr><td>Wizard</td><td class="mono">cite.mjs wizard</td><td>Ant Design Pro step form</td></tr>
+            <tr><td>Marketing hero</td><td class="mono">cite.mjs marketing-hero</td><td>Magic UI hero</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small subtle">132 catalog rows carry DNA. <code>cite.mjs --list</code> dumps them. No row → <code>inspiration.md</code>, then cite. Do not invent. New surfaces still start in Wireframe; this loop is Build / Polish / Audit-that-fixes.</p>
+    </section>
 
     <section class="stack">
       <h2>The tokens are the tell, not the components</h2>
@@ -424,7 +453,7 @@
       <div class="stack">
         <p>One git-tracked directory both Claude Code and Cursor symlink. The index is 255 lines, ~14 KB — still inside the 5,000-token window that survives compaction — so catalog cite and the non-negotiables sit at the top. Do not load all twenty-seven references: run <code>corpus/cite.mjs</code>, open the files it lists from <code>~/design-corpus</code>, then the one reference the surface needs. Dedicated executor: <code>shine-ux</code>. Five wirings: per-edit lint, stop-sweep, and the doctor, each on both surfaces. A gate that is not in the doctor does not exist.</p>
         <p>A path-gated skill is an absent skill. This one used to list <code>tsx,jsx,css,html</code>, so it never loaded for UI inside Python, and Brutus shipped 56 raw hex values one glob away from the design authority. Frontmatter is <code>name</code> + <code>description</code> only. Never <code>paths:</code>. Design-lint keys on content, not extension — HTML inside a <code>.py</code> counts.</p>
-        <p>New surfaces start in <strong>Wireframe</strong> (interactive discovery → gray-box from a catalog id → locked brief). Existing surfaces run diagnose → cite → fix → remeasure. Six modes: Wireframe, Build, Polish, Audit, Copy, Adoption. Voice is a layer on a surface that speaks, not a seventh mode. Ambiguity defaults to Wireframe if there is no UI yet, otherwise Build. Two lanes, <span class="mono">brand</span> and <span class="mono">personal</span> — brand and mode swap in the token layer, never in markup. The committed brand lane is placeholder values on purpose; a real palette arrives via <code>SHINE_BRAND_OVERRIDE</code> / <code>brand.local.md</code>, never this tree. House style: dark-first, dense, instrumental, editorial type. Light is derived, never hand-authored.</p>
+        <p>New surfaces start in <strong>Wireframe</strong> (interactive discovery → gray-box from a catalog id → locked brief). Existing surfaces run the director loop: job → diagnose → retrieve → apply DNA → prove. Six modes: Wireframe, Build, Polish, Audit, Copy, Adoption. Spoken voice is a layer on a surface that speaks, not a seventh mode — paint voice is kit-faithful / house / brand. Ambiguity defaults to Wireframe if there is no UI yet, otherwise Build. Two lanes, <span class="mono">brand</span> and <span class="mono">personal</span> — brand and mode swap in the token layer, never in markup. The committed brand lane is placeholder values on purpose; a real palette arrives via <code>SHINE_BRAND_OVERRIDE</code> / <code>brand.local.md</code>, never this tree. House style (the fallback voice): dark-first, dense, instrumental, editorial type. Light is derived, never hand-authored.</p>
       </div>
 
       <figure class="files">
