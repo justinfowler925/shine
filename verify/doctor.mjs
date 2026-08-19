@@ -612,6 +612,59 @@ if (args.includes("--full")) {
   const densGood = run(densityGood);
   if (!/density:/.test(densGood.stderr)) ok("compose gate passes a dense app shell");
   else fail("compose gate passes a dense app shell", densGood.stderr.match(/density:.*/)?.[0] ?? "");
+
+  const prettyTable = join(SHINE, "verify/fixtures/pretty-empty-table.html");
+  const fullTable = join(SHINE, "verify/fixtures/full-table.html");
+  const carbonShadcn = join(SHINE, "verify/fixtures/carbon-as-shadcn.html");
+  const marketingShell = join(SHINE, "verify/fixtures/marketing-as-appshell.html");
+  const missingCite = join(dir, "missing-cite.html");
+  writeFileSync(
+    missingCite,
+    page(`<h1>Invented</h1><p>Named a catalog id and never marked it.</p><button style="background:#a8a29e;color:#0c0a09;border:0;padding:10px 16px;font:inherit">Go</button>`),
+  );
+
+  const pretty = run(prettyTable);
+  if (pretty.status === 1 && /contract: named table missing/.test(pretty.stderr))
+    ok("contract gate fails a pretty empty table");
+  else
+    fail(
+      "contract gate fails a pretty empty table",
+      `exit ${pretty.status}; stderr ${JSON.stringify(pretty.stderr.slice(-220))}`,
+    );
+
+  const full = run(fullTable);
+  if (!/contract:/.test(full.stderr)) ok("contract gate passes a complete table");
+  else fail("contract gate passes a complete table", full.stderr.match(/contract:.*/)?.[0] ?? "");
+
+  const fakeCarbon = run(carbonShadcn);
+  if (fakeCarbon.status === 1 && /likeness: carbon cite/.test(fakeCarbon.stderr))
+    ok("likeness gate fails carbon-as-shadcn");
+  else
+    fail(
+      "likeness gate fails carbon-as-shadcn",
+      `exit ${fakeCarbon.status}; stderr ${JSON.stringify(fakeCarbon.stderr.slice(-220))}`,
+    );
+
+  const fakeMkt = run(marketingShell);
+  if (fakeMkt.status === 1 && /likeness: marketing cite/.test(fakeMkt.stderr))
+    ok("likeness gate fails marketing-as-appshell");
+  else
+    fail(
+      "likeness gate fails marketing-as-appshell",
+      `exit ${fakeMkt.status}; stderr ${JSON.stringify(fakeMkt.stderr.slice(-220))}`,
+    );
+
+  const noCite = spawnSync("node", [measure, missingCite, "--cite", "carbon-datatable"], {
+    encoding: "utf8",
+    env: { ...process.env, NODE_PATH },
+  });
+  if (noCite.status === 1 && /cite: --cite carbon-datatable/.test(noCite.stderr))
+    ok("cite attestation fails a missing data-cite");
+  else
+    fail(
+      "cite attestation fails a missing data-cite",
+      `exit ${noCite.status}; stderr ${JSON.stringify(noCite.stderr.slice(-220))}`,
+    );
 }
 
 // ---- 5. every token reached every emit target -----------------------------
@@ -721,13 +774,36 @@ if (args.includes("--full")) {
     const unknown = spawnSync(process.execPath, [cite, "definitely-not-a-template"], { encoding: "utf8" });
     if (unknown.status !== 1) fail("cite.mjs unknown id", `expected exit 1, got ${unknown.status}`);
     else ok("cite.mjs unknown id", "exit 1");
-    if (!CI && existsSync(join(HOME, "design-corpus"))) {
+    const corpusReady = existsSync(join(HOME, "design-corpus"));
+    if (corpusReady) {
       const blog = spawnSync(process.execPath, [cite, "mui-blog"], { encoding: "utf8" });
       const out = `${blog.stdout || ""}${blog.stderr || ""}`;
       if (blog.status !== 0) fail("cite.mjs mui-blog", `exit ${blog.status}: ${(blog.stderr || "").slice(0, 200)}`);
       else if (!/Template: mui-blog/.test(out) || !/design-corpus/.test(out) || !/Blog\.tsx/.test(out))
         fail("cite.mjs mui-blog", "did not print Template: mui-blog + a design-corpus Blog.tsx to open");
       else ok("cite.mjs mui-blog", "lists corpus files to open");
+
+      const dash = spawnSync(process.execPath, [cite, "dashboard"], { encoding: "utf8" });
+      const dout = `${dash.stdout || ""}${dash.stderr || ""}`;
+      if (dash.status !== 0) fail("cite.mjs dashboard is a page", `exit ${dash.status}: ${dout.slice(0, 200)}`);
+      else if (/vendor pixels are not/i.test(dout))
+        fail("cite.mjs dashboard is a page", "sanding banner is back");
+      else if (!/Template: shadcn-dashboard-01/.test(dout) || !/page\.tsx/.test(dout))
+        fail("cite.mjs dashboard is a page", "expected shadcn-dashboard-01 page.tsx, not Tremor atoms");
+      else if (/Card\.tsx/.test(dout) && !/page\.tsx/.test(dout))
+        fail("cite.mjs dashboard is a page", "listed Card.tsx as the composed page");
+      else if (!/^DNA:/m.test(dout) && !/\nDNA:/.test(dout))
+        fail("cite.mjs dashboard is a page", "missing DNA block");
+      else ok("cite.mjs dashboard is a page", "shadcn-dashboard-01 + page.tsx + DNA");
+
+      const queue = spawnSync(process.execPath, [cite, "queue"], { encoding: "utf8" });
+      const qout = `${queue.stdout || ""}${queue.stderr || ""}`;
+      if (queue.status !== 0) fail("cite.mjs queue", `exit ${queue.status}: ${qout.slice(0, 200)}`);
+      else if (/sidebar-07/.test(qout) && !/carbon-datatable|antd-pro-list/.test(qout))
+        fail("cite.mjs queue", "returned an app-shell instead of a queue page");
+      else if (!/carbon-datatable|antd-pro-list/.test(qout))
+        fail("cite.mjs queue", "expected carbon-datatable or antd-pro-list");
+      else ok("cite.mjs queue", (qout.match(/Template: (\S+)/) || [])[1] || "queue page");
     }
   }
 
@@ -751,6 +827,21 @@ if (args.includes("--full")) {
     if (missingScreens.length) fail("catalog required screens", `no start-from for: ${missingScreens.join(", ")}`);
     else ok("catalog required screens", required.join(", "));
 
+    const missingDefault = required.filter(
+      (s) => !(catalog.templates ?? []).some((t) => t.screen === s && t.startFrom === 1),
+    );
+    if (missingDefault.length) fail("catalog startFrom:1", `no default row for: ${missingDefault.join(", ")}`);
+    else ok("catalog startFrom:1", required.join(", "));
+
+    const noDna = (catalog.templates ?? []).filter((t) => !t.dna?.family);
+    if (noDna.length) fail("catalog DNA", `${noDna.length} rows missing dna.family (${noDna.slice(0, 3).map((t) => t.id).join(", ")})`);
+    else ok("catalog DNA", `${(catalog.templates ?? []).length} rows`);
+
+    const kitPages = ["carbon", "mantine", "magicui", "fluentui", "react-spectrum"];
+    const missingKits = kitPages.filter((k) => !(catalog.templates ?? []).some((t) => t.kit === k));
+    if (missingKits.length) fail("catalog kit pages", `no cite-able page for: ${missingKits.join(", ")}`);
+    else ok("catalog kit pages", kitPages.join(", "));
+
     if (!CI && existsSync(CORPUS)) {
       const missingPaths = (catalog.templates ?? [])
         .filter((t) => t.kind === "source")
@@ -763,6 +854,25 @@ if (args.includes("--full")) {
       fail("catalog paths exist", `no ~/design-corpus — run corpus/acquire.sh`);
     }
   }
+}
+
+{
+  const BANNED = /vendor pixels are not/i;
+  const sample = "Paint: shine tokens. Structure cloned; vendor pixels are not.";
+  if (!BANNED.test(sample)) fail("paint-sentence detector bites", "detector missed the banned sanding line");
+  else ok("paint-sentence detector bites", "a revert of the cite banner would go red");
+  const paintFiles = [
+    "skill/SKILL.md",
+    "agents/shine-ux.md",
+    "corpus/cite.mjs",
+    "skill/references/diagnose.md",
+    "skill/references/kits.md",
+    "skill/references/templates.md",
+    "skill/references/voices.md",
+  ];
+  const hits = paintFiles.filter((f) => existsSync(join(SHINE, f)) && BANNED.test(readFileSync(join(SHINE, f), "utf8")));
+  if (hits.length) fail("no sanding banner", `banned sentence returned in ${hits.join(", ")}`);
+  else ok("no sanding banner", "cite/skill/agent do not print the old paint law");
 }
 
 // ---- 7. every reference is reachable from the map, and vice versa ---------

@@ -19,9 +19,9 @@ structure as given — do not invent a competing IA unless the user says `unlock
 
 A new page without a `templates.md` / `corpus/templates.json` id is a **Critical
 completeness hole** — ranked with missing a11y, not with craft. Run
-`node corpus/cite.mjs <screen|id>` and **read every file it lists** from
-`~/design-corpus`. Copy structure, shine-paint. Naming an id you did not open is
-inventing. A page with no template cite is incomplete, same as a table with no empty state.
+`node corpus/cite.mjs <job|screen|id>` and **read every file it lists** from
+`~/design-corpus`. Open the Preview. Copy structure **and** DNA (`voices.md`).
+Naming an id you did not open is inventing. A page with no template cite is incomplete, same as a table with no empty state.
 
 No row → `inspiration.md` (add a row) then cite. Do not invent.
 
@@ -42,12 +42,26 @@ No row → `inspiration.md` (add a row) then cite. Do not invent.
 
 If two kinds apply, run the stricter first (adoption before craft; contracts before polish).
 
-## 2. Inventory defects at three layers
+## 2. Inventory defects — usability first
 
 Walk the live surface (browser, screenshot, or HTML artifact). Write defects into one of
-three buckets — do not mix:
+four buckets — do not mix. Craft without a usability or completeness defect is the wrong
+pass.
+
+### 0. Usability (can they finish the job?)
+
+- Primary action visible in ~3 seconds? Competing CTAs?
+- Path length: notification → committed change — where does the user invent the next step?
+- Empty / error / loading as **real states**, not voids?
+- Hover-only actions; no keyboard path to finish?
+- The job of the screen vs what the layout actually offers.
+
+Ref: `techniques.md`, APG, Carbon/Ant admin patterns. Cite a catalog id or kit `file:line`
+on every Critical/Major.
 
 ### A. Completeness (contracts)
+
+Named Table / Form / Dialog / Select **loads `contracts.md` MUST in this pass** — not later.
 
 - Named control below MUST (bare `<table>`, unlabeled icon button, placeholder-only label)
 - Missing states: loading / empty / filtered-empty / error triad collapsed
@@ -72,7 +86,8 @@ Ref: `anti-patterns.md` (composition fails), `patterns.md`, `adoption.md`.
 ### C. Craft (tokens, type, motion, depth)
 
 - Raw hex / off-scale spacing / ad-hoc shadow / tracking 0 on display
-- Accent chroma outside OKLCH 0.13–0.24; adjacent surfaces ΔL ≥6pp
+- Accent chroma outside the **voice** range (house: OKLCH 0.13–0.24; kit-faithful: cite DNA)
+- Adjacent surfaces ΔL ≥6pp (house). Kit-faithful follows DNA density/elevation.
 - Theme undeclared or non-switching; contrast fails
 - Motion `transition: all`, layout properties animated, >300ms hover
 
@@ -80,11 +95,12 @@ Ref: SKILL ten rules, `taste.md`, `color-type.md`, `motion.md`, `foundations.md`
 
 ## 3. Prioritize
 
-1. Completeness Critical — including **a page with no template cite** (a11y blockers, data triad, wrong primary, invented layout)
-2. Composition that causes wrong actions or abandonment (void, no primary, path dead-ends)
-3. Adoption blockers on internal tools (no ritual, persona clone, push with nowhere to act)
-4. Craft that reads as slop (chroma, Inter+tracking-0, purple gradient, equal cards)
-5. Polish (density, optical alignment, micro-motion)
+1. Usability — they cannot finish the job (no primary, dead path, hover-only, missing states)
+2. Completeness Critical — including **a page with no template cite** (a11y blockers, data triad, wrong primary, invented layout)
+3. Composition that causes wrong actions or abandonment (void, no primary, path dead-ends)
+4. Adoption blockers on internal tools (no ritual, persona clone, push with nowhere to act)
+5. Craft that reads as slop **for the chosen voice** (house chroma; kit-faithful DNA mismatch)
+6. Polish (density, optical alignment, micro-motion)
 
 Never spend a pass on craft while a Critical completeness hole is open.
 
@@ -94,7 +110,7 @@ Every material fix names a source. Acceptable citations:
 
 | Kind | Form | Example |
 |---|---|---|
-| Catalog template | `templates.md` id + path | "mui-crud-dashboard — copy sidebar+header+grid, shine-paint" |
+| Catalog template | `templates.md` id + path | "carbon-datatable — copy toolbar+batch+empty, apply carbon DNA" |
 | Corpus kit pattern | path + file:line from `~/design-corpus` | `carbon/.../DataTable.tsx:120` filter chrome |
 | Contract / APG | `contracts.md` or `aria-practices/content/...` | Dialog focus restore |
 | Apple HIG | URL + principle name | HIG Layout → alignment |
@@ -109,10 +125,9 @@ building. Technique cites in `techniques.md` do not skip the catalog.
 
 ## 5. Apply
 
-Map the cited **template structure** onto **shine tokens and house style**. Clone
-layout regions; never clone brand pixels from Linear/Stripe/Carbon/Material.
-Completeness and interaction come from kits; chroma, type curve, shadows, radii
-come from shine.
+Map the cited **template structure and visual DNA** onto shine tokens for that voice.
+Clone layout regions; kit-faithful keeps density and type pairing. Brand lane: keep
+regions, drop vendor chrome. Completeness and interaction come from kits.
 
 Upgrade stubs to the contract ladder. Prefer one composition change over ten craft tweaks.
 
@@ -122,10 +137,11 @@ Upgrade stubs to the contract ladder. Prefer one composition change over ten cra
 cd ~/Projects/shine && node verify/measure.mjs /abs/path/or/http-url --shot /tmp/shine-shot.png
 ```
 
-Hard fails block. Notes do not. Report catalog id, `--shot` path, and before/after
+Hard fails block. Notes do not. Report catalog id, DNA, `--shot` path, and before/after
 numbers for every Critical/Major you claimed to fix. Fail the build if the screenshot
 is not derived from the cited template (missing regions, invented equal-card hero,
-competing primaries the template does not have).
+competing primaries the template does not have, or a Carbon cite that still looks like
+shadcn zinc). Named Table without sort/pagination/empty/loading/error fails.
 
 ## Quick defect → next file
 
@@ -134,7 +150,11 @@ competing primaries the template does not have).
 | No UI yet / need a sketch | `wireframe.md` + `templates.md` |
 | Invented page / no catalog id | `templates.md` — pick a row; do not draw |
 | Nobody will open this | `adoption.md` |
-| Table/form missing states | `contracts.md` |
+| Table/form missing states | `contracts.md` — MUST checklist in the report |
+| Queue / batch / empty | `cite.mjs queue` → Carbon DataTable or Ant Pro list |
+| Settings | `cite.mjs settings` |
+| Record / detail | `cite.mjs record` |
+| Marketing hero as app shell | `cite.mjs marketing-hero` |
 | Wrong hierarchy / equal peers | `techniques.md` §Hierarchy, `kits.md` |
 | Numbers undecidable | `dashboards.md` |
 | Chart encoding smell | `dataviz.md` |

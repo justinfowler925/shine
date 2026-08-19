@@ -6,15 +6,15 @@ description: >
   then a locked brief before Build. Also use when asked to "wireframe", "sketch", "low-fi",
   "discover the layout", or "new screen/page". Diagnoses defects, cites techniques from
   measured products (Linear, Stripe, Vercel, Notion, …) and pinned design kits (shadcn,
-  Radix, Base UI, Carbon, Ant, MUI, React Aria/Spectrum, Fluent, APG, Polaris), applies
-  fixes under shine tokens, and remeasures. Use when building or reviewing UI, a dashboard,
+  Radix, Base UI, Carbon, Ant, MUI, React Aria/Spectrum, Fluent, APG, Polaris), applies kit-faithful DNA from a catalog cite (house style is the fallback
+  voice), and remeasures. Use when building or reviewing UI, a dashboard,
   a landing page, a component, a chart, a self-contained HTML artifact, or an email; when
   asked to "make this look better", "polish this", "audit the UI", "design a page", "build
   a table/form/modal"; when choosing colors, type, spacing, motion, or icons; when
   generating images locally; when a surface speaks or listens; when writing or reviewing
   copy; when planning or rescuing an internal tool, cockpit, or digest; and for any
   brand-locked interface work. Not a checklist — run Wireframe (new) or the
-  diagnose → cite → fix → remeasure loop (existing).
+  diagnose → retrieve → apply DNA → prove loop (existing).
 ---
 
 # SHINE
@@ -30,8 +30,9 @@ Design quality is not opinion. It is what actually registers — measurable, and
 checkable. Everything here is either measured from shipped production CSS, pinned in
 `~/design-corpus`, or verified against a primary source (including Apple HIG via WebFetch).
 
-You are a **UI/UX agent**, not a rule encyclopedia. Thresholds without a product or kit
-citation are incomplete.
+You are a **UI/UX director**, not a painter with a catalog. Name the job, diagnose
+usability, retrieve a real corpus page, apply that page’s structure **and** visual DNA,
+prove completeness and likeness. Thresholds without a product or kit citation are incomplete.
 
 ---
 
@@ -53,28 +54,27 @@ Mandatory for Build, Polish, and Audit-that-fixes. Audit-only stops after the re
 Details: `references/diagnose.md`. If a locked wireframe brief exists for this surface,
 read it first and treat structure as given.
 
-0. **Catalog cite required.** Run `node corpus/cite.mjs <screen|id>` (from the
-   shine repo). Read **every file it lists** from `~/design-corpus`. Copy that
-   structure; shine-paint. Naming an id you did not open is inventing — same
-   status as no measure numbers. No row → `inspiration.md` (add a row) then cite.
-   Do not invent. Do not load all 27 references; cite first, then the one file
-   the surface needs.
+0. **Catalog cite required.** Name the job (`adoption.md` if internal). Run
+   `node corpus/cite.mjs <job|screen|id>`. Read **every file it lists** and open the
+   Preview. Copy structure **and** the DNA block. Voice is kit-faithful unless house or
+   brand — `voices.md`. Naming an id you did not open is inventing. No row →
+   `inspiration.md` then cite. Do not invent. Do not load all 27 references.
 1. **Surface** — marketing / product / brand-locked / AI / voice / native. Internal tools:
    `adoption.md` **before** pixels.
-2. **Defects** — inventory at three layers: completeness (`contracts.md`), composition
-   (hierarchy, density, voids, path length), craft (tokens, type, motion).
+2. **Defects** — usability, then completeness (`contracts.md`), composition, craft.
+   Named Table / Form / Dialog / Select → load `contracts.md` MUST in the same pass.
 3. **Cite before edit** — every material fix names a source:
    - catalog template → `templates.md` id **and** the `corpus/cite.mjs` files you opened
    - product technique → `references/techniques.md` (Linear, Vercel, Notion, Stripe, …)
    - kit pattern → `references/kits.md` + `~/design-corpus` `file:line`
    - novel → `references/inspiration.md` (fill a missing catalog row, not skip it)
    - native → Apple HIG URL + principle (not in corpus)
-4. **Apply** — clone **structure** from the files `cite.mjs` listed; map paint onto shine tokens
-   + house style + contracts. Never clone brand pixels from Linear/Carbon/Material.
-5. **Remeasure** — `verify/measure.mjs <path> --shot out.png`. Hard fails block.
-   Screenshot the output against the template preview. Fail if regions are missing,
-   primaries don't match, or the layout was invented rather than derived. Notes do
-   not block. Report catalog id + before/after numbers.
+4. **Apply** — clone regions **and** visual DNA from the cite. Retune shine tokens to that
+   DNA. House style is the fallback voice, not the only paint. Brand lane still sandpapers
+   vendor chrome. See `voices.md`.
+5. **Remeasure** — `verify/measure.mjs <path> --shot out.png`. Hard fails block: contracts,
+   likeness (`data-cite` vs DNA), craft. Fail if regions are missing or a Carbon cite
+   still looks like shadcn zinc. Notes do not block. Report catalog id + DNA + numbers.
 6. **Stop** — Critical completeness (including catalog cite) before craft polish.
 
 **Banned report language:** "tighten spacing", "make it cleaner", "more modern" with no
@@ -87,8 +87,8 @@ citation and no numbers.
 **Wireframe** — interactive discovery → gray-box HTML → locked brief. Default for new
 surfaces. `references/wireframe.md`.
 **Audit** — score, cite, report; change nothing. `references/audit.md`.
-**Build** — loop above; catalog cite, then contracts, then composition. Honours locked brief.
-`templates.md`, `contracts.md`, `patterns.md`, `kits.md`.
+**Build** — loop above; catalog cite, contracts on named Table/Form/Dialog/Select, composition. Honours locked brief.
+`templates.md`, `contracts.md`, `patterns.md`, `kits.md`, `voices.md`.
 **Polish** — upgrade stubs in place; still cite + remeasure.
 **Copy** — presentation as argument. `references/copy.md`.
 **Adoption** — will anyone open it? `references/adoption.md` — first for internal tools
@@ -156,7 +156,7 @@ in `references/techniques.md` — use that file when fixing, not thresholds alon
 
 | # | Rule |
 |---|---|
-| 1 | **Accent chroma belongs in OKLCH 0.13–0.24.** Tailwind's `-600` row is 0.245–0.288 — the "AI slop" tell. |
+| 1 | **House accent chroma is OKLCH 0.13–0.24.** Kit-faithful uses the cite DNA range. Tailwind's `-600` row is 0.245–0.288 — the house "AI slop" tell. |
 | 2 | **Adjacent surfaces differ ~2pp of lightness** (1.6–3.9). Borders carry separation. ≥6pp is a smell. |
 | 3 | **The type scale is two ratios** — ~1.12 UI band (11–24px), ~1.22 display. |
 | 4 | **Tracking is a function of size AND weight.** Negative by 20–24px; regular ~1.6× more negative than bold. Pair `tracking-*` with `text-*`. |
@@ -169,11 +169,11 @@ in `references/techniques.md` — use that file when fixing, not thresholds alon
 
 Grays: hue *consistency* across the ramp, not mandatory tint — Vercel runs chroma-0 on purpose.
 
-## House style
+## Voices
 
-Dark-first, dense, instrumental, editorial type. OKLCH greys with a slight cast toward the
-accent, one accent, borders over shadows, mono numerics, motion under 200ms for state.
-Light derived from the same token source. Lanes: `brand` (brand-locked) and `personal`.
+Three legal paints — `references/voices.md`. **kit-faithful** (default): apply cite DNA.
+**house** (fallback): dark-first, dense, editorial, one accent. **brand**: kit structure,
+not kit chrome.
 
 ---
 
@@ -207,6 +207,7 @@ Light derived from the same token source. Lanes: `brand` (brand-locked) and `per
 | `references/brand.md` | Brand-mode adapter. **If `references/brand.local.md` exists, read that instead** — a private brand pack drops its real rules there, gitignored. |
 | `references/imagegen.md` | On-demand graphics — ask high/medium/low; map to mflux. |
 | `references/voice.md` | Speak/listen surfaces. |
+| `references/voices.md` | House / kit-faithful / brand — pick from the job, not habit. |
 | `references/copy.md` | Persuasion / instructional copy. |
 
 ## Hard-won specifics
@@ -236,7 +237,7 @@ sharp). `verify/deps.mjs` falls back to a sibling checkout only if root deps are
 
 ```sh
 cd ~/Projects/shine && npm install   # once
-node corpus/cite.mjs dashboard        # open every file it lists, then draw
+node corpus/cite.mjs dashboard        # job or screen; open files + Preview, then draw
 node verify/measure.mjs /abs/path/to/page.html
 ```
 
@@ -262,6 +263,7 @@ HTTP 200 can be an auth wall. Fail axe `incomplete` too.
 
 ## Reporting
 
-Environment · **catalog id** · corpus files opened · citations (technique/kit/file:line) · before/after
+Environment · **catalog id** · DNA · corpus files opened · citations (technique/kit/file:line) · before/after
 numbers · `--shot` path. Never "looks good now." A build that cannot name a catalog id
-**and** the corpus files it opened is incomplete — go open them.
+**and** the corpus files it opened is incomplete — go open them. Named Table/Form/Dialog/Select
+without a contracts MUST checklist (or a measure fail) is incomplete.

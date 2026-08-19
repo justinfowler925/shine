@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-cite="carbon-datatable" data-dna-family="carbon" data-shine-voice="kit-faithful">
+<head>
+  <meta charset="utf-8" />
+  <title>Full table contract</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; background: #0c0a09; color: #fafaf9; font: 15px/1.5 system-ui; padding: 24px; }
+    h1 { font-size: 24px; }
+    button.primary { background: #a8a29e; color: #0c0a09; border: 0; padding: 10px 16px; font: inherit; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { text-align: left; padding: 12px; border-bottom: 1px solid #444; }
+    .toolbar { display: flex; gap: 12px; margin: 16px 0; }
+  </style>
+</head>
+<body>
+  <main>
+  <h1>Employees</h1>
+  <p>Toolbar, sort, pagination, and the empty/loading/error triad as real states.</p>
+  <div class="toolbar">
+    <button class="primary" type="button">Add</button>
+    <span data-loading aria-busy="true">Idle</span>
+    <span data-error role="alert" hidden>Could not load</span>
+    <span data-empty hidden>No rows match</span>
+  </div>
+  <table data-shine-contract="table">
+    <thead>
+      <tr>
+        <th aria-sort="none"><button type="button">Name</button></th>
+        <th>Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Ada Lovelace</td><td>Analyst</td></tr>
+      <tr><td>Grace Hopper</td><td>Lead</td></tr>
+    </tbody>
+  </table>
+  <nav data-pagination aria-label="Pagination">
+    <button type="button">Previous</button>
+    <button type="button">Next</button>
+  </nav>
+  </main>
+</body>
+</html>

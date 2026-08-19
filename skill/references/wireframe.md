@@ -5,7 +5,7 @@ Default for a **new** surface with no existing UI. Explicit triggers: “wirefra
 
 Wireframe discovers **structure** with the user by picking a catalog template, then
 citing kits. It emits a gray-box HTML artifact whose regions come from that template,
-then a **locked brief**. Build paints under shine tokens and does not invent a
+then a **locked brief**. Build applies cite DNA and does not invent a
 competing IA unless the user says `unlock structure`.
 
 **Not Wireframe:** craft (chroma, tracking, shadows), brand paint, real charts, or

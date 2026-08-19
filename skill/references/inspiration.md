@@ -39,7 +39,7 @@ cite is paint. Structure still comes from a catalog id.
 3. Extract **regions** (nav, header, focal, primary) — do not clone styling.
 4. Add a row to `corpus/templates.json` via `index-templates.mjs` (or a
    query-only screenshot) so the next session can cite it.
-5. Cite the new id; copy structure; shine-paint; remeasure with `--shot`.
+5. Cite the new id; copy structure and DNA; remeasure with `--shot`.
 
 ## Completeness still wins
 
