@@ -632,6 +632,7 @@ Everything the plan compressed out, kept whole. Loaded only when relevant.
 | `research/verification.md` | The measure loop, tool versions, and the specific traps — including three false readings my own harness produced. |
 | `research/corpus.md` | Clone manifest with sparse paths, footprint numbers, and the acquisition script. |
 | `research/salesforce.md` | SLDS 2 token tiers and what's actually overridable, the delivery constraint, `slds-linter` in CI, and the inventory to run against a target org before scoping anything. |
+| `research/director-plan.md` | 2026-08-19 plan: stop shine-paint, retrieve from the corpus, apply visual DNA, prove completeness and likeness. P0–P3. |
 
 ## Done means
 
