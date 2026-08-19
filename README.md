@@ -497,17 +497,20 @@ surface with its own stale copy of the file list; the lint blocking the token la
 depends on. All of them looked like "no findings". So:
 
 ```sh
-node verify/doctor.mjs          # 35 checks: wiring, both gates fed a known violation, token propagation
+node verify/doctor.mjs          # the full suite: wiring, both gates fed a known violation, token propagation
 node verify/doctor.mjs --ci     # the machine-independent subset
 ```
 
-**The doctor run locally is the only gate that actually executes.** `.github/workflows/`
-carries the same `--ci` lane, and **GitHub Actions cannot start a run in this repository** —
-every push returns `startup_failure` in 0s, including a three-line hello-world workflow, so
-it is the account/repo and not the file. Treat the workflow as dormant until this repo moves
-somewhere Actions works; do not read a green PR here as a check having run. That is why the
-token-freshness checks (every src token present in every target, **and** every dimension's
-emitted value equal to source) live in the doctor rather than only in CI.
+**The local doctor is the gate for machine wirings; CI runs the `--ci` subset.**
+`.github/workflows/` runs the `--ci` lane on the self-hosted runner (`justin-macbook-shine`;
+hosted runners cannot start on this account — billing-locked by choice). That registration
+followed the old repo object when this repo was scrubbed and recreated, so every run sat
+`queued` until it expired while the runner reported itself healthy under the old name —
+re-registered in #18; verify a runner by `gh api repos/O/R/actions/runners`, never by its
+own config file. The machine-local checks (hook wirings, skill symlinks, vendored copies)
+only ever execute on the laptop, which is why the token-freshness checks (every src token
+present in every target, **and** every dimension's emitted value equal to source) live in
+the doctor rather than only in CI.
 
 It proves the gates *bite* rather than merely exist, and it fails when a consumer's
 vendored token copy is stale. Run it after any change to a hook, the skill frontmatter,

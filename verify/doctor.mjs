@@ -48,6 +48,43 @@ const note = (name, detail) => results.push({ pass: true, note: true, name, deta
 const readJSON = (p) => JSON.parse(readFileSync(p, "utf8"));
 const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
 
+// ---- 0. what tree is being measured? ---------------------------------------
+// A doctor run on a checkout parked behind origin/main reports findings about a
+// superseded tree, and every one of them renders exactly like a finding about
+// the repo. Observed 2026-08-19: the sessionStart doctor announced the site
+// listing off by one ("templates.md says 160, is 161") from a shared checkout
+// six commits behind main with another session's uncommitted template edits —
+// main itself was green. Dirty alone stays OK (running the doctor on your own
+// in-flight edit is the normal loop); BEHIND is what makes findings fiction.
+{
+  const git = (...a) => spawnSync("git", a, { cwd: SHINE, encoding: "utf8" });
+  const mainRef = git("rev-parse", "--verify", "--quiet", "origin/main");
+  // A shallow graft cannot answer ancestry: actions/checkout fetches only the
+  // PR merge ref at --depth=1, cutting parent links, so rev-list "sees" the
+  // workspace's remembered origin/main as unreachable and reports a fresh
+  // merge commit as 1 BEHIND. Observed on this repo's own runner, first run
+  // of this check. Shallow means "cannot know", which is a skip, not a fail.
+  const shallow = git("rev-parse", "--is-shallow-repository").stdout.trim() === "true";
+  if (mainRef.status !== 0 || shallow) {
+    note("checkout current", shallow ? "shallow checkout — ancestry unknowable, skipped" : "no origin/main ref — skipped");
+  } else {
+    const behind = Number(git("rev-list", "--count", "HEAD..origin/main").stdout.trim() || "0");
+    const branch = git("branch", "--show-current").stdout.trim() || "detached";
+    const porcelain = git("status", "--porcelain").stdout.trim();
+    const dirty = porcelain ? porcelain.split("\n").length : 0;
+    const where = `${branch}${dirty ? `, ${dirty} dirty file${dirty === 1 ? "" : "s"}` : ""}`;
+    if (behind > 0) {
+      fail(
+        "checkout current",
+        `measuring ${where}, ${behind} commit${behind === 1 ? "" : "s"} BEHIND origin/main — ` +
+          "every finding below is about this tree, not the repo; sync main before trusting them",
+      );
+    } else {
+      ok("checkout current", where);
+    }
+  }
+}
+
 // ---- 1. the skill can load at all -----------------------------------------
 {
   const p = join(SHINE, "skill/SKILL.md");
@@ -773,6 +810,29 @@ if (args.includes("--full")) {
   } else {
     const why = (r.stderr || r.stdout).trim().split("\n")[0].replace(/^skill-listing: (STALE — )?/, "");
     fail("site skill listing current", `${why} — fix: npm run skill-listing -- --write`);
+  }
+}
+
+// The same page claims how many checks `--ci` runs. That number went stale the
+// same way the file listing used to — hand-maintained through additions, wrong
+// by four, rendering exactly like a right one. Ask the --ci run itself.
+if (!CI && !process.env.SHINE_DOCTOR_INNER) {
+  const site = readFileSync(join(SHINE, "site/index.html"), "utf8");
+  const claim = site.match(/<code>--ci<\/code> is ([\d,]+) checks/);
+  if (!claim) {
+    fail("site --ci count current", "no '<code>--ci</code> is N checks' sentence found in site/index.html");
+  } else {
+    const inner = spawnSync(process.execPath, [fileURLToPath(import.meta.url), "--ci"], {
+      encoding: "utf8",
+      env: { ...process.env, SHINE_DOCTOR_INNER: "1" },
+    });
+    const out = `${inner.stdout}\n${inner.stderr}`;
+    const m = out.match(/(\d+) checks pass|of (\d+) checks FAILED/);
+    const actualCi = m ? Number(m[1] ?? m[2]) : NaN;
+    if (!Number.isFinite(actualCi)) fail("site --ci count current", "could not read the --ci run's own count");
+    else if (Number(claim[1].replace(/,/g, "")) !== actualCi)
+      fail("site --ci count current", `site says ${claim[1]}, the --ci run reports ${actualCi}`);
+    else ok("site --ci count current", `${actualCi} checks`);
   }
 }
 
