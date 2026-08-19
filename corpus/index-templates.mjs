@@ -14,7 +14,157 @@ import { homedir } from "node:os";
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CORPUS = resolve(process.env.DESIGN_CORPUS || join(homedir(), "design-corpus"));
 
-const REQUIRED = ["dashboard", "marketing", "auth", "checkout", "app-shell", "crud"];
+const REQUIRED = [
+  "dashboard",
+  "marketing",
+  "auth",
+  "checkout",
+  "app-shell",
+  "crud",
+  "queue",
+  "record",
+  "chat",
+  "settings",
+  "wizard",
+];
+
+const KIT_DNA = {
+  "shadcn-registry": {
+    family: "shadcn-zinc",
+    density: "comfortable",
+    type: "geist 14/16",
+    radius: "lg",
+    chroma: "low",
+    elevation: "hairline+soft",
+    motion: "150ms",
+  },
+  "mui-material": {
+    family: "material",
+    density: "comfortable",
+    type: "roboto 14/16",
+    radius: "md",
+    chroma: "medium",
+    elevation: "shadow-2",
+    motion: "200ms",
+  },
+  tremor: {
+    family: "tremor",
+    density: "comfortable",
+    type: "inter 14",
+    radius: "md",
+    chroma: "medium",
+    elevation: "card",
+    motion: "150ms",
+  },
+  "ant-design-pro": {
+    family: "ant",
+    density: "dense",
+    type: "system 14",
+    radius: "sm",
+    chroma: "medium",
+    elevation: "border",
+    motion: "200ms",
+  },
+  "ant-design": {
+    family: "ant",
+    density: "dense",
+    type: "system 14",
+    radius: "sm",
+    chroma: "medium",
+    elevation: "border",
+    motion: "200ms",
+  },
+  heroui: {
+    family: "heroui",
+    density: "comfortable",
+    type: "inter 14",
+    radius: "lg",
+    chroma: "medium",
+    elevation: "soft",
+    motion: "200ms",
+  },
+  "chakra-ui": {
+    family: "chakra",
+    density: "comfortable",
+    type: "inter 16",
+    radius: "md",
+    chroma: "medium",
+    elevation: "shadow",
+    motion: "200ms",
+  },
+  carbon: {
+    family: "carbon",
+    density: "dense",
+    type: "ibm-plex 14",
+    radius: "none",
+    chroma: "low",
+    elevation: "none",
+    motion: "110ms",
+  },
+  mantine: {
+    family: "mantine",
+    density: "comfortable",
+    type: "system 16",
+    radius: "sm",
+    chroma: "medium",
+    elevation: "shadow",
+    motion: "200ms",
+  },
+  fluentui: {
+    family: "fluent",
+    density: "comfortable",
+    type: "segoe 14",
+    radius: "md",
+    chroma: "medium",
+    elevation: "card",
+    motion: "150ms",
+  },
+  "react-spectrum": {
+    family: "spectrum",
+    density: "comfortable",
+    type: "adobe-clean 14",
+    radius: "md",
+    chroma: "medium",
+    elevation: "well",
+    motion: "200ms",
+  },
+  magicui: {
+    family: "magicui",
+    density: "editorial",
+    type: "display",
+    radius: "xl",
+    chroma: "high",
+    elevation: "glow",
+    motion: "300ms",
+  },
+  shine: {
+    family: "shine",
+    density: "dense",
+    type: "editorial 14/15",
+    radius: "sm",
+    chroma: "0.13-0.24",
+    elevation: "hairline",
+    motion: "150ms",
+  },
+};
+
+const SCREEN_JOBS = {
+  dashboard: ["dashboard"],
+  marketing: ["marketing", "marketing-hero"],
+  auth: ["auth"],
+  checkout: ["checkout", "wizard"],
+  "app-shell": ["app-shell"],
+  crud: ["crud", "queue"],
+  queue: ["queue"],
+  record: ["record", "detail"],
+  chat: ["chat"],
+  settings: ["settings"],
+  wizard: ["wizard"],
+  "ai-generate": ["ai-generate"],
+  "marketing-hero": ["marketing-hero", "marketing"],
+  empty: ["empty"],
+  charts: ["charts"],
+};
 
 const exists = (rel) => existsSync(join(CORPUS, rel));
 
@@ -22,6 +172,8 @@ const templates = [];
 const push = (row) => {
   if (row.kind === "source" && !exists(row.path) && !existsSync(join(SHINE, row.path))) return;
   if ((row.kind === "query-only" || row.kind === "owned") && !exists(row.path)) return;
+  if (!row.dna) row.dna = KIT_DNA[row.kit] || KIT_DNA.shine;
+  if (!row.jobs) row.jobs = SCREEN_JOBS[row.screen] || [row.screen];
   templates.push(row);
 };
 
@@ -66,7 +218,7 @@ if (existsSync(shadcnReg)) {
     if (name === "login-04") return { screen: "auth", rank: 2, title: "shadcn login-04" };
     if (/^login-\d+$/.test(name)) return { screen: "auth", rank: 10, title: `shadcn ${name}` };
     if (/^signup-\d+$/.test(name)) return { screen: "auth", rank: 11, title: `shadcn ${name}` };
-    if (name.startsWith("chart-")) return { screen: "charts", rank: 2, title: `shadcn ${name}` };
+    if (name.startsWith("chart-")) return { screen: "charts", rank: 80, title: `shadcn ${name}` };
     return null;
   };
   for (const item of items) {
@@ -94,7 +246,7 @@ if (existsSync(shadcnReg)) {
 for (const t of [
   { name: "input-group-textarea", rank: 1, title: "shadcn input-group-textarea (prompt composer + submit addon)" },
   { name: "field-choice-card", rank: 2, title: "shadcn field-choice-card (quality tier as radio cards)" },
-  { name: "empty-icon", rank: 3, title: "shadcn empty-icon (no-result / failure state)" },
+  { name: "empty-icon", rank: 3, title: "shadcn empty-icon (no-result / failure state)", jobs: ["empty", "ai-generate"] },
   { name: "item-image", rank: 4, title: "shadcn item-image (history strip row)" },
 ]) {
   push({
@@ -107,25 +259,25 @@ for (const t of [
     license: "MIT",
     kind: "source",
     startFrom: t.rank,
+    ...(t.jobs ? { jobs: t.jobs } : {}),
   });
 }
 
 // ---- kits added in the AdminLTE-list expansion (index if present) ----------
 if (exists("tremor/src")) {
+  // Atoms, not a page. Keep as a chart cite only — never the dashboard default.
   push({
     id: "tremor-dashboard",
-    screen: "dashboard",
+    screen: "charts",
     kit: "tremor",
-    title: "Tremor dashboard / KPI blocks",
+    title: "Tremor KPI / chart blocks",
     path: "tremor/src/components",
     preview: "https://tremor.so",
     license: "Apache-2.0",
     kind: "source",
-    startFrom: 1,
+    startFrom: 80,
+    jobs: ["charts"],
   });
-  // Tremor is the analytics default; demote shadcn dashboard-01.
-  const shadcnDash = templates.find((t) => t.id === "shadcn-dashboard-01");
-  if (shadcnDash) shadcnDash.startFrom = 3;
 }
 
 if (exists("ant-design-pro/src")) {
@@ -181,6 +333,160 @@ if (exists("chakra-ui/apps/compositions")) {
   });
 }
 
+// ---- previously unused pins: one cite-able full page per major kit ----------
+if (exists("carbon/packages/react/src/components/DataTable")) {
+  push({
+    id: "carbon-datatable",
+    screen: "queue",
+    kit: "carbon",
+    title: "Carbon DataTable (toolbar, batch, empty)",
+    path: "carbon/packages/react/src/components/DataTable",
+    preview: "https://carbondesignsystem.com/components/data-table/usage/",
+    license: "Apache-2.0",
+    kind: "source",
+    startFrom: 1,
+    jobs: ["queue"],
+  });
+}
+if (exists("carbon/packages/react/src/components/UIShell")) {
+  push({
+    id: "carbon-uishell",
+    screen: "app-shell",
+    kit: "carbon",
+    title: "Carbon UIShell",
+    path: "carbon/packages/react/src/components/UIShell",
+    preview: "https://carbondesignsystem.com/components/UI-shell-header/usage/",
+    license: "Apache-2.0",
+    kind: "source",
+    startFrom: 7,
+  });
+}
+if (exists("ant-design-pro/src/pages/list")) {
+  push({
+    id: "antd-pro-list",
+    screen: "queue",
+    kit: "ant-design-pro",
+    title: "Ant Design Pro list / queue pages",
+    path: "ant-design-pro/src/pages/list",
+    preview: "https://preview.pro.ant.design",
+    license: "MIT",
+    kind: "source",
+    startFrom: 2,
+    jobs: ["queue"],
+  });
+}
+if (exists("ant-design-pro/src/pages/profile")) {
+  push({
+    id: "antd-pro-profile",
+    screen: "record",
+    kit: "ant-design-pro",
+    title: "Ant Design Pro profile / record",
+    path: "ant-design-pro/src/pages/profile",
+    preview: "https://preview.pro.ant.design",
+    license: "MIT",
+    kind: "source",
+    startFrom: 1,
+    jobs: ["record", "detail"],
+  });
+}
+if (exists("ant-design-pro/src/pages/account/settings")) {
+  push({
+    id: "antd-pro-settings",
+    screen: "settings",
+    kit: "ant-design-pro",
+    title: "Ant Design Pro account settings",
+    path: "ant-design-pro/src/pages/account/settings",
+    preview: "https://preview.pro.ant.design",
+    license: "MIT",
+    kind: "source",
+    startFrom: 1,
+    jobs: ["settings"],
+  });
+}
+if (exists("ant-design-pro/src/pages/form/step-form")) {
+  push({
+    id: "antd-pro-step-form",
+    screen: "wizard",
+    kit: "ant-design-pro",
+    title: "Ant Design Pro step form",
+    path: "ant-design-pro/src/pages/form/step-form",
+    preview: "https://preview.pro.ant.design",
+    license: "MIT",
+    kind: "source",
+    startFrom: 1,
+    jobs: ["wizard"],
+  });
+}
+if (exists("ant-design-pro/src/pages/chatbot")) {
+  push({
+    id: "antd-pro-chatbot",
+    screen: "chat",
+    kit: "ant-design-pro",
+    title: "Ant Design Pro chatbot page",
+    path: "ant-design-pro/src/pages/chatbot",
+    preview: "https://preview.pro.ant.design",
+    license: "MIT",
+    kind: "source",
+    startFrom: 2,
+    jobs: ["chat"],
+  });
+}
+if (exists("react-spectrum/packages/@react-spectrum/ai/src")) {
+  push({
+    id: "spectrum-ai-chat",
+    screen: "chat",
+    kit: "react-spectrum",
+    title: "React Spectrum AI Chat (Thread + PromptField)",
+    path: "react-spectrum/packages/@react-spectrum/ai/src",
+    preview: "https://react-spectrum.adobe.com",
+    license: "Apache-2.0",
+    kind: "source",
+    startFrom: 1,
+    jobs: ["chat"],
+  });
+}
+if (exists("mantine/apps/mantine.dev/src/app-shell-examples/examples/FullLayout")) {
+  push({
+    id: "mantine-appshell",
+    screen: "app-shell",
+    kit: "mantine",
+    title: "Mantine AppShell full layout",
+    path: "mantine/apps/mantine.dev/src/app-shell-examples/examples/FullLayout",
+    preview: "https://mantine.dev/app-shell",
+    license: "MIT",
+    kind: "source",
+    startFrom: 6,
+  });
+}
+if (exists("fluentui/packages/react-components/react-nav")) {
+  push({
+    id: "fluent-nav",
+    screen: "settings",
+    kit: "fluentui",
+    title: "Fluent UI NavDrawer",
+    path: "fluentui/packages/react-components/react-nav",
+    preview: "https://react.fluentui.dev",
+    license: "MIT",
+    kind: "source",
+    startFrom: 2,
+    jobs: ["settings"],
+  });
+}
+if (exists("magicui/apps/www/registry/magicui/hero-video-dialog.tsx")) {
+  push({
+    id: "magicui-hero",
+    screen: "marketing-hero",
+    kit: "magicui",
+    title: "Magic UI hero (video dialog)",
+    path: "magicui/apps/www/registry/magicui/hero-video-dialog.tsx",
+    preview: "https://magicui.design",
+    license: "MIT",
+    kind: "source",
+    startFrom: 1,
+    jobs: ["marketing-hero"],
+  });
+}
+
 // ---- owned (Atlas-licensed, not republished) --------------------------------
 const ownedManifest = join(CORPUS, "owned/manifest.json");
 if (existsSync(ownedManifest)) {
@@ -222,8 +528,8 @@ const md = [];
 md.push("# Templates — start from a real page");
 md.push("");
 md.push("**catalog cite required.** Inventing a page is a Critical completeness hole.");
-md.push("Run `node corpus/cite.mjs <screen|id>`, open every file it lists, copy structure, shine-paint.");
-md.push("Naming an id without opening those files is inventing. Never clone vendor pixels.");
+md.push("Run `node corpus/cite.mjs <job|screen|id>`, open every file it lists **and the Preview**,");
+md.push("clone structure **and** visual DNA. Voice is kit-faithful unless house or brand — `voices.md`.");
 md.push("Generated from `corpus/templates.json` — do not hand-edit; run `node corpus/index-templates.mjs`.");
 md.push("");
 md.push("## Default start-from");
@@ -235,21 +541,21 @@ for (const { screen, row } of defaults) {
   else md.push(`| ${screen} | \`${row.id}\` | ${row.kit} | \`${row.path}\` |`);
 }
 md.push("");
-md.push("First match by `startFrom` wins unless the user names another id.");
+md.push("First match by `startFrom` wins unless the user names another id. Jobs (`queue`, `settings`, `chat`, …) resolve the same way.");
 md.push("");
 md.push("## How to cite");
 md.push("");
 md.push("```sh");
-md.push("node ~/Projects/shine/corpus/cite.mjs mui-crud-dashboard");
+md.push("node ~/Projects/shine/corpus/cite.mjs queue");
 md.push("```");
 md.push("");
-md.push("Open every file it prints. Then:");
+md.push("Open every file it prints, and the Preview. Then:");
 md.push("");
 md.push("```");
-md.push("Template: mui-crud-dashboard");
-md.push("Path: mui-material/docs/data/material/getting-started/templates/crud-dashboard");
-md.push("Opened: ~/design-corpus/…/Dashboard.tsx (and the rest cite.mjs listed)");
-md.push("Paint: shine tokens. Structure cloned; Material purple is not.");
+md.push("Template: carbon-datatable");
+md.push("Voice: kit-faithful");
+md.push("DNA: family=carbon density=dense type=ibm-plex 14 radius=none …");
+md.push("Opened: ~/design-corpus/carbon/…/DataTable.tsx (and the rest cite.mjs listed)");
 md.push("```");
 md.push("");
 md.push("Naming the id without running `cite.mjs` is not a cite. No row for this screen → `inspiration.md` (fill the catalog) then cite. Do not invent.");
@@ -269,9 +575,14 @@ const mdPath = join(SHINE, "skill/references/templates.md");
 writeFileSync(mdPath, md.join("\n"));
 
 const missing = REQUIRED.filter((s) => !templates.some((t) => t.screen === s));
+const missingDefault = REQUIRED.filter((s) => !templates.some((t) => t.screen === s && t.startFrom === 1));
 console.log(`templates: ${templates.length} rows → ${jsonPath}`);
 console.log(`markdown:  ${mdPath}`);
 if (missing.length) {
   console.error(`MISSING required screens: ${missing.join(", ")}`);
+  process.exit(1);
+}
+if (missingDefault.length) {
+  console.error(`MISSING startFrom:1 for: ${missingDefault.join(", ")}`);
   process.exit(1);
 }

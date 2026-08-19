@@ -1,9 +1,8 @@
 # Kits — when to pull which corpus, and worked recipes
 
-Shine tokens are the visual system. Kits supply **behavior, completeness, and structure**.
-Never paste Material/Carbon/Fluent pixels into a shine surface.
+Shine tokens are the semantic system. Kits supply **behavior, completeness, structure, and — under kit-faithful — visual DNA**. House style is the fallback voice (`voices.md`). Brand lane: kit structure yes, kit chrome no.
 
-**Do clone structure** from a `templates.md` catalog row, then shine-paint. Inventing a
+**Do clone structure and DNA** from a `templates.md` catalog row. Inventing a
 page is a Critical hole (`diagnose.md` §0.5). Kits are not a substitute for a catalog id.
 
 Before any library API: `rg` the corpus (`corpus.md`). Cite `file:line` in the fix.
@@ -36,12 +35,12 @@ before locking the brief.
 | Wireframe pattern | Catalog default | Lead kit / recipe |
 |---|---|---|
 | App shell | `shadcn-sidebar-07` | shadcn sidebar + Carbon density — § App shell |
-| Dashboard | `shadcn-dashboard-01` (Tremor when pinned) | Recharts/D3 + `dashboards.md` |
-| Queue / insight stream | app-shell template chrome | ranked rows; Carbon/Ant toolbar density |
-| Data table | `mui-crud-dashboard` | § DataGrid |
-| Form / settings | cited shell | Ant/MUI completeness; Polaris query-only |
-| Landing | `mui-marketing-page` | hero budget; magicui/cult-ui MIT |
-| AI surface | app-shell template | `ai-surfaces.md` first |
+| Dashboard | `shadcn-dashboard-01` | Recharts/D3 + `dashboards.md` — not Tremor atoms |
+| Queue / insight stream | `carbon-datatable` | Carbon/Ant toolbar, batch, empty/loading/error |
+| Data table | `mui-crud-dashboard` / `carbon-datatable` | § DataGrid |
+| Form / settings | `antd-pro-settings` | Ant/MUI completeness; Polaris query-only |
+| Landing | `mui-marketing-page` | hero budget; `magicui-hero` for marketing-hero |
+| AI surface | `cite.mjs chat` or ai-generate | `ai-surfaces.md` first; chat is usually wrong |
 | Dialog | — (component, not a page) | § Dialog / sheet |
 
 ## Worked recipes

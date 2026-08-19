@@ -1,36 +1,41 @@
 # Templates — start from a real page
 
 **catalog cite required.** Inventing a page is a Critical completeness hole.
-Run `node corpus/cite.mjs <screen|id>`, open every file it lists, copy structure, shine-paint.
-Naming an id without opening those files is inventing. Never clone vendor pixels.
+Run `node corpus/cite.mjs <job|screen|id>`, open every file it lists **and the Preview**,
+clone structure **and** visual DNA. Voice is kit-faithful unless house or brand — `voices.md`.
 Generated from `corpus/templates.json` — do not hand-edit; run `node corpus/index-templates.mjs`.
 
 ## Default start-from
 
 | Screen | Id | Kit | Path |
 |---|---|---|---|
-| dashboard | `tremor-dashboard` | tremor | `tremor/src/components` |
+| dashboard | `shadcn-dashboard-01` | shadcn-registry | `shadcn-registry/items/dashboard-01.json` |
 | marketing | `mui-marketing-page` | mui-material | `mui-material/docs/data/material/getting-started/templates/marketing-page` |
 | auth | `mui-sign-in-side` | mui-material | `mui-material/docs/data/material/getting-started/templates/sign-in-side` |
 | checkout | `mui-checkout` | mui-material | `mui-material/docs/data/material/getting-started/templates/checkout` |
 | app-shell | `shadcn-sidebar-07` | shadcn-registry | `shadcn-registry/items/sidebar-07.json` |
 | crud | `mui-crud-dashboard` | mui-material | `mui-material/docs/data/material/getting-started/templates/crud-dashboard` |
+| queue | `carbon-datatable` | carbon | `carbon/packages/react/src/components/DataTable` |
+| record | `antd-pro-profile` | ant-design-pro | `ant-design-pro/src/pages/profile` |
+| chat | `spectrum-ai-chat` | react-spectrum | `react-spectrum/packages/@react-spectrum/ai/src` |
+| settings | `antd-pro-settings` | ant-design-pro | `ant-design-pro/src/pages/account/settings` |
+| wizard | `antd-pro-step-form` | ant-design-pro | `ant-design-pro/src/pages/form/step-form` |
 
-First match by `startFrom` wins unless the user names another id.
+First match by `startFrom` wins unless the user names another id. Jobs (`queue`, `settings`, `chat`, …) resolve the same way.
 
 ## How to cite
 
 ```sh
-node ~/Projects/shine/corpus/cite.mjs mui-crud-dashboard
+node ~/Projects/shine/corpus/cite.mjs queue
 ```
 
-Open every file it prints. Then:
+Open every file it prints, and the Preview. Then:
 
 ```
-Template: mui-crud-dashboard
-Path: mui-material/docs/data/material/getting-started/templates/crud-dashboard
-Opened: ~/design-corpus/…/Dashboard.tsx (and the rest cite.mjs listed)
-Paint: shine tokens. Structure cloned; Material purple is not.
+Template: carbon-datatable
+Voice: kit-faithful
+DNA: family=carbon density=dense type=ibm-plex 14 radius=none …
+Opened: ~/design-corpus/carbon/…/DataTable.tsx (and the rest cite.mjs listed)
 ```
 
 Naming the id without running `cite.mjs` is not a cite. No row for this screen → `inspiration.md` (fill the catalog) then cite. Do not invent.
@@ -48,6 +53,8 @@ Naming the id without running `cite.mjs` is not a cite. No row for this screen �
 | `antd-pro-app` | app-shell | 3 | ant-design-pro | source | `ant-design-pro/src` |
 | `heroui-next-app` | app-shell | 4 | heroui | source | `heroui-next-app` |
 | `chakra-compositions` | app-shell | 5 | chakra-ui | source | `chakra-ui/apps/compositions` |
+| `mantine-appshell` | app-shell | 6 | mantine | source | `mantine/apps/mantine.dev/src/app-shell-examples/examples/FullLayout` |
+| `carbon-uishell` | app-shell | 7 | carbon | source | `carbon/packages/react/src/components/UIShell` |
 | `shadcn-sidebar-01` | app-shell | 11 | shadcn-registry | source | `shadcn-registry/items/sidebar-01.json` |
 | `shadcn-sidebar-02` | app-shell | 12 | shadcn-registry | source | `shadcn-registry/items/sidebar-02.json` |
 | `shadcn-sidebar-03` | app-shell | 13 | shadcn-registry | source | `shadcn-registry/items/sidebar-03.json` |
@@ -80,85 +87,94 @@ Naming the id without running `cite.mjs` is not a cite. No row for this screen �
 | `shadcn-signup-04` | auth | 11 | shadcn-registry | source | `shadcn-registry/items/signup-04.json` |
 | `shadcn-signup-05` | auth | 11 | shadcn-registry | source | `shadcn-registry/items/signup-05.json` |
 | `mui-blog` | blog | 1 | mui-material | source | `mui-material/docs/data/material/getting-started/templates/blog` |
-| `shadcn-chart-area-axes` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-area-axes.json` |
-| `shadcn-chart-area-default` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-area-default.json` |
-| `shadcn-chart-area-gradient` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-area-gradient.json` |
-| `shadcn-chart-area-icons` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-area-icons.json` |
-| `shadcn-chart-area-interactive` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-area-interactive.json` |
-| `shadcn-chart-area-legend` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-area-legend.json` |
-| `shadcn-chart-area-linear` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-area-linear.json` |
-| `shadcn-chart-area-stacked` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-area-stacked.json` |
-| `shadcn-chart-area-stacked-expand` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-area-stacked-expand.json` |
-| `shadcn-chart-area-step` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-area-step.json` |
-| `shadcn-chart-bar-active` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-bar-active.json` |
-| `shadcn-chart-bar-default` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-bar-default.json` |
-| `shadcn-chart-bar-horizontal` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-bar-horizontal.json` |
-| `shadcn-chart-bar-interactive` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-bar-interactive.json` |
-| `shadcn-chart-bar-label` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-bar-label.json` |
-| `shadcn-chart-bar-label-custom` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-bar-label-custom.json` |
-| `shadcn-chart-bar-mixed` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-bar-mixed.json` |
-| `shadcn-chart-bar-multiple` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-bar-multiple.json` |
-| `shadcn-chart-bar-negative` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-bar-negative.json` |
-| `shadcn-chart-bar-stacked` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-bar-stacked.json` |
-| `shadcn-chart-line-default` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-line-default.json` |
-| `shadcn-chart-line-dots` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-line-dots.json` |
-| `shadcn-chart-line-dots-colors` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-line-dots-colors.json` |
-| `shadcn-chart-line-dots-custom` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-line-dots-custom.json` |
-| `shadcn-chart-line-interactive` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-line-interactive.json` |
-| `shadcn-chart-line-label` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-line-label.json` |
-| `shadcn-chart-line-label-custom` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-line-label-custom.json` |
-| `shadcn-chart-line-linear` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-line-linear.json` |
-| `shadcn-chart-line-multiple` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-line-multiple.json` |
-| `shadcn-chart-line-step` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-line-step.json` |
-| `shadcn-chart-pie-donut` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-pie-donut.json` |
-| `shadcn-chart-pie-donut-active` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-pie-donut-active.json` |
-| `shadcn-chart-pie-donut-text` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-pie-donut-text.json` |
-| `shadcn-chart-pie-interactive` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-pie-interactive.json` |
-| `shadcn-chart-pie-label` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-pie-label.json` |
-| `shadcn-chart-pie-label-custom` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-pie-label-custom.json` |
-| `shadcn-chart-pie-label-list` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-pie-label-list.json` |
-| `shadcn-chart-pie-legend` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-pie-legend.json` |
-| `shadcn-chart-pie-separator-none` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-pie-separator-none.json` |
-| `shadcn-chart-pie-simple` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-pie-simple.json` |
-| `shadcn-chart-pie-stacked` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-pie-stacked.json` |
-| `shadcn-chart-radar-default` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-default.json` |
-| `shadcn-chart-radar-dots` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-dots.json` |
-| `shadcn-chart-radar-grid-circle` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-circle.json` |
-| `shadcn-chart-radar-grid-circle-fill` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-circle-fill.json` |
-| `shadcn-chart-radar-grid-circle-no-lines` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-circle-no-lines.json` |
-| `shadcn-chart-radar-grid-custom` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-custom.json` |
-| `shadcn-chart-radar-grid-fill` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-fill.json` |
-| `shadcn-chart-radar-grid-none` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-none.json` |
-| `shadcn-chart-radar-icons` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-icons.json` |
-| `shadcn-chart-radar-label-custom` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-label-custom.json` |
-| `shadcn-chart-radar-legend` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-legend.json` |
-| `shadcn-chart-radar-lines-only` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-lines-only.json` |
-| `shadcn-chart-radar-multiple` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-multiple.json` |
-| `shadcn-chart-radar-radius` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radar-radius.json` |
-| `shadcn-chart-radial-grid` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radial-grid.json` |
-| `shadcn-chart-radial-label` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radial-label.json` |
-| `shadcn-chart-radial-shape` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radial-shape.json` |
-| `shadcn-chart-radial-simple` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radial-simple.json` |
-| `shadcn-chart-radial-stacked` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radial-stacked.json` |
-| `shadcn-chart-radial-text` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-radial-text.json` |
-| `shadcn-chart-tooltip-advanced` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-advanced.json` |
-| `shadcn-chart-tooltip-default` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-default.json` |
-| `shadcn-chart-tooltip-formatter` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-formatter.json` |
-| `shadcn-chart-tooltip-icons` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-icons.json` |
-| `shadcn-chart-tooltip-indicator-line` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-indicator-line.json` |
-| `shadcn-chart-tooltip-indicator-none` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-indicator-none.json` |
-| `shadcn-chart-tooltip-label-custom` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-label-custom.json` |
-| `shadcn-chart-tooltip-label-formatter` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-label-formatter.json` |
-| `shadcn-chart-tooltip-label-none` | charts | 2 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-label-none.json` |
+| `shadcn-chart-area-axes` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-area-axes.json` |
+| `shadcn-chart-area-default` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-area-default.json` |
+| `shadcn-chart-area-gradient` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-area-gradient.json` |
+| `shadcn-chart-area-icons` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-area-icons.json` |
+| `shadcn-chart-area-interactive` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-area-interactive.json` |
+| `shadcn-chart-area-legend` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-area-legend.json` |
+| `shadcn-chart-area-linear` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-area-linear.json` |
+| `shadcn-chart-area-stacked` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-area-stacked.json` |
+| `shadcn-chart-area-stacked-expand` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-area-stacked-expand.json` |
+| `shadcn-chart-area-step` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-area-step.json` |
+| `shadcn-chart-bar-active` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-bar-active.json` |
+| `shadcn-chart-bar-default` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-bar-default.json` |
+| `shadcn-chart-bar-horizontal` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-bar-horizontal.json` |
+| `shadcn-chart-bar-interactive` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-bar-interactive.json` |
+| `shadcn-chart-bar-label` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-bar-label.json` |
+| `shadcn-chart-bar-label-custom` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-bar-label-custom.json` |
+| `shadcn-chart-bar-mixed` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-bar-mixed.json` |
+| `shadcn-chart-bar-multiple` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-bar-multiple.json` |
+| `shadcn-chart-bar-negative` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-bar-negative.json` |
+| `shadcn-chart-bar-stacked` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-bar-stacked.json` |
+| `shadcn-chart-line-default` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-line-default.json` |
+| `shadcn-chart-line-dots` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-line-dots.json` |
+| `shadcn-chart-line-dots-colors` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-line-dots-colors.json` |
+| `shadcn-chart-line-dots-custom` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-line-dots-custom.json` |
+| `shadcn-chart-line-interactive` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-line-interactive.json` |
+| `shadcn-chart-line-label` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-line-label.json` |
+| `shadcn-chart-line-label-custom` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-line-label-custom.json` |
+| `shadcn-chart-line-linear` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-line-linear.json` |
+| `shadcn-chart-line-multiple` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-line-multiple.json` |
+| `shadcn-chart-line-step` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-line-step.json` |
+| `shadcn-chart-pie-donut` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-pie-donut.json` |
+| `shadcn-chart-pie-donut-active` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-pie-donut-active.json` |
+| `shadcn-chart-pie-donut-text` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-pie-donut-text.json` |
+| `shadcn-chart-pie-interactive` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-pie-interactive.json` |
+| `shadcn-chart-pie-label` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-pie-label.json` |
+| `shadcn-chart-pie-label-custom` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-pie-label-custom.json` |
+| `shadcn-chart-pie-label-list` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-pie-label-list.json` |
+| `shadcn-chart-pie-legend` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-pie-legend.json` |
+| `shadcn-chart-pie-separator-none` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-pie-separator-none.json` |
+| `shadcn-chart-pie-simple` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-pie-simple.json` |
+| `shadcn-chart-pie-stacked` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-pie-stacked.json` |
+| `shadcn-chart-radar-default` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-default.json` |
+| `shadcn-chart-radar-dots` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-dots.json` |
+| `shadcn-chart-radar-grid-circle` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-circle.json` |
+| `shadcn-chart-radar-grid-circle-fill` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-circle-fill.json` |
+| `shadcn-chart-radar-grid-circle-no-lines` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-circle-no-lines.json` |
+| `shadcn-chart-radar-grid-custom` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-custom.json` |
+| `shadcn-chart-radar-grid-fill` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-fill.json` |
+| `shadcn-chart-radar-grid-none` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-grid-none.json` |
+| `shadcn-chart-radar-icons` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-icons.json` |
+| `shadcn-chart-radar-label-custom` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-label-custom.json` |
+| `shadcn-chart-radar-legend` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-legend.json` |
+| `shadcn-chart-radar-lines-only` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-lines-only.json` |
+| `shadcn-chart-radar-multiple` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-multiple.json` |
+| `shadcn-chart-radar-radius` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radar-radius.json` |
+| `shadcn-chart-radial-grid` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radial-grid.json` |
+| `shadcn-chart-radial-label` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radial-label.json` |
+| `shadcn-chart-radial-shape` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radial-shape.json` |
+| `shadcn-chart-radial-simple` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radial-simple.json` |
+| `shadcn-chart-radial-stacked` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radial-stacked.json` |
+| `shadcn-chart-radial-text` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-radial-text.json` |
+| `shadcn-chart-tooltip-advanced` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-advanced.json` |
+| `shadcn-chart-tooltip-default` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-default.json` |
+| `shadcn-chart-tooltip-formatter` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-formatter.json` |
+| `shadcn-chart-tooltip-icons` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-icons.json` |
+| `shadcn-chart-tooltip-indicator-line` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-indicator-line.json` |
+| `shadcn-chart-tooltip-indicator-none` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-indicator-none.json` |
+| `shadcn-chart-tooltip-label-custom` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-label-custom.json` |
+| `shadcn-chart-tooltip-label-formatter` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-label-formatter.json` |
+| `shadcn-chart-tooltip-label-none` | charts | 80 | shadcn-registry | source | `shadcn-registry/items/chart-tooltip-label-none.json` |
+| `tremor-dashboard` | charts | 80 | tremor | source | `tremor/src/components` |
+| `spectrum-ai-chat` | chat | 1 | react-spectrum | source | `react-spectrum/packages/@react-spectrum/ai/src` |
+| `antd-pro-chatbot` | chat | 2 | ant-design-pro | source | `ant-design-pro/src/pages/chatbot` |
 | `mui-checkout` | checkout | 1 | mui-material | source | `mui-material/docs/data/material/getting-started/templates/checkout` |
 | `mui-crud-dashboard` | crud | 1 | mui-material | source | `mui-material/docs/data/material/getting-started/templates/crud-dashboard` |
 | `antd-pro-crud` | crud | 2 | ant-design-pro | source | `ant-design-pro/src/pages` |
-| `tremor-dashboard` | dashboard | 1 | tremor | source | `tremor/src/components` |
+| `shadcn-dashboard-01` | dashboard | 1 | shadcn-registry | source | `shadcn-registry/items/dashboard-01.json` |
 | `mui-dashboard-analytics` | dashboard | 2 | mui-material | source | `mui-material/docs/data/material/getting-started/templates/dashboard` |
-| `shadcn-dashboard-01` | dashboard | 3 | shadcn-registry | source | `shadcn-registry/items/dashboard-01.json` |
 | `query-shadcn-blocks` | dashboard | 80 | shadcn-registry | query-only | `query-only/query-shadcn-blocks.png` |
 | `query-haze` | dashboard | 90 | haze | query-only | `query-only/query-haze.png` |
 | `mui-marketing-page` | marketing | 1 | mui-material | source | `mui-material/docs/data/material/getting-started/templates/marketing-page` |
 | `query-mui-free-gallery` | marketing | 80 | mui-material | query-only | `query-only/query-mui-free-gallery.png` |
+| `magicui-hero` | marketing-hero | 1 | magicui | source | `magicui/apps/www/registry/magicui/hero-video-dialog.tsx` |
+| `carbon-datatable` | queue | 1 | carbon | source | `carbon/packages/react/src/components/DataTable` |
+| `antd-pro-list` | queue | 2 | ant-design-pro | source | `ant-design-pro/src/pages/list` |
+| `antd-pro-profile` | record | 1 | ant-design-pro | source | `ant-design-pro/src/pages/profile` |
+| `antd-pro-settings` | settings | 1 | ant-design-pro | source | `ant-design-pro/src/pages/account/settings` |
+| `fluent-nav` | settings | 2 | fluentui | source | `fluentui/packages/react-components/react-nav` |
+| `antd-pro-step-form` | wizard | 1 | ant-design-pro | source | `ant-design-pro/src/pages/form/step-form` |
 
-Indexed 121 templates from /Users/justinfowler/design-corpus.
+Indexed 132 templates from /Users/justinfowler/design-corpus.

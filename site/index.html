@@ -429,7 +429,7 @@
 
       <figure class="files">
 <pre>skill/                        lines
-  <strong>SKILL.md</strong>                    267
+  <strong>SKILL.md</strong>                    269
   references/
     adoption.md                158
     ai-surfaces.md             160
@@ -442,28 +442,29 @@
     corpus.md                  109
     dashboards.md              220
     dataviz.md                 126
-    diagnose.md                145
+    diagnose.md                165
     ecosystem.md               154
     foundations.md             193
     imagegen.md                 60
     inspiration.md              53
-    kits.md                    115
+    kits.md                    114
     motion.md                  223
     patterns.md                213
     performance.md             121
     salesforce.md              196
     taste.md                   224
     techniques.md               90
-    templates.md               164
+    templates.md               180
     verification.md            280
     voice.md                   119
+    voices.md                   38
     wireframe.md               196
-                            <strong>4,627</strong></pre>
+                            <strong>4,702</strong></pre>
         <figcaption class="small subtle">The whole thing. The index is the only part an agent keeps in context.</figcaption>
       </figure>
 
       <ul class="ticks">
-        <li><strong>Catalog cite required.</strong> Run <code>node corpus/cite.mjs &lt;screen|id&gt;</code> and open every file it lists from <code>~/design-corpus</code>. Copy that structure; shine-paint. Naming an id you did not open is inventing — same status as shipping no measure numbers. 117 rows (98 shadcn-registry, 10 MUI, plus Tremor, Ant Design Pro, Mantine, Chakra, HeroUI, …); no row → fill the catalog, then cite.</li>
+        <li><strong>Catalog cite required.</strong> Run <code>node corpus/cite.mjs &lt;job|screen|id&gt;</code> and open every file it lists from <code>~/design-corpus</code>, plus the Preview. Copy structure and visual DNA; house style is the fallback voice. Naming an id you did not open is inventing — same status as shipping no measure numbers. Rows cover shadcn blocks, MUI templates, Carbon, Ant Design Pro, Mantine, Chakra, HeroUI, Spectrum, Fluent, Magic UI; no row → fill the catalog, then cite.</li>
         <li><strong>New surfaces start in Wireframe.</strong> Gray-box HTML from the catalog id, then a locked <code>*.brief.md</code>. Build honours the brief and does not re-open structure unless you say <code>unlock structure</code>.</li>
         <li><strong>Internal tools get Adoption before pixels.</strong> Name the meeting the screen runs, what each persona learns here that they cannot get by asking a person, and the path from notification to committed change. A surface nobody opens is a design defect.</li>
         <li><strong>A component name is a complete contract.</strong> “Table” means toolbar, sorting, pagination, sticky header, selection, empty, loading and error states, keyboard access — not bare markup. Opting out takes an explicit “simple”.</li>
@@ -514,7 +515,7 @@
           </tbody>
         </table>
       </div>
-      <p class="small subtle">Clean to build on: shadcn/ui, Radix, Base UI (shadcn’s default primitive base since 2026-07-03), React Aria, Mantine, Chakra, HeroUI, Headless UI, Blueprint, D3, Recharts, visx, nivo, Magic UI, Motion Primitives, Kibo. Tremor’s npm package is a dead end — last publish 2025-01; the catalog row is the copy-paste kit, not a dependency. Polaris is query-only (Shopify visual-distinctness). Paid stores without an Atlas license — Haze, Prime, MUI Store, AdminLTE commercial — stay query-only screenshots, never clones.</p>
+      <p class="small subtle">Clean to build on: shadcn/ui, Radix, Base UI (shadcn’s default primitive base since 2026-07-03), React Aria, Mantine, Chakra, HeroUI, Headless UI, Blueprint, Carbon, Fluent, Spectrum, D3, Recharts, visx, nivo, Magic UI, Motion Primitives, Kibo. Tremor’s npm package is a dead end — last publish 2025-01; the catalog row is a chart-block cite, not the dashboard default. Polaris is query-only (Shopify visual-distinctness). Paid stores without an Atlas license — Haze, Prime, MUI Store, AdminLTE commercial — stay query-only screenshots, never clones.</p>
     </section>
 
     <section class="stack">
@@ -565,19 +566,19 @@
     <section class="stack">
       <h2>Start from a real page, not a poster</h2>
       <div class="stack">
-        <p>A Linear tracking cite is paint. It does not authorize inventing a dashboard. New pages start with <code>node corpus/cite.mjs &lt;screen&gt;</code> — open the files, copy the regions, shine-paint, never clone vendor pixels. Technique numbers (15px body, 150ms, chroma 0.13–0.24) still come from measuring what shipped. Structure comes from the corpus files, not from naming an id.</p>
+        <p>A Linear tracking cite is paint. It does not authorize inventing a dashboard. New pages start with <code>node corpus/cite.mjs &lt;job|screen&gt;</code> — open the files and the Preview, copy the regions, apply the DNA block. House style is the fallback voice. Technique numbers (15px body, 150ms, chroma 0.13–0.24) still come from measuring what shipped, and they bind the <em>house</em> voice. Structure and kit-faithful type come from the corpus files, not from naming an id.</p>
         <p>Dribbble and Behance stay out. Partly the terms — scraping is prohibited and each shot is copyrighted by an individual designer, so there is nobody who could grant rights even in principle. But mostly because <strong>shots are posters, not software</strong>. No empty states, no error states, no 200-row tables, no keyboard navigation, fake data at conveniently perfect lengths. Training on that produces work that photographs well and falls apart on contact with real content.</p>
-        <p>The catalog is SPDX-clean source already on disk: MUI free templates, shadcn blocks, Tremor, Ant Design Pro, Mantine, Chakra, HeroUI. Paid stores without a license (Haze, Prime, MUI Store, AdminLTE commercial) are query-only screenshots, never clones. No row for this screen → add one, then build. Do not invent.</p>
+        <p>The catalog is SPDX-clean source already on disk: MUI free templates, shadcn blocks, Carbon, Ant Design Pro, Mantine, Chakra, HeroUI, Spectrum, Fluent, Magic UI. Tremor is a chart-block cite, not the dashboard default. Paid stores without a license (Haze, Prime, MUI Store, AdminLTE commercial) are query-only screenshots, never clones. No row for this screen → add one, then build. Do not invent.</p>
         <p>Facts still aren’t copyrightable: “this product’s body text is 15px at 1.6 line-height with −0.011em tracking” is an observation, not an appropriation. Design systems that publish real numbers under real licenses — IBM Carbon, GitHub Primer, Material 3, the US Web Design System — remain the richest sources for those numbers. They do not skip the catalog.</p>
       </div>
       <div class="catalog">
         <figure>
           <img src="img/catalog/mui-crud-dashboard.png" alt="Shine-painted CRUD dashboard derived from the MUI CRUD dashboard template" width="1280" height="900" decoding="async">
-          <figcaption>mui-crud-dashboard · structure from MUI, shine-paint</figcaption>
+          <figcaption>mui-crud-dashboard · structure from MUI, kit-faithful DNA</figcaption>
         </figure>
         <figure>
           <img src="img/catalog/shadcn-blocks.png" alt="shadcn blocks gallery — dashboard, sidebar, and form block previews" width="1280" height="900" decoding="async">
-          <figcaption>shadcn-registry · 98 of 117 catalog rows</figcaption>
+          <figcaption>shadcn-registry · dashboard-01 is the dashboard default</figcaption>
         </figure>
         <figure>
           <img src="img/catalog/mui-free-gallery.png" alt="MUI free templates gallery covering dashboard, blog, checkout, and sign-in" width="1280" height="900" decoding="async">
@@ -599,7 +600,7 @@
         <li><strong>Email.</strong> In. One of nine emit targets: tables, inline styles, no custom properties, no flexbox in Outlook. Tokens compile through a literal-value inliner. The renderer is the constraint, not the design.</li>
         <li><strong>Interface copy.</strong> In. A conventions file for labels, errors, empty and loading states. Cheapest fix here, and one of the loudest tells.</li>
         <li><strong>Keyboard choreography.</strong> In, as contracts checked by review. Focus order, traps and escape behavior were already in the ported component contracts. Automation catches <span class="mono">2.49%</span> of keyboard issues — a linter can’t hold this standard; a document can.</li>
-        <li><strong>Illustration and imagery.</strong> Filled. Anti-stock by rule: real product surfaces, generated texture, data as ornament, typographic covers — no people pointing at laptops. Generation runs locally when a surface needs texture — 4-bit schnell for drafts, 8-bit dev for finals. Plates on this page sit beside the claim they prove, not as a masthead hero. Catalog shots are structure sources; shine-paint is ours. A generated hero with no claim next to it is the tell the rest of the skill exists to kill.</li>
+        <li><strong>Illustration and imagery.</strong> Filled. Anti-stock by rule: real product surfaces, generated texture, data as ornament, typographic covers — no people pointing at laptops. Generation runs locally when a surface needs texture — 4-bit schnell for drafts, 8-bit dev for finals. Plates on this page sit beside the claim they prove, not as a masthead hero. Catalog shots are structure sources; kit-faithful DNA is ours. A generated hero with no claim next to it is the tell the rest of the skill exists to kill.</li>
         <li><strong>A performance budget.</strong> In, twice over. CSS ≤ 20 KB gzip; JS ≤ 40 KB for an app route, zero for a document. The same discipline is the context budget: a 255-line index (~14 KB) still fits the 5,000-token reattach window; references cost zero tokens until read. Do not load all twenty-seven.</li>
       </ul>
       <p>Nothing on that list is still open. The registry — the thing this page used to leave hanging — shipped 2026-08-05. An app still on its own palette is that app’s migration (<code>sync-consumers</code> vendors the tokens). Shine does not become unfinished because a consumer hasn’t imported them.</p>

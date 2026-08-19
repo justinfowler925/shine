@@ -280,6 +280,7 @@ See [`tokens/README.md`](./tokens/README.md) § Private brand lanes.
 | [`skill/references/wireframe.md`](./skill/references/wireframe.md) | Discovery → gray-box → locked brief |
 | [`skill/references/`](./skill/references/) | Contracts, taste, kits, techniques, dashboards, … |
 | [`agents/shine-ux.md`](./agents/shine-ux.md) | Thin executor subagent |
+| [`research/director-plan.md`](./research/director-plan.md) | Director loop: job → diagnose → retrieve → DNA → prove |
 | [`research/`](./research/) | Full measurements and ecosystem notes |
 
 ---
@@ -563,7 +564,7 @@ Design rules → `agent-rules/always/80-design-*.md` (four required frontmatter 
 
 **Name:** `shine`. `/shine` in Claude Code, `@shine` as the registry namespace.
 
-**House style: dark-first, dense, instrumental, with editorial type discipline.** Derived from dark operational tooling that ships daily — dense command surfaces, one accent, semantic status colors. The work is often command surfaces over CRM data. Kinetic/atmospheric fights density and ages in 18 months; pure editorial restraint is wrong for a dashboard. OKLCH grays with a hue cast toward the accent, one accent, borders doing separation, `tabular-nums` on every numeric, motion under 200ms only where it conveys state. Light mode derived from the same source.
+**House voice (fallback): dark-first, dense, instrumental, with editorial type discipline.** Kit-faithful cites carry their own DNA. Derived from dark operational tooling that ships daily — dense command surfaces, one accent, semantic status colors.
 
 **Two lanes, one engine:** `@shine/brand` (brand-locked) and `@shine/personal`.
 

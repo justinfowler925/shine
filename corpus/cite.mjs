@@ -1,9 +1,12 @@
 #!/usr/bin/env node
-// cite.mjs — turn a catalog id or screen type into files the agent must open.
+// cite.mjs — turn a job, screen type, or catalog id into files the agent must open.
 //
-// Naming an id is not a cite. This command is. Draw after reading what it lists.
+// Naming an id is not a cite. This command is. Draw after reading what it lists
+// AND after opening the Preview (URL or PNG). Apply the DNA block — house style
+// is the fallback voice, not the paint law.
 //
 //   node corpus/cite.mjs dashboard
+//   node corpus/cite.mjs queue
 //   node corpus/cite.mjs mui-blog
 //   node corpus/cite.mjs --list
 
@@ -16,8 +19,26 @@ const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CORPUS = resolve(process.env.DESIGN_CORPUS || join(homedir(), "design-corpus"));
 const CATALOG = join(SHINE, "corpus/templates.json");
 const CODE = /\.(tsx|ts|jsx|js|mdx)$/;
-const SKIP = /(?:^|\/)(?:test|tests|__tests__)|\.test\.|\.spec\.|\.stories\./i;
-const PREFER = /(?:^|\/)(readme|page|layout|app|index|dashboard|blog|sign-in|checkout|sidebar|card|metric|areachart)/i;
+const SKIP = /(?:^|\/)(?:test|tests|__tests__)|\.test\.|\.spec\.|\.stories\.|-test\./i;
+const PREFER =
+  /(?:^|\/)(readme|page|layout|app|index|dashboard|data-table|datatable|chat|settings|wizard|profile|shell)/i;
+const DEMOTE = /(?:^|\/)(card|badge|accordion|checkbox|calendar|divider)\./i;
+
+const HOUSE_DNA = {
+  family: "shine",
+  density: "dense",
+  type: "editorial 14/15",
+  radius: "sm",
+  chroma: "0.13-0.24",
+  elevation: "hairline",
+  motion: "150ms",
+};
+
+const ALIAS = {
+  detail: "record",
+  hero: "marketing-hero",
+  "empty-state": "empty",
+};
 
 const die = (code, msg) => {
   process.stderr.write(msg.endsWith("\n") ? msg : msg + "\n");
@@ -32,7 +53,7 @@ const arg = process.argv[2];
 if (!arg || arg === "-h" || arg === "--help") {
   die(
     1,
-    `usage: node corpus/cite.mjs <screen|id>\n       node corpus/cite.mjs --list\n\nOpen every file this prints before drawing. Naming an id is not a cite.`,
+    `usage: node corpus/cite.mjs <job|screen|id>\n       node corpus/cite.mjs --list\n\nOpen every file this prints, and the Preview, before drawing. Naming an id is not a cite.`,
   );
 }
 
@@ -40,19 +61,35 @@ if (arg === "--list") {
   const rows = templates
     .filter((t) => t.startFrom === 1)
     .sort((a, b) => a.screen.localeCompare(b.screen));
-  process.stdout.write("screen\t\tid\n");
-  for (const t of rows) process.stdout.write(`${t.screen}\t${t.id}\n`);
+  process.stdout.write("screen\t\tid\tjobs\n");
+  for (const t of rows) process.stdout.write(`${t.screen}\t${t.id}\t${(t.jobs || []).join(",")}\n`);
   process.exit(0);
 }
 
-const byId = templates.find((t) => t.id === arg);
-const byScreen = templates
-  .filter((t) => t.screen === arg)
-  .sort((a, b) => (a.startFrom ?? 99) - (b.startFrom ?? 99));
-const row = byId || byScreen[0];
+const byStart = (a, b) => (a.startFrom ?? 99) - (b.startFrom ?? 99) || a.id.localeCompare(b.id);
+
+const resolveRow = (key, seen = new Set()) => {
+  if (seen.has(key)) return null;
+  seen.add(key);
+  const byId = templates.find((t) => t.id === key);
+  if (byId) return byId;
+  const byScreen = templates.filter((t) => t.screen === key).sort(byStart);
+  if (byScreen[0]) return byScreen[0];
+  const byJob = templates.filter((t) => (t.jobs ?? []).includes(key)).sort(byStart);
+  if (byJob[0]) return byJob[0];
+  const aliased = ALIAS[key];
+  if (aliased) return resolveRow(aliased, seen);
+  return null;
+};
+
+const row = resolveRow(arg);
 if (!row) {
   const screens = [...new Set(templates.map((t) => t.screen))].sort().join(", ");
-  die(1, `cite: unknown ${JSON.stringify(arg)}\nknown screens: ${screens}\nids: node corpus/cite.mjs --list, or pick from skill/references/templates.md`);
+  const jobs = [...new Set(templates.flatMap((t) => t.jobs ?? []))].sort().join(", ");
+  die(
+    1,
+    `cite: unknown ${JSON.stringify(arg)}\nknown screens: ${screens}\nknown jobs: ${jobs}\nids: node corpus/cite.mjs --list, or pick from skill/references/templates.md`,
+  );
 }
 
 const abs = join(CORPUS, row.path);
@@ -68,22 +105,33 @@ const walk = (dir, acc, depth = 0) => {
   }
   const names = new Set(ents.filter((e) => e.isFile()).map((e) => e.name));
   for (const e of ents) {
-    if (!e.isFile() || !CODE.test(e.name) || SKIP.test(e.name)) continue;
+    if (!e.isFile() || !CODE.test(e.name) || SKIP.test(e.name) || SKIP.test(join(dir, e.name))) continue;
     if (e.name.endsWith(".js") && names.has(e.name.slice(0, -3) + ".tsx")) continue;
     acc.push(join(dir, e.name));
   }
   const readme = ents.find((e) => e.isFile() && /^readme/i.test(e.name));
   if (readme) acc.push(join(dir, readme.name));
-  for (const e of ents.filter((e) => e.isDirectory() && e.name !== "node_modules" && e.name !== ".git")) {
+  for (const e of ents.filter(
+    (e) =>
+      e.isDirectory() &&
+      e.name !== "node_modules" &&
+      e.name !== ".git" &&
+      e.name !== "__tests__" &&
+      e.name !== "test" &&
+      e.name !== "tests",
+  )) {
     walk(join(dir, e.name), acc, depth + 1);
   }
 };
 
 const rank = (p) => {
   const base = p.split("/").pop() || p;
+  const rest = p.includes("#") ? p.split("#")[1] : p;
   if (/^readme/i.test(base)) return 0;
-  if (PREFER.test(base)) return 1;
-  return 2;
+  if (/(?:^|\/)page\.(tsx|ts|jsx|js)$/i.test(rest) || /^page\./i.test(base)) return 1;
+  if (PREFER.test(base)) return 2;
+  if (DEMOTE.test(rest) || DEMOTE.test(base)) return 4;
+  return 3;
 };
 
 if (row.kind === "query-only") {
@@ -107,15 +155,24 @@ if (row.kind === "source" && !existsSync(abs)) {
 const files = [...new Set(listed)].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
 const extra = files.length > 16 ? files.length - 16 : 0;
 const show = files.slice(0, 16);
+const dna = { ...HOUSE_DNA, ...(row.dna || {}) };
+const dnaLine = ["family", "density", "type", "radius", "chroma", "elevation", "motion"]
+  .map((k) => `${k}=${dna[k]}`)
+  .join(" ");
 
 process.stdout.write(`Template: ${row.id}
 Screen: ${row.screen}
 Kit: ${row.kit}
 Kind: ${row.kind}
+Jobs: ${(row.jobs || []).join(", ") || "(none)"}
 Path: ${abs}
 Preview: ${row.preview || ""}
 License: ${row.license || ""}
-Paint: shine tokens. Structure cloned; vendor pixels are not.
+Voice: kit-faithful (default). House is fallback. Brand sandpapers chrome — references/voices.md
+DNA: ${dnaLine}
+Apply this DNA. Retune shine tokens to it. Do not overwrite with house style unless the user asked for shine-native or the lane is brand.
+
+Open the Preview (URL or PNG) before drawing — vision is part of the cite.
 
 Read these files before drawing:
 `);

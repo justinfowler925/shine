@@ -22,11 +22,12 @@ const AXE_PATH = pathTo("axe-core/axe.min.js");
 const args = process.argv.slice(2);
 const target = args.find((a) => !a.startsWith("--"));
 if (!target) {
-  console.error("usage: node verify/measure.mjs <url|file.html> [--dark] [--json out] [--shot out]");
+  console.error("usage: node verify/measure.mjs <url|file.html> [--dark] [--json out] [--shot out] [--cite id]");
   process.exit(2);
 }
 const dark = args.includes("--dark");
 const opt = (name) => (args.includes(name) ? args[args.indexOf(name) + 1] : null);
+const citeWant = opt("--cite");
 const url = /^https?:/.test(target) ? target : pathToFileURL(target).href;
 
 const SPACE_SCALE = [0, 1, 2, 4, 8, 12, 16, 24, 32, 48, 64];
@@ -482,6 +483,37 @@ const compose = await page.evaluate(() => {
   });
   const sectionsMissingJob = sectionJobs.filter((s) => !s.hasHeading);
 
+  const namedTable = document.querySelector('[data-shine-contract="table"], [data-contract="table"], [role="grid"]');
+  const tableContract = namedTable
+    ? {
+        sort: !!(
+          namedTable.querySelector("[aria-sort], [data-sort], thead button, thead [role='button']") ||
+          document.querySelector("[data-sort]")
+        ),
+        page: !!document.querySelector('[data-pagination], nav[aria-label*="page" i], [aria-label*="pagination" i]'),
+        empty: !!document.querySelector('[data-empty], [data-state="empty"]'),
+        loading: !!document.querySelector('[data-loading], [aria-busy="true"], [data-state="loading"]'),
+        error: !!document.querySelector('[data-error], [role="alert"], [data-state="error"]'),
+      }
+    : null;
+
+  const citeEls = [...document.querySelectorAll("[data-cite]")];
+  const citeId =
+    document.documentElement.getAttribute("data-cite") ||
+    document.body.getAttribute("data-cite") ||
+    citeEls[0]?.getAttribute("data-cite") ||
+    null;
+  const dnaFamily =
+    document.documentElement.getAttribute("data-dna-family") ||
+    document.body.getAttribute("data-dna-family") ||
+    null;
+  const voice =
+    document.documentElement.getAttribute("data-shine-voice") ||
+    document.body.getAttribute("data-shine-voice") ||
+    "house";
+  const slotSidebar = !!document.querySelector("[data-slot='sidebar']");
+  const bodyFont = getComputedStyle(document.body).fontFamily;
+
   return {
     voids: voids.sort((a, b) => b.pct - a.pct),
     collisions,
@@ -499,6 +531,13 @@ const compose = await page.evaluate(() => {
     appShellProbe,
     sectionsMissingJob: sectionsMissingJob.slice(0, 8),
     sectionCount: sections.length,
+    tableContract,
+    citeId,
+    dnaFamily,
+    voice,
+    slotSidebar,
+    bodyFont,
+    regionCiteCount: citeEls.length,
   };
 });
 
@@ -607,6 +646,12 @@ for (const v of compose.voids) {
   );
 }
 if (!isWireframe) for (const c of compose.collisions) {
+  if (compose.voice && compose.voice !== "house") {
+    console.log(
+      `  note: type scale ${c.lo}px/${c.hi}px collision skipped — kit-faithful DNA (${compose.voice}); house lane still tight`,
+    );
+    continue;
+  }
   failures.push(
     `type scale: ${c.lo}px and ${c.hi}px are a ${c.ratio} step (used ${c.nLo}× and ${c.nHi}×) — below the ~1.12 UI band, ` +
       `so two steps are doing one job. Cardinality passing is not the scale being right`,
@@ -640,6 +685,34 @@ if (compose.appShellProbe && compose.contentShare < 0.28) {
     `density: app-shell content share ${(compose.contentShare * 100).toFixed(1)}% of viewport ` +
       `(chrome ${(compose.chromeShare * 100).toFixed(1)}%) — content is losing to chrome; ` +
       `raise the main region's job or collapse nav (techniques.md §Hierarchy & density)`,
+  );
+}
+
+if (compose.tableContract) {
+  for (const k of ["sort", "page", "empty", "loading", "error"]) {
+    if (!compose.tableContract[k]) {
+      failures.push(`contract: named table missing ${k} (contracts.md Table MUST)`);
+    }
+  }
+}
+
+if (citeWant && compose.citeId !== citeWant) {
+  failures.push(
+    `cite: --cite ${citeWant} but page data-cite is ${JSON.stringify(compose.citeId)} — naming an id without data-cite is inventing`,
+  );
+}
+
+const family = (compose.dnaFamily || "").toLowerCase();
+const font = compose.bodyFont || "";
+const shadcnChrome = compose.slotSidebar || /Geist|ui-sans-serif/i.test(font);
+if (family === "carbon" && shadcnChrome) {
+  failures.push(
+    `likeness: carbon cite rendered shadcn chrome (sidebar slot or Geist) — apply cite DNA, not house style`,
+  );
+}
+if (/marketing|hero/i.test(compose.citeId || "") && compose.appShellProbe) {
+  failures.push(
+    `likeness: marketing cite is an app-shell — hero budget, not sidebar + KPI cards`,
   );
 }
 
