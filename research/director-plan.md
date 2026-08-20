@@ -109,6 +109,8 @@ Same agent, same week:
 
 Screenshots must be distinguishable by a stranger. Measure: queue fails without empty state; marketing fails if it is a sidebar + KPI cards.
 
+Shipped: `site/examples/queue.html` (`--cite carbon-datatable`) and `site/examples/marketing.html` (`--cite magicui-hero`). Doctor `--full` measures both and asserts they are distinguishable (named table + IBM Plex 20 vs display 48, no table).
+
 ---
 
 ## What we will not do
