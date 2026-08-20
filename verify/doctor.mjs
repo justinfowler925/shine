@@ -683,8 +683,8 @@ if (args.includes("--full")) {
       `exit ${hot.status}; stderr ${JSON.stringify(hot.stderr.slice(-220))}`,
     );
 
-  const queueEx = join(SHINE, "site/examples/queue.html");
-  const mktEx = join(SHINE, "site/examples/marketing.html");
+  const queueEx = join(SHINE, "verify/fixtures/queue.html");
+  const mktEx = join(SHINE, "verify/fixtures/marketing.html");
   const qJson = join(dir, "queue.json");
   const mJson = join(dir, "marketing.json");
   const qRun = spawnSync("node", [measure, queueEx, "--cite", "carbon-datatable", "--json", qJson], {
