@@ -484,6 +484,20 @@ const compose = await page.evaluate(() => {
   const sectionsMissingJob = sectionJobs.filter((s) => !s.hasHeading);
 
   const namedTable = document.querySelector('[data-shine-contract="table"], [data-contract="table"], [role="grid"]');
+  const tableRect = namedTable?.getBoundingClientRect();
+  const tableAreaPct = namedTable && viewport ? +((tableRect.width * tableRect.height) / viewport).toFixed(3) : 0;
+  const hero = document.querySelector("[data-region='hero']");
+  const heroRect = hero?.getBoundingClientRect();
+  const heroAreaPct = hero && viewport ? +((heroRect.width * heroRect.height) / viewport).toFixed(3) : 0;
+  let maxHeadingPx = 0;
+  for (const h of document.querySelectorAll("h1,h2")) {
+    const px = parseFloat(getComputedStyle(h).fontSize);
+    if (px > maxHeadingPx) maxHeadingPx = px;
+  }
+  const accentEl = document.querySelector("[data-primary]");
+  const accentRgb = accentEl ? paintRgb(getComputedStyle(accentEl).backgroundColor) : null;
+  const dnaChroma = document.documentElement.getAttribute("data-dna-chroma");
+  const chromaCheck = document.documentElement.hasAttribute("data-chroma-check");
   const tableContract = namedTable
     ? {
         sort: !!(
@@ -532,6 +546,12 @@ const compose = await page.evaluate(() => {
     sectionsMissingJob: sectionsMissingJob.slice(0, 8),
     sectionCount: sections.length,
     tableContract,
+    tableAreaPct,
+    heroAreaPct,
+    maxHeadingPx,
+    accentRgb,
+    dnaChroma,
+    chromaCheck,
     citeId,
     dnaFamily,
     voice,
@@ -710,10 +730,64 @@ if (family === "carbon" && shadcnChrome) {
     `likeness: carbon cite rendered shadcn chrome (sidebar slot or Geist) — apply cite DNA, not house style`,
   );
 }
+if (family === "carbon" && (compose.tableAreaPct || 0) < 0.06) {
+  failures.push(
+    `likeness: carbon/queue cite table occupies ${((compose.tableAreaPct || 0) * 100).toFixed(1)}% of viewport — DataTable is the focal object (overview.mdx Batch Actions / Toolbar)`,
+  );
+}
 if (/marketing|hero/i.test(compose.citeId || "") && compose.appShellProbe) {
   failures.push(
     `likeness: marketing cite is an app-shell — hero budget, not sidebar + KPI cards`,
   );
+}
+if (/marketing|hero/i.test(compose.citeId || "")) {
+  if (compose.tableContract) {
+    failures.push(`likeness: marketing cite shipped a data table — hero budget, not a queue`);
+  }
+  if ((compose.maxHeadingPx || 0) < 32) {
+    failures.push(
+      `likeness: marketing heading ${(compose.maxHeadingPx || 0).toFixed(0)}px — type is identity (DNA type=display)`,
+    );
+  }
+  if ((compose.heroAreaPct || 0) < 0.2) {
+    failures.push(
+      `likeness: marketing hero occupies ${((compose.heroAreaPct || 0) * 100).toFixed(1)}% — media/hero region missing (magicui HeroVideoDialog)`,
+    );
+  }
+}
+
+const lin = (c) => {
+  c /= 255;
+  return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+};
+const accentC = (() => {
+  const rgb = compose.accentRgb;
+  if (!rgb || rgb.length < 3) return null;
+  const [r, g, b] = rgb;
+  const lr = lin(r), lg = lin(g), lb = lin(b);
+  const l_ = 0.4122214708 * lr + 0.5363325363 * lg + 0.0514459929 * lb;
+  const m_ = 0.2119034982 * lr + 0.6806995451 * lg + 0.1073969566 * lb;
+  const s_ = 0.0883024619 * lr + 0.2817188376 * lg + 0.6299787005 * lb;
+  const l = Math.cbrt(l_), m = Math.cbrt(m_), s = Math.cbrt(s_);
+  const a = 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s;
+  const bb = 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s;
+  return Math.hypot(a, bb);
+})();
+if (compose.chromaCheck && compose.voice === "house" && accentC != null) {
+  if (accentC < 0.13 || accentC > 0.24) {
+    failures.push(
+      `chroma: house accent C=${accentC.toFixed(3)} outside 0.13–0.24 (SKILL house band) — data-chroma-check`,
+    );
+  }
+}
+if (compose.voice === "kit-faithful" && compose.dnaChroma && accentC != null) {
+  const band = compose.dnaChroma;
+  if (band === "low" && accentC > 0.16) {
+    failures.push(`chroma: kit-faithful DNA chroma=low but C=${accentC.toFixed(3)} (>0.16)`);
+  }
+  if (band === "high" && accentC < 0.16) {
+    failures.push(`chroma: kit-faithful DNA chroma=high but C=${accentC.toFixed(3)} (<0.16)`);
+  }
 }
 
 const report = { url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, themeSwitches, failures };

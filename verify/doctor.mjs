@@ -665,6 +665,61 @@ if (args.includes("--full")) {
       "cite attestation fails a missing data-cite",
       `exit ${noCite.status}; stderr ${JSON.stringify(noCite.stderr.slice(-220))}`,
     );
+
+  const houseHot = join(dir, "house-chroma-hot.html");
+  writeFileSync(
+    houseHot,
+    page(
+      `<h1>House</h1><p>Accent outside the house band.</p>` +
+        `<button data-primary style="background:oklch(0.72 0.32 40);color:#0c0a09;border:0;padding:10px 16px;font:inherit">Go</button>`,
+      `html{color-scheme:dark}`,
+    ).replace("<html>", '<html lang="en" data-shine-voice="house" data-chroma-check>'),
+  );
+  const hot = run(houseHot);
+  if (hot.status === 1 && /chroma: house accent/.test(hot.stderr)) ok("chroma gate fails a hot house accent");
+  else
+    fail(
+      "chroma gate fails a hot house accent",
+      `exit ${hot.status}; stderr ${JSON.stringify(hot.stderr.slice(-220))}`,
+    );
+
+  const queueEx = join(SHINE, "site/examples/queue.html");
+  const mktEx = join(SHINE, "site/examples/marketing.html");
+  const qJson = join(dir, "queue.json");
+  const mJson = join(dir, "marketing.json");
+  const qRun = spawnSync("node", [measure, queueEx, "--cite", "carbon-datatable", "--json", qJson], {
+    encoding: "utf8",
+    env: { ...process.env, NODE_PATH },
+  });
+  if (qRun.status === 0) ok("acceptance queue measure");
+  else fail("acceptance queue measure", `exit ${qRun.status}; stderr ${JSON.stringify(qRun.stderr.slice(-280))}`);
+  const mRun = spawnSync("node", [measure, mktEx, "--cite", "magicui-hero", "--json", mJson], {
+    encoding: "utf8",
+    env: { ...process.env, NODE_PATH },
+  });
+  if (mRun.status === 0) ok("acceptance marketing measure");
+  else fail("acceptance marketing measure", `exit ${mRun.status}; stderr ${JSON.stringify(mRun.stderr.slice(-280))}`);
+
+  if (qRun.status === 0 && mRun.status === 0) {
+    const qj = JSON.parse(readFileSync(qJson, "utf8"));
+    const mj = JSON.parse(readFileSync(mJson, "utf8"));
+    const qHead = qj.compose?.maxHeadingPx ?? 0;
+    const mHead = mj.compose?.maxHeadingPx ?? 0;
+    const split =
+      qj.compose?.tableContract &&
+      !mj.compose?.tableContract &&
+      mHead >= 32 &&
+      mHead - qHead >= 12 &&
+      /carbon/i.test(qj.compose?.dnaFamily || "") &&
+      /magicui/i.test(mj.compose?.dnaFamily || "");
+    if (split) ok("acceptance screens distinguishable");
+    else
+      fail(
+        "acceptance screens distinguishable",
+        `queue heading ${qHead} table=${!!qj.compose?.tableContract} family=${qj.compose?.dnaFamily}; ` +
+          `marketing heading ${mHead} table=${!!mj.compose?.tableContract} family=${mj.compose?.dnaFamily}`,
+      );
+  }
 }
 
 // ---- 5. every token reached every emit target -----------------------------

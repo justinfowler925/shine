@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!-- shine-lint: off color — kit-faithful Carbon DNA (ibm-plex 14, radius none, chroma low), not house tokens. -->
+<html lang="en" data-cite="carbon-datatable" data-dna-family="carbon" data-dna-chroma="low" data-shine-voice="kit-faithful">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review queue — stalled accounts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: oklch(0.18 0.012 240);
+    --surface: oklch(0.22 0.012 240);
+    --fg: oklch(0.93 0.01 240);
+    --muted: oklch(0.72 0.01 240);
+    --border: oklch(0.34 0.012 240);
+    --accent: oklch(0.62 0.11 250);
+    --accent-fg: oklch(0.18 0.02 250);
+    --danger: oklch(0.48 0.14 25);
+    --danger-fg: oklch(0.99 0.01 25);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.29;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 24px 16px 48px; }
+  .title { font-size: 20px; font-weight: 600; margin: 0 0 4px; letter-spacing: 0; }
+  .desc { color: var(--muted); margin: 0 0 16px; }
+  .toolbar, .batch {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    min-height: 48px; padding: 8px; background: var(--surface);
+    border: 1px solid var(--border); border-bottom: 0;
+  }
+  .batch { background: var(--accent); color: var(--accent-fg); }
+  .batch strong { font-weight: 600; }
+  label { display: flex; align-items: center; gap: 8px; }
+  input[type="search"] {
+    min-height: 40px; min-width: 240px; padding: 8px 12px;
+    border: 1px solid var(--border); background: var(--bg); color: var(--fg);
+    font: inherit; border-radius: 0;
+  }
+  button {
+    min-height: 40px; padding: 8px 16px; font: inherit; border-radius: 0; cursor: pointer;
+  }
+  button.primary { background: var(--accent); color: var(--accent-fg); border: 0; }
+  button.ghost { background: transparent; color: inherit; border: 1px solid currentColor; }
+  button.danger { background: var(--danger); color: var(--danger-fg); border: 0; }
+  .table-scroll { overflow: auto; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; background: var(--bg); }
+  thead th {
+    position: sticky; top: 0; background: var(--surface); text-align: left;
+    font-weight: 600; border-bottom: 1px solid var(--border); padding: 0;
+  }
+  thead button {
+    width: 100%; min-height: 40px; border: 0; background: transparent; color: var(--fg);
+    text-align: left; padding: 8px 12px; font: inherit; font-weight: 600;
+  }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  td.lead { font-weight: 600; }
+  .pager {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 8px 12px; border: 1px solid var(--border); border-top: 0; background: var(--surface);
+  }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <h1 class="title">Stalled accounts</h1>
+    <p class="desc">Monday forecast queue — 12 rows need a next step before the call.</p>
+
+    <div class="batch" role="region" aria-label="Batch actions">
+      <strong>2 items selected</strong>
+      <button class="danger" type="button">Delete</button>
+      <button class="ghost" type="button">Cancel</button>
+    </div>
+    <div class="toolbar">
+      <label>Search <input type="search" value="" placeholder="Filter accounts"></label>
+      <button class="primary" type="button" data-primary>Assign owner</button>
+      <span data-loading aria-busy="true" hidden>Loading rows</span>
+      <span data-error role="alert" hidden>Could not load the queue. Retry.</span>
+      <span data-empty hidden>No accounts match this filter. Clear search.</span>
+    </div>
+
+    <div class="table-scroll">
+      <table data-shine-contract="table" data-region="table">
+        <caption class="sr">Stalled accounts in this week's forecast</caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="sr">Select</span></th>
+            <th scope="col" aria-sort="ascending"><button type="button">Account</button></th>
+            <th scope="col" aria-sort="none"><button type="button">Stall</button></th>
+            <th scope="col">Next step</th>
+            <th scope="col">Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox" checked aria-label="Select Northwind"></td>
+            <td class="lead">Northwind Logistics</td>
+            <td>No activity 21d</td>
+            <td>Confirm renewal date</td>
+            <td>A. Chen</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" checked aria-label="Select Helios"></td>
+            <td class="lead">Helios Civic</td>
+            <td>Legal review parked</td>
+            <td>Send redlines</td>
+            <td>Unassigned</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" aria-label="Select Harbor"></td>
+            <td class="lead">Harbor Mutual</td>
+            <td>Champion left</td>
+            <td>Map new buyer</td>
+            <td>J. Okonkwo</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" aria-label="Select Atlas"></td>
+            <td class="lead">Atlas Freight</td>
+            <td>Price objection</td>
+            <td>Discount memo</td>
+            <td>A. Chen</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <nav class="pager" data-pagination aria-label="Pagination">
+      <span>1–4 of 12</span>
+      <span>
+        <button class="ghost" type="button" disabled>Previous</button>
+        <button class="ghost" type="button">Next</button>
+      </span>
+    </nav>
+  </main>
+</body>
+</html>
