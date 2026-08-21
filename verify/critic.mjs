@@ -45,7 +45,7 @@ const SLOP = [
   { id: "purple-glow", re: /linear-gradient\([^)]*(#|rgb).*?(purple|indigo|#7c3aed|#6366f1)/i },
   { id: "indigo-default", re: /#4f46e5|#6366f1|bg-indigo-600|from-indigo/i },
   { id: "kpi-soup", re: /grid-cols-3[\s\S]{0,400}(KPI|Dashboard|this week)/i },
-  { id: "zinc", re: /Geist|ui-sans-serif[\s\S]{0,200}zinc|#18181b/i },
+  { id: "zinc", re: /font-family\s*:[^;}{]*Geist|#18181b|bg-zinc-950|bg-zinc-900/i },
 ];
 
 let slop_class = "none";

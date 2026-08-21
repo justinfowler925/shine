@@ -3,460 +3,396 @@
      source (primitives defined once, consumed as var() everywhere else), and the
      theme-color hexes are rendered-pixel readbacks of --bg. Nothing here bypasses
      a token; this file is where the tokens live.
-     Scoped to `color`, which is the only rule the :root block trips. Type, tracking,
-     shadow and spacing stay enforced here — the bare `off` this used to carry was
-     switching off four checks to excuse one. -->
-<html lang="en" data-theme="dark" data-cite="mui-blog">
+     Scoped to `color`. Type, tracking, shadow and spacing stay enforced. -->
+<html lang="en" data-theme="dark" data-cite="magicui-hero" data-dna-family="magicui" data-dna-chroma="high" data-shine-voice="kit-faithful" data-shine-lane="marketing">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SHINE — a design system agents can’t deviate from</title>
-<meta name="description" content="Notes from building SHINE, a design system an AI agent cannot deviate from — shipped as a skill. V2: cite a job, open the DNA pack, apply kit voice, prove completeness and likeness.">
-<meta name="theme-color" content="#080e12">
+<title>Shine — your agent cited Carbon. It still shipped zinc.</title>
+<meta name="description" content="Shine 2.0 is a visual director for Claude Code and Cursor. Cite a real page, apply its DNA, fail it when it still looks like zinc.">
+<meta name="theme-color" content="#1c1c1f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700&display=swap" rel="stylesheet">
 <style>
-@layer reset, base, layout, components, utilities;
+@layer reset, base, layout, components;
 
 @layer reset {
   *, *::before, *::after { box-sizing: border-box; }
   * { margin: 0; }
   html { -webkit-text-size-adjust: 100%; }
-  img, svg { display: block; max-width: 100%; }
+  img { display: block; max-width: 100%; height: auto; }
 }
 
 @layer base {
   :root {
     color-scheme: dark;
-
-    /* ---- primitives: OKLCH, cold cast toward the accent; chroma rises as L falls ---- */
-    --g-99: oklch(0.990 0.002 235);
-    --g-97: oklch(0.972 0.003 235);
-    --g-95: oklch(0.952 0.004 235);
-    --g-90: oklch(0.900 0.005 235);
-    --g-82: oklch(0.820 0.006 235);
-    --g-72: oklch(0.720 0.008 235);
-    --g-56: oklch(0.560 0.009 235);
-    --g-40: oklch(0.400 0.010 235);
-    --g-33: oklch(0.330 0.010 235);
-    --g-27: oklch(0.270 0.010 235);
-    --g-22: oklch(0.220 0.011 235);
-    --g-19: oklch(0.190 0.011 235);
-    --g-16: oklch(0.160 0.012 235);
-    --g-22-fg: oklch(0.220 0.010 235);
-
-    --cyan: oklch(0.780 0.140 200);   /* chroma 0.140 — inside the measured 0.13–0.24 band */
-    --cyan-lo: oklch(0.500 0.120 220);
-
-    /* ---- semantic ---- */
-    --bg:            var(--g-16);
-    --surface:       var(--g-19);
-    --surface-2:     var(--g-22);
-    --border:        var(--g-27);
-    --border-strong: var(--g-33);
-    --fg:            var(--g-95);
-    --fg-muted:      var(--g-72);
-    /* measured: g-56 lands at 4.15:1 on this bg — below the 4.5 floor. 0.635 clears it. */
-    --fg-subtle:     oklch(0.635 0.010 235);
-    --accent:        var(--cyan);
-    --ring:          var(--cyan);
-
-    /* ---- type: two ratios — ~1.12 UI band, ~1.22 display ---- */
-    --t-xs:   0.6875rem;  /* 11 */
-    --t-sm:   0.8125rem;  /* 13 */
-    --t-base: 0.9375rem;  /* 15 */
-    --t-lg:   1.0625rem;  /* 17 */
-    --t-xl:   1.3125rem;  /* 21 */
-    --t-2xl:  1.625rem;   /* 26 */
-    --t-3xl:  2.0625rem;  /* 33 */
-    --t-4xl:  clamp(2.0625rem, 1.55rem + 2.4vw, 2.625rem);
-
-    /* ---- tracking: a curve, paired to the size above it ----
-       These were nine literal letter-spacing values scattered through the sheet.
-       The page argues that a missing token is a gap to report rather than a licence
-       to freelance, and then freelanced its own tracking for months — invisibly,
-       because the lint's type rules only ran on .css and this is a .html. */
-    --tr-xs:   0.010em;   /* 11px — small text opens up */
-    --tr-sm:   0;
-    --tr-base: -0.011em;
-    --tr-lg:   -0.012em;
-    --tr-xl:   -0.016em;
-    --tr-2xl:  -0.019em;
-    --tr-3xl:  -0.028em;
-    --tr-caps:  0.08em;   /* all-caps eyebrows and labels */
-    --tr-caps-tight: 0.04em; /* caps at 11px inside dense cards */
-    --tr-caps-loose: 0.06em;
-    --tr-mono: 0.02em;    /* monospace runs need a hair more */
-
-    /* ---- space: 4px base ---- */
-    --s-1: 0.25rem; --s-2: 0.5rem;  --s-3: 0.75rem; --s-4: 1rem;
-    --s-6: 1.5rem;  --s-8: 2rem;    --s-12: 3rem;   --s-16: 4rem; --s-24: 6rem;
-
-    /* ---- radii: nest as child = parent − padding ---- */
-    --r-sm: 4px; --r-md: 6px; --r-lg: 10px; --r-xl: 14px;
-
-    /* ---- motion: 150ms is the measured mode ---- */
-    --dur: 150ms;
-    --dur-fast: 100ms;
-    --ease: cubic-bezier(0.2, 0, 0, 1);
-
-    /* dark = light geometry at ~4x alpha, plus the 1px inner top highlight */
-    --shadow: inset 0 1px 0 oklch(1 0 0 / 0.04), 0 1px 2px oklch(0 0 0 / 0.16), 0 8px 24px -8px oklch(0 0 0 / 0.32);
+    --bg: oklch(0.12 0.004 260);
+    --bg-hex: #1c1c1f;
+    --surface: oklch(0.16 0.004 260);
+    --fg: oklch(0.97 0.004 260);
+    --fg-muted: oklch(0.72 0.01 260);
+    --border: oklch(0.28 0.008 260);
+    --primary: oklch(0.78 0.18 75);
+    --primary-fg: oklch(0.18 0.04 75);
+    --glow: oklch(1 0 0 / 0.08);
 
     --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    --serif: ui-serif, "Iowan Old Style", "Apple Garamond", Palatino, Georgia, serif;
-    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, monospace;
+    --display: "Syne", var(--font);
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
 
-    --measure: 65ch;
+    --t-xs: 0.75rem;     /* 12 */
+    --t-base: 1rem;      /* 16 — Magic UI DNA */
+    --t-lg: 1.5rem;      /* 24 */
+    --t-display: clamp(2.75rem, 1.4rem + 4vw, 4.5rem); /* 44–72 */
+
+    --tr-display: -0.03em;
+    --tr-caps: 0.12em;
+
+    --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem;
+    --s-6: 1.5rem; --s-8: 2rem; --s-12: 3rem; --s-16: 4rem; --s-24: 6rem;
+
+    --r-control: 12px;
+    --r-card: 20px;
+    --r-media: 24px;
+
+    --dur: 300ms;
+    --ease: cubic-bezier(0.2, 0, 0, 1);
+    --shadow: 0 1px 2px oklch(0 0 0 / 0.24), 0 16px 48px -16px oklch(0 0 0 / 0.48);
   }
 
   :root[data-theme="light"] {
     color-scheme: light;
-    --bg:            var(--g-99);
-    --surface:       var(--g-97);
-    --surface-2:     var(--g-95);
-    --border:        var(--g-90);
-    --border-strong: var(--g-82);
-    --fg:            var(--g-22-fg);
-    --fg-muted:      var(--g-40);
-    --fg-subtle:     oklch(0.495 0.011 235);
-    --accent:        var(--cyan-lo);
-    --ring:          var(--cyan-lo);
-    /* light-mode top-layer alpha ≤6%, per the measured set */
-    --shadow: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 24px -8px oklch(0 0 0 / 0.08);
+    --bg: oklch(0.99 0.002 260);
+    --bg-hex: #fafafa;
+    --surface: oklch(0.97 0.003 260);
+    --fg: oklch(0.16 0.01 260);
+    --fg-muted: oklch(0.42 0.01 260);
+    --border: oklch(0.88 0.006 260);
+    --primary: oklch(0.72 0.16 75);
+    --primary-fg: oklch(0.18 0.04 75);
+    --glow: oklch(0 0 0 / 0.04);
+    --shadow: 0 1px 2px oklch(0 0 0 / 0.04), 0 16px 40px -16px oklch(0 0 0 / 0.12);
   }
+
+  html.no-anim, html.no-anim * { transition: none !important; }
 
   body {
     background: var(--bg);
     color: var(--fg);
     font-family: var(--font);
     font-size: var(--t-base);
-    line-height: 1.6;                 /* peaks at body size */
-    letter-spacing: var(--tr-base);         /* Linear’s measured body tracking */
+    line-height: 1.4;
     -webkit-font-smoothing: antialiased;
     font-variant-numeric: tabular-nums lining-nums;
-    text-wrap: pretty;
   }
 
-  h1, h2, h3 { text-wrap: balance; font-weight: 590; }
+  a { color: inherit; text-underline-offset: 0.2em; }
+  a:hover { color: var(--fg-muted); }
+
+  :focus-visible {
+    outline: 2px solid var(--fg);
+    outline-offset: 3px;
+  }
+
+  h1, h2 { text-wrap: balance; }
   h1 {
-    font-family: var(--serif);
-    font-size: var(--t-4xl);
-    font-weight: 600;
+    font-family: var(--display);
+    font-size: var(--t-display);
+    font-weight: 500;
     line-height: 1.05;
-    letter-spacing: var(--tr-3xl);
+    letter-spacing: var(--tr-display);
   }
-  h2 { font-size: var(--t-2xl); line-height: 1.20; letter-spacing: var(--tr-2xl); }
-  h3 { font-size: var(--t-lg);  line-height: 1.35; letter-spacing: var(--tr-lg); }
+  h2 {
+    font-family: var(--display);
+    font-size: var(--t-lg);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
 
-  p, li { max-inline-size: var(--measure); }
+  p { max-inline-size: 42rem; }
 
-  a { color: var(--accent); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
-  a:hover { color: var(--fg); }
-
-  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-  /* fixed, on-scale: an em-relative size here yields 12px/14px, off the type scale,
-     and em-relative padding yields 1.35px/4.725px, off the 4px grid */
+  code, .mono {
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+  }
   code {
-    font-family: var(--mono); font-size: var(--t-sm); font-variant-numeric: tabular-nums;
-    color: var(--fg-muted); background: var(--surface-2);
-    padding: 2px 4px; border-radius: var(--r-sm);
-  }
-
-  strong { font-weight: 590; color: var(--fg); }
-  em { font-style: normal; color: var(--accent); }
-
-  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: var(--r-sm); }
-
-  /* theme swap: suppress transitions for one frame so nothing tears mid-flip */
-  .no-anim *, .no-anim *::before, .no-anim *::after { transition: none !important; }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    font-size: var(--t-xs);
+    background: var(--surface);
+    padding: 0 4px;
+    border-radius: 0;
   }
 }
 
 @layer layout {
   .bar {
-    position: sticky; top: 0; z-index: 10;
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: var(--s-4);
-    min-height: 48px;
-    padding: var(--s-2) var(--s-6);
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-  }
-  .bar a.brand {
-    font-family: var(--mono);
-    font-size: var(--t-xs);
-    letter-spacing: var(--tr-caps);
-    text-transform: uppercase;
-    color: var(--fg);
-    text-decoration: none;
+    padding: var(--s-4) var(--s-6);
+    min-height: 64px;
   }
   .bar nav {
-    display: flex; align-items: center; gap: var(--s-3);
-    font-size: var(--t-sm);
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
   }
-  .bar nav a { color: var(--fg-muted); text-decoration: none; }
-  @media (hover: hover) { .bar nav a:hover { color: var(--fg); } }
-
-  article {
-    max-width: 44rem;
-    margin-inline: auto;
-    padding: var(--s-12) var(--s-6) var(--s-16);
-  }
-  article > header { display: flex; flex-direction: column; gap: var(--s-4); margin-bottom: var(--s-12); }
-  article > section { padding-block: var(--s-8); border-top: 1px solid var(--border); }
-  article > section:first-of-type { border-top: 0; padding-top: 0; }
-  .stack { display: flex; flex-direction: column; gap: var(--s-4); }
-}
-
-@layer components {
-  .meta {
-    font-family: var(--mono);
+  .bar nav a, .brand {
+    text-decoration: none;
     font-size: var(--t-xs);
     letter-spacing: var(--tr-caps);
     text-transform: uppercase;
-    color: var(--fg-subtle);
+    color: var(--fg-muted);
+  }
+  .brand { color: var(--fg); font-weight: 700; font-family: var(--display); letter-spacing: 0.14em; }
+  @media (hover: hover) {
+    .bar nav a:hover { color: var(--fg); }
   }
 
-  .lede { font-size: var(--t-lg); line-height: 1.45; letter-spacing: var(--tr-lg); color: var(--fg-muted); }
-
-  .plate {
-    margin: 0;
-    max-inline-size: none;
-  }
-  .plate img {
-    display: block; width: 100%; height: auto;
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
-    background: var(--surface);
-  }
-  .plate figcaption {
-    font-family: var(--mono);
-    font-size: var(--t-xs);
-    letter-spacing: var(--tr-mono);
-    color: var(--fg-subtle);
-    margin-top: var(--s-2);
-  }
-
-  .catalog {
+  .hero {
+    min-height: 100svh;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-3);
-    max-inline-size: none;
+    grid-template-rows: auto minmax(16rem, 1fr);
+    justify-items: center;
+    text-align: center;
+    gap: var(--s-8);
+    padding: var(--s-12) var(--s-6) var(--s-8);
+    background:
+      radial-gradient(ellipse 70% 45% at 50% 0%, var(--glow), transparent 70%),
+      var(--bg);
   }
-  .catalog figure { margin: 0; }
-  .catalog img {
-    display: block; width: 100%; height: 16rem; object-fit: cover; object-position: top;
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-4);
+    max-width: 48rem;
+  }
+  .hero-copy p { max-inline-size: 36rem; }
+  .hero-media {
+    width: min(72rem, 100%);
+    margin: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-media img {
+    width: 100%;
+    height: min(28rem, 46svh);
+    object-fit: cover;
+    object-position: top left;
+    border-radius: var(--r-media);
     border: 1px solid var(--border);
-    border-radius: var(--r-md);
+    box-shadow: var(--shadow);
     background: var(--surface);
   }
-  .catalog figcaption {
-    font-family: var(--mono);
+
+  .proof {
+    padding: var(--s-24) var(--s-6);
+    border-top: 1px solid var(--border);
+  }
+  .proof-inner {
+    max-width: 44rem;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .proof figure { margin: 0; }
+  .proof img {
+    width: 100%;
+    border-radius: var(--r-card);
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .proof figcaption, .hero-media figcaption {
+    margin-top: var(--s-3);
     font-size: var(--t-xs);
-    color: var(--fg-subtle);
-    margin-top: var(--s-2);
+    color: var(--fg-muted);
+    font-family: var(--mono);
+    letter-spacing: 0.02em;
+    max-inline-size: none;
+    text-align: left;
   }
-  @media (max-width: 40rem) {
-    .catalog { grid-template-columns: 1fr; }
-  }
-
-  .cta {
-    display: inline-flex; align-items: center; justify-content: center;
-    min-height: 40px;
-    padding: 0 var(--s-4);
-    background: var(--fg);
-    color: var(--bg);
-    font-size: var(--t-sm);
-    font-weight: 590;
-    text-decoration: none;
-    border-radius: var(--r-sm);
-  }
-  .cta:hover { color: var(--bg); }
-
-  .toggle {
-    font-family: var(--mono); font-size: var(--t-xs); letter-spacing: var(--tr-caps-loose);
-    color: var(--fg-muted); background: transparent; cursor: pointer;
-    border: 1px solid var(--border); border-radius: var(--r-sm);
-    min-height: 40px; padding: 0 var(--s-3);
-    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
-  }
-  @media (hover: hover) { .toggle:hover { color: var(--fg); border-color: var(--border-strong); } }
+  .hero-media figcaption { text-align: center; }
 
   .files {
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
+    margin: 0;
+    overflow: auto;
     background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
     padding: var(--s-4);
-    overflow-x: auto;
-    max-inline-size: none;
   }
   .files pre {
     font-family: var(--mono);
-    font-size: var(--t-sm);
-    font-variant-numeric: tabular-nums;
-    line-height: 1.7;
+    font-size: var(--t-xs);
+    line-height: 1.45;
     color: var(--fg-muted);
+    margin: 0;
   }
-  .files pre strong { font-weight: 590; color: var(--fg); }
-  .files figcaption { margin-top: var(--s-3); }
-
-  .tbl-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-md); max-inline-size: none; }
-  table { border-collapse: collapse; width: 100%; font-size: var(--t-sm); }
-  th, td { text-align: left; padding: var(--s-3) var(--s-4); border-bottom: 1px solid var(--border); vertical-align: top; }
-  thead th {
-    font-size: var(--t-xs); text-transform: uppercase; letter-spacing: var(--tr-caps-loose);
-    color: var(--fg-muted); font-weight: 500; background: var(--surface-2);
-    position: sticky; top: 0;
-  }
-  tbody tr:last-child td { border-bottom: 0; }
-  tbody tr { transition: background var(--dur-fast) var(--ease); }
-  @media (hover: hover) { tbody tr:hover { background: var(--surface); } }
-  td .mono { color: var(--fg); }
-  .num { font-family: var(--mono); white-space: nowrap; }
-
-  .flag { border-left: 2px solid var(--accent); padding-left: var(--s-4); }
-  .flag p { color: var(--fg-muted); }
-
-  ul.ticks { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--s-3); }
-  ul.ticks li { padding-left: var(--s-6); position: relative; color: var(--fg-muted); }
-  ul.ticks li::before {
-    content: ""; position: absolute; left: 0; top: 0.62em;
-    width: 8px; height: 1px; background: var(--accent);
-  }
-  ul.ticks strong { color: var(--fg); }
-
-  ol.steps { list-style: none; padding: 0; counter-reset: s; display: flex; flex-direction: column; gap: var(--s-3); }
-  ol.steps li { counter-increment: s; padding-left: var(--s-8); position: relative; color: var(--fg-muted); }
-  ol.steps li::before {
-    content: counter(s, decimal-leading-zero);
-    position: absolute; left: 0; top: 0.05em;
-    font-family: var(--mono); font-size: var(--t-xs); color: var(--accent);
-  }
-  ol.steps strong { color: var(--fg); }
+  .files strong { color: var(--fg); font-weight: 600; }
 
   footer {
-    max-width: 44rem;
-    margin-inline: auto;
-    padding: var(--s-8) var(--s-6) var(--s-16);
+    padding: var(--s-12) var(--s-6) var(--s-16);
     border-top: 1px solid var(--border);
-    color: var(--fg-subtle);
-    font-size: var(--t-sm);
+    color: var(--fg-muted);
+    font-size: var(--t-xs);
   }
+  footer .inner { max-width: 44rem; margin-inline: auto; display: grid; gap: var(--s-4); }
 }
 
-@layer utilities {
-  .muted { color: var(--fg-muted); }
-  .subtle { color: var(--fg-subtle); }
-  .small { font-size: var(--t-sm); }
+@layer components {
+  .eyebrow {
+    font-family: var(--display);
+    font-size: var(--t-lg);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+  .lede {
+    color: var(--fg-muted);
+    font-size: var(--t-base);
+    line-height: 1.45;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 16px;
+    border: 0;
+    border-radius: var(--r-control);
+    background: var(--primary);
+    color: var(--primary-fg);
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+  }
+  .cta:hover { color: var(--primary-fg); opacity: 0.88; }
+  .hint {
+    font-size: var(--t-xs);
+    color: var(--fg-muted);
+  }
+  .toggle {
+    min-height: 40px;
+    min-width: 40px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-control);
+    background: transparent;
+    color: var(--fg-muted);
+    font: inherit;
+    font-size: var(--t-xs);
+    letter-spacing: var(--tr-caps);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .steps {
+    list-style: none;
+    display: grid;
+    gap: var(--s-4);
+    padding: 0;
+    counter-reset: step;
+  }
+  .steps li {
+    display: grid;
+    gap: var(--s-2);
+    padding-left: var(--s-8);
+    position: relative;
+    max-inline-size: none;
+  }
+  .steps li::before {
+    counter-increment: step;
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    color: var(--fg-muted);
+  }
+  .dl {
+    display: grid;
+    gap: var(--s-4);
+  }
+  .dl div {
+    display: grid;
+    gap: 4px;
+    padding-bottom: var(--s-4);
+    border-bottom: 1px solid var(--border);
+  }
+  .dl dt {
+    font-family: var(--mono);
+    font-size: var(--t-xs);
+    letter-spacing: var(--tr-caps);
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .dl dd { margin: 0; }
 }
 </style>
 </head>
 <body>
 
 <header class="bar">
-  <a class="brand" href="/">SHINE</a>
+  <a class="brand" href="/">Shine</a>
   <nav aria-label="Site">
     <a href="/r/">Registry</a>
-    <a class="btn cta" href="https://github.com/justinfowler925/shine">Get the skill</a>
-    <button class="toggle" id="t" aria-label="Toggle color scheme">LIGHT</button>
+    <a href="https://github.com/justinfowler925/shine">GitHub</a>
+    <button class="toggle" id="t" type="button" aria-label="Toggle color scheme">Light</button>
   </nav>
 </header>
 
 <main>
-<article>
+<section class="hero" data-cite="magicui-hero" data-job="thesis + one CTA + media" data-region="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Shine</p>
+    <h1>Your agent cited Carbon. It still shipped zinc.</h1>
+    <p class="lede">V1 measured tokens, contrast, and axe — and printed PASS. V2 opens the DNA pack and fails the costume. One skill, Claude Code and Cursor.</p>
+    <a class="btn cta" data-primary href="https://github.com/justinfowler925/shine">Get the skill</a>
+    <p class="hint">MIT · clone, symlink, <code>node verify/doctor.mjs</code></p>
+  </div>
+  <figure class="hero-media">
+    <img src="img/v2-queue.png" width="1280" height="800" alt="A Carbon-cited review queue in IBM Plex: batch bar, search, twelve stalled accounts, radius none" decoding="async">
+    <figcaption>Same cite. DNA applied. Critic likeness 10.</figcaption>
+  </figure>
+</section>
 
-  <header>
-    <p class="meta">Working notes · 21 Aug 2026 · v2 visual director</p>
-    <h1>A design system agents can’t deviate&nbsp;from</h1>
-    <p class="lede">Everyone tries to give the model taste. Cheaper: take away its room to be wrong. Name the job, retrieve a real page, apply that page’s DNA, measure the box.</p>
-  </header>
+<section class="proof" data-region="proof" data-job="one supporting band">
+  <div class="proof-inner">
+    <h2>V1 passed this</h2>
+    <p class="lede">A Carbon datatable cite, a Geist sidebar, zinc chrome. Completeness was green. Likeness did not exist yet.</p>
+    <figure>
+      <img src="img/v1-costume.png" width="960" height="640" alt="Inbox page with a zinc sidebar, Geist type, and a stone button — marked as a Carbon cite" decoding="async">
+      <figcaption>verify/fixtures/carbon-as-shadcn.html · critic likeness 2 FAIL</figcaption>
+    </figure>
 
-    <section class="stack">
-      <h2>The agent is a director</h2>
-      <div class="stack">
-        <p>The skill used to retrieve a template and sand it into one house look. That is a painter. It now names the job, retrieves a real corpus page, applies that page’s structure <em>and</em> visual DNA, and proves both completeness and likeness. House style is the fallback voice, not the only legal paint.</p>
-        <p>Three voices, picked from the job: <strong>kit-faithful</strong> (default — retune shine tokens to the cite DNA), <strong>house</strong> (shine-native when you ask, or when there is no DNA), <strong>brand</strong> (kit structure, brand chrome). The file is <code>skill/references/voices.md</code>.</p>
+    <dl class="dl">
+      <div>
+        <dt>V1</dt>
+        <dd>Wipe the default palette. Measure the box. Fail off-token, fail axe, fail contrast axe declined to judge.</dd>
       </div>
-      <ol class="steps">
-        <li><strong>Name the job.</strong> Internal tools run Adoption before pixels. Everyone else: one line — dashboard, queue, settings, record, chat, wizard, marketing hero.</li>
-        <li><strong>Cite it.</strong> <code>node corpus/cite.mjs &lt;job|screen|id&gt;</code>. Open every listed file and the Preview. The banner prints DNA: family, density, type, radius, chroma, elevation, motion. Naming an id you did not open is inventing.</li>
-        <li><strong>Diagnose, then apply.</strong> Usability first, then contracts (named Table / Form / Dialog / Select load <code>contracts.md</code> in the same pass), then composition, then craft of the chosen voice. Clone regions and DNA. Do not overwrite Carbon density or MUI marketing type with house defaults.</li>
-        <li><strong>Prove it.</strong> <code>node verify/measure.mjs &lt;path&gt; --shot out.png</code>. Hard-fails: missing contract states, a cite that still looks like shadcn zinc, craft. Report catalog id + DNA + numbers.</li>
-      </ol>
-      <div class="tbl-scroll">
-        <table>
-          <thead><tr><th scope="col">Job</th><th scope="col">Command</th><th scope="col">Default retrieve</th></tr></thead>
-          <tbody>
-            <tr><td>Dashboard</td><td class="mono">cite.mjs dashboard</td><td>shadcn dashboard-01 — full page, not a chart widget</td></tr>
-            <tr><td>Work queue</td><td class="mono">cite.mjs queue</td><td>Carbon DataTable</td></tr>
-            <tr><td>Settings</td><td class="mono">cite.mjs settings</td><td>Ant Design Pro account settings</td></tr>
-            <tr><td>Record / detail</td><td class="mono">cite.mjs record</td><td>Ant Design Pro profile</td></tr>
-            <tr><td>Chat</td><td class="mono">cite.mjs chat</td><td>React Spectrum AI chat</td></tr>
-            <tr><td>Wizard</td><td class="mono">cite.mjs wizard</td><td>Ant Design Pro step form</td></tr>
-            <tr><td>Marketing hero</td><td class="mono">cite.mjs marketing-hero</td><td>Magic UI hero</td></tr>
-          </tbody>
-        </table>
+      <div>
+        <dt>V2</dt>
+        <dd>Cite a real page, open its DNA pack, import the voice CSS, fail it when it still looks like zinc. Salesforce is a host, not a palette dump.</dd>
       </div>
-      <p class="small subtle">132 catalog rows carry DNA. <code>cite.mjs --list</code> dumps them. No row → <code>inspiration.md</code>, then cite. Do not invent. New surfaces still start in Wireframe; this loop is Build / Polish / Audit-that-fixes.</p>
-    </section>
+    </dl>
 
-    <section class="stack">
-      <h2>The tokens are the tell, not the components</h2>
-      <div class="stack">
-        <p>Generated UI has a look, and everybody blames the wrong suspect. The component library is fine. The look is every project on earth shipping the same <em>default token values</em>.</p>
-        <p>Across eighteen products whose production CSS I pulled apart, every reference-grade accent sits between OKLCH chroma 0.13 and 0.24. Tailwind’s <code>-600</code> row runs 0.245–0.288 — hotter than the entire set. That gap is the “unearned saturation” tell, and every generated page you’ve winced at is wearing it.</p>
-        <p>You can’t prompt taste into a default. You can delete the default. Wipe the palette <em>and</em> the default type/tracking/shadow scales, own the token layer, enforce it against rendered pixels — never against source code.</p>
-      </div>
-      <figure class="plate">
-        <img src="img/chroma.png" alt="Painted gouache chips in a cyan-to-indigo chroma ramp on dark paper" width="1536" height="640" decoding="async">
-        <figcaption>Accent chroma lives in a tight OKLCH band (0.13–0.24). Tailwind’s -600 row sits past the hot end. High · seed 7</figcaption>
-      </figure>
-    </section>
+    <h2>On the machine this afternoon</h2>
+    <ol class="steps">
+      <li><strong>Clone and symlink</strong> the skill into Claude Code and Cursor. One directory. Frontmatter is <code>name</code> + <code>description</code> only — never <code>paths:</code>.</li>
+      <li><strong>Cite before you draw.</strong> <code>node corpus/cite.mjs queue</code> — open every file it lists and <code>corpus/packs/&lt;id&gt;/specimen.html</code>. Naming an id you did not open is inventing.</li>
+      <li><strong>Prove both halves.</strong> <code>node verify/measure.mjs page.html --cite carbon-datatable --shot out.png</code> then <code>node verify/critic.mjs page.html --cite carbon-datatable --lane internal</code>. Likeness under 7 fails the build.</li>
+    </ol>
 
-    <section class="stack">
-      <h2>4.5 MB of production CSS</h2>
-      <p class="muted">Linear, Stripe, Vercel, Notion, Raycast, Clerk, Resend, Superhuman, Things, Liveblocks, Dia, Observable and more — stylesheets fetched, tokens extracted, statistics run. Numbers don’t have opinions. These are the ones that survived verification.</p>
+    <p>The gate is <code>node verify/doctor.mjs</code>. <code>--ci</code> is 45 checks; the session-start doctor also proves both surfaces’ skill, <code>shine-ux</code>, and hooks. A gate that is not in the doctor does not exist.</p>
 
-      <div class="tbl-scroll">
-        <table>
-          <thead><tr><th scope="col">Finding</th><th scope="col" class="num">Value</th><th scope="col">Why it matters</th></tr></thead>
-          <tbody>
-            <tr><td>Duration mode</td><td class="num">150ms</td><td>The single most common transition duration across the entire corpus. Micro-feedback clusters at 50–80ms; overlays at 200–300ms. Exits run about 20% faster than entrances.</td></tr>
-            <tr><td>Adjacent surface delta</td><td class="num">~2pp</td><td>Lightness difference between stacked surfaces, measured range 1.6–3.9 percentage points. Separation is carried by the border, not the fill. Six or more is a smell.</td></tr>
-            <tr><td>Type scale</td><td class="num">2 ratios</td><td>About 1.12 through the UI band (11–24px) and 1.22 for display sizes. Not one ratio. A single 1.25 applied from 12px up produces the broken 12→15→18.75 ladder that reads as generated.</td></tr>
-            <tr><td>Top shadow alpha</td><td class="num">≤6%</td><td>In light mode. Two layers minimum; any layer blurred 8px or more carries a negative spread of roughly −blur/4. Dark mode is the same geometry at about 4× the alpha.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <ul class="ticks">
-        <li><strong>Tracking is a function of size and weight, not size alone.</strong> At 32px, regular weight takes about 1.6× more negative tracking than bold — lighter strokes leave more apparent counter-space and need pulling tighter. Tracking crosses to negative around 20–24px and reaches −0.02 to −0.035em by 48px. Uniform <code>letter-spacing: 0</code> across every size is one of the loudest tells there is.</li>
-        <li><strong>Line-height peaks at body size and falls in both directions.</strong> Roughly 1.33 at 12px, 1.5–1.6 at 15–16px, 1.0 at 64px. The floor holds at about 1.33 — dense interfaces cut padding, never leading.</li>
-        <li><strong>Radii nest as <code>child = parent − padding</code>,</strong> and this ships as literal <code>calc()</code> in production. Corners that don’t run parallel are visible even when nobody can say why.</li>
-      </ul>
-      <figure class="plate">
-        <img src="img/radius.png" alt="Macro of nested rounded metal rectangles whose inner corners run parallel to the outer" width="1536" height="640" decoding="async">
-        <figcaption>Nested radius is a measured rule, not a vibe. High · seed 11</figcaption>
-      </figure>
-      <ul class="ticks">
-        <li><strong>Elevation is a hairline ring plus blur layers plus a background-colored ring.</strong> A bare drop shadow leaves a mushy edge no amount of blur tuning fixes.</li>
-        <li><strong>The hypothesis that grays must be tinted is only 7-of-12 true.</strong> Vercel and Observable run chroma of exactly zero, deliberately. The real invariant is hue <em>consistency</em> across the ramp, not hue presence. Where ramps are tinted, saturation <em>rises</em> as lightness falls.</li>
-      </ul>
-    </section>
-
-    <section class="stack">
-      <h2>The skill</h2>
-      <div class="stack">
-        <p>One git-tracked directory both Claude Code and Cursor symlink. The index is a router — still inside the window that survives compaction — so catalog cite and the non-negotiables sit at the top. Do not load all thirty references: run <code>corpus/cite.mjs</code>, open the DNA pack and the files it lists from <code>~/design-corpus</code>, then the one reference the surface needs. Dedicated executor: <code>shine-ux</code>. Five wirings: per-edit lint, stop-sweep, and the doctor, each on both surfaces. A gate that is not in the doctor does not exist.</p>
-        <p>A path-gated skill is an absent skill. This one used to list <code>tsx,jsx,css,html</code>, so it never loaded for UI inside Python, and Brutus shipped 56 raw hex values one glob away from the design authority. Frontmatter is <code>name</code> + <code>description</code> only. Never <code>paths:</code>. Design-lint keys on content, not extension — HTML inside a <code>.py</code> counts.</p>
-        <p>New surfaces start in <strong>Wireframe</strong> (interactive discovery → gray-box from a catalog id → locked brief + <code>DESIGN.md</code>). Existing surfaces run the director loop: lane → job → diagnose → retrieve pack → apply DNA → prove (measure + critic). Six modes: Wireframe, Build, Polish, Audit, Copy, Adoption. Spoken voice is a layer on a surface that speaks, not a seventh mode — paint voice is kit-faithful / house / brand. Ambiguity defaults to Wireframe if there is no UI yet, otherwise Build. Two lanes, <span class="mono">brand</span> and <span class="mono">personal</span> — brand and mode swap in the token layer, never in markup. The committed brand lane is placeholder values on purpose; a real palette arrives via <code>SHINE_BRAND_OVERRIDE</code> / <code>brand.local.md</code>, never this tree. House style (the fallback voice): dark-first, dense, instrumental, editorial type. Light is derived, never hand-authored.</p>
-      </div>
-
-      <figure class="files">
+    <figure class="files">
 <pre>skill/                        lines
   <strong>SKILL.md</strong>                    279
   references/
@@ -492,159 +428,17 @@
     voices.md                   38
     wireframe.md               202
                             <strong>4,884</strong></pre>
-        <figcaption class="small subtle">The whole thing. The index is the only part an agent keeps in context.</figcaption>
-      </figure>
-
-      <ul class="ticks">
-        <li><strong>Catalog cite required.</strong> Run <code>node corpus/cite.mjs &lt;job|screen|id&gt;</code>, open the DNA pack (<code>corpus/packs/&lt;id&gt;/specimen.html</code>), every listed corpus file, and the Preview. Copy structure and visual DNA; import <code>tokens/voices/&lt;family&gt;.css</code> when kit-faithful. Naming an id you did not open is inventing — same status as shipping no measure numbers. Rows cover shadcn blocks, MUI templates, Carbon, Ant Design Pro, Mantine, Chakra, HeroUI, Spectrum, Fluent, Magic UI, Lightning hosts; no row → fill the catalog, then cite.</li>
-        <li><strong>New surfaces start in Wireframe.</strong> Gray-box HTML from the catalog id, then a locked <code>*.brief.md</code> and <code>DESIGN.md</code>. Build honours the brief and does not re-open structure unless you say <code>unlock structure</code>.</li>
-        <li><strong>Internal tools get Adoption before pixels.</strong> Name the meeting the screen runs, what each persona learns here that they cannot get by asking a person, and the path from notification to committed change. A surface nobody opens is a design defect.</li>
-        <li><strong>A component name is a complete contract.</strong> “Table” means toolbar, sorting, pagination, sticky header, selection, empty, loading and error states, keyboard access — not bare markup. Opting out takes an explicit “simple”.</li>
-        <li><strong>Reports state the numbers used.</strong> “Improved the spacing” doesn’t qualify. “Moved 13px → 12px onto the 4px scale; contrast 4.05:1 → 7.2:1” does.</li>
-        <li><strong>Every surface is an argument.</strong> The Copy mode renders Hormozi’s value equation as five beliefs a buyer must feel — it gets me the outcome, it will work for <em>me</em>, I’ll see results soon, it’s easy to implement, it’s worth it and I trust who’s behind it — and demands the element that carries each one. A belief with no carrying element is a copy gap, the same status as a token gap. Ten copy slop tells sit beside the twelve visual ones.</li>
-        <li><strong>A voice layer is a summarizer with manners, never a screen reader.</strong> Nothing leaves the speaker that a colleague wouldn’t say across a desk: no paths, no hashes, no “Jul” read as <em>Jewel</em>. While the surface is speaking, the mic honors only the transport family — the synthesized voice can pronounce your own nav keywords.</li>
-        <li><strong>The pins are part of the knowledge.</strong> <code>@tanstack/react-table@9</code> landed 2026-08-04 and breaks everything — pin <code>^8</code>. <code>class-variance-authority</code> stalled in 2024; <code>tailwind-variants</code> has the slots multi-part components need. Base UI renamed itself mid-RC. No training data keeps up with this; a file on disk does.</li>
-      </ul>
-    </section>
-
-    <section class="stack">
-      <h2>What’s in force</h2>
-      <ol class="steps">
-        <li><strong>Corpus.</strong> Real library source on disk, so the model never invents a prop signature. Queried with ripgrep — these are exact symbol lookups, not a semantic-search problem. 49 pins, ~1.2 GB sparse. <em>Shipped</em>.</li>
-        <li><strong>Tokens.</strong> One DTCG source emitting to nine targets: CSS custom properties, a Tailwind v4 <code>@theme</code> block, an inline <code>&lt;style&gt;</code> for CSP-locked artifacts, a constant for a Python-served app, an email inliner map plus a bulletproof table-based starter, a Google Docs Apps Script, OOXML theme slots for the Office writers, and a Salesforce brand-palette spec whose 17 reference steps keep SLDS’s own lightness ladder re-seeded with the brand hue. Proven the honest way: mutate one token, watch every target change by <em>computed value</em> — the email starter is rendered and measured, not grepped — then migrate a multi-page site's duplicated <code>:root</code> blocks to one import, screenshot-diffed to zero differing pixels.</li>
-        <li><strong>Registry.</strong> <code>@shine</code> at <a href="/r/">/r/</a> — a <code>registry:base</code> plus two theme lanes, generated from <code>tokens/dist</code> so it cannot drift. <code>npx shadcn init https://shine-blond.vercel.app/r/shine.json</code>, then <code>npx shadcn add @shine/&lt;item&gt;</code>. Proven into a clean Vite project: computed values match source in light and dark. <em>Shipped</em>.</li>
-        <li><strong>Knowledge.</strong> Component contracts, plus the template catalog, plus the positive taste reference the measurements produced. <em>Shipped</em> — the section above.</li>
-        <li><strong>Enforcement.</strong> A lint hook on every write. The model can decide to ignore a skill; it cannot decide to ignore a hook. <em>Shipped</em> — design-lint and stop-sweep on Cursor and Claude Code; <code>doctor.mjs</code> proves they bite.</li>
-        <li><strong>Verification.</strong> Render, measure, critique — against pixels, not source. <em>Shipped</em> — <code>measure.mjs</code> reads computed style, axe, and per-pixel contrast. CI runs the <code>--ci</code> lane on a self-hosted runner; the local doctor is the gate for machine wirings.</li>
-      </ol>
-    </section>
-
-    <section class="stack">
-      <h2>Constraints</h2>
-      <div class="stack">
-        <p><strong>Never ship a raw value where a token exists.</strong> No hex, no <code>rgb()</code>, no arbitrary Tailwind, no off-scale spacing, no ad-hoc font size, letter-spacing, or <code>box-shadow</code>. Token gap → fill <code>gen-source.mjs</code> and add the rule that reads the property, in the same change. Pragmas name the one rule (<code>shine-lint: off shadow</code>); a bare <code>off</code> is almost never right.</p>
-        <p><strong>Wipe the default palette — and the default scales.</strong> In Tailwind v4, <code>--color-*</code>, <code>--text-*</code>, <code>--tracking-*</code>, and <code>--shadow-*</code> all go to <code>initial</code>. <code>text-4xl</code> and <code>shadow-lg</code> are the anti-pattern wearing a token-shaped name.</p>
-        <p><strong>Do not vendor that wipe into an app already built on Tailwind defaults.</strong> It deletes the product — every <code>bg-blue-600</code> and <code>text-4xl</code> becomes a missing utility. Keep shine token values; skip the wipe file. Restoring the defaults is the repair. Shine-painting the existing screens is not.</p>
-        <p><strong>Split primitives from semantics, bridged by <code>@theme inline</code>.</strong> Components only ever say <code>bg-surface text-fg</code>. Omitting <code>inline</code> is the single most common cause of “dark mode doesn’t switch.”</p>
-        <p><strong>Per-element checks can pass while the screen is broken.</strong> Composition is a separate gate: voids, colliding type steps, undeclared theme, missing or competing filled primaries. Wireframe gray-boxes are exempt from craft hard-fails until Build; structure still applies.</p>
-        <p>A consequence: <strong>single-file artifacts get hand-written CSS, not a framework.</strong> Nesting and <code>:has()</code> went Baseline in June 2026, <code>light-dark()</code> halves the theming code, and <code>data-variant</code> attributes give a variant API identical at the call site. Zero build, zero FOUC, and the tokens are the artifact.</p>
-        <p class="small subtle">This page is built to those rules. Both themes come from one token set; the toggle swaps a single attribute.</p>
-      </div>
-    </section>
-
-    <section class="stack">
-      <h2>Using is not redistributing</h2>
-      <p class="muted">Everyone assumes component kits are MIT. The popular ones increasingly aren’t, and the difference only bites on the day you ship one inside something you publish.</p>
-      <div class="tbl-scroll">
-        <table>
-          <thead><tr><th scope="col">Source</th><th scope="col">Actual position</th></tr></thead>
-          <tbody>
-            <tr><td class="mono">Aceternity UI</td><td>No license at all. No public repo, no LICENSE file. Terms claim ownership of all material and forbid redistribution.</td></tr>
-            <tr><td class="mono">React Bits, Animate UI</td><td>MIT <strong>plus Commons Clause</strong> — explicitly bars redistributing the components "alone, in a bundle, or as a ported version."</td></tr>
-            <tr><td class="mono">Origin UI</td><td>Transferred and relicensed. Now AGPL-3.0 by default, with a narrow MIT carve-out.</td></tr>
-            <tr><td class="mono">GSAP</td><td>Genuinely free for commercial use, but not OSI. No forking, no redistribution, and it bars use in competing animation tools.</td></tr>
-            <tr><td class="mono">Apple HIG</td><td>Copyrighted with no license grant. Read it; never copy from it.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="small subtle">Clean to build on: shadcn/ui, Radix, Base UI (shadcn’s default primitive base since 2026-07-03), React Aria, Mantine, Chakra, HeroUI, Headless UI, Blueprint, Carbon, Fluent, Spectrum, D3, Recharts, visx, nivo, Magic UI, Motion Primitives, Kibo. Tremor’s npm package is a dead end — last publish 2025-01; the catalog row is a chart-block cite, not the dashboard default. Polaris is query-only (Shopify visual-distinctness). Paid stores without an Atlas license — Haze, Prime, MUI Store, AdminLTE commercial — stay query-only screenshots, never clones.</p>
-    </section>
-
-    <section class="stack">
-      <h2>Three of the four defaults are drifting</h2>
-      <p class="muted">Reputation and maintenance have come apart here. Checked against release history and commit authorship, not stars.</p>
-      <div class="tbl-scroll">
-        <table>
-          <thead><tr><th scope="col">Library</th><th scope="col" class="num">Last release</th><th scope="col">State</th></tr></thead>
-          <tbody>
-            <tr><td class="mono">visx</td><td class="num">2026-06</td><td>Modernization release, zero new packages. One engineer wrote 56 of the last 100 commits. One published package is versioned but was never actually published to npm.</td></tr>
-            <tr><td class="mono">nivo</td><td class="num">2025-05</td><td>24 commits sitting unreleased. Fixes land on master and never reach users.</td></tr>
-            <tr><td class="mono">D3</td><td class="num">2024-03</td><td>Frozen because finished — it is mostly math, and math doesn’t rot. But the type definitions are 33 months stale, which costs more day to day than the runtime does.</td></tr>
-            <tr><td class="mono">Observable&nbsp;Plot</td><td class="num">2025-02</td><td>42 unreleased commits, and a merge-clean release PR that has sat untouched for four months with the changelog already written.</td></tr>
-            <tr><td class="mono">Recharts</td><td class="num">2026-07</td><td>55M downloads a week, commits landing today, and already what shadcn’s chart components wrap.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p>visx and nivo occupy the same slot — React chart libraries over d3, differing only in how opinionated they are. Owning both buys two theming systems and two bundles. The call: depend on D3 for math and server-side rendering plus Recharts for React, and hold visx in reserve for genuinely custom work. Vendor all of them for reference regardless; vendoring is not depending.</p>
-    </section>
-
-    <section class="stack">
-      <h2>Measure the box</h2>
-      <div class="stack">
-        <p>Grepping generated CSS for a token name proves nothing. The string can sit there — present, correct, completely inert — while the browser computes something else. Read the box, not the source.</p>
-        <p>The loop: render in Playwright, read <code>getComputedStyle</code> and <code>getBoundingClientRect</code> (including <code>shadowRoot</code> — a 0/0 walk is a fail). UI-band font sizes are capped at the six-step token scale; display sizes (≥32px) are counted separately, max two. Off-scale spacing values are capped at three. Composition hard-fails independently: voids, colliding type steps, undeclared theme, missing or competing filled primaries, app-shell density. Then accessibility, then contrast. <strong>Likeness is a second program:</strong> <code>verify/critic.mjs</code> scores the page against the DNA pack and names a slop class. A Carbon cite that still looks like shadcn zinc fails. Screenshot critique is capped at three critic passes. <code>--shot</code> is required on Build; the report names the catalog id and <code>images_read</code>. Zero measurements is a fail — a probe that finds targets and measures none of them is reporting that it is broken. Resolve colour by painting it, never by parsing a string; this page is OKLCH throughout and a regex that only sees <code>rgb()</code> would skip every element and print PASS.</p>
-        <p class="small subtle"><code>node verify/doctor.mjs</code> is the gate. <code>--ci</code> is 45 checks; the session-start doctor also proves both surfaces’ skill, <code>shine-ux</code>, and hooks. <code>--full</code> runs composition fixtures (launches Chromium). CI runs the same <code>--ci</code> lane on a self-hosted runner; the wiring checks only ever execute on the laptop, so the local doctor stays the gate.</p>
-      </div>
-
-      <div class="flag stack">
-        <h3>The finding that justifies the whole loop</h3>
-        <p>Given text over a gradient, axe-core returns <code>incomplete</code> — not pass, not fail. It declines to answer, because it cannot resolve a single background color. Which means the most common contrast failure in real design work is precisely the case the accessibility tool refuses to judge.</p>
-        <p>The fix is to hide the text, screenshot clipped to its exact box to capture pure background pixels, decode in-page, and contrast the known foreground against every pixel. Report worst case and 5th percentile, never the mean — a gradient that passes on average still has an unreadable end. On a real page this returned <span class="mono">1.00:1</span> where axe had said nothing at all.</p>
-      </div>
-      <figure class="plate">
-        <img src="img/gradient.png" alt="Pale type losing contrast as it crosses a cyan-to-navy gradient" width="1536" height="640" decoding="async">
-        <figcaption>axe says incomplete. The pixels say 1.00:1. High · seed 13</figcaption>
-      </figure>
-
-      <ul class="ticks">
-        <li><strong>Wait for <code>document.fonts.ready</code> before measuring anything,</strong> or you measure fallback-font geometry and every number is wrong.</li>
-        <li><strong><code>getComputedStyle().color</code> returns <code>oklch()</code>, not <code>rgb()</code>.</strong> Regex the string as RGB and every contrast ratio comes back ~1.0 — a false reading my own harness produced before it became a rule. Canvas <code>fillStyle</code> doesn’t normalize it either; rasterize to a 1×1 canvas and read the pixel back.</li>
-        <li><strong>Measuring during a transition captures the interpolated value.</strong> Inject <code>transition: none</code> everywhere before sampling. And HTTP 200 is not proof a page loaded — it can be an auth wall wearing a success code.</li>
-        <li><strong>Automated accessibility catches about 57% of issues</strong> by the vendor’s own study — 98% for contrast, but <span class="mono">2.49%</span> for keyboard navigation. Green is not clean.</li>
-        <li><strong>Screenshot self-critique plateaus after three passes.</strong> Published work measures +17.8% over three cycles and finds fine-tuning captured only a quarter of the benefit. The loop does the work, not the weights — so run it last, once the deterministic checks have already caught what they can.</li>
-      </ul>
-    </section>
-
-    <section class="stack">
-      <h2>Start from a real page, not a poster</h2>
-      <div class="stack">
-        <p>A Linear tracking cite is paint. It does not authorize inventing a dashboard. New pages start with <code>node corpus/cite.mjs &lt;job|screen&gt;</code> — open the files and the Preview, copy the regions, apply the DNA block. House style is the fallback voice. Technique numbers (15px body, 150ms, chroma 0.13–0.24) still come from measuring what shipped, and they bind the <em>house</em> voice. Structure and kit-faithful type come from the corpus files, not from naming an id.</p>
-        <p>Dribbble and Behance stay out. Partly the terms — scraping is prohibited and each shot is copyrighted by an individual designer, so there is nobody who could grant rights even in principle. But mostly because <strong>shots are posters, not software</strong>. No empty states, no error states, no 200-row tables, no keyboard navigation, fake data at conveniently perfect lengths. Training on that produces work that photographs well and falls apart on contact with real content.</p>
-        <p>The catalog is SPDX-clean source already on disk: MUI free templates, shadcn blocks, Carbon, Ant Design Pro, Mantine, Chakra, HeroUI, Spectrum, Fluent, Magic UI. Tremor is a chart-block cite, not the dashboard default. Paid stores without a license (Haze, Prime, MUI Store, AdminLTE commercial) are query-only screenshots, never clones. No row for this screen → add one, then build. Do not invent.</p>
-        <p>Facts still aren’t copyrightable: “this product’s body text is 15px at 1.6 line-height with −0.011em tracking” is an observation, not an appropriation. Design systems that publish real numbers under real licenses — IBM Carbon, GitHub Primer, Material 3, the US Web Design System — remain the richest sources for those numbers. They do not skip the catalog.</p>
-      </div>
-      <div class="catalog">
-        <figure>
-          <img src="img/catalog/mui-crud-dashboard.png" alt="Shine-painted CRUD dashboard derived from the MUI CRUD dashboard template" width="1280" height="900" decoding="async">
-          <figcaption>mui-crud-dashboard · structure from MUI, kit-faithful DNA</figcaption>
-        </figure>
-        <figure>
-          <img src="img/catalog/shadcn-blocks.png" alt="shadcn blocks gallery — dashboard, sidebar, and form block previews" width="1280" height="900" decoding="async">
-          <figcaption>shadcn-registry · dashboard-01 is the dashboard default</figcaption>
-        </figure>
-        <figure>
-          <img src="img/catalog/mui-free-gallery.png" alt="MUI free templates gallery covering dashboard, blog, checkout, and sign-in" width="1280" height="900" decoding="async">
-          <figcaption>MUI free templates · this page cites mui-blog</figcaption>
-        </figure>
-        <figure>
-          <img src="img/catalog/wireframe-sample.png" alt="Gray-box wireframe with labeled regions and one filled primary" width="1280" height="800" decoding="async">
-          <figcaption>Wireframe gray-box · lock this, then Build</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="stack">
-      <h2>Scope, decided</h2>
-      <p class="muted">These looked like holes when the page was a plan. They have rulings. In the original order:</p>
-      <ul class="ticks">
-        <li><strong>Imposed design systems.</strong> In, as a palette target — proven against the hardest case. Under SLDS 2 the old Salesforce design tokens are deprecated, overriding global styling hooks is prohibited, and there is no org-wide CSS injection point. But the token chain resolves through ~17 brand reference steps, and overriding those recolors the accent system across every component. Salesforce publishes the contract itself: DTCG JSON, 717 tokens, dark values, per-token allowlists. The deliverable is a palette spec an admin transcribes. Our colors on their system, never our system on theirs.</li>
-        <li><strong>Office formats.</strong> In, Google Docs first. Docs has no CSS and no token API, so the emit target is an Apps Script applying named paragraph and character styles, plus a template doc carrying the palette. The Office writers follow, repointed at the shared token source instead of hardcoded hexes.</li>
-        <li><strong>Email.</strong> In. One of nine emit targets: tables, inline styles, no custom properties, no flexbox in Outlook. Tokens compile through a literal-value inliner. The renderer is the constraint, not the design.</li>
-        <li><strong>Interface copy.</strong> In. A conventions file for labels, errors, empty and loading states. Cheapest fix here, and one of the loudest tells.</li>
-        <li><strong>Keyboard choreography.</strong> In, as contracts checked by review. Focus order, traps and escape behavior were already in the ported component contracts. Automation catches <span class="mono">2.49%</span> of keyboard issues — a linter can’t hold this standard; a document can.</li>
-        <li><strong>Illustration and imagery.</strong> Filled. Anti-stock by rule: real product surfaces, generated texture, data as ornament, typographic covers — no people pointing at laptops. Generation runs locally when a surface needs texture — 4-bit schnell for drafts, 8-bit dev for finals. Plates on this page sit beside the claim they prove, not as a masthead hero. Catalog shots are structure sources; kit-faithful DNA is ours. A generated hero with no claim next to it is the tell the rest of the skill exists to kill.</li>
-        <li><strong>A performance budget.</strong> In, twice over. CSS ≤ 20 KB gzip; JS ≤ 40 KB for an app route, zero for a document. The same discipline is the context budget: a 255-line index (~14 KB) still fits the 5,000-token reattach window; references cost zero tokens until read. Do not load all twenty-seven.</li>
-      </ul>
-      <p>Nothing on that list is still open. The registry — the thing this page used to leave hanging — shipped 2026-08-05. An app still on its own palette is that app’s migration (<code>sync-consumers</code> vendors the tokens). Shine does not become unfinished because a consumer hasn’t imported them.</p>
-    </section>
-
-</article>
+    </figure>
+  </div>
+</section>
 </main>
 
-<footer class="stack">
-    <p>Working notes, August 2026. Product description matches <code>skill/SKILL.md</code>. Every number here was measured or verified against a primary source; where something couldn’t be verified it isn’t stated.</p>
-    <p class="subtle small">This page is a single HTML file with no external requests, built to the rules it describes — OKLCH throughout, two-ratio type scale, size-and-weight-dependent tracking, nested radii, tabular numerals, 150ms transitions, both themes from one token set. Cite: <code>mui-blog</code>.</p>
-  </footer>
+<footer>
+  <div class="inner">
+    <p>August 2026 · <a href="https://github.com/justinfowler925/shine/releases/tag/v2.0.0">v2.0.0</a> · cite <code>magicui-hero</code> · voice kit-faithful. Product description matches <code>skill/SKILL.md</code>.</p>
+    <p>Notes that used to live on this page — measured chroma, nested radius, the 4.5 MB CSS inventory — still live in the skill. This page has one job.</p>
+  </div>
+</footer>
 
 <script>
   const root = document.documentElement;
@@ -652,8 +446,8 @@
   const set = (m) => {
     root.classList.add('no-anim');
     root.dataset.theme = m;
-    btn.textContent = m === 'dark' ? 'LIGHT' : 'DARK';
-    document.querySelector('meta[name=theme-color]').content = m === 'dark' ? '#080e12' : '#fafcfd';
+    btn.textContent = m === 'dark' ? 'Light' : 'Dark';
+    document.querySelector('meta[name=theme-color]').content = getComputedStyle(root).getPropertyValue('--bg-hex').trim() || (m === 'dark' ? '#1c1c1f' : '#fafafa');
     try { localStorage.setItem('theme', m); } catch (e) {}
     requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('no-anim')));
   };
@@ -664,6 +458,5 @@
   } catch (e) {}
   btn.addEventListener('click', () => set(root.dataset.theme === 'dark' ? 'light' : 'dark'));
 </script>
-
 </body>
 </html>
