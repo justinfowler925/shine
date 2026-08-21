@@ -1,0 +1,20 @@
+[
+  {
+    "name": "toolbar",
+    "job": "filter, batch, primary",
+    "primary": true,
+    "pct": 8
+  },
+  {
+    "name": "table",
+    "job": "ranked rows",
+    "primary": false,
+    "pct": 70
+  },
+  {
+    "name": "empty",
+    "job": "success when zero",
+    "primary": false,
+    "pct": 0
+  }
+]

@@ -194,3 +194,27 @@ on every `npm run build` — the admin transcription spec, the LWC `:host` fallb
 block, and the machine-readable ramp. Authority is `@salesforce-ux/design-tokens`
 flat.json. Never hand-maintain a hook mapping; re-diff the spec after upgrading
 the package.
+
+---
+
+## Surface ontology — name the host or fail
+
+Palette mapping is necessary and **not sufficient**. Lightning is a family of hosts
+with different density, CSS, and owned chrome. Cite `lex-*` packs, not a SaaS dashboard.
+
+| Host | Catalog | Density | Notes |
+|---|---|---|---|
+| LEX standard | `lex-record`, `lex-record-narrow` | compact | Record home = highlights (≤4 fields) + Path + Dynamic Forms + related as tabs + activity. Component width is often **~494px**. `@container` on `:host`, never `@media` for that width. |
+| LEX console | `lex-console` | compact | Utility bar is one job, keyboard, no page. Do not paint a second sidebar. |
+| LEX list | `lex-queue` | dense | `lightning-datatable` contracts; **unsupported on Salesforce mobile**. |
+| LWR / Experience | `lex-lwr` | editorial | SLDS 2 unsupported on Experience Cloud. Behance-legal only here, not on LEX. |
+| Email | `lex-email` | 600px tables | `tokens/dist/*/email.*`. |
+| Mobile / Mini | `lex-mobile` | compact | No datatable. Separate page. |
+
+**Belong first.** Clone GridBuddy-shaped density, then one owned empty state or utility-bar command. Do not Linear-ize an LWC.
+
+**Walk `shadowRoot`.** A probe that reports 0/0 is broken. `getComputedStyle` empty string on a `--slds-*` hook is a finding — write the fallback. Custom datatable cells: `data-navigation="enable"` all the way down.
+
+**Stale bundles** cache CSS. After token emit, hard-refresh / bump static resource, not “it looks like the old theme.”
+
+**slds-linter** in `doctor --full` for LEX consumers when `slds-linter` is on PATH. Do not invent a second linter.

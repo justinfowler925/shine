@@ -11,7 +11,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SHINE — a design system agents can’t deviate from</title>
-<meta name="description" content="Notes from building SHINE, a design system an AI agent cannot deviate from — shipped as a skill. The agent is a director: cite a job, apply kit DNA, prove likeness. Measured from 4.5 MB of production CSS.">
+<meta name="description" content="Notes from building SHINE, a design system an AI agent cannot deviate from — shipped as a skill. V2: cite a job, open the DNA pack, apply kit voice, prove completeness and likeness.">
 <meta name="theme-color" content="#080e12">
 <style>
 @layer reset, base, layout, components, utilities;
@@ -370,7 +370,7 @@
 <article>
 
   <header>
-    <p class="meta">Working notes · 19 Aug 2026 · director loop</p>
+    <p class="meta">Working notes · 21 Aug 2026 · v2 visual director</p>
     <h1>A design system agents can’t deviate&nbsp;from</h1>
     <p class="lede">Everyone tries to give the model taste. Cheaper: take away its room to be wrong. Name the job, retrieve a real page, apply that page’s DNA, measure the box.</p>
   </header>
@@ -451,18 +451,18 @@
     <section class="stack">
       <h2>The skill</h2>
       <div class="stack">
-        <p>One git-tracked directory both Claude Code and Cursor symlink. The index is 255 lines, ~14 KB — still inside the 5,000-token window that survives compaction — so catalog cite and the non-negotiables sit at the top. Do not load all twenty-seven references: run <code>corpus/cite.mjs</code>, open the files it lists from <code>~/design-corpus</code>, then the one reference the surface needs. Dedicated executor: <code>shine-ux</code>. Five wirings: per-edit lint, stop-sweep, and the doctor, each on both surfaces. A gate that is not in the doctor does not exist.</p>
+        <p>One git-tracked directory both Claude Code and Cursor symlink. The index is a router — still inside the window that survives compaction — so catalog cite and the non-negotiables sit at the top. Do not load all thirty references: run <code>corpus/cite.mjs</code>, open the DNA pack and the files it lists from <code>~/design-corpus</code>, then the one reference the surface needs. Dedicated executor: <code>shine-ux</code>. Five wirings: per-edit lint, stop-sweep, and the doctor, each on both surfaces. A gate that is not in the doctor does not exist.</p>
         <p>A path-gated skill is an absent skill. This one used to list <code>tsx,jsx,css,html</code>, so it never loaded for UI inside Python, and Brutus shipped 56 raw hex values one glob away from the design authority. Frontmatter is <code>name</code> + <code>description</code> only. Never <code>paths:</code>. Design-lint keys on content, not extension — HTML inside a <code>.py</code> counts.</p>
-        <p>New surfaces start in <strong>Wireframe</strong> (interactive discovery → gray-box from a catalog id → locked brief). Existing surfaces run the director loop: job → diagnose → retrieve → apply DNA → prove. Six modes: Wireframe, Build, Polish, Audit, Copy, Adoption. Spoken voice is a layer on a surface that speaks, not a seventh mode — paint voice is kit-faithful / house / brand. Ambiguity defaults to Wireframe if there is no UI yet, otherwise Build. Two lanes, <span class="mono">brand</span> and <span class="mono">personal</span> — brand and mode swap in the token layer, never in markup. The committed brand lane is placeholder values on purpose; a real palette arrives via <code>SHINE_BRAND_OVERRIDE</code> / <code>brand.local.md</code>, never this tree. House style (the fallback voice): dark-first, dense, instrumental, editorial type. Light is derived, never hand-authored.</p>
+        <p>New surfaces start in <strong>Wireframe</strong> (interactive discovery → gray-box from a catalog id → locked brief + <code>DESIGN.md</code>). Existing surfaces run the director loop: lane → job → diagnose → retrieve pack → apply DNA → prove (measure + critic). Six modes: Wireframe, Build, Polish, Audit, Copy, Adoption. Spoken voice is a layer on a surface that speaks, not a seventh mode — paint voice is kit-faithful / house / brand. Ambiguity defaults to Wireframe if there is no UI yet, otherwise Build. Two lanes, <span class="mono">brand</span> and <span class="mono">personal</span> — brand and mode swap in the token layer, never in markup. The committed brand lane is placeholder values on purpose; a real palette arrives via <code>SHINE_BRAND_OVERRIDE</code> / <code>brand.local.md</code>, never this tree. House style (the fallback voice): dark-first, dense, instrumental, editorial type. Light is derived, never hand-authored.</p>
       </div>
 
       <figure class="files">
 <pre>skill/                        lines
-  <strong>SKILL.md</strong>                    269
+  <strong>SKILL.md</strong>                    279
   references/
     adoption.md                158
     ai-surfaces.md             160
-    anti-patterns.md           126
+    anti-patterns.md           130
     audit.md                    95
     brand.md                    84
     color-type.md              217
@@ -472,29 +472,32 @@
     dashboards.md              220
     dataviz.md                 126
     diagnose.md                165
+    direction.md                53
     ecosystem.md               154
     foundations.md             193
     imagegen.md                 60
     inspiration.md              53
+    interaction.md              43
     kits.md                    114
+    layout.md                   29
     motion.md                  223
     patterns.md                213
     performance.md             121
-    salesforce.md              196
+    salesforce.md              220
     taste.md                   224
     techniques.md               90
-    templates.md               180
+    templates.md               193
     verification.md            280
     voice.md                   119
     voices.md                   38
-    wireframe.md               196
-                            <strong>4,702</strong></pre>
+    wireframe.md               202
+                            <strong>4,884</strong></pre>
         <figcaption class="small subtle">The whole thing. The index is the only part an agent keeps in context.</figcaption>
       </figure>
 
       <ul class="ticks">
-        <li><strong>Catalog cite required.</strong> Run <code>node corpus/cite.mjs &lt;job|screen|id&gt;</code> and open every file it lists from <code>~/design-corpus</code>, plus the Preview. Copy structure and visual DNA; house style is the fallback voice. Naming an id you did not open is inventing — same status as shipping no measure numbers. Rows cover shadcn blocks, MUI templates, Carbon, Ant Design Pro, Mantine, Chakra, HeroUI, Spectrum, Fluent, Magic UI; no row → fill the catalog, then cite.</li>
-        <li><strong>New surfaces start in Wireframe.</strong> Gray-box HTML from the catalog id, then a locked <code>*.brief.md</code>. Build honours the brief and does not re-open structure unless you say <code>unlock structure</code>.</li>
+        <li><strong>Catalog cite required.</strong> Run <code>node corpus/cite.mjs &lt;job|screen|id&gt;</code>, open the DNA pack (<code>corpus/packs/&lt;id&gt;/specimen.html</code>), every listed corpus file, and the Preview. Copy structure and visual DNA; import <code>tokens/voices/&lt;family&gt;.css</code> when kit-faithful. Naming an id you did not open is inventing — same status as shipping no measure numbers. Rows cover shadcn blocks, MUI templates, Carbon, Ant Design Pro, Mantine, Chakra, HeroUI, Spectrum, Fluent, Magic UI, Lightning hosts; no row → fill the catalog, then cite.</li>
+        <li><strong>New surfaces start in Wireframe.</strong> Gray-box HTML from the catalog id, then a locked <code>*.brief.md</code> and <code>DESIGN.md</code>. Build honours the brief and does not re-open structure unless you say <code>unlock structure</code>.</li>
         <li><strong>Internal tools get Adoption before pixels.</strong> Name the meeting the screen runs, what each persona learns here that they cannot get by asking a person, and the path from notification to committed change. A surface nobody opens is a design defect.</li>
         <li><strong>A component name is a complete contract.</strong> “Table” means toolbar, sorting, pagination, sticky header, selection, empty, loading and error states, keyboard access — not bare markup. Opting out takes an explicit “simple”.</li>
         <li><strong>Reports state the numbers used.</strong> “Improved the spacing” doesn’t qualify. “Moved 13px → 12px onto the 4px scale; contrast 4.05:1 → 7.2:1” does.</li>
@@ -569,8 +572,8 @@
       <h2>Measure the box</h2>
       <div class="stack">
         <p>Grepping generated CSS for a token name proves nothing. The string can sit there — present, correct, completely inert — while the browser computes something else. Read the box, not the source.</p>
-        <p>The loop: render in Playwright, read <code>getComputedStyle</code> and <code>getBoundingClientRect</code> across every visible element. UI-band font sizes are capped at the six-step token scale; display sizes (≥32px) are counted separately, max two. Off-scale spacing values are capped at three. Composition hard-fails independently: voids, colliding type steps, undeclared theme, missing or competing filled primaries, app-shell density. Then accessibility, then contrast, then a screenshot critique capped at three passes. <code>--shot</code> is required on Build; the report names the catalog id. Zero measurements is a fail — a probe that finds targets and measures none of them is reporting that it is broken. Resolve colour by painting it, never by parsing a string; this page is OKLCH throughout and a regex that only sees <code>rgb()</code> would skip every element and print PASS.</p>
-        <p class="small subtle"><code>node verify/doctor.mjs</code> is the gate. <code>--ci</code> is 39 checks; the session-start doctor also proves both surfaces’ skill, <code>shine-ux</code>, and hooks. <code>--full</code> runs composition fixtures (launches Chromium). CI runs the same <code>--ci</code> lane on a self-hosted runner; the wiring checks only ever execute on the laptop, so the local doctor stays the gate.</p>
+        <p>The loop: render in Playwright, read <code>getComputedStyle</code> and <code>getBoundingClientRect</code> (including <code>shadowRoot</code> — a 0/0 walk is a fail). UI-band font sizes are capped at the six-step token scale; display sizes (≥32px) are counted separately, max two. Off-scale spacing values are capped at three. Composition hard-fails independently: voids, colliding type steps, undeclared theme, missing or competing filled primaries, app-shell density. Then accessibility, then contrast. <strong>Likeness is a second program:</strong> <code>verify/critic.mjs</code> scores the page against the DNA pack and names a slop class. A Carbon cite that still looks like shadcn zinc fails. Screenshot critique is capped at three critic passes. <code>--shot</code> is required on Build; the report names the catalog id and <code>images_read</code>. Zero measurements is a fail — a probe that finds targets and measures none of them is reporting that it is broken. Resolve colour by painting it, never by parsing a string; this page is OKLCH throughout and a regex that only sees <code>rgb()</code> would skip every element and print PASS.</p>
+        <p class="small subtle"><code>node verify/doctor.mjs</code> is the gate. <code>--ci</code> is 45 checks; the session-start doctor also proves both surfaces’ skill, <code>shine-ux</code>, and hooks. <code>--full</code> runs composition fixtures (launches Chromium). CI runs the same <code>--ci</code> lane on a self-hosted runner; the wiring checks only ever execute on the laptop, so the local doctor stays the gate.</p>
       </div>
 
       <div class="flag stack">

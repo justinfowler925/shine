@@ -17,9 +17,13 @@ Hard bans and common failures. Hitting these is an audit fail (Critical/Major fo
 - Disabled buttons used instead of explaining why action is blocked (prefer helper text)
 - Fake links (`<div onClick>`) for navigation
 
+## Lane-relative craft
+
+Glow, large display type, and full-bleed media are **marketing DNA** (`magicui-hero`). They are a fail on `lex` and `internal` queues. Inverse: Carbon radius-none on a marketing hero is a fail. Load `direction.md` before applying this list.
+
 ## AI visual slop (marketing + generic UI)
 
-Do **not** default to these looks:
+Do **not** default to these looks (lint rule `slop` cannot be pragma-exempted):
 
 1. Purple-on-white or purple→indigo glow gradients
 2. Warm cream canvas (~#F4F1EA) + high-contrast serif display + terracotta accent

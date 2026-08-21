@@ -1,0 +1,11 @@
+{
+  "cite": "shadcn-sidebar-07",
+  "css": {
+    "--shine-font-sans": "ui-sans-serif, system-ui, sans-serif",
+    "--shine-radius-sm": "6px",
+    "--shine-radius-md": "8px",
+    "--shine-radius-lg": "12px",
+    "--shine-duration-fast": "150ms",
+    "--shine-duration-base": "200ms"
+  }
+}

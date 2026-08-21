@@ -149,14 +149,17 @@ Do **not** require craft measure PASS on the gray-box.
 
 ## Locked brief
 
-Write `shine-wireframe/<slug>.brief.md` on lock:
+Write `shine-wireframe/<slug>.brief.md` **and** `DESIGN.md` on lock (`direction.md`):
 
 ```markdown
 # Wireframe brief: <name>
 Status: LOCKED
+Lane: internal | saas | lex | marketing
 Pattern: <patterns.md section>
 Template: <templates.md id> via `node corpus/cite.mjs <id>`
 Opened: <paths cite.mjs listed>
+Pack: corpus/packs/<id>/specimen.html
+images_read: <those paths>
 Primary action: <label>
 Regions:
 - nav — job — templates.md <id>
@@ -167,8 +170,11 @@ Kit recipe: <kits.md name> + corpus paths
 Techniques: <techniques.md rows used>
 Adoption: ritual / persona / path (or n/a)
 HTML: shine-wireframe/<slug>.html
+DESIGN.md: shine-wireframe/<slug>.DESIGN.md
 Unlock: only if user says "unlock structure"
 ```
+
+`DESIGN.md` names: lane, cite, voice, job, signature, palette (from pack), type pairing, layout ASCII, Salesforce host width if lex.
 
 ### Build handoff rules
 

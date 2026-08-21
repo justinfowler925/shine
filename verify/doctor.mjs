@@ -173,7 +173,7 @@ if (!CI) {
 // ---- 2d. root install scripts match the README ---------------------------
 {
   const pkg = JSON.parse(readFileSync(join(SHINE, "package.json"), "utf8"));
-  const need = ["build", "verify", "doctor", "measure", "cite"];
+  const need = ["build", "verify", "doctor", "measure", "cite", "pack", "critic"];
   const missing = need.filter((s) => !pkg.scripts?.[s]);
   if (missing.length) fail("root npm scripts", `package.json missing: ${missing.join(", ")}`);
   else ok("root npm scripts", need.join(", "));
@@ -823,6 +823,10 @@ if (args.includes("--full")) {
     fail("SKILL.md cite command", "missing `corpus/cite.mjs` — naming an id without opening corpus files is how inventing a page becomes legal again");
   else ok("SKILL.md cite command", "corpus/cite.mjs");
 
+  if (!/critic\.mjs/.test(skill) || !/direction\.md/.test(skill))
+    fail("SKILL.md critic + direction", "missing critic.mjs or direction.md — visual DNA without a critic is a slogan");
+  else ok("SKILL.md critic + direction", "critic.mjs + direction.md");
+
   const cite = join(SHINE, "corpus/cite.mjs");
   if (!existsSync(cite)) fail("cite.mjs exists", "corpus/cite.mjs missing");
   else {
@@ -895,7 +899,24 @@ if (args.includes("--full")) {
     const kitPages = ["carbon", "mantine", "magicui", "fluentui", "react-spectrum"];
     const missingKits = kitPages.filter((k) => !(catalog.templates ?? []).some((t) => t.kit === k));
     if (missingKits.length) fail("catalog kit pages", `no cite-able page for: ${missingKits.join(", ")}`);
-    else ok("catalog kit pages", kitPages.join(", "));
+      else ok("catalog kit pages", kitPages.join(", "));
+
+    const startFrom = (catalog.templates ?? []).filter((t) => t.startFrom === 1);
+    const missingPacks = startFrom.filter((t) => !existsSync(join(SHINE, "corpus/packs", t.id, "dna.json")));
+    if (missingPacks.length)
+      fail("DNA packs for startFrom:1", missingPacks.slice(0, 6).map((t) => t.id).join(", ") + " — node corpus/pack.mjs");
+    else ok("DNA packs for startFrom:1", `${startFrom.length} packs`);
+
+    const packCheck = spawnSync(process.execPath, [join(SHINE, "corpus/pack.mjs"), "--check"], { encoding: "utf8" });
+    if (packCheck.status !== 0)
+      fail("pack.mjs --check", (packCheck.stderr || packCheck.stdout || "").trim().slice(0, 240));
+    else ok("pack.mjs --check", (packCheck.stdout || "").trim());
+
+    const voiceCss = join(SHINE, "tokens/voices", "carbon.css");
+    if (!existsSync(voiceCss)) fail("voice pack carbon.css", "tokens/voices/carbon.css missing — pack.mjs");
+    else if (!/IBM Plex Sans/.test(readFileSync(voiceCss, "utf8")))
+      fail("voice pack carbon.css", "does not remap sans to IBM Plex");
+    else ok("voice pack carbon.css", "executable remap");
 
     if (!CI && existsSync(CORPUS)) {
       const missingPaths = (catalog.templates ?? [])
@@ -928,6 +949,28 @@ if (args.includes("--full")) {
   const hits = paintFiles.filter((f) => existsSync(join(SHINE, f)) && BANNED.test(readFileSync(join(SHINE, f), "utf8")));
   if (hits.length) fail("no sanding banner", `banned sentence returned in ${hits.join(", ")}`);
   else ok("no sanding banner", "cite/skill/agent do not print the old paint law");
+}
+
+{
+  const critic = join(SHINE, "verify/critic.mjs");
+  const costume = join(SHINE, "verify/fixtures/carbon-as-shadcn.html");
+  const queue = join(SHINE, "verify/fixtures/queue.html");
+  if (!existsSync(critic)) fail("critic.mjs exists", "verify/critic.mjs missing");
+  else {
+    const bad = spawnSync(process.execPath, [critic, costume, "--cite", "carbon-datatable", "--lane", "saas"], {
+      encoding: "utf8",
+    });
+    if (bad.status === 0)
+      fail("critic carbon-as-shadcn fails", "Geist/zinc costume passed — likeness gate is a slogan");
+    else ok("critic carbon-as-shadcn fails", ((bad.stderr || bad.stdout || "").match(/likeness=\d+/) || ["exit 1"])[0]);
+
+    const good = spawnSync(process.execPath, [critic, queue, "--cite", "carbon-datatable", "--lane", "internal"], {
+      encoding: "utf8",
+    });
+    if (good.status !== 0)
+      fail("critic queue kit-faithful", (good.stderr || good.stdout || "").trim().slice(0, 240));
+    else ok("critic queue kit-faithful", ((good.stdout || "").match(/likeness=\d+/) || ["PASS"])[0]);
+  }
 }
 
 // ---- 7. every reference is reachable from the map, and vice versa ---------

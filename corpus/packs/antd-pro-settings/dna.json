@@ -1,0 +1,43 @@
+{
+  "family": "ant",
+  "density": "dense",
+  "type": {
+    "ui": "system 14",
+    "display": null,
+    "mono": "ui-monospace",
+    "pairing": "system-ui+mono"
+  },
+  "radius": {
+    "control": 4,
+    "card": 6,
+    "sheet": 8,
+    "unit": "px"
+  },
+  "chroma": {
+    "accent": 0.12,
+    "fillMax": 0.06,
+    "neutrals": "gray"
+  },
+  "elevation": "border",
+  "motion": {
+    "modeMs": 200,
+    "enter": "fade"
+  },
+  "grid": "page-header + form/table",
+  "signature": "sectioned settings, not a single card soup",
+  "icon": "ant-design-icons",
+  "photo": "none",
+  "lane": [
+    "internal",
+    "saas"
+  ],
+  "css": {
+    "--shine-font-sans": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "--shine-radius-sm": "2px",
+    "--shine-radius-md": "4px",
+    "--shine-radius-lg": "8px",
+    "--shine-duration-base": "200ms",
+    "--shine-text-base": "0.875rem"
+  },
+  "typeLabel": "system 14"
+}

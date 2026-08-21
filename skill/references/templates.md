@@ -20,6 +20,10 @@ Generated from `corpus/templates.json` â€” do not hand-edit; run `node corpus/in
 | chat | `spectrum-ai-chat` | react-spectrum | `react-spectrum/packages/@react-spectrum/ai/src` |
 | settings | `antd-pro-settings` | ant-design-pro | `ant-design-pro/src/pages/account/settings` |
 | wizard | `antd-pro-step-form` | ant-design-pro | `ant-design-pro/src/pages/form/step-form` |
+| empty | `shine-empty` | slds | `corpus/packs/shine-empty` |
+| command-palette | `shine-command-palette` | shadcn-registry | `corpus/packs/shine-command-palette` |
+| lex-record | `lex-record` | slds | `corpus/packs/lex-record` |
+| lex-record-narrow | `lex-record-narrow` | slds | `corpus/packs/lex-record-narrow` |
 
 First match by `startFrom` wins unless the user names another id. Jobs (`queue`, `settings`, `chat`, â€¦) resolve the same way.
 
@@ -161,12 +165,21 @@ Naming the id without running `cite.mjs` is not a cite. No row for this screen â
 | `spectrum-ai-chat` | chat | 1 | react-spectrum | source | `react-spectrum/packages/@react-spectrum/ai/src` |
 | `antd-pro-chatbot` | chat | 2 | ant-design-pro | source | `ant-design-pro/src/pages/chatbot` |
 | `mui-checkout` | checkout | 1 | mui-material | source | `mui-material/docs/data/material/getting-started/templates/checkout` |
+| `shine-command-palette` | command-palette | 1 | shadcn-registry | pack | `corpus/packs/shine-command-palette` |
 | `mui-crud-dashboard` | crud | 1 | mui-material | source | `mui-material/docs/data/material/getting-started/templates/crud-dashboard` |
 | `antd-pro-crud` | crud | 2 | ant-design-pro | source | `ant-design-pro/src/pages` |
 | `shadcn-dashboard-01` | dashboard | 1 | shadcn-registry | source | `shadcn-registry/items/dashboard-01.json` |
 | `mui-dashboard-analytics` | dashboard | 2 | mui-material | source | `mui-material/docs/data/material/getting-started/templates/dashboard` |
 | `query-shadcn-blocks` | dashboard | 80 | shadcn-registry | query-only | `query-only/query-shadcn-blocks.png` |
 | `query-haze` | dashboard | 90 | haze | query-only | `query-only/query-haze.png` |
+| `shine-empty` | empty | 1 | slds | pack | `corpus/packs/shine-empty` |
+| `lex-console` | lex-console | 1 | slds | pack | `corpus/packs/lex-console` |
+| `lex-email` | lex-email | 1 | slds | pack | `corpus/packs/lex-email` |
+| `lex-lwr` | lex-lwr | 1 | slds | pack | `corpus/packs/lex-lwr` |
+| `lex-mobile` | lex-mobile | 1 | slds | pack | `corpus/packs/lex-mobile` |
+| `lex-queue` | lex-queue | 1 | slds | pack | `corpus/packs/lex-queue` |
+| `lex-record` | lex-record | 1 | slds | pack | `corpus/packs/lex-record` |
+| `lex-record-narrow` | lex-record-narrow | 1 | slds | pack | `corpus/packs/lex-record-narrow` |
 | `mui-marketing-page` | marketing | 1 | mui-material | source | `mui-material/docs/data/material/getting-started/templates/marketing-page` |
 | `query-mui-free-gallery` | marketing | 80 | mui-material | query-only | `query-only/query-mui-free-gallery.png` |
 | `magicui-hero` | marketing-hero | 1 | magicui | source | `magicui/apps/www/registry/magicui/hero-video-dialog.tsx` |
@@ -177,4 +190,4 @@ Naming the id without running `cite.mjs` is not a cite. No row for this screen â
 | `fluent-nav` | settings | 2 | fluentui | source | `fluentui/packages/react-components/react-nav` |
 | `antd-pro-step-form` | wizard | 1 | ant-design-pro | source | `ant-design-pro/src/pages/form/step-form` |
 
-Indexed 132 templates from /Users/justinfowler/design-corpus.
+Indexed 141 templates from /Users/justinfowler/design-corpus.

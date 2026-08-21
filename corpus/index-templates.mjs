@@ -26,6 +26,10 @@ const REQUIRED = [
   "chat",
   "settings",
   "wizard",
+  "empty",
+  "command-palette",
+  "lex-record",
+  "lex-record-narrow",
 ];
 
 const KIT_DNA = {
@@ -146,6 +150,15 @@ const KIT_DNA = {
     elevation: "hairline",
     motion: "150ms",
   },
+  slds: {
+    family: "slds",
+    density: "compact",
+    type: "salesforce-sans 13",
+    radius: "sm",
+    chroma: "medium",
+    elevation: "slds-card",
+    motion: "150ms",
+  },
 };
 
 const SCREEN_JOBS = {
@@ -164,6 +177,14 @@ const SCREEN_JOBS = {
   "marketing-hero": ["marketing-hero", "marketing"],
   empty: ["empty"],
   charts: ["charts"],
+  "command-palette": ["command-palette"],
+  "lex-record": ["lex-record", "record", "detail"],
+  "lex-record-narrow": ["lex-record-narrow", "lex-record"],
+  "lex-console": ["lex-console"],
+  "lex-queue": ["lex-queue", "queue"],
+  "lex-lwr": ["lex-lwr", "marketing"],
+  "lex-email": ["lex-email", "email"],
+  "lex-mobile": ["lex-mobile"],
 };
 
 const exists = (rel) => existsSync(join(CORPUS, rel));
@@ -484,6 +505,89 @@ if (exists("magicui/apps/www/registry/magicui/hero-video-dialog.tsx")) {
     kind: "source",
     startFrom: 1,
     jobs: ["marketing-hero"],
+  });
+}
+
+// ---- in-repo DNA packs (no design-corpus path required) --------------------
+for (const t of [
+  {
+    id: "shine-empty",
+    screen: "empty",
+    kit: "slds",
+    title: "Empty state as a designed success",
+    jobs: ["empty"],
+    dna: KIT_DNA.slds,
+  },
+  {
+    id: "shine-command-palette",
+    screen: "command-palette",
+    kit: "shadcn-registry",
+    title: "Command palette (no motion, keyboard)",
+    jobs: ["command-palette"],
+    dna: KIT_DNA["shadcn-registry"],
+  },
+  {
+    id: "lex-record",
+    screen: "lex-record",
+    kit: "slds",
+    title: "Lightning record home (highlights, path, detail, related)",
+    jobs: ["lex-record", "record", "detail"],
+  },
+  {
+    id: "lex-record-narrow",
+    screen: "lex-record-narrow",
+    kit: "slds",
+    title: "Lightning record LWC at ~494px host",
+    jobs: ["lex-record-narrow", "lex-record"],
+  },
+  {
+    id: "lex-console",
+    screen: "lex-console",
+    kit: "slds",
+    title: "Lightning console + utility bar",
+    startFrom: 1,
+  },
+  {
+    id: "lex-queue",
+    screen: "lex-queue",
+    kit: "slds",
+    title: "Lightning list / work queue (datatable contracts)",
+    startFrom: 1,
+  },
+  {
+    id: "lex-lwr",
+    screen: "lex-lwr",
+    kit: "slds",
+    title: "Experience Cloud LWR (SLDS 2 unsupported)",
+    startFrom: 1,
+  },
+  {
+    id: "lex-email",
+    screen: "lex-email",
+    kit: "slds",
+    title: "Salesforce HTML email (600px tables)",
+    startFrom: 1,
+  },
+  {
+    id: "lex-mobile",
+    screen: "lex-mobile",
+    kit: "slds",
+    title: "Salesforce mobile / Mini (no datatable)",
+    startFrom: 1,
+  },
+]) {
+  push({
+    id: t.id,
+    screen: t.screen,
+    kit: t.kit || "slds",
+    title: t.title,
+    path: `corpus/packs/${t.id}`,
+    preview: "",
+    license: "MIT",
+    kind: "pack",
+    startFrom: t.startFrom ?? 1,
+    jobs: t.jobs || SCREEN_JOBS[t.screen],
+    dna: t.dna || KIT_DNA.slds,
   });
 }
 

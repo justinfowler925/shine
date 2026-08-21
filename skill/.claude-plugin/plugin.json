@@ -1,7 +1,7 @@
 {
   "name": "shine",
-  "description": "Design authority — measured rules, component contracts, and a render-and-measure verification loop.",
-  "version": "0.1.0",
+  "description": "Design authority — visual DNA packs, measured rules, component contracts, and a measure + critic loop.",
+  "version": "2.0.0",
   "author": { "name": "Justin Fowler" },
   "keywords": ["design", "ui", "ux", "tokens", "css", "audit", "accessibility"]
 }

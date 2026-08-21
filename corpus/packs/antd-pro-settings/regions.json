@@ -1,0 +1,14 @@
+[
+  {
+    "name": "header",
+    "job": "title + one primary",
+    "primary": true,
+    "pct": 12
+  },
+  {
+    "name": "focal",
+    "job": "sectioned settings, not a single card soup",
+    "primary": false,
+    "pct": 60
+  }
+]

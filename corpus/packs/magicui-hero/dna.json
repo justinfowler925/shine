@@ -1,0 +1,45 @@
+{
+  "family": "magicui",
+  "density": "editorial",
+  "type": {
+    "ui": "system 16",
+    "display": "display 48–72",
+    "mono": "ui-monospace",
+    "pairing": "display+sans"
+  },
+  "radius": {
+    "control": 12,
+    "card": 20,
+    "sheet": 24,
+    "unit": "px"
+  },
+  "chroma": {
+    "accent": 0.2,
+    "fillMax": 0.12,
+    "neutrals": "near-black"
+  },
+  "elevation": "glow",
+  "motion": {
+    "modeMs": 300,
+    "enter": "scale-0.95"
+  },
+  "grid": "full-bleed hero, type as identity",
+  "signature": "one hero media region, not a KPI row",
+  "icon": "lucide",
+  "photo": "product or generated, never stock people",
+  "lane": [
+    "marketing"
+  ],
+  "css": {
+    "--shine-font-sans": "ui-sans-serif, system-ui, sans-serif",
+    "--shine-radius-sm": "8px",
+    "--shine-radius-md": "16px",
+    "--shine-radius-lg": "24px",
+    "--shine-radius-xl": "32px",
+    "--shine-duration-fast": "200ms",
+    "--shine-duration-base": "300ms",
+    "--shine-text-xl": "2rem",
+    "--shine-text-2xl": "3rem"
+  },
+  "typeLabel": "display"
+}

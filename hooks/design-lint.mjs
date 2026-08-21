@@ -88,6 +88,28 @@ const UNSAFE_TEXT = unsafeTextTokens("personal");
 
 const RULES = ["tailwind", "color", "type", "shadow", "spacing", "contrast"];
 
+// Named 2026 slop — cannot be pragma-exempted. A `shine-lint: off` that also
+// excuses cream-serif / indigo-default / purple-glow is how those looks ship.
+const SLOP = [
+  [/#F4F1EA\b/gi, "cream-serif canvas `#F4F1EA`"],
+  [/#4[Ff]46[Ee]5\b|#6366[Ff]1\b/g, "indigo default"],
+  [/\bbg-indigo-600\b|\bfrom-indigo-(500|600)\b/g, "indigo default"],
+  [/box-shadow:[^;]*(#7[Cc]3[Aa][Ee][Dd]|#6366[Ff]1|purple)/i, "purple glow"],
+];
+
+function slopHits(path, text) {
+  const hard = [];
+  const lines = text.split("\n");
+  lines.forEach((line, i) => {
+    const noComment = line.replace(/\/\*.*?\*\//g, "").replace(/(^|[^:])\/\/.*$/, "$1");
+    for (const [re, label] of SLOP) {
+      re.lastIndex = 0;
+      if (re.test(noComment)) hard.push(`${path}:${i + 1}  visual slop (${label}) — cannot be pragma-exempted; pick a cite DNA`);
+    }
+  });
+  return hard;
+}
+
 // `shine-lint: off` -> every rule (still honoured; fixtures need it, and it is
 // reported on every edit). `shine-lint: off shadow` / `off color,type` -> those only.
 function pragma(head) {
@@ -105,7 +127,7 @@ function lint(path, text) {
   const off = pragma(head);
   if (off?.all) {
     return {
-      hard: [],
+      hard: slopHits(path, text),
       soft: [
         `${path}:1  exempt from shine entirely via \`shine-lint: off\` — every colour, type and ` +
           `shadow check is off here, not just the one you meant. Name the rule instead: ` +
@@ -262,6 +284,7 @@ function lint(path, text) {
     }
   });
 
+  hard.push(...slopHits(path, text));
   return { hard, soft };
 }
 

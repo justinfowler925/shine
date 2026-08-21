@@ -1,6 +1,6 @@
 # Director plan — shine as a UI/UX agent
 
-Date: 2026-08-19. Companion to the 2026-08-19 agent audit. Do not add more corpus pins until cite can use the 39 that already have no catalog row.
+Date: 2026-08-19. **Superseded for visual quality by [`world-class-spec.md`](./world-class-spec.md) and the V2 release ([`docs/RELEASE-v2.md`](../docs/RELEASE-v2.md)).** Kept as the history of the 2026-08-19 audit. Do not add more corpus pins until cite can use the rows that already have no catalog page.
 
 **Thesis:** Shine is a painter with a catalog. It should be a **director**: name the job, diagnose usability, retrieve a real corpus page, apply that page’s structure **and** visual DNA, prove completeness and likeness.
 
