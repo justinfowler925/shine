@@ -30,9 +30,11 @@ Design quality is not opinion. It is what actually registers — measurable, and
 checkable. Everything here is either measured from shipped production CSS, pinned in
 `~/design-corpus`, or verified against a primary source (including Apple HIG via WebFetch).
 
-You are a **UI/UX director**, not a painter with a catalog. Name the job, diagnose
-usability, retrieve a real corpus page, apply that page’s structure **and** visual DNA,
-prove completeness and likeness. Thresholds without a product or kit citation are incomplete.
+You are a **UI/UX director**, not a painter with a catalog. Name the **lane**
+(internal / saas / lex / marketing), name the job, diagnose usability, retrieve a
+real corpus page **and its DNA pack**, apply that page’s structure **and** visual DNA,
+prove completeness (`measure.mjs`) **and** likeness (`critic.mjs`). Thresholds without
+a product or kit citation are incomplete. Read `references/direction.md` before paint.
 
 ---
 
@@ -43,7 +45,7 @@ audit, enter **Wireframe** (`references/wireframe.md`) before Build. Explicit �
 “sketch”, or “low-fi” also enters Wireframe. Skip Wireframe when Polish/Audit targets an
 existing surface.
 
-Wireframe ends at **lock** (gray-box HTML + `*.brief.md`). Build starts from that brief and
+Wireframe ends at **lock** (gray-box HTML + `*.brief.md` + `DESIGN.md`). Build starts from that brief and
 **does not re-open structure** unless the user says “unlock structure.”
 
 ---
@@ -55,10 +57,12 @@ Details: `references/diagnose.md`. If a locked wireframe brief exists for this s
 read it first and treat structure as given.
 
 0. **Catalog cite required.** Name the job (`adoption.md` if internal). Run
-   `node corpus/cite.mjs <job|screen|id>`. Read **every file it lists** and open the
-   Preview. Copy structure **and** the DNA block. Voice is kit-faithful unless house or
-   brand — `voices.md`. Naming an id you did not open is inventing. No row →
-   `inspiration.md` then cite. Do not invent. Do not load all 27 references.
+   `node corpus/cite.mjs <job|screen|id>`. Read **every file it lists**, open the
+   Preview, and **Read the DNA pack** (`corpus/packs/<id>/specimen.html` + `dna.json`).
+   Copy structure **and** the DNA block. Voice is kit-faithful unless house or
+   brand — `voices.md`. Import `tokens/voices/<family>.css` when kit-faithful.
+   Naming an id you did not open is inventing. No row →
+   `inspiration.md` then cite. Do not invent. Do not load all 30 references.
 1. **Surface** — marketing / product / brand-locked / AI / voice / native. Internal tools:
    `adoption.md` **before** pixels.
 2. **Defects** — usability, then completeness (`contracts.md`), composition, craft.
@@ -72,9 +76,11 @@ read it first and treat structure as given.
 4. **Apply** — clone regions **and** visual DNA from the cite. Retune shine tokens to that
    DNA. House style is the fallback voice, not the only paint. Brand lane still sandpapers
    vendor chrome. See `voices.md`.
-5. **Remeasure** — `verify/measure.mjs <path> --shot out.png`. Hard fails block: contracts,
-   likeness (`data-cite` vs DNA), craft. Fail if regions are missing or a Carbon cite
-   still looks like shadcn zinc. Notes do not block. Report catalog id + DNA + numbers.
+5. **Remeasure** — `verify/measure.mjs <path> --shot out.png --cite <id>`. Then
+   `verify/critic.mjs <path> --cite <id> --lane <lane>`. Hard fails block: contracts,
+   critic likeness < 7, slop class on a non-zinc cite, craft. Fail if regions are
+   missing or a Carbon cite still looks like shadcn zinc. Cap three critic passes.
+   Notes do not block. Report catalog id + DNA + `images_read` + numbers.
 6. **Stop** — Critical completeness (including catalog cite) before craft polish.
 
 **Banned report language:** "tighten spacing", "make it cleaner", "more modern" with no
@@ -209,6 +215,9 @@ not kit chrome.
 | `references/voice.md` | Speak/listen surfaces. |
 | `references/voices.md` | House / kit-faithful / brand — pick from the job, not habit. |
 | `references/copy.md` | Persuasion / instructional copy. |
+| `references/direction.md` | **Art direction before code** — lanes, DESIGN.md, 2026 defaults, critic loop. |
+| `references/layout.md` | Grid, optical alignment, host width vs viewport, macrostructure. |
+| `references/interaction.md` | Keyboard, URL state, Fitts/Hick, LEX datatable. |
 
 ## Hard-won specifics
 
@@ -237,8 +246,9 @@ sharp). `verify/deps.mjs` falls back to a sibling checkout only if root deps are
 
 ```sh
 cd ~/Projects/shine && npm install   # once
-node corpus/cite.mjs dashboard        # job or screen; open files + Preview, then draw
-node verify/measure.mjs /abs/path/to/page.html
+node corpus/cite.mjs dashboard        # job or screen; open files + pack specimen, then draw
+node verify/measure.mjs /abs/path/to/page.html --cite shadcn-dashboard-01 --shot /tmp/shot.png
+node verify/critic.mjs /abs/path/to/page.html --cite shadcn-dashboard-01 --lane saas
 ```
 
 ```
@@ -263,7 +273,7 @@ HTTP 200 can be an auth wall. Fail axe `incomplete` too.
 
 ## Reporting
 
-Environment · **catalog id** · DNA · corpus files opened · citations (technique/kit/file:line) · before/after
-numbers · `--shot` path. Never "looks good now." A build that cannot name a catalog id
-**and** the corpus files it opened is incomplete — go open them. Named Table/Form/Dialog/Select
+Environment · **lane** · **catalog id** · DNA · `images_read` · corpus files opened · citations (technique/kit/file:line) · before/after
+numbers · critic likeness · `--shot` path. Never "looks good now." A build that cannot name a catalog id
+**and** the corpus files it opened **and** the pack specimen it read is incomplete — go open them. Named Table/Form/Dialog/Select
 without a contracts MUST checklist (or a measure fail) is incomplete.

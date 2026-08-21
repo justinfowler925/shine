@@ -1,6 +1,6 @@
 {
   "name": "@shine/root",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": "true",
   "type": "module",
   "description": "shine \u2014 design authority. Root deps are the ones the verification loop needs; the token pipeline has its own package.json under tokens/.",
@@ -12,6 +12,8 @@
     "doctor:full": "node verify/doctor.mjs --full",
     "measure": "node verify/measure.mjs",
     "cite": "node corpus/cite.mjs",
+    "pack": "node corpus/pack.mjs",
+    "critic": "node verify/critic.mjs",
     "sync-consumers": "bash scripts/sync-consumers.sh",
     "skill-listing": "node site/scripts/skill-listing.mjs",
     "measure-consumers": "node verify/measure-consumers.mjs"

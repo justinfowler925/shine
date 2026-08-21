@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-19",
+  "generated": "2026-08-21",
   "corpus": "/Users/justinfowler/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
@@ -12,7 +12,11 @@
     "record",
     "chat",
     "settings",
-    "wizard"
+    "wizard",
+    "empty",
+    "command-palette",
+    "lex-record",
+    "lex-record-narrow"
   ],
   "templates": [
     {
@@ -2709,6 +2713,29 @@
       ]
     },
     {
+      "id": "shine-command-palette",
+      "screen": "command-palette",
+      "kit": "shadcn-registry",
+      "title": "Command palette (no motion, keyboard)",
+      "path": "corpus/packs/shine-command-palette",
+      "preview": "",
+      "license": "MIT",
+      "kind": "pack",
+      "startFrom": 1,
+      "jobs": [
+        "command-palette"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable",
+        "type": "geist 14/16",
+        "radius": "lg",
+        "chroma": "low",
+        "elevation": "hairline+soft",
+        "motion": "150ms"
+      }
+    },
+    {
       "id": "mui-crud-dashboard",
       "screen": "crud",
       "kit": "mui-material",
@@ -2847,6 +2874,196 @@
       "jobs": [
         "dashboard"
       ]
+    },
+    {
+      "id": "shine-empty",
+      "screen": "empty",
+      "kit": "slds",
+      "title": "Empty state as a designed success",
+      "path": "corpus/packs/shine-empty",
+      "preview": "",
+      "license": "MIT",
+      "kind": "pack",
+      "startFrom": 1,
+      "jobs": [
+        "empty"
+      ],
+      "dna": {
+        "family": "slds",
+        "density": "compact",
+        "type": "salesforce-sans 13",
+        "radius": "sm",
+        "chroma": "medium",
+        "elevation": "slds-card",
+        "motion": "150ms"
+      }
+    },
+    {
+      "id": "lex-console",
+      "screen": "lex-console",
+      "kit": "slds",
+      "title": "Lightning console + utility bar",
+      "path": "corpus/packs/lex-console",
+      "preview": "",
+      "license": "MIT",
+      "kind": "pack",
+      "startFrom": 1,
+      "jobs": [
+        "lex-console"
+      ],
+      "dna": {
+        "family": "slds",
+        "density": "compact",
+        "type": "salesforce-sans 13",
+        "radius": "sm",
+        "chroma": "medium",
+        "elevation": "slds-card",
+        "motion": "150ms"
+      }
+    },
+    {
+      "id": "lex-email",
+      "screen": "lex-email",
+      "kit": "slds",
+      "title": "Salesforce HTML email (600px tables)",
+      "path": "corpus/packs/lex-email",
+      "preview": "",
+      "license": "MIT",
+      "kind": "pack",
+      "startFrom": 1,
+      "jobs": [
+        "lex-email",
+        "email"
+      ],
+      "dna": {
+        "family": "slds",
+        "density": "compact",
+        "type": "salesforce-sans 13",
+        "radius": "sm",
+        "chroma": "medium",
+        "elevation": "slds-card",
+        "motion": "150ms"
+      }
+    },
+    {
+      "id": "lex-lwr",
+      "screen": "lex-lwr",
+      "kit": "slds",
+      "title": "Experience Cloud LWR (SLDS 2 unsupported)",
+      "path": "corpus/packs/lex-lwr",
+      "preview": "",
+      "license": "MIT",
+      "kind": "pack",
+      "startFrom": 1,
+      "jobs": [
+        "lex-lwr",
+        "marketing"
+      ],
+      "dna": {
+        "family": "slds",
+        "density": "compact",
+        "type": "salesforce-sans 13",
+        "radius": "sm",
+        "chroma": "medium",
+        "elevation": "slds-card",
+        "motion": "150ms"
+      }
+    },
+    {
+      "id": "lex-mobile",
+      "screen": "lex-mobile",
+      "kit": "slds",
+      "title": "Salesforce mobile / Mini (no datatable)",
+      "path": "corpus/packs/lex-mobile",
+      "preview": "",
+      "license": "MIT",
+      "kind": "pack",
+      "startFrom": 1,
+      "jobs": [
+        "lex-mobile"
+      ],
+      "dna": {
+        "family": "slds",
+        "density": "compact",
+        "type": "salesforce-sans 13",
+        "radius": "sm",
+        "chroma": "medium",
+        "elevation": "slds-card",
+        "motion": "150ms"
+      }
+    },
+    {
+      "id": "lex-queue",
+      "screen": "lex-queue",
+      "kit": "slds",
+      "title": "Lightning list / work queue (datatable contracts)",
+      "path": "corpus/packs/lex-queue",
+      "preview": "",
+      "license": "MIT",
+      "kind": "pack",
+      "startFrom": 1,
+      "jobs": [
+        "lex-queue",
+        "queue"
+      ],
+      "dna": {
+        "family": "slds",
+        "density": "compact",
+        "type": "salesforce-sans 13",
+        "radius": "sm",
+        "chroma": "medium",
+        "elevation": "slds-card",
+        "motion": "150ms"
+      }
+    },
+    {
+      "id": "lex-record",
+      "screen": "lex-record",
+      "kit": "slds",
+      "title": "Lightning record home (highlights, path, detail, related)",
+      "path": "corpus/packs/lex-record",
+      "preview": "",
+      "license": "MIT",
+      "kind": "pack",
+      "startFrom": 1,
+      "jobs": [
+        "lex-record",
+        "record",
+        "detail"
+      ],
+      "dna": {
+        "family": "slds",
+        "density": "compact",
+        "type": "salesforce-sans 13",
+        "radius": "sm",
+        "chroma": "medium",
+        "elevation": "slds-card",
+        "motion": "150ms"
+      }
+    },
+    {
+      "id": "lex-record-narrow",
+      "screen": "lex-record-narrow",
+      "kit": "slds",
+      "title": "Lightning record LWC at ~494px host",
+      "path": "corpus/packs/lex-record-narrow",
+      "preview": "",
+      "license": "MIT",
+      "kind": "pack",
+      "startFrom": 1,
+      "jobs": [
+        "lex-record-narrow",
+        "lex-record"
+      ],
+      "dna": {
+        "family": "slds",
+        "density": "compact",
+        "type": "salesforce-sans 13",
+        "radius": "sm",
+        "chroma": "medium",
+        "elevation": "slds-card",
+        "motion": "150ms"
+      }
     },
     {
       "id": "mui-marketing-page",

@@ -13,10 +13,10 @@ Pick the voice from the **job**, not from habit. Cite prints the DNA block; appl
 
 ## How to apply DNA
 
-1. Open the cite preview (URL or PNG) **before** drawing.
-2. Clone regions from the listed files.
-3. Map paint onto shine **semantic** tokens (`bg-surface`, `text-fg`, `shadow-md`) whose **values** express the DNA — not the house defaults when they fight the cite.
-4. Brand lane: keep the regions; replace chroma, type family, and logos with the brand pack.
+1. Open the cite preview (URL or PNG) **and** `corpus/packs/<id>/specimen.html` **before** drawing. Report `images_read`.
+2. Clone regions from the listed files and `regions.json`.
+3. Import **`tokens/voices/<family>.css`** — that file is the remap. Semantic tokens (`bg-surface`, `text-fg`, `shadow-md`) keep their names; **values** come from the pack.
+4. Brand lane: keep the regions; replace chroma, type family, and logos with the brand pack. Do not import a vendor voice onto Clearspeed.
 
 Do not overwrite Carbon density or MUI marketing type with house style. That is the
 sanding this file exists to stop.

@@ -92,7 +92,9 @@ if (!row) {
   );
 }
 
-const abs = join(CORPUS, row.path);
+const abs = row.kind === "pack"
+  ? join(SHINE, "corpus/packs", row.id)
+  : join(CORPUS, row.path);
 const listed = [];
 
 const walk = (dir, acc, depth = 0) => {
@@ -148,7 +150,7 @@ if (row.kind === "query-only") {
   listed.push(abs);
 }
 
-if (row.kind === "source" && !existsSync(abs)) {
+if (row.kind === "source" && !existsSync(abs) && row.kind !== "pack") {
   die(2, `cite: ${row.id} path missing: ${abs}\nrun: corpus/acquire.sh`);
 }
 
@@ -160,6 +162,11 @@ const dnaLine = ["family", "density", "type", "radius", "chroma", "elevation", "
   .map((k) => `${k}=${dna[k]}`)
   .join(" ");
 
+const packDir = join(SHINE, "corpus/packs", row.id);
+const packFiles = ["specimen.html", "dna.json", "notes.md", "regions.json", "remap.json"]
+  .map((f) => join(packDir, f))
+  .filter((p) => existsSync(p));
+
 process.stdout.write(`Template: ${row.id}
 Screen: ${row.screen}
 Kit: ${row.kit}
@@ -170,18 +177,21 @@ Preview: ${row.preview || ""}
 License: ${row.license || ""}
 Voice: kit-faithful (default). House is fallback. Brand sandpapers chrome — references/voices.md
 DNA: ${dnaLine}
-Apply this DNA. Retune shine tokens to it. Do not overwrite with house style unless the user asked for shine-native or the lane is brand.
+Apply this DNA. Import tokens/voices/${dna.family}.css when kit-faithful. Do not overwrite with house style unless the user asked for shine-native or the lane is brand.
 
-Open the Preview (URL or PNG) before drawing — vision is part of the cite.
+Open the Preview (URL or PNG) and the DNA pack before drawing — vision is part of the cite.
+Pack: ${packFiles.length ? packDir : "(missing — run node corpus/pack.mjs)"}
+Voice CSS: tokens/voices/${dna.family}.css
 
 Read these files before drawing:
 `);
+for (const f of packFiles) process.stdout.write(`  ${f}\n`);
 for (const f of show) process.stdout.write(`  ${f}\n`);
 if (extra) process.stdout.write(`  … ${extra} more under ${abs} — rg, do not read the tree\n`);
 if (row.kind === "query-only") {
   process.stdout.write("\nQuery-only: screenshot gallery. Copy regions from the shot; do not clone vendor source.\n");
-} else if (!files.length) {
+} else if (!files.length && !packFiles.length) {
   process.stdout.write("\nNo files listed — rg that path, then draw from what you open.\n");
 }
-process.stdout.write("\nDo not draw until every listed file has been opened.\n");
+process.stdout.write("\nDo not draw until every listed file has been opened. Report images_read.\n");
 process.exit(0);

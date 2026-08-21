@@ -329,7 +329,18 @@ const compose = await page.evaluate(() => {
     const r = el.getBoundingClientRect();
     return r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== "hidden";
   };
-  const all = [...document.querySelectorAll("body *")].filter(vis);
+  const walk = (root, acc = []) => {
+    const nodes = root.querySelectorAll("*");
+    for (const el of nodes) {
+      acc.push(el);
+      if (el.shadowRoot) walk(el.shadowRoot, acc);
+    }
+    return acc;
+  };
+  const start = document.body || document.documentElement;
+  const walked = walk(start);
+  const all = walked.filter(vis);
+  const emptyWalk = walked.length === 0;
   const viewport = innerWidth * innerHeight;
   const name = (el) =>
     el.tagName.toLowerCase() +
@@ -528,6 +539,14 @@ const compose = await page.evaluate(() => {
   const slotSidebar = !!document.querySelector("[data-slot='sidebar']");
   const bodyFont = getComputedStyle(document.body).fontFamily;
 
+  const hookMisses = [];
+  const blob =
+    [...document.querySelectorAll("style")].map((s) => s.textContent || "").join("\n") +
+    [...document.querySelectorAll("[style]")].map((el) => el.getAttribute("style") || "").join(";");
+  for (const h of new Set([...blob.matchAll(/--slds-[a-z0-9-]+/g)].map((m) => m[0]))) {
+    if (!getComputedStyle(document.documentElement).getPropertyValue(h).trim()) hookMisses.push(h);
+  }
+
   return {
     voids: voids.sort((a, b) => b.pct - a.pct),
     collisions,
@@ -558,6 +577,8 @@ const compose = await page.evaluate(() => {
     slotSidebar,
     bodyFont,
     regionCiteCount: citeEls.length,
+    emptyWalk,
+    hookMisses,
   };
 });
 
@@ -686,6 +707,16 @@ if (!isWireframe && !themeSwitches && !themeDeclaredSingle) {
 // Hierarchy — promoted from notes after an app shipped dozens of peer Deletes and zero primary.
 // Controls with no filled treatment: nothing reads as the next action.
 // More than two filled treatments: competing primaries dilute the job.
+if (compose.emptyWalk) {
+  failures.push(
+    `walk: 0 nodes from host — start at shadowRoot and refuse 0/0 (LEX synthetic shadow). A probe that measures nothing is broken, not clean`,
+  );
+}
+if ((compose.hookMisses || []).length) {
+  failures.push(
+    `hooks: ${compose.hookMisses.slice(0, 5).join(", ")} resolve to empty on :root — read getComputedStyle and write the measured fallback`,
+  );
+}
 if (compose.controlCount > 0 && compose.filledCount === 0) {
   failures.push(
     `hierarchy: ${compose.controlCount} controls and 0 filled (primary-looking) treatments — ` +

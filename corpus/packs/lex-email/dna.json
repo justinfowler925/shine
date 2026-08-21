@@ -1,0 +1,42 @@
+{
+  "family": "slds",
+  "density": "compact",
+  "type": {
+    "ui": "Salesforce Sans 13/16",
+    "display": null,
+    "mono": "Salesforce Sans Mono",
+    "pairing": "salesforce-sans — never a second face in LEX"
+  },
+  "radius": {
+    "control": 4,
+    "card": 8,
+    "sheet": 8,
+    "unit": "px"
+  },
+  "chroma": {
+    "accent": 0.1,
+    "fillMax": 0.05,
+    "neutrals": "cloud"
+  },
+  "elevation": "slds-card",
+  "motion": {
+    "modeMs": 150,
+    "enter": "none"
+  },
+  "grid": "highlights + path + detail + related",
+  "signature": "one owned empty state or utility-bar command — not a custom nav",
+  "icon": "slds",
+  "photo": "none",
+  "lane": [
+    "lex"
+  ],
+  "css": {
+    "--shine-font-sans": "var(--slds-g-font-family-base, \"Salesforce Sans\", sans-serif)",
+    "--shine-radius-sm": "0.25rem",
+    "--shine-radius-md": "0.5rem",
+    "--shine-duration-base": "150ms",
+    "--shine-text-sm": "0.8125rem",
+    "--shine-text-base": "0.8125rem"
+  },
+  "typeLabel": "salesforce-sans 13"
+}

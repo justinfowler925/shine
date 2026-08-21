@@ -1,0 +1,14 @@
+{
+  "cite": "magicui-hero",
+  "css": {
+    "--shine-font-sans": "ui-sans-serif, system-ui, sans-serif",
+    "--shine-radius-sm": "8px",
+    "--shine-radius-md": "16px",
+    "--shine-radius-lg": "24px",
+    "--shine-radius-xl": "32px",
+    "--shine-duration-fast": "200ms",
+    "--shine-duration-base": "300ms",
+    "--shine-text-xl": "2rem",
+    "--shine-text-2xl": "3rem"
+  }
+}

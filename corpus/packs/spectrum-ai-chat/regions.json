@@ -1,0 +1,14 @@
+[
+  {
+    "name": "header",
+    "job": "title + one primary",
+    "primary": true,
+    "pct": 12
+  },
+  {
+    "name": "focal",
+    "job": "prompt field as the primary, not a chat bubble stack",
+    "primary": false,
+    "pct": 60
+  }
+]

@@ -1,16 +1,17 @@
 # SHINE
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-stone.svg)](./LICENSE)
+[![Release](https://img.shields.io/badge/release-v2.0.0-0c0a09.svg)](https://github.com/justinfowler925/shine/releases/tag/v2.0.0)
 [![Site](https://img.shields.io/badge/site-shine--blond.vercel.app-0c0a09.svg)](https://shine-blond.vercel.app)
 [![Skill](https://img.shields.io/badge/skill-%2Fshine-a8a29e.svg)](./skill/SKILL.md)
 [![Doctor](https://img.shields.io/badge/doctor-local%20gate-16a34a.svg)](./verify/doctor.mjs)
 [![Corpus](https://img.shields.io/badge/corpus-~1.2GB%20sparse-3f3f46.svg)](./skill/references/corpus.md)
 
-**A design system agents can’t deviate from — and a UI/UX director that retrieves a real page, applies its DNA, and proves likeness.**
+**A design system agents can’t deviate from — and a visual director that retrieves a real page, opens its DNA pack, applies that kit’s voice, and proves both completeness and likeness.**
 
-Shine owns the token layer, the design corpus, the agent skill, and the measure loop. New screens start in **Wireframe** (interactive discovery → gray-box HTML → locked brief). Existing surfaces run **job → diagnose → retrieve → apply DNA → prove**. House style is the fallback voice, not the only paint. Hooks block off-token writes on Cursor and Claude Code; `doctor.mjs` proves the wiring bites.
+Shine owns the token layer, the design corpus, the agent skill, and the measure loop. **V2** adds visual DNA packs, executable voice CSS, a critic that fails kit costumes, and Salesforce host lanes. New screens start in **Wireframe** (interactive discovery → gray-box HTML → locked brief + `DESIGN.md`). Existing surfaces run **lane → job → diagnose → retrieve pack → apply DNA → prove (measure + critic)**. House style is the fallback voice, not the only paint. Hooks block off-token writes on Cursor and Claude Code; `doctor.mjs` proves the wiring bites.
 
-**Site:** [shine-blond.vercel.app](https://shine-blond.vercel.app) · **Registry:** [`npx shadcn add`](https://shine-blond.vercel.app/r/) · **Repo:** [`justinfowler925/shine`](https://github.com/justinfowler925/shine)
+**Site:** [shine-blond.vercel.app](https://shine-blond.vercel.app) · **Registry:** [`npx shadcn add`](https://shine-blond.vercel.app/r/) · **Repo:** [`justinfowler925/shine`](https://github.com/justinfowler925/shine) · **Release:** [v2.0.0](https://github.com/justinfowler925/shine/releases/tag/v2.0.0)
 
 ---
 
@@ -19,12 +20,14 @@ Shine owns the token layer, the design corpus, the agent skill, and the measure 
 | Layer | What it does |
 | --- | --- |
 | **UI/UX agent** | `/shine` skill + `shine-ux` subagent — Wireframe, Build, Polish, Audit, Copy, Adoption |
+| **DNA packs** | `corpus/packs/<id>/` — specimen + expanded DNA. Open the pack, not just the Preview URL |
 | **Technique transfer** | Measured rules from 18 products + pinned kits (shadcn, Radix, Carbon, Ant, MUI, Spectrum, Fluent, APG, …) |
 | **Tokens** | One DTCG source → CSS, Tailwind v4, artifacts, Python, email, Docs, Office, Salesforce |
+| **Voices** | `tokens/voices/<family>.css` — kit-faithful remaps that change emitted `--shine-*` |
 | **Corpus** | `~/design-corpus` — sparse upstream source; `rg` before inventing any API |
-| **Enforcement** | design-lint + stop-sweep on both surfaces; no raw hex / off-scale / hand-rolled shadow |
-| **Verification** | `measure.mjs` — computed styles, axe, per-pixel contrast, composition hard-fails |
-| **Doctor** | `verify/doctor.mjs` — wiring, gate bite, token emit, agent/skill symlinks |
+| **Enforcement** | design-lint + stop-sweep; slop (cream/indigo/glow) cannot be pragma-exempted |
+| **Verification** | `measure.mjs` (compliance) + `critic.mjs` (likeness / slop). Carbon-as-zinc fails |
+| **Doctor** | `verify/doctor.mjs` — wiring, gate bite, packs, critic fixtures |
 
 ---
 
@@ -40,6 +43,8 @@ Shine owns the token layer, the design corpus, the agent skill, and the measure 
 | **Adoption** | Will anyone open it? Ritual, persona, path — first for internal tools |
 
 Default: **Wireframe** if new; otherwise **Build** unless the ask is clearly a review.
+
+**V2 notes:** [docs/RELEASE-v2.md](./docs/RELEASE-v2.md) · [CHANGELOG](./CHANGELOG.md)
 
 ---
 

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "header",
+    "job": "title + one primary",
+    "primary": true,
+    "pct": 12
+  },
+  {
+    "name": "focal",
+    "job": "none — default SaaS chrome; do not use as a distinctive identity",
+    "primary": false,
+    "pct": 60
+  }
+]
