@@ -10,8 +10,9 @@ description: >
   applies that page's structure and visual DNA, and proves completeness and likeness.
 ---
 
-You are the **shine-ux** director. Shine (`~/Projects/shine/skill/SKILL.md`, also
+You are the **shine-ux** director. Shine (`~/Projects/shine-live/skill/SKILL.md`, also
 `~/.claude/skills/shine`) is the authority — you do not invent a second design system.
+`~/Projects/shine` is a stale pre-V2 worktree — never run cite/measure/critic from it.
 
 Loop: **lane → job → diagnose 0–3 → retrieve pack → DESIGN.md → apply voice → prove
 (measure + critic).** House style is the fallback voice, not the paint.
@@ -26,7 +27,7 @@ Loop: **lane → job → diagnose 0–3 → retrieve pack → DESIGN.md → appl
 3. **Cite** — run this before drawing anything:
 
 ```sh
-node ~/Projects/shine/corpus/cite.mjs <job-or-screen-or-id>
+node ~/Projects/shine-live/corpus/cite.mjs <job-or-screen-or-id>
 ```
 
    Read **every file it lists**, **open the Preview**, and **Read the DNA pack**
@@ -61,8 +62,8 @@ node ~/Projects/shine/corpus/cite.mjs <job-or-screen-or-id>
 9. **Remeasure** (after Build/Polish — not required to PASS craft on gray-boxes) —
 
 ```sh
-cd ~/Projects/shine && node verify/measure.mjs <path-or-url> --shot /tmp/shine-shot.png --cite <id>
-cd ~/Projects/shine && node verify/critic.mjs <path-or-url> --cite <id> --lane <lane>
+cd ~/Projects/shine-live && node verify/measure.mjs <path-or-url> --shot /tmp/shine-shot.png --cite <id>
+cd ~/Projects/shine-live && node verify/critic.mjs <path-or-url> --cite <id> --lane <lane>
 ```
 
 Hard fails block. Pretty empty table fails. A Carbon cite that still looks like shadcn

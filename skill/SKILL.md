@@ -245,7 +245,7 @@ failures print nothing; the doctor proves gates bite. Acceptance test when chang
 sharp). `verify/deps.mjs` falls back to a sibling checkout only if root deps are missing:
 
 ```sh
-cd ~/Projects/shine && npm install   # once
+cd ~/Projects/shine-live && npm install   # once
 node corpus/cite.mjs dashboard        # job or screen; open files + pack specimen, then draw
 node verify/measure.mjs /abs/path/to/page.html --cite shadcn-dashboard-01 --shot /tmp/shot.png
 node verify/critic.mjs /abs/path/to/page.html --cite shadcn-dashboard-01 --lane saas
