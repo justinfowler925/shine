@@ -32,6 +32,7 @@ import { tmpdir, homedir } from "node:os";
 import { NODE_PATH } from "./deps.mjs";
 import { inspectPack } from "../corpus/pack-files.mjs";
 import { citeGaps } from "../hooks/cite-gate.mjs";
+import { proveGaps, writeProveReceipt } from "../hooks/receipt.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const HOME = homedir();
@@ -352,6 +353,13 @@ if (!CI) {
   else ok("plugin hooks.json", "PostToolUse + Stop");
 }
 
+{
+  const leftoverLive = join(HOME, "Projects/shine-live");
+  if (existsSync(leftoverLive))
+    fail("no leftover shine-live", `${leftoverLive} still exists — skills load shine-deploy; remove that worktree`);
+  else ok("no leftover shine-live", "load path is shine-deploy only");
+}
+
 // ---- 4. the gates actually bite -------------------------------------------
 // A gate never observed failing is decoration. Feed each one a known violation
 // inside a .py, which is the shape that slipped past every earlier version.
@@ -461,6 +469,14 @@ if (!CI) {
   if (citeGaps([cited]).length) fail("cite gate allows a cited page", "data-cite still flagged");
   else ok("cite gate allows a cited page", "data-cite present");
 
+  process.env.SHINE_RECEIPT = join(dir, "last-prove.json");
+  if (!proveGaps(["carbon-datatable"]).length) fail("prove gate bites", "missing receipt was allowed");
+  else ok("prove gate bites", "no compare.mjs receipt is a gap");
+  writeProveReceipt({ cite: "carbon-datatable" });
+  if (proveGaps(["carbon-datatable"]).length) fail("prove gate accepts a receipt", "fresh receipt still flagged");
+  else ok("prove gate accepts a receipt", "compare.mjs receipt matches cite");
+  delete process.env.SHINE_RECEIPT;
+
   // Stop sweep, both surfaces, over a real git repo.
   const git = (...a) => spawnSync("git", a, { cwd: dir, encoding: "utf8" });
   git("init", "-q", ".");
@@ -477,6 +493,38 @@ if (!CI) {
   if (claude.status === 0 && /"decision"\s*:\s*"block"/.test(claude.stdout))
     ok("stop sweep blocks (Claude Code contract)");
   else fail("stop sweep blocks (Claude Code contract)", `exit ${claude.status}, stdout ${JSON.stringify(claude.stdout.slice(0, 120))}`);
+
+  const proveDir = mkdtempSync(join(tmpdir(), "shine-prove-"));
+  const proveHtml = join(proveDir, "app.html");
+  writeFileSync(proveHtml, '<!doctype html><html><body><main data-cite="carbon-datatable">ok</main></body></html>\n');
+  const gitP = (...a) => spawnSync("git", a, { cwd: proveDir, encoding: "utf8" });
+  gitP("init", "-q", ".");
+  gitP("add", "-A");
+  const rec = join(proveDir, "last-prove.json");
+  const feedProve = (event) =>
+    spawnSync("node", [sweep], {
+      input: JSON.stringify({ ...event, cwd: proveDir }),
+      encoding: "utf8",
+      env: { ...process.env, SHINE_RECEIPT: rec },
+    });
+  const noProve = feedProve({ hook_event_name: "stop", conversation_id: "doctor" });
+  if (noProve.status === 2 && /compare\.mjs/.test(noProve.stderr)) ok("stop sweep requires prove", "cited page without compare is blocked");
+  else fail("stop sweep requires prove", `exit ${noProve.status}: ${(noProve.stderr || noProve.stdout).slice(0, 160)}`);
+  process.env.SHINE_RECEIPT = rec;
+  writeProveReceipt({ cite: "carbon-datatable" });
+  delete process.env.SHINE_RECEIPT;
+  const yesProve = feedProve({ hook_event_name: "stop", conversation_id: "doctor" });
+  if (yesProve.status === 0) ok("stop sweep accepts a proved cite", "receipt present");
+  else fail("stop sweep accepts a proved cite", `exit ${yesProve.status}: ${(yesProve.stderr || yesProve.stdout).slice(0, 160)}`);
+
+  const afterPaint = join(SHINE, "verify/fixtures/unfucked/after.html");
+  const afterSrc = readFileSync(afterPaint, "utf8");
+  if (/shine-lint:\s*off/.test(afterSrc)) fail("pragma-free kit paint", "unfucked/after.html carries a shine-lint pragma");
+  else {
+    const lintAfter = spawnSync("node", [lint, afterPaint], { encoding: "utf8" });
+    if (lintAfter.status === 0) ok("pragma-free kit paint", "after.html lints clean, no pragma");
+    else fail("pragma-free kit paint", `lint exit ${lintAfter.status}: ${(lintAfter.stderr || "").slice(0, 160)}`);
+  }
 }
 
 // ---- 4b. the composition gate bites, and does not cry wolf ----------------
@@ -1115,6 +1163,14 @@ if (args.includes("--full")) {
       const gout = `${good.stdout}${good.stderr}`;
       if (good.status === 0 && /palette/.test(gout)) ok("compare accepts the unfuck after", "exit 0");
       else fail("compare accepts the unfuck after", `exit ${good.status}: ${gout.slice(0, 240)}`);
+      const zinc = join(SHINE, "verify/fixtures/zinc-on-carbon.html");
+      const zrun = spawnSync(process.execPath, [compare, zinc, "--cite", "carbon-datatable", "--out", join(tmpdir(), "shine-doctor-zinc.png")], {
+        encoding: "utf8",
+        env: { ...process.env, NODE_PATH },
+      });
+      const zout = `${zrun.stdout}${zrun.stderr}`;
+      if (zrun.status === 1 && /not a relative/.test(zout)) ok("compare rejects zinc-on-carbon", "exit 1 — zinc paint is not Carbon");
+      else fail("compare rejects zinc-on-carbon", `exit ${zrun.status}: ${zout.slice(0, 240)}`);
     }
   }
 }

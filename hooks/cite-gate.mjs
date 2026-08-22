@@ -8,13 +8,13 @@ import { readFileSync } from "node:fs";
 
 const PAGE_EXT = /\.(html|tsx|jsx|svelte|vue)$/;
 const HOST_EXT = /\.(py|go|rb)$/;
-const EXEMPT = /(^|\/)(corpus|tokens|verify\/fixtures|site|hooks|node_modules|dist)\//;
+export const CITE_EXEMPT = /(^|\/)(corpus|tokens|verify\/fixtures|site|hooks|node_modules|dist)\//;
 const CITE = /data-cite\s*=\s*["'][\w-]+["']|<!--\s*cite:\s*[\w-]+/;
 
 export function citeGaps(paths, readText = (p) => readFileSync(p, "utf8")) {
   const gaps = [];
   for (const p of paths) {
-    if (EXEMPT.test(p.replace(/\\/g, "/"))) continue;
+    if (CITE_EXEMPT.test(p.replace(/\\/g, "/"))) continue;
     if (!PAGE_EXT.test(p) && !HOST_EXT.test(p)) continue;
     let text;
     try {

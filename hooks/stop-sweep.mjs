@@ -6,13 +6,15 @@
 // written via Bash (heredocs, sed, generators) — by sweeping
 // `git status --porcelain` for modified design files when the agent stops.
 
+import { readFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 import { isDesignCandidate } from "./design-lint.mjs";
-import { citeGaps } from "./cite-gate.mjs";
+import { citeGaps, CITE_EXEMPT } from "./cite-gate.mjs";
+import { citeIdsIn, proveGaps } from "./receipt.mjs";
 
 const LINT = join(dirname(fileURLToPath(import.meta.url)), "design-lint.mjs");
 
@@ -87,6 +89,25 @@ process.stdin.on("end", () => {
       "shine cite (stop sweep): UI written this turn has no catalog cite (`data-cite` or `<!-- cite: id -->`):\n" +
         gaps.slice(0, 8).join("\n") +
         "\nLaunch shine-ux; do not freelance the page.",
+      event,
+    );
+  }
+
+  const ids = [];
+  for (const f of changed) {
+    if (CITE_EXEMPT.test(f.replace(/\\/g, "/"))) continue;
+    try {
+      ids.push(...citeIdsIn(readFileSync(f, "utf8")));
+    } catch {
+      /* unreadable */
+    }
+  }
+  const missingProve = proveGaps(ids);
+  if (missingProve.length) {
+    failClosed(
+      "shine prove (stop sweep): UI cited this turn was not run through compare.mjs:\n" +
+        missingProve.join("\n") +
+        "\nProve with verify/compare.mjs --cite <id> before finishing.",
       event,
     );
   }
