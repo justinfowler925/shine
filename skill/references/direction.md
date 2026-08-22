@@ -19,26 +19,22 @@ Anti-patterns are **lane-relative**. Glow is a marketing DNA option and a saas/l
 ## Two-pass plan (write `DESIGN.md`)
 
 1. **Ground the subject.** One concrete subject, audience, single job of the page.
-2. **Cite.** `node corpus/cite.mjs <job>` — **Read both pack PNGs / `specimen.html`** before drawing. Report `images_read`.
-3. **Token plan.** 4–6 named roles from the DNA pack or brand pack — not invented hex.
-4. **Type.** Display / body / data pairing from the pack. LEX: Salesforce Sans only.
-5. **Layout.** ASCII + pack `regions.json`.
+2. **Match.** `node corpus/cite.mjs "<job>"` — read the harvested shot (or preview) and the extracted source before drawing.
+3. **Token plan.** 4–6 named roles from the voice sheet / kit tokens or brand pack — declared as custom properties, never invented hex at usage sites.
+4. **Type.** Display / body / data pairing from the kit. LEX: Salesforce Sans only.
+5. **Layout.** ASCII regions cloned from the template's source.
 6. **Signature.** One sentence. Marketing required. LEX: empty state, Path, or utility-bar command — not a custom nav.
-7. **Uniqueness pass.** Replay a similar brief in your head. If the plan matches cream `#F4F1EA` + serif + terracotta, OLED + acid-green, broadsheet hairlines, or indigo-on-zinc, revise that axis.
+7. **Uniqueness pass.** Replay a similar brief in your head. A plan that would be emitted for any similar brief is not a plan — find the axis this brief actually pins.
 8. **Chanel.** Remove one accessory. Spend boldness in one place.
 
 Then build. Do not invent a second DESIGN.md. Unlock structure to change regions.
 
-## 2026 defaults (not choices)
+## Defaults are hypotheses, not choices
 
-These are legitimate for some briefs and illegal as unexamined defaults:
-
-1. Warm cream canvas (`#F4F1EA`) + high-contrast serif + terracotta
-2. Near-black + single acid-green or vermilion
-3. Broadsheet: hairline rules, zero radius, dense newspaper columns
-4. Indigo/violet gradient hero, Inter everywhere, 3-column feature grid
-
-Where the brief pins a look, follow it. Where it leaves an axis free, do not spend that freedom on (1)–(4).
+Cream+serif+terracotta, OLED+acid-green, broadsheet hairlines, and indigo-on-zinc are
+the four looks a model reaches for unprompted. Any of them can be right **when the brief
+pins it**; reaching for one because the axis was free is not a decision. The real
+anti-slop mechanism is the template: match a real screen and follow its DNA.
 
 ## Modes (Impeccable)
 
@@ -47,7 +43,7 @@ Where the brief pins a look, follow it. Where it leaves an axis free, do not spe
 ## After first paint
 
 1. `node verify/measure.mjs <path> --shot out.png --cite <id>`
-2. `node verify/critic.mjs <path> --cite <id> --lane <lane>`
-3. If critic likeness < 7, revise **once** against the pack specimen, then remeasure. Cap three critic passes.
+2. `node verify/compare.mjs <path> --cite <id>` when the template has a harvested shot —
+   read the composite; if the two sides don't read as relatives, fix the match or the paint.
 
 Banned report language: "tighten spacing", "more modern", "shine-paint".

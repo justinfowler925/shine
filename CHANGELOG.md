@@ -2,6 +2,55 @@
 
 All notable changes to Shine are documented here. Public releases follow [Keep a Changelog](https://keepachangelog.com/) and [SemVer](https://semver.org/).
 
+## [3.0.0] — 2026-08-21
+
+Shine V3 is the unfuck. An audit (docs/audit-2026-08-21.md) measured V2's retrieval layer
+as fiction: the DNA packs were generated placeholder stubs, the critic scored "likeness"
+by grepping page source for data-* attributes (a one-button page scored 10/10 against the
+Carbon datatable), the voice sheets carried zero colors while the lint banned raw color
+values — so kit paint was unexpressible — and the executor hardcoded a stale pre-V2
+checkout. V3 deletes the theater and makes retrieval real.
+
+### Removed
+
+- `verify/critic.mjs` — the regex likeness gate trained attribute-stamping; kept as a
+  regression: `verify/fixtures/attribute-stamp.html` must never be blessed by anything
+- `corpus/packs/*` stub specimens, `corpus/pack.mjs`, `corpus/dna-families.json`
+- `skill/references/inspiration.md` (the mandatory row-authoring detour) and the cite
+  liturgy — `images_read`, "naming an id you did not open is inventing", pack-PNG
+  instructions for PNGs that never existed
+- The 141-row catalog flood: 71 chart demos, wildcard sidebars/logins, and the
+  self-citing `lex-*`/`shine-*` rows that pointed at shine's own generated stubs
+
+### Added
+
+- `corpus/cite.mjs` v2 — plain-words matching ("settings page" resolves), ≤3 results,
+  registry JSON auto-extracted to readable `.tsx` under `corpus/extracted/`, pack shots
+  and kit token sheets surfaced as they land
+- `verify/compare.mjs` — side-by-side composite of your page and the template's
+  harvested shot, plus measured facts (fonts, heading sizes, radii, palette). No score,
+  no verdict; refuses to run without real pixels
+- Doctor: packs must carry real full-page shots (≥30KB) or report honestly as
+  unharvested; compare honesty checks; cite synonym checks; no-liturgy invariants
+
+### Changed
+
+- SKILL.md rewritten around **look → name → match → restructure → repaint → prove**;
+  the rendered page is read before it is diagnosed
+- Kit paint is legal: values live in custom-property definitions (voice sheets, pack
+  `tokens.css`, or the page's token block); usage sites say `var(--…)`
+- `verify/measure.mjs` likeness checks key off the `--cite` flag + catalog family,
+  never off page attributes; the data-cite attestation failure is gone
+- Catalog regenerated: 41 curated rows, every one a real composed screen, component
+  set, or an honest `blueprint` row (LEX)
+- Slop lists and "2026 defaults" downgraded from bans to lane-relative guidance — the
+  template's real pixels are the anti-slop mechanism
+
+### Pending (Phase 2)
+
+- `corpus/harvest.mjs`: full-page screenshots + kit token sheets (colors included) for
+  every catalog row; voice sheets regenerated with real paint
+
 ## [2.0.0] — 2026-08-21
 
 Shine V2 is a **visual director**, not a completeness-only auditor. V1 could retrieve a catalog id and still paint every screen as the same zinc dashboard. V2 ships DNA packs the agent must open, executable voice CSS, a critic that fails a Carbon cite in Geist chrome, and Salesforce host lanes.

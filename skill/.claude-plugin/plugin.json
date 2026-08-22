@@ -1,7 +1,17 @@
 {
   "name": "shine",
-  "description": "Design authority — visual DNA packs, measured rules, component contracts, and a measure + critic loop.",
+  "description": "Design authority \u2014 real kit templates with readable source, measured craft rules, component contracts, and a measure + compare loop.",
   "version": "2.0.0",
-  "author": { "name": "Justin Fowler" },
-  "keywords": ["design", "ui", "ux", "tokens", "css", "audit", "accessibility"]
+  "author": {
+    "name": "Justin Fowler"
+  },
+  "keywords": [
+    "design",
+    "ui",
+    "ux",
+    "tokens",
+    "css",
+    "audit",
+    "accessibility"
+  ]
 }

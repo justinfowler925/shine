@@ -59,7 +59,13 @@ Delete or gut, in one PR, so the skill stops actively lying:
 | The self-citing `lex-*`/`shine-*` catalog rows (`kind: pack`) and the 71 `charts` demo rows | Self-reference and inventory noise (§6) |
 | `~/Projects/shine` stale worktree (after Phase 0 lands) | Split brain (§7) |
 
-Collapse references: 31 files → ~15. Merge diagnose+audit+patterns+layout+interaction →
+**Deviation recorded during execution (2026-08-21):** reading the references proved the
+library itself is earned, measured content — the bullshit was the mandatory-path ceremony
+(cite liturgy, packs, critic), not the on-demand files. So the ceremony died completely,
+diagnose/voices/direction were rewritten, inspiration.md deleted — and taste/color-type/
+motion/foundations/layout/interaction/audit/anti-patterns/etc. were kept intact rather
+than blended into fewer, blurrier files. Original intent for the record: collapse 31
+files → ~15. Merge diagnose+audit+patterns+layout+interaction →
 `ux.md`; color-type+motion+foundations+taste numbers → `craft.md`; voices → `paint.md`;
 techniques/kits/ecosystem essentials fold into `corpus.md` and SKILL.md. Keep intact:
 `contracts.md`, `adoption.md`, `salesforce.md`, `dataviz.md`, `wireframe.md` (trimmed),

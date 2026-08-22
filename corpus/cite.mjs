@@ -1,16 +1,17 @@
 #!/usr/bin/env node
-// cite.mjs — turn a job, screen type, or catalog id into files the agent must open.
-//
-// Naming an id is not a cite. This command is. Draw after reading what it lists
-// AND after opening the Preview (URL or PNG). Apply the DNA block — house style
-// is the fallback voice, not the paint law.
+// cite.mjs — turn a job (in plain words) into a template you can actually see and read.
 //
 //   node corpus/cite.mjs dashboard
+//   node corpus/cite.mjs "settings page"
 //   node corpus/cite.mjs queue
-//   node corpus/cite.mjs mui-blog
 //   node corpus/cite.mjs --list
+//
+// Output per match: the pack screenshot when harvested (read it first — pixels are
+// the design), readable source files (registry JSON is extracted to real .tsx on
+// the fly), the kit's voice sheet, and the preview URL. No liturgy: the files are
+// listed because they are useful, not because reading them is a ritual.
 
-import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
@@ -18,27 +19,13 @@ import { homedir } from "node:os";
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CORPUS = resolve(process.env.DESIGN_CORPUS || join(homedir(), "design-corpus"));
 const CATALOG = join(SHINE, "corpus/templates.json");
-const CODE = /\.(tsx|ts|jsx|js|mdx)$/;
+const EXTRACT = join(SHINE, "corpus/extracted");
+const CODE = /\.(tsx|ts|jsx|js|mdx|html|css)$/;
 const SKIP = /(?:^|\/)(?:test|tests|__tests__)|\.test\.|\.spec\.|\.stories\.|-test\./i;
 const PREFER =
   /(?:^|\/)(readme|page|layout|app|index|dashboard|data-table|datatable|chat|settings|wizard|profile|shell)/i;
 const DEMOTE = /(?:^|\/)(card|badge|accordion|checkbox|calendar|divider)\./i;
-
-const HOUSE_DNA = {
-  family: "shine",
-  density: "dense",
-  type: "editorial 14/15",
-  radius: "sm",
-  chroma: "0.13-0.24",
-  elevation: "hairline",
-  motion: "150ms",
-};
-
-const ALIAS = {
-  detail: "record",
-  hero: "marketing-hero",
-  "empty-state": "empty",
-};
+const STOP = new Set(["a", "an", "the", "page", "screen", "view", "ui", "for", "of", "my", "our", "new"]);
 
 const die = (code, msg) => {
   process.stderr.write(msg.endsWith("\n") ? msg : msg + "\n");
@@ -49,56 +36,88 @@ if (!existsSync(CATALOG)) die(2, `cite: missing ${CATALOG}`);
 const catalog = JSON.parse(readFileSync(CATALOG, "utf8"));
 const templates = catalog.templates ?? [];
 
-const arg = process.argv[2];
-if (!arg || arg === "-h" || arg === "--help") {
-  die(
-    1,
-    `usage: node corpus/cite.mjs <job|screen|id>\n       node corpus/cite.mjs --list\n\nOpen every file this prints, and the Preview, before drawing. Naming an id is not a cite.`,
-  );
-}
-
-if (arg === "--list") {
-  const rows = templates
-    .filter((t) => t.startFrom === 1)
-    .sort((a, b) => a.screen.localeCompare(b.screen));
-  process.stdout.write("screen\t\tid\tjobs\n");
-  for (const t of rows) process.stdout.write(`${t.screen}\t${t.id}\t${(t.jobs || []).join(",")}\n`);
+const arg = process.argv.slice(2).filter((a) => !a.startsWith("-")).join(" ").trim();
+if (process.argv.includes("--list")) {
+  process.stdout.write("screen\tid\tkind\tjobs\n");
+  for (const t of templates) process.stdout.write(`${t.screen}\t${t.id}\t${t.kind}\t${(t.jobs || []).join(",")}\n`);
   process.exit(0);
 }
+if (!arg) {
+  die(1, `usage: node corpus/cite.mjs <job, in plain words>\n       node corpus/cite.mjs --list`);
+}
 
-const byStart = (a, b) => (a.startFrom ?? 99) - (b.startFrom ?? 99) || a.id.localeCompare(b.id);
+// ---- match: exact id/screen/job first, then token overlap --------------------
+const tokens = arg
+  .toLowerCase()
+  .split(/[^a-z0-9]+/)
+  .filter((t) => t && !STOP.has(t));
 
-const resolveRow = (key, seen = new Set()) => {
-  if (seen.has(key)) return null;
-  seen.add(key);
-  const byId = templates.find((t) => t.id === key);
-  if (byId) return byId;
-  const byScreen = templates.filter((t) => t.screen === key).sort(byStart);
-  if (byScreen[0]) return byScreen[0];
-  const byJob = templates.filter((t) => (t.jobs ?? []).includes(key)).sort(byStart);
-  if (byJob[0]) return byJob[0];
-  const aliased = ALIAS[key];
-  if (aliased) return resolveRow(aliased, seen);
-  return null;
+const score = (t) => {
+  const jobs = (t.jobs ?? []).map((j) => j.toLowerCase());
+  const words = new Set(
+    [t.id, t.screen, ...jobs, ...(t.title || "").toLowerCase().split(/[^a-z0-9]+/)].flatMap((w) =>
+      String(w).toLowerCase().split(/[^a-z0-9]+/),
+    ),
+  );
+  let s = 0;
+  const q = tokens.join("-");
+  if (t.id === q || t.id === arg) s += 100;
+  if (t.screen === q) s += 60;
+  if (jobs.includes(q)) s += 60;
+  for (const tok of tokens) {
+    if (t.screen === tok) s += 40;
+    if (jobs.includes(tok)) s += 40;
+    else if (words.has(tok)) s += 10;
+  }
+  return s;
 };
 
-const row = resolveRow(arg);
-if (!row) {
-  const screens = [...new Set(templates.map((t) => t.screen))].sort().join(", ");
+// Threshold 40 = at least one screen/job/id hit. Title-word overlap alone (10/token)
+// must not resolve — "definitely-not-a-template" once matched a row via the word
+// "template" in a title, which is how garbage queries get confident answers.
+const ranked = templates
+  .map((t) => ({ t, s: score(t) }))
+  .filter((r) => r.s >= 40)
+  .sort((a, b) => b.s - a.s || (a.t.startFrom ?? 99) - (b.t.startFrom ?? 99) || a.t.id.localeCompare(b.t.id));
+
+if (!ranked.length) {
   const jobs = [...new Set(templates.flatMap((t) => t.jobs ?? []))].sort().join(", ");
   die(
     1,
-    `cite: unknown ${JSON.stringify(arg)}\nknown screens: ${screens}\nknown jobs: ${jobs}\nids: node corpus/cite.mjs --list, or pick from skill/references/templates.md`,
+    `cite: nothing matches ${JSON.stringify(arg)}\nknown jobs: ${jobs}\n` +
+      `No row for this screen? Start from the nearest row + references/patterns.md; ` +
+      `add a row (corpus/index-templates.mjs) after the screen ships, if it earned it.`,
   );
 }
 
-const abs = row.kind === "pack"
-  ? join(SHINE, "corpus/packs", row.id)
-  : join(CORPUS, row.path);
+const row = ranked[0].t;
+const alternates = ranked.slice(1, 3).map((r) => r.t).filter((t) => t.id !== row.id);
+
+// ---- collect readable source --------------------------------------------------
+// shadcn registry items embed TSX as JSON strings with a 28k-char longest line —
+// unreadable through any file reader. Extract to real files once, list those.
 const listed = [];
 
+const extractRegistryItem = (jsonPath, id) => {
+  const outDir = join(EXTRACT, id);
+  const item = JSON.parse(readFileSync(jsonPath, "utf8"));
+  const files = item.files ?? [];
+  if (!files.length) return [jsonPath];
+  const out = [];
+  for (const f of files) {
+    if (!f.path || typeof f.content !== "string") continue;
+    const rel = f.path.replace(/^registry\/[^/]+\//, "");
+    const dest = join(outDir, rel);
+    mkdirSync(dirname(dest), { recursive: true });
+    // idempotent: rewrite only when stale
+    if (!existsSync(dest) || readFileSync(dest, "utf8") !== f.content) writeFileSync(dest, f.content);
+    out.push(dest);
+  }
+  return out.length ? out : [jsonPath];
+};
+
 const walk = (dir, acc, depth = 0) => {
-  if (acc.length >= 80 || depth > 4) return;
+  if (acc.length >= 60 || depth > 4) return;
   let ents = [];
   try {
     ents = readdirSync(dir, { withFileTypes: true });
@@ -114,13 +133,7 @@ const walk = (dir, acc, depth = 0) => {
   const readme = ents.find((e) => e.isFile() && /^readme/i.test(e.name));
   if (readme) acc.push(join(dir, readme.name));
   for (const e of ents.filter(
-    (e) =>
-      e.isDirectory() &&
-      e.name !== "node_modules" &&
-      e.name !== ".git" &&
-      e.name !== "__tests__" &&
-      e.name !== "test" &&
-      e.name !== "tests",
+    (e) => e.isDirectory() && !["node_modules", ".git", "__tests__", "test", "tests"].includes(e.name),
   )) {
     walk(join(dir, e.name), acc, depth + 1);
   }
@@ -128,70 +141,61 @@ const walk = (dir, acc, depth = 0) => {
 
 const rank = (p) => {
   const base = p.split("/").pop() || p;
-  const rest = p.includes("#") ? p.split("#")[1] : p;
-  if (/^readme/i.test(base)) return 0;
-  if (/(?:^|\/)page\.(tsx|ts|jsx|js)$/i.test(rest) || /^page\./i.test(base)) return 1;
+  if (/^readme/i.test(base)) return 1;
+  if (/^page\./i.test(base)) return 0;
   if (PREFER.test(base)) return 2;
-  if (DEMOTE.test(rest) || DEMOTE.test(base)) return 4;
+  if (DEMOTE.test(base)) return 4;
   return 3;
 };
 
-if (row.kind === "query-only") {
+const abs = row.path ? join(CORPUS, row.path) : "";
+if (row.kind === "source" && abs && existsSync(abs)) {
+  if (abs.endsWith(".json")) listed.push(...extractRegistryItem(abs, row.id));
+  else if (statSync(abs).isDirectory()) walk(abs, listed);
+  else listed.push(abs);
+} else if (row.kind === "query-only" && abs) {
   listed.push(abs);
-} else if (existsSync(abs) && abs.endsWith(".json")) {
-  const item = JSON.parse(readFileSync(abs, "utf8"));
-  listed.push(abs);
-  for (const f of item.files ?? []) {
-    if (f.path) listed.push(`${abs}#${f.path}`);
-  }
-} else if (existsSync(abs) && statSync(abs).isDirectory()) {
-  walk(abs, listed);
-} else if (existsSync(abs)) {
-  listed.push(abs);
-}
-
-if (row.kind === "source" && !existsSync(abs) && row.kind !== "pack") {
+} else if (row.kind === "source" && abs) {
   die(2, `cite: ${row.id} path missing: ${abs}\nrun: corpus/acquire.sh`);
 }
 
 const files = [...new Set(listed)].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
-const extra = files.length > 16 ? files.length - 16 : 0;
-const show = files.slice(0, 16);
-const dna = { ...HOUSE_DNA, ...(row.dna || {}) };
-const dnaLine = ["family", "density", "type", "radius", "chroma", "elevation", "motion"]
-  .map((k) => `${k}=${dna[k]}`)
-  .join(" ");
+const show = files.slice(0, 10);
+const extra = files.length - show.length;
 
+// ---- pack (harvested pixels) ---------------------------------------------------
 const packDir = join(SHINE, "corpus/packs", row.id);
-const packFiles = ["specimen.html", "dna.json", "notes.md", "regions.json", "remap.json"]
-  .map((f) => join(packDir, f))
-  .filter((p) => existsSync(p));
+const shot = join(packDir, "shot.png");
+const packTokens = join(packDir, "tokens.css");
+const family = row.dna?.family || "shine";
+const voiceCss = join(SHINE, "tokens/voices", `${family}.css`);
 
-process.stdout.write(`Template: ${row.id}
-Screen: ${row.screen}
-Kit: ${row.kit}
-Kind: ${row.kind}
-Jobs: ${(row.jobs || []).join(", ") || "(none)"}
-Path: ${abs}
-Preview: ${row.preview || ""}
-License: ${row.license || ""}
-Voice: kit-faithful (default). House is fallback. Brand sandpapers chrome — references/voices.md
-DNA: ${dnaLine}
-Apply this DNA. Import tokens/voices/${dna.family}.css when kit-faithful. Do not overwrite with house style unless the user asked for shine-native or the lane is brand.
-
-Open the Preview (URL or PNG) and the DNA pack before drawing — vision is part of the cite.
-Pack: ${packFiles.length ? packDir : "(missing — run node corpus/pack.mjs)"}
-Voice CSS: tokens/voices/${dna.family}.css
-
-Read these files before drawing:
-`);
-for (const f of packFiles) process.stdout.write(`  ${f}\n`);
-for (const f of show) process.stdout.write(`  ${f}\n`);
-if (extra) process.stdout.write(`  … ${extra} more under ${abs} — rg, do not read the tree\n`);
-if (row.kind === "query-only") {
-  process.stdout.write("\nQuery-only: screenshot gallery. Copy regions from the shot; do not clone vendor source.\n");
-} else if (!files.length && !packFiles.length) {
-  process.stdout.write("\nNo files listed — rg that path, then draw from what you open.\n");
+const out = [];
+out.push(`Template: ${row.id} — ${row.title || ""}`);
+out.push(`Kit: ${row.kit}   Kind: ${row.kind}   License: ${row.license || ""}`);
+out.push(`Jobs: ${(row.jobs || []).join(", ")}`);
+if (existsSync(shot)) {
+  out.push(`Shot: ${shot}   ← read this image first; the pixels are the design`);
+} else if (row.preview) {
+  out.push(`Shot: none harvested yet — preview: ${row.preview}`);
+} else if (row.kind === "blueprint") {
+  out.push(`Shot: none — blueprint row; structure lives in ${row.note || "references/salesforce.md"}`);
 }
-process.stdout.write("\nDo not draw until every listed file has been opened. Report images_read.\n");
+if (existsSync(packTokens)) out.push(`Kit tokens: ${packTokens}`);
+if (existsSync(voiceCss)) out.push(`Voice sheet: tokens/voices/${family}.css (import when kit-faithful)`);
+out.push(`Family: ${family}   Density: ${row.dna?.density || ""}`);
+if (show.length) {
+  out.push(``);
+  out.push(`Source (readable${files.some((f) => f.startsWith(EXTRACT)) ? ", extracted from registry JSON" : ""}):`);
+  for (const f of show) out.push(`  ${f}`);
+  if (extra > 0) out.push(`  … ${extra} more — rg under ${abs}`);
+}
+if (alternates.length) {
+  out.push(``);
+  out.push(`Also consider:`);
+  for (const alt of alternates) out.push(`  ${alt.id} — ${alt.title || alt.screen} (node corpus/cite.mjs ${alt.id})`);
+}
+out.push(``);
+out.push(`Copy the regions from the source; paint with the voice sheet / kit tokens (or house/brand lane). references/voices.md.`);
+process.stdout.write(out.join("\n") + "\n");
 process.exit(0);

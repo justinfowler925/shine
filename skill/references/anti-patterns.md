@@ -23,7 +23,7 @@ Glow, large display type, and full-bleed media are **marketing DNA** (`magicui-h
 
 ## AI visual slop (marketing + generic UI)
 
-Do **not** default to these looks (lint rule `slop` cannot be pragma-exempted):
+Do **not** default to these looks — reach for them only when the brief pins them:
 
 1. Purple-on-white or purple→indigo glow gradients
 2. Warm cream canvas (~#F4F1EA) + high-contrast serif display + terracotta accent

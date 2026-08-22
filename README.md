@@ -7,9 +7,9 @@
 [![Doctor](https://img.shields.io/badge/doctor-local%20gate-16a34a.svg)](./verify/doctor.mjs)
 [![Corpus](https://img.shields.io/badge/corpus-~1.2GB%20sparse-3f3f46.svg)](./skill/references/corpus.md)
 
-**A design system agents can’t deviate from — and a visual director that retrieves a real page, opens its DNA pack, applies that kit’s voice, and proves both completeness and likeness.**
+**A design system agents can’t deviate from — and a UX director that looks at the rendered page, names what is wrong, matches a real template from the design kits, and proves the fix with pixels.**
 
-Shine owns the token layer, the design corpus, the agent skill, and the measure loop. **V2** adds visual DNA packs, executable voice CSS, a critic that fails kit costumes, and Salesforce host lanes. New screens start in **Wireframe** (interactive discovery → gray-box HTML → locked brief + `DESIGN.md`). Existing surfaces run **lane → job → diagnose → retrieve pack → apply DNA → prove (measure + critic)**. House style is the fallback voice, not the only paint. Hooks block off-token writes on Cursor and Claude Code; `doctor.mjs` proves the wiring bites.
+Shine owns the token layer, the design corpus, the agent skill, and the measure loop. **V3** deleted the fiction V2 shipped — generated "DNA pack" stubs, a likeness score computed by grepping the page source for attributes, and a cite ritual policing files nobody could read (the full teardown is in [docs/audit-2026-08-21.md](./docs/audit-2026-08-21.md)) — and replaced it with retrieval that hands the agent something real: `corpus/cite.mjs` resolves a job in plain words to ≤3 templates, extracts registry JSON into readable source, and points at harvested screenshots as they land. New screens start in **Wireframe** (interactive discovery → gray-box HTML → locked brief + `DESIGN.md`). Existing surfaces run **look → name → match → restructure → repaint → prove (measure + compare)**. Hooks block off-token writes on Cursor and Claude Code; `doctor.mjs` proves the wiring bites.
 
 **Site:** [shine-blond.vercel.app](https://shine-blond.vercel.app) · **Registry:** [`npx shadcn add`](https://shine-blond.vercel.app/r/) · **Repo:** [`justinfowler925/shine`](https://github.com/justinfowler925/shine) · **Release:** [v2.0.0](https://github.com/justinfowler925/shine/releases/tag/v2.0.0)
 
@@ -20,14 +20,14 @@ Shine owns the token layer, the design corpus, the agent skill, and the measure 
 | Layer | What it does |
 | --- | --- |
 | **UI/UX agent** | `/shine` skill + `shine-ux` subagent — Wireframe, Build, Polish, Audit, Copy, Adoption |
-| **DNA packs** | `corpus/packs/<id>/` — specimen + expanded DNA. Open the pack, not just the Preview URL |
+| **Templates** | `corpus/cite.mjs "<job>"` — 41 curated rows, synonym matching, registry JSON auto-extracted to readable source, harvested shots as Phase 2 lands |
 | **Technique transfer** | Measured rules from 18 products + pinned kits (shadcn, Radix, Carbon, Ant, MUI, Spectrum, Fluent, APG, …) |
 | **Tokens** | One DTCG source → CSS, Tailwind v4, artifacts, Python, email, Docs, Office, Salesforce |
-| **Voices** | `tokens/voices/<family>.css` — kit-faithful remaps that change emitted `--shine-*` |
+| **Voices** | `tokens/voices/<family>.css` + the kit's own token sources — kit paint is legal via custom-property definitions |
 | **Corpus** | `~/design-corpus` — sparse upstream source; `rg` before inventing any API |
-| **Enforcement** | design-lint + stop-sweep; slop (cream/indigo/glow) cannot be pragma-exempted |
-| **Verification** | `measure.mjs` (compliance) + `critic.mjs` (likeness / slop). Carbon-as-zinc fails |
-| **Doctor** | `verify/doctor.mjs` — wiring, gate bite, packs, critic fixtures |
+| **Enforcement** | design-lint + stop-sweep, per-edit and turn-end, on both surfaces |
+| **Verification** | `measure.mjs` (axe, per-pixel contrast, composition, family checks) + `compare.mjs` (side-by-side pixels, facts, no verdict) |
+| **Doctor** | `verify/doctor.mjs` — wiring, gate bite (seeded violations), pack pixels, compare honesty |
 
 ---
 
@@ -279,7 +279,7 @@ See [`tokens/README.md`](./tokens/README.md) § Private brand lanes.
 | Check | How |
 | --- | --- |
 | Wiring + gates + tokens | `node verify/doctor.mjs` (and `--full` for composition fixtures) |
-| GitHub Actions | Dormant by design — local doctor is the gate |
+| GitHub Actions | `doctor` on every PR via the self-hosted runner (justin-macbook-shine) |
 | License | MIT |
 | Homepage | https://shine-blond.vercel.app |
 
@@ -316,6 +316,10 @@ Never add `paths:` / `globs:` to `skill/SKILL.md` frontmatter — a path-gated a
 ---
 
 ## Deep dive
+
+> Historical research notes from V1/V2. The V2 'DNA pack / critic' design described below
+> was measured as fiction and demolished on 2026-08-21 — see [docs/audit-2026-08-21.md](./docs/audit-2026-08-21.md)
+> and [docs/unfuck-plan.md](./docs/unfuck-plan.md) for what replaced it.
 
 Why this exists, corpus/token/registry research, enforcement detail, budgets, and earned traps — receipts for agents and humans.
 
