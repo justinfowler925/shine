@@ -154,7 +154,7 @@ hard-fails until Build; structure rules still apply. Run from shine's own deps
 (`npm install` once at the repo root):
 
 ```sh
-cd ~/Projects/shine-live && npm install                   # once
+cd ~/Projects/shine-deploy && npm install                   # once
 node corpus/cite.mjs "<job>"                              # match: templates + source + shot
 node verify/measure.mjs <path> --shot /tmp/shot.png --cite <id>
 node verify/compare.mjs <path> --cite <id>                # side-by-side vs harvested shot
