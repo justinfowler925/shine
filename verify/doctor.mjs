@@ -916,10 +916,22 @@ if (args.includes("--full")) {
     }
 
     const voiceCss = join(SHINE, "tokens/voices", "carbon.css");
-    if (!existsSync(voiceCss)) fail("voice pack carbon.css", "tokens/voices/carbon.css missing — pack.mjs");
+    if (!existsSync(voiceCss)) fail("voice pack carbon.css", "tokens/voices/carbon.css missing");
     else if (!/IBM Plex Sans/.test(readFileSync(voiceCss, "utf8")))
       fail("voice pack carbon.css", "does not remap sans to IBM Plex");
     else ok("voice pack carbon.css", "executable remap");
+
+    // V2's voice sheets carried ZERO colors while the lint banned raw color values,
+    // so kit paint was unexpressible and everything converged to house style
+    // (docs/audit-2026-08-21.md §5). The four full kits must carry real paint.
+    const thin = [];
+    for (const fam of ["carbon", "shadcn-zinc", "material", "ant"]) {
+      const p = join(SHINE, "tokens/voices", `${fam}.css`);
+      const n = existsSync(p) ? (readFileSync(p, "utf8").match(/--shine-color-/g) || []).length : 0;
+      if (n < 5) thin.push(`${fam}: ${n} color tokens`);
+    }
+    if (thin.length) fail("voice sheets carry real paint", thin.join("; ") + " — a colorless voice is the V2 lie");
+    else ok("voice sheets carry real paint", "carbon, shadcn-zinc, material, ant");
 
     if (!CI && existsSync(CORPUS)) {
       const missingPaths = (catalog.templates ?? [])
@@ -971,17 +983,24 @@ if (args.includes("--full")) {
     if (/likeness/i.test(src.replace(/\/\/[^\n]*/g, "")))
       fail("compare has no score", "compare.mjs computes a likeness value — that is the dead gate returning");
     else ok("compare has no score", "facts + composite only");
-    const r = spawnSync(process.execPath, [compare, stamp, "--cite", "carbon-datatable"], { encoding: "utf8" });
+    // Refusal path must hold even after harvest: point at an id that will never
+    // have a pack. This runs at session start, so it must not launch Chromium —
+    // compare exits before loading playwright when the shot is missing.
+    const r = spawnSync(process.execPath, [compare, stamp, "--cite", "lex-record"], { encoding: "utf8" });
     const out = `${r.stdout}${r.stderr}`;
-    const hasShot = existsSync(join(SHINE, "corpus/packs/carbon-datatable/shot.png"));
-    if (!hasShot) {
-      // Pre-harvest: it must REFUSE, not bless.
-      if (r.status === 2 && /Refusing to compare/.test(out)) ok("compare refuses without pixels", "exit 2");
-      else fail("compare refuses without pixels", `exit ${r.status}: ${out.slice(0, 160)}`);
-    } else {
-      // Post-harvest: it reports facts and never a verdict, even for the stamp page.
-      if (/PASS|FAIL|likeness/i.test(out)) fail("compare stays verdict-free", out.slice(0, 160));
-      else ok("compare stays verdict-free", "facts only on the stamp fixture");
+    if (r.status === 2 && /Refusing to compare/.test(out)) ok("compare refuses without pixels", "exit 2");
+    else fail("compare refuses without pixels", `exit ${r.status}: ${out.slice(0, 160)}`);
+    // Live run (Chromium) only under --full: even the attribute-stamp page gets
+    // facts and a composite, never a verdict.
+    if (args.includes("--full") && existsSync(join(SHINE, "corpus/packs/carbon-datatable/shot.png"))) {
+      const live = spawnSync(process.execPath, [compare, stamp, "--cite", "carbon-datatable", "--out", join(tmpdir(), "shine-doctor-compare.png")], {
+        encoding: "utf8",
+        env: { ...process.env, NODE_PATH },
+      });
+      const lout = `${live.stdout}${live.stderr}`;
+      if (live.status === 0 && !/PASS|FAIL|likeness/i.test(lout) && /palette/.test(lout))
+        ok("compare stays verdict-free", "facts + composite on the stamp fixture");
+      else fail("compare stays verdict-free", `exit ${live.status}: ${lout.slice(0, 200)}`);
     }
   }
 }

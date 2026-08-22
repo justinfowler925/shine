@@ -46,10 +46,18 @@ checkout. V3 deletes the theater and makes retrieval real.
 - Slop lists and "2026 defaults" downgraded from bans to lane-relative guidance — the
   template's real pixels are the anti-slop mechanism
 
-### Pending (Phase 2)
+### Phase 2 (same day)
 
-- `corpus/harvest.mjs`: full-page screenshots + kit token sheets (colors included) for
-  every catalog row; voice sheets regenerated with real paint
+- `corpus/harvest.mjs`: 26 packs harvested — full-page screenshots of the REAL screens
+  (shadcn /view routes, MUI live templates, Ant Pro preview, Carbon storybook, Magic UI,
+  Mantine, Fluent, Tremor, HeroUI), each with `meta.json` provenance. Skips are named,
+  never silent (LEX blueprints and Spectrum ai-chat have no public renderable target).
+- Voice sheets carry real paint: carbon/shadcn-zinc/material/ant hold the kits' actual
+  colors, verified against pinned sources and cited per value; mantine/fluent carry
+  verified primaries; slds maps onto org-measured styling hooks.
+- Doctor: packs must hold ≥30KB real shots (seeded-violation proven), voice sheets must
+  carry ≥5 color tokens for the four full kits (seeded-violation proven), compare's live
+  run stays verdict-free even on the attribute-stamp fixture.
 
 ## [2.0.0] — 2026-08-21
 
