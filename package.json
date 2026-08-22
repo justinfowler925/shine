@@ -12,6 +12,7 @@
     "doctor:full": "node verify/doctor.mjs --full",
     "measure": "node verify/measure.mjs",
     "cite": "node corpus/cite.mjs",
+    "materialize": "node corpus/materialize-packs.mjs",
     "sync-consumers": "bash scripts/sync-consumers.sh",
     "skill-listing": "node site/scripts/skill-listing.mjs",
     "measure-consumers": "node verify/measure-consumers.mjs",

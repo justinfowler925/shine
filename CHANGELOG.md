@@ -4,6 +4,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ## Unreleased
 
+### Added
+
+- Packs carry readable `source/` and kit `tokens.css` next to the harvested shot; `cite.mjs` lists those, not a dump of `~/design-corpus`
+- `compare.mjs` exits 1 when measured facts prove the page is not a relative of the cite (attribute-stamp vs carbon-datatable is the seed)
+- Stop-sweep cite gate: a UI page written this turn needs `data-cite` (or `<!-- cite: id -->`)
+- `skill/run-hook.sh` so Cursor/Claude hooks follow the loaded skill symlink
+
 ### Changed
 
 - Skill is a loader: parent `Task`s `shine-ux` and does not freelance the loop
@@ -11,6 +18,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 - `cite.mjs` prints at most 3 source paths (plus the harvested shot)
 - Doctor fails a hardcoded `Projects/shine*` tool path, a skill over 80 lines, deploy drift off `main`, and sessionStart `|| true`
 - README install uses `$SHINE` (detached `origin/main` worktree) and a fail-closed doctor
+- Stop-sweep no longer fail-opens on a lint crash, a git error, or a missing hook payload
 
 ## [3.0.0] — 2026-08-21
 
