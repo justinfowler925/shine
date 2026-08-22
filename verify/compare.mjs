@@ -19,6 +19,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { pathToFileURL } from "node:url";
 import { load } from "./deps.mjs";
+import { writeProveReceipt } from "../hooks/receipt.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
@@ -129,6 +130,7 @@ if (facts.controls.length) {
 console.log(`page   palette: ${fmtPal(pagePal)}`);
 console.log(`template palette: ${fmtPal(tmplPal)}`);
 console.log(`Read the composite. If the two sides do not read as relatives, the retrieve or the paint is wrong.`);
+writeProveReceipt({ cite: citeId });
 
 const catalog = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "utf8"));
 const row = (catalog.templates ?? []).find((t) => t.id === citeId);

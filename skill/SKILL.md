@@ -24,8 +24,9 @@ output: `Task` with `subagent_type: "shine-ux"`. Do not freelance the loop in th
 turn — that is how zinc clones ship with this skill sitting unread.
 
 **Catalog cite required.** The subagent runs `corpus/cite.mjs` from the tree this skill
-loaded from, then proves with `verify/measure.mjs` and `verify/compare.mjs`. Do not
-hardcode a `Projects/shine*` checkout.
+loaded from, then proves with `verify/measure.mjs` and `verify/compare.mjs`. `data-cite`
+is not a prove receipt — stop-sweep requires `compare.mjs` to have written
+`last-prove.json` this turn. Do not hardcode a `Projects/shine*` checkout.
 
 ## Dispatch
 

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<!-- Phase 4 e2e: live Brutus session rescued through shine-ux.
+     Cite: shadcn-dashboard-01 (sidebar, KPI cards, area chart, data table).
+     Voice: kit-faithful shadcn-zinc — pack tokens.css. -->
+<html lang="en" data-dna-family="shadcn-zinc" data-shine-voice="kit-faithful" data-shine-probe="app-shell">
+<head>
+<meta charset="utf-8">
+<title>Brutus · Queue</title>
+<link rel="stylesheet" href="../../../../corpus/packs/shadcn-dashboard-01/tokens.css">
+<style>
+  html {
+    color-scheme: light dark;
+    --shine-text-xs: 0.75rem;
+    --shine-text-sm: 0.875rem;
+    --shine-text-base: 0.875rem;
+    --shine-text-lg: 1rem;
+    --shine-text-xl: 1.25rem;
+    --shine-text-2xl: 1.5rem;
+    --shine-space-1: 4px;
+    --shine-space-2: 8px;
+    --shine-space-3: 12px;
+    --shine-space-4: 16px;
+    --shine-space-5: 24px;
+    --shine-space-6: 32px;
+    --shine-control: 40px;
+    --shine-sidebar: 256px;
+    --shine-border-w: 1px;
+    --shine-shadow: 0 1px 2px color-mix(in oklch, var(--shine-color-fg) 8%, transparent);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    font-family: var(--shine-font-sans);
+    font-size: var(--shine-text-base);
+    line-height: 1.4;
+    background: var(--shine-color-bg-subtle);
+    color: var(--shine-color-fg);
+  }
+  a { color: var(--shine-color-fg); text-underline-offset: 4px; }
+  button, input, select { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--shine-color-ring); outline-offset: 2px; }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+
+  [data-slot="sidebar"] {
+    width: var(--shine-sidebar);
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--shine-space-4);
+    padding: var(--shine-space-4);
+    margin: var(--shine-space-2);
+    background: var(--shine-color-bg);
+    border: var(--shine-border-w) solid var(--shine-color-border);
+    border-radius: var(--shine-radius-lg);
+  }
+  .brand { display: flex; align-items: center; gap: var(--shine-space-2); }
+  .brand-mark {
+    width: var(--shine-space-4); height: var(--shine-space-4);
+    background: var(--shine-color-fg);
+  }
+  .brand strong { display: block; font-size: var(--shine-text-lg); }
+  .brand span { display: block; color: var(--shine-color-fg-muted); font-size: var(--shine-text-xs); }
+
+  .btn-primary {
+    display: flex; align-items: center; justify-content: center; gap: var(--shine-space-2);
+    min-height: var(--shine-control); width: 100%;
+    border: 0; border-radius: var(--shine-radius-sm);
+    background: var(--shine-color-primary); color: var(--shine-color-primary-fg);
+    font-weight: 600;
+  }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-ghost {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--shine-space-2);
+    min-height: var(--shine-control); min-width: var(--shine-control);
+    padding: 0 var(--shine-space-3);
+    border: var(--shine-border-w) solid transparent;
+    border-radius: var(--shine-radius-sm);
+    background: transparent; color: var(--shine-color-fg);
+  }
+  .btn-ghost:hover { background: var(--shine-color-bg-subtle); }
+  .btn-ghost[aria-current="page"], .btn-ghost[aria-pressed="true"] {
+    background: var(--shine-color-bg-subtle); font-weight: 600;
+  }
+  .btn-ghost[disabled] { color: var(--shine-color-fg-muted); cursor: not-allowed; }
+
+  .nav-list { display: flex; flex-direction: column; gap: var(--shine-space-1); margin: 0; padding: 0; list-style: none; }
+  .nav-list a {
+    display: flex; align-items: center; gap: var(--shine-space-2);
+    min-height: var(--shine-control); padding: 0 var(--shine-space-3);
+    border-radius: var(--shine-radius-sm); text-decoration: none;
+  }
+  .nav-list a:hover, .nav-list a[aria-current="page"] { background: var(--shine-color-bg-subtle); }
+  .nav-list a[aria-current="page"] { font-weight: 600; }
+  .nav-label {
+    margin: var(--shine-space-3) 0 var(--shine-space-1);
+    padding: 0 var(--shine-space-3);
+    color: var(--shine-color-fg-muted); font-size: var(--shine-text-xs); font-weight: 600;
+    letter-spacing: var(--shine-tracking-caps); text-transform: uppercase;
+  }
+  .user {
+    margin-top: auto;
+    display: flex; align-items: center; gap: var(--shine-space-2);
+    min-height: var(--shine-control);
+    padding: var(--shine-space-2);
+    border-top: var(--shine-border-w) solid var(--shine-color-border);
+  }
+  .avatar {
+    width: var(--shine-control); height: var(--shine-control); flex: none;
+    display: grid; place-items: center;
+    border-radius: 999px; background: var(--shine-color-bg-subtle); font-weight: 600;
+  }
+  .user small { display: block; color: var(--shine-color-fg-muted); font-size: var(--shine-text-xs); }
+
+  .inset {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column;
+    margin: var(--shine-space-2) var(--shine-space-2) var(--shine-space-2) 0;
+    background: var(--shine-color-bg);
+    border: var(--shine-border-w) solid var(--shine-color-border);
+    border-radius: var(--shine-radius-lg);
+    overflow: hidden;
+  }
+  .site-header {
+    display: flex; align-items: center; gap: var(--shine-space-3);
+    min-height: 48px;
+    padding: 0 var(--shine-space-4);
+    border-bottom: var(--shine-border-w) solid var(--shine-color-border);
+  }
+  .site-header h1 { margin: 0; font-size: var(--shine-text-lg); font-weight: 600; }
+  .site-header .grow { margin-left: auto; }
+
+  .stack { display: flex; flex-direction: column; gap: var(--shine-space-5); padding: var(--shine-space-5); }
+
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--shine-space-4); }
+  .card {
+    padding: var(--shine-space-4);
+    border: var(--shine-border-w) solid var(--shine-color-border);
+    border-radius: var(--shine-radius-md);
+    box-shadow: var(--shine-shadow);
+  }
+  .card h2 { margin: 0; font-size: var(--shine-text-xs); font-weight: 600; color: var(--shine-color-fg-muted); }
+  .card .metric { margin: var(--shine-space-2) 0 0; font-size: var(--shine-text-2xl); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .card p { margin: var(--shine-space-2) 0 0; color: var(--shine-color-fg-muted); font-size: var(--shine-text-xs); }
+
+  .chart {
+    padding: var(--shine-space-4);
+    border: var(--shine-border-w) solid var(--shine-color-border);
+    border-radius: var(--shine-radius-md);
+  }
+  .chart-head { display: flex; align-items: flex-start; gap: var(--shine-space-3); }
+  .chart-head h2 { margin: 0; font-size: var(--shine-text-lg); font-weight: 600; }
+  .chart-head p { margin: var(--shine-space-1) 0 0; color: var(--shine-color-fg-muted); font-size: var(--shine-text-xs); }
+  .ranges { margin-left: auto; display: flex; gap: var(--shine-space-1); }
+  .chart svg { display: block; width: 100%; height: 200px; margin-top: var(--shine-space-4); }
+
+  .table-wrap { display: flex; flex-direction: column; gap: var(--shine-space-3); }
+  .tabs { display: flex; align-items: center; gap: var(--shine-space-1); flex-wrap: wrap; }
+  .tabs [role="tablist"] { display: flex; align-items: center; gap: var(--shine-space-1); }
+  .tabs [role="tab"] {
+    min-height: var(--shine-control);
+    padding: 0 var(--shine-space-3);
+    border: 0; border-bottom: 2px solid transparent;
+    border-radius: 0;
+    background: transparent; color: var(--shine-color-fg-muted);
+  }
+  .tabs [role="tab"][aria-selected="true"] {
+    color: var(--shine-color-fg); font-weight: 600;
+    border-bottom-color: var(--shine-color-fg);
+  }
+  .tabs .grow { margin-left: auto; display: flex; gap: var(--shine-space-2); }
+  .toolbar { display: flex; align-items: center; gap: var(--shine-space-2); }
+  .toolbar input[type="search"], .toolbar select {
+    min-height: var(--shine-control);
+    padding: 0 var(--shine-space-3);
+    border: var(--shine-border-w) solid var(--shine-color-border);
+    border-radius: var(--shine-radius-sm);
+    background: var(--shine-color-bg);
+  }
+  .toolbar input[type="search"] { flex: 1; min-width: 160px; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  thead th {
+    text-align: left; font-size: var(--shine-text-xs);
+    border-bottom: var(--shine-border-w) solid var(--shine-color-border);
+    background: var(--shine-color-bg);
+  }
+  thead th button {
+    display: flex; align-items: center; gap: var(--shine-space-1);
+    width: 100%; min-height: var(--shine-control);
+    padding: 0 var(--shine-space-3);
+    border: 0; background: transparent; font-weight: 600; text-align: left;
+  }
+  tbody td {
+    padding: var(--shine-space-3);
+    border-bottom: var(--shine-border-w) solid var(--shine-color-border);
+  }
+  tbody tr:hover { background: var(--shine-color-bg-subtle); }
+  .check { width: var(--shine-control); }
+  .check input { width: var(--shine-space-4); height: var(--shine-space-4); }
+  .lead { font-weight: 600; }
+  .muted { color: var(--shine-color-fg-muted); }
+  .status { display: inline-flex; align-items: center; gap: var(--shine-space-1); }
+  .dot {
+    width: var(--shine-space-2); height: var(--shine-space-2); border-radius: 999px;
+    background: var(--shine-color-fg-muted);
+  }
+  .dot-ready { background: var(--shine-color-fg); }
+  .pager {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--shine-space-3);
+    padding: var(--shine-space-2) 0;
+    color: var(--shine-color-fg-muted); font-size: var(--shine-text-xs);
+  }
+  .pager .buttons { display: flex; gap: var(--shine-space-1); }
+  [data-state] { padding: var(--shine-space-6) var(--shine-space-4); }
+  [data-state] h2 { margin: 0 0 var(--shine-space-1); font-size: var(--shine-text-lg); }
+  [data-state] p { margin: 0 0 var(--shine-space-3); color: var(--shine-color-fg-muted); }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<aside data-slot="sidebar" aria-label="Brutus">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div>
+      <strong>Brutus</strong>
+      <span>Capture session</span>
+    </div>
+  </div>
+  <button type="button" class="btn-primary" data-primary>Capture</button>
+  <nav aria-label="Primary">
+    <ul class="nav-list">
+      <li><a href="#queue" aria-current="page">Queue</a></li>
+      <li><a href="#conversation">Conversation</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#decisions">Decisions</a></li>
+    </ul>
+    <p class="nav-label">Stages</p>
+    <ul class="nav-list">
+      <li><a href="#tab-active">Refining · 522</a></li>
+      <li><a href="#tab-ready">Ready · 32</a></li>
+      <li><a href="#tab-working">Working · 1</a></li>
+      <li><a href="#tab-ledger">Ledger</a></li>
+    </ul>
+  </nav>
+  <div class="user">
+    <span class="avatar" aria-hidden="true">JF</span>
+    <div>
+      Justin
+      <small>live session</small>
+    </div>
+  </div>
+</aside>
+
+<div class="inset">
+  <header class="site-header">
+    <button type="button" class="btn-ghost" aria-label="Collapse sidebar">☰</button>
+    <h1>Queue</h1>
+    <a class="grow" href="#work">Work</a>
+  </header>
+
+  <main data-cite="shadcn-dashboard-01" class="stack" id="queue">
+    <section class="cards" aria-label="What needs you">
+      <article class="card">
+        <h2>Needs you</h2>
+        <p class="metric">7</p>
+        <p>Nothing finished in 1d. These are the ones that will be asked about.</p>
+      </article>
+      <article class="card">
+        <h2>Refining</h2>
+        <p class="metric">522</p>
+        <p>25 drafts are clear enough to mark Ready.</p>
+      </article>
+      <article class="card">
+        <h2>Ready</h2>
+        <p class="metric">32</p>
+        <p>Buildable. Decisions live on Work.</p>
+      </article>
+      <article class="card">
+        <h2>Working</h2>
+        <p class="metric">1</p>
+        <p>Approve GitHub Actions Salesforce is in flight.</p>
+      </article>
+    </section>
+
+    <section class="chart" aria-label="Queue flow">
+      <div class="chart-head">
+        <div>
+          <h2>Queue flow</h2>
+          <p>Promotions and captures, last 7 days.</p>
+        </div>
+        <div class="ranges" role="group" aria-label="Range">
+          <button type="button" class="btn-ghost">Last 3 months</button>
+          <button type="button" class="btn-ghost">Last 30 days</button>
+          <button type="button" class="btn-ghost" aria-pressed="true">Last 7 days</button>
+        </div>
+      </div>
+      <svg viewBox="0 0 640 160" role="img" aria-label="Area chart of captures versus promotions">
+        <path fill="var(--shine-color-border)" d="M0 120 C 80 100, 160 90, 240 70 S 400 40, 480 50 S 600 80, 640 60 L 640 160 L 0 160 Z"/>
+        <path fill="none" stroke="var(--shine-color-fg)" stroke-width="2" d="M0 90 C 80 80, 160 100, 240 85 S 400 50, 480 70 S 600 40, 640 30"/>
+      </svg>
+    </section>
+
+    <section class="table-wrap" id="conversation">
+      <h2 class="visually-hidden">Active queue</h2>
+      <div class="tabs">
+        <div role="tablist" aria-label="Queue views">
+          <button type="button" role="tab" aria-selected="true" id="tab-active">Active</button>
+          <button type="button" role="tab" aria-selected="false" id="tab-ready">Ready (32)</button>
+          <button type="button" role="tab" aria-selected="false" id="tab-working">Working (1)</button>
+          <button type="button" role="tab" aria-selected="false" id="tab-ledger">Conversation</button>
+        </div>
+        <div class="grow">
+          <button type="button" class="btn-ghost">Customize columns</button>
+          <button type="button" class="btn-ghost">Add section</button>
+        </div>
+      </div>
+
+      <div class="toolbar" role="search">
+        <label class="visually-hidden" for="filter">Filter queue</label>
+        <input id="filter" type="search" placeholder="Filter by title, ticket, or stage">
+        <label class="visually-hidden" for="sort">Sort</label>
+        <select id="sort">
+          <option>Newest</option>
+          <option>Oldest</option>
+        </select>
+      </div>
+
+      <table aria-label="Capture queue" data-shine-contract="table">
+        <thead>
+          <tr>
+            <th class="check"><input type="checkbox" aria-label="Select all rows"></th>
+            <th aria-sort="ascending"><button type="button" data-sort>Item <span aria-hidden="true">↑</span></button></th>
+            <th><button type="button" data-sort>Stage</button></th>
+            <th><button type="button" data-sort>Type</button></th>
+            <th><button type="button" data-sort>Ticket</button></th>
+            <th><button type="button" data-sort>Age</button></th>
+            <th><span class="visually-hidden">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="check"><input type="checkbox" aria-label="Select Approve GitHub Actions Salesforce"></td>
+            <td class="lead">Approve GitHub Actions Salesforce</td>
+            <td><span class="status"><span class="dot" aria-hidden="true"></span> Working</span></td>
+            <td class="muted">typed</td>
+            <td class="muted">—</td>
+            <td class="muted">3 open</td>
+            <td><a href="#open-gha">Open</a></td>
+          </tr>
+          <tr>
+            <td class="check"><input type="checkbox" aria-label="Select Clean Justin's Voice Control"></td>
+            <td class="lead">Clean Justin's Voice Control config</td>
+            <td><span class="status"><span class="dot dot-ready" aria-hidden="true"></span> Ready</span></td>
+            <td class="muted">build</td>
+            <td>REV-198</td>
+            <td class="muted">6h</td>
+            <td><a href="#open-voice">Open</a></td>
+          </tr>
+          <tr>
+            <td class="check"><input type="checkbox" aria-label="Select GTM multi-touch attribution"></td>
+            <td class="lead">GTM — Multi-touch attribution</td>
+            <td><span class="status"><span class="dot dot-ready" aria-hidden="true"></span> Ready</span></td>
+            <td class="muted">build</td>
+            <td>REV-204</td>
+            <td class="muted">1d</td>
+            <td><a href="#open-gtm">Open</a></td>
+          </tr>
+          <tr>
+            <td class="check"><input type="checkbox" aria-label="Select Phase 3 entity resolution"></td>
+            <td class="lead">Phase 3 — Entity resolution</td>
+            <td><span class="status"><span class="dot dot-ready" aria-hidden="true"></span> Ready</span></td>
+            <td class="muted">build</td>
+            <td>REV-211</td>
+            <td class="muted">2d</td>
+            <td><a href="#open-phase3">Open</a></td>
+          </tr>
+          <tr>
+            <td class="check"><input type="checkbox" aria-label="Select Resolve intermittent constrained decoding"></td>
+            <td class="lead">Resolve intermittent constrained decoding</td>
+            <td><span class="status"><span class="dot" aria-hidden="true"></span> Refining</span></td>
+            <td class="muted">typed</td>
+            <td class="muted">—</td>
+            <td class="muted">3 open</td>
+            <td><a href="#open-decode">Open</a></td>
+          </tr>
+          <tr>
+            <td class="check"><input type="checkbox" aria-label="Select Audit max_tokens leak"></td>
+            <td class="lead">Audit max_tokens leak on Atlas</td>
+            <td><span class="status"><span class="dot" aria-hidden="true"></span> Refining</span></td>
+            <td class="muted">typed</td>
+            <td class="muted">—</td>
+            <td class="muted">2 open</td>
+            <td><a href="#open-tokens">Open</a></td>
+          </tr>
+          <tr>
+            <td class="check"><input type="checkbox" aria-label="Select Reconcile mismatched ledger rows"></td>
+            <td class="lead">Reconcile mismatched ledger rows</td>
+            <td><span class="status"><span class="dot" aria-hidden="true"></span> Refining</span></td>
+            <td class="muted">typed</td>
+            <td class="muted">—</td>
+            <td class="muted">1d</td>
+            <td><a href="#open-ledger">Open</a></td>
+          </tr>
+          <tr>
+            <td class="check"><input type="checkbox" aria-label="Select Run Studio local bake-off"></td>
+            <td class="lead">Run Studio local bake-off</td>
+            <td><span class="status"><span class="dot" aria-hidden="true"></span> Refining</span></td>
+            <td class="muted">typed</td>
+            <td class="muted">—</td>
+            <td class="muted">5h</td>
+            <td><a href="#open-bakeoff">Open</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <nav class="pager" aria-label="Pagination" data-pagination>
+        <span>1–8 of 555 · 156 more · 354 older than 3d</span>
+        <div class="buttons">
+          <button type="button" class="btn-ghost" disabled aria-label="Previous page">‹</button>
+          <button type="button" class="btn-ghost" aria-label="Next page">›</button>
+        </div>
+      </nav>
+    </section>
+
+    <section data-state="empty" hidden>
+      <h2>Queue is clear</h2>
+      <p>Nothing in Active. Capture a thought or widen the filter.</p>
+      <button type="button" class="btn-ghost">Show all stages</button>
+    </section>
+    <section data-state="loading" hidden aria-busy="true">
+      <h2>Loading the queue…</h2>
+      <p>Fetching the live session.</p>
+    </section>
+    <section data-state="error" hidden role="alert">
+      <h2>Couldn’t load the session</h2>
+      <p>Brutus didn’t answer. Filters are kept.</p>
+      <button type="button" class="btn-ghost">Retry</button>
+    </section>
+  </main>
+</div>
+</body>
+</html>
