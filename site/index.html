@@ -4,16 +4,16 @@
      theme-color hexes are rendered-pixel readbacks of --bg. Nothing here bypasses
      a token; this file is where the tokens live.
      Scoped to `color`. Type, tracking, shadow and spacing stay enforced. -->
-<html lang="en" data-theme="dark" data-cite="magicui-hero" data-dna-family="magicui" data-dna-chroma="high" data-shine-voice="kit-faithful" data-shine-lane="marketing">
+<html lang="en" data-theme="light" data-cite="mui-blog" data-dna-family="material" data-dna-chroma="medium" data-shine-voice="kit-faithful" data-shine-lane="marketing">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shine — your agent cited Carbon. It still shipped zinc.</title>
-<meta name="description" content="Shine 2.0 is a visual director for Claude Code and Cursor. Cite a real page, apply its DNA, fail it when it still looks like zinc.">
-<meta name="theme-color" content="#1c1c1f">
+<title>Shine — stop shipping the same generated page</title>
+<meta name="description" content="Shine is a skill for Claude Code and Cursor. It makes the agent copy a real designed page — and fail the build if the result still looks generated.">
+<meta name="theme-color" content="#f4f4f4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 @layer reset, base, layout, components;
 
@@ -26,53 +26,53 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
-    --bg: oklch(0.12 0.004 260);
-    --bg-hex: #1c1c1f;
-    --surface: oklch(0.16 0.004 260);
-    --fg: oklch(0.97 0.004 260);
-    --fg-muted: oklch(0.72 0.01 260);
-    --border: oklch(0.28 0.008 260);
-    --primary: oklch(0.78 0.18 75);
-    --primary-fg: oklch(0.18 0.04 75);
-    --glow: oklch(1 0 0 / 0.08);
+    color-scheme: light;
+    --bg: oklch(0.96 0.004 260);
+    --bg-hex: #f4f4f4;
+    --surface: oklch(1 0 0);
+    --fg: oklch(0.16 0.012 260);
+    --fg-muted: oklch(0.42 0.012 260);
+    --border: oklch(0.88 0.008 260);
+    --primary: oklch(0.16 0.012 260);
+    --primary-fg: oklch(0.99 0.002 260);
+    --glow: oklch(0.72 0.04 250 / 0.18);
 
-    --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    --display: "Syne", var(--font);
-    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --font: "Roboto", system-ui, sans-serif;
+    --mono: "Roboto Mono", ui-monospace, Menlo, monospace;
 
-    --t-xs: 0.75rem;     /* 12 */
-    --t-base: 1rem;      /* 16 — Magic UI DNA */
-    --t-lg: 1.5rem;      /* 24 */
-    --t-display: clamp(2.75rem, 1.4rem + 4vw, 4.5rem); /* 44–72 */
+    --t-xs: 0.75rem;
+    --t-sm: 0.875rem;
+    --t-base: 1rem;
+    --t-lg: 1.25rem;
+    --t-display: clamp(2rem, 1.4rem + 2vw, 2.5rem);
 
-    --tr-display: -0.03em;
-    --tr-caps: 0.12em;
+    --tr-display: -0.02em;
+    --tr-caps: 0.08em;
 
     --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem;
     --s-6: 1.5rem; --s-8: 2rem; --s-12: 3rem; --s-16: 4rem; --s-24: 6rem;
 
-    --r-control: 12px;
-    --r-card: 20px;
-    --r-media: 24px;
+    --r-control: 8px;
+    --r-card: 12px;
+    --r-bar: 12px;
 
-    --dur: 300ms;
+    --dur: 200ms;
     --ease: cubic-bezier(0.2, 0, 0, 1);
-    --shadow: 0 1px 2px oklch(0 0 0 / 0.24), 0 16px 48px -16px oklch(0 0 0 / 0.48);
+    --shadow: 0 1px 2px oklch(0 0 0 / 0.06), 0 12px 32px -12px oklch(0 0 0 / 0.16);
   }
 
-  :root[data-theme="light"] {
-    color-scheme: light;
-    --bg: oklch(0.99 0.002 260);
-    --bg-hex: #fafafa;
-    --surface: oklch(0.97 0.003 260);
-    --fg: oklch(0.16 0.01 260);
-    --fg-muted: oklch(0.42 0.01 260);
-    --border: oklch(0.88 0.006 260);
-    --primary: oklch(0.72 0.16 75);
-    --primary-fg: oklch(0.18 0.04 75);
-    --glow: oklch(0 0 0 / 0.04);
-    --shadow: 0 1px 2px oklch(0 0 0 / 0.04), 0 16px 40px -16px oklch(0 0 0 / 0.12);
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: oklch(0.12 0.01 260);
+    --bg-hex: #121212;
+    --surface: oklch(0.18 0.01 260);
+    --fg: oklch(0.98 0.004 260);
+    --fg-muted: oklch(0.72 0.012 260);
+    --border: oklch(0.28 0.012 260);
+    --primary: oklch(0.99 0.002 260);
+    --primary-fg: oklch(0.12 0.01 260);
+    --glow: oklch(0.45 0.06 250 / 0.22);
+    --shadow: 0 1px 2px oklch(0 0 0 / 0.24), 0 12px 32px -8px oklch(0 0 0 / 0.48);
   }
 
   html.no-anim, html.no-anim * { transition: none !important; }
@@ -82,7 +82,7 @@
     color: var(--fg);
     font-family: var(--font);
     font-size: var(--t-base);
-    line-height: 1.4;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     font-variant-numeric: tabular-nums lining-nums;
   }
@@ -95,128 +95,96 @@
     outline-offset: 3px;
   }
 
-  h1, h2 { text-wrap: balance; }
+  h1, h2 { text-wrap: balance; font-weight: 500; }
   h1 {
-    font-family: var(--display);
     font-size: var(--t-display);
-    font-weight: 500;
-    line-height: 1.05;
+    line-height: 1.15;
     letter-spacing: var(--tr-display);
   }
   h2 {
-    font-family: var(--display);
     font-size: var(--t-lg);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+    letter-spacing: var(--tr-display);
+    line-height: 1.3;
+    margin-top: var(--s-12);
   }
 
-  p { max-inline-size: 42rem; }
+  p { max-inline-size: 40rem; }
 
-  code, .mono {
+  code {
     font-family: var(--mono);
     font-size: var(--t-xs);
-  }
-  code {
-    font-size: var(--t-xs);
     background: var(--surface);
-    padding: 0 4px;
-    border-radius: 0;
+    padding: 2px 4px;
+    border-radius: 4px;
   }
 }
 
 @layer layout {
+  .bar-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: var(--s-4) var(--s-6) 0;
+  }
   .bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--s-4);
-    padding: var(--s-4) var(--s-6);
-    min-height: 64px;
+    min-height: 56px;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: var(--s-2) var(--s-3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-bar);
+    background: color-mix(in oklch, var(--surface) 72%, transparent);
+    backdrop-filter: blur(24px);
+    box-shadow: var(--shadow);
   }
   .bar nav {
     display: flex;
     align-items: center;
-    gap: var(--s-6);
+    gap: var(--s-3);
   }
-  .bar nav a, .brand {
+  .bar nav a:not(.btn), .brand {
     text-decoration: none;
-    font-size: var(--t-xs);
-    letter-spacing: var(--tr-caps);
-    text-transform: uppercase;
-    color: var(--fg-muted);
+    font-size: var(--t-sm);
+    font-weight: 500;
   }
-  .brand { color: var(--fg); font-weight: 700; font-family: var(--display); letter-spacing: 0.14em; }
+  .brand { color: var(--fg); }
+  .bar nav a:not(.btn) { color: var(--fg-muted); }
   @media (hover: hover) {
-    .bar nav a:hover { color: var(--fg); }
+    .bar nav a:not(.btn):hover { color: var(--fg); }
   }
 
-  .hero {
-    min-height: 100svh;
-    display: grid;
-    grid-template-rows: auto minmax(16rem, 1fr);
-    justify-items: center;
-    text-align: center;
-    gap: var(--s-8);
-    padding: var(--s-12) var(--s-6) var(--s-8);
-    background:
-      radial-gradient(ellipse 70% 45% at 50% 0%, var(--glow), transparent 70%),
-      var(--bg);
-  }
-  .hero-copy {
+  .article {
+    max-width: 42rem;
+    margin: var(--s-16) auto var(--s-24);
+    padding: 0 var(--s-6);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: var(--s-4);
-    max-width: 48rem;
+    gap: var(--s-6);
   }
-  .hero-copy p { max-inline-size: 36rem; }
-  .hero-media {
-    width: min(72rem, 100%);
-    margin: 0;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .hero-media img {
+  .article > h1 { margin-bottom: var(--s-2); }
+  .article > h2 { margin-bottom: calc(var(--s-2) * -1); }
+
+  .shot {
+    margin: var(--s-4) 0;
     width: 100%;
-    height: min(28rem, 46svh);
-    object-fit: cover;
-    object-position: top left;
-    border-radius: var(--r-media);
+  }
+  .shot img {
+    width: 100%;
+    border-radius: var(--r-card);
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
     background: var(--surface);
   }
-
-  .proof {
-    padding: var(--s-24) var(--s-6);
-    border-top: 1px solid var(--border);
-  }
-  .proof-inner {
-    max-width: 44rem;
-    margin-inline: auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-8);
-  }
-  .proof figure { margin: 0; }
-  .proof img {
-    width: 100%;
-    border-radius: var(--r-card);
-    border: 1px solid var(--border);
-    background: var(--surface);
-  }
-  .proof figcaption, .hero-media figcaption {
+  .shot figcaption {
     margin-top: var(--s-3);
-    font-size: var(--t-xs);
+    font-size: var(--t-sm);
     color: var(--fg-muted);
-    font-family: var(--mono);
-    letter-spacing: 0.02em;
     max-inline-size: none;
-    text-align: left;
   }
-  .hero-media figcaption { text-align: center; }
 
   .files {
     margin: 0;
@@ -225,6 +193,7 @@
     border: 1px solid var(--border);
     border-radius: var(--r-card);
     padding: var(--s-4);
+    box-shadow: var(--shadow);
   }
   .files pre {
     font-family: var(--mono);
@@ -233,32 +202,32 @@
     color: var(--fg-muted);
     margin: 0;
   }
-  .files strong { color: var(--fg); font-weight: 600; }
+  .files strong { color: var(--fg); font-weight: 500; }
 
   footer {
     padding: var(--s-12) var(--s-6) var(--s-16);
     border-top: 1px solid var(--border);
     color: var(--fg-muted);
-    font-size: var(--t-xs);
+    font-size: var(--t-sm);
   }
-  footer .inner { max-width: 44rem; margin-inline: auto; display: grid; gap: var(--s-4); }
+  footer .inner { max-width: 42rem; margin-inline: auto; display: grid; gap: var(--s-3); }
 }
 
 @layer components {
   .eyebrow {
-    font-family: var(--display);
-    font-size: var(--t-lg);
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-size: var(--t-xs);
+    font-weight: 500;
+    letter-spacing: var(--tr-caps);
     text-transform: uppercase;
-    color: var(--fg);
+    color: var(--fg-muted);
   }
   .lede {
     color: var(--fg-muted);
-    font-size: var(--t-base);
+    font-size: var(--t-lg);
     line-height: 1.45;
+    max-inline-size: 36rem;
   }
-  .cta {
+  .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -269,13 +238,14 @@
     background: var(--primary);
     color: var(--primary-fg);
     font: inherit;
-    font-weight: 600;
+    font-size: var(--t-sm);
+    font-weight: 500;
     text-decoration: none;
-    transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+    transition: opacity var(--dur) var(--ease);
   }
-  .cta:hover { color: var(--primary-fg); opacity: 0.88; }
+  .btn:hover { color: var(--primary-fg); opacity: 0.88; }
   .hint {
-    font-size: var(--t-xs);
+    font-size: var(--t-sm);
     color: var(--fg-muted);
   }
   .toggle {
@@ -287,112 +257,58 @@
     background: transparent;
     color: var(--fg-muted);
     font: inherit;
-    font-size: var(--t-xs);
-    letter-spacing: var(--tr-caps);
-    text-transform: uppercase;
+    font-size: var(--t-sm);
     cursor: pointer;
   }
-  .steps {
-    list-style: none;
-    display: grid;
-    gap: var(--s-4);
-    padding: 0;
-    counter-reset: step;
-  }
-  .steps li {
-    display: grid;
-    gap: var(--s-2);
-    padding-left: var(--s-8);
-    position: relative;
-    max-inline-size: none;
-  }
-  .steps li::before {
-    counter-increment: step;
-    content: counter(step, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    top: 0.15em;
-    font-family: var(--mono);
-    font-size: var(--t-xs);
-    color: var(--fg-muted);
-  }
-  .dl {
-    display: grid;
-    gap: var(--s-4);
-  }
-  .dl div {
-    display: grid;
-    gap: 4px;
-    padding-bottom: var(--s-4);
-    border-bottom: 1px solid var(--border);
-  }
-  .dl dt {
-    font-family: var(--mono);
-    font-size: var(--t-xs);
-    letter-spacing: var(--tr-caps);
-    text-transform: uppercase;
-    color: var(--fg-muted);
-  }
-  .dl dd { margin: 0; }
 }
 </style>
 </head>
 <body>
 
-<header class="bar">
+<div class="bar-wrap">
+<header class="bar" data-cite="mui-blog">
   <a class="brand" href="/">Shine</a>
   <nav aria-label="Site">
     <a href="/r/">Registry</a>
     <a href="https://github.com/justinfowler925/shine">GitHub</a>
-    <button class="toggle" id="t" type="button" aria-label="Toggle color scheme">Light</button>
+    <a class="btn" data-primary href="https://github.com/justinfowler925/shine">Get the skill</a>
+    <button class="toggle" id="t" type="button" aria-label="Toggle color scheme">Dark</button>
   </nav>
 </header>
+</div>
 
-<main>
-<section class="hero" data-cite="magicui-hero" data-job="thesis + one CTA + media" data-region="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">Shine</p>
-    <h1>Your agent cited Carbon. It still shipped zinc.</h1>
-    <p class="lede">V1 measured tokens, contrast, and axe — and printed PASS. V2 opens the DNA pack and fails the costume. One skill, Claude Code and Cursor.</p>
-    <a class="btn cta" data-primary href="https://github.com/justinfowler925/shine">Get the skill</a>
-    <p class="hint">MIT · clone, symlink, <code>node verify/doctor.mjs</code></p>
-  </div>
-  <figure class="hero-media">
-    <img src="img/v2-queue.png" width="1280" height="800" alt="A Carbon-cited review queue in IBM Plex: batch bar, search, twelve stalled accounts, radius none" decoding="async">
-    <figcaption>Same cite. DNA applied. Critic likeness 10.</figcaption>
+<main class="article" data-cite="mui-blog" data-job="the argument, in order" data-region="focal">
+  <p class="eyebrow">Shine · Claude Code and Cursor</p>
+  <h1>Your agent keeps shipping the same page.</h1>
+  <p class="lede">Shine is a skill that makes it copy a real designed product — and fail the build if the result still looks generated.</p>
+
+  <p>You already know the look. Gray canvas. Inter. A rounded card. A blue button. Ask for Linear. Ask for “expensive.” Ask for a briefing a CEO would actually open. You get the same costume with a new label.</p>
+  <p>That isn’t a taste problem. The model paints with whatever the component library left on the floor, which is Tailwind’s defaults. Prompting over it does nothing.</p>
+
+  <h2>We tried a compliance officer. It printed PASS.</h2>
+  <p>So the next move was gates. Wipe the default palette. Own the tokens. Fail contrast. Fail accessibility. That stopped invented hex. It did not stop the costume.</p>
+  <p>The agent would cite a real design system, ship the default gray theme, and print PASS. Completeness is not likeness. A page can hit every token and still look like every other generated page.</p>
+
+  <h2>The missing half is a director.</h2>
+  <p>Before a pixel, the agent has to open a real page that already solved the job — a briefing, a work queue, a marketing hero — and copy how that page is built, not how it was described. A second program scores whether the result still looks generated. Under 7, the build fails.</p>
+  <p>That’s how an executive briefing stops looking like a dashboard someone prompted into existence. The shots below are redacted: no names, no figures, no calendar. What you can see is the shape — a day of meetings, kits only on the ones that matter, answers already written, every number citing a source.</p>
+
+  <figure class="shot">
+    <img src="img/cases/recon-today.png" width="1280" height="900" alt="Redacted briefing index: a day of meetings, kits only on the ones that matter" decoding="async">
+    <figcaption>Today. One primary action per row. Not a widget dashboard.</figcaption>
   </figure>
-</section>
+  <figure class="shot">
+    <img src="img/cases/recon-kit.png" width="1280" height="900" alt="Redacted briefing kit: prepared answers, every claim citing a source" decoding="async">
+    <figcaption>The kit. Questions answered before the room. Names and numbers stripped for this page.</figcaption>
+  </figure>
 
-<section class="proof" data-region="proof" data-job="one supporting band">
-  <div class="proof-inner">
-    <h2>V1 passed this</h2>
-    <p class="lede">A Carbon datatable cite, a Geist sidebar, zinc chrome. Completeness was green. Likeness did not exist yet.</p>
-    <figure>
-      <img src="img/v1-costume.png" width="960" height="640" alt="Inbox page with a zinc sidebar, Geist type, and a stone button — marked as a Carbon cite" decoding="async">
-      <figcaption>verify/fixtures/carbon-as-shadcn.html · critic likeness 2 FAIL</figcaption>
-    </figure>
+  <p>The uniqueness is not a new coat of paint. A briefing looks like a briefing because it was directed to one. A work queue looks like a work queue. House style is the fallback, not the product.</p>
 
-    <dl class="dl">
-      <div>
-        <dt>V1</dt>
-        <dd>Wipe the default palette. Measure the box. Fail off-token, fail axe, fail contrast axe declined to judge.</dd>
-      </div>
-      <div>
-        <dt>V2</dt>
-        <dd>Cite a real page, open its DNA pack, import the voice CSS, fail it when it still looks like zinc. Salesforce is a host, not a palette dump.</dd>
-      </div>
-    </dl>
-
-    <h2>On the machine this afternoon</h2>
-    <ol class="steps">
-      <li><strong>Clone and symlink</strong> the skill into Claude Code and Cursor. One directory. Frontmatter is <code>name</code> + <code>description</code> only — never <code>paths:</code>.</li>
-      <li><strong>Cite before you draw.</strong> <code>node corpus/cite.mjs queue</code> — open every file it lists and <code>corpus/packs/&lt;id&gt;/specimen.html</code>. Naming an id you did not open is inventing.</li>
-      <li><strong>Prove both halves.</strong> <code>node verify/measure.mjs page.html --cite carbon-datatable --shot out.png</code> then <code>node verify/critic.mjs page.html --cite carbon-datatable --lane internal</code>. Likeness under 7 fails the build.</li>
-    </ol>
-
-    <p>The gate is <code>node verify/doctor.mjs</code>. <code>--ci</code> is 45 checks; the session-start doctor also proves both surfaces’ skill, <code>shine-ux</code>, and hooks. A gate that is not in the doctor does not exist.</p>
-
-    <figure class="files">
+  <h2>Install it this afternoon</h2>
+  <p>Clone the repo. Symlink the skill into Claude Code and Cursor. Run <code>node verify/doctor.mjs</code>. The gate is that doctor. <code>--ci</code> is 45 checks; if a gate isn’t in it, it doesn’t exist.</p>
+  <p><a class="btn" data-primary href="https://github.com/justinfowler925/shine">Get the skill</a></p>
+  <p class="hint">MIT · one git directory · both surfaces</p>
+  <figure class="files">
 <pre>skill/                        lines
   <strong>SKILL.md</strong>                    279
   references/
@@ -428,15 +344,12 @@
     voices.md                   38
     wireframe.md               202
                             <strong>4,884</strong></pre>
-    </figure>
-  </div>
-</section>
+  </figure>
 </main>
 
 <footer>
   <div class="inner">
-    <p>August 2026 · <a href="https://github.com/justinfowler925/shine/releases/tag/v2.0.0">v2.0.0</a> · cite <code>magicui-hero</code> · voice kit-faithful. Product description matches <code>skill/SKILL.md</code>.</p>
-    <p>Notes that used to live on this page — measured chroma, nested radius, the 4.5 MB CSS inventory — still live in the skill. This page has one job.</p>
+    <p>August 2026 · <a href="https://github.com/justinfowler925/shine/releases/tag/v2.0.0">v2.0.0</a> · cite <code>mui-blog</code> · voice kit-faithful. Briefing shots are a design-review mock with names and figures stripped.</p>
   </div>
 </footer>
 
@@ -447,14 +360,14 @@
     root.classList.add('no-anim');
     root.dataset.theme = m;
     btn.textContent = m === 'dark' ? 'Light' : 'Dark';
-    document.querySelector('meta[name=theme-color]').content = getComputedStyle(root).getPropertyValue('--bg-hex').trim() || (m === 'dark' ? '#1c1c1f' : '#fafafa');
+    document.querySelector('meta[name=theme-color]').content = getComputedStyle(root).getPropertyValue('--bg-hex').trim() || (m === 'dark' ? '#121212' : '#f4f4f4');
     try { localStorage.setItem('theme', m); } catch (e) {}
     requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('no-anim')));
   };
   try {
     const saved = localStorage.getItem('theme');
     if (saved) set(saved);
-    else if (matchMedia('(prefers-color-scheme: light)').matches) set('light');
+    else if (matchMedia('(prefers-color-scheme: dark)').matches) set('dark');
   } catch (e) {}
   btn.addEventListener('click', () => set(root.dataset.theme === 'dark' ? 'light' : 'dark'));
 </script>
