@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- shine-lint: off color type spacing shadow contrast — deliberately fucked fixture:
+     the demo INPUT for the loop (verify/fixtures/unfucked/README.md). Every violation
+     here is the point; after.html is the same job done right. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Renewals Queue</title>
+<style>
+  body { margin: 0; font-family: Georgia, serif; background: #fbfaf7; color: #6b6b6b; }
+  .top { text-align: center; padding: 37px 10px 5px; }
+  .top h1 { font-size: 33px; font-weight: 400; color: #8a8a93; letter-spacing: 0; margin: 0 0 7px; }
+  .top p { font-size: 15px; max-width: 100%; }
+  .toolbar { display: flex; justify-content: center; gap: 9px; padding: 13px; }
+  .toolbar button { background: #7178f5; color: #fff; border: 0; border-radius: 22px; padding: 11px 19px; font-size: 13px; box-shadow: 0 6px 18px rgba(113,120,245,.55); }
+  .cards { max-width: 1180px; margin: 0 auto; padding: 21px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .card { background: #ffffff; border-radius: 17px; padding: 15px 15px 27px; box-shadow: 0 10px 30px rgba(0,0,0,.14); font-size: 14px; }
+  .card .name { font-size: 16.5px; color: #55555c; }
+  .card .meta { font-size: 12.5px; color: #b3b3ba; margin-top: 6px; }
+  .card .amount { font-size: 21px; color: #9aa0f7; margin-top: 9px; font-family: Verdana, sans-serif; }
+  .card .actions { display: none; margin-top: 10px; }
+  .card:hover .actions { display: block; }
+  .card .actions a { color: #a3a8f8; font-size: 11.5px; margin-right: 9px; text-decoration: none; }
+</style>
+</head>
+<body>
+  <div class="top">
+    <h1>Welcome to your Renewals Workspace ✨</h1>
+    <p>Here you can see everything about all of your renewals, all in one place, whenever you need it, so nothing falls through the cracks.</p>
+  </div>
+  <div class="toolbar">
+    <button>Export</button>
+    <button>Sync now</button>
+    <button>New renewal</button>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="name">Acme Industrial</div>
+      <div class="meta">renews 2026-09-01 · owner jf</div>
+      <div class="amount">$120,400</div>
+      <div class="actions"><a href="#">open</a><a href="#">snooze</a><a href="#">delete</a></div>
+    </div>
+    <div class="card">
+      <div class="name">Globex</div>
+      <div class="meta">renews 2026-09-03 · owner mk</div>
+      <div class="amount">$88,150</div>
+      <div class="actions"><a href="#">open</a><a href="#">snooze</a><a href="#">delete</a></div>
+    </div>
+    <div class="card">
+      <div class="name">Initech</div>
+      <div class="meta">renews 2026-09-10 · owner jf</div>
+      <div class="amount">$41,900</div>
+      <div class="actions"><a href="#">open</a><a href="#">snooze</a><a href="#">delete</a></div>
+    </div>
+    <div class="card">
+      <div class="name">Umbrella Health</div>
+      <div class="meta">renews 2026-09-12 · owner tr</div>
+      <div class="amount">$203,700</div>
+      <div class="actions"><a href="#">open</a><a href="#">snooze</a><a href="#">delete</a></div>
+    </div>
+    <div class="card">
+      <div class="name">Stark Logistics</div>
+      <div class="meta">renews 2026-09-19 · owner mk</div>
+      <div class="amount">$66,300</div>
+      <div class="actions"><a href="#">open</a><a href="#">snooze</a><a href="#">delete</a></div>
+    </div>
+  </div>
+</body>
+</html>

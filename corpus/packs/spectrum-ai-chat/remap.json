@@ -1,9 +1,0 @@
-{
-  "cite": "spectrum-ai-chat",
-  "css": {
-    "--shine-font-sans": "\"adobe-clean\", system-ui, sans-serif",
-    "--shine-radius-sm": "4px",
-    "--shine-radius-md": "8px",
-    "--shine-duration-base": "200ms"
-  }
-}

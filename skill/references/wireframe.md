@@ -47,7 +47,7 @@ draft gray-box — do not interview to death.
 | Pattern | `patterns.md` § name |
 | Kit recipe | `kits.md` + `~/design-corpus/…` `file:line` |
 | Technique | `techniques.md` § + product |
-| Novel only | `inspiration.md` — add a catalog row, then cite it |
+| Novel only | nearest catalog row + `patterns.md` principle — name both |
 
 Banned: “we could do a sidebar” with no source. Gray-box regions come from the
 chosen template, not from anonymous layout ideas. `data-cite` on every region
@@ -157,9 +157,7 @@ Status: LOCKED
 Lane: internal | saas | lex | marketing
 Pattern: <patterns.md section>
 Template: <templates.md id> via `node corpus/cite.mjs <id>`
-Opened: <paths cite.mjs listed>
-Pack: corpus/packs/<id>/specimen.html
-images_read: <those paths>
+Opened: <source paths + shot from cite.mjs>
 Primary action: <label>
 Regions:
 - nav — job — templates.md <id>

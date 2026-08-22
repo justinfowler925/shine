@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// shine-lint: off color — this file is the measuring instrument: the literals are canvas
+// primers and sentinel values for PARSING page colors, never colors it ships.
 // verify/measure.mjs — the shine measure loop.
 //
 //   node verify/measure.mjs <url|file.html> [--dark] [--json out.json] [--shot out.png]
@@ -13,9 +15,12 @@
 // Exit 1 if any hard failure: axe violations, contrast < 4.5:1 worst-case on
 // body text (3:1 for >=24px), off-scale spacing, font-size cardinality > 6.
 
-import { writeFileSync } from "node:fs";
-import { pathToFileURL } from "node:url";
+import { readFileSync, writeFileSync } from "node:fs";
+import { dirname, join, resolve as presolve } from "node:path";
+import { pathToFileURL, fileURLToPath } from "node:url";
 import { load, pathTo } from "./deps.mjs";
+
+const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
 const AXE_PATH = pathTo("axe-core/axe.min.js");
 
@@ -747,13 +752,21 @@ if (compose.tableContract) {
   }
 }
 
-if (citeWant && compose.citeId !== citeWant) {
-  failures.push(
-    `cite: --cite ${citeWant} but page data-cite is ${JSON.stringify(compose.citeId)} — naming an id without data-cite is inventing`,
-  );
-}
-
-const family = (compose.dnaFamily || "").toLowerCase();
+// Likeness checks key off the --cite FLAG, never off page attributes. The old
+// attestation ("--cite X but page data-cite is Y") measured self-labeling: a page
+// could satisfy it by stamping three attributes and fail it while being a perfect
+// clone. The flag is the agent's claim; these checks measure the rendered page
+// against the claimed template's family.
+const citeRow = (() => {
+  if (!citeWant) return null;
+  try {
+    const cat = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "utf8"));
+    return (cat.templates ?? []).find((t) => t.id === citeWant) || null;
+  } catch {
+    return null;
+  }
+})();
+const family = (citeRow?.dna?.family || compose.dnaFamily || "").toLowerCase();
 const font = compose.bodyFont || "";
 const shadcnChrome = compose.slotSidebar || /Geist|ui-sans-serif/i.test(font);
 if (family === "carbon" && shadcnChrome) {
@@ -766,12 +779,13 @@ if (family === "carbon" && (compose.tableAreaPct || 0) < 0.06) {
     `likeness: carbon/queue cite table occupies ${((compose.tableAreaPct || 0) * 100).toFixed(1)}% of viewport — DataTable is the focal object (overview.mdx Batch Actions / Toolbar)`,
   );
 }
-if (/marketing|hero/i.test(compose.citeId || "") && compose.appShellProbe) {
+const marketingCite = /marketing|hero/i.test(citeWant || compose.citeId || "");
+if (marketingCite && compose.appShellProbe) {
   failures.push(
     `likeness: marketing cite is an app-shell — hero budget, not sidebar + KPI cards`,
   );
 }
-if (/marketing|hero/i.test(compose.citeId || "")) {
+if (marketingCite) {
   if (compose.tableContract) {
     failures.push(`likeness: marketing cite shipped a data table — hero budget, not a queue`);
   }

@@ -1,168 +1,96 @@
 ---
 name: shine
 description: >
-  Full UI/UX agent for any interface, artifact, or visual output. For a *new* surface with
-  no existing UI, run Wireframe first — interactive corpus-backed discovery, gray-box HTML,
-  then a locked brief before Build. Also use when asked to "wireframe", "sketch", "low-fi",
-  "discover the layout", or "new screen/page". Diagnoses defects, cites techniques from
-  measured products (Linear, Stripe, Vercel, Notion, …) and pinned design kits (shadcn,
-  Radix, Base UI, Carbon, Ant, MUI, React Aria/Spectrum, Fluent, APG, Polaris), applies kit-faithful DNA from a catalog cite (house style is the fallback
-  voice), and remeasures. Use when building or reviewing UI, a dashboard,
-  a landing page, a component, a chart, a self-contained HTML artifact, or an email; when
-  asked to "make this look better", "polish this", "audit the UI", "design a page", "build
-  a table/form/modal"; when choosing colors, type, spacing, motion, or icons; when
-  generating images locally; when a surface speaks or listens; when writing or reviewing
-  copy; when planning or rescuing an internal tool, cockpit, or digest; and for any
-  brand-locked interface work. Not a checklist — run Wireframe (new) or the
-  diagnose → retrieve → apply DNA → prove loop (existing).
+  Deep UX skill for any interface, artifact, or visual output. Looks at the actual page
+  (screenshot first), names defects in UX terms — hierarchy, flow, states, density, copy,
+  a11y — then applies the structure and paint of real templates from pinned design kits
+  (shadcn, MUI, Ant Pro, Carbon, Fluent, Spectrum, Magic UI, SLDS) to make it shine.
+  Use when building or reviewing any UI, dashboard, landing page, table, form, chart,
+  email, or Lightning/LWC surface; when asked to "make this look better", "polish",
+  "audit", "wireframe", or "design a page"; when choosing colors, type, spacing, motion,
+  or icons; when a surface speaks or listens; when writing UI copy; and for brand-locked
+  work. New surface with no UI → Wireframe first. Existing UI → the loop:
+  look → name → match → restructure → repaint → prove.
 ---
 
 # SHINE
 
-> **The frontmatter above must stay `name` + `description` only. Never add `paths:` or
-> `globs:`.** Both scope a skill to matching files, and Cursor then withholds it from
-> context for everything else. This skill carried `paths: [tsx, jsx, css, html, svelte,
-> vue]` until 2026-08-08, so it never loaded for UI emitted from a `.py`/`.go`/`.rb` file.
-> A Python-served UI reached 56 raw hex values with the design authority one glob away. A
-> path-gated authority is an absent authority. Never scope this.
+> Frontmatter stays `name` + `description` only — `paths:`/`globs:` scope the skill to
+> matching files and Cursor then withholds it everywhere else. A Python-served UI once
+> collected 56 raw hex values with the design authority one glob away.
 
-Design quality is not opinion. It is what actually registers — measurable, and therefore
-checkable. Everything here is either measured from shipped production CSS, pinned in
-`~/design-corpus`, or verified against a primary source (including Apple HIG via WebFetch).
+You are a **UX director**. Nothing here is opinion-shaped: rules are measured from
+~4.5 MB of shipped production CSS, templates are real screens pinned in
+`~/design-corpus`, and claims about a page are proven by rendering it. The failure this
+skill exists to prevent: plausible-looking UI that ignores what real products do.
 
-You are a **UI/UX director**, not a painter with a catalog. Name the **lane**
-(internal / saas / lex / marketing), name the job, diagnose usability, retrieve a
-real corpus page **and its DNA pack**, apply that page’s structure **and** visual DNA,
-prove completeness (`measure.mjs`) **and** likeness (`critic.mjs`). Thresholds without
-a product or kit citation are incomplete. Read `references/direction.md` before paint.
+**New surface, no existing UI → Wireframe first** (`references/wireframe.md`): discovery
+→ gray-box HTML → locked brief. Build honours the brief; only `unlock structure` reopens it.
 
----
+## The loop (existing UI, or Build after a wireframe lock)
 
-## Gate: new surface → Wireframe first
+1. **LOOK.** Render it: `node verify/measure.mjs <path> --shot /tmp/before.png` — then
+   read the screenshot. Never diagnose a page you haven't seen. (Fails already listed by
+   measure are findings, not the whole diagnosis.)
+2. **NAME.** 3–6 defects in UX terms, worst first: can they finish the job → completeness
+   (named Table/Form/Dialog/Select loads `contracts.md` MUST now) → composition (one
+   primary, one focal object, voids, density) → craft. Procedure and defect taxonomy:
+   `references/diagnose.md`. Internal tools: `references/adoption.md` **before** pixels.
+3. **MATCH.** `node corpus/cite.mjs "<job in plain words>"` — it resolves synonyms and
+   returns up to 3 real templates with readable source (registry JSON is auto-extracted),
+   the harvested screenshot when one exists, and the voice sheet. Read the shot (or the
+   preview), skim the source's structure, pick one and say why. No matching row → nearest
+   row + `references/patterns.md`; never invent an anonymous layout for a known job.
+4. **RESTRUCTURE.** Clone the template's regions — nav, header, focal object, primary —
+   from its actual source. A queue keeps the table focal; a hero keeps display type and
+   one primary; a record keeps highlights → detail → related.
+5. **REPAINT.** Pick the voice (`references/voices.md`): **kit-faithful** (default when a
+   kit template is cited) — import `tokens/voices/<family>.css` and take the kit's real
+   values (colors included) from its token sources in the corpus, declared as custom
+   properties; **house** — shine's own dark-first lane; **brand** — kit structure, brand
+   chrome. Raw values live in custom-property definitions (the token layer); usage sites
+   say `var(--…)`. That is what makes kit paint legal under the lint.
+6. **PROVE.** `node verify/measure.mjs <path> --shot /tmp/after.png --cite <id>` (axe,
+   per-pixel contrast, composition, family checks) and, when the template has a harvested
+   shot, `node verify/compare.mjs <path> --cite <id>` — a side-by-side composite plus
+   measured facts. Read the composite. Report before/after numbers and the shot paths.
+   There is no self-scored likeness number: the pixels are the argument.
 
-If the ask is a **new** screen/page/tool and there is **no existing UI** to polish or
-audit, enter **Wireframe** (`references/wireframe.md`) before Build. Explicit “wireframe”,
-“sketch”, or “low-fi” also enters Wireframe. Skip Wireframe when Polish/Audit targets an
-existing surface.
-
-Wireframe ends at **lock** (gray-box HTML + `*.brief.md` + `DESIGN.md`). Build starts from that brief and
-**does not re-open structure** unless the user says “unlock structure.”
-
----
-
-## The loop (Build / Polish / Audit-that-fixes)
-
-Mandatory for Build, Polish, and Audit-that-fixes. Audit-only stops after the report.
-Details: `references/diagnose.md`. If a locked wireframe brief exists for this surface,
-read it first and treat structure as given.
-
-0. **Catalog cite required.** Name the job (`adoption.md` if internal). Run
-   `node corpus/cite.mjs <job|screen|id>`. Read **every file it lists**, open the
-   Preview, and **Read the DNA pack** (`corpus/packs/<id>/specimen.html` + `dna.json`).
-   Copy structure **and** the DNA block. Voice is kit-faithful unless house or
-   brand — `voices.md`. Import `tokens/voices/<family>.css` when kit-faithful.
-   Naming an id you did not open is inventing. No row →
-   `inspiration.md` then cite. Do not invent. Do not load all 30 references.
-1. **Surface** — marketing / product / brand-locked / AI / voice / native. Internal tools:
-   `adoption.md` **before** pixels.
-2. **Defects** — usability, then completeness (`contracts.md`), composition, craft.
-   Named Table / Form / Dialog / Select → load `contracts.md` MUST in the same pass.
-3. **Cite before edit** — every material fix names a source:
-   - catalog template → `templates.md` id **and** the `corpus/cite.mjs` files you opened
-   - product technique → `references/techniques.md` (Linear, Vercel, Notion, Stripe, …)
-   - kit pattern → `references/kits.md` + `~/design-corpus` `file:line`
-   - novel → `references/inspiration.md` (fill a missing catalog row, not skip it)
-   - native → Apple HIG URL + principle (not in corpus)
-4. **Apply** — clone regions **and** visual DNA from the cite. Retune shine tokens to that
-   DNA. House style is the fallback voice, not the only paint. Brand lane still sandpapers
-   vendor chrome. See `voices.md`.
-5. **Remeasure** — `verify/measure.mjs <path> --shot out.png --cite <id>`. Then
-   `verify/critic.mjs <path> --cite <id> --lane <lane>`. Hard fails block: contracts,
-   critic likeness < 7, slop class on a non-zinc cite, craft. Fail if regions are
-   missing or a Carbon cite still looks like shadcn zinc. Cap three critic passes.
-   Notes do not block. Report catalog id + DNA + `images_read` + numbers.
-6. **Stop** — Critical completeness (including catalog cite) before craft polish.
-
-**Banned report language:** "tighten spacing", "make it cleaner", "more modern" with no
-citation and no numbers.
-
----
-
-## Modes
-
-**Wireframe** — interactive discovery → gray-box HTML → locked brief. Default for new
-surfaces. `references/wireframe.md`.
-**Audit** — score, cite, report; change nothing. `references/audit.md`.
-**Build** — loop above; catalog cite, contracts on named Table/Form/Dialog/Select, composition. Honours locked brief.
-`templates.md`, `contracts.md`, `patterns.md`, `kits.md`, `voices.md`.
-**Polish** — upgrade stubs in place; still cite + remeasure.
-**Copy** — presentation as argument. `references/copy.md`.
-**Adoption** — will anyone open it? `references/adoption.md` — first for internal tools
-(also runs lite inside Wireframe for internal surfaces).
-
-Default: **Wireframe** if new surface / no UI; else **Build** unless the ask is clearly a
-review. Persuasive copy gets the Copy pass before ship. Internal tools get Adoption
-before craft (and before Wireframe lock if the ritual is unknown).
-
----
+Audit-only stops after NAME (+ report, `references/audit.md`). Copy that persuades gets
+`references/copy.md` before ship.
 
 ## Constraints (non-negotiables)
 
-These bound every fix inside the loop. Wireframe is exempt from craft hard-fails until
-Build; structure rules (one primary, labeled regions, no voids) still apply.
-
-0. **Measure what your consumers ship, not just this repo.** `npm run measure-consumers`
-   (registry: `consumers.pages.local`). shine once reported 43 of 43 checks passing while
-   the site it governs failed AA on fourteen pages — every check was about shine, none
-   loaded a page a reader sees. `npm run doctor:full` includes it; the default doctor does
-   not, because consumers carry real migration debt and a permanently red gate gets ignored.
-
-1. **Never ship a raw value where a token exists — and never a token that fails as text.**
-   No hex, no `rgb()`, no arbitrary Tailwind, no off-scale spacing, no ad-hoc font size,
-   letter-spacing or `box-shadow`. Token gap → fill `tokens/scripts/gen-source.mjs` or say
-   so. Pragmas name the one rule (`shine-lint: off shadow`); bare `off` is almost never
-   right. **Using a token is not the same as using the right one:** `--mute` is 4.12:1 and
-   `--mute-2` is 2.59:1 against the ground, so both fail AA for normal text while linting
-   clean under every earlier version of this rule. Body text and labels take
-   `--shine-color-fg` or `--shine-color-fg-muted`; the dim aliases are for large display
-   type only. The lint now computes this from the emitted palette and names the
-   replacement.
-
-2. **Wipe the default palette — and the default scales.** Tailwind v4: `--color-*`,
-   `--text-*`, `--tracking-*`, `--shadow-*` → `initial`. Tailwind's `shadow-lg` is the
-   anti-pattern under a token-shaped name.
-
-3. **Two token layers, bridged by `@theme inline`.** Components say `bg-surface text-fg`.
-   Omitting `inline` is the #1 cause of "dark mode doesn't switch."
-
-4. **Measure the rendered box, never the source string.** `getComputedStyle` +
-   `getBoundingClientRect` after `document.fonts.ready`.
-
-5. **A component name is a complete contract.** "Table" means toolbar, sort, pagination,
-   sticky header, selection, empty/loading/error, keyboard — `contracts.md`.
-
-6. **State the numbers you used.** Before/after. Citation + measure.
-
-7. **Per-element checks can pass while the screen is broken.** Composition is separate —
-   absences, counts, collisions, proportions. See Verification.
-
-8. **A number is not done until it is checkable.** Units, comparison, direction, certainty
-   — `dashboards.md`.
-
-9. **Name the ritual before the pixels** on internal surfaces — `adoption.md` before
-   `dashboards.md`.
-
----
+1. **No raw value at a usage site where a token exists** — no hex, no `rgb()`, no
+   arbitrary Tailwind, no off-scale spacing, no ad-hoc font size / tracking / shadow.
+   Values live in token definitions (`tokens/src`, a voice sheet, or the page's own
+   custom-property block); usage says `var(--shine-*)` or a token utility. A legal token
+   can still be the wrong one: body text takes `--shine-color-fg(-muted)` — the dim
+   aliases fail AA as text and the lint now computes this.
+2. **Wipe Tailwind's default palette and scales** (`--color-*`, `--text-*`,
+   `--tracking-*`, `--shadow-*` → `initial`) so off-system values are unreachable, and
+   **bridge the two token layers with `@theme inline`** — omitting `inline` is the #1
+   cause of "dark mode doesn't switch."
+3. **Measure the rendered box, never the source string** — `getComputedStyle` +
+   `getBoundingClientRect` after `document.fonts.ready`. Per-element checks can pass
+   while the screen is broken; composition (voids, collisions, hierarchy, density) is
+   its own pass.
+4. **A component name is a contract.** "Table" means toolbar, sort, pagination, sticky
+   header, states, keyboard — `references/contracts.md`.
+5. **Name the ritual before the pixels** on internal surfaces (`references/adoption.md`),
+   and make every number checkable — units, comparison, direction
+   (`references/dashboards.md`).
+6. **State the numbers you used.** Before/after, with the measure output. Banned report
+   language: "tighten spacing", "cleaner", "more modern" with no source and no numbers.
 
 ## The ten rules that catch most craft defects
 
-Measured across ~4.5 MB of production CSS from Linear, Stripe, Vercel, Notion, Raycast,
-Clerk, Resend, Superhuman, Things, Liveblocks and others. Transfer recipes for these live
-in `references/techniques.md` — use that file when fixing, not thresholds alone.
+Measured across ~4.5 MB of production CSS (Linear, Stripe, Vercel, Notion, Raycast,
+Clerk, Resend, Superhuman, Things, Liveblocks…). Transfer recipes: `references/techniques.md`.
 
 | # | Rule |
 |---|---|
-| 1 | **House accent chroma is OKLCH 0.13–0.24.** Kit-faithful uses the cite DNA range. Tailwind's `-600` row is 0.245–0.288 — the house "AI slop" tell. |
+| 1 | **House accent chroma is OKLCH 0.13–0.24.** Kit-faithful follows the kit. Tailwind's `-600` row is 0.245–0.288 — the "AI slop" tell. |
 | 2 | **Adjacent surfaces differ ~2pp of lightness** (1.6–3.9). Borders carry separation. ≥6pp is a smell. |
 | 3 | **The type scale is two ratios** — ~1.12 UI band (11–24px), ~1.22 display. |
 | 4 | **Tracking is a function of size AND weight.** Negative by 20–24px; regular ~1.6× more negative than bold. Pair `tracking-*` with `text-*`. |
@@ -171,109 +99,76 @@ in `references/techniques.md` — use that file when fixing, not thresholds alon
 | 7 | **Elevation = hairline + blur layers + background ring.** Use `--shine-shadow-*` only. |
 | 8 | **Radii nest: `child = parent − padding`.** Radius scales with element size. |
 | 9 | **Motion: 150ms mode.** 100–150 micro, 150–250 standard, 200–300 overlays. Exit ~20% faster. Never `transition: all`. |
-| 10 | **`tabular-nums` on numerics**, `text-wrap: balance` / `pretty`, `color-scheme` on `<html>`, `:focus-visible` + `outline-offset`. |
+| 10 | **`tabular-nums` on numerics**, `text-wrap: balance`/`pretty`, `color-scheme` on `<html>`, `:focus-visible` + `outline-offset`. |
 
 Grays: hue *consistency* across the ramp, not mandatory tint — Vercel runs chroma-0 on purpose.
-
-## Voices
-
-Three legal paints — `references/voices.md`. **kit-faithful** (default): apply cite DNA.
-**house** (fallback): dark-first, dense, editorial, one accent. **brand**: kit structure,
-not kit chrome.
-
----
 
 ## Reference map — read on demand
 
 | File | When |
 |---|---|
-| `references/wireframe.md` | **New surface / sketch** — discovery, gray-box HTML, locked brief before Build. |
-| `references/diagnose.md` | **Start here** for Build/Polish — surface, defects, cite, apply, remeasure. |
-| `references/techniques.md` | Symptom → product technique transfer (Linear, Vercel, Notion, …). |
-| `references/templates.md` | Catalog ids. **Do not cite from this table alone** — run `corpus/cite.mjs` and open the files. |
-| `references/kits.md` | Which corpus kit; worked recipes (DataGrid, dialog, form, shell). |
+| `references/diagnose.md` | **The loop's procedure** — defect taxonomy, priority order, defect→file table. |
+| `references/wireframe.md` | New surface — discovery, gray-box, locked brief. |
+| `references/templates.md` | Generated catalog index. `corpus/cite.mjs` is the interface. |
+| `references/voices.md` | Kit-faithful / house / brand — how paint actually works. |
 | `references/contracts.md` | MUST/SHOULD/ASK per primitive. |
-| `references/taste.md` | Measurement SSOT — token values, 40 rules, 84-item taxonomy. |
+| `references/adoption.md` | Internal tools — ritual, persona, path. Before dashboards. |
 | `references/patterns.md` | Screen recipes — shell, dashboard, table, forms, landing, queue. |
-| `references/adoption.md` | Internal tools — ritual, persona, path, push/pull. Before dashboards. |
-| `references/dashboards.md` | Metric anatomy, drill-down, queues, myths. |
-| `references/dataviz.md` | Chart encoding, denylist, colour, number format. |
-| `references/ai-surfaces.md` | Model-does-work surfaces; chat is usually wrong. |
-| `references/performance.md` | CWV and latency budgets. |
-| `references/anti-patterns.md` | Hard bans + composition fails. |
-| `references/audit.md` | Audit rubric; citations required on Critical/Major. |
-| `references/color-type.md` | OKLCH, contrast, tracking, fluid scales, DTCG. |
-| `references/motion.md` | Duration/easing, reduced-motion. |
-| `references/verification.md` | Measure loop traps. |
-| `references/ecosystem.md` | Library choice, licenses. |
-| `references/corpus.md` | `~/design-corpus` query map (49 pins including vendor DS). |
-| `references/salesforce.md` | SLDS 2 overrides. |
-| `references/foundations.md` | Semantic vars, 8pt rhythm, elevation, a11y floor. |
-| `references/inspiration.md` | Fill a missing catalog row. Technique cites do not skip this. |
-| `references/brand.md` | Brand-mode adapter. **If `references/brand.local.md` exists, read that instead** — a private brand pack drops its real rules there, gitignored. |
-| `references/imagegen.md` | On-demand graphics — ask high/medium/low; map to mflux. |
-| `references/voice.md` | Speak/listen surfaces. |
-| `references/voices.md` | House / kit-faithful / brand — pick from the job, not habit. |
-| `references/copy.md` | Persuasion / instructional copy. |
-| `references/direction.md` | **Art direction before code** — lanes, DESIGN.md, 2026 defaults, critic loop. |
-| `references/layout.md` | Grid, optical alignment, host width vs viewport, macrostructure. |
+| `references/layout.md` | Grid, optical alignment, host width vs viewport. |
 | `references/interaction.md` | Keyboard, URL state, Fitts/Hick, LEX datatable. |
+| `references/taste.md` | Measurement SSOT — reference values, 40 rules, failure taxonomy. |
+| `references/color-type.md` | OKLCH, contrast policy, tracking, fluid scales, DTCG. |
+| `references/motion.md` | Duration/easing, reduced-motion, platform motion. |
+| `references/foundations.md` | Semantic vars, 8pt rhythm, elevation, a11y floor. |
+| `references/anti-patterns.md` | Hard bans + composition fails. |
+| `references/techniques.md` | Symptom → product technique transfer. |
+| `references/kits.md` | Which corpus kit; worked recipes. |
+| `references/corpus.md` | `~/design-corpus` query map (49 pins). |
+| `references/dashboards.md` | Metric anatomy, drill-down, queues, checkable numbers. |
+| `references/dataviz.md` | Chart encoding, denylist, colour, number format. |
+| `references/audit.md` | Audit rubric + report template. |
+| `references/direction.md` | Lanes + the DESIGN.md two-pass plan. |
+| `references/ai-surfaces.md` | Model-does-work surfaces; chat is usually wrong. |
+| `references/salesforce.md` | SLDS 2 / Lightning — org-measured facts. |
+| `references/brand.md` | Brand adapter. `references/brand.local.md` overrides when present. |
+| `references/copy.md` | Persuasion / instructional copy. |
+| `references/voice.md` | Speak/listen surfaces. |
+| `references/imagegen.md` | On-demand graphics via mflux. |
+| `references/ecosystem.md` | Library choice, licenses. |
+| `references/performance.md` | CWV and latency budgets. |
+| `references/verification.md` | Measure-loop traps. |
 
 ## Hard-won specifics
 
-- **`class-variance-authority` is stale** (0.7.1). Use `tailwind-variants` (slots).
-- **Base UI:** `@base-ui/react`, not `@base-ui-components/react`.
-- **Pin `@tanstack/react-table@^8`** — v9 breaks everything.
-- **`tailwind-merge` ^3** for Tailwind v4.
-- **Charts: D3 for math/SSR, Recharts for React.**
-- **Single-file artifacts: hand-written CSS**, not Tailwind. Nesting, `:has()`, `light-dark()`.
-- **License traps:** Aceternity (none); React Bits / Animate UI (Commons Clause); Origin UI
-  (AGPL). Polaris = query only. Using ≠ redistributing.
+- **`class-variance-authority` is stale** — use `tailwind-variants`. **Base UI:**
+  `@base-ui/react`. **Pin `@tanstack/react-table@^8`.** **`tailwind-merge` ^3** for v4.
+- **Charts: D3 for math/SSR, Recharts for React.** Single-file artifacts: hand-written
+  CSS, not Tailwind — nesting, `:has()`, `light-dark()`.
+- **License traps:** Aceternity (none); React Bits / Animate UI (Commons Clause); Origin
+  UI (AGPL); Polaris query-only. Using ≠ redistributing.
 
 ## Verification
 
-Never claim a design is correct. Measure it and report the numbers.
-
-**Wireframe gray-boxes** are exempt from craft hard-fails until Build. Structure still
-matters: one filled primary, labeled regions, no empty voids pretending to be content.
-Full measure runs after paint.
-
-**Before claiming shine is enforced, run its doctor** — `node verify/doctor.mjs`. Wiring
-failures print nothing; the doctor proves gates bite. Acceptance test when changing shine.
-
-**Measure from shine's own deps** (`npm install` at repo root — Playwright, axe-core,
-sharp). `verify/deps.mjs` falls back to a sibling checkout only if root deps are missing:
+Never claim a design is correct — measure it. Wireframe gray-boxes are exempt from craft
+hard-fails until Build; structure rules still apply. Run from shine's own deps
+(`npm install` once at the repo root):
 
 ```sh
-cd ~/Projects/shine && npm install   # once
-node corpus/cite.mjs dashboard        # job or screen; open files + pack specimen, then draw
-node verify/measure.mjs /abs/path/to/page.html --cite shadcn-dashboard-01 --shot /tmp/shot.png
-node verify/critic.mjs /abs/path/to/page.html --cite shadcn-dashboard-01 --lane saas
+cd ~/Projects/shine-deploy && npm install                   # once
+node corpus/cite.mjs "<job>"                              # match: templates + source + shot
+node verify/measure.mjs <path> --shot /tmp/shot.png --cite <id>
+node verify/compare.mjs <path> --cite <id>                # side-by-side vs harvested shot
+node verify/doctor.mjs                                    # is shine itself in force?
 ```
 
-```
-render      Playwright
-measure     getComputedStyle + getBoundingClientRect
-a11y        axe-core
-contrast    per-pixel (p5 gated)
-lint        scale + cardinality on COMPUTED values
-compose     voids, type-step collisions, hierarchy, density, theme
-template    --shot required on Build; fail if not derived from the catalog cite
-```
-
-Hard-failing (among others): void regions, colliding type steps, unswitching undeclared
-theme, no filled primary when controls exist, competing filled primaries. Notes never
-block — false-positive gates get switched off.
-
-`node verify/doctor.mjs --full` runs composition fixtures (void, empty-state, hierarchy).
-Skipped by default at session start (launches Chromium).
-
-Traps: `oklch()` is not `rgb()` — rasterize to measure; disable transitions before sample;
-HTTP 200 can be an auth wall. Fail axe `incomplete` too.
+Hard-failing in measure (among others): axe violations, worst-case contrast, void
+regions, colliding type steps, undeclared theme, no filled primary / competing primaries,
+app-shell density, table contract, family checks under `--cite`. Notes never block.
+Traps live in `references/verification.md`. Before claiming shine is enforced, run the
+doctor — wiring failures print nothing on their own.
 
 ## Reporting
 
-Environment · **lane** · **catalog id** · DNA · `images_read` · corpus files opened · citations (technique/kit/file:line) · before/after
-numbers · critic likeness · `--shot` path. Never "looks good now." A build that cannot name a catalog id
-**and** the corpus files it opened **and** the pack specimen it read is incomplete — go open them. Named Table/Form/Dialog/Select
-without a contracts MUST checklist (or a measure fail) is incomplete.
+Lane · template id · voice · files/shots read · before/after measure numbers · shot
+paths (and the compare composite when available) · what is NOT done. A named
+Table/Form/Dialog/Select without its contracts MUST checklist is incomplete.
