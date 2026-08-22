@@ -6,25 +6,20 @@
 //   node corpus/cite.mjs queue
 //   node corpus/cite.mjs --list
 //
-// Output per match: the pack screenshot when harvested (read it first — pixels are
-// the design), readable source files (registry JSON is extracted to real .tsx on
-// the fly), the kit's voice sheet, and the preview URL. No liturgy: the files are
-// listed because they are useful, not because reading them is a ritual.
+// Output per match: the pack screenshot (read it first — pixels are the design),
+// readable source files vendored in the pack (registry JSON is extracted if the
+// pack is missing), the kit token sheet, and the preview URL.
 
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
+import { collectCorpusSource, packSourceFiles } from "./pack-files.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CORPUS = resolve(process.env.DESIGN_CORPUS || join(homedir(), "design-corpus"));
 const CATALOG = join(SHINE, "corpus/templates.json");
 const EXTRACT = join(SHINE, "corpus/extracted");
-const CODE = /\.(tsx|ts|jsx|js|mdx|html|css)$/;
-const SKIP = /(?:^|\/)(?:test|tests|__tests__)|\.test\.|\.spec\.|\.stories\.|-test\./i;
-const PREFER =
-  /(?:^|\/)(readme|page|layout|app|index|dashboard|data-table|datatable|chat|settings|wizard|profile|shell|blog)/i;
-const DEMOTE = /(?:^|\/)(card|badge|accordion|checkbox|calendar|divider)\./i;
 const STOP = new Set(["a", "an", "the", "page", "screen", "view", "ui", "for", "of", "my", "our", "new"]);
 
 const die = (code, msg) => {
@@ -94,80 +89,27 @@ const row = ranked[0].t;
 const alternates = ranked.slice(1, 3).map((r) => r.t).filter((t) => t.id !== row.id);
 
 // ---- collect readable source --------------------------------------------------
-// shadcn registry items embed TSX as JSON strings with a 28k-char longest line —
-// unreadable through any file reader. Extract to real files once, list those.
-const listed = [];
+// Prefer the vendored pack (shot + source/ + tokens.css). Fall back to the pinned
+// corpus so materialize and a fresh clone without packs still work.
+const packDir = join(SHINE, "corpus/packs", row.id);
+const packSrc = packSourceFiles(packDir);
+let files = packSrc;
+let show = packSrc.slice(0, 3);
+let extra = Math.max(0, packSrc.length - show.length);
+let fromPack = packSrc.length > 0;
 
-const extractRegistryItem = (jsonPath, id) => {
-  const outDir = join(EXTRACT, id);
-  const item = JSON.parse(readFileSync(jsonPath, "utf8"));
-  const files = item.files ?? [];
-  if (!files.length) return [jsonPath];
-  const out = [];
-  for (const f of files) {
-    if (!f.path || typeof f.content !== "string") continue;
-    const rel = f.path.replace(/^registry\/[^/]+\//, "");
-    const dest = join(outDir, rel);
-    mkdirSync(dirname(dest), { recursive: true });
-    // idempotent: rewrite only when stale
-    if (!existsSync(dest) || readFileSync(dest, "utf8") !== f.content) writeFileSync(dest, f.content);
-    out.push(dest);
+if (!fromPack) {
+  const abs = row.path ? join(CORPUS, row.path) : "";
+  if (row.kind === "source" && abs && !existsSync(abs)) {
+    die(2, `cite: ${row.id} path missing: ${abs}\nrun: corpus/acquire.sh`);
   }
-  return out.length ? out : [jsonPath];
-};
-
-const walk = (dir, acc, depth = 0) => {
-  if (acc.length >= 60 || depth > 4) return;
-  let ents = [];
-  try {
-    ents = readdirSync(dir, { withFileTypes: true });
-  } catch {
-    return;
-  }
-  const names = new Set(ents.filter((e) => e.isFile()).map((e) => e.name));
-  for (const e of ents) {
-    if (!e.isFile() || !CODE.test(e.name) || SKIP.test(e.name) || SKIP.test(join(dir, e.name))) continue;
-    if (e.name.endsWith(".js") && names.has(e.name.slice(0, -3) + ".tsx")) continue;
-    acc.push(join(dir, e.name));
-  }
-  const readme = ents.find((e) => e.isFile() && /^readme/i.test(e.name));
-  if (readme) acc.push(join(dir, readme.name));
-  for (const e of ents.filter(
-    (e) => e.isDirectory() && !["node_modules", ".git", "__tests__", "test", "tests"].includes(e.name),
-  )) {
-    walk(join(dir, e.name), acc, depth + 1);
-  }
-};
-
-const rank = (p) => {
-  const base = p.split("/").pop() || p;
-  if (/^readme/i.test(base)) return 1;
-  if (/^page\./i.test(base)) return 0;
-  if (PREFER.test(base)) return 2;
-  if (DEMOTE.test(base)) return 4;
-  return 3;
-};
-
-const abs = row.path ? join(CORPUS, row.path) : "";
-if (row.kind === "source" && abs && existsSync(abs)) {
-  if (abs.endsWith(".json")) listed.push(...extractRegistryItem(abs, row.id));
-  else if (statSync(abs).isDirectory()) walk(abs, listed);
-  else listed.push(abs);
-} else if (row.kind === "query-only" && abs) {
-  listed.push(abs);
-} else if (row.kind === "source" && abs) {
-  die(2, `cite: ${row.id} path missing: ${abs}\nrun: corpus/acquire.sh`);
+  const collected = collectCorpusSource(row, { corpus: CORPUS, extractDir: EXTRACT });
+  files = collected.files;
+  show = collected.show;
+  extra = collected.extra;
 }
 
-const files = [...new Set(listed)].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
-const composed = files.find((p) =>
-  /(?:^|\/|#)(?:page|blog|index|layout|dashboard)\.[jt]sx?$/i.test(p.split("#").pop() || p),
-);
-const show = (composed ? [composed, ...files.filter((p) => p !== composed)] : files).slice(0, 3);
-const extra = files.length - show.length;
-
 // ---- pack (harvested pixels) ---------------------------------------------------
-const packDir = join(SHINE, "corpus/packs", row.id);
 const shot = join(packDir, "shot.png");
 const packTokens = join(packDir, "tokens.css");
 const family = row.dna?.family || "shine";
@@ -189,9 +131,14 @@ if (existsSync(voiceCss)) out.push(`Voice sheet: tokens/voices/${family}.css (im
 out.push(`Family: ${family}   Density: ${row.dna?.density || ""}`);
 if (show.length) {
   out.push(``);
-  out.push(`Source (readable${files.some((f) => f.startsWith(EXTRACT)) ? ", extracted from registry JSON" : ""}):`);
+  const srcKind = fromPack
+    ? ", in the pack"
+    : files.some((f) => f.startsWith(EXTRACT))
+      ? ", extracted from registry JSON"
+      : "";
+  out.push(`Source (readable${srcKind}):`);
   for (const f of show) out.push(`  ${f}`);
-  if (extra > 0) out.push(`  … ${extra} more — rg under ${abs}`);
+  if (extra > 0) out.push(`  … ${extra} more in ${fromPack ? join(packDir, "source") : row.path || "the corpus"}`);
 }
 if (alternates.length) {
   out.push(``);

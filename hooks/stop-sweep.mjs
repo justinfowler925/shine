@@ -12,6 +12,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 import { isDesignCandidate } from "./design-lint.mjs";
+import { citeGaps } from "./cite-gate.mjs";
 
 const LINT = join(dirname(fileURLToPath(import.meta.url)), "design-lint.mjs");
 
@@ -20,7 +21,18 @@ const LINT = join(dirname(fileURLToPath(import.meta.url)), "design-lint.mjs");
 const isCursor = (event) =>
   event?.hook_event_name === "stop" || (!("stop_hook_active" in (event || {})) && Boolean(event?.conversation_id));
 
-const stdinGuard = setTimeout(() => process.exit(0), 5000);
+const failClosed = (reason, event) => {
+  if (isCursor(event)) {
+    process.stderr.write(`${reason}\n`);
+    process.exit(2);
+  }
+  process.stdout.write(JSON.stringify({ decision: "block", reason }));
+  process.exit(0);
+};
+
+const stdinGuard = setTimeout(() => {
+  failClosed("shine stop-sweep: no hook payload in 5s — refusing to fail open", {});
+}, 5000);
 let input = "";
 process.stdin.on("data", (c) => (input += c));
 process.stdin.on("end", () => {
@@ -28,7 +40,9 @@ process.stdin.on("end", () => {
   let event = {};
   try {
     event = JSON.parse(input);
-  } catch {}
+  } catch {
+    failClosed("shine stop-sweep: hook payload is not JSON — refusing to fail open", {});
+  }
   // don't loop: if a previous Stop block already fired, let the turn end
   if (event.stop_hook_active) process.exit(0);
 
@@ -42,31 +56,39 @@ process.stdin.on("end", () => {
       // One shared predicate with the per-edit lint, so the two gates cannot
       // disagree about what counts as UI.
       .filter((f) => isDesignCandidate(f));
-  } catch {
-    process.exit(0); // not a git repo — nothing to sweep
+  } catch (e) {
+    const msg = `${e.stderr || e.message || e}`;
+    if (/not a git repository/i.test(msg)) process.exit(0);
+    failClosed(`shine stop-sweep: git status failed — ${msg.split("\n")[0]}`, event);
   }
   if (!changed.length) process.exit(0);
 
   const res = spawnSync("node", [LINT, ...changed], { encoding: "utf8" });
-  if (res.status !== 1) process.exit(0);
-
-  const found = res.stderr
-    .split("\n")
-    .filter((l) => l.startsWith("BLOCK"))
-    .slice(0, 12)
-    .join("\n");
-  const reason =
-    "shine design-lint (stop sweep): files modified this turn carry off-token values:\n" +
-    found +
-    "\nFix them before finishing (tokens: var(--shine-*) / token utilities).";
-
-  // Cursor blocks on exit code 2 and reads stderr; Claude Code blocks with a JSON
-  // decision on stdout. Same sweep, two contracts — wiring only one is how Cursor
-  // ran with no shine enforcement at all until 2026-08-08.
-  if (isCursor(event)) {
-    process.stderr.write(`${reason}\n`);
-    process.exit(2);
+  if (res.status !== 0 && res.status !== 1) {
+    failClosed(`shine stop-sweep: design-lint exited ${res.status} — refusing to fail open`, event);
   }
-  process.stdout.write(JSON.stringify({ decision: "block", reason }));
+  if (res.status === 1) {
+    const found = res.stderr
+      .split("\n")
+      .filter((l) => l.startsWith("BLOCK"))
+      .slice(0, 12)
+      .join("\n");
+    failClosed(
+      "shine design-lint (stop sweep): files modified this turn carry off-token values:\n" +
+        found +
+        "\nFix them before finishing (tokens: var(--shine-*) / token utilities).",
+      event,
+    );
+  }
+
+  const gaps = citeGaps(changed);
+  if (gaps.length) {
+    failClosed(
+      "shine cite (stop sweep): UI written this turn has no catalog cite (`data-cite` or `<!-- cite: id -->`):\n" +
+        gaps.slice(0, 8).join("\n") +
+        "\nLaunch shine-ux; do not freelance the page.",
+      event,
+    );
+  }
   process.exit(0);
 });

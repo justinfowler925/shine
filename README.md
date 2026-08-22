@@ -27,7 +27,7 @@ Shine owns the token layer, the design corpus, the agent skill, and the measure 
 | **Corpus** | `~/design-corpus` — sparse upstream source; `rg` before inventing any API |
 | **Enforcement** | design-lint + stop-sweep, per-edit and turn-end, on both surfaces |
 | **Verification** | `measure.mjs` (axe, per-pixel contrast, composition, family checks) + `compare.mjs` (side-by-side pixels, facts, no verdict) |
-| **Doctor** | `verify/doctor.mjs` — wiring, gate bite (seeded violations), pack pixels, compare honesty |
+| **Doctor** | `verify/doctor.mjs` — wiring, gate bite (seeded violations), pack payload, compare mismatch |
 
 ---
 
@@ -95,7 +95,7 @@ ln -sfn "$SHINE/agents/shine-ux.md" ~/.claude/agents/shine-ux.md
 ```
 
 **Hooks (enforcement — skill alone is not enough):** merge into `~/.claude/settings.json`
-under `hooks` (create the file if missing):
+under `hooks` (create the file if missing). Point at the skill symlink, not a checkout:
 
 ```json
 {
@@ -106,7 +106,7 @@ under `hooks` (create the file if missing):
         "hooks": [
           {
             "type": "command",
-            "command": "node $SHINE/hooks/design-lint.mjs",
+            "command": "$HOME/.claude/skills/shine/run-hook.sh design-lint.mjs",
             "timeout": 15,
             "statusMessage": "shine design-lint"
           }
@@ -118,7 +118,7 @@ under `hooks` (create the file if missing):
         "hooks": [
           {
             "type": "command",
-            "command": "node $SHINE/hooks/stop-sweep.mjs",
+            "command": "$HOME/.claude/skills/shine/run-hook.sh stop-sweep.mjs",
             "timeout": 20,
             "statusMessage": "shine stop sweep"
           }
@@ -130,7 +130,7 @@ under `hooks` (create the file if missing):
         "hooks": [
           {
             "type": "command",
-            "command": "node $SHINE/verify/doctor.mjs --quiet",
+            "command": "$HOME/.claude/skills/shine/run-hook.sh doctor.mjs --quiet",
             "timeout": 30,
             "statusMessage": "shine doctor"
           }
@@ -159,25 +159,26 @@ ln -sfn "$SHINE/agents/shine-ux.md" ~/.cursor/agents/shine-ux.md
 ```
 
 **Hooks:** merge into `~/.cursor/hooks.json` (Cursor blocks on **exit code 2**, not JSON
-`decision`):
+`decision`). Point at the **skill symlink**, not a checkout — `run-hook.sh` lives in
+the loaded tree, so retargeting `~/.cursor/skills/shine` retargets the gates.
 
 ```json
 {
   "afterFileEdit": [
     {
-      "command": "node $SHINE/hooks/design-lint.mjs",
+      "command": "$HOME/.cursor/skills/shine/run-hook.sh design-lint.mjs",
       "timeout": 15
     }
   ],
   "stop": [
     {
-      "command": "node $SHINE/hooks/stop-sweep.mjs",
+      "command": "$HOME/.cursor/skills/shine/run-hook.sh stop-sweep.mjs",
       "timeout": 30
     }
   ],
   "sessionStart": [
     {
-      "command": "node $SHINE/verify/doctor.mjs --quiet",
+      "command": "$HOME/.cursor/skills/shine/run-hook.sh doctor.mjs --quiet",
       "timeout": 30
     }
   ]

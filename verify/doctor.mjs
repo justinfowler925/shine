@@ -30,6 +30,8 @@ import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { tmpdir, homedir } from "node:os";
 import { NODE_PATH } from "./deps.mjs";
+import { inspectPack } from "../corpus/pack-files.mjs";
+import { citeGaps } from "../hooks/cite-gate.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const HOME = homedir();
@@ -323,6 +325,22 @@ if (!CI) {
     else ok(`${w.name} fail-closed`, "no || true");
   }
 
+  const HOOK_STALE = /Projects\/shine(?:-live|-deploy)?\//;
+  const hookSample = "node ~/Projects/shine-deploy/hooks/design-lint.mjs";
+  if (!HOOK_STALE.test(hookSample)) fail("hook-path detector bites", "missed a hardcoded shine-deploy hook");
+  else ok("hook-path detector bites", "hardcoded deploy hook would go red");
+  for (const file of [join(HOME, ".cursor/hooks.json"), join(HOME, ".claude/settings.json")]) {
+    if (!existsSync(file)) continue;
+    const blob = readFileSync(file, "utf8");
+    if (!/design-lint\.mjs|stop-sweep\.mjs|doctor\.mjs/.test(blob)) continue;
+    if (HOOK_STALE.test(blob))
+      fail(
+        `hooks resolve from skill (${file.replace(HOME, "~")})`,
+        "command hardcodes a Projects/shine* checkout — point at ~/.cursor/skills/shine/run-hook.sh",
+      );
+    else ok(`hooks resolve from skill (${file.replace(HOME, "~")})`, "no Projects/shine* in hook commands");
+  }
+
   // The plugin-shipped copy, for anyone installing shine as a Claude Code plugin.
   const plugin = join(SHINE, "hooks/hooks.json");
   const conf = readJSON(plugin);
@@ -433,6 +451,15 @@ if (!CI) {
       "per-edit lint scoped pragma silences only the named rule",
       `exit ${sc.status}, shadow ${silenced ? "silenced" : "STILL REPORTED"}, colour ${stillBites ? "still bites" : "ALSO SILENCED"}`,
     );
+
+  const uncited = join(dir, "page.html");
+  const cited = join(dir, "cited.html");
+  writeFileSync(uncited, "<!doctype html><html><body><div>hi</div></body></html>\n");
+  writeFileSync(cited, '<!doctype html><html><body><main data-cite="carbon-datatable">ok</main></body></html>\n');
+  if (!citeGaps([uncited]).length) fail("cite gate bites", "uncited page.html was allowed");
+  else ok("cite gate bites", "page without data-cite is a gap");
+  if (citeGaps([cited]).length) fail("cite gate allows a cited page", "data-cite still flagged");
+  else ok("cite gate allows a cited page", "data-cite present");
 
   // Stop sweep, both surfaces, over a real git repo.
   const git = (...a) => spawnSync("git", a, { cwd: dir, encoding: "utf8" });
@@ -892,13 +919,14 @@ if (args.includes("--full")) {
     if (unknown.status !== 1) fail("cite.mjs unknown id", `expected exit 1, got ${unknown.status}`);
     else ok("cite.mjs unknown id", "exit 1");
     const corpusReady = existsSync(join(HOME, "design-corpus"));
-    if (corpusReady) {
+    const dashPack = existsSync(join(SHINE, "corpus/packs/shadcn-dashboard-01/source"));
+    if (corpusReady || dashPack) {
       const blog = spawnSync(process.execPath, [cite, "mui-blog"], { encoding: "utf8" });
       const out = `${blog.stdout || ""}${blog.stderr || ""}`;
       if (blog.status !== 0) fail("cite.mjs mui-blog", `exit ${blog.status}: ${(blog.stderr || "").slice(0, 200)}`);
-      else if (!/Template: mui-blog/.test(out) || !/design-corpus/.test(out) || !/Blog\.tsx/.test(out))
-        fail("cite.mjs mui-blog", "did not print Template: mui-blog + a design-corpus Blog.tsx to open");
-      else ok("cite.mjs mui-blog", "lists corpus files to open");
+      else if (!/Template: mui-blog/.test(out) || !/Blog\.tsx/.test(out))
+        fail("cite.mjs mui-blog", "did not print Template: mui-blog + Blog.tsx to open");
+      else ok("cite.mjs mui-blog", "lists Blog.tsx to open");
 
       const dash = spawnSync(process.execPath, [cite, "dashboard"], { encoding: "utf8" });
       const dout = `${dash.stdout || ""}${dash.stderr || ""}`;
@@ -907,9 +935,9 @@ if (args.includes("--full")) {
         fail("cite.mjs dashboard is a page", "sanding banner is back");
       else if (!/Template: shadcn-dashboard-01/.test(dout) || !/page\.tsx/.test(dout))
         fail("cite.mjs dashboard is a page", "expected shadcn-dashboard-01 page.tsx, not Tremor atoms");
-      else if (!/extracted/.test(dout))
-        fail("cite.mjs dashboard is a page", "registry JSON was not extracted to readable source");
-      else ok("cite.mjs dashboard is a page", "shadcn-dashboard-01 + extracted page.tsx");
+      else if (dashPack && !/corpus\/packs\/shadcn-dashboard-01\/source/.test(dout))
+        fail("cite.mjs dashboard is a page", "pack source/ exists but cite still pointed at the corpus");
+      else ok("cite.mjs dashboard is a page", "shadcn-dashboard-01 + page.tsx");
 
       const mustLines = dout.split("\n").filter((l) => /^  \//.test(l));
       if (mustLines.length > 3)
@@ -969,27 +997,27 @@ if (args.includes("--full")) {
     if (missingKits.length) fail("catalog kit pages", `no cite-able page for: ${missingKits.join(", ")}`);
       else ok("catalog kit pages", kitPages.join(", "));
 
-    // Packs are real pixels or they are nothing. A pack dir must carry a full-page
-    // shot.png of the ACTUAL screen (>=30KB — a stub can't fake that) — the V2
-    // "DNA pack" was a generated placeholder and every downstream step processed
-    // metadata about design instead of design (docs/audit-2026-08-21.md §1).
+    // Packs are real pixels + readable source + kit paint, or they are nothing.
     const packsDir = join(SHINE, "corpus/packs");
+    const seed = mkdtempSync(join(tmpdir(), "shine-pack-"));
+    writeFileSync(join(seed, "shot.png"), Buffer.alloc(31_000));
+    const seedHits = inspectPack(seed, "carbon");
+    if (!seedHits.some((s) => /source/.test(s)) || !seedHits.some((s) => /tokens\.css/.test(s)))
+      fail("pack inspector bites", `seed without source/tokens passed: ${seedHits.join("; ") || "clean"}`);
+    else ok("pack inspector bites", seedHits.join("; "));
     if (!existsSync(packsDir)) {
-      note("harvested packs", "none yet — Phase 2 (corpus/harvest.mjs) adds real screenshots + kit tokens");
+      fail("harvested packs", "corpus/packs missing");
     } else {
+      const byId = new Map((catalog.templates ?? []).map((t) => [t.id, t]));
       const packDirs = readdirSync(packsDir).filter((d) => !d.startsWith("."));
       const broken = [];
       for (const d of packDirs) {
-        const shot = join(packsDir, d, "shot.png");
-        if (!existsSync(shot)) broken.push(`${d}: no shot.png`);
-        else {
-          const bytes = statSync(shot).size;
-          if (bytes < 30_000) broken.push(`${d}: shot.png ${bytes}B — too small to be a real screen`);
-        }
+        const family = byId.get(d)?.dna?.family || "";
+        for (const b of inspectPack(join(packsDir, d), family)) broken.push(`${d}: ${b}`);
       }
-      if (!packDirs.length) note("harvested packs", "packs/ exists but is empty — Phase 2 pending");
-      else if (broken.length) fail("harvested packs carry real pixels", broken.slice(0, 6).join("; "));
-      else ok("harvested packs carry real pixels", `${packDirs.length} packs, all with full-page shots`);
+      if (!packDirs.length) fail("harvested packs", "packs/ exists but is empty");
+      else if (broken.length) fail("harvested packs are a payload", broken.slice(0, 8).join("; "));
+      else ok("harvested packs are a payload", `${packDirs.length} packs with shot + source + tokens`);
     }
 
     const voiceCss = join(SHINE, "tokens/voices", "carbon.css");
@@ -1059,7 +1087,7 @@ if (args.includes("--full")) {
     const src = readFileSync(compare, "utf8");
     if (/likeness/i.test(src.replace(/\/\/[^\n]*/g, "")))
       fail("compare has no score", "compare.mjs computes a likeness value — that is the dead gate returning");
-    else ok("compare has no score", "facts + composite only");
+    else ok("compare has no score", "facts + measured mismatch, no score");
     // Refusal path must hold even after harvest: point at an id that will never
     // have a pack. This runs at session start, so it must not launch Chromium —
     // compare exits before loading playwright when the shot is missing.
@@ -1067,17 +1095,26 @@ if (args.includes("--full")) {
     const out = `${r.stdout}${r.stderr}`;
     if (r.status === 2 && /Refusing to compare/.test(out)) ok("compare refuses without pixels", "exit 2");
     else fail("compare refuses without pixels", `exit ${r.status}: ${out.slice(0, 160)}`);
-    // Live run (Chromium) only under --full: even the attribute-stamp page gets
-    // facts and a composite, never a verdict.
-    if (args.includes("--full") && existsSync(join(SHINE, "corpus/packs/carbon-datatable/shot.png"))) {
-      const live = spawnSync(process.execPath, [compare, stamp, "--cite", "carbon-datatable", "--out", join(tmpdir(), "shine-doctor-compare.png")], {
+    // Live Chromium: skip at sessionStart (--quiet). --ci and a normal doctor run
+    // must watch the stamp FAIL and the unfuck after.html PASS.
+    const liveCompare = (CI || args.includes("--full") || !QUIET) && existsSync(join(SHINE, "corpus/packs/carbon-datatable/shot.png"));
+    if (liveCompare) {
+      const live = spawnSync(process.execPath, [compare, stamp, "--cite", "carbon-datatable", "--out", join(tmpdir(), "shine-doctor-stamp.png")], {
         encoding: "utf8",
         env: { ...process.env, NODE_PATH },
       });
       const lout = `${live.stdout}${live.stderr}`;
-      if (live.status === 0 && !/PASS|FAIL|likeness/i.test(lout) && /palette/.test(lout))
-        ok("compare stays verdict-free", "facts + composite on the stamp fixture");
-      else fail("compare stays verdict-free", `exit ${live.status}: ${lout.slice(0, 200)}`);
+      if (live.status === 1 && /not a relative/.test(lout) && !/likeness/i.test(lout))
+        ok("compare rejects the attribute stamp", "exit 1 — stamp is not a datatable");
+      else fail("compare rejects the attribute stamp", `exit ${live.status}: ${lout.slice(0, 240)}`);
+      const after = join(SHINE, "verify/fixtures/unfucked/after.html");
+      const good = spawnSync(process.execPath, [compare, after, "--cite", "carbon-datatable", "--out", join(tmpdir(), "shine-doctor-after.png")], {
+        encoding: "utf8",
+        env: { ...process.env, NODE_PATH },
+      });
+      const gout = `${good.stdout}${good.stderr}`;
+      if (good.status === 0 && /palette/.test(gout)) ok("compare accepts the unfuck after", "exit 0");
+      else fail("compare accepts the unfuck after", `exit ${good.status}: ${gout.slice(0, 240)}`);
     }
   }
 }

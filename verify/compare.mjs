@@ -1,19 +1,18 @@
 #!/usr/bin/env node
-// compare.mjs — side-by-side pixels + measured facts. No verdict, no score.
+// compare.mjs — side-by-side pixels + measured facts. No self-scored integer.
 //
 //   node verify/compare.mjs <page.html|url> --cite <id> [--out /tmp/compare.png]
 //
 // Renders the page, composites it beside the cited template's harvested shot
 // (corpus/packs/<id>/shot.png), and prints measured facts: computed fonts, heading
-// sizes, control radii, and the dominant palette of each image. The judgment is
-// made by whoever looks at the composite — this tool only makes looking cheap and
-// the facts checkable.
+// sizes, control radii, and the dominant palette of each image. The agent still
+// has to look at the composite. Exit 1 when measured facts prove the page is not
+// a relative of the cite (a one-button stamp of a datatable, kit-faithful paint
+// that is not the kit). That is not a score — it is a failed measurement.
 //
 // It REFUSES to run without the template's real shot (exit 2). Its predecessor
-// (critic.mjs) scored "likeness" by grepping the page source for data-* attributes:
-// a one-button page with three attributes scored 10/10 against the Carbon datatable.
-// A comparison that never looks at pixels trains attribute-stamping, so this tool
-// does not exist until the pixels do.
+// (critic.mjs) grepped the page source for data-* attributes: a one-button page
+// with three attributes scored 10/10 against the Carbon datatable.
 
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -59,6 +58,7 @@ await page.evaluate(() => document.fonts?.ready);
 const facts = await page.evaluate(() => {
   const style = (el) => getComputedStyle(el);
   const body = style(document.body);
+  const root = document.documentElement;
   const headings = [...document.querySelectorAll("h1,h2,h3")].map((h) => ({
     tag: h.tagName.toLowerCase(),
     px: parseFloat(style(h).fontSize),
@@ -68,6 +68,7 @@ const facts = await page.evaluate(() => {
   const controls = [...document.querySelectorAll("button, [role=button], input, select")]
     .slice(0, 12)
     .map((el) => ({ radius: style(el).borderRadius, bg: style(el).backgroundColor }));
+  const primary = document.querySelector("[data-primary], .btn-primary, button[type=submit]");
   return {
     bodyFont: body.fontFamily,
     bodySize: body.fontSize,
@@ -75,6 +76,10 @@ const facts = await page.evaluate(() => {
     bodyColor: body.color,
     headings: headings.slice(0, 6),
     controls,
+    hasTable: Boolean(document.querySelector("table, [role=grid], [role=table]")),
+    voice: root.getAttribute("data-shine-voice") || "",
+    family: root.getAttribute("data-dna-family") || "",
+    primaryBg: primary ? style(primary).backgroundColor : "",
   };
 });
 
@@ -124,3 +129,72 @@ if (facts.controls.length) {
 console.log(`page   palette: ${fmtPal(pagePal)}`);
 console.log(`template palette: ${fmtPal(tmplPal)}`);
 console.log(`Read the composite. If the two sides do not read as relatives, the retrieve or the paint is wrong.`);
+
+const catalog = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "utf8"));
+const row = (catalog.templates ?? []).find((t) => t.id === citeId);
+const screen = row?.screen || "";
+const family = row?.dna?.family || facts.family || "";
+const tokensPath = existsSync(join(SHINE, "corpus/packs", citeId, "tokens.css"))
+  ? join(SHINE, "corpus/packs", citeId, "tokens.css")
+  : join(SHINE, "tokens/voices", `${family}.css`);
+const tokens = existsSync(tokensPath) ? readFileSync(tokensPath, "utf8") : "";
+
+const GENERIC = new Set([
+  "system-ui",
+  "sans-serif",
+  "serif",
+  "monospace",
+  "ui-sans-serif",
+  "ui-monospace",
+  "ui-serif",
+  "ui-rounded",
+  "emoji",
+  "inherit",
+  "unset",
+  "helvetica",
+  "arial",
+  "helvetica neue",
+]);
+const fontNames = (s) =>
+  [...s.matchAll(/"([^"]+)"|'([^']+)'|([^,]+)/g)]
+    .map((m) => (m[1] || m[2] || m[3] || "").trim().toLowerCase())
+    .filter((n) => n && !GENERIC.has(n));
+const hexes = (s) => [...s.matchAll(/#([0-9a-fA-F]{3,8})\b/g)].map((m) => m[0]);
+const hexToRgb = (h) => {
+  let x = h.slice(1);
+  if (x.length === 3) x = x.split("").map((c) => c + c).join("");
+  if (x.length === 8) x = x.slice(0, 6);
+  return [parseInt(x.slice(0, 2), 16), parseInt(x.slice(2, 4), 16), parseInt(x.slice(4, 6), 16)];
+};
+const parseRgb = (s) => {
+  const m = String(s).match(/rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)/);
+  return m ? [Number(m[1]), Number(m[2]), Number(m[3])] : null;
+};
+const dist = (a, b) => Math.max(Math.abs(a[0] - b[0]), Math.abs(a[1] - b[1]), Math.abs(a[2] - b[2]));
+
+const mismatches = [];
+const tableScreen = /^(queue|crud|dashboard)$/.test(screen) || /datatable|list|table/.test(citeId);
+if (tableScreen && !facts.hasTable)
+  mismatches.push(`cite ${citeId} is a ${screen || "table"}; the page has no table`);
+
+const kitFaithful = facts.voice === "kit-faithful";
+if (kitFaithful && tokens) {
+  const sans = (tokens.match(/--shine-font-sans:\s*([^;]+)/) || [])[1] || "";
+  const want = fontNames(sans);
+  const got = fontNames(facts.bodyFont);
+  if (want.length && !want.some((w) => got.some((g) => g.includes(w) || w.includes(g))))
+    mismatches.push(`kit-faithful body font is ${facts.bodyFont}; voice sheet is ${sans.trim()}`);
+  const primaryTok = (tokens.match(/--shine-color-primary:\s*([^;]+)/) || [])[1] || "";
+  const targets = hexes(primaryTok).map(hexToRgb).filter((r) => r.every(Number.isFinite));
+  const gotBg = parseRgb(facts.primaryBg);
+  if (targets.length && gotBg && !targets.some((t) => dist(t, gotBg) <= 40))
+    mismatches.push(
+      `kit-faithful primary is ${facts.primaryBg}; voice primary is ${primaryTok.trim()}`,
+    );
+}
+
+if (mismatches.length) {
+  console.error(`compare: not a relative of ${citeId}:`);
+  for (const m of mismatches) console.error(`  ${m}`);
+  process.exit(1);
+}
