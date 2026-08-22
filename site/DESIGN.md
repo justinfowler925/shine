@@ -1,45 +1,45 @@
 # Shine public page — DESIGN.md
 
-**Lane:** marketing · **Job:** tell the story of what shine is for · **Cite:** `mui-blog`
-**Voice:** kit-faithful (Material DNA — Roboto, filled primary, elevation, 200ms)
-**Unlock:** the notes essay rambled; the Magic UI hero was empty; the marketing landing had no story and leaked a face. This is an article.
+**Lane:** marketing · **Job:** what Shine is, how the loop works, why you'd want it · **Cite:** `mui-blog`
+**Voice:** kit-faithful (Material DNA — Roboto, blue[700] filled primary, elevation, 200ms)
+**Unlock:** structure stays the article. Featured figures under the lede (template photo-card role). No blog-index of dummy posts.
 
 ## Subject
 
-A Cursor/Claude user who has watched generated UI come out generic. They need the argument in order: the sameness, the failed compliance-only fix, the director loop, then proof.
+A Cursor/Claude user who has watched generated UI come out generic. They need the story in order: what Shine is, how the loop works, then the afternoon it takes to install. Not a SaaS landing. Not a lab notebook. Proof is pictures of Shine's own artifacts.
 
-## Regions (`corpus/packs/mui-blog/regions.json`)
+## Regions (`corpus/packs/mui-blog` — AppAppBar + article + featured figures)
 
 ```
-[  floating app bar: Shine · Registry · Get the skill     ]  header
-[  article: problem → failed fix → director → proof       ]  focal
-[  elevated figures in the story, names/figures redacted  ]
-[  install + skill listing                                ]
+[  floating app bar: Shine · Registry · Get the skill              ]  header
+[  h1 + lede                                                       ]
+[  featured pair: unfucked costume vs carbon-directed              ]  photo cards
+[  article: what it is → catalog specimens → loop → install        ]  focal
+[  elevated loop inset — six named steps                           ]
+[  install + skill listing from disk                               ]
 ```
 
-No dummy Carbon fixtures. No gouache plates. No portrait. No skill-tree as the story.
+No dummy blog posts. No portrait. No Meeting Recon wordmark. Catalog shots are harvested pack PNGs. The pair is `verify/fixtures/unfucked/` rendered through measure.
 
 ## Tokens (pack DNA)
 
 | Role | Value |
 |---|---|
-| canvas | Material paper gray / near-black — not cream |
-| primary | filled `#161616` (specimen), not Material purple |
+| canvas | Material `#ffffff` / dark `#121212` |
+| primary | filled `#1976d2` (createPalette light blue[700]); dark `#90caf9` |
 | display / body | Roboto 32–40 / 16 |
 | radius | control 8 · card 12 |
 | motion | 200ms |
-| elevation | shadow-2 on bar and figures |
-
-No house cyan. No Syne. No Fraunces.
+| elevation | shadow-2 on bar, figures, loop, listing |
 
 ## Signature
 
-The page *is* the story. Proof appears after the claim, as figures, not as a hero dump.
+The pair under the lede is the product. The catalog strip is the inventory. The loop is how.
 
 ## Copy (beliefs)
 
-1. Outcome: generated UI that doesn't look generated.
-2. Proof: redacted Meeting Recon shots — chrome and structure, no live details.
+1. Outcome: shown — costume vs cited Carbon, same job.
+2. Proof: three harvested catalog shots (Carbon, Material, shadcn).
 3. Time: clone, symlink, doctor — same afternoon.
 4. Effort: one git directory, two surfaces.
-5. Trust: MIT, `--ci` count from the run, skill tree from disk.
+5. Trust: MIT, `--ci` is 67 checks, skill tree generated from disk.
