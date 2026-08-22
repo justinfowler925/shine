@@ -22,7 +22,7 @@ Score against `contracts.md`, `foundations.md`, `patterns.md`, `anti-patterns.md
 7. If the surface carries persuasive or instructional copy, run the copy pass (`copy.md`).
 8. Internal tools: adoption pass (`adoption.md`) — ritual, persona, path, push/pull.
 9. Produce the report template below. Every Critical/Major row needs a **technique or kit
-   citation** (or `inspiration.md` principle) and, if fixes were applied, **remeasure
+   citation** (or a `patterns.md` principle) and, if fixes were applied, **remeasure
    before/after numbers**. Prioritize completeness before cosmetic tweaks.
 
 ## Incomplete-primitive fails (always flag)

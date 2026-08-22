@@ -24,7 +24,7 @@
 //   --ci     skip machine-local checks (hook wirings, skill symlinks, vendored copies)
 //   --quiet  print only failures (for a sessionStart hook)
 
-import { readFileSync, readdirSync, existsSync, realpathSync, mkdtempSync, writeFileSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync, realpathSync, mkdtempSync, writeFileSync, statSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -173,7 +173,7 @@ if (!CI) {
 // ---- 2d. root install scripts match the README ---------------------------
 {
   const pkg = JSON.parse(readFileSync(join(SHINE, "package.json"), "utf8"));
-  const need = ["build", "verify", "doctor", "measure", "cite", "pack", "critic"];
+  const need = ["build", "verify", "doctor", "measure", "cite", "compare"];
   const missing = need.filter((s) => !pkg.scripts?.[s]);
   if (missing.length) fail("root npm scripts", `package.json missing: ${missing.join(", ")}`);
   else ok("root npm scripts", need.join(", "));
@@ -617,11 +617,6 @@ if (args.includes("--full")) {
   const fullTable = join(SHINE, "verify/fixtures/full-table.html");
   const carbonShadcn = join(SHINE, "verify/fixtures/carbon-as-shadcn.html");
   const marketingShell = join(SHINE, "verify/fixtures/marketing-as-appshell.html");
-  const missingCite = join(dir, "missing-cite.html");
-  writeFileSync(
-    missingCite,
-    page(`<h1>Invented</h1><p>Named a catalog id and never marked it.</p><button style="background:#a8a29e;color:#0c0a09;border:0;padding:10px 16px;font:inherit">Go</button>`),
-  );
 
   const pretty = run(prettyTable);
   if (pretty.status === 1 && /contract: named table missing/.test(pretty.stderr))
@@ -636,7 +631,8 @@ if (args.includes("--full")) {
   if (!/contract:/.test(full.stderr)) ok("contract gate passes a complete table");
   else fail("contract gate passes a complete table", full.stderr.match(/contract:.*/)?.[0] ?? "");
 
-  const fakeCarbon = run(carbonShadcn);
+  const runCite = (f, id) => spawnSync("node", [measure, f, "--cite", id], { encoding: "utf8", env: { ...process.env, NODE_PATH } });
+  const fakeCarbon = runCite(carbonShadcn, "carbon-datatable");
   if (fakeCarbon.status === 1 && /likeness: carbon cite/.test(fakeCarbon.stderr))
     ok("likeness gate fails carbon-as-shadcn");
   else
@@ -645,25 +641,13 @@ if (args.includes("--full")) {
       `exit ${fakeCarbon.status}; stderr ${JSON.stringify(fakeCarbon.stderr.slice(-220))}`,
     );
 
-  const fakeMkt = run(marketingShell);
+  const fakeMkt = runCite(marketingShell, "magicui-hero");
   if (fakeMkt.status === 1 && /likeness: marketing cite/.test(fakeMkt.stderr))
     ok("likeness gate fails marketing-as-appshell");
   else
     fail(
       "likeness gate fails marketing-as-appshell",
       `exit ${fakeMkt.status}; stderr ${JSON.stringify(fakeMkt.stderr.slice(-220))}`,
-    );
-
-  const noCite = spawnSync("node", [measure, missingCite, "--cite", "carbon-datatable"], {
-    encoding: "utf8",
-    env: { ...process.env, NODE_PATH },
-  });
-  if (noCite.status === 1 && /cite: --cite carbon-datatable/.test(noCite.stderr))
-    ok("cite attestation fails a missing data-cite");
-  else
-    fail(
-      "cite attestation fails a missing data-cite",
-      `exit ${noCite.status}; stderr ${JSON.stringify(noCite.stderr.slice(-220))}`,
     );
 
   const houseHot = join(dir, "house-chroma-hot.html");
@@ -815,17 +799,19 @@ if (args.includes("--full")) {
   const acquire = readFileSync(join(SHINE, "corpus/acquire.sh"), "utf8");
   const CORPUS = join(HOME, "design-corpus");
 
-  if (!/catalog cite required/i.test(skill))
-    fail("SKILL.md catalog cite", "missing the string `catalog cite required` — deleting it is how inventing a page becomes legal again");
-  else ok("SKILL.md catalog cite", "catalog cite required");
-
   if (!/corpus\/cite\.mjs/.test(skill))
-    fail("SKILL.md cite command", "missing `corpus/cite.mjs` — naming an id without opening corpus files is how inventing a page becomes legal again");
+    fail("SKILL.md cite command", "missing `corpus/cite.mjs` — the MATCH step lost its interface");
   else ok("SKILL.md cite command", "corpus/cite.mjs");
 
-  if (!/critic\.mjs/.test(skill) || !/direction\.md/.test(skill))
-    fail("SKILL.md critic + direction", "missing critic.mjs or direction.md — visual DNA without a critic is a slogan");
-  else ok("SKILL.md critic + direction", "critic.mjs + direction.md");
+  if (!/compare\.mjs/.test(skill))
+    fail("SKILL.md compare", "missing compare.mjs — PROVE lost its pixels");
+  else ok("SKILL.md compare", "compare.mjs");
+
+  // The old liturgy must stay dead: self-reported evidence fields and the deleted
+  // critic trained attribute-stamping (see docs/audit-2026-08-21.md §3–4).
+  if (/images_read|critic\.mjs/.test(skill))
+    fail("SKILL.md no liturgy", "mentions images_read or critic.mjs — the self-report era is over");
+  else ok("SKILL.md no liturgy", "no images_read, no critic");
 
   const cite = join(SHINE, "corpus/cite.mjs");
   if (!existsSync(cite)) fail("cite.mjs exists", "corpus/cite.mjs missing");
@@ -849,11 +835,16 @@ if (args.includes("--full")) {
         fail("cite.mjs dashboard is a page", "sanding banner is back");
       else if (!/Template: shadcn-dashboard-01/.test(dout) || !/page\.tsx/.test(dout))
         fail("cite.mjs dashboard is a page", "expected shadcn-dashboard-01 page.tsx, not Tremor atoms");
-      else if (/Card\.tsx/.test(dout) && !/page\.tsx/.test(dout))
-        fail("cite.mjs dashboard is a page", "listed Card.tsx as the composed page");
-      else if (!/^DNA:/m.test(dout) && !/\nDNA:/.test(dout))
-        fail("cite.mjs dashboard is a page", "missing DNA block");
-      else ok("cite.mjs dashboard is a page", "shadcn-dashboard-01 + page.tsx + DNA");
+      else if (!/extracted/.test(dout))
+        fail("cite.mjs dashboard is a page", "registry JSON was not extracted to readable source");
+      else ok("cite.mjs dashboard is a page", "shadcn-dashboard-01 + extracted page.tsx");
+
+      // Synonyms: "settings page" used to be an unknown token (exact-match lexicon).
+      const syn = spawnSync(process.execPath, [cite, "settings page"], { encoding: "utf8" });
+      const sout = `${syn.stdout || ""}${syn.stderr || ""}`;
+      if (syn.status !== 0 || !/Template: antd-pro-settings|Template: fluent-nav/.test(sout))
+        fail("cite.mjs resolves plain words", `"settings page" → exit ${syn.status}: ${sout.slice(0, 160)}`);
+      else ok("cite.mjs resolves plain words", (sout.match(/Template: (\S+)/) || [])[1]);
 
       const queue = spawnSync(process.execPath, [cite, "queue"], { encoding: "utf8" });
       const qout = `${queue.stdout || ""}${queue.stderr || ""}`;
@@ -866,7 +857,7 @@ if (args.includes("--full")) {
     }
   }
 
-  if (!/A page with no template cite is incomplete/.test(diagnose))
+  if (!/A page with no\s+template cite is incomplete/.test(diagnose))
     fail("diagnose.md catalog hole", "missing `A page with no template cite is incomplete`");
   else ok("diagnose.md catalog hole", "inventing a page is Critical");
 
@@ -901,16 +892,28 @@ if (args.includes("--full")) {
     if (missingKits.length) fail("catalog kit pages", `no cite-able page for: ${missingKits.join(", ")}`);
       else ok("catalog kit pages", kitPages.join(", "));
 
-    const startFrom = (catalog.templates ?? []).filter((t) => t.startFrom === 1);
-    const missingPacks = startFrom.filter((t) => !existsSync(join(SHINE, "corpus/packs", t.id, "dna.json")));
-    if (missingPacks.length)
-      fail("DNA packs for startFrom:1", missingPacks.slice(0, 6).map((t) => t.id).join(", ") + " — node corpus/pack.mjs");
-    else ok("DNA packs for startFrom:1", `${startFrom.length} packs`);
-
-    const packCheck = spawnSync(process.execPath, [join(SHINE, "corpus/pack.mjs"), "--check"], { encoding: "utf8" });
-    if (packCheck.status !== 0)
-      fail("pack.mjs --check", (packCheck.stderr || packCheck.stdout || "").trim().slice(0, 240));
-    else ok("pack.mjs --check", (packCheck.stdout || "").trim());
+    // Packs are real pixels or they are nothing. A pack dir must carry a full-page
+    // shot.png of the ACTUAL screen (>=30KB — a stub can't fake that) — the V2
+    // "DNA pack" was a generated placeholder and every downstream step processed
+    // metadata about design instead of design (docs/audit-2026-08-21.md §1).
+    const packsDir = join(SHINE, "corpus/packs");
+    if (!existsSync(packsDir)) {
+      note("harvested packs", "none yet — Phase 2 (corpus/harvest.mjs) adds real screenshots + kit tokens");
+    } else {
+      const packDirs = readdirSync(packsDir).filter((d) => !d.startsWith("."));
+      const broken = [];
+      for (const d of packDirs) {
+        const shot = join(packsDir, d, "shot.png");
+        if (!existsSync(shot)) broken.push(`${d}: no shot.png`);
+        else {
+          const bytes = statSync(shot).size;
+          if (bytes < 30_000) broken.push(`${d}: shot.png ${bytes}B — too small to be a real screen`);
+        }
+      }
+      if (!packDirs.length) note("harvested packs", "packs/ exists but is empty — Phase 2 pending");
+      else if (broken.length) fail("harvested packs carry real pixels", broken.slice(0, 6).join("; "));
+      else ok("harvested packs carry real pixels", `${packDirs.length} packs, all with full-page shots`);
+    }
 
     const voiceCss = join(SHINE, "tokens/voices", "carbon.css");
     if (!existsSync(voiceCss)) fail("voice pack carbon.css", "tokens/voices/carbon.css missing — pack.mjs");
@@ -952,24 +955,34 @@ if (args.includes("--full")) {
 }
 
 {
-  const critic = join(SHINE, "verify/critic.mjs");
-  const costume = join(SHINE, "verify/fixtures/carbon-as-shadcn.html");
-  const queue = join(SHINE, "verify/fixtures/queue.html");
-  if (!existsSync(critic)) fail("critic.mjs exists", "verify/critic.mjs missing");
-  else {
-    const bad = spawnSync(process.execPath, [critic, costume, "--cite", "carbon-datatable", "--lane", "saas"], {
-      encoding: "utf8",
-    });
-    if (bad.status === 0)
-      fail("critic carbon-as-shadcn fails", "Geist/zinc costume passed — likeness gate is a slogan");
-    else ok("critic carbon-as-shadcn fails", ((bad.stderr || bad.stdout || "").match(/likeness=\d+/) || ["exit 1"])[0]);
+  // The critic scored "likeness" by grepping source for data-* attributes: a one-button
+  // page with three attributes scored 10/10 against the Carbon datatable (audit §4).
+  // Its absence is an invariant, and its replacement must be unable to bless anything.
+  if (existsSync(join(SHINE, "verify/critic.mjs")))
+    fail("no self-scored likeness", "verify/critic.mjs is back — the regex likeness gate trains attribute-stamping");
+  else ok("no self-scored likeness", "critic.mjs deleted");
 
-    const good = spawnSync(process.execPath, [critic, queue, "--cite", "carbon-datatable", "--lane", "internal"], {
-      encoding: "utf8",
-    });
-    if (good.status !== 0)
-      fail("critic queue kit-faithful", (good.stderr || good.stdout || "").trim().slice(0, 240));
-    else ok("critic queue kit-faithful", ((good.stdout || "").match(/likeness=\d+/) || ["PASS"])[0]);
+  const compare = join(SHINE, "verify/compare.mjs");
+  const stamp = join(SHINE, "verify/fixtures/attribute-stamp.html");
+  if (!existsSync(compare)) fail("compare.mjs exists", "verify/compare.mjs missing");
+  else if (!existsSync(stamp)) fail("attribute-stamp fixture", "verify/fixtures/attribute-stamp.html missing");
+  else {
+    const src = readFileSync(compare, "utf8");
+    if (/likeness/i.test(src.replace(/\/\/[^\n]*/g, "")))
+      fail("compare has no score", "compare.mjs computes a likeness value — that is the dead gate returning");
+    else ok("compare has no score", "facts + composite only");
+    const r = spawnSync(process.execPath, [compare, stamp, "--cite", "carbon-datatable"], { encoding: "utf8" });
+    const out = `${r.stdout}${r.stderr}`;
+    const hasShot = existsSync(join(SHINE, "corpus/packs/carbon-datatable/shot.png"));
+    if (!hasShot) {
+      // Pre-harvest: it must REFUSE, not bless.
+      if (r.status === 2 && /Refusing to compare/.test(out)) ok("compare refuses without pixels", "exit 2");
+      else fail("compare refuses without pixels", `exit ${r.status}: ${out.slice(0, 160)}`);
+    } else {
+      // Post-harvest: it reports facts and never a verdict, even for the stamp page.
+      if (/PASS|FAIL|likeness/i.test(out)) fail("compare stays verdict-free", out.slice(0, 160));
+      else ok("compare stays verdict-free", "facts only on the stamp fixture");
+    }
   }
 }
 

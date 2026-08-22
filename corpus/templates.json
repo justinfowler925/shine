@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-21",
+  "generated": "2026-08-22",
   "corpus": "/Users/justinfowler/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
@@ -15,8 +15,7 @@
     "wizard",
     "empty",
     "command-palette",
-    "lex-record",
-    "lex-record-narrow"
+    "lex-record"
   ],
   "templates": [
     {
@@ -25,121 +24,66 @@
       "kit": "shadcn-registry",
       "title": "shadcn input-group-textarea (prompt composer + submit addon)",
       "path": "shadcn-registry/items/input-group-textarea.json",
-      "preview": "https://ui.shadcn.com/docs/components/input-group",
+      "preview": "https://ui.shadcn.com/docs/components/input",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
       "dna": {
         "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
+        "density": "comfortable"
       },
       "jobs": [
-        "ai-generate"
+        "ai-generate",
+        "prompt",
+        "composer"
       ]
     },
     {
       "id": "shadcn-field-choice-card",
       "screen": "ai-generate",
       "kit": "shadcn-registry",
-      "title": "shadcn field-choice-card (quality tier as radio cards)",
+      "title": "shadcn field-choice-card (option tier as radio cards)",
       "path": "shadcn-registry/items/field-choice-card.json",
-      "preview": "https://ui.shadcn.com/docs/components/input-group",
+      "preview": "https://ui.shadcn.com/docs/components/field",
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
       "dna": {
         "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
+        "density": "comfortable"
       },
       "jobs": [
-        "ai-generate"
-      ]
-    },
-    {
-      "id": "shadcn-empty-icon",
-      "screen": "ai-generate",
-      "kit": "shadcn-registry",
-      "title": "shadcn empty-icon (no-result / failure state)",
-      "path": "shadcn-registry/items/empty-icon.json",
-      "preview": "https://ui.shadcn.com/docs/components/input-group",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 3,
-      "jobs": [
-        "empty",
-        "ai-generate"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      }
-    },
-    {
-      "id": "shadcn-item-image",
-      "screen": "ai-generate",
-      "kit": "shadcn-registry",
-      "title": "shadcn item-image (history strip row)",
-      "path": "shadcn-registry/items/item-image.json",
-      "preview": "https://ui.shadcn.com/docs/components/input-group",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 4,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "ai-generate"
+        "ai-generate",
+        "prompt",
+        "composer"
       ]
     },
     {
       "id": "shadcn-sidebar-07",
       "screen": "app-shell",
       "kit": "shadcn-registry",
-      "title": "shadcn sidebar-07",
+      "title": "shadcn sidebar-07 (collapsible shell)",
       "path": "shadcn-registry/items/sidebar-07.json",
-      "preview": "https://ui.shadcn.com/blocks",
+      "preview": "https://ui.shadcn.com/view/sidebar-07",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
       "dna": {
         "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
+        "density": "comfortable"
       },
       "jobs": [
-        "app-shell"
+        "app-shell",
+        "shell",
+        "nav",
+        "sidebar"
       ]
     },
     {
       "id": "mui-dashboard",
       "screen": "app-shell",
       "kit": "mui-material",
-      "title": "MUI dashboard",
+      "title": "MUI dashboard shell",
       "path": "mui-material/docs/data/material/getting-started/templates/dashboard",
       "preview": "https://mui.com/material-ui/getting-started/templates/",
       "license": "MIT",
@@ -147,15 +91,13 @@
       "startFrom": 2,
       "dna": {
         "family": "material",
-        "density": "comfortable",
-        "type": "roboto 14/16",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "shadow-2",
-        "motion": "200ms"
+        "density": "comfortable"
       },
       "jobs": [
-        "app-shell"
+        "app-shell",
+        "shell",
+        "nav",
+        "sidebar"
       ]
     },
     {
@@ -170,84 +112,13 @@
       "startFrom": 3,
       "dna": {
         "family": "ant",
-        "density": "dense",
-        "type": "system 14",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "border",
-        "motion": "200ms"
+        "density": "dense"
       },
       "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "heroui-next-app",
-      "screen": "app-shell",
-      "kit": "heroui",
-      "title": "HeroUI Next.js app template",
-      "path": "heroui-next-app",
-      "preview": "https://www.heroui.com",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 4,
-      "dna": {
-        "family": "heroui",
-        "density": "comfortable",
-        "type": "inter 14",
-        "radius": "lg",
-        "chroma": "medium",
-        "elevation": "soft",
-        "motion": "200ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "chakra-compositions",
-      "screen": "app-shell",
-      "kit": "chakra-ui",
-      "title": "Chakra UI compositions",
-      "path": "chakra-ui/apps/compositions",
-      "preview": "https://chakra-ui.com",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 5,
-      "dna": {
-        "family": "chakra",
-        "density": "comfortable",
-        "type": "inter 16",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "shadow",
-        "motion": "200ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "mantine-appshell",
-      "screen": "app-shell",
-      "kit": "mantine",
-      "title": "Mantine AppShell full layout",
-      "path": "mantine/apps/mantine.dev/src/app-shell-examples/examples/FullLayout",
-      "preview": "https://mantine.dev/app-shell",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 6,
-      "dna": {
-        "family": "mantine",
-        "density": "comfortable",
-        "type": "system 16",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "shadow",
-        "motion": "200ms"
-      },
-      "jobs": [
-        "app-shell"
+        "app-shell",
+        "shell",
+        "nav",
+        "sidebar"
       ]
     },
     {
@@ -259,363 +130,58 @@
       "preview": "https://carbondesignsystem.com/components/UI-shell-header/usage/",
       "license": "Apache-2.0",
       "kind": "source",
-      "startFrom": 7,
+      "startFrom": 4,
       "dna": {
         "family": "carbon",
-        "density": "dense",
-        "type": "ibm-plex 14",
-        "radius": "none",
-        "chroma": "low",
-        "elevation": "none",
-        "motion": "110ms"
+        "density": "dense"
       },
       "jobs": [
-        "app-shell"
+        "app-shell",
+        "shell",
+        "nav",
+        "sidebar"
       ]
     },
     {
-      "id": "shadcn-sidebar-01",
+      "id": "mantine-appshell",
       "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-01",
-      "path": "shadcn-registry/items/sidebar-01.json",
-      "preview": "https://ui.shadcn.com/blocks",
+      "kit": "mantine",
+      "title": "Mantine AppShell full layout",
+      "path": "mantine/apps/mantine.dev/src/app-shell-examples/examples/FullLayout",
+      "preview": "https://mantine.dev/app-shell",
       "license": "MIT",
       "kind": "source",
-      "startFrom": 11,
+      "startFrom": 5,
       "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
+        "family": "mantine",
+        "density": "comfortable"
       },
       "jobs": [
-        "app-shell"
+        "app-shell",
+        "shell",
+        "nav",
+        "sidebar"
       ]
     },
     {
-      "id": "shadcn-sidebar-02",
+      "id": "heroui-next-app",
       "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-02",
-      "path": "shadcn-registry/items/sidebar-02.json",
-      "preview": "https://ui.shadcn.com/blocks",
+      "kit": "heroui",
+      "title": "HeroUI Next.js app template",
+      "path": "heroui-next-app",
+      "preview": "https://www.heroui.com",
       "license": "MIT",
       "kind": "source",
-      "startFrom": 12,
+      "startFrom": 6,
       "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
+        "family": "heroui",
+        "density": "comfortable"
       },
       "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-03",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-03",
-      "path": "shadcn-registry/items/sidebar-03.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 13,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-04",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-04",
-      "path": "shadcn-registry/items/sidebar-04.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 14,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-05",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-05",
-      "path": "shadcn-registry/items/sidebar-05.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 15,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-06",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-06",
-      "path": "shadcn-registry/items/sidebar-06.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 16,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-08",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-08",
-      "path": "shadcn-registry/items/sidebar-08.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 18,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-09",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-09",
-      "path": "shadcn-registry/items/sidebar-09.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 19,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-10",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-10",
-      "path": "shadcn-registry/items/sidebar-10.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 20,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-11",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-11",
-      "path": "shadcn-registry/items/sidebar-11.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 21,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-12",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-12",
-      "path": "shadcn-registry/items/sidebar-12.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 22,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-13",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-13",
-      "path": "shadcn-registry/items/sidebar-13.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 23,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-14",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-14",
-      "path": "shadcn-registry/items/sidebar-14.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 24,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-15",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-15",
-      "path": "shadcn-registry/items/sidebar-15.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 25,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-16",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-16",
-      "path": "shadcn-registry/items/sidebar-16.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 26,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "app-shell"
+        "app-shell",
+        "shell",
+        "nav",
+        "sidebar"
       ]
     },
     {
@@ -630,15 +196,13 @@
       "kind": "query-only",
       "dna": {
         "family": "shine",
-        "density": "dense",
-        "type": "editorial 14/15",
-        "radius": "sm",
-        "chroma": "0.13-0.24",
-        "elevation": "hairline",
-        "motion": "150ms"
+        "density": "dense"
       },
       "jobs": [
-        "app-shell"
+        "app-shell",
+        "shell",
+        "nav",
+        "sidebar"
       ]
     },
     {
@@ -653,15 +217,13 @@
       "kind": "query-only",
       "dna": {
         "family": "shine",
-        "density": "dense",
-        "type": "editorial 14/15",
-        "radius": "sm",
-        "chroma": "0.13-0.24",
-        "elevation": "hairline",
-        "motion": "150ms"
+        "density": "dense"
       },
       "jobs": [
-        "app-shell"
+        "app-shell",
+        "shell",
+        "nav",
+        "sidebar"
       ]
     },
     {
@@ -676,15 +238,13 @@
       "kind": "query-only",
       "dna": {
         "family": "shine",
-        "density": "dense",
-        "type": "editorial 14/15",
-        "radius": "sm",
-        "chroma": "0.13-0.24",
-        "elevation": "hairline",
-        "motion": "150ms"
+        "density": "dense"
       },
       "jobs": [
-        "app-shell"
+        "app-shell",
+        "shell",
+        "nav",
+        "sidebar"
       ]
     },
     {
@@ -699,15 +259,13 @@
       "startFrom": 1,
       "dna": {
         "family": "material",
-        "density": "comfortable",
-        "type": "roboto 14/16",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "shadow-2",
-        "motion": "200ms"
+        "density": "comfortable"
       },
       "jobs": [
-        "auth"
+        "auth",
+        "login",
+        "signin",
+        "signup"
       ]
     },
     {
@@ -716,274 +274,19 @@
       "kit": "shadcn-registry",
       "title": "shadcn login-04",
       "path": "shadcn-registry/items/login-04.json",
-      "preview": "https://ui.shadcn.com/blocks",
+      "preview": "https://ui.shadcn.com/view/login-04",
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
       "dna": {
         "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
+        "density": "comfortable"
       },
       "jobs": [
-        "auth"
-      ]
-    },
-    {
-      "id": "mui-sign-in",
-      "screen": "auth",
-      "kit": "mui-material",
-      "title": "MUI sign-in",
-      "path": "mui-material/docs/data/material/getting-started/templates/sign-in",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 3,
-      "dna": {
-        "family": "material",
-        "density": "comfortable",
-        "type": "roboto 14/16",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "shadow-2",
-        "motion": "200ms"
-      },
-      "jobs": [
-        "auth"
-      ]
-    },
-    {
-      "id": "mui-sign-up",
-      "screen": "auth",
-      "kit": "mui-material",
-      "title": "MUI sign-up",
-      "path": "mui-material/docs/data/material/getting-started/templates/sign-up",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 4,
-      "dna": {
-        "family": "material",
-        "density": "comfortable",
-        "type": "roboto 14/16",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "shadow-2",
-        "motion": "200ms"
-      },
-      "jobs": [
-        "auth"
-      ]
-    },
-    {
-      "id": "shadcn-login-01",
-      "screen": "auth",
-      "kit": "shadcn-registry",
-      "title": "shadcn login-01",
-      "path": "shadcn-registry/items/login-01.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 10,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "auth"
-      ]
-    },
-    {
-      "id": "shadcn-login-02",
-      "screen": "auth",
-      "kit": "shadcn-registry",
-      "title": "shadcn login-02",
-      "path": "shadcn-registry/items/login-02.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 10,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "auth"
-      ]
-    },
-    {
-      "id": "shadcn-login-03",
-      "screen": "auth",
-      "kit": "shadcn-registry",
-      "title": "shadcn login-03",
-      "path": "shadcn-registry/items/login-03.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 10,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "auth"
-      ]
-    },
-    {
-      "id": "shadcn-login-05",
-      "screen": "auth",
-      "kit": "shadcn-registry",
-      "title": "shadcn login-05",
-      "path": "shadcn-registry/items/login-05.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 10,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "auth"
-      ]
-    },
-    {
-      "id": "shadcn-signup-01",
-      "screen": "auth",
-      "kit": "shadcn-registry",
-      "title": "shadcn signup-01",
-      "path": "shadcn-registry/items/signup-01.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 11,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "auth"
-      ]
-    },
-    {
-      "id": "shadcn-signup-02",
-      "screen": "auth",
-      "kit": "shadcn-registry",
-      "title": "shadcn signup-02",
-      "path": "shadcn-registry/items/signup-02.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 11,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "auth"
-      ]
-    },
-    {
-      "id": "shadcn-signup-03",
-      "screen": "auth",
-      "kit": "shadcn-registry",
-      "title": "shadcn signup-03",
-      "path": "shadcn-registry/items/signup-03.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 11,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "auth"
-      ]
-    },
-    {
-      "id": "shadcn-signup-04",
-      "screen": "auth",
-      "kit": "shadcn-registry",
-      "title": "shadcn signup-04",
-      "path": "shadcn-registry/items/signup-04.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 11,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "auth"
-      ]
-    },
-    {
-      "id": "shadcn-signup-05",
-      "screen": "auth",
-      "kit": "shadcn-registry",
-      "title": "shadcn signup-05",
-      "path": "shadcn-registry/items/signup-05.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 11,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "auth"
+        "auth",
+        "login",
+        "signin",
+        "signup"
       ]
     },
     {
@@ -998,1671 +301,50 @@
       "startFrom": 1,
       "dna": {
         "family": "material",
-        "density": "comfortable",
-        "type": "roboto 14/16",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "shadow-2",
-        "motion": "200ms"
+        "density": "comfortable"
       },
       "jobs": [
-        "blog"
+        "blog",
+        "article"
       ]
     },
     {
-      "id": "shadcn-chart-area-axes",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-area-axes",
-      "path": "shadcn-registry/items/chart-area-axes.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-area-default",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-area-default",
-      "path": "shadcn-registry/items/chart-area-default.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-area-gradient",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-area-gradient",
-      "path": "shadcn-registry/items/chart-area-gradient.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-area-icons",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-area-icons",
-      "path": "shadcn-registry/items/chart-area-icons.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-area-interactive",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-area-interactive",
-      "path": "shadcn-registry/items/chart-area-interactive.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-area-legend",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-area-legend",
-      "path": "shadcn-registry/items/chart-area-legend.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-area-linear",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-area-linear",
-      "path": "shadcn-registry/items/chart-area-linear.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-area-stacked",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-area-stacked",
-      "path": "shadcn-registry/items/chart-area-stacked.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-area-stacked-expand",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-area-stacked-expand",
-      "path": "shadcn-registry/items/chart-area-stacked-expand.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-area-step",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-area-step",
-      "path": "shadcn-registry/items/chart-area-step.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-bar-active",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-bar-active",
-      "path": "shadcn-registry/items/chart-bar-active.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-bar-default",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-bar-default",
-      "path": "shadcn-registry/items/chart-bar-default.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-bar-horizontal",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-bar-horizontal",
-      "path": "shadcn-registry/items/chart-bar-horizontal.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-bar-interactive",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-bar-interactive",
-      "path": "shadcn-registry/items/chart-bar-interactive.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-bar-label",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-bar-label",
-      "path": "shadcn-registry/items/chart-bar-label.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-bar-label-custom",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-bar-label-custom",
-      "path": "shadcn-registry/items/chart-bar-label-custom.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-bar-mixed",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-bar-mixed",
-      "path": "shadcn-registry/items/chart-bar-mixed.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-bar-multiple",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-bar-multiple",
-      "path": "shadcn-registry/items/chart-bar-multiple.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-bar-negative",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-bar-negative",
-      "path": "shadcn-registry/items/chart-bar-negative.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-bar-stacked",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-bar-stacked",
-      "path": "shadcn-registry/items/chart-bar-stacked.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-line-default",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-line-default",
-      "path": "shadcn-registry/items/chart-line-default.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-line-dots",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-line-dots",
-      "path": "shadcn-registry/items/chart-line-dots.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-line-dots-colors",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-line-dots-colors",
-      "path": "shadcn-registry/items/chart-line-dots-colors.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-line-dots-custom",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-line-dots-custom",
-      "path": "shadcn-registry/items/chart-line-dots-custom.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-line-interactive",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-line-interactive",
-      "path": "shadcn-registry/items/chart-line-interactive.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-line-label",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-line-label",
-      "path": "shadcn-registry/items/chart-line-label.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-line-label-custom",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-line-label-custom",
-      "path": "shadcn-registry/items/chart-line-label-custom.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-line-linear",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-line-linear",
-      "path": "shadcn-registry/items/chart-line-linear.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-line-multiple",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-line-multiple",
-      "path": "shadcn-registry/items/chart-line-multiple.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-line-step",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-line-step",
-      "path": "shadcn-registry/items/chart-line-step.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-pie-donut",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-pie-donut",
-      "path": "shadcn-registry/items/chart-pie-donut.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-pie-donut-active",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-pie-donut-active",
-      "path": "shadcn-registry/items/chart-pie-donut-active.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-pie-donut-text",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-pie-donut-text",
-      "path": "shadcn-registry/items/chart-pie-donut-text.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-pie-interactive",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-pie-interactive",
-      "path": "shadcn-registry/items/chart-pie-interactive.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-pie-label",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-pie-label",
-      "path": "shadcn-registry/items/chart-pie-label.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-pie-label-custom",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-pie-label-custom",
-      "path": "shadcn-registry/items/chart-pie-label-custom.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-pie-label-list",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-pie-label-list",
-      "path": "shadcn-registry/items/chart-pie-label-list.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-pie-legend",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-pie-legend",
-      "path": "shadcn-registry/items/chart-pie-legend.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-pie-separator-none",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-pie-separator-none",
-      "path": "shadcn-registry/items/chart-pie-separator-none.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-pie-simple",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-pie-simple",
-      "path": "shadcn-registry/items/chart-pie-simple.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-pie-stacked",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-pie-stacked",
-      "path": "shadcn-registry/items/chart-pie-stacked.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-default",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-default",
-      "path": "shadcn-registry/items/chart-radar-default.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-dots",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-dots",
-      "path": "shadcn-registry/items/chart-radar-dots.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-grid-circle",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-grid-circle",
-      "path": "shadcn-registry/items/chart-radar-grid-circle.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-grid-circle-fill",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-grid-circle-fill",
-      "path": "shadcn-registry/items/chart-radar-grid-circle-fill.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-grid-circle-no-lines",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-grid-circle-no-lines",
-      "path": "shadcn-registry/items/chart-radar-grid-circle-no-lines.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-grid-custom",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-grid-custom",
-      "path": "shadcn-registry/items/chart-radar-grid-custom.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-grid-fill",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-grid-fill",
-      "path": "shadcn-registry/items/chart-radar-grid-fill.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-grid-none",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-grid-none",
-      "path": "shadcn-registry/items/chart-radar-grid-none.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-icons",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-icons",
-      "path": "shadcn-registry/items/chart-radar-icons.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-label-custom",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-label-custom",
-      "path": "shadcn-registry/items/chart-radar-label-custom.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-legend",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-legend",
-      "path": "shadcn-registry/items/chart-radar-legend.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-lines-only",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-lines-only",
-      "path": "shadcn-registry/items/chart-radar-lines-only.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-multiple",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-multiple",
-      "path": "shadcn-registry/items/chart-radar-multiple.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radar-radius",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radar-radius",
-      "path": "shadcn-registry/items/chart-radar-radius.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radial-grid",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radial-grid",
-      "path": "shadcn-registry/items/chart-radial-grid.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radial-label",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radial-label",
-      "path": "shadcn-registry/items/chart-radial-label.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radial-shape",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radial-shape",
-      "path": "shadcn-registry/items/chart-radial-shape.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radial-simple",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radial-simple",
-      "path": "shadcn-registry/items/chart-radial-simple.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radial-stacked",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radial-stacked",
-      "path": "shadcn-registry/items/chart-radial-stacked.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-radial-text",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-radial-text",
-      "path": "shadcn-registry/items/chart-radial-text.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-tooltip-advanced",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-tooltip-advanced",
-      "path": "shadcn-registry/items/chart-tooltip-advanced.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-tooltip-default",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-tooltip-default",
-      "path": "shadcn-registry/items/chart-tooltip-default.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-tooltip-formatter",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-tooltip-formatter",
-      "path": "shadcn-registry/items/chart-tooltip-formatter.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-tooltip-icons",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-tooltip-icons",
-      "path": "shadcn-registry/items/chart-tooltip-icons.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-tooltip-indicator-line",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-tooltip-indicator-line",
-      "path": "shadcn-registry/items/chart-tooltip-indicator-line.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-tooltip-indicator-none",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-tooltip-indicator-none",
-      "path": "shadcn-registry/items/chart-tooltip-indicator-none.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-tooltip-label-custom",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-tooltip-label-custom",
-      "path": "shadcn-registry/items/chart-tooltip-label-custom.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-tooltip-label-formatter",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-tooltip-label-formatter",
-      "path": "shadcn-registry/items/chart-tooltip-label-formatter.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "shadcn-chart-tooltip-label-none",
-      "screen": "charts",
-      "kit": "shadcn-registry",
-      "title": "shadcn chart-tooltip-label-none",
-      "path": "shadcn-registry/items/chart-tooltip-label-none.json",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 80,
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "charts"
-      ]
-    },
-    {
-      "id": "tremor-dashboard",
+      "id": "tremor-charts",
       "screen": "charts",
       "kit": "tremor",
-      "title": "Tremor KPI / chart blocks",
+      "title": "Tremor chart + KPI blocks (atoms — compose, don't cite as a page)",
       "path": "tremor/src/components",
       "preview": "https://tremor.so",
       "license": "Apache-2.0",
       "kind": "source",
-      "startFrom": 80,
+      "startFrom": 1,
       "jobs": [
-        "charts"
+        "charts",
+        "chart",
+        "dataviz"
       ],
       "dna": {
         "family": "tremor",
-        "density": "comfortable",
-        "type": "inter 14",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "card",
-        "motion": "150ms"
+        "density": "comfortable"
       }
     },
     {
       "id": "spectrum-ai-chat",
       "screen": "chat",
       "kit": "react-spectrum",
-      "title": "React Spectrum AI Chat (Thread + PromptField)",
+      "title": "React Spectrum AI Chat (Thread + PromptField — prompt field is the primary)",
       "path": "react-spectrum/packages/@react-spectrum/ai/src",
       "preview": "https://react-spectrum.adobe.com",
       "license": "Apache-2.0",
       "kind": "source",
       "startFrom": 1,
       "jobs": [
-        "chat"
+        "chat",
+        "assistant"
       ],
       "dna": {
         "family": "spectrum",
-        "density": "comfortable",
-        "type": "adobe-clean 14",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "well",
-        "motion": "200ms"
+        "density": "comfortable"
       }
     },
     {
@@ -2680,12 +362,7 @@
       ],
       "dna": {
         "family": "ant",
-        "density": "dense",
-        "type": "system 14",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "border",
-        "motion": "200ms"
+        "density": "dense"
       }
     },
     {
@@ -2700,40 +377,31 @@
       "startFrom": 1,
       "dna": {
         "family": "material",
-        "density": "comfortable",
-        "type": "roboto 14/16",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "shadow-2",
-        "motion": "200ms"
+        "density": "comfortable"
       },
       "jobs": [
-        "checkout",
-        "wizard"
+        "checkout"
       ]
     },
     {
-      "id": "shine-command-palette",
+      "id": "shadcn-command",
       "screen": "command-palette",
       "kit": "shadcn-registry",
-      "title": "Command palette (no motion, keyboard)",
-      "path": "corpus/packs/shine-command-palette",
-      "preview": "",
+      "title": "shadcn command (palette, keyboard-first, no motion)",
+      "path": "shadcn-registry/items/command.json",
+      "preview": "https://ui.shadcn.com/docs/components/command",
       "license": "MIT",
-      "kind": "pack",
+      "kind": "source",
       "startFrom": 1,
-      "jobs": [
-        "command-palette"
-      ],
       "dna": {
         "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      }
+        "density": "comfortable"
+      },
+      "jobs": [
+        "command-palette",
+        "palette",
+        "cmdk"
+      ]
     },
     {
       "id": "mui-crud-dashboard",
@@ -2747,23 +415,18 @@
       "startFrom": 1,
       "dna": {
         "family": "material",
-        "density": "comfortable",
-        "type": "roboto 14/16",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "shadow-2",
-        "motion": "200ms"
+        "density": "comfortable"
       },
       "jobs": [
         "crud",
-        "queue"
+        "admin"
       ]
     },
     {
       "id": "antd-pro-crud",
       "screen": "crud",
       "kit": "ant-design-pro",
-      "title": "Ant Design Pro pages",
+      "title": "Ant Design Pro pages (browse for the shape you need)",
       "path": "ant-design-pro/src/pages",
       "preview": "https://preview.pro.ant.design",
       "license": "MIT",
@@ -2771,59 +434,26 @@
       "startFrom": 2,
       "dna": {
         "family": "ant",
-        "density": "dense",
-        "type": "system 14",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "border",
-        "motion": "200ms"
+        "density": "dense"
       },
       "jobs": [
         "crud",
-        "queue"
+        "admin"
       ]
     },
     {
       "id": "shadcn-dashboard-01",
       "screen": "dashboard",
       "kit": "shadcn-registry",
-      "title": "shadcn dashboard-01",
+      "title": "shadcn dashboard-01 (sidebar, cards, chart, table)",
       "path": "shadcn-registry/items/dashboard-01.json",
-      "preview": "https://ui.shadcn.com/blocks",
+      "preview": "https://ui.shadcn.com/view/dashboard-01",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
       "dna": {
         "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
-      },
-      "jobs": [
-        "dashboard"
-      ]
-    },
-    {
-      "id": "mui-dashboard-analytics",
-      "screen": "dashboard",
-      "kit": "mui-material",
-      "title": "MUI dashboard (analytics fallback)",
-      "path": "mui-material/docs/data/material/getting-started/templates/dashboard",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "dna": {
-        "family": "material",
-        "density": "comfortable",
-        "type": "roboto 14/16",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "shadow-2",
-        "motion": "200ms"
+        "density": "comfortable"
       },
       "jobs": [
         "dashboard"
@@ -2841,12 +471,7 @@
       "kind": "query-only",
       "dna": {
         "family": "shadcn-zinc",
-        "density": "comfortable",
-        "type": "geist 14/16",
-        "radius": "lg",
-        "chroma": "low",
-        "elevation": "hairline+soft",
-        "motion": "150ms"
+        "density": "comfortable"
       },
       "jobs": [
         "dashboard"
@@ -2864,38 +489,29 @@
       "kind": "query-only",
       "dna": {
         "family": "shine",
-        "density": "dense",
-        "type": "editorial 14/15",
-        "radius": "sm",
-        "chroma": "0.13-0.24",
-        "elevation": "hairline",
-        "motion": "150ms"
+        "density": "dense"
       },
       "jobs": [
         "dashboard"
       ]
     },
     {
-      "id": "shine-empty",
+      "id": "shadcn-empty-icon",
       "screen": "empty",
-      "kit": "slds",
-      "title": "Empty state as a designed success",
-      "path": "corpus/packs/shine-empty",
-      "preview": "",
+      "kit": "shadcn-registry",
+      "title": "shadcn empty-icon (empty / no-result state)",
+      "path": "shadcn-registry/items/empty-icon.json",
+      "preview": "https://ui.shadcn.com/docs/components/empty",
       "license": "MIT",
-      "kind": "pack",
+      "kind": "source",
       "startFrom": 1,
       "jobs": [
-        "empty"
+        "empty",
+        "ai-generate"
       ],
       "dna": {
-        "family": "slds",
-        "density": "compact",
-        "type": "salesforce-sans 13",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "slds-card",
-        "motion": "150ms"
+        "family": "shadcn-zinc",
+        "density": "comfortable"
       }
     },
     {
@@ -2903,33 +519,29 @@
       "screen": "lex-console",
       "kit": "slds",
       "title": "Lightning console + utility bar",
-      "path": "corpus/packs/lex-console",
+      "path": "",
       "preview": "",
-      "license": "MIT",
-      "kind": "pack",
+      "license": "n/a",
+      "kind": "blueprint",
       "startFrom": 1,
       "jobs": [
         "lex-console"
       ],
       "dna": {
         "family": "slds",
-        "density": "compact",
-        "type": "salesforce-sans 13",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "slds-card",
-        "motion": "150ms"
-      }
+        "density": "compact"
+      },
+      "note": "references/salesforce.md is the structure source; no public source exists"
     },
     {
       "id": "lex-email",
       "screen": "lex-email",
       "kit": "slds",
       "title": "Salesforce HTML email (600px tables)",
-      "path": "corpus/packs/lex-email",
+      "path": "",
       "preview": "",
-      "license": "MIT",
-      "kind": "pack",
+      "license": "n/a",
+      "kind": "blueprint",
       "startFrom": 1,
       "jobs": [
         "lex-email",
@@ -2937,70 +549,57 @@
       ],
       "dna": {
         "family": "slds",
-        "density": "compact",
-        "type": "salesforce-sans 13",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "slds-card",
-        "motion": "150ms"
-      }
+        "density": "compact"
+      },
+      "note": "references/salesforce.md is the structure source; no public source exists"
     },
     {
       "id": "lex-lwr",
       "screen": "lex-lwr",
       "kit": "slds",
       "title": "Experience Cloud LWR (SLDS 2 unsupported)",
-      "path": "corpus/packs/lex-lwr",
+      "path": "",
       "preview": "",
-      "license": "MIT",
-      "kind": "pack",
+      "license": "n/a",
+      "kind": "blueprint",
       "startFrom": 1,
       "jobs": [
-        "lex-lwr",
-        "marketing"
+        "lex-lwr"
       ],
       "dna": {
         "family": "slds",
-        "density": "compact",
-        "type": "salesforce-sans 13",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "slds-card",
-        "motion": "150ms"
-      }
+        "density": "compact"
+      },
+      "note": "references/salesforce.md is the structure source; no public source exists"
     },
     {
       "id": "lex-mobile",
       "screen": "lex-mobile",
       "kit": "slds",
-      "title": "Salesforce mobile / Mini (no datatable)",
-      "path": "corpus/packs/lex-mobile",
+      "title": "Salesforce mobile (no datatable)",
+      "path": "",
       "preview": "",
-      "license": "MIT",
-      "kind": "pack",
+      "license": "n/a",
+      "kind": "blueprint",
       "startFrom": 1,
       "jobs": [
         "lex-mobile"
       ],
       "dna": {
         "family": "slds",
-        "density": "compact",
-        "type": "salesforce-sans 13",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "slds-card",
-        "motion": "150ms"
-      }
+        "density": "compact"
+      },
+      "note": "references/salesforce.md is the structure source; no public source exists"
     },
     {
       "id": "lex-queue",
       "screen": "lex-queue",
       "kit": "slds",
-      "title": "Lightning list / work queue (datatable contracts)",
-      "path": "corpus/packs/lex-queue",
+      "title": "Lightning list / work queue (lightning-datatable contracts)",
+      "path": "",
       "preview": "",
-      "license": "MIT",
-      "kind": "pack",
+      "license": "n/a",
+      "kind": "blueprint",
       "startFrom": 1,
       "jobs": [
         "lex-queue",
@@ -3008,62 +607,52 @@
       ],
       "dna": {
         "family": "slds",
-        "density": "compact",
-        "type": "salesforce-sans 13",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "slds-card",
-        "motion": "150ms"
-      }
+        "density": "compact"
+      },
+      "note": "references/salesforce.md is the structure source; no public source exists"
     },
     {
       "id": "lex-record",
       "screen": "lex-record",
       "kit": "slds",
       "title": "Lightning record home (highlights, path, detail, related)",
-      "path": "corpus/packs/lex-record",
+      "path": "",
       "preview": "",
-      "license": "MIT",
-      "kind": "pack",
+      "license": "n/a",
+      "kind": "blueprint",
       "startFrom": 1,
       "jobs": [
         "lex-record",
         "record",
-        "detail"
+        "detail",
+        "lightning",
+        "lwc"
       ],
       "dna": {
         "family": "slds",
-        "density": "compact",
-        "type": "salesforce-sans 13",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "slds-card",
-        "motion": "150ms"
-      }
+        "density": "compact"
+      },
+      "note": "references/salesforce.md is the structure source; no public source exists"
     },
     {
       "id": "lex-record-narrow",
-      "screen": "lex-record-narrow",
+      "screen": "lex-record",
       "kit": "slds",
-      "title": "Lightning record LWC at ~494px host",
-      "path": "corpus/packs/lex-record-narrow",
+      "title": "Lightning record LWC at ~494px host (container queries, not @media)",
+      "path": "",
       "preview": "",
-      "license": "MIT",
-      "kind": "pack",
-      "startFrom": 1,
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 2,
       "jobs": [
         "lex-record-narrow",
         "lex-record"
       ],
       "dna": {
         "family": "slds",
-        "density": "compact",
-        "type": "salesforce-sans 13",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "slds-card",
-        "motion": "150ms"
-      }
+        "density": "compact"
+      },
+      "note": "references/salesforce.md is the structure source; no public source exists"
     },
     {
       "id": "mui-marketing-page",
@@ -3077,12 +666,7 @@
       "startFrom": 1,
       "dna": {
         "family": "material",
-        "density": "comfortable",
-        "type": "roboto 14/16",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "shadow-2",
-        "motion": "200ms"
+        "density": "comfortable"
       },
       "jobs": [
         "marketing",
@@ -3101,12 +685,7 @@
       "kind": "query-only",
       "dna": {
         "family": "material",
-        "density": "comfortable",
-        "type": "roboto 14/16",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "shadow-2",
-        "motion": "200ms"
+        "density": "comfortable"
       },
       "jobs": [
         "marketing",
@@ -3117,46 +696,40 @@
       "id": "magicui-hero",
       "screen": "marketing-hero",
       "kit": "magicui",
-      "title": "Magic UI hero (video dialog)",
+      "title": "Magic UI hero (display type, one primary, full-bleed media)",
       "path": "magicui/apps/www/registry/magicui/hero-video-dialog.tsx",
       "preview": "https://magicui.design",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
       "jobs": [
-        "marketing-hero"
+        "marketing-hero",
+        "hero",
+        "landing"
       ],
       "dna": {
         "family": "magicui",
-        "density": "editorial",
-        "type": "display",
-        "radius": "xl",
-        "chroma": "high",
-        "elevation": "glow",
-        "motion": "300ms"
+        "density": "editorial"
       }
     },
     {
       "id": "carbon-datatable",
       "screen": "queue",
       "kit": "carbon",
-      "title": "Carbon DataTable (toolbar, batch, empty)",
+      "title": "Carbon DataTable (toolbar-first, batch actions, dense)",
       "path": "carbon/packages/react/src/components/DataTable",
       "preview": "https://carbondesignsystem.com/components/data-table/usage/",
       "license": "Apache-2.0",
       "kind": "source",
       "startFrom": 1,
       "jobs": [
-        "queue"
+        "queue",
+        "list",
+        "inbox"
       ],
       "dna": {
         "family": "carbon",
-        "density": "dense",
-        "type": "ibm-plex 14",
-        "radius": "none",
-        "chroma": "low",
-        "elevation": "none",
-        "motion": "110ms"
+        "density": "dense"
       }
     },
     {
@@ -3170,16 +743,13 @@
       "kind": "source",
       "startFrom": 2,
       "jobs": [
-        "queue"
+        "queue",
+        "list",
+        "inbox"
       ],
       "dna": {
         "family": "ant",
-        "density": "dense",
-        "type": "system 14",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "border",
-        "motion": "200ms"
+        "density": "dense"
       }
     },
     {
@@ -3194,16 +764,12 @@
       "startFrom": 1,
       "jobs": [
         "record",
-        "detail"
+        "detail",
+        "profile"
       ],
       "dna": {
         "family": "ant",
-        "density": "dense",
-        "type": "system 14",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "border",
-        "motion": "200ms"
+        "density": "dense"
       }
     },
     {
@@ -3217,16 +783,13 @@
       "kind": "source",
       "startFrom": 1,
       "jobs": [
-        "settings"
+        "settings",
+        "preferences",
+        "account"
       ],
       "dna": {
         "family": "ant",
-        "density": "dense",
-        "type": "system 14",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "border",
-        "motion": "200ms"
+        "density": "dense"
       }
     },
     {
@@ -3244,12 +807,7 @@
       ],
       "dna": {
         "family": "fluent",
-        "density": "comfortable",
-        "type": "segoe 14",
-        "radius": "md",
-        "chroma": "medium",
-        "elevation": "card",
-        "motion": "150ms"
+        "density": "comfortable"
       }
     },
     {
@@ -3263,16 +821,13 @@
       "kind": "source",
       "startFrom": 1,
       "jobs": [
-        "wizard"
+        "wizard",
+        "steps",
+        "onboarding"
       ],
       "dna": {
         "family": "ant",
-        "density": "dense",
-        "type": "system 14",
-        "radius": "sm",
-        "chroma": "medium",
-        "elevation": "border",
-        "motion": "200ms"
+        "density": "dense"
       }
     }
   ]

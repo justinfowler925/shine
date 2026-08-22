@@ -12,11 +12,10 @@
     "doctor:full": "node verify/doctor.mjs --full",
     "measure": "node verify/measure.mjs",
     "cite": "node corpus/cite.mjs",
-    "pack": "node corpus/pack.mjs",
-    "critic": "node verify/critic.mjs",
     "sync-consumers": "bash scripts/sync-consumers.sh",
     "skill-listing": "node site/scripts/skill-listing.mjs",
-    "measure-consumers": "node verify/measure-consumers.mjs"
+    "measure-consumers": "node verify/measure-consumers.mjs",
+    "compare": "node verify/compare.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.12.1",

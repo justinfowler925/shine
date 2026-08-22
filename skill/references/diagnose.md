@@ -1,165 +1,120 @@
 # Diagnose — how to find what is wrong
 
-This is the procedure. Rules and thresholds live elsewhere; this file is the order of
-operations so every fix starts from a named defect and ends with a citation.
+The loop's procedure. Thresholds live in `taste.md`/SKILL; this file is the order of
+operations so every fix starts from a named defect and ends with a source.
 
-Load this before editing UI in Build or Polish. Audit-only stops after the report;
-Audit-that-fixes continues through Cite → Apply → Remeasure.
+## 0. Route first
 
-## 0. New surface? Wireframe first
+- **No existing UI** (new screen/page/tool), or the user said wireframe/sketch/low-fi →
+  `wireframe.md` before anything here.
+- A `shine-wireframe/<slug>.brief.md` with `Status: LOCKED` → structure is given; do not
+  invent a competing IA unless the user says `unlock structure`.
+- **Internal tool / cockpit / digest** → `adoption.md` before pixels. A surface nobody
+  opens is a design defect, not a training problem.
 
-If there is **no existing UI** to polish or audit (new screen/page/tool), **stop** and run
-`references/wireframe.md` before this inventory. Explicit “wireframe” / “sketch” /
-“low-fi” also routes there.
+## 1. LOOK — render before opining
 
-If a `shine-wireframe/<slug>.brief.md` exists with `Status: LOCKED`, read it and treat
-structure as given — do not invent a competing IA unless the user says `unlock structure`.
-
-## 0.5 Catalog cite required
-
-A new page without a `templates.md` / `corpus/templates.json` id is a **Critical
-completeness hole** — ranked with missing a11y, not with craft. Run
-`node corpus/cite.mjs <job|screen|id>` and **read every file it lists** from
-`~/design-corpus`. Open the Preview. Copy structure **and** DNA (`voices.md`).
-Naming an id you did not open is inventing. A page with no template cite is incomplete, same as a table with no empty state.
-
-No row → `inspiration.md` (add a row) then cite. Do not invent.
-
----
-
-## 1. Name the surface
+`node verify/measure.mjs <path> --shot /tmp/before.png`, then **read the screenshot**.
+The measure output is a findings list; the screenshot is the diagnosis surface. A page
+you have not seen gets no opinions.
 
 | Kind | Signals | First refs |
 |---|---|---|
-| Internal tool / cockpit / digest | Auth'd app, queues, metrics for a ritual | `adoption.md` **before** pixels |
+| Internal tool / cockpit | Auth'd app, queues, metrics for a ritual | `adoption.md` first |
 | Product app shell | Nav, tables, forms, settings | `patterns.md`, `contracts.md` |
 | Dashboard / forecast | KPIs, charts, "what needs me" | `dashboards.md`, `dataviz.md` |
 | AI / agent surface | Model does work a human owns | `ai-surfaces.md` |
 | Marketing / landing | Hero, CTA, persuasion | `patterns.md` (hero budget), `copy.md` |
-| brand-locked | Client-facing or brand lock | `brand.md` + brand checker |
+| Brand-locked | Client-facing or brand lock | `brand.md` + brand checker |
 | Speaks or listens | TTS, mic, read-aloud | `voice.md` |
-| Native / macOS / iOS shaped | Desktop chrome, HIG language | Apple HIG via WebFetch (not corpus) |
+| Native / macOS / iOS | Desktop chrome, HIG language | Apple HIG via WebFetch |
+| Lightning / LWC | Record page, console, datatable | `salesforce.md` |
 
-If two kinds apply, run the stricter first (adoption before craft; contracts before polish).
+Two kinds → run the stricter first (adoption before craft; contracts before polish).
 
-## 2. Inventory defects — usability first
+## 2. NAME — four buckets, usability first
 
-Walk the live surface (browser, screenshot, or HTML artifact). Write defects into one of
-four buckets — do not mix. Craft without a usability or completeness defect is the wrong
-pass.
+Write 3–6 defects, each in one bucket. Craft without a usability or completeness defect
+above it is the wrong pass.
 
-### 0. Usability (can they finish the job?)
-
+### Usability (can they finish the job?)
 - Primary action visible in ~3 seconds? Competing CTAs?
-- Path length: notification → committed change — where does the user invent the next step?
-- Empty / error / loading as **real states**, not voids?
+- Path: notification → committed change — where does the user invent the next step?
+- Empty / error / loading as real states, not voids?
 - Hover-only actions; no keyboard path to finish?
 - The job of the screen vs what the layout actually offers.
 
-Ref: `techniques.md`, APG, Carbon/Ant admin patterns. Cite a catalog id or kit `file:line`
-on every Critical/Major.
+### Completeness (contracts)
+Named Table / Form / Dialog / Select loads `contracts.md` MUST **in this pass**.
+- Named control below MUST (bare `<table>`, unlabeled icon button, placeholder-as-label)
+- Missing states: loading / empty / filtered-empty / error
+- Destructive without confirm; double-submit; toast-only errors
 
-### A. Completeness (contracts)
-
-Named Table / Form / Dialog / Select **loads `contracts.md` MUST in this pass** — not later.
-
-- Named control below MUST (bare `<table>`, unlabeled icon button, placeholder-only label)
-- Missing states: loading / empty / filtered-empty / error triad collapsed
-- Hover-only actions; no keyboard path; destructive without confirm
-- ASK features present without need (noise)
-
-Ref: `contracts.md`, incomplete-primitive list in `audit.md`.
-
-### B. Composition (relationships the per-element gate cannot see)
-
-- **Scan order** — in 3 seconds, what do you read? Is that the job of the screen?
-- **Weight budget** — one primary, few secondary, everything else tertiary. Count filled
-  controls; count equal-weight peers.
+### Composition (what per-element gates cannot see)
+- **Scan order** — in 3 seconds, what do you read? Is that the job?
+- **Weight budget** — one primary, few secondary. Count filled controls.
 - **Focal object** — dashboards need one; six equal modules is an index.
-- **Chrome vs content** — nav/toolbars eating the viewport; largest region empty.
-- **Section jobs** — each section one purpose, one headline, usually one supporting line.
-- **Path length** — notification → committed change: where does the user invent the next step?
-- **Collisions** — one token, two meanings; type steps that are not distinguishable.
+- **Chrome vs content**; largest region empty; sections with three jobs.
+- **Collisions** — one token two meanings; type steps that aren't distinguishable.
 
-Ref: `anti-patterns.md` (composition fails), `patterns.md`, `adoption.md`.
-
-### C. Craft (tokens, type, motion, depth)
-
-- Raw hex / off-scale spacing / ad-hoc shadow / tracking 0 on display
-- Accent chroma outside the **voice** range (house: OKLCH 0.13–0.24; kit-faithful: cite DNA)
-- Adjacent surfaces ΔL ≥6pp (house). Kit-faithful follows DNA density/elevation.
-- Theme undeclared or non-switching; contrast fails
-- Motion `transition: all`, layout properties animated, >300ms hover
-
-Ref: SKILL ten rules, `taste.md`, `color-type.md`, `motion.md`, `foundations.md`.
+### Craft (of the chosen voice)
+- Raw values at usage sites; off-scale spacing; tracking 0 on display type
+- House accent chroma outside 0.13–0.24; kit-faithful drifting back to house paint
+- Theme undeclared or non-switching; contrast fails; `transition: all`
+- Refs: SKILL ten rules, `taste.md`, `color-type.md`, `motion.md`, `foundations.md`
 
 ## 3. Prioritize
 
-1. Usability — they cannot finish the job (no primary, dead path, hover-only, missing states)
-2. Completeness Critical — including **a page with no template cite** (a11y blockers, data triad, wrong primary, invented layout)
-3. Composition that causes wrong actions or abandonment (void, no primary, path dead-ends)
-4. Adoption blockers on internal tools (no ritual, persona clone, push with nowhere to act)
-5. Craft that reads as slop **for the chosen voice** (house chroma; kit-faithful DNA mismatch)
+1. Usability — they cannot finish the job
+2. Completeness Critical — a11y blockers, data-state triad, wrong primary
+3. Composition that causes wrong actions or abandonment
+4. Adoption blockers on internal tools
+5. Craft that reads as slop for the chosen voice
 6. Polish (density, optical alignment, micro-motion)
 
 Never spend a pass on craft while a Critical completeness hole is open.
 
-## 4. Cite before edit
+## 4. MATCH — a template, not a vibe
 
-Every material fix names a source. Acceptable citations:
+`node corpus/cite.mjs "<job in plain words>"`. Read the harvested shot (or preview),
+skim the source's regions, pick one of the ≤3 matches and say why. A page with no
+template cite is incomplete for a *known* job — dashboards, queues, records, settings,
+auth, checkout all have rows. No matching row → nearest row + `patterns.md`, and add a
+catalog row **after** the screen ships if it earned one. Technique cites
+(`techniques.md`) are for craft transfer; they don't replace a structural match.
 
-| Kind | Form | Example |
-|---|---|---|
-| Catalog template | `templates.md` id + path | "carbon-datatable — copy toolbar+batch+empty, apply carbon DNA" |
-| Corpus kit pattern | path + file:line from `~/design-corpus` | `carbon/.../DataTable.tsx:120` filter chrome |
-| Contract / APG | `contracts.md` or `aria-practices/content/...` | Dialog focus restore |
-| Apple HIG | URL + principle name | HIG Layout → alignment |
-| House rule | SKILL / foundations rule number | "Rule 8 nested radius" |
-| Locked wireframe | `shine-wireframe/<slug>.brief.md` | Honour LOCKED regions/primary |
+## 5. RESTRUCTURE + REPAINT
 
-**Banned:** "tighten spacing", "make it cleaner", "more modern", threshold-only prose with
-no product or kit named.
-
-If diagnose cannot cite a catalog row, run `inspiration.md` and **add the row** before
-building. Technique cites in `techniques.md` do not skip the catalog.
-
-## 5. Apply
-
-Map the cited **template structure and visual DNA** onto shine tokens for that voice.
-Clone layout regions; kit-faithful keeps density and type pairing. Brand lane: keep
-regions, drop vendor chrome. Completeness and interaction come from kits.
-
+Clone the template's regions from its source; keep the focal object focal. Then paint by
+voice (`voices.md`): kit-faithful imports the voice sheet and the kit's real token
+values; house uses the shine lanes; brand keeps regions and drops vendor chrome.
 Upgrade stubs to the contract ladder. Prefer one composition change over ten craft tweaks.
 
-## 6. Remeasure
+## 6. PROVE
 
 ```sh
-cd ~/Projects/shine && node verify/measure.mjs /abs/path/or/http-url --shot /tmp/shine-shot.png
+node verify/measure.mjs <path> --shot /tmp/after.png --cite <id>
+node verify/compare.mjs <path> --cite <id>    # when the template has a harvested shot
 ```
 
-Hard fails block. Notes do not. Report catalog id, DNA, `--shot` path, and before/after
-numbers for every Critical/Major you claimed to fix. Fail the build if the screenshot
-is not derived from the cited template (missing regions, invented equal-card hero,
-competing primaries the template does not have, or a Carbon cite that still looks like
-shadcn zinc). Named Table without sort/pagination/empty/loading/error fails.
+Hard fails block; notes don't. Report before/after numbers for every Critical/Major you
+claimed to fix, plus the shot paths. Read the compare composite — if the two sides don't
+read as relatives, the match or the paint is wrong.
 
 ## Quick defect → next file
 
 | You see… | Open |
 |---|---|
-| No UI yet / need a sketch | `wireframe.md` + `templates.md` |
-| Invented page / no catalog id | `templates.md` — pick a row; do not draw |
+| No UI yet / need a sketch | `wireframe.md` |
+| Known job, invented layout | `corpus/cite.mjs <job>` — match a row |
 | Nobody will open this | `adoption.md` |
-| Table/form missing states | `contracts.md` — MUST checklist in the report |
+| Table/form missing states | `contracts.md` |
 | Queue / batch / empty | `cite.mjs queue` → Carbon DataTable or Ant Pro list |
-| Settings | `cite.mjs settings` |
-| Record / detail | `cite.mjs record` |
-| Marketing hero as app shell | `cite.mjs marketing-hero` |
 | Wrong hierarchy / equal peers | `techniques.md` §Hierarchy, `kits.md` |
 | Numbers undecidable | `dashboards.md` |
 | Chart encoding smell | `dataviz.md` |
 | AI chat as default shell | `ai-surfaces.md` |
 | Words don't persuade | `copy.md` |
-| Raw values / tokens | foundations + color-type |
+| Raw values / tokens | `foundations.md`, `color-type.md` |
 | Need a library API | `corpus.md` then `rg` |
-| Novel pattern, no cite | `inspiration.md` protocol |
+| Lightning host quirks | `salesforce.md` |
