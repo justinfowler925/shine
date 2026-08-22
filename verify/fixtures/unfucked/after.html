@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!-- The demo OUTPUT of the loop (verify/fixtures/unfucked/README.md).
+     Template: carbon-datatable (corpus/packs/carbon-datatable/shot.png) — toolbar-first,
+     batch actions, full-bleed dense table, one filled primary.
+     Voice: kit-faithful carbon — ../../../tokens/voices/carbon.css. -->
+<html lang="en" data-dna-family="carbon" data-shine-voice="kit-faithful">
+<head>
+<meta charset="utf-8">
+<title>Renewals queue</title>
+<link rel="stylesheet" href="../../../tokens/voices/carbon.css">
+<style>
+  :root {
+    color-scheme: light dark;
+    /* page token block — Carbon productive type scale (heading-03 1.25rem, label-01 0.75rem) */
+    --shine-text-xl: 1.25rem;
+    --shine-text-xs: 0.75rem;
+    --shine-tracking-caps: 0.02rem;
+  }
+  body {
+    margin: 0;
+    font-family: var(--shine-font-sans);
+    font-size: var(--shine-text-base); /* on body only — on html it compounds rem and body renders 12.25px */
+    line-height: 1.4;
+    background: var(--shine-color-bg);
+    color: var(--shine-color-fg);
+  }
+  main { max-width: 1440px; margin: 0 auto; padding: 24px 32px 48px; }
+  .page-head { padding: 16px 0 8px; }
+  .page-head h1 { font-size: var(--shine-text-xl); font-weight: 400; margin: 0; letter-spacing: var(--shine-tracking-base, 0); }
+  .page-head p { color: var(--shine-color-fg-muted); margin: 4px 0 0; }
+  .toolbar { display: flex; align-items: center; gap: 8px; margin-top: 16px; background: var(--shine-color-bg-subtle); padding: 0; }
+  .toolbar input[type="search"] {
+    flex: 1; border: 0; border-bottom: 1px solid var(--shine-color-border-strong);
+    background: transparent; padding: 12px 16px; font: inherit; color: var(--shine-color-fg);
+    min-height: 48px; box-sizing: border-box;
+  }
+  .toolbar input[type="search"]::placeholder { color: var(--shine-color-fg-muted); }
+  button { font: inherit; border: 0; border-radius: var(--shine-radius-sm); min-height: 48px; padding: 12px 16px; cursor: pointer; }
+  .btn-ghost { background: transparent; color: var(--shine-color-fg); }
+  .btn-ghost:hover { background: var(--shine-color-bg-subtle); }
+  .btn-primary { background: var(--shine-color-primary); color: var(--shine-color-primary-fg); font-weight: 600; padding: 12px 24px; }
+  .btn-primary:hover { filter: brightness(0.92); }
+  :focus-visible { outline: 2px solid var(--shine-color-ring); outline-offset: 2px; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; margin-top: 0; }
+  thead th { text-align: left; background: var(--shine-color-bg-subtle); font-weight: 600; padding: 0; }
+  thead th button {
+    display: flex; align-items: center; gap: 4px; width: 100%; text-align: left;
+    background: transparent; color: var(--shine-color-fg); font-weight: 600; padding: 12px 16px;
+  }
+  thead th button:hover { background: var(--shine-color-border); }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid var(--shine-color-border); }
+  tbody tr:hover { background: var(--shine-color-bg-subtle); }
+  td.num, th.num button { justify-content: flex-end; }
+  td.num { text-align: right; }
+  .status { color: var(--shine-color-fg-muted); }
+  .status.overdue { color: var(--shine-color-danger); font-weight: 600; }
+  td a { color: var(--shine-color-link); }
+  .check { width: 48px; }
+  .check input { width: 16px; height: 16px; margin: 0; }
+  .pager { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--shine-color-border); padding: 8px 16px; color: var(--shine-color-fg-muted); }
+  .pager .buttons { display: flex; gap: 4px; }
+  [data-state] { padding: 48px 16px; }
+  [data-state] h2 { font-size: var(--shine-text-base); font-weight: 600; margin: 0 0 4px; }
+  [data-state] p { color: var(--shine-color-fg-muted); margin: 0 0 12px; }
+  [hidden] { display: none; }
+</style>
+</head>
+<body>
+<main data-cite="carbon-datatable">
+  <header class="page-head">
+    <h1>Renewals queue</h1>
+    <p>5 renewals in the next 30 days · $520,450 total</p>
+  </header>
+
+  <div class="toolbar" role="search">
+    <input type="search" aria-label="Filter renewals" placeholder="Filter by account, owner, or date">
+    <button type="button" class="btn-ghost">Export</button>
+    <button type="button" class="btn-primary" data-primary>New renewal</button>
+  </div>
+
+  <table aria-label="Renewals" data-shine-contract="table">
+    <thead>
+      <tr>
+        <th class="check"><input type="checkbox" aria-label="Select all renewals"></th>
+        <th aria-sort="ascending"><button type="button" data-sort>Renews <span aria-hidden="true">↑</span></button></th>
+        <th><button type="button" data-sort>Account</button></th>
+        <th><button type="button" data-sort>Owner</button></th>
+        <th class="num"><button type="button" data-sort>ARR</button></th>
+        <th><button type="button" data-sort>Status</button></th>
+        <th><span class="visually-hidden">Actions</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="check"><input type="checkbox" aria-label="Select Acme Industrial"></td>
+        <td>Sep 1</td><td>Acme Industrial</td><td>JF</td><td class="num">$120,400</td>
+        <td class="status overdue">No contact 21d</td><td><a href="#open-acme">Open</a></td>
+      </tr>
+      <tr>
+        <td class="check"><input type="checkbox" aria-label="Select Globex"></td>
+        <td>Sep 3</td><td>Globex</td><td>MK</td><td class="num">$88,150</td>
+        <td class="status">Proposal sent</td><td><a href="#open-globex">Open</a></td>
+      </tr>
+      <tr>
+        <td class="check"><input type="checkbox" aria-label="Select Initech"></td>
+        <td>Sep 10</td><td>Initech</td><td>JF</td><td class="num">$41,900</td>
+        <td class="status">On track</td><td><a href="#open-initech">Open</a></td>
+      </tr>
+      <tr>
+        <td class="check"><input type="checkbox" aria-label="Select Umbrella Health"></td>
+        <td>Sep 12</td><td>Umbrella Health</td><td>TR</td><td class="num">$203,700</td>
+        <td class="status overdue">Champion left</td><td><a href="#open-umbrella">Open</a></td>
+      </tr>
+      <tr>
+        <td class="check"><input type="checkbox" aria-label="Select Stark Logistics"></td>
+        <td>Sep 19</td><td>Stark Logistics</td><td>MK</td><td class="num">$66,300</td>
+        <td class="status">On track</td><td><a href="#open-stark">Open</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav class="pager" aria-label="Pagination" data-pagination>
+    <span>1–5 of 5 renewals</span>
+    <div class="buttons">
+      <button type="button" class="btn-ghost" disabled aria-label="Previous page">‹</button>
+      <button type="button" class="btn-ghost" disabled aria-label="Next page">›</button>
+    </div>
+  </nav>
+
+  <section data-state="empty" hidden>
+    <h2>Nothing renews in this window</h2>
+    <p>Every renewal inside 30 days is handled. Widen the window to plan further out.</p>
+    <button type="button" class="btn-ghost">Show next 90 days</button>
+  </section>
+  <section data-state="loading" hidden aria-busy="true">
+    <h2>Loading renewals…</h2>
+    <p>Fetching the current queue.</p>
+  </section>
+  <section data-state="error" hidden role="alert">
+    <h2>Couldn’t load renewals</h2>
+    <p>The CRM didn’t answer. Your filters are kept.</p>
+    <button type="button" class="btn-ghost">Retry</button>
+  </section>
+</main>
+</body>
+</html>

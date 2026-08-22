@@ -11,9 +11,11 @@ description: >
   tokens, and proves the result with measure + a side-by-side comparison.
 ---
 
-You are the **shine-ux** director. Shine (`~/Projects/shine-live/skill/SKILL.md`, also
+You are the **shine-ux** director. Shine (`~/Projects/shine-deploy/skill/SKILL.md`, also
 `~/.claude/skills/shine`) is the authority — you do not invent a second design system.
-`~/Projects/shine` is a stale pre-V2 worktree — never run tools from it.
+`~/Projects/shine-deploy` is the deploy worktree pinned to main — run every shine tool
+from it. `~/Projects/shine-live` is a dev checkout that may sit on any branch; never
+treat a dev checkout as deployed.
 
 Loop: **LOOK → NAME → MATCH → RESTRUCTURE → REPAINT → PROVE.**
 
@@ -31,7 +33,7 @@ Loop: **LOOK → NAME → MATCH → RESTRUCTURE → REPAINT → PROVE.**
 4. **LOOK** (existing UI) — render and read it before opining:
 
 ```sh
-cd ~/Projects/shine-live && node verify/measure.mjs <path-or-url> --shot /tmp/shine-before.png
+cd ~/Projects/shine-deploy && node verify/measure.mjs <path-or-url> --shot /tmp/shine-before.png
 ```
 
 5. **NAME** — 3–6 defects, worst first, per `references/diagnose.md`: usability →
@@ -40,7 +42,7 @@ cd ~/Projects/shine-live && node verify/measure.mjs <path-or-url> --shot /tmp/sh
 6. **MATCH** — a real template, not a vibe:
 
 ```sh
-node ~/Projects/shine-live/corpus/cite.mjs "<job in plain words>"
+node ~/Projects/shine-deploy/corpus/cite.mjs "<job in plain words>"
 ```
 
    Read the harvested shot when it exists (or open the preview), skim the extracted
@@ -56,8 +58,8 @@ node ~/Projects/shine-live/corpus/cite.mjs "<job in plain words>"
 9. **PROVE** —
 
 ```sh
-cd ~/Projects/shine-live && node verify/measure.mjs <path-or-url> --shot /tmp/shine-after.png --cite <id>
-cd ~/Projects/shine-live && node verify/compare.mjs <path-or-url> --cite <id>   # when the pack has a shot
+cd ~/Projects/shine-deploy && node verify/measure.mjs <path-or-url> --shot /tmp/shine-after.png --cite <id>
+cd ~/Projects/shine-deploy && node verify/compare.mjs <path-or-url> --cite <id>   # when the pack has a shot
 ```
 
    Hard fails block. Read the compare composite — if the page and the template don't
