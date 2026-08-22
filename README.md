@@ -71,15 +71,18 @@ npm run build   # wraps tokens/ — emit both lanes
 npm run verify  # wraps tokens/ — prove emit targets by computed value
 ```
 
-Keep the tree the IDEs load on `main` and pull often. If `~/Projects/shine` is on a feature branch, add a detached live worktree and point **skill, agent, and hook commands** at it — otherwise both surfaces load whatever you were last building:
+Keep the tree the IDEs load on `main`. If the clone will sit on a feature branch, add a
+detached deploy worktree and point **every** skill, agent, and hook command at it:
 
 ```sh
-git -C ~/Projects/shine worktree add --detach ~/Projects/shine-live origin/main
-# then ln -sfn ~/Projects/shine-live/skill (and agents/shine-ux.md) into
-# ~/.claude and ~/.cursor as in steps 2–3. Hook `command` paths must use
-# ~/Projects/shine-live for design-lint, stop-sweep, and doctor.
-git -C ~/Projects/shine-live fetch origin && git -C ~/Projects/shine-live checkout --detach origin/main
+git -C ~/Projects/shine worktree add --detach ~/Projects/shine-deploy origin/main
+git -C ~/Projects/shine-deploy fetch origin && git -C ~/Projects/shine-deploy checkout --detach origin/main
+export SHINE=~/Projects/shine-deploy   # the tree doctor reports; never the feature checkout
 ```
+
+If the clone itself stays on `main`, `export SHINE=$(pwd)` and skip the worktree. Skill
+and agent text resolve tools from the loaded symlink (`realpath ~/.cursor/skills/shine`),
+not from a hardcoded checkout.
 
 ### 2. Claude Code
 
@@ -87,8 +90,8 @@ git -C ~/Projects/shine-live fetch origin && git -C ~/Projects/shine-live checko
 
 ```sh
 mkdir -p ~/.claude/skills ~/.claude/agents
-ln -sfn ~/Projects/shine/skill ~/.claude/skills/shine
-ln -sfn ~/Projects/shine/agents/shine-ux.md ~/.claude/agents/shine-ux.md
+ln -sfn "$SHINE/skill" ~/.claude/skills/shine
+ln -sfn "$SHINE/agents/shine-ux.md" ~/.claude/agents/shine-ux.md
 ```
 
 **Hooks (enforcement — skill alone is not enough):** merge into `~/.claude/settings.json`
@@ -103,7 +106,7 @@ under `hooks` (create the file if missing):
         "hooks": [
           {
             "type": "command",
-            "command": "node ~/Projects/shine/hooks/design-lint.mjs",
+            "command": "node $SHINE/hooks/design-lint.mjs",
             "timeout": 15,
             "statusMessage": "shine design-lint"
           }
@@ -115,7 +118,7 @@ under `hooks` (create the file if missing):
         "hooks": [
           {
             "type": "command",
-            "command": "node ~/Projects/shine/hooks/stop-sweep.mjs",
+            "command": "node $SHINE/hooks/stop-sweep.mjs",
             "timeout": 20,
             "statusMessage": "shine stop sweep"
           }
@@ -127,7 +130,7 @@ under `hooks` (create the file if missing):
         "hooks": [
           {
             "type": "command",
-            "command": "node ~/Projects/shine/verify/doctor.mjs --quiet || true",
+            "command": "node $SHINE/verify/doctor.mjs --quiet",
             "timeout": 30,
             "statusMessage": "shine doctor"
           }
@@ -151,8 +154,8 @@ doctor checks on a normal laptop install.
 
 ```sh
 mkdir -p ~/.cursor/skills ~/.cursor/agents
-ln -sfn ~/Projects/shine/skill ~/.cursor/skills/shine
-ln -sfn ~/Projects/shine/agents/shine-ux.md ~/.cursor/agents/shine-ux.md
+ln -sfn "$SHINE/skill" ~/.cursor/skills/shine
+ln -sfn "$SHINE/agents/shine-ux.md" ~/.cursor/agents/shine-ux.md
 ```
 
 **Hooks:** merge into `~/.cursor/hooks.json` (Cursor blocks on **exit code 2**, not JSON
@@ -162,19 +165,19 @@ ln -sfn ~/Projects/shine/agents/shine-ux.md ~/.cursor/agents/shine-ux.md
 {
   "afterFileEdit": [
     {
-      "command": "node ~/Projects/shine/hooks/design-lint.mjs",
+      "command": "node $SHINE/hooks/design-lint.mjs",
       "timeout": 15
     }
   ],
   "stop": [
     {
-      "command": "node ~/Projects/shine/hooks/stop-sweep.mjs",
+      "command": "node $SHINE/hooks/stop-sweep.mjs",
       "timeout": 30
     }
   ],
   "sessionStart": [
     {
-      "command": "node ~/Projects/shine/verify/doctor.mjs --quiet || true",
+      "command": "node $SHINE/verify/doctor.mjs --quiet",
       "timeout": 30
     }
   ]
@@ -210,7 +213,7 @@ consumes `@shine` CSS or `npx shadcn add` — that is the **design system**, not
 ### 6. Prove it is deployed
 
 ```sh
-cd ~/Projects/shine
+cd "$SHINE"
 node verify/doctor.mjs
 ```
 
@@ -231,8 +234,8 @@ node verify/measure.mjs /abs/path/to/page.html
 ### 7. Updating
 
 ```sh
-git -C ~/Projects/shine pull --ff-only
-npm install && npm run build
+git -C "$SHINE" fetch origin && git -C "$SHINE" checkout --detach origin/main
+cd "$SHINE" && npm install && npm run build
 node verify/doctor.mjs
 npm run sync-consumers   # re-vendor token copies into consumer apps
 ```
@@ -327,11 +330,11 @@ Why this exists, corpus/token/registry research, enforcement detail, budgets, an
 
 Multiple products, multiple visual languages, zero shared code. Brand tokens hand-transcribed into one app. A personal site carrying nine copies of the same `:root` block.
 
-The `shine` skill is the design authority on both surfaces (`~/.claude/skills/shine` ↔
-`~/Projects/shine/skill`; Cursor skill symlink). The `shine-ux` subagent
-(`agents/shine-ux.md`, linked into `~/.cursor/agents` and `~/.claude/agents`) runs the
-director loop (job → diagnose → retrieve → apply DNA → prove). Knowledge is not a checklist — techniques transfer
-from measured products and `~/design-corpus` kits.
+The `shine` skill is the design authority on both surfaces (`~/.claude/skills/shine` and
+`~/.cursor/skills/shine` → `"$SHINE/skill"`). The `shine-ux` subagent
+(`agents/shine-ux.md`, linked into `~/.cursor/agents` and `~/.claude/agents`) is the
+director — the parent launches it and does not freelance the loop. Tools resolve from
+the loaded skill realpath, never a hardcoded checkout.
 
 **The organizing insight:** shadcn's *default token values*, not its components, produce the homogeneous "AI look." Measured: every reference-grade accent sits at OKLCH chroma 0.13–0.24; Tailwind's `-600` row is 0.245–0.288. The tokens are the tell. So: wipe the defaults, own the token layer, enforce against rendered pixels.
 

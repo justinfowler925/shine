@@ -98,10 +98,67 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   } else {
     ok("skill frontmatter", "name + description, unscoped");
   }
+  const lines = text.split("\n").length;
+  if (lines > 80) {
+    fail("SKILL.md is a loader", `${lines} lines — protocol belongs in shine-ux, cap 80`);
+  } else {
+    ok("SKILL.md is a loader", `${lines} lines`);
+  }
+  if (!/subagent_type:\s*"shine-ux"/.test(text)) {
+    fail("SKILL.md dispatches shine-ux", "parent must Task subagent_type: \"shine-ux\" — freelance paint is how the skill sits unread");
+  } else {
+    ok("SKILL.md dispatches shine-ux", "subagent_type: shine-ux");
+  }
+}
+
+// ---- 1b. tools resolve from the loaded skill, never a hardcoded checkout --
+{
+  const STALE_CMD = /(?:^|[`'\"\s])(?:cd |node |ln -sfn )~\/Projects\/shine(?:-live|-deploy)?(?:\/|\s|$|`|'|")/;
+  const sample = "cd ~/Projects/shine && node verify/critic.mjs";
+  if (!STALE_CMD.test(sample)) fail("stale-root detector bites", "detector missed `cd ~/Projects/shine && node verify/critic.mjs`");
+  else ok("stale-root detector bites", "hardcoded primary checkout would go red");
+  const deploySample = "node ~/Projects/shine-deploy/corpus/cite.mjs dashboard";
+  if (!STALE_CMD.test(deploySample)) fail("stale-root detector bites deploy", "detector missed a shine-deploy tool path");
+  else ok("stale-root detector bites deploy", "hardcoded shine-deploy would go red");
+
+  const agentFiles = ["skill/SKILL.md", "agents/shine-ux.md"];
+  const hits = agentFiles.filter((f) => existsSync(join(SHINE, f)) && STALE_CMD.test(readFileSync(join(SHINE, f), "utf8")));
+  if (hits.length) fail("no hardcoded shine checkout", `stale Projects/shine* tool path in ${hits.join(", ")}`);
+  else ok("no hardcoded shine checkout", agentFiles.join(", "));
+
+  const readme = readFileSync(join(SHINE, "README.md"), "utf8");
+  if (/ln -sfn ~\/Projects\/shine\/skill/.test(readme))
+    fail("README install is not the primary", "ln -sfn ~/Projects/shine/skill would load a feature checkout");
+  else ok("README install is not the primary", "symlinks use $SHINE");
+  if (/doctor\.mjs[^"\n]*\|\|\s*true/.test(readme))
+    fail("README doctor fail-closed", "`|| true` swallows a red doctor");
+  else ok("README doctor fail-closed", "sessionStart doctor is not `|| true`");
 }
 
 // ---- 2. the skill is deployed to both surfaces ----------------------------
 if (!CI) {
+  const deployed = join(HOME, ".cursor/skills/shine");
+  if (existsSync(deployed)) {
+    const root = dirname(realpathSync(deployed));
+    const git = (...a) => spawnSync("git", a, { cwd: root, encoding: "utf8" });
+    const branch = git("branch", "--show-current").stdout.trim();
+    const behind = Number(git("rev-list", "--count", "HEAD..origin/main").stdout.trim() || "0");
+    if (behind > 0) {
+      fail(
+        "deployed tree current",
+        `skill loads ${root.replace(HOME, "~")} (${branch || "detached"}), ${behind} behind origin/main`,
+      );
+    } else if (branch && branch !== "main" && !process.env.SHINE_ALLOW_DRIFT) {
+      fail(
+        "deployed tree on main",
+        `skill loads ${branch} at ${root.replace(HOME, "~")} — detach origin/main (documented exception: SHINE_ALLOW_DRIFT=1)`,
+      );
+    } else if (branch && branch !== "main") {
+      note("deployed tree on main", `SHINE_ALLOW_DRIFT=1 — skill loads ${branch}`);
+    } else {
+      ok("deployed tree on main", `${root.replace(HOME, "~")} ${branch || "detached"}`);
+    }
+  }
   for (const [surface, p] of [
     ["Cursor", join(HOME, ".cursor/skills/shine")],
     ["Claude Code", join(HOME, ".claude/skills/shine")],
@@ -249,6 +306,21 @@ if (!CI) {
     const branch = conf.hooks?.[w.key];
     if (branch && has(branch, w.pat)) ok(w.name, `${w.key} in ${w.file.replace(HOME, "~")}`);
     else fail(w.name, `no ${w.pat.source} under hooks.${w.key} in ${w.file.replace(HOME, "~")}`);
+  }
+
+  for (const w of wirings.filter((x) => x.pat.source.includes("doctor"))) {
+    if (!existsSync(w.file)) continue;
+    let conf;
+    try {
+      conf = readJSON(w.file);
+    } catch {
+      continue;
+    }
+    const blob = JSON.stringify(conf.hooks?.[w.key] ?? "");
+    if (!/doctor\.mjs/.test(blob)) continue;
+    if (/doctor\.mjs[^"]*\|\|\s*true/.test(blob))
+      fail(`${w.name} fail-closed`, "`|| true` swallows a red doctor");
+    else ok(`${w.name} fail-closed`, "no || true");
   }
 
   // The plugin-shipped copy, for anyone installing shine as a Claude Code plugin.
@@ -839,6 +911,11 @@ if (args.includes("--full")) {
         fail("cite.mjs dashboard is a page", "registry JSON was not extracted to readable source");
       else ok("cite.mjs dashboard is a page", "shadcn-dashboard-01 + extracted page.tsx");
 
+      const mustLines = dout.split("\n").filter((l) => /^  \//.test(l));
+      if (mustLines.length > 3)
+        fail("cite.mjs must-read cap", `dashboard listed ${mustLines.length} paths — cap 3`);
+      else ok("cite.mjs must-read cap", `${mustLines.length} paths`);
+
       // Synonyms: "settings page" used to be an unknown token (exact-match lexicon).
       const syn = spawnSync(process.execPath, [cite, "settings page"], { encoding: "utf8" });
       const sout = `${syn.stdout || ""}${syn.stderr || ""}`;
@@ -1010,20 +1087,15 @@ if (args.includes("--full")) {
 // same failure as a skill that exists on disk and never loads. A map row with no file
 // behind it sends the agent to read nothing and report the gap as absent guidance.
 {
-  const skill = readFileSync(join(SHINE, "skill/SKILL.md"), "utf8");
-  const mapped = new Set([...skill.matchAll(/`references\/([\w.-]+\.md)`/g)].map((m) => m[1]));
+  const agent = readFileSync(join(SHINE, "agents/shine-ux.md"), "utf8");
+  const mapped = new Set([...agent.matchAll(/`references\/([\w.-]+\.md)`/g)].map((m) => m[1]));
   const onDisk = new Set(readdirSync(join(SHINE, "skill/references")).filter((f) => f.endsWith(".md")));
   const unmapped = [...onDisk].filter((f) => !mapped.has(f));
-  // `*.local.md` is an optional private override — gitignored, installed by a
-  // brand pack, absent on a clean clone. SKILL.md has to name it or the model
-  // never learns to look for it, so the map check has to know the difference
-  // between "named and missing" and "named and optional". Everything else that
-  // SKILL.md names still has to exist.
   const missing = [...mapped].filter((f) => !onDisk.has(f) && !f.endsWith(".local.md"));
   if (unmapped.length || missing.length) {
     fail("reference map complete", [
-      unmapped.length ? `on disk, never named in SKILL.md: ${unmapped.join(", ")}` : "",
-      missing.length ? `named in SKILL.md, no such file: ${missing.join(", ")}` : "",
+      unmapped.length ? `on disk, never named in shine-ux.md: ${unmapped.join(", ")}` : "",
+      missing.length ? `named in shine-ux.md, no such file: ${missing.join(", ")}` : "",
     ].filter(Boolean).join("; "));
   } else {
     ok("reference map complete", `${onDisk.size} references, all reachable`);
