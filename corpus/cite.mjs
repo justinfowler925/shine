@@ -23,7 +23,7 @@ const EXTRACT = join(SHINE, "corpus/extracted");
 const CODE = /\.(tsx|ts|jsx|js|mdx|html|css)$/;
 const SKIP = /(?:^|\/)(?:test|tests|__tests__)|\.test\.|\.spec\.|\.stories\.|-test\./i;
 const PREFER =
-  /(?:^|\/)(readme|page|layout|app|index|dashboard|data-table|datatable|chat|settings|wizard|profile|shell)/i;
+  /(?:^|\/)(readme|page|layout|app|index|dashboard|data-table|datatable|chat|settings|wizard|profile|shell|blog)/i;
 const DEMOTE = /(?:^|\/)(card|badge|accordion|checkbox|calendar|divider)\./i;
 const STOP = new Set(["a", "an", "the", "page", "screen", "view", "ui", "for", "of", "my", "our", "new"]);
 
@@ -160,7 +160,10 @@ if (row.kind === "source" && abs && existsSync(abs)) {
 }
 
 const files = [...new Set(listed)].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
-const show = files.slice(0, 10);
+const composed = files.find((p) =>
+  /(?:^|\/|#)(?:page|blog|index|layout|dashboard)\.[jt]sx?$/i.test(p.split("#").pop() || p),
+);
+const show = (composed ? [composed, ...files.filter((p) => p !== composed)] : files).slice(0, 3);
 const extra = files.length - show.length;
 
 // ---- pack (harvested pixels) ---------------------------------------------------

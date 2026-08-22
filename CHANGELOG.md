@@ -2,6 +2,16 @@
 
 All notable changes to Shine are documented here. Public releases follow [Keep a Changelog](https://keepachangelog.com/) and [SemVer](https://semver.org/).
 
+## Unreleased
+
+### Changed
+
+- Skill is a loader: parent `Task`s `shine-ux` and does not freelance the loop
+- Cite/measure/compare resolve from the loaded skill realpath, not a hardcoded checkout
+- `cite.mjs` prints at most 3 source paths (plus the harvested shot)
+- Doctor fails a hardcoded `Projects/shine*` tool path, a skill over 80 lines, deploy drift off `main`, and sessionStart `|| true`
+- README install uses `$SHINE` (detached `origin/main` worktree) and a fail-closed doctor
+
 ## [3.0.0] — 2026-08-21
 
 Shine V3 is the unfuck. An audit (docs/audit-2026-08-21.md) measured V2's retrieval layer
