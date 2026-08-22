@@ -3,14 +3,15 @@
      source (primitives defined once, consumed as var() everywhere else), and the
      theme-color hexes are rendered-pixel readbacks of --bg. Nothing here bypasses
      a token; this file is where the tokens live.
-     Scoped to `color`. Type, tracking, shadow and spacing stay enforced. -->
+     Scoped to `color`. Type, tracking, shadow and spacing stay enforced.
+     Kit paint: mui-blog / material createPalette light (blue[700] #1976d2). -->
 <html lang="en" data-theme="light" data-cite="mui-blog" data-dna-family="material" data-dna-chroma="medium" data-shine-voice="kit-faithful" data-shine-lane="marketing">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shine — stop shipping the same generated page</title>
-<meta name="description" content="Shine is a skill for Claude Code and Cursor. It makes the agent copy a real designed page — and fail the build if the result still looks generated.">
-<meta name="theme-color" content="#f4f4f4">
+<title>Shine — your agent copies a real designed page</title>
+<meta name="description" content="Shine is a UX skill for Claude Code and Cursor. It matches the job to a real template, paints with that kit’s tokens, and proves the pixels — look, name, match, restructure, repaint, prove.">
+<meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,15 +28,15 @@
 @layer base {
   :root {
     color-scheme: light;
-    --bg: oklch(0.96 0.004 260);
-    --bg-hex: #f4f4f4;
-    --surface: oklch(1 0 0);
-    --fg: oklch(0.16 0.012 260);
-    --fg-muted: oklch(0.42 0.012 260);
-    --border: oklch(0.88 0.008 260);
-    --primary: oklch(0.16 0.012 260);
-    --primary-fg: oklch(0.99 0.002 260);
-    --glow: oklch(0.72 0.04 250 / 0.18);
+    --bg: #ffffff;
+    --bg-hex: #ffffff;
+    --surface: #ffffff;
+    --fg: rgba(0, 0, 0, 0.87);
+    --fg-muted: rgba(0, 0, 0, 0.6);
+    --border: rgba(0, 0, 0, 0.12);
+    --primary: #1976d2;
+    --primary-fg: #ffffff;
+    --glow: color-mix(in srgb, var(--primary) 18%, transparent);
 
     --font: "Roboto", system-ui, sans-serif;
     --mono: "Roboto Mono", ui-monospace, Menlo, monospace;
@@ -58,24 +59,28 @@
 
     --dur: 200ms;
     --ease: cubic-bezier(0.2, 0, 0, 1);
-    --shadow: 0 1px 2px oklch(0 0 0 / 0.06), 0 12px 32px -12px oklch(0 0 0 / 0.16);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 12px 32px -12px rgba(0, 0, 0, 0.16);
   }
 
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --bg: oklch(0.12 0.01 260);
+    --bg: #121212;
     --bg-hex: #121212;
-    --surface: oklch(0.18 0.01 260);
-    --fg: oklch(0.98 0.004 260);
-    --fg-muted: oklch(0.72 0.012 260);
-    --border: oklch(0.28 0.012 260);
-    --primary: oklch(0.99 0.002 260);
-    --primary-fg: oklch(0.12 0.01 260);
-    --glow: oklch(0.45 0.06 250 / 0.22);
-    --shadow: 0 1px 2px oklch(0 0 0 / 0.24), 0 12px 32px -8px oklch(0 0 0 / 0.48);
+    --surface: #1e1e1e;
+    --fg: rgba(255, 255, 255, 0.87);
+    --fg-muted: rgba(255, 255, 255, 0.7);
+    --border: rgba(255, 255, 255, 0.12);
+    --primary: #90caf9;
+    --primary-fg: #121212;
+    --glow: color-mix(in srgb, var(--primary) 22%, transparent);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.24), 0 12px 32px -8px rgba(0, 0, 0, 0.48);
   }
 
   html.no-anim, html.no-anim * { transition: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+  }
 
   body {
     background: var(--bg);
@@ -87,11 +92,11 @@
     font-variant-numeric: tabular-nums lining-nums;
   }
 
-  a { color: inherit; text-underline-offset: 0.2em; }
-  a:hover { color: var(--fg-muted); }
+  a { color: var(--primary); text-underline-offset: 0.2em; }
+  a:hover { color: var(--fg); }
 
   :focus-visible {
-    outline: 2px solid var(--fg);
+    outline: 2px solid var(--primary);
     outline-offset: 3px;
   }
 
@@ -116,6 +121,7 @@
     background: var(--surface);
     padding: 2px 4px;
     border-radius: 4px;
+    border: 1px solid var(--border);
   }
 }
 
@@ -137,7 +143,7 @@
     padding: var(--s-2) var(--s-3);
     border: 1px solid var(--border);
     border-radius: var(--r-bar);
-    background: color-mix(in oklch, var(--surface) 72%, transparent);
+    background: color-mix(in srgb, var(--surface) 72%, transparent);
     backdrop-filter: blur(24px);
     box-shadow: var(--shadow);
   }
@@ -145,6 +151,8 @@
     display: flex;
     align-items: center;
     gap: var(--s-3);
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
   .bar nav a:not(.btn), .brand {
     text-decoration: none;
@@ -158,7 +166,7 @@
   }
 
   .article {
-    max-width: 42rem;
+    max-width: 56rem;
     margin: var(--s-16) auto var(--s-24);
     padding: 0 var(--s-6);
     display: flex;
@@ -168,22 +176,82 @@
   .article > h1 { margin-bottom: var(--s-2); }
   .article > h2 { margin-bottom: calc(var(--s-2) * -1); }
 
-  .shot {
-    margin: var(--s-4) 0;
+  .shot, .pair, .catalog {
+    margin: var(--s-2) 0 0;
     width: 100%;
   }
-  .shot img {
+  .shot img, .catalog img {
     width: 100%;
+    aspect-ratio: 1280 / 900;
+    object-fit: cover;
+    object-position: top left;
     border-radius: var(--r-card);
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
     background: var(--surface);
   }
-  .shot figcaption {
+  .shot figcaption, .catalog figcaption, .pair > figcaption {
     margin-top: var(--s-3);
     font-size: var(--t-sm);
     color: var(--fg-muted);
     max-inline-size: none;
+  }
+  .pair-grid, .catalog {
+    display: grid;
+    gap: var(--s-4);
+  }
+  .pair-grid { grid-template-columns: 1fr; }
+  .catalog { grid-template-columns: 1fr; }
+  @media (min-width: 48rem) {
+    .pair-grid { grid-template-columns: 1fr 1fr; }
+    .catalog { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .pair-grid .shot, .catalog .shot { margin: 0; }
+  .pair-grid .shot figcaption, .catalog .shot figcaption { margin-top: var(--s-3); }
+
+  .loop {
+    margin: var(--s-2) 0;
+    padding: var(--s-6);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
+    box-shadow: var(--shadow);
+  }
+  .loop > .eyebrow { margin-bottom: var(--s-4); }
+  .loop ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--s-4);
+    counter-reset: shine-step;
+  }
+  .loop li {
+    display: grid;
+    grid-template-columns: var(--s-8) 1fr;
+    gap: var(--s-3);
+    align-items: start;
+    counter-increment: shine-step;
+    max-inline-size: none;
+  }
+  .loop li::before {
+    content: counter(shine-step);
+    font-size: var(--t-sm);
+    font-weight: 500;
+    color: var(--primary);
+    line-height: 1.6;
+  }
+  .loop strong {
+    display: block;
+    font-weight: 500;
+    letter-spacing: var(--tr-caps);
+    text-transform: uppercase;
+    font-size: var(--t-xs);
+    color: var(--fg);
+  }
+  .loop span {
+    color: var(--fg-muted);
+    font-size: var(--t-sm);
   }
 
   .files {
@@ -211,6 +279,8 @@
     font-size: var(--t-sm);
   }
   footer .inner { max-width: 42rem; margin-inline: auto; display: grid; gap: var(--s-3); }
+  footer a { color: var(--fg-muted); }
+  footer a:hover { color: var(--fg); }
 }
 
 @layer components {
@@ -270,44 +340,68 @@
   <a class="brand" href="/">Shine</a>
   <nav aria-label="Site">
     <a href="/r/">Registry</a>
-    <a href="https://github.com/justinfowler925/shine">GitHub</a>
     <a class="btn" data-primary href="https://github.com/justinfowler925/shine">Get the skill</a>
     <button class="toggle" id="t" type="button" aria-label="Toggle color scheme">Dark</button>
   </nav>
 </header>
 </div>
 
-<main class="article" data-cite="mui-blog" data-job="the argument, in order" data-region="focal">
+<main class="article" data-cite="mui-blog" data-job="what it is, how it works" data-region="focal">
   <p class="eyebrow">Shine · Claude Code and Cursor</p>
-  <h1>Your agent keeps shipping the same page.</h1>
-  <p class="lede">Shine is a skill that makes it copy a real designed product — and fail the build if the result still looks generated.</p>
+  <h1>Your agent copies a real designed page.</h1>
+  <p class="lede">Shine is the UX skill that makes it match a template from a real kit — then prove the pixels. Look, name, match, restructure, repaint, prove.</p>
 
-  <p>You already know the look. Gray canvas. Inter. A rounded card. A blue button. Ask for Linear. Ask for “expensive.” Ask for a briefing a CEO would actually open. You get the same costume with a new label.</p>
-  <p>That isn’t a taste problem. The model paints with whatever the component library left on the floor, which is Tailwind’s defaults. Prompting over it does nothing.</p>
-
-  <h2>We tried a compliance officer. It printed PASS.</h2>
-  <p>So the next move was gates. Wipe the default palette. Own the tokens. Fail contrast. Fail accessibility. That stopped invented hex. It did not stop the costume.</p>
-  <p>The agent would cite a real design system, ship the default gray theme, and print PASS. Completeness is not likeness. A page can hit every token and still look like every other generated page.</p>
-
-  <h2>The missing half is a director.</h2>
-  <p>Before a pixel, the agent has to open a real page that already solved the job — a briefing, a work queue, a marketing hero — and copy how that page is built, not how it was described. A second program scores whether the result still looks generated. Under 7, the build fails.</p>
-  <p>That’s how an executive briefing stops looking like a dashboard someone prompted into existence. The shots below are redacted: no names, no figures, no calendar. What you can see is the shape — a day of meetings, kits only on the ones that matter, answers already written, every number citing a source.</p>
-
-  <figure class="shot">
-    <img src="img/cases/recon-today.png" width="1280" height="900" alt="Redacted briefing index: a day of meetings, kits only on the ones that matter" decoding="async">
-    <figcaption>Today. One primary action per row. Not a widget dashboard.</figcaption>
-  </figure>
-  <figure class="shot">
-    <img src="img/cases/recon-kit.png" width="1280" height="900" alt="Redacted briefing kit: prepared answers, every claim citing a source" decoding="async">
-    <figcaption>The kit. Questions answered before the room. Names and numbers stripped for this page.</figcaption>
+  <figure class="pair" data-cite="mui-blog">
+    <div class="pair-grid">
+      <figure class="shot">
+        <img src="img/demo/costume.png" width="1280" height="900" alt="Generated renewals workspace: greeting hero, three glow pills, renewals as cards" decoding="async">
+        <figcaption>The costume. Prompted. Three primaries. The job is buried in cards.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="img/demo/directed.png" width="1280" height="900" alt="Same renewals queue after citing Carbon: page head, toolbar, table, one filled primary" decoding="async">
+        <figcaption>Same job, cited <code>carbon-datatable</code>. One primary. The work is a table.</figcaption>
+      </figure>
+    </div>
   </figure>
 
-  <p>The uniqueness is not a new coat of paint. A briefing looks like a briefing because it was directed to one. A work queue looks like a work queue. House style is the fallback, not the product.</p>
+  <p>You already know the other look. Gray canvas. Inter. A rounded card. A blue button. Ask for Linear. Ask for “expensive.” Ask for a briefing a CEO would actually open. You get the same costume with a new label. Prompting over it does nothing. The model paints with whatever the library left on the floor.</p>
 
-  <h2>Install it this afternoon</h2>
-  <p>Clone the repo. Symlink the skill into Claude Code and Cursor. Run <code>node verify/doctor.mjs</code>. The gate is that doctor. <code>--ci</code> is 67 checks; if a gate isn’t in it, it doesn’t exist.</p>
+  <h2>What it is</h2>
+  <p>A director, not a palette. Shine is a skill for Claude Code and Cursor: a design system the agent cannot shrug off, and a director that looks at the rendered page. A catalog of 41 real templates — shadcn, MUI, Ant, Carbon, Spectrum, Fluent, Lightning. Hooks that block off-token writes. None of that is interesting until the next briefing looks like a briefing.</p>
+  <p>The product is the loop. Before a pixel, the agent opens a page that already solved the job. It names what is wrong in UX terms. It matches one of those templates, clones that page’s regions, and paints with that kit’s own tokens. Then measure and compare have to agree, or the build is not done.</p>
+  <div class="catalog" data-cite="mui-blog">
+    <figure class="shot">
+      <img src="img/catalog/carbon-datatable.png" width="1280" height="900" alt="Carbon DataTable harvest: toolbar, batch actions, dense table, one Add new primary" decoding="async">
+      <figcaption>Carbon · queue</figcaption>
+    </figure>
+    <figure class="shot">
+      <img src="img/catalog/mui-dashboard.png" width="1280" height="900" alt="MUI dashboard harvest: sidebar, metric cards, session chart, details table" decoding="async">
+      <figcaption>Material · dashboard</figcaption>
+    </figure>
+    <figure class="shot">
+      <img src="img/catalog/shadcn-dashboard-01.png" width="1280" height="900" alt="shadcn dashboard harvest: sidebar, KPI row, visitors chart, section table" decoding="async">
+      <figcaption>shadcn · dashboard</figcaption>
+    </figure>
+  </div>
+
+  <h2>How it works</h2>
+  <figure class="loop" data-cite="mui-blog">
+    <p class="eyebrow">The loop</p>
+    <ol>
+      <li><div><strong>Look</strong><span>Render the page. Read the pixels, not the source.</span></div></li>
+      <li><div><strong>Name</strong><span>Hierarchy, flow, density — defects in UX terms, worst first.</span></div></li>
+      <li><div><strong>Match</strong><span>A real template for this job. Not a vibe. Not zinc.</span></div></li>
+      <li><div><strong>Restructure</strong><span>Clone that page’s regions. A briefing stays a briefing.</span></div></li>
+      <li><div><strong>Repaint</strong><span>The kit’s tokens, declared once. Usage sites say var().</span></div></li>
+      <li><div><strong>Prove</strong><span>axe, contrast 4.5:1 (3:1 at 24px), composition, and a side-by-side against the harvested shot. No likeness score.</span></div></li>
+    </ol>
+  </figure>
+  <p>Gates catch invented hex. They do not catch the costume. A page can hit every token and still look generated — completeness is not likeness. Prove is pixels: <code>measure.mjs</code> and <code>compare.mjs</code> against the cite, not a number the page awards itself. This page cites <code>mui-blog</code> and paints with Material. That is the point.</p>
+
+  <h2 id="install">This afternoon</h2>
+  <p>Clone the repo. Symlink the skill into Claude Code and Cursor. Run <code>node verify/doctor.mjs</code>. The gate is that doctor. <code>--ci</code> is 67 checks; if a gate isn’t in it, it doesn’t exist. The skill itself is a 48-line loader (2,424 bytes). Tokens emit to nine targets: CSS, Tailwind, artifacts, Python, site CSS, email, Docs, Office, Salesforce. The listing below is generated from disk.</p>
   <p><a class="btn" data-primary href="https://github.com/justinfowler925/shine">Get the skill</a></p>
-  <p class="hint">MIT · one git directory · both surfaces</p>
+  <p class="hint">MIT · one git directory · both surfaces · the next briefing looks like a briefing</p>
   <figure class="files">
 <pre>skill/                        lines
   <strong>SKILL.md</strong>                     48
@@ -348,7 +442,8 @@
 
 <footer>
   <div class="inner">
-    <p>August 2026 · <a href="https://github.com/justinfowler925/shine/releases/tag/v2.0.0">v2.0.0</a> · cite <code>mui-blog</code> · voice kit-faithful. Briefing shots are a design-review mock with names and figures stripped.</p>
+    <p>August 2026 · <a href="https://github.com/justinfowler925/shine/releases/tag/v2.0.0">v2.0.0</a> · cite <code>mui-blog</code> · voice kit-faithful · <a href="https://github.com/justinfowler925/shine">GitHub</a></p>
+    <p>The skill listing is generated from disk. Public copy is a claim — checked against SKILL.md, the catalog, and measure.</p>
   </div>
 </footer>
 
@@ -359,7 +454,7 @@
     root.classList.add('no-anim');
     root.dataset.theme = m;
     btn.textContent = m === 'dark' ? 'Light' : 'Dark';
-    document.querySelector('meta[name=theme-color]').content = getComputedStyle(root).getPropertyValue('--bg-hex').trim() || (m === 'dark' ? '#121212' : '#f4f4f4');
+    document.querySelector('meta[name=theme-color]').content = getComputedStyle(root).getPropertyValue('--bg-hex').trim() || (m === 'dark' ? '#121212' : '#ffffff');
     try { localStorage.setItem('theme', m); } catch (e) {}
     requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('no-anim')));
   };
