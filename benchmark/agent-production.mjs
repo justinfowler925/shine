@@ -2,7 +2,7 @@
 import {chromium} from "playwright";
 import {createHash} from "node:crypto";
 import {closeSync,existsSync,mkdirSync,openSync,readFileSync,rmSync,symlinkSync,writeFileSync} from "node:fs";
-import {spawnSync} from "node:child_process";
+import {execFile,spawnSync} from "node:child_process";
 import {basename,dirname,join,resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 
@@ -58,6 +58,8 @@ function codexRunIdentity(events){
  const thread=events.find(x=>x.type==="thread.started")?.thread_id||events.find(x=>x.thread_id)?.thread_id||null;
  const reverse=[...events].reverse();return {thread,turn:reverse.find(x=>x.type==="turn.completed"),failed:reverse.find(x=>x.type==="turn.failed")};
 }
+
+function execFileRecord(file,args,options){return new Promise(resolve=>execFile(file,args,options,(error,stdout,stderr)=>resolve({status:error?.code==="ETIMEDOUT"?null:typeof error?.code==="number"?error.code:0,error,stdout,stderr})));}
 
 function readReceipt(path,artifactSha256){
  if(!existsSync(path))return null;const data=JSON.parse(readFileSync(path,"utf8"));const receipts=Array.isArray(data.receipts)?data.receipts:[data];return receipts.find(x=>x.artifactSha256===artifactSha256)||null;
@@ -125,7 +127,7 @@ export async function runCodexProduction({brief,skillRoot,outDir,model=MODEL}){
   writeFileSync(join(app,"AGENTS.md"),`# Native Shine benchmark\nRead ${join(skillRoot,"skill/SKILL.md")} and ${agentFile} completely before acting. Execute the shine-ux role yourself. Only write inside this app. The benchmark harness, brief, and model are fixed; the supplied Shine tree is the only experimental variable.\n`);
   writeFileSync(join(app,"package.json"),JSON.stringify({private:true,scripts:{build:"vite build"},devDependencies:{vite:"6.1.0"}},null,2));spawnSync("git",["init"],{cwd:app,encoding:"utf8"});
   const timeout=Number(process.env.SHINE_AGENT_TIMEOUT_MS||900000),args=["exec","--json","--ephemeral","--ignore-user-config","--ignore-rules","--approve-for-me","--model",model,"--config",'model_reasoning_effort="medium"',"--cd",app,"--output-last-message",lastMessage,buildPrompt(brief)];
-  const run=spawnSync(CODEX,args,{cwd:app,input:"",encoding:"utf8",timeout,maxBuffer:64*1024*1024,env:{...process.env,SHINE_RECEIPT:receiptPath}}),events=parseCodexEvents(run.stdout),identity=codexRunIdentity(events);writeFileSync(join(outDir,"tool-trace.json"),JSON.stringify(events,null,2));writeFileSync(join(outDir,"transcript.json"),JSON.stringify(events.filter(x=>/message|item/.test(x.type||"")),null,2));writeFileSync(join(outDir,"run.log"),`${run.stdout||""}\nSTDERR\n${run.stderr||""}`);
+  const run=await execFileRecord(CODEX,args,{cwd:app,encoding:"utf8",timeout,maxBuffer:64*1024*1024,env:{...process.env,SHINE_RECEIPT:receiptPath}}),events=parseCodexEvents(run.stdout),identity=codexRunIdentity(events);writeFileSync(join(outDir,"tool-trace.json"),JSON.stringify(events,null,2));writeFileSync(join(outDir,"transcript.json"),JSON.stringify(events.filter(x=>/message|item/.test(x.type||"")),null,2));writeFileSync(join(outDir,"run.log"),`${run.stdout||""}\nSTDERR\n${run.stderr||""}`);
   const artifact=join(app,"index.html"),source=existsSync(artifact)?readFileSync(artifact):Buffer.alloc(0),artifactSha256=source.length?sha(source):null,vite=join(ROOT,"verify/fixtures/integrations/node_modules/vite/bin/vite.js"),build=spawnSync(process.execPath,[vite,"build"],{cwd:app,encoding:"utf8"});writeFileSync(join(outDir,"build.log"),`${build.stdout||""}${build.stderr||""}`);
   const selectedKits=[...String(source).matchAll(/data-cite=["']([^"']+)/g)].map(x=>x[1]),receiptCandidates=[receiptPath,join(app,"last-prove.json"),join(app,"artifacts/last-prove.json"),join(app,"proof/last-prove.json")],receipt=artifactSha256?receiptCandidates.map(path=>readReceipt(path,artifactSha256)).find(Boolean)||null:null,shot=join(outDir,"screenshot.png"),measureJson=join(outDir,"measure.json"),cite=selectedKits[0];
   const measure=cite?spawnSync(process.execPath,[join(skillRoot,"verify/measure.mjs"),artifact,"--shot",shot,"--json",measureJson,"--cite",cite],{encoding:"utf8",timeout:120000}):{status:1,stdout:"",stderr:"no cite"};writeFileSync(join(outDir,"measure.log"),`${measure.stdout||""}${measure.stderr||""}`);const interaction=source.length?await verifyInteraction(artifact,shot):{status:"fail",reason:"artifact missing"};writeFileSync(join(outDir,"interaction.json"),JSON.stringify(interaction,null,2));
