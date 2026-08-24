@@ -28,6 +28,7 @@ Shine owns the token layer, the design corpus, the agent skill, and the measure 
 | **Enforcement** | design-lint + stop-sweep, per-edit and turn-end, on both surfaces |
 | **Verification** | `measure.mjs` (axe, per-pixel contrast, composition, family checks) + `compare.mjs` (side-by-side pixels, facts, no verdict) |
 | **Doctor** | `verify/doctor.mjs` — wiring, gate bite (seeded violations), pack payload, compare mismatch |
+| **Benchmark** | `benchmark/run.mjs` — 24 production-cite briefs, frozen `9f6a2cf` baseline, automated proof + blinded human-review packet |
 
 ---
 

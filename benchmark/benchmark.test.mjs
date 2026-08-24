@@ -1,0 +1,10 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { benchmarkPopulationGaps } from "./contracts.mjs";
+const briefs=JSON.parse(readFileSync(new URL("./briefs.json",import.meta.url)));
+assert.deepEqual(benchmarkPopulationGaps(briefs),[]);
+assert.match(benchmarkPopulationGaps([]).join(" "),/population 0\/24/);
+assert.match(benchmarkPopulationGaps(briefs.filter(b=>b.category!=="datagrid")).join(" "),/datagrid 0\/6/);
+const review=JSON.parse(readFileSync(new URL("./human-review.json",import.meta.url)));
+assert.equal(review.status,"pending-human-review");assert.equal(review.reviews.length,0);
+console.log("benchmark contract PASS: 24 population; zero/category mutations bite; human gate pending");

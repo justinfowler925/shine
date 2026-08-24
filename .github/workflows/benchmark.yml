@@ -1,0 +1,40 @@
+name: shine-benchmark
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  benchmark-smoke:
+    name: benchmark-smoke
+    runs-on: [self-hosted, macOS, ARM64, shine]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run benchmark:test
+      - run: npm run benchmark:smoke
+
+  benchmark-full:
+    name: benchmark-full
+    if: github.event_name != 'pull_request'
+    runs-on: [self-hosted, macOS, ARM64, shine]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run benchmark:full
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shine-benchmark-review
+          path: /tmp/shine-benchmark
+          retention-days: 14

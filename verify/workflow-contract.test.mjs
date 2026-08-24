@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const source = readFileSync(join(root, ".github/workflows/doctor.yml"), "utf8");
+const benchmark = readFileSync(join(root, ".github/workflows/benchmark.yml"), "utf8");
 const required = [
   [/^  doctor-default:\s*$/m, "doctor-default job"],
   [/^  doctor-full:\s*$/m, "doctor-full job"],
@@ -14,6 +15,7 @@ const required = [
   [/working-directory: verify\/fixtures\/integrations[\s\S]*?npm ci --ignore-scripts/, "real integration dependencies"],
 ];
 const missing = required.filter(([pattern]) => !pattern.test(source)).map(([, label]) => label);
+for (const [pattern,label] of [[/^  benchmark-smoke:\s*$/m,"benchmark-smoke job"],[/^  benchmark-full:\s*$/m,"benchmark-full job"],[/npm run benchmark:full/,"benchmark full command"],[/fetch-depth: 0/,"baseline history checkout"]]) if(!pattern.test(benchmark)) missing.push(label);
 if (missing.length) {
   console.error(`workflow contract FAIL: ${missing.join(", ")}`);
   process.exit(1);
