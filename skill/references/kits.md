@@ -7,6 +7,11 @@ page is a Critical hole (`diagnose.md` §0.5). Kits are not a substitute for a c
 
 Before any library API: `rg` the corpus (`corpus.md`). Cite `file:line` in the fix.
 
+Run `integrations/resolve.mjs --project <consumer-root>` before choosing implementation
+code. It detects React/Next/Vite/LEX/native, the package manager, and installed kits;
+it refuses a second design system and verifies every recipe API against the pinned pack.
+`integrations/scaffold.mjs` writes the verified adapter plus its provenance receipt.
+
 ## Decision table
 
 | Need | Primary kit | Also | Avoid |

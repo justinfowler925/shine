@@ -31,6 +31,8 @@ import { fileURLToPath } from "node:url";
 import { tmpdir, homedir } from "node:os";
 import { NODE_PATH } from "./deps.mjs";
 import { dependencyClosure, inspectPack } from "../corpus/pack-files.mjs";
+import { detectProject, RECIPES, resolveIntegration, verifyRecipeApi } from "../integrations/resolve.mjs";
+import { scaffold } from "../integrations/scaffold.mjs";
 import { citeGaps } from "../hooks/cite-gate.mjs";
 import { artifactClaim, proveGaps, readProveReceipt, writeProveReceipt } from "../hooks/receipt.mjs";
 
@@ -1339,6 +1341,49 @@ if (args.includes("--full")) {
       else fail("compare rejects zinc-on-carbon", `exit ${zrun.status}: ${zout.slice(0, 240)}`);
     }
   }
+}
+
+// ---- 6b. framework-aware component integrations ---------------------------
+{
+  const root = mkdtempSync(join(tmpdir(), "shine-integrations-"));
+  const make = (name, dependencies = {}, extras = []) => {
+    const dir = join(root, name); mkdirSync(dir, { recursive: true });
+    if (dependencies) writeFileSync(join(dir, "package.json"), JSON.stringify({ dependencies }));
+    for (const file of extras) writeFileSync(join(dir, file), "{}\n");
+    return dir;
+  };
+  const projects = {
+    mui: make("mui", { react: "1", "@mui/material": "1", "@mui/x-data-grid": "1" }, ["package-lock.json"]),
+    carbon: make("carbon", { react: "1", "@carbon/react": "1" }),
+    ant: make("ant", { react: "1", antd: "1", "@ant-design/pro-components": "1" }),
+    "shadcn-tanstack": make("shadcn", { react: "1", "@tanstack/react-table": "1" }, ["components.json", "pnpm-lock.yaml"]),
+    native: make("native", null),
+    lex: make("lex", {}, ["sfdx-project.json"]),
+  };
+  for (const [kit, project] of Object.entries(projects)) {
+    try {
+      const resolved = resolveIntegration(project, kit);
+      const out = join(root, `out-${kit}`);
+      const built = scaffold(project, out, kit);
+      const importsPresent = resolved.recipe.imports.every((line) => built.source.includes(line));
+      if (resolved.kit === kit && resolved.provenance.cite && importsPresent && existsSync(join(out, "shine-integration.json")))
+        ok(`integration resolves and scaffolds ${kit}`, `${resolved.framework}/${resolved.packageManager} → ${resolved.provenance.cite}`);
+      else fail(`integration resolves and scaffolds ${kit}`, "recipe, provenance, or imports missing");
+    } catch (err) { fail(`integration resolves and scaffolds ${kit}`, err.message); }
+  }
+  if (detectProject(projects["shadcn-tanstack"]).packageManager === "pnpm") ok("integration detects package manager");
+  else fail("integration detects package manager", "pnpm lock ignored");
+  try { resolveIntegration(projects.mui, "ant"); fail("integration refuses a second design system", "Ant injected into MUI app"); }
+  catch (err) { if (/refusing to add/.test(err.message)) ok("integration refuses a second design system"); else fail("integration refuses a second design system", err.message); }
+  const noKit = make("react-no-kit", { react: "1", vite: "1" });
+  try { resolveIntegration(noKit); fail("integration fails when React has no chosen kit", "silently chose a kit"); }
+  catch (err) { if (/choose explicitly/.test(err.message)) ok("integration fails when React has no chosen kit"); else fail("integration fails when React has no chosen kit", err.message); }
+  const multi = make("multi", { react: "1", "@mui/material": "1", "@carbon/react": "1" });
+  try { resolveIntegration(multi); fail("integration refuses ambiguous installed kits", "silently chose first kit"); }
+  catch (err) { if (/multiple installed/.test(err.message)) ok("integration refuses ambiguous installed kits"); else fail("integration refuses ambiguous installed kits", err.message); }
+  const fake = { ...RECIPES.mui, api: [...RECIPES.mui.api, "InventedGridProp"] };
+  if (verifyRecipeApi(fake).includes("InventedGridProp")) ok("integration API provenance gate bites invented API");
+  else fail("integration API provenance gate bites invented API", "invented symbol passed");
 }
 
 // ---- 7. every reference is reachable from the map, and vice versa ---------

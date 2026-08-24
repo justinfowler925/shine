@@ -6,6 +6,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- Framework-aware MUI, Carbon, Ant, shadcn/TanStack, native, and LEX integration recipes with installed-kit preservation, API provenance, and executable scaffolding.
 - Deterministic template dependency closures with pinned upstream provenance, per-file hashes, structural signatures, and query-only source restrictions; MUI and Ant CRUD packs now carry their real grid pages.
 - Executable DataGrid contract: native tables and ARIA grids are discovered automatically, interactive sort/filter/page controls must change rendered state, and every default capability has a seeded fail/pass proof.
 - House and kit voices all carry `--shine-color-*` (shine, magicui, spectrum, fluent, mantine, slds, plus heroui and tremor). Doctor fails any colorless sheet, not just the favoured four.
