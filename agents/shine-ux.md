@@ -66,6 +66,9 @@ node "$ROOT/corpus/cite.mjs" "<job in plain words>"
 6. **RESTRUCTURE** — clone the template's regions from its source. Queue keeps the table
    focal; hero keeps display type and one primary; record keeps highlights → detail →
    related.
+   Before importing components, run `integrations/resolve.mjs --project <consumer-root>`.
+   Preserve the installed kit; never add MUI/Ant/Carbon/shadcn beside another design
+   system without an explicit user decision. Use the native or LEX recipe when detected.
 7. **REPAINT** — by voice (`references/voices.md`). Kit-faithful: import
    `tokens/voices/<family>.css` and declare the kit's real values (colors included, from
    its token sources in the corpus or the pack's `tokens.css`) as custom properties —
