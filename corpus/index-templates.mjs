@@ -98,7 +98,7 @@ const push = (row) => {
 const muiBase = "mui-material/docs/data/material/getting-started/templates";
 const muiPreview = "https://mui.com/material-ui/getting-started/templates/";
 for (const t of [
-  { id: "mui-crud-dashboard", screen: "crud", dir: "crud-dashboard", rank: 1, title: "MUI CRUD dashboard" },
+  { id: "mui-crud-dashboard", screen: "crud", dir: "crud-dashboard", rank: 1, title: "MUI CRUD dashboard", entrypoints: ["CrudDashboard.tsx"] },
   { id: "mui-dashboard", screen: "app-shell", dir: "dashboard", rank: 2, title: "MUI dashboard shell" },
   { id: "mui-marketing-page", screen: "marketing", dir: "marketing-page", rank: 1, title: "MUI marketing page" },
   { id: "mui-checkout", screen: "checkout", dir: "checkout", rank: 1, title: "MUI checkout" },
@@ -115,6 +115,7 @@ for (const t of [
     license: "MIT",
     kind: "source",
     startFrom: t.rank,
+    ...(t.entrypoints ? { entrypoints: t.entrypoints } : {}),
   });
 }
 
@@ -153,7 +154,7 @@ for (const t of [
   { id: "antd-pro-settings", screen: "settings", dir: "src/pages/account/settings", rank: 1, title: "Ant Design Pro account settings", jobs: ["settings", "preferences", "account"] },
   { id: "antd-pro-step-form", screen: "wizard", dir: "src/pages/form/step-form", rank: 1, title: "Ant Design Pro step form", jobs: ["wizard", "steps", "onboarding"] },
   { id: "antd-pro-chatbot", screen: "chat", dir: "src/pages/chatbot", rank: 2, title: "Ant Design Pro chatbot page", jobs: ["chat"] },
-  { id: "antd-pro-crud", screen: "crud", dir: "src/pages", rank: 2, title: "Ant Design Pro pages (browse for the shape you need)" },
+  { id: "antd-pro-crud", screen: "crud", dir: "src/pages/table-list", rank: 2, title: "Ant Design Pro ProTable CRUD page", entrypoints: ["index.tsx"] },
   { id: "antd-pro-app", screen: "app-shell", dir: "src", rank: 3, title: "Ant Design Pro admin app" },
 ]) {
   if (!exists(`ant-design-pro/${t.dir}`)) continue;
@@ -167,6 +168,7 @@ for (const t of [
     license: "MIT",
     kind: "source",
     startFrom: t.rank,
+    ...(t.entrypoints ? { entrypoints: t.entrypoints } : {}),
     ...(t.jobs ? { jobs: t.jobs } : {}),
   });
 }

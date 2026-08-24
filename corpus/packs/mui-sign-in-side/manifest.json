@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "mui-sign-in-side",
+  "screen": "auth",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "mui-material",
+    "mode": "sparse",
+    "url": "https://github.com/mui/material-ui.git",
+    "branch": "master",
+    "sha": "81e94061ca393d4eaf238e6f77c283b2edd9ef7e"
+  },
+  "corpusPath": "mui-material/docs/data/material/getting-started/templates/sign-in-side",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "Content.tsx",
+      "sha256": "f92ea6b1a32ecc4becd4f726278ee57c5a1bac064e4c1153d8c951feca453e77"
+    },
+    {
+      "path": "CustomIcons.tsx",
+      "sha256": "ca574faa28c5e97ef84f11071e8a6b825cd5364e47ff0b24070e30bca6198adc"
+    },
+    {
+      "path": "ForgotPassword.tsx",
+      "sha256": "b4a424761c4edb3371db5967b0bf6b8319dd035f56e4683ec34faad80352b345"
+    }
+  ]
+}

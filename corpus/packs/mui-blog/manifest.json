@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "mui-blog",
+  "screen": "blog",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "mui-material",
+    "mode": "sparse",
+    "url": "https://github.com/mui/material-ui.git",
+    "branch": "master",
+    "sha": "81e94061ca393d4eaf238e6f77c283b2edd9ef7e"
+  },
+  "corpusPath": "mui-material/docs/data/material/getting-started/templates/blog",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "AppAppBar.tsx",
+      "sha256": "ab75d154c0fa2e01a4932d791038a0cb78908433faaf68cc940b261e8cf7de83"
+    },
+    {
+      "path": "Blog.tsx",
+      "sha256": "133d235b1c42b965f1e4460023cf6b5f968bb7f9c8c40d957387180e60a29d9d"
+    },
+    {
+      "path": "Footer.tsx",
+      "sha256": "1dafe75f90475257e68c9381145e773359f7c5c9cc86f2449224c96a2ca072cb"
+    }
+  ]
+}

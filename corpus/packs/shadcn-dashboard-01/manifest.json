@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "shadcn-dashboard-01",
+  "screen": "dashboard",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/dashboard-01.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "app-sidebar.tsx",
+      "sha256": "4b5d8891b26d61f651059f240a85a1294fdcea7b9f27e7ade467412a6847cf33"
+    },
+    {
+      "path": "data-table.tsx",
+      "sha256": "d05b74af48e3585521b916bae116b32c575688b2c87bf555ec5933ff3a26ee88"
+    },
+    {
+      "path": "page.tsx",
+      "sha256": "042f13bbb8c0033e4546232b6767f83349ec29db3b2bcd93a07291ff549b6a65"
+    }
+  ]
+}

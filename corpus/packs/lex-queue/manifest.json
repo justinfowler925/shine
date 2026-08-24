@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "id": "lex-queue",
+  "screen": "lex-queue",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": null,
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "lex-queue.md",
+      "sha256": "83bab3b07ac06d3a758b3acb4ef71c19521657faaf727bd0abb3c2e2d14685c9"
+    }
+  ]
+}

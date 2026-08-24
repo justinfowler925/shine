@@ -24,13 +24,13 @@
 //   --ci     skip machine-local checks (hook wirings, skill symlinks, vendored copies)
 //   --quiet  print only failures (for a sessionStart hook)
 
-import { readFileSync, readdirSync, existsSync, realpathSync, mkdtempSync, writeFileSync, statSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync, realpathSync, mkdirSync, mkdtempSync, writeFileSync, statSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { tmpdir, homedir } from "node:os";
 import { NODE_PATH } from "./deps.mjs";
-import { inspectPack } from "../corpus/pack-files.mjs";
+import { dependencyClosure, inspectPack } from "../corpus/pack-files.mjs";
 import { citeGaps } from "../hooks/cite-gate.mjs";
 import { artifactClaim, proveGaps, readProveReceipt, writeProveReceipt } from "../hooks/receipt.mjs";
 
@@ -1182,12 +1182,45 @@ if (args.includes("--full")) {
       const packDirs = readdirSync(packsDir).filter((d) => !d.startsWith("."));
       const broken = [];
       for (const d of packDirs) {
-        const family = byId.get(d)?.dna?.family || "";
-        for (const b of inspectPack(join(packsDir, d), family)) broken.push(`${d}: ${b}`);
+        const row = byId.get(d);
+        const family = row?.dna?.family || "";
+        for (const b of inspectPack(join(packsDir, d), family, row)) broken.push(`${d}: ${b}`);
       }
       if (!packDirs.length) fail("harvested packs", "packs/ exists but is empty");
       else if (broken.length) fail("harvested packs are a payload", broken.slice(0, 8).join("; "));
-      else ok("harvested packs are a payload", `${packDirs.length} packs with shot + source + tokens`);
+      else ok("harvested packs are a payload", `${packDirs.length} packs with shot + source + tokens + provenance manifests`);
+
+      for (const id of ["mui-crud-dashboard", "antd-pro-crud"]) {
+        const manifest = JSON.parse(readFileSync(join(packsDir, id, "manifest.json"), "utf8"));
+        if (!manifest.files.length || !manifest.structuralSignature?.files?.length || !manifest.upstream?.sha)
+          fail(`${id} dependency closure`, `files=${manifest.files.length}, signature=${manifest.structuralSignature?.files?.length || 0}, pin=${manifest.upstream?.sha || "none"}`);
+        else ok(`${id} dependency closure`, `${manifest.files.length} files, ${manifest.structuralSignature.files.length} table signatures, pin ${manifest.upstream.sha.slice(0, 8)}`);
+      }
+
+      const graphDir = mkdtempSync(join(tmpdir(), "shine-graph-"));
+      writeFileSync(join(graphDir, "a.ts"), 'import "./b"; export const a = 1;\n');
+      writeFileSync(join(graphDir, "b.ts"), 'import "./a"; export const b = 1;\n');
+      writeFileSync(join(graphDir, "unrelated.ts"), "export const unrelated = true;\n");
+      const graph = dependencyClosure(["a.ts"], graphDir, graphDir);
+      if (graph.files.length === 2 && !graph.files.some((f) => f.endsWith("unrelated.ts"))) ok("dependency closure handles cycles and excludes unrelated files");
+      else fail("dependency closure handles cycles and excludes unrelated files", graph.files.join(", "));
+      try {
+        dependencyClosure(["missing.ts"], graphDir, graphDir);
+        fail("dependency closure rejects missing entrypoint", "missing entrypoint passed");
+      } catch {
+        ok("dependency closure rejects missing entrypoint");
+      }
+
+      const corrupt = mkdtempSync(join(tmpdir(), "shine-pack-corrupt-"));
+      mkdirSync(join(corrupt, "source"), { recursive: true });
+      writeFileSync(join(corrupt, "shot.png"), Buffer.alloc(31_000));
+      writeFileSync(join(corrupt, "tokens.css"), "--shine-color-bg:#fff;".repeat(6));
+      writeFileSync(join(corrupt, "source/page.tsx"), "export default function Page(){return <table/>}\n".repeat(2));
+      writeFileSync(join(corrupt, "manifest.json"), JSON.stringify({ version: 1, files: [{ path: "page.tsx", sha256: "bad" }], upstream: { sha: "pin" }, structuralSignature: { files: ["page.tsx"] } }));
+      if (inspectPack(corrupt, "", { kind: "source" }).some((s) => /hash mismatch/.test(s))) ok("pack inspector bites corrupt provenance hash");
+      else fail("pack inspector bites corrupt provenance hash", "corrupt hash passed");
+      if (inspectPack(corrupt, "", { kind: "query-only" }).some((s) => /must not vendor source/.test(s))) ok("pack inspector forbids query-only source vendoring");
+      else fail("pack inspector forbids query-only source vendoring", "query-only source payload passed");
 
       const missingHarvest = required.filter((s) => {
         const rows = (catalog.templates ?? []).filter((t) => t.screen === s || (t.jobs || []).includes(s));

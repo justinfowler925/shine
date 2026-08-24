@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "id": "lex-mobile",
+  "screen": "lex-mobile",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": null,
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "lex-mobile.md",
+      "sha256": "f7cbcae42f4b0b27bb953b0d0512195c024502527b69d25ece11e2bd7b14e316"
+    }
+  ]
+}

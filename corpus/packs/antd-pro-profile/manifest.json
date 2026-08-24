@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "antd-pro-profile",
+  "screen": "record",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "ant-design-pro",
+    "mode": "sparse",
+    "url": "https://github.com/ant-design/ant-design-pro.git",
+    "branch": "master",
+    "sha": "bb40867ae3ef943e06e48da6911ccc5900e638a1"
+  },
+  "corpusPath": "ant-design-pro/src/pages/profile",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "_mock.ts",
+      "sha256": "20ec63d042a194cf1e927fecd1eea0f0020a235fb8bcc9458dd99f3cdf5b1b64"
+    },
+    {
+      "path": "index.tsx",
+      "sha256": "0cb577c53ec74948c86778d8e613e7df39f215d3597292177349081ead0c9ff2"
+    },
+    {
+      "path": "style.style.ts",
+      "sha256": "8bf15029ace6facd2dd88bc32e22eed50e1a2b1329f13a60ad99ab1344d05def"
+    }
+  ]
+}

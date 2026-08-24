@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "id": "lex-record-narrow",
+  "screen": "lex-record",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": null,
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "lex-record-narrow.md",
+      "sha256": "1bce925532610d4dbf37ab31fb9ec972e4ada384253e2f80e9fe6ac9ba0861b3"
+    }
+  ]
+}

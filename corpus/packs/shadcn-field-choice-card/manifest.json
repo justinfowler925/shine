@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-field-choice-card",
+  "screen": "ai-generate",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/field-choice-card.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "field-choice-card.tsx",
+      "sha256": "1b6358017fc56848aeb677ec9ec935fec976b7128ed0c75238064a3c580b4d65"
+    }
+  ]
+}

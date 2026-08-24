@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "id": "lex-console",
+  "screen": "lex-console",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": null,
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "lex-console.md",
+      "sha256": "abeb97bddc375cf751ac69c25657ff817b27ceaa2231a0799f9e990de310baef"
+    }
+  ]
+}

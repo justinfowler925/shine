@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-input-group-textarea",
+  "screen": "ai-generate",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/input-group-textarea.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "input-group-textarea.tsx",
+      "sha256": "f243f0f38cf7e725ee21e21c695bef2f9cbdb57fc6d63042843e6a364231a4fc"
+    }
+  ]
+}

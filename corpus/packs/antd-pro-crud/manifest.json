@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "id": "antd-pro-crud",
+  "screen": "crud",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "ant-design-pro",
+    "mode": "sparse",
+    "url": "https://github.com/ant-design/ant-design-pro.git",
+    "branch": "master",
+    "sha": "bb40867ae3ef943e06e48da6911ccc5900e638a1"
+  },
+  "corpusPath": "ant-design-pro/src/pages/table-list",
+  "entrypoints": [
+    "index.tsx"
+  ],
+  "structuralSignature": {
+    "pattern": "\\b(DataGrid|ProTable|Table)\\b",
+    "files": [
+      "index.tsx"
+    ]
+  },
+  "files": [
+    {
+      "path": "components/CreateForm.tsx",
+      "sha256": "51a604d7ebeabf38ff3d38c62f35c848f2e873929ba24bcbcabef68c2895d975"
+    },
+    {
+      "path": "components/UpdateForm.tsx",
+      "sha256": "66a9b906c3db7a603ab728fedb956c284a27cd2daef34af6d16d14764f029457"
+    },
+    {
+      "path": "index.tsx",
+      "sha256": "e23d5aa06e6c764d9d6c077fecac8c4b83cec42b8324ba4bf84813d638ae65da"
+    }
+  ]
+}

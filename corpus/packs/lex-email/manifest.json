@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "id": "lex-email",
+  "screen": "lex-email",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": null,
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "lex-email.md",
+      "sha256": "8394bd47a1ba938dfbf164fed29d5dbb313cfca34fb1927bf11db344920358a4"
+    }
+  ]
+}

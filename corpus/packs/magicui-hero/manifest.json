@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "magicui-hero",
+  "screen": "marketing-hero",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/magicui/hero-video-dialog.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "hero-video-dialog.tsx",
+      "sha256": "8a7a25227054b5b747e77efe12aacf3e4fff4410a55e4bcd8fda6c5bcf71b670"
+    }
+  ]
+}
