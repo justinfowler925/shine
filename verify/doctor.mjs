@@ -32,7 +32,7 @@ import { tmpdir, homedir } from "node:os";
 import { NODE_PATH } from "./deps.mjs";
 import { inspectPack } from "../corpus/pack-files.mjs";
 import { citeGaps } from "../hooks/cite-gate.mjs";
-import { proveGaps, writeProveReceipt } from "../hooks/receipt.mjs";
+import { artifactClaim, proveGaps, readProveReceipt, writeProveReceipt } from "../hooks/receipt.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const HOME = homedir();
@@ -470,11 +470,58 @@ if (!CI) {
   else ok("cite gate allows a cited page", "data-cite present");
 
   process.env.SHINE_RECEIPT = join(dir, "last-prove.json");
-  if (!proveGaps(["carbon-datatable"]).length) fail("prove gate bites", "missing receipt was allowed");
+  const proofShot = join(dir, "template.png");
+  writeFileSync(proofShot, "template pixels");
+  const citedClaim = artifactClaim(cited, "carbon-datatable");
+  if (!proveGaps([citedClaim]).length) fail("prove gate bites", "missing receipt was allowed");
   else ok("prove gate bites", "no compare.mjs receipt is a gap");
-  writeProveReceipt({ cite: "carbon-datatable" });
-  if (proveGaps(["carbon-datatable"]).length) fail("prove gate accepts a receipt", "fresh receipt still flagged");
-  else ok("prove gate accepts a receipt", "compare.mjs receipt matches cite");
+  writeProveReceipt({ cite: "carbon-datatable", target: cited, templateShot: proofShot });
+  if (proveGaps([citedClaim]).length) fail("prove gate accepts a receipt", "fresh artifact receipt still flagged");
+  else ok("prove gate accepts a receipt", "compare.mjs receipt matches artifact + cite + hash");
+
+  writeFileSync(cited, readFileSync(cited, "utf8") + "<!-- changed -->\n");
+  if (/changed after compare/.test(proveGaps([artifactClaim(cited, "carbon-datatable")]).join("\n")))
+    ok("prove gate bites after artifact mutation");
+  else fail("prove gate bites after artifact mutation", "mutated artifact reused an old receipt");
+  writeFileSync(cited, '<!doctype html><html><body><main data-cite="carbon-datatable">ok</main></body></html>\n');
+  writeProveReceipt({ cite: "carbon-datatable", target: cited, templateShot: proofShot });
+
+  const second = join(dir, "second file.html");
+  writeFileSync(second, '<!doctype html><html><body><main data-cite="carbon-datatable">two</main></body></html>\n');
+  if (/no compare/.test(proveGaps([artifactClaim(second, "carbon-datatable")]).join("\n")))
+    ok("prove gate binds one receipt per artifact");
+  else fail("prove gate binds one receipt per artifact", "one file's receipt blessed a sibling");
+
+  if (/no compare/.test(proveGaps([artifactClaim(cited, "antd-pro-crud")]).join("\n")))
+    ok("prove gate binds the cited template");
+  else fail("prove gate binds the cited template", "receipt for one cite blessed another");
+
+  const store = readProveReceipt();
+  store.receipts[0].at = Date.now() + 120_000;
+  writeFileSync(process.env.SHINE_RECEIPT, JSON.stringify(store));
+  if (/future-dated/.test(proveGaps([artifactClaim(cited, "carbon-datatable")]).join("\n")))
+    ok("prove gate rejects future receipts");
+  else fail("prove gate rejects future receipts", "future receipt was accepted");
+  writeProveReceipt({ cite: "carbon-datatable", target: cited, templateShot: proofShot });
+
+  writeFileSync(proofShot, "different template pixels");
+  if (/template shot changed/.test(proveGaps([artifactClaim(cited, "carbon-datatable")]).join("\n")))
+    ok("prove gate binds template pixels");
+  else fail("prove gate binds template pixels", "changed template pixels reused an old receipt");
+  writeFileSync(proofShot, "template pixels");
+  writeProveReceipt({ cite: "carbon-datatable", target: cited, templateShot: proofShot });
+
+  const stale = readProveReceipt();
+  stale.receipts[0].at = Date.now() - 21 * 60 * 1000;
+  writeFileSync(process.env.SHINE_RECEIPT, JSON.stringify(stale));
+  if (/stale/.test(proveGaps([artifactClaim(cited, "carbon-datatable")]).join("\n")))
+    ok("prove gate rejects stale receipts");
+  else fail("prove gate rejects stale receipts", "expired proof was accepted");
+  writeFileSync(process.env.SHINE_RECEIPT, "{not json");
+  if (/no artifact-bound/.test(proveGaps([artifactClaim(cited, "carbon-datatable")]).join("\n")))
+    ok("prove gate rejects malformed receipts");
+  else fail("prove gate rejects malformed receipts", "malformed proof was accepted");
+  writeProveReceipt({ cite: "carbon-datatable", target: cited, templateShot: proofShot });
   delete process.env.SHINE_RECEIPT;
 
   // Stop sweep, both surfaces, over a real git repo.
@@ -511,7 +558,7 @@ if (!CI) {
   if (noProve.status === 2 && /compare\.mjs/.test(noProve.stderr)) ok("stop sweep requires prove", "cited page without compare is blocked");
   else fail("stop sweep requires prove", `exit ${noProve.status}: ${(noProve.stderr || noProve.stdout).slice(0, 160)}`);
   process.env.SHINE_RECEIPT = rec;
-  writeProveReceipt({ cite: "carbon-datatable" });
+  writeProveReceipt({ cite: "carbon-datatable", target: proveHtml, templateShot: proofShot });
   delete process.env.SHINE_RECEIPT;
   const yesProve = feedProve({ hook_event_name: "stop", conversation_id: "doctor" });
   if (yesProve.status === 0) ok("stop sweep accepts a proved cite", "receipt present");
@@ -1163,13 +1210,14 @@ if (args.includes("--full")) {
     // must watch the stamp FAIL and the unfuck after.html PASS.
     const liveCompare = (CI || args.includes("--full") || !QUIET) && existsSync(join(SHINE, "corpus/packs/carbon-datatable/shot.png"));
     if (liveCompare) {
+      const failedReceipt = join(tmpdir(), `shine-doctor-failed-${process.pid}.json`);
       const live = spawnSync(process.execPath, [compare, stamp, "--cite", "carbon-datatable", "--out", join(tmpdir(), "shine-doctor-stamp.png")], {
         encoding: "utf8",
-        env: { ...process.env, NODE_PATH },
+        env: { ...process.env, NODE_PATH, SHINE_RECEIPT: failedReceipt },
       });
       const lout = `${live.stdout}${live.stderr}`;
-      if (live.status === 1 && /not a relative/.test(lout) && !/likeness/i.test(lout))
-        ok("compare rejects the attribute stamp", "exit 1 — stamp is not a datatable");
+      if (live.status === 1 && /not a relative/.test(lout) && !/likeness/i.test(lout) && !existsSync(failedReceipt))
+        ok("compare rejects the attribute stamp", "exit 1 — stamp is not a datatable and minted no receipt");
       else fail("compare rejects the attribute stamp", `exit ${live.status}: ${lout.slice(0, 240)}`);
       const after = join(SHINE, "verify/fixtures/unfucked/after.html");
       const good = spawnSync(process.execPath, [compare, after, "--cite", "carbon-datatable", "--out", join(tmpdir(), "shine-doctor-after.png")], {

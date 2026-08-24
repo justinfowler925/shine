@@ -21,6 +21,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 - Packs carry readable `source/` and kit `tokens.css` next to the harvested shot; `cite.mjs` lists those, not a dump of `~/design-corpus`
 - `compare.mjs` exits 1 when measured facts prove the page is not a relative of the cite (attribute-stamp vs carbon-datatable is the seed)
+- Compare receipts bind to exact artifact content and template pixels, and are minted only after a passing verdict.
 - Stop-sweep cite gate: a UI page written this turn needs `data-cite` (or `<!-- cite: id -->`)
 - `skill/run-hook.sh` so Cursor/Claude hooks follow the loaded skill symlink
 - Prove receipt: `compare.mjs` writes `last-prove.json`; stop-sweep blocks a cited page with no matching compare this turn
@@ -32,7 +33,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 - Skill is a loader: parent `Task`s `shine-ux` and does not freelance the loop
 - Cite/measure/compare resolve from the loaded skill realpath, not a hardcoded checkout
-- Public `--ci` count tracks the `--ci` run (now 69)
+- Public `--ci` count tracks the `--ci` run (now 76)
 - Doctor fails a hardcoded `Projects/shine*` tool path, a skill over 80 lines, deploy drift off `main`, and sessionStart `|| true`
 - README install uses `$SHINE` (detached `origin/main` worktree) and a fail-closed doctor
 - Stop-sweep no longer fail-opens on a lint crash, a git error, or a missing hook payload

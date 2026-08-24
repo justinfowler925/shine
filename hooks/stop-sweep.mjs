@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 import { isDesignCandidate } from "./design-lint.mjs";
 import { citeGaps, CITE_EXEMPT } from "./cite-gate.mjs";
-import { citeIdsIn, proveGaps } from "./receipt.mjs";
+import { artifactClaim, citeIdsIn, proveGaps } from "./receipt.mjs";
 
 const LINT = join(dirname(fileURLToPath(import.meta.url)), "design-lint.mjs");
 
@@ -93,16 +93,17 @@ process.stdin.on("end", () => {
     );
   }
 
-  const ids = [];
+  const claims = [];
   for (const f of changed) {
     if (CITE_EXEMPT.test(f.replace(/\\/g, "/"))) continue;
     try {
-      ids.push(...citeIdsIn(readFileSync(f, "utf8")));
+      const ids = citeIdsIn(readFileSync(f, "utf8"));
+      claims.push(...ids.map((id) => artifactClaim(f, id)));
     } catch {
       /* unreadable */
     }
   }
-  const missingProve = proveGaps(ids);
+  const missingProve = proveGaps(claims);
   if (missingProve.length) {
     failClosed(
       "shine prove (stop sweep): UI cited this turn was not run through compare.mjs:\n" +
