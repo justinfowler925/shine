@@ -22,7 +22,7 @@ jobs:
       - run: npm run benchmark:smoke
 
   benchmark-full:
-    name: benchmark-full
+    name: deterministic-full
     if: github.event_name != 'pull_request'
     runs-on: [self-hosted, macOS, ARM64, shine]
     steps:
@@ -39,3 +39,27 @@ jobs:
           name: shine-benchmark-review
           path: /tmp/shine-benchmark
           retention-days: 14
+
+  native-agent-release:
+    name: native-agent-release
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: [self-hosted, macOS, ARM64, shine]
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Six-category bounded native-agent evaluation
+        env:
+          SHINE_AGENT_CONCURRENCY: 1
+          SHINE_AGENT_TIMEOUT_MS: 180000
+        run: npm run benchmark:agent:representative
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shine-native-agent-review
+          path: /private/tmp/shine-production-corpus
+          retention-days: 30
