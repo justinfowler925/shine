@@ -130,7 +130,6 @@ if (facts.controls.length) {
 console.log(`page   palette: ${fmtPal(pagePal)}`);
 console.log(`template palette: ${fmtPal(tmplPal)}`);
 console.log(`Read the composite. If the two sides do not read as relatives, the retrieve or the paint is wrong.`);
-writeProveReceipt({ cite: citeId });
 
 const catalog = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "utf8"));
 const row = (catalog.templates ?? []).find((t) => t.id === citeId);
@@ -200,3 +199,9 @@ if (mismatches.length) {
   for (const m of mismatches) console.error(`  ${m}`);
   process.exit(1);
 }
+
+if (/^https?:/.test(target)) {
+  console.error("compare: remote URLs cannot mint an artifact-bound receipt; prove the local source artifact");
+  process.exit(2);
+}
+writeProveReceipt({ cite: citeId, target: resolve(target), templateShot: shotPath });

@@ -1,21 +1,48 @@
 #!/usr/bin/env node
-// last-prove.json — compare.mjs writes this; stop-sweep requires it for UI pages.
-// data-cite without a prove receipt is still freelance paint (the attribute stamp).
+// Proof is bound to one exact artifact and one exact template image.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { createHash } from "node:crypto";
+import { existsSync, mkdirSync, readFileSync, realpathSync, renameSync, writeFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
 import { homedir } from "node:os";
 
+const VERSION = 2;
 const MAX_AGE_MS = 20 * 60 * 1000;
 
 export function receiptPath() {
   return process.env.SHINE_RECEIPT || join(homedir(), ".cache/shine/last-prove.json");
 }
 
-export function writeProveReceipt({ cite, tool = "compare.mjs" }) {
+export const sha256 = (value) => createHash("sha256").update(value).digest("hex");
+
+export function artifactClaim(target, cite) {
+  const artifact = realpathSync(resolve(target));
+  return { artifact, cite, artifactSha256: sha256(readFileSync(artifact)) };
+}
+
+export function writeProveReceipt({ cite, target, templateShot, compareVersion = "compare-v2", tool = "compare.mjs" }) {
+  if (!target || !templateShot) throw new Error("proof receipt requires target and templateShot");
+  const claim = artifactClaim(target, cite);
+  const shot = realpathSync(resolve(templateShot));
+  const receipt = {
+    version: VERSION,
+    verdict: "pass",
+    ...claim,
+    templateShot: shot,
+    templateShotSha256: sha256(readFileSync(shot)),
+    compareVersion,
+    tool,
+    at: Date.now(),
+  };
   const p = receiptPath();
   mkdirSync(dirname(p), { recursive: true });
-  writeFileSync(p, JSON.stringify({ cite, tool, at: Date.now() }) + "\n");
+  const current = readProveReceipt();
+  const receipts = current?.version === VERSION && Array.isArray(current.receipts) ? current.receipts : [];
+  const kept = receipts.filter((r) => !(r.artifact === receipt.artifact && r.cite === receipt.cite));
+  const tmp = `${p}.${process.pid}.tmp`;
+  writeFileSync(tmp, JSON.stringify({ version: VERSION, receipts: [...kept, receipt] }) + "\n", { mode: 0o600 });
+  renameSync(tmp, p);
+  return receipt;
 }
 
 export function readProveReceipt() {
@@ -28,14 +55,25 @@ export function readProveReceipt() {
   }
 }
 
-/** Cite ids on pages written this turn that have no matching compare.mjs receipt. */
-export function proveGaps(citeIds, now = Date.now()) {
-  const ids = [...new Set(citeIds.filter(Boolean))];
-  if (!ids.length) return [];
-  const rec = readProveReceipt();
-  if (!rec || typeof rec.at !== "number" || now - rec.at > MAX_AGE_MS)
-    return ids.map((id) => `${id}: no compare.mjs this turn`);
-  return ids.filter((id) => rec.cite !== id).map((id) => `${id}: last prove was ${rec.cite || "(none)"}`);
+/** Claims are `{artifact,cite,artifactSha256}`. Every artifact needs its own fresh PASS. */
+export function proveGaps(claims, now = Date.now()) {
+  const wanted = claims.filter((c) => c?.artifact && c?.cite && c?.artifactSha256);
+  if (!wanted.length) return claims.length ? ["invalid artifact proof claim"] : [];
+  const store = readProveReceipt();
+  if (store?.version !== VERSION || !Array.isArray(store.receipts))
+    return wanted.map((c) => `${c.artifact}: no artifact-bound compare.mjs proof`);
+  return wanted.flatMap((claim) => {
+    const rec = store.receipts.find((r) => r.artifact === claim.artifact && r.cite === claim.cite);
+    if (!rec) return [`${claim.artifact}: no compare.mjs proof for ${claim.cite}`];
+    if (rec.verdict !== "pass" || rec.tool !== "compare.mjs") return [`${claim.artifact}: proof is not a compare PASS`];
+    if (typeof rec.at !== "number" || rec.at > now + 60_000 || now - rec.at > MAX_AGE_MS)
+      return [`${claim.artifact}: compare proof is stale or future-dated`];
+    if (rec.artifactSha256 !== claim.artifactSha256) return [`${claim.artifact}: changed after compare.mjs`];
+    if (!rec.templateShot || !existsSync(rec.templateShot)) return [`${claim.artifact}: template shot is missing`];
+    if (sha256(readFileSync(rec.templateShot)) !== rec.templateShotSha256)
+      return [`${claim.artifact}: template shot changed after compare.mjs`];
+    return [];
+  });
 }
 
 export function citeIdsIn(text) {
