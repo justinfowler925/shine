@@ -46,6 +46,9 @@ above it is the wrong pass.
 
 ### Completeness (contracts)
 Named Table / Form / Dialog / Select loads `contracts.md` MUST **in this pass**.
+- A `<table>` with two or more header cells **is** a named Table. Missing
+  `data-shine-contract="table"` does not exempt it. Only `data-shine-contract="layout"`
+  (or `role="presentation"`) opts out.
 - Named control below MUST (bare `<table>`, unlabeled icon button, placeholder-as-label)
 - Missing states: loading / empty / filtered-empty / error
 - Destructive without confirm; double-submit; toast-only errors
@@ -82,6 +85,9 @@ template cite is incomplete for a *known* job — dashboards, queues, records, s
 auth, checkout all have rows. No matching row → nearest row + `patterns.md`, and add a
 catalog row **after** the screen ships if it earned one. Technique cites
 (`techniques.md`) are for craft transfer; they don't replace a structural match.
+A record list (queue, remainder, sources, admin rows) cites a DataGrid kit
+(`carbon-datatable`, `mui-crud-dashboard`, `antd-pro-crud`). A list/dashboard/app-shell
+cite is the wrong match even if `cite.mjs` ranked it first — re-query with `datagrid`.
 
 ## 5. RESTRUCTURE + REPAINT
 

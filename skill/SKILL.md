@@ -28,6 +28,12 @@ loaded from, then proves with `verify/measure.mjs` and `verify/compare.mjs`. `da
 is not a prove receipt — stop-sweep requires `compare.mjs` to have written
 `last-prove.json` this turn. Do not hardcode a `Projects/shine*` checkout.
 
+**Record list → DataGrid.** Rows of records (queue, remainder, sources, admin) cite
+`carbon-datatable` / `mui-crud-dashboard` / `antd-pro-crud`, not a list or dashboard
+shell. `measure.mjs` fails any data `<table>` (2+ header cells) that is not
+contract-complete. Opt out with `data-shine-contract="layout"`. Wrapping `<table>` in
+JS is not a DataGrid.
+
 ## Dispatch
 
 1. Name the **lane** (`internal` / `saas` / `lex` / `marketing`) and the job, one line each.

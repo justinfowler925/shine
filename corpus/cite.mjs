@@ -70,6 +70,22 @@ const score = (t) => {
   const HOST = new Set(["lightning", "lwc", "lex", "slds", "salesforce", "console"]);
   if (tokens.some((tok) => HOST.has(tok)) && (t.id.startsWith("lex-") || t.kit === "slds")) s += 80;
   if (tokens.some((tok) => HOST.has(tok)) && !t.id.startsWith("lex-") && t.kit !== "slds") s -= 20;
+  const TABLE_JOB = new Set([
+    "table",
+    "datagrid",
+    "datatable",
+    "grid",
+    "queue",
+    "crud",
+    "admin",
+    "rows",
+    "sources",
+    "remainder",
+  ]);
+  if (tokens.some((tok) => TABLE_JOB.has(tok))) {
+    if (t.screen === "crud" || t.screen === "queue" || /datatable|crud|datagrid/.test(t.id)) s += 50;
+    if (t.screen === "app-shell" || t.screen === "dashboard" || t.screen === "list") s -= 25;
+  }
   return s;
 };
 

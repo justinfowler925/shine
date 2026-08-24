@@ -144,6 +144,11 @@ SSOT for what a named component includes. Distilled from MUI X, Ant Design, IBM 
 
 A “table” in an app is a **DataGrid-class surface**, not bare `<table>` markup — unless user says simple/static/presentation.
 
+A `<table>` with two or more header cells is a named Table whether or not it carries
+`data-shine-contract="table"`. That attribute documents; it does not opt in.
+Opt out with `data-shine-contract="layout"` or `role="presentation"`. `measure.mjs`
+fails the unmarked data table.
+
 ### Anatomy (Carbon-class)
 1. Title + optional description  
 2. Toolbar (global actions)  

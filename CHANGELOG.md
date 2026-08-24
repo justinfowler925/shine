@@ -6,6 +6,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- Record lists are a DataGrid in the loop, not a catalog souvenir: MATCH must cite `carbon-datatable` / `mui-crud-dashboard` / `antd-pro-crud`; `measure.mjs` infers a data `<table>` (2+ header cells) and fails it without toolbar/sort/page/empty/loading/error. `data-shine-contract="table"` documents; it does not opt in. Layout tables opt out with `data-shine-contract="layout"`. Doctor fails an unmarked data table.
 - House and kit voices all carry `--shine-color-*` (shine, magicui, spectrum, fluent, mantine, slds, plus heroui and tremor). Doctor fails any colorless sheet, not just the favoured four.
 - Harvested shots for `spectrum-ai-chat`, `antd-pro-chatbot`, and the LEX blueprints (SLDS vendor pages). `corpus/blueprints/lex-*.md` is the region map.
 - `cite.mjs "lightning record"` resolves to `lex-record`. Doctor asserts it.

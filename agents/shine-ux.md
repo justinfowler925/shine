@@ -58,6 +58,11 @@ node "$ROOT/corpus/cite.mjs" "<job in plain words>"
    source's regions (the must-read paths, not the whole tree), pick one of the matches
    and say why. No matching row → nearest row + `references/patterns.md`; never an
    anonymous layout for a known job.
+   **Record list:** if LOOK found a data table, or the job is rows of records, the cite
+   query includes `datagrid` (or `datatable` / `crud` / `queue`). Reject a cite whose
+   screen is only `app-shell` / `dashboard` / `list`. Clone that kit's toolbar, sort,
+   filter, pager, row actions, and empty/loading/error — a wrapper around `<table>` is
+   not a DataGrid. Layout tables opt out with `data-shine-contract="layout"`.
 6. **RESTRUCTURE** — clone the template's regions from its source. Queue keeps the table
    focal; hero keeps display type and one primary; record keeps highlights → detail →
    related.

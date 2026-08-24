@@ -112,6 +112,26 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   } else {
     ok("SKILL.md dispatches shine-ux", "subagent_type: shine-ux");
   }
+  if (!/DataGrid/.test(text)) {
+    fail(
+      "SKILL.md DataGrid dispatch",
+      "record lists must cite a DataGrid kit — contracts.md is not a process unless MATCH and measure enforce it",
+    );
+  } else {
+    ok("SKILL.md DataGrid dispatch", "record list → DataGrid");
+  }
+}
+
+{
+  const ux = readFileSync(join(SHINE, "agents/shine-ux.md"), "utf8");
+  if (!/Record list/.test(ux) || !/datagrid/i.test(ux)) {
+    fail(
+      "shine-ux DataGrid match",
+      "MATCH must cite a DataGrid kit for record lists and reject list/dashboard shells",
+    );
+  } else {
+    ok("shine-ux DataGrid match", "MATCH requires a DataGrid cite");
+  }
 }
 
 // ---- 1b. tools resolve from the loaded skill, never a hardcoded checkout --
@@ -749,7 +769,7 @@ if (args.includes("--full")) {
       `<aside><p>Nav</p></aside>` +
       `<main><h1>Inbox</h1>` +
       `<p>Twelve threads need a reply before the Monday forecast call. Each row names the account, the stall reason, and the next step.</p>` +
-      `<table style="width:100%;border-collapse:collapse">` +
+      `<table data-shine-contract="layout" style="width:100%;border-collapse:collapse">` +
       Array.from({ length: 10 }, (_, i) =>
         `<tr><td style="padding:8px;border-bottom:1px solid #333">Account ${i}</td>` +
           `<td style="padding:8px;border-bottom:1px solid #333">No activity 21d</td></tr>`,
@@ -772,6 +792,24 @@ if (args.includes("--full")) {
     fail(
       "contract gate fails a pretty empty table",
       `exit ${pretty.status}; stderr ${JSON.stringify(pretty.stderr.slice(-220))}`,
+    );
+
+  const nakedTable = join(dir, "naked-data-table.html");
+  writeFileSync(
+    nakedTable,
+    page(
+      `<h1>Sources</h1><p>Unmarked data table must still fail the contract.</p>` +
+        `<table><thead><tr><th>Name</th><th>Kind</th></tr></thead>` +
+        `<tbody><tr><td>Gazette</td><td>Wire</td></tr></tbody></table>`,
+    ),
+  );
+  const naked = run(nakedTable);
+  if (naked.status === 1 && /contract: named table missing/.test(naked.stderr))
+    ok("contract gate fails an unmarked data table");
+  else
+    fail(
+      "contract gate fails an unmarked data table",
+      `exit ${naked.status}; stderr ${JSON.stringify(naked.stderr.slice(-220))}`,
     );
 
   const full = run(fullTable);
