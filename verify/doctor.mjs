@@ -61,6 +61,17 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   else fail("CI workflow contract", `${workflow.stderr || workflow.stdout}`.trim());
 }
 
+{
+  for (const [name,file,needle] of [
+    ["benchmark output quality gates", "benchmark/quality.test.mjs", "clone structure"],
+    ["functional originality gates", "verify/originality.test.mjs", "attribute stamp"],
+  ]) {
+    const run=spawnSync(process.execPath,[join(SHINE,file)],{encoding:"utf8"});
+    if(run.status===0&&run.stdout.includes(needle))ok(name,"adversarial repetitions + positive path");
+    else fail(name,`${run.stderr||run.stdout}`.trim().slice(-300));
+  }
+}
+
 // ---- 0. what tree is being measured? ---------------------------------------
 // A doctor run on a checkout parked behind origin/main reports findings about a
 // superseded tree, and every one of them renders exactly like a finding about

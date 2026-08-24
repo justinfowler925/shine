@@ -20,6 +20,7 @@
     ,"benchmark:smoke": "node benchmark/run.mjs"
     ,"benchmark:full": "node benchmark/run.mjs --full"
     ,"benchmark:test": "node benchmark/benchmark.test.mjs"
+    ,"benchmark:quality": "node benchmark/quality.test.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.12.1",

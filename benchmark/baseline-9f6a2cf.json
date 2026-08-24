@@ -1,7 +1,7 @@
 {
   "commit": "9f6a2cf",
   "status": "recoverable",
-  "meaning": "Original pre-remediation Shine tree, retained as the blinded comparison arm.",
-  "artifact": "git archive 9f6a2cf (materialized by benchmark/run.mjs --full)",
-  "humanPreference": null
+  "meaning": "The deliberately bad unfucked/before.html fixture from the original tree, duplicated as a harness control. It is not 24 historical agent outputs and cannot support a preference claim.",
+  "artifact": "git show 9f6a2cf:verify/fixtures/unfucked/before.html",
+  "humanPreference": "ineligible-until-real-baseline"
 }

@@ -6,7 +6,7 @@ assert.deepEqual(benchmarkPopulationGaps(briefs),[]);
 assert.match(benchmarkPopulationGaps([]).join(" "),/population 0\/24/);
 assert.match(benchmarkPopulationGaps(briefs.filter(b=>b.category!=="datagrid")).join(" "),/datagrid 0\/6/);
 const review=JSON.parse(readFileSync(new URL("./human-review.json",import.meta.url)));
-assert.equal(review.status,"pending-human-review");assert.equal(review.reviews.length,0);
+assert.equal(review.status,"blocked-invalid-baseline");assert.equal(review.reviews.length,0);
 assert.equal(review.threshold.minimumCurrentPreferenceRate,.75);
 const hundred=Array.from({length:100},(_,i)=>({id:`pair-${i}`})), key=Object.fromEntries(hundred.map(b=>[b.id,{A:"current",B:"baseline"}]));
 const choices=n=>hundred.map((b,i)=>({id:b.id,choice:i<n?"A":"B"}));

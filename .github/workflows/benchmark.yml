@@ -18,6 +18,7 @@ jobs:
           node-version: 22
       - run: npm ci
       - run: npm run benchmark:test
+      - run: npm run benchmark:quality
       - run: npm run benchmark:smoke
 
   benchmark-full:
