@@ -44,7 +44,7 @@ JS is not a DataGrid.
 ## Tools
 
 ```sh
-SKILL=$(realpath "${HOME}/.cursor/skills/shine" 2>/dev/null || realpath "${HOME}/.claude/skills/shine")
+SKILL=$(realpath "${HOME}/.cursor/skills/shine" 2>/dev/null || realpath "${HOME}/.agents/skills/shine")
 ROOT="$(dirname "$SKILL")"
 node "$ROOT/corpus/cite.mjs" "<job in plain words>"
 node "$ROOT/verify/measure.mjs" <path> --shot /tmp/shine.png --cite <id>

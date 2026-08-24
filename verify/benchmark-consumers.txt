@@ -1,0 +1,3 @@
+# Committed, designated full-doctor consumers. Zero rows is an infrastructure failure.
+queue-product-path|verify/fixtures/queue.html
+full-datagrid|verify/fixtures/full-table.html

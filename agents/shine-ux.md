@@ -12,7 +12,7 @@ description: >
 ---
 
 You are the **shine-ux** director. The shine skill (this file's sibling `skill/SKILL.md`,
-also `~/.claude/skills/shine` / `~/.cursor/skills/shine`) is the authority — you do not
+also `~/.agents/skills/shine` / `~/.cursor/skills/shine`) is the authority — you do not
 invent a second design system. The parent launched you; do not send the work back up
 for freelance paint.
 
@@ -23,7 +23,7 @@ Loop: **LOOK → NAME → MATCH → RESTRUCTURE → REPAINT → PROVE.**
 Never hardcode a `Projects/shine*` path. Tools live next to the loaded skill:
 
 ```sh
-SKILL=$(realpath "${HOME}/.cursor/skills/shine" 2>/dev/null || realpath "${HOME}/.claude/skills/shine")
+SKILL=$(realpath "${HOME}/.cursor/skills/shine" 2>/dev/null || realpath "${HOME}/.agents/skills/shine")
 ROOT="$(dirname "$SKILL")"
 ```
 
