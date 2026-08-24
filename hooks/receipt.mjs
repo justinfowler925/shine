@@ -6,7 +6,7 @@ import { existsSync, mkdirSync, readFileSync, realpathSync, renameSync, writeFil
 import { dirname, join, resolve } from "node:path";
 import { homedir } from "node:os";
 
-const VERSION = 2;
+const VERSION = 3;
 const MAX_AGE_MS = 20 * 60 * 1000;
 
 export function receiptPath() {
@@ -20,7 +20,7 @@ export function artifactClaim(target, cite) {
   return { artifact, cite, artifactSha256: sha256(readFileSync(artifact)) };
 }
 
-export function writeProveReceipt({ cite, target, templateShot, compareVersion = "compare-v2", tool = "compare.mjs" }) {
+export function writeProveReceipt({ cite, target, templateShot, compareVersion = "compare-v3", tool = "compare.mjs", proof = null }) {
   if (!target || !templateShot) throw new Error("proof receipt requires target and templateShot");
   const claim = artifactClaim(target, cite);
   const shot = realpathSync(resolve(templateShot));
@@ -32,6 +32,7 @@ export function writeProveReceipt({ cite, target, templateShot, compareVersion =
     templateShotSha256: sha256(readFileSync(shot)),
     compareVersion,
     tool,
+    proof,
     at: Date.now(),
   };
   const p = receiptPath();
@@ -65,7 +66,7 @@ export function proveGaps(claims, now = Date.now()) {
   return wanted.flatMap((claim) => {
     const rec = store.receipts.find((r) => r.artifact === claim.artifact && r.cite === claim.cite);
     if (!rec) return [`${claim.artifact}: no compare.mjs proof for ${claim.cite}`];
-    if (rec.verdict !== "pass" || rec.tool !== "compare.mjs") return [`${claim.artifact}: proof is not a compare PASS`];
+    if (rec.verdict !== "pass" || rec.tool !== "compare.mjs" || !rec.proof?.structureFingerprint) return [`${claim.artifact}: proof is not a compare PASS`];
     if (typeof rec.at !== "number" || rec.at > now + 60_000 || now - rec.at > MAX_AGE_MS)
       return [`${claim.artifact}: compare proof is stale or future-dated`];
     if (rec.artifactSha256 !== claim.artifactSha256) return [`${claim.artifact}: changed after compare.mjs`];
