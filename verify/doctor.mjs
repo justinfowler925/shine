@@ -661,7 +661,7 @@ if (FULL) {
   );
 
   const run = (f) =>
-    spawnSync("node", [measure, f], {
+    spawnSync(process.execPath, [measure, f], {
       encoding: "utf8",
       env: { ...process.env, NODE_PATH },
     });
@@ -676,6 +676,10 @@ if (FULL) {
   const good = run(goodFile);
   if (!/composition:/.test(good.stderr)) ok("compose gate passes a region with an empty state");
   else fail("compose gate passes a region with an empty state", good.stderr.match(/composition:.*/)?.[0] ?? "");
+
+  const overlap=run(join(SHINE,"verify/fixtures/overlapping-panes.html"));
+  if(overlap.status===1&&/geometry: section overlaps aside/.test(overlap.stderr))ok("geometry gate catches colliding work panes");
+  else fail("geometry gate catches colliding work panes",`exit ${overlap.status}; stderr ${JSON.stringify(overlap.stderr.slice(-200))}`);
 
   // The contrast probe samples the background under a text rect. Which rect it
   // picks is the whole game: selectNodeContents(el) spans child elements, so a

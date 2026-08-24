@@ -25,7 +25,8 @@ turn — that is how zinc clones ship with this skill sitting unread.
 
 **Catalog cite required.** The subagent runs `corpus/cite.mjs` from the tree this skill
 loaded from, then proves with `verify/measure.mjs` and `verify/compare.mjs`. `data-cite`
-is not a prove receipt — stop-sweep requires `compare.mjs` to have written
+on the finished `<html>` must equal the selected catalog id; the CLI flag alone is not
+provenance. It is not a prove receipt — stop-sweep requires `compare.mjs` to have written
 `last-prove.json` this turn. Do not hardcode a `Projects/shine*` checkout.
 
 **Record list → DataGrid.** Rows of records (queue, remainder, sources, admin) cite
@@ -50,5 +51,8 @@ node "$ROOT/corpus/cite.mjs" "<job in plain words>"
 node "$ROOT/verify/measure.mjs" <path> --shot /tmp/shine.png --cite <id>
 node "$ROOT/verify/compare.mjs" <path> --cite <id>
 ```
+
+`measure.mjs` must exit 0 before `compare.mjs` runs. A red measure is unfinished work,
+not a reportable residual; fix and rerun it until green.
 
 `shine-ux` reads `references/direction.md` and the rest on demand. The parent does not.

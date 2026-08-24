@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": "true",
   "type": "module",
-  "description": "shine \u2014 design authority. Root deps are the ones the verification loop needs; the token pipeline has its own package.json under tokens/.",
+  "description": "shine — design authority. Root deps are the ones the verification loop needs; the token pipeline has its own package.json under tokens/.",
   "scripts": {
     "build": "npm run build --prefix tokens",
     "verify": "npm run verify --prefix tokens",
@@ -16,13 +16,16 @@
     "sync-consumers": "bash scripts/sync-consumers.sh",
     "skill-listing": "node site/scripts/skill-listing.mjs",
     "measure-consumers": "node verify/measure-consumers.mjs",
-    "compare": "node verify/compare.mjs"
-    ,"benchmark:smoke": "node benchmark/run.mjs"
-    ,"benchmark:full": "node benchmark/run.mjs --full"
-    ,"benchmark:test": "node benchmark/benchmark.test.mjs"
-    ,"benchmark:quality": "node benchmark/quality.test.mjs"
+    "compare": "node verify/compare.mjs",
+    "benchmark:smoke": "node benchmark/run.mjs",
+    "benchmark:full": "node benchmark/run.mjs --full",
+    "benchmark:test": "node benchmark/benchmark.test.mjs",
+    "benchmark:quality": "node benchmark/quality.test.mjs",
+    "benchmark:agent:test": "node benchmark/agent-production.test.mjs"
+    ,"benchmark:agent:score:test": "node benchmark/agent-score.test.mjs"
   },
   "devDependencies": {
+    "@cursor/sdk": "^1.0.28",
     "axe-core": "^4.12.1",
     "playwright": "^1.62.1",
     "sharp": "^0.35.3"
