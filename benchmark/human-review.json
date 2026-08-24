@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "status": "pending-human-review",
+  "blinding": {"labels": ["A", "B"], "mappingHeldIn": "generated ../review-key.json outside reviewer packet"},
+  "threshold": {"minimumCompletedReviewers": 1, "minimumCurrentPreferenceRate": 0.75, "denominator": "all 24 unique brief pairs"},
+  "instructions": "Open generated review/index.html without review-key.json. For every brief choose A, B, tie, or unusable. Record reviewer identity and timestamp only after all 24 choices are locked.",
+  "reviews": []
+}

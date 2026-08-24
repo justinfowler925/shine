@@ -1,0 +1,7 @@
+{
+  "commit": "9f6a2cf",
+  "status": "recoverable",
+  "meaning": "Original pre-remediation Shine tree, retained as the blinded comparison arm.",
+  "artifact": "git archive 9f6a2cf (materialized by benchmark/run.mjs --full)",
+  "humanPreference": null
+}
