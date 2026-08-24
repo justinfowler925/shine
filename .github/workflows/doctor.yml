@@ -30,6 +30,16 @@ jobs:
           node-version: 22
       - name: install root deps
         run: npm ci
+      - name: install pinned integration runtimes
+        working-directory: verify/fixtures/integrations
+        run: npm ci --ignore-scripts
+      - name: typecheck and build real integration fixtures
+        working-directory: verify/fixtures/integrations
+        run: npm run build
+      - name: prove generated integration scaffolds and compiler gates
+        run: node verify/integrations-bite.mjs
+      - name: render and interact through production framework entries
+        run: node verify/integrations-runtime.mjs
       - name: shine doctor (--ci)
         run: node verify/doctor.mjs --ci
 
