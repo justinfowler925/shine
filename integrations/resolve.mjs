@@ -23,8 +23,8 @@ export const RECIPES = {
   },
   "shadcn-tanstack": {
     packages: ["@tanstack/react-table"], cite: "shadcn-dashboard-01",
-    imports: ["import { FlexRender, createFilteredRowModel, createPaginatedRowModel, createSortedRowModel, useTable } from '@tanstack/react-table';"],
-    api: ["useTable", "createSortedRowModel", "createFilteredRowModel", "createPaginatedRowModel"],
+    imports: ["import { FlexRender, columnFilteringFeature, columnVisibilityFeature, createFilteredRowModel, createPaginatedRowModel, createSortedRowModel, rowPaginationFeature, rowSortingFeature, tableFeatures, useTable } from '@tanstack/react-table';"],
+    api: ["useTable", "tableFeatures", "rowSortingFeature", "columnFilteringFeature", "columnVisibilityFeature", "rowPaginationFeature", "createSortedRowModel", "createFilteredRowModel", "createPaginatedRowModel"],
     contract: "shadcn Table chrome over TanStack Table state models",
   },
   native: {
@@ -79,6 +79,8 @@ export function resolveIntegration(project, requested = "") {
     throw new Error(`refusing to add ${requested}; project already uses ${detected.installed.join(", ")}`);
   if (kit !== "native" && kit !== "lex" && !detected.installed.includes(kit)) throw new Error(`${kit} packages are not installed`);
   const recipe = RECIPES[kit];
+  const missingPackages = recipe.packages.filter((name) => !existsSync(join(detected.root, "node_modules", ...name.split("/"), "package.json")));
+  if (missingPackages.length) throw new Error(`${kit} packages are declared but not installed: ${missingPackages.join(", ")}`);
   const unverified = verifyRecipeApi(recipe);
   if (unverified.length) throw new Error(`recipe API not proven by ${recipe.cite}: ${unverified.join(", ")}`);
   const manifest = JSON.parse(readFileSync(join(SHINE, "corpus/packs", recipe.cite, "manifest.json"), "utf8"));

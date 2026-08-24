@@ -8,7 +8,7 @@ const bodies = {
   mui: `export function ShineDataGrid({rows,columns,loading=false}) { return <DataGrid rows={rows} columns={columns} loading={loading} pagination disableRowSelectionOnClick /> }`,
   ant: `export function ShineDataGrid({request,columns}) { return <ProTable rowKey="id" request={request} columns={columns} search={{labelWidth:"auto"}} pagination={{showSizeChanger:true}} /> }`,
   carbon: `export function ShineDataGrid({rows,headers,children}) { return <DataTable rows={rows} headers={headers}>{children}</DataTable> }`,
-  "shadcn-tanstack": `export function useShineDataGrid(options) { return useTable({...options,features:[createSortedRowModel(),createFilteredRowModel(),createPaginatedRowModel()]}) }`,
+  "shadcn-tanstack": `const features = tableFeatures({ columnFilteringFeature, columnVisibilityFeature, rowPaginationFeature, rowSortingFeature, filteredRowModel: createFilteredRowModel(), paginatedRowModel: createPaginatedRowModel(), sortedRowModel: createSortedRowModel() });\nexport function useShineDataGrid(options) { return useTable({ ...options, features }) }`,
   native: `export const shineDataGridElement = "table";`,
   lex: `export const shineDataGridElement = "lightning-datatable";`,
 };

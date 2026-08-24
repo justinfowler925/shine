@@ -1352,11 +1352,12 @@ if (args.includes("--full")) {
     for (const file of extras) writeFileSync(join(dir, file), "{}\n");
     return dir;
   };
+  const runtimeProject = join(SHINE, "verify/fixtures/integrations");
   const projects = {
-    mui: make("mui", { react: "1", "@mui/material": "1", "@mui/x-data-grid": "1" }, ["package-lock.json"]),
-    carbon: make("carbon", { react: "1", "@carbon/react": "1" }),
-    ant: make("ant", { react: "1", antd: "1", "@ant-design/pro-components": "1" }),
-    "shadcn-tanstack": make("shadcn", { react: "1", "@tanstack/react-table": "1" }, ["components.json", "pnpm-lock.yaml"]),
+    mui: runtimeProject,
+    carbon: runtimeProject,
+    ant: runtimeProject,
+    "shadcn-tanstack": runtimeProject,
     native: make("native", null),
     lex: make("lex", {}, ["sfdx-project.json"]),
   };
@@ -1371,9 +1372,11 @@ if (args.includes("--full")) {
       else fail(`integration resolves and scaffolds ${kit}`, "recipe, provenance, or imports missing");
     } catch (err) { fail(`integration resolves and scaffolds ${kit}`, err.message); }
   }
-  if (detectProject(projects["shadcn-tanstack"]).packageManager === "pnpm") ok("integration detects package manager");
+  const pnpmProject = make("shadcn-pnpm", { react: "1", "@tanstack/react-table": "1" }, ["components.json", "pnpm-lock.yaml"]);
+  if (detectProject(pnpmProject).packageManager === "pnpm") ok("integration detects package manager");
   else fail("integration detects package manager", "pnpm lock ignored");
-  try { resolveIntegration(projects.mui, "ant"); fail("integration refuses a second design system", "Ant injected into MUI app"); }
+  const muiOnly = make("mui-only", { react: "1", "@mui/material": "1", "@mui/x-data-grid": "1" });
+  try { resolveIntegration(muiOnly, "ant"); fail("integration refuses a second design system", "Ant injected into MUI app"); }
   catch (err) { if (/refusing to add/.test(err.message)) ok("integration refuses a second design system"); else fail("integration refuses a second design system", err.message); }
   const noKit = make("react-no-kit", { react: "1", vite: "1" });
   try { resolveIntegration(noKit); fail("integration fails when React has no chosen kit", "silently chose a kit"); }
@@ -1384,6 +1387,9 @@ if (args.includes("--full")) {
   const fake = { ...RECIPES.mui, api: [...RECIPES.mui.api, "InventedGridProp"] };
   if (verifyRecipeApi(fake).includes("InventedGridProp")) ok("integration API provenance gate bites invented API");
   else fail("integration API provenance gate bites invented API", "invented symbol passed");
+  const missing = make("mui-missing-package", { react: "1", "@mui/material": "1", "@mui/x-data-grid": "1" });
+  try { resolveIntegration(missing, "mui"); fail("integration refuses missing runtime packages", "declared-only package set passed"); }
+  catch (err) { if (/declared but not installed/.test(err.message)) ok("integration refuses missing runtime packages"); else fail("integration refuses missing runtime packages", err.message); }
 }
 
 // ---- 7. every reference is reachable from the map, and vice versa ---------
@@ -1497,6 +1503,18 @@ if (!CI) {
 // costs more than the check buys. `npm run doctor:full` is the deliberate act; the
 // default stays green-when-good so a FAIL still means something.
 if (args.includes("--full") && !CI) {
+  const fixture = join(SHINE, "verify/fixtures/integrations");
+  const build = spawnSync("npm", ["run", "build"], { cwd: fixture, encoding: "utf8", timeout: 600_000 });
+  if (build.status === 0) ok("integration fixture typechecks and builds", "four pinned production libraries");
+  else fail("integration fixture typechecks and builds", `${build.stderr || build.stdout}`.trim().slice(-500));
+  const runtime = build.status === 0 ? spawnSync(process.execPath, [join(SHINE, "verify/integrations-runtime.mjs")], { cwd: SHINE, encoding: "utf8", timeout: 600_000 }) : null;
+  if (runtime?.status === 0 && (runtime.stdout.match(/integration runtime PASS:/g) || []).length === 4)
+    ok("integration fixture renders and interacts", "4/4 production framework entries; DataGrid 12/12 each");
+  else fail("integration fixture renders and interacts", runtime ? `${runtime.stderr || runtime.stdout}`.trim().slice(-500) : "build failed; runtime not run");
+  const bites = spawnSync(process.execPath, [join(SHINE, "verify/integrations-bite.mjs")], { cwd: SHINE, encoding: "utf8", timeout: 120_000 });
+  if (bites.status === 0 && (bites.stdout.match(/integration scaffold PASS:/g) || []).length === 4 && (bites.stdout.match(/integration bite PASS:/g) || []).length === 2)
+    ok("integration compiler gates bite", "4/4 generated scaffolds typecheck; renamed API + missing package rejected");
+  else fail("integration compiler gates bite", `${bites.stderr || bites.stdout}`.trim().slice(-500));
   const r = spawnSync(process.execPath, [join(SHINE, "verify/measure-consumers.mjs"), "--quiet"], {
     encoding: "utf8",
     timeout: 600_000,
