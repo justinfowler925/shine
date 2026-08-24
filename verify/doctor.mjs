@@ -1063,6 +1063,10 @@ if (args.includes("--full")) {
   const diagnose = readFileSync(join(SHINE, "skill/references/diagnose.md"), "utf8");
   const acquire = readFileSync(join(SHINE, "corpus/acquire.sh"), "utf8");
   const CORPUS = join(HOME, "design-corpus");
+  const artDirection = spawnSync(process.execPath, [join(SHINE, "verify/art-direction.test.mjs")], { encoding: "utf8" });
+  if (artDirection.status === 0 && /determinism=20\/20/.test(artDirection.stdout))
+    ok("brief-specific art direction", "20/20 deterministic; distance, exclusions, history, gaps and slop gated");
+  else fail("brief-specific art direction", `${artDirection.stderr || artDirection.stdout}`.trim().slice(-400));
 
   if (!/corpus\/cite\.mjs/.test(skill))
     fail("SKILL.md cite command", "missing `corpus/cite.mjs` — the MATCH step lost its interface");

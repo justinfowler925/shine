@@ -51,18 +51,23 @@ node "$ROOT/verify/measure.mjs" <path-or-url> --shot /tmp/shine-before.png
 5. **MATCH** — a real template, not a vibe:
 
 ```sh
-node "$ROOT/corpus/cite.mjs" "<job in plain words>"
+node "$ROOT/corpus/cite.mjs" "<brief: job, lane, audience, density, information shape, brand, interaction, tone, type, image, framework>"
 ```
 
-   Read the harvested shot when it exists (or open the preview), skim the extracted
-   source's regions (the must-read paths, not the whole tree), pick one of the matches
-   and say why. No matching row → nearest row + `references/patterns.md`; never an
+   Read the normalized brief axes, harvested shots, semantic distances, exclusions and
+   catalog gaps. Read the chosen source's regions (the must-read paths, not the whole
+   tree), then pick one materially distinct candidate and say why its axes fit. Project
+   history may break a tie only when eligibility scores are equal (`--history
+   <project>/.shine/citations.json`); it never overrides the brief. No matching row →
+   nearest row + `references/patterns.md`; never an
    anonymous layout for a known job.
    **Record list:** if LOOK found a data table, or the job is rows of records, the cite
    query includes `datagrid` (or `datatable` / `crud` / `queue`). Reject a cite whose
    screen is only `app-shell` / `dashboard` / `list`. Clone that kit's toolbar, sort,
    filter, pager, row actions, and empty/loading/error — a wrapper around `<table>` is
    not a DataGrid. Layout tables opt out with `data-shine-contract="layout"`.
+   Do not ask for “variety” or shuffle candidates. Bento, glass, gradient, neon and
+   purple are absent by default; they enter only when the brief explicitly demands one.
 6. **RESTRUCTURE** — clone the template's regions from its source. Queue keeps the table
    focal; hero keeps display type and one primary; record keeps highlights → detail →
    related.
