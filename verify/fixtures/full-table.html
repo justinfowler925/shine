@@ -1,44 +1,30 @@
 <!doctype html>
 <html lang="en" data-cite="carbon-datatable" data-dna-family="carbon" data-shine-voice="kit-faithful">
 <head>
-  <meta charset="utf-8" />
-  <title>Full table contract</title>
+  <meta charset="utf-8"><title>Complete DataGrid contract</title>
   <style>
-    :root { color-scheme: dark; }
-    body { margin: 0; background: #0c0a09; color: #fafaf9; font: 15px/1.5 system-ui; padding: 24px; }
-    h1 { font-size: 24px; }
-    button.primary { background: #a8a29e; color: #0c0a09; border: 0; padding: 10px 16px; font: inherit; }
-    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-    th, td { text-align: left; padding: 12px; border-bottom: 1px solid #444; }
-    .toolbar { display: flex; gap: 12px; margin: 16px 0; }
+    :root{color-scheme:dark}body{margin:0;background:#0c0a09;color:#fafaf9;font:15px/1.5 system-ui;padding:24px}
+    button{min-height:40px}button.primary{background:#a8a29e;color:#0c0a09;border:0;padding:10px 16px}.toolbar{display:flex;gap:12px;margin:16px 0}
+    [data-grid-scroll]{overflow-x:auto}table{width:100%;border-collapse:collapse}thead{position:sticky;top:0;background:#0c0a09}th,td{text-align:left;padding:12px;border-bottom:1px solid #444}
   </style>
 </head>
-<body>
-  <main>
-  <h1>Employees</h1>
-  <p>Toolbar, sort, pagination, and the empty/loading/error triad as real states.</p>
-  <div class="toolbar">
-    <button class="primary" type="button">Add</button>
-    <span data-loading aria-busy="true">Idle</span>
-    <span data-error role="alert" hidden>Could not load</span>
-    <span data-empty hidden>No rows match</span>
+<body><main data-grid>
+  <h1>Employees</h1><p>A functional grid with every default contract capability.</p>
+  <div class="toolbar" data-toolbar role="search">
+    <input type="search" aria-label="Search employees" data-shine-probe-value="zzzz"><button data-clear-filters>Clear filters</button>
+    <span data-state="loading">Loading state</span><span data-state="empty">Empty state</span><span data-state="filtered-empty">Filtered empty state</span>
+    <span data-state="error" role="alert">Error state <button data-retry>Retry</button></span>
   </div>
-  <table data-shine-contract="table">
-    <thead>
-      <tr>
-        <th aria-sort="none"><button type="button">Name</button></th>
-        <th>Title</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Ada Lovelace</td><td>Analyst</td></tr>
-      <tr><td>Grace Hopper</td><td>Lead</td></tr>
-    </tbody>
-  </table>
-  <nav data-pagination aria-label="Pagination">
-    <button type="button">Previous</button>
-    <button type="button">Next</button>
-  </nav>
-  </main>
-</body>
-</html>
+  <div data-grid-scroll><table id="employees" data-shine-contract="table" data-client-mode>
+    <thead><tr><th aria-sort="none"><button data-sort>Name</button><span role="separator" data-column-resize></span></th><th>Title</th><th>Actions</th></tr></thead>
+    <tbody><tr><td>Ada</td><td>Analyst</td><td><button data-row-action>Open</button></td></tr><tr><td>Grace</td><td>Lead</td><td><button data-row-action>Open</button></td></tr></tbody>
+  </table></div>
+  <nav data-pagination aria-label="Pagination"><span data-page-size>10/page</span><span data-page-range>1–2</span><span data-total>2 total</span><button>Previous</button><button data-page-next>Next</button></nav>
+  <script>
+    const table=document.querySelector('table'),body=table.tBodies[0],search=document.querySelector('input[type=search]');
+    document.querySelector('[data-sort]').onclick=()=>{const rows=[...body.rows].reverse();rows.forEach(r=>body.append(r));table.querySelector('[aria-sort]').setAttribute('aria-sort','ascending')};
+    search.oninput=()=>{for(const row of body.rows)row.hidden=search.value&& !row.innerText.toLowerCase().includes(search.value.toLowerCase())};
+    document.querySelector('[data-clear-filters]').onclick=()=>{search.value='';search.dispatchEvent(new InputEvent('input',{bubbles:true}))};
+    document.querySelector('[data-page-next]').onclick=()=>{[...body.rows].forEach(r=>body.append(r));body.rows[0].cells[0].textContent+=' next'};
+  </script>
+</main></body></html>

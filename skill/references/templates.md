@@ -29,8 +29,8 @@ Generated from `corpus/templates.json` — do not hand-edit; run `node corpus/in
 | chat | `antd-pro-chatbot` | ant-design-pro | source | chat |
 | checkout | `mui-checkout` | mui-material | source | checkout |
 | command-palette | `shadcn-command` | shadcn-registry | source | command-palette, palette, cmdk |
-| crud | `mui-crud-dashboard` | mui-material | source | crud, admin |
-| crud | `antd-pro-crud` | ant-design-pro | source | crud, admin |
+| crud | `mui-crud-dashboard` | mui-material | source | crud, admin, table, datagrid, datatable |
+| crud | `antd-pro-crud` | ant-design-pro | source | crud, admin, table, datagrid, datatable |
 | dashboard | `shadcn-dashboard-01` | shadcn-registry | source | dashboard |
 | dashboard | `query-shadcn-blocks` | shadcn-registry | query-only | dashboard |
 | dashboard | `query-haze` | haze | query-only | dashboard |
@@ -45,7 +45,7 @@ Generated from `corpus/templates.json` — do not hand-edit; run `node corpus/in
 | marketing | `mui-marketing-page` | mui-material | source | marketing, marketing-hero |
 | marketing | `query-mui-free-gallery` | mui-material | query-only | marketing, marketing-hero |
 | marketing-hero | `magicui-hero` | magicui | source | marketing-hero, hero, landing |
-| queue | `carbon-datatable` | carbon | source | queue, list, inbox |
+| queue | `carbon-datatable` | carbon | source | queue, list, inbox, table, datagrid, datatable, sources, remainder |
 | queue | `antd-pro-list` | ant-design-pro | source | queue, list, inbox |
 | record | `antd-pro-profile` | ant-design-pro | source | record, detail, profile |
 | settings | `antd-pro-settings` | ant-design-pro | source | settings, preferences, account |
