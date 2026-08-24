@@ -82,11 +82,16 @@ node "$ROOT/corpus/cite.mjs" "<brief: job, lane, audience, density, information 
 
 ```sh
 node "$ROOT/verify/measure.mjs" <path-or-url> --shot /tmp/shine-after.png --cite <id>
-node "$ROOT/verify/compare.mjs" <path-or-url> --cite <id>
+node "$ROOT/verify/compare.mjs" <path-or-url> --cite <id> --brief <brief-id> --lane <lane>
 ```
 
-   Hard fails block. Read the compare composite — if the page and the template don't
-   read as relatives, the match or the paint is wrong. Report before/after numbers.
+   Hard fails block. For SaaS and marketing, mark the one visible, brief-specific owned
+   moment with `data-shine-signature="<brief-specific-name>"`; compare rejects missing
+   signatures and a structural fingerprint already proved for another brief. LEX and
+   brand-locked adaptation belong to their system and are exempt (`--brand-locked`).
+   Read the compare composite and its region order, focal share, controls, density,
+   geometry, type, palette, spacing/radii and interaction facts. If the page and the
+   template don't read as relatives, the match or the paint is wrong. Report facts.
 
 ## Hard rules
 
