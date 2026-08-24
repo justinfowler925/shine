@@ -112,6 +112,26 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   } else {
     ok("SKILL.md dispatches shine-ux", "subagent_type: shine-ux");
   }
+  if (!/DataGrid/.test(text)) {
+    fail(
+      "SKILL.md DataGrid dispatch",
+      "record lists must cite a DataGrid kit — contracts.md is not a process unless MATCH and measure enforce it",
+    );
+  } else {
+    ok("SKILL.md DataGrid dispatch", "record list → DataGrid");
+  }
+}
+
+{
+  const ux = readFileSync(join(SHINE, "agents/shine-ux.md"), "utf8");
+  if (!/Record list/.test(ux) || !/datagrid/i.test(ux)) {
+    fail(
+      "shine-ux DataGrid match",
+      "MATCH must cite a DataGrid kit for record lists and reject list/dashboard shells",
+    );
+  } else {
+    ok("shine-ux DataGrid match", "MATCH requires a DataGrid cite");
+  }
 }
 
 // ---- 1b. tools resolve from the loaded skill, never a hardcoded checkout --
@@ -796,7 +816,7 @@ if (args.includes("--full")) {
       `<aside><p>Nav</p></aside>` +
       `<main><h1>Inbox</h1>` +
       `<p>Twelve threads need a reply before the Monday forecast call. Each row names the account, the stall reason, and the next step.</p>` +
-      `<table style="width:100%;border-collapse:collapse">` +
+      `<table data-shine-contract="layout" style="width:100%;border-collapse:collapse">` +
       Array.from({ length: 10 }, (_, i) =>
         `<tr><td style="padding:8px;border-bottom:1px solid #333">Account ${i}</td>` +
           `<td style="padding:8px;border-bottom:1px solid #333">No activity 21d</td></tr>`,
@@ -813,7 +833,7 @@ if (args.includes("--full")) {
   const marketingShell = join(SHINE, "verify/fixtures/marketing-as-appshell.html");
 
   const pretty = run(prettyTable);
-  if (pretty.status === 1 && /contract: named table missing/.test(pretty.stderr))
+  if (pretty.status === 1 && /contract: DataGrid .* missing or inert/.test(pretty.stderr))
     ok("contract gate fails a pretty empty table");
   else
     fail(
@@ -821,9 +841,58 @@ if (args.includes("--full")) {
       `exit ${pretty.status}; stderr ${JSON.stringify(pretty.stderr.slice(-220))}`,
     );
 
+  const nakedTable = join(dir, "naked-data-table.html");
+  writeFileSync(
+    nakedTable,
+    page(
+      `<h1>Sources</h1><p>Unmarked data table must still fail the contract.</p>` +
+        `<table><thead><tr><th>Name</th><th>Kind</th></tr></thead>` +
+        `<tbody><tr><td>Gazette</td><td>Wire</td></tr></tbody></table>`,
+    ),
+  );
+  const naked = run(nakedTable);
+  if (naked.status === 1 && /contract: DataGrid .* missing or inert/.test(naked.stderr))
+    ok("contract gate fails an unmarked data table");
+  else
+    fail(
+      "contract gate fails an unmarked data table",
+      `exit ${naked.status}; stderr ${JSON.stringify(naked.stderr.slice(-220))}`,
+    );
+
   const full = run(fullTable);
   if (!/contract:/.test(full.stderr)) ok("contract gate passes a complete table");
   else fail("contract gate passes a complete table", full.stderr.match(/contract:.*/)?.[0] ?? "");
+
+  const fullSource = readFileSync(fullTable, "utf8");
+  const capabilitySeeds = [
+    ["title", "<h1>Employees</h1>", "<div>Employees</div>"],
+    ["toolbar", 'data-toolbar role="search"', ""],
+    ["filter", "search.oninput=", "search.dataset.noop="],
+    ["sort", "document.querySelector('[data-sort]').onclick=", "document.querySelector('[data-sort]').dataset.noop="],
+    ["sticky", "position:sticky", "position:relative"],
+    ["overflow", "overflow-x:auto", "overflow-x:visible"],
+    ["page", "document.querySelector('[data-page-next]').onclick=", "document.querySelector('[data-page-next]').dataset.noop="],
+    ["resize", 'role="separator" data-column-resize', ""],
+    ["rowActions", '<td><button data-row-action>Open</button></td>', "<td><span>Open</span></td>"],
+    ["states", 'data-state="filtered-empty"', 'data-example="filtered-empty"'],
+    ["remoteMode", " data-client-mode", ""],
+  ];
+  for (const [capability, from, to] of capabilitySeeds) {
+    const seeded = join(dir, `datagrid-missing-${capability}.html`);
+    let source = fullSource.replace(from, to);
+    if (capability === "overflow") source = source.replace("table{width:100%", "table{min-width:2000px;width:100%");
+    writeFileSync(seeded, source);
+    const result = run(seeded);
+    const expected = new RegExp(`contract: DataGrid .* missing or inert ${capability}`);
+    if (result.status === 1 && expected.test(result.stderr)) ok(`DataGrid gate bites missing ${capability}`);
+    else fail(`DataGrid gate bites missing ${capability}`, `exit ${result.status}; ${JSON.stringify(result.stderr.slice(-220))}`);
+  }
+
+  const presentation = join(dir, "presentation-table.html");
+  writeFileSync(presentation, page('<h1>Layout</h1><table role="presentation"><tr><th>A</th><th>B</th></tr><tr><td>1</td><td>2</td></tr></table>'));
+  const presentationRun = run(presentation);
+  if (!/contract: DataGrid/.test(presentationRun.stderr)) ok("DataGrid gate ignores explicit presentation table");
+  else fail("DataGrid gate ignores explicit presentation table", presentationRun.stderr.match(/contract:.*/)?.[0] ?? "");
 
   const runCite = (f, id) => spawnSync("node", [measure, f, "--cite", id], { encoding: "utf8", env: { ...process.env, NODE_PATH } });
   const fakeCarbon = runCite(carbonShadcn, "carbon-datatable");

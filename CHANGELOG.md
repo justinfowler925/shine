@@ -6,6 +6,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- Executable DataGrid contract: native tables and ARIA grids are discovered automatically, interactive sort/filter/page controls must change rendered state, and every default capability has a seeded fail/pass proof.
 - House and kit voices all carry `--shine-color-*` (shine, magicui, spectrum, fluent, mantine, slds, plus heroui and tremor). Doctor fails any colorless sheet, not just the favoured four.
 - Harvested shots for `spectrum-ai-chat`, `antd-pro-chatbot`, and the LEX blueprints (SLDS vendor pages). `corpus/blueprints/lex-*.md` is the region map.
 - `cite.mjs "lightning record"` resolves to `lex-record`. Doctor asserts it.

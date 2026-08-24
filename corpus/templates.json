@@ -419,7 +419,10 @@
       },
       "jobs": [
         "crud",
-        "admin"
+        "admin",
+        "table",
+        "datagrid",
+        "datatable"
       ]
     },
     {
@@ -438,7 +441,10 @@
       },
       "jobs": [
         "crud",
-        "admin"
+        "admin",
+        "table",
+        "datagrid",
+        "datatable"
       ]
     },
     {
@@ -718,7 +724,12 @@
       "jobs": [
         "queue",
         "list",
-        "inbox"
+        "inbox",
+        "table",
+        "datagrid",
+        "datatable",
+        "sources",
+        "remainder"
       ],
       "dna": {
         "family": "carbon",

@@ -19,6 +19,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve as presolve } from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
 import { load, pathTo } from "./deps.mjs";
+import { evaluateDataGrids } from "./contracts/table.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
@@ -329,6 +330,7 @@ for (const t of textTargets) {
 // These checks are about relationships, absences and counts. The hard ones are
 // unambiguous; the judgement ones print every run as notes and never block, because a
 // gate with false positives is a gate someone switches off.
+const dataGrids = await page.evaluate(evaluateDataGrids);
 const compose = await page.evaluate(() => {
   const vis = (el) => {
     const r = el.getBoundingClientRect();
@@ -499,7 +501,20 @@ const compose = await page.evaluate(() => {
   });
   const sectionsMissingJob = sectionJobs.filter((s) => !s.hasHeading);
 
-  const namedTable = document.querySelector('[data-shine-contract="table"], [data-contract="table"], [role="grid"]');
+  const layoutTable = (el) => {
+    const c = el.getAttribute("data-shine-contract") || el.getAttribute("data-contract") || "";
+    if (c === "layout" || c === "presentation") return true;
+    const role = el.getAttribute("role");
+    return role === "presentation" || role === "none";
+  };
+  const isDataTable = (el) => {
+    if (layoutTable(el)) return false;
+    return el.querySelectorAll("thead th, thead td, tr:first-child > th").length >= 2;
+  };
+  const namedTable =
+    document.querySelector('[data-shine-contract="table"], [data-contract="table"], [role="grid"]') ||
+    [...document.querySelectorAll("table")].find(isDataTable) ||
+    null;
   const tableRect = namedTable?.getBoundingClientRect();
   const tableAreaPct = namedTable && viewport ? +((tableRect.width * tableRect.height) / viewport).toFixed(3) : 0;
   const hero = document.querySelector("[data-region='hero']");
@@ -514,8 +529,14 @@ const compose = await page.evaluate(() => {
   const accentRgb = accentEl ? paintRgb(getComputedStyle(accentEl).backgroundColor) : null;
   const dnaChroma = document.documentElement.getAttribute("data-dna-chroma");
   const chromaCheck = document.documentElement.hasAttribute("data-chroma-check");
+  const tableHost = namedTable?.closest("[data-grid], .grid, main, body") || document;
   const tableContract = namedTable
     ? {
+        toolbar: !!(
+          tableHost.querySelector(
+            "[data-toolbar], [data-shine-toolbar], .toolbar, [role='search'], input[type='search']",
+          ) || namedTable.parentElement?.querySelector("input, [role='search']")
+        ),
         sort: !!(
           namedTable.querySelector("[aria-sort], [data-sort], thead button, thead [role='button']") ||
           document.querySelector("[data-sort]")
@@ -586,6 +607,8 @@ const compose = await page.evaluate(() => {
     hookMisses,
   };
 });
+compose.dataGrids = dataGrids;
+compose.tableAreaPct = Math.max(0, ...dataGrids.map((g) => g.area));
 
 // 7. Does the theme actually switch? A page stuck in one mode passes every per-element
 // check in whichever mode it is stuck in, and this harness would cheerfully print
@@ -744,11 +767,9 @@ if (compose.appShellProbe && compose.contentShare < 0.28) {
   );
 }
 
-if (compose.tableContract) {
-  for (const k of ["sort", "page", "empty", "loading", "error"]) {
-    if (!compose.tableContract[k]) {
-      failures.push(`contract: named table missing ${k} (contracts.md Table MUST)`);
-    }
+for (const grid of compose.dataGrids) {
+  for (const k of ["title", "toolbar", "filter", "sort", "sticky", "overflow", "page", "resize", "rowActions", "states", "semantics", "remoteMode"]) {
+    if (!grid[k]) failures.push(`contract: DataGrid ${grid.selector} missing or inert ${k} (contracts.md Table MUST)`);
   }
 }
 
