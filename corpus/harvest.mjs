@@ -49,10 +49,19 @@ const TARGETS = {
   "carbon-datatable": { url: "https://react.carbondesignsystem.com/iframe.html?id=components-datatable-batch-actions--default&viewMode=story", mode: "full", expect: "table" },
   "carbon-uishell": { url: "https://react.carbondesignsystem.com/iframe.html?id=components-ui-shell-header--header-w-navigation&viewMode=story", mode: "viewport", expect: "header" },
   "mantine-appshell": { url: "https://mantine.dev/app-shell/?e=FullLayout", mode: "viewport", expect: "a" },
-  "fluent-nav": { url: "https://react.fluentui.dev/?path=/docs/components-navdrawer--docs", mode: "viewport", expect: "iframe" },
-  "magicui-hero": { url: "https://magicui.design", mode: "viewport", expect: "h1" },
-  "tremor-charts": { url: "https://tremor.so", mode: "viewport", expect: "h1" },
-  "heroui-next-app": { url: "https://www.heroui.com", mode: "viewport", expect: "h1" },
+  "fluent-nav": { url: "https://react.fluentui.dev/?path=/docs/components-navdrawer--docs", mode: "full", expect: "iframe, #storybook-root, main" },
+  "magicui-hero": { url: "https://magicui.design/docs/components/hero-video-dialog", mode: "full", expect: "h1, main" },
+  "tremor-charts": { url: "https://blocks.tremor.so/blocks", mode: "full", expect: "h1, main, [class*='tremor']" },
+  "heroui-next-app": { url: "https://www.heroui.com/docs/components/navbar", mode: "full", expect: "nav, header, main" },
+  "spectrum-ai-chat": { url: "https://react-spectrum.adobe.com/react-spectrum/Chat.html", mode: "full", expect: "main, h1" },
+  "antd-pro-chatbot": { url: "https://preview.pro.ant.design/ai/chat", mode: "full", expect: ".ant-layout, .ant-pro-layout, main" },
+  "lex-record": { url: "https://www.lightningdesignsystem.com/components/page-headers/", mode: "full", expect: "h1, main, .slds-page-header, article" },
+  "lex-record-narrow": { url: "https://www.lightningdesignsystem.com/components/page-headers/", mode: "viewport", expect: "h1, main, .slds-page-header, article", viewport: { width: 494, height: 900 } },
+  "lex-queue": { url: "https://www.lightningdesignsystem.com/components/data-tables/", mode: "full", expect: "h1, table, main" },
+  "lex-console": { url: "https://www.lightningdesignsystem.com/components/tabs/", mode: "full", expect: "h1, main" },
+  "lex-email": { url: "https://www.lightningdesignsystem.com/guidelines/email/", mode: "full", expect: "h1, main, article" },
+  "lex-mobile": { url: "https://www.lightningdesignsystem.com/guidelines/mobile/", mode: "viewport", expect: "h1, main, article", viewport: { width: 390, height: 844 } },
+  "lex-lwr": { url: "https://www.lightningdesignsystem.com/guidelines/overview/", mode: "full", expect: "h1, main, article" },
 };
 
 const catalog = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "utf8"));
@@ -83,6 +92,7 @@ for (const row of wanted) {
   const shot = join(dir, "shot.png");
   try {
     const page = await ctx.newPage();
+    if (t.viewport) await page.setViewportSize(t.viewport);
     await page.goto(t.url, { waitUntil: "networkidle", timeout: 45_000 });
     await page.waitForTimeout(1_200); // let charts/fonts settle
     const found = await page.locator(t.expect).first().count();
@@ -90,7 +100,11 @@ for (const row of wanted) {
     // kill animations so the shot is stable
     await page.addStyleTag({ content: "*,*::before,*::after{transition:none!important;animation:none!important}" });
     mkdirSync(dir, { recursive: true });
-    if (t.mode === "viewport") {
+    if (t.frame) {
+      const frame = page.locator("iframe").first();
+      await frame.waitFor({ state: "visible", timeout: 15_000 });
+      await frame.screenshot({ path: shot });
+    } else if (t.mode === "viewport") {
       await page.screenshot({ path: shot });
     } else {
       await page.screenshot({ path: shot, fullPage: true });

@@ -1,0 +1,21 @@
+/* shine voice pack — tremor. Default Tremor blue #3b82f6, slate neutrals,
+   8px radius. */
+html[data-dna-family="tremor"], html[data-shine-voice="kit-faithful"][data-dna-family="tremor"] {
+  --shine-font-sans: ui-sans-serif, system-ui, sans-serif;
+  --shine-radius-sm: 4px;
+  --shine-radius-md: 8px;
+  --shine-duration-base: 200ms;
+  --shine-text-sm: 0.875rem;
+  --shine-text-base: 0.875rem;
+
+  --shine-color-bg: light-dark(#ffffff, #09090b);
+  --shine-color-bg-subtle: light-dark(#f8fafc, #18181b);
+  --shine-color-fg: light-dark(#0f172a, #f8fafc);
+  --shine-color-fg-muted: light-dark(#64748b, #94a3b8);
+  --shine-color-border: light-dark(#e2e8f0, #27272a);
+  --shine-color-primary: #3b82f6;
+  --shine-color-primary-fg: #ffffff;
+  --shine-color-ring: #3b82f6;
+  --shine-color-danger: #ef4444;
+  --shine-color-success: #22c55e;
+}

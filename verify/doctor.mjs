@@ -1007,6 +1007,12 @@ if (args.includes("--full")) {
       else if (!/carbon-datatable|antd-pro-list/.test(qout))
         fail("cite.mjs queue", "expected carbon-datatable or antd-pro-list");
       else ok("cite.mjs queue", (qout.match(/Template: (\S+)/) || [])[1] || "queue page");
+
+      const lex = spawnSync(process.execPath, [cite, "lightning record"], { encoding: "utf8" });
+      const lout = `${lex.stdout || ""}${lex.stderr || ""}`;
+      if (lex.status !== 0 || !/Template: lex-record\b/.test(lout))
+        fail("cite.mjs lightning record", `"lightning record" → ${(lout.match(/Template: (\S+)/) || ["", lout.slice(0, 80)])[1]}`);
+      else ok("cite.mjs lightning record", "lex-record");
     }
   }
 
@@ -1066,6 +1072,14 @@ if (args.includes("--full")) {
       if (!packDirs.length) fail("harvested packs", "packs/ exists but is empty");
       else if (broken.length) fail("harvested packs are a payload", broken.slice(0, 8).join("; "));
       else ok("harvested packs are a payload", `${packDirs.length} packs with shot + source + tokens`);
+
+      const missingHarvest = required.filter((s) => {
+        const rows = (catalog.templates ?? []).filter((t) => t.screen === s || (t.jobs || []).includes(s));
+        return !rows.some((t) => existsSync(join(packsDir, t.id, "shot.png")));
+      });
+      if (missingHarvest.length)
+        fail("required screens have a shot", `no pack shot for: ${missingHarvest.join(", ")}`);
+      else ok("required screens have a shot", required.join(", "));
     }
 
     const voiceCss = join(SHINE, "tokens/voices", "carbon.css");
@@ -1076,15 +1090,17 @@ if (args.includes("--full")) {
 
     // V2's voice sheets carried ZERO colors while the lint banned raw color values,
     // so kit paint was unexpressible and everything converged to house style
-    // (docs/audit-2026-08-21.md §5). The four full kits must carry real paint.
+    // (docs/audit-2026-08-21.md §5). Every shipped voice must carry real paint —
+    // a colorless house or spectrum sheet is the same lie as a colorless Carbon sheet.
     const thin = [];
-    for (const fam of ["carbon", "shadcn-zinc", "material", "ant"]) {
-      const p = join(SHINE, "tokens/voices", `${fam}.css`);
-      const n = existsSync(p) ? (readFileSync(p, "utf8").match(/--shine-color-/g) || []).length : 0;
-      if (n < 5) thin.push(`${fam}: ${n} color tokens`);
+    const voiceDir = join(SHINE, "tokens/voices");
+    const voiceFiles = readdirSync(voiceDir).filter((n) => n.endsWith(".css"));
+    for (const f of voiceFiles) {
+      const n = (readFileSync(join(voiceDir, f), "utf8").match(/--shine-color-/g) || []).length;
+      if (n < 5) thin.push(`${f}: ${n} color tokens`);
     }
     if (thin.length) fail("voice sheets carry real paint", thin.join("; ") + " — a colorless voice is the V2 lie");
-    else ok("voice sheets carry real paint", "carbon, shadcn-zinc, material, ant");
+    else ok("voice sheets carry real paint", voiceFiles.map((f) => f.replace(/\.css$/, "")).join(", "));
 
     if (!CI && existsSync(CORPUS)) {
       const missingPaths = (catalog.templates ?? [])
@@ -1139,7 +1155,7 @@ if (args.includes("--full")) {
     // Refusal path must hold even after harvest: point at an id that will never
     // have a pack. This runs at session start, so it must not launch Chromium —
     // compare exits before loading playwright when the shot is missing.
-    const r = spawnSync(process.execPath, [compare, stamp, "--cite", "lex-record"], { encoding: "utf8" });
+    const r = spawnSync(process.execPath, [compare, stamp, "--cite", "not-a-harvested-pack"], { encoding: "utf8" });
     const out = `${r.stdout}${r.stderr}`;
     if (r.status === 2 && /Refusing to compare/.test(out)) ok("compare refuses without pixels", "exit 2");
     else fail("compare refuses without pixels", `exit ${r.status}: ${out.slice(0, 160)}`);

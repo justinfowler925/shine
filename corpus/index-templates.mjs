@@ -244,17 +244,17 @@ for (const t of singles) {
 // no corpus path. Structure and org-measured facts live in references/salesforce.md;
 // harvest (Phase 2) adds real screenshots to corpus/packs/<id>/shot.png.
 for (const t of [
-  { id: "lex-record", screen: "lex-record", rank: 1, title: "Lightning record home (highlights, path, detail, related)", jobs: ["lex-record", "record", "detail", "lightning", "lwc"] },
-  { id: "lex-record-narrow", screen: "lex-record", rank: 2, title: "Lightning record LWC at ~494px host (container queries, not @media)", jobs: ["lex-record-narrow", "lex-record"] },
-  { id: "lex-queue", screen: "lex-queue", rank: 1, title: "Lightning list / work queue (lightning-datatable contracts)", jobs: ["lex-queue", "queue"] },
-  { id: "lex-console", screen: "lex-console", rank: 1, title: "Lightning console + utility bar", jobs: ["lex-console"] },
-  { id: "lex-lwr", screen: "lex-lwr", rank: 1, title: "Experience Cloud LWR (SLDS 2 unsupported)", jobs: ["lex-lwr"] },
-  { id: "lex-email", screen: "lex-email", rank: 1, title: "Salesforce HTML email (600px tables)", jobs: ["lex-email", "email"] },
-  { id: "lex-mobile", screen: "lex-mobile", rank: 1, title: "Salesforce mobile (no datatable)", jobs: ["lex-mobile"] },
+  { id: "lex-record", screen: "lex-record", rank: 1, title: "Lightning record home (highlights, path, detail, related)", jobs: ["lex-record", "record", "detail", "lightning", "lwc"], preview: "https://www.lightningdesignsystem.com/components/page-headers/" },
+  { id: "lex-record-narrow", screen: "lex-record", rank: 2, title: "Lightning record LWC at ~494px host (container queries, not @media)", jobs: ["lex-record-narrow", "lex-record"], preview: "https://www.lightningdesignsystem.com/components/page-headers/" },
+  { id: "lex-queue", screen: "lex-queue", rank: 1, title: "Lightning list / work queue (lightning-datatable contracts)", jobs: ["lex-queue", "queue"], preview: "https://www.lightningdesignsystem.com/components/data-tables/" },
+  { id: "lex-console", screen: "lex-console", rank: 1, title: "Lightning console + utility bar", jobs: ["lex-console"], preview: "https://www.lightningdesignsystem.com/components/tabs/" },
+  { id: "lex-lwr", screen: "lex-lwr", rank: 1, title: "Experience Cloud LWR (SLDS 2 unsupported)", jobs: ["lex-lwr"], preview: "https://www.lightningdesignsystem.com/guidelines/overview/" },
+  { id: "lex-email", screen: "lex-email", rank: 1, title: "Salesforce HTML email (600px tables)", jobs: ["lex-email", "email"], preview: "https://www.lightningdesignsystem.com/guidelines/email/" },
+  { id: "lex-mobile", screen: "lex-mobile", rank: 1, title: "Salesforce mobile (no datatable)", jobs: ["lex-mobile"], preview: "https://www.lightningdesignsystem.com/guidelines/mobile/" },
 ]) {
   push({
     id: t.id, screen: t.screen, kit: "slds", title: t.title,
-    path: "", preview: "", license: "n/a", kind: "blueprint",
+    preview: t.preview || "", license: "n/a", kind: "blueprint",
     startFrom: t.rank, jobs: t.jobs, dna: KIT_FAMILY.slds,
     note: "references/salesforce.md is the structure source; no public source exists",
   });
