@@ -42,4 +42,4 @@ The pair under the lede is the product. The catalog strip is the inventory. The 
 2. Proof: three harvested catalog shots (Carbon, Material, shadcn).
 3. Time: clone, symlink, doctor — same afternoon.
 4. Effort: one git directory, two surfaces.
-5. Trust: MIT, `--ci` is 98 checks, skill tree generated from disk.
+5. Trust: MIT, default `--ci` is 108 browser-free checks; named full CI adds browser/runtime/consumer proof; skill tree generated from disk.

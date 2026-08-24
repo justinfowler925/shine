@@ -20,7 +20,7 @@
 // and read the FAIL lines. It checks the wiring, proves the gates bite by feeding
 // them a known violation, and checks the token layer reached every consumer.
 //
-// Usage: node verify/doctor.mjs [--ci] [--quiet]
+// Usage: node verify/doctor.mjs [--ci] [--full] [--quiet]
 //   --ci     skip machine-local checks (hook wirings, skill symlinks, vendored copies)
 //   --quiet  print only failures (for a sessionStart hook)
 
@@ -35,11 +35,13 @@ import { detectProject, RECIPES, resolveIntegration, verifyRecipeApi } from "../
 import { scaffold } from "../integrations/scaffold.mjs";
 import { citeGaps } from "../hooks/cite-gate.mjs";
 import { artifactClaim, proveGaps, readProveReceipt, writeProveReceipt } from "../hooks/receipt.mjs";
+import { DATAGRID_CAPABILITIES, dataGridContractGaps } from "./contracts/table.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const HOME = homedir();
 const args = process.argv.slice(2);
 const CI = args.includes("--ci");
+const FULL = args.includes("--full");
 const QUIET = args.includes("--quiet");
 
 const results = [];
@@ -52,6 +54,12 @@ const note = (name, detail) => results.push({ pass: true, note: true, name, deta
 
 const readJSON = (p) => JSON.parse(readFileSync(p, "utf8"));
 const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
+
+{
+  const workflow = spawnSync(process.execPath, [join(SHINE, "verify/workflow-contract.test.mjs")], { encoding: "utf8" });
+  if (workflow.status === 0) ok("CI workflow contract", "named default + full lanes");
+  else fail("CI workflow contract", `${workflow.stderr || workflow.stdout}`.trim());
+}
 
 // ---- 0. what tree is being measured? ---------------------------------------
 // A doctor run on a checkout parked behind origin/main reports findings about a
@@ -186,7 +194,7 @@ if (!CI) {
   }
   for (const [surface, p] of [
     ["Cursor", join(HOME, ".cursor/skills/shine")],
-    ["Claude Code", join(HOME, ".claude/skills/shine")],
+    ["Codex", join(HOME, ".agents/skills/shine")],
   ]) {
     const want = join(SHINE, "skill");
     if (!existsSync(p)) fail(`${surface} skill deployed`, `missing: ln -s ${want} ${p}`);
@@ -204,7 +212,7 @@ if (!CI) {
     ok("shine-ux agent source", "agents/shine-ux.md");
     for (const [surface, p] of [
       ["Cursor", join(HOME, ".cursor/agents/shine-ux.md")],
-      ["Claude Code", join(HOME, ".claude/agents/shine-ux.md")],
+      ["Codex", join(HOME, ".Codex/agents/shine-ux.md")],
     ]) {
       if (!existsSync(p)) fail(`${surface} shine-ux agent`, `missing: ln -s ${want} ${p}`);
       else if (realpathSync(p) !== realpathSync(want))
@@ -236,7 +244,7 @@ if (!CI) {
   }
   // Craft exemption must actually work — a fixture that fails measure while the
   // docs claim exemption is the same lie as a gate that never bites.
-  if (!CI && existsSync(fixture)) {
+  if (FULL && existsSync(fixture)) {
     const r = spawnSync(process.execPath, [join(SHINE, "verify/measure.mjs"), fixture], {
       encoding: "utf8",
       env: { ...process.env, NODE_PATH },
@@ -278,14 +286,14 @@ if (!CI) {
 if (!CI) {
   const wirings = [
     {
-      name: "Claude Code per-edit lint",
-      file: join(HOME, ".claude/settings.json"),
+      name: "Codex per-edit lint",
+      file: join(HOME, ".Codex/hooks.json"),
       key: "PostToolUse",
       pat: /design-lint\.mjs/,
     },
     {
-      name: "Claude Code stop sweep",
-      file: join(HOME, ".claude/settings.json"),
+      name: "Codex stop sweep",
+      file: join(HOME, ".Codex/hooks.json"),
       key: "Stop",
       pat: /stop-sweep\.mjs/,
     },
@@ -304,8 +312,8 @@ if (!CI) {
     // This script, at session start, so a broken wiring is reported before the
     // agent makes design decisions rather than after someone notices bad output.
     {
-      name: "Claude Code doctor at session start",
-      file: join(HOME, ".claude/settings.json"),
+      name: "Codex doctor at session start",
+      file: join(HOME, ".Codex/hooks.json"),
       key: "SessionStart",
       pat: /doctor\.mjs/,
     },
@@ -352,19 +360,20 @@ if (!CI) {
   const hookSample = "node ~/Projects/shine-deploy/hooks/design-lint.mjs";
   if (!HOOK_STALE.test(hookSample)) fail("hook-path detector bites", "missed a hardcoded shine-deploy hook");
   else ok("hook-path detector bites", "hardcoded deploy hook would go red");
-  for (const file of [join(HOME, ".cursor/hooks.json"), join(HOME, ".claude/settings.json")]) {
+  for (const file of [join(HOME, ".cursor/hooks.json"), join(HOME, ".Codex/hooks.json")]) {
     if (!existsSync(file)) continue;
     const blob = readFileSync(file, "utf8");
     if (!/design-lint\.mjs|stop-sweep\.mjs|doctor\.mjs/.test(blob)) continue;
-    if (HOOK_STALE.test(blob))
+    const wrongSurface = file.includes(".Codex") ? /\.claude\/skills\/shine|\.cursor\/skills\/shine/.test(blob) : /\.claude\/skills\/shine|\.Codex\/skills\/shine/.test(blob);
+    if (HOOK_STALE.test(blob) || wrongSurface)
       fail(
         `hooks resolve from skill (${file.replace(HOME, "~")})`,
-        "command hardcodes a Projects/shine* checkout — point at ~/.cursor/skills/shine/run-hook.sh",
+        `command uses a stale checkout/surface — point at ${file.includes(".Codex") ? "~/.agents" : "~/.cursor"}/skills/shine/run-hook.sh`,
       );
     else ok(`hooks resolve from skill (${file.replace(HOME, "~")})`, "no Projects/shine* in hook commands");
   }
 
-  // The plugin-shipped copy, for anyone installing shine as a Claude Code plugin.
+  // The plugin-shipped hook contract is also the Codex PostToolUse/Stop source.
   const plugin = join(SHINE, "hooks/hooks.json");
   const conf = readJSON(plugin);
   const missing = [
@@ -559,10 +568,10 @@ if (!CI) {
   if (cursor.status === 2 && /BLOCK/.test(cursor.stderr)) ok("stop sweep blocks (Cursor contract)");
   else fail("stop sweep blocks (Cursor contract)", `exit ${cursor.status}, stderr ${JSON.stringify(cursor.stderr.slice(0, 120))}`);
 
-  const claude = feed({ hook_event_name: "Stop", stop_hook_active: false });
-  if (claude.status === 0 && /"decision"\s*:\s*"block"/.test(claude.stdout))
-    ok("stop sweep blocks (Claude Code contract)");
-  else fail("stop sweep blocks (Claude Code contract)", `exit ${claude.status}, stdout ${JSON.stringify(claude.stdout.slice(0, 120))}`);
+  const codex = feed({ hook_event_name: "Stop", stop_hook_active: false });
+  if (codex.status === 0 && /"decision"\s*:\s*"block"/.test(codex.stdout))
+    ok("stop sweep blocks (Codex contract)");
+  else fail("stop sweep blocks (Codex contract)", `exit ${codex.status}, stdout ${JSON.stringify(codex.stdout.slice(0, 120))}`);
 
   const proveDir = mkdtempSync(join(tmpdir(), "shine-prove-"));
   const proveHtml = join(proveDir, "app.html");
@@ -606,7 +615,19 @@ if (!CI) {
 // screen whose largest region was an empty void. But the first version of the void check
 // flagged shine's own site screenshots (an <img> has no text and no children), and a gate
 // with false positives is a gate someone switches off.
-if (args.includes("--full")) {
+{
+  const complete = Object.fromEntries(DATAGRID_CAPABILITIES.map((key) => [key, true]));
+  if (dataGridContractGaps(complete).length) fail("DataGrid import gate accepts complete contract", dataGridContractGaps(complete).join(", "));
+  else ok("DataGrid import gate accepts complete contract", `${DATAGRID_CAPABILITIES.length}/${DATAGRID_CAPABILITIES.length}`);
+  for (const capability of DATAGRID_CAPABILITIES) {
+    const mutated = { ...complete, [capability]: false };
+    const gaps = dataGridContractGaps(mutated);
+    if (gaps.length === 1 && gaps[0] === capability) ok(`DataGrid import gate bites missing ${capability}`);
+    else fail(`DataGrid import gate bites missing ${capability}`, `reported ${gaps.join(", ") || "no gaps"}`);
+  }
+}
+
+if (FULL) {
   const dir = mkdtempSync(join(tmpdir(), "shine-compose-"));
   const measure = join(SHINE, "verify/measure.mjs");
   const page = (body, head = "") =>
@@ -1317,7 +1338,7 @@ if (args.includes("--full")) {
     else fail("compare refuses without pixels", `exit ${r.status}: ${out.slice(0, 160)}`);
     // Live Chromium: skip at sessionStart (--quiet). --ci and a normal doctor run
     // must watch the stamp FAIL and the unfuck after.html PASS.
-    const liveCompare = (CI || args.includes("--full") || !QUIET) && existsSync(join(SHINE, "corpus/packs/carbon-datatable/shot.png"));
+    const liveCompare = FULL && existsSync(join(SHINE, "corpus/packs/carbon-datatable/shot.png"));
     if (liveCompare) {
       const matrix = spawnSync(process.execPath, [join(SHINE, "verify/compare-proof.test.mjs")], { encoding: "utf8", env: { ...process.env, NODE_PATH }, timeout: 180_000 });
       if (matrix.status === 0 && /baseline 0\/0/.test(matrix.stdout)) ok("compare structural/visual proof matrix", "import-safe; calibrated; adversarial and positive branches bite");
@@ -1510,7 +1531,7 @@ if (!CI) {
 // mid-migration, structural landmarks — and a permanently red doctor gets ignored, which
 // costs more than the check buys. `npm run doctor:full` is the deliberate act; the
 // default stays green-when-good so a FAIL still means something.
-if (args.includes("--full") && !CI) {
+if (FULL) {
   const fixture = join(SHINE, "verify/fixtures/integrations");
   const build = spawnSync("npm", ["run", "build"], { cwd: fixture, encoding: "utf8", timeout: 600_000 });
   if (build.status === 0) ok("integration fixture typechecks and builds", "four pinned production libraries");
@@ -1523,14 +1544,13 @@ if (args.includes("--full") && !CI) {
   if (bites.status === 0 && (bites.stdout.match(/integration scaffold PASS:/g) || []).length === 4 && (bites.stdout.match(/integration bite PASS:/g) || []).length === 2)
     ok("integration compiler gates bite", "4/4 generated scaffolds typecheck; renamed API + missing package rejected");
   else fail("integration compiler gates bite", `${bites.stderr || bites.stdout}`.trim().slice(-500));
-  const r = spawnSync(process.execPath, [join(SHINE, "verify/measure-consumers.mjs"), "--quiet"], {
+  const r = spawnSync(process.execPath, [join(SHINE, "verify/measure-consumers.mjs"), "--quiet", "--registry", join(SHINE, "verify/benchmark-consumers.txt")], {
     encoding: "utf8",
     timeout: 600_000,
   });
   const out = `${r.stdout}${r.stderr}`;
   const summary = (out.match(/measure-consumers: ([^\n]+)/) ?? [])[1] ?? "no verdict";
-  if (r.status === 2) note("consumer pages measured", summary);
-  else if (r.status === 0) ok("consumer pages measured", summary);
+  if (r.status === 0) ok("consumer pages measured", summary);
   else fail("consumer pages measured", `${summary} — node verify/measure-consumers.mjs`);
 }
 

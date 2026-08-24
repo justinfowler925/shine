@@ -23,19 +23,19 @@
 
 import { existsSync, readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
-import { join, dirname } from "node:path";
+import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const REGISTRY = join(ROOT, "consumers.pages.local");
+const registryArg = process.argv.indexOf("--registry");
+const REGISTRY = registryArg >= 0 ? resolve(process.argv[registryArg + 1] || "") : join(ROOT, "consumers.pages.local");
 const QUIET = process.argv.includes("--quiet");
 
 if (!existsSync(REGISTRY)) {
   // Exit 2, never 0. "Nothing registered" and "everything passes" must not look the same
   // from the outside — that equivalence is the whole bug this file exists to close.
-  console.log("measure-consumers: no consumers.pages.local — nothing measured (this is not a pass)");
-  console.log("  create it with lines of  name|path-or-url  to measure what your consumers ship");
+  console.log(`measure-consumers: missing registry ${REGISTRY} — nothing measured (this is not a pass)`);
   process.exit(2);
 }
 
@@ -47,6 +47,7 @@ const targets = readFileSync(REGISTRY, "utf8")
     const [name, ...rest] = l.split("|");
     let t = rest.join("|").trim();
     if (t.startsWith("~")) t = join(homedir(), t.slice(1));
+    else if (!/^https?:\/\//.test(t) && !t.startsWith("/")) t = resolve(ROOT, t);
     return { name: name.trim(), target: t };
   });
 

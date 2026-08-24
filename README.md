@@ -9,7 +9,7 @@
 
 **A design system agents can’t deviate from — and a UX director that looks at the rendered page, names what is wrong, matches a real template from the design kits, and proves the fix with pixels.**
 
-Shine owns the token layer, the design corpus, the agent skill, and the measure loop. **V3** deleted the fiction V2 shipped — generated "DNA pack" stubs, a likeness score computed by grepping the page source for attributes, and a cite ritual policing files nobody could read (the full teardown is in [docs/audit-2026-08-21.md](./docs/audit-2026-08-21.md)) — and replaced it with retrieval that hands the agent something real: `corpus/cite.mjs` resolves a job in plain words to ≤3 templates, extracts registry JSON into readable source, and points at harvested screenshots as they land. New screens start in **Wireframe** (interactive discovery → gray-box HTML → locked brief + `DESIGN.md`). Existing surfaces run **look → name → match → restructure → repaint → prove (measure + compare)**. Hooks block off-token writes on Cursor and Claude Code; `doctor.mjs` proves the wiring bites.
+Shine owns the token layer, the design corpus, the agent skill, and the measure loop. **V3** deleted the fiction V2 shipped — generated "DNA pack" stubs, a likeness score computed by grepping the page source for attributes, and a cite ritual policing files nobody could read (the full teardown is in [docs/audit-2026-08-21.md](./docs/audit-2026-08-21.md)) — and replaced it with retrieval that hands the agent something real: `corpus/cite.mjs` resolves a job in plain words to ≤3 templates, extracts registry JSON into readable source, and points at harvested screenshots as they land. New screens start in **Wireframe** (interactive discovery → gray-box HTML → locked brief + `DESIGN.md`). Existing surfaces run **look → name → match → restructure → repaint → prove (measure + compare)**. Hooks block off-token writes on Cursor and Codex; `doctor.mjs` proves the wiring bites.
 
 **Site:** [shine-blond.vercel.app](https://shine-blond.vercel.app) · **Registry:** [`npx shadcn add`](https://shine-blond.vercel.app/r/) · **Repo:** [`justinfowler925/shine`](https://github.com/justinfowler925/shine) · **Release:** [v2.0.0](https://github.com/justinfowler925/shine/releases/tag/v2.0.0)
 
@@ -51,7 +51,7 @@ Default: **Wireframe** if new; otherwise **Build** unless the ask is clearly a r
 ## Install & deploy
 
 Shine is not a daemon. **Deploy = clone + symlink skill/agent + wire hooks + pass doctor.**
-Supported agent surfaces: **Claude Code** and **Cursor**. Plain **VS Code is not supported**
+Supported agent surfaces: **Codex** and **Cursor**. Plain **VS Code is not supported**
 (no Agent Skills / Cursor-style hooks path). Copilot Chat / Windsurf / others are out of scope
 unless they grow an equivalent skill + hook surface.
 
@@ -59,7 +59,7 @@ unless they grow an equivalent skill + hook surface.
 
 - Node 20+ (`node`, `npm`)
 - Git
-- Claude Code and/or Cursor installed
+- Codex and/or Cursor installed
 - Optional for measure loop: Playwright Chromium (comes with `npm install` in this repo)
 
 ### 1. Clone and install
@@ -84,17 +84,17 @@ If the clone itself stays on `main`, `export SHINE=$(pwd)` and skip the worktree
 and agent text resolve tools from the loaded symlink (`realpath ~/.cursor/skills/shine`),
 not from a hardcoded checkout.
 
-### 2. Claude Code
+### 2. Codex
 
 **Skill + subagent (authority the model loads):**
 
 ```sh
-mkdir -p ~/.claude/skills ~/.claude/agents
-ln -sfn "$SHINE/skill" ~/.claude/skills/shine
-ln -sfn "$SHINE/agents/shine-ux.md" ~/.claude/agents/shine-ux.md
+mkdir -p ~/.agents/skills ~/.Codex/agents
+ln -sfn "$SHINE/skill" ~/.agents/skills/shine
+ln -sfn "$SHINE/agents/shine-ux.md" ~/.Codex/agents/shine-ux.md
 ```
 
-**Hooks (enforcement — skill alone is not enough):** merge into `~/.claude/settings.json`
+**Hooks (enforcement — skill alone is not enough):** merge into `~/.Codex/hooks.json`
 under `hooks` (create the file if missing). Point at the skill symlink, not a checkout:
 
 ```json
@@ -106,7 +106,7 @@ under `hooks` (create the file if missing). Point at the skill symlink, not a ch
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.claude/skills/shine/run-hook.sh design-lint.mjs",
+            "command": "$HOME/.agents/skills/shine/run-hook.sh design-lint.mjs",
             "timeout": 15,
             "statusMessage": "shine design-lint"
           }
@@ -118,7 +118,7 @@ under `hooks` (create the file if missing). Point at the skill symlink, not a ch
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.claude/skills/shine/run-hook.sh stop-sweep.mjs",
+            "command": "$HOME/.agents/skills/shine/run-hook.sh stop-sweep.mjs",
             "timeout": 20,
             "statusMessage": "shine stop sweep"
           }
@@ -130,7 +130,7 @@ under `hooks` (create the file if missing). Point at the skill symlink, not a ch
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.claude/skills/shine/run-hook.sh doctor.mjs --quiet",
+            "command": "$HOME/.agents/skills/shine/run-hook.sh doctor.mjs --quiet",
             "timeout": 30,
             "statusMessage": "shine doctor"
           }
@@ -141,11 +141,11 @@ under `hooks` (create the file if missing). Point at the skill symlink, not a ch
 }
 ```
 
-Restart Claude Code after creating `~/.claude/skills/` mid-session. Invoke with `/shine` or
+Restart Codex after creating `~/.agents/skills/` mid-session. Invoke Shine or
 ask the agent to use **shine** / **shine-ux**.
 
-Plugin path (optional): `hooks/hooks.json` in this repo is the Claude Code *plugin* hook
-manifest (`CLAUDE_PLUGIN_ROOT`). The user-level `settings.json` snippets above are what the
+Plugin path (optional): `hooks/hooks.json` is the portable PostToolUse/Stop hook
+manifest. The user-level `settings.json` snippets above are what the
 doctor checks on a normal laptop install.
 
 ### 3. Cursor
@@ -192,7 +192,7 @@ tasks. New surfaces default to Wireframe.
 
 | Surface | Skill | Agent | Lint hooks | Status |
 | --- | --- | --- | --- | --- |
-| Claude Code | `~/.claude/skills/shine` | `~/.claude/agents/shine-ux.md` | `settings.json` hooks | **Supported** |
+| Codex | `~/.agents/skills/shine` | `~/.Codex/agents/shine-ux.md` | `hooks.json` | **Supported** |
 | Cursor | `~/.cursor/skills/shine` | `~/.cursor/agents/shine-ux.md` | `hooks.json` | **Supported** |
 | VS Code (stock) | — | — | — | **Not supported** |
 | VS Code + Copilot | — | — | — | **Not supported** |
@@ -293,7 +293,7 @@ See [`tokens/README.md`](./tokens/README.md) § Private brand lanes.
 
 | Path | Use |
 | --- | --- |
-| [`README.md`](./README.md) § Install & deploy | Claude Code + Cursor wiring; VS Code not supported |
+| [`README.md`](./README.md) § Install & deploy | Codex + Cursor wiring; VS Code not supported |
 | [`skill/references/wireframe.md`](./skill/references/wireframe.md) | Discovery → gray-box → locked brief |
 | [`skill/references/`](./skill/references/) | Contracts, taste, kits, techniques, dashboards, … |
 | [`agents/shine-ux.md`](./agents/shine-ux.md) | Thin executor subagent |
@@ -331,9 +331,9 @@ Why this exists, corpus/token/registry research, enforcement detail, budgets, an
 
 Multiple products, multiple visual languages, zero shared code. Brand tokens hand-transcribed into one app. A personal site carrying nine copies of the same `:root` block.
 
-The `shine` skill is the design authority on both surfaces (`~/.claude/skills/shine` and
+The `shine` skill is the design authority on both surfaces (`~/.agents/skills/shine` and
 `~/.cursor/skills/shine` → `"$SHINE/skill"`). The `shine-ux` subagent
-(`agents/shine-ux.md`, linked into `~/.cursor/agents` and `~/.claude/agents`) is the
+(`agents/shine-ux.md`, linked into `~/.cursor/agents` and `~/.Codex/agents`) is the
 director — the parent launches it and does not freelance the loop. Tools resolve from
 the loaded skill realpath, never a hardcoded checkout.
 
@@ -577,7 +577,7 @@ Screenshot critique has prior art and a ceiling: *Vision-Guided Iterative Refine
 
 ## Distribution
 
-Deploy the skill to every agent surface you use (Cursor and Claude Code both symlink one tree). Authoring into one IDE's skills folder alone is how parity breaks.
+Deploy the skill to every agent surface you use (Cursor and Codex both symlink one tree). Authoring into one IDE's skills folder alone is how parity breaks.
 
 Design rules → `agent-rules/always/80-design-*.md` (four required frontmatter keys: `id`, `title`, `order`, `why`). `brain-build.py --write` compiles to `~/.claude/CLAUDE.md` and per-repo `.cursor/rules/`. Brain carries rules; the plugin carries corpus and contracts. Commit the brain **and** every repo whose generated files changed.
 

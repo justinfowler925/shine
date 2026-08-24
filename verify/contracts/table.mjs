@@ -1,3 +1,12 @@
+export const DATAGRID_CAPABILITIES = Object.freeze([
+  "title", "toolbar", "filter", "sort", "sticky", "overflow", "page", "resize",
+  "rowActions", "states", "semantics", "remoteMode",
+]);
+
+export function dataGridContractGaps(result) {
+  return DATAGRID_CAPABILITIES.filter((capability) => result?.[capability] !== true);
+}
+
 // Browser-side DataGrid contract evaluator. This function is self-contained so
 // Playwright can serialize it into the product page.
 export async function evaluateDataGrids() {
