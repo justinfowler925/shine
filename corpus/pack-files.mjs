@@ -4,18 +4,35 @@
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const SHINE = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 const CODE = /\.(tsx|ts|jsx|js|mdx|html|css)$/;
 const SKIP = /(?:^|\/)(?:test|tests|__tests__)|\.test\.|\.spec\.|-test\./i;
 const PREFER =
-  /(?:^|\/)(readme|page|layout|app|index|dashboard|data-table|datatable|chat|settings|wizard|profile|shell|blog)/i;
-const DEMOTE = /(?:^|\/)(card|badge|accordion|checkbox|calendar|divider)\./i;
-export const FULL_PAINT = new Set(["carbon", "shadcn-zinc", "material", "ant"]);
+  /(?:^|\/)(readme|page|layout|app|dashboard|data-table|datatable|chat|settings|wizard|profile|shell|blog|navdrawer|nav-drawer|navbar|hero)/i;
+const DEMOTE = /(?:^|\/)(card|badge|accordion|checkbox|calendar|divider|types)\./i;
+export const FULL_PAINT = new Set([
+  "carbon",
+  "shadcn-zinc",
+  "material",
+  "ant",
+  "fluent",
+  "mantine",
+  "magicui",
+  "spectrum",
+  "slds",
+  "shine",
+  "heroui",
+  "tremor",
+]);
 const MIN_SHOT = 30_000;
 const MIN_SOURCE_LINES = 30;
 
 export const rankSource = (p) => {
   const base = p.split("/").pop() || p;
+  if (/\.types\.tsx?$|\.d\.ts$/i.test(base)) return 6;
   if (/^readme/i.test(base)) return 1;
   if (/^page\./i.test(base)) return 0;
   if (PREFER.test(base)) return 2;
@@ -74,6 +91,9 @@ export function collectCorpusSource(row, { corpus, extractDir }) {
     else listed.push(abs);
   } else if (row.kind === "query-only" && abs && existsSync(abs)) {
     listed.push(abs);
+  } else if (row.kind === "blueprint") {
+    const bp = join(SHINE, "corpus/blueprints", `${row.id}.md`);
+    if (existsSync(bp)) listed.push(bp);
   }
   const files = [...new Set(listed)].sort((a, b) => rankSource(a) - rankSource(b) || a.localeCompare(b));
   const picked = pickMustRead(files);
@@ -110,7 +130,7 @@ export function pickMustRead(files) {
   });
   const appPage = files.find((p) => /\/app\/page\.[jt]sx?$/.test(p));
   const composed = files.find((p) =>
-    /(?:^|\/)(?:page|blog|index|layout|dashboard)\.[jt]sx?$/i.test(p.split("/").pop() || p),
+    /(?:^|\/)(?:page|blog|layout|dashboard|navdrawer|chat)\.[jt]sx?$/i.test(p.split("/").pop() || p),
   );
   const ordered = [];
   for (const p of [appPage, composed, ...usable.sort((a, b) => rankSource(a) - rankSource(b) || a.localeCompare(b))]) {

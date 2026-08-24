@@ -31,11 +31,7 @@ shows up: a Carbon cite beside your page should read as relatives.
 
 ## House (when it is the voice)
 
-Dark-first, dense, instrumental, editorial type. OKLCH greys with a slight cast toward
-the accent, one accent, borders over shadows, mono numerics, motion under 200ms for
-state. Light derived from the same token source. Lanes: `brand` and `personal`. House
-craft bands (chroma 0.13–0.24, ~1.12 UI type ratio, 150ms motion) bind **this voice**;
-kit-faithful follows the kit's own values instead.
+House paint lives in `tokens/voices/shine.css` (stone + ember from `tokens/src/personal.tokens.json`). Import it when the voice is house; do not leave `--shine-color-*` undefined and hope the page invents hex.
 
 ## Brand lane
 

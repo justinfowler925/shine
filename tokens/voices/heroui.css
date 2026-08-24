@@ -1,0 +1,22 @@
+/* shine voice pack — heroui. Default NextUI/HeroUI primary #006FEE, content1
+   backgrounds, large radii. */
+html[data-dna-family="heroui"], html[data-shine-voice="kit-faithful"][data-dna-family="heroui"] {
+  --shine-font-sans: ui-sans-serif, system-ui, sans-serif;
+  --shine-radius-sm: 8px;
+  --shine-radius-md: 12px;
+  --shine-radius-lg: 14px;
+  --shine-duration-base: 250ms;
+  --shine-text-sm: 0.875rem;
+  --shine-text-base: 1rem;
+
+  --shine-color-bg: light-dark(#ffffff, #000000);
+  --shine-color-bg-subtle: light-dark(#f4f4f5, #18181b);
+  --shine-color-fg: light-dark(#11181c, #ececec);
+  --shine-color-fg-muted: light-dark(#71717a, #a1a1aa);
+  --shine-color-border: light-dark(#e4e4e7, #27272a);
+  --shine-color-primary: #006fee;
+  --shine-color-primary-fg: #ffffff;
+  --shine-color-ring: #006fee;
+  --shine-color-danger: #f31260;
+  --shine-color-success: #17c964;
+}

@@ -64,6 +64,12 @@ const score = (t) => {
     if (jobs.includes(tok)) s += 40;
     else if (words.has(tok)) s += 10;
   }
+  // "lightning record" used to tie lex-record (jobs: lightning+record = 80) with
+  // antd-pro-profile (screen===record + jobs.record = 80); localeCompare then
+  // preferred Ant. Host hints must beat a generic record screen.
+  const HOST = new Set(["lightning", "lwc", "lex", "slds", "salesforce", "console"]);
+  if (tokens.some((tok) => HOST.has(tok)) && (t.id.startsWith("lex-") || t.kit === "slds")) s += 80;
+  if (tokens.some((tok) => HOST.has(tok)) && !t.id.startsWith("lex-") && t.kit !== "slds") s -= 20;
   return s;
 };
 

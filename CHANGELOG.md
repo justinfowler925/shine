@@ -6,6 +6,19 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- House and kit voices all carry `--shine-color-*` (shine, magicui, spectrum, fluent, mantine, slds, plus heroui and tremor). Doctor fails any colorless sheet, not just the favoured four.
+- Harvested shots for `spectrum-ai-chat`, `antd-pro-chatbot`, and the LEX blueprints (SLDS vendor pages). `corpus/blueprints/lex-*.md` is the region map.
+- `cite.mjs "lightning record"` resolves to `lex-record`. Doctor asserts it.
+- Every required screen type now has a pack shot. Doctor asserts that too.
+
+### Changed
+
+- Magic UI / Tremor / HeroUI harvest URLs are component/docs routes, not marketing homepages.
+- Fluent pack source is `NavDrawer.tsx`, not type barrels.
+- Public copy no longer says “41 real templates.” `--ci` is 69.
+
+### Added
+
 - Packs carry readable `source/` and kit `tokens.css` next to the harvested shot; `cite.mjs` lists those, not a dump of `~/design-corpus`
 - `compare.mjs` exits 1 when measured facts prove the page is not a relative of the cite (attribute-stamp vs carbon-datatable is the seed)
 - Stop-sweep cite gate: a UI page written this turn needs `data-cite` (or `<!-- cite: id -->`)
@@ -19,7 +32,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 - Skill is a loader: parent `Task`s `shine-ux` and does not freelance the loop
 - Cite/measure/compare resolve from the loaded skill realpath, not a hardcoded checkout
-- Public `--ci` count is 67 (prove receipt, zinc-on-carbon, leftover shine-live, pragma-free kit paint)
+- Public `--ci` count tracks the `--ci` run (now 69)
 - Doctor fails a hardcoded `Projects/shine*` tool path, a skill over 80 lines, deploy drift off `main`, and sessionStart `|| true`
 - README install uses `$SHINE` (detached `origin/main` worktree) and a fail-closed doctor
 - Stop-sweep no longer fail-opens on a lint crash, a git error, or a missing hook payload
