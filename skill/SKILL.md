@@ -1,58 +1,56 @@
 ---
 name: shine
-description: >
-  Deep UX skill for any interface, artifact, or visual output. Looks at the actual page
-  (screenshot first), names defects in UX terms — hierarchy, flow, states, density, copy,
-  a11y — then applies the structure and paint of real templates from pinned design kits
-  (shadcn, MUI, Ant Pro, Carbon, Fluent, Spectrum, Magic UI, SLDS) to make it shine.
-  Use when building or reviewing any UI, dashboard, landing page, table, form, chart,
-  email, or Lightning/LWC surface; when asked to "make this look better", "polish",
-  "audit", "wireframe", or "design a page"; when choosing colors, type, spacing, motion,
-  or icons; when a surface speaks or listens; when writing UI copy; and for brand-locked
-  work. New surface with no UI → Wireframe first. Existing UI → the loop:
-  look → name → match → restructure → repaint → prove.
+description: >-
+  Design, build, or audit interfaces using real template structure, the consumer's installed
+  component system, complete interaction contracts, and browser proof. Use for UI, UX,
+  dashboards, tables, forms, landing pages, charts, email, Lightning, or visual polish.
 ---
 
-# SHINE
+# Shine
 
-> Frontmatter stays `name` + `description` only — `paths:`/`globs:` scope the skill to
-> matching files and Cursor then withholds it everywhere else. A Python-served UI once
-> collected 56 raw hex values with the design authority one glob away.
+Build the interface directly in the current Codex task. Do not delegate to a second design
+agent. Shine's deterministic tools choose and verify; you supply brief-specific design judgment.
 
-You are not the director. **`shine-ux` is.** Any UI, artifact, chart, email, or visual
-output: `Task` with `subagent_type: "shine-ux"`. Do not freelance the loop in the parent
-turn — that is how zinc clones ship with this skill sitting unread.
+## Start with one bounded packet
 
-**Catalog cite required.** The subagent runs `corpus/cite.mjs` from the tree this skill
-loaded from, then proves with `verify/measure.mjs` and `verify/compare.mjs`. `data-cite`
-on the finished `<html>` must equal the selected catalog id; the CLI flag alone is not
-provenance. It is not a prove receipt — stop-sweep requires `compare.mjs` to have written
-`last-prove.json` this turn. Do not hardcode a `Projects/shine*` checkout.
-
-**Record list → DataGrid.** Rows of records (queue, remainder, sources, admin) cite
-`carbon-datatable` / `mui-crud-dashboard` / `antd-pro-crud`, not a list or dashboard
-shell. `measure.mjs` fails any data `<table>` (2+ header cells) that is not
-contract-complete. Opt out with `data-shine-contract="layout"`. Wrapping `<table>` in
-JS is not a DataGrid.
-
-## Dispatch
-
-1. Name the **lane** (`internal` / `saas` / `lex` / `marketing`) and the job, one line each.
-2. Launch **shine-ux**. New surface / no UI → Wireframe. Existing → LOOK → NAME → MATCH →
-   RESTRUCTURE → REPAINT → PROVE.
-3. Stop. Do not edit the surface in this turn.
-
-## Tools
+Resolve this installed tree, then create the packet before planning or editing:
 
 ```sh
-SKILL=$(realpath "${HOME}/.cursor/skills/shine" 2>/dev/null || realpath "${HOME}/.agents/skills/shine")
-ROOT="$(dirname "$SKILL")"
-node "$ROOT/corpus/cite.mjs" "<job in plain words>"
-node "$ROOT/verify/measure.mjs" <path> --shot /tmp/shine.png --cite <id>
-node "$ROOT/verify/compare.mjs" <path> --cite <id>
+SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}/.cursor/skills/shine")
+ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
+node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --project "$PWD"
 ```
 
-`measure.mjs` must exit 0 before `compare.mjs` runs. A red measure is unfinished work,
-not a reportable residual; fix and rerun it until green.
+Read the selected screenshot and the packet's embedded source excerpts. Do not reopen their files
+or load the full reference library. The packet is authoritative for the region graph, controls, states,
+integration, provenance, and proof commands.
+When `starter` is present, copy it first and replace its content and visual direction while
+preserving its executable contract markers. Do not rebuild those mechanics from memory.
 
-`shine-ux` reads `references/direction.md` and the rest on demand. The parent does not.
+## Build
+
+- Existing surface: render it first and name the user-blocking defects before editing.
+- New surface: state the information hierarchy and primary workflow, then build; ask discovery
+  questions only when missing product decisions would materially change the result.
+- Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports.
+- For record data, use the resolved production DataGrid recipe. Every data grid includes search,
+  sorting, filters, column visibility, pagination, selection, row actions, and loading/empty/error
+  states. A hand-built table is allowed only for static presentation or a framework-free page.
+- Use the selected template's region structure, not its sample copy. Make the decision data,
+  content, and interaction specific to this job.
+- Put the selected id on the artifact as `data-cite`. Use existing tokens; fill genuine token gaps
+  in Shine's source rather than hardcoding around them.
+
+Only when the packet cannot answer a genuinely advanced requirement, read one focused reference:
+`references/contracts.md`, `references/interaction.md`, `references/adoption.md`, or
+`references/salesforce.md`. Ordinary tables, forms, and page structures need none of them.
+
+## Prove
+
+Exercise the primary workflow in the rendered product. Run the packet's measure command until it
+exits zero, then run compare as the final write. A receipt is generated only by the verifier;
+never create or edit one. Report the selected template, component implementation, workflow result,
+measure facts, screenshot, receipt, and anything not completed.
+
+The packet supplies the exact invocations of `verify/measure.mjs` and `verify/compare.mjs` for
+its selected template; use those commands rather than reconstructing their flags.

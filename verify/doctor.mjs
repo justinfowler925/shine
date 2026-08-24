@@ -128,10 +128,10 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   } else {
     ok("SKILL.md is a loader", `${lines} lines`);
   }
-  if (!/subagent_type:\s*"shine-ux"/.test(text)) {
-    fail("SKILL.md dispatches shine-ux", "parent must Task subagent_type: \"shine-ux\" — freelance paint is how the skill sits unread");
+  if (!/Build the interface directly/.test(text) || /subagent_type:/.test(text)) {
+    fail("SKILL.md executes natively", "skill must build directly without a nested design agent");
   } else {
-    ok("SKILL.md dispatches shine-ux", "subagent_type: shine-ux");
+    ok("SKILL.md executes natively", "bounded packet + direct Codex task");
   }
   if (!/DataGrid/.test(text)) {
     fail(
@@ -145,14 +145,23 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
 
 {
   const ux = readFileSync(join(SHINE, "agents/shine-ux.md"), "utf8");
-  if (!/Record list/.test(ux) || !/datagrid/i.test(ux)) {
+  if (!/bounded design packet/.test(ux) || !/installed component system/.test(ux)) {
     fail(
-      "shine-ux DataGrid match",
-      "MATCH must cite a DataGrid kit for record lists and reject list/dashboard shells",
+      "shine-ux compatibility alias",
+      "compatibility agent must route backward to the native bounded workflow",
     );
   } else {
-    ok("shine-ux DataGrid match", "MATCH requires a DataGrid cite");
+    ok("shine-ux compatibility alias", "native workflow remains canonical");
   }
+}
+
+{
+  const packet=spawnSync(process.execPath,[join(SHINE,"verify/design-packet.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(packet.status===0)ok("bounded design packet", "job structure, controls, states, sources, provenance");
+  else fail("bounded design packet",`${packet.stderr||packet.stdout}`.trim().slice(-500));
+  const release=spawnSync(process.execPath,[join(SHINE,"verify/release.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(release.status===0)ok("versioned atomic release", "immutable manifest + current pointer");
+  else fail("versioned atomic release",`${release.stderr||release.stdout}`.trim().slice(-500));
 }
 
 // ---- 1b. tools resolve from the loaded skill, never a hardcoded checkout --
@@ -1105,9 +1114,9 @@ if (FULL) {
     ok("brief-specific art direction", "20/20 deterministic; distance, exclusions, history, gaps and slop gated");
   else fail("brief-specific art direction", `${artDirection.stderr || artDirection.stdout}`.trim().slice(-400));
 
-  if (!/corpus\/cite\.mjs/.test(skill))
-    fail("SKILL.md cite command", "missing `corpus/cite.mjs` — the MATCH step lost its interface");
-  else ok("SKILL.md cite command", "corpus/cite.mjs");
+  if (!/core\/design-packet\.mjs/.test(skill))
+    fail("SKILL.md packet command", "missing `core/design-packet.mjs` — deterministic selection is bypassed");
+  else ok("SKILL.md packet command", "core/design-packet.mjs");
 
   if (!/compare\.mjs/.test(skill))
     fail("SKILL.md compare", "missing compare.mjs — PROVE lost its pixels");
@@ -1436,23 +1445,16 @@ if (FULL) {
   catch (err) { if (/declared but not installed/.test(err.message)) ok("integration refuses missing runtime packages"); else fail("integration refuses missing runtime packages", err.message); }
 }
 
-// ---- 7. every reference is reachable from the map, and vice versa ---------
-// A reference file the map never names is a file the agent never reads on demand — the
-// same failure as a skill that exists on disk and never loads. A map row with no file
-// behind it sends the agent to read nothing and report the gap as absent guidance.
+// ---- 7. focused references named by the thin skill exist ------------------
 {
-  const agent = readFileSync(join(SHINE, "agents/shine-ux.md"), "utf8");
-  const mapped = new Set([...agent.matchAll(/`references\/([\w.-]+\.md)`/g)].map((m) => m[1]));
+  const skill = readFileSync(join(SHINE, "skill/SKILL.md"), "utf8");
+  const mapped = new Set([...skill.matchAll(/`references\/([\w.-]+\.md)`/g)].map((m) => m[1]));
   const onDisk = new Set(readdirSync(join(SHINE, "skill/references")).filter((f) => f.endsWith(".md")));
-  const unmapped = [...onDisk].filter((f) => !mapped.has(f));
   const missing = [...mapped].filter((f) => !onDisk.has(f) && !f.endsWith(".local.md"));
-  if (unmapped.length || missing.length) {
-    fail("reference map complete", [
-      unmapped.length ? `on disk, never named in shine-ux.md: ${unmapped.join(", ")}` : "",
-      missing.length ? `named in shine-ux.md, no such file: ${missing.join(", ")}` : "",
-    ].filter(Boolean).join("; "));
+  if (missing.length || mapped.size<4) {
+    fail("focused reference routing", missing.length?`named in SKILL.md, no such file: ${missing.join(", ")}`:`only ${mapped.size} focused references`);
   } else {
-    ok("reference map complete", `${onDisk.size} references, all reachable`);
+    ok("focused reference routing", `${mapped.size} task-specific references; ${onDisk.size} available without bulk loading`);
   }
 }
 

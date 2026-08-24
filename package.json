@@ -12,6 +12,7 @@
     "doctor:full": "node verify/doctor.mjs --full",
     "measure": "node verify/measure.mjs",
     "cite": "node corpus/cite.mjs",
+    "packet": "node core/design-packet.mjs",
     "materialize": "node corpus/materialize-packs.mjs",
     "sync-consumers": "bash scripts/sync-consumers.sh",
     "skill-listing": "node site/scripts/skill-listing.mjs",
@@ -21,8 +22,12 @@
     "benchmark:full": "node benchmark/run.mjs --full",
     "benchmark:test": "node benchmark/benchmark.test.mjs",
     "benchmark:quality": "node benchmark/quality.test.mjs",
-    "benchmark:agent:test": "node benchmark/agent-production.test.mjs"
-    ,"benchmark:agent:score:test": "node benchmark/agent-score.test.mjs"
+    "benchmark:agent:test": "node benchmark/agent-production.test.mjs",
+    "benchmark:agent:score:test": "node benchmark/agent-score.test.mjs",
+    "benchmark:agent:representative": "node benchmark/agent-corpus.mjs --set representative",
+    "benchmark:agent:full": "node benchmark/agent-corpus.mjs",
+    "packet:test": "node verify/design-packet.test.mjs",
+    "release:test": "node verify/release.test.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.28",

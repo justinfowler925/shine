@@ -51,8 +51,9 @@ Default: **Wireframe** if new; otherwise **Build** unless the ask is clearly a r
 
 ## Install & deploy
 
-Shine is not a daemon. **Deploy = clone + symlink skill/agent + wire hooks + pass doctor.**
-Supported agent surfaces: **Codex** and **Cursor**. Plain **VS Code is not supported**
+Shine is not a daemon. **Deploy = immutable release + atomic current pointer + hooks + doctor.**
+The native **Codex skill is canonical**. Cursor receives the same skill and a compatibility
+agent generated from that release; it is not a second implementation. Plain **VS Code is not supported**
 (no Agent Skills / Cursor-style hooks path). Copilot Chat / Windsurf / others are out of scope
 unless they grow an equivalent skill + hook surface.
 
@@ -72,22 +73,20 @@ npm run build   # wraps tokens/ — emit both lanes
 npm run verify  # wraps tokens/ — prove emit targets by computed value
 ```
 
-Keep the tree the IDEs load on `main`. If the clone will sit on a feature branch, add a
-detached deploy worktree and point **every** skill, agent, and hook command at it:
+Build a versioned release from a clean `main` checkout. The release contains its source SHA,
+Node version, corpus digest, and skill digest; `current` is replaced atomically:
 
 ```sh
-git -C ~/Projects/shine worktree add --detach ~/Projects/shine-deploy origin/main
-git -C ~/Projects/shine-deploy fetch origin && git -C ~/Projects/shine-deploy checkout --detach origin/main
-export SHINE=~/Projects/shine-deploy   # the tree doctor reports; never the feature checkout
+node scripts/release.mjs
+export SHINE="$HOME/.local/share/shine/current"
 ```
 
-If the clone itself stays on `main`, `export SHINE=$(pwd)` and skip the worktree. Skill
-and agent text resolve tools from the loaded symlink (`realpath ~/.cursor/skills/shine`),
-not from a hardcoded checkout.
+Never point an installed skill at a feature checkout, detached worktree, or another tree's
+`node_modules`. Skill text resolves tools from the loaded `current` symlink.
 
 ### 2. Codex
 
-**Skill + subagent (authority the model loads):**
+**Native skill + compatibility alias:**
 
 ```sh
 mkdir -p ~/.agents/skills ~/.Codex/agents
@@ -142,8 +141,8 @@ under `hooks` (create the file if missing). Point at the skill symlink, not a ch
 }
 ```
 
-Restart Codex after creating `~/.agents/skills/` mid-session. Invoke Shine or
-ask the agent to use **shine** / **shine-ux**.
+Restart Codex after creating `~/.agents/skills/` mid-session. Invoke **shine**. It executes
+inside the current task; the `shine-ux` file exists only for backward compatibility.
 
 Plugin path (optional): `hooks/hooks.json` is the portable PostToolUse/Stop hook
 manifest. The user-level `settings.json` snippets above are what the
@@ -151,7 +150,7 @@ doctor checks on a normal laptop install.
 
 ### 3. Cursor
 
-**Skill + subagent:**
+**Generated compatibility deployment:**
 
 ```sh
 mkdir -p ~/.cursor/skills ~/.cursor/agents

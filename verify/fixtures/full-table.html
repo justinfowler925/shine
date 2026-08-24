@@ -11,13 +11,13 @@
 <body><main data-grid>
   <h1>Employees</h1><p>A functional grid with every default contract capability.</p>
   <div class="toolbar" data-toolbar role="search">
-    <input type="search" aria-label="Search employees" data-shine-probe-value="zzzz"><button data-clear-filters>Clear filters</button>
+    <input type="search" aria-label="Search employees" data-shine-probe-value="zzzz" data-task-control><button data-clear-filters>Clear filters</button>
     <span data-state="loading">Loading state</span><span data-state="empty">Empty state</span><span data-state="filtered-empty">Filtered empty state</span>
     <span data-state="error" role="alert">Error state <button data-retry>Retry</button></span>
   </div>
   <div data-grid-scroll><table id="employees" data-shine-contract="table" data-client-mode>
     <thead><tr><th aria-sort="none"><button data-sort>Name</button><span role="separator" data-column-resize></span></th><th>Title</th><th>Actions</th></tr></thead>
-    <tbody><tr><td>Ada</td><td>Analyst</td><td><button data-row-action>Open</button></td></tr><tr><td>Grace</td><td>Lead</td><td><button data-row-action>Open</button></td></tr></tbody>
+    <tbody data-task-result><tr><td>Ada</td><td>Analyst</td><td><button data-row-action>Open</button></td></tr><tr><td>Grace</td><td>Lead</td><td><button data-row-action>Open</button></td></tr></tbody>
   </table></div>
   <nav data-pagination aria-label="Pagination"><span data-page-size>10/page</span><span data-page-range>1–2</span><span data-total>2 total</span><button>Previous</button><button data-page-next>Next</button></nav>
   <script>

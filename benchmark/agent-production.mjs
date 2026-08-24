@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 import {chromium} from "playwright";
 import {createHash} from "node:crypto";
-import {closeSync,existsSync,mkdirSync,openSync,readFileSync,rmSync,symlinkSync,writeFileSync} from "node:fs";
-import {execFile,spawnSync} from "node:child_process";
+import {closeSync,copyFileSync,existsSync,mkdirSync,openSync,readFileSync,rmSync,symlinkSync,writeFileSync} from "node:fs";
+import {execFile,spawn,spawnSync} from "node:child_process";
 import {basename,dirname,join,resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const CODEX="/Applications/ChatGPT.app/Contents/Resources/codex";
-const MODEL="gpt-5.6-terra";
+const MODEL="gpt-5.6-luna";
+export const BUDGETS={timeoutMs:180000,maxInputTokens:250000,maxOutputTokens:12000};
 const sha=value=>createHash("sha256").update(value).digest("hex");
 
 export function discoverProductionEntries({cursorApiKey=process.env.CURSOR_API_KEY}={}){
@@ -21,8 +22,10 @@ export function discoverProductionEntries({cursorApiKey=process.env.CURSOR_API_K
 
 export function buildPrompt(brief){
  const tasks={datagrid:"Search must change visible rows; sorting must change order; pagination must change the visible range.",dashboard:"A time-range control and the primary drilldown must change visible decision data.",form:"Validation must reject an incomplete value and successful submission must show an in-page confirmation.",marketing:"The primary product-demo action must reveal or navigate to concrete product evidence.",lex:"The primary record action must enter an editable state and saving must visibly confirm the record update.",voice:"Sending a message must append both the user turn and an assistant/tool/source state to the transcript."};
- return `Lane: ${brief.lane}\nJob: ${brief.brief}\n\nUse the supplied Shine skill and execute the shine-ux role natively. Build the finished interface in index.html. This is a locked benchmark brief: do not ask questions. It must be a standalone Vite-buildable page with real job-specific content and interactions, not a wireframe or generic category shell. ${tasks[brief.category]} Mark the control that starts that task with data-task-control and the visibly changing result region with data-task-result. Choose one cited direction, then run cite, measure, compare, and the DataGrid contract when applicable. A nonzero measure is unfinished: fix every hard failure and rerun until it exits 0 before compare. Compare is the final write: do not edit index.html after it. Finish only after the artifact and artifact-bound compare receipt exist.`;
+ return `Lane: ${brief.lane}\nJob: ${brief.brief}\n\nUse the supplied Shine skill directly. Build the finished interface in index.html. If index.html is already present, edit it in place and preserve its executable contract mechanics. This is a locked benchmark brief: do not ask questions. It must be a standalone Vite-buildable page with real job-specific content and interactions, not a wireframe or generic category shell. ${tasks[brief.category]} Mark the control that starts that task with data-task-control and the visibly changing result region with data-task-result. Use Shine's bounded design packet; when it supplies a starter, preserve that executable contract while adapting its content and visual direction. Then build, measure, and compare. A nonzero measure is unfinished: fix every hard failure and rerun until it exits 0 before compare. Compare is the final write: do not edit index.html or proof receipts after it. Finish only after the artifact and artifact-bound compare receipt exist.`;
 }
+
+function preseedArtifact({brief,skillRoot,app}){const packet=spawnSync(process.execPath,[join(skillRoot,"core/design-packet.mjs"),"--job",brief.brief,"--lane",brief.lane,"--project",app],{encoding:"utf8",env:{...process.env,SHINE_ROOT:skillRoot}});if(packet.status!==0)throw new Error(`design packet failed: ${packet.stderr||packet.stdout}`);const data=JSON.parse(packet.stdout);writeFileSync(join(app,"shine-packet.json"),JSON.stringify(data,null,2));if(data.starter)copyFileSync(data.starter,join(app,"index.html"));return data}
 
 export function validateRunRecord(record){
  const gaps=[];
@@ -40,6 +43,9 @@ export function validateRunRecord(record){
  if(record.receipt?.artifactSha256!==record.artifactSha256)gaps.push("receipt is not bound to artifact");
  if(!record.selectedKits?.length)gaps.push("selected kit missing");
  if(record.usage?.finishReason&&record.usage.finishReason!=="stop")gaps.push(`incomplete finish ${record.usage.finishReason}`);
+ if(record.elapsedMs>BUDGETS.timeoutMs)gaps.push(`runtime budget exceeded ${record.elapsedMs}ms`);
+ if((record.usage?.input_tokens||record.usage?.inputTokens||0)>BUDGETS.maxInputTokens)gaps.push("input token budget exceeded");
+ if((record.usage?.output_tokens||record.usage?.outputTokens||0)>BUDGETS.maxOutputTokens)gaps.push("output token budget exceeded");
  return gaps;
 }
 
@@ -59,7 +65,8 @@ function codexRunIdentity(events){
  const reverse=[...events].reverse();return {thread,turn:reverse.find(x=>x.type==="turn.completed"),failed:reverse.find(x=>x.type==="turn.failed")};
 }
 
-function execFileRecord(file,args,options){return new Promise(resolve=>execFile(file,args,options,(error,stdout,stderr)=>resolve({status:error?.code==="ETIMEDOUT"?null:typeof error?.code==="number"?error.code:0,error,stdout,stderr})));}
+function execFileRecord(file,args,options){return new Promise(resolve=>execFile(file,args,options,(error,stdout,stderr)=>resolve({status:error?.code==="ETIMEDOUT"?null:typeof error?.code==="number"?error.code:error?1:0,error,stdout,stderr})));}
+function spawnRecord(file,args,{cwd,env,timeout,maxBuffer=64*1024*1024}){return new Promise(resolve=>{const child=spawn(file,args,{cwd,env,stdio:["pipe","pipe","pipe"]});const stdout=[],stderr=[];let bytes=0,timedOut=false,settled=false,timer;const finish=(status,error=null)=>{if(settled)return;settled=true;clearTimeout(timer);resolve({status:timedOut?null:status,error:timedOut?Object.assign(new Error(`agent timeout ${timeout}ms`),{code:"ETIMEDOUT"}):error,stdout:Buffer.concat(stdout).toString(),stderr:Buffer.concat(stderr).toString()})};for(const [stream,parts] of [[child.stdout,stdout],[child.stderr,stderr]])stream.on("data",chunk=>{bytes+=chunk.length;if(bytes>maxBuffer){child.kill("SIGTERM");finish(1,new Error(`agent output exceeded ${maxBuffer} bytes`));return}parts.push(chunk)});child.on("error",error=>finish(1,error));child.on("close",code=>finish(code??1));child.stdin.end();timer=setTimeout(()=>{timedOut=true;child.kill("SIGTERM")},timeout);});}
 
 function readReceipt(path,artifactSha256){
  if(!existsSync(path))return null;const data=JSON.parse(readFileSync(path,"utf8"));const receipts=Array.isArray(data.receipts)?data.receipts:[data];return receipts.find(x=>x.artifactSha256===artifactSha256)||null;
@@ -123,15 +130,15 @@ export async function runCodexProduction({brief,skillRoot,outDir,model=MODEL}){
  try{
   rmSync(outDir,{recursive:true,force:true});mkdirSync(outDir,{recursive:true});
   const app=join(outDir,"app"),receiptPath=join(outDir,"compare-receipt.json"),lastMessage=join(outDir,"last-message.txt");mkdirSync(app,{recursive:true});
-  const agentFile=join(skillRoot,"agents/shine-ux.md");
-  writeFileSync(join(app,"AGENTS.md"),`# Native Shine benchmark\nRead ${join(skillRoot,"skill/SKILL.md")} and ${agentFile} completely before acting. Execute the shine-ux role yourself. Only write inside this app. The benchmark harness, brief, and model are fixed; the supplied Shine tree is the only experimental variable.\n`);
   writeFileSync(join(app,"package.json"),JSON.stringify({private:true,scripts:{build:"vite build"},devDependencies:{vite:"6.1.0"}},null,2));spawnSync("git",["init"],{cwd:app,encoding:"utf8"});
-  const timeout=Number(process.env.SHINE_AGENT_TIMEOUT_MS||900000),args=["exec","--json","--ephemeral","--ignore-user-config","--ignore-rules","--approve-for-me","--model",model,"--config",'model_reasoning_effort="medium"',"--cd",app,"--output-last-message",lastMessage,buildPrompt(brief)];
-  const run=await execFileRecord(CODEX,args,{cwd:app,encoding:"utf8",timeout,maxBuffer:64*1024*1024,env:{...process.env,SHINE_RECEIPT:receiptPath}}),events=parseCodexEvents(run.stdout),identity=codexRunIdentity(events);writeFileSync(join(outDir,"tool-trace.json"),JSON.stringify(events,null,2));writeFileSync(join(outDir,"transcript.json"),JSON.stringify(events.filter(x=>/message|item/.test(x.type||"")),null,2));writeFileSync(join(outDir,"run.log"),`${run.stdout||""}\nSTDERR\n${run.stderr||""}`);
+  const packet=brief.arm==="current"?preseedArtifact({brief,skillRoot,app}):null;
+  writeFileSync(join(app,"AGENTS.md"),`# Native Shine benchmark\nRead ${join(skillRoot,"skill/SKILL.md")} completely before acting. Execute it directly in this task. Only write inside this app. The benchmark harness, brief, and model are fixed; the supplied Shine tree is the only experimental variable.${packet?" The bounded design packet is already in shine-packet.json and any starter is already index.html. Do not rediscover the Shine root, regenerate the packet, or read reference/source files; design, edit, and prove.":""}\n`);
+  const started=Date.now(),timeout=Number(process.env.SHINE_AGENT_TIMEOUT_MS||BUDGETS.timeoutMs),args=["exec","--json","--ephemeral","--ignore-user-config","--ignore-rules","--approve-for-me","--model",model,"--config",'model_reasoning_effort="medium"',"--cd",app,"--output-last-message",lastMessage,buildPrompt(brief)];
+  const run=await spawnRecord(CODEX,args,{cwd:app,timeout,maxBuffer:64*1024*1024,env:{...process.env,SHINE_ROOT:skillRoot,SHINE_PRESEEDED:packet?.starter?"1":"",SHINE_RECEIPT:receiptPath}}),events=parseCodexEvents(run.stdout),identity=codexRunIdentity(events);writeFileSync(join(outDir,"tool-trace.json"),JSON.stringify(events,null,2));writeFileSync(join(outDir,"transcript.json"),JSON.stringify(events.filter(x=>/message|item/.test(x.type||"")),null,2));writeFileSync(join(outDir,"run.log"),`${run.stdout||""}\nSTDERR\n${run.stderr||""}`);
   const artifact=join(app,"index.html"),source=existsSync(artifact)?readFileSync(artifact):Buffer.alloc(0),artifactSha256=source.length?sha(source):null,vite=join(ROOT,"verify/fixtures/integrations/node_modules/vite/bin/vite.js"),build=spawnSync(process.execPath,[vite,"build"],{cwd:app,encoding:"utf8"});writeFileSync(join(outDir,"build.log"),`${build.stdout||""}${build.stderr||""}`);
   const selectedKits=[...String(source).matchAll(/data-cite=["']([^"']+)/g)].map(x=>x[1]),receiptCandidates=[receiptPath,join(app,"last-prove.json"),join(app,"artifacts/last-prove.json"),join(app,"proof/last-prove.json")],receipt=artifactSha256?receiptCandidates.map(path=>readReceipt(path,artifactSha256)).find(Boolean)||null:null,shot=join(outDir,"screenshot.png"),measureJson=join(outDir,"measure.json"),cite=selectedKits[0];
   const measure=cite?spawnSync(process.execPath,[join(skillRoot,"verify/measure.mjs"),artifact,"--shot",shot,"--json",measureJson,"--cite",cite],{encoding:"utf8",timeout:120000}):{status:1,stdout:"",stderr:"no cite"};writeFileSync(join(outDir,"measure.log"),`${measure.stdout||""}${measure.stderr||""}`);const interaction=source.length?await verifyInteraction(artifact,shot):{status:"fail",reason:"artifact missing"};writeFileSync(join(outDir,"interaction.json"),JSON.stringify(interaction,null,2));
-  const timedOut=run.error?.code==="ETIMEDOUT",status=run.status===0&&!identity.failed?"finished":"error",usage=identity.turn?.usage||{},runError=timedOut?{message:`agent timeout ${timeout}ms`}:(identity.failed||run.error||run.status!==0)?{message:identity.failed?.error?.message||run.error?.message||`exit ${run.status}`} :null,record={version:1,surface:"codex-cli-native",arm:brief.arm,brief:brief.id,model,agentId:"shine-ux-native",runId:identity.thread,status,error:runError,result:existsSync(lastMessage)?readFileSync(lastMessage,"utf8"):null,usage:{...usage,finishReason:status==="finished"?"stop":timedOut?"timeout":"error"},artifact,artifactSha256,artifactBytes:source.length,selectedKits:[...new Set(selectedKits)],transcript:events,toolTrace:events,build:{status:build.status,log:"build.log"},measure:{status:measure.status,log:"measure.log",json:"measure.json"},screenshot:existsSync(shot),interaction,receipt};
+  const timedOut=run.error?.code==="ETIMEDOUT",status=run.status===0&&!identity.failed?"finished":"error",usage=identity.turn?.usage||{},runError=timedOut?{message:`agent timeout ${timeout}ms`}:(identity.failed||run.error||run.status!==0)?{message:identity.failed?.error?.message||run.error?.message||`exit ${run.status}`} :null,record={version:1,surface:"codex-cli-native",elapsedMs:Date.now()-started,arm:brief.arm,brief:brief.id,model,agentId:"shine-native",runId:identity.thread,status,error:runError,result:existsSync(lastMessage)?readFileSync(lastMessage,"utf8"):null,usage:{...usage,finishReason:status==="finished"?"stop":timedOut?"timeout":"error"},artifact,artifactSha256,artifactBytes:source.length,selectedKits:[...new Set(selectedKits)],transcript:events,toolTrace:events,build:{status:build.status,log:"build.log"},measure:{status:measure.status,log:"measure.log",json:"measure.json"},screenshot:existsSync(shot),interaction,receipt};
   record.gaps=validateRunRecord(record);writeFileSync(join(outDir,"record.json"),JSON.stringify(record,null,2));return record;
  } finally {closeSync(lockFd);rmSync(lock,{force:true});}
 }
