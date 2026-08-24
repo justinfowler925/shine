@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "heroui-next-app",
+  "screen": "app-shell",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui-next-app",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "heroui-next-app__app__about__page.tsx",
+      "sha256": "507764b868b660729ed9c5c2a3de64201635b6ca997e8d5ec725ea5d736320d2"
+    },
+    {
+      "path": "layout.tsx",
+      "sha256": "8c8cb8e406284ec0c9a0f26c02a3dd672fd6f2af99c8d400d63ae76eda09cc1d"
+    },
+    {
+      "path": "page.tsx",
+      "sha256": "0d50675f2aa7edbdef0a2d92ad28b1757c179c04b242376a8273ec79c33c750e"
+    }
+  ]
+}

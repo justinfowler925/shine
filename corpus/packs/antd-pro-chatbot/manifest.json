@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "antd-pro-chatbot",
+  "screen": "chat",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "ant-design-pro",
+    "mode": "sparse",
+    "url": "https://github.com/ant-design/ant-design-pro.git",
+    "branch": "master",
+    "sha": "bb40867ae3ef943e06e48da6911ccc5900e638a1"
+  },
+  "corpusPath": "ant-design-pro/src/pages/chatbot",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "index.tsx",
+      "sha256": "a2eefe74329c59e88a5bc7a2e8247d2ca371114b5ab911e298d4da95de081ce1"
+    },
+    {
+      "path": "style.ts",
+      "sha256": "7d1bbdc27564096831eedb128e8afda55e2bbf9963248ca3337c8e73517dfaff"
+    }
+  ]
+}

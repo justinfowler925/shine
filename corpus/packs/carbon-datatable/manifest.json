@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "id": "carbon-datatable",
+  "screen": "queue",
+  "kind": "source",
+  "license": "Apache-2.0",
+  "upstream": {
+    "name": "carbon",
+    "mode": "sparse",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "branch": "main",
+    "sha": "82f04fbfdb385323883f4f8e3ce97a14865a744a"
+  },
+  "corpusPath": "carbon/packages/react/src/components/DataTable",
+  "entrypoints": [],
+  "structuralSignature": {
+    "pattern": "\\b(DataTable|ProList|List|Table|table)\\b",
+    "files": [
+      "DataTable.mdx",
+      "DataTable.tsx",
+      "DataTable-ai-label.stories.js"
+    ]
+  },
+  "files": [
+    {
+      "path": "DataTable-ai-label.stories.js",
+      "sha256": "44f95d650da5413ed975a77b025cbeefba73e7240fe8c601d0cc77b0126894da"
+    },
+    {
+      "path": "DataTable.mdx",
+      "sha256": "90b459c52930d0ab42d16887f1388bc5f875a2e14feda2c4e1caf30882da0d28"
+    },
+    {
+      "path": "DataTable.tsx",
+      "sha256": "4ccb8a68a22515140b3e23410ff61cb0005324c5eb32d0a7380b389c41e9a1e0"
+    }
+  ]
+}

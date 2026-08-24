@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "mui-marketing-page",
+  "screen": "marketing",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "mui-material",
+    "mode": "sparse",
+    "url": "https://github.com/mui/material-ui.git",
+    "branch": "master",
+    "sha": "81e94061ca393d4eaf238e6f77c283b2edd9ef7e"
+  },
+  "corpusPath": "mui-material/docs/data/material/getting-started/templates/marketing-page",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "AppAppBar.tsx",
+      "sha256": "b8e2f8e24fec914e30019d2c94a5ffabfbf45c5ae5c4af373d0d84cedf9fd4c0"
+    },
+    {
+      "path": "FAQ.tsx",
+      "sha256": "18adf9389d94e5c7bdd1cbf033be38fa4916f789737ced073b6e9d9153745270"
+    },
+    {
+      "path": "Hero.tsx",
+      "sha256": "7e58b28ea110ec9a67703c14cc603b1c9eda1851449c6d33447ce515bace9dbc"
+    }
+  ]
+}

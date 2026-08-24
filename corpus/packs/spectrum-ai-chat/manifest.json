@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "spectrum-ai-chat",
+  "screen": "chat",
+  "kind": "source",
+  "license": "Apache-2.0",
+  "upstream": {
+    "name": "react-spectrum",
+    "mode": "sparse",
+    "url": "https://github.com/adobe/react-spectrum.git",
+    "branch": "main",
+    "sha": "7c0765468a1d161ab9ac88ca9f1b54d3603a275c"
+  },
+  "corpusPath": "react-spectrum/packages/@react-spectrum/ai/src",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "AIButton.tsx",
+      "sha256": "29c6c80024f4f9929131c556e24beeb0b33c63ebc08769312fbfeb07c4431453"
+    },
+    {
+      "path": "AttachmentList.tsx",
+      "sha256": "58039e91b0756331cdb7f4b40d3bf3a9863e6c21b0dd93e49432ea2b51b0df84"
+    },
+    {
+      "path": "Chat.tsx",
+      "sha256": "e5ce5695d31e71573ba74a221d15683ae84e09d9b730362f8cac8ef516a690b3"
+    }
+  ]
+}

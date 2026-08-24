@@ -3,7 +3,8 @@
 // cite.mjs lists these; materialize-packs.mjs writes them; doctor inspects them.
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { createHash } from "node:crypto";
+import { dirname, extname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const SHINE = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -29,6 +30,32 @@ export const FULL_PAINT = new Set([
 ]);
 const MIN_SHOT = 30_000;
 const MIN_SOURCE_LINES = 30;
+const RESOLVE_EXT = ["", ".tsx", ".ts", ".jsx", ".js", ".css", ".json", "/index.tsx", "/index.ts", "/index.jsx", "/index.js"];
+
+const localImports = (text) => [...text.matchAll(/(?:import|export)\s+(?:[^"']*?\s+from\s+)?["']([^"']+)["']|import\(\s*["']([^"']+)["']\s*\)/g)]
+  .map((m) => m[1] || m[2]).filter((s) => s?.startsWith("."));
+
+export function dependencyClosure(entrypoints, root, corpusRoot = root) {
+  const queue = entrypoints.map((p) => resolve(root, p));
+  const seen = new Set();
+  const external = new Set();
+  while (queue.length) {
+    const file = queue.shift();
+    if (seen.has(file)) continue;
+    if (!existsSync(file) || !statSync(file).isFile()) throw new Error(`dependency entry missing: ${file}`);
+    if (!resolve(file).startsWith(resolve(corpusRoot) + "/")) throw new Error(`dependency escapes corpus: ${file}`);
+    seen.add(file);
+    if (!CODE.test(file) || extname(file) === ".json") continue;
+    const text = readFileSync(file, "utf8");
+    for (const spec of localImports(text)) {
+      const base = resolve(dirname(file), spec);
+      const hit = RESOLVE_EXT.map((x) => base + x).find((p) => existsSync(p) && statSync(p).isFile());
+      if (hit) queue.push(hit);
+      else external.add(`${relative(corpusRoot, file)} -> ${spec}`);
+    }
+  }
+  return { files: [...seen].sort(), unresolvedLocal: [...external].sort() };
+}
 
 export const rankSource = (p) => {
   const base = p.split("/").pop() || p;
@@ -84,9 +111,14 @@ const walk = (dir, acc, depth = 0) => {
 /** Ranked readable source paths from the pinned corpus (not the pack). */
 export function collectCorpusSource(row, { corpus, extractDir }) {
   const listed = [];
+  let dependencyFiles = null;
   const abs = row.path ? join(corpus, row.path) : "";
   if (row.kind === "source" && abs && existsSync(abs)) {
-    if (abs.endsWith(".json")) listed.push(...extractRegistryItem(abs, row.id, extractDir));
+    if (row.entrypoints?.length && statSync(abs).isDirectory()) {
+      const graph = dependencyClosure(row.entrypoints, abs, corpus);
+      listed.push(...graph.files);
+      dependencyFiles = graph.files;
+    } else if (abs.endsWith(".json")) listed.push(...extractRegistryItem(abs, row.id, extractDir));
     else if (statSync(abs).isDirectory()) walk(abs, listed);
     else listed.push(abs);
   } else if (row.kind === "query-only" && abs && existsSync(abs)) {
@@ -97,7 +129,11 @@ export function collectCorpusSource(row, { corpus, extractDir }) {
   }
   const files = [...new Set(listed)].sort((a, b) => rankSource(a) - rankSource(b) || a.localeCompare(b));
   const picked = pickMustRead(files);
-  return { files: picked.files.length ? picked.files : files, show: picked.show.length ? picked.show : files.slice(0, 3), extra: picked.extra, corpusRoot: abs };
+  if (row.entrypoints?.length) {
+    const entry = row.entrypoints.map((p) => resolve(abs, p));
+    picked.show = [...entry, ...picked.show.filter((p) => !entry.includes(p))].slice(0, 3);
+  }
+  return { files: dependencyFiles || (picked.files.length ? picked.files : files), show: picked.show.length ? picked.show : files.slice(0, 3), extra: picked.extra, corpusRoot: abs };
 }
 
 export function packSourceFiles(packDir) {
@@ -140,7 +176,7 @@ export function pickMustRead(files) {
 }
 
 /** What's wrong with this pack directory. Empty array = shippable. */
-export function inspectPack(dir, family = "") {
+export function inspectPack(dir, family = "", row = null) {
   const broken = [];
   const shot = join(dir, "shot.png");
   if (!existsSync(shot)) broken.push("no shot.png");
@@ -157,6 +193,27 @@ export function inspectPack(dir, family = "") {
   else if (FULL_PAINT.has(family)) {
     const n = (readFileSync(tokens, "utf8").match(/--shine-color-/g) || []).length;
     if (n < 5) broken.push(`tokens.css has ${n} --shine-color- (need ≥5 for ${family})`);
+  }
+  const manifestPath = join(dir, "manifest.json");
+  if (!existsSync(manifestPath)) broken.push("no manifest.json");
+  else {
+    try {
+      const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+      if (!Array.isArray(manifest.files) || !manifest.files.length) broken.push("manifest has zero files");
+      for (const file of manifest.files || []) {
+        const p = join(dir, "source", file.path);
+        if (!existsSync(p)) broken.push(`manifest file missing: ${file.path}`);
+        else {
+          const hash = createHash("sha256").update(readFileSync(p)).digest("hex");
+          if (hash !== file.sha256) broken.push(`manifest hash mismatch: ${file.path}`);
+        }
+      }
+      if (row?.kind === "source" && !manifest.upstream?.sha) broken.push("source manifest has no upstream pin");
+      if (row?.kind === "query-only" && manifest.files?.length) broken.push("query-only pack must not vendor source");
+      if (manifest.structuralSignature && !manifest.structuralSignature.files?.length) broken.push("structural signature has zero files");
+    } catch (err) {
+      broken.push(`invalid manifest.json: ${err.message}`);
+    }
   }
   return broken;
 }

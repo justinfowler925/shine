@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-23",
+  "generated": "2026-08-24",
   "corpus": "/Users/justinfowler/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
@@ -413,38 +413,38 @@
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
+      "entrypoints": [
+        "CrudDashboard.tsx"
+      ],
       "dna": {
         "family": "material",
         "density": "comfortable"
       },
       "jobs": [
         "crud",
-        "admin",
-        "table",
-        "datagrid",
-        "datatable"
+        "admin"
       ]
     },
     {
       "id": "antd-pro-crud",
       "screen": "crud",
       "kit": "ant-design-pro",
-      "title": "Ant Design Pro pages (browse for the shape you need)",
-      "path": "ant-design-pro/src/pages",
+      "title": "Ant Design Pro ProTable CRUD page",
+      "path": "ant-design-pro/src/pages/table-list",
       "preview": "https://preview.pro.ant.design",
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
+      "entrypoints": [
+        "index.tsx"
+      ],
       "dna": {
         "family": "ant",
         "density": "dense"
       },
       "jobs": [
         "crud",
-        "admin",
-        "table",
-        "datagrid",
-        "datatable"
+        "admin"
       ]
     },
     {
@@ -724,12 +724,7 @@
       "jobs": [
         "queue",
         "list",
-        "inbox",
-        "table",
-        "datagrid",
-        "datatable",
-        "sources",
-        "remainder"
+        "inbox"
       ],
       "dna": {
         "family": "carbon",

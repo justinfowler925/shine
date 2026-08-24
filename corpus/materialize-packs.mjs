@@ -7,6 +7,7 @@
 // sheet and the 3 must-read source files into the pack so cite/compare/doctor
 // do not depend on ~/design-corpus at read time.
 
+import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -19,6 +20,11 @@ const PACKS = join(SHINE, "corpus/packs");
 const EXTRACT = join(SHINE, "corpus/extracted");
 const catalog = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "utf8"));
 const byId = new Map((catalog.templates ?? []).map((t) => [t.id, t]));
+const lockLines = readFileSync(join(SHINE, "corpus/corpus.lock"), "utf8").split(/\r?\n/).filter((l) => l && !l.startsWith("#"));
+const pins = new Map(lockLines.map((line) => { const [name, mode, url, branch, sha] = line.split("\t"); return [name, { name, mode, url, branch, sha }]; }));
+const kitPin = { "mui-material": "mui-material", "ant-design-pro": "ant-design-pro", carbon: "carbon", fluentui: "fluentui", "react-spectrum": "react-spectrum", magicui: "magicui", mantine: "mantine", heroui: "heroui", tremor: "tremor", "shadcn-registry": "shadcn-registry" };
+const sha256 = (p) => createHash("sha256").update(readFileSync(p)).digest("hex");
+const signatures = { crud: /\b(DataGrid|ProTable|Table)\b/, queue: /\b(DataTable|ProList|List|Table|table)\b/ };
 
 const only = process.argv.slice(2).filter((a) => !a.startsWith("-"));
 const dirs = readdirSync(PACKS).filter((d) => !d.startsWith(".") && (only.length ? only.includes(d) : true));
@@ -48,7 +54,7 @@ for (const id of dirs) {
   writeFileSync(join(dir, "tokens.css"), header + (body.startsWith("/*") ? body : `\n${body}`));
 
   const { show, files } = collectCorpusSource(row, { corpus: CORPUS, extractDir: EXTRACT });
-  const picks = show.length ? show : files.slice(0, 3);
+  const picks = row.entrypoints?.length ? files : (show.length ? show : files.slice(0, 3));
   if (!picks.length) {
     failed.push(`${id}: no corpus source at ${row.path || "(none)"} — run corpus/acquire.sh`);
     continue;
@@ -57,13 +63,30 @@ for (const id of dirs) {
   rmSync(srcDir, { recursive: true, force: true });
   mkdirSync(srcDir, { recursive: true });
   const used = new Set();
+  const root = row.path ? join(CORPUS, row.path) : CORPUS;
+  const manifestFiles = [];
   for (const src of picks) {
-    let name = basename(src);
+    let name = row.entrypoints?.length ? relative(root, src) : basename(src);
+    if (name.startsWith("..")) name = relative(CORPUS, src);
     if (used.has(name)) name = relative(CORPUS, src).replace(/[\\/]/g, "__");
     used.add(name);
-    writeFileSync(join(srcDir, name), readFileSync(src));
+    const dest = join(srcDir, name);
+    mkdirSync(dirname(dest), { recursive: true });
+    writeFileSync(dest, readFileSync(src));
+    manifestFiles.push({ path: name, sha256: sha256(src) });
   }
-  const broken = inspectPack(dir, family);
+  const pin = pins.get(kitPin[row.kit]);
+  const signature = signatures[row.screen];
+  const signatureFiles = signature ? manifestFiles.filter((f) => signature.test(readFileSync(join(srcDir, f.path), "utf8"))).map((f) => f.path) : [];
+  const manifest = {
+    version: 1, id, screen: row.screen, kind: row.kind, license: row.license,
+    upstream: pin || null, corpusPath: row.path, entrypoints: row.entrypoints || [],
+    structuralSignature: signature ? { pattern: signature.source, files: signatureFiles } : null,
+    files: manifestFiles.sort((a, b) => a.path.localeCompare(b.path)),
+  };
+  writeFileSync(join(dir, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
+  if (signature && !signatureFiles.length) failed.push(`${id}: no ${row.screen} structural signature in dependency closure`);
+  const broken = inspectPack(dir, family, row);
   if (broken.length) failed.push(`${id}: ${broken.join("; ")}`);
   else ok.push(`${id} (${picks.map((p) => basename(p)).join(", ")})`);
 }

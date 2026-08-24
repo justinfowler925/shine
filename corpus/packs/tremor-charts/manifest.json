@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "tremor-charts",
+  "screen": "charts",
+  "kind": "source",
+  "license": "Apache-2.0",
+  "upstream": {
+    "name": "tremor",
+    "mode": "sparse",
+    "url": "https://github.com/tremorlabs/tremor.git",
+    "branch": "main",
+    "sha": "ca4d588f47820ff3d514d37fa4ee08a4222dec11"
+  },
+  "corpusPath": "tremor/src/components",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "areachart.stories.tsx",
+      "sha256": "18b21ff8dd882a3d947aa1f51679062642b9870ea459561ffa2217acee50903e"
+    },
+    {
+      "path": "AreaChart.tsx",
+      "sha256": "6ee1f2f0c2f45a0017ffef7f827279a9909ccb2c039864b9ed7a88d93dce76a7"
+    },
+    {
+      "path": "barchart.stories.tsx",
+      "sha256": "48a3b1c1242132f10bd13ab04342be287314ee4b3ca2ce8c68d652c95ac7fbff"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "mantine-appshell",
+  "screen": "app-shell",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "mantine",
+    "mode": "sparse",
+    "url": "https://github.com/mantinedev/mantine.git",
+    "branch": "master",
+    "sha": "4430b6f592155c8b6ddcd78d44cb758a9d4a31a9"
+  },
+  "corpusPath": "mantine/apps/mantine.dev/src/app-shell-examples/examples/FullLayout",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "FullLayout.tsx",
+      "sha256": "c66b66eb50b365408dcfdc5a9e86fbb4a4fb7b0a7462d1d8515986df57e2d134"
+    }
+  ]
+}

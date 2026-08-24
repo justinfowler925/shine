@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "id": "lex-lwr",
+  "screen": "lex-lwr",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": null,
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "lex-lwr.md",
+      "sha256": "8a9bdbd83c14f2635190021b415dc851494af2b0421273c1f9ba4ada7984d0f1"
+    }
+  ]
+}

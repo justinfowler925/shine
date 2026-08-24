@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "fluent-nav",
+  "screen": "settings",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "fluentui",
+    "mode": "sparse",
+    "url": "https://github.com/microsoft/fluentui.git",
+    "branch": "master",
+    "sha": "c83bfa7666778640350f54991c8ebe712a8f389b"
+  },
+  "corpusPath": "fluentui/packages/react-components/react-nav",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "NavDrawer.tsx",
+      "sha256": "4bd72092b858ca96124969c440647ebd2922c07e0911ba03c9be22c4c43e0ced"
+    },
+    {
+      "path": "useAppItem.ts",
+      "sha256": "d8539c3b1c88369bee823e59173b45a639fb60e8c1d16e584abffbe7a29aafb8"
+    },
+    {
+      "path": "useAppItemStyles.styles.ts",
+      "sha256": "e296491385ba7b392de7ead381dde0439b4a44808bd1f32dac189717bf624283"
+    }
+  ]
+}
