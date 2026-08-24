@@ -19,7 +19,7 @@ Anti-patterns are **lane-relative**. Glow is a marketing DNA option and a saas/l
 ## Two-pass plan (write `DESIGN.md`)
 
 1. **Ground the subject.** One concrete subject, audience, single job of the page.
-2. **Match.** `node corpus/cite.mjs "<job>"` — read the harvested shot (or preview) and the extracted source before drawing.
+2. **Match.** `node corpus/cite.mjs "<job + lane + audience + density + information shape + brand + interaction + tone + type + image + framework>"` — read the normalized axes, harvested shots, explained exclusions/gaps and extracted source before drawing. Candidates must differ by at least three semantic axes. Never shuffle. Project history is only the final tie-break among equal eligibility scores.
 3. **Token plan.** 4–6 named roles from the voice sheet / kit tokens or brand pack — declared as custom properties, never invented hex at usage sites.
 4. **Type.** Display / body / data pairing from the kit. LEX: Salesforce Sans only.
 5. **Layout.** ASCII regions cloned from the template's source.
@@ -35,6 +35,10 @@ Cream+serif+terracotta, OLED+acid-green, broadsheet hairlines, and indigo-on-zin
 the four looks a model reaches for unprompted. Any of them can be right **when the brief
 pins it**; reaching for one because the axis was free is not a decision. The real
 anti-slop mechanism is the template: match a real screen and follow its DNA.
+The retrieval layer also refuses bento, glassmorphism, gradient, neon and purple as
+unstated defaults. Naming one in the brief makes it an explicit demand, not a random
+style lottery. If the requested axis is absent, report the catalog gap instead of
+quietly substituting the nearest generic SaaS look.
 
 ## Modes (Impeccable)
 

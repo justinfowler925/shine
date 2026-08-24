@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "axes": ["job", "lane", "audience", "density", "informationShape", "brand", "interaction", "tone", "type", "image", "framework", "signature"],
+  "screenProfiles": {
+    "ai-generate": {"informationShape":"form","interaction":"generation","tone":"technical","type":"ui","image":"none","signature":"composer/choices/output"},
+    "app-shell": {"informationShape":"navigation","interaction":"navigation","tone":"restrained","type":"ui","image":"none","signature":"rail/header/workspace"},
+    "auth": {"informationShape":"form","interaction":"form","tone":"reassuring","type":"humanist","image":"product","signature":"identity/form/trust"},
+    "blog": {"informationShape":"narrative","interaction":"reading","tone":"editorial","type":"display","image":"editorial","signature":"masthead/story/related"},
+    "charts": {"informationShape":"metrics","interaction":"analysis","tone":"technical","type":"numeric","image":"none","signature":"summary/plot/legend"},
+    "chat": {"informationShape":"conversation","interaction":"conversation","tone":"human","type":"humanist","image":"none","signature":"thread/composer/context"},
+    "checkout": {"informationShape":"transaction","interaction":"form","tone":"reassuring","type":"ui","image":"product","signature":"steps/form/summary"},
+    "command-palette": {"informationShape":"commands","interaction":"command","tone":"technical","type":"ui","image":"none","signature":"query/results/shortcut"},
+    "crud": {"informationShape":"records","interaction":"data-operations","tone":"technical","type":"ui","image":"none","signature":"toolbar/grid/actions"},
+    "dashboard": {"informationShape":"metrics","interaction":"analysis","tone":"technical","type":"numeric","image":"none","signature":"summary/trend/queue"},
+    "empty": {"informationShape":"state","interaction":"recovery","tone":"encouraging","type":"humanist","image":"illustration","signature":"icon/explanation/action"},
+    "marketing": {"informationShape":"narrative","interaction":"conversion","tone":"editorial","type":"display","image":"editorial","signature":"hero/proof/cta"},
+    "marketing-hero": {"informationShape":"narrative","interaction":"conversion","tone":"expressive","type":"display","image":"editorial","signature":"display/media/cta"},
+    "queue": {"informationShape":"records","interaction":"data-operations","tone":"serious","type":"ui","image":"none","signature":"filters/grid/triage"},
+    "record": {"informationShape":"record-detail","interaction":"editing","tone":"technical","type":"ui","image":"none","signature":"highlights/detail/related"},
+    "settings": {"informationShape":"form","interaction":"configuration","tone":"restrained","type":"ui","image":"none","signature":"nav/sections/controls"},
+    "wizard": {"informationShape":"form","interaction":"guided-form","tone":"reassuring","type":"ui","image":"none","signature":"progress/step/review"}
+  },
+  "kitProfiles": {
+    "ant-design-pro": {"density":"dense","brand":"kit-faithful","framework":"ant","tone":"technical","type":"ui"},
+    "carbon": {"density":"dense","brand":"kit-faithful","framework":"carbon","tone":"serious","type":"grotesk"},
+    "fluentui": {"density":"comfortable","brand":"kit-faithful","framework":"fluent","tone":"restrained","type":"humanist"},
+    "magicui": {"density":"editorial","brand":"kit-faithful","framework":"native","tone":"expressive","type":"display"},
+    "mantine": {"density":"comfortable","brand":"kit-faithful","framework":"native","tone":"friendly","type":"humanist"},
+    "mui-material": {"density":"comfortable","brand":"kit-faithful","framework":"mui","tone":"neutral","type":"ui"},
+    "react-spectrum": {"density":"comfortable","brand":"kit-faithful","framework":"spectrum","tone":"restrained","type":"humanist"},
+    "shadcn-registry": {"density":"comfortable","brand":"neutral","framework":"shadcn-tanstack","tone":"restrained","type":"ui"},
+    "slds": {"density":"compact","brand":"brand-locked","framework":"lex","tone":"technical","type":"ui"},
+    "tremor": {"density":"comfortable","brand":"neutral","framework":"react","tone":"technical","type":"numeric"}
+  },
+  "slopStyles": ["bento", "glassmorphism", "gradient", "neon", "purple"]
+}
