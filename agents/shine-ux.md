@@ -71,6 +71,13 @@ node "$ROOT/corpus/cite.mjs" "<brief: job, lane, audience, density, information 
 6. **RESTRUCTURE** — clone the template's regions from its source. Queue keeps the table
    focal; hero keeps display type and one primary; record keeps highlights → detail →
    related.
+   Before writing markup, name the brief-specific **region graph, decision data, and
+   control inventory**. A category shell with nouns swapped is a failed direction:
+   dashboards need job-specific measures/encodings, forms need the job's sections and
+   validation path, marketing needs product evidence/media, LEX needs its named host
+   anatomy, and voice/AI needs listening/tool/source/recovery states. Do not reuse copy,
+   sample values, or the same structure from another brief. Search project history for
+   prior `data-shine-signature` and proof receipts before building.
    Before importing components, run `integrations/resolve.mjs --project <consumer-root>`.
    Preserve the installed kit; never add MUI/Ant/Carbon/shadcn beside another design
    system without an explicit user decision. Use the native or LEX recipe when detected.
@@ -85,8 +92,11 @@ node "$ROOT/verify/measure.mjs" <path-or-url> --shot /tmp/shine-after.png --cite
 node "$ROOT/verify/compare.mjs" <path-or-url> --cite <id> --brief <brief-id> --lane <lane>
 ```
 
-   Hard fails block. For SaaS and marketing, mark the one visible, brief-specific owned
-   moment with `data-shine-signature="<brief-specific-name>"`; compare rejects missing
+   Hard fails block. For SaaS and marketing, the visible, brief-specific owned
+   **region** carries `data-shine-signature="<brief-specific-name>"`; a heading attribute
+   on an otherwise stock shell is an attribute stamp, not a signature. Its text must
+   name the brief's subject, occupy meaningful area, and contain the job-specific
+   interaction/evidence promised in RESTRUCTURE. Compare rejects missing
    signatures and a structural fingerprint already proved for another brief. LEX and
    brand-locked adaptation belong to their system and are exempt (`--brand-locked`).
    Read the compare composite and its region order, focal share, controls, density,
