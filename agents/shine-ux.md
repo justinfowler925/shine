@@ -87,12 +87,18 @@ node "$ROOT/corpus/cite.mjs" "<brief: job, lane, audience, density, information 
    usage sites say `var(--…)`. House: shine lanes. Brand: kit structure, brand chrome.
 8. **PROVE** —
 
+   Before proof, bind the selected catalog row on the finished artifact itself:
+   `<html data-cite="<id>">`. The `--cite` CLI flag does not substitute for this
+   provenance. Compare refuses a missing or different artifact cite.
+
 ```sh
 node "$ROOT/verify/measure.mjs" <path-or-url> --shot /tmp/shine-after.png --cite <id>
 node "$ROOT/verify/compare.mjs" <path-or-url> --cite <id> --brief <brief-id> --lane <lane>
 ```
 
-   Hard fails block. For SaaS and marketing, the visible, brief-specific owned
+   A nonzero measure exit means the artifact is unfinished: fix the named failures and
+   rerun measure until it exits 0. Do not run compare, mint a receipt, or finish while
+   measure is red. Hard fails block. For SaaS and marketing, the visible, brief-specific owned
    **region** carries `data-shine-signature="<brief-specific-name>"`; a heading attribute
    on an otherwise stock shell is an attribute stamp, not a signature. Its text must
    name the brief's subject, occupy meaningful area, and contain the job-specific

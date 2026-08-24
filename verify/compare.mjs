@@ -25,7 +25,8 @@ export async function compareArtifact({target,citeId,outPath="/tmp/shine-compare
   const [pagePalette,templatePalette,calibration]=await Promise.all([palette(sharp,captured.screenshot),palette(sharp,template),pixelCalibration(sharp,template,template)]);
   const W=800,a=await sharp(captured.screenshot).resize({width:W}).png().toBuffer(),b=await sharp(template).resize({width:W}).png().toBuffer(); const [ma,mb]=await Promise.all([sharp(a).metadata(),sharp(b).metadata()]);
   await sharp({create:{width:W*2+24,height:Math.max(ma.height,mb.height),channels:3,background:{r:24,g:24,b:24}}}).composite([{input:a,left:0,top:0},{input:b,left:W+24,top:0}]).png().toFile(outPath);
-  const failures=[...structure.failures,...visual.failures]; const report=reportProof({outPath,citeId,facts:captured.facts,pagePalette,templatePalette,calibration,structure,visual});
+  const citeFailures=captured.facts.cite===citeId?[]:[`artifact data-cite ${captured.facts.cite||"missing"} does not bind the requested template ${citeId}`];
+  const failures=[...citeFailures,...structure.failures,...visual.failures]; const report=reportProof({outPath,citeId,facts:captured.facts,pagePalette,templatePalette,calibration,structure,visual});
   const proof={...structure.proof,...visual.proof,calibration,pagePalette,templatePalette};
   if(!failures.length&&!/^https?:/.test(target))writeProveReceipt({cite:citeId,target:resolve(target),templateShot:shotPath,compareVersion:"compare-v3",proof});
   else if(!failures.length) return {status:2,failures:["remote URLs cannot mint an artifact-bound receipt"],report,proof};

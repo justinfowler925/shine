@@ -501,6 +501,19 @@ const compose = await page.evaluate(() => {
   });
   const sectionsMissingJob = sectionJobs.filter((s) => !s.hasHeading);
 
+  // 9. Sibling pane collisions. A table can satisfy its own overflow contract while
+  // its containing pane still paints underneath a detail rail. Measure peer regions,
+  // not the table alone, and ignore deliberate overlay primitives.
+  const paneCandidates=[...document.querySelectorAll("main > section,main > article,main > aside,[data-pane]")].filter(vis);
+  const paneOverlaps=[];
+  for(let i=0;i<paneCandidates.length;i++)for(let j=i+1;j<paneCandidates.length;j++){
+    const a=paneCandidates[i],b=paneCandidates[j];if(a.contains(b)||b.contains(a))continue;
+    if(a.closest("[role=dialog],[role=menu],[popover]")||b.closest("[role=dialog],[role=menu],[popover]"))continue;
+    const ar=a.getBoundingClientRect(),br=b.getBoundingClientRect(),w=Math.min(ar.right,br.right)-Math.max(ar.left,br.left),h=Math.min(ar.bottom,br.bottom)-Math.max(ar.top,br.top);
+    if(w<=16||h<=16)continue;const overlap=w*h,smaller=Math.min(ar.width*ar.height,br.width*br.height);
+    if(smaller&&overlap/smaller>.04)paneOverlaps.push({a:name(a),b:name(b),w:Math.round(w),h:Math.round(h),share:+(overlap/smaller).toFixed(2)});
+  }
+
   const layoutTable = (el) => {
     const c = el.getAttribute("data-shine-contract") || el.getAttribute("data-contract") || "";
     if (c === "layout" || c === "presentation") return true;
@@ -589,6 +602,7 @@ const compose = await page.evaluate(() => {
     chromeShare: +chromeShare.toFixed(3),
     appShellProbe,
     sectionsMissingJob: sectionsMissingJob.slice(0, 8),
+    paneOverlaps,
     sectionCount: sections.length,
     tableContract,
     tableAreaPct,
@@ -714,6 +728,7 @@ for (const v of compose.voids) {
       `give it a title, a line of body and one action, per patterns.md`,
   );
 }
+for(const o of compose.paneOverlaps||[])failures.push(`geometry: ${o.a} overlaps ${o.b} by ${o.w}×${o.h}px (${Math.round(o.share*100)}% of the smaller pane) — contain the grid/toolbar inside its pane; sibling work regions must not paint through each other`);
 if (!isWireframe) for (const c of compose.collisions) {
   if (compose.voice && compose.voice !== "house") {
     console.log(

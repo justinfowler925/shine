@@ -1,28 +1,27 @@
 #!/usr/bin/env node
-import {Agent} from "@cursor/sdk";
 import {chromium} from "playwright";
 import {createHash} from "node:crypto";
 import {closeSync,existsSync,mkdirSync,openSync,readFileSync,rmSync,symlinkSync,writeFileSync} from "node:fs";
 import {spawnSync} from "node:child_process";
-import {dirname,join,resolve} from "node:path";
+import {basename,dirname,join,resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const CODEX="/Applications/ChatGPT.app/Contents/Resources/codex";
-const MODEL="gpt-5.4";
+const MODEL="gpt-5.6-terra";
 const sha=value=>createHash("sha256").update(value).digest("hex");
 
 export function discoverProductionEntries({cursorApiKey=process.env.CURSOR_API_KEY}={}){
  return {
   codex:{available:existsSync(CODEX),entry:`${CODEX} exec --json`,skill:"~/.agents/skills/shine",agent:"~/.Codex/agents/shine-ux.md"},
   cursor:{available:Boolean(cursorApiKey),entry:"@cursor/sdk Agent.create local",skill:"~/.cursor/skills/shine",agent:"AgentOptions.agents[shine-ux]"},
-  causalHarness:{surface:"cursor",model:MODEL,settingSources:["project"],variable:"skillRoot only"}
+  causalHarness:{surface:"codex-cli-native",model:MODEL,reasoning:"medium",variable:"skillRoot only"}
  };
 }
 
 export function buildPrompt(brief){
  const tasks={datagrid:"Search must change visible rows; sorting must change order; pagination must change the visible range.",dashboard:"A time-range control and the primary drilldown must change visible decision data.",form:"Validation must reject an incomplete value and successful submission must show an in-page confirmation.",marketing:"The primary product-demo action must reveal or navigate to concrete product evidence.",lex:"The primary record action must enter an editable state and saving must visibly confirm the record update.",voice:"Sending a message must append both the user turn and an assistant/tool/source state to the transcript."};
- return `Lane: ${brief.lane}\nJob: ${brief.brief}\n\nUse the Shine skill and dispatch the shine-ux agent. Build the finished interface in index.html. This is a locked benchmark brief: do not ask questions. It must be a standalone Vite-buildable page with real job-specific content and interactions, not a wireframe or generic category shell. ${tasks[brief.category]} Mark the control that starts that task with data-task-control and the visibly changing result region with data-task-result. Choose one cited direction, make at most one visual refinement pass, then run cite, measure, compare, and the DataGrid contract when applicable. Compare is the final write: do not edit index.html after it. Finish only after the artifact and artifact-bound compare receipt exist.`;
+ return `Lane: ${brief.lane}\nJob: ${brief.brief}\n\nUse the supplied Shine skill and execute the shine-ux role natively. Build the finished interface in index.html. This is a locked benchmark brief: do not ask questions. It must be a standalone Vite-buildable page with real job-specific content and interactions, not a wireframe or generic category shell. ${tasks[brief.category]} Mark the control that starts that task with data-task-control and the visibly changing result region with data-task-result. Choose one cited direction, then run cite, measure, compare, and the DataGrid contract when applicable. A nonzero measure is unfinished: fix every hard failure and rerun until it exits 0 before compare. Compare is the final write: do not edit index.html after it. Finish only after the artifact and artifact-bound compare receipt exist.`;
 }
 
 export function validateRunRecord(record){
@@ -48,6 +47,16 @@ function prepareHome(home,skillRoot,agentFile){
  mkdirSync(join(home,".agents/skills"),{recursive:true});mkdirSync(join(home,".cursor/skills"),{recursive:true});mkdirSync(join(home,".Codex/agents"),{recursive:true});mkdirSync(join(home,".cursor/agents"),{recursive:true});
  symlinkSync(join(skillRoot,"skill"),join(home,".agents/skills/shine"));symlinkSync(join(skillRoot,"skill"),join(home,".cursor/skills/shine"));
  symlinkSync(agentFile,join(home,".Codex/agents/shine-ux.md"));symlinkSync(agentFile,join(home,".cursor/agents/shine-ux.md"));
+}
+
+function parseCodexEvents(stdout){
+ const events=[];for(const line of String(stdout||"").split("\n")){if(!line.trim())continue;try{events.push(JSON.parse(line))}catch{events.push({type:"unparsed",text:line})}}
+ return events;
+}
+
+function codexRunIdentity(events){
+ const thread=events.find(x=>x.type==="thread.started")?.thread_id||events.find(x=>x.thread_id)?.thread_id||null;
+ const reverse=[...events].reverse();return {thread,turn:reverse.find(x=>x.type==="turn.completed"),failed:reverse.find(x=>x.type==="turn.failed")};
 }
 
 function readReceipt(path,artifactSha256){
@@ -78,7 +87,8 @@ async function verifyInteraction(artifact,shot){
 
 export async function runCursorProduction({brief,skillRoot,outDir,apiKey=process.env.CURSOR_API_KEY,model=MODEL}){
  if(!apiKey)throw new Error("CURSOR_API_KEY is required");
- const lock=join(dirname(outDir),".production-agent.lock");mkdirSync(dirname(outDir),{recursive:true});const lockFd=acquireLock(lock);
+ const {Agent}=await import("@cursor/sdk");
+ const lock=join(dirname(outDir),`.${basename(outDir)}.production-agent.lock`);mkdirSync(dirname(outDir),{recursive:true});const lockFd=acquireLock(lock);
  try{
   rmSync(outDir,{recursive:true,force:true});mkdirSync(outDir,{recursive:true});
   const home=join(outDir,"home"),app=join(outDir,"app"),receiptPath=join(outDir,"compare-receipt.json");mkdirSync(app,{recursive:true});
@@ -105,8 +115,27 @@ export async function runCursorProduction({brief,skillRoot,outDir,apiKey=process
  } finally {closeSync(lockFd);rmSync(lock,{force:true});}
 }
 
+export async function runCodexProduction({brief,skillRoot,outDir,model=MODEL}){
+ if(!existsSync(CODEX))throw new Error(`Codex CLI missing: ${CODEX}`);
+ const lock=join(dirname(outDir),`.${basename(outDir)}.production-agent.lock`);mkdirSync(dirname(outDir),{recursive:true});const lockFd=acquireLock(lock);
+ try{
+  rmSync(outDir,{recursive:true,force:true});mkdirSync(outDir,{recursive:true});
+  const app=join(outDir,"app"),receiptPath=join(outDir,"compare-receipt.json"),lastMessage=join(outDir,"last-message.txt");mkdirSync(app,{recursive:true});
+  const agentFile=join(skillRoot,"agents/shine-ux.md");
+  writeFileSync(join(app,"AGENTS.md"),`# Native Shine benchmark\nRead ${join(skillRoot,"skill/SKILL.md")} and ${agentFile} completely before acting. Execute the shine-ux role yourself. Only write inside this app. The benchmark harness, brief, and model are fixed; the supplied Shine tree is the only experimental variable.\n`);
+  writeFileSync(join(app,"package.json"),JSON.stringify({private:true,scripts:{build:"vite build"},devDependencies:{vite:"6.1.0"}},null,2));spawnSync("git",["init"],{cwd:app,encoding:"utf8"});
+  const timeout=Number(process.env.SHINE_AGENT_TIMEOUT_MS||900000),args=["exec","--json","--ephemeral","--ignore-user-config","--ignore-rules","--approve-for-me","--model",model,"--config",'model_reasoning_effort="medium"',"--cd",app,"--output-last-message",lastMessage,buildPrompt(brief)];
+  const run=spawnSync(CODEX,args,{cwd:app,input:"",encoding:"utf8",timeout,maxBuffer:64*1024*1024,env:{...process.env,SHINE_RECEIPT:receiptPath}}),events=parseCodexEvents(run.stdout),identity=codexRunIdentity(events);writeFileSync(join(outDir,"tool-trace.json"),JSON.stringify(events,null,2));writeFileSync(join(outDir,"transcript.json"),JSON.stringify(events.filter(x=>/message|item/.test(x.type||"")),null,2));writeFileSync(join(outDir,"run.log"),`${run.stdout||""}\nSTDERR\n${run.stderr||""}`);
+  const artifact=join(app,"index.html"),source=existsSync(artifact)?readFileSync(artifact):Buffer.alloc(0),artifactSha256=source.length?sha(source):null,vite=join(ROOT,"verify/fixtures/integrations/node_modules/vite/bin/vite.js"),build=spawnSync(process.execPath,[vite,"build"],{cwd:app,encoding:"utf8"});writeFileSync(join(outDir,"build.log"),`${build.stdout||""}${build.stderr||""}`);
+  const selectedKits=[...String(source).matchAll(/data-cite=["']([^"']+)/g)].map(x=>x[1]),receiptCandidates=[receiptPath,join(app,"last-prove.json"),join(app,"artifacts/last-prove.json"),join(app,"proof/last-prove.json")],receipt=artifactSha256?receiptCandidates.map(path=>readReceipt(path,artifactSha256)).find(Boolean)||null:null,shot=join(outDir,"screenshot.png"),measureJson=join(outDir,"measure.json"),cite=selectedKits[0];
+  const measure=cite?spawnSync(process.execPath,[join(skillRoot,"verify/measure.mjs"),artifact,"--shot",shot,"--json",measureJson,"--cite",cite],{encoding:"utf8",timeout:120000}):{status:1,stdout:"",stderr:"no cite"};writeFileSync(join(outDir,"measure.log"),`${measure.stdout||""}${measure.stderr||""}`);const interaction=source.length?await verifyInteraction(artifact,shot):{status:"fail",reason:"artifact missing"};writeFileSync(join(outDir,"interaction.json"),JSON.stringify(interaction,null,2));
+  const timedOut=run.error?.code==="ETIMEDOUT",status=run.status===0&&!identity.failed?"finished":"error",usage=identity.turn?.usage||{},runError=timedOut?{message:`agent timeout ${timeout}ms`}:(identity.failed||run.error||run.status!==0)?{message:identity.failed?.error?.message||run.error?.message||`exit ${run.status}`} :null,record={version:1,surface:"codex-cli-native",arm:brief.arm,brief:brief.id,model,agentId:"shine-ux-native",runId:identity.thread,status,error:runError,result:existsSync(lastMessage)?readFileSync(lastMessage,"utf8"):null,usage:{...usage,finishReason:status==="finished"?"stop":timedOut?"timeout":"error"},artifact,artifactSha256,artifactBytes:source.length,selectedKits:[...new Set(selectedKits)],transcript:events,toolTrace:events,build:{status:build.status,log:"build.log"},measure:{status:measure.status,log:"measure.log",json:"measure.json"},screenshot:existsSync(shot),interaction,receipt};
+  record.gaps=validateRunRecord(record);writeFileSync(join(outDir,"record.json"),JSON.stringify(record,null,2));return record;
+ } finally {closeSync(lockFd);rmSync(lock,{force:true});}
+}
+
 if(import.meta.url===`file://${process.argv[1]}`){
  const arg=name=>{const i=process.argv.indexOf(name);return i>=0?process.argv[i+1]:null};const briefId=arg("--brief"),skillRoot=resolve(arg("--skill-root")||"."),outDir=resolve(arg("--out")||join("/private/tmp","shine-agent",briefId||"run"));
  const briefs=JSON.parse(readFileSync(join(ROOT,"benchmark/briefs.json"),"utf8"));const brief=briefs.find(x=>x.id===briefId);if(!brief)throw new Error(`unknown brief ${briefId}`);brief.arm=arg("--arm")||"current";
- const record=await runCursorProduction({brief,skillRoot,outDir});console.log(JSON.stringify({record:join(outDir,"record.json"),status:record.status,gaps:record.gaps},null,2));if(record.gaps.length)process.exit(1);
+ const surface=arg("--surface")||"codex",record=surface==="cursor"?await runCursorProduction({brief,skillRoot,outDir}):await runCodexProduction({brief,skillRoot,outDir});console.log(JSON.stringify({record:join(outDir,"record.json"),status:record.status,gaps:record.gaps},null,2));if(record.gaps.length)process.exit(1);
 }
