@@ -13,6 +13,7 @@
     "measure": "node verify/measure.mjs",
     "cite": "node corpus/cite.mjs",
     "packet": "node core/design-packet.mjs",
+    "render": "node core/render-spec.mjs",
     "materialize": "node corpus/materialize-packs.mjs",
     "sync-consumers": "bash scripts/sync-consumers.sh",
     "skill-listing": "node site/scripts/skill-listing.mjs",
@@ -27,6 +28,7 @@
     "benchmark:agent:representative": "node benchmark/agent-corpus.mjs --set representative",
     "benchmark:agent:full": "node benchmark/agent-corpus.mjs",
     "packet:test": "node verify/design-packet.test.mjs",
+    "render:test": "node verify/design-spec.test.mjs",
     "release:test": "node verify/release.test.mjs"
   },
   "devDependencies": {
