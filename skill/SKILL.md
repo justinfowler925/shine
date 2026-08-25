@@ -24,13 +24,15 @@ node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <interna
 Read the selected screenshot and the packet's embedded source excerpts. Do not reopen their files
 or load the full reference library. The packet is authoritative for the region graph, controls, states,
 integration, provenance, and proof commands.
-When `starter` is present, copy it first and replace its content and visual direction while
-preserving its executable contract markers. Do not rebuild those mechanics from memory.
+For a new standalone surface, put brief-specific design judgment in a small `design.json` using
+`core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`.
+The renderer owns repeated contract mechanics; the spec owns hierarchy, copy, data, and direction.
+For an existing product, edit its real components and preserve its architecture.
 
 ## Build
 
 - Existing surface: render it first and name the user-blocking defects before editing.
-- New surface: state the information hierarchy and primary workflow, then build; ask discovery
+- New surface: state the information hierarchy and primary workflow in the design spec, then build; ask discovery
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports.
 - For record data, use the resolved production DataGrid recipe. Every data grid includes search,
