@@ -29,6 +29,7 @@
     "mui-material": {"density":"comfortable","brand":"kit-faithful","framework":"mui","tone":"neutral","type":"ui"},
     "react-spectrum": {"density":"comfortable","brand":"kit-faithful","framework":"spectrum","tone":"restrained","type":"humanist"},
     "shadcn-registry": {"density":"comfortable","brand":"neutral","framework":"shadcn-tanstack","tone":"restrained","type":"ui"},
+    "untitled-ui-react": {"density":"comfortable","brand":"kit-faithful","framework":"react","tone":"restrained","type":"ui"},
     "slds": {"density":"compact","brand":"brand-locked","framework":"lex","tone":"technical","type":"ui"},
     "tremor": {"density":"comfortable","brand":"neutral","framework":"react","tone":"technical","type":"numeric"}
   },

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-line-charts",
+  "screen": "dashboard",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/charts/line-charts.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "line-charts.demo.tsx",
+      "sha256": "4e93eb217fd075c2df7e2f68aefa799565ea3b1d022891c59df615c29f9254ce"
+    }
+  ]
+}

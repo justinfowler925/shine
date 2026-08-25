@@ -3,6 +3,7 @@ import {existsSync, readFileSync} from "node:fs";
 import {dirname, join, resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 import {retrieveDirections} from "../corpus/art-direction.mjs";
+import {findUntitledExamples} from "../corpus/untitledui.mjs";
 import {detectProject, RECIPES} from "../integrations/resolve.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
@@ -27,8 +28,9 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  if(!retrieval.selected.length)throw new Error(`no eligible template: ${retrieval.gaps.join("; ")}`);
  const candidates=retrieval.selected.slice(0,3).map(({template,score,matches,distance})=>({id:template.id,title:template.title,kit:template.kit,family:template.dna?.family,score,distance,matches,paths:packPaths(template)}));
  const selected=candidates[0],recipeKey=detected.framework==="lex"?"lex":detected.installed[0]||"native";
+ const examples=findUntitledExamples(job,8);
  const starter=category==="datagrid"&&recipeKey==="native"?join(ROOT,"verify/fixtures/full-table.html"):category==="marketing"?join(ROOT,"verify/fixtures/marketing.html"):null;
- return {version:1,job,lane,category,project:detected,selected,candidates,starter,regionGraph:categories[category].regions,controlInventory:categories[category].controls,requiredStates:categories[category].states,integration:{key:recipeKey,contract:RECIPES[recipeKey].contract,packages:RECIPES[recipeKey].packages,imports:RECIPES[recipeKey].imports},proof:{artifactAttribute:`data-cite=\"${selected.id}\"`,commands:[`node ${join(ROOT,"verify/measure.mjs")} <artifact> --cite ${selected.id} --shot /tmp/shine-after.png`,`node ${join(ROOT,"verify/compare.mjs")} <artifact> --cite ${selected.id} --lane ${lane}`]},gaps:retrieval.gaps};
+ return {version:1,job,lane,category,project:detected,selected,candidates,examples,starter,regionGraph:categories[category].regions,controlInventory:categories[category].controls,requiredStates:categories[category].states,integration:{key:recipeKey,contract:RECIPES[recipeKey].contract,packages:RECIPES[recipeKey].packages,imports:RECIPES[recipeKey].imports},proof:{artifactAttribute:`data-cite=\"${selected.id}\"`,commands:[`node ${join(ROOT,"verify/measure.mjs")} <artifact> --cite ${selected.id} --shot /tmp/shine-after.png`,`node ${join(ROOT,"verify/compare.mjs")} <artifact> --cite ${selected.id} --lane ${lane}`]},gaps:retrieval.gaps};
 }
 
 if(process.argv[1]===fileURLToPath(import.meta.url)){

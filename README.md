@@ -20,7 +20,8 @@ Shine owns the token layer, the design corpus, the agent skill, and the measure 
 | Layer | What it does |
 | --- | --- |
 | **UI/UX agent** | `/shine` skill + `shine-ux` subagent — Wireframe, Build, Polish, Audit, Copy, Adoption |
-| **Templates** | `corpus/cite.mjs "<job>"` — 41 curated rows, synonym matching, registry JSON auto-extracted to readable source, harvested shots as Phase 2 lands |
+| **Templates** | `corpus/cite.mjs "<job>"` — 44 curated rows, with Untitled UI and shadcn as primary source templates |
+| **Examples** | `npm run untitled:search -- "<job>"` — all 392 public Untitled UI demo exports, including 187 renderable Storybook stories |
 | **Technique transfer** | Measured rules from 18 products + pinned kits (shadcn, Radix, Carbon, Ant, MUI, Spectrum, Fluent, APG, …) |
 | **Tokens** | One DTCG source → CSS, Tailwind v4, artifacts, Python, email, Docs, Office, Salesforce |
 | **Voices** | `tokens/voices/<family>.css` + the kit's own token sources — kit paint is legal via custom-property definitions |
@@ -207,6 +208,12 @@ consumes `@shine` CSS or `npx shadcn add` — that is the **design system**, not
 # pin to lockfile later:
 ./corpus/acquire.sh --restore ~/design-corpus
 ```
+
+The acquisition includes the complete MIT-licensed Untitled UI React public
+library. `npm run untitled:index` pins all public demos into Shine's generated
+example catalog; `npm run untitled -- search "<query>"` uses the official CLI.
+Untitled UI PRO page examples require a separate license and stay in the external
+`owned/` corpus lane rather than being redistributed by this public repository.
 
 ~1.2 GB sparse. Query with `rg` — see
 `skill/references/corpus.md`.
@@ -597,7 +604,7 @@ Design rules → `agent-rules/always/80-design-*.md` (four required frontmatter 
 2. **One token source.** DTCG + Terrazzo → CSS vars + Tailwind `@theme`. Prove on a real multi-page site: nine `:root` blocks → one import, screenshot-diffed. ✅ shipped 2026-08-05 — `tokens/`, both lanes; pages pixel-identical after migration. Verified findings in `tokens/README.md`.
 3. **`taste.md`.** ✅ shipped (`skill/references/taste.md`).
 4. **Corpus.** Acquisition script + `corpus.lock` committed. ✅ shipped 2026-08-05 —
-   49 pins at ~1.2 GB on the laptop, shadcn as 411 registry JSON items, `corpus/acquire.sh`
+   50 pins at ~1.2 GB on the laptop, shadcn as 411 registry JSON items, `corpus/acquire.sh`
    (+ `--restore`), lockfile pins every SHA. Query guide: `skill/references/corpus.md`.
 5. **Registry.** `registry:base` published; `npx shadcn add` works into a clean project.
    ✅ shipped 2026-08-05 — `registry/build.mjs` generates `registry.json` + `site/r/*.json`
@@ -638,7 +645,7 @@ Two of them, and the second is the one that matters day to day.
 
 **Context budget — the answer to "does this raw-dog my agent window."** It does not, by construction.
 
-Only the skill *index* is ever resident: 255 lines, ~14 KB, still inside the 5,000-token window that survives compaction. Everything else sits on disk and is read on demand, one file at a time, only when the task touches it. A typical UI task runs `node corpus/cite.mjs <screen>`, opens those corpus files, then one reference. Do not load all 27. The full corpus is ~1.2 GB on disk (49 pins after AdminLTE-list expansion) and contributes **zero tokens** until ripgrep returns a specific match, which is why retrieval beat embeddings here.
+Only the skill *index* is ever resident: 255 lines, ~14 KB, still inside the 5,000-token window that survives compaction. Everything else sits on disk and is read on demand, one file at a time, only when the task touches it. A typical UI task runs `node corpus/cite.mjs <screen>`, opens those corpus files, then one reference. Do not load all 30. The full corpus is ~1.2 GB on disk (50 pins, including Untitled UI) and contributes **zero tokens** until ripgrep returns a specific match, which is why retrieval beat embeddings here.
 
 Hard caps, from the platform's own limits: `SKILL.md` under 500 lines, non-negotiables in the first 5,000 tokens because that's all that survives compaction, 25,000 tokens total across all re-attached skills. Detail belongs in `research/`, never in the index.
 

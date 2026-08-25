@@ -42,6 +42,7 @@ const REQUIRED = [
 // sources in ~/design-corpus.
 const KIT_FAMILY = {
   "shadcn-registry": { family: "shadcn-zinc", density: "comfortable" },
+  "untitled-ui-react": { family: "untitled", density: "comfortable" },
   "mui-material": { family: "material", density: "comfortable" },
   tremor: { family: "tremor", density: "comfortable" },
   "ant-design-pro": { family: "ant", density: "dense" },
@@ -144,6 +145,36 @@ for (const t of [
     kind: "source",
     startFrom: t.rank,
     ...(t.jobs ? { jobs: t.jobs } : {}),
+  });
+}
+
+// ---- Untitled UI public examples -------------------------------------------
+// The exhaustive inventory lives in untitledui-examples.json. These composed
+// examples are the primary directions worth putting in template retrieval.
+for (const t of [
+  {
+    id: "untitled-sidebar-navigation", screen: "app-shell", rank: 1,
+    title: "Untitled UI sidebar navigation examples",
+    path: "untitled-ui-react/components/application/app-navigation/sidebar-navigation.demo.tsx",
+    jobs: ["app-shell", "navigation", "sidebar"],
+  },
+  {
+    id: "untitled-table", screen: "queue", rank: 1,
+    title: "Untitled UI table examples (populated, empty, error, offline)",
+    path: "untitled-ui-react/components/application/table/table.demo.tsx",
+    jobs: ["queue", "crud", "table", "records", "datagrid"],
+  },
+  {
+    id: "untitled-line-charts", screen: "dashboard", rank: 1,
+    title: "Untitled UI line chart examples",
+    path: "untitled-ui-react/components/application/charts/line-charts.demo.tsx",
+    jobs: ["dashboard", "analytics", "charts", "dataviz"],
+  },
+]) {
+  push({
+    id: t.id, screen: t.screen, kit: "untitled-ui-react", title: t.title,
+    path: t.path, preview: "https://www.untitledui.com/react/components",
+    license: "MIT", kind: "source", startFrom: t.rank, jobs: t.jobs,
   });
 }
 

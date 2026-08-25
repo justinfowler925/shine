@@ -21,7 +21,7 @@ ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
 node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --project "$PWD"
 ```
 
-Read the selected screenshot and the packet's embedded source excerpts. Do not reopen their files
+Read the selected screenshot, embedded source excerpts, and matched Untitled UI examples. Do not reopen their files
 or load the full reference library. The packet is authoritative for the region graph, controls, states,
 integration, provenance, and proof commands.
 For a new standalone surface, put brief-specific design judgment in a small `design.json` using

@@ -123,6 +123,7 @@ PY
 
 fetch_shadcn
 sparse_clone shadcn-docs      shadcn-ui/ui          main   apps/v4/content apps/v4/registry
+sparse_clone untitled-ui-react untitleduico/react    main   components hooks styles utils .storybook
 
 sparse_clone visx             airbnb/visx           master packages
 sparse_clone nivo             plouc/nivo            master packages website/src/data
@@ -200,4 +201,5 @@ cp "$LOCK" "$ROOT/corpus/corpus.lock"
 log "lockfile: $LOCK"
 log "repo pin: $ROOT/corpus/corpus.lock"
 node "$ROOT/corpus/index-templates.mjs"
+node "$ROOT/corpus/untitledui.mjs" --index
 log "on disk:  $(du -sh "$TARGET" | cut -f1)"
