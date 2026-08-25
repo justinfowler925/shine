@@ -1,26 +1,6 @@
 {
   "templates": [
     {
-      "id": "query-mui-store",
-      "screen": "app-shell",
-      "kit": "mui-store",
-      "title": "MUI Store premium templates (query-only)",
-      "path": "query-only/query-mui-store.png",
-      "preview": "https://mui.com/store/",
-      "license": "proprietary",
-      "startFrom": 90
-    },
-    {
-      "id": "query-mui-free-gallery",
-      "screen": "marketing",
-      "kit": "mui-material",
-      "title": "MUI free templates gallery (query-only preview)",
-      "path": "query-only/query-mui-free-gallery.png",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "startFrom": 80
-    },
-    {
       "id": "query-adminlte",
       "screen": "app-shell",
       "kit": "adminlte",

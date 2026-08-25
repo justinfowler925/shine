@@ -1139,10 +1139,8 @@ if (FULL) {
     if (corpusReady || dashPack) {
       const blog = spawnSync(process.execPath, [cite, "mui-blog"], { encoding: "utf8" });
       const out = `${blog.stdout || ""}${blog.stderr || ""}`;
-      if (blog.status !== 0) fail("cite.mjs mui-blog", `exit ${blog.status}: ${(blog.stderr || "").slice(0, 200)}`);
-      else if (!/Template: mui-blog/.test(out) || !/Blog\.tsx/.test(out))
-        fail("cite.mjs mui-blog", "did not print Template: mui-blog + Blog.tsx to open");
-      else ok("cite.mjs mui-blog", "lists Blog.tsx to open");
+      if (blog.status === 1 && /nothing matches/.test(out)) ok("cite.mjs rejects deleted MUI");
+      else fail("cite.mjs rejects deleted MUI", `exit ${blog.status}: ${out.slice(0, 200)}`);
 
       const dash = spawnSync(process.execPath, [cite, "dashboard"], { encoding: "utf8" });
       const dout = `${dash.stdout || ""}${dash.stderr || ""}`;
@@ -1169,12 +1167,8 @@ if (FULL) {
 
       const queue = spawnSync(process.execPath, [cite, "queue"], { encoding: "utf8" });
       const qout = `${queue.stdout || ""}${queue.stderr || ""}`;
-      if (queue.status !== 0) fail("cite.mjs queue", `exit ${queue.status}: ${qout.slice(0, 200)}`);
-      else if (/sidebar-07/.test(qout) && !/carbon-datatable|antd-pro-list/.test(qout))
-        fail("cite.mjs queue", "returned an app-shell instead of a queue page");
-      else if (!/carbon-datatable|antd-pro-list/.test(qout))
-        fail("cite.mjs queue", "expected carbon-datatable or antd-pro-list");
-      else ok("cite.mjs queue", (qout.match(/Template: (\S+)/) || [])[1] || "queue page");
+      if (queue.status === 1 && /nothing matches/.test(qout)) ok("cite.mjs queue fails closed without approved source");
+      else fail("cite.mjs queue fails closed", `exit ${queue.status}: ${qout.slice(0, 200)}`);
 
       const lex = spawnSync(process.execPath, [cite, "lightning record"], { encoding: "utf8" });
       const lout = `${lex.stdout || ""}${lex.stderr || ""}`;
@@ -1214,7 +1208,15 @@ if (FULL) {
     if (noDna.length) fail("catalog DNA", `${noDna.length} rows missing dna.family (${noDna.slice(0, 3).map((t) => t.id).join(", ")})`);
     else ok("catalog DNA", `${(catalog.templates ?? []).length} rows`);
 
-    const kitPages = ["carbon", "mantine", "magicui", "fluentui", "react-spectrum"];
+    const rejectedKits = ["carbon", "mui-material", "mui-store", "ant-design", "ant-design-pro"];
+    const rejectedRows = (catalog.templates ?? []).filter((t) => rejectedKits.includes(t.kit));
+    if (rejectedRows.length) fail("catalog rejected kits", rejectedRows.map((t) => t.id).join(", "));
+    else ok("catalog rejected kits", "Carbon, MUI, and Ant absent");
+    const blocked = catalog.blockedScreenTypes ?? [];
+    const blockedRows = (catalog.templates ?? []).filter((t) => blocked.includes(t.screen));
+    if (blockedRows.length) fail("catalog blocked screens", blockedRows.map((t) => t.id).join(", "));
+    else ok("catalog blocked screens", blocked.join(", "));
+    const kitPages = ["mantine", "magicui", "fluentui", "react-spectrum"];
     const missingKits = kitPages.filter((k) => !(catalog.templates ?? []).some((t) => t.kit === k));
     if (missingKits.length) fail("catalog kit pages", `no cite-able page for: ${missingKits.join(", ")}`);
       else ok("catalog kit pages", kitPages.join(", "));

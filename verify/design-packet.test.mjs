@@ -1,15 +1,10 @@
 import assert from "node:assert/strict";
 import {createDesignPacket} from "../core/design-packet.mjs";
-const grid=createDesignPacket({job:"fraud claims review queue datagrid",lane:"internal",project:process.cwd()});
-assert.equal(grid.category,"datagrid");
-assert.match(grid.selected.id,/datatable|crud/i);
-for(const item of ["search","sort","filters","column visibility","pagination","row selection","row actions"])assert(grid.controlInventory.includes(item),item);
-assert.deepEqual(grid.requiredStates,["loading","empty","error","populated"]);
-assert(grid.candidates.length>0&&grid.candidates.length<=3);
-assert(grid.selected.paths.sourceExcerpts.length>0);
-assert(grid.selected.paths.sourceExcerpts.every(x=>x.excerpt.length<=1200));
-assert.match(grid.starter,/full-table\.html$/);
-assert.match(grid.proof.artifactAttribute,/data-cite/);
+assert.throws(
+  ()=>createDesignPacket({job:"fraud claims review queue datagrid",lane:"internal",project:process.cwd()}),
+  /no eligible template/,
+  "a deleted table family must leave a visible catalog gap instead of selecting a fallback",
+);
 const form=createDesignPacket({job:"insurance application form",lane:"saas",project:process.cwd()});
 assert.equal(form.category,"form");assert(form.controlInventory.includes("validation"));
 assert.throws(()=>createDesignPacket({job:""}),/job is required/);
