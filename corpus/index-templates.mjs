@@ -21,20 +21,15 @@ const CORPUS = resolve(process.env.DESIGN_CORPUS || join(homedir(), "design-corp
 
 const REQUIRED = [
   "dashboard",
-  "marketing",
   "auth",
-  "checkout",
   "app-shell",
-  "crud",
-  "queue",
-  "record",
   "chat",
   "settings",
-  "wizard",
   "empty",
   "command-palette",
   "lex-record",
 ];
+const BLOCKED = ["marketing", "checkout", "crud", "queue", "record", "wizard"];
 
 // Family only decides which voice sheet to import and which likeness checks apply.
 // The adjectives V2 carried here (radius/chroma/elevation as words) transferred
@@ -42,13 +37,9 @@ const REQUIRED = [
 // sources in ~/design-corpus.
 const KIT_FAMILY = {
   "shadcn-registry": { family: "shadcn-zinc", density: "comfortable" },
-  "mui-material": { family: "material", density: "comfortable" },
   tremor: { family: "tremor", density: "comfortable" },
-  "ant-design-pro": { family: "ant", density: "dense" },
-  "ant-design": { family: "ant", density: "dense" },
   heroui: { family: "heroui", density: "comfortable" },
   "chakra-ui": { family: "chakra", density: "comfortable" },
-  carbon: { family: "carbon", density: "dense" },
   mantine: { family: "mantine", density: "comfortable" },
   fluentui: { family: "fluent", density: "comfortable" },
   "react-spectrum": { family: "spectrum", density: "comfortable" },
@@ -86,7 +77,11 @@ const SCREEN_JOBS = {
 const exists = (rel) => existsSync(join(CORPUS, rel));
 
 const templates = [];
+const REJECTED_KITS = new Set(["mui-material", "mui-store", "ant-design", "ant-design-pro", "carbon"]);
 const push = (row) => {
+  if (REJECTED_KITS.has(row.kit)) {
+    throw new Error(`rejected kit cannot enter the catalog: ${row.kit} (${row.id})`);
+  }
   if (row.kind === "source" && !exists(row.path)) return;
   if ((row.kind === "query-only" || row.kind === "owned") && !exists(row.path)) return;
   if (!row.dna) row.dna = KIT_FAMILY[row.kit] || KIT_FAMILY.shine;
@@ -94,38 +89,13 @@ const push = (row) => {
   templates.push(row);
 };
 
-// ---- MUI free templates (real composed pages, in mui-material docs/data) ---
-const muiBase = "mui-material/docs/data/material/getting-started/templates";
-const muiPreview = "https://mui.com/material-ui/getting-started/templates/";
-for (const t of [
-  { id: "mui-crud-dashboard", screen: "crud", dir: "crud-dashboard", rank: 1, title: "MUI CRUD dashboard", entrypoints: ["CrudDashboard.tsx"] },
-  { id: "mui-dashboard", screen: "app-shell", dir: "dashboard", rank: 2, title: "MUI dashboard shell" },
-  { id: "mui-marketing-page", screen: "marketing", dir: "marketing-page", rank: 1, title: "MUI marketing page" },
-  { id: "mui-checkout", screen: "checkout", dir: "checkout", rank: 1, title: "MUI checkout" },
-  { id: "mui-blog", screen: "blog", dir: "blog", rank: 1, title: "MUI blog" },
-  { id: "mui-sign-in-side", screen: "auth", dir: "sign-in-side", rank: 1, title: "MUI sign-in (split)" },
-]) {
-  push({
-    id: t.id,
-    screen: t.screen,
-    kit: "mui-material",
-    title: t.title,
-    path: `${muiBase}/${t.dir}`,
-    preview: muiPreview,
-    license: "MIT",
-    kind: "source",
-    startFrom: t.rank,
-    ...(t.entrypoints ? { entrypoints: t.entrypoints } : {}),
-  });
-}
-
 // ---- shadcn blocks and cited component sets ---------------------------------
 // Curated, never wildcarded: the wildcard version indexed 70 chart demos and a
 // dozen near-identical sidebars, drowning the rows anyone actually needs.
 for (const t of [
   { name: "dashboard-01", screen: "dashboard", rank: 1, title: "shadcn dashboard-01 (sidebar, cards, chart, table)" },
   { name: "sidebar-07", screen: "app-shell", rank: 1, title: "shadcn sidebar-07 (collapsible shell)" },
-  { name: "login-04", screen: "auth", rank: 2, title: "shadcn login-04" },
+  { name: "login-04", screen: "auth", rank: 1, title: "shadcn login-04" },
   { name: "command", screen: "command-palette", rank: 1, title: "shadcn command (palette, keyboard-first, no motion)" },
   { name: "input-group-textarea", screen: "ai-generate", rank: 1, title: "shadcn input-group-textarea (prompt composer + submit addon)" },
   { name: "field-choice-card", screen: "ai-generate", rank: 2, title: "shadcn field-choice-card (option tier as radio cards)" },
@@ -147,48 +117,8 @@ for (const t of [
   });
 }
 
-// ---- Ant Design Pro — the densest real admin pages in the corpus ------------
-for (const t of [
-  { id: "antd-pro-list", screen: "queue", dir: "src/pages/list", rank: 2, title: "Ant Design Pro list / queue pages", jobs: ["queue", "list", "inbox"] },
-  { id: "antd-pro-profile", screen: "record", dir: "src/pages/profile", rank: 1, title: "Ant Design Pro profile / record", jobs: ["record", "detail", "profile"] },
-  { id: "antd-pro-settings", screen: "settings", dir: "src/pages/account/settings", rank: 1, title: "Ant Design Pro account settings", jobs: ["settings", "preferences", "account"] },
-  { id: "antd-pro-step-form", screen: "wizard", dir: "src/pages/form/step-form", rank: 1, title: "Ant Design Pro step form", jobs: ["wizard", "steps", "onboarding"] },
-  { id: "antd-pro-chatbot", screen: "chat", dir: "src/pages/chatbot", rank: 2, title: "Ant Design Pro chatbot page", jobs: ["chat"] },
-  { id: "antd-pro-crud", screen: "crud", dir: "src/pages/table-list", rank: 2, title: "Ant Design Pro ProTable CRUD page", entrypoints: ["index.tsx"] },
-  { id: "antd-pro-app", screen: "app-shell", dir: "src", rank: 3, title: "Ant Design Pro admin app" },
-]) {
-  if (!exists(`ant-design-pro/${t.dir}`)) continue;
-  push({
-    id: t.id,
-    screen: t.screen,
-    kit: "ant-design-pro",
-    title: t.title,
-    path: `ant-design-pro/${t.dir}`,
-    preview: "https://preview.pro.ant.design",
-    license: "MIT",
-    kind: "source",
-    startFrom: t.rank,
-    ...(t.entrypoints ? { entrypoints: t.entrypoints } : {}),
-    ...(t.jobs ? { jobs: t.jobs } : {}),
-  });
-}
-
 // ---- one cite-able page per remaining major kit ------------------------------
 const singles = [
-  {
-    id: "carbon-datatable", screen: "queue", kit: "carbon", rank: 1,
-    title: "Carbon DataTable (toolbar-first, batch actions, dense)",
-    path: "carbon/packages/react/src/components/DataTable",
-    preview: "https://carbondesignsystem.com/components/data-table/usage/",
-    license: "Apache-2.0", jobs: ["queue", "list", "inbox"],
-  },
-  {
-    id: "carbon-uishell", screen: "app-shell", kit: "carbon", rank: 4,
-    title: "Carbon UIShell",
-    path: "carbon/packages/react/src/components/UIShell",
-    preview: "https://carbondesignsystem.com/components/UI-shell-header/usage/",
-    license: "Apache-2.0",
-  },
   {
     id: "spectrum-ai-chat", screen: "chat", kit: "react-spectrum", rank: 1,
     title: "React Spectrum AI Chat (Thread + PromptField — prompt field is the primary)",
@@ -204,7 +134,7 @@ const singles = [
     license: "MIT",
   },
   {
-    id: "fluent-nav", screen: "settings", kit: "fluentui", rank: 2,
+    id: "fluent-nav", screen: "settings", kit: "fluentui", rank: 1,
     title: "Fluent UI NavDrawer",
     path: "fluentui/packages/react-components/react-nav",
     preview: "https://react.fluentui.dev",
@@ -288,6 +218,7 @@ const catalog = {
   generated: new Date().toISOString().slice(0, 10),
   corpus: CORPUS,
   requiredScreenTypes: REQUIRED,
+  blockedScreenTypes: BLOCKED,
   templates,
 };
 
