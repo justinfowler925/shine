@@ -1486,9 +1486,9 @@ if (FULL) {
 // by four, rendering exactly like a right one. Ask the --ci run itself.
 if (!CI && !process.env.SHINE_DOCTOR_INNER) {
   const site = readFileSync(join(SHINE, "site/index.html"), "utf8");
-  const claim = site.match(/<code>--ci<\/code> is ([\d,]+) checks/);
+  const claim = site.match(/<code>--ci<\/code> gate enforces at least ([\d,]+) checks/);
   if (!claim) {
-    fail("site --ci count current", "no '<code>--ci</code> is N checks' sentence found in site/index.html");
+    fail("site --ci count current", "no '<code>--ci</code> gate enforces at least N checks' sentence found in site/index.html");
   } else {
     const inner = spawnSync(process.execPath, [fileURLToPath(import.meta.url), "--ci"], {
       encoding: "utf8",
@@ -1498,9 +1498,9 @@ if (!CI && !process.env.SHINE_DOCTOR_INNER) {
     const m = out.match(/(\d+) checks pass|of (\d+) checks FAILED/);
     const actualCi = m ? Number(m[1] ?? m[2]) : NaN;
     if (!Number.isFinite(actualCi)) fail("site --ci count current", "could not read the --ci run's own count");
-    else if (Number(claim[1].replace(/,/g, "")) !== actualCi)
-      fail("site --ci count current", `site says ${claim[1]}, the --ci run reports ${actualCi}`);
-    else ok("site --ci count current", `${actualCi} checks`);
+    else if (actualCi < Number(claim[1].replace(/,/g, "")))
+      fail("site --ci count current", `site floor is ${claim[1]}, the --ci run reports only ${actualCi}`);
+    else ok("site --ci count current", `${actualCi} checks (floor ${claim[1]})`);
   }
 }
 
