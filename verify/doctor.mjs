@@ -162,6 +162,9 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   const release=spawnSync(process.execPath,[join(SHINE,"verify/release.test.mjs")],{cwd:SHINE,encoding:"utf8"});
   if(release.status===0)ok("versioned atomic release", "immutable manifest + current pointer");
   else fail("versioned atomic release",`${release.stderr||release.stdout}`.trim().slice(-500));
+  const untitled=spawnSync(process.execPath,[join(SHINE,"verify/untitledui.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(untitled.status===0)ok("Untitled UI corpus", "CLI pinned; 392/392 public examples; seeded gates bite");
+  else fail("Untitled UI corpus",`${untitled.stderr||untitled.stdout}`.trim().slice(-500));
 }
 
 // ---- 1b. tools resolve from the loaded skill, never a hardcoded checkout --
@@ -1191,6 +1194,7 @@ if (FULL) {
   const pins = [
     "mantine", "chakra-ui", "heroui", "heroui-next-app", "headlessui",
     "tremor", "blueprint", "park-ui", "rsuite", "grommet", "ant-design-pro",
+    "untitled-ui-react",
   ];
   const missingPins = pins.filter((p) => !new RegExp(`sparse_clone ${p}\\b|full_clone\\s+${p}\\b`).test(acquire));
   if (missingPins.length) fail("acquire.sh AdminLTE-list pins", `missing: ${missingPins.join(", ")}`);
@@ -1214,7 +1218,7 @@ if (FULL) {
     if (noDna.length) fail("catalog DNA", `${noDna.length} rows missing dna.family (${noDna.slice(0, 3).map((t) => t.id).join(", ")})`);
     else ok("catalog DNA", `${(catalog.templates ?? []).length} rows`);
 
-    const kitPages = ["carbon", "mantine", "magicui", "fluentui", "react-spectrum"];
+    const kitPages = ["carbon", "mantine", "magicui", "fluentui", "react-spectrum", "untitled-ui-react"];
     const missingKits = kitPages.filter((k) => !(catalog.templates ?? []).some((t) => t.kit === k));
     if (missingKits.length) fail("catalog kit pages", `no cite-able page for: ${missingKits.join(", ")}`);
       else ok("catalog kit pages", kitPages.join(", "));

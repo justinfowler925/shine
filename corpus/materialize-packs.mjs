@@ -22,7 +22,7 @@ const catalog = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "u
 const byId = new Map((catalog.templates ?? []).map((t) => [t.id, t]));
 const lockLines = readFileSync(join(SHINE, "corpus/corpus.lock"), "utf8").split(/\r?\n/).filter((l) => l && !l.startsWith("#"));
 const pins = new Map(lockLines.map((line) => { const [name, mode, url, branch, sha] = line.split("\t"); return [name, { name, mode, url, branch, sha }]; }));
-const kitPin = { "mui-material": "mui-material", "ant-design-pro": "ant-design-pro", carbon: "carbon", fluentui: "fluentui", "react-spectrum": "react-spectrum", magicui: "magicui", mantine: "mantine", heroui: "heroui", tremor: "tremor", "shadcn-registry": "shadcn-registry" };
+const kitPin = { "mui-material": "mui-material", "ant-design-pro": "ant-design-pro", carbon: "carbon", fluentui: "fluentui", "react-spectrum": "react-spectrum", magicui: "magicui", mantine: "mantine", heroui: "heroui", tremor: "tremor", "shadcn-registry": "shadcn-registry", "untitled-ui-react": "untitled-ui-react" };
 const sha256 = (p) => createHash("sha256").update(readFileSync(p)).digest("hex");
 const signatures = { crud: /\b(DataGrid|ProTable|Table)\b/, queue: /\b(DataTable|ProList|List|Table|table)\b/ };
 

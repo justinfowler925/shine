@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-sidebar-navigation",
+  "screen": "app-shell",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/app-navigation/sidebar-navigation.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "sidebar-navigation.demo.tsx",
+      "sha256": "93bef88e4d891a269bc024458c0da93981aa6a5364fae8fcb3ed72037e6c64c0"
+    }
+  ]
+}

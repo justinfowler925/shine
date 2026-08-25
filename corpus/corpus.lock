@@ -1,6 +1,7 @@
 #name	mode	url	branch	sha	paths
 shadcn-registry	json	https://ui.shadcn.com/r/styles/new-york-v4/{name}.json	main	d14b6e69a91f0fc99e31a7adb26a48d661df9911	411/411 items
 shadcn-docs	sparse	https://github.com/shadcn-ui/ui.git	main	d14b6e69a91f0fc99e31a7adb26a48d661df9911	apps/v4/content apps/v4/registry
+untitled-ui-react	sparse	https://github.com/untitleduico/react.git	main	d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e	components hooks styles utils .storybook
 visx	sparse	https://github.com/airbnb/visx.git	master	485c0359664ee8e612992defb16e1f035ed40b23	packages
 nivo	sparse	https://github.com/plouc/nivo.git	master	0dae2c32052a573f9f1d66ec1b453b572119b265	packages website/src/data
 d3	sparse	https://github.com/d3/d3.git	main	ca958d45217b4c15332d971b935451a6d4c978f4	docs src

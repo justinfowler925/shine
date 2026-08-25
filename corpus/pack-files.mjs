@@ -27,6 +27,7 @@ export const FULL_PAINT = new Set([
   "shine",
   "heroui",
   "tremor",
+  "untitled",
 ]);
 const MIN_SHOT = 30_000;
 const MIN_SOURCE_LINES = 30;

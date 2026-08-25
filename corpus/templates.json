@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-24",
+  "generated": "2026-08-25",
   "corpus": "/Users/justinfowler/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
@@ -78,6 +78,26 @@
         "nav",
         "sidebar"
       ]
+    },
+    {
+      "id": "untitled-sidebar-navigation",
+      "screen": "app-shell",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI sidebar navigation examples",
+      "path": "untitled-ui-react/components/application/app-navigation/sidebar-navigation.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "app-shell",
+        "navigation",
+        "sidebar"
+      ],
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
     },
     {
       "id": "mui-dashboard",
@@ -466,6 +486,27 @@
       ]
     },
     {
+      "id": "untitled-line-charts",
+      "screen": "dashboard",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI line chart examples",
+      "path": "untitled-ui-react/components/application/charts/line-charts.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "dashboard",
+        "analytics",
+        "charts",
+        "dataviz"
+      ],
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "query-shadcn-blocks",
       "screen": "dashboard",
       "kit": "shadcn-registry",
@@ -729,6 +770,28 @@
       "dna": {
         "family": "carbon",
         "density": "dense"
+      }
+    },
+    {
+      "id": "untitled-table",
+      "screen": "queue",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI table examples (populated, empty, error, offline)",
+      "path": "untitled-ui-react/components/application/table/table.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "queue",
+        "crud",
+        "table",
+        "records",
+        "datagrid"
+      ],
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
       }
     },
     {

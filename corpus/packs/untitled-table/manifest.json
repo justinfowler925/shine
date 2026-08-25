@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "untitled-table",
+  "screen": "queue",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/table/table.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": {
+    "pattern": "\\b(DataTable|ProList|List|Table|table)\\b",
+    "files": [
+      "table.demo.tsx"
+    ]
+  },
+  "files": [
+    {
+      "path": "table.demo.tsx",
+      "sha256": "8fef24fe58499ce73534c8bd9ee10d17f55462a20ed4cb86e6f42ccefd305ef3"
+    }
+  ]
+}

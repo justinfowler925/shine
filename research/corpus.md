@@ -27,6 +27,7 @@ One anomaly: for `cult-ui`, `--depth 1` (458 MB) is *larger* than a full clone (
 | Repo | SPDX | apiKB | Value-bearing paths | Strategy |
 |---|---|---|---|---|
 | shadcn-ui/ui | MIT | 68,889 | `apps/v4/registry/`, `apps/v4/content/docs/` (305 mdx), `apps/v4/registry.json` | **JSON** + sparse docs |
+| untitleduico/react | MIT (public repo only) | — | `components`, `hooks`, `styles`, `utils`, `.storybook` — 296 TSX components, 36 demo files, 392 demo exports | sparse + exhaustive generated example index |
 | airbnb/visx | MIT | 16,763 | `packages/visx-*/src`, `packages/visx-demo` | sparse |
 | plouc/nivo | MIT | 81,104 | `packages/`, `website/src/data/components` | sparse |
 | d3/d3 | ISC | 59,348 | `docs/` (119 md), `src/` | sparse |
@@ -176,6 +177,7 @@ import json;print('\n'.join(i['name'] for i in json.load(open('$out/registry.jso
 
 fetch_shadcn
 sparse_clone shadcn-docs      shadcn-ui/ui          main   apps/v4/content apps/v4/registry
+sparse_clone untitled-ui-react untitleduico/react   main   components hooks styles utils .storybook
 
 sparse_clone visx             airbnb/visx           master packages
 sparse_clone nivo             plouc/nivo            master packages website/src/data
