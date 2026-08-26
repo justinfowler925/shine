@@ -761,6 +761,8 @@
       "preview": "https://carbondesignsystem.com/components/data-table/usage/",
       "license": "Apache-2.0",
       "kind": "source",
+      "selectable": false,
+      "retiredReason": "Untitled UI replaced Carbon as Shine's table reference; retain this pack only for adversarial regression fixtures",
       "startFrom": 1,
       "jobs": [
         "queue",

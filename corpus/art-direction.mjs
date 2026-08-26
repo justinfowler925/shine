@@ -36,7 +36,11 @@ export function normalizeBrief(text, constraints = {}) {
     tone: constraints.tone || detect(tokens, AXIS_WORDS.tone),
     type: constraints.type || detect(tokens, AXIS_WORDS.type),
     image: constraints.image || detect(tokens, AXIS_WORDS.image),
-    framework: constraints.framework || detect(tokens, AXIS_WORDS.framework),
+    // The job text describes the desired visual/interaction reference. The
+    // consumer's implementation framework is a separate constraint supplied
+    // explicitly by the project resolver. "Untitled + shadcn" must therefore
+    // remain eligible for an Untitled reference implemented with shadcn.
+    framework: constraints.framework || "unspecified",
     demandedSlop,
     licenseMode: constraints.licenseMode || "source"
   };
@@ -92,6 +96,7 @@ export function retrieveDirections(templates, text, constraints = {}) {
   for (const template of templates) {
     const axes = candidateAxes(template, brief);
     const reasons = [];
+    if (template.selectable === false) reasons.push(`retired: ${template.retiredReason || "not eligible for new work"}`);
     if (brief.licenseMode === "source" && template.kind === "query-only") reasons.push("license: query-only cannot be a build source");
     if (brief.framework !== "unspecified" && axes.framework !== brief.framework) reasons.push(`framework: needs ${brief.framework}, candidate is ${axes.framework}`);
     if (brief.lane === "lex" && axes.lane !== "lex") reasons.push("lane: Lightning requires SLDS/LEX structure");

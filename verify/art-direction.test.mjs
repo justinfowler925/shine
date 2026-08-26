@@ -39,6 +39,10 @@ try {
   assert.equal(withHistory.selected[0].score, without.selected[0].score, "history must not override eligibility score");
 } finally { rmSync(dir, { recursive: true, force: true }); }
 const plain = retrieveDirections(templates, "saas queue datagrid");
+assert.equal(plain.selected[0].template.id, "untitled-table", "Untitled is the default table reference");
+assert.ok(plain.exclusions.some((item) => item.template.id === "carbon-datatable" && item.reasons.some((reason) => reason.startsWith("retired:"))), "Carbon remains only as a retired regression fixture");
+const hybrid = retrieveDirections(templates, "Untitled UI shadcn CEO judgment queue datagrid");
+assert.equal(hybrid.selected[0].template.id, "untitled-table", "visual reference and implementation framework are independent");
 assert.deepEqual(plain.brief.demandedSlop, []);
 assert.ok(plain.selected.every((item) => !directionMetadata.slopStyles.some((style) => item.axes.signature.includes(style))));
 assert.deepEqual(retrieveDirections(templates, "gradient saas queue datagrid").brief.demandedSlop, ["gradient"]);

@@ -1173,10 +1173,10 @@ if (FULL) {
       const queue = spawnSync(process.execPath, [cite, "queue"], { encoding: "utf8" });
       const qout = `${queue.stdout || ""}${queue.stderr || ""}`;
       if (queue.status !== 0) fail("cite.mjs queue", `exit ${queue.status}: ${qout.slice(0, 200)}`);
-      else if (/sidebar-07/.test(qout) && !/carbon-datatable|antd-pro-list/.test(qout))
+      else if (/sidebar-07/.test(qout) && !/untitled-table|antd-pro-list/.test(qout))
         fail("cite.mjs queue", "returned an app-shell instead of a queue page");
-      else if (!/carbon-datatable|antd-pro-list/.test(qout))
-        fail("cite.mjs queue", "expected carbon-datatable or antd-pro-list");
+      else if (!/untitled-table|antd-pro-list/.test(qout))
+        fail("cite.mjs queue", "expected untitled-table or antd-pro-list");
       else ok("cite.mjs queue", (qout.match(/Template: (\S+)/) || [])[1] || "queue page");
 
       const lex = spawnSync(process.execPath, [cite, "lightning record"], { encoding: "utf8" });
