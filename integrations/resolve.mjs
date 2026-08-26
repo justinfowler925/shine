@@ -28,7 +28,7 @@ export const RECIPES = {
     contract: "shadcn Table chrome over TanStack Table state models",
   },
   native: {
-    packages: [], cite: "carbon-datatable", imports: [], api: ["table"],
+    packages: [], cite: "untitled-table", imports: [], api: ["table"],
     contract: "semantic native table plus executable Shine DataGrid contract",
   },
   lex: {
