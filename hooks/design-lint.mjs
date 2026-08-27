@@ -122,7 +122,7 @@ function pragma(head) {
   return { all: named.length === 0, off: new Set(named) };
 }
 
-function lint(path, text) {
+export function lintText(path, text) {
   const head = text.split("\n", 8).join("\n");
   const off = pragma(head);
   if (off?.all) {
@@ -177,6 +177,7 @@ function lint(path, text) {
     const noComment = line
       .replace(/\/\*.*?\*\//g, "")
       .replace(/(^|[^:])\/\/.*$/, "$1");
+    const tokenDefinition = /--shine-[\w-]+\s*:/.test(noComment);
 
     // 1. arbitrary Tailwind values — the token contract exists so these never happen
     if (enabled("tailwind")) {
@@ -187,7 +188,7 @@ function lint(path, text) {
 
     // 2. raw color literals
     const inValue = isCSS ? /:\s*[^;{]*$/.test(noComment) || /:/.test(noComment) : true;
-    if (inValue && enabled("color")) {
+    if (inValue && enabled("color") && !tokenDefinition) {
       for (const m of noComment.matchAll(RAW_HEX)) {
         hard.push(`${path}:${n}  raw hex \`${m[0]}\` — colors come from var(--shine-*) or a token utility`);
       }
@@ -336,7 +337,7 @@ function lintPath(path) {
   // A `.css` file is a stylesheet by definition. Every other host language has to prove it
   // is carrying one, or every backend module in the repo becomes a false positive.
   if (!design && !UI_MARKER.test(text)) return { hard: [], soft: [] };
-  return lint(path, text);
+  return lintText(path, text);
 }
 
 // Everything below runs only when this file is the process entrypoint. Without the guard,

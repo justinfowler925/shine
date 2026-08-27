@@ -92,6 +92,7 @@ const push = (row) => {
   if ((row.kind === "query-only" || row.kind === "owned") && !exists(row.path)) return;
   if (!row.dna) row.dna = KIT_FAMILY[row.kit] || KIT_FAMILY.shine;
   if (!row.jobs) row.jobs = SCREEN_JOBS[row.screen] || [row.screen];
+  if (!row.scope) row.scope = "page";
   templates.push(row);
 };
 
@@ -124,13 +125,13 @@ for (const t of [
 // Curated, never wildcarded: the wildcard version indexed 70 chart demos and a
 // dozen near-identical sidebars, drowning the rows anyone actually needs.
 for (const t of [
-  { name: "dashboard-01", screen: "dashboard", rank: 1, title: "shadcn dashboard-01 (sidebar, cards, chart, table)" },
-  { name: "sidebar-07", screen: "app-shell", rank: 1, title: "shadcn sidebar-07 (collapsible shell)" },
-  { name: "login-04", screen: "auth", rank: 2, title: "shadcn login-04" },
-  { name: "command", screen: "command-palette", rank: 1, title: "shadcn command (palette, keyboard-first, no motion)" },
-  { name: "input-group-textarea", screen: "ai-generate", rank: 1, title: "shadcn input-group-textarea (prompt composer + submit addon)" },
-  { name: "field-choice-card", screen: "ai-generate", rank: 2, title: "shadcn field-choice-card (option tier as radio cards)" },
-  { name: "empty-icon", screen: "empty", rank: 1, title: "shadcn empty-icon (empty / no-result state)", jobs: ["empty", "ai-generate"] },
+  { name: "dashboard-01", screen: "dashboard", rank: 1, title: "shadcn dashboard-01 (sidebar, cards, chart, table)", required:["navigation","summary","chart","table"] },
+  { name: "sidebar-07", screen: "app-shell", rank: 1, title: "shadcn sidebar-07 (collapsible shell)", required:["navigation"] },
+  { name: "login-04", screen: "auth", rank: 2, title: "shadcn login-04", required:["form"] },
+  { name: "command", screen: "command-palette", rank: 1, title: "shadcn command (palette, keyboard-first, no motion)", scope:"component" },
+  { name: "input-group-textarea", screen: "ai-generate", rank: 1, title: "shadcn input-group-textarea (prompt composer + submit addon)", scope:"component" },
+  { name: "field-choice-card", screen: "ai-generate", rank: 2, title: "shadcn field-choice-card (option tier as radio cards)", scope:"component" },
+  { name: "empty-icon", screen: "empty", rank: 1, title: "shadcn empty-icon (empty / no-result state)", jobs: ["empty", "ai-generate"], scope:"component" },
 ]) {
   const rel = `shadcn-registry/items/${t.name}.json`;
   if (!exists(rel)) continue;
@@ -144,6 +145,8 @@ for (const t of [
     license: "MIT",
     kind: "source",
     startFrom: t.rank,
+    scope: t.scope || "page",
+    ...(t.required ? { reference: { required: t.required } } : {}),
     ...(t.jobs ? { jobs: t.jobs } : {}),
   });
 }
@@ -157,24 +160,28 @@ for (const t of [
     title: "Untitled UI sidebar navigation examples",
     path: "untitled-ui-react/components/application/app-navigation/sidebar-navigation.demo.tsx",
     jobs: ["app-shell", "navigation", "sidebar"],
+    required: ["navigation"],
   },
   {
     id: "untitled-table", screen: "queue", rank: 1,
     title: "Untitled UI table examples (populated, empty, error, offline)",
     path: "untitled-ui-react/components/application/table/table.demo.tsx",
     jobs: ["queue", "crud", "table", "records", "datagrid"],
+    required: ["table"],
   },
   {
     id: "untitled-line-charts", screen: "dashboard", rank: 1,
     title: "Untitled UI line chart examples",
     path: "untitled-ui-react/components/application/charts/line-charts.demo.tsx",
     jobs: ["dashboard", "analytics", "charts", "dataviz"],
+    required: ["chart"],
   },
 ]) {
   push({
     id: t.id, screen: t.screen, kit: "untitled-ui-react", title: t.title,
     path: t.path, preview: "https://www.untitledui.com/react/components",
     license: "MIT", kind: "source", startFrom: t.rank, jobs: t.jobs,
+    scope: "component", reference: { required: t.required },
   });
 }
 
@@ -211,7 +218,8 @@ const singles = [
     title: "Carbon DataTable (toolbar-first, batch actions, dense)",
     path: "carbon/packages/react/src/components/DataTable",
     preview: "https://carbondesignsystem.com/components/data-table/usage/",
-    license: "Apache-2.0", jobs: ["queue", "list", "inbox"],
+    license: "Apache-2.0", jobs: ["queue", "list", "inbox"], selectable: false,
+    retiredReason: "Untitled UI replaced Carbon as Shine's table reference; retain this pack only for adversarial regression fixtures",
   },
   {
     id: "carbon-uishell", screen: "app-shell", kit: "carbon", rank: 4,
@@ -269,6 +277,7 @@ for (const t of singles) {
     id: t.id, screen: t.screen, kit: t.kit, title: t.title, path: t.path,
     preview: t.preview, license: t.license, kind: "source", startFrom: t.rank,
     ...(t.jobs ? { jobs: t.jobs } : {}),
+    ...(t.selectable === false ? { selectable: false, retiredReason: t.retiredReason } : {}),
   });
 }
 

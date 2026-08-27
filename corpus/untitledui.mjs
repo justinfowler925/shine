@@ -14,7 +14,7 @@ const KIT = "untitled-ui-react";
 const SOURCE = join(CORPUS, KIT);
 const OUTPUT = join(SHINE, "corpus/untitledui-examples.json");
 const EXPORT = /^export const ([A-Za-z_$][\w$]*)/gm;
-const STOP = new Set(["a", "an", "and", "demo", "example", "the", "ui"]);
+const STOP = new Set(["a", "an", "and", "demo", "example", "the", "ui", "fix", "make", "improve", "design", "ux", "problems", "templates", "components", "shadcn", "untitled"]);
 
 const words = (value) => String(value || "")
   .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
@@ -34,6 +34,15 @@ const walk = (dir, suffix, out = []) => {
 };
 
 const exported = (path) => [...readFileSync(path, "utf8").matchAll(EXPORT)].map((match) => match[1]);
+
+const sourceExcerpt = (path, name) => {
+  const source = readFileSync(path, "utf8");
+  const start = source.indexOf(`export const ${name}`);
+  const next = source.indexOf("\nexport const ", start + 1);
+  const imports = source.slice(0, 1200).trim();
+  const implementation = source.slice(start, next < 0 ? start + 2800 : Math.min(next, start + 2800)).trim();
+  return `${imports}\n\n/* ${name} */\n${implementation}`.slice(0, 4000);
+};
 
 const storyMetadata = (path) => {
   const source = readFileSync(path, "utf8");
@@ -112,6 +121,7 @@ export function buildUntitledCatalog() {
         storyFile: storyData ? `${KIT}/${relative(SOURCE, story.path).replaceAll("\\", "/")}` : null,
         renderable: Boolean(storyData),
         design: storyData?.design || {},
+        sourceExcerpt: sourceExcerpt(demo, name),
         license: "MIT",
       });
     }
@@ -148,7 +158,7 @@ export function findUntitledExamples(query, limit = 8, catalog = null) {
       const score = queryWords.reduce((sum, word) => sum + (bag.has(word) ? 10 : [...bag].some((candidate) => candidate.includes(word)) ? 3 : 0), 0) + (item.renderable ? 1 : 0);
       return { ...item, score };
     })
-    .filter((item) => item.score > 0)
+    .filter((item) => item.score >= 10)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
     .slice(0, limit);
 }

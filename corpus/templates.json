@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-25",
+  "generated": "2026-08-27",
   "corpus": "/Users/justinfowler/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
@@ -28,6 +28,7 @@
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
+      "scope": "component",
       "dna": {
         "family": "shadcn-zinc",
         "density": "comfortable"
@@ -48,6 +49,7 @@
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
+      "scope": "component",
       "dna": {
         "family": "shadcn-zinc",
         "density": "comfortable"
@@ -68,6 +70,12 @@
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation"
+        ]
+      },
       "dna": {
         "family": "shadcn-zinc",
         "density": "comfortable"
@@ -94,6 +102,12 @@
         "navigation",
         "sidebar"
       ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "navigation"
+        ]
+      },
       "dna": {
         "family": "untitled",
         "density": "comfortable"
@@ -118,7 +132,8 @@
         "shell",
         "nav",
         "sidebar"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "antd-pro-app",
@@ -139,7 +154,8 @@
         "shell",
         "nav",
         "sidebar"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "carbon-uishell",
@@ -160,7 +176,8 @@
         "shell",
         "nav",
         "sidebar"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "mantine-appshell",
@@ -181,7 +198,8 @@
         "shell",
         "nav",
         "sidebar"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "heroui-next-app",
@@ -202,7 +220,8 @@
         "shell",
         "nav",
         "sidebar"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "query-mui-store",
@@ -223,7 +242,8 @@
         "shell",
         "nav",
         "sidebar"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "query-adminlte",
@@ -244,7 +264,8 @@
         "shell",
         "nav",
         "sidebar"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "query-primeblocks",
@@ -265,7 +286,8 @@
         "shell",
         "nav",
         "sidebar"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "mui-sign-in-side",
@@ -286,7 +308,8 @@
         "login",
         "signin",
         "signup"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "shadcn-login-04",
@@ -298,6 +321,12 @@
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
+      "scope": "page",
+      "reference": {
+        "required": [
+          "form"
+        ]
+      },
       "dna": {
         "family": "shadcn-zinc",
         "density": "comfortable"
@@ -326,7 +355,8 @@
       "jobs": [
         "blog",
         "article"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "tremor-charts",
@@ -346,7 +376,8 @@
       "dna": {
         "family": "tremor",
         "density": "comfortable"
-      }
+      },
+      "scope": "page"
     },
     {
       "id": "spectrum-ai-chat",
@@ -365,7 +396,8 @@
       "dna": {
         "family": "spectrum",
         "density": "comfortable"
-      }
+      },
+      "scope": "page"
     },
     {
       "id": "antd-pro-chatbot",
@@ -383,7 +415,8 @@
       "dna": {
         "family": "ant",
         "density": "dense"
-      }
+      },
+      "scope": "page"
     },
     {
       "id": "mui-checkout",
@@ -401,7 +434,8 @@
       },
       "jobs": [
         "checkout"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "shadcn-command",
@@ -413,6 +447,7 @@
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
+      "scope": "component",
       "dna": {
         "family": "shadcn-zinc",
         "density": "comfortable"
@@ -443,7 +478,8 @@
       "jobs": [
         "crud",
         "admin"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "antd-pro-crud",
@@ -465,7 +501,8 @@
       "jobs": [
         "crud",
         "admin"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "shadcn-dashboard-01",
@@ -477,6 +514,15 @@
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "chart",
+          "table"
+        ]
+      },
       "dna": {
         "family": "shadcn-zinc",
         "density": "comfortable"
@@ -501,6 +547,12 @@
         "charts",
         "dataviz"
       ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "chart"
+        ]
+      },
       "dna": {
         "family": "untitled",
         "density": "comfortable"
@@ -522,7 +574,8 @@
       },
       "jobs": [
         "dashboard"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "query-haze",
@@ -540,7 +593,8 @@
       },
       "jobs": [
         "dashboard"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "shadcn-empty-icon",
@@ -552,6 +606,7 @@
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
+      "scope": "component",
       "jobs": [
         "empty",
         "ai-generate"
@@ -577,7 +632,8 @@
         "family": "slds",
         "density": "compact"
       },
-      "note": "references/salesforce.md is the structure source; no public source exists"
+      "note": "references/salesforce.md is the structure source; no public source exists",
+      "scope": "page"
     },
     {
       "id": "lex-email",
@@ -596,7 +652,8 @@
         "family": "slds",
         "density": "compact"
       },
-      "note": "references/salesforce.md is the structure source; no public source exists"
+      "note": "references/salesforce.md is the structure source; no public source exists",
+      "scope": "page"
     },
     {
       "id": "lex-lwr",
@@ -614,7 +671,8 @@
         "family": "slds",
         "density": "compact"
       },
-      "note": "references/salesforce.md is the structure source; no public source exists"
+      "note": "references/salesforce.md is the structure source; no public source exists",
+      "scope": "page"
     },
     {
       "id": "lex-mobile",
@@ -632,7 +690,8 @@
         "family": "slds",
         "density": "compact"
       },
-      "note": "references/salesforce.md is the structure source; no public source exists"
+      "note": "references/salesforce.md is the structure source; no public source exists",
+      "scope": "page"
     },
     {
       "id": "lex-queue",
@@ -651,7 +710,8 @@
         "family": "slds",
         "density": "compact"
       },
-      "note": "references/salesforce.md is the structure source; no public source exists"
+      "note": "references/salesforce.md is the structure source; no public source exists",
+      "scope": "page"
     },
     {
       "id": "lex-record",
@@ -673,7 +733,8 @@
         "family": "slds",
         "density": "compact"
       },
-      "note": "references/salesforce.md is the structure source; no public source exists"
+      "note": "references/salesforce.md is the structure source; no public source exists",
+      "scope": "page"
     },
     {
       "id": "lex-record-narrow",
@@ -692,7 +753,8 @@
         "family": "slds",
         "density": "compact"
       },
-      "note": "references/salesforce.md is the structure source; no public source exists"
+      "note": "references/salesforce.md is the structure source; no public source exists",
+      "scope": "page"
     },
     {
       "id": "mui-marketing-page",
@@ -711,7 +773,8 @@
       "jobs": [
         "marketing",
         "marketing-hero"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "query-mui-free-gallery",
@@ -730,7 +793,8 @@
       "jobs": [
         "marketing",
         "marketing-hero"
-      ]
+      ],
+      "scope": "page"
     },
     {
       "id": "magicui-hero",
@@ -750,7 +814,8 @@
       "dna": {
         "family": "magicui",
         "density": "editorial"
-      }
+      },
+      "scope": "page"
     },
     {
       "id": "carbon-datatable",
@@ -761,18 +826,19 @@
       "preview": "https://carbondesignsystem.com/components/data-table/usage/",
       "license": "Apache-2.0",
       "kind": "source",
-      "selectable": false,
-      "retiredReason": "Untitled UI replaced Carbon as Shine's table reference; retain this pack only for adversarial regression fixtures",
       "startFrom": 1,
       "jobs": [
         "queue",
         "list",
         "inbox"
       ],
+      "selectable": false,
+      "retiredReason": "Untitled UI replaced Carbon as Shine's table reference; retain this pack only for adversarial regression fixtures",
       "dna": {
         "family": "carbon",
         "density": "dense"
-      }
+      },
+      "scope": "page"
     },
     {
       "id": "untitled-table",
@@ -791,6 +857,12 @@
         "records",
         "datagrid"
       ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "table"
+        ]
+      },
       "dna": {
         "family": "untitled",
         "density": "comfortable"
@@ -814,7 +886,8 @@
       "dna": {
         "family": "ant",
         "density": "dense"
-      }
+      },
+      "scope": "page"
     },
     {
       "id": "antd-pro-profile",
@@ -834,7 +907,8 @@
       "dna": {
         "family": "ant",
         "density": "dense"
-      }
+      },
+      "scope": "page"
     },
     {
       "id": "antd-pro-settings",
@@ -854,7 +928,8 @@
       "dna": {
         "family": "ant",
         "density": "dense"
-      }
+      },
+      "scope": "page"
     },
     {
       "id": "fluent-nav",
@@ -872,7 +947,8 @@
       "dna": {
         "family": "fluent",
         "density": "comfortable"
-      }
+      },
+      "scope": "page"
     },
     {
       "id": "antd-pro-step-form",
@@ -892,7 +968,8 @@
       "dna": {
         "family": "ant",
         "density": "dense"
-      }
+      },
+      "scope": "page"
     }
   ]
 }
