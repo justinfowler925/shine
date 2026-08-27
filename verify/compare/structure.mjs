@@ -1,4 +1,4 @@
-export function assessStructure({ facts, screen, lane="", brandLocked=false, brief="", prior=[] }) {
+export function assessStructure({ facts, screen, reference={}, lane="", brandLocked=false, brief="", prior=[] }) {
   const failures=[];
   const tableScreen=/^(queue|crud|dashboard)$/.test(screen);
   if (facts.regions.length < 2) failures.push(`structure: ${facts.regions.length} regions; expected a composed region graph`);
@@ -10,6 +10,8 @@ export function assessStructure({ facts, screen, lane="", brandLocked=false, bri
     if (facts.rowCount < 2) failures.push(`structure: table-presence clone has ${facts.rowCount} row(s)`);
   }
   if (facts.controls.length && !facts.interactions.primary && !tableScreen) failures.push("interaction: controls exist but no primary action is identifiable");
+  const counts={table:facts.tableCount,navigation:facts.navigationCount,chart:facts.chartCount,summary:facts.summaryCount,form:facts.interactions.form?1:0};
+  for(const requirement of reference.required||[])if(!counts[requirement])failures.push(`reference: ${requirement} required by cited ${screen} structure`);
   const originalityApplicable=!brandLocked && lane!=="lex" && /^(marketing|saas)$/.test(lane);
   if (originalityApplicable && (!brief || !facts.signature?.name)) failures.push("originality: brief-specific visible signature required for saas/marketing");
   if (originalityApplicable && facts.signature && !facts.signature.text) failures.push("originality: signature region is empty");
@@ -24,5 +26,5 @@ export function assessStructure({ facts, screen, lane="", brandLocked=false, bri
   }
   if (originalityApplicable) for (const item of prior) if (item.brief && item.brief!==brief && item.structureFingerprint===facts.structureFingerprint)
     failures.push(`originality: cross-brief structural clone of ${item.brief}`);
-  return { failures, originalityApplicable, proof:{regionGraph:facts.regions,regionOrder:facts.regions.map((r)=>r.name||r.tag),focalShare:facts.focalShare,controlInventory:facts.controls,density:facts.density,keyInteractions:facts.interactions,brief,signature:facts.signature,structureFingerprint:facts.structureFingerprint,lane,brandLocked} };
+  return { failures, originalityApplicable, proof:{regionGraph:facts.regions,regionOrder:facts.regions.map((r)=>r.name||r.tag),focalShare:facts.focalShare,controlInventory:facts.controls,density:facts.density,keyInteractions:facts.interactions,referenceCounts:counts,brief,signature:facts.signature,structureFingerprint:facts.structureFingerprint,lane,brandLocked} };
 }

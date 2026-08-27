@@ -157,8 +157,23 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
 
 {
   const packet=spawnSync(process.execPath,[join(SHINE,"verify/design-packet.test.mjs")],{cwd:SHINE,encoding:"utf8"});
-  if(packet.status===0)ok("bounded design packet", "job structure, controls, states, sources, provenance");
+  if(packet.status===0)ok("bounded design packet", "9 natural briefs, ambiguity refusal, page/component split, usable source");
   else fail("bounded design packet",`${packet.stderr||packet.stdout}`.trim().slice(-500));
+  const diagnosis=spawnSync(process.execPath,[join(SHINE,"verify/diagnosis.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(diagnosis.status===0)ok("existing-surface diagnosis", "before artifact + screenshot, prioritized evidence, hash");
+  else fail("existing-surface diagnosis",`${diagnosis.stderr||diagnosis.stdout}`.trim().slice(-500));
+  const render=spawnSync(process.execPath,[join(SHINE,"verify/design-spec.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(render.status===0)ok("renderer obeys design lint", "7 categories render with zero hard violations");
+  else fail("renderer obeys design lint",`${render.stderr||render.stdout}`.trim().slice(-500));
+  const reference=spawnSync(process.execPath,[join(SHINE,"verify/reference-contract.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(reference.status===0)ok("template-relative proof", "generic dashboard fails shadcn and Untitled structure");
+  else fail("template-relative proof",`${reference.stderr||reference.stdout}`.trim().slice(-500));
+  const productionAgent=spawnSync(process.execPath,[join(SHINE,"benchmark/agent-production.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(productionAgent.status===0)ok("production agent benchmark contract", "dual entry discovery; 11 fail paths bite 20/20");
+  else fail("production agent benchmark contract",`${productionAgent.stderr||productionAgent.stdout}`.trim().slice(-500));
+  const voiceContrast=spawnSync(process.execPath,[join(SHINE,"verify/voice-contrast.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(voiceContrast.status===0)ok("voice primary contrast", "Ant action fill 6.16:1; seeded gate");
+  else fail("voice primary contrast",`${voiceContrast.stderr||voiceContrast.stdout}`.trim().slice(-500));
   const release=spawnSync(process.execPath,[join(SHINE,"verify/release.test.mjs")],{cwd:SHINE,encoding:"utf8"});
   if(release.status===0)ok("versioned atomic release", "immutable manifest + current pointer");
   else fail("versioned atomic release",`${release.stderr||release.stdout}`.trim().slice(-500));

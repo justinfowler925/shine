@@ -18,20 +18,24 @@ Resolve this installed tree, then create the packet before planning or editing:
 ```sh
 SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}/.cursor/skills/shine")
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
-node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --project "$PWD"
+node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new> --project "$PWD"
 ```
 
-Read the selected screenshot, embedded source excerpts, and matched Untitled UI examples. Do not reopen their files
+If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
+dashboard. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
+source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files
 or load the full reference library. The packet is authoritative for the region graph, controls, states,
 integration, provenance, and proof commands.
 For a new standalone surface, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`.
 The renderer owns repeated contract mechanics; the spec owns hierarchy, copy, data, and direction.
-For an existing product, edit its real components and preserve its architecture.
+For an existing product, render its real components and read `references/diagnose.md`. Complete the packet's
+`shine-diagnosis.json` before editing: primary task, before artifact + screenshot, and 3–8 evidence-backed defects
+across usability, completeness, composition, craft, or adoption. Preserve the product architecture.
 
 ## Build
 
-- Existing surface: render it first and name the user-blocking defects before editing.
+- Existing surface: fix defects in diagnosis priority order; do not paint before usability and completeness are sound.
 - New surface: state the information hierarchy and primary workflow in the design spec, then build; ask discovery
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports.

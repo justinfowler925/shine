@@ -1,6 +1,6 @@
 import {readFileSync} from "node:fs";
 
-const categories=new Set(["datagrid","dashboard","form","marketing","lex","voice"]);
+const categories=new Set(["datagrid","dashboard","form","marketing","record","lex","voice"]);
 const clean=value=>String(value||"").replace(/[<>]/g,"").trim().slice(0,240);
 const words=value=>clean(value).split(/\s+/).filter(Boolean);
 const title=value=>words(value).map(word=>word[0]?.toUpperCase()+word.slice(1)).join(" ");
@@ -9,7 +9,7 @@ export function seedDesignSpec({brief,packet}){
  const subject=title(brief.brief.replace(/\b(dense|records?|compact|executive)\b/gi,"").trim());
  return {version:1,briefId:brief.id,category:brief.category,lane:brief.lane,cite:packet.selected.id,
   direction:{name:`${subject} signal desk`,principle:"Make the next consequential action obvious before showing supporting detail.",density:["datagrid","dashboard","lex"].includes(brief.category)?"dense":"focused"},
-  copy:{eyebrow:title(brief.category),title:subject,summary:`A purpose-built ${brief.brief} that turns live evidence into a clear next action.`,primaryAction:{datagrid:"Review selected",dashboard:"Open exceptions",form:"Save settings",marketing:"Explore the product",lex:"Edit record",voice:"Send message"}[brief.category],secondaryAction:"View activity"},
+  copy:{eyebrow:title(brief.category),title:subject,summary:`A purpose-built ${brief.brief} that turns live evidence into a clear next action.`,primaryAction:{datagrid:"Review selected",dashboard:"Open exceptions",form:"Save settings",marketing:"Explore the product",record:"Take next action",lex:"Edit record",voice:"Send message"}[brief.category],secondaryAction:"View activity"},
   data:{metrics:["Priority","In review","Resolved"],rows:[["Aster","High","Ready"],["Beacon","Medium","Review"],["Cinder","Low","Resolved"]],fields:["Workspace name","Notification email","Review cadence"],insight:"Three items changed since the previous review."}};
 }
 
