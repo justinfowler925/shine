@@ -499,7 +499,20 @@ const compose = await page.evaluate(() => {
   });
   const sectionsMissingJob = sectionJobs.filter((s) => !s.hasHeading);
 
-  const namedTable = document.querySelector('[data-shine-contract="table"], [data-contract="table"], [role="grid"]');
+  const layoutTable = (el) => {
+    const c = el.getAttribute("data-shine-contract") || el.getAttribute("data-contract") || "";
+    if (c === "layout" || c === "presentation") return true;
+    const role = el.getAttribute("role");
+    return role === "presentation" || role === "none";
+  };
+  const isDataTable = (el) => {
+    if (layoutTable(el)) return false;
+    return el.querySelectorAll("thead th, thead td, tr:first-child > th").length >= 2;
+  };
+  const namedTable =
+    document.querySelector('[data-shine-contract="table"], [data-contract="table"], [role="grid"]') ||
+    [...document.querySelectorAll("table")].find(isDataTable) ||
+    null;
   const tableRect = namedTable?.getBoundingClientRect();
   const tableAreaPct = namedTable && viewport ? +((tableRect.width * tableRect.height) / viewport).toFixed(3) : 0;
   const hero = document.querySelector("[data-region='hero']");
@@ -514,8 +527,14 @@ const compose = await page.evaluate(() => {
   const accentRgb = accentEl ? paintRgb(getComputedStyle(accentEl).backgroundColor) : null;
   const dnaChroma = document.documentElement.getAttribute("data-dna-chroma");
   const chromaCheck = document.documentElement.hasAttribute("data-chroma-check");
+  const tableHost = namedTable?.closest("[data-grid], .grid, main, body") || document;
   const tableContract = namedTable
     ? {
+        toolbar: !!(
+          tableHost.querySelector(
+            "[data-toolbar], [data-shine-toolbar], .toolbar, [role='search'], input[type='search']",
+          ) || namedTable.parentElement?.querySelector("input, [role='search']")
+        ),
         sort: !!(
           namedTable.querySelector("[aria-sort], [data-sort], thead button, thead [role='button']") ||
           document.querySelector("[data-sort]")
@@ -745,7 +764,7 @@ if (compose.appShellProbe && compose.contentShare < 0.28) {
 }
 
 if (compose.tableContract) {
-  for (const k of ["sort", "page", "empty", "loading", "error"]) {
+  for (const k of ["toolbar", "sort", "page", "empty", "loading", "error"]) {
     if (!compose.tableContract[k]) {
       failures.push(`contract: named table missing ${k} (contracts.md Table MUST)`);
     }
