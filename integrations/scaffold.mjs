@@ -5,9 +5,6 @@ import { fileURLToPath } from "node:url";
 import { resolveIntegration } from "./resolve.mjs";
 
 const bodies = {
-  mui: `export function ShineDataGrid({rows,columns,loading=false,onRowSelectionModelChange}) { return <DataGrid rows={rows} columns={columns} loading={loading} checkboxSelection disableRowSelectionOnClick showToolbar pagination pageSizeOptions={[25,50,100]} onRowSelectionModelChange={onRowSelectionModelChange} /> }`,
-  ant: `export function ShineDataGrid({request,columns,rowSelection,onRow}) { return <ProTable rowKey="id" request={request} columns={columns} rowSelection={rowSelection} onRow={onRow} search={{labelWidth:"auto"}} options={{density:true,fullScreen:true,reload:true,setting:true}} pagination={{showSizeChanger:true,pageSize:25}} /> }`,
-  carbon: `export function ShineDataGrid({rows,headers,children}) { return <DataTable rows={rows} headers={headers} isSortable useZebraStyles>{children}</DataTable> }`,
   "shadcn-tanstack": `const features = tableFeatures({ columnFilteringFeature, columnVisibilityFeature, rowPaginationFeature, rowSortingFeature, filteredRowModel: createFilteredRowModel(), paginatedRowModel: createPaginatedRowModel(), sortedRowModel: createSortedRowModel() });\nexport function useShineDataGrid(options) { return useTable({ ...options, features }) }`,
   native: `export const shineDataGridElement = "table";`,
   lex: `export const shineDataGridElement = "lightning-datatable";`,
