@@ -1426,9 +1426,6 @@ if (FULL) {
   };
   const runtimeProject = join(SHINE, "verify/fixtures/integrations");
   const projects = {
-    mui: runtimeProject,
-    carbon: runtimeProject,
-    ant: runtimeProject,
     "shadcn-tanstack": runtimeProject,
     native: make("native", null),
     lex: make("lex", {}, ["sfdx-project.json"]),
@@ -1447,20 +1444,14 @@ if (FULL) {
   const pnpmProject = make("shadcn-pnpm", { react: "1", "@tanstack/react-table": "1" }, ["components.json", "pnpm-lock.yaml"]);
   if (detectProject(pnpmProject).packageManager === "pnpm") ok("integration detects package manager");
   else fail("integration detects package manager", "pnpm lock ignored");
-  const muiOnly = make("mui-only", { react: "1", "@mui/material": "1", "@mui/x-data-grid": "1" });
-  try { resolveIntegration(muiOnly, "ant"); fail("integration refuses a second design system", "Ant injected into MUI app"); }
-  catch (err) { if (/refusing to add/.test(err.message)) ok("integration refuses a second design system"); else fail("integration refuses a second design system", err.message); }
   const noKit = make("react-no-kit", { react: "1", vite: "1" });
   try { resolveIntegration(noKit); fail("integration fails when React has no chosen kit", "silently chose a kit"); }
   catch (err) { if (/choose explicitly/.test(err.message)) ok("integration fails when React has no chosen kit"); else fail("integration fails when React has no chosen kit", err.message); }
-  const multi = make("multi", { react: "1", "@mui/material": "1", "@carbon/react": "1" });
-  try { resolveIntegration(multi); fail("integration refuses ambiguous installed kits", "silently chose first kit"); }
-  catch (err) { if (/multiple installed/.test(err.message)) ok("integration refuses ambiguous installed kits"); else fail("integration refuses ambiguous installed kits", err.message); }
-  const fake = { ...RECIPES.mui, api: [...RECIPES.mui.api, "InventedGridProp"] };
+  const fake = { ...RECIPES["shadcn-tanstack"], api: [...RECIPES["shadcn-tanstack"].api, "InventedGridProp"] };
   if (verifyRecipeApi(fake).includes("InventedGridProp")) ok("integration API provenance gate bites invented API");
   else fail("integration API provenance gate bites invented API", "invented symbol passed");
-  const missing = make("mui-missing-package", { react: "1", "@mui/material": "1", "@mui/x-data-grid": "1" });
-  try { resolveIntegration(missing, "mui"); fail("integration refuses missing runtime packages", "declared-only package set passed"); }
+  const missing = make("shadcn-missing-package", { react: "1", "@tanstack/react-table": "1" }, ["components.json"]);
+  try { resolveIntegration(missing, "shadcn-tanstack"); fail("integration refuses missing runtime packages", "declared-only package set passed"); }
   catch (err) { if (/declared but not installed/.test(err.message)) ok("integration refuses missing runtime packages"); else fail("integration refuses missing runtime packages", err.message); }
 }
 

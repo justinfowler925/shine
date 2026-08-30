@@ -6,21 +6,6 @@ import { fileURLToPath } from "node:url";
 
 const SHINE = resolve(fileURLToPath(new URL("..", import.meta.url)));
 export const RECIPES = {
-  mui: {
-    packages: ["@mui/material", "@mui/x-data-grid"], cite: "mui-crud-dashboard",
-    imports: ["import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';"],
-    api: ["DataGrid", "GridActionsCellItem"], contract: "MUI DataGrid with toolbar, pagination, states, row actions and column resize",
-  },
-  carbon: {
-    packages: ["@carbon/react"], cite: "carbon-datatable",
-    imports: ["import { DataTable, TableToolbar } from '@carbon/react';"],
-    api: ["DataTable", "TableToolbar"], contract: "Carbon DataTable render-prop composition plus its pagination adapter",
-  },
-  ant: {
-    packages: ["antd", "@ant-design/pro-components"], cite: "antd-pro-crud",
-    imports: ["import { ProTable } from '@ant-design/pro-components';"],
-    api: ["ProTable"], contract: "Ant ProTable request, columns, toolbar and row actions",
-  },
   "shadcn-tanstack": {
     packages: ["@tanstack/react-table"], cite: "shadcn-dashboard-01",
     imports: ["import { FlexRender, columnFilteringFeature, columnVisibilityFeature, createFilteredRowModel, createPaginatedRowModel, createSortedRowModel, rowPaginationFeature, rowSortingFeature, tableFeatures, useTable } from '@tanstack/react-table';"],
@@ -44,9 +29,6 @@ export function detectProject(project) {
   const pkg = existsSync(pkgPath) ? JSON.parse(readFileSync(pkgPath, "utf8")) : {};
   const deps = allDeps(pkg);
   const installed = [];
-  if (deps["@mui/material"] || deps["@mui/x-data-grid"]) installed.push("mui");
-  if (deps["@carbon/react"]) installed.push("carbon");
-  if (deps.antd || deps["@ant-design/pro-components"]) installed.push("ant");
   if (deps["@tanstack/react-table"] || existsSync(join(root, "components.json"))) installed.push("shadcn-tanstack");
   const lex = existsSync(join(root, "sfdx-project.json")) || existsSync(join(root, "force-app"));
   const framework = lex ? "lex" : deps.next ? "next" : deps.vite ? "vite" : deps.react ? "react" : "native";
