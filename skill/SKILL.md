@@ -60,3 +60,12 @@ measure facts, screenshot, receipt, and anything not completed.
 
 The packet supplies the exact invocations of `verify/measure.mjs` and `verify/compare.mjs` for
 its selected template; use those commands rather than reconstructing their flags.
+
+## Usability is executable, not inferred from craft
+
+After choosing the reference template, read `references/usability.md`. Before painting, write
+`shine-usability.json` beside the surface: map each user-facing object to the selected reference
+role and express the primary job as browser steps. Run `node verify/usability.mjs <url|page>
+--contract shine-usability.json --cite <selected-template>` after measure and before compare.
+Do not claim a screen is usable because it passes contrast, axe, or a visual comparison. A static
+dashboard, a decorative capture control, or a flow that does not change observable state fails.
