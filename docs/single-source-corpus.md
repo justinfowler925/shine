@@ -98,6 +98,7 @@ renders nodes server-side. The token is read from `FIGMA_TOKEN` or 1Password
 (`op://Employee/FIGMA_PAT/FIGMA PAT`), is never printed and never written to disk.
 
 ```sh
+node corpus/figma-harvest.mjs --team <team-url|team-id>                 # discover file keys
 node corpus/figma-harvest.mjs --list <url|file-key>                     # every top-level frame, by page
 node corpus/figma-harvest.mjs --shot <url?node-id=1-234> --id <pack-id> # render one frame to shot.png
 node corpus/figma-harvest.mjs --tokens <url> --family <name>            # voice sheet from variables/styles
@@ -118,8 +119,15 @@ Figma-derived pack is `kind: "blueprint"` with a hand-authored
 screens shadcn has no block for, and the authoritative source for a
 brand voice sheet.
 
-Local variables (`/v1/files/:key/variables/local`) are Enterprise-gated; the
-tool reports that and falls back to published styles rather than failing.
+Discovery: Figma has no "list my files" endpoint, and `/v1/teams/:id/projects`
+needs the `projects:read` scope a default PAT lacks. `--team` works around that
+through the published-library endpoints (`team_library_content:read`), since every
+published component carries its `file_key`. **A file that publishes no library is
+invisible to this path** — that limit is printed, not hidden.
+
+Local variables (`/v1/files/:key/variables/local`) need the `file_variables:read`
+scope; the tool names the missing scope and falls back to published fill styles
+rather than failing.
 
 ## Test status
 

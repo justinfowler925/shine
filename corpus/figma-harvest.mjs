@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // figma-harvest.mjs — pixels and tokens from a Figma file.
 //
+//   node corpus/figma-harvest.mjs --team <team-url|team-id>
 //   node corpus/figma-harvest.mjs --list <url|file-key>
 //   node corpus/figma-harvest.mjs --shot <url-with-node-id> --id <pack-id> [--scope component]
 //   node corpus/figma-harvest.mjs --tokens <url|file-key> --family <name> [--out tokens/voices/<name>.css]
@@ -38,6 +39,53 @@ function token() {
   } catch {
     throw new Error(`no Figma token: set FIGMA_TOKEN or make ${OP_REF} readable (op signin)`);
   }
+}
+
+/** Accept a team URL or bare team id. */
+export function parseTeam(value) {
+  const raw = String(value || "").trim();
+  const m = raw.match(/figma\.com\/files\/team\/([0-9]+)/) || raw.match(/^([0-9]{6,})$/);
+  if (!m) throw new Error(`could not read a team id from ${JSON.stringify(raw)}`);
+  return m[1];
+}
+
+/**
+ * Discover file keys for a team. Figma has no "list my files" endpoint and
+ * /v1/teams/:id/projects needs the projects:read scope, which a default PAT does
+ * not carry. The published-library endpoints do work under
+ * team_library_content:read and every component carries its file_key, so the
+ * team's published libraries are discoverable without widening the token.
+ * Files that publish nothing stay invisible — that limit is reported, not hidden.
+ */
+async function team(id, tok) {
+  const keys = new Map();
+  let cursor = "";
+  for (let page = 0; page < 20; page += 1) {
+    const qs = `page_size=1000${cursor ? `&after=${encodeURIComponent(cursor)}` : ""}`;
+    const body = await figma(`/teams/${id}/components?${qs}`, tok);
+    const comps = body.meta?.components || [];
+    for (const c of comps) keys.set(c.file_key, (keys.get(c.file_key) || 0) + 1);
+    cursor = body.meta?.cursor?.after || "";
+    if (!cursor || !comps.length) break;
+  }
+  if (!keys.size) {
+    console.log("no published library components in this team — nothing discoverable without the projects:read scope");
+    return;
+  }
+  console.log(`${keys.size} file(s) publishing components in team ${id}:\n`);
+  for (const [key, count] of [...keys].sort((a, b) => b[1] - a[1])) {
+    let name = "(metadata unavailable)";
+    let modified = "";
+    try {
+      const meta = await figma(`/files/${key}?depth=1`, tok);
+      name = meta.name;
+      modified = String(meta.lastModified || "").slice(0, 10);
+    } catch { /* keep the key even when metadata is refused */ }
+    console.log(`  ${key}  ${String(count).padStart(4)} components  ${modified}  ${name}`);
+  }
+  console.log(`\nInspect one with:\n  node corpus/figma-harvest.mjs --list <file-key>`);
+  console.log("Note: only files that PUBLISH a library appear here. A file with no published");
+  console.log("components is invisible to this path — paste its URL directly.");
 }
 
 /** Accept a full Figma URL or a bare file key; pull the node id when present. */
@@ -159,17 +207,19 @@ async function tokens(target, tok, family, outPath) {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const mode = has("--list") ? "list" : has("--shot") ? "shot" : has("--tokens") ? "tokens" : "";
+  const mode = has("--team") ? "team" : has("--list") ? "list" : has("--shot") ? "shot" : has("--tokens") ? "tokens" : "";
   if (!mode) {
     console.error(`usage:
+  node corpus/figma-harvest.mjs --team <team-url|team-id>
   node corpus/figma-harvest.mjs --list <url|file-key>
   node corpus/figma-harvest.mjs --shot <url-with-node-id> --id <pack-id> [--scope component]
   node corpus/figma-harvest.mjs --tokens <url|file-key> --family <name> [--out <path>] [--force]`);
     process.exit(2);
   }
   try {
-    const target = parseTarget(opt(`--${mode}`));
     const tok = token();
+    if (mode === "team") { await team(parseTeam(opt("--team")), tok); process.exit(0); }
+    const target = parseTarget(opt(`--${mode}`));
     if (mode === "list") await list(target, tok);
     if (mode === "shot") await shot(target, tok, opt("--id"), opt("--scope"));
     if (mode === "tokens") await tokens(target, tok, opt("--family"), opt("--out"));
