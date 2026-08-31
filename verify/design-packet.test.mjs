@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import {mkdirSync,writeFileSync} from "node:fs";
+import {join} from "node:path";
+import {fileURLToPath} from "node:url";
 import {classifyJob,createDesignPacket} from "../core/design-packet.mjs";
 
 const cases=[
@@ -34,4 +37,34 @@ assert.equal(dashboard.selected.id,"shadcn-dashboard-01","component demo cannot 
 assert(dashboard.componentReferences.some(x=>x.id==="untitled-line-charts"),"Untitled chart should be a component reference");
 assert.equal(dashboard.diagnosis.required,false);
 assert.throws(()=>createDesignPacket({job:""}),/job is required/);
-console.log("design packet PASS: 9 natural briefs · ambiguity refusal · page/component split · usable source · diagnosis contract");
+// Kit affinity. A consumer's installed kit decided the build recipe but had no
+// say in the page reference, so a shadcn/TanStack repo asking for a records
+// surface was handed an Ant Design Pro reference to copy: untitled-table and
+// antd-pro-list both scored 122 and the tie broke alphabetically.
+const shadcnRepo=fileURLToPath(new URL("./fixtures/kit-affinity-shadcn",import.meta.url));
+mkdirSync(shadcnRepo,{recursive:true});
+writeFileSync(join(shadcnRepo,"package.json"),JSON.stringify({name:"kit-affinity-fixture",dependencies:{next:"16.0.0","@tanstack/react-table":"8.21.3"}})+"\n");
+writeFileSync(join(shadcnRepo,"components.json"),JSON.stringify({$schema:"https://ui.shadcn.com/schema.json",style:"new-york"})+"\n");
+
+const affine=createDesignPacket({job:"triage the weekly goal board and assign owners",lane:"internal",project:shadcnRepo,mode:"existing",category:"datagrid"});
+assert.equal(affine.integration.key,"shadcn-tanstack","fixture must detect as a shadcn/TanStack consumer");
+assert(affine.componentReferences.some(x=>x.id==="untitled-table"&&x.matches.includes("installedKit")),
+ "a buildable component reference must be marked installedKit");
+// Coverage is thin and uneven: queue has exactly one page-scope reference and it
+// is Ant Design Pro. Ordering must not eliminate it, but the packet must say it
+// is a structure to port rather than source to copy.
+assert(affine.selected.scope==="page","a composed page reference is still required");
+if(!["shadcn-registry","untitled-ui-react"].includes(affine.selected.kit)){
+ assert.equal(affine.selected.port,true,"a cross-kit page reference must be flagged as port-not-copy");
+ assert.match(affine.selected.portNote,/port the structure to shadcn-registry/);
+}
+
+const affineDash=createDesignPacket({job:"marketing influenced pipeline dashboard",lane:"internal",project:shadcnRepo,mode:"existing",category:"dashboard"});
+assert.equal(affineDash.selected.id,"shadcn-dashboard-01","a buildable page reference must win when one is eligible");
+assert.notEqual(affineDash.selected.port,true,"a same-kit reference is not a port");
+assert(affineDash.selected.matches.includes("installedKit"));
+
+const lex=createDesignPacket({job:"lightning record page for claims",lane:"lex",project:shadcnRepo,mode:"existing",category:"record"});
+assert.equal(lex.selected.kit,"slds","kit affinity must not override the Lightning lane");
+
+console.log("design packet PASS: 9 natural briefs · ambiguity refusal · page/component split · usable source · diagnosis contract · kit affinity + port disclosure + lex lane");

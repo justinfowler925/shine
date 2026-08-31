@@ -1,975 +1,1000 @@
 {
-  "generated": "2026-08-27",
-  "corpus": "/Users/justinfowler/design-corpus",
-  "requiredScreenTypes": [
-    "dashboard",
-    "marketing",
-    "auth",
-    "checkout",
+ "generated": "2026-08-27",
+ "corpus": "/Users/justinfowler/design-corpus",
+ "requiredScreenTypes": [
+  "dashboard",
+  "marketing",
+  "auth",
+  "checkout",
+  "app-shell",
+  "crud",
+  "queue",
+  "record",
+  "chat",
+  "settings",
+  "wizard",
+  "empty",
+  "command-palette",
+  "lex-record"
+ ],
+ "templates": [
+  {
+   "id": "shadcn-input-group-textarea",
+   "screen": "ai-generate",
+   "kit": "shadcn-registry",
+   "title": "shadcn input-group-textarea (prompt composer + submit addon)",
+   "path": "shadcn-registry/items/input-group-textarea.json",
+   "preview": "https://ui.shadcn.com/docs/components/input",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "scope": "component",
+   "dna": {
+    "family": "shadcn-zinc",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "ai-generate",
+    "prompt",
+    "composer"
+   ]
+  },
+  {
+   "id": "shadcn-field-choice-card",
+   "screen": "ai-generate",
+   "kit": "shadcn-registry",
+   "title": "shadcn field-choice-card (option tier as radio cards)",
+   "path": "shadcn-registry/items/field-choice-card.json",
+   "preview": "https://ui.shadcn.com/docs/components/field",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 2,
+   "scope": "component",
+   "dna": {
+    "family": "shadcn-zinc",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "ai-generate",
+    "prompt",
+    "composer"
+   ]
+  },
+  {
+   "id": "shadcn-sidebar-07",
+   "screen": "app-shell",
+   "kit": "shadcn-registry",
+   "title": "shadcn sidebar-07 (collapsible shell)",
+   "path": "shadcn-registry/items/sidebar-07.json",
+   "preview": "https://ui.shadcn.com/view/sidebar-07",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "scope": "page",
+   "reference": {
+    "required": [
+     "navigation"
+    ]
+   },
+   "dna": {
+    "family": "shadcn-zinc",
+    "density": "comfortable"
+   },
+   "jobs": [
     "app-shell",
-    "crud",
-    "queue",
-    "record",
+    "shell",
+    "nav",
+    "sidebar"
+   ]
+  },
+  {
+   "id": "untitled-sidebar-navigation",
+   "screen": "app-shell",
+   "kit": "untitled-ui-react",
+   "title": "Untitled UI sidebar navigation examples",
+   "path": "untitled-ui-react/components/application/app-navigation/sidebar-navigation.demo.tsx",
+   "preview": "https://www.untitledui.com/react/components",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "jobs": [
+    "app-shell",
+    "navigation",
+    "sidebar"
+   ],
+   "scope": "component",
+   "reference": {
+    "required": [
+     "navigation"
+    ]
+   },
+   "dna": {
+    "family": "untitled",
+    "density": "comfortable"
+   }
+  },
+  {
+   "id": "mui-dashboard",
+   "screen": "app-shell",
+   "kit": "mui-material",
+   "title": "MUI dashboard shell",
+   "path": "mui-material/docs/data/material/getting-started/templates/dashboard",
+   "preview": "https://mui.com/material-ui/getting-started/templates/",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 2,
+   "dna": {
+    "family": "material",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "app-shell",
+    "shell",
+    "nav",
+    "sidebar"
+   ],
+   "scope": "page",
+   "selectable": false,
+   "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
+  },
+  {
+   "id": "antd-pro-app",
+   "screen": "app-shell",
+   "kit": "ant-design-pro",
+   "title": "Ant Design Pro admin app",
+   "path": "ant-design-pro/src",
+   "preview": "https://preview.pro.ant.design",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 3,
+   "dna": {
+    "family": "ant",
+    "density": "dense"
+   },
+   "jobs": [
+    "app-shell",
+    "shell",
+    "nav",
+    "sidebar"
+   ],
+   "scope": "page",
+   "selectable": false,
+   "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
+  },
+  {
+   "id": "carbon-uishell",
+   "screen": "app-shell",
+   "kit": "carbon",
+   "title": "Carbon UIShell",
+   "path": "carbon/packages/react/src/components/UIShell",
+   "preview": "https://carbondesignsystem.com/components/UI-shell-header/usage/",
+   "license": "Apache-2.0",
+   "kind": "source",
+   "startFrom": 4,
+   "dna": {
+    "family": "carbon",
+    "density": "dense"
+   },
+   "jobs": [
+    "app-shell",
+    "shell",
+    "nav",
+    "sidebar"
+   ],
+   "scope": "page",
+   "selectable": false,
+   "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
+  },
+  {
+   "id": "mantine-appshell",
+   "screen": "app-shell",
+   "kit": "mantine",
+   "title": "Mantine AppShell full layout",
+   "path": "mantine/apps/mantine.dev/src/app-shell-examples/examples/FullLayout",
+   "preview": "https://mantine.dev/app-shell",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 5,
+   "dna": {
+    "family": "mantine",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "app-shell",
+    "shell",
+    "nav",
+    "sidebar"
+   ],
+   "scope": "page",
+   "selectable": false,
+   "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
+  },
+  {
+   "id": "heroui-next-app",
+   "screen": "app-shell",
+   "kit": "heroui",
+   "title": "HeroUI Next.js app template",
+   "path": "heroui-next-app",
+   "preview": "https://www.heroui.com",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 6,
+   "dna": {
+    "family": "heroui",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "app-shell",
+    "shell",
+    "nav",
+    "sidebar"
+   ],
+   "scope": "page",
+   "selectable": false,
+   "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
+  },
+  {
+   "id": "query-mui-store",
+   "screen": "app-shell",
+   "kit": "mui-store",
+   "title": "MUI Store premium templates (query-only)",
+   "path": "query-only/query-mui-store.png",
+   "preview": "https://mui.com/store/",
+   "license": "proprietary",
+   "startFrom": 90,
+   "kind": "query-only",
+   "dna": {
+    "family": "shine",
+    "density": "dense"
+   },
+   "jobs": [
+    "app-shell",
+    "shell",
+    "nav",
+    "sidebar"
+   ],
+   "scope": "page"
+  },
+  {
+   "id": "query-adminlte",
+   "screen": "app-shell",
+   "kit": "adminlte",
+   "title": "AdminLTE v3 (query-only)",
+   "path": "query-only/query-adminlte.png",
+   "preview": "https://adminlte.io/themes/v3/",
+   "license": "proprietary",
+   "startFrom": 91,
+   "kind": "query-only",
+   "dna": {
+    "family": "shine",
+    "density": "dense"
+   },
+   "jobs": [
+    "app-shell",
+    "shell",
+    "nav",
+    "sidebar"
+   ],
+   "scope": "page"
+  },
+  {
+   "id": "query-primeblocks",
+   "screen": "app-shell",
+   "kit": "primeblocks",
+   "title": "PrimeBlocks (query-only)",
+   "path": "query-only/query-primeblocks.png",
+   "preview": "https://primeblocks.org/",
+   "license": "proprietary",
+   "startFrom": 92,
+   "kind": "query-only",
+   "dna": {
+    "family": "shine",
+    "density": "dense"
+   },
+   "jobs": [
+    "app-shell",
+    "shell",
+    "nav",
+    "sidebar"
+   ],
+   "scope": "page"
+  },
+  {
+   "id": "mui-sign-in-side",
+   "screen": "auth",
+   "kit": "mui-material",
+   "title": "MUI sign-in (split)",
+   "path": "mui-material/docs/data/material/getting-started/templates/sign-in-side",
+   "preview": "https://mui.com/material-ui/getting-started/templates/",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "dna": {
+    "family": "material",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "auth",
+    "login",
+    "signin",
+    "signup"
+   ],
+   "scope": "page",
+   "selectable": false,
+   "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers auth (shadcn-login-04)"
+  },
+  {
+   "id": "shadcn-login-04",
+   "screen": "auth",
+   "kit": "shadcn-registry",
+   "title": "shadcn login-04",
+   "path": "shadcn-registry/items/login-04.json",
+   "preview": "https://ui.shadcn.com/view/login-04",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 2,
+   "scope": "page",
+   "reference": {
+    "required": [
+     "form"
+    ]
+   },
+   "dna": {
+    "family": "shadcn-zinc",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "auth",
+    "login",
+    "signin",
+    "signup"
+   ]
+  },
+  {
+   "id": "mui-blog",
+   "screen": "blog",
+   "kit": "mui-material",
+   "title": "MUI blog",
+   "path": "mui-material/docs/data/material/getting-started/templates/blog",
+   "preview": "https://mui.com/material-ui/getting-started/templates/",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "dna": {
+    "family": "material",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "blog",
+    "article"
+   ],
+   "scope": "page"
+  },
+  {
+   "id": "tremor-charts",
+   "screen": "charts",
+   "kit": "tremor",
+   "title": "Tremor chart + KPI blocks (atoms \u2014 compose, don't cite as a page)",
+   "path": "tremor/src/components",
+   "preview": "https://tremor.so",
+   "license": "Apache-2.0",
+   "kind": "source",
+   "startFrom": 1,
+   "jobs": [
+    "charts",
+    "chart",
+    "dataviz"
+   ],
+   "dna": {
+    "family": "tremor",
+    "density": "comfortable"
+   },
+   "scope": "page"
+  },
+  {
+   "id": "spectrum-ai-chat",
+   "screen": "chat",
+   "kit": "react-spectrum",
+   "title": "React Spectrum AI Chat (Thread + PromptField \u2014 prompt field is the primary)",
+   "path": "react-spectrum/packages/@react-spectrum/ai/src",
+   "preview": "https://react-spectrum.adobe.com",
+   "license": "Apache-2.0",
+   "kind": "source",
+   "startFrom": 1,
+   "jobs": [
     "chat",
-    "settings",
-    "wizard",
-    "empty",
+    "assistant"
+   ],
+   "dna": {
+    "family": "spectrum",
+    "density": "comfortable"
+   },
+   "scope": "page"
+  },
+  {
+   "id": "antd-pro-chatbot",
+   "screen": "chat",
+   "kit": "ant-design-pro",
+   "title": "Ant Design Pro chatbot page",
+   "path": "ant-design-pro/src/pages/chatbot",
+   "preview": "https://preview.pro.ant.design",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 2,
+   "jobs": [
+    "chat"
+   ],
+   "dna": {
+    "family": "ant",
+    "density": "dense"
+   },
+   "scope": "page"
+  },
+  {
+   "id": "mui-checkout",
+   "screen": "checkout",
+   "kit": "mui-material",
+   "title": "MUI checkout",
+   "path": "mui-material/docs/data/material/getting-started/templates/checkout",
+   "preview": "https://mui.com/material-ui/getting-started/templates/",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "dna": {
+    "family": "material",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "checkout"
+   ],
+   "scope": "page"
+  },
+  {
+   "id": "shadcn-command",
+   "screen": "command-palette",
+   "kit": "shadcn-registry",
+   "title": "shadcn command (palette, keyboard-first, no motion)",
+   "path": "shadcn-registry/items/command.json",
+   "preview": "https://ui.shadcn.com/docs/components/command",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "scope": "component",
+   "dna": {
+    "family": "shadcn-zinc",
+    "density": "comfortable"
+   },
+   "jobs": [
     "command-palette",
+    "palette",
+    "cmdk"
+   ]
+  },
+  {
+   "id": "mui-crud-dashboard",
+   "screen": "crud",
+   "kit": "mui-material",
+   "title": "MUI CRUD dashboard",
+   "path": "mui-material/docs/data/material/getting-started/templates/crud-dashboard",
+   "preview": "https://mui.com/material-ui/getting-started/templates/",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "entrypoints": [
+    "CrudDashboard.tsx"
+   ],
+   "dna": {
+    "family": "material",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "crud",
+    "admin"
+   ],
+   "scope": "page",
+   "selectable": false,
+   "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for crud"
+  },
+  {
+   "id": "antd-pro-crud",
+   "screen": "crud",
+   "kit": "ant-design-pro",
+   "title": "Ant Design Pro ProTable CRUD page",
+   "path": "ant-design-pro/src/pages/table-list",
+   "preview": "https://preview.pro.ant.design",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 2,
+   "entrypoints": [
+    "index.tsx"
+   ],
+   "dna": {
+    "family": "ant",
+    "density": "dense"
+   },
+   "jobs": [
+    "crud",
+    "admin"
+   ],
+   "scope": "page",
+   "selectable": false,
+   "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for crud"
+  },
+  {
+   "id": "shadcn-dashboard-01",
+   "screen": "dashboard",
+   "kit": "shadcn-registry",
+   "title": "shadcn dashboard-01 (sidebar, cards, chart, table)",
+   "path": "shadcn-registry/items/dashboard-01.json",
+   "preview": "https://ui.shadcn.com/view/dashboard-01",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "scope": "page",
+   "reference": {
+    "required": [
+     "navigation",
+     "summary",
+     "chart",
+     "table"
+    ]
+   },
+   "dna": {
+    "family": "shadcn-zinc",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "crud",
+    "dashboard",
+    "inbox",
+    "list",
+    "queue",
+    "records",
+    "triage",
+    "worklist"
+   ]
+  },
+  {
+   "id": "untitled-line-charts",
+   "screen": "dashboard",
+   "kit": "untitled-ui-react",
+   "title": "Untitled UI line chart examples",
+   "path": "untitled-ui-react/components/application/charts/line-charts.demo.tsx",
+   "preview": "https://www.untitledui.com/react/components",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "jobs": [
+    "dashboard",
+    "analytics",
+    "charts",
+    "dataviz"
+   ],
+   "scope": "component",
+   "reference": {
+    "required": [
+     "chart"
+    ]
+   },
+   "dna": {
+    "family": "untitled",
+    "density": "comfortable"
+   }
+  },
+  {
+   "id": "query-shadcn-blocks",
+   "screen": "dashboard",
+   "kit": "shadcn-registry",
+   "title": "shadcn blocks gallery (query-only preview)",
+   "path": "query-only/query-shadcn-blocks.png",
+   "preview": "https://ui.shadcn.com/blocks",
+   "license": "MIT",
+   "startFrom": 80,
+   "kind": "query-only",
+   "dna": {
+    "family": "shadcn-zinc",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "dashboard"
+   ],
+   "scope": "page"
+  },
+  {
+   "id": "query-haze",
+   "screen": "dashboard",
+   "kit": "haze",
+   "title": "Haze Dashboard listing (query-only)",
+   "path": "query-only/query-haze.png",
+   "preview": "https://adminlte.io/blog/react-ui-frameworks/",
+   "license": "proprietary",
+   "startFrom": 90,
+   "kind": "query-only",
+   "dna": {
+    "family": "shine",
+    "density": "dense"
+   },
+   "jobs": [
+    "dashboard"
+   ],
+   "scope": "page"
+  },
+  {
+   "id": "shadcn-empty-icon",
+   "screen": "empty",
+   "kit": "shadcn-registry",
+   "title": "shadcn empty-icon (empty / no-result state)",
+   "path": "shadcn-registry/items/empty-icon.json",
+   "preview": "https://ui.shadcn.com/docs/components/empty",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "scope": "component",
+   "jobs": [
+    "empty",
+    "ai-generate"
+   ],
+   "dna": {
+    "family": "shadcn-zinc",
+    "density": "comfortable"
+   }
+  },
+  {
+   "id": "lex-console",
+   "screen": "lex-console",
+   "kit": "slds",
+   "title": "Lightning console + utility bar",
+   "preview": "https://www.lightningdesignsystem.com/components/tabs/",
+   "license": "n/a",
+   "kind": "blueprint",
+   "startFrom": 1,
+   "jobs": [
+    "lex-console"
+   ],
+   "dna": {
+    "family": "slds",
+    "density": "compact"
+   },
+   "note": "references/salesforce.md is the structure source; no public source exists",
+   "scope": "page"
+  },
+  {
+   "id": "lex-email",
+   "screen": "lex-email",
+   "kit": "slds",
+   "title": "Salesforce HTML email (600px tables)",
+   "preview": "https://www.lightningdesignsystem.com/guidelines/email/",
+   "license": "n/a",
+   "kind": "blueprint",
+   "startFrom": 1,
+   "jobs": [
+    "lex-email",
+    "email"
+   ],
+   "dna": {
+    "family": "slds",
+    "density": "compact"
+   },
+   "note": "references/salesforce.md is the structure source; no public source exists",
+   "scope": "page"
+  },
+  {
+   "id": "lex-lwr",
+   "screen": "lex-lwr",
+   "kit": "slds",
+   "title": "Experience Cloud LWR (SLDS 2 unsupported)",
+   "preview": "https://www.lightningdesignsystem.com/guidelines/overview/",
+   "license": "n/a",
+   "kind": "blueprint",
+   "startFrom": 1,
+   "jobs": [
+    "lex-lwr"
+   ],
+   "dna": {
+    "family": "slds",
+    "density": "compact"
+   },
+   "note": "references/salesforce.md is the structure source; no public source exists",
+   "scope": "page"
+  },
+  {
+   "id": "lex-mobile",
+   "screen": "lex-mobile",
+   "kit": "slds",
+   "title": "Salesforce mobile (no datatable)",
+   "preview": "https://www.lightningdesignsystem.com/guidelines/mobile/",
+   "license": "n/a",
+   "kind": "blueprint",
+   "startFrom": 1,
+   "jobs": [
+    "lex-mobile"
+   ],
+   "dna": {
+    "family": "slds",
+    "density": "compact"
+   },
+   "note": "references/salesforce.md is the structure source; no public source exists",
+   "scope": "page"
+  },
+  {
+   "id": "lex-queue",
+   "screen": "lex-queue",
+   "kit": "slds",
+   "title": "Lightning list / work queue (lightning-datatable contracts)",
+   "preview": "https://www.lightningdesignsystem.com/components/data-tables/",
+   "license": "n/a",
+   "kind": "blueprint",
+   "startFrom": 1,
+   "jobs": [
+    "lex-queue",
+    "queue"
+   ],
+   "dna": {
+    "family": "slds",
+    "density": "compact"
+   },
+   "note": "references/salesforce.md is the structure source; no public source exists",
+   "scope": "page"
+  },
+  {
+   "id": "lex-record",
+   "screen": "lex-record",
+   "kit": "slds",
+   "title": "Lightning record home (highlights, path, detail, related)",
+   "preview": "https://www.lightningdesignsystem.com/components/page-headers/",
+   "license": "n/a",
+   "kind": "blueprint",
+   "startFrom": 1,
+   "jobs": [
+    "lex-record",
+    "record",
+    "detail",
+    "lightning",
+    "lwc"
+   ],
+   "dna": {
+    "family": "slds",
+    "density": "compact"
+   },
+   "note": "references/salesforce.md is the structure source; no public source exists",
+   "scope": "page"
+  },
+  {
+   "id": "lex-record-narrow",
+   "screen": "lex-record",
+   "kit": "slds",
+   "title": "Lightning record LWC at ~494px host (container queries, not @media)",
+   "preview": "https://www.lightningdesignsystem.com/components/page-headers/",
+   "license": "n/a",
+   "kind": "blueprint",
+   "startFrom": 2,
+   "jobs": [
+    "lex-record-narrow",
     "lex-record"
-  ],
-  "templates": [
-    {
-      "id": "shadcn-input-group-textarea",
-      "screen": "ai-generate",
-      "kit": "shadcn-registry",
-      "title": "shadcn input-group-textarea (prompt composer + submit addon)",
-      "path": "shadcn-registry/items/input-group-textarea.json",
-      "preview": "https://ui.shadcn.com/docs/components/input",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "scope": "component",
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "ai-generate",
-        "prompt",
-        "composer"
-      ]
-    },
-    {
-      "id": "shadcn-field-choice-card",
-      "screen": "ai-generate",
-      "kit": "shadcn-registry",
-      "title": "shadcn field-choice-card (option tier as radio cards)",
-      "path": "shadcn-registry/items/field-choice-card.json",
-      "preview": "https://ui.shadcn.com/docs/components/field",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "scope": "component",
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "ai-generate",
-        "prompt",
-        "composer"
-      ]
-    },
-    {
-      "id": "shadcn-sidebar-07",
-      "screen": "app-shell",
-      "kit": "shadcn-registry",
-      "title": "shadcn sidebar-07 (collapsible shell)",
-      "path": "shadcn-registry/items/sidebar-07.json",
-      "preview": "https://ui.shadcn.com/view/sidebar-07",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "scope": "page",
-      "reference": {
-        "required": [
-          "navigation"
-        ]
-      },
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ]
-    },
-    {
-      "id": "untitled-sidebar-navigation",
-      "screen": "app-shell",
-      "kit": "untitled-ui-react",
-      "title": "Untitled UI sidebar navigation examples",
-      "path": "untitled-ui-react/components/application/app-navigation/sidebar-navigation.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "app-shell",
-        "navigation",
-        "sidebar"
-      ],
-      "scope": "component",
-      "reference": {
-        "required": [
-          "navigation"
-        ]
-      },
-      "dna": {
-        "family": "untitled",
-        "density": "comfortable"
-      }
-    },
-    {
-      "id": "mui-dashboard",
-      "screen": "app-shell",
-      "kit": "mui-material",
-      "title": "MUI dashboard shell",
-      "path": "mui-material/docs/data/material/getting-started/templates/dashboard",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "antd-pro-app",
-      "screen": "app-shell",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro admin app",
-      "path": "ant-design-pro/src",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 3,
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "carbon-uishell",
-      "screen": "app-shell",
-      "kit": "carbon",
-      "title": "Carbon UIShell",
-      "path": "carbon/packages/react/src/components/UIShell",
-      "preview": "https://carbondesignsystem.com/components/UI-shell-header/usage/",
-      "license": "Apache-2.0",
-      "kind": "source",
-      "startFrom": 4,
-      "dna": {
-        "family": "carbon",
-        "density": "dense"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "mantine-appshell",
-      "screen": "app-shell",
-      "kit": "mantine",
-      "title": "Mantine AppShell full layout",
-      "path": "mantine/apps/mantine.dev/src/app-shell-examples/examples/FullLayout",
-      "preview": "https://mantine.dev/app-shell",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 5,
-      "dna": {
-        "family": "mantine",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "heroui-next-app",
-      "screen": "app-shell",
-      "kit": "heroui",
-      "title": "HeroUI Next.js app template",
-      "path": "heroui-next-app",
-      "preview": "https://www.heroui.com",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 6,
-      "dna": {
-        "family": "heroui",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "query-mui-store",
-      "screen": "app-shell",
-      "kit": "mui-store",
-      "title": "MUI Store premium templates (query-only)",
-      "path": "query-only/query-mui-store.png",
-      "preview": "https://mui.com/store/",
-      "license": "proprietary",
-      "startFrom": 90,
-      "kind": "query-only",
-      "dna": {
-        "family": "shine",
-        "density": "dense"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "query-adminlte",
-      "screen": "app-shell",
-      "kit": "adminlte",
-      "title": "AdminLTE v3 (query-only)",
-      "path": "query-only/query-adminlte.png",
-      "preview": "https://adminlte.io/themes/v3/",
-      "license": "proprietary",
-      "startFrom": 91,
-      "kind": "query-only",
-      "dna": {
-        "family": "shine",
-        "density": "dense"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "query-primeblocks",
-      "screen": "app-shell",
-      "kit": "primeblocks",
-      "title": "PrimeBlocks (query-only)",
-      "path": "query-only/query-primeblocks.png",
-      "preview": "https://primeblocks.org/",
-      "license": "proprietary",
-      "startFrom": 92,
-      "kind": "query-only",
-      "dna": {
-        "family": "shine",
-        "density": "dense"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "mui-sign-in-side",
-      "screen": "auth",
-      "kit": "mui-material",
-      "title": "MUI sign-in (split)",
-      "path": "mui-material/docs/data/material/getting-started/templates/sign-in-side",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "auth",
-        "login",
-        "signin",
-        "signup"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "shadcn-login-04",
-      "screen": "auth",
-      "kit": "shadcn-registry",
-      "title": "shadcn login-04",
-      "path": "shadcn-registry/items/login-04.json",
-      "preview": "https://ui.shadcn.com/view/login-04",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "scope": "page",
-      "reference": {
-        "required": [
-          "form"
-        ]
-      },
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "auth",
-        "login",
-        "signin",
-        "signup"
-      ]
-    },
-    {
-      "id": "mui-blog",
-      "screen": "blog",
-      "kit": "mui-material",
-      "title": "MUI blog",
-      "path": "mui-material/docs/data/material/getting-started/templates/blog",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "blog",
-        "article"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "tremor-charts",
-      "screen": "charts",
-      "kit": "tremor",
-      "title": "Tremor chart + KPI blocks (atoms — compose, don't cite as a page)",
-      "path": "tremor/src/components",
-      "preview": "https://tremor.so",
-      "license": "Apache-2.0",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "charts",
-        "chart",
-        "dataviz"
-      ],
-      "dna": {
-        "family": "tremor",
-        "density": "comfortable"
-      },
-      "scope": "page"
-    },
-    {
-      "id": "spectrum-ai-chat",
-      "screen": "chat",
-      "kit": "react-spectrum",
-      "title": "React Spectrum AI Chat (Thread + PromptField — prompt field is the primary)",
-      "path": "react-spectrum/packages/@react-spectrum/ai/src",
-      "preview": "https://react-spectrum.adobe.com",
-      "license": "Apache-2.0",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "chat",
-        "assistant"
-      ],
-      "dna": {
-        "family": "spectrum",
-        "density": "comfortable"
-      },
-      "scope": "page"
-    },
-    {
-      "id": "antd-pro-chatbot",
-      "screen": "chat",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro chatbot page",
-      "path": "ant-design-pro/src/pages/chatbot",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "jobs": [
-        "chat"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "scope": "page"
-    },
-    {
-      "id": "mui-checkout",
-      "screen": "checkout",
-      "kit": "mui-material",
-      "title": "MUI checkout",
-      "path": "mui-material/docs/data/material/getting-started/templates/checkout",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "checkout"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "shadcn-command",
-      "screen": "command-palette",
-      "kit": "shadcn-registry",
-      "title": "shadcn command (palette, keyboard-first, no motion)",
-      "path": "shadcn-registry/items/command.json",
-      "preview": "https://ui.shadcn.com/docs/components/command",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "scope": "component",
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "command-palette",
-        "palette",
-        "cmdk"
-      ]
-    },
-    {
-      "id": "mui-crud-dashboard",
-      "screen": "crud",
-      "kit": "mui-material",
-      "title": "MUI CRUD dashboard",
-      "path": "mui-material/docs/data/material/getting-started/templates/crud-dashboard",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "entrypoints": [
-        "CrudDashboard.tsx"
-      ],
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "crud",
-        "admin"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "antd-pro-crud",
-      "screen": "crud",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro ProTable CRUD page",
-      "path": "ant-design-pro/src/pages/table-list",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "entrypoints": [
-        "index.tsx"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "jobs": [
-        "crud",
-        "admin"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "shadcn-dashboard-01",
-      "screen": "dashboard",
-      "kit": "shadcn-registry",
-      "title": "shadcn dashboard-01 (sidebar, cards, chart, table)",
-      "path": "shadcn-registry/items/dashboard-01.json",
-      "preview": "https://ui.shadcn.com/view/dashboard-01",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "scope": "page",
-      "reference": {
-        "required": [
-          "navigation",
-          "summary",
-          "chart",
-          "table"
-        ]
-      },
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "dashboard"
-      ]
-    },
-    {
-      "id": "untitled-line-charts",
-      "screen": "dashboard",
-      "kit": "untitled-ui-react",
-      "title": "Untitled UI line chart examples",
-      "path": "untitled-ui-react/components/application/charts/line-charts.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "dashboard",
-        "analytics",
-        "charts",
-        "dataviz"
-      ],
-      "scope": "component",
-      "reference": {
-        "required": [
-          "chart"
-        ]
-      },
-      "dna": {
-        "family": "untitled",
-        "density": "comfortable"
-      }
-    },
-    {
-      "id": "query-shadcn-blocks",
-      "screen": "dashboard",
-      "kit": "shadcn-registry",
-      "title": "shadcn blocks gallery (query-only preview)",
-      "path": "query-only/query-shadcn-blocks.png",
-      "preview": "https://ui.shadcn.com/blocks",
-      "license": "MIT",
-      "startFrom": 80,
-      "kind": "query-only",
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "dashboard"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "query-haze",
-      "screen": "dashboard",
-      "kit": "haze",
-      "title": "Haze Dashboard listing (query-only)",
-      "path": "query-only/query-haze.png",
-      "preview": "https://adminlte.io/blog/react-ui-frameworks/",
-      "license": "proprietary",
-      "startFrom": 90,
-      "kind": "query-only",
-      "dna": {
-        "family": "shine",
-        "density": "dense"
-      },
-      "jobs": [
-        "dashboard"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "shadcn-empty-icon",
-      "screen": "empty",
-      "kit": "shadcn-registry",
-      "title": "shadcn empty-icon (empty / no-result state)",
-      "path": "shadcn-registry/items/empty-icon.json",
-      "preview": "https://ui.shadcn.com/docs/components/empty",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "scope": "component",
-      "jobs": [
-        "empty",
-        "ai-generate"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      }
-    },
-    {
-      "id": "lex-console",
-      "screen": "lex-console",
-      "kit": "slds",
-      "title": "Lightning console + utility bar",
-      "preview": "https://www.lightningdesignsystem.com/components/tabs/",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "lex-console"
-      ],
-      "dna": {
-        "family": "slds",
-        "density": "compact"
-      },
-      "note": "references/salesforce.md is the structure source; no public source exists",
-      "scope": "page"
-    },
-    {
-      "id": "lex-email",
-      "screen": "lex-email",
-      "kit": "slds",
-      "title": "Salesforce HTML email (600px tables)",
-      "preview": "https://www.lightningdesignsystem.com/guidelines/email/",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "lex-email",
-        "email"
-      ],
-      "dna": {
-        "family": "slds",
-        "density": "compact"
-      },
-      "note": "references/salesforce.md is the structure source; no public source exists",
-      "scope": "page"
-    },
-    {
-      "id": "lex-lwr",
-      "screen": "lex-lwr",
-      "kit": "slds",
-      "title": "Experience Cloud LWR (SLDS 2 unsupported)",
-      "preview": "https://www.lightningdesignsystem.com/guidelines/overview/",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "lex-lwr"
-      ],
-      "dna": {
-        "family": "slds",
-        "density": "compact"
-      },
-      "note": "references/salesforce.md is the structure source; no public source exists",
-      "scope": "page"
-    },
-    {
-      "id": "lex-mobile",
-      "screen": "lex-mobile",
-      "kit": "slds",
-      "title": "Salesforce mobile (no datatable)",
-      "preview": "https://www.lightningdesignsystem.com/guidelines/mobile/",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "lex-mobile"
-      ],
-      "dna": {
-        "family": "slds",
-        "density": "compact"
-      },
-      "note": "references/salesforce.md is the structure source; no public source exists",
-      "scope": "page"
-    },
-    {
-      "id": "lex-queue",
-      "screen": "lex-queue",
-      "kit": "slds",
-      "title": "Lightning list / work queue (lightning-datatable contracts)",
-      "preview": "https://www.lightningdesignsystem.com/components/data-tables/",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "lex-queue",
-        "queue"
-      ],
-      "dna": {
-        "family": "slds",
-        "density": "compact"
-      },
-      "note": "references/salesforce.md is the structure source; no public source exists",
-      "scope": "page"
-    },
-    {
-      "id": "lex-record",
-      "screen": "lex-record",
-      "kit": "slds",
-      "title": "Lightning record home (highlights, path, detail, related)",
-      "preview": "https://www.lightningdesignsystem.com/components/page-headers/",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "lex-record",
-        "record",
-        "detail",
-        "lightning",
-        "lwc"
-      ],
-      "dna": {
-        "family": "slds",
-        "density": "compact"
-      },
-      "note": "references/salesforce.md is the structure source; no public source exists",
-      "scope": "page"
-    },
-    {
-      "id": "lex-record-narrow",
-      "screen": "lex-record",
-      "kit": "slds",
-      "title": "Lightning record LWC at ~494px host (container queries, not @media)",
-      "preview": "https://www.lightningdesignsystem.com/components/page-headers/",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 2,
-      "jobs": [
-        "lex-record-narrow",
-        "lex-record"
-      ],
-      "dna": {
-        "family": "slds",
-        "density": "compact"
-      },
-      "note": "references/salesforce.md is the structure source; no public source exists",
-      "scope": "page"
-    },
-    {
-      "id": "mui-marketing-page",
-      "screen": "marketing",
-      "kit": "mui-material",
-      "title": "MUI marketing page",
-      "path": "mui-material/docs/data/material/getting-started/templates/marketing-page",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "marketing",
-        "marketing-hero"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "query-mui-free-gallery",
-      "screen": "marketing",
-      "kit": "mui-material",
-      "title": "MUI free templates gallery (query-only preview)",
-      "path": "query-only/query-mui-free-gallery.png",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "startFrom": 80,
-      "kind": "query-only",
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "marketing",
-        "marketing-hero"
-      ],
-      "scope": "page"
-    },
-    {
-      "id": "magicui-hero",
-      "screen": "marketing-hero",
-      "kit": "magicui",
-      "title": "Magic UI hero (display type, one primary, full-bleed media)",
-      "path": "magicui/apps/www/registry/magicui/hero-video-dialog.tsx",
-      "preview": "https://magicui.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "marketing-hero",
-        "hero",
-        "landing"
-      ],
-      "dna": {
-        "family": "magicui",
-        "density": "editorial"
-      },
-      "scope": "page"
-    },
-    {
-      "id": "carbon-datatable",
-      "screen": "queue",
-      "kit": "carbon",
-      "title": "Carbon DataTable (toolbar-first, batch actions, dense)",
-      "path": "carbon/packages/react/src/components/DataTable",
-      "preview": "https://carbondesignsystem.com/components/data-table/usage/",
-      "license": "Apache-2.0",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "queue",
-        "list",
-        "inbox"
-      ],
-      "selectable": false,
-      "retiredReason": "Untitled UI replaced Carbon as Shine's table reference; retain this pack only for adversarial regression fixtures",
-      "dna": {
-        "family": "carbon",
-        "density": "dense"
-      },
-      "scope": "page"
-    },
-    {
-      "id": "untitled-table",
-      "screen": "queue",
-      "kit": "untitled-ui-react",
-      "title": "Untitled UI table examples (populated, empty, error, offline)",
-      "path": "untitled-ui-react/components/application/table/table.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "queue",
-        "crud",
-        "table",
-        "records",
-        "datagrid"
-      ],
-      "scope": "component",
-      "reference": {
-        "required": [
-          "table"
-        ]
-      },
-      "dna": {
-        "family": "untitled",
-        "density": "comfortable"
-      }
-    },
-    {
-      "id": "antd-pro-list",
-      "screen": "queue",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro list / queue pages",
-      "path": "ant-design-pro/src/pages/list",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "jobs": [
-        "queue",
-        "list",
-        "inbox"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "scope": "page"
-    },
-    {
-      "id": "antd-pro-profile",
-      "screen": "record",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro profile / record",
-      "path": "ant-design-pro/src/pages/profile",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "record",
-        "detail",
-        "profile"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "scope": "page"
-    },
-    {
-      "id": "antd-pro-settings",
-      "screen": "settings",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro account settings",
-      "path": "ant-design-pro/src/pages/account/settings",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "settings",
-        "preferences",
-        "account"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "scope": "page"
-    },
-    {
-      "id": "fluent-nav",
-      "screen": "settings",
-      "kit": "fluentui",
-      "title": "Fluent UI NavDrawer",
-      "path": "fluentui/packages/react-components/react-nav",
-      "preview": "https://react.fluentui.dev",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "jobs": [
-        "settings"
-      ],
-      "dna": {
-        "family": "fluent",
-        "density": "comfortable"
-      },
-      "scope": "page"
-    },
-    {
-      "id": "antd-pro-step-form",
-      "screen": "wizard",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro step form",
-      "path": "ant-design-pro/src/pages/form/step-form",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "wizard",
-        "steps",
-        "onboarding"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "scope": "page"
-    }
-  ]
+   ],
+   "dna": {
+    "family": "slds",
+    "density": "compact"
+   },
+   "note": "references/salesforce.md is the structure source; no public source exists",
+   "scope": "page"
+  },
+  {
+   "id": "mui-marketing-page",
+   "screen": "marketing",
+   "kit": "mui-material",
+   "title": "MUI marketing page",
+   "path": "mui-material/docs/data/material/getting-started/templates/marketing-page",
+   "preview": "https://mui.com/material-ui/getting-started/templates/",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "dna": {
+    "family": "material",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "marketing",
+    "marketing-hero"
+   ],
+   "scope": "page"
+  },
+  {
+   "id": "query-mui-free-gallery",
+   "screen": "marketing",
+   "kit": "mui-material",
+   "title": "MUI free templates gallery (query-only preview)",
+   "path": "query-only/query-mui-free-gallery.png",
+   "preview": "https://mui.com/material-ui/getting-started/templates/",
+   "license": "MIT",
+   "startFrom": 80,
+   "kind": "query-only",
+   "dna": {
+    "family": "material",
+    "density": "comfortable"
+   },
+   "jobs": [
+    "marketing",
+    "marketing-hero"
+   ],
+   "scope": "page"
+  },
+  {
+   "id": "magicui-hero",
+   "screen": "marketing-hero",
+   "kit": "magicui",
+   "title": "Magic UI hero (display type, one primary, full-bleed media)",
+   "path": "magicui/apps/www/registry/magicui/hero-video-dialog.tsx",
+   "preview": "https://magicui.design",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "jobs": [
+    "marketing-hero",
+    "hero",
+    "landing"
+   ],
+   "dna": {
+    "family": "magicui",
+    "density": "editorial"
+   },
+   "scope": "page"
+  },
+  {
+   "id": "carbon-datatable",
+   "screen": "queue",
+   "kit": "carbon",
+   "title": "Carbon DataTable (toolbar-first, batch actions, dense)",
+   "path": "carbon/packages/react/src/components/DataTable",
+   "preview": "https://carbondesignsystem.com/components/data-table/usage/",
+   "license": "Apache-2.0",
+   "kind": "source",
+   "startFrom": 1,
+   "jobs": [
+    "queue",
+    "list",
+    "inbox"
+   ],
+   "selectable": false,
+   "retiredReason": "Untitled UI replaced Carbon as Shine's table reference; retain this pack only for adversarial regression fixtures",
+   "dna": {
+    "family": "carbon",
+    "density": "dense"
+   },
+   "scope": "page"
+  },
+  {
+   "id": "untitled-table",
+   "screen": "queue",
+   "kit": "untitled-ui-react",
+   "title": "Untitled UI table examples (populated, empty, error, offline)",
+   "path": "untitled-ui-react/components/application/table/table.demo.tsx",
+   "preview": "https://www.untitledui.com/react/components",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "jobs": [
+    "queue",
+    "crud",
+    "table",
+    "records",
+    "datagrid"
+   ],
+   "scope": "component",
+   "reference": {
+    "required": [
+     "table"
+    ]
+   },
+   "dna": {
+    "family": "untitled",
+    "density": "comfortable"
+   }
+  },
+  {
+   "id": "antd-pro-list",
+   "screen": "queue",
+   "kit": "ant-design-pro",
+   "title": "Ant Design Pro list / queue pages",
+   "path": "ant-design-pro/src/pages/list",
+   "preview": "https://preview.pro.ant.design",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 2,
+   "jobs": [
+    "queue",
+    "list",
+    "inbox"
+   ],
+   "dna": {
+    "family": "ant",
+    "density": "dense"
+   },
+   "scope": "page",
+   "selectable": false,
+   "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for queue"
+  },
+  {
+   "id": "antd-pro-profile",
+   "screen": "record",
+   "kit": "ant-design-pro",
+   "title": "Ant Design Pro profile / record",
+   "path": "ant-design-pro/src/pages/profile",
+   "preview": "https://preview.pro.ant.design",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "jobs": [
+    "record",
+    "detail",
+    "profile"
+   ],
+   "dna": {
+    "family": "ant",
+    "density": "dense"
+   },
+   "scope": "page"
+  },
+  {
+   "id": "antd-pro-settings",
+   "screen": "settings",
+   "kit": "ant-design-pro",
+   "title": "Ant Design Pro account settings",
+   "path": "ant-design-pro/src/pages/account/settings",
+   "preview": "https://preview.pro.ant.design",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "jobs": [
+    "settings",
+    "preferences",
+    "account"
+   ],
+   "dna": {
+    "family": "ant",
+    "density": "dense"
+   },
+   "scope": "page"
+  },
+  {
+   "id": "fluent-nav",
+   "screen": "settings",
+   "kit": "fluentui",
+   "title": "Fluent UI NavDrawer",
+   "path": "fluentui/packages/react-components/react-nav",
+   "preview": "https://react.fluentui.dev",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 2,
+   "jobs": [
+    "settings"
+   ],
+   "dna": {
+    "family": "fluent",
+    "density": "comfortable"
+   },
+   "scope": "page"
+  },
+  {
+   "id": "antd-pro-step-form",
+   "screen": "wizard",
+   "kit": "ant-design-pro",
+   "title": "Ant Design Pro step form",
+   "path": "ant-design-pro/src/pages/form/step-form",
+   "preview": "https://preview.pro.ant.design",
+   "license": "MIT",
+   "kind": "source",
+   "startFrom": 1,
+   "jobs": [
+    "wizard",
+    "steps",
+    "onboarding"
+   ],
+   "dna": {
+    "family": "ant",
+    "density": "dense"
+   },
+   "scope": "page"
+  }
+ ]
 }

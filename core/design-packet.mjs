@@ -4,7 +4,7 @@ import {dirname, join, resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 import {retrieveDirections} from "../corpus/art-direction.mjs";
 import {findUntitledExamples} from "../corpus/untitledui.mjs";
-import {detectProject, RECIPES} from "../integrations/resolve.mjs";
+import {detectProject, RECIPES, RECIPE_KITS} from "../integrations/resolve.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const catalog=JSON.parse(readFileSync(join(ROOT,"corpus/templates.json"),"utf8")).templates;
@@ -51,12 +51,15 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  if(!job?.trim())throw new Error("job is required");
  if(!["existing","new"].includes(mode))throw new Error("mode must be existing or new");
  const detected=detectProject(project),classification=classifyJob(job,category),kind=classification.category;
- const retrieval=retrieveDirections(catalog,`${job} ${categories[kind].fallback}`,{lane,framework,licenseMode:"source"});
+ // The installed kit decides the build recipe, so it must also constrain which
+ // page reference can win — otherwise the packet contradicts itself.
+ const recipeKey=detected.framework==="lex"?"lex":detected.installed[0]||"native";
+ const retrieval=retrieveDirections(catalog,`${job} ${categories[kind].fallback}`,{lane,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[]});
  if(!retrieval.selected.length)throw new Error(`no eligible template: ${retrieval.gaps.join("; ")}`);
- const allCandidates=retrieval.selected.slice(0,3).map(({template,score,matches,distance})=>({id:template.id,title:template.title,kit:template.kit,family:template.dna?.family,screen:template.screen,scope:template.scope||"page",reference:template.reference||{},score,distance,matches,paths:packPaths(template)}));
+ const allCandidates=retrieval.selected.slice(0,3).map(({template,score,matches,distance,port,portNote})=>({id:template.id,title:template.title,kit:template.kit,family:template.dna?.family,screen:template.screen,scope:template.scope||"page",reference:template.reference||{},score,distance,matches,...(port?{port:true,portNote}:{}),paths:packPaths(template)}));
  const candidates=allCandidates.filter(item=>item.scope==="page"),components=allCandidates.filter(item=>item.scope==="component");
  if(!candidates.length)throw new Error(`no composed page reference matched ${JSON.stringify(job)}; use --category or add a catalog page row`);
- const selected=candidates[0],recipeKey=detected.framework==="lex"?"lex":detected.installed[0]||"native",examples=findUntitledExamples(job,3);
+ const selected=candidates[0],examples=findUntitledExamples(job,3);
  const starter=kind==="datagrid"&&recipeKey==="native"?join(ROOT,"verify/fixtures/full-table.html"):kind==="marketing"?join(ROOT,"verify/fixtures/marketing.html"):null;
  const diagnosis=mode==="existing"?{required:true,reference:join(ROOT,"skill/references/diagnose.md"),command:`node ${join(ROOT,"core/diagnosis.mjs")} init --job ${JSON.stringify(job)} --category ${kind} --out shine-diagnosis.json`}:{required:false};
  const usability={required:true,reference:join(ROOT,"skill/references/usability.md"),contract:"shine-usability.json",commands:[`node ${join(ROOT,"verify/usability.mjs")} <artifact> --contract shine-usability.json --cite ${selected.id}`]};
