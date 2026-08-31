@@ -137,17 +137,26 @@ export function retrieveDirections(templates, text, constraints = {}) {
       kitGaps.push(`kit: no eligible candidate is built on ${installedKits.join(", ")} — the selected reference is a structure to port, not source to copy`);
     }
   }
+  const limit = Number.isInteger(constraints.limit) && constraints.limit > 0 ? constraints.limit : 3;
   const selected = [];
   for (const candidate of ranked) {
-    const distance = selected.length ? Math.min(...selected.map((prior) => axisDistance(prior.axes, candidate.axes))) : 11;
-    if (!selected.length || distance >= 3) selected.push({ ...candidate, distance });
-    else exclusions.push({ ...candidate, reasons:[`near-duplicate: semantic distance ${distance} < 3`] });
-    if (selected.length === 3) break;
+    // Near-duplicate suppression stops the caller being offered three
+    // interchangeable choices for one slot, so distance is measured only against
+    // candidates competing for the SAME slot. A page and a component are not
+    // interchangeable: measuring across scopes let a chart component suppress
+    // the composed dashboard page it belongs inside (distance 1), which surfaced
+    // as "no composed page reference" once the corpus carried many chart packs.
+    const scope = candidate.template.scope || "page";
+    const peers = selected.filter((prior) => (prior.template.scope || "page") === scope);
+    const distance = peers.length ? Math.min(...peers.map((prior) => axisDistance(prior.axes, candidate.axes))) : 11;
+    if (!peers.length || distance >= 3) selected.push({ ...candidate, distance });
+    else exclusions.push({ ...candidate, reasons:[`near-duplicate: semantic distance ${distance} < 3 within ${scope} scope`] });
+    if (selected.length === limit) break;
   }
   const represented = new Set(selected.flatMap((item) => constrainedAxes.map((axis) => `${axis}:${item.axes[axis]}`)));
   const gaps = [...kitGaps, ...constrainedAxes.filter((axis) => brief[axis] !== "unspecified" && !represented.has(`${axis}:${brief[axis]}`)).map((axis) => `${axis}: no eligible candidate matches ${brief[axis]}`)];
   if (!selected.length) gaps.unshift(`job: no source-usable catalog row matches ${JSON.stringify(text)}`);
-  else if (selected.length < 3) gaps.push(`diversity: catalog has ${selected.length} materially distinct source-usable candidate${selected.length === 1 ? "" : "s"} for this brief`);
+  else if (selected.length < limit) gaps.push(`diversity: catalog has ${selected.length} materially distinct source-usable candidate${selected.length === 1 ? "" : "s"} for this brief`);
   if (brief.job === "unspecified" && selected.length) brief.job = selected[0].template.screen;
   return { brief, selected, exclusions: exclusions.sort((a,b) => b.score-a.score || a.template.id.localeCompare(b.template.id)), gaps };
 }

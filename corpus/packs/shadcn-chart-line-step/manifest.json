@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-line-step",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-line-step.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-line-step.tsx",
+      "sha256": "7de698cb7d6f1b1772b9cfa402a0b159185bb8fca0ba110f2e86a751602ee39d"
+    }
+  ]
+}

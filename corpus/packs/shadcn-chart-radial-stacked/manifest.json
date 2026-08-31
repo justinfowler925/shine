@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-radial-stacked",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-radial-stacked.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-radial-stacked.tsx",
+      "sha256": "d94e8253ad22dadfb74b18f6497d4a771b16cb968399c659c43d28ff7813fd17"
+    }
+  ]
+}

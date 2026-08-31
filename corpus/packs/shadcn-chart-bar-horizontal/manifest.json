@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-bar-horizontal",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-bar-horizontal.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-bar-horizontal.tsx",
+      "sha256": "0dccb76e8d82c6b113a074ef17a22bd06c5908da3bc42df2a24703d8d3b81f5b"
+    }
+  ]
+}

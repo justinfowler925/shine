@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-radial-text",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-radial-text.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-radial-text.tsx",
+      "sha256": "d02a7c05bb28a4a76e7cb2d16df8ae33bd4e50e06a095f8d13a02cd78d33818e"
+    }
+  ]
+}

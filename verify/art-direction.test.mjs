@@ -51,8 +51,11 @@ try {
   // tested against a synthetic pair rather than against whatever the corpus
   // happens to contain — that keeps this a test of the tie-break, not of
   // corpus composition.
+  // The corpus now carries all 16 shadcn sidebar blocks, so which variant wins a
+  // tie is a detail; what must hold is that the house kit owns the slot.
   const shell = retrieveDirections(templates, "app shell");
-  assert.equal(shell.selected[0].template.id, "shadcn-sidebar-07", "shadcn is the house app-shell reference");
+  assert.equal(shell.selected[0].template.kit, "shadcn-registry", "shadcn is the house app-shell reference");
+  assert.match(shell.selected[0].template.id, /^shadcn-sidebar-\d+$/, "the app-shell slot resolves to a sidebar block");
 
   const twin = (id) => ({ id, kit: "shadcn-registry", screen: "app-shell", scope: "page", jobs: ["app-shell"],
     kind: "source", reference: { required: ["navigation"] }, dna: { family: "shadcn-zinc", density: "comfortable" }, startFrom: 1 });

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-radar-icons",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-radar-icons.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-radar-icons.tsx",
+      "sha256": "305d1e3c1fad1503ce9cf29ac9531bf1c53800c79706955fcb84bf120f3c5f26"
+    }
+  ]
+}

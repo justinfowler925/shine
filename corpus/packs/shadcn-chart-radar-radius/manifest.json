@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-radar-radius",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-radar-radius.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-radar-radius.tsx",
+      "sha256": "5a64fa9fa2300034b7451dddce0e84afb2005218d461c4385e641837760e60c6"
+    }
+  ]
+}

@@ -54,10 +54,16 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  // The installed kit decides the build recipe, so it must also constrain which
  // page reference can win — otherwise the packet contradicts itself.
  const recipeKey=detected.framework==="lex"?"lex":detected.installed[0]||"native";
- const retrieval=retrieveDirections(catalog,`${job} ${categories[kind].fallback}`,{lane,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[]});
+ const retrieval=retrieveDirections(catalog,`${job} ${categories[kind].fallback}`,{lane,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[],limit:12});
  if(!retrieval.selected.length)throw new Error(`no eligible template: ${retrieval.gaps.join("; ")}`);
- const allCandidates=retrieval.selected.slice(0,3).map(({template,score,matches,distance,port,portNote})=>({id:template.id,title:template.title,kit:template.kit,family:template.dna?.family,screen:template.screen,scope:template.scope||"page",reference:template.reference||{},score,distance,matches,...(port?{port:true,portNote}:{}),paths:packPaths(template)}));
- const candidates=allCandidates.filter(item=>item.scope==="page"),components=allCandidates.filter(item=>item.scope==="component");
+ const shape=({template,score,matches,distance,port,portNote})=>({id:template.id,title:template.title,kit:template.kit,family:template.dna?.family,screen:template.screen,scope:template.scope||"page",reference:template.reference||{},score,distance,matches,...(port?{port:true,portNote}:{}),paths:packPaths(template)});
+ // Page and component references are chosen from their own pools. Slicing one
+ // ranked list starved the page slot as soon as the corpus carried many
+ // component packs scoring on the same brief (70 shadcn chart blocks buried the
+ // dashboard page reference), which read as "no composed page reference".
+ const ranked=retrieval.selected.map(shape);
+ const candidates=ranked.filter(item=>item.scope==="page").slice(0,3),components=ranked.filter(item=>item.scope==="component").slice(0,3);
+ const allCandidates=[...candidates,...components];
  if(!candidates.length)throw new Error(`no composed page reference matched ${JSON.stringify(job)}; use --category or add a catalog page row`);
  const selected=candidates[0],examples=findUntitledExamples(job,3);
  const starter=kind==="datagrid"&&recipeKey==="native"?join(ROOT,"verify/fixtures/full-table.html"):kind==="marketing"?join(ROOT,"verify/fixtures/marketing.html"):null;

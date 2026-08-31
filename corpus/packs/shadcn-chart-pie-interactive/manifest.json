@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-pie-interactive",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-pie-interactive.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-pie-interactive.tsx",
+      "sha256": "da332a1b7a5bfc383162e3e77a726e82bae1cebd011d84cafb4c79a0bc445328"
+    }
+  ]
+}

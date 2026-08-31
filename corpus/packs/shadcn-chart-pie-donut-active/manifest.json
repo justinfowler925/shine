@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-pie-donut-active",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-pie-donut-active.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-pie-donut-active.tsx",
+      "sha256": "c8a88201e324eb09acdc3fa0ad1b42945c7df4b3e5b21082d58f02d4032ee9be"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-pie-separator-none",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-pie-separator-none.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-pie-separator-none.tsx",
+      "sha256": "4811ddc719959d4b0a4d9013b0756131d4fc4f5322bacec3ed85f3fb9e5385a6"
+    }
+  ]
+}

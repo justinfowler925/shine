@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-radar-multiple",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-radar-multiple.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-radar-multiple.tsx",
+      "sha256": "f6a2b2323e758e88e5dad518e0cd0de90026da45fee4f0498db5a658e7697338"
+    }
+  ]
+}

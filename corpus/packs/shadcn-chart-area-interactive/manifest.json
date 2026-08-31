@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-area-interactive",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-area-interactive.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-area-interactive.tsx",
+      "sha256": "81fcf9732a151a5e59703713044623a7e05dd97b6d0a31d1cfce49991b439a98"
+    }
+  ]
+}
