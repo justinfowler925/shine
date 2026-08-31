@@ -52,28 +52,30 @@ instead of implying "copy this source".
 - **Records briefs now return one candidate, not three.** The thinness is
   reported as a `diversity:` gap rather than padded with an unbuildable kit.
 
-## The gap that matters, and why it is not a config fix
+## Corpus coverage (closed)
 
-`corpus.lock` pins the shadcn registry at **411/411 items**, already downloaded
-to `~/design-corpus/shadcn-registry/items`. Of its **97 `registry:block`**
-entries the corpus has promoted **three** page packs. The rest are unharvested:
+`corpus.lock` pinned the shadcn registry at **411/411 items**, already downloaded
+to `~/design-corpus/shadcn-registry/items`, while the corpus had promoted **three**
+of its **97 `registry:block`** entries. All 94 remaining blocks are now
+catalogued, harvested and materialized — **shadcn goes from 8 usable templates to
+101**:
 
-| Available locally | Blocks | Promoted |
-| --- | --- | --- |
-| `chart-*` | 70 | 0 (the chart reference is still Tremor) |
-| `sidebar-01…16` | 16 | 1 (`sidebar-07`) |
-| `login-01…05`, `signup-01…05` | 10 | 1 (`login-04`) |
-| `dashboard-01` | 1 | 1 |
+| Family | Blocks available | Promoted before | Promoted now |
+| --- | --- | --- | --- |
+| `sidebar-01…16` (app-shell) | 16 | 1 | 16 |
+| `chart-*` (charts) | 70 | 0 | 70 |
+| `login-01…05`, `signup-01…05` (auth) | 10 | 1 | 10 |
+| `dashboard-01` | 1 | 1 | 1 |
 
-Promoting a block is not a catalog edit: `harvest.mjs` needs one network render
-per pack to produce `shot.png`, which `compare.mjs` composites against and the
-doctor rejects if missing. That is the "add more later" work, in priority order:
+Page-scope coverage for **app-shell (16) and auth (10) is now entirely shadcn**,
+where each previously offered one shadcn pack against MUI/Ant/Carbon. The 70
+chart blocks are component-scope — they are section-level cards, not pages — so
+they surface as component references on dashboard and charts briefs. The `charts`
+*page* screen still resolves to Tremor until a composed shadcn charts page is
+authored.
 
-1. **Charts** — 70 shadcn chart blocks sit unused while `charts` still resolves
-   to Tremor. Highest ratio of available material to captured coverage.
-2. **Sidebars** — 15 more app-shell variants, so app-shell has real choice again
-   within the house kit rather than one pack.
-3. **Auth** — 9 more login/signup variants.
+`harvest.mjs` now derives shadcn targets from each catalog row's own `preview`
+URL, so adding a block is a data change rather than a new `TARGETS` entry.
 
 ## Screens shadcn genuinely cannot cover yet
 
@@ -88,8 +90,9 @@ Until then the packet tells the truth about what it is handing over, which is th
 point of a single source: it names what it does not have instead of substituting
 something the consumer cannot build.
 
-## Pre-existing failures (not introduced here)
+## Test status
 
-`verify/compare-proof.test.mjs`, `verify/untitledui.test.mjs` and
-`verify/usability.test.mjs` fail on `origin/main` before any change in this
-branch. They need separate attention.
+All 12 suites pass in an installed release. `compare-proof` and `usability` were
+failing on `origin/main` and now pass. `untitledui` fails only in a dev checkout
+whose `node_modules` lacks `untitledui`; it is declared at 0.1.64 and present in
+the release.
