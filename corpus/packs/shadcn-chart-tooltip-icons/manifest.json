@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-tooltip-icons",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-tooltip-icons.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-tooltip-icons.tsx",
+      "sha256": "1e834c4367c7722c60b2c9e1bb0d8307fb58dceddae202bae046c26c43c98049"
+    }
+  ]
+}

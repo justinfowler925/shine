@@ -109,17 +109,54 @@ export function retrieveDirections(templates, text, constraints = {}) {
     }
   }
   eligible.sort((a,b) => b.score-a.score || a.history-b.history || (a.template.startFrom ?? 99)-(b.template.startFrom ?? 99) || a.template.id.localeCompare(b.template.id));
+  // Kit affinity. The consumer's installed kit decided the build recipe but had
+  // no say in which page reference won, so a Next+shadcn/TanStack repo asking
+  // for a records surface was handed an Ant Design Pro reference: untitled-table
+  // and antd-pro-list both scored 122 and the tie broke alphabetically. A cite
+  // the consumer cannot build against is not a near-miss, it is the wrong
+  // answer, so compatible kits form a preference tier rather than a score nudge.
+  // If nothing compatible is eligible the tier is skipped and the mismatch is
+  // reported as a gap — a thin corpus corner must not become "no template".
+  const installedKits = (Array.isArray(constraints.installedKits) ? constraints.installedKits : []).filter(Boolean);
+  const kitGaps = [];
+  let ranked = eligible;
+  if (installedKits.length && eligible.length) {
+    const buildable = (candidate) => installedKits.includes(candidate.template.kit);
+    // Order, never eliminate. Page-scope coverage is thin and unevenly
+    // distributed across kits — queue has exactly one page reference and it is
+    // Ant Design Pro — so filtering to the installed kit turns a thin corner of
+    // the corpus into "no eligible template". Ordering fixes the real defect
+    // (untitled-table and antd-pro-list both scored 122 and the tie broke
+    // alphabetically, handing a shadcn/TanStack repo an Ant reference) while
+    // keeping the only reference for a screen reachable.
+    ranked = [...eligible.filter(buildable), ...eligible.filter((candidate) => !buildable(candidate))]
+      .map((candidate) => buildable(candidate)
+        ? { ...candidate, matches: [...candidate.matches, "installedKit"], port: false }
+        : { ...candidate, port: true, portNote: `${candidate.template.kit} carries its own runtime and theming; port the structure to ${installedKits[0]} rather than copying the source` });
+    if (!eligible.some(buildable)) {
+      kitGaps.push(`kit: no eligible candidate is built on ${installedKits.join(", ")} — the selected reference is a structure to port, not source to copy`);
+    }
+  }
+  const limit = Number.isInteger(constraints.limit) && constraints.limit > 0 ? constraints.limit : 3;
   const selected = [];
-  for (const candidate of eligible) {
-    const distance = selected.length ? Math.min(...selected.map((prior) => axisDistance(prior.axes, candidate.axes))) : 11;
-    if (!selected.length || distance >= 3) selected.push({ ...candidate, distance });
-    else exclusions.push({ ...candidate, reasons:[`near-duplicate: semantic distance ${distance} < 3`] });
-    if (selected.length === 3) break;
+  for (const candidate of ranked) {
+    // Near-duplicate suppression stops the caller being offered three
+    // interchangeable choices for one slot, so distance is measured only against
+    // candidates competing for the SAME slot. A page and a component are not
+    // interchangeable: measuring across scopes let a chart component suppress
+    // the composed dashboard page it belongs inside (distance 1), which surfaced
+    // as "no composed page reference" once the corpus carried many chart packs.
+    const scope = candidate.template.scope || "page";
+    const peers = selected.filter((prior) => (prior.template.scope || "page") === scope);
+    const distance = peers.length ? Math.min(...peers.map((prior) => axisDistance(prior.axes, candidate.axes))) : 11;
+    if (!peers.length || distance >= 3) selected.push({ ...candidate, distance });
+    else exclusions.push({ ...candidate, reasons:[`near-duplicate: semantic distance ${distance} < 3 within ${scope} scope`] });
+    if (selected.length === limit) break;
   }
   const represented = new Set(selected.flatMap((item) => constrainedAxes.map((axis) => `${axis}:${item.axes[axis]}`)));
-  const gaps = constrainedAxes.filter((axis) => brief[axis] !== "unspecified" && !represented.has(`${axis}:${brief[axis]}`)).map((axis) => `${axis}: no eligible candidate matches ${brief[axis]}`);
+  const gaps = [...kitGaps, ...constrainedAxes.filter((axis) => brief[axis] !== "unspecified" && !represented.has(`${axis}:${brief[axis]}`)).map((axis) => `${axis}: no eligible candidate matches ${brief[axis]}`)];
   if (!selected.length) gaps.unshift(`job: no source-usable catalog row matches ${JSON.stringify(text)}`);
-  else if (selected.length < 3) gaps.push(`diversity: catalog has ${selected.length} materially distinct source-usable candidate${selected.length === 1 ? "" : "s"} for this brief`);
+  else if (selected.length < limit) gaps.push(`diversity: catalog has ${selected.length} materially distinct source-usable candidate${selected.length === 1 ? "" : "s"} for this brief`);
   if (brief.job === "unspecified" && selected.length) brief.job = selected[0].template.screen;
   return { brief, selected, exclusions: exclusions.sort((a,b) => b.score-a.score || a.template.id.localeCompare(b.template.id)), gaps };
 }

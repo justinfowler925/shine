@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-line-dots",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-line-dots.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-line-dots.tsx",
+      "sha256": "e41121b704b22277c5133ee53bedd252ead81c8c14b1c8a113c1290e1c7dffdf"
+    }
+  ]
+}

@@ -23,6 +23,7 @@ import { load } from "../verify/deps.mjs";
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const PACKS = join(SHINE, "corpus/packs");
 const MIN_BYTES = 30_000;
+const MIN_BYTES_COMPONENT = 8_000;
 
 // mode: "full" = full-page (capped), "viewport" = first screen only (marketing heroes).
 // expect: a selector that must exist, or the shot is a 404/consent-wall in disguise.
@@ -64,6 +65,15 @@ const TARGETS = {
   "lex-lwr": { url: "https://www.lightningdesignsystem.com/guidelines/overview/", mode: "full", expect: "h1, main, article" },
 };
 
+// shadcn blocks are harvested from their own standalone preview route rather
+// than 97 hand-written TARGETS entries: the catalog row already carries the
+// canonical URL, so the mapping is data, not a table to maintain.
+const shadcnTarget = (row) => (
+  row.kit === "shadcn-registry" && /^https:\/\/ui\.shadcn\.com\/view\//.test(row.preview || "")
+    ? { url: row.preview, mode: "full", expect: "body" }
+    : null
+);
+
 const catalog = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "utf8"));
 const rows = catalog.templates ?? [];
 const only = process.argv.slice(2).filter((a) => !a.startsWith("-"));
@@ -83,7 +93,7 @@ const skipped = [];
 const failed = [];
 
 for (const row of wanted) {
-  const t = TARGETS[row.id];
+  const t = TARGETS[row.id] || shadcnTarget(row);
   if (!t) {
     if (row.kind !== "query-only") skipped.push(`${row.id} (${row.kind}${row.kind === "blueprint" ? ": no public renderable target" : ": no harvest target mapped"})`);
     continue;
@@ -111,9 +121,10 @@ for (const row of wanted) {
     }
     await page.close();
     const bytes = statSync(shot).size;
-    if (bytes < MIN_BYTES) {
+    const floor = (row.scope === "component" || row.screen === "auth") ? MIN_BYTES_COMPONENT : MIN_BYTES;
+    if (bytes < floor) {
       rmSync(shot);
-      throw new Error(`shot only ${bytes}B — not a real screen`);
+      throw new Error(`shot only ${bytes}B — under the ${floor}B floor for ${row.scope || "page"} scope, not a real screen`);
     }
     writeFileSync(
       join(dir, "meta.json"),

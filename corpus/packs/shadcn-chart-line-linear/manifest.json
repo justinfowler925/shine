@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-line-linear",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-line-linear.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-line-linear.tsx",
+      "sha256": "c120b438d13b32cc90973c947ba79e82e884753ef1e1ab4f59a2a7524e8e5577"
+    }
+  ]
+}

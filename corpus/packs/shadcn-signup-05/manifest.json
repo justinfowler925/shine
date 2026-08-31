@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "shadcn-signup-05",
+  "screen": "auth",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/signup-05.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "page.tsx",
+      "sha256": "a4acb240d4278ada3890ca6507a1c8084628ca51bb3b38afba3754fa147a5e21"
+    },
+    {
+      "path": "signup-form.tsx",
+      "sha256": "3349beff9968a443f1f50b80ef55939b0ac5d15b50814ddbd0e433c360f94c96"
+    }
+  ]
+}

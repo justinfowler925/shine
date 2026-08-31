@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-area-stacked-expand",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-area-stacked-expand.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-area-stacked-expand.tsx",
+      "sha256": "5df80ae409fa14f38c6b5cb6249a794231c59fc2a29a33966d49c0c8850ba658"
+    }
+  ]
+}

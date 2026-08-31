@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-area-legend",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-area-legend.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-area-legend.tsx",
+      "sha256": "b16d9ef9b2016c81e77516608ca86e56869b26690500c098a63b9a361b94ee28"
+    }
+  ]
+}

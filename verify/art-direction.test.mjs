@@ -11,15 +11,30 @@ const query = "internal operator queue datagrid dense serious";
 const baseline = JSON.stringify(retrieveDirections(templates, query));
 for (let i = 0; i < 20; i += 1) assert.equal(JSON.stringify(retrieveDirections(templates, query)), baseline, `determinism run ${i + 1}`);
 const diverse = retrieveDirections(templates, query);
-assert.equal(diverse.selected.length, 3, "queue brief must return three material candidates");
+// Single-source policy: shadcn is the house kit and the Ant/MUI records pages
+// are retired, so a records brief no longer has three kits to offer. What must
+// hold is that a candidate exists, that no retired pack is ever offered, and
+// that thin coverage is REPORTED rather than padded with a kit the consumer
+// cannot build. The old assertion (exactly three candidates) encoded the
+// multi-kit corpus and could only pass by keeping the contamination.
+assert.ok(diverse.selected.length >= 1, "a records brief must still resolve to a reference");
+assert.ok(diverse.selected.every((candidate) => candidate.template.selectable !== false), "a retired pack must never be offered");
+if (diverse.selected.length < 3) assert.ok(diverse.gaps.some((gap) => gap.startsWith("diversity:")), "thin coverage must be named in gaps, not hidden");
 for (let i = 0; i < diverse.selected.length; i += 1) for (let j = i + 1; j < diverse.selected.length; j += 1)
   assert.ok(axisDistance(diverse.selected[i].axes, diverse.selected[j].axes) >= 3, "selected candidates must be semantically distinct");
 for (const template of templates) {
   const axes = candidateAxes(template, diverse.brief);
   for (const axis of directionMetadata.axes) assert.ok(axes[axis] !== undefined, `${template.id} missing ${axis}`);
 }
+// MUI is no longer a build source for records surfaces. Asking for it by
+// framework must return nothing and say why, rather than substituting a kit the
+// brief did not ask for.
 const muiOnly = retrieveDirections(templates, "queue datagrid", { framework: "mui" });
-assert.ok(muiOnly.selected.length && muiOnly.selected.every((candidate) => candidate.axes.framework === "mui"));
+assert.equal(muiOnly.selected.length, 0, "MUI records pages are retired; the framework filter must not substitute another kit");
+assert.ok(muiOnly.gaps.length, "an unsatisfiable framework constraint must be reported as a gap");
+// The framework filter itself must still work where coverage exists.
+const shadcnOnly = retrieveDirections(templates, "dashboard analytics", { framework: "react" });
+assert.ok(shadcnOnly.selected.every((candidate) => candidate.axes.framework === "react"), "framework filter must exclude non-matching candidates");
 assert.ok(muiOnly.exclusions.some((item) => item.reasons.some((reason) => reason.startsWith("framework:"))));
 const sourceOnly = retrieveDirections(templates, "dashboard", { licenseMode: "source" });
 assert.ok(sourceOnly.exclusions.some((item) => item.template.kind === "query-only" && item.reasons.some((reason) => reason.startsWith("license:"))));
@@ -31,12 +46,26 @@ assert.ok(gap.gaps.some((item) => item.startsWith("job:")));
 const dir = mkdtempSync(join(tmpdir(), "shine-history-"));
 try {
   const history = join(dir, "history.json");
-  writeFileSync(history, JSON.stringify({ citations: ["shadcn-sidebar-07", "shadcn-sidebar-07"] }));
-  const without = retrieveDirections(templates, "app shell");
-  const withHistory = retrieveDirections(templates, "app shell", { history });
-  assert.equal(without.selected[0].template.id, "shadcn-sidebar-07");
-  assert.notEqual(withHistory.selected[0].template.id, "shadcn-sidebar-07", "history breaks only an equal-score tie toward less-used work");
-  assert.equal(withHistory.selected[0].score, without.selected[0].score, "history must not override eligibility score");
+  // Rotation needs somewhere to rotate TO. Under the single-source policy no
+  // screen is guaranteed two equal-scored references, so the mechanism is
+  // tested against a synthetic pair rather than against whatever the corpus
+  // happens to contain — that keeps this a test of the tie-break, not of
+  // corpus composition.
+  // The corpus now carries all 16 shadcn sidebar blocks, so which variant wins a
+  // tie is a detail; what must hold is that the house kit owns the slot.
+  const shell = retrieveDirections(templates, "app shell");
+  assert.equal(shell.selected[0].template.kit, "shadcn-registry", "shadcn is the house app-shell reference");
+  assert.match(shell.selected[0].template.id, /^shadcn-sidebar-\d+$/, "the app-shell slot resolves to a sidebar block");
+
+  const twin = (id) => ({ id, kit: "shadcn-registry", screen: "app-shell", scope: "page", jobs: ["app-shell"],
+    kind: "source", reference: { required: ["navigation"] }, dna: { family: "shadcn-zinc", density: "comfortable" }, startFrom: 1 });
+  const pair = [twin("twin-a"), twin("twin-b")];
+  const pairPlain = retrieveDirections(pair, "app shell");
+  assert.equal(pairPlain.selected[0].template.id, "twin-a", "equal scores resolve deterministically by id");
+  writeFileSync(history, JSON.stringify({ citations: ["twin-a", "twin-a"] }));
+  const pairHistory = retrieveDirections(pair, "app shell", { history });
+  assert.equal(pairHistory.selected[0].template.id, "twin-b", "history breaks an equal-score tie toward less-used work");
+  assert.equal(pairHistory.selected[0].score, pairPlain.selected[0].score, "history must not override eligibility score");
 } finally { rmSync(dir, { recursive: true, force: true }); }
 const plain = retrieveDirections(templates, "saas queue datagrid");
 assert.equal(plain.selected[0].template.id, "untitled-table", "Untitled is the default table reference");

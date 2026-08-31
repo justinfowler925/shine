@@ -30,6 +30,11 @@ export const FULL_PAINT = new Set([
   "untitled",
 ]);
 const MIN_SHOT = 30_000;
+// The floor catches a blank or failed render. It was calibrated on full
+// application shells; a single chart card or a centred sign-in screen is
+// legitimately a fraction of that, so those scopes get a lower floor that still
+// rejects an empty render rather than being failed for being small.
+const MIN_SHOT_COMPONENT = 8_000;
 const MIN_SOURCE_LINES = 30;
 const RESOLVE_EXT = ["", ".tsx", ".ts", ".jsx", ".js", ".css", ".json", "/index.tsx", "/index.ts", "/index.jsx", "/index.js"];
 
@@ -183,7 +188,8 @@ export function inspectPack(dir, family = "", row = null) {
   if (!existsSync(shot)) broken.push("no shot.png");
   else {
     const bytes = statSync(shot).size;
-    if (bytes < MIN_SHOT) broken.push(`shot.png ${bytes}B — too small to be a real screen`);
+    const floor = (row?.scope === "component" || row?.screen === "auth") ? MIN_SHOT_COMPONENT : MIN_SHOT;
+    if (bytes < floor) broken.push(`shot.png ${bytes}B — under the ${floor}B floor for ${row?.scope || "page"} scope`);
   }
   const src = packSourceFiles(dir);
   if (!src.length) broken.push("no source/");

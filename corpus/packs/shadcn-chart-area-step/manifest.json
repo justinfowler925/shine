@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-area-step",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-area-step.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-area-step.tsx",
+      "sha256": "967c57218247435bb287d729c526bf0db5596ce0ae82ddf16747d186f432948a"
+    }
+  ]
+}

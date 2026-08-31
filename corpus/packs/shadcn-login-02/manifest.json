@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "shadcn-login-02",
+  "screen": "auth",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/login-02.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "login-form.tsx",
+      "sha256": "7adb9a832ce9b6b3a0de08264525eba22ed55160dc1f12a7645d8e4898711a4f"
+    },
+    {
+      "path": "page.tsx",
+      "sha256": "212bdfcc92905ef96644d0d7826e89072408249bb76e9f6629de05ce51b2dc63"
+    }
+  ]
+}

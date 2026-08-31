@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "shadcn-sidebar-01",
+  "screen": "app-shell",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/sidebar-01.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "app-sidebar.tsx",
+      "sha256": "0a12fbafd0752d3ee24d5dead49255e41243c5412cbaae9cda3bc4ca7fbe430a"
+    },
+    {
+      "path": "page.tsx",
+      "sha256": "3587d625ceb2fadf4ca2cddf262b426b40d4dc142a880ce79c747eb2f04400fa"
+    },
+    {
+      "path": "version-switcher.tsx",
+      "sha256": "32ab6d736b7b5fc680790162f6694d2563aeab2fa706d30521f0fe32e14d0250"
+    }
+  ]
+}

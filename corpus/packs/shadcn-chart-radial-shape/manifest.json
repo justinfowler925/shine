@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "shadcn-chart-radial-shape",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "shadcn-registry/items/chart-radial-shape.json",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chart-radial-shape.tsx",
+      "sha256": "e5f7fd025fd83a4aff2fc4ba28b626801ef41fc68e6e839e3e0716472cfc2619"
+    }
+  ]
+}
