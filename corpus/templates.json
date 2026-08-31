@@ -389,7 +389,9 @@
     "family": "tremor",
     "density": "comfortable"
    },
-   "scope": "page"
+   "scope": "page",
+   "selectable": false,
+   "retiredReason": "shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it"
   },
   {
    "id": "spectrum-ai-chat",
@@ -1108,13 +1110,13 @@
    "id": "shadcn-chart-area-interactive",
    "screen": "charts",
    "kit": "shadcn-registry",
-   "title": "shadcn chart-area-interactive (area chart block)",
+   "title": "shadcn chart-area-interactive (chart-led analytics page)",
    "path": "shadcn-registry/items/chart-area-interactive.json",
    "preview": "https://ui.shadcn.com/view/new-york-v4/chart-area-interactive",
    "license": "MIT",
    "kind": "source",
    "startFrom": 1,
-   "scope": "component",
+   "scope": "page",
    "reference": {
     "required": [
      "chart"
@@ -1128,7 +1130,9 @@
     "charts",
     "chart",
     "area",
-    "analytics"
+    "dataviz",
+    "trend",
+    "timeseries"
    ]
   },
   {
