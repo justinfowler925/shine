@@ -31,9 +31,6 @@ radix-colors	full	https://github.com/radix-ui/colors.git	main	dbdb85470547c7d34b
 tailwindcss	sparse	https://github.com/tailwindlabs/tailwindcss.git	main	16e94cbf7f965c5ad697e90e940b5e178efad67c	packages/tailwindcss
 magicui	sparse	https://github.com/magicuidesign/magicui.git	main	5543371f99eaa6d1549a8dec864e78ee0b4515f2	apps/www/registry apps/www/content
 cult-ui	sparse	https://github.com/nolly-studio/cult-ui.git	main	3b855612fb524cb042cc91b65f0cd575057471cc	apps/www/registry apps/www/content
-carbon	sparse	https://github.com/carbon-design-system/carbon.git	main	82f04fbfdb385323883f4f8e3ce97a14865a744a	packages/react packages/styles packages/themes packages/layout packages/type packages/colors
-ant-design	sparse	https://github.com/ant-design/ant-design.git	master	5ea586b559f47a72bb7d812b1d4c8174610b64a6	components
-mui-material	sparse	https://github.com/mui/material-ui.git	master	81e94061ca393d4eaf238e6f77c283b2edd9ef7e	packages/mui-material packages/mui-system docs/data
 react-spectrum	sparse	https://github.com/adobe/react-spectrum.git	main	7c0765468a1d161ab9ac88ca9f1b54d3603a275c	packages/@react-aria packages/@react-spectrum packages/@react-stately packages/react-aria-components packages/dev/docs
 fluentui	sparse	https://github.com/microsoft/fluentui.git	master	c83bfa7666778640350f54991c8ebe712a8f389b	packages/react-components
 aria-practices	sparse	https://github.com/w3c/aria-practices.git	main	7e4034b262bc0d25332e330d8a582aaf34113829	content
@@ -48,4 +45,3 @@ blueprint	sparse	https://github.com/palantir/blueprint.git	develop	933c7de615166
 park-ui	sparse	https://github.com/chakra-ui/park-ui.git	main	102769cc91a9d36753dbc5893c74b7954b495efe	components/react packages
 rsuite	sparse	https://github.com/rsuite/rsuite.git	main	d5e12c76bd46f48b762cf95b8524bd3d60cadf8a	src docs
 grommet	sparse	https://github.com/grommet/grommet.git	master	035651f9a5c2a5481290b3f90bce9dd70113bdd8	src storybook
-ant-design-pro	sparse	https://github.com/ant-design/ant-design-pro.git	master	bb40867ae3ef943e06e48da6911ccc5900e638a1	src config docs

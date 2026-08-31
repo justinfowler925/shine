@@ -184,11 +184,12 @@ sparse_clone cult-ui          nolly-studio/cult-ui  main   apps/www/registry app
 # Vendor design systems — behavior/completeness reference; shine tokens stay the visual system.
 # Polaris LICENSE is MIT with Shopify-integration + visual-distinctness restrictions — query only,
 # do not harvest into a published registry.
-sparse_clone carbon           carbon-design-system/carbon main \
-  packages/react packages/styles packages/themes packages/layout packages/type packages/colors
-sparse_clone ant-design       ant-design/ant-design      master components
-sparse_clone mui-material     mui/material-ui            master \
-  packages/mui-material packages/mui-system docs/data
+# MUI, Ant Design and IBM Carbon are NOT cloned. They were deleted from the corpus
+# on 2026-08-31 (docs/no-foreign-runtimes.md): every one of them carries its own
+# runtime and theming, so neither Clearspeed consumer can build what their pages
+# show, and a reference nobody can build is a reference that only teaches costume.
+# Adding a clone back here without adding a consumer that runs it re-opens that
+# defect — the doctor fails if their ids reappear in the catalog.
 sparse_clone react-spectrum   adobe/react-spectrum       main \
   packages/@react-aria packages/@react-spectrum packages/@react-stately \
   packages/react-aria-components packages/dev/docs
@@ -199,8 +200,8 @@ sparse_clone polaris          Shopify/polaris            main \
   polaris-react polaris-tokens documentation
 
 # AdminLTE-list expansion 2026-08-12 — SPDX-clean source; shine tokens stay the paint.
-# No source clone: Haze (paid), PrimeReact v11+ (commercial), MUI Store premium,
-# AdminLTE commercial, Tremor paid blocks. Those are query-only screenshots.
+# No source clone: Haze (paid), PrimeReact v11+ (commercial), AdminLTE commercial,
+# Tremor paid blocks. Those are query-only screenshots.
 sparse_clone mantine          mantinedev/mantine         master \
   packages/@mantine apps/mantine.dev
 sparse_clone chakra-ui        chakra-ui/chakra-ui        main \
@@ -217,7 +218,6 @@ sparse_clone park-ui          chakra-ui/park-ui          main \
   components/react packages
 sparse_clone rsuite           rsuite/rsuite              main   src docs
 sparse_clone grommet          grommet/grommet            master src storybook
-sparse_clone ant-design-pro   ant-design/ant-design-pro  master src config docs
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 mv "$LOCK_TMP" "$LOCK"; trap - EXIT

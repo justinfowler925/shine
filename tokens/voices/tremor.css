@@ -13,7 +13,10 @@ html[data-dna-family="tremor"], html[data-shine-voice="kit-faithful"][data-dna-f
   --shine-color-fg: light-dark(#0f172a, #f8fafc);
   --shine-color-fg-muted: light-dark(#64748b, #94a3b8);
   --shine-color-border: light-dark(#e2e8f0, #27272a);
-  --shine-color-primary: #3b82f6;
+  /* blue-500 #3b82f6 is Tremor's chart series colour (utils/chartColors.ts) and
+     measures 3.68:1 under white — fine for a 4px stroke, an AA failure for a
+     button label. blue-600 is the same Tailwind ramp at 5.17:1. */
+  --shine-color-primary: #2563eb;                            /* blue-600 */
   --shine-color-primary-fg: #ffffff;
   --shine-color-ring: #3b82f6;
   --shine-color-danger: #ef4444;

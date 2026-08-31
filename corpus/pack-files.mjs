@@ -15,10 +15,7 @@ const PREFER =
   /(?:^|\/)(readme|page|layout|app|dashboard|data-table|datatable|chat|settings|wizard|profile|shell|blog|navdrawer|nav-drawer|navbar|hero)/i;
 const DEMOTE = /(?:^|\/)(card|badge|accordion|checkbox|calendar|divider|types)\./i;
 export const FULL_PAINT = new Set([
-  "carbon",
   "shadcn-zinc",
-  "material",
-  "ant",
   "fluent",
   "mantine",
   "magicui",

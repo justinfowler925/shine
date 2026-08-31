@@ -15,15 +15,15 @@ const dir=mkdtempSync(join(tmpdir(),"shine-compare-proof-")), receipt=join(dir,"
 const run=(file,...args)=>spawnSync(process.execPath,[compare,join(fixtures,file),...args,"--out",join(dir,`${file}.png`)],{cwd:repo,encoding:"utf8",env});
 const output=(r)=>`${r.stdout}${r.stderr}`;
 try {
-  const sharp=load("sharp"), shot=readFileSync(join(repo,"corpus/packs/carbon-datatable/shot.png"));
+  const sharp=load("sharp"), shot=readFileSync(join(repo,"corpus/packs/untitled-table/shot.png"));
   assert.deepEqual(await pixelCalibration(sharp,shot,shot),{changedChannels:0,maxChannelDelta:0,baseline:true});
-  for(const [file,needle] of [["attribute-stamp.html","region graph"],["zinc-on-carbon.html","kit-faithful family"],["table-presence-clone.html","table-presence clone"]]){
-    const r=run(file,"--cite","carbon-datatable"); assert.equal(r.status,1,`${file} must fail`); assert.match(output(r),new RegExp(needle)); assert.equal(existsSync(receipt),false,"failed proof minted receipt");
+  for(const [file,needle] of [["attribute-stamp.html","region graph"],["zinc-on-untitled.html","kit-faithful family"],["table-presence-clone.html","table-presence clone"]]){
+    const r=run(file,"--cite","untitled-table"); assert.equal(r.status,1,`${file} must fail`); assert.match(output(r),new RegExp(needle)); assert.equal(existsSync(receipt),false,"failed proof minted receipt");
   }
   for(const [file,cite,needle] of [["generic-shadcn-dashboard.html","shadcn-dashboard-01","navigation required"],["generic-untitled-chart.html","untitled-line-charts","chart required"]]){
     const r=run(file,"--cite",cite);assert.equal(r.status,1,`${file} must fail`);assert.match(output(r),new RegExp(needle));assert.equal(existsSync(receipt),false,"reference mismatch minted receipt");
   }
-  const uncited=run("missing-cite.html","--cite","carbon-datatable"); assert.equal(uncited.status,1); assert.match(output(uncited),/artifact data-cite missing/); assert.equal(existsSync(receipt),false);
+  const uncited=run("missing-cite.html","--cite","untitled-table"); assert.equal(uncited.status,1); assert.match(output(uncited),/artifact data-cite missing/); assert.equal(existsSync(receipt),false);
   const stock=run("stock-clone.html","--cite","magicui-hero","--lane","marketing","--brief","claims"); assert.equal(stock.status,1); assert.match(output(stock),/brief-specific visible signature/); assert.equal(existsSync(receipt),false);
   const first=run("cross-brief-a.html","--cite","magicui-hero","--lane","marketing","--brief","claims"); assert.equal(first.status,0,output(first));
   const count=JSON.parse(readFileSync(receipt,"utf8")).receipts.length;

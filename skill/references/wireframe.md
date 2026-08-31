@@ -66,7 +66,7 @@ Options:
 
 ### Structure forks (ask only what is undecided)
 
-- Nav: sidebar vs top vs none — Carbon/Polaris admin density vs marketing hero budget
+- Nav: sidebar vs top vs none — admin density (`untitled-table`, Polaris query-only) vs marketing hero budget
 - Focal object: what is the one thing this page is about (`patterns.md` dashboard / queue)
 - Primary action: one filled control (techniques.md §Hierarchy)
 - Supporting regions: filters, KPI row, queue, detail pane — name jobs
@@ -115,7 +115,7 @@ Or a path the user names. Keep HTML + brief adjacent.
     <div class="wf-shell">
       <aside class="wf-region wf-nav" data-label="nav" data-job="…" data-cite="kits.md App shell">…</aside>
       <main class="wf-main">
-        <header class="wf-region wf-header" data-label="page-header" data-job="…" data-cite="templates.md mui-crud-dashboard">
+        <header class="wf-region wf-header" data-label="page-header" data-job="…" data-cite="templates.md shadcn-dashboard-01">
           <div>
             <h1 class="wf-title">…</h1>
             <p class="wf-desc">…</p>
@@ -188,12 +188,12 @@ Unlock: only if user says "unlock structure"
 
 | Pattern (`patterns.md`) | Lead with |
 |---|---|
-| App shell | `templates.md` `shadcn-sidebar-07` (or MUI dashboard) |
+| App shell | `templates.md` `shadcn-sidebar-07` |
 | Dashboard / metrics | `templates.md` `shadcn-dashboard-01` (Tremor when pinned) |
 | Insight stream / queue | ranked rows; start from app-shell template chrome |
-| Data table | `templates.md` `mui-crud-dashboard` |
-| Form / settings | Ant/MUI completeness on the cited shell |
-| Landing / marketing | `templates.md` `mui-marketing-page` |
+| Data table | `templates.md` `untitled-table` |
+| Form / settings | `templates.md` `shadcn-settings` on the cited shell |
+| Landing / marketing | `templates.md` `shadcn-marketing` |
 | AI surface | `ai-surfaces.md` topology first — then an app-shell template |
 | Dialog / sheet | Base UI / Radix + APG |
 

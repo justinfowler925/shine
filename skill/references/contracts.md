@@ -1,6 +1,6 @@
 # Component Contracts
 
-SSOT for what a named component includes. Distilled from MUI X, Ant Design, IBM Carbon, React Aria/Spectrum, shadcn/Radix (+ TanStack), Untitled UI/Plus UI visual matrices, and OpenAI Apps SDK UI (chat).
+SSOT for what a named component includes. The MUST/SHOULD lists below were distilled in 2026 from MUI X, Ant Design, IBM Carbon, React Aria/Spectrum, shadcn/Radix (+ TanStack), Untitled UI/Plus UI visual matrices, and OpenAI Apps SDK UI (chat). That sentence is provenance, not a pointer: MUI, Ant and Carbon were deleted from the corpus on 2026-08-31 (`docs/no-foreign-runtimes.md`) and are not there to read. The distilled requirements stayed — a completeness ladder is a fact about tables, not about a vendor.
 
 **Rule:** implement MUST always. For app/admin surfaces, also SHOULD. ASK before building ASK items. Opt-out only when user says simple/static/presentation/minimal.
 
@@ -149,7 +149,7 @@ A `<table>` with two or more header cells is a named Table whether or not it car
 Opt out with `data-shine-contract="layout"` or `role="presentation"`. `measure.mjs`
 fails the unmarked data table.
 
-### Anatomy (Carbon-class)
+### Anatomy (enterprise data table)
 1. Title + optional description  
 2. Toolbar (global actions)  
 3. Column headers  
@@ -368,9 +368,9 @@ fails the unmarked data table.
 | Need | Reference model |
 |---|---|
 | Interaction/a11y | React Aria + WAI-ARIA APG |
-| Enterprise form/table API | Ant Design Form + Table |
-| Product table anatomy | Carbon Data table |
-| React DataGrid batteries | MUI X Data Grid (Community = MUST/SHOULD; Pro/Premium = ASK) |
+| Enterprise form/table API | this file's § Form and § Table MUST lists |
+| Product table anatomy | this file's § Anatomy, proven by `untitled-table` |
+| React DataGrid batteries | TanStack Table ^8 + `integrations/resolve.mjs` recipe |
 | Composable React stack | shadcn + Radix + TanStack Table/Form |
 | Visual variants | Untitled UI / Plus UI |
 | Chat embeds | OpenAI Apps SDK UI |

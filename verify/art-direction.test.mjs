@@ -12,7 +12,8 @@ const baseline = JSON.stringify(retrieveDirections(templates, query));
 for (let i = 0; i < 20; i += 1) assert.equal(JSON.stringify(retrieveDirections(templates, query)), baseline, `determinism run ${i + 1}`);
 const diverse = retrieveDirections(templates, query);
 // Single-source policy: shadcn is the house kit and the Ant/MUI records pages
-// are retired, so a records brief no longer has three kits to offer. What must
+// were deleted outright on 2026-08-31, so a records brief no longer has three
+// kits to offer. What must
 // hold is that a candidate exists, that no retired pack is ever offered, and
 // that thin coverage is REPORTED rather than padded with a kit the consumer
 // cannot build. The old assertion (exactly three candidates) encoded the
@@ -26,16 +27,30 @@ for (const template of templates) {
   const axes = candidateAxes(template, diverse.brief);
   for (const axis of directionMetadata.axes) assert.ok(axes[axis] !== undefined, `${template.id} missing ${axis}`);
 }
-// MUI is no longer a build source for records surfaces. Asking for it by
-// framework must return nothing and say why, rather than substituting a kit the
-// brief did not ask for.
-const muiOnly = retrieveDirections(templates, "queue datagrid", { framework: "mui" });
-assert.equal(muiOnly.selected.length, 0, "MUI records pages are retired; the framework filter must not substitute another kit");
-assert.ok(muiOnly.gaps.length, "an unsatisfiable framework constraint must be reported as a gap");
+// The foreign-runtime kits are not merely unselectable, they are gone. This is
+// the regression gate on the deletion: a row carrying one of these kits or ids
+// must never reappear in the catalog, because a row an agent can read is a row
+// an agent can imitate.
+const DELETED_KITS = ["mui-material", "mui-store", "ant-design", "ant-design-pro", "carbon"];
+const DELETED_IDS = [
+  "mui-crud-dashboard", "mui-dashboard", "mui-marketing-page", "mui-checkout", "mui-blog",
+  "mui-sign-in-side", "query-mui-store", "query-mui-free-gallery",
+  "antd-pro-app", "antd-pro-list", "antd-pro-crud", "antd-pro-profile", "antd-pro-settings",
+  "antd-pro-step-form", "antd-pro-chatbot", "carbon-datatable", "carbon-uishell",
+];
+for (const kit of DELETED_KITS)
+  assert.ok(!templates.some((t) => t.kit === kit), `${kit} was deleted from the corpus; a row brought it back`);
+for (const id of DELETED_IDS)
+  assert.ok(!templates.some((t) => t.id === id), `${id} was deleted from the corpus; a row brought it back`);
+// An unsatisfiable framework constraint must return nothing and say why, rather
+// than substituting a kit the brief did not ask for.
+const unsatisfiable = retrieveDirections(templates, "queue datagrid", { framework: "mui" });
+assert.equal(unsatisfiable.selected.length, 0, "an unsatisfiable framework filter must not substitute another kit");
+assert.ok(unsatisfiable.gaps.length, "an unsatisfiable framework constraint must be reported as a gap");
 // The framework filter itself must still work where coverage exists.
 const shadcnOnly = retrieveDirections(templates, "dashboard analytics", { framework: "react" });
 assert.ok(shadcnOnly.selected.every((candidate) => candidate.axes.framework === "react"), "framework filter must exclude non-matching candidates");
-assert.ok(muiOnly.exclusions.some((item) => item.reasons.some((reason) => reason.startsWith("framework:"))));
+assert.ok(unsatisfiable.exclusions.some((item) => item.reasons.some((reason) => reason.startsWith("framework:"))));
 const sourceOnly = retrieveDirections(templates, "dashboard", { licenseMode: "source" });
 assert.ok(sourceOnly.exclusions.some((item) => item.template.kind === "query-only" && item.reasons.some((reason) => reason.startsWith("license:"))));
 const lex = retrieveDirections(templates, "lightning record");
@@ -69,7 +84,7 @@ try {
 } finally { rmSync(dir, { recursive: true, force: true }); }
 const plain = retrieveDirections(templates, "saas queue datagrid");
 assert.equal(plain.selected[0].template.id, "untitled-table", "Untitled is the default table reference");
-assert.ok(plain.exclusions.some((item) => item.template.id === "carbon-datatable" && item.reasons.some((reason) => reason.startsWith("retired:"))), "Carbon remains only as a retired regression fixture");
+assert.ok(plain.exclusions.some((item) => item.template.selectable === false && item.reasons.some((reason) => reason.startsWith("retired:"))), "retired rows must be excluded with a retired: reason, not silently ranked");
 const hybrid = retrieveDirections(templates, "Untitled UI shadcn CEO judgment queue datagrid");
 assert.equal(hybrid.selected[0].template.id, "untitled-table", "visual reference and implementation framework are independent");
 assert.deepEqual(plain.brief.demandedSlop, []);

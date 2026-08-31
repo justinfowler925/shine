@@ -11,7 +11,7 @@ alignment, whitespace as meaning, fold choreography. Load after the DNA pack’s
 - **Whitespace is information.** Three gap tiers: 8 intra-component, 16 intra-group, 64–96 inter-section (marketing). Dense UIs cut padding, never leading.
 - **Measure in `ch` for prose** (45–75). Linear’s reading column is 624px. App tables are full-bleed.
 - **Optical alignment.** Icon+label rows need a 1px nudge more often than geometry admits. `items-center` is a start, not a finish.
-- **Nested radius** = parent − padding. Carbon / LEX: radius none or host tokens — do not round a DataTable.
+- **Nested radius** = parent − padding. LEX and dense enterprise chrome: radius none or host tokens — do not round a DataTable.
 - **Fold.** Above the fold is the job of the screen, not a widget gallery.
 
 ## Host width ≠ viewport

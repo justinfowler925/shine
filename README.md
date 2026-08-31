@@ -20,9 +20,9 @@ Shine owns the token layer, the design corpus, the agent skill, and the measure 
 | Layer | What it does |
 | --- | --- |
 | **UI/UX agent** | `/shine` skill + `shine-ux` subagent — Wireframe, Build, Polish, Audit, Copy, Adoption |
-| **Templates** | `corpus/cite.mjs "<job>"` — 44 curated rows, with Untitled UI and shadcn as primary source templates |
+| **Templates** | `corpus/cite.mjs "<job>"` — 128 rows, shadcn as the house kit and Untitled UI as its buildable sibling. No foreign-runtime kits: [MUI, Ant and Carbon were deleted 2026-08-31](./docs/no-foreign-runtimes.md) |
 | **Examples** | `npm run untitled:search -- "<job>"` — all 392 public Untitled UI demo exports, including 187 renderable Storybook stories |
-| **Technique transfer** | Measured rules from 18 products + pinned kits (shadcn, Radix, Carbon, Ant, MUI, Spectrum, Fluent, APG, …) |
+| **Technique transfer** | Measured rules from 18 products + pinned kits (shadcn, Radix, Untitled UI, Spectrum, Fluent, APG, …) |
 | **Tokens** | One DTCG source → CSS, Tailwind v4, artifacts, Python, email, Docs, Office, Salesforce |
 | **Voices** | `tokens/voices/<family>.css` + the kit's own token sources — kit paint is legal via custom-property definitions |
 | **Corpus** | `~/design-corpus` — sparse upstream source; `rg` before inventing any API |
@@ -365,7 +365,9 @@ One plugin, `shine`. Iterate as a skills-dir plugin (`claude plugin init shine -
 
 Full clones **5.1 GB** → shallow **1.5 GB** → **sparse ~1.2 GB** (AdminLTE-list expansion
 2026-08-12: Mantine, Chakra, HeroUI, Headless UI, Tremor, Blueprint, Park UI, RSuite,
-Grommet, Ant Design Pro). Recharts and Motion dominate history; value dirs stay sparse.
+Grommet). Recharts and Motion dominate history; value dirs stay sparse. Four clones
+came back out on 2026-08-31 — `mui-material`, `ant-design`, `ant-design-pro`,
+`carbon` ([why](./docs/no-foreign-runtimes.md)).
 
 shadcn specifically: the repo is 67 MB, the actual component set is **372 KB of TSX** or **550 KB as registry JSON**. Don't clone it — fetch the JSON. Docs come as raw markdown by appending `.md` to any docs URL.
 
@@ -482,7 +484,7 @@ What works instead, already proven: **measure production CSS.** ~4.5 MB extracte
 
 **Three rulesets already written for agents** — the highest-value find of the research: `vercel-labs/web-interface-guidelines/AGENTS.md` (~150 numeric MUST/SHOULD/NEVER), `interfaces.rauno.me` (stricter, often disagrees with Vercel — keep both and note conflicts), `emilkowal.ski/ui/agents-with-taste` (already tables).
 
-**Mine in order:** IBM Carbon (Apache-2.0, already emits DTCG, descriptions read as agent rules verbatim) → GitHub Primer (MIT, ships `$extensions["org.primer.llm"]` — rules written *for a model*, including a `size-fine`/`size-coarse` pointer-type split worth stealing) → Material 3 (Apache-2.0) → USWDS (CC0).
+**Mine in order:** GitHub Primer (MIT, ships `$extensions["org.primer.llm"]` — rules written *for a model*, including a `size-fine`/`size-coarse` pointer-type split worth stealing) → Adobe Spectrum 2 (Apache-2.0) → Fluent 2 (MIT) → USWDS (CC0). These are *token* sources, not component runtimes — the distinction that decided [the 2026-08-31 deletion](./docs/no-foreign-runtimes.md).
 
 ### What `taste.md` contains
 

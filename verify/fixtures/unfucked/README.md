@@ -13,23 +13,29 @@ job (work the queue) is not performable without hovering every card.
 
 1. **LOOK** — `measure.mjs before.html --shot` and read the screenshot.
 2. **NAME** — queue rendered as card soup; no focal object; contract absent; craft slop.
-3. **MATCH** — `cite.mjs queue` → **carbon-datatable** (read
-   `corpus/packs/carbon-datatable/shot.png`: toolbar-first, batch actions, full-bleed
-   dense table, one filled primary).
+3. **MATCH** — `cite.mjs queue` → **untitled-table** (read
+   `corpus/packs/untitled-table/shot.png`: toolbar-first, the table as the focal
+   object, visible row actions, one filled primary).
 4. **RESTRUCTURE** — page head with the count that matters, toolbar (filter · Export ·
    one filled primary), selection column, sortable headers, visible row actions,
    pagination, real empty/loading/error states.
-5. **REPAINT** — `tokens/voices/carbon.css` (IBM Plex, radius 0, blue-60 primary,
-   `light-dark()` so dark mode is g100); every value a `var(--shine-*)`.
+5. **REPAINT** — `tokens/voices/untitled.css` (Inter, radius 6/8/12, brand-600
+   primary, `light-dark()` so dark mode is the kit's own gray-950 ground); every
+   value a `var(--shine-*)`.
 6. **PROVE** — measure PASS (axe 0, 40 text elements worst 5.00:1, theme switches,
-   table contract complete, family checks green under `--cite carbon-datatable`);
-   `compare.mjs` composite beside the harvested Carbon shot reads as relatives
-   (same type, radius, palette proportions).
+   table contract complete, family checks green under `--cite untitled-table`);
+   `compare.mjs` composite beside the harvested Untitled UI shot reads as
+   relatives (same type, radius, palette proportions).
 
 Regenerate the artifacts:
 
 ```sh
 node verify/measure.mjs verify/fixtures/unfucked/before.html --shot /tmp/before.png   # FAILs, by design
-node verify/measure.mjs verify/fixtures/unfucked/after.html --shot /tmp/after.png --cite carbon-datatable
-node verify/compare.mjs verify/fixtures/unfucked/after.html --cite carbon-datatable --out /tmp/compare.png
+node verify/measure.mjs verify/fixtures/unfucked/after.html --shot /tmp/after.png --cite untitled-table
+node verify/compare.mjs verify/fixtures/unfucked/after.html --cite untitled-table --out /tmp/compare.png
 ```
+
+This demo cited Carbon until 2026-08-31. Carbon, MUI and Ant Design Pro were
+deleted from the corpus that day (`docs/no-foreign-runtimes.md`), so the page was
+re-cited and repainted against `untitled-table` — the table reference a shadcn
+consumer can actually build. The before/after job is unchanged.

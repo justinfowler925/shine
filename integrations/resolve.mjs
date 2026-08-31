@@ -9,8 +9,9 @@ const SHINE = resolve(fileURLToPath(new URL("..", import.meta.url)));
 // by the packet so the page reference and the build recipe cannot contradict
 // each other. shadcn ships Tailwind-token primitives and Untitled UI React is
 // the corpus table reference on the same footing, so a shadcn/TanStack consumer
-// can port either; MUI and Ant Design Pro carry their own runtime and theming
-// and cannot be copied into one of these repos.
+// can port either. The kits that carried their own runtime and theming — MUI,
+// Ant Design Pro, Carbon — were deleted from the corpus on 2026-08-31 rather
+// than merely excluded here (docs/no-foreign-runtimes.md).
 export const RECIPE_KITS = {
   "shadcn-tanstack": ["shadcn-registry", "untitled-ui-react"],
   native: ["untitled-ui-react", "shadcn-registry"],

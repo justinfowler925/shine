@@ -106,9 +106,7 @@ Plot **never measures text** — it uses a static width table — so Node output
 |---|---|
 | **Mantine** 9.5.1 | Spotlight, notification system, rich hooks, real date/time pickers |
 | **Chakra v3** 3.36.1 | Recipe/slot theming — the token system is genuinely better designed |
-| **MUI** 9.2.0 | DataGrid (virtualised), timezone-aware pickers, Charts, Tree View |
 | **Fluent 2** 9.74.5 | Enterprise density, virtualisation, rigorous flat token set |
-| **Carbon** 1.113.0 | The most rigorous numeric system anywhere; real DataTable |
 
 ⚠️ **Shopify Polaris React is deprecated** — repo description says so, replaced by Polaris Web Components Oct 2025, no npm publish since 2025-03. Note the name trap: `Shopify/polaris` and `Shopify/polaris-react` are the same repo, and its active push date reflects the tokens monorepo, not React maintenance.
 
@@ -120,13 +118,11 @@ The numbers live in **token repos, not prose pages** — most doc sites are unfe
 
 | Rank | System | Tokens | License |
 |---|---|---|---|
-| 1 | **IBM Carbon** | `@carbon/{type,layout,motion,themes}` | **Apache-2.0**, code and docs |
-| 2 | **GitHub Primer** | `@primer/primitives` | **MIT** |
-| 3 | **Material 3** | material-web | **Apache-2.0** |
-| 4 | **Adobe Spectrum 2** | `adobe/spectrum-design-data` | Apache-2.0 |
-| 5 | **Atlassian** | `@atlaskit/tokens` | ⚠️ Apache npm, restrictive docs site |
-| 6 | **Fluent 2** | `@fluentui/tokens` | MIT |
-| 7 | **USWDS** | `@uswds/uswds` | **CC0 — public domain** |
+| 1 | **GitHub Primer** | `@primer/primitives` | **MIT** |
+| 2 | **Adobe Spectrum 2** | `adobe/spectrum-design-data` | Apache-2.0 |
+| 3 | **Fluent 2** | `@fluentui/tokens` | MIT |
+| 4 | **Atlassian** | `@atlaskit/tokens` | ⚠️ Apache npm, restrictive docs site |
+| 5 | **USWDS** | `@uswds/uswds` | **CC0 — public domain** |
 | — | **Apple HIG** | none | ⚠️ Copyrighted, no grant |
 
 **Two verified highlights.**
@@ -136,10 +132,11 @@ The numbers live in **token repos, not prose pages** — most doc sites are unfe
 
 Steal its `size-fine` / `size-coarse` split — pointer type as a first-class token dimension.
 
-**Carbon already emits DTCG**, with descriptions that read as agent rules verbatim:
-> `duration.moderate.01` — *"Micro-interactions, small expansion, short distance movements. Default transition speed."*
-
-**Extraction order: Carbon → Primer → Material 3 → USWDS.** That's ~90% of a rigorous numeric corpus with zero licensing ambiguity.
+**Extraction order: Primer → Spectrum → Fluent → USWDS.** That is ~90% of a rigorous
+numeric corpus with zero licensing ambiguity, and every one of them is a *token*
+source rather than a component runtime — which is the distinction that decided the
+2026-08-31 deletion. A published duration scale costs nothing to adopt; a component
+library costs its whole runtime.
 
 ---
 

@@ -33,9 +33,14 @@ html[data-dna-family="slds"], html[data-shine-voice="kit-faithful"][data-dna-fam
   --shine-color-fg: var(--slds-g-color-on-surface-3, light-dark(#03234d, #d8e6fe));
   --shine-color-fg-muted: var(--slds-g-color-on-surface-1, light-dark(#5c5c5c, #aeaeae));
   --shine-color-border: var(--slds-g-color-border-1, light-dark(#c9c9c9, #444));
-  /* accent-2 resolves through --slds-r-color-brand-40/70 in the package; the
-     fallback is that chain resolved. SLDS 1's #0176d3 is not an SLDS 2 value. */
-  --shine-color-primary: var(--slds-g-color-accent-2, light-dark(#0250d9, #7cb1fe));
+  /* An action FILL is accent-container-1 (brand-50 #066afe), which Salesforce
+     documents as "background fill for ... Brand buttons. Always pair with
+     on-accent-1". accent-2 is the ink hook — "emphasis color for text, links,
+     and icon color fills" — and in dark mode it resolves to brand-70 #7cb1fe,
+     so filling a button with it and writing on-accent-1 white on top measured
+     2.19:1. accent-container-1 carries no light-dark variant: one fill, both
+     modes, 4.67:1 against white. SLDS 1's #0176d3 is not an SLDS 2 value. */
+  --shine-color-primary: var(--slds-g-color-accent-container-1, #066afe);
   --shine-color-primary-fg: var(--slds-g-color-on-accent-1, #fff);
   --shine-color-ring: var(--slds-g-color-accent-2, light-dark(#0250d9, #7cb1fe));
   --shine-color-danger: var(--slds-g-color-error-1, light-dark(#b60554, #fe8aa7));

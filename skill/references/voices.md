@@ -18,16 +18,16 @@ the token layer is where raw values are supposed to live. So kit paint is one bl
 1. Import `tokens/voices/<family>.css` (the cite names it). It remaps `--shine-*`
    structure values (font stack, radii, durations) for that family.
 2. Take the kit's real colors from its own token sources in `~/design-corpus` — e.g.
-   Carbon `packages/themes` (g10/g100), the shadcn theme CSS in extracted blocks, MUI
-   `createPalette.js`, Ant seed tokens — and declare them once as custom properties
+   the shadcn theme CSS in extracted blocks, `untitled-ui-react/styles/theme.css`,
+   Spectrum and Fluent token files — and declare them once as custom properties
    (`--shine-color-primary: …` overrides, or a `--kit-*` block) in the page/app token
    layer. Usage sites say `var(--…)`.
 3. When a harvested pack exists, `corpus/packs/<id>/tokens.css` already carries the kit's
    values — import it and skip step 2.
 
-Do not overwrite Carbon density or MUI marketing type with house style; do not leave a
+Do not overwrite a kit's density or its marketing type with house style; do not leave a
 Magic UI hero in house grays. The compare composite (`verify/compare.mjs`) is where this
-shows up: a Carbon cite beside your page should read as relatives.
+shows up: an `untitled-table` cite beside your page should read as relatives.
 
 ## House (when it is the voice)
 
@@ -41,6 +41,6 @@ voice; density and type pairing are.
 
 ## Fail if
 
-- A kit cite still ships in house paint (or shadcn zinc when the cite is Carbon/MUI).
+- A kit cite still ships in house paint (or shadcn zinc when the cite is another family).
 - Brand-locked work clones IBM/Linear/Shopify chrome.
 - Kit colors are typed as raw values at usage sites instead of declared once as tokens.

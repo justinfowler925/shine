@@ -11,7 +11,7 @@ Regions. Host: HTML email (Outlook-safe). Paint: house or brand, not SLDS hooks 
 
 - Tables for layout. Inline CSS. No flex, no grid, no custom properties in the email body (many clients drop `:root`).
 - Preview text is real, not "Lorem".
-- Cite this row for Salesforce HTML emails, not `mui-blog`.
+- Cite this row for Salesforce HTML emails, not an editorial web page (`shadcn-blog`).
 
 ## Checklist (agent)
 

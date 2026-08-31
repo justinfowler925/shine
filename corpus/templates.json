@@ -519,78 +519,6 @@
       }
     },
     {
-      "id": "mui-dashboard",
-      "screen": "app-shell",
-      "kit": "mui-material",
-      "title": "MUI dashboard shell",
-      "path": "mui-material/docs/data/material/getting-started/templates/dashboard",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page",
-      "selectable": false,
-      "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
-    },
-    {
-      "id": "antd-pro-app",
-      "screen": "app-shell",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro admin app",
-      "path": "ant-design-pro/src",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 3,
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page",
-      "selectable": false,
-      "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
-    },
-    {
-      "id": "carbon-uishell",
-      "screen": "app-shell",
-      "kit": "carbon",
-      "title": "Carbon UIShell",
-      "path": "carbon/packages/react/src/components/UIShell",
-      "preview": "https://carbondesignsystem.com/components/UI-shell-header/usage/",
-      "license": "Apache-2.0",
-      "kind": "source",
-      "startFrom": 4,
-      "dna": {
-        "family": "carbon",
-        "density": "dense"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page",
-      "selectable": false,
-      "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
-    },
-    {
       "id": "mantine-appshell",
       "screen": "app-shell",
       "kit": "mantine",
@@ -639,28 +567,6 @@
       "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
     },
     {
-      "id": "query-mui-store",
-      "screen": "app-shell",
-      "kit": "mui-store",
-      "title": "MUI Store premium templates (query-only)",
-      "path": "query-only/query-mui-store.png",
-      "preview": "https://mui.com/store/",
-      "license": "proprietary",
-      "startFrom": 90,
-      "kind": "query-only",
-      "dna": {
-        "family": "shine",
-        "density": "dense"
-      },
-      "jobs": [
-        "app-shell",
-        "shell",
-        "nav",
-        "sidebar"
-      ],
-      "scope": "page"
-    },
-    {
       "id": "query-adminlte",
       "screen": "app-shell",
       "kit": "adminlte",
@@ -703,30 +609,6 @@
         "sidebar"
       ],
       "scope": "page"
-    },
-    {
-      "id": "mui-sign-in-side",
-      "screen": "auth",
-      "kit": "mui-material",
-      "title": "MUI sign-in (split)",
-      "path": "mui-material/docs/data/material/getting-started/templates/sign-in-side",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "auth",
-        "login",
-        "signin",
-        "signup"
-      ],
-      "scope": "page",
-      "selectable": false,
-      "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers auth (shadcn-login-04)"
     },
     {
       "id": "shadcn-login-01",
@@ -1008,23 +890,25 @@
       ]
     },
     {
-      "id": "mui-blog",
+      "id": "shadcn-blog",
       "screen": "blog",
-      "kit": "mui-material",
-      "title": "MUI blog",
-      "path": "mui-material/docs/data/material/getting-started/templates/blog",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
+      "kit": "shadcn-registry",
+      "title": "shadcn editorial / article page (measure, rhythm, one figure class) — region map only",
+      "preview": "",
       "license": "MIT",
-      "kind": "source",
+      "kind": "blueprint",
       "startFrom": 1,
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
       "jobs": [
         "blog",
-        "article"
+        "article",
+        "editorial",
+        "post"
       ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "corpus/blueprints/shadcn-blog.md is the region map; shadcn publishes no block for this screen",
       "scope": "page"
     },
     {
@@ -2963,44 +2847,6 @@
       "scope": "page"
     },
     {
-      "id": "antd-pro-chatbot",
-      "screen": "chat",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro chatbot page",
-      "path": "ant-design-pro/src/pages/chatbot",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "jobs": [
-        "chat"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "scope": "page"
-    },
-    {
-      "id": "mui-checkout",
-      "screen": "checkout",
-      "kit": "mui-material",
-      "title": "MUI checkout",
-      "path": "mui-material/docs/data/material/getting-started/templates/checkout",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "checkout"
-      ],
-      "scope": "page"
-    },
-    {
       "id": "shadcn-checkout",
       "screen": "checkout",
       "kit": "shadcn-registry",
@@ -3046,56 +2892,6 @@
         "palette",
         "cmdk"
       ]
-    },
-    {
-      "id": "mui-crud-dashboard",
-      "screen": "crud",
-      "kit": "mui-material",
-      "title": "MUI CRUD dashboard",
-      "path": "mui-material/docs/data/material/getting-started/templates/crud-dashboard",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "entrypoints": [
-        "CrudDashboard.tsx"
-      ],
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "crud",
-        "admin"
-      ],
-      "scope": "page",
-      "selectable": false,
-      "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for crud"
-    },
-    {
-      "id": "antd-pro-crud",
-      "screen": "crud",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro ProTable CRUD page",
-      "path": "ant-design-pro/src/pages/table-list",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "entrypoints": [
-        "index.tsx"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "jobs": [
-        "crud",
-        "admin"
-      ],
-      "scope": "page",
-      "selectable": false,
-      "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for crud"
     },
     {
       "id": "shadcn-dashboard-01",
@@ -3357,26 +3153,6 @@
       "scope": "page"
     },
     {
-      "id": "mui-marketing-page",
-      "screen": "marketing",
-      "kit": "mui-material",
-      "title": "MUI marketing page",
-      "path": "mui-material/docs/data/material/getting-started/templates/marketing-page",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "marketing",
-        "marketing-hero"
-      ],
-      "scope": "page"
-    },
-    {
       "id": "shadcn-marketing",
       "screen": "marketing",
       "kit": "shadcn-registry",
@@ -3395,26 +3171,6 @@
         "density": "comfortable"
       },
       "note": "corpus/blueprints/shadcn-marketing.md is the region map; shadcn publishes no block for this screen",
-      "scope": "page"
-    },
-    {
-      "id": "query-mui-free-gallery",
-      "screen": "marketing",
-      "kit": "mui-material",
-      "title": "MUI free templates gallery (query-only preview)",
-      "path": "query-only/query-mui-free-gallery.png",
-      "preview": "https://mui.com/material-ui/getting-started/templates/",
-      "license": "MIT",
-      "startFrom": 80,
-      "kind": "query-only",
-      "dna": {
-        "family": "material",
-        "density": "comfortable"
-      },
-      "jobs": [
-        "marketing",
-        "marketing-hero"
-      ],
       "scope": "page"
     },
     {
@@ -3437,29 +3193,6 @@
         "density": "editorial"
       },
       "scope": "page"
-    },
-    {
-      "id": "carbon-datatable",
-      "screen": "queue",
-      "kit": "carbon",
-      "title": "Carbon DataTable (toolbar-first, batch actions, dense)",
-      "path": "carbon/packages/react/src/components/DataTable",
-      "preview": "https://carbondesignsystem.com/components/data-table/usage/",
-      "license": "Apache-2.0",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "queue",
-        "list",
-        "inbox"
-      ],
-      "dna": {
-        "family": "carbon",
-        "density": "dense"
-      },
-      "scope": "page",
-      "selectable": false,
-      "retiredReason": "Untitled UI replaced Carbon as Shine's table reference; retain this pack only for adversarial regression fixtures"
     },
     {
       "id": "untitled-table",
@@ -3490,50 +3223,6 @@
       }
     },
     {
-      "id": "antd-pro-list",
-      "screen": "queue",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro list / queue pages",
-      "path": "ant-design-pro/src/pages/list",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "jobs": [
-        "queue",
-        "list",
-        "inbox"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "scope": "page",
-      "selectable": false,
-      "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for queue"
-    },
-    {
-      "id": "antd-pro-profile",
-      "screen": "record",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro profile / record",
-      "path": "ant-design-pro/src/pages/profile",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "record",
-        "detail",
-        "profile"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
-      "scope": "page"
-    },
-    {
       "id": "shadcn-record",
       "screen": "record",
       "kit": "shadcn-registry",
@@ -3559,27 +3248,6 @@
         ]
       },
       "note": "corpus/blueprints/shadcn-record.md is the region map; corpus/blueprints/shadcn-record/ is authored shadcn source to copy",
-      "scope": "page"
-    },
-    {
-      "id": "antd-pro-settings",
-      "screen": "settings",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro account settings",
-      "path": "ant-design-pro/src/pages/account/settings",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "settings",
-        "preferences",
-        "account"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
       "scope": "page"
     },
     {
@@ -3657,27 +3325,6 @@
         ]
       },
       "note": "corpus/blueprints/shadcn-weekly-board.md is the region map; shadcn publishes no block for this screen",
-      "scope": "page"
-    },
-    {
-      "id": "antd-pro-step-form",
-      "screen": "wizard",
-      "kit": "ant-design-pro",
-      "title": "Ant Design Pro step form",
-      "path": "ant-design-pro/src/pages/form/step-form",
-      "preview": "https://preview.pro.ant.design",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 1,
-      "jobs": [
-        "wizard",
-        "steps",
-        "onboarding"
-      ],
-      "dna": {
-        "family": "ant",
-        "density": "dense"
-      },
       "scope": "page"
     },
     {

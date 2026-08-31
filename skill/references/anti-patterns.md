@@ -19,7 +19,7 @@ Hard bans and common failures. Hitting these is an audit fail (Critical/Major fo
 
 ## Lane-relative craft
 
-Glow, large display type, and full-bleed media are **marketing DNA** (`magicui-hero`). They are a fail on `lex` and `internal` queues. Inverse: Carbon radius-none on a marketing hero is a fail. Load `direction.md` before applying this list.
+Glow, large display type, and full-bleed media are **marketing DNA** (`magicui-hero`). They are a fail on `lex` and `internal` queues. Inverse: an enterprise queue's radius-none, tabular density on a marketing hero is a fail. Load `direction.md` before applying this list.
 
 ## AI visual slop (marketing + generic UI)
 

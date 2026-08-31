@@ -18,13 +18,11 @@ it refuses a second design system and verifies every recipe API against the pinn
 |---|---|---|---|
 | Headless primitives (dialog, menu, popover, tabs) | **Base UI** or **Radix** (website docs) | React Aria for complex a11y | Inventing focus traps |
 | Shadcn-shaped React components | **shadcn-registry** JSON | Base UI underneath | Thin demos without contract states |
-| Data table / virtualized list | **TanStack Table ^8** + **TanStack Virtual** | Carbon DataTable / Ant Table for chrome density | TanStack Table v9 |
+| Data table / virtualized list | **TanStack Table ^8** + **TanStack Virtual** | `untitled-table` for chrome density | TanStack Table v9 |
 | Charts | **Recharts** (React) + **D3** (math/SSR) | Observable Plot for grammar | nivo (drifting), visx except custom |
 | Motion primitives (MIT) | **motion** + **motion-primitives** | — | GSAP, Aceternity, Animate UI |
 | Marketing blocks (MIT) | **magicui** / **cult-ui** | — | Origin UI (AGPL) |
-| Dense enterprise filters / DataTable chrome | **Carbon** | Ant Design table/filter matrices | Copying IBM colors |
-| Form/table completeness matrices | **Ant Design** `components/` | MUI docs/data examples | Blind Ant styling |
-| Material behavior / API completeness | **mui-material** + `docs/data` | — | MUI default theme as brand |
+| Form/table completeness matrices | **`contracts.md`** (the MUST lists) | `untitled-ui-react` demos | A matrix read off a kit Shine no longer carries |
 | Interaction/a11y SSOT | **react-spectrum** (`@react-aria`, RAC) + **aria-practices** | Radix website | Skipping APG for custom widgets |
 | Fluent patterns | **fluentui** `react-components` | — | Fluent brand paint |
 | Admin / settings grammar | **Polaris** (query only) | — | Republishing Polaris components |
@@ -39,12 +37,13 @@ before locking the brief.
 
 | Wireframe pattern | Catalog default | Lead kit / recipe |
 |---|---|---|
-| App shell | `shadcn-sidebar-07` | shadcn sidebar + Carbon density — § App shell |
+| App shell | `shadcn-sidebar-07` | shadcn sidebar — § App shell |
 | Dashboard | `shadcn-dashboard-01` | Recharts/D3 + `dashboards.md` — not Tremor atoms |
-| Queue / insight stream | `carbon-datatable` | Carbon/Ant toolbar, batch, empty/loading/error |
-| Data table | `mui-crud-dashboard` / `carbon-datatable` | § DataGrid |
-| Form / settings | `antd-pro-settings` | Ant/MUI completeness; Polaris query-only |
-| Landing | `mui-marketing-page` | hero budget; `magicui-hero` for marketing-hero |
+| Queue / insight stream | `untitled-table` | toolbar, batch, empty/loading/error |
+| Data table | `untitled-table` / `shadcn-dashboard-01` | § DataGrid |
+| Form / settings | `shadcn-settings` | `contracts.md` completeness; Polaris query-only |
+| Landing | `shadcn-marketing` | hero budget; `magicui-hero` for marketing-hero |
+| Editorial / article | `shadcn-blog` | measure 60–75ch; region map only |
 | AI surface | `cite.mjs chat` or ai-generate | `ai-surfaces.md` first; chat is usually wrong |
 | Dialog | — (component, not a page) | § Dialog / sheet |
 
@@ -56,11 +55,10 @@ before locking the brief.
    Confirm APIs in `~/design-corpus/tanstack-table`.
 2. **Chrome:** shadcn table / data-table registry item as structure; upgrade to full
    `contracts.md` Table MUST (toolbar, sticky header, empty/loading/error, keyboard).
-3. **Density / filters:** read Carbon DataTable + filter patterns
-   (`~/design-corpus/carbon/packages/react`) for toolbar layout and batch actions — re-skin
-   with shine tokens.
+3. **Density / filters:** read `untitled-table`'s harvested source and shot for toolbar
+   layout, batch actions and the four table states — re-skin with shine tokens.
 4. **Virtualize** when rows ≫ viewport — TanStack Virtual examples.
-5. Cite: tanstack file:line + carbon pattern + contracts Table MUST.
+5. Cite: tanstack file:line + `untitled-table` pattern + contracts Table MUST.
 
 ### Dialog / sheet
 
@@ -72,14 +70,14 @@ before locking the brief.
 
 ### Form
 
-1. Completeness from Ant Form / MUI form examples (`ant-design/components/form`,
-   `mui-material/docs/data`) — labels, helper, error association, disabled semantics.
+1. Completeness from `contracts.md` § Form and the `shadcn-settings` blueprint —
+   labels, helper, error association, disabled semantics.
 2. Implement with shine inputs + Base UI where needed.
 3. Never placeholder-only labels; never disable submit before interaction without inline errors.
 
 ### App shell
 
-1. shadcn sidebar blocks for structure; Polaris / Carbon for admin nav density cues.
+1. shadcn sidebar blocks for structure; Polaris (query-only) for admin nav density cues.
 2. Active state, mobile drawer, page header (title, description, one primary).
 3. Adoption pass if internal (`adoption.md`).
 
@@ -106,7 +104,8 @@ before locking the brief.
 
 | Kit | Redistribute into registry? |
 |---|---|
-| shadcn, Radix, Base UI, Ark, TanStack, D3, Recharts, motion, magicui, cult-ui, lucide, phosphor, Carbon, Ant, MUI, React Spectrum, Fluent, APG | Yes if SPDX allows (usually MIT/Apache) — still prefer depend, don't vendor wholesale |
+| shadcn, Radix, Base UI, Ark, TanStack, D3, Recharts, motion, magicui, cult-ui, lucide, phosphor, Untitled UI, React Spectrum, Fluent, APG | Yes if SPDX allows (usually MIT/Apache) — still prefer depend, don't vendor wholesale |
+| MUI, Ant Design (+ Pro), IBM Carbon | **No** — deleted from the corpus 2026-08-31. Not a licensing call: they carry their own runtime and theming, so nothing here can build what their pages show |
 | **Polaris** | **No** — query only; Shopify visual-distinctness clause |
 | Origin UI | **No** — AGPL |
 | Aceternity / React Bits / Animate UI / GSAP | **No** — missing or Commons Clause / no redistribution |
@@ -114,6 +113,6 @@ before locking the brief.
 ## Citation form
 
 ```
-Kit: Carbon DataTable batch-actions layout (carbon/packages/react/.../DataTable:LINE)
+Kit: Untitled UI table batch-actions layout (corpus/packs/untitled-table/source/table.demo.tsx:LINE)
 Mapped to: shine toolbar + destructive behind menu (contracts Table SHOULD)
 ```

@@ -20,7 +20,7 @@ shadcn ships no record block — its 97 blocks are one dashboard, sixteen sideba
 ## Do not
 
 - A dashboard of KPI cards. The reader arrived knowing which record they want; ranking and totals are the queue's job, not this page's.
-- `antd-pro-profile` ported class-for-class. It is a profile page — avatar, bio, descriptions list — and it will push you toward a field dump with no decision region.
+- A profile page ported class-for-class — avatar, bio, descriptions list. That shape (the one the deleted Ant Design Pro row carried) pushes you toward a field dump with no decision region.
 - Two primary buttons. One filled action; everything else outline, ghost, or overflow.
 - Invented placeholders in empty fields. An empty field stays empty.
 

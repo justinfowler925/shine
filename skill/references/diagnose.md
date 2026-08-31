@@ -85,9 +85,10 @@ template cite is incomplete for a *known* job — dashboards, queues, records, s
 auth, checkout all have rows. No matching row → nearest row + `patterns.md`, and add a
 catalog row **after** the screen ships if it earned one. Technique cites
 (`techniques.md`) are for craft transfer; they don't replace a structural match.
-A record list (queue, remainder, sources, admin rows) cites a DataGrid kit
-(`carbon-datatable`, `mui-crud-dashboard`, `antd-pro-crud`). A list/dashboard/app-shell
-cite is the wrong match even if `cite.mjs` ranked it first — re-query with `datagrid`.
+A record list (queue, remainder, sources, admin rows) cites a DataGrid row
+(`untitled-table`, or `shadcn-dashboard-01` for the composed records page). A
+list/dashboard/app-shell cite is the wrong match even if `cite.mjs` ranked it
+first — re-query with `datagrid`.
 
 ## 5. RESTRUCTURE + REPAINT
 
@@ -115,7 +116,7 @@ read as relatives, the match or the paint is wrong.
 | Known job, invented layout | `corpus/cite.mjs <job>` — match a row |
 | Nobody will open this | `adoption.md` |
 | Table/form missing states | `contracts.md` |
-| Queue / batch / empty | `cite.mjs queue` → Carbon DataTable or Ant Pro list |
+| Queue / batch / empty | `cite.mjs queue` → `untitled-table` |
 | Wrong hierarchy / equal peers | `techniques.md` §Hierarchy, `kits.md` |
 | Numbers undecidable | `dashboards.md` |
 | Chart encoding smell | `dataviz.md` |

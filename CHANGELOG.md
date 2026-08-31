@@ -4,6 +4,50 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ## Unreleased
 
+### Removed
+
+- **MUI, Ant Design Pro and IBM Carbon are deleted from the corpus** (see
+  [docs/no-foreign-runtimes.md](docs/no-foreign-runtimes.md)). 17 catalog rows,
+  15 harvested packs, 4 corpus clones and pins, 3 voice sheets
+  (`material.css`, `ant.css`, `carbon.css`), 7 fixture runtime dependencies, and
+  every reference that pointed at them. Not retired — gone. Both consumers are
+  shadcn/Tailwind repos, so a page on a foreign runtime could only ever teach
+  costume. Catalog: 144 rows → 128; kits: 16 → 12.
+- `verify/fixtures/integrations` no longer installs `@mui/*`, `@carbon/react`,
+  `antd` or Emotion. It builds the two recipes Shine supports — shadcn/TanStack
+  and a new `native` semantic-table view — and its lockfile carries 74 packages
+  with zero foreign entries.
+
+### Added
+
+- `corpus/blueprints/shadcn-blog.md` — the blog screen's only row was MUI's;
+  deleting MUI would have deleted the screen. Doctor fails if it goes missing.
+- `templates.md` marks every retired row **retired** and lists the reasons under
+  the table. A retired row used to be indistinguishable from a live one in the
+  reference the agent actually reads.
+- `verify/art-direction.test.mjs` asserts by name that the 5 deleted kits and 17
+  deleted ids never reappear in the catalog.
+- `--shine-text-base` / `--shine-text-sm` in `untitled.css` — the one voice sheet
+  missing them, so Untitled-painted pages fell back to browser defaults.
+
+### Fixed
+
+- **Four voice sheets shipped an action colour that failed AA against its own
+  label**, found by generalising the contrast test from one sheet to all ten:
+  `mantine` 3.56:1 → 5.02:1 (blue[8]), `slds` 2.19:1 dark → 4.67:1
+  (`accent-container-1` is the Brand-button fill; `accent-2` is the ink hook),
+  `spectrum` 2.19:1 dark → 5.39:1 (indigo-900 in both modes), `tremor` 3.68:1 →
+  5.17:1 (blue-600). The test now runs every sheet in every mode it declares and
+  asserts a shared core role set.
+- `measure.mjs` likeness rules keyed off `family === "carbon"`; they now key off
+  the cited row's jobs, so any records/table cite is held to them.
+- `integrations-bite.mjs` still scaffolded `mui`/`carbon`/`ant` after those
+  recipes were retired on 2026-08-29 — a `doctor:full` check that had been red
+  and unreported since.
+- Required-screen coverage is computed by job, not by the `screen` field, and the
+  shot check now reports which screens are structure-only (region map, no
+  harvested pixels): marketing, checkout, wizard.
+
 ### Added
 
 - Framework-aware MUI, Carbon, Ant, shadcn/TanStack, native, and LEX integration recipes with installed-kit preservation, API provenance, and executable scaffolding.
