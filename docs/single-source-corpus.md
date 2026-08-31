@@ -90,6 +90,37 @@ Until then the packet tells the truth about what it is handing over, which is th
 point of a single source: it names what it does not have instead of substituting
 something the consumer cannot build.
 
+## Figma
+
+`corpus/figma-harvest.mjs` is the Figma sibling of `harvest.mjs` — Figma has no
+public render route, so it calls the REST API with a personal access token and
+renders nodes server-side. The token is read from `FIGMA_TOKEN` or 1Password
+(`op://Employee/FIGMA_PAT/FIGMA PAT`), is never printed and never written to disk.
+
+```sh
+node corpus/figma-harvest.mjs --list <url|file-key>                     # every top-level frame, by page
+node corpus/figma-harvest.mjs --shot <url?node-id=1-234> --id <pack-id> # render one frame to shot.png
+node corpus/figma-harvest.mjs --tokens <url> --family <name>            # voice sheet from variables/styles
+```
+
+What Figma can and cannot supply for a pack:
+
+| Requirement | From Figma |
+| --- | --- |
+| `shot.png` | yes — `/v1/images` renders any frame at 2x |
+| `tokens.css` | yes — local variables, falling back to published fill styles |
+| `source/` | **no** — Figma holds no code |
+
+Because `inspectPack` requires a `source/` file of at least 30 readable lines, a
+Figma-derived pack is `kind: "blueprint"` with a hand-authored
+`corpus/blueprints/<id>.md` — exactly how the seven Lightning packs already work
+(`lex-queue.md` is 46 lines). That makes Figma the right way to close the eight
+screens shadcn has no block for, and the authoritative source for a
+brand voice sheet.
+
+Local variables (`/v1/files/:key/variables/local`) are Enterprise-gated; the
+tool reports that and falls back to published styles rather than failing.
+
 ## Test status
 
 All 12 suites pass in an installed release. `compare-proof` and `usability` were
