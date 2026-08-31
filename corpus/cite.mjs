@@ -101,7 +101,15 @@ if (existsSync(shot)) {
 } else if (row.preview) {
   out.push(`Shot: none harvested yet — preview: ${row.preview}`);
 } else if (row.kind === "blueprint") {
-  out.push(`Shot: none — blueprint row; structure lives in ${row.note || "references/salesforce.md"}`);
+  // A row's note is a full sentence that stands on its own, so it is printed
+  // verbatim; only the fallback gets the "structure lives in" lead-in. Reading
+  // the note as a noun phrase produced "structure lives in <sentence>".
+  //
+  // The fallback is the row's own region map. It used to be references/salesforce.md,
+  // which is right for the LEX rows and sent every other blueprint to Salesforce.
+  out.push(row.note
+    ? `Shot: none — blueprint row; ${row.note}`
+    : `Shot: none — blueprint row; structure lives in corpus/blueprints/${row.id}.md`);
 }
 if (existsSync(packTokens)) out.push(`Kit tokens: ${packTokens}`);
 if (existsSync(voiceCss)) out.push(`Voice sheet: tokens/voices/${family}.css (import when kit-faithful)`);

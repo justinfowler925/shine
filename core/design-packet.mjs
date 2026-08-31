@@ -53,7 +53,13 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  const detected=detectProject(project),classification=classifyJob(job,category),kind=classification.category;
  // The installed kit decides the build recipe, so it must also constrain which
  // page reference can win — otherwise the packet contradicts itself.
- const recipeKey=detected.framework==="lex"?"lex":detected.installed[0]||"native";
+ //
+ // The lex lane outranks whatever is installed. A Lightning surface is hosted by
+ // Salesforce, so a shadcn/Tailwind repo on disk says nothing about what can be
+ // built there, and detected.framework is a filesystem guess while the lane is
+ // the caller stating the target host. Reading only the guess let kit affinity
+ // promote a shadcn reference over the Lightning one for a lex brief.
+ const recipeKey=(lane==="lex"||detected.framework==="lex")?"lex":detected.installed[0]||"native";
  const retrieval=retrieveDirections(catalog,`${job} ${categories[kind].fallback}`,{lane,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[],limit:12});
  if(!retrieval.selected.length)throw new Error(`no eligible template: ${retrieval.gaps.join("; ")}`);
  const shape=({template,score,matches,distance,port,portNote})=>({id:template.id,title:template.title,kit:template.kit,family:template.dna?.family,screen:template.screen,scope:template.scope||"page",reference:template.reference||{},score,distance,matches,...(port?{port:true,portNote}:{}),paths:packPaths(template)});

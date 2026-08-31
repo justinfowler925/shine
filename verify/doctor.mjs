@@ -1330,6 +1330,18 @@ if (FULL) {
       if (missingPaths.length)
         fail("catalog paths exist", missingPaths.slice(0, 5).map((t) => `${t.id} → ${t.path}`).join("; "));
       else ok("catalog paths exist", `${(catalog.templates ?? []).filter((t) => t.kind === "source").length} source rows`);
+
+      // templates.json is generated. When a row is hand-added to the JSON instead
+      // of to the generator, the next regenerate silently deletes it — that has
+      // happened once, to 89 rows. Only meaningful with the corpus present, since
+      // the generator drops source rows whose path it cannot see.
+      const sync = spawnSync(process.execPath, [join(SHINE, "corpus/index-templates.mjs"), "--check"], {
+        encoding: "utf8", env: { ...process.env, DESIGN_CORPUS: CORPUS },
+      });
+      if (sync.status !== 0) {
+        const why = `${sync.stdout || ""}${sync.stderr || ""}`.trim().split("\n").slice(0, 3).join(" | ");
+        fail("templates.json is generated", why || "index-templates.mjs --check failed");
+      } else ok("templates.json is generated", "in sync with corpus/index-templates.mjs");
     } else if (!CI) {
       fail("catalog paths exist", `no ~/design-corpus — run corpus/acquire.sh`);
     }
