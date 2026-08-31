@@ -121,7 +121,31 @@ PY
   record shadcn-registry json "https://ui.shadcn.com/r/styles/$style/{name}.json" main "$sha" "$counts items"
 }
 
+# SLDS 2 is authoritative for Salesforce work, and Salesforce publishes its
+# styling hooks as a versioned npm package — 524 --slds-g-* globals, 107
+# --slds-s-* component hooks and 85 --slds-r-* reference tokens, as CSS and raw
+# JSON, in two themes. `cosmos` is SLDS 2; `lightning-blue` is the SLDS 1 theme.
+#
+# This replaces reading values off a rendered org. Measuring one org captured
+# whatever that org had enabled: every fallback in tokens/voices/slds.css
+# disagreed with SLDS 2, down to "Salesforce Sans" for a family SLDS 2 sets to
+# system-ui. verify/slds-tokens.test.mjs pins the voice sheet to this package.
+fetch_slds_tokens(){
+  local pkg="@salesforce-ux/design-tokens" out="$TARGET/slds-tokens"
+  local meta version tarball
+  meta=$(curl -fsSL --retry 3 "https://registry.npmjs.org/@salesforce-ux%2fdesign-tokens") || return 1
+  version=$(printf '%s' "$meta" | python3 -c 'import json,sys; d=json.load(sys.stdin); print(d["dist-tags"]["latest"])')
+  tarball=$(printf '%s' "$meta" | python3 -c 'import json,sys; d=json.load(sys.stdin); print(d["versions"][d["dist-tags"]["latest"]]["dist"]["tarball"])')
+  log "slds design-tokens @ $version"
+  rm -rf "$out"; mkdir -p "$out"
+  curl -fsSL --retry 3 "$tarball" -o "$out/pkg.tgz"
+  tar xzf "$out/pkg.tgz" -C "$out" --strip-components 1
+  rm -f "$out/pkg.tgz"
+  record slds-tokens npm "https://registry.npmjs.org/$pkg" latest "$version" "themes/cosmos themes/lightning-blue"
+}
+
 fetch_shadcn
+fetch_slds_tokens
 sparse_clone shadcn-docs      shadcn-ui/ui          main   apps/v4/content apps/v4/registry
 sparse_clone untitled-ui-react untitleduico/react    main   components hooks styles utils .storybook
 

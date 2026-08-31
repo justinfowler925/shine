@@ -174,6 +174,13 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   const voiceContrast=spawnSync(process.execPath,[join(SHINE,"verify/voice-contrast.test.mjs")],{cwd:SHINE,encoding:"utf8"});
   if(voiceContrast.status===0)ok("voice primary contrast", "Ant action fill 6.16:1; seeded gate");
   else fail("voice primary contrast",`${voiceContrast.stderr||voiceContrast.stdout}`.trim().slice(-500));
+  // SLDS 2 is authoritative for Salesforce work, so the slds voice sheet must be
+  // derived from Salesforce's published tokens rather than measured off an org.
+  const sldsTokens=spawnSync(process.execPath,[join(SHINE,"verify/slds-tokens.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  const sldsOut=`${sldsTokens.stdout||""}${sldsTokens.stderr||""}`.trim();
+  if(sldsTokens.status!==0)fail("slds voice is derived from SLDS 2",sldsOut.slice(-500));
+  else if(/NOTE:/.test(sldsOut))note("slds voice is derived from SLDS 2","no slds-tokens in the corpus — run corpus/acquire.sh");
+  else ok("slds voice is derived from SLDS 2",(sldsOut.match(/PASS: (.*)$/m)||["","derived"])[1]);
   const release=spawnSync(process.execPath,[join(SHINE,"verify/release.test.mjs")],{cwd:SHINE,encoding:"utf8"});
   if(release.status===0)ok("versioned atomic release", "immutable manifest + current pointer");
   else fail("versioned atomic release",`${release.stderr||release.stdout}`.trim().slice(-500));

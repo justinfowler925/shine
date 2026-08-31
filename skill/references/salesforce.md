@@ -30,7 +30,7 @@ npm ships both in parallel — `@salesforce-ux/design-system` dist-tags: `summer
 
 ## The token architecture
 
-`--sds-*` is dead legacy. Live namespace is `--slds-` with a **tier letter** as the second segment. Counts extracted from `@salesforce-ux/design-tokens@4.0.0`:
+`--sds-*` is dead legacy. Live namespace is `--slds-` with a **tier letter** as the second segment. Counts extracted from `@salesforce-ux/design-tokens@4.1.0`, which `corpus/acquire.sh` pins into `~/design-corpus/slds-tokens` (`fetch_slds_tokens`) and records in `corpus.lock`:
 
 | Tier | Prefix | Count | Status for us |
 |---|---|---:|---|
@@ -51,6 +51,24 @@ The chain resolves `r → g → s → c`:
 
 **This is the leverage point.** Because of that chain, overriding **17 `--slds-r-color-brand-*` steps recolors the entire accent system across every component.** The emitter's whole job for Salesforce is mapping a brand ramp onto ~85 reference tokens.
 
+### Shine's slds voice sheet is derived from this package
+
+`tokens/voices/slds.css` cites these hooks and carries the package's resolved values as
+fallbacks. `verify/slds-tokens.test.mjs` asserts every fallback still equals what the pinned
+package resolves that hook to, and the doctor runs it.
+
+It has to be checked rather than trusted, because the sheet was previously written from values
+read off one rendered org. That org was still on SLDS 1, so every fallback was wrong — a font
+family of `"Salesforce Sans"` against SLDS 2's system stack, SLDS 1's `#0176d3` brand blue,
+`#ba0517` error, `#2e844a` success — and a measured value is indistinguishable from a correct
+one by inspection.
+
+**The trap worth naming: SLDS 2 numbers its text hooks by weight, not by importance.**
+`--slds-g-color-on-surface-1` is the *lightest* ink (body copy, placeholders, field labels) and
+`--slds-g-color-on-surface-3` is the *darkest* (titles). The old sheet mapped Shine's primary ink
+to `on-surface-1` and its muted ink to `on-surface-3` — exactly inverted. Both pairs pass a
+contrast check, which is why the test asserts the mapping directly.
+
 The prohibition, verbatim from *New Global Styling Hooks Guidance*:
 
 > "We don't support overriding the values of global styling hooks in your customizations."
@@ -62,7 +80,7 @@ The prohibition, verbatim from *New Global Styling Hooks Guidance*:
 
 ## The token contract is first-class — better than most design systems ship
 
-`@salesforce-ux/design-tokens@4.0.0` (2026-06-01) ships per theme:
+`@salesforce-ux/design-tokens@4.1.0` (2026-08-08) ships per theme:
 
 - `*.global.tokens.raw.json` — DTCG-faithful (`$value`, `$type`, `$description`, `$extensions`)
 - `*.global.tokens.flat.json` — **717 entries, consumer-oriented**
