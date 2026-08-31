@@ -13,7 +13,14 @@ html[data-dna-family="spectrum"], html[data-shine-voice="kit-faithful"][data-dna
   --shine-color-fg: light-dark(#222222, #f8f8f8);            /* gray-800 / gray-50 */
   --shine-color-fg-muted: light-dark(#6d6d6d, #b9b9b9);      /* gray-600 / gray-400 */
   --shine-color-border: light-dark(#d5d5d5, #393939);        /* gray-300 / gray-700 */
-  --shine-color-primary: light-dark(#0265dc, #52b7ff);       /* indigo-900 / indigo-500 */
+  /* indigo-900 in both modes. The sheet used to swap in indigo-500 #52b7ff for
+     dark and keep white ink on top, which measures 2.19:1 — indigo-500 is an
+     emphasis/ink value, not a fill. Spectrum's dark accent FILL could not be
+     verified: the corpus clone carries the token names but not their literal
+     values (no @adobe/spectrum-tokens package pinned), so the sheet holds the
+     one value it can defend rather than a plausible-looking guess. Pin that
+     package and this becomes a two-mode pair again. */
+  --shine-color-primary: #0265dc;                            /* indigo-900, 5.39:1 on white */
   --shine-color-primary-fg: #ffffff;
   --shine-color-ring: light-dark(#0265dc, #52b7ff);
   --shine-color-danger: #d7373f;                             /* red-900 */

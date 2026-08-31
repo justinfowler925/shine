@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <!-- The demo OUTPUT of the loop (verify/fixtures/unfucked/README.md).
-     Template: carbon-datatable (corpus/packs/carbon-datatable/shot.png) — toolbar-first,
-     batch actions, full-bleed dense table, one filled primary.
-     Voice: kit-faithful carbon — ../../../tokens/voices/carbon.css. -->
-<html lang="en" data-cite="carbon-datatable" data-dna-family="carbon" data-shine-voice="kit-faithful">
+     Template: untitled-table (corpus/packs/untitled-table/shot.png) — toolbar-first,
+     the table as the focal object, visible row actions, one filled primary.
+     Voice: kit-faithful untitled — ../../../tokens/voices/untitled.css. -->
+<html lang="en" data-cite="untitled-table" data-dna-family="untitled" data-shine-voice="kit-faithful">
 <head>
 <meta charset="utf-8">
 <title>Renewals queue</title>
-<link rel="stylesheet" href="../../../tokens/voices/carbon.css">
+<link rel="stylesheet" href="../../../tokens/voices/untitled.css">
 <style>
   :root {
     color-scheme: light dark;
-    /* page token block — Carbon productive type scale (heading-03 1.25rem, label-01 0.75rem) */
-    --shine-text-xl: 1.25rem;
+    /* page token block — Untitled UI display scale (display-xs 1.5rem, text-xs 0.75rem).
+       The voice sheet carries base and sm; a page adds only the steps it uses. */
+    --shine-text-xl: 1.5rem;
     --shine-text-xs: 0.75rem;
-    --shine-tracking-caps: 0.02rem;
+    --shine-color-border-strong: var(--shine-color-fg-muted);
+    --shine-color-link: light-dark(#6941c6, #b692f6); /* brand-700 / brand-400, theme.css */
   }
   body {
     margin: 0;
@@ -26,7 +28,7 @@
   }
   main { max-width: 1440px; margin: 0 auto; padding: 24px 32px 48px; }
   .page-head { padding: 16px 0 8px; }
-  .page-head h1 { font-size: var(--shine-text-xl); font-weight: 400; margin: 0; letter-spacing: var(--shine-tracking-base, 0); }
+  .page-head h1 { font-size: var(--shine-text-xl); font-weight: 600; margin: 0; letter-spacing: var(--shine-tracking-base, 0); }
   .page-head p { color: var(--shine-color-fg-muted); margin: 4px 0 0; }
   .toolbar { display: flex; align-items: center; gap: 8px; margin-top: 16px; background: var(--shine-color-bg-subtle); padding: 0; }
   .toolbar input[type="search"] {
@@ -66,7 +68,7 @@
 </style>
 </head>
 <body>
-<main data-cite="carbon-datatable">
+<main data-cite="untitled-table">
   <header class="page-head">
     <h1>Renewals queue</h1>
     <p>5 renewals in the next 30 days · $520,450 total</p>

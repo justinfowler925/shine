@@ -13,7 +13,10 @@ html[data-dna-family="mantine"], html[data-shine-voice="kit-faithful"][data-dna-
   --shine-color-fg: light-dark(#212529, #c1c2c5);
   --shine-color-fg-muted: light-dark(#868e96, #909296);
   --shine-color-border: light-dark(#dee2e6, #373a40);
-  --shine-color-primary: #228be6;                            /* blue[6] */
+  /* blue[6] #228be6 is Mantine's default filled-button fill and measures 3.56:1
+     against white — an AA failure the old single-sheet contrast test never looked
+     at. blue[8] is the same ramp (default-colors.ts) at 5.02:1. */
+  --shine-color-primary: #1971c2;                            /* blue[8] */
   --shine-color-primary-fg: #ffffff;
   --shine-color-ring: #228be6;
   --shine-color-danger: #fa5252;                             /* red[6] */

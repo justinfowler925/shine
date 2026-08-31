@@ -2,7 +2,7 @@
 
 Regions, in order. Host: application shell (`shadcn-sidebar-*` supplies the frame). Density: comfortable. Paint: `tokens/voices/shadcn-zinc.css`. Authored source: `corpus/blueprints/shadcn-settings/page.tsx`.
 
-shadcn ships no settings block. The corpus's only settings rows are `antd-pro-settings` and `fluent-nav`, and both are structurally misleading for this job — see Do not.
+shadcn ships no settings block. Since Ant Design Pro was deleted on 2026-08-31 (`docs/no-foreign-runtimes.md`), the corpus's other settings row is `fluent-nav`, which is a nav component rather than a settings page — see Do not.
 
 A settings page is a form whose defining problem is *findability*, not layout. The reader arrives to change exactly one thing and does not know which section it lives in. Every decision below serves that.
 
@@ -21,7 +21,7 @@ A settings page is a form whose defining problem is *findability*, not layout. T
 
 ## Do not
 
-- `antd-pro-settings` ported class-for-class. It is a tabbed *account* page; tabs hide the section names, which is the one thing this page cannot afford to hide.
+- A tabbed *account* page ported class-for-class (the shape the deleted Ant Design Pro row carried). Tabs hide the section names, which is the one thing this page cannot afford to hide.
 - `fluent-nav` as a settings reference. It is a navigation shell that happens to be filed under settings; it has no field rows at all.
 - A card per field. Twelve cards read as twelve equal-weight decisions and triple the page's height.
 - One global save for the whole page.

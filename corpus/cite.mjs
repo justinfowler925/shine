@@ -141,7 +141,7 @@ if (explained.length) {
 if (retrieval.gaps.length) { out.push(``); out.push(`Catalog gaps: ${retrieval.gaps.join("; ")}`); }
 out.push(``);
 out.push(`Copy the regions from the source; paint with the voice sheet / kit tokens (or house/brand lane). references/voices.md.`);
-out.push(`Integration: node ${join(SHINE, "integrations/resolve.mjs")} --project <consumer-root> --kit ${family === "material" ? "mui" : family === "ant" ? "ant" : family === "carbon" ? "carbon" : family === "shadcn-zinc" ? "shadcn-tanstack" : "native"}`);
+out.push(`Integration: node ${join(SHINE, "integrations/resolve.mjs")} --project <consumer-root> --kit ${family === "shadcn-zinc" ? "shadcn-tanstack" : "native"}`);
 out.push(`Scaffold: node ${join(SHINE, "integrations/scaffold.mjs")} --project <consumer-root> --out <destination>`);
 process.stdout.write(out.join("\n") + "\n");
 process.exit(0);

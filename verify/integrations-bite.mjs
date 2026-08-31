@@ -18,7 +18,7 @@ const check = (name, source, reason) => {
   console.log(`integration bite PASS: ${name} · exit=${run.status}`);
 };
 try {
-  for (const kit of ["mui", "carbon", "ant", "shadcn-tanstack"]) {
+  for (const kit of ["shadcn-tanstack"]) {
     const generated = join(dir, kit);
     const { source } = scaffold(fixture, generated, kit);
     const file = join(generated, "ShineDataGrid.tsx");
@@ -30,8 +30,11 @@ try {
     for(const state of ["loading","empty","error","populated"])if(!contract.requiredStates.includes(state))throw new Error(`${kit}: contract omitted ${state}`);
     console.log(`integration scaffold PASS: ${kit} · genuine package typecheck`);
   }
-  check("renamed-api", `import { InventedDataGrid } from "@mui/x-data-grid"; export const grid = <InventedDataGrid />;`, /no exported member.*InventedDataGrid/i);
-  check("missing-package", `import { MissingTable } from "@carbon/not-a-package"; export const grid = <MissingTable />;`, /Cannot find module.*@carbon\/not-a-package/i);
+  // Seeded failures run against the runtime Shine actually recommends. They used
+  // to import @mui/x-data-grid and @carbon/react, which meant proving the gate
+  // bites required installing two runtimes no consumer builds against.
+  check("renamed-api", `import { InventedTableFeature } from "@tanstack/react-table"; export const feature = InventedTableFeature;`, /no exported member.*InventedTableFeature/i);
+  check("missing-package", `import { MissingTable } from "@tanstack/not-a-package"; export const grid = <MissingTable />;`, /Cannot find module.*@tanstack\/not-a-package/i);
 } finally {
   rmSync(dir, { recursive: true, force: true });
 }

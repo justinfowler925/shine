@@ -4,8 +4,12 @@
      theme-color hexes are rendered-pixel readbacks of --bg. Nothing here bypasses
      a token; this file is where the tokens live.
      Scoped to `color`. Type, tracking, shadow and spacing stay enforced.
-     Kit paint: mui-blog / material createPalette light (blue[700] #1976d2). -->
-<html lang="en" data-theme="light" data-cite="mui-blog" data-dna-family="material" data-dna-chroma="medium" data-shine-voice="kit-faithful" data-shine-lane="marketing">
+     Kit paint: shadcn-blog / shadcn new-york zinc (tokens/voices/shadcn-zinc.css,
+     zinc ramp from tailwindcss theme.css). This page cited mui-blog and painted
+     Material until 2026-08-31, when MUI, Ant and Carbon were deleted from the
+     corpus (docs/no-foreign-runtimes.md). A page cannot cite a row that no longer
+     exists, so it was re-cited and repainted. -->
+<html lang="en" data-theme="light" data-cite="shadcn-blog" data-dna-family="shadcn-zinc" data-dna-chroma="low" data-shine-voice="kit-faithful" data-shine-lane="marketing">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +18,7 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 @layer reset, base, layout, components;
 
@@ -31,15 +35,15 @@
     --bg: #ffffff;
     --bg-hex: #ffffff;
     --surface: #ffffff;
-    --fg: rgba(0, 0, 0, 0.87);
-    --fg-muted: rgba(0, 0, 0, 0.6);
-    --border: rgba(0, 0, 0, 0.12);
-    --primary: #1976d2;
-    --primary-fg: #ffffff;
+    --fg: #09090b;
+    --fg-muted: #52525b;
+    --border: #e4e4e7;
+    --primary: #18181b;
+    --primary-fg: #fafafa;
     --glow: color-mix(in srgb, var(--primary) 18%, transparent);
 
-    --font: "Roboto", system-ui, sans-serif;
-    --mono: "Roboto Mono", ui-monospace, Menlo, monospace;
+    --font: "Geist", ui-sans-serif, system-ui, sans-serif;
+    --mono: "Geist Mono", ui-monospace, Menlo, monospace;
 
     --t-xs: 0.75rem;
     --t-sm: 0.875rem;
@@ -53,7 +57,7 @@
     --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem;
     --s-6: 1.5rem; --s-8: 2rem; --s-12: 3rem; --s-16: 4rem; --s-24: 6rem;
 
-    --r-control: 8px;
+    --r-control: 6px;
     --r-card: 12px;
     --r-bar: 12px;
 
@@ -64,14 +68,14 @@
 
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --bg: #121212;
-    --bg-hex: #121212;
-    --surface: #1e1e1e;
-    --fg: rgba(255, 255, 255, 0.87);
-    --fg-muted: rgba(255, 255, 255, 0.7);
-    --border: rgba(255, 255, 255, 0.12);
-    --primary: #90caf9;
-    --primary-fg: #121212;
+    --bg: #09090b;
+    --bg-hex: #09090b;
+    --surface: #18181b;
+    --fg: #fafafa;
+    --fg-muted: #a1a1aa;
+    --border: #27272a;
+    --primary: #fafafa;
+    --primary-fg: #18181b;
     --glow: color-mix(in srgb, var(--primary) 22%, transparent);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.24), 0 12px 32px -8px rgba(0, 0, 0, 0.48);
   }
@@ -336,7 +340,7 @@
 <body>
 
 <div class="bar-wrap">
-<header class="bar" data-cite="mui-blog">
+<header class="bar" data-cite="shadcn-blog">
   <a class="brand" href="/">Shine</a>
   <nav aria-label="Site">
     <a href="/r/">Registry</a>
@@ -346,20 +350,20 @@
 </header>
 </div>
 
-<main class="article" data-cite="mui-blog" data-job="what it is, how it works" data-region="focal">
+<main class="article" data-cite="shadcn-blog" data-job="what it is, how it works" data-region="focal">
   <p class="eyebrow">Shine · Claude Code and Cursor</p>
   <h1>Your agent copies a real designed page.</h1>
   <p class="lede">Shine is the UX skill that makes it match a template from a real kit — then prove the pixels. Look, name, match, restructure, repaint, prove.</p>
 
-  <figure class="pair" data-cite="mui-blog">
+  <figure class="pair" data-cite="shadcn-blog">
     <div class="pair-grid">
       <figure class="shot">
         <img src="img/demo/costume.png" width="1280" height="900" alt="Generated renewals workspace: greeting hero, three glow pills, renewals as cards" decoding="async">
         <figcaption>The costume. Prompted. Three primaries. The job is buried in cards.</figcaption>
       </figure>
       <figure class="shot">
-        <img src="img/demo/directed.png" width="1280" height="900" alt="Same renewals queue after citing Carbon: page head, toolbar, table, one filled primary" decoding="async">
-        <figcaption>Same job, cited <code>carbon-datatable</code>. One primary. The work is a table.</figcaption>
+        <img src="img/demo/directed.png" width="1280" height="900" alt="Same renewals queue after citing Untitled UI: page head, toolbar, table, one filled primary" decoding="async">
+        <figcaption>Same job, cited <code>untitled-table</code>. One primary. The work is a table.</figcaption>
       </figure>
     </div>
   </figure>
@@ -367,16 +371,16 @@
   <p>You already know the other look. Gray canvas. Inter. A rounded card. A blue button. Ask for Linear. Ask for “expensive.” Ask for a briefing a CEO would actually open. You get the same costume with a new label. Prompting over it does nothing. The model paints with whatever the library left on the floor.</p>
 
   <h2>What it is</h2>
-  <p>A director, not a palette. Shine is a skill for Claude Code and Cursor: a design system the agent cannot shrug off, and a director that looks at the rendered page. Harvested kit screens (shadcn, MUI, Ant, Carbon, Spectrum, Fluent) plus Lightning blueprints with vendor shots. Query-only kits stay query-only. Hooks that block off-token writes. None of that is interesting until the next briefing looks like a briefing.</p>
+  <p>A director, not a palette. Shine is a skill for Claude Code and Cursor: a design system the agent cannot shrug off, and a director that looks at the rendered page. Harvested kit screens (shadcn, Untitled UI, Spectrum, Fluent, Magic UI) plus Lightning blueprints with vendor shots. Query-only kits stay query-only. Kits that carry their own runtime are not carried at all. Hooks that block off-token writes. None of that is interesting until the next briefing looks like a briefing.</p>
   <p>The product is the loop. Before a pixel, the agent opens a page that already solved the job. It names what is wrong in UX terms. It matches one of those templates, clones that page’s regions, and paints with that kit’s own tokens. Then measure and compare have to agree, or the build is not done.</p>
-  <div class="catalog" data-cite="mui-blog">
+  <div class="catalog" data-cite="shadcn-blog">
     <figure class="shot">
-      <img src="img/catalog/carbon-datatable.png" width="1280" height="900" alt="Carbon DataTable harvest: toolbar, batch actions, dense table, one Add new primary" decoding="async">
-      <figcaption>Carbon · queue</figcaption>
+      <img src="img/catalog/untitled-table.png" width="1280" height="900" alt="Untitled UI table harvest: toolbar, sortable headers, populated rows, row actions" decoding="async">
+      <figcaption>Untitled UI · queue</figcaption>
     </figure>
     <figure class="shot">
-      <img src="img/catalog/mui-dashboard.png" width="1280" height="900" alt="MUI dashboard harvest: sidebar, metric cards, session chart, details table" decoding="async">
-      <figcaption>Material · dashboard</figcaption>
+      <img src="img/catalog/shadcn-sidebar-07.png" width="1280" height="900" alt="shadcn sidebar-07 harvest: collapsible rail, breadcrumb header, content workspace" decoding="async">
+      <figcaption>shadcn · app shell</figcaption>
     </figure>
     <figure class="shot">
       <img src="img/catalog/shadcn-dashboard-01.png" width="1280" height="900" alt="shadcn dashboard harvest: sidebar, KPI row, visitors chart, section table" decoding="async">
@@ -385,7 +389,7 @@
   </div>
 
   <h2>How it works</h2>
-  <figure class="loop" data-cite="mui-blog">
+  <figure class="loop" data-cite="shadcn-blog">
     <p class="eyebrow">The loop</p>
     <ol>
       <li><div><strong>Look</strong><span>Render the page. Read the pixels, not the source.</span></div></li>
@@ -396,7 +400,13 @@
       <li><div><strong>Prove</strong><span>axe, contrast 4.5:1 (3:1 at 24px), composition, and a side-by-side against the harvested shot. No likeness score.</span></div></li>
     </ol>
   </figure>
-  <p>Gates catch invented hex. They do not catch the costume. A page can hit every token and still look generated — completeness is not likeness. Prove is pixels: <code>measure.mjs</code> and <code>compare.mjs</code> against the cite, not a number the page awards itself. This page cites <code>mui-blog</code> and paints with Material. That is the point.</p>
+  <p>Gates catch invented hex. They do not catch the costume. A page can hit every token and still look generated — completeness is not likeness. Prove is pixels: <code>measure.mjs</code> and <code>compare.mjs</code> against the cite, not a number the page awards itself. This page cites <code>shadcn-blog</code> and paints with zinc. That is the point.</p>
+
+  <h2 id="one-runtime">One runtime, or none</h2>
+  <p>On 31 August 2026 Shine deleted MUI, Ant Design Pro and IBM Carbon outright — 15 harvested packs, 4 corpus clones, 3 voice sheets, 17 catalog rows and every reference that pointed at them. Not retired, not down-ranked: gone from disk. Both consumers of this skill are shadcn/Tailwind repos, so a reference built on another kit's runtime and theming is a page nobody can build. Handing an agent a page it cannot build teaches it costume — copy the look, skip the mechanism — which is the exact failure the loop exists to stop.</p>
+  <p>The cost is stated rather than hidden. Marketing, checkout and wizard lost their only rendered pixels and are now region maps: structure without a shot, and the doctor names them as structure-only every run. What replaced the deleted rows is a blueprint per screen, written against what shadcn actually publishes.</p>
+  <p>Generalising the checks that had been written around those kits found four more defects that had nothing to do with them: Mantine, SLDS, Spectrum and Tremor were each shipping an action colour that failed AA against its own label — 3.56:1, 2.19:1, 2.19:1 and 3.68:1. The contrast law had only ever been proven on one sheet. It now runs over every sheet on disk, in every mode a sheet declares.</p>
+  <p><a href="https://github.com/justinfowler925/shine/blob/main/docs/no-foreign-runtimes.md">Read the write-up →</a></p>
 
   <h2 id="install">This afternoon</h2>
   <p>Clone the repo. Build an immutable release, then point Codex and the Cursor compatibility links at its atomic <code>current</code> pointer. Run <code>node verify/doctor.mjs</code>. The browser-free <code>--ci</code> gate enforces at least 111 checks; environment-specific checks are reported separately as notes. <code>--ci --full</code> adds browser interaction, visual proof, real component runtimes, and designated consumers. The native skill is 56 lines. Tokens emit to nine targets: CSS, Tailwind, artifacts, Python, site CSS, email, Docs, Office, Salesforce. The listing below is generated from disk.</p>
@@ -414,16 +424,16 @@
     color-type.md              217
     contracts.md               376
     copy.md                    148
-    corpus.md                  109
+    corpus.md                  110
     dashboards.md              220
     dataviz.md                 126
-    diagnose.md                126
+    diagnose.md                127
     direction.md                52
-    ecosystem.md               154
+    ecosystem.md               151
     foundations.md             193
     imagegen.md                 60
     interaction.md              43
-    kits.md                    119
+    kits.md                    118
     layout.md                   29
     motion.md                  223
     patterns.md                213
@@ -431,19 +441,19 @@
     salesforce.md              238
     taste.md                   224
     techniques.md               90
-    templates.md               159
+    templates.md               153
     usability.md                32
     verification.md            280
     voice.md                   119
     voices.md                   46
     wireframe.md               200
-                            <strong>4,615</strong></pre>
+                            <strong>4,607</strong></pre>
   </figure>
 </main>
 
 <footer>
   <div class="inner">
-    <p>August 2026 · <a href="https://github.com/justinfowler925/shine/releases/tag/v2.0.0">v2.0.0</a> · cite <code>mui-blog</code> · voice kit-faithful · <a href="https://github.com/justinfowler925/shine">GitHub</a></p>
+    <p>August 2026 · <a href="https://github.com/justinfowler925/shine/releases/tag/v2.0.0">v2.0.0</a> · cite <code>shadcn-blog</code> · voice kit-faithful · <a href="https://github.com/justinfowler925/shine">GitHub</a></p>
     <p>The skill listing is generated from disk. Public copy is a claim — checked against SKILL.md, the catalog, and measure.</p>
   </div>
 </footer>
@@ -455,7 +465,7 @@
     root.classList.add('no-anim');
     root.dataset.theme = m;
     btn.textContent = m === 'dark' ? 'Light' : 'Dark';
-    document.querySelector('meta[name=theme-color]').content = getComputedStyle(root).getPropertyValue('--bg-hex').trim() || (m === 'dark' ? '#121212' : '#ffffff');
+    document.querySelector('meta[name=theme-color]').content = getComputedStyle(root).getPropertyValue('--bg-hex').trim() || (m === 'dark' ? '#09090b' : '#ffffff');
     try { localStorage.setItem('theme', m); } catch (e) {}
     requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('no-anim')));
   };

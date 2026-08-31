@@ -172,7 +172,7 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   if(productionAgent.status===0)ok("production agent benchmark contract", "dual entry discovery; 11 fail paths bite 20/20");
   else fail("production agent benchmark contract",`${productionAgent.stderr||productionAgent.stdout}`.trim().slice(-500));
   const voiceContrast=spawnSync(process.execPath,[join(SHINE,"verify/voice-contrast.test.mjs")],{cwd:SHINE,encoding:"utf8"});
-  if(voiceContrast.status===0)ok("voice primary contrast", "Ant action fill 6.16:1; seeded gate");
+  if(voiceContrast.status===0)ok("voice primary contrast", "every voice sheet's action fill measured; seeded gate");
   else fail("voice primary contrast",`${voiceContrast.stderr||voiceContrast.stdout}`.trim().slice(-500));
   // SLDS 2 is authoritative for Salesforce work, so the slds voice sheet must be
   // derived from Salesforce's published tokens rather than measured off an org.
@@ -539,7 +539,7 @@ if (!CI) {
   const uncited = join(dir, "page.html");
   const cited = join(dir, "cited.html");
   writeFileSync(uncited, "<!doctype html><html><body><div>hi</div></body></html>\n");
-  writeFileSync(cited, '<!doctype html><html><body><main data-cite="carbon-datatable">ok</main></body></html>\n');
+  writeFileSync(cited, '<!doctype html><html><body><main data-cite="untitled-table">ok</main></body></html>\n');
   if (!citeGaps([uncited]).length) fail("cite gate bites", "uncited page.html was allowed");
   else ok("cite gate bites", "page without data-cite is a gap");
   if (citeGaps([cited]).length) fail("cite gate allows a cited page", "data-cite still flagged");
@@ -548,57 +548,57 @@ if (!CI) {
   process.env.SHINE_RECEIPT = join(dir, "last-prove.json");
   const proofShot = join(dir, "template.png");
   writeFileSync(proofShot, "template pixels");
-  const citedClaim = artifactClaim(cited, "carbon-datatable");
+  const citedClaim = artifactClaim(cited, "untitled-table");
   const receiptProof = { structureFingerprint: "doctor-fixture" };
   if (!proveGaps([citedClaim]).length) fail("prove gate bites", "missing receipt was allowed");
   else ok("prove gate bites", "no compare.mjs receipt is a gap");
-  writeProveReceipt({ cite: "carbon-datatable", target: cited, templateShot: proofShot, proof: receiptProof });
+  writeProveReceipt({ cite: "untitled-table", target: cited, templateShot: proofShot, proof: receiptProof });
   if (proveGaps([citedClaim]).length) fail("prove gate accepts a receipt", "fresh artifact receipt still flagged");
   else ok("prove gate accepts a receipt", "compare.mjs receipt matches artifact + cite + hash");
 
   writeFileSync(cited, readFileSync(cited, "utf8") + "<!-- changed -->\n");
-  if (/changed after compare/.test(proveGaps([artifactClaim(cited, "carbon-datatable")]).join("\n")))
+  if (/changed after compare/.test(proveGaps([artifactClaim(cited, "untitled-table")]).join("\n")))
     ok("prove gate bites after artifact mutation");
   else fail("prove gate bites after artifact mutation", "mutated artifact reused an old receipt");
-  writeFileSync(cited, '<!doctype html><html><body><main data-cite="carbon-datatable">ok</main></body></html>\n');
-  writeProveReceipt({ cite: "carbon-datatable", target: cited, templateShot: proofShot, proof: receiptProof });
+  writeFileSync(cited, '<!doctype html><html><body><main data-cite="untitled-table">ok</main></body></html>\n');
+  writeProveReceipt({ cite: "untitled-table", target: cited, templateShot: proofShot, proof: receiptProof });
 
   const second = join(dir, "second file.html");
-  writeFileSync(second, '<!doctype html><html><body><main data-cite="carbon-datatable">two</main></body></html>\n');
-  if (/no compare/.test(proveGaps([artifactClaim(second, "carbon-datatable")]).join("\n")))
+  writeFileSync(second, '<!doctype html><html><body><main data-cite="untitled-table">two</main></body></html>\n');
+  if (/no compare/.test(proveGaps([artifactClaim(second, "untitled-table")]).join("\n")))
     ok("prove gate binds one receipt per artifact");
   else fail("prove gate binds one receipt per artifact", "one file's receipt blessed a sibling");
 
-  if (/no compare/.test(proveGaps([artifactClaim(cited, "antd-pro-crud")]).join("\n")))
+  if (/no compare/.test(proveGaps([artifactClaim(cited, "shadcn-dashboard-01")]).join("\n")))
     ok("prove gate binds the cited template");
   else fail("prove gate binds the cited template", "receipt for one cite blessed another");
 
   const store = readProveReceipt();
   store.receipts[0].at = Date.now() + 120_000;
   writeFileSync(process.env.SHINE_RECEIPT, JSON.stringify(store));
-  if (/future-dated/.test(proveGaps([artifactClaim(cited, "carbon-datatable")]).join("\n")))
+  if (/future-dated/.test(proveGaps([artifactClaim(cited, "untitled-table")]).join("\n")))
     ok("prove gate rejects future receipts");
   else fail("prove gate rejects future receipts", "future receipt was accepted");
-  writeProveReceipt({ cite: "carbon-datatable", target: cited, templateShot: proofShot, proof: receiptProof });
+  writeProveReceipt({ cite: "untitled-table", target: cited, templateShot: proofShot, proof: receiptProof });
 
   writeFileSync(proofShot, "different template pixels");
-  if (/template shot changed/.test(proveGaps([artifactClaim(cited, "carbon-datatable")]).join("\n")))
+  if (/template shot changed/.test(proveGaps([artifactClaim(cited, "untitled-table")]).join("\n")))
     ok("prove gate binds template pixels");
   else fail("prove gate binds template pixels", "changed template pixels reused an old receipt");
   writeFileSync(proofShot, "template pixels");
-  writeProveReceipt({ cite: "carbon-datatable", target: cited, templateShot: proofShot, proof: receiptProof });
+  writeProveReceipt({ cite: "untitled-table", target: cited, templateShot: proofShot, proof: receiptProof });
 
   const stale = readProveReceipt();
   stale.receipts[0].at = Date.now() - 21 * 60 * 1000;
   writeFileSync(process.env.SHINE_RECEIPT, JSON.stringify(stale));
-  if (/stale/.test(proveGaps([artifactClaim(cited, "carbon-datatable")]).join("\n")))
+  if (/stale/.test(proveGaps([artifactClaim(cited, "untitled-table")]).join("\n")))
     ok("prove gate rejects stale receipts");
   else fail("prove gate rejects stale receipts", "expired proof was accepted");
   writeFileSync(process.env.SHINE_RECEIPT, "{not json");
-  if (/no artifact-bound/.test(proveGaps([artifactClaim(cited, "carbon-datatable")]).join("\n")))
+  if (/no artifact-bound/.test(proveGaps([artifactClaim(cited, "untitled-table")]).join("\n")))
     ok("prove gate rejects malformed receipts");
   else fail("prove gate rejects malformed receipts", "malformed proof was accepted");
-  writeProveReceipt({ cite: "carbon-datatable", target: cited, templateShot: proofShot, proof: receiptProof });
+  writeProveReceipt({ cite: "untitled-table", target: cited, templateShot: proofShot, proof: receiptProof });
   delete process.env.SHINE_RECEIPT;
 
   // Stop sweep, both surfaces, over a real git repo.
@@ -620,7 +620,7 @@ if (!CI) {
 
   const proveDir = mkdtempSync(join(tmpdir(), "shine-prove-"));
   const proveHtml = join(proveDir, "app.html");
-  writeFileSync(proveHtml, '<!doctype html><html><body><main data-cite="carbon-datatable">ok</main></body></html>\n');
+  writeFileSync(proveHtml, '<!doctype html><html><body><main data-cite="untitled-table">ok</main></body></html>\n');
   const gitP = (...a) => spawnSync("git", a, { cwd: proveDir, encoding: "utf8" });
   gitP("init", "-q", ".");
   gitP("add", "-A");
@@ -635,7 +635,7 @@ if (!CI) {
   if (noProve.status === 2 && /compare\.mjs/.test(noProve.stderr)) ok("stop sweep requires prove", "cited page without compare is blocked");
   else fail("stop sweep requires prove", `exit ${noProve.status}: ${(noProve.stderr || noProve.stdout).slice(0, 160)}`);
   process.env.SHINE_RECEIPT = rec;
-  writeProveReceipt({ cite: "carbon-datatable", target: proveHtml, templateShot: proofShot, proof: receiptProof });
+  writeProveReceipt({ cite: "untitled-table", target: proveHtml, templateShot: proofShot, proof: receiptProof });
   delete process.env.SHINE_RECEIPT;
   const yesProve = feedProve({ hook_event_name: "stop", conversation_id: "doctor" });
   if (yesProve.status === 0) ok("stop sweep accepts a proved cite", "receipt present");
@@ -902,7 +902,7 @@ if (FULL) {
 
   const prettyTable = join(SHINE, "verify/fixtures/pretty-empty-table.html");
   const fullTable = join(SHINE, "verify/fixtures/full-table.html");
-  const carbonShadcn = join(SHINE, "verify/fixtures/carbon-as-shadcn.html");
+  const untitledShadcn = join(SHINE, "verify/fixtures/untitled-as-shadcn.html");
   const marketingShell = join(SHINE, "verify/fixtures/marketing-as-appshell.html");
 
   const pretty = run(prettyTable);
@@ -968,13 +968,13 @@ if (FULL) {
   else fail("DataGrid gate ignores explicit presentation table", presentationRun.stderr.match(/contract:.*/)?.[0] ?? "");
 
   const runCite = (f, id) => spawnSync("node", [measure, f, "--cite", id], { encoding: "utf8", env: { ...process.env, NODE_PATH } });
-  const fakeCarbon = runCite(carbonShadcn, "carbon-datatable");
-  if (fakeCarbon.status === 1 && /likeness: carbon cite/.test(fakeCarbon.stderr))
-    ok("likeness gate fails carbon-as-shadcn");
+  const fakeUntitled = runCite(untitledShadcn, "untitled-table");
+  if (fakeUntitled.status === 1 && /likeness: untitled cite/.test(fakeUntitled.stderr))
+    ok("likeness gate fails untitled-as-shadcn");
   else
     fail(
-      "likeness gate fails carbon-as-shadcn",
-      `exit ${fakeCarbon.status}; stderr ${JSON.stringify(fakeCarbon.stderr.slice(-220))}`,
+      "likeness gate fails untitled-as-shadcn",
+      `exit ${fakeUntitled.status}; stderr ${JSON.stringify(fakeUntitled.stderr.slice(-220))}`,
     );
 
   const fakeMkt = runCite(marketingShell, "magicui-hero");
@@ -1007,7 +1007,7 @@ if (FULL) {
   const mktEx = join(SHINE, "verify/fixtures/marketing.html");
   const qJson = join(dir, "queue.json");
   const mJson = join(dir, "marketing.json");
-  const qRun = spawnSync("node", [measure, queueEx, "--cite", "carbon-datatable", "--json", qJson], {
+  const qRun = spawnSync("node", [measure, queueEx, "--cite", "untitled-table", "--json", qJson], {
     encoding: "utf8",
     env: { ...process.env, NODE_PATH },
   });
@@ -1030,7 +1030,7 @@ if (FULL) {
       !mj.compose?.tableContract &&
       mHead >= 32 &&
       mHead - qHead >= 12 &&
-      /carbon/i.test(qj.compose?.dnaFamily || "") &&
+      /untitled/i.test(qj.compose?.dnaFamily || "") &&
       /magicui/i.test(mj.compose?.dnaFamily || "");
     if (split) ok("acceptance screens distinguishable");
     else
@@ -1162,12 +1162,15 @@ if (FULL) {
     const corpusReady = existsSync(join(HOME, "design-corpus"));
     const dashPack = existsSync(join(SHINE, "corpus/packs/shadcn-dashboard-01/source"));
     if (corpusReady || dashPack) {
-      const blog = spawnSync(process.execPath, [cite, "mui-blog"], { encoding: "utf8" });
+      // The blog screen's only row used to be MUI's. Deleting MUI would have deleted
+      // the screen, which is the catalog hole diagnose.md rates Critical, so the
+      // blueprint carries it and this check is what stops it going missing again.
+      const blog = spawnSync(process.execPath, [cite, "blog"], { encoding: "utf8" });
       const out = `${blog.stdout || ""}${blog.stderr || ""}`;
-      if (blog.status !== 0) fail("cite.mjs mui-blog", `exit ${blog.status}: ${(blog.stderr || "").slice(0, 200)}`);
-      else if (!/Template: mui-blog/.test(out) || !/Blog\.tsx/.test(out))
-        fail("cite.mjs mui-blog", "did not print Template: mui-blog + Blog.tsx to open");
-      else ok("cite.mjs mui-blog", "lists Blog.tsx to open");
+      if (blog.status !== 0) fail("cite.mjs blog", `exit ${blog.status}: ${(blog.stderr || "").slice(0, 200)}`);
+      else if (!/Template: shadcn-blog/.test(out))
+        fail("cite.mjs blog", "blog screen has no row — the catalog hole is back");
+      else ok("cite.mjs blog", "shadcn-blog region map");
 
       const dash = spawnSync(process.execPath, [cite, "dashboard"], { encoding: "utf8" });
       const dout = `${dash.stdout || ""}${dash.stderr || ""}`;
@@ -1188,17 +1191,17 @@ if (FULL) {
       // Synonyms: "settings page" used to be an unknown token (exact-match lexicon).
       const syn = spawnSync(process.execPath, [cite, "settings page"], { encoding: "utf8" });
       const sout = `${syn.stdout || ""}${syn.stderr || ""}`;
-      if (syn.status !== 0 || !/Template: antd-pro-settings|Template: fluent-nav/.test(sout))
+      if (syn.status !== 0 || !/Template: shadcn-settings|Template: fluent-nav/.test(sout))
         fail("cite.mjs resolves plain words", `"settings page" → exit ${syn.status}: ${sout.slice(0, 160)}`);
       else ok("cite.mjs resolves plain words", (sout.match(/Template: (\S+)/) || [])[1]);
 
       const queue = spawnSync(process.execPath, [cite, "queue"], { encoding: "utf8" });
       const qout = `${queue.stdout || ""}${queue.stderr || ""}`;
       if (queue.status !== 0) fail("cite.mjs queue", `exit ${queue.status}: ${qout.slice(0, 200)}`);
-      else if (/sidebar-07/.test(qout) && !/untitled-table|antd-pro-list/.test(qout))
+      else if (/sidebar-07/.test(qout) && !/untitled-table|shadcn-dashboard-01/.test(qout))
         fail("cite.mjs queue", "returned an app-shell instead of a queue page");
-      else if (!/untitled-table|antd-pro-list/.test(qout))
-        fail("cite.mjs queue", "expected untitled-table or antd-pro-list");
+      else if (!/untitled-table|shadcn-dashboard-01/.test(qout))
+        fail("cite.mjs queue", "expected untitled-table or shadcn-dashboard-01");
       else ok("cite.mjs queue", (qout.match(/Template: (\S+)/) || [])[1] || "queue page");
 
       const lex = spawnSync(process.execPath, [cite, "lightning record"], { encoding: "utf8" });
@@ -1215,7 +1218,7 @@ if (FULL) {
 
   const pins = [
     "mantine", "chakra-ui", "heroui", "heroui-next-app", "headlessui",
-    "tremor", "blueprint", "park-ui", "rsuite", "grommet", "ant-design-pro",
+    "tremor", "blueprint", "park-ui", "rsuite", "grommet",
     "untitled-ui-react",
   ];
   const missingPins = pins.filter((p) => !new RegExp(`sparse_clone ${p}\\b|full_clone\\s+${p}\\b`).test(acquire));
@@ -1226,12 +1229,18 @@ if (FULL) {
   else {
     const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
     const required = catalog.requiredScreenTypes ?? ["dashboard", "marketing", "auth", "checkout", "app-shell", "crud"];
-    const missingScreens = required.filter((s) => !(catalog.templates ?? []).some((t) => t.screen === s));
+    // Coverage is by JOB, not by the screen field. shadcn-dashboard-01 is screen
+    // "dashboard" and carries the crud/queue/records jobs, which is how those
+    // screens survived deleting the MUI and Ant admin pages. Asking only about
+    // t.screen would report a hole that the retrieval layer does not have.
+    const live = (catalog.templates ?? []).filter((t) => t.selectable !== false);
+    const covers = (t, s) => t.screen === s || (t.jobs || []).includes(s);
+    const missingScreens = required.filter((s) => !live.some((t) => covers(t, s)));
     if (missingScreens.length) fail("catalog required screens", `no start-from for: ${missingScreens.join(", ")}`);
     else ok("catalog required screens", required.join(", "));
 
     const missingDefault = required.filter(
-      (s) => !(catalog.templates ?? []).some((t) => t.screen === s && t.startFrom === 1),
+      (s) => !live.some((t) => covers(t, s) && t.startFrom === 1),
     );
     if (missingDefault.length) fail("catalog startFrom:1", `no default row for: ${missingDefault.join(", ")}`);
     else ok("catalog startFrom:1", required.join(", "));
@@ -1240,7 +1249,7 @@ if (FULL) {
     if (noDna.length) fail("catalog DNA", `${noDna.length} rows missing dna.family (${noDna.slice(0, 3).map((t) => t.id).join(", ")})`);
     else ok("catalog DNA", `${(catalog.templates ?? []).length} rows`);
 
-    const kitPages = ["carbon", "mantine", "magicui", "fluentui", "react-spectrum", "untitled-ui-react"];
+    const kitPages = ["mantine", "magicui", "fluentui", "react-spectrum", "untitled-ui-react"];
     const missingKits = kitPages.filter((k) => !(catalog.templates ?? []).some((t) => t.kit === k));
     if (missingKits.length) fail("catalog kit pages", `no cite-able page for: ${missingKits.join(", ")}`);
       else ok("catalog kit pages", kitPages.join(", "));
@@ -1249,7 +1258,7 @@ if (FULL) {
     const packsDir = join(SHINE, "corpus/packs");
     const seed = mkdtempSync(join(tmpdir(), "shine-pack-"));
     writeFileSync(join(seed, "shot.png"), Buffer.alloc(31_000));
-    const seedHits = inspectPack(seed, "carbon");
+    const seedHits = inspectPack(seed, "untitled");
     if (!seedHits.some((s) => /source/.test(s)) || !seedHits.some((s) => /tokens\.css/.test(s)))
       fail("pack inspector bites", `seed without source/tokens passed: ${seedHits.join("; ") || "clean"}`);
     else ok("pack inspector bites", seedHits.join("; "));
@@ -1268,7 +1277,12 @@ if (FULL) {
       else if (broken.length) fail("harvested packs are a payload", broken.slice(0, 8).join("; "));
       else ok("harvested packs are a payload", `${packDirs.length} packs with shot + source + tokens + provenance manifests`);
 
-      for (const id of ["mui-crud-dashboard", "antd-pro-crud"]) {
+      // The two packs that used to prove this were MUI's and Ant's multi-file
+      // React trees, deleted on 2026-08-31. untitled-table is the corpus's
+      // remaining entrypoint-declared source pack; the algorithm's cycle and
+      // missing-entrypoint behaviour is proven synthetically just below, which is
+      // where the real coverage always was.
+      for (const id of ["untitled-table"]) {
         const manifest = JSON.parse(readFileSync(join(packsDir, id, "manifest.json"), "utf8"));
         if (!manifest.files.length || !manifest.structuralSignature?.files?.length || !manifest.upstream?.sha)
           fail(`${id} dependency closure`, `files=${manifest.files.length}, signature=${manifest.structuralSignature?.files?.length || 0}, pin=${manifest.upstream?.sha || "none"}`);
@@ -1300,25 +1314,36 @@ if (FULL) {
       if (inspectPack(corrupt, "", { kind: "query-only" }).some((s) => /must not vendor source/.test(s))) ok("pack inspector forbids query-only source vendoring");
       else fail("pack inspector forbids query-only source vendoring", "query-only source payload passed");
 
-      const missingHarvest = required.filter((s) => {
-        const rows = (catalog.templates ?? []).filter((t) => t.screen === s || (t.jobs || []).includes(s));
-        return !rows.some((t) => existsSync(join(packsDir, t.id, "shot.png")));
+      // Every required screen must offer the agent something real to start from:
+      // a harvested shot (pixels) or a blueprint region map (structure). Deleting
+      // MUI and Ant cost marketing, checkout and wizard their only rendered
+      // pixels — the blueprints carry those screens now, and this check names
+      // which screens are structure-only rather than quietly passing them.
+      const startingPoints = required.map((s) => {
+        const rows = (catalog.templates ?? []).filter((t) => t.selectable !== false && (t.screen === s || (t.jobs || []).includes(s)));
+        const shot = rows.some((t) => existsSync(join(packsDir, t.id, "shot.png")));
+        const map = rows.some((t) => t.kind === "blueprint" && existsSync(join(SHINE, "corpus/blueprints", `${t.id}.md`)));
+        return { screen: s, shot, map };
       });
-      if (missingHarvest.length)
-        fail("required screens have a shot", `no pack shot for: ${missingHarvest.join(", ")}`);
-      else ok("required screens have a shot", required.join(", "));
+      const nothing = startingPoints.filter((p) => !p.shot && !p.map).map((p) => p.screen);
+      const structureOnly = startingPoints.filter((p) => !p.shot && p.map).map((p) => p.screen);
+      if (nothing.length)
+        fail("required screens have a starting point", `no shot and no region map for: ${nothing.join(", ")}`);
+      else ok("required screens have a starting point", structureOnly.length
+        ? `${required.length - structureOnly.length} with pixels; structure-only (region map, no shot): ${structureOnly.join(", ")}`
+        : required.join(", "));
     }
 
-    const voiceCss = join(SHINE, "tokens/voices", "carbon.css");
-    if (!existsSync(voiceCss)) fail("voice pack carbon.css", "tokens/voices/carbon.css missing");
-    else if (!/IBM Plex Sans/.test(readFileSync(voiceCss, "utf8")))
-      fail("voice pack carbon.css", "does not remap sans to IBM Plex");
-    else ok("voice pack carbon.css", "executable remap");
+    const voiceCss = join(SHINE, "tokens/voices", "untitled.css");
+    if (!existsSync(voiceCss)) fail("voice pack untitled.css", "tokens/voices/untitled.css missing");
+    else if (!/Inter/.test(readFileSync(voiceCss, "utf8")))
+      fail("voice pack untitled.css", "does not remap sans to Inter");
+    else ok("voice pack untitled.css", "executable remap");
 
     // V2's voice sheets carried ZERO colors while the lint banned raw color values,
     // so kit paint was unexpressible and everything converged to house style
     // (docs/audit-2026-08-21.md §5). Every shipped voice must carry real paint —
-    // a colorless house or spectrum sheet is the same lie as a colorless Carbon sheet.
+    // a colorless house or spectrum sheet is the same lie as a colorless kit sheet.
     const thin = [];
     const voiceDir = join(SHINE, "tokens/voices");
     const voiceFiles = readdirSync(voiceDir).filter((n) => n.endsWith(".css"));
@@ -1376,7 +1401,7 @@ if (FULL) {
 
 {
   // The critic scored "likeness" by grepping source for data-* attributes: a one-button
-  // page with three attributes scored 10/10 against the Carbon datatable (audit §4).
+  // page with three attributes scored 10/10 against the cited table (audit §4).
   // Its absence is an invariant, and its replacement must be unable to bless anything.
   if (existsSync(join(SHINE, "verify/critic.mjs")))
     fail("no self-scored likeness", "verify/critic.mjs is back — the regex likeness gate trains attribute-stamping");
@@ -1400,13 +1425,13 @@ if (FULL) {
     else fail("compare refuses without pixels", `exit ${r.status}: ${out.slice(0, 160)}`);
     // Live Chromium: skip at sessionStart (--quiet). --ci and a normal doctor run
     // must watch the stamp FAIL and the unfuck after.html PASS.
-    const liveCompare = FULL && existsSync(join(SHINE, "corpus/packs/carbon-datatable/shot.png"));
+    const liveCompare = FULL && existsSync(join(SHINE, "corpus/packs/untitled-table/shot.png"));
     if (liveCompare) {
       const matrix = spawnSync(process.execPath, [join(SHINE, "verify/compare-proof.test.mjs")], { encoding: "utf8", env: { ...process.env, NODE_PATH }, timeout: 180_000 });
       if (matrix.status === 0 && /baseline 0\/0/.test(matrix.stdout)) ok("compare structural/visual proof matrix", "import-safe; calibrated; adversarial and positive branches bite");
       else fail("compare structural/visual proof matrix", `${matrix.stderr || matrix.stdout}`.trim().slice(-400));
       const failedReceipt = join(tmpdir(), `shine-doctor-failed-${process.pid}.json`);
-      const live = spawnSync(process.execPath, [compare, stamp, "--cite", "carbon-datatable", "--out", join(tmpdir(), "shine-doctor-stamp.png")], {
+      const live = spawnSync(process.execPath, [compare, stamp, "--cite", "untitled-table", "--out", join(tmpdir(), "shine-doctor-stamp.png")], {
         encoding: "utf8",
         env: { ...process.env, NODE_PATH, SHINE_RECEIPT: failedReceipt },
       });
@@ -1415,21 +1440,21 @@ if (FULL) {
         ok("compare rejects the attribute stamp", "exit 1 — stamp is not a datatable and minted no receipt");
       else fail("compare rejects the attribute stamp", `exit ${live.status}: ${lout.slice(0, 240)}`);
       const after = join(SHINE, "verify/fixtures/unfucked/after.html");
-      const good = spawnSync(process.execPath, [compare, after, "--cite", "carbon-datatable", "--out", join(tmpdir(), "shine-doctor-after.png")], {
+      const good = spawnSync(process.execPath, [compare, after, "--cite", "untitled-table", "--out", join(tmpdir(), "shine-doctor-after.png")], {
         encoding: "utf8",
         env: { ...process.env, NODE_PATH },
       });
       const gout = `${good.stdout}${good.stderr}`;
       if (good.status === 0 && /palette/.test(gout)) ok("compare accepts the unfuck after", "exit 0");
       else fail("compare accepts the unfuck after", `exit ${good.status}: ${gout.slice(0, 240)}`);
-      const zinc = join(SHINE, "verify/fixtures/zinc-on-carbon.html");
-      const zrun = spawnSync(process.execPath, [compare, zinc, "--cite", "carbon-datatable", "--out", join(tmpdir(), "shine-doctor-zinc.png")], {
+      const zinc = join(SHINE, "verify/fixtures/zinc-on-untitled.html");
+      const zrun = spawnSync(process.execPath, [compare, zinc, "--cite", "untitled-table", "--out", join(tmpdir(), "shine-doctor-zinc.png")], {
         encoding: "utf8",
         env: { ...process.env, NODE_PATH },
       });
       const zout = `${zrun.stdout}${zrun.stderr}`;
-      if (zrun.status === 1 && /not a relative/.test(zout)) ok("compare rejects zinc-on-carbon", "exit 1 — zinc paint is not Carbon");
-      else fail("compare rejects zinc-on-carbon", `exit ${zrun.status}: ${zout.slice(0, 240)}`);
+      if (zrun.status === 1 && /not a relative/.test(zout)) ok("compare rejects zinc-on-untitled", "exit 1 — zinc paint is not Untitled UI");
+      else fail("compare rejects zinc-on-untitled", `exit ${zrun.status}: ${zout.slice(0, 240)}`);
     }
   }
 }
@@ -1580,15 +1605,15 @@ if (!CI) {
 if (FULL) {
   const fixture = join(SHINE, "verify/fixtures/integrations");
   const build = spawnSync("npm", ["run", "build"], { cwd: fixture, encoding: "utf8", timeout: 600_000 });
-  if (build.status === 0) ok("integration fixture typechecks and builds", "four pinned production libraries");
+  if (build.status === 0) ok("integration fixture typechecks and builds", "the two recipes Shine supports: shadcn/TanStack and native");
   else fail("integration fixture typechecks and builds", `${build.stderr || build.stdout}`.trim().slice(-500));
   const runtime = build.status === 0 ? spawnSync(process.execPath, [join(SHINE, "verify/integrations-runtime.mjs")], { cwd: SHINE, encoding: "utf8", timeout: 600_000 }) : null;
-  if (runtime?.status === 0 && (runtime.stdout.match(/integration runtime PASS:/g) || []).length === 4)
-    ok("integration fixture renders and interacts", "4/4 production framework entries; DataGrid 12/12 each");
+  if (runtime?.status === 0 && (runtime.stdout.match(/integration runtime PASS:/g) || []).length === 2)
+    ok("integration fixture renders and interacts", "2/2 supported recipes; DataGrid 12/12 each");
   else fail("integration fixture renders and interacts", runtime ? `${runtime.stderr || runtime.stdout}`.trim().slice(-500) : "build failed; runtime not run");
   const bites = spawnSync(process.execPath, [join(SHINE, "verify/integrations-bite.mjs")], { cwd: SHINE, encoding: "utf8", timeout: 120_000 });
-  if (bites.status === 0 && (bites.stdout.match(/integration scaffold PASS:/g) || []).length === 4 && (bites.stdout.match(/integration bite PASS:/g) || []).length === 2)
-    ok("integration compiler gates bite", "4/4 generated scaffolds typecheck; renamed API + missing package rejected");
+  if (bites.status === 0 && (bites.stdout.match(/integration scaffold PASS:/g) || []).length === 1 && (bites.stdout.match(/integration bite PASS:/g) || []).length === 2)
+    ok("integration compiler gates bite", "generated scaffold typechecks; renamed API + missing package rejected");
   else fail("integration compiler gates bite", `${bites.stderr || bites.stdout}`.trim().slice(-500));
   const r = spawnSync(process.execPath, [join(SHINE, "verify/measure-consumers.mjs"), "--quiet", "--registry", join(SHINE, "verify/benchmark-consumers.txt")], {
     encoding: "utf8",

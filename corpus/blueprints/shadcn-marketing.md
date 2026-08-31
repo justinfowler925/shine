@@ -2,7 +2,7 @@
 
 Regions, in order. Host: standalone page, no app shell. Density: comfortable. Paint: `tokens/voices/shadcn-zinc.css`.
 
-shadcn is an application kit. It ships no marketing block, no hero, and no pricing table, and that is a deliberate boundary rather than a gap in the corpus — all 97 shadcn blocks are one dashboard, sixteen sidebars, ten auth pages and seventy charts. The corpus's marketing rows are `mui-marketing-page` and `magicui-hero`. Their region graphs port; their source does not.
+shadcn is an application kit. It ships no marketing block, no hero, and no pricing table, and that is a deliberate boundary rather than a gap in the corpus — all 97 shadcn blocks are one dashboard, sixteen sidebars, ten auth pages and seventy charts. Since MUI was deleted on 2026-08-31 (`docs/no-foreign-runtimes.md`), the corpus's other marketing row is `magicui-hero`, for the hero alone. Its region graph ports; its source does not.
 
 Region map only: no authored source ships for this row. The estate builds marketing *analytics* (screen `dashboard`, well covered by shadcn), not marketing *pages*, so authored TSX here would be untested reference code.
 
@@ -22,7 +22,7 @@ Region map only: no authored source ships for this row. The estate builds market
 
 ## Do not
 
-- Copy MUI or MagicUI source. Port the regions; both carry their own runtime.
+- Copy MagicUI source. Port the regions; it carries its own runtime.
 - A hero headline that would fit any competitor unchanged.
 - Numbered markers over content that is not a sequence.
 - Two filled buttons in the hero.
@@ -43,7 +43,7 @@ Region map only: no authored source ships for this row. The estate builds market
 ## Source of truth
 
 - The regions above are the structure. They are not optional.
-- `mui-marketing-page` and `magicui-hero` shots are the structural pixel references; their source is not to be copied.
+- `magicui-hero`'s shot is the structural pixel reference for the hero region only; its source is not to be copied.
 - Paint comes from `tokens/voices/shadcn-zinc.css`.
 - No authored source and no pack shot ship for this row, so `verify/compare.mjs` has nothing to compare against. Say so rather than reporting a likeness score.
 - For a marketing *analytics* surface, this is the wrong row: cite a `dashboard` row instead.

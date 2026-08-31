@@ -6,7 +6,7 @@ import {lintText} from "../hooks/design-lint.mjs";
 const categories=["datagrid","dashboard","form","marketing","record","lex","voice"];
 for(const category of categories){
  const brief={id:`${category}-case`,category,lane:category==="marketing"?"marketing":"saas",brief:`${category} insurance decision workspace`};
- const spec=seedDesignSpec({brief,packet:{selected:{id:category==="datagrid"?"carbon-datatable":"magicui-hero"}}});
+ const spec=seedDesignSpec({brief,packet:{selected:{id:category==="datagrid"?"untitled-table":"magicui-hero"}}});
  assert.deepEqual(validateDesignSpec(spec,{brief}),[],category);
  const html=renderDesignSpec(spec);
  assert.equal(lintText(`${category}.html`,html).hard.length,0,`${category}: renderer violates design-lint`);

@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 
-// Carbon 1.114 ships @position-try rules that Lightning CSS 1.32 cannot minify.
-// The browser accepts the source CSS; disabling only CSS minification preserves it.
-export default defineConfig({ build: { cssMinify: false } });
+// Defaults. The `build.cssMinify: false` escape hatch here existed only because
+// Carbon 1.114 shipped @position-try rules Lightning CSS could not minify;
+// Carbon was deleted from Shine on 2026-08-31 and the workaround went with it.
+export default defineConfig({});

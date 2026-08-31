@@ -19,7 +19,7 @@ Load `references/contracts.md` Table MUST. Lightning extras:
 
 - Dashboard cards for a queue.
 - A marketing hero above the table.
-- Carbon/Ant chrome on a Lightning host (structure from this blueprint, paint from SLDS).
+- Any non-SLDS kit chrome on a Lightning host (structure from this blueprint, paint from SLDS).
 
 ## Checklist (agent)
 

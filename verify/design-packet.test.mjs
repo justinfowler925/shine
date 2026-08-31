@@ -40,7 +40,7 @@ assert.throws(()=>createDesignPacket({job:""}),/job is required/);
 // Kit affinity. A consumer's installed kit decided the build recipe but had no
 // say in the page reference, so a shadcn/TanStack repo asking for a records
 // surface was handed an Ant Design Pro reference to copy: untitled-table and
-// antd-pro-list both scored 122 and the tie broke alphabetically.
+// the foreign-runtime row both scored 122 and the tie broke alphabetically.
 const shadcnRepo=fileURLToPath(new URL("./fixtures/kit-affinity-shadcn",import.meta.url));
 mkdirSync(shadcnRepo,{recursive:true});
 writeFileSync(join(shadcnRepo,"package.json"),JSON.stringify({name:"kit-affinity-fixture",dependencies:{next:"16.0.0","@tanstack/react-table":"8.21.3"}})+"\n");

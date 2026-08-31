@@ -805,14 +805,23 @@ const citeRow = (() => {
 const family = (citeRow?.dna?.family || compose.dnaFamily || "").toLowerCase();
 const font = compose.bodyFont || "";
 const shadcnChrome = compose.slotSidebar || /Geist|ui-sans-serif/i.test(font);
-if (family === "carbon" && shadcnChrome) {
+// These two keyed off family === "carbon" until 2026-08-31, when Carbon was
+// deleted from the corpus. Keying a rule to one vendor's name was always the
+// weaker form of it: what is actually being checked is that a page citing a
+// records/table reference painted that reference's DNA instead of house style,
+// and that the table is the focal object rather than a strip under a hero. Both
+// are properties of the cited ROW, so they now read the row.
+const citeJobs = new Set((citeRow?.jobs || []).map((job) => String(job).toLowerCase()));
+const tableCite = ["queue", "crud", "table", "records", "datagrid", "list", "inbox"].some((job) => citeJobs.has(job));
+const houseFamily = family === "shadcn-zinc" || family === "shine" || family === "";
+if (tableCite && !houseFamily && shadcnChrome) {
   failures.push(
-    `likeness: carbon cite rendered shadcn chrome (sidebar slot or Geist) — apply cite DNA, not house style`,
+    `likeness: ${family} cite rendered shadcn chrome (sidebar slot or Geist) — apply cite DNA, not house style`,
   );
 }
-if (family === "carbon" && (compose.tableAreaPct || 0) < 0.06) {
+if (tableCite && (compose.tableAreaPct || 0) < 0.06) {
   failures.push(
-    `likeness: carbon/queue cite table occupies ${((compose.tableAreaPct || 0) * 100).toFixed(1)}% of viewport — DataTable is the focal object (overview.mdx Batch Actions / Toolbar)`,
+    `likeness: ${family || "records"}/queue cite table occupies ${((compose.tableAreaPct || 0) * 100).toFixed(1)}% of viewport — the table is the focal object, not a strip under a hero`,
   );
 }
 const marketingCite = /marketing|hero/i.test(citeWant || compose.citeId || "");

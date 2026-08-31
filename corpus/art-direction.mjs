@@ -13,12 +13,12 @@ const AXIS_WORDS = {
   audience: { executive:["executive","exec","cro","ceo","leader"], operator:["operator","ops","analyst","agent","rep"], customer:["customer","buyer","visitor","applicant"], admin:["admin","administrator"], developer:["developer","engineer"] },
   density: { dense:["dense","compact","high-density"], comfortable:["comfortable","balanced"], editorial:["editorial","spacious"] },
   informationShape: { records:["records","rows","table","grid","queue","crud","admin"], metrics:["metrics","analytics","chart","dashboard","kpi"], narrative:["story","article","marketing","landing"], form:["form","settings","wizard","checkout","login"], conversation:["chat","assistant","conversation"], navigation:["shell","navigation","sidebar"] },
-  brand: { "brand-locked":["brand","branded","clearspeed","slds"], "kit-faithful":["material","mui","carbon","ant","spectrum","fluent"], neutral:["neutral","unbranded"] },
+  brand: { "brand-locked":["brand","branded","clearspeed","slds"], "kit-faithful":["kit-faithful","spectrum","fluent","untitled"], neutral:["neutral","unbranded"] },
   interaction: { "data-operations":["table","grid","queue","crud","triage"], analysis:["analytics","chart","dashboard"], form:["form","settings","wizard","checkout"], conversation:["chat","assistant"], conversion:["marketing","landing","signup"], navigation:["shell","sidebar"] },
   tone: { serious:["serious","institutional","enterprise"], editorial:["editorial","magazine"], expressive:["expressive","bold","playful"], technical:["technical","precise"], restrained:["restrained","quiet","minimal"] },
   type: { display:["display","editorial"], numeric:["numeric","metrics"], humanist:["humanist","friendly"], ui:["ui","interface"] },
   image: { none:["no-image","imageless"], editorial:["photo","editorial-image","photography"], product:["product-image","screenshot"], illustration:["illustration"] },
-  framework: { mui:["mui","material"], ant:["ant","antd"], carbon:["carbon"], "shadcn-tanstack":["shadcn","tanstack"], lex:["lex","lwc","lightning","salesforce","slds"], native:["native","html"] }
+  framework: { "shadcn-tanstack":["shadcn","tanstack"], lex:["lex","lwc","lightning","salesforce","slds"], native:["native","html"] }
 };
 
 const detect = (tokens, groups, fallback = "unspecified") => Object.entries(groups).find(([, synonyms]) => hasAny(tokens, synonyms))?.[0] || fallback;
@@ -111,24 +111,27 @@ export function retrieveDirections(templates, text, constraints = {}) {
   eligible.sort((a,b) => b.score-a.score || a.history-b.history || (a.template.startFrom ?? 99)-(b.template.startFrom ?? 99) || a.template.id.localeCompare(b.template.id));
   // Kit affinity. The consumer's installed kit decided the build recipe but had
   // no say in which page reference won, so a Next+shadcn/TanStack repo asking
-  // for a records surface was handed an Ant Design Pro reference: untitled-table
-  // and antd-pro-list both scored 122 and the tie broke alphabetically. A cite
-  // the consumer cannot build against is not a near-miss, it is the wrong
-  // answer, so compatible kits form a preference tier rather than a score nudge.
-  // If nothing compatible is eligible the tier is skipped and the mismatch is
-  // reported as a gap — a thin corpus corner must not become "no template".
+  // for a records surface was handed a foreign-runtime reference: the two
+  // candidates tied on score and the tie broke alphabetically. A cite the
+  // consumer cannot build against is not a near-miss, it is the wrong answer, so
+  // compatible kits form a preference tier rather than a score nudge. If nothing
+  // compatible is eligible the tier is skipped and the mismatch is reported as a
+  // gap — a thin corpus corner must not become "no template".
+  //
+  // The kits that made this defect reachable (MUI, Ant Design Pro, Carbon) were
+  // deleted on 2026-08-31; this tier stays because the corpus still carries
+  // Spectrum, Fluent, Mantine, HeroUI and MagicUI rows on their own runtimes.
   const installedKits = (Array.isArray(constraints.installedKits) ? constraints.installedKits : []).filter(Boolean);
   const kitGaps = [];
   let ranked = eligible;
   if (installedKits.length && eligible.length) {
     const buildable = (candidate) => installedKits.includes(candidate.template.kit);
     // Order, never eliminate. Page-scope coverage is thin and unevenly
-    // distributed across kits — queue has exactly one page reference and it is
-    // Ant Design Pro — so filtering to the installed kit turns a thin corner of
-    // the corpus into "no eligible template". Ordering fixes the real defect
-    // (untitled-table and antd-pro-list both scored 122 and the tie broke
-    // alphabetically, handing a shadcn/TanStack repo an Ant reference) while
-    // keeping the only reference for a screen reachable.
+    // distributed across kits, so filtering to the installed kit turns a thin
+    // corner of the corpus into "no eligible template". Ordering fixed the real
+    // defect (two candidates tied on score and the tie broke alphabetically,
+    // handing a shadcn/TanStack repo a foreign-runtime reference) while keeping
+    // the only reference for a screen reachable.
     ranked = [...eligible.filter(buildable), ...eligible.filter((candidate) => !buildable(candidate))]
       .map((candidate) => buildable(candidate)
         ? { ...candidate, matches: [...candidate.matches, "installedKit"], port: false }

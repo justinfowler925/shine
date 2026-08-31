@@ -50,13 +50,9 @@ const REQUIRED = [
 const KIT_FAMILY = {
   "shadcn-registry": { family: "shadcn-zinc", density: "comfortable" },
   "untitled-ui-react": { family: "untitled", density: "comfortable" },
-  "mui-material": { family: "material", density: "comfortable" },
   tremor: { family: "tremor", density: "comfortable" },
-  "ant-design-pro": { family: "ant", density: "dense" },
-  "ant-design": { family: "ant", density: "dense" },
   heroui: { family: "heroui", density: "comfortable" },
   "chakra-ui": { family: "chakra", density: "comfortable" },
-  carbon: { family: "carbon", density: "dense" },
   mantine: { family: "mantine", density: "comfortable" },
   fluentui: { family: "fluent", density: "comfortable" },
   "react-spectrum": { family: "spectrum", density: "comfortable" },
@@ -99,19 +95,19 @@ const exists = (rel) => existsSync(join(CORPUS, rel));
 // keeps its pack — art-direction skips it for selection but adversarial fixtures
 // and provenance still need it. Retiring a row is only safe once another row
 // covers the same screen, which is why each reason names its replacement.
+//
+// Retirement is the soft lane, for a kit whose pack is still worth keeping as a
+// fixture. The hard lane is deletion: MUI, Ant Design Pro and Carbon were removed
+// from this file, from ~/design-corpus pins, and from disk entirely (2026-08-31,
+// docs/no-foreign-runtimes.md). A retired row is still visible in templates.md and
+// can still be cited by id; a deleted kit cannot be reached at all. Foreign-runtime
+// kits earned the hard lane because a retired row is a row an agent can still read
+// and imitate.
 const HOUSE_KIT = "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against";
 const RETIRED = {
-  "mui-dashboard": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
-  "antd-pro-app": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
-  "carbon-uishell": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
   "mantine-appshell": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
   "heroui-next-app": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
-  "mui-sign-in-side": `${HOUSE_KIT}; shadcn covers auth (shadcn-login-04)`,
-  "mui-crud-dashboard": `${HOUSE_KIT}; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for crud`,
-  "antd-pro-crud": `${HOUSE_KIT}; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for crud`,
-  "antd-pro-list": `${HOUSE_KIT}; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for queue`,
   "tremor-charts": "shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it",
-  "carbon-datatable": "Untitled UI replaced Carbon as Shine's table reference; retain this pack only for adversarial regression fixtures",
 };
 
 const templates = [];
@@ -128,39 +124,14 @@ const push = (row) => {
   templates.push(row);
 };
 
-// ---- MUI free templates (real composed pages, in mui-material docs/data) ---
-const muiBase = "mui-material/docs/data/material/getting-started/templates";
-const muiPreview = "https://mui.com/material-ui/getting-started/templates/";
-for (const t of [
-  { id: "mui-crud-dashboard", screen: "crud", dir: "crud-dashboard", rank: 1, title: "MUI CRUD dashboard", entrypoints: ["CrudDashboard.tsx"] },
-  { id: "mui-dashboard", screen: "app-shell", dir: "dashboard", rank: 2, title: "MUI dashboard shell" },
-  { id: "mui-marketing-page", screen: "marketing", dir: "marketing-page", rank: 1, title: "MUI marketing page" },
-  { id: "mui-checkout", screen: "checkout", dir: "checkout", rank: 1, title: "MUI checkout" },
-  { id: "mui-blog", screen: "blog", dir: "blog", rank: 1, title: "MUI blog" },
-  { id: "mui-sign-in-side", screen: "auth", dir: "sign-in-side", rank: 1, title: "MUI sign-in (split)" },
-]) {
-  push({
-    id: t.id,
-    screen: t.screen,
-    kit: "mui-material",
-    title: t.title,
-    path: `${muiBase}/${t.dir}`,
-    preview: muiPreview,
-    license: "MIT",
-    kind: "source",
-    startFrom: t.rank,
-    ...(t.entrypoints ? { entrypoints: t.entrypoints } : {}),
-  });
-}
-
 // ---- shadcn blocks and cited component sets ---------------------------------
 // Hand-picked rows first: these carry a title and rank chosen for the job they
 // serve, so they are declared rather than derived. The full block expansion
 // below skips any id already pushed here.
 for (const t of [
   // Carries crud/queue/records jobs as well as dashboard: it is the composed
-  // records reference that replaced mui-crud-dashboard and antd-pro-list, so
-  // retiring those rows depends on these jobs staying here.
+  // records reference that replaced the deleted MUI and Ant Design Pro admin
+  // pages, so deleting those rows depends on these jobs staying here.
   { name: "dashboard-01", screen: "dashboard", rank: 1, title: "shadcn dashboard-01 (sidebar, cards, chart, table)", required:["navigation","summary","chart","table"], jobs: ["crud","dashboard","inbox","list","queue","records","triage","worklist"] },
   { name: "sidebar-07", screen: "app-shell", rank: 1, title: "shadcn sidebar-07 (collapsible shell)", required:["navigation"] },
   { name: "login-04", screen: "auth", rank: 2, title: "shadcn login-04", required:["form"] },
@@ -306,48 +277,8 @@ for (const t of [
   });
 }
 
-// ---- Ant Design Pro — the densest real admin pages in the corpus ------------
-for (const t of [
-  { id: "antd-pro-list", screen: "queue", dir: "src/pages/list", rank: 2, title: "Ant Design Pro list / queue pages", jobs: ["queue", "list", "inbox"] },
-  { id: "antd-pro-profile", screen: "record", dir: "src/pages/profile", rank: 1, title: "Ant Design Pro profile / record", jobs: ["record", "detail", "profile"] },
-  { id: "antd-pro-settings", screen: "settings", dir: "src/pages/account/settings", rank: 1, title: "Ant Design Pro account settings", jobs: ["settings", "preferences", "account"] },
-  { id: "antd-pro-step-form", screen: "wizard", dir: "src/pages/form/step-form", rank: 1, title: "Ant Design Pro step form", jobs: ["wizard", "steps", "onboarding"] },
-  { id: "antd-pro-chatbot", screen: "chat", dir: "src/pages/chatbot", rank: 2, title: "Ant Design Pro chatbot page", jobs: ["chat"] },
-  { id: "antd-pro-crud", screen: "crud", dir: "src/pages/table-list", rank: 2, title: "Ant Design Pro ProTable CRUD page", entrypoints: ["index.tsx"] },
-  { id: "antd-pro-app", screen: "app-shell", dir: "src", rank: 3, title: "Ant Design Pro admin app" },
-]) {
-  if (!exists(`ant-design-pro/${t.dir}`)) continue;
-  push({
-    id: t.id,
-    screen: t.screen,
-    kit: "ant-design-pro",
-    title: t.title,
-    path: `ant-design-pro/${t.dir}`,
-    preview: "https://preview.pro.ant.design",
-    license: "MIT",
-    kind: "source",
-    startFrom: t.rank,
-    ...(t.entrypoints ? { entrypoints: t.entrypoints } : {}),
-    ...(t.jobs ? { jobs: t.jobs } : {}),
-  });
-}
-
 // ---- one cite-able page per remaining major kit ------------------------------
 const singles = [
-  {
-    id: "carbon-datatable", screen: "queue", kit: "carbon", rank: 1,
-    title: "Carbon DataTable (toolbar-first, batch actions, dense)",
-    path: "carbon/packages/react/src/components/DataTable",
-    preview: "https://carbondesignsystem.com/components/data-table/usage/",
-    license: "Apache-2.0", jobs: ["queue", "list", "inbox"],
-  },
-  {
-    id: "carbon-uishell", screen: "app-shell", kit: "carbon", rank: 4,
-    title: "Carbon UIShell",
-    path: "carbon/packages/react/src/components/UIShell",
-    preview: "https://carbondesignsystem.com/components/UI-shell-header/usage/",
-    license: "Apache-2.0",
-  },
   {
     id: "spectrum-ai-chat", screen: "chat", kit: "react-spectrum", rank: 1,
     title: "React Spectrum AI Chat (Thread + PromptField — prompt field is the primary)",
@@ -424,23 +355,29 @@ for (const t of [
 
 // ---- shadcn page blueprints --------------------------------------------------
 // shadcn ships 97 blocks: one dashboard, sixteen sidebars, ten auth pages and
-// seventy charts. Every one of them is already catalogued, so these five screens
-// are not a harvest backlog — they are the edge of what shadcn publishes. Left
-// alone, a shadcn host asking for a settings or record page gets an Ant or MUI
-// row flagged port:true, which is honest but gives no shadcn-shaped target.
+// seventy charts. Every one of them is already catalogued, so these screens are
+// not a harvest backlog — they are the edge of what shadcn publishes. These rows
+// are what a shadcn host gets for a screen the kit does not publish, and since
+// the foreign-runtime kits were deleted they are the ONLY thing standing between
+// those screens and a catalog hole. Deleting MUI/Ant/Carbon was only safe because
+// these landed first.
 //
-// These rows are that target. Three carry authored source in
-// corpus/blueprints/<id>/ because the kit reference they replace is structurally
-// misleading (antd-pro-profile is a profile, antd-pro-settings hides its section
-// names behind tabs, antd-pro-step-form ships Ant's Steps runtime). Checkout and
-// marketing are region maps only: the MUI structure ports cleanly, and the estate
-// builds neither, so authored source there would be untested reference code.
+// Four carry authored source in corpus/blueprints/<id>/ because the deleted kit
+// reference was structurally misleading anyway (Ant's profile page is a profile,
+// its settings page hides section names behind tabs, its step form ships Ant's
+// Steps runtime). Checkout, marketing and blog are region maps only: their
+// structure is not kit-specific and the estate builds none of them, so authored
+// source there would be untested reference code.
 for (const t of [
   { id: "shadcn-record", screen: "record", title: "shadcn record detail (identity, facts, decision, evidence)", jobs: ["record", "detail", "account", "opportunity"], required: ["form", "table"] },
   { id: "shadcn-settings", screen: "settings", title: "shadcn settings (visible section nav, per-section save)", jobs: ["settings", "preferences", "account"], required: ["form", "navigation"] },
   { id: "shadcn-wizard", screen: "wizard", title: "shadcn wizard (step list, review before commit)", jobs: ["wizard", "stepper", "multi-step", "onboarding"], required: ["form", "navigation"] },
   { id: "shadcn-checkout", screen: "checkout", title: "shadcn checkout (persistent order summary) — region map only", jobs: ["checkout", "payment"], required: ["form", "summary"] },
   { id: "shadcn-marketing", screen: "marketing", title: "shadcn marketing page (claim, proof, pricing) — region map only", jobs: ["marketing", "landing", "pricing"] },
+  // The blog screen had exactly one row, MUI's. Deleting MUI would have deleted
+  // the screen, so the region map carries it: an editorial column is measure and
+  // rhythm, not kit chrome, and shadcn publishes no block for it.
+  { id: "shadcn-blog", screen: "blog", title: "shadcn editorial / article page (measure, rhythm, one figure class) — region map only", jobs: ["blog", "article", "editorial", "post"] },
   // A recurring-meeting board, read in full in a fixed order. Deliberately NOT
   // screen "queue": queue/crud/dashboard demand a grid with search, sort and
   // pagination, and sorting a cadence destroys the meaning while paginating it
@@ -530,14 +467,26 @@ md.push("earned it.");
 md.push("");
 md.push("Generated from `corpus/templates.json` — do not hand-edit; run `node corpus/index-templates.mjs`.");
 md.push("");
-md.push("| Screen | Id | Kit | Kind | Jobs |");
-md.push("|---|---|---|---|---|");
+md.push("A row marked **retired** is not selectable: `cite.mjs` and the packet skip it,");
+md.push("its pack survives only as a regression fixture, and citing it by id is a defect.");
+md.push("Reasons are listed under the table.");
+md.push("");
+md.push("| Screen | Id | Kit | Kind | Status | Jobs |");
+md.push("|---|---|---|---|---|---|");
 for (const t of templates) {
-  md.push(`| ${t.screen} | \`${t.id}\` | ${t.kit} | ${t.kind} | ${(t.jobs || []).join(", ")} |`);
+  const status = t.selectable === false ? "**retired**" : "live";
+  md.push(`| ${t.screen} | \`${t.id}\` | ${t.kit} | ${t.kind} | ${status} | ${(t.jobs || []).join(", ")} |`);
 }
 md.push("");
-md.push(`${templates.length} rows. Required screen coverage: ${REQUIRED.join(", ")}.`);
+const retiredRows = templates.filter((t) => t.selectable === false);
+md.push(`${templates.length} rows, ${retiredRows.length} of them retired. Required screen coverage: ${REQUIRED.join(", ")}.`);
 md.push("");
+if (retiredRows.length) {
+  md.push("## Retired rows — do not cite");
+  md.push("");
+  for (const t of retiredRows) md.push(`- \`${t.id}\` — ${t.retiredReason}`);
+  md.push("");
+}
 const mdPath = join(SHINE, "skill/references/templates.md");
 writeFileSync(mdPath, md.join("\n") + "\n");
 

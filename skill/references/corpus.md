@@ -36,8 +36,7 @@ rg -ln "useVirtualizer" ~/design-corpus/tanstack-virtual/examples
 rg -n "sideOffset" ~/design-corpus/radix-website/data
 
 # vendor design systems — behavior / completeness, not brand pixels
-rg -n "DataTable" ~/design-corpus/carbon/packages/react/src/components --glob '*.tsx' | head
-rg -n "filterDropdown" ~/design-corpus/ant-design/components/table
+rg -n "Table" ~/design-corpus/untitled-ui-react/components/application/table --glob '*.tsx' | head
 rg -n "useDialog" ~/design-corpus/react-spectrum/packages/@react-aria
 rg -n "aria-practices" ~/design-corpus/aria-practices/content -l | head
 rg -n "IndexTable" ~/design-corpus/polaris/polaris-react/src/components
@@ -66,9 +65,6 @@ rg -n "IndexTable" ~/design-corpus/polaris/polaris-react/src/components
 | `radix-colors/` | 5 src files | scale construction reference |
 | `tailwindcss/` | `packages/tailwindcss` — `theme.css`, `preflight.css`, src | default token values, v4 internals |
 | `magicui/`, `cult-ui/` | registry + content (MIT-clean) | marketing-grade components |
-| `carbon/` | IBM Carbon — react, styles, themes, layout, type, colors | dense enterprise chrome, DataTable, filters |
-| `ant-design/` | Ant Design `components/` | form/table matrices, completeness ladders |
-| `mui-material/` | MUI Material + system + `docs/data` | Material behavior/API completeness |
 | `react-spectrum/` | Adobe React Aria / Spectrum / Stately + docs | interaction/a11y SSOT beside Radix |
 | `fluentui/` | Fluent UI `react-components` | Fluent patterns without cloning the world |
 | `aria-practices/` | W3C ARIA Authoring Practices `content/` | APG patterns as greppable truth |
@@ -83,8 +79,13 @@ rg -n "IndexTable" ~/design-corpus/polaris/polaris-react/src/components
 | `park-ui/` | Park UI (Ark + Panda) | styled Ark alternative |
 | `rsuite/` | React Suite | enterprise table/date pickers |
 | `grommet/` | HPE Grommet | a11y-first layout |
-| `ant-design-pro/` | Ant Design Pro | actual admin templates |
 | `query-only/` | Playwright screenshots of paid stores | layout ideas; **no source copy** |
+
+**Not in the corpus, deliberately:** MUI, Ant Design, Ant Design Pro and IBM
+Carbon were deleted on 2026-08-31 (`docs/no-foreign-runtimes.md`). They are not
+cloned, not catalogued, not painted and not cited. If a brief asks for one of
+them by name, say that Shine does not carry it and cite the row that covers the
+screen instead.
 
 ## Not in the corpus — protocol
 

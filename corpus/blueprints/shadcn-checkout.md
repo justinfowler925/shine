@@ -2,9 +2,9 @@
 
 Regions, in order. Host: focused page, no app sidebar. Density: comfortable. Paint: `tokens/voices/shadcn-zinc.css`.
 
-shadcn ships no checkout block. `mui-checkout` is the corpus's only checkout row and its region graph is sound — a stepper beside a persistent order summary. Port that structure; do not copy MUI source, which carries Emotion and its own theming. This file exists so the port has a shadcn-shaped target rather than an Ant or MUI-shaped one.
+shadcn ships no checkout block, and since MUI was deleted on 2026-08-31 (`docs/no-foreign-runtimes.md`) this row is the corpus's only checkout reference. The region graph it inherits is sound — a step sequence beside a persistent order summary — and it is written here as structure rather than carried as someone else's source.
 
-Region map only: no authored source ships for this row. The estate does not build a checkout, so authored TSX here would be untested reference code. The MUI shot is the pixel reference for structure; the paint comes from the shadcn voice sheet.
+Region map only: no authored source and no pack shot ship for this row. The estate does not build a checkout, so authored TSX here would be untested reference code. The regions below are the whole reference; the paint comes from the shadcn voice sheet.
 
 1. **Order summary** — persistent, never behind a disclosure, and never re-collapsed after step one. On wide hosts it is a right rail that stays visible through every step; on narrow hosts it is a sticky collapsed bar showing the total, expandable in place. The reader is being asked for money and must be able to see what for at the moment they commit.
 2. **Step indicator** — same contract as `shadcn-wizard`: every step visible, state in shape and text, completed steps are links back. Address → Delivery → Payment → Review is the conventional order and deviating from it costs the reader more than it saves.
@@ -22,7 +22,7 @@ Region map only: no authored source ships for this row. The estate does not buil
 
 ## Do not
 
-- Copy MUI source. Port the regions; the runtime and theming do not come with them.
+- Reach for another kit's checkout source. The regions below are the reference; a foreign runtime does not come with them.
 - Hide the order summary behind a disclosure at any breakpoint.
 - Introduce shipping cost or tax for the first time on the final step.
 - `Place order` with no amount.
@@ -42,7 +42,7 @@ Region map only: no authored source ships for this row. The estate does not buil
 ## Source of truth
 
 - The regions above are the structure. They are not optional.
-- `mui-checkout`'s shot is the structural pixel reference; its source is not to be copied.
+- There is no pack shot for this row, so `verify/compare.mjs` has nothing to compare against. Say so rather than reporting a likeness score.
 - Paint comes from `tokens/voices/shadcn-zinc.css`.
 - No authored source and no pack shot ship for this row, so `verify/compare.mjs` has nothing to compare against. Say so rather than reporting a likeness score.
 - Payment-field composition is a compliance surface as well as a design one; do not invent field sets.

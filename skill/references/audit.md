@@ -54,7 +54,7 @@ ship | polish | redesign
 ## Top issues
 | # | Severity | Issue | Contract/rule | Citation (technique/kit) | Fix | Remeasure |
 |---|---|---|---|---|---|---|
-| 1 | Critical | … | Table MUST / a11y | Carbon DataTable… / techniques.md §… | … | before → after |
+| 1 | Critical | … | Table MUST / a11y | `untitled-table`… / techniques.md §… | … | before → after |
 
 ## Completeness
 - Components below MUST: …

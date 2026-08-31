@@ -19,7 +19,7 @@ try {
   if (!ready) throw new Error("Vite production preview did not become ready");
   const browser = await chromium.launch();
   try {
-    for (const kit of ["mui", "carbon", "ant", "tanstack"]) {
+    for (const kit of ["tanstack", "native"]) {
       const page = await browser.newPage();
       const errors = [];
       page.on("pageerror", (error) => errors.push(error.message));
@@ -30,7 +30,7 @@ try {
       await page.waitForFunction(() => !document.querySelector("main")?.innerText.includes("Ada"));
       await page.getByRole("button", { name: "Clear" }).click();
       await page.waitForFunction(() => document.querySelector("main")?.innerText.includes("Ada"));
-      if (kit === "carbon" || kit === "tanstack") {
+      if (kit === "tanstack" || kit === "native") {
         const header = page.locator("thead button").first();
         const beforeSort = await page.locator("thead th").first().getAttribute("aria-sort");
         await header.click();

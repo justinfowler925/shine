@@ -13,6 +13,16 @@ export function assessVisual({facts,row,tokens=""}) {
   if(strict&&facts.voice==="adapted"&&!facts.adaptation)failures.push("visual: adapted work must name its structural adaptation in data-shine-adaptation");
   if(strict&&facts.voice==="kit-faithful"&&family&&!facts.family)failures.push(`visual: kit-faithful work must declare data-dna-family=${family}`);
   if(facts.voice==="kit-faithful"&&family&&facts.family&&facts.family!==family) failures.push(`visual: kit-faithful family is ${facts.family}; cite is ${family}`);
-  const font=(tokens.match(/--shine-font-sans:\s*([^;]+)/)||[])[1]; if(facts.voice==="kit-faithful"&&font){const first=font.split(",")[0].replace(/["']/g,"").trim().toLowerCase();if(first&&!facts.bodyFont.toLowerCase().includes(first))failures.push(`visual: body font ${facts.bodyFont}; kit font ${font.trim()}`)}
+  // A voice sheet may wrap its first family in a host hook —
+  // `var(--font-inter, "Inter"), …` is how Untitled UI ships. The browser
+  // resolves that to the fallback, so comparing the raw declaration against the
+  // rendered font failed a page that was painted correctly. Unwrap the var()
+  // fallback before taking the first family.
+  const font=(tokens.match(/--shine-font-sans:\s*([^;]+)/)||[])[1];
+  if(facts.voice==="kit-faithful"&&font){
+    const declared=font.replace(/var\(\s*--[a-z0-9-]+\s*,\s*([^)]+)\)/gi,"$1");
+    const first=declared.split(",")[0].replace(/["']/g,"").trim().toLowerCase();
+    if(first&&!facts.bodyFont.toLowerCase().includes(first))failures.push(`visual: body font ${facts.bodyFont}; kit font ${font.trim()}`);
+  }
   return {failures,proof:{geometry:facts.regions.map((r)=>r.box),typography:facts.typography,palette:facts.palette,spacing:facts.spacing,radii:facts.radii,body:{font:facts.bodyFont,size:facts.bodySize,bg:facts.bodyBg,fg:facts.bodyColor}}};
 }

@@ -21,12 +21,9 @@
     "wizard": {"informationShape":"form","interaction":"guided-form","tone":"reassuring","type":"ui","image":"none","signature":"progress/step/review"}
   },
   "kitProfiles": {
-    "ant-design-pro": {"density":"dense","brand":"kit-faithful","framework":"ant","tone":"technical","type":"ui"},
-    "carbon": {"density":"dense","brand":"kit-faithful","framework":"carbon","tone":"serious","type":"grotesk"},
     "fluentui": {"density":"comfortable","brand":"kit-faithful","framework":"fluent","tone":"restrained","type":"humanist"},
     "magicui": {"density":"editorial","brand":"kit-faithful","framework":"native","tone":"expressive","type":"display"},
     "mantine": {"density":"comfortable","brand":"kit-faithful","framework":"native","tone":"friendly","type":"humanist"},
-    "mui-material": {"density":"comfortable","brand":"kit-faithful","framework":"mui","tone":"neutral","type":"ui"},
     "react-spectrum": {"density":"comfortable","brand":"kit-faithful","framework":"spectrum","tone":"restrained","type":"humanist"},
     "shadcn-registry": {"density":"comfortable","brand":"neutral","framework":"shadcn-tanstack","tone":"restrained","type":"ui"},
     "untitled-ui-react": {"density":"comfortable","brand":"kit-faithful","framework":"react","tone":"restrained","type":"ui"},

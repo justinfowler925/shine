@@ -2,7 +2,7 @@
 
 Regions, in order. Host: application shell or a focused modal-width page. Density: comfortable. Paint: `tokens/voices/shadcn-zinc.css`. Authored source: `corpus/blueprints/shadcn-wizard/page.tsx`.
 
-shadcn ships no stepper primitive and no wizard block. The corpus's only wizard row is `antd-pro-step-form`, which carries Ant's `Steps` component and its runtime — the structure ports, the source does not.
+shadcn ships no stepper primitive and no wizard block, and since Ant Design Pro was deleted on 2026-08-31 (`docs/no-foreign-runtimes.md`) this row is the corpus's only wizard reference. The step list below is built from shadcn primitives; nothing here depends on someone else's `Steps` runtime.
 
 A wizard exists for one reason: the task cannot be validated all at once, so it is cut into steps that each end in a decision the reader can commit. If the whole form *could* be one page, make it one page — a wizard over a form that fits on one screen adds clicks and hides fields.
 
@@ -23,7 +23,7 @@ A wizard exists for one reason: the task cannot be validated all at once, so it 
 
 ## Do not
 
-- `antd-pro-step-form` copied as source. Port the region graph; Ant carries its own runtime and theming.
+- A vendor `Steps` component pulled in for the progress rail. Build it from the primitives; a stepper is a list, a current index and a state per item.
 - A progress bar instead of a step list. A bar shows how far, not what is left or what is done.
 - Colour-only step state.
 - A disabled `Continue` with no visible reason.
