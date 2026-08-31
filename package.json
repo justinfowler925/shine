@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": "true",
   "type": "module",
-  "description": "shine — design authority. Root deps are the ones the verification loop needs; the token pipeline has its own package.json under tokens/.",
+  "description": "shine \u2014 design authority. Root deps are the ones the verification loop needs; the token pipeline has its own package.json under tokens/.",
   "scripts": {
     "build": "npm run build --prefix tokens",
     "verify": "npm run verify --prefix tokens",
@@ -34,6 +34,7 @@
     "diagnosis:test": "node verify/diagnosis.test.mjs",
     "reference:test": "node verify/reference-contract.test.mjs",
     "voice:test": "node verify/voice-contrast.test.mjs",
+    "slds:test": "node verify/slds-tokens.test.mjs",
     "release:test": "node verify/release.test.mjs",
     "untitled": "untitledui",
     "untitled:index": "node corpus/untitledui.mjs --index",
