@@ -151,8 +151,9 @@ Generated from `corpus/templates.json` — do not hand-edit; run `node corpus/in
 | settings | `antd-pro-settings` | ant-design-pro | source | settings, preferences, account |
 | settings | `shadcn-settings` | shadcn-registry | blueprint | settings, preferences, account |
 | settings | `fluent-nav` | fluentui | source | settings |
+| weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `antd-pro-step-form` | ant-design-pro | source | wizard, steps, onboarding |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | wizard, stepper, multi-step, onboarding |
 
-143 rows. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+144 rows. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
