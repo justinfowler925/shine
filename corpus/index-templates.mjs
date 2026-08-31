@@ -3,10 +3,17 @@
 // from on-disk corpus, owned/, and query-only/. A new clone that is not in this
 // index is invisible to the agent. Run from acquire.sh after pins land.
 //
-// V3 rule: every row must earn its place. A row is a real, composed screen (or a
-// deliberately-cited component set), never an inventory dump. The V2 catalog reached
-// 141 rows — 71 of them chart demos — because wildcards indexed whatever the kits
-// shipped. Curate by hand; the doctor checks coverage of requiredScreenTypes.
+// Rule: every row must earn its place, and every row must be DERIVED here rather
+// than hand-written into templates.json. The file is generated; a row that exists
+// only in the JSON is destroyed the next time anyone runs this script.
+//
+// V3 curated by hand because a wildcard index of 141 rows — 71 of them chart demos
+// — drowned the composed pages anyone actually needed. That was a retrieval defect
+// and it is now fixed at the retrieval layer: art-direction measures near-duplicate
+// distance within a scope and draws page and component candidates from separate
+// pools. So the shadcn expansion below indexes all 97 of the kit's blocks, by
+// declared family rather than by wildcard, and reports anything it cannot classify.
+// The doctor checks coverage of requiredScreenTypes.
 //
 //   node corpus/index-templates.mjs
 //   DESIGN_CORPUS=/path node corpus/index-templates.mjs
@@ -86,6 +93,26 @@ const SCREEN_JOBS = {
 
 const exists = (rel) => existsSync(join(CORPUS, rel));
 
+// Retirement is a catalog-wide policy decision, not a property of one kit's loop,
+// so it is declared here in one place. A retired row stays in the catalog and
+// keeps its pack — art-direction skips it for selection but adversarial fixtures
+// and provenance still need it. Retiring a row is only safe once another row
+// covers the same screen, which is why each reason names its replacement.
+const HOUSE_KIT = "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against";
+const RETIRED = {
+  "mui-dashboard": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
+  "antd-pro-app": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
+  "carbon-uishell": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
+  "mantine-appshell": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
+  "heroui-next-app": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
+  "mui-sign-in-side": `${HOUSE_KIT}; shadcn covers auth (shadcn-login-04)`,
+  "mui-crud-dashboard": `${HOUSE_KIT}; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for crud`,
+  "antd-pro-crud": `${HOUSE_KIT}; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for crud`,
+  "antd-pro-list": `${HOUSE_KIT}; shadcn-dashboard-01 carries the composed records structure (navigation, summary, chart, table) for queue`,
+  "tremor-charts": "shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it",
+  "carbon-datatable": "Untitled UI replaced Carbon as Shine's table reference; retain this pack only for adversarial regression fixtures",
+};
+
 const templates = [];
 const push = (row) => {
   if (row.kind === "source" && !exists(row.path)) return;
@@ -93,6 +120,10 @@ const push = (row) => {
   if (!row.dna) row.dna = KIT_FAMILY[row.kit] || KIT_FAMILY.shine;
   if (!row.jobs) row.jobs = SCREEN_JOBS[row.screen] || [row.screen];
   if (!row.scope) row.scope = "page";
+  if (RETIRED[row.id]) {
+    row.selectable = false;
+    row.retiredReason = RETIRED[row.id];
+  }
   templates.push(row);
 };
 
@@ -122,10 +153,14 @@ for (const t of [
 }
 
 // ---- shadcn blocks and cited component sets ---------------------------------
-// Curated, never wildcarded: the wildcard version indexed 70 chart demos and a
-// dozen near-identical sidebars, drowning the rows anyone actually needs.
+// Hand-picked rows first: these carry a title and rank chosen for the job they
+// serve, so they are declared rather than derived. The full block expansion
+// below skips any id already pushed here.
 for (const t of [
-  { name: "dashboard-01", screen: "dashboard", rank: 1, title: "shadcn dashboard-01 (sidebar, cards, chart, table)", required:["navigation","summary","chart","table"] },
+  // Carries crud/queue/records jobs as well as dashboard: it is the composed
+  // records reference that replaced mui-crud-dashboard and antd-pro-list, so
+  // retiring those rows depends on these jobs staying here.
+  { name: "dashboard-01", screen: "dashboard", rank: 1, title: "shadcn dashboard-01 (sidebar, cards, chart, table)", required:["navigation","summary","chart","table"], jobs: ["crud","dashboard","inbox","list","queue","records","triage","worklist"] },
   { name: "sidebar-07", screen: "app-shell", rank: 1, title: "shadcn sidebar-07 (collapsible shell)", required:["navigation"] },
   { name: "login-04", screen: "auth", rank: 2, title: "shadcn login-04", required:["form"] },
   { name: "command", screen: "command-palette", rank: 1, title: "shadcn command (palette, keyboard-first, no motion)", scope:"component" },
@@ -141,7 +176,9 @@ for (const t of [
     kit: "shadcn-registry",
     title: t.title,
     path: rel,
-    preview: t.name.includes("-0") ? `https://ui.shadcn.com/view/${t.name}` : `https://ui.shadcn.com/docs/components/${t.name.split("-")[0]}`,
+    // /view/<name> 404s; the view route is style-scoped. Component rows have no
+    // view page at all and point at their docs entry instead.
+    preview: t.name.includes("-0") ? `https://ui.shadcn.com/view/new-york-v4/${t.name}` : `https://ui.shadcn.com/docs/components/${t.name.split("-")[0]}`,
     license: "MIT",
     kind: "source",
     startFrom: t.rank,
@@ -149,6 +186,89 @@ for (const t of [
     ...(t.required ? { reference: { required: t.required } } : {}),
     ...(t.jobs ? { jobs: t.jobs } : {}),
   });
+}
+
+// ---- shadcn full block expansion --------------------------------------------
+// shadcn publishes exactly 97 blocks and the corpus carries all of them, so the
+// catalog indexes all of them. This is a declared classification of the kit's own
+// block taxonomy, not a wildcard: each family below names its screen, scope, and
+// jobs, and anything the registry adds outside those families is reported rather
+// than silently indexed.
+//
+// The earlier curated-only pass existed because 70 near-identical chart rows and
+// 16 sidebars drowned the rows anyone needed. That was a retrieval defect, and it
+// has since been fixed at the retrieval layer: art-direction measures
+// near-duplicate distance within a scope and draws page and component candidates
+// from separate pools, so a full corpus no longer crowds out the composed pages.
+//
+// Deriving these rows here rather than hand-writing them into templates.json is
+// the point. The hand-written version diverged: the generator produced 49 rows
+// against the file's 138, so running the documented regenerate command destroyed
+// 89 rows, every chart row among them.
+const CHART_FAMILIES = ["area", "bar", "line", "pie", "radar", "radial", "tooltip"];
+const BLOCK_FAMILIES = [
+  {
+    match: /^sidebar-\d+$/, screen: "app-shell", scope: "page",
+    required: ["navigation"], jobs: ["app-shell", "shell", "nav", "sidebar"],
+    title: (name) => `shadcn ${name} (application shell)`,
+  },
+  {
+    match: /^login-\d+$/, screen: "auth", scope: "page",
+    required: ["form"], jobs: ["auth", "login", "signin", "signup", "sign-in"],
+    title: (name) => `shadcn ${name} (sign-in screen)`,
+  },
+  {
+    match: /^signup-\d+$/, screen: "auth", scope: "page",
+    required: ["form"], jobs: ["auth", "login", "signin", "signup", "sign-up"],
+    title: (name) => `shadcn ${name} (sign-up screen)`,
+  },
+  {
+    match: new RegExp(`^chart-(${CHART_FAMILIES.join("|")})-`), screen: "charts", scope: "component",
+    required: ["chart"],
+    jobs: (name) => ["charts", "chart", name.split("-")[1], "analytics"],
+    title: (name) => `shadcn ${name} (${name.split("-")[1]} chart block)`,
+  },
+];
+// One chart block is a composed page rather than a single mark: it carries its own
+// range control and header, which is the shape a chart-led analytics page needs.
+const CHART_PAGE = {
+  name: "chart-area-interactive", scope: "page",
+  jobs: ["charts", "chart", "area", "dataviz", "trend", "timeseries"],
+  title: "shadcn chart-area-interactive (chart-led analytics page)",
+};
+
+const shadcnRegistry = join(CORPUS, "shadcn-registry/registry.json");
+if (existsSync(shadcnRegistry)) {
+  const blocks = (JSON.parse(readFileSync(shadcnRegistry, "utf8")).items ?? [])
+    .filter((item) => item.type === "registry:block")
+    .map((item) => item.name)
+    .sort();
+  const unclassified = [];
+  for (const name of blocks) {
+    const id = `shadcn-${name}`;
+    if (templates.some((row) => row.id === id)) continue; // hand-picked above
+    const rel = `shadcn-registry/items/${name}.json`;
+    if (!exists(rel)) continue;
+    const family = BLOCK_FAMILIES.find((f) => f.match.test(name));
+    if (!family) {
+      if (name !== "dashboard-01") unclassified.push(name);
+      continue;
+    }
+    const page = name === CHART_PAGE.name;
+    push({
+      id, screen: family.screen, kit: "shadcn-registry",
+      title: page ? CHART_PAGE.title : family.title(name),
+      path: rel,
+      preview: `https://ui.shadcn.com/view/new-york-v4/${name}`,
+      license: "MIT", kind: "source", startFrom: 1,
+      scope: page ? CHART_PAGE.scope : family.scope,
+      reference: { required: family.required },
+      jobs: page ? CHART_PAGE.jobs : (typeof family.jobs === "function" ? family.jobs(name) : family.jobs),
+    });
+  }
+  if (unclassified.length) {
+    console.warn(`shadcn blocks not classified by BLOCK_FAMILIES (add a family or curate them): ${unclassified.join(", ")}`);
+  }
 }
 
 // ---- Untitled UI public examples -------------------------------------------
@@ -218,8 +338,7 @@ const singles = [
     title: "Carbon DataTable (toolbar-first, batch actions, dense)",
     path: "carbon/packages/react/src/components/DataTable",
     preview: "https://carbondesignsystem.com/components/data-table/usage/",
-    license: "Apache-2.0", jobs: ["queue", "list", "inbox"], selectable: false,
-    retiredReason: "Untitled UI replaced Carbon as Shine's table reference; retain this pack only for adversarial regression fixtures",
+    license: "Apache-2.0", jobs: ["queue", "list", "inbox"],
   },
   {
     id: "carbon-uishell", screen: "app-shell", kit: "carbon", rank: 4,
@@ -302,6 +421,39 @@ for (const t of [
   });
 }
 
+// ---- shadcn page blueprints --------------------------------------------------
+// shadcn ships 97 blocks: one dashboard, sixteen sidebars, ten auth pages and
+// seventy charts. Every one of them is already catalogued, so these five screens
+// are not a harvest backlog — they are the edge of what shadcn publishes. Left
+// alone, a shadcn host asking for a settings or record page gets an Ant or MUI
+// row flagged port:true, which is honest but gives no shadcn-shaped target.
+//
+// These rows are that target. Three carry authored source in
+// corpus/blueprints/<id>/ because the kit reference they replace is structurally
+// misleading (antd-pro-profile is a profile, antd-pro-settings hides its section
+// names behind tabs, antd-pro-step-form ships Ant's Steps runtime). Checkout and
+// marketing are region maps only: the MUI structure ports cleanly, and the estate
+// builds neither, so authored source there would be untested reference code.
+for (const t of [
+  { id: "shadcn-record", screen: "record", title: "shadcn record detail (identity, facts, decision, evidence)", jobs: ["record", "detail", "account", "opportunity"], required: ["form", "table"] },
+  { id: "shadcn-settings", screen: "settings", title: "shadcn settings (visible section nav, per-section save)", jobs: ["settings", "preferences", "account"], required: ["form", "navigation"] },
+  { id: "shadcn-wizard", screen: "wizard", title: "shadcn wizard (step list, review before commit)", jobs: ["wizard", "stepper", "multi-step", "onboarding"], required: ["form", "navigation"] },
+  { id: "shadcn-checkout", screen: "checkout", title: "shadcn checkout (persistent order summary) — region map only", jobs: ["checkout", "payment"], required: ["form", "summary"] },
+  { id: "shadcn-marketing", screen: "marketing", title: "shadcn marketing page (claim, proof, pricing) — region map only", jobs: ["marketing", "landing", "pricing"] },
+]) {
+  // Blueprints live in Shine, not the acquired corpus, so exists() is wrong here.
+  const authored = existsSync(join(SHINE, "corpus/blueprints", t.id));
+  push({
+    id: t.id, screen: t.screen, kit: "shadcn-registry", title: t.title,
+    preview: "", license: "MIT", kind: "blueprint", startFrom: 1, jobs: t.jobs,
+    dna: KIT_FAMILY["shadcn-registry"],
+    ...(t.required ? { reference: { required: t.required } } : {}),
+    note: authored
+      ? `corpus/blueprints/${t.id}.md is the region map; corpus/blueprints/${t.id}/ is authored shadcn source to copy`
+      : `corpus/blueprints/${t.id}.md is the region map; shadcn publishes no block for this screen`,
+  });
+}
+
 // ---- owned (Atlas-licensed, not republished) --------------------------------
 const ownedManifest = join(CORPUS, "owned/manifest.json");
 if (existsSync(ownedManifest)) {
@@ -331,8 +483,33 @@ const catalog = {
   templates,
 };
 
+// --check proves the committed catalog is still what this script produces. It is
+// the gate on the defect that shipped once already: 94 shadcn rows were hand-added
+// to templates.json and never encoded here, so the generator produced 49 rows
+// against the file's 138 and the documented regenerate command destroyed 89 rows.
+const checkOnly = process.argv.includes("--check");
 const jsonPath = join(SHINE, "corpus/templates.json");
-writeFileSync(jsonPath, JSON.stringify(catalog, null, 2) + "\n");
+const rendered = JSON.stringify(catalog, null, 2) + "\n";
+if (checkOnly) {
+  const onDisk = existsSync(jsonPath) ? readFileSync(jsonPath, "utf8") : "";
+  if (onDisk === rendered) {
+    console.log(`templates.json: in sync with the generator (${templates.length} rows)`);
+    process.exit(0);
+  }
+  const diskRows = onDisk ? (JSON.parse(onDisk).templates ?? []) : [];
+  const diskIds = new Set(diskRows.map((row) => row.id));
+  const madeIds = new Set(templates.map((row) => row.id));
+  const orphaned = [...diskIds].filter((id) => !madeIds.has(id));
+  const unwritten = [...madeIds].filter((id) => !diskIds.has(id));
+  console.error(`templates.json is out of sync with corpus/index-templates.mjs`);
+  console.error(`  on disk: ${diskRows.length} rows   generator: ${templates.length} rows`);
+  if (orphaned.length) console.error(`  only in the file (hand-edited; a regenerate would destroy these): ${orphaned.join(", ")}`);
+  if (unwritten.length) console.error(`  only in the generator (never written): ${unwritten.join(", ")}`);
+  if (!orphaned.length && !unwritten.length) console.error(`  same rows, different field values — run the generator to see the diff`);
+  console.error(`  fix: encode the change in corpus/index-templates.mjs, then run it without --check`);
+  process.exit(1);
+}
+writeFileSync(jsonPath, rendered);
 
 // ---- templates.md — thin generated index ------------------------------------
 const md = [];

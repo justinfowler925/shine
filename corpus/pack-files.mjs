@@ -130,8 +130,15 @@ export function collectCorpusSource(row, { corpus, extractDir }) {
   } else if (row.kind === "query-only" && abs && existsSync(abs)) {
     listed.push(abs);
   } else if (row.kind === "blueprint") {
+    // A blueprint is a region map for a screen with no harvestable upstream. The
+    // LEX rows are map-only because no public Lightning source exists to copy.
+    // Where the kit's own primitives ARE in the corpus and only the composed page
+    // is missing — every shadcn page gap — the blueprint may also carry authored
+    // source in a sibling directory, so the reader gets code and not just prose.
     const bp = join(SHINE, "corpus/blueprints", `${row.id}.md`);
     if (existsSync(bp)) listed.push(bp);
+    const authored = join(SHINE, "corpus/blueprints", row.id);
+    if (existsSync(authored) && statSync(authored).isDirectory()) walk(authored, listed);
   }
   const files = [...new Set(listed)].sort((a, b) => rankSource(a) - rankSource(b) || a.localeCompare(b));
   const picked = pickMustRead(files);
