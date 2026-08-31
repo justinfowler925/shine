@@ -77,6 +77,7 @@ const SCREEN_JOBS = {
   chat: ["chat", "assistant"],
   settings: ["settings", "preferences", "account"],
   wizard: ["wizard", "steps", "onboarding"],
+  "weekly-board": ["weekly-board", "board", "cadence", "report-out", "standup", "kanban"],
   "ai-generate": ["ai-generate", "prompt", "composer"],
   "marketing-hero": ["marketing-hero", "hero", "landing"],
   empty: ["empty", "empty-state", "zero"],
@@ -440,6 +441,12 @@ for (const t of [
   { id: "shadcn-wizard", screen: "wizard", title: "shadcn wizard (step list, review before commit)", jobs: ["wizard", "stepper", "multi-step", "onboarding"], required: ["form", "navigation"] },
   { id: "shadcn-checkout", screen: "checkout", title: "shadcn checkout (persistent order summary) — region map only", jobs: ["checkout", "payment"], required: ["form", "summary"] },
   { id: "shadcn-marketing", screen: "marketing", title: "shadcn marketing page (claim, proof, pricing) — region map only", jobs: ["marketing", "landing", "pricing"] },
+  // A recurring-meeting board, read in full in a fixed order. Deliberately NOT
+  // screen "queue": queue/crud/dashboard demand a grid with search, sort and
+  // pagination, and sorting a cadence destroys the meaning while paginating it
+  // hides half the agenda. The blueprint states the four conditions that must
+  // hold before citing this instead of building the grid.
+  { id: "shadcn-weekly-board", screen: "weekly-board", title: "shadcn weekly cadence board (report-out, discuss, up next)", jobs: ["weekly-board", "board", "cadence", "report-out", "standup", "kanban", "elt"], required: ["navigation", "summary"] },
 ]) {
   // Blueprints live in Shine, not the acquired corpus, so exists() is wrong here.
   const authored = existsSync(join(SHINE, "corpus/blueprints", t.id));

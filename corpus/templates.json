@@ -3629,6 +3629,37 @@
       "scope": "page"
     },
     {
+      "id": "shadcn-weekly-board",
+      "screen": "weekly-board",
+      "kit": "shadcn-registry",
+      "title": "shadcn weekly cadence board (report-out, discuss, up next)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "weekly-board",
+        "board",
+        "cadence",
+        "report-out",
+        "standup",
+        "kanban",
+        "elt"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "navigation",
+          "summary"
+        ]
+      },
+      "note": "corpus/blueprints/shadcn-weekly-board.md is the region map; shadcn publishes no block for this screen",
+      "scope": "page"
+    },
+    {
       "id": "antd-pro-step-form",
       "screen": "wizard",
       "kit": "ant-design-pro",
