@@ -32,6 +32,11 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Fixed
 
+- **Every editor hook was dying at runtime.** `skill/run-hook.sh` resolved its
+  root with a logical `cd ..`, and every surface invokes it through a symlink, so
+  it walked the *link's* parent: `~/.agents/skills/verify/doctor.mjs`,
+  MODULE_NOT_FOUND, on all three surfaces. The doctor read the hook config and
+  called the wiring green. It now runs the real command through the real link.
 - **Four voice sheets shipped an action colour that failed AA against its own
   label**, found by generalising the contrast test from one sheet to all ten:
   `mantine` 3.56:1 → 5.02:1 (blue[8]), `slds` 2.19:1 dark → 4.67:1

@@ -401,6 +401,24 @@ if (!CI) {
     else ok(`${w.name} fail-closed`, "no || true");
   }
 
+  // Wiring is not execution. Every surface invokes run-hook.sh THROUGH a symlink,
+  // and the script resolved its root with a logical `cd ..`, which walks the
+  // LINK's parent — so a correctly-wired hook died with MODULE_NOT_FOUND on
+  // ~/.agents/skills/verify/doctor.mjs and nothing here noticed, because this
+  // block only ever read the config. Run the real command through the real link.
+  for (const [surface, link] of [
+    ["Cursor", join(HOME, ".cursor/skills/shine")],
+    ["Codex", join(HOME, ".agents/skills/shine")],
+    ["Claude", join(HOME, ".claude/skills/shine")],
+  ]) {
+    const runner = join(link, "run-hook.sh");
+    if (!existsSync(runner)) continue;
+    const r = spawnSync(runner, ["design-lint.mjs"], { input: "{}", encoding: "utf8", timeout: 30_000 });
+    const out = `${r.stdout || ""}${r.stderr || ""}`;
+    if (r.status === 0 && !/Cannot find module/.test(out)) ok(`${surface} hook command runs`, runner.replace(HOME, "~"));
+    else fail(`${surface} hook command runs`, `exit ${r.status}: ${out.trim().split("\n")[0]?.slice(0, 160) || "no output"}`);
+  }
+
   const HOOK_STALE = /Projects\/shine(?:-live|-deploy)?\//;
   const hookSample = "node ~/Projects/shine-deploy/hooks/design-lint.mjs";
   if (!HOOK_STALE.test(hookSample)) fail("hook-path detector bites", "missed a hardcoded shine-deploy hook");
