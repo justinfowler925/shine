@@ -70,9 +70,24 @@ catalogued, harvested and materialized — **shadcn goes from 8 usable templates
 Page-scope coverage for **app-shell (16) and auth (10) is now entirely shadcn**,
 where each previously offered one shadcn pack against MUI/Ant/Carbon. The 70
 chart blocks are component-scope — they are section-level cards, not pages — so
-they surface as component references on dashboard and charts briefs. The `charts`
-*page* screen still resolves to Tremor until a composed shadcn charts page is
-authored.
+they surface as component references on dashboard briefs.
+
+**The `charts` screen now has a house page reference.** `shadcn-chart-area-interactive`
+is promoted to `scope: page` — its standalone preview genuinely renders as a full
+page (header, range selector, plot), so this is a real page reference rather than a
+card relabelled. Exactly one is promoted; the other 69 stay components, which is
+what they are. `tremor-charts` is retired accordingly.
+
+Its jobs are deliberately narrow (`charts, chart, area, dataviz, trend, timeseries`
+and **not** `analytics` or `dashboard`): with those included, a dashboard brief
+resolved to a single chart page instead of the composed `shadcn-dashboard-01`,
+which is a worse answer. Verified after the change: a charts brief → the chart
+page, a dashboard brief → `shadcn-dashboard-01`, a records brief →
+`shadcn-dashboard-01`, an app-shell brief → a sidebar block.
+
+Why this screen matters: `screen: charts` does **not** trigger the table demand that
+`queue|crud|dashboard` do, so a genuinely chart-led surface can cite a house
+reference without being required to show a grid it does not have.
 
 `harvest.mjs` now derives shadcn targets from each catalog row's own `preview`
 URL, so adding a block is a data change rather than a new `TARGETS` entry.
