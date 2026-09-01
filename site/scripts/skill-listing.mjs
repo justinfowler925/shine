@@ -14,12 +14,14 @@
 // difference between the <strong>-wrapped rows and the plain ones — so a run against an
 // already-current page is a no-op, byte for byte.
 
-import { readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const PAGE = join(ROOT, "site/index.html");
+const PUBLIC_SKILL = join(ROOT, "site/SKILL.md");
+const CANONICAL_SKILL = join(ROOT, "skill/SKILL.md");
 const REFS = "skill/references";
 
 // Visible (tag-stripped) column at which the numbers end.
@@ -50,6 +52,8 @@ const built = [
 ].join("\n");
 
 const page = readFileSync(PAGE, "utf8");
+const canonicalSkill = readFileSync(CANONICAL_SKILL, "utf8");
+const publicSkillCurrent = existsSync(PUBLIC_SKILL) && readFileSync(PUBLIC_SKILL, "utf8") === canonicalSkill;
 const re = /<pre>skill\/[\s\S]*?<\/pre>/;
 const current = page.match(re);
 
@@ -61,8 +65,8 @@ if (!current) {
 const write = process.argv.includes("--write");
 const check = process.argv.includes("--check");
 
-if (current[0] === built) {
-  console.log(`skill-listing: current — ${refs.length} files, ${total} lines`);
+if (current[0] === built && publicSkillCurrent) {
+  console.log(`skill-listing: current — ${refs.length} files, ${total} lines; public SKILL.md matches canonical`);
   process.exit(0);
 }
 
@@ -79,6 +83,7 @@ if (check) {
   for (const f of claimed.keys()) if (!refLines.some(([g]) => g === f)) problems.push(`${f} listed but not on disk`);
   const claimedTotal = Number((current[0].match(/<strong>([\d,]+)<\/strong><\/pre>/) ?? [])[1]?.replace(/,/g, ""));
   if (claimedTotal !== total) problems.push(`total says ${claimedTotal}, is ${total}`);
+  if (!publicSkillCurrent) problems.push("site/SKILL.md differs from skill/SKILL.md");
   if (!problems.length) problems.push("block differs only in whitespace");
   console.error(`skill-listing: STALE — ${problems.join("; ")}`);
   console.error("  fix: node site/scripts/skill-listing.mjs --write");
@@ -87,7 +92,8 @@ if (check) {
 
 if (write) {
   writeFileSync(PAGE, page.replace(re, built));
-  console.log(`skill-listing: written — ${refs.length} files, ${total} lines`);
+  writeFileSync(PUBLIC_SKILL, canonicalSkill);
+  console.log(`skill-listing: written — ${refs.length} files, ${total} lines; public SKILL.md synced`);
   process.exit(0);
 }
 

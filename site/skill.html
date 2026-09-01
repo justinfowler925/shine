@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!-- shine-lint: off color — this standalone page owns its zinc token source below;
+     usage sites consume variables. Type, spacing, tracking, and shadow remain enforced. -->
+<html lang="en" data-theme="light" data-cite="shadcn-blog" data-dna-family="shadcn-zinc" data-shine-voice="kit-faithful" data-shine-lane="marketing">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get the Shine skill — copy or download SKILL.md</title>
+<meta name="description" content="Copy the canonical Shine SKILL.md into your AI's project instructions, or download it as a plain Markdown file. No GitHub knowledge required.">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  :root {
+    color-scheme: light;
+    --bg: #ffffff; --bg-hex: #ffffff; --surface: #fafafa; --fg: #09090b;
+    --muted: #52525b; --border: #e4e4e7; --primary: #18181b; --primary-fg: #fafafa;
+    --success: #166534; --success-bg: #f0fdf4;
+    --font: "Geist", ui-sans-serif, system-ui, sans-serif;
+    --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+    --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem;
+    --text-lg: 1.25rem; --text-display: clamp(2.25rem, 1.55rem + 3vw, 3.75rem);
+    --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-6: 1.5rem;
+    --space-8: 2rem; --space-12: 3rem; --space-16: 4rem; --space-24: 6rem;
+    --radius-control: 6px; --radius-card: 12px;
+    --tracking-display: -0.03em; --tracking-heading: -0.01em; --tracking-caps: 0.08em;
+    --duration: 200ms; --ease: cubic-bezier(0.2, 0, 0, 1);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 12px 32px -12px rgba(0, 0, 0, 0.16);
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #09090b; --bg-hex: #09090b; --surface: #18181b; --fg: #fafafa;
+    --muted: #a1a1aa; --border: #27272a; --primary: #fafafa; --primary-fg: #18181b;
+    --success: #86efac; --success-bg: #052e16;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.24), 0 12px 32px -8px rgba(0, 0, 0, 0.48);
+  }
+  html.no-anim, html.no-anim * { transition: none !important; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--font); font-size: var(--text-base); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: var(--fg); text-underline-offset: 0.2em; }
+  :focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+  .bar-wrap { position: sticky; top: 0; z-index: 10; padding: var(--space-4) var(--space-6) 0; }
+  .bar { max-width: 72rem; min-height: 56px; margin-inline: auto; padding: var(--space-2) var(--space-3); display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); background: color-mix(in srgb, var(--bg) 78%, transparent); border: 1px solid var(--border); border-radius: var(--radius-card); backdrop-filter: blur(24px); box-shadow: var(--shadow); }
+  .brand { text-decoration: none; font-weight: 600; }
+  .nav { display: flex; align-items: center; gap: var(--space-3); }
+  .nav a { color: var(--muted); font-size: var(--text-sm); text-decoration: none; }
+  .page { width: min(100% - 3rem, 72rem); margin: var(--space-16) auto var(--space-24); }
+  .hero { max-width: 48rem; display: grid; gap: var(--space-6); }
+  .eyebrow { color: var(--muted); font-size: var(--text-xs); font-weight: 600; letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+  h1 { font-size: var(--text-display); font-weight: 500; line-height: 1.05; letter-spacing: var(--tracking-display); text-wrap: balance; }
+  .lede { max-width: 40rem; color: var(--muted); font-size: var(--text-lg); line-height: 1.45; }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+  button, .button { min-height: 44px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-control); font: inherit; font-size: var(--text-sm); font-weight: 500; cursor: pointer; transition: opacity var(--duration) var(--ease), background var(--duration) var(--ease); }
+  .primary { border: 1px solid var(--primary); background: var(--primary); color: var(--primary-fg); }
+  .secondary, .theme { border: 1px solid var(--border); background: transparent; color: var(--fg); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+  button:disabled { cursor: wait; opacity: 0.55; }
+  button:hover:not(:disabled), .button:hover { opacity: 0.82; }
+  .theme { min-width: 44px; padding-inline: var(--space-3); color: var(--muted); }
+  .status { min-height: 1.6em; color: var(--muted); font-size: var(--text-sm); }
+  .status[data-state="success"] { color: var(--success); }
+  .proof { margin-top: var(--space-12); display: grid; grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr); gap: var(--space-6); align-items: start; }
+  .steps, .source { border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow); }
+  .steps { padding: var(--space-6); }
+  .steps h2, .source-head h2 { font-size: var(--text-lg); font-weight: 500; letter-spacing: var(--tracking-heading); }
+  .steps ol { margin-top: var(--space-6); padding: 0; list-style: none; display: grid; gap: var(--space-6); counter-reset: steps; }
+  .steps li { counter-increment: steps; display: grid; grid-template-columns: var(--space-8) 1fr; gap: var(--space-3); }
+  .steps li::before { content: counter(steps); width: var(--space-8); height: var(--space-8); display: grid; place-items: center; border: 1px solid var(--border); border-radius: 50%; font-size: var(--text-sm); font-weight: 600; }
+  .steps strong { display: block; font-weight: 500; }
+  .steps span { display: block; margin-top: var(--space-2); color: var(--muted); font-size: var(--text-sm); }
+  .note { margin-top: var(--space-6); padding: var(--space-4); border-radius: var(--radius-control); background: var(--success-bg); color: var(--success); font-size: var(--text-sm); }
+  .source { min-width: 0; overflow: hidden; }
+  .source-head { padding: var(--space-4) var(--space-6); display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); border-bottom: 1px solid var(--border); }
+  .source-head span { color: var(--muted); font-family: var(--mono); font-size: var(--text-xs); }
+  pre { max-height: 42rem; overflow: auto; padding: var(--space-6); color: var(--muted); font-family: var(--mono); font-size: var(--text-xs); line-height: 1.55; white-space: pre-wrap; }
+  .advanced { margin-top: var(--space-12); max-width: 48rem; display: grid; gap: var(--space-3); }
+  .advanced h2 { font-size: var(--text-lg); font-weight: 500; }
+  .advanced p { color: var(--muted); }
+  footer { border-top: 1px solid var(--border); padding: var(--space-12) var(--space-6); color: var(--muted); font-size: var(--text-sm); }
+  footer p { max-width: 72rem; margin-inline: auto; }
+  @media (max-width: 52rem) { .proof { grid-template-columns: 1fr; } .page { width: min(100% - 2rem, 72rem); margin-top: var(--space-12); } .bar-wrap { padding-inline: var(--space-4); } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="bar-wrap">
+  <header class="bar">
+    <a class="brand" href="/">Shine</a>
+    <nav class="nav" aria-label="Site">
+      <a href="https://github.com/justinfowler925/shine">Repository</a>
+      <button class="theme" id="theme" type="button" aria-label="Toggle color scheme">Dark</button>
+    </nav>
+  </header>
+</div>
+
+<main class="page" data-cite="shadcn-blog" data-job="copy or download the skill">
+  <section class="hero" aria-labelledby="title">
+    <p class="eyebrow">One file · plain Markdown · MIT</p>
+    <h1 id="title">Give your AI a design director.</h1>
+    <p class="lede">Copy Shine into persistent project instructions, or download <code>SKILL.md</code> for an AI that supports skills. You do not need Git, GitHub, or a terminal.</p>
+    <div class="actions">
+      <button class="primary" data-primary data-testid="copy-skill" id="copy" type="button" disabled>Copy the skill</button>
+      <a class="button secondary" data-testid="download-skill" href="/SKILL.md" download="SKILL.md">Download SKILL.md</a>
+      <a class="button secondary" href="/SKILL.md">View plain text</a>
+    </div>
+    <p class="status" data-testid="copy-status" id="status" role="status" aria-live="polite">Loading the canonical skill…</p>
+  </section>
+
+  <section class="proof" aria-label="Install instructions and canonical source">
+    <div class="steps" data-testid="install-steps">
+      <h2>Three steps</h2>
+      <ol>
+        <li><div><strong>Copy or download</strong><span>The buttons above always use the same canonical file shipped with Shine.</span></div></li>
+        <li><div><strong>Open your AI’s instructions</strong><span>Use a project, workspace, custom assistant, or skill folder—whatever your tool calls persistent instructions.</span></div></li>
+        <li><div><strong>Paste or attach</strong><span>Ask the AI to follow Shine whenever it designs, builds, or audits an interface.</span></div></li>
+      </ol>
+      <p class="note"><strong>Honest compatibility:</strong> Codex and Cursor can install the full native skill. Other assistants can use this file as persistent instructions, but their tool access and enforcement hooks will differ.</p>
+    </div>
+
+    <div class="source" data-testid="skill-source">
+      <div class="source-head"><h2>The actual file</h2><span id="meta">SKILL.md</span></div>
+      <pre id="source" tabindex="0">Loading…</pre>
+    </div>
+  </section>
+
+  <section class="advanced">
+    <h2>Want the gates too?</h2>
+    <p>The one-file path gives your AI Shine’s workflow. The <a href="https://github.com/justinfowler925/shine#install--deploy">full repository install</a> adds the template corpus, browser proof, design lint, stop hooks, and doctor checks.</p>
+  </section>
+</main>
+
+<footer><p>Shine v3 · <a href="https://github.com/justinfowler925/shine">source</a> · with gratitude to <a href="https://github.com/shadcn">shadcn</a>, creator of <a href="https://github.com/shadcn-ui/ui">shadcn/ui</a></p></footer>
+
+<script>
+  const root = document.documentElement;
+  const theme = document.getElementById("theme");
+  const copy = document.getElementById("copy");
+  const source = document.getElementById("source");
+  const status = document.getElementById("status");
+  const meta = document.getElementById("meta");
+  let skill = "";
+
+  const setTheme = (value) => {
+    root.classList.add("no-anim");
+    root.dataset.theme = value;
+    theme.textContent = value === "dark" ? "Light" : "Dark";
+    document.querySelector('meta[name="theme-color"]').content = getComputedStyle(root).getPropertyValue("--bg-hex").trim();
+    try { localStorage.setItem("theme", value); } catch (error) {}
+    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove("no-anim")));
+  };
+
+  try {
+    setTheme(localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+  } catch (error) {}
+  theme.addEventListener("click", () => setTheme(root.dataset.theme === "dark" ? "light" : "dark"));
+
+  const fallbackCopy = (value) => {
+    const area = document.createElement("textarea");
+    area.value = value;
+    area.setAttribute("readonly", "");
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+  };
+
+  fetch("/SKILL.md")
+    .then((response) => {
+      if (!response.ok) throw new Error("The skill file could not be loaded.");
+      return response.text();
+    })
+    .then((value) => {
+      skill = value;
+      source.textContent = value;
+      const lines = value.split("\n").length - 1;
+      meta.textContent = `SKILL.md · ${lines} lines`;
+      status.textContent = "Ready to copy.";
+      copy.disabled = false;
+    })
+    .catch((error) => {
+      source.textContent = error.message;
+      status.textContent = "The file did not load. Use Download SKILL.md instead.";
+    });
+
+  copy.addEventListener("click", async () => {
+    try {
+      if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(skill);
+      else fallbackCopy(skill);
+      status.dataset.state = "success";
+      status.textContent = "Copied. Paste it into your AI’s persistent instructions.";
+      copy.textContent = "Copied";
+    } catch (error) {
+      fallbackCopy(skill);
+      status.dataset.state = "success";
+      status.textContent = "Copied. Paste it into your AI’s persistent instructions.";
+      copy.textContent = "Copied";
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "cite": "shadcn-blog",
+  "objects": [
+    {
+      "id": "copy-skill",
+      "selector": "[data-testid=copy-skill]",
+      "referenceRole": "primary action",
+      "purpose": "Copy the canonical skill without using a repository"
+    },
+    {
+      "id": "copy-status",
+      "selector": "[data-testid=copy-status]",
+      "referenceRole": "interaction result",
+      "purpose": "Confirm what happened and tell the visitor what to do next"
+    },
+    {
+      "id": "download-skill",
+      "selector": "[data-testid=download-skill]",
+      "referenceRole": "secondary action",
+      "purpose": "Download the canonical Markdown file for a native skill folder"
+    },
+    {
+      "id": "skill-source",
+      "selector": "[data-testid=skill-source]",
+      "referenceRole": "product proof",
+      "purpose": "Show that the offered download is the actual readable skill"
+    }
+  ],
+  "flows": [
+    {
+      "id": "copy-canonical-skill",
+      "userJob": "Copy Shine and know where to paste it",
+      "steps": [
+        {"action": "visible", "selector": "[data-testid=skill-source]"},
+        {"action": "click", "selector": "[data-testid=copy-skill]"},
+        {"action": "text", "selector": "[data-testid=copy-status]", "value": "Copied"}
+      ]
+    }
+  ]
+}

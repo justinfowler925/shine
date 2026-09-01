@@ -4,6 +4,16 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ## Unreleased
 
+### Added
+
+- A public, non-technical skill path at `/skill`: read the canonical file, copy
+  it with one action, download `SKILL.md`, or use it as persistent instructions
+  in an AI without native skill support. The public Markdown is generated from
+  `skill/SKILL.md`, and the doctor fails if the two drift.
+- A LinkedIn-ready V3 article documenting the failed likeness critic, fictional
+  visual proof, dead symlinked hooks, weekly-board evidence gap, runtime pruning,
+  and the move from visual confidence to executable usability.
+
 ### Changed
 
 - Added explicit public credit and links for [shadcn](https://github.com/shadcn),

@@ -9,6 +9,15 @@ does not exist — so the page was re-cited to the `shadcn-blog` region map and
 repainted from the zinc ramp. The regions did not change; the paint did.
 **Unlock:** structure stays the article. Featured figures under the lede (template photo-card role). No blog-index of dummy posts.
 
+## Skill route
+
+`/skill` is the adoption close for visitors who do not know GitHub. It keeps the
+same shadcn editorial voice and makes the primary job executable: load the exact
+canonical `SKILL.md`, copy it, and show the next instruction. Download and raw
+text are secondary actions. Native skill support and paste-as-persistent-
+instructions are named separately; the page does not claim every AI has Codex's
+or Cursor's hooks and tool surface.
+
 ## Subject
 
 A Cursor/Claude user who has watched generated UI come out generic. They need the story in order: what Shine is, how the loop works, then the afternoon it takes to install. Not a SaaS landing. Not a lab notebook. Proof is pictures of Shine's own artifacts.

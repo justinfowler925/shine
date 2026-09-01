@@ -1621,6 +1621,9 @@ if (!CI) {
 // costs more than the check buys. `npm run doctor:full` is the deliberate act; the
 // default stays green-when-good so a FAIL still means something.
 if (FULL) {
+  const publicSkill = spawnSync(process.execPath, [join(SHINE, "verify/public-skill.test.mjs")], { cwd: SHINE, encoding: "utf8", timeout: 120_000 });
+  if (publicSkill.status === 0) ok("public skill copies canonical instructions", "4 objects; copy result browser-proven");
+  else fail("public skill copies canonical instructions", `${publicSkill.stderr || publicSkill.stdout}`.trim().slice(-500));
   const fixture = join(SHINE, "verify/fixtures/integrations");
   const build = spawnSync("npm", ["run", "build"], { cwd: fixture, encoding: "utf8", timeout: 600_000 });
   if (build.status === 0) ok("integration fixture typechecks and builds", "the two recipes Shine supports: shadcn/TanStack and native");
