@@ -16,6 +16,9 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Changed
 
+- Usability text assertions now wait for asynchronous interaction results instead
+  of reading immediately after a click; the public skill proof also runs under
+  the production CSP so a blocked self-fetch cannot pass locally.
 - Added explicit public credit and links for [shadcn](https://github.com/shadcn),
   creator of [shadcn/ui](https://github.com/shadcn-ui/ui), to the README, V3
   release notes, and website footer.

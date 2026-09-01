@@ -43,7 +43,7 @@ async function runStep(page,step) {
   if(step.action==="press") return locator.press(step.value||"Enter");
   if(step.action==="visible") return locator.waitFor({state:"visible"});
   if(step.action==="hidden") return locator.waitFor({state:"hidden"});
-  if(step.action==="text") { const actual=await locator.textContent(); if(!String(actual||"").includes(step.value||"")) fail(`${step.selector} text did not contain ${JSON.stringify(step.value||"")}`); return; }
+  if(step.action==="text") { const expected=step.value||""; await locator.filter({hasText:expected}).waitFor({state:"visible"}); const actual=await locator.textContent(); if(!String(actual||"").includes(expected)) fail(`${step.selector} text did not contain ${JSON.stringify(expected)}`); return; }
   if(step.action==="value") { const actual=await locator.inputValue(); if(actual!==(step.value??"")) fail(`${step.selector} value was ${JSON.stringify(actual)}, expected ${JSON.stringify(step.value??"")}`); return; }
   fail(`unknown action ${step.action}`);
 }
