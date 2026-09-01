@@ -24,3 +24,7 @@ node verify/usability.mjs <url-or-page> --contract shine-usability.json --cite <
 ```
 
 This is not a claim that an automated browser test can replace human judgment. It makes the minimum judgment falsifiable: if the primary workflow is vague, decorative, or broken, Shine cannot call the screen done.
+
+## Credit
+
+Shine's shadcn catalog and registry work stands on [shadcn/ui](https://github.com/shadcn-ui/ui), created by [shadcn](https://github.com/shadcn). Thank you for the extraordinary design and engineering work, and for sharing it as an accessible, open-code component system. Shine is an independent project and is not affiliated with or endorsed by shadcn/ui.

@@ -13,6 +13,8 @@ Shine owns the token layer, the design corpus, the agent skill, and the measure 
 
 **Site:** [shine-blond.vercel.app](https://shine-blond.vercel.app) · **Registry:** [`npx shadcn add`](https://shine-blond.vercel.app/r/) · **Repo:** [`justinfowler925/shine`](https://github.com/justinfowler925/shine) · **Release:** [v3.0.0](https://github.com/justinfowler925/shine/releases/tag/v3.0.0)
 
+Shine's shadcn catalog and registry work stands on [shadcn/ui](https://github.com/shadcn-ui/ui), created by [shadcn](https://github.com/shadcn). Thank you for making an unusually thoughtful, accessible, open-code component system and sharing it with everyone. Shine is an independent project and is not affiliated with or endorsed by shadcn/ui.
+
 ---
 
 ## What you get

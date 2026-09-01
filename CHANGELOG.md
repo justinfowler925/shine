@@ -2,6 +2,14 @@
 
 All notable changes to Shine are documented here. Public releases follow [Keep a Changelog](https://keepachangelog.com/) and [SemVer](https://semver.org/).
 
+## Unreleased
+
+### Changed
+
+- Added explicit public credit and links for [shadcn](https://github.com/shadcn),
+  creator of [shadcn/ui](https://github.com/shadcn-ui/ui), to the README, V3
+  release notes, and website footer.
+
 ## [3.0.0] — 2026-09-01
 
 Shine V3 replaces self-attested visual similarity with executable proof: real
