@@ -20,6 +20,11 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- `shadcn-weekly-board` is now a complete authored blueprint pack: copyable
+  shadcn source, executable owner/outcome workflow, kit tokens, provenance
+  manifest, and a captured reference. Its required `compare.mjs` proof now exits
+  zero for a conforming artifact instead of refusing the intentionally absent
+  screenshot.
 - `corpus/blueprints/shadcn-blog.md` — the blog screen's only row was MUI's;
   deleting MUI would have deleted the screen. Doctor fails if it goes missing.
 - `templates.md` marks every retired row **retired** and lists the reasons under
@@ -32,6 +37,11 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Fixed
 
+- Compare recognizes compact peer-control navigation such as a weekly owner
+  roster, while retaining a width floor that prevents incidental links from
+  satisfying a page navigation contract. The proof matrix now carries positive
+  `shadcn-weekly-board` and `shadcn-dashboard-01` cases, and the dashboard fixture
+  binds its cite and summary at the document contract boundary.
 - **Every editor hook was dying at runtime.** `skill/run-hook.sh` resolved its
   root with a logical `cd ..`, and every surface invokes it through a symlink, so
   it walked the *link's* parent: `~/.agents/skills/verify/doctor.mjs`,

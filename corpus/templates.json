@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-31",
+  "generated": "2026-09-01",
   "corpus": "/Users/justinfowler/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
@@ -3324,7 +3324,7 @@
           "summary"
         ]
       },
-      "note": "corpus/blueprints/shadcn-weekly-board.md is the region map; shadcn publishes no block for this screen",
+      "note": "corpus/blueprints/shadcn-weekly-board.md is the region map; corpus/blueprints/shadcn-weekly-board/ is authored shadcn source to copy",
       "scope": "page"
     },
     {

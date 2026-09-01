@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "id": "shadcn-weekly-board",
+  "screen": "weekly-board",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "page.tsx",
+      "sha256": "59147a190a8a25f4b1478ae82308e155e52a8f93c68220698f8ffa9a43cc39f9"
+    },
+    {
+      "path": "reference.html",
+      "sha256": "80e40b5928ea994f14d1b7b1086b0f29e314d2961b739faa03f47a876c80d65b"
+    },
+    {
+      "path": "shadcn-weekly-board.md",
+      "sha256": "56a6424620072225c12bc8f217f34479e78e4d126e748eaa922d1a895abd9769"
+    }
+  ]
+}
