@@ -1,7 +1,7 @@
 # SHINE
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-stone.svg)](./LICENSE)
-[![Release](https://img.shields.io/badge/release-v2.0.0-0c0a09.svg)](https://github.com/justinfowler925/shine/releases/tag/v2.0.0)
+[![Release](https://img.shields.io/badge/release-v3.0.0-0c0a09.svg)](https://github.com/justinfowler925/shine/releases/tag/v3.0.0)
 [![Site](https://img.shields.io/badge/site-shine--blond.vercel.app-0c0a09.svg)](https://shine-blond.vercel.app)
 [![Skill](https://img.shields.io/badge/skill-%2Fshine-a8a29e.svg)](./skill/SKILL.md)
 [![Doctor](https://img.shields.io/badge/doctor-local%20gate-16a34a.svg)](./verify/doctor.mjs)
@@ -11,7 +11,7 @@
 
 Shine owns the token layer, the design corpus, the agent skill, and the measure loop. **V3** deleted the fiction V2 shipped — generated "DNA pack" stubs, a likeness score computed by grepping the page source for attributes, and a cite ritual policing files nobody could read (the full teardown is in [docs/audit-2026-08-21.md](./docs/audit-2026-08-21.md)) — and replaced it with retrieval that hands the agent something real: `corpus/cite.mjs` resolves a job in plain words to ≤3 templates, extracts registry JSON into readable source, and points at harvested screenshots as they land. It now also requires executable usability proof: user-facing objects map to the selected Shadcn/Untitled reference, and the primary job must produce an observable result in a real browser. Read [what failed and what changed](./docs/RELEASE-v3.md). New screens start in **Wireframe** (interactive discovery → gray-box HTML → locked brief + `DESIGN.md`). Existing surfaces run **look → name → match → restructure → repaint → prove (measure → usability → compare)**. Hooks block off-token writes on Cursor and Codex; `doctor.mjs` proves the wiring bites.
 
-**Site:** [shine-blond.vercel.app](https://shine-blond.vercel.app) · **Registry:** [`npx shadcn add`](https://shine-blond.vercel.app/r/) · **Repo:** [`justinfowler925/shine`](https://github.com/justinfowler925/shine) · **Release:** [v2.0.0](https://github.com/justinfowler925/shine/releases/tag/v2.0.0)
+**Site:** [shine-blond.vercel.app](https://shine-blond.vercel.app) · **Registry:** [`npx shadcn add`](https://shine-blond.vercel.app/r/) · **Repo:** [`justinfowler925/shine`](https://github.com/justinfowler925/shine) · **Release:** [v3.0.0](https://github.com/justinfowler925/shine/releases/tag/v3.0.0)
 
 ---
 
@@ -46,7 +46,7 @@ Shine owns the token layer, the design corpus, the agent skill, and the measure 
 
 Default: **Wireframe** if new; otherwise **Build** unless the ask is clearly a review.
 
-**V2 notes:** [docs/RELEASE-v2.md](./docs/RELEASE-v2.md) · [CHANGELOG](./CHANGELOG.md)
+**V3 notes:** [docs/RELEASE-v3.md](./docs/RELEASE-v3.md) · [CHANGELOG](./CHANGELOG.md) · [V2 archive](./docs/RELEASE-v2.md)
 
 ---
 

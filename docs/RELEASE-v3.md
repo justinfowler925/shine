@@ -8,6 +8,15 @@ The reference corpus remains the source of taste: Shadcn and Untitled UI establi
 
 The active integration path is deliberately narrower: Shadcn/TanStack for component applications and native, Untitled-shaped contracts where a framework is not present. MUI, Carbon, and Ant are no longer active routing choices.
 
+## What shipped
+
+- Real, readable template source, tokens, provenance, and screenshots replace generated DNA stubs.
+- `shadcn-weekly-board` is a complete authored blueprint with working owner/outcome interactions and its own visual proof.
+- `measure.mjs`, usability contracts, and `compare.mjs` prove composition, workflow, and template-relative pixels at the artifact boundary.
+- Cursor and Codex share one immutable release, with fail-closed edit and stop hooks that the doctor exercises rather than merely finding on disk.
+- The supported integration surface is intentionally narrow: shadcn/TanStack for component apps and native, Untitled-shaped contracts without a framework.
+- The root install and immutable release audit with zero known npm vulnerabilities.
+
 Run the proof between measurement and visual comparison:
 
 ```sh

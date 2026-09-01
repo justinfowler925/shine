@@ -2,7 +2,11 @@
 
 All notable changes to Shine are documented here. Public releases follow [Keep a Changelog](https://keepachangelog.com/) and [SemVer](https://semver.org/).
 
-## Unreleased
+## [3.0.0] — 2026-09-01
+
+Shine V3 replaces self-attested visual similarity with executable proof: real
+template source and screenshots, browser-tested usability contracts, measured
+comparison, and editor hooks whose failure paths are themselves verified.
 
 ### Removed
 
@@ -102,7 +106,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 - README install uses `$SHINE` (detached `origin/main` worktree) and a fail-closed doctor
 - Stop-sweep no longer fail-opens on a lint crash, a git error, or a missing hook payload
 
-## [3.0.0] — 2026-08-21
+### V3 foundation — 2026-08-21
 
 Shine V3 is the unfuck. An audit (docs/audit-2026-08-21.md) measured V2's retrieval layer
 as fiction: the DNA packs were generated placeholder stubs, the critic scored "likeness"
@@ -111,7 +115,7 @@ Carbon datatable), the voice sheets carried zero colors while the lint banned ra
 values — so kit paint was unexpressible — and the executor hardcoded a stale pre-V2
 checkout. V3 deletes the theater and makes retrieval real.
 
-### Removed
+#### Removed
 
 - `verify/critic.mjs` — the regex likeness gate trained attribute-stamping; kept as a
   regression: `verify/fixtures/attribute-stamp.html` must never be blessed by anything
@@ -122,7 +126,7 @@ checkout. V3 deletes the theater and makes retrieval real.
 - The 141-row catalog flood: 71 chart demos, wildcard sidebars/logins, and the
   self-citing `lex-*`/`shine-*` rows that pointed at shine's own generated stubs
 
-### Added
+#### Added
 
 - `corpus/cite.mjs` v2 — plain-words matching ("settings page" resolves), ≤3 results,
   registry JSON auto-extracted to readable `.tsx` under `corpus/extracted/`, pack shots
@@ -133,7 +137,7 @@ checkout. V3 deletes the theater and makes retrieval real.
 - Doctor: packs must carry real full-page shots (≥30KB) or report honestly as
   unharvested; compare honesty checks; cite synonym checks; no-liturgy invariants
 
-### Changed
+#### Changed
 
 - SKILL.md rewritten around **look → name → match → restructure → repaint → prove**;
   the rendered page is read before it is diagnosed
@@ -188,4 +192,5 @@ Shine V2 is a **visual director**, not a completeness-only auditor. V1 could ret
 - SigLIP embeddings are optional (`SHINE_SIGLIP`); the default critic is structural DNA + slop, not a hosted VLM.
 - Marketing pipelines stay off Lightning record pages.
 
+[3.0.0]: https://github.com/justinfowler925/shine/releases/tag/v3.0.0
 [2.0.0]: https://github.com/justinfowler925/shine/releases/tag/v2.0.0
