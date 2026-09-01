@@ -37,6 +37,8 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Fixed
 
+- Updated the Cursor SDK and pinned its transitive HTTP client to the patched
+  `undici` 6.28.0 release, clearing all three root npm audit findings.
 - Compare recognizes compact peer-control navigation such as a weekly owner
   roster, while retaining a width floor that prevents incidental links from
   satisfying a page navigation contract. The proof matrix now carries positive

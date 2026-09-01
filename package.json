@@ -41,11 +41,14 @@
     "untitled:search": "node corpus/untitledui.mjs"
   },
   "devDependencies": {
-    "@cursor/sdk": "^1.0.28",
+    "@cursor/sdk": "^1.0.30",
     "axe-core": "^4.12.1",
     "playwright": "^1.62.1",
     "sharp": "^0.35.3",
     "untitledui": "0.1.64"
+  },
+  "overrides": {
+    "undici": "6.28.0"
   },
   "license": "ISC"
 }
