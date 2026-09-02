@@ -1,40 +1,40 @@
 {
   "version": 1,
-  "job": "Repair the Shine V4 public landing page before-and-after comparison so it shows related, truthful screenshots of the real V3 and V4 pages at matched viewport and crop, then verify the interaction and deployed presentation",
+  "job": "Fix the production Shine V4 light-theme accent text contrast failure found by the Sergii browser gate without changing the page structure or dark-theme identity",
   "category": "marketing",
-  "primaryTask": "Compare the actual V3 and V4 public pages side by side and understand what the rebuild materially changed.",
+  "primaryTask": "Read and operate the same Shine page successfully in both dark and light themes.",
   "before": {
-    "artifact": "http://127.0.0.1:4173",
-    "screenshot": "/tmp/shine-proof-before.png"
+    "artifact": "https://shine-blond.vercel.app/",
+    "screenshot": "/tmp/shine-live-light-before.png"
   },
   "defects": [
     {
       "bucket": "usability",
       "severity": "major",
-      "problem": "The evidence action promises a rebuild but reveals a real V3 screenshot beside an abstract placeholder, so the user cannot perform the promised comparison.",
-      "evidence": "The V3 figure contains site/img/shine-v3-before.png; the V4 figure contains only .after-visual, four empty .line elements, and no screenshot.",
-      "expectedEffect": "Reveal two real page captures at the same 16:10 frame so the comparison can be completed directly."
+      "problem": "Light-theme users cannot reliably read the lime eyebrow, version label, emphasized headline, architecture numbers, or workflow numbers.",
+      "evidence": "Fresh production axe reports color-contrast violations on 13 selectors immediately after the theme toggle.",
+      "expectedEffect": "All content remains readable and axe-clean after switching to light theme."
     },
     {
       "bucket": "completeness",
       "severity": "major",
-      "problem": "The V4 comparison figure has no source artifact, intrinsic dimensions, or descriptive screenshot alternative text.",
-      "evidence": "The After panel is a role=img div whose accessible name admits it is an abstraction rather than the claimed rebuild screenshot.",
-      "expectedEffect": "Use the checked-in V4 browser capture with explicit dimensions and a truthful description."
+      "problem": "The production verification contract exercises the theme toggle but does not run accessibility analysis in the resulting theme state.",
+      "evidence": "The earlier measure receipt reported zero axe violations in the initial state while the new direct browser probe fails after toggling light.",
+      "expectedEffect": "The saved production receipt covers both interactive state change and axe in the changed state at desktop and mobile sizes."
     },
     {
       "bucket": "composition",
       "severity": "minor",
-      "problem": "The two comparison panels use different visual grammars: a dense white page capture versus a sparse green decorative card.",
-      "evidence": "The baseline screenshot shows the left panel as a recognizable webpage and the right panel as a geometric illustration with no matching page chrome or content regions.",
-      "expectedEffect": "Use the same image frame, crop position, and screenshot treatment for both versions."
+      "problem": "One lime token carries two incompatible jobs in light mode: bright action fills and small foreground text.",
+      "evidence": "The action buttons need a bright fill with dark ink, while small text using the same bright value falls below foreground contrast on the off-white page.",
+      "expectedEffect": "Separate accent fill from accent foreground while preserving one coherent hue family."
     },
     {
       "bucket": "craft",
       "severity": "minor",
-      "problem": "The placeholder resembles a skeleton card and reads as unfinished work inside the page's principal proof section.",
-      "evidence": "Four unlabeled horizontal bars inside a tilted box are the only content in the After frame.",
-      "expectedEffect": "Remove the placeholder-only CSS and let the actual V4 composition carry the visual proof."
+      "problem": "The light theme looks intentional at a glance, which allowed the low-contrast lime labels to masquerade as acceptable craft.",
+      "evidence": "The screenshot preserves hierarchy and balance, but the smallest lime text visually fades into #f3f4ed and white surfaces.",
+      "expectedEffect": "Retain the lime identity while using a darker optical foreground value for text and focus treatment."
     }
   ]
 }
