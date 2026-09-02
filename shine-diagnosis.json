@@ -1,40 +1,40 @@
 {
   "version": 1,
-  "job": "Rebuild the Shine V4 public marketing page and article to demonstrate the final open-source design director, with before-and-after proof, a downloadable SKILL.md, and a clear conversion path",
+  "job": "Repair the Shine V4 public landing page before-and-after comparison so it shows related, truthful screenshots of the real V3 and V4 pages at matched viewport and crop, then verify the interaction and deployed presentation",
   "category": "marketing",
-  "primaryTask": "Understand why Shine V4 is materially better, inspect the proof, and get the complete skill without needing GitHub or a terminal.",
+  "primaryTask": "Compare the actual V3 and V4 public pages side by side and understand what the rebuild materially changed.",
   "before": {
-    "artifact": "https://shine-blond.vercel.app",
-    "screenshot": "site/img/shine-v3-before.png"
+    "artifact": "http://127.0.0.1:4173",
+    "screenshot": "/tmp/shine-proof-before.png"
   },
   "defects": [
     {
       "bucket": "usability",
       "severity": "major",
-      "problem": "The primary path is split between a technical essay, a distant write-up link, and a skill action near the bottom of a 4,255px page.",
-      "evidence": "The live baseline places the first product action in the nav, while the explanatory conversion section begins after five long text sections.",
-      "expectedEffect": "Place one clear Get Shine action and one evidence action in the hero, then repeat the install path after the proof."
+      "problem": "The evidence action promises a rebuild but reveals a real V3 screenshot beside an abstract placeholder, so the user cannot perform the promised comparison.",
+      "evidence": "The V3 figure contains site/img/shine-v3-before.png; the V4 figure contains only .after-visual, four empty .line elements, and no screenshot.",
+      "expectedEffect": "Reveal two real page captures at the same 16:10 frame so the comparison can be completed directly."
     },
     {
       "bucket": "completeness",
       "severity": "major",
-      "problem": "The page describes V3 internals but does not prove the V4 reference strategy, cross-media lanes, interaction result, or the rebuild itself.",
-      "evidence": "The baseline contains two small UI comparisons and a file listing, but no V4 contract, before/after narrative, or visible output-lane model.",
-      "expectedEffect": "Make the V4 architecture, dogfood receipt, downloadable skill, and working interaction explicit and testable."
+      "problem": "The V4 comparison figure has no source artifact, intrinsic dimensions, or descriptive screenshot alternative text.",
+      "evidence": "The After panel is a role=img div whose accessible name admits it is an abstraction rather than the claimed rebuild screenshot.",
+      "expectedEffect": "Use the checked-in V4 browser capture with explicit dimensions and a truthful description."
     },
     {
       "bucket": "composition",
       "severity": "minor",
-      "problem": "The page reads as a narrow article column with evenly weighted paragraphs, so the product proof never becomes the focal object.",
-      "evidence": "At 1280px the content occupies a thin central column and the three catalog images render as thumbnails beneath multiple paragraphs.",
-      "expectedEffect": "Use an evidence-led hero and a wide visual proof stage so the before/after and director loop establish hierarchy within three seconds."
+      "problem": "The two comparison panels use different visual grammars: a dense white page capture versus a sparse green decorative card.",
+      "evidence": "The baseline screenshot shows the left panel as a recognizable webpage and the right panel as a geometric illustration with no matching page chrome or content regions.",
+      "expectedEffect": "Use the same image frame, crop position, and screenshot treatment for both versions."
     },
     {
       "bucket": "craft",
       "severity": "minor",
-      "problem": "The visual language is clean but collapses into the same neutral shadcn editorial treatment the product is meant to help agents move beyond.",
-      "evidence": "The baseline has excellent axe and contrast results, but nearly every surface is white, zinc, one-pixel bordered, and equally rounded.",
-      "expectedEffect": "Retain the accessibility floor while introducing a distinctive editorial-tech composition, purposeful image treatment, and one signature proof visual."
+      "problem": "The placeholder resembles a skeleton card and reads as unfinished work inside the page's principal proof section.",
+      "evidence": "Four unlabeled horizontal bars inside a tilted box are the only content in the After frame.",
+      "expectedEffect": "Remove the placeholder-only CSS and let the actual V4 composition carry the visual proof."
     }
   ]
 }

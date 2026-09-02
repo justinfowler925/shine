@@ -36,6 +36,7 @@
     "voice:test": "node verify/voice-contrast.test.mjs",
     "slds:test": "node verify/slds-tokens.test.mjs",
     "release:test": "node verify/release.test.mjs",
+    "site:test": "node --test verify/site-proof.test.mjs",
     "untitled": "untitledui",
     "untitled:index": "node corpus/untitledui.mjs --index",
     "untitled:search": "node corpus/untitledui.mjs"
