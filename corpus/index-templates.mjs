@@ -129,10 +129,14 @@ const push = (row) => {
 // serve, so they are declared rather than derived. The full block expansion
 // below skips any id already pushed here.
 for (const t of [
-  // Carries crud/queue/records jobs as well as dashboard: it is the composed
-  // records reference that replaced the deleted MUI and Ant Design Pro admin
-  // pages, so deleting those rows depends on these jobs staying here.
-  { name: "dashboard-01", screen: "dashboard", rank: 1, title: "shadcn dashboard-01 (sidebar, cards, chart, table)", required:["navigation","summary","chart","table"], jobs: ["crud","dashboard","inbox","list","queue","records","triage","worklist"] },
+  // Carries crud/records jobs as well as dashboard: it is the composed records
+  // reference that replaced the deleted MUI and Ant Design Pro admin pages, so
+  // deleting those rows depended on these jobs landing somewhere. The
+  // queue-family jobs (queue/triage/worklist/inbox) moved to shadcn-queue on
+  // 2026-09-01 — this row requires a chart, and handing a chartless triage grid
+  // a chart-bearing cite forced consumers to split their measure and usability
+  // declarations across two references. One home per job.
+  { name: "dashboard-01", screen: "dashboard", rank: 1, title: "shadcn dashboard-01 (sidebar, cards, chart, table)", required:["navigation","summary","chart","table"], jobs: ["crud","dashboard","list","records"] },
   { name: "sidebar-07", screen: "app-shell", rank: 1, title: "shadcn sidebar-07 (collapsible shell)", required:["navigation"] },
   { name: "login-04", screen: "auth", rank: 2, title: "shadcn login-04", required:["form"] },
   { name: "command", screen: "command-palette", rank: 1, title: "shadcn command (palette, keyboard-first, no motion)", scope:"component" },
@@ -384,12 +388,22 @@ for (const t of [
   // hides half the agenda. The blueprint states the four conditions that must
   // hold before citing this instead of building the grid.
   { id: "shadcn-weekly-board", screen: "weekly-board", title: "shadcn weekly cadence board (report-out, discuss, up next)", jobs: ["weekly-board", "board", "cadence", "report-out", "standup", "kanban", "elt"], required: ["navigation", "summary"] },
+  // The chartless work queue. shadcn-dashboard-01 was the only shadcn row
+  // carrying the queue-family jobs, and its reference roles require a chart —
+  // so a shadcn triage grid (cro-suite's gov page) could not declare one cite
+  // that satisfied both measure (shadcn DNA) and usability (queue demands).
+  // Requires navigation+table only; summary is welcome but not demanded.
+  // startFrom 2 is deliberate: on a kit-neutral cite this row ties
+  // untitled-table on score, and untitled-table must stay the default table
+  // reference (pinned by art-direction.test) — kit affinity, not raw score, is
+  // what should hand a shadcn host this row.
+  { id: "shadcn-queue", screen: "queue", title: "shadcn work queue (triage grid, no chart)", jobs: ["queue", "worklist", "triage", "inbox", "datagrid"], required: ["navigation", "table"], startFrom: 2 },
 ]) {
   // Blueprints live in Shine, not the acquired corpus, so exists() is wrong here.
   const authored = existsSync(join(SHINE, "corpus/blueprints", t.id));
   push({
     id: t.id, screen: t.screen, kit: "shadcn-registry", title: t.title,
-    preview: "", license: "MIT", kind: "blueprint", startFrom: 1, jobs: t.jobs,
+    preview: "", license: "MIT", kind: "blueprint", startFrom: t.startFrom ?? 1, jobs: t.jobs,
     dna: KIT_FAMILY["shadcn-registry"],
     ...(t.required ? { reference: { required: t.required } } : {}),
     note: authored

@@ -122,7 +122,7 @@ Reasons are listed under the table.
 | chat | `spectrum-ai-chat` | react-spectrum | source | live | chat, assistant |
 | checkout | `shadcn-checkout` | shadcn-registry | blueprint | live | checkout, payment |
 | command-palette | `shadcn-command` | shadcn-registry | source | live | command-palette, palette, cmdk |
-| dashboard | `shadcn-dashboard-01` | shadcn-registry | source | live | crud, dashboard, inbox, list, queue, records, triage, worklist |
+| dashboard | `shadcn-dashboard-01` | shadcn-registry | source | live | crud, dashboard, list, records |
 | dashboard | `untitled-line-charts` | untitled-ui-react | source | live | dashboard, analytics, charts, dataviz |
 | dashboard | `query-shadcn-blocks` | shadcn-registry | query-only | live | dashboard |
 | dashboard | `query-haze` | haze | query-only | live | dashboard |
@@ -137,13 +137,14 @@ Reasons are listed under the table.
 | marketing | `shadcn-marketing` | shadcn-registry | blueprint | live | marketing, landing, pricing |
 | marketing-hero | `magicui-hero` | magicui | source | live | marketing-hero, hero, landing |
 | queue | `untitled-table` | untitled-ui-react | source | live | queue, crud, table, records, datagrid |
+| queue | `shadcn-queue` | shadcn-registry | blueprint | live | queue, worklist, triage, inbox, datagrid |
 | record | `shadcn-record` | shadcn-registry | blueprint | live | record, detail, account, opportunity |
 | settings | `shadcn-settings` | shadcn-registry | blueprint | live | settings, preferences, account |
 | settings | `fluent-nav` | fluentui | source | live | settings |
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-128 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+129 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 

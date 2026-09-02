@@ -1,0 +1,7 @@
+{
+  "id": "shadcn-queue",
+  "source": "corpus/blueprints/shadcn-queue/reference.html",
+  "harvested": "2026-09-01",
+  "bytes": 153868,
+  "provenance": "Authored blueprint composed from the current official shadcn primitives; not an upstream shadcn block. shadcn publishes no queue block \u2014 dashboard-01 was the only shadcn row carrying the queue jobs and its roles demand a chart."
+}

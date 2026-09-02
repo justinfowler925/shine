@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-01",
+  "generated": "2026-09-02",
   "corpus": "/Users/justinfowler/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
@@ -2915,12 +2915,8 @@
       "jobs": [
         "crud",
         "dashboard",
-        "inbox",
         "list",
-        "queue",
-        "records",
-        "triage",
-        "worklist"
+        "records"
       ],
       "dna": {
         "family": "shadcn-zinc",
@@ -3221,6 +3217,35 @@
         "family": "untitled",
         "density": "comfortable"
       }
+    },
+    {
+      "id": "shadcn-queue",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "shadcn work queue (triage grid, no chart)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "queue",
+        "worklist",
+        "triage",
+        "inbox",
+        "datagrid"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "navigation",
+          "table"
+        ]
+      },
+      "note": "corpus/blueprints/shadcn-queue.md is the region map; corpus/blueprints/shadcn-queue/ is authored shadcn source to copy",
+      "scope": "page"
     },
     {
       "id": "shadcn-record",
