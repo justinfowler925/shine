@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {existsSync, readFileSync} from "node:fs";
+import {existsSync, readFileSync, realpathSync} from "node:fs";
 import {dirname, join, resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 import {retrieveDirections} from "../corpus/art-direction.mjs";
@@ -78,7 +78,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  return {version:3,job,lane,mode,category:kind,classification,project:detected,selected,candidates,componentReferences:components,examples,starter,diagnosis,usability,regionGraph:categories[kind].regions,controlInventory:categories[kind].controls,requiredStates:categories[kind].states,integration:{key:recipeKey,contract:RECIPES[recipeKey].contract,packages:RECIPES[recipeKey].packages,imports:RECIPES[recipeKey].imports},proof:{artifactAttribute:`data-cite=\"${selected.id}\"`,commands:[`node ${join(ROOT,"verify/measure.mjs")} <artifact> --cite ${selected.id} --shot /tmp/shine-after.png`,...usability.commands,`node ${join(ROOT,"verify/compare.mjs")} <artifact> --cite ${selected.id} --lane ${lane}${mode==="existing"?" --mode existing --diagnosis shine-diagnosis.json":""}`]},gaps:retrieval.gaps};
 }
 
-if(process.argv[1]===fileURLToPath(import.meta.url)){
+if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),opt=n=>args.includes(n)?args[args.indexOf(n)+1]:"";
  try{process.stdout.write(JSON.stringify(createDesignPacket({job:opt("--job")||args[0],lane:opt("--lane")||"saas",project:resolve(opt("--project")||process.cwd()),framework:opt("--framework"),category:opt("--category"),mode:opt("--mode")||"existing"}),null,2)+"\n");}catch(error){console.error(`shine packet: ${error.message}`);process.exit(1)}
 }

@@ -1,6 +1,6 @@
 {
   "name": "@shine/root",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "private": "true",
   "type": "module",
   "description": "shine \u2014 design authority. Root deps are the ones the verification loop needs; the token pipeline has its own package.json under tokens/.",

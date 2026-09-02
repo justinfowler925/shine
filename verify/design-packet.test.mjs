@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
-import {mkdirSync,writeFileSync} from "node:fs";
+import {mkdirSync,mkdtempSync,rmSync,symlinkSync,writeFileSync} from "node:fs";
+import {spawnSync} from "node:child_process";
+import {tmpdir} from "node:os";
 import {join} from "node:path";
 import {fileURLToPath} from "node:url";
 import {classifyJob,createDesignPacket} from "../core/design-packet.mjs";
@@ -67,4 +69,12 @@ assert(affineDash.selected.matches.includes("installedKit"));
 const lex=createDesignPacket({job:"lightning record page for claims",lane:"lex",project:shadcnRepo,mode:"existing",category:"record"});
 assert.equal(lex.selected.kit,"slds","kit affinity must not override the Lightning lane");
 
-console.log("design packet PASS: 9 natural briefs · ambiguity refusal · page/component split · usable source · diagnosis contract · kit affinity + port disclosure + lex lane");
+const linked=mkdtempSync(join(tmpdir(),"shine-packet-link-"));
+try {
+ const entry=join(linked,"packet.mjs");
+ symlinkSync(fileURLToPath(new URL("../core/design-packet.mjs",import.meta.url)),entry);
+ const run=spawnSync(process.execPath,[entry,"--job","Explain the product and request a demo","--category","marketing","--mode","new"],{encoding:"utf8"});
+ assert.equal(run.status,0,run.stderr);assert.equal(JSON.parse(run.stdout).category,"marketing","installed symlink must execute the packet CLI");
+} finally {rmSync(linked,{recursive:true,force:true});}
+
+console.log("design packet PASS: 9 natural briefs · ambiguity refusal · page/component split · usable source · diagnosis contract · kit affinity + port disclosure + lex lane · symlink CLI");

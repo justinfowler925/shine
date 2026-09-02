@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, realpathSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { resolveIntegration } from "./resolve.mjs";
@@ -20,7 +20,7 @@ export function scaffold(project, out, kit = "") {
   return { dest, source, resolved };
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2); const opt = (n) => args.includes(n) ? args[args.indexOf(n) + 1] : "";
   try { const result = scaffold(opt("--project") || process.cwd(), opt("--out") || join(process.cwd(), "shine-integration"), opt("--kit")); console.log(`${result.resolved.kit}: ${result.dest}`); }
   catch (err) { console.error(`scaffold: ${err.message}`); process.exit(1); }

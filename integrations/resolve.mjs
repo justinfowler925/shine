@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Resolve one compatible UI implementation path from the consumer's actual stack.
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -82,7 +82,7 @@ export function resolveIntegration(project, requested = "") {
   return { ...detected, kit, recipe, provenance: { cite: recipe.cite, upstream: manifest.upstream, files: manifest.files.length } };
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2); const opt = (n) => args.includes(n) ? args[args.indexOf(n) + 1] : "";
   try { console.log(JSON.stringify(resolveIntegration(opt("--project") || process.cwd(), opt("--kit")), null, 2)); }
   catch (err) { console.error(`integration: ${err.message}`); process.exit(1); }

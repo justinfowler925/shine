@@ -3,7 +3,7 @@
 // Source stays in ~/design-corpus/untitled-ui-react; the generated catalog ships
 // with Shine so the installed skill can route to exact examples without guessing.
 
-import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, realpathSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
@@ -163,7 +163,7 @@ export function findUntitledExamples(query, limit = 8, catalog = null) {
     .slice(0, limit);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   try {
     if (args.includes("--index")) {

@@ -4,6 +4,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ## Unreleased
 
+## [4.0.1] — 2026-09-01
+
+### Fixed
+
+- Installed CLI entry points now resolve their invoked symlink before checking whether they are
+  the main module. Running the packet, renderer, integration resolver, usability verifier, or
+  compare verifier through the immutable `current` release path now executes instead of exiting
+  silently. The downstream portfolio dogfood test found this immediately after V4 launched.
+
 ## [4.0.0] — 2026-09-01
 
 Shine V4 adds an enforceable art-direction layer without replacing shadcn. Reference shortlists

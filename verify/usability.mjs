@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Executable task proof: a visual relative of a kit still fails if its objects
 // cannot complete the user's job.
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { load } from "./deps.mjs";
@@ -61,7 +61,7 @@ export async function proveUsability({target,contractPath,citeId=""}) {
   } finally { await browser.close(); }
 }
 
-if(process.argv[1]===fileURLToPath(import.meta.url)) {
+if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)) {
   const args=process.argv.slice(2),opt=name=>args.includes(name)?args[args.indexOf(name)+1]:"",target=args.find((arg,index)=>!arg.startsWith("-")&&(index===0||!args[index-1].startsWith("--")));
   if(!target){console.error("usage: node verify/usability.mjs <page|url> --contract shine-usability.json [--cite template-id]");process.exit(2);}
   try { console.log(JSON.stringify(await proveUsability({target,contractPath:opt("--contract"),citeId:opt("--cite")}),null,2)); } catch(error) { console.error(error.message); process.exit(1); }
