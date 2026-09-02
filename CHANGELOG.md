@@ -4,6 +4,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ## Unreleased
 
+## [4.0.2] — 2026-09-01
+
+### Fixed
+
+- The same installed-symlink main-module check now covers diagnosis, lint, benchmark, and Figma
+  entry points. The portfolio dogfood run exposed diagnosis immediately after packet execution was
+  fixed, so the audit expanded to every executable instead of patching one command at a time.
+
 ## [4.0.1] — 2026-09-01
 
 ### Fixed

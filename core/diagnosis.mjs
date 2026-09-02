@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import {createHash} from "node:crypto";
-import {existsSync, readFileSync, writeFileSync} from "node:fs";
+import {existsSync, readFileSync, realpathSync, writeFileSync} from "node:fs";
 import {resolve} from "node:path";
+import {fileURLToPath} from "node:url";
 
 const buckets=new Set(["usability","completeness","composition","craft","adoption"]);
 const severities=new Set(["critical","major","minor"]);
@@ -42,7 +43,7 @@ export function seedDiagnosis({job,category}){
  ]};
 }
 
-if(import.meta.url===`file://${process.argv[1]}`){
+if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),opt=(name)=>args.includes(name)?args[args.indexOf(name)+1]:"",command=args[0];
  try{
   if(command==="init"){

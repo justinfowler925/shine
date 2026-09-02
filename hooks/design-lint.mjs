@@ -11,7 +11,7 @@
 // Escapes: a `shine-lint: off` comment in the first five lines of a file,
 // files under tokens/, dist/, node_modules/, corpus dirs, or generated files.
 
-import { readFileSync } from "node:fs";
+import { readFileSync, realpathSync } from "node:fs";
 import { basename, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -345,7 +345,7 @@ function lintPath(path) {
 // the importer's process: it consumed stop-sweep.mjs's stdin, saw no file path, and called
 // process.exit(0) — the sweep reported clean on a file with raw hex in it.
 const isEntrypoint =
-  process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+  process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
 
 // ---- direct CLI mode: any path argument wins; hook mode is stdin-only ----
 if (isEntrypoint && process.argv.length > 2) {

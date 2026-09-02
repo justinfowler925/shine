@@ -21,7 +21,7 @@
 // FIGMA_TOKEN env, then 1Password.
 
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, realpathSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -206,7 +206,7 @@ async function tokens(target, tok, family, outPath) {
   if (painted < 5) console.log(`warn  only ${painted} --shine-color- vars; inspectPack wants ≥5 for a full-paint family`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const mode = has("--team") ? "team" : has("--list") ? "list" : has("--shot") ? "shot" : has("--tokens") ? "tokens" : "";
   if (!mode) {
     console.error(`usage:

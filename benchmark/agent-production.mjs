@@ -147,7 +147,7 @@ export async function runCodexProduction({brief,skillRoot,outDir,model=MODEL}){
  } finally {closeSync(lockFd);rmSync(lock,{force:true});}
 }
 
-if(import.meta.url===`file://${process.argv[1]}`){
+if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
  const arg=name=>{const i=process.argv.indexOf(name);return i>=0?process.argv[i+1]:null};const briefId=arg("--brief"),skillRoot=realpathSync(resolve(arg("--skill-root")||".")),outDir=resolve(arg("--out")||join("/private/tmp","shine-agent",briefId||"run"));
  const briefs=JSON.parse(readFileSync(join(ROOT,"benchmark/briefs.json"),"utf8"));const brief=briefs.find(x=>x.id===briefId);if(!brief)throw new Error(`unknown brief ${briefId}`);brief.arm=arg("--arm")||"current";
  const surface=arg("--surface")||"codex",record=surface==="cursor"?await runCursorProduction({brief,skillRoot,outDir}):await runCodexProduction({brief,skillRoot,outDir});console.log(JSON.stringify({record:join(outDir,"record.json"),status:record.status,gaps:record.gaps},null,2));if(record.gaps.length)process.exit(1);
