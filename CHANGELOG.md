@@ -4,8 +4,18 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ## Unreleased
 
+## [4.0.0] — 2026-09-01
+
+Shine V4 adds an enforceable art-direction layer without replacing shadcn. Reference shortlists
+cap each visual family at one candidate per scope, composed pages outrank atoms, and every design
+spec declares its composition archetype, image strategy, signature moment, and anti-repetition
+constraint. Cross-media work now routes to native web, editable-deck, code-first-deck, PDF, or
+email production.
+
 ### Added
 
+- `references/cross-media.md`, the complete self-contained `shine-skill.md`, and a Claude plugin.
+- A measured V3/V4 dogfood pair and a rebuilt public product story with executable conversion.
 - A public, non-technical skill path at `/skill`: read the canonical file, copy
   it with one action, download `SKILL.md`, or use it as persistent instructions
   in an AI without native skill support. The public Markdown is generated from
@@ -16,6 +26,8 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Changed
 
+- The design spec schema is V4 and retrieval explicitly caps same-family repetition.
+- The public page now leads with the director and the before/after proof instead of a long essay.
 - Usability text assertions now wait for asynchronous interaction results instead
   of reading immediately after a click; the public skill proof also runs under
   the production CSP so a blocked self-fetch cannot pass locally.

@@ -23,6 +23,10 @@ assert.ok(diverse.selected.every((candidate) => candidate.template.selectable !=
 if (diverse.selected.length < 3) assert.ok(diverse.gaps.some((gap) => gap.startsWith("diversity:")), "thin coverage must be named in gaps, not hidden");
 for (let i = 0; i < diverse.selected.length; i += 1) for (let j = i + 1; j < diverse.selected.length; j += 1)
   assert.ok(axisDistance(diverse.selected[i].axes, diverse.selected[j].axes) >= 3, "selected candidates must be semantically distinct");
+for (const scope of ["page", "component"]) {
+  const families = diverse.selected.filter((candidate) => (candidate.template.scope || "page") === scope).map((candidate) => candidate.template.dna?.family || candidate.template.kit);
+  assert.equal(new Set(families).size, families.length, `${scope} shortlist must cap each visual family at one candidate`);
+}
 for (const template of templates) {
   const axes = candidateAxes(template, diverse.brief);
   for (const axis of directionMetadata.axes) assert.ok(axes[axis] !== undefined, `${template.id} missing ${axis}`);

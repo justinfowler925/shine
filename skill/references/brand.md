@@ -10,9 +10,9 @@ brand-facing (marketing site, demos, client decks-as-web, product UI carrying a
 company's identity).
 
 **A brand lane is a token override plus a small set of bans — not a second design
-system.** Everything in `contracts.md`, `patterns.md`, `taste.md` and
-`component-contracts.md` still applies. This file is the adapter: what a brand
-kit has to tell you, and what changes once it has.
+system.** Everything in `contracts.md`, `patterns.md` and `taste.md` still
+applies. This file is the adapter: what a brand kit has to tell you, and what
+changes once it has.
 
 ## Load order
 
@@ -63,7 +63,7 @@ Same tokens and type roles, adapted for density:
 
 - No marketing hero inside a dashboard
 - Action color stays action-only — buttons, link emphasis, connectors; not fills
-- Tables/forms/menus keep the full [component-contracts.md](component-contracts.md)
+- Tables/forms/menus keep the full [contracts.md](contracts.md)
   contract (a brand admin table is DataGrid-class)
 - Prefer bordered/flat elevation; a soft primary-tinted shadow only where brand
   cards call for one

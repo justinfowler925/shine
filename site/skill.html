@@ -5,8 +5,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Get the Shine skill — copy or download SKILL.md</title>
-<meta name="description" content="Copy the canonical Shine SKILL.md into your AI's project instructions, or download it as a plain Markdown file. No GitHub knowledge required.">
+<title>Get the Shine skill — one self-contained file</title>
+<meta name="description" content="Download Shine as one self-contained Markdown file with every reference inlined, or as a plugin for Claude. No corpus, no terminal, no GitHub required.">
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,6 +54,7 @@
   .actions { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
   button, .button { min-height: 44px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-control); font: inherit; font-size: var(--text-sm); font-weight: 500; cursor: pointer; transition: opacity var(--duration) var(--ease), background var(--duration) var(--ease); }
   .primary { border: 1px solid var(--primary); background: var(--primary); color: var(--primary-fg); }
+  .primary:disabled { opacity: 1; cursor: wait; }
   .secondary, .theme { border: 1px solid var(--border); background: transparent; color: var(--fg); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
   button:disabled { cursor: wait; opacity: 0.55; }
   button:hover:not(:disabled), .button:hover { opacity: 0.82; }
@@ -96,13 +97,13 @@
 
 <main class="page" data-cite="shadcn-blog" data-job="copy or download the skill">
   <section class="hero" aria-labelledby="title">
-    <p class="eyebrow">One file · plain Markdown · MIT</p>
+    <p class="eyebrow">Self-contained · nothing to install · MIT</p>
     <h1 id="title">Give your AI a design director.</h1>
-    <p class="lede">Copy Shine into persistent project instructions, or download <code>SKILL.md</code> for an AI that supports skills. You do not need Git, GitHub, or a terminal.</p>
+    <p class="lede">One file, complete. Every Shine reference is inlined — the template catalog, the component contracts, the measured craft thresholds. No corpus, no terminal, no GitHub.</p>
     <div class="actions">
       <button class="primary" data-primary data-testid="copy-skill" id="copy" type="button" disabled>Copy the skill</button>
-      <a class="button secondary" data-testid="download-skill" href="/SKILL.md" download="SKILL.md">Download SKILL.md</a>
-      <a class="button secondary" href="/SKILL.md">View plain text</a>
+      <a class="button secondary" data-testid="download-skill" href="/shine-skill.md" download="shine-skill.md">Download shine-skill.md</a>
+      <a class="button secondary" href="/shine-skill.md">View plain text</a>
     </div>
     <p class="status" data-testid="copy-status" id="status" role="status" aria-live="polite">Loading the canonical skill…</p>
   </section>
@@ -111,22 +112,24 @@
     <div class="steps" data-testid="install-steps">
       <h2>Three steps</h2>
       <ol>
-        <li><div><strong>Copy or download</strong><span>The buttons above always use the same canonical file shipped with Shine.</span></div></li>
-        <li><div><strong>Open your AI’s instructions</strong><span>Use a project, workspace, custom assistant, or skill folder—whatever your tool calls persistent instructions.</span></div></li>
+        <li><div><strong>Copy or download</strong><span>One Markdown file with every reference inlined. Nothing else to fetch.</span></div></li>
+        <li><div><strong>Open your AI’s instructions</strong><span>A project, workspace, custom assistant, or skill folder—whatever your tool calls persistent instructions.</span></div></li>
         <li><div><strong>Paste or attach</strong><span>Ask the AI to follow Shine whenever it designs, builds, or audits an interface.</span></div></li>
       </ol>
-      <p class="note"><strong>Honest compatibility:</strong> Codex and Cursor can install the full native skill. Other assistants can use this file as persistent instructions, but their tool access and enforcement hooks will differ.</p>
+      <p class="note"><strong>Honest sizing:</strong> this file is roughly 62,000 tokens. Tools that attach a file and retrieve from it handle that comfortably; a small paste-in instructions box will not. For Claude, the plugin below is the better fit—it loads one reference at a time instead of all of them.</p>
     </div>
 
     <div class="source" data-testid="skill-source">
-      <div class="source-head"><h2>The actual file</h2><span id="meta">SKILL.md</span></div>
+      <div class="source-head"><h2>The actual file</h2><span id="meta">shine-skill.md</span></div>
       <pre id="source" tabindex="0">Loading…</pre>
     </div>
   </section>
 
   <section class="advanced">
-    <h2>Want the gates too?</h2>
-    <p>The one-file path gives your AI Shine’s workflow. The <a href="https://github.com/justinfowler925/shine#install--deploy">full repository install</a> adds the template corpus, browser proof, design lint, stop hooks, and doctor checks.</p>
+    <h2>Using Claude?</h2>
+    <p>Download <a href="/shine.plugin" download="shine.plugin"><strong>shine.plugin</strong></a> (160 KB) and drag it into a Claude Code or Cowork chat. It carries the same knowledge as the file above plus the 14 blueprint region maps and their authored source, and it loads one reference at a time rather than all of them at once.</p>
+    <h2>Want the enforcement gates?</h2>
+    <p>Both downloads give your AI Shine’s workflow and judgment. The <a href="https://github.com/justinfowler925/shine#install--deploy">full repository install</a> adds the pinned design corpus, the pixel measure loop, design lint, stop hooks, and doctor checks for Codex and Cursor.</p>
   </section>
 </main>
 
@@ -167,22 +170,29 @@
     area.remove();
   };
 
-  fetch("/SKILL.md")
+  fetch("/shine-skill.md")
     .then((response) => {
       if (!response.ok) throw new Error("The skill file could not be loaded.");
       return response.text();
     })
     .then((value) => {
       skill = value;
-      source.textContent = value;
-      const lines = value.split("\n").length - 1;
-      meta.textContent = `SKILL.md · ${lines} lines`;
+      const all = value.split("\n");
+      const lines = all.length - 1;
+      // Preview only — the whole file is 4,400+ lines and painting it costs more than it
+      // tells anyone. Copy and download still use the complete text.
+      const PREVIEW = 160;
+      source.textContent = all.length > PREVIEW
+        ? all.slice(0, PREVIEW).join("\n") + `\n\n… ${(lines - PREVIEW).toLocaleString()} more lines. Download or copy for the whole file.`
+        : value;
+      const kb = Math.round(new Blob([value]).size / 1024);
+      meta.textContent = `shine-skill.md · ${lines.toLocaleString()} lines · ${kb} KB`;
       status.textContent = "Ready to copy.";
       copy.disabled = false;
     })
     .catch((error) => {
       source.textContent = error.message;
-      status.textContent = "The file did not load. Use Download SKILL.md instead.";
+      status.textContent = "The file did not load. Use the download button instead.";
     });
 
   copy.addEventListener("click", async () => {

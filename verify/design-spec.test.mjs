@@ -13,5 +13,6 @@ for(const category of categories){
  for(const marker of ["data-cite=","data-task-control","data-task-result","data-region="])assert.ok(html.includes(marker),`${category}: ${marker}`);
  if(category==="datagrid")for(const marker of ["data-sort","data-column-visibility","data-pagination","data-row-action","data-column-resize","data-state=\"loading\"","data-state=\"empty\"","data-state=\"error\""])assert.ok(html.includes(marker),`datagrid: ${marker}`);
  const broken=structuredClone(spec);broken.copy.title="";assert.match(validateDesignSpec(broken,{brief}).join(" "),/copy.title/);
+ const generic=structuredClone(spec);generic.direction.signatureMoment="";assert.match(validateDesignSpec(generic,{brief}).join(" "),/direction.signatureMoment/);
 }
 console.log("design spec PASS: 7 categories render lint-clean; dashboard structure and full DataGrid contract bite");

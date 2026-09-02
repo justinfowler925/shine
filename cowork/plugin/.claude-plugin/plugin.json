@@ -1,0 +1,12 @@
+{
+  "name": "shine",
+  "version": "3.0.0",
+  "description": "UI/UX design authority for Claude Cowork — real template structure, complete interaction contracts, measured craft rules, and browser proof. Adapted from the Shine design system (justinfowler925/shine v3.0).",
+  "author": {
+    "name": "Justin Fowler"
+  },
+  "homepage": "https://shine-blond.vercel.app",
+  "repository": "https://github.com/justinfowler925/shine",
+  "license": "MIT",
+  "keywords": ["design", "ui", "ux", "frontend", "shadcn", "accessibility"]
+}

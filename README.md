@@ -1,7 +1,7 @@
 # SHINE
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-stone.svg)](./LICENSE)
-[![Release](https://img.shields.io/badge/release-v3.0.0-0c0a09.svg)](https://github.com/justinfowler925/shine/releases/tag/v3.0.0)
+[![Release](https://img.shields.io/badge/release-v4.0.0-0c0a09.svg)](https://github.com/justinfowler925/shine/releases/tag/v4.0.0)
 [![Site](https://img.shields.io/badge/site-shine--blond.vercel.app-0c0a09.svg)](https://shine-blond.vercel.app)
 [![Skill](https://img.shields.io/badge/skill-%2Fshine-a8a29e.svg)](./skill/SKILL.md)
 [![Doctor](https://img.shields.io/badge/doctor-local%20gate-16a34a.svg)](./verify/doctor.mjs)
@@ -9,9 +9,9 @@
 
 **A design system agents can’t deviate from — and a UX director that looks at the rendered page, names what is wrong, matches a real template from the design kits, and proves the fix with pixels.**
 
-Shine owns the token layer, the design corpus, the agent skill, and the measure loop. **V3** deleted the fiction V2 shipped — generated "DNA pack" stubs, a likeness score computed by grepping the page source for attributes, and a cite ritual policing files nobody could read (the full teardown is in [docs/audit-2026-08-21.md](./docs/audit-2026-08-21.md)) — and replaced it with retrieval that hands the agent something real: `corpus/cite.mjs` resolves a job in plain words to ≤3 templates, extracts registry JSON into readable source, and points at harvested screenshots as they land. It now also requires executable usability proof: user-facing objects map to the selected Shadcn/Untitled reference, and the primary job must produce an observable result in a real browser. Read [what failed and what changed](./docs/RELEASE-v3.md). New screens start in **Wireframe** (interactive discovery → gray-box HTML → locked brief + `DESIGN.md`). Existing surfaces run **look → name → match → restructure → repaint → prove (measure → usability → compare)**. Hooks block off-token writes on Cursor and Codex; `doctor.mjs` proves the wiring bites.
+Shine owns the token layer, the design corpus, the agent skill, and the measure loop. **V4** adds the direction layer component libraries cannot supply: a shortlist capped at one page per visual family, page-over-atom retrieval, and a required composition archetype, image strategy, signature moment, and anti-repetition constraint. It keeps shadcn as the composition foundation, uses Base UI by default or React Aria for complex accessible interaction, and routes decks, PDFs, reports, and email through output-native production. The V3 usability contract remains: the primary job must produce an observable result in a real browser. Read [what changed in V4](./docs/RELEASE-v4.md). New screens start in **Wireframe** (interactive discovery → gray-box HTML → locked brief + `DESIGN.md`). Existing surfaces run **look → name → match → direct → restructure → repaint → prove (measure → usability → compare)**. Hooks block off-token writes on Cursor and Codex; `doctor.mjs` proves the wiring bites.
 
-**Site:** [shine-blond.vercel.app](https://shine-blond.vercel.app) · **Skill:** [copy or download `SKILL.md`](https://shine-blond.vercel.app/skill) · **Registry:** [`npx shadcn add`](https://shine-blond.vercel.app/r/) · **Repo:** [`justinfowler925/shine`](https://github.com/justinfowler925/shine) · **Release:** [v3.0.0](https://github.com/justinfowler925/shine/releases/tag/v3.0.0)
+**Site:** [shine-blond.vercel.app](https://shine-blond.vercel.app) · **Skill:** [copy or download the complete skill](https://shine-blond.vercel.app/skill) · **Registry:** [`npx shadcn add`](https://shine-blond.vercel.app/r/) · **Repo:** [`justinfowler925/shine`](https://github.com/justinfowler925/shine) · **Release:** [v4.0.0](https://github.com/justinfowler925/shine/releases/tag/v4.0.0)
 
 Shine's shadcn catalog and registry work stands on [shadcn/ui](https://github.com/shadcn-ui/ui), created by [shadcn](https://github.com/shadcn). Thank you for making an unusually thoughtful, accessible, open-code component system and sharing it with everyone. Shine is an independent project and is not affiliated with or endorsed by shadcn/ui.
 
@@ -22,7 +22,7 @@ Shine's shadcn catalog and registry work stands on [shadcn/ui](https://github.co
 | Layer | What it does |
 | --- | --- |
 | **UI/UX agent** | `/shine` skill + `shine-ux` subagent — Wireframe, Build, Polish, Audit, Copy, Adoption |
-| **Templates** | `corpus/cite.mjs "<job>"` — 128 rows, shadcn as the house kit and Untitled UI as its buildable sibling. No foreign-runtime kits: [MUI, Ant and Carbon were deleted 2026-08-31](./docs/no-foreign-runtimes.md) |
+| **Templates** | `corpus/cite.mjs "<job>"` — 129 rows, one shortlist slot per visual family, shadcn as the house kit and Untitled UI as its buildable sibling. No foreign-runtime kits: [MUI, Ant and Carbon were deleted 2026-08-31](./docs/no-foreign-runtimes.md) |
 | **Examples** | `npm run untitled:search -- "<job>"` — all 392 public Untitled UI demo exports, including 187 renderable Storybook stories |
 | **Technique transfer** | Measured rules from 18 products + pinned kits (shadcn, Radix, Untitled UI, Spectrum, Fluent, APG, …) |
 | **Tokens** | One DTCG source → CSS, Tailwind v4, artifacts, Python, email, Docs, Office, Salesforce |
@@ -48,7 +48,7 @@ Shine's shadcn catalog and registry work stands on [shadcn/ui](https://github.co
 
 Default: **Wireframe** if new; otherwise **Build** unless the ask is clearly a review.
 
-**V3 notes:** [docs/RELEASE-v3.md](./docs/RELEASE-v3.md) · [CHANGELOG](./CHANGELOG.md) · [V2 archive](./docs/RELEASE-v2.md)
+**V4 notes:** [docs/RELEASE-v4.md](./docs/RELEASE-v4.md) · [V3 archive](./docs/RELEASE-v3.md) · [CHANGELOG](./CHANGELOG.md)
 
 ---
 

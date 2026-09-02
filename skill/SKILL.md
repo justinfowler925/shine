@@ -3,7 +3,7 @@ name: shine
 description: >-
   Design, build, or audit interfaces using real template structure, the consumer's installed
   component system, complete interaction contracts, and browser proof. Use for UI, UX,
-  dashboards, tables, forms, landing pages, charts, email, Lightning, or visual polish.
+  dashboards, tables, forms, landing pages, charts, email, Lightning, decks, PDFs, or visual polish.
 ---
 
 # Shine
@@ -29,6 +29,8 @@ integration, provenance, and proof commands.
 For a new standalone surface, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`.
 The renderer owns repeated contract mechanics; the spec owns hierarchy, copy, data, and direction.
+Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
+constraint. The signature must express this product's job, never generic design decoration.
 For an existing product, render its real components and read `references/diagnose.md`. Complete the packet's
 `shine-diagnosis.json` before editing: primary task, before artifact + screenshot, and 3–8 evidence-backed defects
 across usability, completeness, composition, craft, or adoption. Preserve the product architecture.
@@ -44,12 +46,19 @@ across usability, completeness, composition, craft, or adoption. Preserve the pr
   states. A hand-built table is allowed only for static presentation or a framework-free page.
 - Use the selected template's region structure, not its sample copy. Make the decision data,
   content, and interaction specific to this job.
+- Cap a shortlist at one page per visual family. Pages outrank atoms: component demos may fill
+  a named region, but they never supply the page silhouette. Use citation history to avoid
+  repeating the previous output's family or signature device.
 - Put the selected id on the artifact as `data-cite`. Use existing tokens; fill genuine token gaps
   in Shine's source rather than hardcoding around them.
 
+For decks, PDFs, reports, and email, read `references/cross-media.md` and choose the output-native
+lane. Preserve the hierarchy and evidence; a website screenshot pasted onto a slide is not a deck.
+
 Only when the packet cannot answer a genuinely advanced requirement, read one focused reference:
-`references/contracts.md`, `references/interaction.md`, `references/adoption.md`, or
-`references/salesforce.md`. Ordinary tables, forms, and page structures need none of them.
+`references/contracts.md`, `references/interaction.md`, `references/adoption.md`,
+`references/cross-media.md`, or `references/salesforce.md`. Ordinary tables, forms, and page
+structures need none of them.
 
 ## Prove
 
@@ -58,8 +67,7 @@ exits zero, then run compare as the final write. A receipt is generated only by 
 never create or edit one. Report the selected template, component implementation, workflow result,
 measure facts, screenshot, receipt, and anything not completed.
 
-The packet supplies the exact invocations of `verify/measure.mjs` and `verify/compare.mjs` for
-its selected template; use those commands rather than reconstructing their flags.
+Use the packet's exact `verify/measure.mjs` and `verify/compare.mjs` invocations; do not rebuild flags.
 
 ## Usability is executable, not inferred from craft
 

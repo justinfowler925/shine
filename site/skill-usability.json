@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "cite": "shadcn-blog",
+  "objects": [
+    {"id":"copy-skill","selector":"[data-testid=copy-skill]","referenceRole":"primary action","purpose":"Copy the complete self-contained skill without a repository"},
+    {"id":"copy-status","selector":"[data-testid=copy-status]","referenceRole":"interaction result","purpose":"Confirm the copy and next step"},
+    {"id":"download-skill","selector":"[data-testid=download-skill]","referenceRole":"secondary action","purpose":"Download the complete Markdown file"},
+    {"id":"skill-source","selector":"[data-testid=skill-source]","referenceRole":"product proof","purpose":"Preview the exact downloadable skill"}
+  ],
+  "flows": [
+    {"id":"copy-canonical-skill","userJob":"Copy Shine and know where to paste it","steps":[
+      {"action":"visible","selector":"[data-testid=skill-source]"},
+      {"action":"click","selector":"[data-testid=copy-skill]"},
+      {"action":"text","selector":"[data-testid=copy-status]","value":"Copied"}
+    ]}
+  ]
+}

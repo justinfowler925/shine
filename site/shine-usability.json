@@ -1,41 +1,17 @@
 {
   "version": 1,
-  "cite": "shadcn-blog",
+  "cite": "shadcn-marketing",
   "objects": [
-    {
-      "id": "copy-skill",
-      "selector": "[data-testid=copy-skill]",
-      "referenceRole": "primary action",
-      "purpose": "Copy the canonical skill without using a repository"
-    },
-    {
-      "id": "copy-status",
-      "selector": "[data-testid=copy-status]",
-      "referenceRole": "interaction result",
-      "purpose": "Confirm what happened and tell the visitor what to do next"
-    },
-    {
-      "id": "download-skill",
-      "selector": "[data-testid=download-skill]",
-      "referenceRole": "secondary action",
-      "purpose": "Download the canonical Markdown file for a native skill folder"
-    },
-    {
-      "id": "skill-source",
-      "selector": "[data-testid=skill-source]",
-      "referenceRole": "product proof",
-      "purpose": "Show that the offered download is the actual readable skill"
-    }
+    {"id":"show-proof","selector":"[data-testid=show-proof]","referenceRole":"primary evidence action","purpose":"Reveal the V3 to V4 product proof from the hero"},
+    {"id":"rebuild-proof","selector":"#rebuild","referenceRole":"interaction result","purpose":"Show the before and after and explain what changed"},
+    {"id":"get-skill","selector":"[data-testid=get-skill]","referenceRole":"conversion","purpose":"Open the complete self-contained skill path"}
   ],
   "flows": [
-    {
-      "id": "copy-canonical-skill",
-      "userJob": "Copy Shine and know where to paste it",
-      "steps": [
-        {"action": "visible", "selector": "[data-testid=skill-source]"},
-        {"action": "click", "selector": "[data-testid=copy-skill]"},
-        {"action": "text", "selector": "[data-testid=copy-status]", "value": "Copied"}
-      ]
-    }
+    {"id":"inspect-rebuild","userJob":"Understand the V4 change and reach the complete skill","steps":[
+      {"action":"visible","selector":"[data-testid=show-proof]"},
+      {"action":"click","selector":"[data-testid=show-proof]"},
+      {"action":"visible","selector":"#rebuild"},
+      {"action":"text","selector":"[data-testid=show-proof]","value":"Rebuild revealed"}
+    ]}
   ]
 }

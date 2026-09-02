@@ -151,6 +151,12 @@ export function retrieveDirections(templates, text, constraints = {}) {
     // as "no composed page reference" once the corpus carried many chart packs.
     const scope = candidate.template.scope || "page";
     const peers = selected.filter((prior) => (prior.template.scope || "page") === scope);
+    const family = candidate.template.dna?.family || candidate.template.kit;
+    const familyPeer = peers.find((prior) => (prior.template.dna?.family || prior.template.kit) === family);
+    if (familyPeer) {
+      exclusions.push({ ...candidate, reasons:[`family-cap: ${family} already represented by ${familyPeer.template.id} in ${scope} scope`] });
+      continue;
+    }
     const distance = peers.length ? Math.min(...peers.map((prior) => axisDistance(prior.axes, candidate.axes))) : 11;
     if (!peers.length || distance >= 3) selected.push({ ...candidate, distance });
     else exclusions.push({ ...candidate, reasons:[`near-duplicate: semantic distance ${distance} < 3 within ${scope} scope`] });

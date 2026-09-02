@@ -1,6 +1,6 @@
 # Foundations
 
-Visual and interaction floor for every UI. Behavior completeness lives in [component-contracts.md](component-contracts.md). Brand tokens override the neutrals in brand mode ([brand.md](brand.md)).
+Visual and interaction floor for every UI. Behavior completeness lives in [contracts.md](contracts.md). Brand tokens override the neutrals in brand mode ([brand.md](brand.md)).
 
 ## Tokens
 

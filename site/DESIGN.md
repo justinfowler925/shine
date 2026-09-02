@@ -1,59 +1,50 @@
-# Shine public page — DESIGN.md
+# Shine V4 public page — design contract
 
-**Lane:** marketing · **Job:** what Shine is, how the loop works, why you'd want it · **Cite:** `shadcn-blog`
-**Voice:** kit-faithful (shadcn new-york zinc — Geist, zinc-900 filled primary, hairline borders, 200ms)
+**Lane:** marketing
 
-Cited `mui-blog` and painted Material until 2026-08-31. MUI was deleted from the
-corpus that day (`docs/no-foreign-runtimes.md`), and a page may not cite a row that
-does not exist — so the page was re-cited to the `shadcn-blog` region map and
-repainted from the zinc ramp. The regions did not change; the paint did.
-**Unlock:** structure stays the article. Featured figures under the lede (template photo-card role). No blog-index of dummy posts.
+**Job:** explain the V4 director, prove the rebuild, and move a visitor to the complete skill
 
-## Skill route
+**Cite:** `shadcn-marketing` for the page region graph; `magicui-hero` for the media-led hero technique
 
-`/skill` is the adoption close for visitors who do not know GitHub. It keeps the
-same shadcn editorial voice and makes the primary job executable: load the exact
-canonical `SKILL.md`, copy it, and show the next instruction. Download and raw
-text are secondary actions. Native skill support and paste-as-persistent-
-instructions are named separately; the page does not claim every AI has Codex's
-or Cursor's hooks and tool surface.
+**Archetype:** evidence-led editorial
 
-## Subject
+**Image strategy:** real before screenshot plus a product-specific director packet; no stock imagery
 
-A Cursor/Claude user who has watched generated UI come out generic. They need the story in order: what Shine is, how the loop works, then the afternoon it takes to install. Not a SaaS landing. Not a lab notebook. Proof is pictures of Shine's own artifacts.
+**Signature moment:** the art-direction requirement is highlighted inside the product itself
+**Anti-repetition:** do not reuse V3's narrow essay, neutral zinc paint, thumbnail proof, or bottom-only conversion
 
-## Regions (`corpus/blueprints/shadcn-blog.md` — bar + article + featured figures)
+## Diagnosis
 
+The V3 page passed axe and contrast. Its failure was not hygiene; it was composition and product
+story. At 1,280px the page ran 4,255px tall, placed the key proof in small thumbnails, and asked a
+technical essay to do the work of a product demonstration. `../shine-diagnosis.json` holds the
+four evidence-backed defects.
+
+## Regions
+
+```text
+[ sticky navigation · one install path ]
+[ specific claim              | live director packet ]  hero
+[ attributed release facts                                ]  proof
+[ real V3 screenshot          | V4 visual decision       ]  before/after
+[ director / composition / primitives / references / output ]
+[ six-step working loop                                   ]
+[ five output-native lanes                                ]
+[ one-file conversion                                    ]
 ```
-[  floating app bar: Shine · Registry · Get the skill              ]  header
-[  h1 + lede                                                       ]
-[  featured pair: unfucked costume vs untitled-directed            ]  photo cards
-[  article: what it is → catalog specimens → loop → install        ]  focal
-[  elevated loop inset — six named steps                           ]
-[  install + skill listing from disk                               ]
-```
 
-No dummy blog posts. No portrait. No Meeting Recon wordmark. Catalog shots are harvested pack PNGs. The pair is `verify/fixtures/unfucked/` rendered through measure.
+## Tokens and voice
 
-## Tokens (pack DNA)
+The brand voice is an editorial-tech dark field with an acid proof color. The acid is spent on the
+headline interruption, the active director gate, and conversion—not on decorative gradients. DM
+Mono carries evidence and system labels; Manrope carries the argument. The scale is deliberately
+small: 12, 14, 16, 20, 40, and 64px.
 
-| Role | Value |
-|---|---|
-| canvas | white `#ffffff` / dark zinc-950 `#09090b` |
-| primary | filled zinc-900 `#18181b`; dark zinc-50 `#fafafa` |
-| display / body | Geist 32–40 / 16 |
-| radius | control 6 · card 12 |
-| motion | 200ms |
-| elevation | one soft shadow on bar, figures, loop, listing |
+## Proof
 
-## Signature
-
-The pair under the lede is the product. The catalog strip is the inventory. The loop is how.
-
-## Copy (beliefs)
-
-1. Outcome: shown — costume vs cited Untitled UI, same job.
-2. Proof: three harvested catalog shots (Untitled UI, shadcn shell, shadcn dashboard).
-3. Time: clone, symlink, doctor — same afternoon.
-4. Effort: one git directory, two surfaces.
-5. Trust: MIT, default `--ci` is 108 browser-free checks; named full CI adds browser/runtime/consumer proof; skill tree generated from disk.
+- Before: `img/shine-v3-before.png`
+- After: `img/shine-v4-after.png`
+- Accessibility: zero axe violations in the browser measure pass
+- Workflow: `shine-usability.json` clicks **See the rebuild** and observes the revealed state
+- Structural compare: unavailable because `shadcn-marketing` is an honest region-map-only row with
+  no harvested shot. The verifier refuses to invent a likeness score.

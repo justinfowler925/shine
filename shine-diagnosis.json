@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "job": "Rebuild the Shine V4 public marketing page and article to demonstrate the final open-source design director, with before-and-after proof, a downloadable SKILL.md, and a clear conversion path",
+  "category": "marketing",
+  "primaryTask": "Understand why Shine V4 is materially better, inspect the proof, and get the complete skill without needing GitHub or a terminal.",
+  "before": {
+    "artifact": "https://shine-blond.vercel.app",
+    "screenshot": "site/img/shine-v3-before.png"
+  },
+  "defects": [
+    {
+      "bucket": "usability",
+      "severity": "major",
+      "problem": "The primary path is split between a technical essay, a distant write-up link, and a skill action near the bottom of a 4,255px page.",
+      "evidence": "The live baseline places the first product action in the nav, while the explanatory conversion section begins after five long text sections.",
+      "expectedEffect": "Place one clear Get Shine action and one evidence action in the hero, then repeat the install path after the proof."
+    },
+    {
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "The page describes V3 internals but does not prove the V4 reference strategy, cross-media lanes, interaction result, or the rebuild itself.",
+      "evidence": "The baseline contains two small UI comparisons and a file listing, but no V4 contract, before/after narrative, or visible output-lane model.",
+      "expectedEffect": "Make the V4 architecture, dogfood receipt, downloadable skill, and working interaction explicit and testable."
+    },
+    {
+      "bucket": "composition",
+      "severity": "minor",
+      "problem": "The page reads as a narrow article column with evenly weighted paragraphs, so the product proof never becomes the focal object.",
+      "evidence": "At 1280px the content occupies a thin central column and the three catalog images render as thumbnails beneath multiple paragraphs.",
+      "expectedEffect": "Use an evidence-led hero and a wide visual proof stage so the before/after and director loop establish hierarchy within three seconds."
+    },
+    {
+      "bucket": "craft",
+      "severity": "minor",
+      "problem": "The visual language is clean but collapses into the same neutral shadcn editorial treatment the product is meant to help agents move beyond.",
+      "evidence": "The baseline has excellent axe and contrast results, but nearly every surface is white, zinc, one-pixel bordered, and equally rounded.",
+      "expectedEffect": "Retain the accessibility floor while introducing a distinctive editorial-tech composition, purposeful image treatment, and one signature proof visual."
+    }
+  ]
+}
