@@ -10,7 +10,6 @@ description: >-
 
 Build the interface directly in the current Codex task. Do not delegate to a second design
 agent. Shine's deterministic tools choose and verify; you supply brief-specific design judgment.
-
 ## Start with one bounded packet
 
 Resolve this installed tree, then create the packet before planning or editing:
@@ -20,7 +19,6 @@ SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
 node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new> --project "$PWD"
 ```
-
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
 dashboard. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
 source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files
@@ -34,21 +32,12 @@ constraint. The signature must express this product's job, never generic design 
 For an existing product, render its real components and read `references/diagnose.md`. Complete the packet's
 `shine-diagnosis.json` before editing: primary task, before artifact + screenshot, and 3–8 evidence-backed defects
 across usability, completeness, composition, craft, or adoption. Preserve the product architecture.
-
 ## Product precedent outranks the catalog
 
-For an existing product, inventory the shipped sibling surfaces before accepting the packet's external
-reference. Find the closest page that presents the same information object or supports the same user job.
-If one exists, rerun the packet with `--product-reference <page-or-url> --product-reference-name <name>`.
-The sibling owns the product conventions; the external reference may fill a genuine gap but must not replace
-working in-product card anatomy, toolbar behavior, expansion model, action placement, states, terminology, or
-responsive behavior. Name the sibling and every justified divergence in the diagnosis.
-
-Reuse or extract the sibling's component and CSS vocabulary. Do not create a parallel component for the same
-object. Mark shared shells with stable `data-product-pattern` values and run the packet's product-compare command.
-Every visible icon needs a distinct semantic job (state, action, object type, or direction). If nearby text already
-does all of the meaning, remove the icon; decoration is not semantics.
-
+For an existing product, inventory shipped sibling surfaces before accepting the external reference. Find the closest page presenting the same information object or supporting the same user job. If one exists, rerun the packet with `--product-reference <page-or-url> --product-reference-name <name>`.
+The sibling owns product conventions; the catalog may fill a gap but must not replace working card anatomy, toolbar behavior, expansion, actions, states, terminology, or responsive behavior. Name the sibling and every justified divergence in the diagnosis.
+Reuse or extract its component and CSS vocabulary; never create a parallel component for the same object. Mark shared shells with stable `data-product-pattern` values and run the packet's product-compare command.
+Every visible icon needs a distinct semantic job: state, action, object type, or direction. If nearby text already supplies all meaning, remove it; decoration is not semantics.
 ## Build
 
 - Existing surface: fix defects in diagnosis priority order; do not paint before usability and completeness are sound.
@@ -65,24 +54,19 @@ does all of the meaning, remove the icon; decoration is not semantics.
   repeating the previous output's family or signature device.
 - Put the selected id on the artifact as `data-cite`. Use existing tokens; fill genuine token gaps
   in Shine's source rather than hardcoding around them.
-
 For decks, PDFs, reports, and email, read `references/cross-media.md` and choose the output-native
 lane. Preserve the hierarchy and evidence; a website screenshot pasted onto a slide is not a deck.
-
 Only when the packet cannot answer a genuinely advanced requirement, read one focused reference:
 `references/contracts.md`, `references/interaction.md`, `references/adoption.md`,
 `references/cross-media.md`, or `references/salesforce.md`. Ordinary tables, forms, and page
 structures need none of them.
-
 ## Prove
 
 Exercise the primary workflow in the rendered product. Run the packet's measure command until it
 exits zero, run product compare when the packet names a product precedent, then run catalog compare as the final write. A receipt is generated only by the verifier;
 never create or edit one. Report the selected template, component implementation, workflow result,
 measure facts, screenshot, receipt, and anything not completed.
-
 Use the packet's exact `verify/measure.mjs` and `verify/compare.mjs` invocations; do not rebuild flags.
-
 ## Usability is executable, not inferred from craft
 
 After choosing the reference template, read `references/usability.md`. Before painting, write
