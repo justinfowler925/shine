@@ -22,7 +22,7 @@ assert.throws(()=>classifyJob("Fix the design and UX problems"),/cannot infer/);
 assert.equal(classifyJob("Fix the design and UX problems","form").category,"form");
 
 const grid=createDesignPacket({job:cases[0][0],lane:"internal",project:process.cwd()});
-assert.equal(grid.version,3);assert.equal(grid.category,"datagrid");assert.equal(grid.selected.scope,"page");
+assert.equal(grid.version,4);assert.equal(grid.category,"datagrid");assert.equal(grid.selected.scope,"page");
 assert(grid.componentReferences.some(x=>x.id==="untitled-table"));
 for(const item of ["search","sort","filters","column visibility","pagination","row selection","row actions"])assert(grid.controlInventory.includes(item),item);
 assert.deepEqual(grid.requiredStates,["loading","empty","filtered-empty","error","populated"]);
@@ -33,6 +33,13 @@ assert.equal(grid.usability.required,true);
 assert.match(grid.usability.commands[0],/verify\/usability\.mjs/);
 assert.match(grid.proof.commands[2],/--mode existing --diagnosis shine-diagnosis\.json/);
 assert.equal(grid.diagnosis.required,true);
+assert.equal(grid.productPrecedent.required,true);
+assert.equal(grid.productPrecedent.provided,false);
+
+const withSibling=createDesignPacket({job:cases[2][0],lane:"internal",project:process.cwd(),mode:"existing",productReference:"http://localhost:3000/cro/gov",productReferenceName:"Government signals"});
+assert.equal(withSibling.productPrecedent.provided,true);
+assert.equal(withSibling.productPrecedent.name,"Government signals");
+assert(withSibling.proof.commands.some((command)=>command.includes("compare-product.mjs")&&command.includes("/cro/gov")));
 
 const dashboard=createDesignPacket({job:cases[2][0],lane:"internal",project:process.cwd(),mode:"new"});
 assert.equal(dashboard.selected.id,"shadcn-dashboard-01","component demo cannot replace the composed page reference");

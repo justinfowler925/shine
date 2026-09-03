@@ -19,6 +19,8 @@
     "skill-listing": "node site/scripts/skill-listing.mjs",
     "measure-consumers": "node verify/measure-consumers.mjs",
     "compare": "node verify/compare.mjs",
+    "compare:product": "node verify/compare-product.mjs",
+    "compare:product:test": "node verify/product-consistency.test.mjs",
     "usability": "node verify/usability.mjs",
     "usability:test": "node verify/usability.test.mjs",
     "benchmark:smoke": "node benchmark/run.mjs",

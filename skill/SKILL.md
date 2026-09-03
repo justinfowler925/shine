@@ -35,6 +35,20 @@ For an existing product, render its real components and read `references/diagnos
 `shine-diagnosis.json` before editing: primary task, before artifact + screenshot, and 3–8 evidence-backed defects
 across usability, completeness, composition, craft, or adoption. Preserve the product architecture.
 
+## Product precedent outranks the catalog
+
+For an existing product, inventory the shipped sibling surfaces before accepting the packet's external
+reference. Find the closest page that presents the same information object or supports the same user job.
+If one exists, rerun the packet with `--product-reference <page-or-url> --product-reference-name <name>`.
+The sibling owns the product conventions; the external reference may fill a genuine gap but must not replace
+working in-product card anatomy, toolbar behavior, expansion model, action placement, states, terminology, or
+responsive behavior. Name the sibling and every justified divergence in the diagnosis.
+
+Reuse or extract the sibling's component and CSS vocabulary. Do not create a parallel component for the same
+object. Mark shared shells with stable `data-product-pattern` values and run the packet's product-compare command.
+Every visible icon needs a distinct semantic job (state, action, object type, or direction). If nearby text already
+does all of the meaning, remove the icon; decoration is not semantics.
+
 ## Build
 
 - Existing surface: fix defects in diagnosis priority order; do not paint before usability and completeness are sound.
@@ -63,7 +77,7 @@ structures need none of them.
 ## Prove
 
 Exercise the primary workflow in the rendered product. Run the packet's measure command until it
-exits zero, then run compare as the final write. A receipt is generated only by the verifier;
+exits zero, run product compare when the packet names a product precedent, then run catalog compare as the final write. A receipt is generated only by the verifier;
 never create or edit one. Report the selected template, component implementation, workflow result,
 measure facts, screenshot, receipt, and anything not completed.
 
