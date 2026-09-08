@@ -19,6 +19,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve as presolve } from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
 import { load, pathTo } from "./deps.mjs";
+import { auditTables } from "./table-quality.mjs";
 import { evaluateDataGrids } from "./contracts/table.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -40,7 +41,8 @@ const SPACE_SCALE = [0, 1, 2, 4, 8, 12, 16, 24, 32, 48, 64];
 const onScale = (px) => SPACE_SCALE.some((s) => Math.abs(px - s) < 0.51) || px % 4 < 0.51 || px % 4 > 3.49;
 
 const browser = await chromium.launch();
-const page = await browser.newPage({ colorScheme: dark ? "dark" : "light", viewport: { width: 1280, height: 900 } });
+const context = await browser.newContext({ colorScheme: dark ? "dark" : "light", viewport: { width: 1280, height: 900 } });
+const page = await context.newPage();
 await page.goto(url, { waitUntil: "networkidle" });
 if (dark) await page.evaluate(() => document.documentElement.classList.add("dark"));
 await page.evaluate(() => document.fonts.ready);
@@ -331,6 +333,7 @@ for (const t of textTargets) {
 // unambiguous; the judgement ones print every run as notes and never block, because a
 // gate with false positives is a gate someone switches off.
 const dataGrids = await page.evaluate(evaluateDataGrids);
+const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
 const compose = await page.evaluate(() => {
   const vis = (el) => {
     const r = el.getBoundingClientRect();
@@ -782,10 +785,8 @@ if (compose.appShellProbe && compose.contentShare < 0.28) {
   );
 }
 
-for (const grid of compose.dataGrids) {
-  for (const k of ["title", "toolbar", "filter", "sort", "sticky", "overflow", "page", "resize", "rowActions", "states", "semantics", "remoteMode"]) {
-    if (!grid[k]) failures.push(`contract: DataGrid ${grid.selector} missing or inert ${k} (contracts.md Table MUST)`);
-  }
+for (const check of tableQuality.checks) {
+  if (check.status !== "passed") failures.push(`contract: DataGrid missing or inert ${check.name}: ${check.status}: ${check.reason}`);
 }
 
 // Likeness checks key off the --cite FLAG, never off page attributes. The old
@@ -938,6 +939,7 @@ if (notes.length) {
   notes.forEach((n) => console.log("  • " + n));
 }
 report.notes = notes;
+report.tableQuality = tableQuality;
 if (jsonOut) writeFileSync(jsonOut, JSON.stringify(report, null, 2));
 
 if (failures.length) {

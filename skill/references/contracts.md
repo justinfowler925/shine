@@ -1,6 +1,6 @@
 # Component Contracts
 
-SSOT for what a named component includes. The MUST/SHOULD lists below were distilled in 2026 from MUI X, Ant Design, IBM Carbon, React Aria/Spectrum, shadcn/Radix (+ TanStack), Untitled UI/Plus UI visual matrices, and OpenAI Apps SDK UI (chat). That sentence is provenance, not a pointer: MUI, Ant and Carbon were deleted from the corpus on 2026-08-31 (`docs/no-foreign-runtimes.md`) and are not there to read. The distilled requirements stayed — a completeness ladder is a fact about tables, not about a vendor.
+SSOT for what a named component includes. For record tables, `table-quality.md` defines the enforced executable proof and task-appropriate capabilities. The MUST/SHOULD lists below were distilled in 2026 from MUI X, Ant Design, IBM Carbon, React Aria/Spectrum, shadcn/Radix (+ TanStack), Untitled UI/Plus UI visual matrices, and OpenAI Apps SDK UI (chat). That sentence is provenance, not a pointer: MUI, Ant and Carbon were deleted from the corpus on 2026-08-31 (`docs/no-foreign-runtimes.md`) and are not there to read. The distilled requirements stayed — a completeness ladder is a fact about tables, not about a vendor.
 
 **Rule:** implement MUST always. For app/admin surfaces, also SHOULD. ASK before building ASK items. Opt-out only when user says simple/static/presentation/minimal.
 

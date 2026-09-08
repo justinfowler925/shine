@@ -156,6 +156,9 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
 }
 
 {
+  const table=spawnSync(process.execPath,[join(SHINE,"verify/table-quality.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(table.status===0)ok("table quality rejects incomplete custom patterns",table.stdout.trim().slice(-300));
+  else fail("table quality rejects incomplete custom patterns",`${table.stderr||table.stdout}`.trim().slice(-800));
   const packet=spawnSync(process.execPath,[join(SHINE,"verify/design-packet.test.mjs")],{cwd:SHINE,encoding:"utf8"});
   if(packet.status===0)ok("bounded design packet", "9 natural briefs, ambiguity refusal, page/component split, usable source");
   else fail("bounded design packet",`${packet.stderr||packet.stdout}`.trim().slice(-500));
@@ -924,7 +927,7 @@ if (FULL) {
   const marketingShell = join(SHINE, "verify/fixtures/marketing-as-appshell.html");
 
   const pretty = run(prettyTable);
-  if (pretty.status === 1 && /contract: DataGrid .* missing or inert/.test(pretty.stderr))
+  if (pretty.status === 1 && /contract: DataGrid.*missing or inert/.test(pretty.stderr))
     ok("contract gate fails a pretty empty table");
   else
     fail(
@@ -942,7 +945,7 @@ if (FULL) {
     ),
   );
   const naked = run(nakedTable);
-  if (naked.status === 1 && /contract: DataGrid .* missing or inert/.test(naked.stderr))
+  if (naked.status === 1 && /contract: DataGrid.*missing or inert/.test(naked.stderr))
     ok("contract gate fails an unmarked data table");
   else
     fail(
@@ -951,39 +954,8 @@ if (FULL) {
     );
 
   const full = run(fullTable);
-  if (!/contract:/.test(full.stderr)) ok("contract gate passes a complete table");
-  else fail("contract gate passes a complete table", full.stderr.match(/contract:.*/)?.[0] ?? "");
-
-  const fullSource = readFileSync(fullTable, "utf8");
-  const capabilitySeeds = [
-    ["title", "<h1>Employees</h1>", "<div>Employees</div>"],
-    ["toolbar", 'data-toolbar role="search"', ""],
-    ["filter", "search.oninput=", "search.dataset.noop="],
-    ["sort", "document.querySelector('[data-sort]').onclick=", "document.querySelector('[data-sort]').dataset.noop="],
-    ["sticky", "position:sticky", "position:relative"],
-    ["overflow", "overflow-x:auto", "overflow-x:visible"],
-    ["page", "document.querySelector('[data-page-next]').onclick=", "document.querySelector('[data-page-next]').dataset.noop="],
-    ["resize", 'role="separator" data-column-resize', ""],
-    ["rowActions", '<td><button data-row-action>Open</button></td>', "<td><span>Open</span></td>"],
-    ["states", 'data-state="filtered-empty"', 'data-example="filtered-empty"'],
-    ["remoteMode", " data-client-mode", ""],
-  ];
-  for (const [capability, from, to] of capabilitySeeds) {
-    const seeded = join(dir, `datagrid-missing-${capability}.html`);
-    let source = fullSource.replace(from, to);
-    if (capability === "overflow") source = source.replace("table{width:100%", "table{min-width:2000px;width:100%");
-    writeFileSync(seeded, source);
-    const result = run(seeded);
-    const expected = new RegExp(`contract: DataGrid .* missing or inert ${capability}`);
-    if (result.status === 1 && expected.test(result.stderr)) ok(`DataGrid gate bites missing ${capability}`);
-    else fail(`DataGrid gate bites missing ${capability}`, `exit ${result.status}; ${JSON.stringify(result.stderr.slice(-220))}`);
-  }
-
-  const presentation = join(dir, "presentation-table.html");
-  writeFileSync(presentation, page('<h1>Layout</h1><table role="presentation"><tr><th>A</th><th>B</th></tr><tr><td>1</td><td>2</td></tr></table>'));
-  const presentationRun = run(presentation);
-  if (!/contract: DataGrid/.test(presentationRun.stderr)) ok("DataGrid gate ignores explicit presentation table");
-  else fail("DataGrid gate ignores explicit presentation table", presentationRun.stderr.match(/contract:.*/)?.[0] ?? "");
+  if (full.status === 1 && /contract: DataGrid/.test(full.stderr)) ok("legacy marker-only complete table is rejected");
+  else fail("legacy marker-only complete table is rejected", full.stderr.slice(-500));
 
   const runCite = (f, id) => spawnSync("node", [measure, f, "--cite", id], { encoding: "utf8", env: { ...process.env, NODE_PATH } });
   const fakeUntitled = runCite(untitledShadcn, "untitled-table");
@@ -1029,8 +1001,8 @@ if (FULL) {
     encoding: "utf8",
     env: { ...process.env, NODE_PATH },
   });
-  if (qRun.status === 0) ok("acceptance queue measure");
-  else fail("acceptance queue measure", `exit ${qRun.status}; stderr ${JSON.stringify(qRun.stderr.slice(-280))}`);
+  if (qRun.status === 1 && /contract: DataGrid.*not_tested/.test(qRun.stderr)) ok("untested legacy queue measure is rejected");
+  else fail("untested legacy queue measure is rejected", `exit ${qRun.status}; stderr ${JSON.stringify(qRun.stderr.slice(-280))}`);
   const mRun = spawnSync("node", [measure, mktEx, "--cite", "magicui-hero", "--json", mJson], {
     encoding: "utf8",
     env: { ...process.env, NODE_PATH },
@@ -1038,7 +1010,7 @@ if (FULL) {
   if (mRun.status === 0) ok("acceptance marketing measure");
   else fail("acceptance marketing measure", `exit ${mRun.status}; stderr ${JSON.stringify(mRun.stderr.slice(-280))}`);
 
-  if (qRun.status === 0 && mRun.status === 0) {
+  if (qRun.status === 1 && existsSync(qJson) && mRun.status === 0) {
     const qj = JSON.parse(readFileSync(qJson, "utf8"));
     const mj = JSON.parse(readFileSync(mJson, "utf8"));
     const qHead = qj.compose?.maxHeadingPx ?? 0;
@@ -1442,7 +1414,7 @@ if (FULL) {
     if (r.status === 2 && /Refusing to compare/.test(out)) ok("compare refuses without pixels", "exit 2");
     else fail("compare refuses without pixels", `exit ${r.status}: ${out.slice(0, 160)}`);
     // Live Chromium: skip at sessionStart (--quiet). --ci and a normal doctor run
-    // must watch the stamp FAIL and the unfuck after.html PASS.
+    // must reject the stamp and the visually improved but untested after.html table.
     const liveCompare = FULL && existsSync(join(SHINE, "corpus/packs/untitled-table/shot.png"));
     if (liveCompare) {
       const matrix = spawnSync(process.execPath, [join(SHINE, "verify/compare-proof.test.mjs")], { encoding: "utf8", env: { ...process.env, NODE_PATH }, timeout: 180_000 });
@@ -1463,8 +1435,8 @@ if (FULL) {
         env: { ...process.env, NODE_PATH },
       });
       const gout = `${good.stdout}${good.stderr}`;
-      if (good.status === 0 && /palette/.test(gout)) ok("compare accepts the unfuck after", "exit 0");
-      else fail("compare accepts the unfuck after", `exit ${good.status}: ${gout.slice(0, 240)}`);
+      if (good.status === 1 && /table quality:.*not_tested/.test(gout)) ok("compare rejects an untested after table", "exit 1; no interaction proof");
+      else fail("compare rejects an untested after table", `exit ${good.status}: ${gout.slice(0, 240)}`);
       const zinc = join(SHINE, "verify/fixtures/zinc-on-untitled.html");
       const zrun = spawnSync(process.execPath, [compare, zinc, "--cite", "untitled-table", "--out", join(tmpdir(), "shine-doctor-zinc.png")], {
         encoding: "utf8",
@@ -1630,13 +1602,13 @@ if (FULL) {
   else fail("integration fixture typechecks and builds", `${build.stderr || build.stdout}`.trim().slice(-500));
   const runtime = build.status === 0 ? spawnSync(process.execPath, [join(SHINE, "verify/integrations-runtime.mjs")], { cwd: SHINE, encoding: "utf8", timeout: 600_000 }) : null;
   if (runtime?.status === 0 && (runtime.stdout.match(/integration runtime PASS:/g) || []).length === 2)
-    ok("integration fixture renders and interacts", "2/2 supported recipes; DataGrid 12/12 each");
+    ok("integration fixture renders and interacts", "2/2 supported recipes; runtime smoke only, table quality checked separately");
   else fail("integration fixture renders and interacts", runtime ? `${runtime.stderr || runtime.stdout}`.trim().slice(-500) : "build failed; runtime not run");
   const bites = spawnSync(process.execPath, [join(SHINE, "verify/integrations-bite.mjs")], { cwd: SHINE, encoding: "utf8", timeout: 120_000 });
   if (bites.status === 0 && (bites.stdout.match(/integration scaffold PASS:/g) || []).length === 1 && (bites.stdout.match(/integration bite PASS:/g) || []).length === 2)
     ok("integration compiler gates bite", "generated scaffold typechecks; renamed API + missing package rejected");
   else fail("integration compiler gates bite", `${bites.stderr || bites.stdout}`.trim().slice(-500));
-  const r = spawnSync(process.execPath, [join(SHINE, "verify/measure-consumers.mjs"), "--quiet", "--registry", join(SHINE, "verify/benchmark-consumers.txt")], {
+  const r = spawnSync(process.execPath, [join(SHINE, "verify/measure-consumers.mjs"), "--quiet", "--serve-local", "--registry", join(SHINE, "verify/benchmark-consumers.txt")], {
     encoding: "utf8",
     timeout: 600_000,
   });

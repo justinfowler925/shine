@@ -1,0 +1,4 @@
+:root{color-scheme:light}
+body{margin:0;padding:24px;color:#18181b;background:#fff;font:16px/1.5 system-ui}main{max-width:1100px;margin:auto}h1{font-size:24px}#toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}button,input,select{font:inherit;min-height:40px;padding:8px;border:1px solid #71717a;border-radius:4px;background:white;color:#18181b}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #1d4ed8;outline-offset:2px}button:disabled{opacity:.6}.scroll{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px;border-bottom:1px solid #d4d4d8}th{background:#f4f4f5;position:sticky;top:0}nav{display:flex;align-items:center;gap:16px;margin-top:16px}[hidden]{display:none!important}
+
+.primary{background:#1d4ed8;color:#fff;border-color:#1d4ed8}

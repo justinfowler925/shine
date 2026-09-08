@@ -85,3 +85,7 @@ try {
 } finally {rmSync(linked,{recursive:true,force:true});}
 
 console.log("design packet PASS: 9 natural briefs · ambiguity refusal · page/component split · usable source · diagnosis contract · kit affinity + port disclosure + lex lane · symlink CLI");
+
+assert.deepEqual(grid.tableQuality.enforcedBy,["measure","compare"]);
+assert.equal(grid.tableQuality.contract,"shine-tables.json");
+assert.match(grid.tableQuality.reference,/table-quality\.md$/);

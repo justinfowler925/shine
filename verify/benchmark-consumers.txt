@@ -1,3 +1,2 @@
-# Committed, designated full-doctor consumers. Zero rows is an infrastructure failure.
-queue-product-path|verify/fixtures/queue.html
-full-datagrid|verify/fixtures/full-table.html
+# Committed browser consumer. Legacy queue/full-table fixtures are rejection cases in table-quality.test.mjs.
+full-datagrid|verify/fixtures/table-quality/candidate.html
