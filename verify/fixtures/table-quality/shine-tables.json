@@ -1,0 +1,411 @@
+{
+  "version": 1,
+  "project": ".",
+  "grids": [
+    {
+      "selector": "#queue",
+      "title": "h1",
+      "toolbar": "#toolbar",
+      "kind": "records",
+      "source": {
+        "entry": "candidate.html",
+        "shared": "shared.js",
+        "referenceEntry": "reference.html"
+      },
+      "reference": {
+        "target": "reference.html",
+        "selector": "#queue",
+        "title": "h1",
+        "toolbar": "#toolbar"
+      },
+      "cases": {
+        "sort": {
+          "steps": [
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Acme"
+              ]
+            },
+            {
+              "op": "click",
+              "selector": "#sort"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Acme",
+                "Bravo"
+              ]
+            },
+            {
+              "op": "click",
+              "selector": "#sort"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Delta",
+                "Cedar"
+              ]
+            }
+          ]
+        },
+        "search": {
+          "steps": [
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Acme"
+              ]
+            },
+            {
+              "op": "fill",
+              "selector": "input",
+              "value": "Acme"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Acme"
+              ]
+            },
+            {
+              "op": "fill",
+              "selector": "input",
+              "value": ""
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Acme"
+              ]
+            }
+          ]
+        },
+        "filter": {
+          "steps": [
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Acme"
+              ]
+            },
+            {
+              "op": "select",
+              "selector": "#owner",
+              "value": "Unassigned"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Delta"
+              ]
+            },
+            {
+              "op": "click",
+              "selector": "#clear"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Acme"
+              ]
+            }
+          ]
+        },
+        "pagination": {
+          "steps": [
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Acme"
+              ]
+            },
+            {
+              "op": "click",
+              "selector": "#next"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Delta",
+                "Cedar"
+              ]
+            },
+            {
+              "op": "click",
+              "selector": "#previous"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Acme"
+              ]
+            }
+          ]
+        },
+        "visibility": {
+          "steps": [
+            {
+              "op": "visible",
+              "selector": "th.owner"
+            },
+            {
+              "op": "click",
+              "selector": "#columns"
+            },
+            {
+              "op": "hidden",
+              "selector": "th.owner"
+            },
+            {
+              "op": "click",
+              "selector": "#columns"
+            },
+            {
+              "op": "visible",
+              "selector": "th.owner"
+            }
+          ]
+        },
+        "rowAction": {
+          "steps": [
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Acme"
+              ]
+            },
+            {
+              "op": "text",
+              "selector": "#detail",
+              "equals": ""
+            },
+            {
+              "op": "click",
+              "selector": "tbody tr:first-child button"
+            },
+            {
+              "op": "text",
+              "selector": "#detail",
+              "equals": "Request for Bravo \u2014 owner: Unassigned"
+            }
+          ]
+        },
+        "loading": {
+          "steps": [
+            {
+              "op": "visible",
+              "selector": "#loading"
+            },
+            {
+              "op": "hidden",
+              "selector": "#empty"
+            },
+            {
+              "op": "hidden",
+              "selector": "#error"
+            }
+          ],
+          "routes": [
+            {
+              "url": "**/data.json",
+              "responses": [
+                {
+                  "hold": true
+                }
+              ]
+            }
+          ]
+        },
+        "empty": {
+          "steps": [
+            {
+              "op": "visible",
+              "selector": "#empty"
+            },
+            {
+              "op": "hidden",
+              "selector": "#loading"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": []
+            }
+          ],
+          "routes": [
+            {
+              "url": "**/data.json",
+              "responses": [
+                {
+                  "body": []
+                }
+              ]
+            }
+          ]
+        },
+        "filteredEmpty": {
+          "steps": [
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Acme"
+              ]
+            },
+            {
+              "op": "fill",
+              "selector": "input",
+              "value": "Nobody matches this"
+            },
+            {
+              "op": "visible",
+              "selector": "#filtered"
+            },
+            {
+              "op": "hidden",
+              "selector": "#empty"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": []
+            }
+          ]
+        },
+        "error": {
+          "steps": [
+            {
+              "op": "visible",
+              "selector": "#error"
+            },
+            {
+              "op": "hidden",
+              "selector": "#loading"
+            },
+            {
+              "op": "visible",
+              "selector": "#retry"
+            }
+          ],
+          "routes": [
+            {
+              "url": "**/data.json",
+              "responses": [
+                {
+                  "status": 500,
+                  "body": {}
+                }
+              ]
+            }
+          ]
+        },
+        "retry": {
+          "steps": [
+            {
+              "op": "visible",
+              "selector": "#error"
+            },
+            {
+              "op": "click",
+              "selector": "#retry"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Acme"
+              ]
+            },
+            {
+              "op": "hidden",
+              "selector": "#error"
+            }
+          ],
+          "routes": [
+            {
+              "url": "**/data.json",
+              "responses": [
+                {
+                  "status": 500,
+                  "body": {}
+                },
+                {
+                  "body": [
+                    {
+                      "account": "Bravo",
+                      "owner": "Unassigned"
+                    },
+                    {
+                      "account": "Acme",
+                      "owner": "Allison"
+                    },
+                    {
+                      "account": "Delta",
+                      "owner": "Unassigned"
+                    },
+                    {
+                      "account": "Cedar",
+                      "owner": "Justin"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "keyboard": {
+          "steps": [
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Bravo",
+                "Acme"
+              ]
+            },
+            {
+              "op": "press",
+              "selector": "#sort",
+              "key": "Enter"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .account",
+              "equals": [
+                "Acme",
+                "Bravo"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

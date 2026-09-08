@@ -39,14 +39,16 @@ The sibling owns product conventions; the catalog may fill a gap but must not re
 Reuse or extract its component and CSS vocabulary; never create a parallel component for the same object. Mark shared shells with stable `data-product-pattern` values and run the packet's product-compare command.
 Every visible icon needs a distinct semantic job: state, action, object type, or direction. If nearby text already supplies all meaning, remove it; decoration is not semantics.
 ## Build
-
 - Existing surface: fix defects in diagnosis priority order; do not paint before usability and completeness are sound.
 - New surface: state the information hierarchy and primary workflow in the design spec, then build; ask discovery
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports.
-- For record data, use the resolved production DataGrid recipe. Every data grid includes search,
-  sorting, filters, column visibility, pagination, selection, row actions, and loading/empty/error
-  states. A hand-built table is allowed only for static presentation or a framework-free page.
+- For record data, reuse the product's shared DataGrid and installed table-state engine.
+  Read `references/table-quality.md` and write `shine-tables.json`: shared source, approved
+  sibling table, and executable scenarios. Measure and compare both enforce it, including
+  tables nested in dashboards. Primitives, hidden state markers, and changed sort arrows
+  are not proof. Search, sort, filters, columns, pagination, actions, states, and keyboard
+  must work; bulk actions also require selection. Static presentation needs an explicit reason.
 - Use the selected template's region structure, not its sample copy. Make the decision data,
   content, and interaction specific to this job.
 - Cap a shortlist at one page per visual family. Pages outrank atoms: component demos may fill

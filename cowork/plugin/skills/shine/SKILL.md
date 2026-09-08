@@ -21,7 +21,11 @@ task; the references in this skill decide, you supply brief-specific judgment.
 2. **Match a template, never invent a page.** Every known job (dashboard, queue, record,
    settings, auth, checkout, landing, wizard…) has a row in `references/templates.md`.
    Clone the selected row's regions; put its id on the artifact as `data-cite`.
-3. **Named controls owe their contract.** A data table, form, dialog, or select gets the
+3. **Record tables require executable pattern proof.** Reuse the product shared DataGrid,
+   read `references/table-quality.md`, and supply `shine-tables.json` to measure and compare.
+   Source imports, scoped sibling styling, and real browser outcomes must pass; markers
+   and sort arrows cannot prove completeness. Bulk workflows also need selection.
+   **Named controls owe their contract.** A data table, form, dialog, or select gets the
    full MUST list from `references/contracts.md`. Every data grid includes search,
    sorting, filters, column visibility, pagination, selection, row actions, and
    loading/empty/filtered-empty/error states. A hand-built `<table>` is allowed only for

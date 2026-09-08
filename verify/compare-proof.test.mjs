@@ -38,9 +38,11 @@ try {
   assert.equal(weekly.status,0,output(weekly));
   assert.doesNotMatch(output(weekly),/no harvested shot|Refusing to compare against nothing/);
   const queue=runTarget(join(repo,"corpus/blueprints/shadcn-queue/reference.html"),"--cite","shadcn-queue");
-  assert.equal(queue.status,0,output(queue));
+  assert.equal(queue.status,1,output(queue));
+  assert.match(output(queue),/table quality:.*not_tested/);
   assert.doesNotMatch(output(queue),/no harvested shot|Refusing to compare against nothing/);
   const dashboard=runTarget(join(fixtures,"e2e/brutus-session/after.html"),"--cite","shadcn-dashboard-01");
-  assert.equal(dashboard.status,0,output(dashboard));
-  console.log("compare proof PASS: import-safe · baseline 0/0 · 11 seeded branches · receipt fail-closed · authored blueprints (weekly-board, queue) + dashboard proofs");
+  assert.equal(dashboard.status,1,output(dashboard));
+  assert.match(output(dashboard),/table quality:.*not_tested/);
+  console.log("compare proof PASS: import-safe · baseline 0/0 · 11 seeded branches · receipt fail-closed · weekly-board proof; untested queue and dashboard table proofs rejected");
 } finally { rmSync(dir,{recursive:true,force:true}); }
