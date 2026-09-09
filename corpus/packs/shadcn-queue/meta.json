@@ -1,7 +1,21 @@
 {
   "id": "shadcn-queue",
   "source": "corpus/blueprints/shadcn-queue/reference.html",
-  "harvested": "2026-09-01",
-  "bytes": 153868,
-  "provenance": "Authored blueprint composed from the current official shadcn primitives; not an upstream shadcn block. shadcn publishes no queue block \u2014 dashboard-01 was the only shadcn row carrying the queue jobs and its roles demand a chart."
+  "harvested": "2026-09-09",
+  "bytes": 157395,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "shadcn work queue reference",
+    "headings": "Work queue\nWork queue",
+    "expectedSelector": "[data-region=\"queue-grid\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-queue/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-queue/reference.html",
+    "capturedAt": "2026-09-09T18:53:57.282Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "c8ba9431b6db4d86fb8472cb58a04a2f2dc07b5d613438d5db700aa7bb706faa",
+    "shotSha256": "0bd112c08a049d2c4741f917b7b801d294569cb67e42e4d8014a6a9d19c12d2e"
+  }
 }

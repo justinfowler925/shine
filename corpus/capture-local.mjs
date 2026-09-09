@@ -11,7 +11,20 @@ try{for(const id of ids){const row=rows.find(r=>r.id===id);if(!row||row.kind!=='
  const path=join(root,'corpus/blueprints',id,'reference.html'),url=pathToFileURL(path).href;
  const page=await browser.newPage({viewport:{width:1440,height:1000}}),response=await page.goto(url);
  await page.evaluate(()=>document.fonts.ready);
- const capture=await inspectReferencePage(page,response,{url,expect:row.screen==='broadcast'?'video':'article details'});
+ /*
+  * The reference declares what proves it rendered; this file no longer guesses.
+  *
+  * It used to expect `article details` for everything except a broadcast, which
+  * is only true of a blog post. shadcn-queue and shadcn-weekly-board are a work
+  * queue and a cadence board — neither is an article containing a details — so
+  * both were unrecapturable, their captures stayed legacy/unverified, and every
+  * prove.mjs run citing them reported referenceValidity and visualComparison as
+  * not_tested. A completion receipt was unreachable through no fault of the
+  * surface being proved.
+  */
+ const expect=row.reference?.captureExpect;
+ if(!expect)throw new Error(`${id}: declare reference.captureExpect in corpus/templates.json — the selector that proves this page rendered. Refusing to guess.`);
+ const capture=await inspectReferencePage(page,response,{url,expect});
  const dir=join(root,'corpus/packs',id);mkdirSync(dir,{recursive:true});const shot=await page.screenshot({path:join(dir,'shot.png'),fullPage:true});
  capture.sourceUrl=`corpus/blueprints/${id}/reference.html`;capture.finalUrl=capture.sourceUrl;
  capture.sourceSha256=hash(readFileSync(path));capture.shotSha256=hash(shot);

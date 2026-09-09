@@ -1,7 +1,21 @@
 {
   "id": "shadcn-weekly-board",
   "source": "corpus/blueprints/shadcn-weekly-board/reference.html",
-  "harvested": "2026-08-31",
-  "bytes": 128531,
-  "provenance": "Authored blueprint composed from the current official shadcn primitives; not an upstream shadcn block"
+  "harvested": "2026-09-09",
+  "bytes": 131417,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "shadcn weekly cadence board reference",
+    "headings": "Week ending 4 September\nReport out\nCommitted now\nDiscuss\nUp next\nStanding",
+    "expectedSelector": "[data-region=\"weekly-summary\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-weekly-board/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-weekly-board/reference.html",
+    "capturedAt": "2026-09-09T18:53:57.190Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "80e40b5928ea994f14d1b7b1086b0f29e314d2961b739faa03f47a876c80d65b",
+    "shotSha256": "75c2cbb648c6f46ce9eaa5fac2553ff8cd493a702e9e635cbb324389d2a5a283"
+  }
 }
