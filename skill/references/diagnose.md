@@ -47,8 +47,8 @@ above it is the wrong pass.
 ### Completeness (contracts)
 Named Table / Form / Dialog / Select loads `contracts.md` MUST **in this pass**.
 - A `<table>` with two or more header cells **is** a named Table. Missing
-  `data-shine-contract="table"` does not exempt it. Only `data-shine-contract="layout"`
-  (or `role="presentation"`) opts out.
+  `data-shine-contract="table"` does not exempt it. A layout or presentation attribute cannot exempt record data. Static presentation
+  requires the documented purpose and noninteractive checks in `table-quality.md`.
 - Named control below MUST (bare `<table>`, unlabeled icon button, placeholder-as-label)
 - Missing states: loading / empty / filtered-empty / error
 - Destructive without confirm; double-submit; toast-only errors
