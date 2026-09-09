@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Prepare consumers and independently verify the complete registered distribution."""
-import argparse, importlib.util, time, hashlib, io, json, os, pathlib, re, subprocess, sys, tempfile, urllib.request, zipfile
+import argparse, importlib.util, time, hashlib, io, json, os, pathlib, re, subprocess, sys, tempfile, urllib.request, urllib.error, urllib.parse, zipfile
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 CONFIG=json.loads((ROOT/'distribution.json').read_text())
 def sha(data): return hashlib.sha256(data).hexdigest()
@@ -79,17 +79,28 @@ def get(url,cookie=None):
 def check_identity(actual,expected):
     for key in ('sourceRevision','skillSha256'):
         if actual.get(key)!=expected[key]: raise RuntimeError(key+' differs from source release')
-def verify(receipt,storage_state=None,browser_receipt=None):
-    expected=source();checks={};spec=importlib.util.spec_from_file_location('exports',ROOT/'scripts/build-distribution.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);expected_public,_=module.render(ROOT);cookie=os.environ.get('SHINE_NUCLEUS_COOKIE')
-    if storage_state:
-        state=json.loads(pathlib.Path(storage_state).read_text());host=CONFIG['nucleusBase'].split('//')[1]
-        cookie='; '.join(c['name']+'='+c['value'] for c in state['cookies'] if host==c['domain'].lstrip('.') or host.endswith('.'+c['domain'].lstrip('.')))
-    browser=json.loads(pathlib.Path(browser_receipt).read_text()) if browser_receipt else None
-    def browser_readback():
-        if not browser or not 0 <= time.time()-browser.get('observedAt',0) <= 1200: raise RuntimeError('browser observation missing or stale')
-        if browser.get('pageUrl')!=CONFIG['nucleusBase']+'/company-tools' or browser.get('downloadUrl')!=CONFIG['nucleusBase']+'/api/company-tools/shine/download': raise RuntimeError('browser observation target differs')
-        if expected['sourceRevision'][:7] not in browser.get('pageText','') or 'Shine' not in browser.get('pageText',''): raise RuntimeError('browser page does not show this release')
-        return browser
+def validate_attestation(value,expected,archive_sha):
+    check_identity(value,expected)
+    if value.get('method')!='server-computed-sha256' or value.get('archiveSha256')!=archive_sha or not isinstance(value.get('archiveBytes'),int) or value['archiveBytes']<=0:
+        raise RuntimeError('deployed package attestation differs from committed source')
+    from datetime import datetime
+    age=time.time()-datetime.fromisoformat(value.get('checkedAt','').replace('Z','+00:00')).timestamp()
+    if not -60 <= age <= 300: raise RuntimeError('package attestation is stale')
+    return value
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self,req,fp,code,msg,headers,newurl):return None
+def access_boundary(url,cookie=None):
+    request=urllib.request.Request(url,headers={'Cache-Control':'no-cache',**({'Cookie':cookie} if cookie else {})})
+    try:
+        with urllib.request.build_opener(NoRedirect).open(request,timeout=30) as response: raise RuntimeError('protected surface admitted an unauthenticated request')
+    except urllib.error.HTTPError as response:
+        target=urllib.parse.urlparse(urllib.parse.urljoin(url,response.headers.get('Location','')))
+        origin=urllib.parse.urlparse(url)
+        if response.code not in (302,303,307,308) or target.netloc!=origin.netloc or target.path!='/login' or urllib.parse.parse_qs(target.query).get('reason')!=['required']:
+            raise RuntimeError('protected surface did not enforce the expected login boundary')
+        return {'status':response.code,'location':response.headers['Location']}
+def verify(receipt):
+    expected=source();checks={};spec=importlib.util.spec_from_file_location('exports',ROOT/'scripts/build-distribution.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);expected_public,_=module.render(ROOT)
     def probe(name,fn):
         try: facts=fn();checks[name]={'status':'passed','facts':facts}
         except Exception as error: checks[name]={'status':'failed','reason':str(error)}
@@ -125,7 +136,7 @@ def verify(receipt,storage_state=None,browser_receipt=None):
             return {'sha256':sha(data),'bytes':len(data)}
         probe(name,download)
     def page(url,needles):
-        text=get(url,cookie if url.startswith(CONFIG['nucleusBase']) else None).decode()
+        text=get(url).decode()
         if not all(n in text for n in needles): raise RuntimeError('expected release/page content absent')
         return {'url':url,'sha256':sha(text.encode())}
     probe('public-page',lambda:page(base+'/skill',['shine-skill.md','shine.plugin']))
@@ -140,17 +151,16 @@ def verify(receipt,storage_state=None,browser_receipt=None):
     probe('portfolio-page',lambda:page(port+'/writing/shine.html',[expected['sourceRevision'][:7],base+'/skill']))
     nucleus=CONFIG['nucleusBase']
     def internal():
-        if browser:
-            observation=browser_readback();data=pathlib.Path(observation['downloadPath']).read_bytes()
-        elif cookie: data=get(nucleus+'/api/company-tools/shine/download',cookie)
-        else: raise RuntimeError('authenticated Nucleus readback required; supply a session or fresh browser receipt')
-        if sha(data)!=sha(package(expected['sourceRevision'])): raise RuntimeError('archive bytes differ from committed source package')
-        with zipfile.ZipFile(io.BytesIO(data)) as z:
-            check_identity(json.loads(z.read('release.json')),expected)
-            if sha(z.read('skill/SKILL.md'))!=expected['skillSha256']: raise RuntimeError('archive skill differs')
-        return {'sha256':sha(data),'bytes':len(data)}
-    probe('nucleus-download',internal)
-    probe('nucleus-page',lambda: {'url':browser_readback()['pageUrl'],'method':'authenticated browser observation','sha256':sha(browser['pageText'].encode())} if browser else page(nucleus+'/company-tools',[expected['sourceRevision'][:7],'Shine']))
+        value=json.loads(get(nucleus+'/api/company-tools/shine/release'))
+        return validate_attestation(value,expected,sha(package(expected['sourceRevision'])))
+    probe('nucleus-package',internal)
+    def protection():
+        results=[]
+        for path in ['/company-tools','/api/company-tools/shine/download']:
+            for cookie in [None,'holloway_session=invalid-release-probe']:
+                results.append({'path':path,'credential':'anonymous' if cookie is None else 'invalid',**access_boundary(nucleus+path,cookie)})
+        return {'method':'unauthenticated and invalid-session refusal; no protected ZIP transfer', 'checks':results}
+    probe('nucleus-access-boundary',protection)
     for name in CONFIG['requiredDestinations']:
         if name not in checks: checks[name]={'status':'not_tested','reason':'destination has no verifier'}
     passed=sum(c['status']=='passed' for c in checks.values());complete=bool(checks) and set(checks)==set(CONFIG['requiredDestinations']) and passed==len(checks)
@@ -158,9 +168,9 @@ def verify(receipt,storage_state=None,browser_receipt=None):
     if receipt: write(pathlib.Path(receipt),report)
     print(json.dumps(report,indent=2));return 0 if complete else 1
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('command',choices=['prepare','link','verify']);p.add_argument('--nucleus',type=pathlib.Path);p.add_argument('--portfolio',type=pathlib.Path);p.add_argument('--receipt');p.add_argument('--storage-state');p.add_argument('--browser-receipt');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('command',choices=['prepare','link','verify']);p.add_argument('--nucleus',type=pathlib.Path);p.add_argument('--portfolio',type=pathlib.Path);p.add_argument('--receipt');a=p.parse_args()
     if a.command=='prepare':
         if not a.nucleus or not a.portfolio: p.error('prepare requires both consumers')
         prepare(a.nucleus,a.portfolio)
     elif a.command=='link': link()
-    else: sys.exit(verify(a.receipt,a.storage_state,a.browser_receipt))
+    else: sys.exit(verify(a.receipt))

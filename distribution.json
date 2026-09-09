@@ -6,16 +6,55 @@
   "publicBase": "https://shine-blond.vercel.app",
   "portfolioBase": "https://justinfowler.com",
   "nucleusBase": "https://nucleus-clearspeed.vercel.app",
-  "requiredDestinations": ["source", "local-codex", "local-cursor", "local-claude", "local-codex-alias", "local-cursor-alias", "public-skill", "public-markdown", "public-plugin", "public-page", "portfolio-registry", "portfolio-page", "nucleus-download", "nucleus-page"],
+  "requiredDestinations": [
+    "source",
+    "local-codex",
+    "local-cursor",
+    "local-claude",
+    "local-codex-alias",
+    "local-cursor-alias",
+    "public-skill",
+    "public-markdown",
+    "public-plugin",
+    "public-page",
+    "portfolio-registry",
+    "portfolio-page",
+    "nucleus-package",
+    "nucleus-access-boundary"
+  ],
   "links": {
-    "local-codex": ["~/.agents/skills/shine", "skill"],
-    "local-cursor": ["~/.cursor/skills/shine", "skill"],
-    "local-claude": ["~/.claude/skills/shine", "skill"],
-    "local-codex-alias": ["~/.Codex/agents/shine-ux.md", "agents/shine-ux.md"],
-    "local-cursor-alias": ["~/.cursor/agents/shine-ux.md", "agents/shine-ux.md"]
+    "local-codex": [
+      "~/.agents/skills/shine",
+      "skill"
+    ],
+    "local-cursor": [
+      "~/.cursor/skills/shine",
+      "skill"
+    ],
+    "local-claude": [
+      "~/.claude/skills/shine",
+      "skill"
+    ],
+    "local-codex-alias": [
+      "~/.Codex/agents/shine-ux.md",
+      "agents/shine-ux.md"
+    ],
+    "local-cursor-alias": [
+      "~/.cursor/agents/shine-ux.md",
+      "agents/shine-ux.md"
+    ]
   },
   "consumers": {
-    "nucleus": {"repository": "justin-fowler_cspd/nucleus", "catalog": "src/lib/company-tools.ts", "archive": "company-tools/packages/shine.zip", "receipt": "company-tools/releases/shine.json"},
-    "portfolio": {"repository": "justinfowler925/justinfowler.com", "catalog": "data/public-work.json", "receipt": "data/shine-release.json"}
+    "nucleus": {
+      "repository": "justin-fowler_cspd/nucleus",
+      "catalog": "src/lib/company-tools.ts",
+      "archive": "company-tools/packages/shine.zip",
+      "receipt": "company-tools/releases/shine.json"
+    },
+    "portfolio": {
+      "repository": "justinfowler925/justinfowler.com",
+      "catalog": "data/public-work.json",
+      "receipt": "data/shine-release.json"
+    }
   }
 }
