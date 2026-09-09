@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 import { isDesignCandidate } from "./design-lint.mjs";
 import { citeGaps, CITE_EXEMPT } from "./cite-gate.mjs";
-import { artifactClaim, citeIdsIn, proveGaps } from "./receipt.mjs";
+import { RENDERABLE_ARTIFACT, artifactClaim, citeClaim, citeIdsIn, proveGaps } from "./receipt.mjs";
 
 const LINT = join(dirname(fileURLToPath(import.meta.url)), "design-lint.mjs");
 
@@ -93,12 +93,18 @@ process.stdin.on("end", () => {
     );
   }
 
+  // A rendered artifact claims its own bytes; a component source can only claim
+  // its cite. Keying a source to `artifactClaim` demanded a receipt compare has
+  // never been able to write — pointing it at a .tsx renders TypeScript as text
+  // — so in any component-based estate this gate blocked every turn with no way
+  // out. See receipt.mjs `citeClaim`.
   const claims = [];
   for (const f of changed) {
     if (CITE_EXEMPT.test(f.replace(/\\/g, "/"))) continue;
     try {
       const ids = citeIdsIn(readFileSync(f, "utf8"));
-      claims.push(...ids.map((id) => artifactClaim(f, id)));
+      const claim = RENDERABLE_ARTIFACT.test(f) ? (id) => artifactClaim(f, id) : (id) => citeClaim(id, f);
+      claims.push(...ids.map(claim));
     } catch {
       /* unreadable */
     }
@@ -108,7 +114,9 @@ process.stdin.on("end", () => {
     failClosed(
       "shine prove (stop sweep): UI cited this turn was not run through compare.mjs:\n" +
         missingProve.join("\n") +
-        "\nProve with verify/compare.mjs --cite <id> before finishing.",
+        "\nProve with verify/compare.mjs --cite <id> before finishing. A component source is not a\n" +
+        "compare target: render the surface to an artifact (a fixture route, or a self-contained\n" +
+        "html capture) and compare that.",
       event,
     );
   }

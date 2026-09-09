@@ -196,6 +196,12 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   const untitled=spawnSync(process.execPath,[join(SHINE,"verify/untitledui.test.mjs")],{cwd:SHINE,encoding:"utf8"});
   if(untitled.status===0)ok("Untitled UI corpus", "CLI pinned; 392/392 public examples; seeded gates bite");
   else fail("Untitled UI corpus",`${untitled.stderr||untitled.stdout}`.trim().slice(-500));
+  // The stop sweep has to stay satisfiable on component sources. It once keyed
+  // proof to the changed .tsx, which compare can never render and so can never
+  // mint a receipt for — every turn in a React estate blocked with no way out.
+  const sweepProof=spawnSync(process.execPath,[join(SHINE,"verify/stop-sweep-proof.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(sweepProof.status===0)ok("stop-sweep proof keying", "component sources claim their cite; artifacts stay bound to their bytes");
+  else fail("stop-sweep proof keying",`${sweepProof.stderr||sweepProof.stdout}`.trim().slice(-800));
 }
 
 // ---- 1b. tools resolve from the loaded skill, never a hardcoded checkout --
