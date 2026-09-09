@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "id": "shadcn-blog",
+  "screen": "blog",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "reference.html",
+      "sha256": "5b01e037337ef2dd29be115971d05a0543659dccf15765ef47d362d99c9a8032"
+    },
+    {
+      "path": "shadcn-blog.md",
+      "sha256": "0bd1e83766114bd73979d0841a91b73f96dc213a1cf6376f682fbefe08de6442"
+    }
+  ]
+}

@@ -18,6 +18,7 @@ import { existsSync, mkdirSync, statSync, writeFileSync, rmSync } from "node:fs"
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { readFileSync } from "node:fs";
+import {hash,inspectReferencePage} from './reference-health.mjs';
 import { load } from "../verify/deps.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -88,8 +89,9 @@ for (const row of wanted) {
   try {
     const page = await ctx.newPage();
     if (t.viewport) await page.setViewportSize(t.viewport);
-    await page.goto(t.url, { waitUntil: "networkidle", timeout: 45_000 });
+    const response=await page.goto(t.url, { waitUntil: "networkidle", timeout: 45_000 });
     await page.waitForTimeout(1_200); // let charts/fonts settle
+    const capture=await inspectReferencePage(page,response,{url:t.url,expect:t.expect,expectedText:t.expectedText});
     const found = await page.locator(t.expect).first().count();
     if (!found) throw new Error(`expected selector ${JSON.stringify(t.expect)} not found — wrong page?`);
     // kill animations so the shot is stable
@@ -113,11 +115,15 @@ for (const row of wanted) {
     }
     writeFileSync(
       join(dir, "meta.json"),
-      JSON.stringify({ id: row.id, source: t.url, harvested: new Date().toISOString().slice(0, 10), bytes }, null, 2) + "\n",
+      JSON.stringify({ id: row.id, source: t.url, harvested: new Date().toISOString().slice(0, 10), bytes, capture:{...capture,shotSha256:hash(readFileSync(shot))} }, null, 2) + "\n",
     );
     harvested.push(`${row.id} (${Math.round(bytes / 1024)}KB)`);
     console.log(`ok    ${row.id}  ${Math.round(bytes / 1024)}KB  ${t.url}`);
   } catch (e) {
+    mkdirSync(dir,{recursive:true});
+    const metaPath=join(dir,'meta.json');
+    const prior=existsSync(metaPath)?JSON.parse(readFileSync(metaPath,'utf8')):{};
+    writeFileSync(metaPath,JSON.stringify({...prior,review:{status:'failed',reason:e.message.split('\n')[0],at:new Date().toISOString()}},null,2)+'\n');
     failed.push(`${row.id}: ${e.message.split("\n")[0]}`);
     console.error(`FAIL  ${row.id}  ${e.message.split("\n")[0]}`);
   }

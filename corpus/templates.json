@@ -893,7 +893,7 @@
       "id": "shadcn-blog",
       "screen": "blog",
       "kit": "shadcn-registry",
-      "title": "shadcn editorial / article page (measure, rhythm, one figure class) — region map only",
+      "title": "Editorial publication with source attribution and natural text flow",
       "preview": "",
       "license": "MIT",
       "kind": "blueprint",
@@ -908,7 +908,7 @@
         "family": "shadcn-zinc",
         "density": "comfortable"
       },
-      "note": "corpus/blueprints/shadcn-blog.md is the region map; shadcn publishes no block for this screen",
+      "note": "Authored editorial blueprint with captured source in corpus/blueprints/shadcn-blog/",
       "scope": "page"
     },
     {
@@ -2807,7 +2807,7 @@
       "id": "tremor-charts",
       "screen": "charts",
       "kit": "tremor",
-      "title": "Tremor chart + KPI blocks (atoms — compose, don't cite as a page)",
+      "title": "Tremor chart + KPI blocks (atoms \u2014 compose, don't cite as a page)",
       "path": "tremor/src/components",
       "preview": "https://tremor.so",
       "license": "Apache-2.0",
@@ -2830,7 +2830,7 @@
       "id": "spectrum-ai-chat",
       "screen": "chat",
       "kit": "react-spectrum",
-      "title": "React Spectrum AI Chat (Thread + PromptField — prompt field is the primary)",
+      "title": "React Spectrum AI Chat (Thread + PromptField \u2014 prompt field is the primary)",
       "path": "react-spectrum/packages/@react-spectrum/ai/src",
       "preview": "https://react-spectrum.adobe.com",
       "license": "Apache-2.0",
@@ -2850,7 +2850,7 @@
       "id": "shadcn-checkout",
       "screen": "checkout",
       "kit": "shadcn-registry",
-      "title": "shadcn checkout (persistent order summary) — region map only",
+      "title": "shadcn checkout (persistent order summary) \u2014 region map only",
       "preview": "",
       "license": "MIT",
       "kind": "blueprint",
@@ -3152,7 +3152,7 @@
       "id": "shadcn-marketing",
       "screen": "marketing",
       "kit": "shadcn-registry",
-      "title": "shadcn marketing page (claim, proof, pricing) — region map only",
+      "title": "shadcn marketing page (claim, proof, pricing) \u2014 region map only",
       "preview": "",
       "license": "MIT",
       "kind": "blueprint",
@@ -3378,6 +3378,35 @@
         ]
       },
       "note": "corpus/blueprints/shadcn-wizard.md is the region map; corpus/blueprints/shadcn-wizard/ is authored shadcn source to copy",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-broadcast",
+      "screen": "broadcast",
+      "kit": "shadcn-registry",
+      "title": "Broadcast player with aspect-ratio frame and adjacent source context",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "broadcast",
+        "video",
+        "media",
+        "player",
+        "television",
+        "presenter"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "navigation"
+        ]
+      },
+      "note": "Authored native HTML media blueprint compatible with shadcn; not an upstream block.",
       "scope": "page"
     }
   ]

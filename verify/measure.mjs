@@ -19,6 +19,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve as presolve } from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
 import { load, pathTo } from "./deps.mjs";
+import {mediaWaste} from './layout.mjs';
 import { auditTables } from "./table-quality.mjs";
 import { evaluateDataGrids } from "./contracts/table.mjs";
 
@@ -41,7 +42,7 @@ const SPACE_SCALE = [0, 1, 2, 4, 8, 12, 16, 24, 32, 48, 64];
 const onScale = (px) => SPACE_SCALE.some((s) => Math.abs(px - s) < 0.51) || px % 4 < 0.51 || px % 4 > 3.49;
 
 const browser = await chromium.launch();
-const context = await browser.newContext({ colorScheme: dark ? "dark" : "light", viewport: { width: 1280, height: 900 } });
+const context = await browser.newContext({ colorScheme: dark ? "dark" : "light", ...(opt("--storage-state")?{storageState:opt("--storage-state")} : {}), viewport: { width: 1280, height: 900 } });
 const page = await context.newPage();
 await page.goto(url, { waitUntil: "networkidle" });
 if (dark) await page.evaluate(() => document.documentElement.classList.add("dark"));
@@ -650,10 +651,11 @@ const isWireframe = await page.evaluate(
 
 const shot = opt("--shot");
 if (shot) await page.screenshot({ path: shot, fullPage: true });
+const mediaGaps=await mediaWaste(page);
 await browser.close();
 
 // ---- verdicts ----------------------------------------------------------------
-const failures = [];
+const failures = mediaGaps.map(g=>`layout: ${g.gap}px unused below media in ${g.selector}`);
 // A gate that measured nothing must never report a pass. Three `continue` paths in the
 // contrast loop are silent by design (an element that re-rendered away, a screenshot that
 // would not clip, an unresolvable colour), and when one of them fired for *every* target
@@ -881,7 +883,7 @@ if (compose.voice === "kit-faithful" && compose.dnaChroma && accentC != null) {
   }
 }
 
-const report = { url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, themeSwitches, failures };
+const report = { scope:"single-viewport styling and accessibility; not overall completion", mediaGaps, url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, themeSwitches, failures };
 const jsonOut = opt("--json"); // written once at the end, after notes are attached
 
 console.log(`mode=${report.mode}  bodyBg=${measured.bodyBg}  bodyColor=${measured.bodyColor}`);
@@ -948,5 +950,5 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(
-  "\nPASS — text ≥ threshold, spacing on scale, axe clean, no void regions, type steps distinct, hierarchy ok, theme accounted for",
+  "\nMEASURE PASS (partial evidence) — text ≥ threshold, spacing on scale, axe clean, no void regions, type steps distinct, hierarchy ok, theme accounted for",
 );

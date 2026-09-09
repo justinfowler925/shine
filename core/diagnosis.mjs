@@ -37,9 +37,9 @@ export function readDiagnosis(path,options={}){
 
 export function seedDiagnosis({job,category}){
  return {version:1,job,category,primaryTask:"",before:{artifact:"",screenshot:""},defects:[
-  {bucket:"usability",severity:"major",problem:"",evidence:"",expectedEffect:""},
-  {bucket:"completeness",severity:"major",problem:"",evidence:"",expectedEffect:""},
-  {bucket:"composition",severity:"minor",problem:"",evidence:"",expectedEffect:""}
+  {id:"primary-workflow",assertions:[],bucket:"usability",severity:"major",problem:"",evidence:"",expectedEffect:""},
+  {id:"content-states",assertions:[],bucket:"completeness",severity:"major",problem:"",evidence:"",expectedEffect:""},
+  {id:"layout",assertions:[],bucket:"composition",severity:"minor",problem:"",evidence:"",expectedEffect:""}
  ]};
 }
 

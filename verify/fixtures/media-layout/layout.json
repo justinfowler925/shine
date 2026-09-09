@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "ready": "#controls",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 1000
+    },
+    {
+      "width": 768,
+      "height": 1000
+    },
+    {
+      "width": 1280,
+      "height": 1000
+    },
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1920,
+      "height": 1000
+    }
+  ],
+  "content": [
+    {
+      "selector": "#headline",
+      "text": "An extended headline about changes to public programs and the operational requirements that deserve closer examination. An extended headline about changes to public programs and the operational requirements that deserve closer examination. An extended headline about changes to public programs and the operational requirements that deserve closer examination. An extended headline about changes to public programs and the operational requirements that deserve closer examination. An extended headline about changes to public programs and the operational requirements that deserve closer examination. "
+    },
+    {
+      "selector": "#notes",
+      "text": "Additional context covers staffing, budget, oversight and the timing of implementation. Additional context covers staffing, budget, oversight and the timing of implementation. Additional context covers staffing, budget, oversight and the timing of implementation. Additional context covers staffing, budget, oversight and the timing of implementation. Additional context covers staffing, budget, oversight and the timing of implementation. Additional context covers staffing, budget, oversight and the timing of implementation. Additional context covers staffing, budget, oversight and the timing of implementation. Additional context covers staffing, budget, oversight and the timing of implementation. Additional context covers staffing, budget, oversight and the timing of implementation. Additional context covers staffing, budget, oversight and the timing of implementation. Additional context covers staffing, budget, oversight and the timing of implementation. Additional context covers staffing, budget, oversight and the timing of implementation. "
+    }
+  ],
+  "media": [
+    {
+      "video": "#video",
+      "frame": "#frame",
+      "poster": "#poster"
+    }
+  ],
+  "missingMedia": [
+    "#source"
+  ],
+  "checks": [
+    {
+      "id": "caption-controls",
+      "type": "gap",
+      "selector": "#caption",
+      "to": "#controls",
+      "max": 1
+    },
+    {
+      "id": "frame-ratio",
+      "type": "aspect-ratio",
+      "selector": "#frame",
+      "ratio": 1.5
+    },
+    {
+      "id": "page-overflow",
+      "type": "no-overflow",
+      "selector": "html"
+    },
+    {
+      "id": "play-visible",
+      "type": "visible",
+      "selector": "#play"
+    }
+  ]
+}
