@@ -23,6 +23,7 @@
     "compare:product:test": "node verify/product-consistency.test.mjs",
     "usability": "node verify/usability.mjs",
     "usability:test": "node verify/usability.test.mjs",
+    "sweep:test": "node verify/stop-sweep-proof.test.mjs",
     "benchmark:smoke": "node benchmark/run.mjs",
     "benchmark:full": "node benchmark/run.mjs --full",
     "benchmark:test": "node benchmark/benchmark.test.mjs",
