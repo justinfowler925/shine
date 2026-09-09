@@ -1,6 +1,6 @@
 # shadcn wizard
 
-Regions, in order. Host: application shell or a focused modal-width page. Density: comfortable. Paint: the kit's own zinc theme values, declared once as custom properties. Authored source: `blueprints/shadcn-wizard/page.tsx` (bundled).
+Regions, in order. Host: application shell or a focused modal-width page. Density: comfortable. Paint: `tokens/voices/shadcn-zinc.css`. Authored source: `corpus/blueprints/shadcn-wizard/page.tsx`.
 
 shadcn ships no stepper primitive and no wizard block, and since Ant Design Pro was deleted on 2026-08-31 (`docs/no-foreign-runtimes.md`) this row is the corpus's only wizard reference. The step list below is built from shadcn primitives; nothing here depends on someone else's `Steps` runtime.
 
@@ -19,7 +19,7 @@ A wizard exists for one reason: the task cannot be validated all at once, so it 
 - Validate on advance, not on blur of every field. Blur validation on a step the reader is still filling reads as the form arguing with them.
 - The step indicator is `nav` + `ol`; `aria-current="step"` marks the current step. Shape-and-text state encoding is what makes it pass without colour.
 - Focus moves to the new step's `h1` on advance, or a keyboard reader stays stranded at the bottom of the previous step.
-- The usability bar requires the flow to change observable state. A wizard whose Continue does not advance the DOM fails, however finished it looks.
+- `verify/usability.mjs` requires the flow to change observable state. A wizard whose Continue does not advance the DOM fails, however finished it looks.
 
 ## Do not
 
@@ -38,12 +38,12 @@ A wizard exists for one reason: the task cannot be validated all at once, so it 
 - The commit button names the action.
 - A review step precedes the commit.
 - `data-cite="shadcn-wizard"` on the artifact.
-- Prove in the browser: render, screenshot, advance two steps and return to the first — the step state must be observable.
+- Prove with `verify/measure.mjs`, then `verify/usability.mjs` with a contract that advances two steps and returns to the first, then `verify/compare.mjs`.
 
 ## Source of truth
 
 - The regions above are the structure. They are not optional.
-- `blueprints/shadcn-wizard/page.tsx` (bundled beside this file) is authored shadcn source — copy it, do not port it.
-- Paint comes from the kit's own zinc theme values, declared once as custom properties.
-- No reference screenshot ships for this row — the region map above is the reference.
+- `corpus/blueprints/shadcn-wizard/page.tsx` is authored shadcn source — copy it, do not port it.
+- Paint comes from `tokens/voices/shadcn-zinc.css`.
+- There is no pack shot for this row, so `verify/compare.mjs` has nothing to compare against. Say so rather than reporting a likeness score.
 - shadcn has no `Steps` component; the indicator here is composed from `nav`/`ol` and tokens, which is why it is authored rather than cited.

@@ -91,5 +91,5 @@ Citation column is required for Critical/Major. Threshold-only rows are incomple
 - **Audit only:** stop after the report.
 - **Polish after audit:** work the prioritized list top-down; upgrade stubs to contracts;
   cite before each edit; remeasure; avoid unrelated redesign.
-- **Brand-locked:** also check copy and tokens against the brand pack; UI
+- **Brand-locked:** also run `brand-checker` for copy/token compliance; UI
   completeness still uses this rubric.

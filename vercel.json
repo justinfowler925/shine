@@ -1,36 +1,69 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "echo 'static site — no install'",
-  "buildCommand": "echo 'static site — tokens build is local (npm run build)'",
+  "installCommand": "echo 'static site \u2014 no install'",
+  "buildCommand": "python3 scripts/build-distribution.py",
   "outputDirectory": "site",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/r", "destination": "/r/index.html" },
-    { "source": "/r/", "destination": "/r/index.html" }
+    {
+      "source": "/r",
+      "destination": "/r/index.html"
+    },
+    {
+      "source": "/r/",
+      "destination": "/r/index.html"
+    }
   ],
   "headers": [
     {
       "source": "/(SKILL|shine-skill).md",
       "headers": [
-        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Cache-Control", "value": "public, max-age=60" }
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60"
+        }
       ]
     },
     {
       "source": "/shine.plugin",
       "headers": [
-        { "key": "Content-Type", "value": "application/zip" },
-        { "key": "Content-Disposition", "value": "attachment; filename=\"shine.plugin\"" },
-        { "key": "Cache-Control", "value": "public, max-age=60" }
+        {
+          "key": "Content-Type",
+          "value": "application/zip"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"shine.plugin\""
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60"
+        }
       ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'none'; connect-src 'self'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'self'"
@@ -40,8 +73,14 @@
     {
       "source": "/r/(.*).json",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Cache-Control", "value": "public, max-age=60" }
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60"
+        }
       ]
     }
   ]

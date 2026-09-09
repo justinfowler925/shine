@@ -10,7 +10,7 @@ import {proveUsability, readUsabilityContract} from "./usability.mjs";
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const canonical=readFileSync(join(ROOT,"skill/SKILL.md"),"utf8");
 const bundled=readFileSync(join(ROOT,"site/shine-skill.md"),"utf8");
-assert.ok(bundled.includes("Table quality — shared patterns and executable outcomes"),"download omits table-quality reference");
+assert.ok(bundled.includes(readFileSync(join(ROOT,"skill/references/table-quality.md"),"utf8")),"download omits table-quality reference");
 assert.ok(bundled.includes("require the full repository install"),"guidance must distinguish the executable tools");
 const published=readFileSync(join(ROOT,"site/SKILL.md"),"utf8");
 if(published!==canonical) throw new Error("public SKILL.md drifted from skill/SKILL.md");

@@ -38,7 +38,7 @@ Clerk, Liveblocks, Raycast, Superhuman, Things, and the wider set).
 | AI purple / loud accent | **Accent chroma OKLCH 0.13–0.24 @ L55–65** | Entire measured set vs Tailwind −600 | shine accent tokens only; fill chroma ≤0.08 on large areas | chroma gate / contrast-gate |
 | Card stack of different greys | **Adjacent surfaces ΔL ≈2pp**; borders separate | Linear dark ramp +2.0–2.7pp | `surface` / `surface-2` with hairline border, not fill jumps | ΔL 1.6–4pp |
 | Dead dark greys | **Saturation rises as lightness falls** in tinted ramps | Raycast | personal lane OKLCH cast toward accent | ramp inspection |
-| Palette won't stay related | **Derive with `color-mix` / OKLCH formulas** | Clerk 1,193× `color-mix` | derive tokens with formulas, not hand hex | no raw hex in UI |
+| Palette won't stay related | **Derive with `color-mix` / OKLCH formulas** | Clerk 1,193× `color-mix` | tokens from `gen-source.mjs`, not hand hex | no raw hex in UI |
 | Neutrals fight the accent | **Hue-monotone greys OR chroma-0** — pick one | Vercel chroma-0 vs Linear hue-210 | house: slight cast toward accent | taste rule 1 |
 | Dark mode #000 void | **Brand-tinted black + raised surfaces** | Superhuman; taste 78 | never `#000` body; elevate panels | dark screenshot |
 

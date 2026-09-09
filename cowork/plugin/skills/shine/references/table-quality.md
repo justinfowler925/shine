@@ -1,10 +1,5 @@
 # Record tables: complete patterns, executable outcomes
 
-This reference describes the full repository checker. The guidance-only Markdown and
-plugin downloads do not include its Node tools or runnable fixture; install the repository
-to execute the commands and inspect the JSON example. Do not claim automated verification
-from reading these instructions.
-
 A few shadcn primitives wrapped around a handmade table are not a production DataGrid.
 Reuse the product's approved shared table implementation and its installed state engine.
 The closest shipped sibling (for Nucleus, Sources when directed by the user) owns the

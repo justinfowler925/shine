@@ -14,9 +14,9 @@ operations so every fix starts from a named defect and ends with a source.
 
 ## 1. LOOK — render before opining
 
-Render the page in a real browser and **take a screenshot, then read it**. For an HTML
-file, open it directly; for an app, run it and navigate to the surface. A page you have
-not seen gets no opinions. Note what you actually see — not what the source suggests.
+`node verify/measure.mjs <path> --shot /tmp/before.png`, then **read the screenshot**.
+The measure output is a findings list; the screenshot is the diagnosis surface. A page
+you have not seen gets no opinions.
 
 | Kind | Signals | First refs |
 |---|---|---|
@@ -25,9 +25,9 @@ not seen gets no opinions. Note what you actually see — not what the source su
 | Dashboard / forecast | KPIs, charts, "what needs me" | `dashboards.md`, `dataviz.md` |
 | AI / agent surface | Model does work a human owns | `ai-surfaces.md` |
 | Marketing / landing | Hero, CTA, persuasion | `patterns.md` (hero budget), `copy.md` |
-| Brand-locked | Client-facing or brand lock | `brand.md` |
+| Brand-locked | Client-facing or brand lock | `brand.md` + brand checker |
 | Speaks or listens | TTS, mic, read-aloud | `voice.md` |
-| Native / macOS / iOS | Desktop chrome, HIG language | Apple HIG (fetch it) |
+| Native / macOS / iOS | Desktop chrome, HIG language | Apple HIG via WebFetch |
 | Lightning / LWC | Record page, console, datatable | `salesforce.md` |
 
 Two kinds → run the stricter first (adoption before craft; contracts before polish).
@@ -79,52 +79,49 @@ Never spend a pass on craft while a Critical completeness hole is open.
 
 ## 4. MATCH — a template, not a vibe
 
-Open `templates.md`, find the rows whose Jobs match the screen's job in plain words,
-read the selected row's real structure (registry source, bundled blueprint, or public
-demo), pick one of the best 2–3 matches and say why. A page with no template cite is
-incomplete for a *known* job — dashboards, queues, records, settings, auth, checkout
-all have rows. No matching row → nearest row + `patterns.md`, and say so. Technique
-cites (`techniques.md`) are for craft transfer; they don't replace a structural match.
+`node corpus/cite.mjs "<job in plain words>"`. Read the harvested shot (or preview),
+skim the source's regions, pick one of the ≤3 matches and say why. A page with no
+template cite is incomplete for a *known* job — dashboards, queues, records, settings,
+auth, checkout all have rows. No matching row → nearest row + `patterns.md`, and add a
+catalog row **after** the screen ships if it earned one. Technique cites
+(`techniques.md`) are for craft transfer; they don't replace a structural match.
 A record list (queue, remainder, sources, admin rows) cites a DataGrid row
 (`untitled-table`, or `shadcn-dashboard-01` for the composed records page). A
-list/dashboard/app-shell cite is the wrong match for a record list even if it looks
-closer — re-check the datagrid rows.
+list/dashboard/app-shell cite is the wrong match even if `cite.mjs` ranked it
+first — re-query with `datagrid`.
 
 ## 5. RESTRUCTURE + REPAINT
 
 Clone the template's regions from its source; keep the focal object focal. Then paint by
-voice (`voices.md`): kit-faithful uses the kit's real token values; house uses a dark-first
-single-accent editorial system; brand keeps regions and drops vendor chrome.
+voice (`voices.md`): kit-faithful imports the voice sheet and the kit's real token
+values; house uses the shine lanes; brand keeps regions and drops vendor chrome.
 Upgrade stubs to the contract ladder. Prefer one composition change over ten craft tweaks.
 
 ## 6. PROVE
 
-Render the result in a real browser and:
+```sh
+node verify/measure.mjs <path> --shot /tmp/after.png --cite <id>
+node verify/compare.mjs <path> --cite <id>    # when the template has a harvested shot
+```
 
-1. Screenshot before and after, and read both.
-2. Walk the primary workflow yourself (click, fill, submit) — the DOM must visibly change.
-3. Check contrast on every suspect text/background pair (compute it, don't eyeball it —
-   text ≥4.5:1, non-text UI ≥3:1).
-4. Compare the after-shot to the cited template's structure — the two should read as
-   relatives. If they don't, the match or the paint is wrong.
-
-Report before/after evidence for every Critical/Major you claimed to fix, plus the shot
-paths. Never claim a defect fixed without having looked at the rendered result.
+Hard fails block; notes don't. Report before/after numbers for every Critical/Major you
+claimed to fix, plus the shot paths. Read the compare composite — if the two sides don't
+read as relatives, the match or the paint is wrong.
 
 ## Quick defect → next file
 
 | You see… | Open |
 |---|---|
 | No UI yet / need a sketch | `wireframe.md` |
-| Known job, invented layout | `templates.md` — match a row |
+| Known job, invented layout | `corpus/cite.mjs <job>` — match a row |
 | Nobody will open this | `adoption.md` |
 | Table/form missing states | `contracts.md` |
-| Queue / batch / empty | `templates.md` `untitled-table` |
+| Queue / batch / empty | `cite.mjs queue` → `untitled-table` |
 | Wrong hierarchy / equal peers | `techniques.md` §Hierarchy, `kits.md` |
 | Numbers undecidable | `dashboards.md` |
 | Chart encoding smell | `dataviz.md` |
 | AI chat as default shell | `ai-surfaces.md` |
 | Words don't persuade | `copy.md` |
 | Raw values / tokens | `foundations.md`, `color-type.md` |
-| Need a library API | fetch the library's official docs — never invent an API |
+| Need a library API | `corpus.md` then `rg` |
 | Lightning host quirks | `salesforce.md` |

@@ -1,6 +1,6 @@
 # Salesforce mobile (no datatable)
 
-Regions. Host: Salesforce mobile app / native webview. Paint: the host's SLDS 2 styling hooks (see `salesforce.md`). Cite `lex-mobile`.
+Regions. Host: Salesforce mobile app / native webview. Paint: `tokens/voices/slds.css`. Cite `lex-mobile`.
 
 1. **Top bar** — title + one action. Back is the platform back, not a custom chevron that fights the OS.
 2. **Focal** — one object. A record is highlights then detail, stacked. A queue is a list, not a table.
@@ -15,8 +15,8 @@ Regions. Host: Salesforce mobile app / native webview. Paint: the host's SLDS 2 
 ## Checklist (agent)
 
 - Name the host before citing (LEX / console / LWR / email / mobile).
-- Structure comes from this file; paint comes from the host's SLDS 2 styling hooks (see `salesforce.md`) except LWR and email.
-- Prove in the browser: render, screenshot, and walk the primary workflow.
+- Structure comes from this file; paint comes from `tokens/voices/slds.css` except LWR and email.
+- Prove with `verify/measure.mjs` and `verify/compare.mjs` once a pack shot exists.
 - Do not substitute a shadcn dashboard or an Ant profile because it scored on the word "record".
 - Empty, loading, and error states are real regions, not afterthoughts.
 - One primary action. Row actions are visible without hover.

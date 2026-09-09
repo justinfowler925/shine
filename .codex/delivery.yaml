@@ -1,0 +1,20 @@
+schema_version: 1
+repository: github.com/justinfowler925/shine
+requirements:
+  - id: tests
+    kind: test
+    command: node verify/doctor.mjs --ci --full --quiet
+    freshness_hours: 4
+  - id: distribution-tests
+    kind: test
+    command: python3 verify/distribution_test.py
+    freshness_hours: 4
+  - id: git
+    kind: git
+    probe: origin/main contains the tested source and all consumer updates; release trees are clean
+    freshness_hours: 4
+  - id: distribution
+    kind: readback
+    command: python3 scripts/distribute.py verify --receipt /tmp/shine-distribution.json
+    target: every required destination in distribution.json
+    freshness_hours: 4
