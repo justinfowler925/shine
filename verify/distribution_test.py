@@ -1,5 +1,6 @@
 import contextlib, importlib.util, io, json, pathlib, tempfile, unittest, zipfile
 from unittest.mock import patch
+from datetime import datetime, timezone, timedelta
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 def load(name,path):
     spec=importlib.util.spec_from_file_location(name,path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
@@ -27,6 +28,21 @@ class Distribution(unittest.TestCase):
             report=json.loads(out.read_text());self.assertEqual(report['status'],'incomplete');self.assertEqual(report['required'],14)
             self.assertEqual(set(report['checks']),set(dist.CONFIG['requiredDestinations']))
         with self.assertRaises(RuntimeError):dist.check_identity({'sourceRevision':'stale','skillSha256':'fake'},dist.source())
+    def test_attestation_rejects_stale_or_altered_packages(self):
+        expected=dist.source()
+        value={**expected,'method':'server-computed-sha256','archiveSha256':'a'*64,'archiveBytes':123,'checkedAt':datetime.now(timezone.utc).isoformat()}
+        self.assertEqual(dist.validate_attestation(value,expected,'a'*64),value)
+        for change in ({'archiveSha256':'b'*64},{'sourceRevision':'stale'},{'archiveBytes':0},{'method':'manifest-only'},{'checkedAt':(datetime.now(timezone.utc)-timedelta(minutes=6)).isoformat()}):
+            with self.subTest(change=change),self.assertRaises(RuntimeError):dist.validate_attestation({**value,**change},expected,'a'*64)
+    def test_access_boundary_rejects_public_or_wrong_redirects(self):
+        import urllib.error
+        url='https://example.test/company-tools'
+        for status,location,valid in [(307,'/login?reason=required',True),(200,'',False),(307,'https://other.test/login?reason=required',False),(307,'/login',False),(503,'',False)]:
+            error=urllib.error.HTTPError(url,status,'probe',{'Location':location},None)
+            with self.subTest(status=status,location=location),patch.object(dist.urllib.request.OpenerDirector,'open',side_effect=error):
+                if valid:self.assertEqual(dist.access_boundary(url)['status'],307)
+                else:
+                    with self.assertRaises(RuntimeError):dist.access_boundary(url)
     def test_extra_destination_cannot_be_silently_skipped(self):
         with tempfile.TemporaryDirectory() as temp,patch.dict(dist.CONFIG,{'requiredDestinations':dist.CONFIG['requiredDestinations']+['new-agent']}),patch.object(dist,'get',side_effect=RuntimeError('offline')),contextlib.redirect_stdout(io.StringIO()):
             out=pathlib.Path(temp)/'proof.json';self.assertEqual(dist.verify(out),1);self.assertEqual(json.loads(out.read_text())['checks']['new-agent']['status'],'not_tested')

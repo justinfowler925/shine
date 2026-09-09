@@ -5,8 +5,7 @@ A source merge, local install, deployment READY, public 200, or generated ZIP al
 
 The machine-readable population is `distribution.json`. Shine currently requires 14 destinations:
 source main; Codex, Cursor and Claude skill links; both compatibility aliases; the public canonical
-skill, self-contained Markdown, plugin and page; the portfolio registry and page; and the authenticated
-Nucleus ZIP and page. Historical articles retain their dated results and link to the current release.
+skill, self-contained Markdown, plugin and page; the portfolio registry and page; and Nucleus’s server-computed package attestation and access boundary. Historical articles retain their dated results and link to the current release.
 Other skills should adopt the same contract with their own explicit destination inventory; do not
 claim an unregistered skill is covered by Shine's release.
 
@@ -24,16 +23,20 @@ claim an unregistered skill is covered by Shine's release.
    release entry. Review/test/commit/merge those consumer changes. Never deploy an old branch.
 5. Deploy Shine and the portfolio to their existing production projects. Deploy Nucleus with
    its `scripts/deploy.sh`, preserving its required tests and authentication boundary.
-6. Run `python3 scripts/distribute.py verify --receipt <path>` with `SHINE_NUCLEUS_COOKIE`
-   supplied through the environment or `--storage-state <private-playwright-file>`. The verifier
-   reads actual production bodies, checks download hashes and the archive's identity, and
-   compares every local link. Missing auth or any untested destination is incomplete, never passed.
-7. Attach the resulting receipt to the work item and report checked/required counts. Only a
+6. Run `python3 scripts/distribute.py verify --receipt <path>` on the Studio. Public file
+   bodies must match canonical hashes. Nucleus computes the deployed ZIP checksum on its server
+   at `/api/company-tools/shine/release`; compare it to the exact source package and check its
+   timestamp. Anonymous and invalid-cookie requests to the catalog/download must redirect to login.
+   No Studio sign-in or protected ZIP download is needed. This establishes package integrity and
+   access protection, not an authenticated end-to-end file transfer. Missing evidence is incomplete.
+   Studio receipts cover the nine hosted destinations; independently verify the five local agent
+   links against the same source revision on their host. Both receipts are required for 14/14.
+7. Attach the resulting receipts to the work item and report checked/required counts. Only a
    complete receipt permits a delivered claim. Recheck if source or a target changes.
 
 ## Automatic follow-through
 
-The current task's release monitor watches source main and the destination report. It continues
+At 9 AM and 9 PM America/Chicago, the Studio verifier checks hosted destinations. The current task's release monitor watches source main and the destination report. It continues
 this chain whenever a registered destination is stale and notifies only on a delivered release
 or an actionable blocker. It must create isolated worktrees, preserve unrelated edits, run the
 consumer's required checks, and verify production before reporting done. A failed scheduled run
@@ -43,10 +46,3 @@ inventory and negative-control tests before they count as covered.
 Public exports are guidance, not the executable repository. The Nucleus archive includes the
 repository and immutable source identity. Never bake browser cookies, local brand files, credentials,
 node_modules or untracked work into a downloadable archive.
-
-When the authenticated session is available only in the browser, use `--browser-receipt <json>`.
-Record the observed page URL, actual accessibility text, download URL, downloaded file path and
-Unix `observedAt` time after operating the real browser. The receipt keys are `pageUrl`, `pageText`,
-`downloadUrl`, `downloadPath`, and `observedAt`. Readback rejects observations older than 20 minutes,
-wrong page/release text, and archive bytes differing from the exact committed source package.
-This is explicitly browser observation evidence; it does not pretend an API session was tested.
