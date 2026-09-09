@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-blog",
+  "source": "corpus/blueprints/shadcn-blog/reference.html",
+  "harvested": "2026-09-09",
+  "bytes": 62526,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "Editorial publication reference",
+    "headings": "A sourced view of the events shaping the week\nBehind the headline",
+    "expectedSelector": "article details",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-blog/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-blog/reference.html",
+    "capturedAt": "2026-09-09T14:10:59.645Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "5b01e037337ef2dd29be115971d05a0543659dccf15765ef47d362d99c9a8032",
+    "shotSha256": "334f5ee086f1b1077d9dc043a3880b75c61aa04991f8ea0a7cefa798a153823f"
+  }
+}

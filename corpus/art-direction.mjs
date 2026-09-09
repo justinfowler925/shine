@@ -1,3 +1,4 @@
+import {referenceHealth} from './reference-health.mjs';
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -96,6 +97,7 @@ export function retrieveDirections(templates, text, constraints = {}) {
   for (const template of templates) {
     const axes = candidateAxes(template, brief);
     const reasons = [];
+    const health=referenceHealth(join(ROOT,'..'),template.id);if(health.status==='failed')reasons.push(`reference: ${health.reasons.join('; ')}`);
     if (template.selectable === false) reasons.push(`retired: ${template.retiredReason || "not eligible for new work"}`);
     if (brief.licenseMode === "source" && template.kind === "query-only") reasons.push("license: query-only cannot be a build source");
     if (brief.framework !== "unspecified" && axes.framework !== brief.framework) reasons.push(`framework: needs ${brief.framework}, candidate is ${axes.framework}`);

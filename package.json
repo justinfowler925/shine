@@ -44,7 +44,10 @@
     "untitled:index": "node corpus/untitledui.mjs --index",
     "untitled:search": "node corpus/untitledui.mjs",
     "table:test": "node verify/table-quality.test.mjs",
-    "table:verify": "node verify/table-quality.mjs"
+    "table:verify": "node verify/table-quality.mjs",
+    "layout:test": "node verify/media-layout.test.mjs",
+    "layout:verify": "node verify/layout.mjs",
+    "prove": "node verify/prove.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",

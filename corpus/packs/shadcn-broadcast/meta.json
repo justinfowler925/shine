@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-broadcast",
+  "source": "corpus/blueprints/shadcn-broadcast/reference.html",
+  "harvested": "2026-09-09",
+  "bytes": 78948,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "Broadcast player reference",
+    "headings": "The daily broadcast\nA closer look at the story behind the headline\nViewing notes\nThe written edition",
+    "expectedSelector": "video",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-broadcast/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-broadcast/reference.html",
+    "capturedAt": "2026-09-09T14:10:59.559Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "10e84741d76fdf9e9c841d118a40940e43546aff672de4c5014ed8a8804537fb",
+    "shotSha256": "31683009f73349ad348d4033cdd062a2d65de6a558e897c37e98578ae006fbc5"
+  }
+}

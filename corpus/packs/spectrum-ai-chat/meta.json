@@ -2,5 +2,10 @@
   "id": "spectrum-ai-chat",
   "source": "https://react-spectrum.adobe.com/react-spectrum/Chat.html",
   "harvested": "2026-08-31",
-  "bytes": 34385
+  "bytes": 34385,
+  "review": {
+    "status": "failed",
+    "reason": "Stored reference screenshot displays Error 404: Page not found; excluded until a successful semantic recapture.",
+    "at": "2026-09-09"
+  }
 }

@@ -10,12 +10,14 @@ import { assessStructure } from "./compare/structure.mjs";
 import { assessVisual, palette, pixelCalibration } from "./compare/visual.mjs";
 import { reportProof } from "./compare/report.mjs";
 import { readProveReceipt, writeProveReceipt } from "../hooks/receipt.mjs";
+import {referenceHealth} from '../corpus/reference-health.mjs';
 import { readDiagnosis } from "../core/diagnosis.mjs";
 
-export async function compareArtifact({target,citeId,outPath="/tmp/shine-compare.png",lane="",brief="",brandLocked=false,mode="new",diagnosisPath="",tableContractPath=""}) {
+export async function compareArtifact({target,citeId,outPath="/tmp/shine-compare.png",lane="",brief="",brandLocked=false,mode="new",diagnosisPath="",tableContractPath="",writeReceipt=true,storageState}) {
   const SHINE=resolve(dirname(fileURLToPath(import.meta.url)),".."); const shotPath=join(SHINE,"corpus/packs",citeId,"shot.png");
   if(!existsSync(shotPath)) return {status:2,failures:[`no harvested shot for ${citeId}; Refusing to compare against nothing`]};
   const catalog=JSON.parse(readFileSync(join(SHINE,"corpus/templates.json"),"utf8")); const row=(catalog.templates||[]).find((t)=>t.id===citeId);
+  const health=referenceHealth(SHINE,citeId);if(health.status==='failed')return {status:1,failures:health.reasons.map(r=>'invalid reference: '+r)};
   if(!row)return {status:2,failures:[`unknown cite ${citeId}`]};
   let diagnosis=null;
   if(mode==="existing"){
@@ -24,7 +26,7 @@ export async function compareArtifact({target,citeId,outPath="/tmp/shine-compare
   }
   const tokensPath=existsSync(join(SHINE,"corpus/packs",citeId,"tokens.css"))?join(SHINE,"corpus/packs",citeId,"tokens.css"):join(SHINE,"tokens/voices",`${row.dna?.family||""}.css`);
   const tokens=existsSync(tokensPath)?readFileSync(tokensPath,"utf8"):""; const {chromium}=load("playwright"),sharp=load("sharp");
-  const browser=await chromium.launch(); const context=await browser.newContext({viewport:{width:1280,height:800}}); const page=await context.newPage();
+  const browser=await chromium.launch(); const context=await browser.newContext({viewport:{width:1280,height:800},...(storageState?{storageState}:{})}); const page=await context.newPage();
   const url=/^https?:/.test(target)?target:pathToFileURL(resolve(target)).href; await page.goto(url,{waitUntil:"networkidle"}); await page.evaluate(()=>document.fonts?.ready);
   let tableQuality, captured;
   try { tableQuality=await auditTables({page,target,contractPath:tableContractPath}); captured=await capturePage(page); } finally { await browser.close(); } const template=readFileSync(shotPath);
@@ -36,7 +38,8 @@ export async function compareArtifact({target,citeId,outPath="/tmp/shine-compare
   const citeFailures=captured.facts.cite===citeId?[]:[`artifact data-cite ${captured.facts.cite||"missing"} does not bind the requested template ${citeId}`];
   const tableFailures=tableQuality.checks.filter(c=>c.status!=="passed").map(c=>`table quality: ${c.name}: ${c.status}: ${c.reason}`);
   const failures=[...tableFailures,...citeFailures,...structure.failures,...visual.failures]; const report=reportProof({outPath,citeId,facts:captured.facts,pagePalette,templatePalette,calibration,structure,visual});
-  const proof={tableQuality,...structure.proof,...visual.proof,calibration,pagePalette,templatePalette,...(diagnosis?{diagnosis:{path:diagnosis.path,hash:diagnosis.hash,defects:diagnosis.value.defects.length}}:{})};
+  const proof={scope:"visual comparison only; use prove.mjs for completion",referenceValidity:health,tableQuality,...structure.proof,...visual.proof,calibration,pagePalette,templatePalette,...(diagnosis?{diagnosis:{path:diagnosis.path,hash:diagnosis.hash,defects:diagnosis.value.defects.length}}:{})};
+  if(!writeReceipt)return {status:failures.length?1:0,failures,report,proof};
   if(!failures.length&&!/^https?:/.test(target))writeProveReceipt({cite:citeId,target:resolve(target),templateShot:shotPath,compareVersion:"compare-v3",proof});
   else if(!failures.length) return {status:2,failures:["remote URLs cannot mint an artifact-bound receipt"],report,proof};
   return {status:failures.length?1:0,failures,report,proof};

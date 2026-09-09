@@ -48,9 +48,9 @@ async function runStep(page,step) {
   fail(`unknown action ${step.action}`);
 }
 
-export async function proveUsability({target,contractPath,citeId=""}) {
+export async function proveUsability({target,contractPath,citeId="",storageState}) {
   const contract=readUsabilityContract(contractPath,{citeId}); const {chromium}=load("playwright");
-  const browser=await chromium.launch(); const page=await browser.newPage({viewport:{width:1280,height:800}});
+  const browser=await chromium.launch(); const page=await browser.newPage({viewport:{width:1280,height:800},...(storageState?{storageState}:{})});
   try {
     await page.goto(/^https?:/.test(target)?target:pathToFileURL(resolve(target)).href,{waitUntil:"networkidle"});
     for(const object of contract.objects) await page.locator(object.selector).first().waitFor({state:"visible"});

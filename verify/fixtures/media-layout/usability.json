@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "cite": "shadcn-broadcast",
+  "objects": [
+    {
+      "id": "navigation",
+      "selector": "nav",
+      "referenceRole": "navigation",
+      "purpose": "Read the written edition"
+    },
+    {
+      "id": "play",
+      "selector": "#play",
+      "referenceRole": "command",
+      "purpose": "Play the local preview"
+    },
+    {
+      "id": "stop",
+      "selector": "#stop",
+      "referenceRole": "command",
+      "purpose": "Stop and release media"
+    },
+    {
+      "id": "status",
+      "selector": "#status",
+      "referenceRole": "state",
+      "purpose": "Observe playback state"
+    }
+  ],
+  "flows": [
+    {
+      "id": "play-stop",
+      "userJob": "Play the preview and stop it",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "#play"
+        },
+        {
+          "action": "text",
+          "selector": "#status",
+          "value": "Playing preview"
+        },
+        {
+          "action": "click",
+          "selector": "#stop"
+        },
+        {
+          "action": "text",
+          "selector": "#status",
+          "value": "Stopped"
+        }
+      ]
+    }
+  ]
+}

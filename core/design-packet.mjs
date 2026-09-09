@@ -2,6 +2,7 @@
 import {existsSync, readFileSync, realpathSync} from "node:fs";
 import {dirname, join, resolve} from "node:path";
 import {fileURLToPath} from "node:url";
+import {referenceHealth} from '../corpus/reference-health.mjs';
 import {retrieveDirections} from "../corpus/art-direction.mjs";
 import {findUntitledExamples} from "../corpus/untitledui.mjs";
 import {detectProject, RECIPES, RECIPE_KITS} from "../integrations/resolve.mjs";
@@ -9,6 +10,8 @@ import {detectProject, RECIPES, RECIPE_KITS} from "../integrations/resolve.mjs";
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const catalog=JSON.parse(readFileSync(join(ROOT,"corpus/templates.json"),"utf8")).templates;
 const categories={
+ media:{fallback:'broadcast video player',regions:['publication navigation','broadcast context','media frame','caption','playback controls','viewing notes','written reporting'],controls:['play','stop','transcript','inspect source'],states:['poster','connecting','playing','stopped','error','missing-media']},
+ editorial:{fallback:'blog article editorial',regions:['masthead','headline','source attribution','figure','reporting','related stories'],controls:['read source','expand source details'],states:['populated','long-content','missing-media']},
  datagrid:{fallback:"queue records table",regions:["context header","decision toolbar","data grid","pagination","row detail"],controls:["search","sort","filters","column visibility","pagination","row selection","row actions"],states:["loading","empty","filtered-empty","error","populated"]},
  form:{fallback:"settings wizard form",regions:["context header","sectioned fields","validation summary","actions","confirmation"],controls:["labels","help","validation","cancel","submit"],states:["pristine","invalid","submitting","success","error"]},
  marketing:{fallback:"landing marketing conversion",regions:["navigation","evidence-led hero","product proof","workflow","conversion"],controls:["primary evidence action","secondary action"],states:["default","interaction result"]},
@@ -18,6 +21,8 @@ const categories={
  lex:{fallback:"lightning record",regions:["host context","record highlights","detail","related work","record actions"],controls:["edit","save","cancel"],states:["view","edit","saving","success","error"]}
 };
 const signals={
+ media:[[12,/\b(video|broadcast|television|presenter|avatar|media player|tv section)\b/i]],
+ editorial:[[8,/\b(newspaper|publication|editorial|article page|news site)\b/i]],
  lex:[[6,/\b(salesforce|lightning|lwc|slds|lex)\b/i]],
  marketing:[[6,/\b(landing|homepage|marketing|campaign|conversion)\b/i],[5,/\b(request|book|schedule) (a )?demo\b/i],[4,/\b(buyers?|visitors?|prospects?)\b.*\b(understand|explain|learn)\b|\bexplain\b.*\bproduct\b/i]],
  voice:[[6,/\b(chat|assistant|conversation|transcript|voice)\b/i],[5,/\bfollow[- ]?up questions?\b|\binspect citations?\b|\bsources?\b.*\banswer/i]],
@@ -60,9 +65,9 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  // the caller stating the target host. Reading only the guess let kit affinity
  // promote a shadcn reference over the Lightning one for a lex brief.
  const recipeKey=(lane==="lex"||detected.framework==="lex")?"lex":detected.installed[0]||"native";
- const retrieval=retrieveDirections(catalog,`${job} ${categories[kind].fallback}`,{lane,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[],limit:12});
+ const retrieval=retrieveDirections(catalog.filter(row=>referenceHealth(ROOT,row.id).status!=='failed' && (kind!=='media'||row.screen==='broadcast') && (kind!=='editorial'||row.screen==='blog')),`${job} ${categories[kind].fallback}`,{lane,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[],limit:12});
  if(!retrieval.selected.length)throw new Error(`no eligible template: ${retrieval.gaps.join("; ")}`);
- const shape=({template,score,matches,distance,port,portNote})=>({id:template.id,title:template.title,kit:template.kit,family:template.dna?.family,screen:template.screen,scope:template.scope||"page",reference:template.reference||{},score,distance,matches,...(port?{port:true,portNote}:{}),paths:packPaths(template)});
+ const shape=({template,score,matches,distance,port,portNote})=>({id:template.id,title:template.title,kit:template.kit,family:template.dna?.family,screen:template.screen,scope:template.scope||"page",reference:template.reference||{},score,distance,matches,...(port?{port:true,portNote}:{}),paths:packPaths(template),referenceHealth:referenceHealth(ROOT,template.id)});
  // Page and component references are chosen from their own pools. Slicing one
  // ranked list starved the page slot as soon as the corpus carried many
  // component packs scoring on the same brief (70 shadcn chart blocks buried the
@@ -77,7 +82,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  const usability={required:true,reference:join(ROOT,"skill/references/usability.md"),contract:"shine-usability.json",commands:[`node ${join(ROOT,"verify/usability.mjs")} <artifact> --contract shine-usability.json --cite ${selected.id}`]};
  const productPrecedent=mode==="existing"?{required:true,provided:Boolean(productReference),name:productReferenceName||productReference||null,reference:productReference||null,instruction:productReference?"Reuse or extract the sibling conventions; document justified differences in shine-diagnosis.json.":"Inventory shipped sibling surfaces. If the same object or user job exists, rerun with --product-reference and --product-reference-name before editing."}:null;
  const productCommands=productReference?[`node ${join(ROOT,"verify/compare-product.mjs")} <artifact> ${JSON.stringify(productReference)} --name ${JSON.stringify(productReferenceName||productReference)}`]:[];
- return {version:4,job,lane,mode,category:kind,classification,project:detected,selected,candidates,componentReferences:components,examples,starter,diagnosis,productPrecedent,usability,tableQuality:{required:"every record table, including tables nested inside dashboards",contract:"shine-tables.json",reference:join(ROOT,"skill/references/table-quality.md"),example:join(ROOT,"verify/fixtures/table-quality/shine-tables.json"),enforcedBy:["measure","compare"]},regionGraph:categories[kind].regions,controlInventory:categories[kind].controls,requiredStates:categories[kind].states,integration:{key:recipeKey,contract:RECIPES[recipeKey].contract,packages:RECIPES[recipeKey].packages,imports:RECIPES[recipeKey].imports},proof:{artifactAttribute:`data-cite=\"${selected.id}\"`,commands:[`node ${join(ROOT,"verify/measure.mjs")} <artifact> --cite ${selected.id} --shot /tmp/shine-after.png`,...usability.commands,...productCommands,`node ${join(ROOT,"verify/compare.mjs")} <artifact> --cite ${selected.id} --lane ${lane}${mode==="existing"?" --mode existing --diagnosis shine-diagnosis.json":""}`]},gaps:retrieval.gaps};
+ return {version:4,job,lane,mode,category:kind,classification,project:detected,selected,candidates,componentReferences:components,examples,starter,diagnosis,productPrecedent,usability,tableQuality:{required:"every record table, including tables nested inside dashboards",contract:"shine-tables.json",reference:join(ROOT,"skill/references/table-quality.md"),example:join(ROOT,"verify/fixtures/table-quality/shine-tables.json"),enforcedBy:["measure","compare"]},regionGraph:categories[kind].regions,controlInventory:categories[kind].controls,requiredStates:categories[kind].states,integration:{key:recipeKey,contract:RECIPES[recipeKey].contract,packages:RECIPES[recipeKey].packages,imports:RECIPES[recipeKey].imports},proof:{artifactAttribute:`data-cite=\"${selected.id}\"`,commands:[`node ${join(ROOT,"verify/measure.mjs")} <artifact> --cite ${selected.id} --shot /tmp/shine-after.png`,...usability.commands,...productCommands,`node ${join(ROOT,"verify/compare.mjs")} <artifact> --cite ${selected.id} --lane ${lane}${mode==="existing"?" --mode existing --diagnosis shine-diagnosis.json":""}`]},layout:{required:true,contract:'shine-layout.json',command:`node ${join(ROOT,'verify/layout.mjs')} <artifact> --contract shine-layout.json`,viewports:[390,768,1280,1440,1920],states:['baseline','long-content','missing-media',...(kind==='media'?['media-loaded']:[]),'large-text']},completion:{command:`node ${join(ROOT,'verify/prove.mjs')} <artifact> --cite ${selected.id} --layout shine-layout.json --usability shine-usability.json${mode==='existing'?' --diagnosis shine-diagnosis.json':''}`,requires:['accessibility','styling','layout','interactions','referenceValidity','visualComparison','buildBinding',...(mode==='existing'?['defectAssertions']:[])],instruction:'Individual checks are partial evidence. Only the aggregate verifier can issue completion proof.'},gaps:retrieval.gaps};
 }
 
 if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
