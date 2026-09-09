@@ -18,6 +18,7 @@ const ORDER = [
   ["direction", "Direction — art direction before code"],
   ["templates", "Templates — start from a real page"],
   ["contracts", "Component contracts — what every named control owes"],
+  ["table-quality", "Table quality — shared patterns and executable outcomes"],
   ["foundations", "Foundations — tokens, states, accessibility floor"],
   ["taste", "Taste — measured thresholds and failure tells"],
   ["color-type", "Color and type — the method"],
@@ -102,7 +103,9 @@ description: >-
 # Shine — self-contained design authority
 
 All ${ORDER.length} Shine references are inlined below. Nothing to install, no corpus to
-clone, no other file to open. Adapted from Shine v4.0
+clone to read the guidance. The executable table-quality checker, its JSON example, and
+browser tools require the full repository install; this Markdown file cannot run them.
+Adapted from Shine V4, updated September 8, 2026
 (github.com/justinfowler925/shine, MIT).
 
 **Not in this file:** the 14 blueprint region maps (records, settings, wizards, marketing,
