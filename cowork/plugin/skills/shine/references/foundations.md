@@ -78,8 +78,8 @@ Prefer semantic CSS variables over scattered hex/Tailwind literals:
   top layer vs 6%). Ship only the light values into a dark UI and every overlay reads flat.
 - The `brand` lane tints the shadow **anchor navy**, not black, per brand — and has no
   dark variant, because the lane has no dark mode.
-- Never hand-roll a `box-shadow` at a usage site. A focus ring (`0 0 0 Npx`) and an
-  `inset` highlight are not elevation and are fine.
+- design-lint hard-blocks a hand-rolled `box-shadow`. A focus ring (`0 0 0 Npx`) and an
+  `inset` highlight are not elevation and pass.
 
 ### Tracking tokens
 
@@ -99,7 +99,7 @@ Prefer semantic CSS variables over scattered hex/Tailwind literals:
 - `rem`, not `em`: DTCG's dimension type admits `px` and `rem` only, and the measured curve
   these come from is itself published per-size in rem. The em equivalents are in the
   comments so the tie back to Rule 4's figures stays checkable.
-- Never write a literal `letter-spacing` at a usage site. `normal`, `var()` and `calc()` are fine.
+- design-lint hard-blocks a literal `letter-spacing`. `normal`, `var()` and `calc()` pass.
 
 ### Known token gaps — say so, don't hardcode around them
 
@@ -110,10 +110,10 @@ Prefer semantic CSS variables over scattered hex/Tailwind literals:
 Shadow, tracking and the `text-sm`/`text-base` collision were all on this list until
 2026-08-09. Two of them mattered more than they read: **a missing token manufactures the
 escape hatch that blinds the gate.** With no shadow token, shipping any shadow meant a raw
-`rgba()` at the usage site, so the only route was ignoring the rules entirely —
-and once one rule is being ignored, colour and type discipline go with it. The gap did not just leave one
-rule unenforced; it taught people to disable the rest. Fill the gap at the token layer
-instead — that is the other half of the same fix.
+`rgba()`, which design-lint hard-blocks, so the only route was a `shine-lint: off` pragma —
+and that switched colour and type off for the whole file too. The gap did not just leave one
+rule unenforced; it taught people to disable the rest. Pragmas are scoped now
+(`shine-lint: off shadow`), which is the other half of the same fix.
 
 ## Typography
 

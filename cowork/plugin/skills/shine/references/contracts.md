@@ -1,6 +1,6 @@
 # Component Contracts
 
-SSOT for what a named component includes. For record tables, `table-quality.md` defines enforced executable proof and task-appropriate capabilities. The MUST/SHOULD lists below were distilled in 2026 from MUI X, Ant Design, IBM Carbon, React Aria/Spectrum, shadcn/Radix (+ TanStack), Untitled UI/Plus UI visual matrices, and OpenAI Apps SDK UI (chat). That sentence is provenance, not a pointer: MUI, Ant and Carbon were deleted from the corpus on 2026-08-31 (`docs/no-foreign-runtimes.md`) and are not there to read. The distilled requirements stayed — a completeness ladder is a fact about tables, not about a vendor.
+SSOT for what a named component includes. For record tables, `table-quality.md` defines the enforced executable proof and task-appropriate capabilities. The MUST/SHOULD lists below were distilled in 2026 from MUI X, Ant Design, IBM Carbon, React Aria/Spectrum, shadcn/Radix (+ TanStack), Untitled UI/Plus UI visual matrices, and OpenAI Apps SDK UI (chat). That sentence is provenance, not a pointer: MUI, Ant and Carbon were deleted from the corpus on 2026-08-31 (`docs/no-foreign-runtimes.md`) and are not there to read. The distilled requirements stayed — a completeness ladder is a fact about tables, not about a vendor.
 
 **Rule:** implement MUST always. For app/admin surfaces, also SHOULD. ASK before building ASK items. Opt-out only when user says simple/static/presentation/minimal.
 
@@ -146,8 +146,8 @@ A “table” in an app is a **DataGrid-class surface**, not bare `<table>` mark
 
 A `<table>` with two or more header cells is a named Table whether or not it carries
 `data-shine-contract="table"`. That attribute documents; it does not opt in.
-Opt out with `data-shine-contract="layout"` or `role="presentation"`. An unmarked data
-table still owes the full contract.
+Opt out with `data-shine-contract="layout"` or `role="presentation"`. `measure.mjs`
+fails the unmarked data table.
 
 ### Anatomy (enterprise data table)
 1. Title + optional description  
@@ -370,7 +370,7 @@ table still owes the full contract.
 | Interaction/a11y | React Aria + WAI-ARIA APG |
 | Enterprise form/table API | this file's § Form and § Table MUST lists |
 | Product table anatomy | this file's § Anatomy, proven by `untitled-table` |
-| React DataGrid batteries | TanStack Table ^8 |
+| React DataGrid batteries | TanStack Table ^8 + `integrations/resolve.mjs` recipe |
 | Composable React stack | shadcn + Radix + TanStack Table/Form |
 | Visual variants | Untitled UI / Plus UI |
 | Chat embeds | OpenAI Apps SDK UI |

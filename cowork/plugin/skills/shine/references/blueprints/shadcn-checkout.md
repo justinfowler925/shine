@@ -1,6 +1,6 @@
 # shadcn checkout
 
-Regions, in order. Host: focused page, no app sidebar. Density: comfortable. Paint: the kit's own zinc theme values, declared once as custom properties.
+Regions, in order. Host: focused page, no app sidebar. Density: comfortable. Paint: `tokens/voices/shadcn-zinc.css`.
 
 shadcn ships no checkout block, and since MUI was deleted on 2026-08-31 (`docs/no-foreign-runtimes.md`) this row is the corpus's only checkout reference. The region graph it inherits is sound — a step sequence beside a persistent order summary — and it is written here as structure rather than carried as someone else's source.
 
@@ -37,12 +37,12 @@ Region map only: no authored source and no pack shot ship for this row. The esta
 - The commit button carries the amount.
 - Pending and declined states are announced, and double-submit is impossible.
 - `data-cite="shadcn-checkout"` on the artifact.
-- Prove in the browser: render, screenshot, and walk the flow — advance to review and back — confirming the DOM actually changes.
+- Prove with `verify/measure.mjs`, then `verify/usability.mjs` with a contract that advances to review and back, then `verify/compare.mjs`.
 
 ## Source of truth
 
 - The regions above are the structure. They are not optional.
-- No reference screenshot ships for this row — the region map above is the reference.
-- Paint comes from the kit's own zinc theme values, declared once as custom properties.
-- No authored source ships for this row — the region map above is the reference.
+- There is no pack shot for this row, so `verify/compare.mjs` has nothing to compare against. Say so rather than reporting a likeness score.
+- Paint comes from `tokens/voices/shadcn-zinc.css`.
+- No authored source and no pack shot ship for this row, so `verify/compare.mjs` has nothing to compare against. Say so rather than reporting a likeness score.
 - Payment-field composition is a compliance surface as well as a design one; do not invent field sets.

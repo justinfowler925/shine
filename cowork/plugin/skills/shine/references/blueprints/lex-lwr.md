@@ -15,8 +15,8 @@ Regions. Host: Lightning Web Runtime (Experience Cloud). Paint: the site's theme
 ## Checklist (agent)
 
 - Name the host before citing (LEX / console / LWR / email / mobile).
-- Structure comes from this file; paint comes from the host's SLDS 2 styling hooks (see `salesforce.md`) except LWR and email.
-- Prove in the browser: render, screenshot, and walk the primary workflow.
+- Structure comes from this file; paint comes from `tokens/voices/slds.css` except LWR and email.
+- Prove with `verify/measure.mjs` and `verify/compare.mjs` once a pack shot exists.
 - Do not substitute a shadcn dashboard or an Ant profile because it scored on the word "record".
 - Empty, loading, and error states are real regions, not afterthoughts.
 - One primary action. Row actions are visible without hover.

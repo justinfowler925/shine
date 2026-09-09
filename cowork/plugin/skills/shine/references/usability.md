@@ -1,9 +1,6 @@
 # Usability proof — references become working objects
 
-Visual similarity and accessibility are necessary but do not establish that a person can
-complete a job. Every existing or new product surface therefore carries a small
-`shine-usability.json` beside its design diagnosis/spec, and the flows in it are proved
-in a real browser.
+Visual similarity and accessibility are necessary but do not establish that a person can complete a job. Every existing or new product surface therefore carries a small `shine-usability.json` beside its design diagnosis/spec and proves it in a real browser.
 
 ```json
 {
@@ -21,29 +18,15 @@ in a real browser.
 }
 ```
 
-- `cite` is the selected `templates.md` reference. Structural resemblance proves the page
-  shape; this contract proves the selected reference objects exist and work for this
-  product's job.
-- Each object has a stable selector, the reference role it implements, and a user-facing
-  purpose. All required roles from the reference template must be present.
-- Each flow has at least three observable steps and at least one real user action
-  (`click`, `fill`, or `press`). Screenshot-only, assertion-only, and invented-object
-  flows fail.
+- `cite` is the selected Shadcn, Untitled UI, or other corpus reference. `compare` proves its page structure; this contract proves the selected reference objects exist and work for this product’s job.
+- Each object has a stable selector, the reference role it implements, and a user-facing purpose. All required roles from the reference template must be present.
+- Each flow has at least three observable steps and at least one real user action (`click`, `fill`, or `press`). Screenshot-only, assertion-only, and invented-object flows fail.
 - Valid actions: `click`, `fill`, `press`, `visible`, `hidden`, `text`, and `value`.
 
-## Proving it in Cowork
+Run this after measure and before compare:
 
-Execute the contract yourself in the browser, after the visual pass and before calling
-the work done:
+```sh
+node verify/usability.mjs http://127.0.0.1:3000 --contract shine-usability.json --cite untitled-table
+```
 
-1. Render the page (open the file, or run the app and navigate to the surface).
-2. For each object: confirm the selector resolves and the element is present **at page
-   load** — hover-only objects fail.
-3. For each flow: perform the steps in order — click/fill/press for real, then verify
-   the assertion steps (`text`, `visible`, `value`) against the live DOM, not the source.
-4. Screenshot the end state and report which flows passed, step by step.
-
-A static dashboard, a decorative capture control, or a flow that does not change
-observable state fails. Do not claim a screen is usable because it passes contrast, an
-accessibility scan, or a visual comparison. If the product cannot declare its primary
-job in executable steps, do not polish it. Resolve the workflow first.
+If the product cannot declare its primary job in executable steps, do not polish it. Resolve the workflow first.

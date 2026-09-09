@@ -10,9 +10,9 @@ brand-facing (marketing site, demos, client decks-as-web, product UI carrying a
 company's identity).
 
 **A brand lane is a token override plus a small set of bans — not a second design
-system.** Everything in `contracts.md`, `patterns.md`, `taste.md` and
-`contracts.md` still applies. This file is the adapter: what a brand
-kit has to tell you, and what changes once it has.
+system.** Everything in `contracts.md`, `patterns.md` and `taste.md` still
+applies. This file is the adapter: what a brand kit has to tell you, and what
+changes once it has.
 
 ## Load order
 
@@ -20,11 +20,11 @@ kit has to tell you, and what changes once it has.
    Figma export, a `colors_and_type.css` — whatever exists. Name the file you
    read. A remembered palette is a guess, and a guess in brand work is the one
    error a client always catches.
-2. **Build the tokens, don't transcribe them.** Declare the brand palette once
-   as custom properties in a single token block and reference it with `var()`
-   everywhere else. Keep brand values out of public trees and shared examples.
-   Hand-copied hexes are how five surfaces end up with five slightly different
-   navies.
+2. **Build the tokens, don't transcribe them.** Point `SHINE_BRAND_OVERRIDE` at a
+   private palette JSON (`tokens/brand.local.example.json` is the shape) and run
+   `npm run build`. Output lands in `tokens/local/` — gitignored, so a brand's
+   values never enter a public tree. Hand-copied hexes are how five surfaces end
+   up with five slightly different navies.
 3. **Copy and terminology go to the brand's own voice authority**, if it has one.
    This skill owns layout, interaction, and component completeness. Don't fork
    messaging rules in here.
@@ -78,6 +78,7 @@ filter, pagination, sticky header, empty/loading/error states, and a11y.
 
 ## Private brand lanes
 
-A real brand lane lives outside any public tree: the palette source + this
-file's brand-specific twin, distributed privately to the people who need it.
-Never let real brand values enter a public repo or a shared example.
+The public `@shine/brand` lane ships **placeholder values on purpose**. A real
+brand lane lives outside this repo: palette JSON + this file's brand-specific
+twin + the built `artifact.css`, distributed to the people who need it. See
+[`../../tokens/README.md`](../../tokens/README.md) § Private brand lanes.

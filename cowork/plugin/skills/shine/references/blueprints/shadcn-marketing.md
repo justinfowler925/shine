@@ -1,6 +1,6 @@
 # shadcn marketing page
 
-Regions, in order. Host: standalone page, no app shell. Density: comfortable. Paint: the kit's own zinc theme values, declared once as custom properties.
+Regions, in order. Host: standalone page, no app shell. Density: comfortable. Paint: `tokens/voices/shadcn-zinc.css`.
 
 shadcn is an application kit. It ships no marketing block, no hero, and no pricing table, and that is a deliberate boundary rather than a gap in the corpus — all 97 shadcn blocks are one dashboard, sixteen sidebars, ten auth pages and seventy charts. Since MUI was deleted on 2026-08-31 (`docs/no-foreign-runtimes.md`), the corpus's other marketing row is `magicui-hero`, for the hero alone. Its region graph ports; its source does not.
 
@@ -38,12 +38,12 @@ Region map only: no authored source ships for this row. The estate builds market
 - Every tier's price is visible at rest and the feature order matches across tiers.
 - Accent validated against both grounds; reduced-motion honoured.
 - `data-cite="shadcn-marketing"` on the artifact.
-- Prove in the browser: render, screenshot, and exercise the primary action.
+- Prove with `verify/measure.mjs`, then `verify/usability.mjs` with a contract that exercises the primary action, then `verify/compare.mjs`.
 
 ## Source of truth
 
 - The regions above are the structure. They are not optional.
 - `magicui-hero`'s shot is the structural pixel reference for the hero region only; its source is not to be copied.
-- Paint comes from the kit's own zinc theme values, declared once as custom properties.
-- No authored source ships for this row — the region map above is the reference.
+- Paint comes from `tokens/voices/shadcn-zinc.css`.
+- No authored source and no pack shot ship for this row, so `verify/compare.mjs` has nothing to compare against. Say so rather than reporting a likeness score.
 - For a marketing *analytics* surface, this is the wrong row: cite a `dashboard` row instead.

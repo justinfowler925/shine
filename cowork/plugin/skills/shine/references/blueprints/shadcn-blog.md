@@ -1,6 +1,6 @@
 # shadcn editorial / article page
 
-Regions, in order. Host: standalone page, no app shell. Density: comfortable. Paint: the kit's own zinc theme values, declared once as custom properties.
+Regions, in order. Host: standalone page, no app shell. Density: comfortable. Paint: `tokens/voices/shadcn-zinc.css`.
 
 This row exists because deleting MUI deleted the only blog row in the catalog, and a screen with no row is a catalog hole — the condition `references/diagnose.md` rates Critical, because it is the condition under which an agent invents a page. An editorial column is the one screen where that loss costs least: it is measure, rhythm and one figure class, not kit chrome. There is nothing Material-specific about a paragraph.
 
@@ -37,11 +37,11 @@ Region map only: no authored source ships for this row. shadcn publishes no edit
 - One figure class, used consistently; nothing but code and tables exceeds the measure.
 - Links are the only accent in running text.
 - `data-cite="shadcn-blog"` on the artifact.
-- Prove in the browser: render, screenshot, and check the checklist below.
+- Prove with `verify/measure.mjs`, then `verify/compare.mjs` — and say plainly that there is no pack shot to compare against.
 
 ## Source of truth
 
 - The regions above are the structure. They are not optional.
-- No authored source ships for this row — the region map above is the reference.
-- Paint comes from the kit's own zinc theme values, declared once as custom properties.
+- No authored source and no pack shot ship for this row, so `verify/compare.mjs` has nothing to compare against. Report that rather than a likeness score.
+- Paint comes from `tokens/voices/shadcn-zinc.css`.
 - For a documentation page — navigation, versioning, code-first — this is the wrong row: build the app shell and put the article in it.

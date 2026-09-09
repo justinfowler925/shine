@@ -1,6 +1,6 @@
 # shadcn weekly cadence board
 
-Regions, in order. Host: application shell. Density: comfortable. Paint: the kit's own zinc theme values, declared once as custom properties. Authored source: `blueprints/shadcn-weekly-board/page.tsx` (bundled).
+Regions, in order. Host: application shell. Density: comfortable. Paint: `tokens/voices/shadcn-zinc.css`. Authored source: `corpus/blueprints/shadcn-weekly-board/page.tsx`.
 
 A recurring-meeting board: the same set of commitments read every week, grouped by **where they sit in the cadence** rather than ranked or filtered. shadcn ships no board or kanban block, and neither does any other kit in the corpus.
 
@@ -44,12 +44,12 @@ A recurring-meeting board: the same set of commitments read every week, grouped 
 - Standing items show no date.
 - One primary action, and it reads as primary against the masthead's ground.
 - `data-cite="shadcn-weekly-board"` on the artifact.
-- Prove in the browser: render, screenshot, record one outcome and move between owners — both must produce observable DOM changes.
+- Prove with `verify/measure.mjs`, then `verify/usability.mjs` with a contract that records one outcome and moves between owners, then `verify/compare.mjs`. The pack now carries a reference shot, so compare must exit zero for a conforming artifact rather than report an unprovable blueprint.
 
 ## Source of truth
 
 - The regions above are the structure. They are not optional.
-- Paint comes from the kit's own zinc theme values, declared once as custom properties.
-- `blueprints/shadcn-weekly-board/page.tsx` (bundled beside this file) is authored shadcn source composed from the current official primitives; copy it rather than inventing another page graph.
-- The bundled `page.tsx` is an authored blueprint, not a claim that shadcn publishes a weekly-board block.
+- Paint comes from `tokens/voices/shadcn-zinc.css`.
+- `corpus/blueprints/shadcn-weekly-board/page.tsx` is authored shadcn source composed from the current official primitives; copy it rather than inventing another page graph.
+- `corpus/packs/shadcn-weekly-board/shot.png` is captured from the sibling `reference.html` and gives `verify/compare.mjs` an independent visual reference. It is an authored blueprint proof, not a claim that shadcn publishes a weekly-board block.
 - `reference.required` is `navigation` and `summary` deliberately — a board that has neither the roster nor the counts is not this screen.

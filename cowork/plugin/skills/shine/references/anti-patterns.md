@@ -65,8 +65,8 @@ Do **not** default to these looks — reach for them only when the brief pins th
 
 ## Composition fails a per-element check cannot see
 
-These pass every token, contrast and axe check — composition has to be judged from the
-rendered screenshot. All of them were found on a surface that scored
+These pass every token, contrast and axe check and are the reason the composition gate
+exists (`verify/measure.mjs --compose`). All of them were found on a surface that scored
 zero violations on everything else:
 
 - **A large region with no content and no empty state.** The biggest element on the screen

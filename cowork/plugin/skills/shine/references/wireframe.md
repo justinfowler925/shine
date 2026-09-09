@@ -3,13 +3,13 @@
 Default for a **new** surface with no existing UI. Explicit triggers: “wireframe”,
 “sketch”, “low-fi”, “discover the layout”, “new screen”.
 
-Wireframe discovers **structure** with the user by picking a catalog template
-(`templates.md`), then citing kits. It emits a gray-box HTML artifact whose regions come
-from that template, then a **locked brief**. Build applies the cited template's DNA and
-does not invent a competing IA unless the user says `unlock structure`.
+Wireframe discovers **structure** with the user by picking a catalog template, then
+citing kits. It emits a gray-box HTML artifact whose regions come from that template,
+then a **locked brief**. Build applies cite DNA and does not invent a
+competing IA unless the user says `unlock structure`.
 
 **Not Wireframe:** craft (chroma, tracking, shadows), brand paint, real charts, or
-shipping React. Craft judgments wait until Build.
+shipping React. Craft hard-fails in `measure.mjs` wait until Build.
 
 ---
 
@@ -34,7 +34,7 @@ draft gray-box — do not interview to death.
 | Turns | Goal |
 |---|---|
 | 1–2 | Intent: job of the screen; who opens it; ritual if internal (`adoption.md` lite) |
-| 2–3 | **Catalog pick** — match the job to a `templates.md` row (default start-from) + pattern from `patterns.md`. Open the row's source (registry item, bundled blueprint, or public demo). |
+| 2–3 | **Catalog pick** — `node corpus/cite.mjs <screen>` (default start-from) + pattern from `patterns.md`. Open the files it lists. |
 | 3–6 | Structure forks still undecided after the template (nav collapse, states) |
 | ≤8 | Emit/update gray-box; keep iterating on the HTML |
 | Lock | Write `*.brief.md`; hand off to Build |
@@ -45,13 +45,13 @@ draft gray-box — do not interview to death.
 |---|---|
 | Catalog template | `templates.md` id — **required on every region** |
 | Pattern | `patterns.md` § name |
-| Kit recipe | `kits.md` recipe + the kit's official docs |
+| Kit recipe | `kits.md` + `~/design-corpus/…` `file:line` |
 | Technique | `techniques.md` § + product |
 | Novel only | nearest catalog row + `patterns.md` principle — name both |
 
 Banned: “we could do a sidebar” with no source. Gray-box regions come from the
 chosen template, not from anonymous layout ideas. `data-cite` on every region
-includes the `templates.md` id.
+includes the `templates.json` id.
 
 ### Recommendation format (every fork)
 
@@ -92,12 +92,13 @@ Or a path the user names. Keep HTML + brief adjacent.
 
 - Root: `data-shine-wireframe` on a wrapper (or `<body>`).
 - `color-scheme: light` on `:root` / `<html>` (declared single mode).
+- Do **not** set `data-shine-probe="app-shell"` (density gate is for Build app shells).
 - Regions: `.wf-region` with `data-label`, `data-job`, `data-cite`.
 - Exactly **one** control with `data-primary` (filled primary).
 - States as `.wf-state` text: `[empty]`, `[loading]`, `[error]`, `[filtered-empty]`.
 - No imagery, no accent chroma, no real chart ink — blocks and labels only.
-- CSS: paste `assets/wireframe.css` (bundled with this skill) inline so the artifact
-  opens standalone.
+- CSS: link or inline from `skill/assets/wireframe.css` (copy into the artifact so it
+  opens without a server dependency on the skill path when needed).
 
 ### Minimal skeleton
 
@@ -107,12 +108,12 @@ Or a path the user names. Keep HTML + brief adjacent.
 <head>
   <meta charset="utf-8" />
   <title>Wireframe — <name></title>
-  <style>/* paste assets/wireframe.css */</style>
+  <style>/* paste skill/assets/wireframe.css */</style>
 </head>
 <body>
   <div data-shine-wireframe>
     <div class="wf-shell">
-      <aside class="wf-region wf-nav" data-label="nav" data-job="…" data-cite="templates.md shadcn-sidebar-07">…</aside>
+      <aside class="wf-region wf-nav" data-label="nav" data-job="…" data-cite="kits.md App shell">…</aside>
       <main class="wf-main">
         <header class="wf-region wf-header" data-label="page-header" data-job="…" data-cite="templates.md shadcn-dashboard-01">
           <div>
@@ -132,7 +133,7 @@ Or a path the user names. Keep HTML + brief adjacent.
 </html>
 ```
 
-### Structural checks (Wireframe, not full craft)
+### Structural checks (Wireframe, not full measure)
 
 Before lock, confirm:
 
@@ -142,29 +143,28 @@ Before lock, confirm:
 4. No large empty `.wf-region` without a `.wf-state` or content label
 5. Pattern + kit named in the meta or brief
 
-Do **not** apply craft thresholds to the gray-box.
+Do **not** require craft measure PASS on the gray-box.
 
 ---
 
 ## Locked brief
 
-Write `shine-wireframe/<slug>.brief.md` on lock, and a short `DESIGN.md` beside it
-(`direction.md` names its contents):
+Write `shine-wireframe/<slug>.brief.md` **and** `DESIGN.md` on lock (`direction.md`):
 
 ```markdown
 # Wireframe brief: <name>
 Status: LOCKED
 Lane: internal | saas | lex | marketing
 Pattern: <patterns.md section>
-Template: <templates.md id>
-Opened: <source you actually read — registry JSON, blueprint file, or demo URL>
+Template: <templates.md id> via `node corpus/cite.mjs <id>`
+Opened: <source paths + shot from cite.mjs>
 Primary action: <label>
 Regions:
 - nav — job — templates.md <id>
 - page-header — …
 - focal — …
 States: empty / loading / error / …
-Kit recipe: <kits.md name> + official docs consulted
+Kit recipe: <kits.md name> + corpus paths
 Techniques: <techniques.md rows used>
 Adoption: ritual / persona / path (or n/a)
 HTML: shine-wireframe/<slug>.html
@@ -172,15 +172,14 @@ DESIGN.md: shine-wireframe/<slug>.DESIGN.md
 Unlock: only if user says "unlock structure"
 ```
 
-`DESIGN.md` names: lane, cite, voice, job, signature, palette, type pairing, layout
-ASCII, Salesforce host width if lex.
+`DESIGN.md` names: lane, cite, voice, job, signature, palette (from pack), type pairing, layout ASCII, Salesforce host width if lex.
 
 ### Build handoff rules
 
 1. Read the brief before any paint.
 2. Honour regions, primary, and kit recipe.
 3. Upgrade placeholders to contract MUST states.
-4. Re-render and re-screenshot after paint.
+4. Remeasure with `measure.mjs` after paint.
 5. If the brief is missing or `Status` is not `LOCKED`, do not invent IA — return to Wireframe.
 
 ---
@@ -190,7 +189,7 @@ ASCII, Salesforce host width if lex.
 | Pattern (`patterns.md`) | Lead with |
 |---|---|
 | App shell | `templates.md` `shadcn-sidebar-07` |
-| Dashboard / metrics | `templates.md` `shadcn-dashboard-01` |
+| Dashboard / metrics | `templates.md` `shadcn-dashboard-01` (Tremor when pinned) |
 | Insight stream / queue | ranked rows; start from app-shell template chrome |
 | Data table | `templates.md` `untitled-table` |
 | Form / settings | `templates.md` `shadcn-settings` on the cited shell |

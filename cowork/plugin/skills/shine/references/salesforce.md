@@ -30,7 +30,7 @@ npm ships both in parallel — `@salesforce-ux/design-system` dist-tags: `summer
 
 ## The token architecture
 
-`--sds-*` is dead legacy. Live namespace is `--slds-` with a **tier letter** as the second segment. Counts extracted from `@salesforce-ux/design-tokens@4.1.0` (install it and read `flat.json` for the authoritative list):
+`--sds-*` is dead legacy. Live namespace is `--slds-` with a **tier letter** as the second segment. Counts extracted from `@salesforce-ux/design-tokens@4.1.0`, which `corpus/acquire.sh` pins into `~/design-corpus/slds-tokens` (`fetch_slds_tokens`) and records in `corpus.lock`:
 
 | Tier | Prefix | Count | Status for us |
 |---|---|---:|---|
@@ -53,8 +53,9 @@ The chain resolves `r → g → s → c`:
 
 ### Shine's slds voice sheet is derived from this package
 
-Any SLDS fallback values you write must come from the package's own resolved values,
-re-checked against the installed `@salesforce-ux/design-tokens` version — never from memory.
+`tokens/voices/slds.css` cites these hooks and carries the package's resolved values as
+fallbacks. `verify/slds-tokens.test.mjs` asserts every fallback still equals what the pinned
+package resolves that hook to, and the doctor runs it.
 
 It has to be checked rather than trusted, because the sheet was previously written from values
 read off one rendered org. That org was still on SLDS 1, so every fallback was wrong — a font
@@ -206,10 +207,11 @@ problem in one line.
 
 ## The emitter exists
 
-When emitting brand values for Salesforce, produce three things: the admin
-transcription spec (for the Themes & Branding UI), the LWC `:host` fallback block,
-and a machine-readable ramp. Authority is `@salesforce-ux/design-tokens` flat.json.
-Never hand-maintain a hook mapping; re-derive after upgrading the package.
+`tokens/plugins/salesforce.mjs` generates `dist/brand/salesforce.{md,css,json}`
+on every `npm run build` — the admin transcription spec, the LWC `:host` fallback
+block, and the machine-readable ramp. Authority is `@salesforce-ux/design-tokens`
+flat.json. Never hand-maintain a hook mapping; re-diff the spec after upgrading
+the package.
 
 ---
 

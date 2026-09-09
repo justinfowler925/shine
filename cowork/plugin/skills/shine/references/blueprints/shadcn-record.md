@@ -1,6 +1,6 @@
 # shadcn record detail
 
-Regions, in order. Host: application shell (`shadcn-sidebar-*` supplies the frame). Density: comfortable. Paint: the kit's own zinc theme values, declared once as custom properties. Authored source: `blueprints/shadcn-record/page.tsx` (bundled).
+Regions, in order. Host: application shell (`shadcn-sidebar-*` supplies the frame). Density: comfortable. Paint: `tokens/voices/shadcn-zinc.css`. Authored source: `corpus/blueprints/shadcn-record/page.tsx`.
 
 shadcn ships no record block — its 97 blocks are one dashboard, sixteen sidebars, ten auth pages and seventy charts. The primitives a record page needs are all in the corpus as component rows; only the composition is missing. This file is that composition.
 
@@ -13,7 +13,7 @@ shadcn ships no record block — its 97 blocks are one dashboard, sixteen sideba
 ## Host facts the region map cannot show
 
 - Activity is presentation, so a plain `Table` is correct and the DataGrid contract does not apply. The moment the reader needs to search, sort, or page it, it becomes a grid and owes the full recipe — search, sort, filters, column visibility, pagination, selection, row actions, and loading/empty/error states.
-- Row actions are visible at rest. Hover-only actions fail the usability bar: every declared object must be present at page load.
+- Row actions are visible at rest. Hover-only actions fail `verify/usability.mjs`, which requires every declared object to be present at page load.
 - The write confirmation (`role="status"`) mounts at rest with its resting copy, not on first success. A live region created at success time is not announced.
 - Commit the status lead synchronously before any `await`. A confirmation set after a clipboard or network promise leaves the control reading "not done" while the work is already finished.
 
@@ -31,12 +31,12 @@ shadcn ships no record block — its 97 blocks are one dashboard, sixteen sideba
 - The submit is disabled until the rationale is non-empty, and the disabled reason is visible, not a tooltip.
 - `data-cite="shadcn-record"` on the artifact.
 - Tabs are keyboard reachable and the panel is labelled by its trigger.
-- Prove in the browser: render, screenshot, and exercise the decision write — the record must visibly change state.
+- Prove with `verify/measure.mjs`, then `verify/usability.mjs` with a contract that exercises the decision write, then `verify/compare.mjs`.
 
 ## Source of truth
 
 - The regions above are the structure. They are not optional.
-- `blueprints/shadcn-record/page.tsx` (bundled beside this file) is authored shadcn source — copy it, do not port it.
-- Paint comes from the kit's own zinc theme values, declared once as custom properties; fill genuine token gaps in Shine rather than hardcoding.
-- No reference screenshot ships for this row — the region map above is the reference.
+- `corpus/blueprints/shadcn-record/page.tsx` is authored shadcn source — copy it, do not port it.
+- Paint comes from `tokens/voices/shadcn-zinc.css`; fill genuine token gaps in Shine rather than hardcoding.
+- There is no pack shot for this row. `verify/compare.mjs` has nothing to compare against, so say so rather than reporting a likeness score.
 - Component-scope references for the pieces (`Card`, `Table`, `Tabs`, `Badge`) come from their own catalog rows, not from this file.

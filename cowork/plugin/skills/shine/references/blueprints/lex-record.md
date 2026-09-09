@@ -1,6 +1,6 @@
 # Lightning record home
 
-Regions, in order. Host: Lightning record page (standard). Density: compact. Paint: the host's SLDS 2 styling hooks (see `salesforce.md`).
+Regions, in order. Host: Lightning record page (standard). Density: compact. Paint: `tokens/voices/slds.css`.
 
 1. **Highlights panel** — key fields in a horizontal strip. First field is the name. No more than ~8 highlights. Each highlight is a label + value; value is the readable one, not the API name.
 2. **Path** — sales/status path when the object has stages. One current step. Not a second primary.
@@ -23,8 +23,8 @@ Regions, in order. Host: Lightning record page (standard). Density: compact. Pai
 ## Checklist (agent)
 
 - Name the host before citing (LEX / console / LWR / email / mobile).
-- Structure comes from this file; paint comes from the host's SLDS 2 styling hooks (see `salesforce.md`) except LWR and email.
-- Prove in the browser: render, screenshot, and walk the primary workflow.
+- Structure comes from this file; paint comes from `tokens/voices/slds.css` except LWR and email.
+- Prove with `verify/measure.mjs` and `verify/compare.mjs` once a pack shot exists.
 - Do not substitute a shadcn dashboard or an Ant profile because it scored on the word "record".
 - Empty, loading, and error states are real regions, not afterthoughts.
 - One primary action. Row actions are visible without hover.

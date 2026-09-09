@@ -1,6 +1,6 @@
 # shadcn settings
 
-Regions, in order. Host: application shell (`shadcn-sidebar-*` supplies the frame). Density: comfortable. Paint: the kit's own zinc theme values, declared once as custom properties. Authored source: `blueprints/shadcn-settings/page.tsx` (bundled).
+Regions, in order. Host: application shell (`shadcn-sidebar-*` supplies the frame). Density: comfortable. Paint: `tokens/voices/shadcn-zinc.css`. Authored source: `corpus/blueprints/shadcn-settings/page.tsx`.
 
 shadcn ships no settings block. Since Ant Design Pro was deleted on 2026-08-31 (`docs/no-foreign-runtimes.md`), the corpus's other settings row is `fluent-nav`, which is a nav component rather than a settings page — see Do not.
 
@@ -34,12 +34,12 @@ A settings page is a form whose defining problem is *findability*, not layout. T
 - Save is per-section, disabled until dirty, with a visible reason.
 - The danger zone is last, visually separated, and its confirm names what is lost.
 - `data-cite="shadcn-settings"` on the artifact.
-- Prove in the browser: render, screenshot, change one field and save it — the save must produce visible feedback.
+- Prove with `verify/measure.mjs`, then `verify/usability.mjs` with a contract that changes one field and saves it, then `verify/compare.mjs`.
 
 ## Source of truth
 
 - The regions above are the structure. They are not optional.
-- `blueprints/shadcn-settings/page.tsx` (bundled beside this file) is authored shadcn source — copy it, do not port it.
-- Paint comes from the kit's own zinc theme values, declared once as custom properties.
-- No reference screenshot ships for this row — the region map above is the reference.
+- `corpus/blueprints/shadcn-settings/page.tsx` is authored shadcn source — copy it, do not port it.
+- Paint comes from `tokens/voices/shadcn-zinc.css`.
+- There is no pack shot for this row, so `verify/compare.mjs` has nothing to compare against. Say so rather than reporting a likeness score.
 - `Switch`, `Select`, `Input`, and `Label` come from their own component rows.
