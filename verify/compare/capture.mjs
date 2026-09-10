@@ -28,7 +28,15 @@ export async function capturePage(page) {
     // Navigation can be a compact peer-control row (weekly owner roster, tabs,
     // breadcrumbs), not only a 100px-tall sidebar. Keep the width floor so an
     // incidental one-link wrapper cannot satisfy a page-level nav requirement.
-    return {title:document.title,bodyFont:body.fontFamily,bodySize:body.fontSize,bodyBg:body.backgroundColor,bodyColor:body.color,regions,controls,typography,palette,spacing,radii,productPatterns,interactions,tableCount:document.querySelectorAll("table,[role=grid]").length,rowCount:document.querySelectorAll("tbody tr,[role=row]").length,chartCount:meaningful('svg,canvas,[data-chart],[role=img][aria-label*=chart i]',180,100),navigationCount:meaningful('nav,aside,[data-sidebar],[data-region*=navigation]',120,40),summaryCount:meaningful('[data-summary],[data-region*=summary],.metrics,.stats',160,60),toolbar:!!document.querySelector('[data-toolbar],.toolbar,[role=search]'),cite:root.getAttribute("data-cite")||document.body?.getAttribute("data-cite")||"",voice:root.getAttribute("data-shine-voice")||"",family:root.getAttribute("data-dna-family")||"",adaptation:root.getAttribute("data-shine-adaptation")||"",signature:signature&&visible(signature)?{name:signature.getAttribute("data-shine-signature")||"",text:signature.textContent.trim().slice(0,120),box:box(signature)}:null,textChars:(document.body.innerText||"").length,viewport:{w:innerWidth,h:innerHeight}};
+    //
+    // A summary band takes the same relaxation for the same reason. A dense
+    // scoreboard — caps label over a 28px numeral, three or four of them in a
+    // row — measures about 54px tall, so a 60px floor refused to see the
+    // summary on a board whose whole design is that density (the ELT weekly
+    // board's is 238x54). The width floor stays higher than navigation's,
+    // because a summary is several figures side by side and a lone stat chip
+    // should not satisfy a page-level summary requirement.
+    return {title:document.title,bodyFont:body.fontFamily,bodySize:body.fontSize,bodyBg:body.backgroundColor,bodyColor:body.color,regions,controls,typography,palette,spacing,radii,productPatterns,interactions,tableCount:document.querySelectorAll("table,[role=grid]").length,rowCount:document.querySelectorAll("tbody tr,[role=row]").length,chartCount:meaningful('svg,canvas,[data-chart],[role=img][aria-label*=chart i]',180,100),navigationCount:meaningful('nav,aside,[data-sidebar],[data-region*=navigation]',120,40),summaryCount:meaningful('[data-summary],[data-region*=summary],.metrics,.stats',160,40),toolbar:!!document.querySelector('[data-toolbar],.toolbar,[role=search]'),cite:root.getAttribute("data-cite")||document.body?.getAttribute("data-cite")||"",voice:root.getAttribute("data-shine-voice")||"",family:root.getAttribute("data-dna-family")||"",adaptation:root.getAttribute("data-shine-adaptation")||"",signature:signature&&visible(signature)?{name:signature.getAttribute("data-shine-signature")||"",text:signature.textContent.trim().slice(0,120),box:box(signature)}:null,textChars:(document.body.innerText||"").length,viewport:{w:innerWidth,h:innerHeight}};
   });
   const graph = facts.regions.map((r)=>`${r.tag}:${r.role}:${r.box.x},${r.box.y},${r.box.w},${r.box.h}`);
   facts.focalShare = Math.max(0,...facts.regions.map((r)=>r.box.share));
