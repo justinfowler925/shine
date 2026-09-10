@@ -82,4 +82,35 @@ try{
   assert.throws(()=>sourceProof({...engine,package:'fake-grid'},dir),/does not resolve/);passed++;
   assert.throws(()=>sourceProof({...engine,package:undefined},dir),/React record tables/);passed++;
   console.log(`table quality PASS: ${passed} positive and rejection cases; real browser outcomes, shared source, scoped pattern at two widths`);
+
+/*
+ * A repo-level contract must not fail a surface that has no records.
+ *
+ * The contract file sits at the repo root and covers whichever surfaces carry
+ * tables. Before this, the moment one surface added a contract, every
+ * table-free surface in the same repo failed measure with "every discovered
+ * table must match exactly one contract" about tables it does not have.
+ */
+{
+  const {chromium}=load('playwright');
+  const {mkdtempSync,writeFileSync,rmSync}=await import('node:fs');
+  const {tmpdir}=await import('node:os');
+  const dir=mkdtempSync(join(tmpdir(),'shine-tablefree-'));
+  const contract=join(dir,'shine-tables.json');
+  writeFileSync(contract,JSON.stringify({version:1,project:'.',grids:[{selector:'#somewhere-else table',title:'#somewhere-else h2',kind:'static',reason:'A record table on a different surface in this same repository, documented static there.'}]}));
+  const browser=await chromium.launch();
+  try{
+    const page=await browser.newPage();
+    await page.setContent('<!doctype html><html><body><h1>A surface with no records</h1><p>Only prose and figures here.</p></body></html>');
+    const result=await auditTables({page,target:'https://example.invalid/x',contractPath:contract});
+    assert.equal(result.status,'passed','a table-free page passes even when the repo has a contract');
+    assert.equal(result.tables,0);
+    // and a page that DOES have a record table is still governed by it
+    await page.setContent('<!doctype html><html><body><table><thead><tr><th>a</th><th>b</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr></tbody></table></body></html>');
+    const governed=await auditTables({page,target:'https://example.invalid/x',contractPath:contract});
+    assert.equal(governed.status,'failed','an uncontracted record table still fails');
+  }finally{await browser.close();rmSync(dir,{recursive:true,force:true});}
+  console.log('  table-free surfaces: repo contract does not fail them; real records still governed');
+}
+
 }finally{await browser.close();await new Promise(done=>server.close(done));rmSync(dir,{recursive:true,force:true});}

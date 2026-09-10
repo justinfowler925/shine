@@ -166,7 +166,17 @@ export async function auditTables({page,target,contractPath,timeout=3000}) {
   const check=async(name,fn)=>{try{const evidence=await fn();checks.push({name,status:'passed',evidence});}catch(error){checks.push({name,status:'failed',reason:error.message});}};
   const base=/^https?:/.test(target)?process.cwd():dirname(target.startsWith('file:')?fileURLToPath(target):resolve(target));
   const path=contractPath?resolve(contractPath):join(base,'shine-tables.json');
-  if(!tables.length && !existsSync(path))return {status:'passed',checks:[],tables:0};
+  /*
+   * A page with no record tables has nothing for a contract to govern.
+   *
+   * The contract file lives at the repo root and covers whichever surfaces in
+   * that repo carry records. Requiring it to match on a table-free page made
+   * one surface's contract fail every other surface in the same repo: Company
+   * has no tables at all, and the moment Marketing added its contract,
+   * Company's measure run failed with "every discovered table must match
+   * exactly one contract" about tables it does not have.
+   */
+  if(!tables.length)return {status:'passed',checks:[],tables:0};
   if(!existsSync(path))return {status:'failed',tables:tables.length,checks:[{name:'table contract',status:'not_tested',reason:`record tables require ${path}; table markup and state markers are not proof`}]};
   let contract;
   try{contract=JSON.parse(readFileSync(path,'utf8'));if(contract.version!==1||!Array.isArray(contract.grids)||!contract.grids.length)throw new Error('requires version 1 and nonempty grids');}
