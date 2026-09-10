@@ -5,6 +5,12 @@ Reuse the product's approved shared table implementation and its installed state
 The closest shipped sibling (for Nucleus, Sources when directed by the user) owns the
 pattern. Never create a second implementation or a newly copied reference to pass proof.
 
+## Summary before detail
+
+For more than 10 total rows, apply [the summary-and-accordion standard](table-summary.md).
+Keep the summary visible and the complete table directly underneath, collapsed initially.
+The disclosure wraps the shared DataGrid; it does not replace any table capability.
+
 ## Required evidence
 
 Write `shine-tables.json` beside a local artifact, or pass `--table-contract <file>` to
