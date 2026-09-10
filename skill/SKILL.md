@@ -39,6 +39,10 @@ Every visible icon needs a distinct semantic job: state, action, object type, or
 - New surface: state the information hierarchy and primary workflow in the design spec, then build; ask discovery
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports.
+- For tables with **more than 10 total rows**, use the standard summary-and-accordion pattern:
+  meaningful KPI boxes or an infographic remain visible, with the full detail table directly
+  underneath in a collapsed accordion. Count the full dataset, not the visible page. Read
+  `references/table-summary.md` for threshold, state, accessibility, and drill-down behavior.
 - For record data, reuse the product's shared DataGrid and installed table-state engine.
   Read `references/table-quality.md` and write `shine-tables.json`: shared source, approved
   sibling table, and executable scenarios. Measure and compare both enforce it, including
