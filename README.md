@@ -52,6 +52,16 @@ Default: **Wireframe** if new; otherwise **Build** unless the ask is clearly a r
 
 ---
 
+## Component layers
+
+Shine treats Tailwind styling, shadcn controls and TanStack table state independently.
+Tailwind-only React and shadcn without tables are supported; a TanStack dependency does not
+imply shadcn. Existing product components remain authoritative. The resolver preserves
+Tailwind v3/v4 and chooses the installed TanStack v8/v9 adapter, checking real runtime exports.
+Design packets disclose missing dependencies instead of emitting speculative imports.
+See [component responsibilities and theme integration](skill/references/component-layers.md).
+Run `npm run layers:test` for routing and negative controls.
+
 ## Install & deploy
 
 Shine is not a daemon. **Deploy = immutable release + atomic current pointer + hooks + doctor.**

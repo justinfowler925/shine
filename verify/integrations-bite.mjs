@@ -18,7 +18,7 @@ const check = (name, source, reason) => {
   console.log(`integration bite PASS: ${name} · exit=${run.status}`);
 };
 try {
-  for (const kit of ["shadcn-tanstack"]) {
+  for (const kit of ["tanstack"]) {
     const generated = join(dir, kit);
     const { source } = scaffold(fixture, generated, kit);
     const file = join(generated, "ShineDataGrid.tsx");

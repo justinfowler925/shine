@@ -33,6 +33,7 @@
     "benchmark:agent:score:test": "node benchmark/agent-score.test.mjs",
     "benchmark:agent:representative": "node benchmark/agent-corpus.mjs --set representative",
     "benchmark:agent:full": "node benchmark/agent-corpus.mjs",
+    "layers:test": "node verify/component-layers.test.mjs",
     "packet:test": "node verify/design-packet.test.mjs",
     "render:test": "node verify/design-spec.test.mjs",
     "diagnosis:test": "node verify/diagnosis.test.mjs",

@@ -3,6 +3,7 @@
 import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 
 const SHINE = resolve(fileURLToPath(new URL("..", import.meta.url)));
 // Which corpus kits a consumer on this recipe can actually build against. Read
@@ -14,6 +15,10 @@ const SHINE = resolve(fileURLToPath(new URL("..", import.meta.url)));
 // than merely excluded here (docs/no-foreign-runtimes.md).
 export const RECIPE_KITS = {
   "shadcn-tanstack": ["shadcn-registry", "untitled-ui-react"],
+  shadcn: ["shadcn-registry", "untitled-ui-react"],
+  tailwind: ["untitled-ui-react", "shadcn-registry"],
+  "tailwind-tanstack": ["untitled-ui-react", "shadcn-registry"],
+  tanstack: ["untitled-ui-react", "shadcn-registry"],
   native: ["untitled-ui-react", "shadcn-registry"],
   lex: ["slds"],
 };
@@ -35,18 +40,33 @@ export const RECIPES = {
   },
 };
 
+// Styling, interactive primitives and data state are independent capabilities.
+RECIPES.shadcn = { packages: [], cite: "shadcn-dashboard-01", imports: [], api: [], contract: "installed shadcn controls; consumer tokens and layout; no table engine required" };
+RECIPES.tailwind = { packages: ["tailwindcss"], cite: "untitled-table", imports: [], api: [], contract: "Tailwind layout and styling around existing consumer components and semantic HTML" };
+RECIPES.tanstack = { ...RECIPES["shadcn-tanstack"], contract: "consumer table chrome over installed TanStack state; no shadcn imports" };
+RECIPES["tailwind-tanstack"] = { ...RECIPES.tanstack, packages: ["tailwindcss", "@tanstack/react-table"], contract: "Tailwind table layout and styling over installed TanStack state; preserve consumer controls" };
+
 const allDeps = (pkg) => ({ ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) });
 export function detectProject(project) {
   const root = resolve(project);
   const pkgPath = join(root, "package.json");
   const pkg = existsSync(pkgPath) ? JSON.parse(readFileSync(pkgPath, "utf8")) : {};
   const deps = allDeps(pkg);
-  const installed = [];
-  if (deps["@tanstack/react-table"] || existsSync(join(root, "components.json"))) installed.push("shadcn-tanstack");
+  const configPath = join(root, "components.json");
+  const config = existsSync(configPath) ? JSON.parse(readFileSync(configPath, "utf8")) : null;
+  const tailwind = Boolean(deps.tailwindcss);
+  const shadcn = Boolean(config);
+  const tanstack = Boolean(deps["@tanstack/react-table"]);
+  const installed = shadcn ? [tanstack ? "shadcn-tanstack" : "shadcn"] : tailwind ? [tanstack ? "tailwind-tanstack" : "tailwind"] : tanstack ? ["tanstack"] : [];
   const lex = existsSync(join(root, "sfdx-project.json")) || existsSync(join(root, "force-app"));
   const framework = lex ? "lex" : deps.next ? "next" : deps.vite ? "vite" : deps.react ? "react" : "native";
-  const managers = [["pnpm-lock.yaml", "pnpm"], ["yarn.lock", "yarn"], ["bun.lockb", "bun"], ["package-lock.json", "npm"]];
-  return { root, framework, packageManager: managers.find(([f]) => existsSync(join(root, f)))?.[1] || (pkgPath && existsSync(pkgPath) ? "npm" : "none"), installed };
+  const managers = [["pnpm-lock.yaml", "pnpm"], ["yarn.lock", "yarn"], ["bun.lock", "bun"], ["bun.lockb", "bun"], ["package-lock.json", "npm"]];
+  const layers = {
+    styling: { name: tailwind ? "tailwind" : "consumer-css", declaredVersion: deps.tailwindcss || null, css: config?.tailwind?.css || null, config: config?.tailwind?.config || null, prefix: config?.tailwind?.prefix || "", responsibility: "layout, spacing, typography, responsive and visual states; reuse consumer tokens" },
+    components: { name: shadcn ? "shadcn" : "consumer", aliases: config?.aliases || {}, responsibility: "reuse installed controls and their keyboard, focus and accessibility behavior; preserve shared product components" },
+    data: { name: tanstack ? "tanstack" : "consumer", declaredVersion: deps["@tanstack/react-table"] || null, responsibility: "table sorting, filtering, selection and pagination only when the workflow needs them" },
+  };
+  return { root, framework, packageManager: managers.find(([f]) => existsSync(join(root, f)))?.[1] || (existsSync(pkgPath) ? "npm" : "none"), installed, layers };
 }
 
 const sourceContains = (cite, symbol) => {
@@ -73,10 +93,34 @@ export function resolveIntegration(project, requested = "") {
   if (requested && chosen && requested !== chosen && detected.installed.length && !detected.installed.includes(requested))
     throw new Error(`refusing to add ${requested}; project already uses ${detected.installed.join(", ")}`);
   if (kit !== "native" && kit !== "lex" && !detected.installed.includes(kit)) throw new Error(`${kit} packages are not installed`);
-  const recipe = RECIPES[kit];
+  if (kit === "lex") detected.layers = { styling: { name: "slds" }, components: { name: "lightning" }, data: { name: "lightning-datatable" } };
+  const recipe = { ...RECIPES[kit], packages: [...RECIPES[kit].packages] };
+  if (kit !== "lex" && detected.layers.styling.name === "tailwind" && !recipe.packages.includes("tailwindcss")) recipe.packages.push("tailwindcss");
   const missingPackages = recipe.packages.filter((name) => !existsSync(join(detected.root, "node_modules", ...name.split("/"), "package.json")));
   if (missingPackages.length) throw new Error(`${kit} packages are declared but not installed: ${missingPackages.join(", ")}`);
-  const unverified = verifyRecipeApi(recipe);
+  // Corpus symbol matching is provenance, not consumer compatibility.
+  if (recipe.packages.includes("@tanstack/react-table")) {
+    const runtime = JSON.parse(readFileSync(join(detected.root, "node_modules/@tanstack/react-table/package.json"), "utf8"));
+    const major = Number(runtime.version.split(".")[0]);
+    if (![8, 9].includes(major)) throw new Error(`TanStack ${runtime.version}: generated adapters support v8/v9; preserve the existing DataGrid instead of upgrading it`);
+    detected.layers.data.installedVersion = runtime.version;
+    recipe.tableMajor = major;
+    if (major === 8) {
+      recipe.api = ["useReactTable", "getCoreRowModel", "getFilteredRowModel", "getSortedRowModel", "getPaginationRowModel"];
+      recipe.imports = [`import { ${recipe.api.join(", ")} } from '@tanstack/react-table';`, "import type { RowData, TableOptions } from '@tanstack/react-table';"];
+      recipe.apiReference = "https://tanstack.com/table/v8/docs/guide/tables";
+    }
+    // Resolve exports from the consumer, not from Shine's corpus or dependencies.
+    const runtimeExports = createRequire(join(detected.root, "package.json"))("@tanstack/react-table");
+    const missingExports = recipe.api.filter(name => !(name in runtimeExports));
+    if (missingExports.length) throw new Error(`installed TanStack ${runtime.version} lacks required exports: ${missingExports.join(", ")}`);
+  }
+  if (recipe.packages.includes("tailwindcss")) {
+    const runtime = JSON.parse(readFileSync(join(detected.root, "node_modules/tailwindcss/package.json"), "utf8"));
+    if (![3, 4].includes(Number(runtime.version.split(".")[0]))) throw new Error(`Tailwind ${runtime.version}: supported styling guidance is v3/v4; inspect this version before generating CSS`);
+    detected.layers.styling.installedVersion = runtime.version;
+  }
+  const unverified = recipe.tableMajor === 8 ? [] : verifyRecipeApi(recipe);
   if (unverified.length) throw new Error(`recipe API not proven by ${recipe.cite}: ${unverified.join(", ")}`);
   const manifest = JSON.parse(readFileSync(join(SHINE, "corpus/packs", recipe.cite, "manifest.json"), "utf8"));
   return { ...detected, kit, recipe, provenance: { cite: recipe.cite, upstream: manifest.upstream, files: manifest.files.length } };
