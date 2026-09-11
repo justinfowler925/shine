@@ -2,11 +2,11 @@
   "version": 1,
   "skill": "shine",
   "sourceRepository": "justinfowler925/shine",
-  "sourceRevision": "800c2e05293487a8f5139d65f0547d133687239f",
-  "skillSha256": "fae09e40ebe326317677f9cd75d100beb4832d909a4af4e888737443eaeb7dc5",
+  "sourceRevision": "4cdb84476e3ea1014caed4b6adf0620b48659b6c",
+  "skillSha256": "975fe7a2a9935b84f4370b20ef3537be5b34496738bbd4a48b022f821d9281d7",
   "artifacts": {
-    "SKILL.md": "fae09e40ebe326317677f9cd75d100beb4832d909a4af4e888737443eaeb7dc5",
-    "shine-skill.md": "a5c18d15dfdeea2b8d8fcd2b8ebb3709b7e9acdc68c146de080314c6ffcc247a",
-    "shine.plugin": "58f24d08d874e77694cce1d873dac4fd190e17c1b29d50618de72b4c5fc4bfa3"
+    "SKILL.md": "975fe7a2a9935b84f4370b20ef3537be5b34496738bbd4a48b022f821d9281d7",
+    "shine-skill.md": "bde46086a4b9c2a72d83aa22b4c216192677c21bdfb523f04c1e0dd037e82e6f",
+    "shine.plugin": "a00b5d0dd8c71ef82c8bb72f33918dcf0799a50a71f4db82b71a6eccb970bc8e"
   }
 }

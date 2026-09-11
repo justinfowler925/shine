@@ -38,7 +38,7 @@ Every visible icon needs a distinct semantic job: state, action, object type, or
 - Existing surface: fix defects in diagnosis priority order; do not paint before usability and completeness are sound.
 - New surface: state the information hierarchy and primary workflow in the design spec, then build; ask discovery
   questions only when missing product decisions would materially change the result.
-- Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports.
+- Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports; follow `references/component-layers.md`: Tailwind owns styling/layout, shadcn owns controls, TanStack owns table state. Detect each independently; reuse product components.
 - For tables with **more than 10 total rows**, keep meaningful KPIs or an infographic above an adjacent collapsed detail table. Count the full dataset, not the visible page. Follow `references/table-summary.md` for state, accessibility and drill-down.
 - For record data, reuse the product's shared DataGrid and installed table-state engine.
   Read `references/table-quality.md` and write `shine-tables.json`: shared source, approved

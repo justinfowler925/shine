@@ -165,6 +165,9 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   const media=spawnSync(process.execPath,[join(SHINE,"verify/media-layout.test.mjs")],{cwd:SHINE,encoding:"utf8",timeout:240000});
   if(media.status===0)ok("media layout and complete browser proof",media.stdout.trim().slice(-300));
   else fail("media layout and complete browser proof",`${media.stderr||media.stdout}`.trim().slice(-1200));
+  const layers=spawnSync(process.execPath,[join(SHINE,"verify/component-layers.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(layers.status===0)ok("independent component layers",layers.stdout.trim());
+  else fail("independent component layers",`${layers.stderr||layers.stdout}`.trim().slice(-1200));
   const packet=spawnSync(process.execPath,[join(SHINE,"verify/design-packet.test.mjs")],{cwd:SHINE,encoding:"utf8"});
   if(packet.status===0)ok("bounded design packet", "9 natural briefs, ambiguity refusal, page/component split, usable source");
   else fail("bounded design packet",`${packet.stderr||packet.stdout}`.trim().slice(-500));
@@ -1477,7 +1480,7 @@ if (FULL) {
   };
   const runtimeProject = join(SHINE, "verify/fixtures/integrations");
   const projects = {
-    "shadcn-tanstack": runtimeProject,
+    tanstack: runtimeProject,
     native: make("native", null),
     lex: make("lex", {}, ["sfdx-project.json"]),
   };
