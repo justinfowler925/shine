@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "blocks": [
+    {"id":"async-state","export":"AsyncState","title":"Async state","description":"Loading, empty, filtered-empty and error with real recovery actions.","primitives":["button"],"blocks":[],"matches":["AsyncState","StatePanel","EmptyState"],"categories":["datagrid","record","dashboard","form"]},
+    {"id":"collection","export":"Collection","title":"Collection disclosure","description":"Summary and adjacent persistent details; more than ten full records start collapsed.","primitives":["button"],"blocks":[],"matches":["Collection","CollectionSection"],"categories":["datagrid","dashboard"]},
+    {"id":"data-grid","export":"DataGrid","title":"Record data grid","description":"Client-side TanStack v8 grid with sorting, search, filters, columns, pagination, selection, actions and recovery. Never use for a partial server-paged dataset.","primitives":["button","input","checkbox","dropdown-menu","table"],"blocks":["async-state","collection"],"dependencies":["@tanstack/react-table@^8.21.3"],"matches":["DataGrid","DataTable"],"categories":["datagrid"]},
+    {"id":"record-editor","export":"RecordEditor","title":"Record editor","description":"Dialog editor with validation, asynchronous save, retained failed drafts, discard confirmation and focus restoration.","primitives":["button","input","label","dialog","alert-dialog"],"blocks":[],"matches":["RecordEditor","RecordDialog","FormDialog"],"categories":["form","record"]},
+    {"id":"detail-sheet","export":"DetailSheet","title":"Record detail sheet","description":"Accessible detail drawer with scrolling content, fixed actions and restored focus.","primitives":["sheet"],"blocks":[],"matches":["DetailSheet","RecordSheet","RecordDrawer","DetailDrawer"],"categories":["record","datagrid"]},
+    {"id":"workspace-tabs","export":"WorkspaceTabs","title":"Tabbed workspace","description":"Library keyboard behavior and persistent inactive panels for filters and drafts.","primitives":["tabs"],"blocks":[],"matches":["WorkspaceTabs","WorkspaceTabList"],"categories":["form","record","dashboard","datagrid"]}
+  ]
+}

@@ -5,7 +5,6 @@ description: >-
   component system, complete interaction contracts, and browser proof. Use for UI, UX,
   dashboards, tables, forms, landing pages, charts, email, Lightning, decks, PDFs, or visual polish.
 ---
-
 # Shine
 Build the interface directly in the current Codex task. Do not delegate to a second design agent. Shine's deterministic tools choose and verify; you supply brief-specific design judgment.
 ## Start with one bounded packet
@@ -39,6 +38,7 @@ Every visible icon needs a distinct semantic job: state, action, object type, or
 - New surface: state the information hierarchy and primary workflow in the design spec, then build; ask discovery
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports; follow `references/component-layers.md`: Tailwind owns styling/layout, shadcn owns controls, TanStack owns table state. Detect each independently; reuse product components.
+- Use the packet’s `reusableBlocks` plan and `references/reusable-blocks.md`. Import existing product blocks first; otherwise install the matching finished registry block. Bind actual imports in `shine-reuse.json`; include its check in completion. Do not reconstruct a matching block from primitives.
 - For tables with **more than 10 total rows**, keep meaningful KPIs or an infographic above an adjacent collapsed detail table. Count the full dataset, not the visible page. Follow `references/table-summary.md` for state, accessibility and drill-down.
 - For record data, reuse the product's shared DataGrid and installed table-state engine.
   Read `references/table-quality.md` and write `shine-tables.json`: shared source, approved

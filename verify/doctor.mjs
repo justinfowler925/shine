@@ -156,6 +156,12 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
 }
 
 {
+  for(const script of ["verify/blocks.test.mjs","verify/blocks-browser.mjs","verify/usability.test.mjs"]){
+    const result=spawnSync(process.execPath,[join(SHINE,script)],{cwd:SHINE,encoding:"utf8",timeout:120000});
+    if(result.status===0)ok(script,result.stdout.trim().slice(-250));else fail(script,`${result.stderr||result.stdout}`.trim().slice(-1200));
+  }
+  const blockTypes=spawnSync(process.execPath,[join(SHINE,"node_modules/typescript/bin/tsc"),"-p","verify/fixtures/blocks/tsconfig.json"],{cwd:SHINE,encoding:"utf8",timeout:120000});
+  if(blockTypes.status===0)ok("published blocks typecheck");else fail("published blocks typecheck",`${blockTypes.stderr||blockTypes.stdout}`.trim().slice(-1200));
   const table=spawnSync(process.execPath,[join(SHINE,"verify/table-quality.test.mjs")],{cwd:SHINE,encoding:"utf8"});
   if(table.status===0)ok("table quality rejects incomplete custom patterns",table.stdout.trim().slice(-300));
   else fail("table quality rejects incomplete custom patterns",`${table.stderr||table.stdout}`.trim().slice(-800));

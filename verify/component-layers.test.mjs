@@ -35,6 +35,7 @@ try {
   if(options.shadcn)assert.equal(resolved.layers.components.aliases.ui,'@/shared/ui');
  }
  const missingPacket=createDesignPacket({job:'review customer records',category:'datagrid',project:fixture('packet-missing',{tailwind:true,installed:false})});
+ const mismatched=fixture('mismatched-prefix',{tailwind:true,shadcn:true});mkdirSync(join(mismatched,'src'),{recursive:true});writeFileSync(join(mismatched,'src/theme.css'),'@import "./utilities.css";');writeFileSync(join(mismatched,'src/utilities.css'),'@import "tailwindcss" prefix(nx);');assert.throws(()=>resolveIntegration(mismatched),/prefix mismatch/);writeFileSync(join(mismatched,'src/utilities.css'),'@import "tailwindcss" prefix(tw);');assert.equal(resolveIntegration(mismatched).layers.styling.prefix,'tw');
  assert.equal(missingPacket.integration.validated,false);assert.deepEqual(missingPacket.integration.imports,[]);assert.match(missingPacket.integration.validationError,/not installed/);
  const badExports=fixture('bad-exports');
  writeFileSync(join(badExports,'package.json'),JSON.stringify({dependencies:{react:'19', '@tanstack/react-table':'9.1.2'}}));

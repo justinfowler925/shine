@@ -1,0 +1,401 @@
+{
+  "version": 4,
+  "job": "Reusable record table, editor and tabbed workspace blocks with loading, recovery and saved results",
+  "lane": "internal",
+  "mode": "existing",
+  "category": "datagrid",
+  "classification": {
+    "category": "datagrid",
+    "confidence": "explicit",
+    "scores": {
+      "datagrid": 99
+    }
+  },
+  "project": {
+    "root": "/Users/justinfowler/Projects/nucleus-shine-ui",
+    "framework": "next",
+    "packageManager": "npm",
+    "installed": [
+      "shadcn-tanstack"
+    ],
+    "layers": {
+      "styling": {
+        "name": "tailwind",
+        "declaredVersion": "4.3.3",
+        "css": "src/app/globals.css",
+        "config": null,
+        "prefix": "",
+        "responsibility": "layout, spacing, typography, responsive and visual states; reuse consumer tokens"
+      },
+      "components": {
+        "name": "shadcn",
+        "aliases": {
+          "components": "@/components",
+          "utils": "@/lib/utils",
+          "ui": "@/components/ui",
+          "lib": "@/lib",
+          "hooks": "@/hooks"
+        },
+        "responsibility": "reuse installed controls and their keyboard, focus and accessibility behavior; preserve shared product components"
+      },
+      "data": {
+        "name": "tanstack",
+        "declaredVersion": "^8.21.3",
+        "responsibility": "table sorting, filtering, selection and pagination only when the workflow needs them"
+      }
+    }
+  },
+  "selected": {
+    "id": "shadcn-queue",
+    "title": "shadcn work queue (triage grid, no chart)",
+    "kit": "shadcn-registry",
+    "family": "shadcn-zinc",
+    "screen": "queue",
+    "scope": "page",
+    "reference": {
+      "required": [
+        "navigation",
+        "table"
+      ],
+      "captureExpect": "[data-region=\"queue-grid\"]"
+    },
+    "score": 114,
+    "distance": 11,
+    "matches": [
+      "lane",
+      "informationShape",
+      "interaction",
+      "installedKit"
+    ],
+    "paths": {
+      "shot": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/shadcn-queue/shot.png",
+      "tokens": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/shadcn-queue/tokens.css",
+      "sourceExcerpts": [
+        {
+          "path": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/shadcn-queue/source/page.tsx",
+          "excerpt": "/**\n * shadcn work queue — authored reference for the `queue` screen.\n *\n * shadcn ships no queue block, so this is authored from its primitives (Table,\n * Input, Button, Select, Checkbox, DropdownMenu, Badge) plus TanStack Table for\n * the grid state. It exists because the only shadcn row that carried the queue\n * jobs was dashboard-01, whose reference roles demand a chart — and a queue is\n * a grid with a job, not a dashboard missing its chart.\n *\n * Structure, and why each part is here:\n *   masthead    what this queue is and WHEN it was generated. A queue whose\n *               freshness is unstated reads as live when it may be a snapshot.\n *   toolbar     search, column visibility, and the one filled primary — open\n *               the top row where the work happens. The page exists to move\n *               the reader to the record, so the primary is a departure, not\n *               a refresh.\n *   batch bar   mounted at rest with its resting count and a disabled\n *               action; enables with selection. A status region created on\n *               first selection is announced unreliably.\n *   the grid    the focal object. Sortable columns sort the VALUE (amounts\n *               and dates carry sort keys, never their rendered labels), rows\n *               deep-link to their record, and the trailing cell is the row\n *               action. Empty and filtered-empty\n\n/* selected implementation */\nexport default function WorkQueue() {\n  const [sorting, setSorting] = useState<SortingState>([{ id: \"amount\", desc: true }]);\n  const [globalFilter, setGlobalFilter] = useState(\"\");\n  const [rowSelection, setRowSelection] = useState({});\n  const [columnVisibility, setColumnVisibility] = useState({});\n\n  const columns = useMemo<ColumnDef<QueueRow>[]>(\n    () => [\n      {\n        id: \"select\",\n        header: ({ table }) => (\n          <Checkbox\n            aria-label=\"Select all rows on this page\"\n            checked={table.getIsAllPageRowsSelected()}\n            onCheckedChange={(v) => table.toggleAllPageRowsSelected(Boolean(v))}\n          />\n        ),\n        cell: ({ row }) => (\n          <Checkbox\n            aria-label={`Select ${row.original.title}`}\n            checked={row.getIsSelected()}\n            onCheckedChange={(v) => row.toggleSelected(Boolean(v))}\n          />\n        ),\n        enableSorting: false,\n      },\n      { accessorKey: \"kind\", header: \"Problem\", cell: ({ getValue }) => <Badge variant=\"outline\">{String(getValue())}</Badge> },\n      {\n        accessorKey: \"title\",\n        header: ({ column }) => (\n          <Button variant=\"ghost\" size=\"sm\" onClick={() => column.toggleSorting(column.getIsSorted() === \"asc\")}>\n            Item <ArrowUpDown aria-hidden />\n          </Button>\n        ),\n      },\n      { accessorKey: \"owner\", header: \"Owner\" },\n      {\n        // Sorts the number; the label is formatting applied at print time only.\n        accessorKey: \"amount\",\n        header: ({ column }) => (\n          <Button variant=\"ghost\" size=\"sm\" onClick={() => column.toggleSorting(column.getIsSorted() === \"asc\")}>\n            Value <ArrowUpDown aria-hidden />\n          </Button>\n        ),\n        cell: ({ getValue }) => <span className=\"tabular-nums\">{money(Number(getValue()))}</span>,\n      },\n      { accessorKey: \"due\", header: \"Due\" },\n      {\n        id: \"open\",\n        header: \"\",\n        cell: ({ row }) => (\n          <Button variant=\"ghost\" size=\"sm\" asChild>\n            <a href={row.original.url}>\n              Open <ExternalLink aria-hidden />\n            </a>\n          </Button>\n        ),\n        enableSorting: false,\n      },\n    ],\n    [],\n  );\n\n  const table = useReactTable({\n    data: ROWS,\n    columns,\n    state: { sorting, globalFilter, rowSelection, columnVisibility },\n    onSortingChange: setSorting,\n    onGlobalFilterChange: setGlobalFilter,\n    onRowSelectionChange: setRowSelection,\n    onColumnVisibilityChange: setColumnVisibility,\n    getCoreRowModel: getCoreRowModel(),\n    getSortedRowModel: getSortedRowModel(),\n    getFilteredRowModel: getFilteredRowModel(),\n    getPaginationRowModel: getPaginationRowModel(),\n    initialState: { pagination: { pageSize: 10 } },\n  });\n\n  const selected = table.getSelectedRowModel().rows;\n  const top = table.getRowModel().rows[0]?.original;\n  const isFiltered = globalFilter.trim().length > 0;\n\n  return (\n    <main className=\"mx-auto flex max-w-5"
+        },
+        {
+          "path": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/shadcn-queue/source/reference.html",
+          "excerpt": "<!doctype html>\n<html lang=\"en\" data-cite=\"shadcn-queue\" data-shine-voice=\"kit-faithful\" data-dna-family=\"shadcn-zinc\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n  <title>shadcn work queue reference</title>\n  <link rel=\"stylesheet\" href=\"../../../tokens/voices/shadcn-zinc.css\">\n  <style>\n    *{box-sizing:border-box}:root{color-scheme:light}body{margin:0;background:#fafafa;color:#18181b;font:14px/1.5 var(--shine-font-sans,ui-sans-serif,system-ui)}.wrap{width:min(1184px,calc(100% - 48px));margin:auto}\n    .shell{display:flex;align-items:center;gap:24px;padding:12px 0;border-bottom:1px solid #e4e4e7;background:#fff}\n    .shell .wrap{display:flex;align-items:center;gap:24px}\n    .mark{font-weight:700;letter-spacing:-.02em}\n    .shellnav{display:flex;gap:4px;margin:0;padding:0;list-style:none}\n    .shellnav a{display:inline-flex;min-height:36px;align-items:center;padding:0 12px;border-radius:8px;color:#3f3f46;text-decoration:none;font-weight:550}\n    .shellnav a[aria-current=\"page\"]{background:#f4f4f5;color:#18181b}\n    header.page .wrap{padding:28px 0 0}\n    h1{margin:0;font-size:24px;line-height:1.2;letter-spacing:-.025em}\n    .fresh{margin:8px 0 0;color:#71717a}\n    .toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:20px 0 12px}\n    .search{position:relative}\n    .search svg{position:absolute;left:12px;top:12px;width:16px;height:16px;color:#a1a1aa}\n    .search input{min-height:36px;width:280px;padding:0 12px 0 36px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;font:inherit}\n    .button{display:inline-flex;align-items:center;gap:8px;justify-content:center;min-height:36px;padding:0 16px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;color:#18181b;font:600 14px/1 var(--shine-font-sans,ui-sans-serif);cursor:pointer}\n    .button.ghost{border-color:transparent;background:transparent;color:#3f3f46}\n    .button.primary{margin-left:auto;background:#18181b;border-color:#18181b;color:#fafafa}\n    .button svg{width:16px;height:16px}\n    .button[disabled]{opacity:.5;cursor:not-allowed}\n    .batch{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;padding:8px 12px;border:1px solid #e4e4e7;border-radius:8px;background:#f4f4f5}\n    .batch strong{font-size:13px}\n    .gridbox{overflow-x:auto;border:1px solid #e4e4e7;border-radius:12px;background:#fff}\n    table{border-collapse:collapse;width:100%;min-width:760px}\n    thead th{position:sticky;top:0;background:#fff;border-bottom:1px solid #e4e4e7;padding:12px;text-align:left;font-size:12px;color:#71717a;font-weight:600}\n    thead th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}\n    thead button{display:inline-flex;align-items:center;gap:8px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:pointer}\n    thead button svg{width:14px;height:14px}\n    tbody td{border-bottom:1px solid #f4f4f5;padding:12px;vertical-align:middle}\n    tbody tr:last-"
+        },
+        {
+          "path": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/shadcn-queue/source/shadcn-queue.md",
+          "excerpt": "# shadcn work queue\n\nRegions, in order. Host: application shell. Density: dense. Paint: `tokens/voices/shadcn-zinc.css`. Authored source: `corpus/blueprints/shadcn-queue/page.tsx` — the minimal composed statement of the grid contract; the living implementations (the shared shadcn/TanStack DataGrid in cro-suite and Nucleus) carry the full one.\n\nA collection someone arrives at wanting to **find and act on a row**: a triage queue, a hygiene worklist, an inbox of notices. shadcn publishes no queue block — its 97 blocks are one dashboard, sixteen sidebars, ten auth pages and seventy charts — and `shadcn-dashboard-01` is the wrong cite for this screen because its reference roles demand a chart. A queue is a grid with a job, not a dashboard missing its chart; forcing the chart cite made consumers split their measure and usability declarations across two references (cro-suite gov did exactly this, with a `cite_note` apologising for it). This row is the one declaration.\n\n**This is the inverse of `shadcn-weekly-board`, and the same four conditions decide between them.** A board is read in full, in a fixed order, on a schedule, by people accountable out loud. A queue is searched, sorted, paged and acted on. If all four board conditions hold, cite the board; otherwise this row — and never both for the same rows.\n\n1. **Masthead** — what this queue is and when it was generated. A queue whose freshness is not stated reads as live when it may be a snapshot; the dateline is not chrome.\n2. **Toolbar** — search, column visibility, and the one primary action. The primary is filled and singular: on a deep-linked queue it is *open the top row where the work happens* (the worst deal, the highest-ranked notice), because the page exists to move the reader to the record. The batch bar is mounted at rest with its resting count (“0 selected”) and its action disabled — a status region created on first selection is announced unreliably; one that rests visible is not furniture, it is the resting state.\n3. **The grid** — the focal object, not a strip under a hero. Sticky header; every sortable column sorts the value, never the phrase (amounts and dates carry `data-sort`); rows deep-link to their record (`data-url`) and the row action opens it. Row selection only when a batch action exists to consume it.\n4. **Pagination** — page size choices and a pager that states position. A queue that fits one page still renders the pager at rest; it is how the reader knows the queue is complete.\n5. **Gated actions** — an action whose delivery is not yet authorized renders disabled *with the reason stated beside it*, never omitted. A control for an action no endpoint performs is a lie; a visibly gated one is a plan.\n\n## Interaction contract (what queue means)\n\nThe demands `untitled-table` carries, restated here so this cite carries them natively: **search, sort, filters, column visibility, pagination, row selection, row actions** — and the five states a grid must be able to show: **loading, e"
+        }
+      ]
+    },
+    "referenceHealth": {
+      "status": "passed",
+      "reasons": [],
+      "source": "corpus/blueprints/shadcn-queue/reference.html",
+      "capturedAt": "2026-09-09T18:53:57.282Z",
+      "shotSha256": "0bd112c08a049d2c4741f917b7b801d294569cb67e42e4d8014a6a9d19c12d2e"
+    }
+  },
+  "candidates": [
+    {
+      "id": "shadcn-queue",
+      "title": "shadcn work queue (triage grid, no chart)",
+      "kit": "shadcn-registry",
+      "family": "shadcn-zinc",
+      "screen": "queue",
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "table"
+        ],
+        "captureExpect": "[data-region=\"queue-grid\"]"
+      },
+      "score": 114,
+      "distance": 11,
+      "matches": [
+        "lane",
+        "informationShape",
+        "interaction",
+        "installedKit"
+      ],
+      "paths": {
+        "shot": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/shadcn-queue/shot.png",
+        "tokens": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/shadcn-queue/tokens.css",
+        "sourceExcerpts": [
+          {
+            "path": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/shadcn-queue/source/page.tsx",
+            "excerpt": "/**\n * shadcn work queue — authored reference for the `queue` screen.\n *\n * shadcn ships no queue block, so this is authored from its primitives (Table,\n * Input, Button, Select, Checkbox, DropdownMenu, Badge) plus TanStack Table for\n * the grid state. It exists because the only shadcn row that carried the queue\n * jobs was dashboard-01, whose reference roles demand a chart — and a queue is\n * a grid with a job, not a dashboard missing its chart.\n *\n * Structure, and why each part is here:\n *   masthead    what this queue is and WHEN it was generated. A queue whose\n *               freshness is unstated reads as live when it may be a snapshot.\n *   toolbar     search, column visibility, and the one filled primary — open\n *               the top row where the work happens. The page exists to move\n *               the reader to the record, so the primary is a departure, not\n *               a refresh.\n *   batch bar   mounted at rest with its resting count and a disabled\n *               action; enables with selection. A status region created on\n *               first selection is announced unreliably.\n *   the grid    the focal object. Sortable columns sort the VALUE (amounts\n *               and dates carry sort keys, never their rendered labels), rows\n *               deep-link to their record, and the trailing cell is the row\n *               action. Empty and filtered-empty\n\n/* selected implementation */\nexport default function WorkQueue() {\n  const [sorting, setSorting] = useState<SortingState>([{ id: \"amount\", desc: true }]);\n  const [globalFilter, setGlobalFilter] = useState(\"\");\n  const [rowSelection, setRowSelection] = useState({});\n  const [columnVisibility, setColumnVisibility] = useState({});\n\n  const columns = useMemo<ColumnDef<QueueRow>[]>(\n    () => [\n      {\n        id: \"select\",\n        header: ({ table }) => (\n          <Checkbox\n            aria-label=\"Select all rows on this page\"\n            checked={table.getIsAllPageRowsSelected()}\n            onCheckedChange={(v) => table.toggleAllPageRowsSelected(Boolean(v))}\n          />\n        ),\n        cell: ({ row }) => (\n          <Checkbox\n            aria-label={`Select ${row.original.title}`}\n            checked={row.getIsSelected()}\n            onCheckedChange={(v) => row.toggleSelected(Boolean(v))}\n          />\n        ),\n        enableSorting: false,\n      },\n      { accessorKey: \"kind\", header: \"Problem\", cell: ({ getValue }) => <Badge variant=\"outline\">{String(getValue())}</Badge> },\n      {\n        accessorKey: \"title\",\n        header: ({ column }) => (\n          <Button variant=\"ghost\" size=\"sm\" onClick={() => column.toggleSorting(column.getIsSorted() === \"asc\")}>\n            Item <ArrowUpDown aria-hidden />\n          </Button>\n        ),\n      },\n      { accessorKey: \"owner\", header: \"Owner\" },\n      {\n        // Sorts the number; the label is formatting applied at print time only.\n        accessorKey: \"amount\",\n        header: ({ column }) => (\n          <Button variant=\"ghost\" size=\"sm\" onClick={() => column.toggleSorting(column.getIsSorted() === \"asc\")}>\n            Value <ArrowUpDown aria-hidden />\n          </Button>\n        ),\n        cell: ({ getValue }) => <span className=\"tabular-nums\">{money(Number(getValue()))}</span>,\n      },\n      { accessorKey: \"due\", header: \"Due\" },\n      {\n        id: \"open\",\n        header: \"\",\n        cell: ({ row }) => (\n          <Button variant=\"ghost\" size=\"sm\" asChild>\n            <a href={row.original.url}>\n              Open <ExternalLink aria-hidden />\n            </a>\n          </Button>\n        ),\n        enableSorting: false,\n      },\n    ],\n    [],\n  );\n\n  const table = useReactTable({\n    data: ROWS,\n    columns,\n    state: { sorting, globalFilter, rowSelection, columnVisibility },\n    onSortingChange: setSorting,\n    onGlobalFilterChange: setGlobalFilter,\n    onRowSelectionChange: setRowSelection,\n    onColumnVisibilityChange: setColumnVisibility,\n    getCoreRowModel: getCoreRowModel(),\n    getSortedRowModel: getSortedRowModel(),\n    getFilteredRowModel: getFilteredRowModel(),\n    getPaginationRowModel: getPaginationRowModel(),\n    initialState: { pagination: { pageSize: 10 } },\n  });\n\n  const selected = table.getSelectedRowModel().rows;\n  const top = table.getRowModel().rows[0]?.original;\n  const isFiltered = globalFilter.trim().length > 0;\n\n  return (\n    <main className=\"mx-auto flex max-w-5"
+          },
+          {
+            "path": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/shadcn-queue/source/reference.html",
+            "excerpt": "<!doctype html>\n<html lang=\"en\" data-cite=\"shadcn-queue\" data-shine-voice=\"kit-faithful\" data-dna-family=\"shadcn-zinc\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n  <title>shadcn work queue reference</title>\n  <link rel=\"stylesheet\" href=\"../../../tokens/voices/shadcn-zinc.css\">\n  <style>\n    *{box-sizing:border-box}:root{color-scheme:light}body{margin:0;background:#fafafa;color:#18181b;font:14px/1.5 var(--shine-font-sans,ui-sans-serif,system-ui)}.wrap{width:min(1184px,calc(100% - 48px));margin:auto}\n    .shell{display:flex;align-items:center;gap:24px;padding:12px 0;border-bottom:1px solid #e4e4e7;background:#fff}\n    .shell .wrap{display:flex;align-items:center;gap:24px}\n    .mark{font-weight:700;letter-spacing:-.02em}\n    .shellnav{display:flex;gap:4px;margin:0;padding:0;list-style:none}\n    .shellnav a{display:inline-flex;min-height:36px;align-items:center;padding:0 12px;border-radius:8px;color:#3f3f46;text-decoration:none;font-weight:550}\n    .shellnav a[aria-current=\"page\"]{background:#f4f4f5;color:#18181b}\n    header.page .wrap{padding:28px 0 0}\n    h1{margin:0;font-size:24px;line-height:1.2;letter-spacing:-.025em}\n    .fresh{margin:8px 0 0;color:#71717a}\n    .toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:20px 0 12px}\n    .search{position:relative}\n    .search svg{position:absolute;left:12px;top:12px;width:16px;height:16px;color:#a1a1aa}\n    .search input{min-height:36px;width:280px;padding:0 12px 0 36px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;font:inherit}\n    .button{display:inline-flex;align-items:center;gap:8px;justify-content:center;min-height:36px;padding:0 16px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;color:#18181b;font:600 14px/1 var(--shine-font-sans,ui-sans-serif);cursor:pointer}\n    .button.ghost{border-color:transparent;background:transparent;color:#3f3f46}\n    .button.primary{margin-left:auto;background:#18181b;border-color:#18181b;color:#fafafa}\n    .button svg{width:16px;height:16px}\n    .button[disabled]{opacity:.5;cursor:not-allowed}\n    .batch{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;padding:8px 12px;border:1px solid #e4e4e7;border-radius:8px;background:#f4f4f5}\n    .batch strong{font-size:13px}\n    .gridbox{overflow-x:auto;border:1px solid #e4e4e7;border-radius:12px;background:#fff}\n    table{border-collapse:collapse;width:100%;min-width:760px}\n    thead th{position:sticky;top:0;background:#fff;border-bottom:1px solid #e4e4e7;padding:12px;text-align:left;font-size:12px;color:#71717a;font-weight:600}\n    thead th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}\n    thead button{display:inline-flex;align-items:center;gap:8px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:pointer}\n    thead button svg{width:14px;height:14px}\n    tbody td{border-bottom:1px solid #f4f4f5;padding:12px;vertical-align:middle}\n    tbody tr:last-"
+          },
+          {
+            "path": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/shadcn-queue/source/shadcn-queue.md",
+            "excerpt": "# shadcn work queue\n\nRegions, in order. Host: application shell. Density: dense. Paint: `tokens/voices/shadcn-zinc.css`. Authored source: `corpus/blueprints/shadcn-queue/page.tsx` — the minimal composed statement of the grid contract; the living implementations (the shared shadcn/TanStack DataGrid in cro-suite and Nucleus) carry the full one.\n\nA collection someone arrives at wanting to **find and act on a row**: a triage queue, a hygiene worklist, an inbox of notices. shadcn publishes no queue block — its 97 blocks are one dashboard, sixteen sidebars, ten auth pages and seventy charts — and `shadcn-dashboard-01` is the wrong cite for this screen because its reference roles demand a chart. A queue is a grid with a job, not a dashboard missing its chart; forcing the chart cite made consumers split their measure and usability declarations across two references (cro-suite gov did exactly this, with a `cite_note` apologising for it). This row is the one declaration.\n\n**This is the inverse of `shadcn-weekly-board`, and the same four conditions decide between them.** A board is read in full, in a fixed order, on a schedule, by people accountable out loud. A queue is searched, sorted, paged and acted on. If all four board conditions hold, cite the board; otherwise this row — and never both for the same rows.\n\n1. **Masthead** — what this queue is and when it was generated. A queue whose freshness is not stated reads as live when it may be a snapshot; the dateline is not chrome.\n2. **Toolbar** — search, column visibility, and the one primary action. The primary is filled and singular: on a deep-linked queue it is *open the top row where the work happens* (the worst deal, the highest-ranked notice), because the page exists to move the reader to the record. The batch bar is mounted at rest with its resting count (“0 selected”) and its action disabled — a status region created on first selection is announced unreliably; one that rests visible is not furniture, it is the resting state.\n3. **The grid** — the focal object, not a strip under a hero. Sticky header; every sortable column sorts the value, never the phrase (amounts and dates carry `data-sort`); rows deep-link to their record (`data-url`) and the row action opens it. Row selection only when a batch action exists to consume it.\n4. **Pagination** — page size choices and a pager that states position. A queue that fits one page still renders the pager at rest; it is how the reader knows the queue is complete.\n5. **Gated actions** — an action whose delivery is not yet authorized renders disabled *with the reason stated beside it*, never omitted. A control for an action no endpoint performs is a lie; a visibly gated one is a plan.\n\n## Interaction contract (what queue means)\n\nThe demands `untitled-table` carries, restated here so this cite carries them natively: **search, sort, filters, column visibility, pagination, row selection, row actions** — and the five states a grid must be able to show: **loading, e"
+          }
+        ]
+      },
+      "referenceHealth": {
+        "status": "passed",
+        "reasons": [],
+        "source": "corpus/blueprints/shadcn-queue/reference.html",
+        "capturedAt": "2026-09-09T18:53:57.282Z",
+        "shotSha256": "0bd112c08a049d2c4741f917b7b801d294569cb67e42e4d8014a6a9d19c12d2e"
+      }
+    }
+  ],
+  "componentReferences": [
+    {
+      "id": "untitled-table",
+      "title": "Untitled UI table examples (populated, empty, error, offline)",
+      "kit": "untitled-ui-react",
+      "family": "untitled",
+      "screen": "queue",
+      "scope": "component",
+      "reference": {
+        "required": [
+          "table"
+        ]
+      },
+      "score": 234,
+      "distance": 11,
+      "matches": [
+        "lane",
+        "informationShape",
+        "interaction",
+        "installedKit"
+      ],
+      "paths": {
+        "shot": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/untitled-table/shot.png",
+        "tokens": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/untitled-table/tokens.css",
+        "sourceExcerpts": [
+          {
+            "path": "/Users/justinfowler/Projects/shine-finished-blocks/corpus/packs/untitled-table/source/table.demo.tsx",
+            "excerpt": "\"use client\";\n\nimport { useMemo, useState } from \"react\";\nimport { FileIcon } from \"@untitledui/file-icons\";\nimport {\n    AlertCircle,\n    Check,\n    ChevronDown,\n    DownloadCloud02,\n    Edit01,\n    FilterLines,\n    Link03,\n    Plus,\n    RefreshCw05,\n    ReverseLeft,\n    SearchLg,\n    Trash01,\n    UploadCloud02,\n    UsersPlus,\n    X,\n} from \"@untitledui/icons\";\nimport type { Key, SortDescriptor } from \"react-aria-components\";\nimport { EmptyState } from \"@/components/application/empty-state/empty-state\";\nimport { PaginationCardMinimal, PaginationPageMinimalCenter } from \"@/components/application/pagination/pagination\";\nimport customers from \"@/components/application/table/customers.json\";\nimport invoices from \"@/components/application/table/invoices.json\";\nimport { Table, TableCard } from \"@/components/application/table/table\";\nimport teamMembers from \"@/components/application/table/team-members.json\";\nimport uploadedFiles from \"@/components/application/table/uploaded-files.json\";\nimport { Avatar } from \"@/components/base/avatar/avatar\";\nimport type { BadgeTypes } from \"@/components/base/badges/badge-types\";\nimport { Badge, type BadgeColor, BadgeWithDot, BadgeWithIcon } from \"@/components/base/badges/badges\";\nimport { Button } from \"@/components/base/buttons/button\";\nimport { ButtonUtility } from \"@/components/base/buttons/button-utility\";\nimport { DropdownIconSimple } from \"@/\n\n/* selected implementation */\nexport const Table01DividerLine = () => {\n    const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({\n        column: \"status\",\n        direction: \"ascending\",\n    });\n\n    const sortedItems = useMemo(() => {\n        return teamMembers.items.sort((a, b) => {\n            const first = a[sortDescriptor.column as keyof typeof a];\n            const second = b[sortDescriptor.column as keyof typeof b];\n\n            // Compare numbers or booleans\n            if ((typeof first === \"number\" && typeof second === \"number\") || (typeof first === \"boolean\" && typeof second === \"boolean\")) {\n                return sortDescriptor.direction === \"descending\" ? second - first : first - second;\n            }\n\n            // Compare strings\n            if (typeof first === \"string\" && typeof second === \"string\") {\n                let cmp = first.localeCompare(second);\n                if (sortDescriptor.direction === \"descending\") {\n                    cmp *= -1;\n                }\n                return cmp;\n            }\n\n            return 0;\n        });\n    }, [sortDescriptor]);\n\n    return (\n        <TableCard.Root>\n            <TableCard.Header\n                title=\"Team members\"\n                badge=\"100 users\"\n                contentTrailing={\n                    <div className=\"absolute top-5 right-4 md:right-6\">\n                        <DropdownIconSimple />\n                    </div>\n                }\n            />\n            <Table aria-label=\"Team members\" selectionMode=\"multiple\" sortDescriptor={sortDescriptor} onSortChange={setSortDescriptor}>\n                <Table.Header>\n                    <Table.Head id=\"name\" label=\"Name\" isRowHeader allowsSorting className=\"w-full max-w-1/4\" />\n                    <Table.Head id=\"status\" label=\"Status\" allowsSorting />\n                    <Table.Head id=\"role\" label=\"Role\" allowsSorting tooltip=\"This is a tooltip\" />\n                    <Table.Head id=\"email\" label=\"Email address\" allowsSorting className=\"md:hidden xl:table-cell\" />\n                    <Table.Head id=\"teams\" label=\"Teams\" />\n                    <Table.Head id=\"actions\" />\n                </Table.Header>\n\n                <Table.Body items={sortedItems}>\n                    {(item) => (\n                        <Table.Row id={item.username}>\n                            <Table.Cell>\n                                <div className=\"flex items-center gap-3\">\n                                    <Avatar src={item.avatarUrl} alt={item.name} size=\"md\" />\n                                    <div className=\"whitespace-nowrap\">\n                                        <p className=\"text-sm font-medium text-primary\">{item.name}</p>\n                                        <p className=\"text-sm text-tertiary\">{item.username}</p>\n                                    </div>\n                                </div>\n                            </Table.Cell>\n                            <Table.Cell>\n                        "
+          }
+        ]
+      },
+      "referenceHealth": {
+        "status": "not_tested",
+        "reasons": [
+          "legacy capture has no HTTP/content evidence; recapture it"
+        ]
+      }
+    }
+  ],
+  "examples": [
+    {
+      "id": "untitledui-dot-circle-with-label",
+      "title": "Dot Circle With Label",
+      "export": "DotCircleWithLabelDemo",
+      "screen": "component",
+      "jobs": [
+        "application",
+        "loading",
+        "indicator",
+        "dot",
+        "circle",
+        "with",
+        "label"
+      ],
+      "sourceFile": "untitled-ui-react/components/application/loading-indicator/loading-indicator.demo.tsx",
+      "storyFile": null,
+      "renderable": false,
+      "design": {},
+      "sourceExcerpt": "import { LoadingIndicator } from \"@/components/application/loading-indicator/loading-indicator\";\n\nexport const DefaultDemo = () => {\n    return (\n        <div className=\"flex flex-col items-start gap-8 md:flex-row md:gap-16\">\n            <LoadingIndicator type=\"line-simple\" size=\"md\" label=\"Loading...\" />\n            <LoadingIndicator type=\"line-spinner\" size=\"md\" label=\"Loading...\" />\n            <LoadingIndicator type=\"dot-circle\" size=\"md\" label=\"Loading...\" />\n        </div>\n    );\n};\n\nexport const LineSimpleDemo = () => {\n    return <LoadingIndicator type=\"line-simple\" size=\"md\" />;\n};\n\nexport const LineSimpleWithLabelDemo = () => {\n    return <LoadingIndicator type=\"line-simple\" size=\"md\" label=\"Loading...\" />;\n};\n\nexport const LineSpinnerDemo = () => {\n    return <LoadingIndicator type=\"line-spinner\" size=\"md\" />;\n};\n\nexport const LineSpinnerWithLabelDemo = () => {\n    return <LoadingIndicator type=\"line-spinner\" size=\"md\" label=\"Loading...\" />;\n};\n\nexport const DotCircleDemo = () => {\n    return <LoadingIndicator type=\"dot-circle\" size=\"md\" />;\n};\n\nexport const DotCircleWithLabelDemo = () => {\n    return <LoadingIndicator type=\"dot-circle\" size=\"md\" label=\"Loading...\" />;\n}\n\n/* DotCircleWithLabelDemo */\nexport const DotCircleWithLabelDemo = () => {\n    return <LoadingIndicator type=\"dot-circle\" size=\"md\" label=\"Loading...\" />;\n};",
+      "license": "MIT",
+      "score": 20
+    },
+    {
+      "id": "untitledui-line-simple-with-label",
+      "title": "Line Simple With Label",
+      "export": "LineSimpleWithLabelDemo",
+      "screen": "component",
+      "jobs": [
+        "application",
+        "loading",
+        "indicator",
+        "line",
+        "simple",
+        "with",
+        "label"
+      ],
+      "sourceFile": "untitled-ui-react/components/application/loading-indicator/loading-indicator.demo.tsx",
+      "storyFile": null,
+      "renderable": false,
+      "design": {},
+      "sourceExcerpt": "import { LoadingIndicator } from \"@/components/application/loading-indicator/loading-indicator\";\n\nexport const DefaultDemo = () => {\n    return (\n        <div className=\"flex flex-col items-start gap-8 md:flex-row md:gap-16\">\n            <LoadingIndicator type=\"line-simple\" size=\"md\" label=\"Loading...\" />\n            <LoadingIndicator type=\"line-spinner\" size=\"md\" label=\"Loading...\" />\n            <LoadingIndicator type=\"dot-circle\" size=\"md\" label=\"Loading...\" />\n        </div>\n    );\n};\n\nexport const LineSimpleDemo = () => {\n    return <LoadingIndicator type=\"line-simple\" size=\"md\" />;\n};\n\nexport const LineSimpleWithLabelDemo = () => {\n    return <LoadingIndicator type=\"line-simple\" size=\"md\" label=\"Loading...\" />;\n};\n\nexport const LineSpinnerDemo = () => {\n    return <LoadingIndicator type=\"line-spinner\" size=\"md\" />;\n};\n\nexport const LineSpinnerWithLabelDemo = () => {\n    return <LoadingIndicator type=\"line-spinner\" size=\"md\" label=\"Loading...\" />;\n};\n\nexport const DotCircleDemo = () => {\n    return <LoadingIndicator type=\"dot-circle\" size=\"md\" />;\n};\n\nexport const DotCircleWithLabelDemo = () => {\n    return <LoadingIndicator type=\"dot-circle\" size=\"md\" label=\"Loading...\" />;\n}\n\n/* LineSimpleWithLabelDemo */\nexport const LineSimpleWithLabelDemo = () => {\n    return <LoadingIndicator type=\"line-simple\" size=\"md\" label=\"Loading...\" />;\n};",
+      "license": "MIT",
+      "score": 20
+    },
+    {
+      "id": "untitledui-line-spinner-with-label",
+      "title": "Line Spinner With Label",
+      "export": "LineSpinnerWithLabelDemo",
+      "screen": "component",
+      "jobs": [
+        "application",
+        "loading",
+        "indicator",
+        "line",
+        "spinner",
+        "with",
+        "label"
+      ],
+      "sourceFile": "untitled-ui-react/components/application/loading-indicator/loading-indicator.demo.tsx",
+      "storyFile": null,
+      "renderable": false,
+      "design": {},
+      "sourceExcerpt": "import { LoadingIndicator } from \"@/components/application/loading-indicator/loading-indicator\";\n\nexport const DefaultDemo = () => {\n    return (\n        <div className=\"flex flex-col items-start gap-8 md:flex-row md:gap-16\">\n            <LoadingIndicator type=\"line-simple\" size=\"md\" label=\"Loading...\" />\n            <LoadingIndicator type=\"line-spinner\" size=\"md\" label=\"Loading...\" />\n            <LoadingIndicator type=\"dot-circle\" size=\"md\" label=\"Loading...\" />\n        </div>\n    );\n};\n\nexport const LineSimpleDemo = () => {\n    return <LoadingIndicator type=\"line-simple\" size=\"md\" />;\n};\n\nexport const LineSimpleWithLabelDemo = () => {\n    return <LoadingIndicator type=\"line-simple\" size=\"md\" label=\"Loading...\" />;\n};\n\nexport const LineSpinnerDemo = () => {\n    return <LoadingIndicator type=\"line-spinner\" size=\"md\" />;\n};\n\nexport const LineSpinnerWithLabelDemo = () => {\n    return <LoadingIndicator type=\"line-spinner\" size=\"md\" label=\"Loading...\" />;\n};\n\nexport const DotCircleDemo = () => {\n    return <LoadingIndicator type=\"dot-circle\" size=\"md\" />;\n};\n\nexport const DotCircleWithLabelDemo = () => {\n    return <LoadingIndicator type=\"dot-circle\" size=\"md\" label=\"Loading...\" />;\n}\n\n/* LineSpinnerWithLabelDemo */\nexport const LineSpinnerWithLabelDemo = () => {\n    return <LoadingIndicator type=\"line-spinner\" size=\"md\" label=\"Loading...\" />;\n};",
+      "license": "MIT",
+      "score": 20
+    }
+  ],
+  "starter": null,
+  "diagnosis": {
+    "required": true,
+    "reference": "/Users/justinfowler/Projects/shine-finished-blocks/skill/references/diagnose.md",
+    "command": "node /Users/justinfowler/Projects/shine-finished-blocks/core/diagnosis.mjs init --job \"Reusable record table, editor and tabbed workspace blocks with loading, recovery and saved results\" --category datagrid --out shine-diagnosis.json"
+  },
+  "productPrecedent": {
+    "required": true,
+    "provided": true,
+    "name": "Nucleus operational workspace",
+    "reference": "Nucleus shared DataGrid and RecordDialog",
+    "instruction": "Reuse or extract the sibling conventions; document justified differences in shine-diagnosis.json."
+  },
+  "usability": {
+    "required": true,
+    "reference": "/Users/justinfowler/Projects/shine-finished-blocks/skill/references/usability.md",
+    "contract": "shine-usability.json",
+    "commands": [
+      "node /Users/justinfowler/Projects/shine-finished-blocks/verify/usability.mjs <artifact> --contract shine-usability.json --cite shadcn-queue"
+    ]
+  },
+  "tableQuality": {
+    "presentation": {
+      "pattern": "summary-and-accordion",
+      "threshold": "more than 10 total dataset rows before table search and pagination",
+      "defaultExpanded": false,
+      "reference": "/Users/justinfowler/Projects/shine-finished-blocks/skill/references/table-summary.md",
+      "instruction": "Keep meaningful KPIs or an infographic visible above the adjacent collapsed shared DataGrid; preserve state and provide real drill-down."
+    },
+    "required": "every record table, including tables nested inside dashboards",
+    "contract": "shine-tables.json",
+    "reference": "/Users/justinfowler/Projects/shine-finished-blocks/skill/references/table-quality.md",
+    "example": "/Users/justinfowler/Projects/shine-finished-blocks/verify/fixtures/table-quality/shine-tables.json",
+    "enforcedBy": [
+      "measure",
+      "compare"
+    ]
+  },
+  "regionGraph": [
+    "context header",
+    "decision toolbar",
+    "data grid",
+    "pagination",
+    "row detail"
+  ],
+  "controlInventory": [
+    "search",
+    "sort",
+    "filters",
+    "column visibility",
+    "pagination",
+    "row selection",
+    "row actions"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "filtered-empty",
+    "error",
+    "populated"
+  ],
+  "integration": {
+    "key": "shadcn-tanstack",
+    "layers": {
+      "styling": {
+        "name": "tailwind",
+        "declaredVersion": "4.3.3",
+        "css": "src/app/globals.css",
+        "config": null,
+        "prefix": "",
+        "responsibility": "layout, spacing, typography, responsive and visual states; reuse consumer tokens",
+        "installedVersion": "4.3.3"
+      },
+      "components": {
+        "name": "shadcn",
+        "aliases": {
+          "components": "@/components",
+          "utils": "@/lib/utils",
+          "ui": "@/components/ui",
+          "lib": "@/lib",
+          "hooks": "@/hooks"
+        },
+        "responsibility": "reuse installed controls and their keyboard, focus and accessibility behavior; preserve shared product components"
+      },
+      "data": {
+        "name": "tanstack",
+        "declaredVersion": "^8.21.3",
+        "responsibility": "table sorting, filtering, selection and pagination only when the workflow needs them",
+        "installedVersion": "8.21.3"
+      }
+    },
+    "validated": true,
+    "validationError": null,
+    "reference": "/Users/justinfowler/Projects/shine-finished-blocks/skill/references/component-layers.md",
+    "contract": "shadcn Table chrome over TanStack Table state models",
+    "packages": [
+      "@tanstack/react-table",
+      "tailwindcss"
+    ],
+    "imports": [
+      "import { useReactTable, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getPaginationRowModel } from '@tanstack/react-table';",
+      "import type { RowData, TableOptions } from '@tanstack/react-table';"
+    ]
+  },
+  "proof": {
+    "artifactAttribute": "data-cite=\"shadcn-queue\"",
+    "commands": [
+      "node /Users/justinfowler/Projects/shine-finished-blocks/verify/measure.mjs <artifact> --cite shadcn-queue --shot /tmp/shine-after.png",
+      "node /Users/justinfowler/Projects/shine-finished-blocks/verify/usability.mjs <artifact> --contract shine-usability.json --cite shadcn-queue",
+      "node /Users/justinfowler/Projects/shine-finished-blocks/verify/compare-product.mjs <artifact> \"Nucleus shared DataGrid and RecordDialog\" --name \"Nucleus operational workspace\"",
+      "node /Users/justinfowler/Projects/shine-finished-blocks/verify/compare.mjs <artifact> --cite shadcn-queue --lane internal --mode existing --diagnosis shine-diagnosis.json"
+    ]
+  },
+  "layout": {
+    "required": true,
+    "contract": "shine-layout.json",
+    "command": "node /Users/justinfowler/Projects/shine-finished-blocks/verify/layout.mjs <artifact> --contract shine-layout.json",
+    "viewports": [
+      390,
+      768,
+      1280,
+      1440,
+      1920
+    ],
+    "states": [
+      "baseline",
+      "long-content",
+      "missing-media",
+      "large-text"
+    ]
+  },
+  "completion": {
+    "command": "node /Users/justinfowler/Projects/shine-finished-blocks/verify/prove.mjs <artifact> --cite shadcn-queue --layout shine-layout.json --usability shine-usability.json --diagnosis shine-diagnosis.json",
+    "requires": [
+      "accessibility",
+      "styling",
+      "layout",
+      "interactions",
+      "referenceValidity",
+      "visualComparison",
+      "buildBinding",
+      "defectAssertions"
+    ],
+    "instruction": "Individual checks are partial evidence. Only the aggregate verifier can issue completion proof."
+  },
+  "gaps": [
+    "diversity: catalog has 2 materially distinct source-usable candidates for this brief"
+  ]
+}

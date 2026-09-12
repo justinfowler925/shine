@@ -12,6 +12,7 @@ import {proveUsability} from './usability.mjs';
 import {compareArtifact} from './compare.mjs';
 import {load} from './deps.mjs';
 import {bindBrowser,writeCompletionReceipt} from './completion-receipt.mjs';
+import {verifyReuse} from '../integrations/blocks.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'),exec=promisify(execFile);
 export function checkDefectAssertions(diagnosis,layout,usability){
  const errors=[],out=[];
@@ -25,9 +26,10 @@ export function checkDefectAssertions(diagnosis,layout,usability){
  }
  return {status:errors.length?'failed':'passed',assertions:out,failures:errors};
 }
-export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPath,project,commit,buildId,receiptPath,storageState}){
+export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPath,project,commit,buildId,receiptPath,storageState,reusePath}){
  const temp=mkdtempSync(join(tmpdir(),'shine-completion-')),checks={},evidence={};let observed;
  try{
+  if(reusePath){try{const result=verifyReuse(project,JSON.parse(readFileSync(reusePath,'utf8')));checks.componentReuse=result;evidence.reuse=result;}catch(error){checks.componentReuse={status:'failed',reason:error.message};}}
   const measurement=join(temp,'measure.json');
   try{await exec(process.execPath,[join(ROOT,'verify/measure.mjs'),target,'--cite',citeId,'--json',measurement,...(storageState?['--storage-state',storageState]:[])],{maxBuffer:5_000_000,timeout:120000});}catch(error){evidence.measureError=String(error.stderr||error.message).slice(-3000);}
   const measure=existsSync(measurement)?JSON.parse(readFileSync(measurement,'utf8')):null;
@@ -58,7 +60,7 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
 }
 if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),opt=n=>args.includes(n)?args[args.indexOf(n)+1]:undefined;
- const report=await prove({target:args[0],citeId:opt('--cite'),layoutPath:opt('--layout'),usabilityPath:opt('--usability'),diagnosisPath:opt('--diagnosis'),project:opt('--project'),commit:opt('--commit'),buildId:opt('--build-id'),receiptPath:opt('--receipt'),storageState:opt('--storage-state')});
+ const report=await prove({target:args[0],citeId:opt('--cite'),layoutPath:opt('--layout'),usabilityPath:opt('--usability'),diagnosisPath:opt('--diagnosis'),project:opt('--project'),commit:opt('--commit'),buildId:opt('--build-id'),receiptPath:opt('--receipt'),storageState:opt('--storage-state'),reusePath:opt('--reuse')});
  if(opt('--json'))writeFileSync(opt('--json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));process.exit(report.status==='passed'?0:1);
 }

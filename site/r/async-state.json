@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "async-state",
+  "type": "registry:block",
+  "title": "Async state",
+  "description": "Loading, empty, filtered-empty and error with real recovery actions.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "blocks/async-state.tsx",
+      "type": "registry:component",
+      "target": "components/shine/async-state.tsx",
+      "content": "\"use client\";\nimport type { ReactNode } from \"react\";\nimport { Button } from \"@/components/ui/button\";\n\nexport type AsyncStateProps =\n  | { state: \"loading\"; title?: string }\n  | { state: \"error\"; title?: string; message: string; onRetry: () => void }\n  | { state: \"empty\"; title?: string; message: string; action?: ReactNode }\n  | { state: \"filtered-empty\"; title?: string; onClear: () => void };\n\n/** One state vocabulary; callers supply domain copy and real recovery callbacks. */\nexport function AsyncState(props: AsyncStateProps) {\n  return <div data-product-pattern=\"async-state\" role={props.state === \"error\" ? \"alert\" : \"status\"}\n    aria-busy={props.state === \"loading\"} className=\"flex flex-col items-start gap-3 rounded-lg border p-6 text-sm\">\n    <p className=\"font-medium\">{props.title || ({ loading: \"Loading…\", error: \"Could not load records\", empty: \"No records yet\", \"filtered-empty\": \"No matching records\" })[props.state]}</p>\n    {\"message\" in props && <p className=\"text-muted-foreground\">{props.message}</p>}\n    {props.state === \"error\" && <Button className=\"min-h-11\" type=\"button\" variant=\"outline\" onClick={props.onRetry}>Retry</Button>}\n    {props.state === \"filtered-empty\" && <Button className=\"min-h-11\" type=\"button\" variant=\"outline\" onClick={props.onClear}>Clear filters</Button>}\n    {props.state === \"empty\" && props.action}\n  </div>;\n}\n"
+    }
+  ]
+}

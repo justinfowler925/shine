@@ -8,7 +8,8 @@ import { load } from "./deps.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const fail=(message)=>{throw new Error(`usability: ${message}`)};
-const requiredActions=new Set(["click","fill","press"]);
+const requiredActions=new Set(["click","fill","press","select"]);
+const actions=new Set([...requiredActions,"visible","hidden","text","value","checked","count","enabled","disabled"]);
 
 export function readUsabilityContract(path,{citeId=""}={}) {
   if(!path||!existsSync(path)) fail("missing --contract <shine-usability.json>");
@@ -20,10 +21,16 @@ export function readUsabilityContract(path,{citeId=""}={}) {
   if(!Array.isArray(value.objects)||value.objects.length<2) errors.push("at least two user-facing objects are required");
   if(!Array.isArray(value.flows)||!value.flows.length) errors.push("at least one user workflow is required");
   for(const object of value.objects||[]) if(!object.id||!object.selector||!object.referenceRole||!object.purpose) errors.push("every object needs id, selector, referenceRole, and purpose");
+  for(const object of value.objects||[]) if(object.appearsIn&&!value.flows?.some(flow=>flow.id===object.appearsIn&&flow.steps?.some(step=>step.selector===object.selector&&step.action!=="hidden"))) errors.push(`deferred object ${object.id} must be exercised in its appearsIn flow`);
+  if(new Set((value.objects||[]).map(o=>o.id)).size!==value.objects?.length)errors.push("object ids must be unique");
+  if(new Set((value.flows||[]).map(f=>f.id)).size!==value.flows?.length)errors.push("flow ids must be unique");
   for(const flow of value.flows||[]) {
     if(!flow.id||!flow.userJob||!Array.isArray(flow.steps)||flow.steps.length<3) {errors.push("every flow needs id, userJob, and at least three steps"); continue;}
     if(!flow.steps.some(step=>requiredActions.has(step.action))) errors.push(`flow ${flow.id} has no user action`);
     for(const step of flow.steps) if(!step.action||!step.selector) errors.push(`flow ${flow.id} has a step without action or selector`);
+    for(const step of flow.steps) if(!actions.has(step.action))errors.push(`flow ${flow.id} has unknown action ${step.action}`);
+    if(!flow.steps.some(step=>["text","value","checked","count","visible","hidden","enabled","disabled"].includes(step.action)))errors.push(`flow ${flow.id} needs an observable outcome`);
+    if(flow.path&&(!flow.path.startsWith("/")||flow.path.startsWith("//")))errors.push(`flow ${flow.id} path must be same-origin and absolute`);
   }
   if(errors.length) fail(errors.join("; "));
   const templates=JSON.parse(readFileSync(resolve(ROOT,"corpus/templates.json"),"utf8")).templates||[];
@@ -38,13 +45,22 @@ export function readUsabilityContract(path,{citeId=""}={}) {
 
 async function runStep(page,step) {
   const locator=page.locator(step.selector).first();
-  if(step.action==="click") return locator.click();
+  if(step.action==="click"||step.action==="press") {
+    let handled=false,dialogError="",handling;
+    const handler=dialog=>{handled=true;handling=(async()=>{if(step.dialog.message&&!dialog.message().includes(step.dialog.message)){await dialog.dismiss();dialogError="unexpected dialog message";return;} await (step.dialog.accept?dialog.accept():dialog.dismiss());})();};
+    if(step.dialog)page.once("dialog",handler);
+    try {await (step.action==="click"?locator.click():locator.press(step.value||"Enter"));await handling;if(dialogError)fail(dialogError);if(step.dialog&&!handled)fail("expected dialog did not open");}
+    finally {page.off("dialog",handler);}
+    return;
+  }
   if(step.action==="fill") return locator.fill(step.value??"");
-  if(step.action==="press") return locator.press(step.value||"Enter");
+  if(step.action==="select")return locator.selectOption(step.value);
   if(step.action==="visible") return locator.waitFor({state:"visible"});
   if(step.action==="hidden") return locator.waitFor({state:"hidden"});
   if(step.action==="text") { const expected=step.value||""; await locator.filter({hasText:expected}).waitFor({state:"visible"}); const actual=await locator.textContent(); if(!String(actual||"").includes(expected)) fail(`${step.selector} text did not contain ${JSON.stringify(expected)}`); return; }
   if(step.action==="value") { const actual=await locator.inputValue(); if(actual!==(step.value??"")) fail(`${step.selector} value was ${JSON.stringify(actual)}, expected ${JSON.stringify(step.value??"")}`); return; }
+  if(step.action==="count"){if(await page.locator(step.selector).count()!==step.value)fail(`${step.selector} count differs from ${step.value}`);return;}
+  if(["checked","enabled","disabled"].includes(step.action)){const actual=step.action==="checked"?await locator.isChecked():step.action==="enabled"?await locator.isEnabled():await locator.isDisabled();if(actual!==(step.value??true))fail(`${step.selector} ${step.action} differs`);return;}
   fail(`unknown action ${step.action}`);
 }
 
@@ -53,9 +69,14 @@ export async function proveUsability({target,contractPath,citeId="",storageState
   const browser=await chromium.launch(); const page=await browser.newPage({viewport:{width:1280,height:800},...(storageState?{storageState}:{})});
   try {
     await page.goto(/^https?:/.test(target)?target:pathToFileURL(resolve(target)).href,{waitUntil:"networkidle"});
-    for(const object of contract.objects) await page.locator(object.selector).first().waitFor({state:"visible"});
-    for(const flow of contract.flows) for(const [index,step] of flow.steps.entries()) {
-      try { await runStep(page,step); } catch(error) { fail(`${flow.id} step ${index+1} (${step.action} ${step.selector}): ${error.message}`); }
+    page.setDefaultTimeout(contract.timeoutMs||10000);
+    for(const object of contract.objects.filter(o=>!o.appearsIn)) await page.locator(object.selector).first().waitFor({state:"visible"});
+    for(const flow of contract.flows) {
+      if(flow.path){if(!/^https?:/.test(target))fail("flow paths require an HTTP target");const url=new URL(flow.path,target);if(url.origin!==new URL(target).origin)fail("flow path changed origin");await page.goto(url.href,{waitUntil:"networkidle"});}
+      else if(flow.reset)await page.reload({waitUntil:"networkidle"});
+      for(const [index,step] of flow.steps.entries()) {
+        try { await runStep(page,step); } catch(error) { fail(`${flow.id} step ${index+1} (${step.action} ${step.selector}): ${error.message}`); }
+      }
     }
     return {status:0,cite:contract.cite,objects:contract.objects.length,flows:contract.flows.map(flow=>({id:flow.id,userJob:flow.userJob,steps:flow.steps.length}))};
   } finally { await browser.close(); }

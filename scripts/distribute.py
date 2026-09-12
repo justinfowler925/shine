@@ -140,6 +140,17 @@ def verify(receipt):
         if not all(n in text for n in needles): raise RuntimeError('expected release/page content absent')
         return {'url':url,'sha256':sha(text.encode())}
     probe('public-page',lambda:page(base+'/skill',['shine-skill.md','shine.plugin']))
+    def public_blocks():
+        catalog=json.loads((ROOT/'blocks/catalog.json').read_text())['blocks']; results=[]
+        if not catalog: raise RuntimeError('block catalog is empty')
+        registry=json.loads(get(base+'/r/registry.json'))
+        for block in catalog:
+            if not any(item.get('name')==block['id'] and item.get('type')=='registry:block' for item in registry.get('items',[])): raise RuntimeError('block missing from hosted registry: '+block['id'])
+            data=get(base+'/r/'+block['id']+'.json'); expected_data=(ROOT/'site/r'/ (block['id']+'.json')).read_bytes()
+            if sha(data)!=sha(expected_data): raise RuntimeError('hosted block differs: '+block['id'])
+            results.append({'block':block['id'],'sha256':sha(data),'bytes':len(data)})
+        return {'checked':len(results),'required':len(catalog),'blocks':results}
+    probe('public-blocks',public_blocks)
     port=CONFIG['portfolioBase']
     def registry():
         entries=json.loads(get(port+'/data/public-work.json'))['items'];matches=[x for x in entries if x.get('slug')=='shine']

@@ -751,6 +751,115 @@
           "target": "components/ui/swatch.tsx"
         }
       ]
+    },
+    {
+      "name": "async-state",
+      "type": "registry:block",
+      "title": "Async state",
+      "description": "Loading, empty, filtered-empty and error with real recovery actions.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "blocks/async-state.tsx",
+          "type": "registry:component",
+          "target": "components/shine/async-state.tsx"
+        }
+      ]
+    },
+    {
+      "name": "collection",
+      "type": "registry:block",
+      "title": "Collection disclosure",
+      "description": "Summary and adjacent persistent details; more than ten full records start collapsed.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "blocks/collection.tsx",
+          "type": "registry:component",
+          "target": "components/shine/collection.tsx"
+        }
+      ]
+    },
+    {
+      "name": "data-grid",
+      "type": "registry:block",
+      "title": "Record data grid",
+      "description": "Client-side TanStack v8 grid with sorting, search, filters, columns, pagination, selection, actions and recovery. Never use for a partial server-paged dataset.",
+      "dependencies": [
+        "@tanstack/react-table@^8.21.3"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "checkbox",
+        "dropdown-menu",
+        "table",
+        "https://shine-blond.vercel.app/r/async-state.json",
+        "https://shine-blond.vercel.app/r/collection.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/data-grid.tsx",
+          "type": "registry:component",
+          "target": "components/shine/data-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "record-editor",
+      "type": "registry:block",
+      "title": "Record editor",
+      "description": "Dialog editor with validation, asynchronous save, retained failed drafts, discard confirmation and focus restoration.",
+      "registryDependencies": [
+        "button",
+        "input",
+        "label",
+        "dialog",
+        "alert-dialog"
+      ],
+      "files": [
+        {
+          "path": "blocks/record-editor.tsx",
+          "type": "registry:component",
+          "target": "components/shine/record-editor.tsx"
+        }
+      ]
+    },
+    {
+      "name": "detail-sheet",
+      "type": "registry:block",
+      "title": "Record detail sheet",
+      "description": "Accessible detail drawer with scrolling content, fixed actions and restored focus.",
+      "registryDependencies": [
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "blocks/detail-sheet.tsx",
+          "type": "registry:component",
+          "target": "components/shine/detail-sheet.tsx"
+        }
+      ]
+    },
+    {
+      "name": "workspace-tabs",
+      "type": "registry:block",
+      "title": "Tabbed workspace",
+      "description": "Library keyboard behavior and persistent inactive panels for filters and drafts.",
+      "registryDependencies": [
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "blocks/workspace-tabs.tsx",
+          "type": "registry:component",
+          "target": "components/shine/workspace-tabs.tsx"
+        }
+      ]
     }
   ]
 }

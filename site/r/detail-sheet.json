@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "detail-sheet",
+  "type": "registry:block",
+  "title": "Record detail sheet",
+  "description": "Accessible detail drawer with scrolling content, fixed actions and restored focus.",
+  "registryDependencies": [
+    "sheet"
+  ],
+  "files": [
+    {
+      "path": "blocks/detail-sheet.tsx",
+      "type": "registry:component",
+      "target": "components/shine/detail-sheet.tsx",
+      "content": "\"use client\";\nimport { useRef, type ReactNode } from \"react\";\nimport { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from \"@/components/ui/sheet\";\n\nexport function DetailSheet({ open, onOpenChange, title, description, children, actions }: {\n  open: boolean; onOpenChange: (open: boolean) => void; title: string; description: string; children: ReactNode; actions?: ReactNode;\n}) {\n  const opener = useRef<HTMLElement | null>(null);\n  return <Sheet open={open} onOpenChange={onOpenChange}>\n    <SheetContent data-product-pattern=\"detail-sheet\" className=\"flex w-full flex-col gap-0 sm:max-w-xl\" onOpenAutoFocus={() => { opener.current = document.activeElement as HTMLElement; }} onCloseAutoFocus={event => { event.preventDefault(); if(opener.current?.isConnected)opener.current.focus(); }}>\n      <SheetHeader className=\"shrink-0 border-b\"><SheetTitle>{title}</SheetTitle><SheetDescription>{description}</SheetDescription></SheetHeader>\n      <div className=\"min-h-0 flex-1 overflow-y-auto p-4\">{children}</div>\n      {actions && <SheetFooter className=\"shrink-0 border-t\">{actions}</SheetFooter>}\n    </SheetContent>\n  </Sheet>;\n}\n"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Resolve one compatible UI implementation path from the consumer's actual stack.
 import { existsSync, readFileSync, realpathSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 
@@ -47,6 +47,12 @@ RECIPES.tanstack = { ...RECIPES["shadcn-tanstack"], contract: "consumer table ch
 RECIPES["tailwind-tanstack"] = { ...RECIPES.tanstack, packages: ["tailwindcss", "@tanstack/react-table"], contract: "Tailwind table layout and styling over installed TanStack state; preserve consumer controls" };
 
 const allDeps = (pkg) => ({ ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) });
+function cssPrefixes(root,entry){
+  const prefixes=new Set(),seen=new Set();
+  const visit=file=>{file=resolve(file);if(seen.has(file)||!existsSync(file)||!file.startsWith(root+"/"))return;seen.add(file);const css=readFileSync(file,"utf8").replace(/\/\*[\s\S]*?\*\//g,"");
+    for(const match of css.matchAll(/@import\s+["']([^"']+)["']([^;]*);/g)){if(match[1].startsWith("tailwindcss"))prefixes.add(match[2].match(/prefix\(([^)]+)\)/)?.[1]||"");else if(match[1].startsWith("."))visit(resolve(dirname(file),match[1]));}
+  };if(entry)visit(resolve(root,entry));return [...prefixes];
+}
 export function detectProject(project) {
   const root = resolve(project);
   const pkgPath = join(root, "package.json");
@@ -66,6 +72,7 @@ export function detectProject(project) {
     components: { name: shadcn ? "shadcn" : "consumer", aliases: config?.aliases || {}, responsibility: "reuse installed controls and their keyboard, focus and accessibility behavior; preserve shared product components" },
     data: { name: tanstack ? "tanstack" : "consumer", declaredVersion: deps["@tanstack/react-table"] || null, responsibility: "table sorting, filtering, selection and pagination only when the workflow needs them" },
   };
+  if(tailwind&&config?.tailwind?.css)layers.styling.cssPrefixes=cssPrefixes(root,config.tailwind.css);
   return { root, framework, packageManager: managers.find(([f]) => existsSync(join(root, f)))?.[1] || (existsSync(pkgPath) ? "npm" : "none"), installed, layers };
 }
 
@@ -119,6 +126,7 @@ export function resolveIntegration(project, requested = "") {
     const runtime = JSON.parse(readFileSync(join(detected.root, "node_modules/tailwindcss/package.json"), "utf8"));
     if (![3, 4].includes(Number(runtime.version.split(".")[0]))) throw new Error(`Tailwind ${runtime.version}: supported styling guidance is v3/v4; inspect this version before generating CSS`);
     detected.layers.styling.installedVersion = runtime.version;
+    if(Number(runtime.version.split('.')[0])===4&&detected.layers.styling.cssPrefixes?.some(prefix=>prefix!==detected.layers.styling.prefix))throw new Error(`Tailwind prefix mismatch: components.json declares ${JSON.stringify(detected.layers.styling.prefix)} but the imported CSS compiles ${JSON.stringify(detected.layers.styling.cssPrefixes)}. Align the existing configuration before adding controls; uncompiled utility classes are not styling proof.`);
   }
   const unverified = recipe.tableMajor === 8 ? [] : verifyRecipeApi(recipe);
   if (unverified.length) throw new Error(`recipe API not proven by ${recipe.cite}: ${unverified.join(", ")}`);
