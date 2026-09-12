@@ -8,7 +8,7 @@ import {once} from 'node:events';
 import {captureHealth,referenceHealth,hash,inspectReferencePage} from '../corpus/reference-health.mjs';
 import {createDesignPacket,classifyJob} from '../core/design-packet.mjs';
 import {readLayoutContract,proveLayout,mediaWaste} from './layout.mjs';
-import {checkDefectAssertions,prove} from './prove.mjs';
+import {checkDefectAssertions,prove,activeSurfaceVideos} from './prove.mjs';
 import {sourceBinding,bindBrowser,writeCompletionReceipt,validateCompletionReceipt} from './completion-receipt.mjs';
 import {load} from './deps.mjs';
 const root=resolve(import.meta.dirname,'..'),temp=mkdtempSync(join(tmpdir(),'shine-media-regression-'));
@@ -49,6 +49,20 @@ try{
  for(const path of ['/hard404','/soft404']){const url=base+path,response=await page.goto(url);await assert.rejects(()=>inspectReferencePage(page,response,{url,expect:'video'}),/HTTP|error/);}
  const url=base+'/good',response=await page.goto(url);assert.equal((await inspectReferencePage(page,response,{url,expect:'video'})).status,200);
  await page.goto('file://'+broken);assert.ok((await mediaWaste(page)).length,'media descendants must not exempt empty wrappers');
+
+ // A navigation logo does not turn the enclosing application shell into a
+ // player frame. Empty media wrappers within its main content still fail.
+ const logo='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="30"><rect width="100" height="30" fill="navy"/></svg>');
+ await page.setContent(`<div style="min-height:1200px"><nav><img src="${logo}" alt="Product"><a href="#work">Work</a></nav><main><h1>Record collection</h1><p>Choose a record.</p></main></div>`);
+ assert.deepEqual(await mediaWaste(page),[],'application shell whitespace is not unused logo media space');
+ await page.setContent(`<div style="min-height:1200px"><nav><img src="${logo}" alt="Product"></nav><main><h1>Broadcast</h1><section id="empty-player-wrapper" style="height:900px"><img src="${logo}" alt="Poster"></section></main></div>`);
+ assert.ok((await mediaWaste(page)).some(row=>row.selector==='#empty-player-wrapper'),'the shell boundary must not exempt empty content media wrappers');
+ await page.setContent('<main><h1>Records</h1><dialog><video hidden></video></dialog></main>');
+ assert.equal(await activeSurfaceVideos(page),0,'a closed dialog is a separate workflow');
+ await page.locator('dialog').evaluate(dialog=>dialog.showModal());
+ assert.equal(await activeSurfaceVideos(page),1,'an opened dialog requires media proof even before playback');
+ await page.setContent('<main><h1>Player</h1><video hidden></video></main>');
+ assert.equal(await activeSurfaceVideos(page),1,'a hidden player on the active page still requires media proof');
  await browser.close();browser=null;await new Promise(r=>server.close(r));server=null;
  // Browser identity must match the real clean source checkout and the rendered build.
  const project=join(temp,'project');mkdirSync(project);writeFileSync(join(project,'app.html'),'source');
