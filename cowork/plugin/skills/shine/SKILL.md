@@ -16,9 +16,7 @@ node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <interna
 ```
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
 dashboard. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
-source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files
-or load the full reference library. The packet is authoritative for the region graph, controls, states,
-integration, provenance, and proof commands.
+source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories.
 For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`.
@@ -39,6 +37,8 @@ Every visible icon needs a distinct semantic job: state, action, object type, or
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports; follow `references/component-layers.md`: Tailwind owns styling/layout, shadcn owns controls, TanStack owns table state. Detect each independently; reuse product components.
 - Use the packet’s `reusableBlocks` plan and `references/reusable-blocks.md`. Import existing product blocks first; otherwise install the matching finished registry block. Bind actual imports in `shine-reuse.json`; include its check in completion. Do not reconstruct a matching block from primitives.
+- Read the packet's separate reference, finished-block and finished-page counts. Classify every finished pattern in `shine-coverage.json` using `integrations/coverage.mjs`; bind existing product sources or explain an absent workflow. Include the packet's `--coverage` flag in completion. Raw control census is review evidence, not automatic behavioral proof.
+- For a new list, detail, settings, report or approval page, install the matching finished page template and supply its data/callback contract. Use the working examples at `https://shine-blond.vercel.app/library/`; preserve an existing product page when it already owns the job.
 - For tables with **more than 10 total rows**, keep meaningful KPIs or an infographic above an adjacent collapsed detail table. Count the full dataset, not the visible page. Follow `references/table-summary.md` for state, accessibility and drill-down.
 - For record data, reuse the product's shared DataGrid and installed table-state engine.
   Read `references/table-quality.md` and write `shine-tables.json`: shared source, approved

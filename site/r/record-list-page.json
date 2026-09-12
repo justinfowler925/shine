@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "record-list-page",
+  "type": "registry:block",
+  "title": "Record list page",
+  "description": "Configured grid, detail sheet and editor complete the list-to-save workflow.",
+  "registryDependencies": [
+    "button",
+    "https://shine-blond.vercel.app/r/data-grid.json",
+    "https://shine-blond.vercel.app/r/detail-sheet.json",
+    "https://shine-blond.vercel.app/r/record-editor.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/record-list-page.tsx",
+      "type": "registry:component",
+      "target": "components/shine/record-list-page.tsx",
+      "content": "\"use client\";\nimport { useRef, useState, type ReactNode } from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { DataGrid, type DataGridProps } from \"@/components/shine/data-grid\";\nimport { DetailSheet } from \"@/components/shine/detail-sheet\";\nimport { RecordEditor, type EditorField } from \"@/components/shine/record-editor\";\n/** A complete list → detail → edit workflow. Product adapters own reads and writes. */\nexport function RecordListPage<T>({ title, description, grid, details, editor }: {\n title: string; description: string; grid: Omit<DataGridProps<T>, \"onOpen\">;\n details: (row: T) => ReactNode;\n editor?: { fields: EditorField[]; values: (row: T) => Record<string, string>; save: (row: T, values: Record<string, string>) => Promise<void> };\n}) {\n const [selectedId, setSelectedId] = useState<string | null>(null), [editing, setEditing] = useState(false), editButton = useRef<HTMLButtonElement>(null);\n const selected = grid.rows.find(row => grid.getRowId(row) === selectedId);\n return <main data-product-pattern=\"record-list-page\" data-cite=\"shadcn-queue\" className=\"mx-auto max-w-7xl space-y-6 p-4 sm:p-6\"><header className=\"space-y-2\"><h1 className=\"text-2xl font-semibold tracking-tight\">{title}</h1><p className=\"text-muted-foreground\">{description}</p></header>\n  <DataGrid {...grid} onOpen={row => setSelectedId(grid.getRowId(row))} />\n  <DetailSheet open={Boolean(selected)} onOpenChange={open => { if (!open) setSelectedId(null); }} title={selected ? grid.rowLabel(selected) : \"Record\"} description=\"Review the record before making changes.\" actions={selected && editor ? <Button ref={editButton} type=\"button\" onClick={() => setEditing(true)}>Edit record</Button> : undefined}>{selected && details(selected)}</DetailSheet>\n  {selected && editor && editing && <RecordEditor key={grid.getRowId(selected)} title={\"Edit \" + grid.rowLabel(selected)} description=\"Save updates to this record.\" fields={editor.fields} initialValues={editor.values(selected)} onSave={values => editor.save(selected, values)} onClose={() => setEditing(false)} returnFocus={() => editButton.current} />}\n </main>;\n}\n"
+    }
+  ]
+}

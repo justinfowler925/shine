@@ -1,11 +1,400 @@
 {
   "version": 1,
   "blocks": [
-    {"id":"async-state","export":"AsyncState","title":"Async state","description":"Loading, empty, filtered-empty and error with real recovery actions.","primitives":["button"],"blocks":[],"matches":["AsyncState","StatePanel","EmptyState"],"categories":["datagrid","record","dashboard","form"]},
-    {"id":"collection","export":"Collection","title":"Collection disclosure","description":"Summary and adjacent persistent details; more than ten full records start collapsed.","primitives":["button"],"blocks":[],"matches":["Collection","CollectionSection"],"categories":["datagrid","dashboard"]},
-    {"id":"data-grid","export":"DataGrid","title":"Record data grid","description":"Client-side TanStack v8 grid with sorting, search, filters, columns, pagination, selection, actions and recovery. Never use for a partial server-paged dataset.","primitives":["button","input","checkbox","dropdown-menu","table"],"blocks":["async-state","collection"],"dependencies":["@tanstack/react-table@^8.21.3"],"matches":["DataGrid","DataTable"],"categories":["datagrid"]},
-    {"id":"record-editor","export":"RecordEditor","title":"Record editor","description":"Dialog editor with validation, asynchronous save, retained failed drafts, discard confirmation and focus restoration.","primitives":["button","input","label","dialog","alert-dialog"],"blocks":[],"matches":["RecordEditor","RecordDialog","FormDialog"],"categories":["form","record"]},
-    {"id":"detail-sheet","export":"DetailSheet","title":"Record detail sheet","description":"Accessible detail drawer with scrolling content, fixed actions and restored focus.","primitives":["sheet"],"blocks":[],"matches":["DetailSheet","RecordSheet","RecordDrawer","DetailDrawer"],"categories":["record","datagrid"]},
-    {"id":"workspace-tabs","export":"WorkspaceTabs","title":"Tabbed workspace","description":"Library keyboard behavior and persistent inactive panels for filters and drafts.","primitives":["tabs"],"blocks":[],"matches":["WorkspaceTabs","WorkspaceTabList"],"categories":["form","record","dashboard","datagrid"]}
+    {
+      "id": "async-state",
+      "export": "AsyncState",
+      "title": "Async state",
+      "description": "Loading, empty, filtered-empty and error with real recovery actions.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [],
+      "matches": [
+        "AsyncState",
+        "StatePanel",
+        "EmptyState"
+      ],
+      "categories": [
+        "datagrid",
+        "record",
+        "dashboard",
+        "form"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "collection",
+      "export": "Collection",
+      "title": "Collection disclosure",
+      "description": "Summary and adjacent persistent details; more than ten full records start collapsed.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [],
+      "matches": [
+        "Collection",
+        "CollectionSection"
+      ],
+      "categories": [
+        "datagrid",
+        "dashboard"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "data-grid",
+      "export": "DataGrid",
+      "title": "Record data grid",
+      "description": "Client-side TanStack v8 grid with sorting, search, filters, columns, pagination, selection, actions and recovery. Never use for a partial server-paged dataset.",
+      "primitives": [
+        "button",
+        "input",
+        "checkbox",
+        "dropdown-menu",
+        "table"
+      ],
+      "blocks": [
+        "async-state",
+        "collection"
+      ],
+      "dependencies": [
+        "@tanstack/react-table@^8.21.3"
+      ],
+      "matches": [
+        "DataGrid",
+        "DataTable"
+      ],
+      "categories": [
+        "datagrid"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "record-editor",
+      "export": "RecordEditor",
+      "title": "Record editor",
+      "description": "Dialog editor with validation, asynchronous save, retained failed drafts, discard confirmation and focus restoration.",
+      "primitives": [
+        "button",
+        "input",
+        "label",
+        "dialog",
+        "alert-dialog"
+      ],
+      "blocks": [],
+      "matches": [
+        "RecordEditor",
+        "RecordDialog",
+        "FormDialog"
+      ],
+      "categories": [
+        "form",
+        "record"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "detail-sheet",
+      "export": "DetailSheet",
+      "title": "Record detail sheet",
+      "description": "Accessible detail drawer with scrolling content, fixed actions and restored focus.",
+      "primitives": [
+        "sheet"
+      ],
+      "blocks": [],
+      "matches": [
+        "DetailSheet",
+        "RecordSheet",
+        "RecordDrawer",
+        "DetailDrawer"
+      ],
+      "categories": [
+        "record",
+        "datagrid"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "workspace-tabs",
+      "export": "WorkspaceTabs",
+      "title": "Tabbed workspace",
+      "description": "Library keyboard behavior and persistent inactive panels for filters and drafts.",
+      "primitives": [
+        "tabs"
+      ],
+      "blocks": [],
+      "matches": [
+        "WorkspaceTabs",
+        "WorkspaceTabList"
+      ],
+      "categories": [
+        "form",
+        "record",
+        "dashboard",
+        "datagrid"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "application-nav",
+      "export": "ApplicationNav",
+      "title": "Application navigation",
+      "description": "Responsive route links with current location, skip link and product actions.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [],
+      "matches": [
+        "ApplicationNav",
+        "TopNav"
+      ],
+      "categories": [
+        "datagrid",
+        "record",
+        "dashboard",
+        "form"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "filter-bar",
+      "export": "FilterBar",
+      "title": "Search and filter bar",
+      "description": "Controlled search, option filters, clear action and announced result count.",
+      "primitives": [
+        "button",
+        "input"
+      ],
+      "blocks": [],
+      "matches": [
+        "FilterBar",
+        "SearchFilterBar",
+        "RecordFilters"
+      ],
+      "categories": [
+        "datagrid",
+        "dashboard"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "date-range",
+      "export": "DateRange",
+      "title": "Date range",
+      "description": "Calendar-date validation, retained failed values and guarded asynchronous apply.",
+      "primitives": [
+        "button",
+        "input"
+      ],
+      "blocks": [],
+      "matches": [
+        "DateRange",
+        "DateRangeFilter"
+      ],
+      "categories": [
+        "dashboard",
+        "form"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "form-panel",
+      "export": "FormPanel",
+      "title": "Validated form panel",
+      "description": "Typed fields, validation links, failed drafts, guarded save and confirmed reset.",
+      "primitives": [
+        "button",
+        "input",
+        "label",
+        "alert-dialog"
+      ],
+      "blocks": [],
+      "matches": [
+        "FormPanel",
+        "SettingsForm"
+      ],
+      "categories": [
+        "form",
+        "record"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "file-upload",
+      "export": "FileUpload",
+      "title": "File upload",
+      "description": "File selection and drop, limits, progress, abort, retry and retained failures.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [],
+      "matches": [
+        "FileUpload",
+        "UploadField"
+      ],
+      "categories": [
+        "form",
+        "record"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "notification-center",
+      "export": "NotificationCenter",
+      "title": "Notification center",
+      "description": "Accessible inbox with asynchronous read persistence, retry and keyboard dismissal.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [
+        "detail-sheet"
+      ],
+      "matches": [
+        "NotificationCenter"
+      ],
+      "categories": [
+        "dashboard",
+        "record"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "calendar-agenda",
+      "export": "CalendarAgenda",
+      "title": "Calendar agenda",
+      "description": "Explicit timezone, seven-day navigation, event selection and read recovery.",
+      "primitives": [
+        "button",
+        "input"
+      ],
+      "blocks": [],
+      "matches": [
+        "CalendarAgenda",
+        "CroConflictCalendar"
+      ],
+      "categories": [
+        "dashboard",
+        "record"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "kanban-board",
+      "export": "KanbanBoard",
+      "title": "Kanban board",
+      "description": "Accessible card moves through real asynchronous callbacks; failures preserve positions.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [],
+      "matches": [
+        "KanbanBoard",
+        "PmKanban"
+      ],
+      "categories": [
+        "dashboard",
+        "datagrid"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "record-list-page",
+      "export": "RecordListPage",
+      "title": "Record list page",
+      "description": "Configured grid, detail sheet and editor complete the list-to-save workflow.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [
+        "data-grid",
+        "detail-sheet",
+        "record-editor"
+      ],
+      "matches": [
+        "RecordListPage"
+      ],
+      "categories": [
+        "datagrid"
+      ],
+      "kind": "page"
+    },
+    {
+      "id": "record-detail-page",
+      "export": "RecordDetailPage",
+      "title": "Record detail page",
+      "description": "Identity, facts, activity and persistent edit form behind accessible tabs.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [
+        "workspace-tabs",
+        "form-panel"
+      ],
+      "matches": [
+        "RecordDetailPage"
+      ],
+      "categories": [
+        "record"
+      ],
+      "kind": "page"
+    },
+    {
+      "id": "settings-page",
+      "export": "SettingsPage",
+      "title": "Settings page",
+      "description": "Named setting sections, retained drafts, per-section save and reset confirmation.",
+      "primitives": [],
+      "blocks": [
+        "workspace-tabs",
+        "form-panel"
+      ],
+      "matches": [
+        "SettingsPage"
+      ],
+      "categories": [
+        "form"
+      ],
+      "kind": "page"
+    },
+    {
+      "id": "report-page",
+      "export": "ReportPage",
+      "title": "Report page",
+      "description": "Validated date range, meaningful metrics, evidence grid and methodology.",
+      "primitives": [],
+      "blocks": [
+        "date-range",
+        "data-grid"
+      ],
+      "matches": [
+        "ReportPage"
+      ],
+      "categories": [
+        "dashboard"
+      ],
+      "kind": "page"
+    },
+    {
+      "id": "approval-page",
+      "export": "ApprovalPage",
+      "title": "Approval page",
+      "description": "Review queue, evidence, required explanation, confirmation and guarded decision write.",
+      "primitives": [
+        "button",
+        "alert-dialog"
+      ],
+      "blocks": [
+        "data-grid"
+      ],
+      "matches": [
+        "ApprovalPage"
+      ],
+      "categories": [
+        "datagrid",
+        "record"
+      ],
+      "kind": "page"
+    }
   ]
 }

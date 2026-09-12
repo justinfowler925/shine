@@ -1,0 +1,23 @@
+"use client";
+import { useId } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+export type AgendaEvent = { id: string; title: string; startsAt: string; endsAt: string; description?: string };
+const addDays = (date: string, amount: number) => { const value = new Date(date + "T12:00:00Z"); value.setUTCDate(value.getUTCDate() + amount); return value.toISOString().slice(0, 10); };
+const dayKey = (date: Date, timeZone: string) => { const parts = new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(date); return ["year", "month", "day"].map(type => parts.find(part => part.type === type)!.value).join("-"); };
+/** Agenda composition; scheduling authorization and external writes stay with the product. */
+export function CalendarAgenda({ startDate, onStartDateChange, timeZone, events, onOpen, loading = false, error, onRetry }: {
+ startDate: string; onStartDateChange: (date: string) => void; timeZone: string; events: AgendaEvent[]; onOpen: (event: AgendaEvent) => void; loading?: boolean; error?: string; onRetry: () => void;
+}) {
+ const id = useId();
+ let invalid = !/^\d{4}-\d{2}-\d{2}$/.test(startDate) || !Number.isFinite(Date.parse(startDate + "T12:00:00Z"));
+ if (!invalid) invalid = new Date(startDate + "T12:00:00Z").toISOString().slice(0,10) !== startDate;
+ try { new Intl.DateTimeFormat(undefined, { timeZone }); } catch { invalid = true; }
+ if (invalid) return <section data-product-pattern="calendar-agenda"><h2>Calendar</h2><p role="alert">The calendar date or time zone is invalid.</p><Button type="button" variant="outline" onClick={onRetry}>Retry calendar</Button></section>;
+ const days = Array.from({ length: 7 }, (_, index) => addDays(startDate, index));
+ const time = new Intl.DateTimeFormat(undefined, { timeZone, hour: "numeric", minute: "2-digit" });
+ const valid = events.filter(event => Number.isFinite(Date.parse(event.startsAt)) && Number.isFinite(Date.parse(event.endsAt)) && Date.parse(event.endsAt) >= Date.parse(event.startsAt));
+ return <section aria-labelledby={id} data-product-pattern="calendar-agenda" className="min-w-0 space-y-4"><header className="flex flex-wrap items-end justify-between gap-3"><div><h2 id={id} className="text-lg font-semibold">Calendar</h2><p className="text-sm text-muted-foreground">{timeZone} · Seven-day agenda</p></div><div className="flex flex-wrap items-end gap-2"><Button type="button" variant="outline" onClick={() => onStartDateChange(addDays(startDate, -7))}>Previous week</Button><label className="space-y-1 text-sm"><span className="block">Week starting</span><Input type="date" className="h-11" value={startDate} onChange={e => { if (e.target.value) onStartDateChange(e.target.value); }} /></label><Button type="button" variant="outline" onClick={() => onStartDateChange(addDays(startDate, 7))}>Next week</Button></div></header>
+  {loading ? <p role="status">Loading calendar…</p> : error ? <div role="alert"><p>{error}</p><Button type="button" variant="outline" onClick={onRetry}>Retry calendar</Button></div> : <><p role="status" className="text-sm text-muted-foreground">{valid.filter(event => dayKey(new Date(event.startsAt), timeZone) <= days[6] && dayKey(new Date(event.endsAt), timeZone) >= days[0]).length} events in this period</p>{valid.length !== events.length && <p role="alert">Some events have invalid dates and could not be displayed.</p>}<ol className="space-y-3">{days.map(day => { const rows = valid.filter(event => dayKey(new Date(event.startsAt), timeZone) <= day && dayKey(new Date(event.endsAt), timeZone) >= day).sort((a, b) => Date.parse(a.startsAt) - Date.parse(b.startsAt)); return <li key={day} className="grid min-w-0 gap-3 rounded-lg border border-border p-4 sm:grid-cols-4"><h3 className="font-medium"><time dateTime={day}>{new Intl.DateTimeFormat(undefined, { timeZone: "UTC", weekday: "short", month: "short", day: "numeric" }).format(new Date(day + "T12:00:00Z"))}</time></h3><div className="min-w-0 space-y-2 sm:col-span-3">{rows.length ? rows.map(event => <Button key={event.id} type="button" variant="outline" className="h-auto min-h-11 w-full justify-start whitespace-normal py-3 text-left" onClick={() => onOpen(event)}><span className="min-w-0"><strong className="block">{event.title}</strong><span className="block text-sm font-normal">{time.format(new Date(event.startsAt))}–{time.format(new Date(event.endsAt))}{event.description ? " · " + event.description : ""}</span></span></Button>) : <p className="text-sm text-muted-foreground">No events</p>}</div></li>; })}</ol></>}
+ </section>;
+}

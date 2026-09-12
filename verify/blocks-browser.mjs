@@ -54,5 +54,5 @@ try{
  await check('enlarged text keeps search usable',async()=>{await page.setViewportSize({width:390,height:1000});const style=await page.addStyleTag({content:'html{font-size:32px!important}'});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);assert.ok((await page.getByLabel('Search accounts').boundingBox()).width>=200);await style.evaluate(e=>e.remove());});
  await check('ten records open without a disclosure click',async()=>{await page.reload();await button('Ten records').click();await visible(page.getByRole('table'));assert.equal(await page.locator('tbody tr').count(),10);});
  await check('no browser exceptions',async()=>assert.deepEqual(errors,[]));
- writeFileSync(join(out,'results.json'),JSON.stringify({checked,blocks:catalog.length,errors,source:'generated registry content',screenshots:out},null,2));console.log(`blocks browser PASS: ${checked} checks, ${catalog.length} distributed blocks`);
+ writeFileSync(join(out,'results.json'),JSON.stringify({checked,blocks:6,registryEntries:catalog.length,errors,source:'generated registry content',screenshots:out},null,2));console.log(`blocks browser PASS: ${checked} checks, 6 original workflow blocks (${catalog.length} registry entries compiled)`);
 }finally{await browser.close();await new Promise(r=>server.close(r));rmSync(temp,{recursive:true,force:true});}

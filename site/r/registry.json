@@ -860,6 +860,230 @@
           "target": "components/shine/workspace-tabs.tsx"
         }
       ]
+    },
+    {
+      "name": "application-nav",
+      "type": "registry:block",
+      "title": "Application navigation",
+      "description": "Responsive route links with current location, skip link and product actions.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "blocks/application-nav.tsx",
+          "type": "registry:component",
+          "target": "components/shine/application-nav.tsx"
+        }
+      ]
+    },
+    {
+      "name": "filter-bar",
+      "type": "registry:block",
+      "title": "Search and filter bar",
+      "description": "Controlled search, option filters, clear action and announced result count.",
+      "registryDependencies": [
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "blocks/filter-bar.tsx",
+          "type": "registry:component",
+          "target": "components/shine/filter-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "date-range",
+      "type": "registry:block",
+      "title": "Date range",
+      "description": "Calendar-date validation, retained failed values and guarded asynchronous apply.",
+      "registryDependencies": [
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "blocks/date-range.tsx",
+          "type": "registry:component",
+          "target": "components/shine/date-range.tsx"
+        }
+      ]
+    },
+    {
+      "name": "form-panel",
+      "type": "registry:block",
+      "title": "Validated form panel",
+      "description": "Typed fields, validation links, failed drafts, guarded save and confirmed reset.",
+      "registryDependencies": [
+        "button",
+        "input",
+        "label",
+        "alert-dialog"
+      ],
+      "files": [
+        {
+          "path": "blocks/form-panel.tsx",
+          "type": "registry:component",
+          "target": "components/shine/form-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "file-upload",
+      "type": "registry:block",
+      "title": "File upload",
+      "description": "File selection and drop, limits, progress, abort, retry and retained failures.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "blocks/file-upload.tsx",
+          "type": "registry:component",
+          "target": "components/shine/file-upload.tsx"
+        }
+      ]
+    },
+    {
+      "name": "notification-center",
+      "type": "registry:block",
+      "title": "Notification center",
+      "description": "Accessible inbox with asynchronous read persistence, retry and keyboard dismissal.",
+      "registryDependencies": [
+        "button",
+        "https://shine-blond.vercel.app/r/detail-sheet.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/notification-center.tsx",
+          "type": "registry:component",
+          "target": "components/shine/notification-center.tsx"
+        }
+      ]
+    },
+    {
+      "name": "calendar-agenda",
+      "type": "registry:block",
+      "title": "Calendar agenda",
+      "description": "Explicit timezone, seven-day navigation, event selection and read recovery.",
+      "registryDependencies": [
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "blocks/calendar-agenda.tsx",
+          "type": "registry:component",
+          "target": "components/shine/calendar-agenda.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kanban-board",
+      "type": "registry:block",
+      "title": "Kanban board",
+      "description": "Accessible card moves through real asynchronous callbacks; failures preserve positions.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "blocks/kanban-board.tsx",
+          "type": "registry:component",
+          "target": "components/shine/kanban-board.tsx"
+        }
+      ]
+    },
+    {
+      "name": "record-list-page",
+      "type": "registry:block",
+      "title": "Record list page",
+      "description": "Configured grid, detail sheet and editor complete the list-to-save workflow.",
+      "registryDependencies": [
+        "button",
+        "https://shine-blond.vercel.app/r/data-grid.json",
+        "https://shine-blond.vercel.app/r/detail-sheet.json",
+        "https://shine-blond.vercel.app/r/record-editor.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/record-list-page.tsx",
+          "type": "registry:component",
+          "target": "components/shine/record-list-page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "record-detail-page",
+      "type": "registry:block",
+      "title": "Record detail page",
+      "description": "Identity, facts, activity and persistent edit form behind accessible tabs.",
+      "registryDependencies": [
+        "button",
+        "https://shine-blond.vercel.app/r/workspace-tabs.json",
+        "https://shine-blond.vercel.app/r/form-panel.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/record-detail-page.tsx",
+          "type": "registry:component",
+          "target": "components/shine/record-detail-page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "settings-page",
+      "type": "registry:block",
+      "title": "Settings page",
+      "description": "Named setting sections, retained drafts, per-section save and reset confirmation.",
+      "registryDependencies": [
+        "https://shine-blond.vercel.app/r/workspace-tabs.json",
+        "https://shine-blond.vercel.app/r/form-panel.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/settings-page.tsx",
+          "type": "registry:component",
+          "target": "components/shine/settings-page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "report-page",
+      "type": "registry:block",
+      "title": "Report page",
+      "description": "Validated date range, meaningful metrics, evidence grid and methodology.",
+      "registryDependencies": [
+        "https://shine-blond.vercel.app/r/date-range.json",
+        "https://shine-blond.vercel.app/r/data-grid.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/report-page.tsx",
+          "type": "registry:component",
+          "target": "components/shine/report-page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "approval-page",
+      "type": "registry:block",
+      "title": "Approval page",
+      "description": "Review queue, evidence, required explanation, confirmation and guarded decision write.",
+      "registryDependencies": [
+        "button",
+        "alert-dialog",
+        "https://shine-blond.vercel.app/r/data-grid.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/approval-page.tsx",
+          "type": "registry:component",
+          "target": "components/shine/approval-page.tsx"
+        }
+      ]
     }
   ]
 }

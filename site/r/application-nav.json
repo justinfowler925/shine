@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "application-nav",
+  "type": "registry:block",
+  "title": "Application navigation",
+  "description": "Responsive route links with current location, skip link and product actions.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "blocks/application-nav.tsx",
+      "type": "registry:component",
+      "target": "components/shine/application-nav.tsx",
+      "content": "\"use client\";\nimport { useId, type ReactNode } from \"react\";\nimport { Button } from \"@/components/ui/button\";\n/** Route navigation stays links; wrapping preserves every destination on phones. */\nexport function ApplicationNav({ label, items, current, brand, actions }: {\n label: string; items: { id: string; label: string; href: string; description?: string }[]; current: string; brand?: ReactNode; actions?: ReactNode;\n}) {\n const id = useId();\n return <header className=\"border-b bg-background\" data-product-pattern=\"application-nav\">\n  <a href={\"#\" + id} className=\"sr-only focus:not-sr-only focus:block focus:p-3\">Skip navigation</a>\n  <div className=\"mx-auto flex max-w-7xl flex-wrap items-center gap-4 p-4\">{brand}<nav aria-label={label} className=\"min-w-0 flex-1\"><ul className=\"flex flex-wrap gap-1\">{items.map(item => <li key={item.id}><Button variant={current === item.id ? \"secondary\" : \"ghost\"} className=\"min-h-11 whitespace-normal text-left\" asChild><a href={item.href} aria-current={current === item.id ? \"page\" : undefined} title={item.description}>{item.label}</a></Button></li>)}</ul></nav>{actions && <div className=\"flex flex-wrap gap-2\">{actions}</div>}</div><span id={id} tabIndex={-1} />\n </header>;\n}\n"
+    }
+  ]
+}

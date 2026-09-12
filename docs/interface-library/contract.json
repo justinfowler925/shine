@@ -1,0 +1,10 @@
+{
+  "outcome": "Agents install or reuse finished interfaces rather than repeatedly assemble common workflows.",
+  "source": "Shine source main cc1b8f8; Nucleus source main 7327c30; isolated worktrees.",
+  "before": {"catalogReferences":130,"finishedBlocks":6,"pageReferences":54,"componentReferences":76},
+  "scope": {"newBlocks":["application-nav","filter-bar","date-range","form-panel","file-upload","notification-center","calendar-agenda","kanban-board"],"newPageTemplates":["record-list-page","record-detail-page","settings-page","report-page","approval-page"]},
+  "preserve": ["Existing product components and their domain behavior", "Nucleus permissions and real write handlers", "Tailwind prefix and semantic tokens", "Current source main before every release"],
+  "acceptance": ["Every new registry implementation imports established controls and declares its dependencies", "Browser workflows cover success, failure, keyboard and narrow/wide layouts for each new entry", "Finished templates compose reusable blocks with real configuration and callbacks", "Coverage audit distinguishes references, blocks and page templates and detects missing bindings", "Nucleus uses new shared patterns where missing and binds existing implementations where they already own the job", "All required tests, documentation reviews and 15 distribution destinations pass"],
+  "delivery": "Merge source and consumer changes, immutable installs on both hosts, existing production deployments, Studio and local distribution readback.",
+  "workItem": "2964e0ab-3950-4850-8987-763973972b76"
+}

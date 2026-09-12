@@ -51,7 +51,9 @@
     "layout:test": "node verify/media-layout.test.mjs",
     "layout:verify": "node verify/layout.mjs",
     "prove": "node verify/prove.mjs",
-    "blocks:test": "node verify/blocks.test.mjs && node verify/blocks-browser.mjs && tsc -p verify/fixtures/blocks/tsconfig.json"
+    "blocks:test": "node verify/blocks.test.mjs && node verify/blocks-browser.mjs && tsc -p verify/fixtures/blocks/tsconfig.json",
+    "library:build": "node site/scripts/build-library.mjs",
+    "library:test": "node verify/coverage.test.mjs && node verify/library-browser.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",

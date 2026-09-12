@@ -22,7 +22,7 @@ assert.throws(()=>classifyJob("Fix the design and UX problems"),/cannot infer/);
 assert.equal(classifyJob("Fix the design and UX problems","form").category,"form");
 
 const grid=createDesignPacket({job:cases[0][0],lane:"internal",project:process.cwd()});
-assert.equal(grid.version,5);assert.equal(grid.category,"datagrid");assert.equal(grid.selected.scope,"page");
+assert.equal(grid.version,6);assert.equal(grid.category,"datagrid");assert.equal(grid.selected.scope,"page");
 assert(grid.componentReferences.some(x=>x.id==="untitled-table"));
 for(const item of ["search","sort","filters","column visibility","pagination","row selection","row actions"])assert(grid.controlInventory.includes(item),item);
 assert.deepEqual(grid.requiredStates,["loading","empty","filtered-empty","error","populated"]);
@@ -89,3 +89,6 @@ console.log("design packet PASS: 9 natural briefs · ambiguity refusal · page/c
 assert.deepEqual(grid.tableQuality.enforcedBy,["measure","compare"]);
 assert.equal(grid.tableQuality.contract,"shine-tables.json");
 assert.match(grid.tableQuality.reference,/table-quality\.md$/);
+
+assert.equal(grid.library.implementations.total,19);
+assert.match(affine.completion.command,/--coverage shine-coverage.json/);
