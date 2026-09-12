@@ -50,6 +50,7 @@ class Distribution(unittest.TestCase):
         def hosted(url):
             path=url.split('/r/')[-1]
             if '/r/' in url and (ROOT/'site/r'/path).is_file(): return (ROOT/'site/r'/path).read_bytes()
+            if url.endswith('/library'): return (ROOT/'site/library/index.html').read_bytes()
             if '/library/' in url: return (ROOT/'site/library'/url.split('/library/')[-1]).read_bytes()
             raise RuntimeError('unrelated destination not supplied')
         with tempfile.TemporaryDirectory() as temp,contextlib.redirect_stdout(io.StringIO()):
