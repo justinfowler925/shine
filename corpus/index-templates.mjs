@@ -381,13 +381,13 @@ for (const t of [
   // The blog screen had exactly one row, MUI's. Deleting MUI would have deleted
   // the screen, so the region map carries it: an editorial column is measure and
   // rhythm, not kit chrome, and shadcn publishes no block for it.
-  { id: "shadcn-blog", screen: "blog", title: "shadcn editorial / article page (measure, rhythm, one figure class) — region map only", jobs: ["blog", "article", "editorial", "post"] },
+  { id: "shadcn-blog", screen: "blog", title: "Editorial publication with source attribution and natural text flow", jobs: ["blog", "article", "editorial", "post"], captureExpect: "article details", note: "Authored editorial blueprint with captured source in corpus/blueprints/shadcn-blog/" },
   // A recurring-meeting board, read in full in a fixed order. Deliberately NOT
   // screen "queue": queue/crud/dashboard demand a grid with search, sort and
   // pagination, and sorting a cadence destroys the meaning while paginating it
   // hides half the agenda. The blueprint states the four conditions that must
   // hold before citing this instead of building the grid.
-  { id: "shadcn-weekly-board", screen: "weekly-board", title: "shadcn weekly cadence board (report-out, discuss, up next)", jobs: ["weekly-board", "board", "cadence", "report-out", "standup", "kanban", "elt"], required: ["navigation", "summary"] },
+  { id: "shadcn-weekly-board", screen: "weekly-board", title: "shadcn weekly cadence board (report-out, discuss, up next)", jobs: ["weekly-board", "board", "cadence", "report-out", "standup", "kanban", "elt"], required: ["navigation", "summary"], captureExpect: '[data-region="weekly-summary"]' },
   // The chartless work queue. shadcn-dashboard-01 was the only shadcn row
   // carrying the queue-family jobs, and its reference roles require a chart —
   // so a shadcn triage grid (cro-suite's gov page) could not declare one cite
@@ -397,7 +397,7 @@ for (const t of [
   // untitled-table on score, and untitled-table must stay the default table
   // reference (pinned by art-direction.test) — kit affinity, not raw score, is
   // what should hand a shadcn host this row.
-  { id: "shadcn-queue", screen: "queue", title: "shadcn work queue (triage grid, no chart)", jobs: ["queue", "worklist", "triage", "inbox", "datagrid"], required: ["navigation", "table"], startFrom: 2 },
+  { id: "shadcn-queue", screen: "queue", title: "shadcn work queue (triage grid, no chart)", jobs: ["queue", "worklist", "triage", "inbox", "datagrid"], required: ["navigation", "table"], captureExpect: '[data-region="queue-grid"]', startFrom: 2 },
 ]) {
   // Blueprints live in Shine, not the acquired corpus, so exists() is wrong here.
   const authored = existsSync(join(SHINE, "corpus/blueprints", t.id));
@@ -405,12 +405,24 @@ for (const t of [
     id: t.id, screen: t.screen, kit: "shadcn-registry", title: t.title,
     preview: "", license: "MIT", kind: "blueprint", startFrom: t.startFrom ?? 1, jobs: t.jobs,
     dna: KIT_FAMILY["shadcn-registry"],
-    ...(t.required ? { reference: { required: t.required } } : {}),
-    note: authored
+    ...((t.required || t.captureExpect) ? { reference: { ...(t.required ? { required: t.required } : {}), ...(t.captureExpect ? { captureExpect: t.captureExpect } : {}) } } : {}),
+    note: t.note ?? (authored
       ? `corpus/blueprints/${t.id}.md is the region map; corpus/blueprints/${t.id}/ is authored shadcn source to copy`
-      : `corpus/blueprints/${t.id}.md is the region map; shadcn publishes no block for this screen`,
+      : `corpus/blueprints/${t.id}.md is the region map; shadcn publishes no block for this screen`),
   });
 }
+
+// Native media blueprint must survive catalog regeneration.
+push({
+  id: "shadcn-broadcast", screen: "broadcast", kit: "shadcn-registry",
+  title: "Broadcast player with aspect-ratio frame and adjacent source context",
+  preview: "", license: "MIT", kind: "blueprint", startFrom: 1,
+  jobs: ["broadcast", "video", "media", "player", "television", "presenter"],
+  dna: KIT_FAMILY["shadcn-registry"],
+  reference: { required: ["navigation"], captureExpect: "video" },
+  note: "Authored native HTML media blueprint compatible with shadcn; not an upstream block.",
+  scope: "page",
+});
 
 // ---- owned (Atlas-licensed, not republished) --------------------------------
 const ownedManifest = join(CORPUS, "owned/manifest.json");

@@ -14,6 +14,11 @@ import {load} from './deps.mjs';
 import {bindBrowser,writeCompletionReceipt} from './completion-receipt.mjs';
 import {verifyReuse} from '../integrations/blocks.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'),exec=promisify(execFile);
+// Closed native dialogs are separate workflows. Hidden players in the active
+// surface still require a loaded-media scenario, including poster-first players.
+export async function activeSurfaceVideos(page){
+ return page.locator('video').evaluateAll(videos=>videos.filter(video=>!video.closest('dialog:not([open])')).length);
+}
 export function checkDefectAssertions(diagnosis,layout,usability){
  const errors=[],out=[];
  for(const [index,defect] of diagnosis.defects.entries()){
@@ -47,7 +52,7 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
   try{const page=await browser.newPage({...(storageState?{storageState}:{})});const response=await page.goto(/^https?:/.test(target)?target:pathToFileURL(resolve(target)).href,{waitUntil:'networkidle'});
    const meta=await page.evaluate(()=>({sourceCommit:document.querySelector('meta[name="shine-source-commit"]')?.content,buildId:document.querySelector('meta[name="shine-build-id"]')?.content}));
    observed={url:page.url(),status:response?.status()??200,sourceCommit:response?.headers()['x-shine-source-commit']||meta.sourceCommit,buildId:response?.headers()['x-shine-build-id']||meta.buildId,renderedSha256:hash(await page.content()),screenshotSha256:hash(await page.screenshot({fullPage:true}))};
-   const videos=await page.locator('video').count();if(videos&&(!layoutPath||!existsSync(layoutPath)||!JSON.parse(readFileSync(layoutPath,'utf8')).media?.length))checks.layout={status:'not_tested',reason:'video is present but no media-loaded scenario is configured'};
+   const videos=await activeSurfaceVideos(page);if(videos&&(!layoutPath||!existsSync(layoutPath)||!JSON.parse(readFileSync(layoutPath,'utf8')).media?.length))checks.layout={status:'not_tested',reason:'video is present but no media-loaded scenario is configured'};
   }finally{await browser.close();}
   let binding;
   if(/^https?:/.test(target)){try{binding=bindBrowser({target,project,expectedCommit:commit,expectedBuild:buildId,observed});checks.buildBinding={status:'passed',commit:binding.commit,buildId:binding.buildId};}catch(error){checks.buildBinding={status:'not_tested',reason:error.message};}}

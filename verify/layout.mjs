@@ -39,6 +39,11 @@ export async function mediaWaste(page){return page.evaluate(()=>{
   if(!visible(media))continue;
   let box=media.parentElement;
   for(let depth=0;box&&depth<4&&box!==document.body;depth++,box=box.parentElement){
+   // A shell containing the page's main landmark is not a media frame.
+   // Keep checking wrappers inside main, including main itself, so an empty
+   // player wrapper cannot evade the check merely by adding a landmark.
+   const main=box.querySelector('main,[role=main]'),nav=box.querySelector('nav,[role=navigation]');
+   if(main&&nav&&!main.contains(nav))break;
    if(seen.has(box)||!visible(box))continue;seen.add(box);
    const r=box.getBoundingClientRect();let bottom=media.getBoundingClientRect().bottom;
    for(const leaf of box.querySelectorAll('img,video,canvas'))if(visible(leaf))bottom=Math.max(bottom,leaf.getBoundingClientRect().bottom);
