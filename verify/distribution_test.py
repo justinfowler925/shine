@@ -50,11 +50,14 @@ class Distribution(unittest.TestCase):
         def hosted(url):
             path=url.split('/r/')[-1]
             if '/r/' in url and (ROOT/'site/r'/path).is_file(): return (ROOT/'site/r'/path).read_bytes()
+            if '/library/' in url: return (ROOT/'site/library'/url.split('/library/')[-1]).read_bytes()
             raise RuntimeError('unrelated destination not supplied')
         with tempfile.TemporaryDirectory() as temp,contextlib.redirect_stdout(io.StringIO()):
             out=pathlib.Path(temp)/'proof.json'
             with patch.object(dist,'get',side_effect=hosted): dist.verify(out)
-            self.assertEqual(json.loads(out.read_text())['checks']['public-blocks']['facts']['checked'],6)
+            self.assertEqual(json.loads(out.read_text())['checks']['public-blocks']['facts']['checked'],len(json.loads((ROOT/'blocks/catalog.json').read_text())['blocks']))
             with patch.object(dist,'get',side_effect=lambda url:b'altered' if url.endswith('/data-grid.json') else hosted(url)): dist.verify(out)
+            self.assertEqual(json.loads(out.read_text())['checks']['public-blocks']['status'],'failed')
+            with patch.object(dist,'get',side_effect=lambda url:b'altered' if url.endswith('/library/app.js') else hosted(url)): dist.verify(out)
             self.assertEqual(json.loads(out.read_text())['checks']['public-blocks']['status'],'failed')
 if __name__=='__main__':unittest.main()

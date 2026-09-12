@@ -16,9 +16,7 @@ node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <interna
 ```
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
 dashboard. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
-source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files
-or load the full reference library. The packet is authoritative for the region graph, controls, states,
-integration, provenance, and proof commands.
+source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories.
 For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`.
@@ -39,6 +37,8 @@ Every visible icon needs a distinct semantic job: state, action, object type, or
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports; follow `references/component-layers.md`: Tailwind owns styling/layout, shadcn owns controls, TanStack owns table state. Detect each independently; reuse product components.
 - Use the packet’s `reusableBlocks` plan and `references/reusable-blocks.md`. Import existing product blocks first; otherwise install the matching finished registry block. Bind actual imports in `shine-reuse.json`; include its check in completion. Do not reconstruct a matching block from primitives.
+- Read the packet's separate reference, finished-block and finished-page counts. Classify every finished pattern in `shine-coverage.json` using `integrations/coverage.mjs`; bind existing product sources or explain an absent workflow. Include the packet's `--coverage` flag in completion. Raw control census is review evidence, not automatic behavioral proof.
+- For a new list, detail, settings, report or approval page, install the matching finished page template and supply its data/callback contract. Use the working examples at `https://shine-blond.vercel.app/library/`; preserve an existing product page when it already owns the job.
 - For tables with **more than 10 total rows**, keep meaningful KPIs or an infographic above an adjacent collapsed detail table. Count the full dataset, not the visible page. Follow `references/table-summary.md` for state, accessibility and drill-down.
 - For record data, reuse the product's shared DataGrid and installed table-state engine.
   Read `references/table-quality.md` and write `shine-tables.json`: shared source, approved
@@ -3498,7 +3498,7 @@ Run `node integrations/blocks.mjs --project <consumer> --category <packet-catego
 3. Configure data, columns, labels, validation and real callbacks. Do not copy the block's implementation into each page. A callback must resolve only after the actual write; errors must reject. Keep business authorization in the consumer.
 4. Bind source reuse and exercise each instance in the product browser. A tested library does not certify its integration.
 
-## Six blocks
+## Fourteen workflow blocks and five finished page templates
 
 - `data-grid`: complete client-side TanStack v8 grid. Requires full dataset, stable row ids, column definitions, column labels, row labels, open action, retry action and empty copy. Optional exact-match column filters and asynchronous bulk action. A failed bulk action retains selection. Sorting, search, column visibility, pagination and row actions use the same implementation everywhere. A server-paged dataset must use the product's server grid; this block must not imply that one fetched page is the full dataset.
 - `collection`: meaningful summary plus adjacent persistent detail region. Counts the full dataset, collapses above ten, preserves mounted child state. Supply a changed `revealKey` when a summary drill-down opens filtered details. Unknown/loading counts expose recovery instead of concealing it.
@@ -3506,6 +3506,35 @@ Run `node integrations/blocks.mjs --project <consumer> --category <packet-catego
 - `detail-sheet`: installed Sheet primitive with title/description, scrolling content and persistent footer actions.
 - `workspace-tabs`: installed Tabs primitive owns keyboard and accessibility. Inactive panels remain mounted and hidden; draft state survives navigation. Product route navigation remains links, not fake tabs.
 - `async-state`: distinct loading, empty, filtered-empty and error states with required recovery callbacks where applicable.
+
+## Additional workflow blocks
+
+- `application-nav`: real route links, current-page state, skip navigation and wrapping actions.
+- `filter-bar`: controlled search, option filters, clear callback and an announced result count. Existing grids retain their own integrated controls.
+- `date-range`: calendar dates, invalid/reversed range feedback, asynchronous apply and retained failed values.
+- `form-panel`: text, email, date, number, select, textarea and checkbox fields; required/custom validation, linked errors, failed draft retention, per-form save, double-submit protection and confirmed reset.
+- `file-upload`: input and drop, file-type/size feedback, remove, progress, cancellation and retry. The callback must honor AbortSignal; stopping locally does not prove a server write was undone. Server authorization and content validation remain mandatory product behavior.
+- `notification-center`: Sheet-based inbox, unread counts, persisted mark-read callbacks and retry. It does not replace transient save toasts.
+- `calendar-agenda`: seven-day agenda, explicit timezone, event selection and week navigation. Reuse a product scheduling calendar for conflict detection, attendee permissions or provider writes.
+- `kanban-board`: card columns and accessible move controls. The async callback owns the transition; failed moves retain the existing column. It is not a drag-and-drop-only board.
+
+## Finished pages
+
+- `record-list-page`: shared DataGrid, DetailSheet and RecordEditor implement list → inspect → edit → save.
+- `record-detail-page`: identity, facts, activity and persistent edit form behind WorkspaceTabs.
+- `settings-page`: named sections with independent FormPanel saves and retained inactive drafts.
+- `report-page`: validated date range, metrics, evidence DataGrid and methodology.
+- `approval-page`: evidence queue, required explanation, explicit confirmation and asynchronous decision persistence.
+
+These pages are configurable React implementations, not screenshots. Their props supply actual records, labels, values and real callbacks; authorization stays in the consumer. Keep mounted forms keyed by record identity. Use product formatting and timezone choices for dates and amounts.
+
+The interactive library at https://shine-blond.vercel.app/library/ imports the generated registry sources with real shadcn primitives. Its examples use fictional in-memory records and a clearly labeled failure simulator. `verify/library-browser.mjs` exercises all five page workflows and the new blocks at desktop and phone widths; `verify/blocks-browser.mjs` retains the original six-block regression suite.
+
+## Coverage before generation
+
+`node integrations/coverage.mjs --project <consumer>` reports reference counts separately from 14 finished blocks and five finished pages, plus an AST census of raw forms, files, dates, searches, navigation and tables. Do not report the reference count as installable coverage.
+
+Classify every registry pattern in `shine-coverage.json` with `decision: reuse`, actual exported source, importing entrypoints, named executable proof files and a product rationale. Use `decision: not-needed` only when the workflow is absent; existing matching implementations and raw upload/search/navigation controls cannot be declared absent. An `install` or missing decision is unfinished. The packet requires `--coverage shine-coverage.json` in completion. Source binding and proof locations do not replace running the browser tests.
 
 ## Source binding
 

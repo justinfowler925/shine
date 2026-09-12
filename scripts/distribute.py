@@ -149,7 +149,12 @@ def verify(receipt):
             data=get(base+'/r/'+block['id']+'.json'); expected_data=(ROOT/'site/r'/ (block['id']+'.json')).read_bytes()
             if sha(data)!=sha(expected_data): raise RuntimeError('hosted block differs: '+block['id'])
             results.append({'block':block['id'],'sha256':sha(data),'bytes':len(data)})
-        return {'checked':len(results),'required':len(catalog),'blocks':results}
+        gallery=[]
+        for name in ['index.html','app.js','app.css']:
+            data=get(base+'/library/'+name)
+            if sha(data)!=sha((ROOT/'site/library'/name).read_bytes()): raise RuntimeError('hosted library differs: '+name)
+            gallery.append({'file':name,'sha256':sha(data)})
+        return {'checked':len(results),'required':len(catalog),'blocks':results,'gallery':gallery}
     probe('public-blocks',public_blocks)
     port=CONFIG['portfolioBase']
     def registry():

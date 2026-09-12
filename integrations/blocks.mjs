@@ -22,9 +22,11 @@ export function sourceInventory(project){
 }
 export function planBlocks(project,category=''){
  const inventory=sourceInventory(project);
+ const coveragePath=join(project,"shine-coverage.json"),declared=existsSync(coveragePath)?JSON.parse(readFileSync(coveragePath,"utf8")).patterns||[]:[];
  return {version:1,project:resolve(project),scannedFiles:inventory.length,blocks:blocks.filter(b=>!category||b.categories.includes(category)).map(block=>{
-  const candidates=inventory.flatMap(file=>file.exports.filter(name=>block.matches.includes(name)).map(name=>({path:file.path,export:name,sha256:file.sha256})));
-  return {id:block.id,title:block.title,decision:candidates.length?'reuse':'install-if-needed',candidates,registry:`https://shine-blond.vercel.app/r/${block.id}.json`,source:join(ROOT,`blocks/${block.id}.tsx`),instruction:candidates.length?'Import the existing implementation. Extend it for a demonstrated gap; do not install a competing block.':'Use this block only when the page needs this object. Install through the consumer shadcn CLI; preserve aliases, prefix, tokens and existing primitives.'};
+  const binding=declared.find(pattern=>pattern.id===block.id&&pattern.decision==="reuse");
+  const candidates=inventory.flatMap(file=>file.exports.filter(name=>block.matches.includes(name)||(file.path===binding?.source&&name===binding?.export)).map(name=>({path:file.path,export:name,sha256:file.sha256})));
+  return {id:block.id,kind:block.kind||"block",title:block.title,decision:candidates.length?'reuse':'install-if-needed',candidates,registry:`https://shine-blond.vercel.app/r/${block.id}.json`,source:join(ROOT,`blocks/${block.id}.tsx`),instruction:candidates.length?'Import the existing implementation. Extend it for a demonstrated gap; do not install a competing block.':'Use this block only when the page needs this object. Install through the consumer shadcn CLI; preserve aliases, prefix, tokens and existing primitives.'};
  })};
 }
 /** Bind each repeated object to an actual exported component and prove every entry imports it. */

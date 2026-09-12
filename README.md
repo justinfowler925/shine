@@ -278,7 +278,7 @@ block with the existing shadcn configuration:
 npx shadcn@latest add https://shine-blond.vercel.app/r/data-grid.json
 ```
 
-Six blocks cover the data grid, collection disclosure, record editor, detail sheet,
+Fourteen workflow blocks and five page templates cover the data grid, collection disclosure, record editor, detail sheet,
 workspace tabs and async states. See [reuse and integration](skill/references/reusable-blocks.md).
 Adding a block does not require changing the theme.
 
@@ -710,3 +710,5 @@ Everything the plan compressed out, kept whole. Loaded only when relevant.
 - **Creating `~/.claude/skills/` mid-session needs a restart.**
 - **Marketplace installs copy the plugin**, breaking relative `../` refs. Symlink shared files.
 - **Figma's Variables REST API is Enterprise-only**, both directions. Confirm seat status before scoping any Figma work.
+
+The [working interface library](https://shine-blond.vercel.app/library/) contains 14 workflow blocks and 5 composed page templates. The 130 design references are a separate catalog, not 130 installable templates. Consumer `shine-coverage.json` contracts classify all 19 implementations and bind reused product components to real import paths and proof files.
