@@ -20,8 +20,11 @@ Visual similarity and accessibility are necessary but do not establish that a pe
 
 - `cite` is the selected Shadcn, Untitled UI, or other corpus reference. `compare` proves its page structure; this contract proves the selected reference objects exist and work for this product’s job.
 - Each object has a stable selector, the reference role it implements, and a user-facing purpose. All required roles from the reference template must be present.
-- Each flow has at least three observable steps and at least one real user action (`click`, `fill`, or `press`). Screenshot-only, assertion-only, and invented-object flows fail.
-- Valid actions: `click`, `fill`, `press`, `visible`, `hidden`, `text`, and `value`.
+- Each flow has at least three observable steps and at least one real user action (`click`, `fill`, `select`, or `press`). Screenshot-only, assertion-only, and invented-object flows fail.
+- Valid actions: `click`, `fill`, `press`, `select`, `visible`, `hidden`, `text`, `value`, `checked`, `count`, `enabled`, and `disabled`. Every flow needs an observable assertion.
+- Controls revealed later declare `appearsIn: "flow-id"`; that flow must exercise the real selector. Other objects are checked at initial load. Do not add fake visible markers for hidden dialogs or panels.
+- A flow may set `path: "/accounts?view=history"` to navigate within the target origin, or `reset: true` to reload. Flows otherwise continue from the previous flow for compatibility.
+- A `click` or `press` step may include `dialog: {"accept": false, "message": "Discard"}` to exercise a real browser confirmation. Missing or unexpected dialogs fail.
 
 Run this after measure and before compare:
 

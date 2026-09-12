@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "job": "Finish reusable application blocks and remove workflow proof workarounds",
+  "category": "datagrid",
+  "primaryTask": "Configure an existing tested application block and complete record workflows",
+  "before": {
+    "artifact": "corpus/blueprints/shadcn-queue/page.tsx",
+    "screenshot": "corpus/packs/shadcn-queue/shot.png"
+  },
+  "defects": [
+    {
+      "id": "blocks",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "The distributed registry has no complete application blocks",
+      "evidence": "registry.json lists only shine, personal, brand and swatch; scaffold produces adapter-only",
+      "expectedEffect": "Consumers install composed controls with executable workflows"
+    },
+    {
+      "id": "reuse",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "Product reuse is a prose instruction without source enforcement",
+      "evidence": "design-packet creates imports for primitives but supplies no reusable block binding",
+      "expectedEffect": "Existing product implementations are found and required before new installation"
+    },
+    {
+      "id": "deferred",
+      "bucket": "usability",
+      "severity": "major",
+      "problem": "Modal and later-panel controls are required visible at initial load",
+      "evidence": "proveUsability waits for every object before executing any flow",
+      "expectedEffect": "Real dialogs and tabs can be tested at the point their controls appear"
+    }
+  ]
+}

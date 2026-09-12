@@ -270,6 +270,18 @@ npm run sync-consumers          # vendor via consumers.local (see consumers.exam
 npm run sync-consumers -- --check
 ```
 
+For an existing React product, first run `node integrations/blocks.mjs --project <app>`.
+Reuse the detected product components. If a needed object is missing, install a finished
+block with the existing shadcn configuration:
+
+```sh
+npx shadcn@latest add https://shine-blond.vercel.app/r/data-grid.json
+```
+
+Six blocks cover the data grid, collection disclosure, record editor, detail sheet,
+workspace tabs and async states. See [reuse and integration](skill/references/reusable-blocks.md).
+Adding a block does not require changing the theme.
+
 Registry install for a greenfield React app:
 
 ```sh

@@ -145,7 +145,7 @@ const cssVarsFor = (l, chart) => ({
 const HOMEPAGE = "https://github.com/justinfowler925/shine";
 const R_URL = "https://shine-blond.vercel.app/r/{name}.json";
 
-const swatchSource = read("registry/swatch.tsx");
+const blocks = JSON.parse(read("blocks/catalog.json")).blocks;
 
 const items = [
   {
@@ -199,6 +199,12 @@ const items = [
     registryDependencies: [],
     files: [{ path: "registry/swatch.tsx", type: "registry:ui", target: "components/ui/swatch.tsx" }],
   },
+  ...blocks.map(block => ({
+    name: block.id, type: "registry:block", title: block.title, description: block.description,
+    ...(block.dependencies ? { dependencies: block.dependencies } : {}),
+    registryDependencies: [...block.primitives, ...block.blocks.map(id => `https://shine-blond.vercel.app/r/${id}.json`)],
+    files: [{ path: `blocks/${block.id}.tsx`, type: "registry:component", target: `components/shine/${block.id}.tsx` }],
+  })),
 ];
 
 // ---- emit -------------------------------------------------------------------
@@ -212,11 +218,14 @@ writeFileSync(join(ROOT, "registry.json"), JSON.stringify(catalog, null, 2) + "\
 
 mkdirSync(join(ROOT, "site/r"), { recursive: true });
 writeFileSync(join(ROOT, "site/r/registry.json"), JSON.stringify(catalog, null, 2) + "\n");
+const escapeHtml=value=>value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const blockLinks=blocks.map(block=>`    <li><a href="./${block.id}.json"><span>${escapeHtml(block.title)}</span><span class="desc">${escapeHtml(block.description)}</span></a></li>`).join('\n');
+writeFileSync(join(ROOT,'site/r/index.html'),read('site/r/index.html').replace(/<!-- BEGIN BLOCKS -->[\s\S]*?<!-- END BLOCKS -->/,`<!-- BEGIN BLOCKS -->\n${blockLinks}\n    <!-- END BLOCKS -->`));
 for (const item of items) {
   const out = {
     $schema: "https://ui.shadcn.com/schema/registry-item.json",
     ...item,
-    files: item.files?.map((f) => ({ ...f, content: swatchSource })),
+    files: item.files?.map((f) => ({ ...f, content: read(f.path) })),
   };
   if (!out.files) delete out.files;
   writeFileSync(join(ROOT, `site/r/${item.name}.json`), JSON.stringify(out, null, 2) + "\n");

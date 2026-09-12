@@ -25,7 +25,7 @@ class Distribution(unittest.TestCase):
     def test_missing_or_stale_targets_never_pass(self):
         with tempfile.TemporaryDirectory() as temp,patch.object(dist,'get',side_effect=RuntimeError('offline')),contextlib.redirect_stdout(io.StringIO()):
             out=pathlib.Path(temp)/'proof.json';self.assertEqual(dist.verify(out),1)
-            report=json.loads(out.read_text());self.assertEqual(report['status'],'incomplete');self.assertEqual(report['required'],14)
+            report=json.loads(out.read_text());self.assertEqual(report['status'],'incomplete');self.assertEqual(report['required'],15)
             self.assertEqual(set(report['checks']),set(dist.CONFIG['requiredDestinations']))
         with self.assertRaises(RuntimeError):dist.check_identity({'sourceRevision':'stale','skillSha256':'fake'},dist.source())
     def test_attestation_rejects_stale_or_altered_packages(self):
@@ -46,4 +46,15 @@ class Distribution(unittest.TestCase):
     def test_extra_destination_cannot_be_silently_skipped(self):
         with tempfile.TemporaryDirectory() as temp,patch.dict(dist.CONFIG,{'requiredDestinations':dist.CONFIG['requiredDestinations']+['new-agent']}),patch.object(dist,'get',side_effect=RuntimeError('offline')),contextlib.redirect_stdout(io.StringIO()):
             out=pathlib.Path(temp)/'proof.json';self.assertEqual(dist.verify(out),1);self.assertEqual(json.loads(out.read_text())['checks']['new-agent']['status'],'not_tested')
+    def test_hosted_block_source_must_match(self):
+        def hosted(url):
+            path=url.split('/r/')[-1]
+            if '/r/' in url and (ROOT/'site/r'/path).is_file(): return (ROOT/'site/r'/path).read_bytes()
+            raise RuntimeError('unrelated destination not supplied')
+        with tempfile.TemporaryDirectory() as temp,contextlib.redirect_stdout(io.StringIO()):
+            out=pathlib.Path(temp)/'proof.json'
+            with patch.object(dist,'get',side_effect=hosted): dist.verify(out)
+            self.assertEqual(json.loads(out.read_text())['checks']['public-blocks']['facts']['checked'],6)
+            with patch.object(dist,'get',side_effect=lambda url:b'altered' if url.endswith('/data-grid.json') else hosted(url)): dist.verify(out)
+            self.assertEqual(json.loads(out.read_text())['checks']['public-blocks']['status'],'failed')
 if __name__=='__main__':unittest.main()

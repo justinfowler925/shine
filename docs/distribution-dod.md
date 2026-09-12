@@ -3,9 +3,9 @@
 A skill change is delivered only after its registered destinations serve the same tested release.
 A source merge, local install, deployment READY, public 200, or generated ZIP alone is partial evidence.
 
-The machine-readable population is `distribution.json`. Shine currently requires 14 destinations:
+The machine-readable population is `distribution.json`. Shine currently requires 15 destinations:
 source main; Codex, Cursor and Claude skill links; both compatibility aliases; the public canonical
-skill, self-contained Markdown, plugin and page; the portfolio registry and page; and Nucleus’s server-computed package attestation and access boundary. Historical articles retain their dated results and link to the current release.
+skill, self-contained Markdown, plugin, page and complete block registry; the portfolio registry and page; and Nucleus’s server-computed package attestation and access boundary. Historical articles retain their dated results and link to the current release.
 Other skills should adopt the same contract with their own explicit destination inventory; do not
 claim an unregistered skill is covered by Shine's release.
 
@@ -29,8 +29,8 @@ claim an unregistered skill is covered by Shine's release.
    timestamp. Anonymous and invalid-cookie requests to the catalog/download must redirect to login.
    No Studio sign-in or protected ZIP download is needed. This establishes package integrity and
    access protection, not an authenticated end-to-end file transfer. Missing evidence is incomplete.
-   Studio receipts cover the nine hosted destinations; independently verify the five local agent
-   links against the same source revision on their host. Both receipts are required for 14/14.
+   Studio receipts cover the ten hosted destinations; independently verify the five local agent
+   links against the same source revision on their host. Both receipts are required for 15/15.
 7. Attach the resulting receipts to the work item and report checked/required counts. Only a
    complete receipt permits a delivered claim. Recheck if source or a target changes.
 

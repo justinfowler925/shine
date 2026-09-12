@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collection",
+  "type": "registry:block",
+  "title": "Collection disclosure",
+  "description": "Summary and adjacent persistent details; more than ten full records start collapsed.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "blocks/collection.tsx",
+      "type": "registry:component",
+      "target": "components/shine/collection.tsx",
+      "content": "\"use client\";\nimport { useId, useState, type ReactNode } from \"react\";\nimport { Button } from \"@/components/ui/button\";\n\n/** Details stay mounted so closing a collection never discards table/editor state. */\nexport function Collection({ title, total, summary, children, revealKey }: {\n  title: string; total: number | null; summary?: ReactNode; children: ReactNode; revealKey?: string;\n}) {\n  const id = useId();\n  const [choice, setChoice] = useState<boolean | null>(null);\n  const [seenReveal, setSeenReveal] = useState(revealKey);\n  if (seenReveal !== revealKey) { setSeenReveal(revealKey); if (revealKey) setChoice(true); }\n  const open = choice ?? (total === null || total <= 10);\n  return <section data-product-pattern=\"collection\" aria-label={title} className=\"min-w-0 space-y-4\">\n    {summary}\n    <div className=\"flex flex-wrap items-center justify-between gap-3\">\n      <h2 className=\"text-lg font-semibold\">{title} <span className=\"font-normal text-muted-foreground\">{total === null ? \"\" : `(${total})`}</span></h2>\n      <Button className=\"min-h-11\" type=\"button\" variant=\"outline\" aria-expanded={open} aria-controls={id} onClick={() => setChoice(!open)}>{open ? \"Hide details\" : \"Show details\"}</Button>\n    </div>\n    <div id={id} hidden={!open}>{children}</div>\n  </section>;\n}\n"
+    }
+  ]
+}

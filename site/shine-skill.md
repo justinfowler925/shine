@@ -5,7 +5,6 @@ description: >-
   component system, complete interaction contracts, and browser proof. Use for UI, UX,
   dashboards, tables, forms, landing pages, charts, email, Lightning, decks, PDFs, or visual polish.
 ---
-
 # Shine
 Build the interface directly in the current Codex task. Do not delegate to a second design agent. Shine's deterministic tools choose and verify; you supply brief-specific design judgment.
 ## Start with one bounded packet
@@ -39,6 +38,7 @@ Every visible icon needs a distinct semantic job: state, action, object type, or
 - New surface: state the information hierarchy and primary workflow in the design spec, then build; ask discovery
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports; follow `references/component-layers.md`: Tailwind owns styling/layout, shadcn owns controls, TanStack owns table state. Detect each independently; reuse product components.
+- Use the packet’s `reusableBlocks` plan and `references/reusable-blocks.md`. Import existing product blocks first; otherwise install the matching finished registry block. Bind actual imports in `shine-reuse.json`; include its check in completion. Do not reconstruct a matching block from primitives.
 - For tables with **more than 10 total rows**, keep meaningful KPIs or an infographic above an adjacent collapsed detail table. Count the full dataset, not the visible page. Follow `references/table-summary.md` for state, accessibility and drill-down.
 - For record data, reuse the product's shared DataGrid and installed table-state engine.
   Read `references/table-quality.md` and write `shine-tables.json`: shared source, approved
@@ -3485,6 +3485,43 @@ technique will fix.
 
 ---
 
+## Reference: reusable-blocks.md
+
+# Reuse working blocks before composing controls
+
+The template catalog supplies page structure. The block registry supplies working React implementations. Do not treat a screenshot, blueprint, or TanStack adapter as an installed block.
+
+Run `node integrations/blocks.mjs --project <consumer> --category <packet-category>` before adding components. The design packet includes the same result under `reusableBlocks`.
+
+1. When a candidate exists, import that exact source. Extend it once for a demonstrated missing capability. Do not install Shine's version beside a working product component.
+2. When no product implementation exists and the page needs the object, install the named registry block with the consumer's shadcn CLI and existing configuration. For example: `npx shadcn@latest add https://shine-blond.vercel.app/r/data-grid.json`. Inspect the proposed dependencies; preserve installed primitives, aliases, Tailwind version/prefix, and tokens. Never use `--overwrite` to replace existing controls. Installation of a block does not require Shine's base/theme.
+3. Configure data, columns, labels, validation and real callbacks. Do not copy the block's implementation into each page. A callback must resolve only after the actual write; errors must reject. Keep business authorization in the consumer.
+4. Bind source reuse and exercise each instance in the product browser. A tested library does not certify its integration.
+
+## Six blocks
+
+- `data-grid`: complete client-side TanStack v8 grid. Requires full dataset, stable row ids, column definitions, column labels, row labels, open action, retry action and empty copy. Optional exact-match column filters and asynchronous bulk action. A failed bulk action retains selection. Sorting, search, column visibility, pagination and row actions use the same implementation everywhere. A server-paged dataset must use the product's server grid; this block must not imply that one fetched page is the full dataset.
+- `collection`: meaningful summary plus adjacent persistent detail region. Counts the full dataset, collapses above ten, preserves mounted child state. Supply a changed `revealKey` when a summary drill-down opens filtered details. Unknown/loading counts expose recovery instead of concealing it.
+- `record-editor`: required/custom/email validation, real asynchronous save, double-submit lock, failed draft retention, discard confirmation, scrollable fields and fixed footer. Mount with `key=record.id`. Supply `returnFocus` when the original opener is removed (for example, moving from a sheet into an editor). Use the product's richer editor for field types this block does not support.
+- `detail-sheet`: installed Sheet primitive with title/description, scrolling content and persistent footer actions.
+- `workspace-tabs`: installed Tabs primitive owns keyboard and accessibility. Inactive panels remain mounted and hidden; draft state survives navigation. Product route navigation remains links, not fake tabs.
+- `async-state`: distinct loading, empty, filtered-empty and error states with required recovery callbacks where applicable.
+
+## Source binding
+
+Write `shine-reuse.json`:
+
+```json
+{"version":1,"bindings":[{"block":"data-grid","source":"src/components/ui/data-grid.tsx","export":"DataGrid","entries":["src/app/accounts/page.tsx","src/app/owners/page.tsx"]}]}
+```
+
+`node integrations/blocks.mjs --project <consumer> --contract shine-reuse.json` checks actual exported sources and TypeScript-resolved import graphs. Competing named implementations fail unless `exceptions` names the different source and a concrete different user job. This source check detects known recurring components; it cannot infer that arbitrarily named code is behaviorally equivalent. Include the packet's `--reuse` argument in aggregate completion so this check is required there.
+
+The browser suite imports generated registry file bodies and real upstream shadcn primitives. It does not use lookalike demo controls. Run `node verify/blocks-browser.mjs` and the consumer's affected workflows after changes. Failed or unrun consumer states remain incomplete.
+
+
+---
+
 ## Reference: salesforce.md
 
 # salesforce.md
@@ -4433,8 +4470,11 @@ Visual similarity and accessibility are necessary but do not establish that a pe
 
 - `cite` is the selected Shadcn, Untitled UI, or other corpus reference. `compare` proves its page structure; this contract proves the selected reference objects exist and work for this product’s job.
 - Each object has a stable selector, the reference role it implements, and a user-facing purpose. All required roles from the reference template must be present.
-- Each flow has at least three observable steps and at least one real user action (`click`, `fill`, or `press`). Screenshot-only, assertion-only, and invented-object flows fail.
-- Valid actions: `click`, `fill`, `press`, `visible`, `hidden`, `text`, and `value`.
+- Each flow has at least three observable steps and at least one real user action (`click`, `fill`, `select`, or `press`). Screenshot-only, assertion-only, and invented-object flows fail.
+- Valid actions: `click`, `fill`, `press`, `select`, `visible`, `hidden`, `text`, `value`, `checked`, `count`, `enabled`, and `disabled`. Every flow needs an observable assertion.
+- Controls revealed later declare `appearsIn: "flow-id"`; that flow must exercise the real selector. Other objects are checked at initial load. Do not add fake visible markers for hidden dialogs or panels.
+- A flow may set `path: "/accounts?view=history"` to navigate within the target origin, or `reset: true` to reload. Flows otherwise continue from the previous flow for compatibility.
+- A `click` or `press` step may include `dialog: {"accept": false, "message": "Discard"}` to exercise a real browser confirmation. Missing or unexpected dialogs fail.
 
 Run this after measure and before compare:
 
@@ -5187,9 +5227,9 @@ Run `node verify/media-layout.test.mjs`; it is also included in doctor.
 A skill change is delivered only after its registered destinations serve the same tested release.
 A source merge, local install, deployment READY, public 200, or generated ZIP alone is partial evidence.
 
-The machine-readable population is `distribution.json`. Shine currently requires 14 destinations:
+The machine-readable population is `distribution.json`. Shine currently requires 15 destinations:
 source main; Codex, Cursor and Claude skill links; both compatibility aliases; the public canonical
-skill, self-contained Markdown, plugin and page; the portfolio registry and page; and Nucleus’s server-computed package attestation and access boundary. Historical articles retain their dated results and link to the current release.
+skill, self-contained Markdown, plugin, page and complete block registry; the portfolio registry and page; and Nucleus’s server-computed package attestation and access boundary. Historical articles retain their dated results and link to the current release.
 Other skills should adopt the same contract with their own explicit destination inventory; do not
 claim an unregistered skill is covered by Shine's release.
 
@@ -5213,8 +5253,8 @@ claim an unregistered skill is covered by Shine's release.
    timestamp. Anonymous and invalid-cookie requests to the catalog/download must redirect to login.
    No Studio sign-in or protected ZIP download is needed. This establishes package integrity and
    access protection, not an authenticated end-to-end file transfer. Missing evidence is incomplete.
-   Studio receipts cover the nine hosted destinations; independently verify the five local agent
-   links against the same source revision on their host. Both receipts are required for 14/14.
+   Studio receipts cover the ten hosted destinations; independently verify the five local agent
+   links against the same source revision on their host. Both receipts are required for 15/15.
 7. Attach the resulting receipts to the work item and report checked/required counts. Only a
    complete receipt permits a delivered claim. Recheck if source or a target changes.
 
