@@ -7,11 +7,12 @@ import {createHash} from 'node:crypto';
 import {load} from '../verify/deps.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 export const blocks=JSON.parse(readFileSync(join(ROOT,'blocks/catalog.json'),'utf8')).blocks;
+function sourceConfig(root){const path=join(root,'shine-project.json');const value=existsSync(path)?JSON.parse(readFileSync(path,'utf8')):{};for(const item of [...(value.sourceRoots||[]),...(value.tsconfig?[value.tsconfig]:[])]){if(typeof item!=='string'||relative(root,resolve(root,item)).startsWith('..')||!existsSync(resolve(root,item))||relative(root,realpathSync(resolve(root,item))).startsWith('..'))throw Error('Project source configuration must stay inside the project');}return value;}
 const ignored=new Set(['node_modules','.git','.next','dist','build','coverage','.vercel','vendor']);
 export function sourceInventory(project){
  const root=realpathSync(project),ts=load('typescript'),files=[];
  const visit=dir=>{for(const entry of readdirSync(dir,{withFileTypes:true})){if(entry.isSymbolicLink()||ignored.has(entry.name)||entry.name.startsWith('.'))continue;const path=join(dir,entry.name);if(entry.isDirectory())visit(path);else if(/\.[jt]sx?$/.test(path)&&!/(?:\.test|\.spec|\.d)\.[jt]sx?$/.test(path))files.push(path);}};
- for(const dir of ['src','app','components','pages'])if(existsSync(join(root,dir)))visit(join(root,dir));
+ for(const dir of sourceConfig(root).sourceRoots||['src','app','components','pages'])if(existsSync(join(root,dir)))visit(join(root,dir));
  return [...new Set(files)].sort().map(path=>{const source=readFileSync(path,'utf8'),ast=ts.createSourceFile(path,source,ts.ScriptTarget.Latest,true),exports=[];
   for(const node of ast.statements){if(!node.modifiers?.some(mod=>mod.kind===ts.SyntaxKind.ExportKeyword))continue;
    if(ts.isFunctionDeclaration(node)||ts.isClassDeclaration(node)){if(node.name)exports.push(node.name.text);}
@@ -32,7 +33,7 @@ export function planBlocks(project,category=''){
 /** Resolve local imports with the consumer's TypeScript aliases. */
 export function sourceGraph(project){
  const ts=load('typescript'),root=realpathSync(project);
- const config=ts.findConfigFile(root,ts.sys.fileExists,'tsconfig.json');const options=config?ts.parseJsonConfigFileContent(ts.readConfigFile(config,ts.sys.readFile).config,ts.sys,dirname(config)).options:{allowJs:true,moduleResolution:ts.ModuleResolutionKind.Bundler};
+ const declared=sourceConfig(root).tsconfig;const config=declared?join(root,declared):ts.findConfigFile(root,ts.sys.fileExists,'tsconfig.json');const options=config?ts.parseJsonConfigFileContent(ts.readConfigFile(config,ts.sys.readFile).config,ts.sys,dirname(config)).options:{allowJs:true,moduleResolution:ts.ModuleResolutionKind.Bundler};
  return entry=>{const visited=new Set();const walk=file=>{file=realpathSync(file);if(visited.has(file)||file.includes('/node_modules/'))return;visited.add(file);const ast=ts.createSourceFile(file,readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true);const visit=node=>{let spec;if((ts.isImportDeclaration(node)||ts.isExportDeclaration(node))&&node.moduleSpecifier&&ts.isStringLiteral(node.moduleSpecifier))spec=node.moduleSpecifier.text;else if(ts.isCallExpression(node)&&node.expression.kind===ts.SyntaxKind.ImportKeyword&&node.arguments[0]&&ts.isStringLiteral(node.arguments[0]))spec=node.arguments[0].text;if(spec){const resolved=ts.resolveModuleName(spec,file,options,ts.sys).resolvedModule?.resolvedFileName;if(resolved&&!resolved.includes('/node_modules/'))walk(resolved);}ts.forEachChild(node,visit);};visit(ast);};walk(resolve(root,entry));return visited;};
 }
 /** Bind each repeated object to an actual exported component and prove every entry imports it. */

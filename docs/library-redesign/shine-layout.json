@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "ready": "h1",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 1000
+    },
+    {
+      "width": 768,
+      "height": 1000
+    },
+    {
+      "width": 1280,
+      "height": 1000
+    },
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1920,
+      "height": 1000
+    }
+  ],
+  "content": [
+    {
+      "selector": "h1",
+      "text": "A thoughtfully designed foundation for your next ambitious application and every detail that makes it work including record details, collaborative project workflows, reporting, permissions, settings and everything needed to make a confident choice"
+    }
+  ],
+  "checks": [
+    {
+      "id": "page-contained",
+      "type": "no-overflow",
+      "selector": "html"
+    },
+    {
+      "id": "preview-contained",
+      "type": "no-overflow",
+      "selector": ".template-grid"
+    },
+    {
+      "id": "heading-visible",
+      "type": "visible",
+      "selector": "h1"
+    },
+    {
+      "id": "search-visible",
+      "type": "visible",
+      "selector": "input[type=search]"
+    }
+  ],
+  "missingMedia": [
+    ".preview-browser img"
+  ]
+}

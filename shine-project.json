@@ -1,0 +1,8 @@
+{
+  "sourceRoots": [
+    "blocks",
+    "site/library-src",
+    "verify/fixtures/blocks"
+  ],
+  "tsconfig": "verify/fixtures/blocks/tsconfig.json"
+}

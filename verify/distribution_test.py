@@ -62,6 +62,8 @@ class Distribution(unittest.TestCase):
             self.assertEqual(json.loads(out.read_text())['checks']['public-blocks']['status'],'failed')
             with patch.object(dist,'get',side_effect=lambda url:b'{}' if '/api/library-records?' in url else hosted(url)): dist.verify(out)
             self.assertEqual(json.loads(out.read_text())['checks']['public-blocks']['status'],'failed')
+            with patch.object(dist,'get',side_effect=lambda url:b'altered' if url.endswith('/library/previews/system.webp') else hosted(url)): dist.verify(out)
+            self.assertEqual(json.loads(out.read_text())['checks']['public-blocks']['status'],'failed')
             with patch.object(dist,'get',side_effect=lambda url:b'altered' if url.endswith('/library/app.js') else hosted(url)): dist.verify(out)
             self.assertEqual(json.loads(out.read_text())['checks']['public-blocks']['status'],'failed')
 if __name__=='__main__':unittest.main()

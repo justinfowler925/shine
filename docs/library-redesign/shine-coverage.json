@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "patterns": [
+    {
+      "id": "async-state",
+      "decision": "reuse",
+      "source": "blocks/async-state.tsx",
+      "export": "AsyncState",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "collection",
+      "decision": "reuse",
+      "source": "blocks/collection.tsx",
+      "export": "Collection",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "data-grid",
+      "decision": "reuse",
+      "source": "blocks/data-grid.tsx",
+      "export": "DataGrid",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "record-editor",
+      "decision": "reuse",
+      "source": "blocks/record-editor.tsx",
+      "export": "RecordEditor",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "detail-sheet",
+      "decision": "reuse",
+      "source": "blocks/detail-sheet.tsx",
+      "export": "DetailSheet",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "workspace-tabs",
+      "decision": "reuse",
+      "source": "blocks/workspace-tabs.tsx",
+      "export": "WorkspaceTabs",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "application-nav",
+      "decision": "reuse",
+      "source": "blocks/application-nav.tsx",
+      "export": "ApplicationNav",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "filter-bar",
+      "decision": "reuse",
+      "source": "blocks/filter-bar.tsx",
+      "export": "FilterBar",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "date-range",
+      "decision": "reuse",
+      "source": "blocks/date-range.tsx",
+      "export": "DateRange",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "form-panel",
+      "decision": "reuse",
+      "source": "blocks/form-panel.tsx",
+      "export": "FormPanel",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "file-upload",
+      "decision": "reuse",
+      "source": "blocks/file-upload.tsx",
+      "export": "FileUpload",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "notification-center",
+      "decision": "reuse",
+      "source": "blocks/notification-center.tsx",
+      "export": "NotificationCenter",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "calendar-agenda",
+      "decision": "reuse",
+      "source": "blocks/calendar-agenda.tsx",
+      "export": "CalendarAgenda",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "kanban-board",
+      "decision": "reuse",
+      "source": "blocks/kanban-board.tsx",
+      "export": "KanbanBoard",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "record-list-page",
+      "decision": "reuse",
+      "source": "blocks/record-list-page.tsx",
+      "export": "RecordListPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "record-detail-page",
+      "decision": "reuse",
+      "source": "blocks/record-detail-page.tsx",
+      "export": "RecordDetailPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "settings-page",
+      "decision": "reuse",
+      "source": "blocks/settings-page.tsx",
+      "export": "SettingsPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "report-page",
+      "decision": "reuse",
+      "source": "blocks/report-page.tsx",
+      "export": "ReportPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "approval-page",
+      "decision": "reuse",
+      "source": "blocks/approval-page.tsx",
+      "export": "ApprovalPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "application-shell",
+      "decision": "reuse",
+      "source": "blocks/application-shell.tsx",
+      "export": "ApplicationShell",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "command-palette",
+      "decision": "reuse",
+      "source": "blocks/command-palette.tsx",
+      "export": "CommandPalette",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "multi-select",
+      "decision": "reuse",
+      "source": "blocks/multi-select.tsx",
+      "export": "MultiSelect",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "form-wizard",
+      "decision": "reuse",
+      "source": "blocks/form-wizard.tsx",
+      "export": "FormWizard",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "activity-feed",
+      "decision": "reuse",
+      "source": "blocks/activity-feed.tsx",
+      "export": "ActivityFeed",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "comment-thread",
+      "decision": "reuse",
+      "source": "blocks/comment-thread.tsx",
+      "export": "CommentThread",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "attachment-manager",
+      "decision": "reuse",
+      "source": "blocks/attachment-manager.tsx",
+      "export": "AttachmentManager",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "permissions-panel",
+      "decision": "reuse",
+      "source": "blocks/permissions-panel.tsx",
+      "export": "PermissionsPanel",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "chart-panel",
+      "decision": "reuse",
+      "source": "blocks/chart-panel.tsx",
+      "export": "ChartPanel",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "dashboard-page",
+      "decision": "reuse",
+      "source": "blocks/dashboard-page.tsx",
+      "export": "DashboardPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "server-data-grid",
+      "decision": "reuse",
+      "source": "blocks/server-data-grid.tsx",
+      "export": "ServerDataGrid",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "saved-views",
+      "decision": "reuse",
+      "source": "blocks/saved-views.tsx",
+      "export": "SavedViews",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    },
+    {
+      "id": "csv-import",
+      "decision": "reuse",
+      "source": "blocks/csv-import.tsx",
+      "export": "CsvImport",
+      "entries": [
+        "site/library-src/main.tsx"
+      ],
+      "reason": "The gallery imports canonical published registry source through the shared shadcn consumer adapter.",
+      "proofs": [
+        "verify/library-browser.mjs",
+        "verify/system-browser.mjs",
+        "verify/showcase-browser.mjs"
+      ]
+    }
+  ]
+}

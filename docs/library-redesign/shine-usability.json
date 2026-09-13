@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "cite": "shadcn-sidebar-07",
+  "objects": [
+    {
+      "id": "navigation",
+      "selector": "nav[aria-label=\"Library categories\"]",
+      "referenceRole": "navigation",
+      "purpose": "Choose page examples or all reusable patterns"
+    },
+    {
+      "id": "search",
+      "selector": "input[type=search]",
+      "referenceRole": "command",
+      "purpose": "Find the right pattern"
+    },
+    {
+      "id": "previews",
+      "selector": ".template-grid",
+      "referenceRole": "content",
+      "purpose": "Compare actual page previews"
+    },
+    {
+      "id": "object-4",
+      "selector": ".template-card",
+      "referenceRole": "interaction",
+      "purpose": "Find a workspace by its purpose",
+      "appearsIn": "find-template"
+    },
+    {
+      "id": "object-5",
+      "selector": "h1",
+      "referenceRole": "interaction",
+      "purpose": "Find a workspace by its purpose",
+      "appearsIn": "find-template"
+    },
+    {
+      "id": "object-6",
+      "selector": "[data-testid=system-writes]",
+      "referenceRole": "interaction",
+      "purpose": "Inspect the composed workspace without debugging controls",
+      "appearsIn": "public-example"
+    },
+    {
+      "id": "object-7",
+      "selector": "button:has-text(\"Use this pattern\")",
+      "referenceRole": "interaction",
+      "purpose": "Inspect the composed workspace without debugging controls",
+      "appearsIn": "public-example"
+    },
+    {
+      "id": "object-8",
+      "selector": ".source-panel code",
+      "referenceRole": "interaction",
+      "purpose": "Inspect the composed workspace without debugging controls",
+      "appearsIn": "public-example"
+    },
+    {
+      "id": "object-9",
+      "selector": "textarea",
+      "referenceRole": "interaction",
+      "purpose": "Keep a comment draft while inspecting files",
+      "appearsIn": "workspace-tabs"
+    },
+    {
+      "id": "object-10",
+      "selector": "[role=tab]:has-text(\"Files\")",
+      "referenceRole": "interaction",
+      "purpose": "Keep a comment draft while inspecting files",
+      "appearsIn": "workspace-tabs"
+    },
+    {
+      "id": "object-11",
+      "selector": "a:has-text(\"Northstar \u00b7 creative brief.txt\")",
+      "referenceRole": "interaction",
+      "purpose": "Keep a comment draft while inspecting files",
+      "appearsIn": "workspace-tabs"
+    },
+    {
+      "id": "object-12",
+      "selector": "[role=tab]:has-text(\"Overview\")",
+      "referenceRole": "interaction",
+      "purpose": "Keep a comment draft while inspecting files",
+      "appearsIn": "workspace-tabs"
+    }
+  ],
+  "flows": [
+    {
+      "id": "find-template",
+      "userJob": "Find a workspace by its purpose",
+      "reset": true,
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "input[type=search]",
+          "value": "workspace"
+        },
+        {
+          "action": "count",
+          "selector": ".template-card",
+          "value": 1
+        },
+        {
+          "action": "click",
+          "selector": ".template-card"
+        },
+        {
+          "action": "text",
+          "selector": "h1",
+          "value": "Northstar Studio"
+        }
+      ]
+    },
+    {
+      "id": "public-example",
+      "userJob": "Inspect the composed workspace without debugging controls",
+      "path": "/library?view=system",
+      "steps": [
+        {
+          "action": "count",
+          "selector": "[data-testid=system-writes]",
+          "value": 0
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text(\"Use this pattern\")"
+        },
+        {
+          "action": "text",
+          "selector": ".source-panel code",
+          "value": "application-shell.json"
+        }
+      ]
+    },
+    {
+      "id": "workspace-tabs",
+      "userJob": "Keep a comment draft while inspecting files",
+      "path": "/library?view=system",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "textarea",
+          "value": "Design review draft"
+        },
+        {
+          "action": "click",
+          "selector": "[role=tab]:has-text(\"Files\")"
+        },
+        {
+          "action": "visible",
+          "selector": "a:has-text(\"Northstar \u00b7 creative brief.txt\")"
+        },
+        {
+          "action": "click",
+          "selector": "[role=tab]:has-text(\"Overview\")"
+        },
+        {
+          "action": "value",
+          "selector": "textarea",
+          "value": "Design review draft"
+        }
+      ]
+    }
+  ]
+}

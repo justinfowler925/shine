@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "bindings": [
+    {
+      "block": "async-state",
+      "source": "blocks/async-state.tsx",
+      "export": "AsyncState",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "collection",
+      "source": "blocks/collection.tsx",
+      "export": "Collection",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "data-grid",
+      "source": "blocks/data-grid.tsx",
+      "export": "DataGrid",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "record-editor",
+      "source": "blocks/record-editor.tsx",
+      "export": "RecordEditor",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "detail-sheet",
+      "source": "blocks/detail-sheet.tsx",
+      "export": "DetailSheet",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "workspace-tabs",
+      "source": "blocks/workspace-tabs.tsx",
+      "export": "WorkspaceTabs",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "application-nav",
+      "source": "blocks/application-nav.tsx",
+      "export": "ApplicationNav",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "filter-bar",
+      "source": "blocks/filter-bar.tsx",
+      "export": "FilterBar",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "date-range",
+      "source": "blocks/date-range.tsx",
+      "export": "DateRange",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "form-panel",
+      "source": "blocks/form-panel.tsx",
+      "export": "FormPanel",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "file-upload",
+      "source": "blocks/file-upload.tsx",
+      "export": "FileUpload",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "notification-center",
+      "source": "blocks/notification-center.tsx",
+      "export": "NotificationCenter",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "calendar-agenda",
+      "source": "blocks/calendar-agenda.tsx",
+      "export": "CalendarAgenda",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "kanban-board",
+      "source": "blocks/kanban-board.tsx",
+      "export": "KanbanBoard",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "record-list-page",
+      "source": "blocks/record-list-page.tsx",
+      "export": "RecordListPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "record-detail-page",
+      "source": "blocks/record-detail-page.tsx",
+      "export": "RecordDetailPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "settings-page",
+      "source": "blocks/settings-page.tsx",
+      "export": "SettingsPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "report-page",
+      "source": "blocks/report-page.tsx",
+      "export": "ReportPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "approval-page",
+      "source": "blocks/approval-page.tsx",
+      "export": "ApprovalPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "application-shell",
+      "source": "blocks/application-shell.tsx",
+      "export": "ApplicationShell",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "command-palette",
+      "source": "blocks/command-palette.tsx",
+      "export": "CommandPalette",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "multi-select",
+      "source": "blocks/multi-select.tsx",
+      "export": "MultiSelect",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "form-wizard",
+      "source": "blocks/form-wizard.tsx",
+      "export": "FormWizard",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "activity-feed",
+      "source": "blocks/activity-feed.tsx",
+      "export": "ActivityFeed",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "comment-thread",
+      "source": "blocks/comment-thread.tsx",
+      "export": "CommentThread",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "attachment-manager",
+      "source": "blocks/attachment-manager.tsx",
+      "export": "AttachmentManager",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "permissions-panel",
+      "source": "blocks/permissions-panel.tsx",
+      "export": "PermissionsPanel",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "chart-panel",
+      "source": "blocks/chart-panel.tsx",
+      "export": "ChartPanel",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "dashboard-page",
+      "source": "blocks/dashboard-page.tsx",
+      "export": "DashboardPage",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "server-data-grid",
+      "source": "blocks/server-data-grid.tsx",
+      "export": "ServerDataGrid",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "saved-views",
+      "source": "blocks/saved-views.tsx",
+      "export": "SavedViews",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    },
+    {
+      "block": "csv-import",
+      "source": "blocks/csv-import.tsx",
+      "export": "CsvImport",
+      "entries": [
+        "site/library-src/main.tsx"
+      ]
+    }
+  ]
+}
