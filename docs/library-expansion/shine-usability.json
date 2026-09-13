@@ -89,6 +89,202 @@
       "referenceRole": "interaction",
       "purpose": "Find and inspect a teammate",
       "appearsIn": "team"
+    },
+    {
+      "id": "suite-billing-0",
+      "selector": "button:has-text(\"Change plan\")",
+      "referenceRole": "interaction",
+      "purpose": "Choose a plan using the installed form",
+      "appearsIn": "billing"
+    },
+    {
+      "id": "suite-billing-1",
+      "selector": "select[name=plan]",
+      "referenceRole": "interaction",
+      "purpose": "Choose a plan using the installed form",
+      "appearsIn": "billing"
+    },
+    {
+      "id": "suite-billing-2",
+      "selector": "button:has-text(\"Save changes\")",
+      "referenceRole": "interaction",
+      "purpose": "Choose a plan using the installed form",
+      "appearsIn": "billing"
+    },
+    {
+      "id": "suite-billing-3",
+      "selector": ".billing-feature h2",
+      "referenceRole": "interaction",
+      "purpose": "Choose a plan using the installed form",
+      "appearsIn": "billing"
+    },
+    {
+      "id": "suite-help-0",
+      "selector": "input[type=search]",
+      "referenceRole": "interaction",
+      "purpose": "Find the right guide and ask for more help",
+      "appearsIn": "help"
+    },
+    {
+      "id": "suite-help-1",
+      "selector": ".help-article",
+      "referenceRole": "interaction",
+      "purpose": "Find the right guide and ask for more help",
+      "appearsIn": "help"
+    },
+    {
+      "id": "suite-help-2",
+      "selector": "button:has-text(\"I need more help\")",
+      "referenceRole": "interaction",
+      "purpose": "Find the right guide and ask for more help",
+      "appearsIn": "help"
+    },
+    {
+      "id": "suite-help-3",
+      "selector": ".guide-article footer a",
+      "referenceRole": "interaction",
+      "purpose": "Find the right guide and ask for more help",
+      "appearsIn": "help"
+    },
+    {
+      "id": "suite-editor-0",
+      "selector": "input[name=title]",
+      "referenceRole": "interaction",
+      "purpose": "Save a document with correctly associated fields",
+      "appearsIn": "editor"
+    },
+    {
+      "id": "suite-editor-1",
+      "selector": "textarea[name=body]",
+      "referenceRole": "interaction",
+      "purpose": "Save a document with correctly associated fields",
+      "appearsIn": "editor"
+    },
+    {
+      "id": "suite-editor-2",
+      "selector": "button:has-text(\"Save changes\")",
+      "referenceRole": "interaction",
+      "purpose": "Save a document with correctly associated fields",
+      "appearsIn": "editor"
+    },
+    {
+      "id": "suite-editor-3",
+      "selector": ".document-preview h2",
+      "referenceRole": "interaction",
+      "purpose": "Save a document with correctly associated fields",
+      "appearsIn": "editor"
+    },
+    {
+      "id": "suite-account-0",
+      "selector": "input[name=name]",
+      "referenceRole": "interaction",
+      "purpose": "Create the clearly labeled sample profile",
+      "appearsIn": "account"
+    },
+    {
+      "id": "suite-account-1",
+      "selector": "button:has-text(\"Create demo profile\")",
+      "referenceRole": "interaction",
+      "purpose": "Create the clearly labeled sample profile",
+      "appearsIn": "account"
+    },
+    {
+      "id": "suite-account-2",
+      "selector": ".completion-panel",
+      "referenceRole": "interaction",
+      "purpose": "Create the clearly labeled sample profile",
+      "appearsIn": "account"
+    },
+    {
+      "id": "suite-recovery-0",
+      "selector": "button[role=tab]:has-text(\"Connection error\")",
+      "referenceRole": "interaction",
+      "purpose": "Recover from a failed connection",
+      "appearsIn": "recovery"
+    },
+    {
+      "id": "suite-recovery-1",
+      "selector": "button:has-text(\"Retry\")",
+      "referenceRole": "interaction",
+      "purpose": "Recover from a failed connection",
+      "appearsIn": "recovery"
+    },
+    {
+      "id": "suite-recovery-2",
+      "selector": ".completion-panel",
+      "referenceRole": "interaction",
+      "purpose": "Recover from a failed connection",
+      "appearsIn": "recovery"
+    },
+    {
+      "id": "suite-commerce-0",
+      "selector": "button[aria-label=\"Lilac cover\"]",
+      "referenceRole": "interaction",
+      "purpose": "Choose a cover, add to bag and inspect the actual total",
+      "appearsIn": "commerce"
+    },
+    {
+      "id": "suite-commerce-1",
+      "selector": "select[aria-label=\"Product quantity\"]",
+      "referenceRole": "interaction",
+      "purpose": "Choose a cover, add to bag and inspect the actual total",
+      "appearsIn": "commerce"
+    },
+    {
+      "id": "suite-commerce-2",
+      "selector": "button:has-text(\"Add to bag\")",
+      "referenceRole": "interaction",
+      "purpose": "Choose a cover, add to bag and inspect the actual total",
+      "appearsIn": "commerce"
+    },
+    {
+      "id": "suite-commerce-3",
+      "selector": "a:has-text(\"View your bag\")",
+      "referenceRole": "interaction",
+      "purpose": "Choose a cover, add to bag and inspect the actual total",
+      "appearsIn": "commerce"
+    },
+    {
+      "id": "suite-commerce-4",
+      "selector": ".order-summary",
+      "referenceRole": "interaction",
+      "purpose": "Choose a cover, add to bag and inspect the actual total",
+      "appearsIn": "commerce"
+    },
+    {
+      "id": "suite-reuse-0",
+      "selector": "button:has-text(\"Use this pattern\")",
+      "referenceRole": "interaction",
+      "purpose": "Find the whole example source and installed components",
+      "appearsIn": "reuse"
+    },
+    {
+      "id": "suite-reuse-1",
+      "selector": ".source-panel a:has-text(\"View complete example source\")",
+      "referenceRole": "interaction",
+      "purpose": "Find the whole example source and installed components",
+      "appearsIn": "reuse"
+    },
+    {
+      "id": "suite-reuse-2",
+      "selector": ".source-panel a:has-text(\"Browse installable components\")",
+      "referenceRole": "interaction",
+      "purpose": "Find the whole example source and installed components",
+      "appearsIn": "reuse"
+    },
+    {
+      "id": "suite-reuse-3",
+      "selector": ".pattern-card",
+      "referenceRole": "interaction",
+      "purpose": "Find the whole example source and installed components",
+      "appearsIn": "reuse"
+    },
+    {
+      "id": "suite-reuse-grid",
+      "selector": ".pattern-grid",
+      "referenceRole": "content",
+      "purpose": "Browse reusable patterns",
+      "appearsIn": "reuse"
     }
   ],
   "flows": [
@@ -157,6 +353,179 @@
           "action": "text",
           "selector": "[role=dialog]",
           "value": "Portland"
+        }
+      ]
+    },
+    {
+      "id": "billing",
+      "path": "/library?view=billing",
+      "userJob": "Choose a plan using the installed form",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "button:has-text(\"Change plan\")"
+        },
+        {
+          "action": "select",
+          "selector": "select[name=plan]",
+          "value": "solo"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text(\"Save changes\")"
+        },
+        {
+          "action": "text",
+          "selector": ".billing-feature h2",
+          "value": "Solo"
+        }
+      ]
+    },
+    {
+      "id": "help",
+      "path": "/library?view=help",
+      "userJob": "Find the right guide and ask for more help",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "input[type=search]",
+          "value": "plan"
+        },
+        {
+          "action": "click",
+          "selector": ".help-article"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text(\"I need more help\")"
+        },
+        {
+          "action": "visible",
+          "selector": ".guide-article footer a"
+        }
+      ]
+    },
+    {
+      "id": "editor",
+      "path": "/library?view=editor",
+      "userJob": "Save a document with correctly associated fields",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "input[name=title]",
+          "value": "A finished system"
+        },
+        {
+          "action": "fill",
+          "selector": "textarea[name=body]",
+          "value": "A useful source for every next page."
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text(\"Save changes\")"
+        },
+        {
+          "action": "text",
+          "selector": ".document-preview h2",
+          "value": "A finished system"
+        }
+      ]
+    },
+    {
+      "id": "account",
+      "path": "/library?view=signup",
+      "userJob": "Create the clearly labeled sample profile",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "input[name=name]",
+          "value": "Jordan"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text(\"Create demo profile\")"
+        },
+        {
+          "action": "text",
+          "selector": ".completion-panel",
+          "value": "You\u2019re ready to explore."
+        }
+      ]
+    },
+    {
+      "id": "recovery",
+      "path": "/library?view=status",
+      "userJob": "Recover from a failed connection",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "button[role=tab]:has-text(\"Connection error\")"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text(\"Retry\")"
+        },
+        {
+          "action": "text",
+          "selector": ".completion-panel",
+          "value": "Connection restored."
+        }
+      ]
+    },
+    {
+      "id": "commerce",
+      "path": "/library?view=product",
+      "userJob": "Choose a cover, add to bag and inspect the actual total",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "button[aria-label=\"Lilac cover\"]"
+        },
+        {
+          "action": "select",
+          "selector": "select[aria-label=\"Product quantity\"]",
+          "value": "2"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text(\"Add to bag\")"
+        },
+        {
+          "action": "click",
+          "selector": "a:has-text(\"View your bag\")"
+        },
+        {
+          "action": "text",
+          "selector": ".order-summary",
+          "value": "64"
+        }
+      ]
+    },
+    {
+      "id": "reuse",
+      "path": "/library?view=landing",
+      "userJob": "Find the whole example source and installed components",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "button:has-text(\"Use this pattern\")"
+        },
+        {
+          "action": "visible",
+          "selector": ".source-panel a:has-text(\"View complete example source\")"
+        },
+        {
+          "action": "click",
+          "selector": ".source-panel a:has-text(\"Browse installable components\")"
+        },
+        {
+          "action": "visible",
+          "selector": ".pattern-grid"
+        },
+        {
+          "action": "count",
+          "selector": ".pattern-card",
+          "value": 32
         }
       ]
     }

@@ -2,7 +2,7 @@
   "version": 1,
   "job": "Expand the approved interface collection",
   "category": "dashboard",
-  "primaryTask": "Browse and use project planning, activity and team examples.",
+  "primaryTask": "Choose and reuse a complete page example across application, account, public website and commerce workflows.",
   "before": {
     "artifact": "site/library-src/showcase.tsx",
     "screenshot": "/Users/justinfowler/Projects/shine-delivery-2026-09-12/designed-library/catalog-1440.png"
@@ -40,11 +40,72 @@
       "assertions": [
         "flow:team"
       ]
+    },
+    {
+      "id": "application-suite",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "Missing composed billing, knowledge and editing pages",
+      "evidence": "Original eight-page catalog has no billing, help or document editor preview",
+      "expectedEffect": "Use complete shared-component application workflows",
+      "assertions": [
+        "flow:billing",
+        "flow:help",
+        "flow:editor"
+      ]
+    },
+    {
+      "id": "account-recovery",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "Missing complete account and recovery examples",
+      "evidence": "Original catalog has forms but no account journey or recovery page",
+      "expectedEffect": "Demonstrate profile entry and useful error recovery",
+      "assertions": [
+        "flow:account",
+        "flow:recovery"
+      ]
+    },
+    {
+      "id": "commerce-suite",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "No complete shopping flow",
+      "evidence": "Original catalog has no product, bag or checkout",
+      "expectedEffect": "Choose a product and see the actual selected variant, quantity and total",
+      "assertions": [
+        "flow:commerce"
+      ]
+    },
+    {
+      "id": "reuse-path",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "Composed examples need truthful source guidance",
+      "evidence": "A single block install command cannot recreate a complete composed page",
+      "expectedEffect": "Open composition source and browse the actual installable blocks",
+      "assertions": [
+        "flow:reuse"
+      ]
+    },
+    {
+      "id": "suite-layout",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "More page families must preserve the approved catalog at all sizes",
+      "evidence": "30 previews and seven categories increase the catalog density",
+      "expectedEffect": "Keep search, heading and previews contained and readable",
+      "assertions": [
+        "page-contained",
+        "preview-contained",
+        "heading-visible",
+        "search-visible"
+      ]
     }
   ],
   "productPrecedent": {
     "name": "Northstar workspace",
     "reference": "https://shine-blond.vercel.app/library?view=system",
-    "divergences": "Only task-specific content changes; shared shell, cards, typography, actions and tabs are reused."
+    "divergences": "Application examples reuse the Northstar shell and component vocabulary. Public marketing, account and commerce pages use a wider header and editorial composition suited to browsing and purchasing; shared theme, controls, focus and feedback remain consistent."
   }
 }
