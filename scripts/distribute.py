@@ -154,7 +154,10 @@ def verify(receipt):
             data=get(base+('/library' if name=='index.html' else '/library/'+name))
             if sha(data)!=sha((ROOT/'site/library'/name).read_bytes()): raise RuntimeError('hosted library differs: '+name)
             gallery.append({'file':name,'sha256':sha(data)})
-        return {'checked':len(results),'required':len(catalog),'blocks':results,'gallery':gallery}
+        query=urllib.parse.quote(json.dumps({'search':'Account 100000','sorting':[],'pagination':{'pageIndex':0,'pageSize':10}},separators=(',',':')))
+        remote=json.loads(get(base+'/api/library-records?query='+query))
+        if remote.get('sourceRevision')!=expected['sourceRevision'] or remote.get('rowCount')!=1 or len(remote.get('rows',[]))!=1 or remote['rows'][0].get('id')!='100000': raise RuntimeError('hosted remote grid backend is stale or returns the wrong population')
+        return {'checked':len(results),'required':len(catalog),'blocks':results,'gallery':gallery,'remoteGrid':{'sourceRevision':remote['sourceRevision'],'rowCount':remote['rowCount'],'recordId':remote['rows'][0]['id']}}
     probe('public-blocks',public_blocks)
     port=CONFIG['portfolioBase']
     def registry():
