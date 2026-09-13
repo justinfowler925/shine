@@ -9,7 +9,7 @@ node integrations/surface-audit.mjs --project /path/to/product
 A version 1 contract contains `buildHeader` (the deployed source SHA header), `widths`
 (default 390 and 1440), `routes`, and `controlOwners`. Every discovered Next App Router
 page must appear at least once. Route variants may share a source but have distinct ids.
-Each route has an id, source, same-origin URL, requiredStates, and states. Each state has
+Each route has an id, source, same-origin URL, requiredStates, and states. A route or state may declare a same-origin `destination` for an intentional canonical redirect (for example `/` to `/home`); undeclared redirects still fail. Each state has
 an id, optional same-origin path, and browser steps using the existing usability DSL:
 click, fill, press, select, visible, hidden, text, value, checked, count, enabled, disabled.
 Every state needs an observable assertion; non-ready states also need a user action.
