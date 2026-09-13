@@ -29,12 +29,17 @@ export function planBlocks(project,category=''){
   return {id:block.id,kind:block.kind||"block",title:block.title,decision:candidates.length?'reuse':'install-if-needed',candidates,registry:`https://shine-blond.vercel.app/r/${block.id}.json`,source:join(ROOT,`blocks/${block.id}.tsx`),instruction:candidates.length?'Import the existing implementation. Extend it for a demonstrated gap; do not install a competing block.':'Use this block only when the page needs this object. Install through the consumer shadcn CLI; preserve aliases, prefix, tokens and existing primitives.'};
  })};
 }
+/** Resolve local imports with the consumer's TypeScript aliases. */
+export function sourceGraph(project){
+ const ts=load('typescript'),root=realpathSync(project);
+ const config=ts.findConfigFile(root,ts.sys.fileExists,'tsconfig.json');const options=config?ts.parseJsonConfigFileContent(ts.readConfigFile(config,ts.sys.readFile).config,ts.sys,dirname(config)).options:{allowJs:true,moduleResolution:ts.ModuleResolutionKind.Bundler};
+ return entry=>{const visited=new Set();const walk=file=>{file=realpathSync(file);if(visited.has(file)||file.includes('/node_modules/'))return;visited.add(file);const ast=ts.createSourceFile(file,readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true);const visit=node=>{let spec;if((ts.isImportDeclaration(node)||ts.isExportDeclaration(node))&&node.moduleSpecifier&&ts.isStringLiteral(node.moduleSpecifier))spec=node.moduleSpecifier.text;else if(ts.isCallExpression(node)&&node.expression.kind===ts.SyntaxKind.ImportKeyword&&node.arguments[0]&&ts.isStringLiteral(node.arguments[0]))spec=node.arguments[0].text;if(spec){const resolved=ts.resolveModuleName(spec,file,options,ts.sys).resolvedModule?.resolvedFileName;if(resolved&&!resolved.includes('/node_modules/'))walk(resolved);}ts.forEachChild(node,visit);};visit(ast);};walk(resolve(root,entry));return visited;};
+}
 /** Bind each repeated object to an actual exported component and prove every entry imports it. */
 export function verifyReuse(project,contract){
  const ts=load('typescript'),root=realpathSync(project),inventory=sourceInventory(root),errors=[],checked=[];
  if(contract.version!==1||!Array.isArray(contract.bindings)||!contract.bindings.length)throw new Error('reuse contract needs nonempty version 1 bindings');
- const config=ts.findConfigFile(root,ts.sys.fileExists,'tsconfig.json');const options=config?ts.parseJsonConfigFileContent(ts.readConfigFile(config,ts.sys.readFile).config,ts.sys,dirname(config)).options:{allowJs:true,moduleResolution:ts.ModuleResolutionKind.Bundler};
- const graph=entry=>{const visited=new Set();const walk=file=>{file=realpathSync(file);if(visited.has(file)||file.includes('/node_modules/'))return;visited.add(file);const ast=ts.createSourceFile(file,readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true);const visit=node=>{let spec;if((ts.isImportDeclaration(node)||ts.isExportDeclaration(node))&&node.moduleSpecifier&&ts.isStringLiteral(node.moduleSpecifier))spec=node.moduleSpecifier.text;else if(ts.isCallExpression(node)&&node.expression.kind===ts.SyntaxKind.ImportKeyword&&node.arguments[0]&&ts.isStringLiteral(node.arguments[0]))spec=node.arguments[0].text;if(spec){const resolved=ts.resolveModuleName(spec,file,options,ts.sys).resolvedModule?.resolvedFileName;if(resolved&&!resolved.includes('/node_modules/'))walk(resolved);}ts.forEachChild(node,visit);};visit(ast);};walk(resolve(root,entry));return visited;};
+ const graph=sourceGraph(root);
  const ids=new Set();for(const binding of contract.bindings){
   const block=blocks.find(b=>b.id===binding.block);if(!block||ids.has(binding.block)){errors.push(`unknown or duplicate block ${binding.block}`);continue;}ids.add(binding.block);
   const source=inventory.find(file=>file.path===binding.source&&file.exports.includes(binding.export));if(!source){errors.push(`${binding.block}: source must export ${binding.export}`);continue;}
@@ -45,7 +50,7 @@ export function verifyReuse(project,contract){
  }
  return {status:errors.length?'failed':'passed',scannedFiles:inventory.length,bindings:contract.bindings.length,checked,errors};
 }
-if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
+if(process.argv[1]&&existsSync(process.argv[1])&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),opt=n=>args.includes(n)?args[args.indexOf(n)+1]:'';
  try{const result=opt('--contract')?verifyReuse(opt('--project')||process.cwd(),JSON.parse(readFileSync(opt('--contract'),'utf8'))):planBlocks(opt('--project')||process.cwd(),opt('--category'));console.log(JSON.stringify(result,null,2));if(result.status==='failed')process.exitCode=1;}catch(error){console.error(error.message);process.exitCode=1;}
 }

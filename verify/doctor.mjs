@@ -156,7 +156,7 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
 }
 
 {
-  for(const script of ["verify/blocks.test.mjs","verify/coverage.test.mjs","verify/blocks-browser.mjs","verify/library-browser.mjs","verify/usability.test.mjs"]){
+  for(const script of ["verify/blocks.test.mjs","verify/coverage.test.mjs","verify/system-tools.test.mjs","verify/surface-audit-browser.mjs","verify/system-browser.mjs","verify/blocks-browser.mjs","verify/library-browser.mjs","verify/usability.test.mjs"]){
     const result=spawnSync(process.execPath,[join(SHINE,script)],{cwd:SHINE,encoding:"utf8",timeout:120000});
     if(result.status===0)ok(script,result.stdout.trim().slice(-250));else fail(script,`${result.stderr||result.stdout}`.trim().slice(-1200));
   }

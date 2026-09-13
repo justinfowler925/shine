@@ -43,7 +43,7 @@ export function readUsabilityContract(path,{citeId=""}={}) {
   return value;
 }
 
-async function runStep(page,step) {
+export async function runStep(page,step) {
   const locator=page.locator(step.selector).first();
   if(step.action==="click"||step.action==="press") {
     let handled=false,dialogError="",handling;

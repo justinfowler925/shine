@@ -17,6 +17,6 @@ try{
  writeFileSync(join(root,'src/page.tsx'),'import {DataGrid} from "./grid";export function Page(){return <DataGrid/>}');writeFileSync(join(root,'browser-proof.mjs'),'// executable consumer proof location');
  const pattern=contract.patterns.find(row=>row.id==='data-grid');Object.assign(pattern,{decision:'reuse',source:'src/grid.tsx',export:'DataGrid',entries:['src/page.tsx'],proofs:['browser-proof.mjs'],reason:'The installed product grid owns all record-list behavior.'});assert.equal(verifyCoverage(root,contract).status,'passed');
  pattern.proofs=['missing.mjs'];assert.match(verifyCoverage(root,contract).errors.join('\n'),/executable consumer proof/);pattern.proofs=['browser-proof.mjs'];writeFileSync(join(root,'src/page.tsx'),'export function Page(){return <table/>}');assert.match(verifyCoverage(root,contract).errors.join('\n'),/does not import/);
- const counts=libraryInventory();assert.equal(counts.implementations.blocks,14);assert.equal(counts.implementations.pages,5);assert.equal(counts.references.total,130);
+ const counts=libraryInventory();assert.equal(counts.implementations.blocks,26);assert.equal(counts.implementations.pages,6);assert.equal(counts.references.total,130);
  console.log('coverage PASS: reference/implementation counts, raw control census, missing pattern, false absence, disconnected source and missing proof controls');
 }finally{rmSync(root,{recursive:true,force:true});}

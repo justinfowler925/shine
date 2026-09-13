@@ -1,3 +1,4 @@
+import { SystemLibrary } from "./system";
 import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { ApplicationNav } from "@/components/shine/application-nav";
@@ -18,7 +19,7 @@ const initial = Array.from({ length: 12 }, (_, index) => ({ id: String(index + 1
 const fields = [{ name: "name", label: "Display name", required: true }, { name: "email", label: "Email", type: "email" as const, required: true }, { name: "team", label: "Team", type: "select" as const, required: true, options: [{ value: "operations", label: "Operations" }, { value: "finance", label: "Finance" }] }, { name: "notes", label: "Notes", type: "textarea" as const }, { name: "updates", label: "Receive updates", type: "checkbox" as const }];
 const values = { name: "Morgan", email: "morgan@example.test", team: "operations", notes: "", updates: "true" };
 const wait = () => new Promise(resolve => setTimeout(resolve, 150));
-function Library() {
+function OriginalLibrary() {
  const mode = new URLSearchParams(location.search).get("view") || "components";
  const [loadState, setLoadState] = useState(new URLSearchParams(location.search).get("state") || "ready");
  const asyncProps = { loading: loadState === "loading", error: loadState === "error" ? "Service unavailable." : undefined, onRetry: () => setLoadState("ready") };
@@ -28,7 +29,7 @@ function Library() {
  const [week, setWeek] = useState("2026-09-07"), [cards, setCards] = useState([{ id: "1", title: "Review account", column: "todo", description: "Confirm ownership and supporting evidence." }]);
  const save = async (value: Record<string, string>) => { await wait(); if (fail) throw Error("Save failed. Your draft is still here."); setWrites(current => current + 1); setMessage("Saved " + value.name); };
  const grid = { title: "Accounts", rows, columns: [{ accessorKey: "title", header: "Account" }, { accessorKey: "owner", header: "Owner" }, { accessorKey: "amount", header: "Amount" }], columnLabels: { title: "Account", owner: "Owner", amount: "Amount" }, getRowId: (row: typeof initial[number]) => row.id, rowLabel: (row: typeof initial[number]) => row.title, onRetry: () => setMessage("Records refreshed"), emptyMessage: "No accounts recorded.", summary: <dl className="grid gap-3 sm:grid-cols-3">{[{ label: "Accounts", value: rows.length }, { label: "Pending review", value: rows.filter(row => row.status === "Pending").length }, { label: "Recorded amount", value: new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(rows.reduce((sum, row) => sum + row.amount, 0)) }].map(metric => <div key={metric.label} className="space-y-2 rounded-lg border p-5"><dt className="text-sm text-muted-foreground">{metric.label}</dt><dd className="text-2xl font-semibold tabular-nums">{metric.value}</dd></div>)}</dl> };
- const navigation = ["components", "list", "detail", "settings", "report", "approvals"].map(id => ({ id, label: ({ components: "Blocks", list: "Record list", detail: "Record detail", settings: "Settings", report: "Report", approvals: "Approvals" } as Record<string, string>)[id], href: "?view=" + id }));
+ const navigation = ["components", "list", "detail", "settings", "report", "approvals", "system", "remote", "dashboard"].map(id => ({ id, label: ({ components: "Blocks", list: "Record list", detail: "Record detail", settings: "Settings", report: "Report", approvals: "Approvals", system: "Application workflows", remote: "Remote records", dashboard: "Dashboard" } as Record<string, string>)[id], href: "?view=" + id }));
  return <><ApplicationNav label="Library examples" brand={<a href="?view=components" className="font-semibold">Shine library</a>} current={mode} items={navigation} /><div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 pt-4 text-sm"><p>Interactive examples use fictional, in-memory data.</p><Button type="button" variant="outline" aria-pressed={fail} onClick={() => setFail(value => !value)}>Simulate errors</Button><p data-testid="writes">Successful writes: {writes}</p><p role="status" data-testid="result">{message}</p></div>
  {mode === "list" ? <RecordListPage title="Account register" description="Find a record, inspect its details and save a correction." grid={grid} details={row => <dl><dt>Owner</dt><dd>{row.owner}</dd><dt>Status</dt><dd>{row.status}</dd></dl>} editor={{ fields: [{ name: "title", label: "Account name", required: true }], values: row => ({ title: row.title }), save: async (row, next) => { await wait(); if (fail) throw Error("Save failed. Your draft is still here."); setRows(current => current.map(item => item.id === row.id ? { ...item, title: next.title } : item)); setWrites(current => current + 1); } }} />
  : mode === "detail" ? <RecordDetailPage title="Northstar account" description="Identity, recent activity and accountable edits." back={{ href: "?view=list", label: "Back to accounts" }} facts={[{ label: "Owner", value: "Morgan" }, { label: "Status", value: "Active" }]} activity={[{ id: "1", title: "Ownership confirmed", detail: "Morgan accepted ownership.", dateLabel: "September 12, 2026" }]} editor={{ fields, initialValues: values, onSave: save }} />
@@ -44,3 +45,5 @@ function Library() {
  </>;
 }
 createRoot(document.getElementById("root")!).render(<Library />);
+
+function Library(){const mode=new URLSearchParams(location.search).get("view")||"components";return ["system","remote","dashboard"].includes(mode)?<SystemLibrary mode={mode}/>:<OriginalLibrary/>;}

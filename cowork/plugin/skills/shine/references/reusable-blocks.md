@@ -43,7 +43,7 @@ The interactive library at https://shine-blond.vercel.app/library/ imports the g
 
 ## Coverage before generation
 
-`node integrations/coverage.mjs --project <consumer>` reports reference counts separately from 14 finished blocks and five finished pages, plus an AST census of raw forms, files, dates, searches, navigation and tables. Do not report the reference count as installable coverage.
+`node integrations/coverage.mjs --project <consumer>` reports reference counts separately from 26 finished blocks and six finished pages, plus an AST census of raw forms, files, dates, searches, navigation and tables. Do not report the reference count as installable coverage.
 
 Classify every registry pattern in `shine-coverage.json` with `decision: reuse`, actual exported source, importing entrypoints, named executable proof files and a product rationale. Use `decision: not-needed` only when the workflow is absent; existing matching implementations and raw upload/search/navigation controls cannot be declared absent. An `install` or missing decision is unfinished. The packet requires `--coverage shine-coverage.json` in completion. Source binding and proof locations do not replace running the browser tests.
 
