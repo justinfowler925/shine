@@ -1,0 +1,23 @@
+{
+  "workItem": "d0a69618-3d51-44da-a557-e9d134fca443",
+  "scope": "Complete 30-page demo suite spanning application, account, marketing, commerce and recovery, built with shared Shine components. Real backend integrations remain the consuming application\u2019s responsibility; every demo is labeled and locally functional.",
+  "acceptance": [
+    "30 searchable real page previews",
+    "Project creation validation, inspect and status move",
+    "Notification read state and related record navigation",
+    "Team filter, profile and validated add",
+    "Mobile, dark, keyboard, no errors",
+    "Production and 15 destination verification",
+    "Calendar event creation and date navigation",
+    "Document upload, edit and export",
+    "Onboarding validation and back navigation",
+    "Support ticket creation and replies",
+    "Billing plan changes and invoice export",
+    "Searchable help and readable article",
+    "Marketing contact form and pricing selection",
+    "Clearly simulated login, signup and recovery; no real credentials requested",
+    "Store product choices, cart quantity/removal, checkout validation and confirmation",
+    "Recoverable empty/error/loading states",
+    "Every page: desktop/mobile/dark keyboard and error-free interactions"
+  ]
+}

@@ -1,0 +1,7 @@
+import {useSyncExternalStore} from 'react';
+type Store={value:unknown;listeners:Set<()=>void>};
+const stores=new Map<string,Store>();
+/** One local demo store per key keeps headers, forms and route totals in sync. */
+export function useDemoState<T>(key:string,initial:T){const name='shine-demo-v1:'+key;let store=stores.get(name);if(!store){let value=initial;try{const raw=sessionStorage.getItem(name);if(raw)value=JSON.parse(raw);}catch{/* A blocked or corrupt store falls back to sample data. */}store={value,listeners:new Set()};stores.set(name,store);}const current=store;const value=useSyncExternalStore(listener=>{current.listeners.add(listener);return()=>current.listeners.delete(listener)},()=>current.value as T,()=>initial);const update=(next:T|((current:T)=>T))=>{current.value=typeof next==='function'?(next as (current:T)=>T)(current.value as T):next;try{sessionStorage.setItem(name,JSON.stringify(current.value));}catch{/* In-memory state remains functional. */}current.listeners.forEach(listener=>listener());};return [value,update] as const;}
+export const money=(n:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:Number.isInteger(n)?0:2,maximumFractionDigits:2}).format(n);
+export const downloadText=(name:string,text:string)=>{const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};

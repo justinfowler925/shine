@@ -1,0 +1,482 @@
+{
+  "version": 1,
+  "examples": [
+    {
+      "id": "dashboard",
+      "name": "The overview",
+      "category": "Dashboards",
+      "description": "The numbers, the trend, the next move.",
+      "pattern": "dashboard-page",
+      "eyebrow": "01 / ANALYTICS",
+      "color": "lilac",
+      "source": "site/library-src/showcase.tsx",
+      "blocks": [
+        "dashboard-page"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=dashboard",
+      "kind": "composed-example",
+      "component": "Dashboard"
+    },
+    {
+      "id": "system",
+      "name": "The workspace",
+      "category": "Workspaces",
+      "description": "One account. Every conversation in context.",
+      "pattern": "application-shell",
+      "eyebrow": "02 / COLLABORATION",
+      "color": "peach",
+      "source": "site/library-src/showcase.tsx",
+      "blocks": [
+        "application-shell"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=system",
+      "kind": "composed-example",
+      "component": "Workspace"
+    },
+    {
+      "id": "list",
+      "name": "The register",
+      "category": "Records",
+      "description": "From a thousand rows to the one that matters.",
+      "pattern": "record-list-page",
+      "eyebrow": "03 / OPERATIONS",
+      "color": "blue",
+      "source": "site/library-src/main.tsx",
+      "blocks": [
+        "record-list-page"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=list",
+      "kind": "composed-example",
+      "component": "App"
+    },
+    {
+      "id": "detail",
+      "name": "The record",
+      "category": "Records",
+      "description": "A clear picture, with the detail close at hand.",
+      "pattern": "record-detail-page",
+      "eyebrow": "04 / ACCOUNT DETAIL",
+      "color": "sage",
+      "source": "site/library-src/main.tsx",
+      "blocks": [
+        "record-detail-page"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=detail",
+      "kind": "composed-example",
+      "component": "App"
+    },
+    {
+      "id": "settings",
+      "name": "The settings",
+      "category": "Forms",
+      "description": "Thoughtful defaults. Confident changes.",
+      "pattern": "settings-page",
+      "eyebrow": "05 / PREFERENCES",
+      "color": "rose",
+      "source": "site/library-src/main.tsx",
+      "blocks": [
+        "settings-page"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=settings",
+      "kind": "composed-example",
+      "component": "App"
+    },
+    {
+      "id": "approvals",
+      "name": "The review",
+      "category": "Records",
+      "description": "Evidence first. A considered decision second.",
+      "pattern": "approval-page",
+      "eyebrow": "06 / APPROVALS",
+      "color": "sand",
+      "source": "site/library-src/main.tsx",
+      "blocks": [
+        "approval-page"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=approvals",
+      "kind": "composed-example",
+      "component": "App"
+    },
+    {
+      "id": "report",
+      "name": "The report",
+      "category": "Dashboards",
+      "description": "A useful summary with a path to every source.",
+      "pattern": "report-page",
+      "eyebrow": "07 / REPORTING",
+      "color": "blue",
+      "source": "site/library-src/showcase.tsx",
+      "blocks": [
+        "report-page"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=report",
+      "kind": "composed-example",
+      "component": "StudioReport"
+    },
+    {
+      "id": "remote",
+      "name": "The big picture",
+      "category": "Records",
+      "description": "A hundred thousand records. Still in control.",
+      "pattern": "server-data-grid",
+      "eyebrow": "08 / SERVER DATA",
+      "color": "lilac",
+      "source": "site/library-src/main.tsx",
+      "blocks": [
+        "server-data-grid"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=remote",
+      "kind": "composed-example",
+      "component": "App"
+    },
+    {
+      "id": "projects",
+      "name": "The project board",
+      "category": "Workspaces",
+      "description": "Good work, from the first idea to the finish.",
+      "pattern": "kanban-board",
+      "eyebrow": "09 / PROJECT PLANNING",
+      "color": "peach",
+      "source": "site/library-src/more-examples.tsx",
+      "blocks": [
+        "kanban-board"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=projects",
+      "kind": "composed-example",
+      "component": "Projects"
+    },
+    {
+      "id": "activity",
+      "name": "The pulse",
+      "category": "Workspaces",
+      "description": "Every decision, conversation and small win.",
+      "pattern": "notification-center",
+      "eyebrow": "10 / STUDIO ACTIVITY",
+      "color": "sage",
+      "source": "site/library-src/more-examples.tsx",
+      "blocks": [
+        "notification-center"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=activity",
+      "kind": "composed-example",
+      "component": "ActivityDesk"
+    },
+    {
+      "id": "team",
+      "name": "The team",
+      "category": "Workspaces",
+      "description": "Meet the people who make the work possible.",
+      "pattern": "collection",
+      "eyebrow": "11 / PEOPLE",
+      "color": "lilac",
+      "source": "site/library-src/more-examples.tsx",
+      "blocks": [
+        "collection"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=team",
+      "kind": "composed-example",
+      "component": "TeamDirectory"
+    },
+    {
+      "id": "calendar",
+      "name": "The schedule",
+      "category": "Workspaces",
+      "description": "Make time for the conversations that move things forward.",
+      "pattern": "calendar-agenda",
+      "eyebrow": "12 / SCHEDULING",
+      "color": "sage",
+      "source": "site/library-src/application-suite.tsx",
+      "blocks": [
+        "calendar-agenda",
+        "record-editor",
+        "detail-sheet"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=calendar",
+      "kind": "composed-example",
+      "component": "CalendarPage"
+    },
+    {
+      "id": "files",
+      "name": "The document room",
+      "category": "Workspaces",
+      "description": "A thoughtful home for the source behind the work.",
+      "pattern": "attachment-manager",
+      "eyebrow": "13 / DOCUMENTS",
+      "color": "sand",
+      "source": "site/library-src/application-suite.tsx",
+      "blocks": [
+        "attachment-manager"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=files",
+      "kind": "composed-example",
+      "component": "FilesPage"
+    },
+    {
+      "id": "onboarding",
+      "name": "The beginning",
+      "category": "Forms",
+      "description": "A confident first step, with every detail considered.",
+      "pattern": "form-wizard",
+      "eyebrow": "14 / ONBOARDING",
+      "color": "peach",
+      "source": "site/library-src/application-suite.tsx",
+      "blocks": [
+        "form-wizard"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=onboarding",
+      "kind": "composed-example",
+      "component": "OnboardingPage"
+    },
+    {
+      "id": "support",
+      "name": "The help desk",
+      "category": "Records",
+      "description": "Every question deserves a clear next step.",
+      "pattern": "record-list-page",
+      "eyebrow": "15 / SUPPORT",
+      "color": "blue",
+      "source": "site/library-src/application-suite.tsx",
+      "blocks": [
+        "record-list-page",
+        "record-editor",
+        "comment-thread"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=support",
+      "kind": "composed-example",
+      "component": "SupportPage"
+    },
+    {
+      "id": "billing",
+      "name": "The billing desk",
+      "category": "Records",
+      "description": "Your plan, your usage and no surprises.",
+      "pattern": "collection",
+      "eyebrow": "16 / BILLING",
+      "color": "lilac",
+      "source": "site/library-src/application-suite.tsx",
+      "blocks": [
+        "collection",
+        "form-panel"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=billing",
+      "kind": "composed-example",
+      "component": "BillingPage"
+    },
+    {
+      "id": "help",
+      "name": "The handbook",
+      "category": "Workspaces",
+      "description": "Useful answers, easy to find.",
+      "pattern": "collection",
+      "eyebrow": "17 / KNOWLEDGE",
+      "color": "sage",
+      "source": "site/library-src/application-suite.tsx",
+      "blocks": [
+        "async-state"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=help",
+      "kind": "composed-example",
+      "component": "HelpPage"
+    },
+    {
+      "id": "editor",
+      "name": "The writing room",
+      "category": "Workspaces",
+      "description": "Give the idea a shape and keep a copy.",
+      "pattern": "form-panel",
+      "eyebrow": "18 / DOCUMENT EDITOR",
+      "color": "sand",
+      "source": "site/library-src/application-suite.tsx",
+      "blocks": [
+        "form-panel"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=editor",
+      "kind": "composed-example",
+      "component": "EditorPage"
+    },
+    {
+      "id": "article",
+      "name": "The guide",
+      "category": "Workspaces",
+      "description": "A clear path from a question to an answer.",
+      "pattern": "collection",
+      "eyebrow": "19 / ARTICLE",
+      "color": "peach",
+      "source": "site/library-src/application-suite.tsx",
+      "blocks": [
+        "application-shell"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=article",
+      "kind": "composed-example",
+      "component": "ArticlePage"
+    },
+    {
+      "id": "landing",
+      "name": "The welcome",
+      "category": "Marketing",
+      "description": "A thoughtful introduction to a better working day.",
+      "pattern": "application-nav",
+      "eyebrow": "20 / LANDING PAGE",
+      "color": "lilac",
+      "source": "site/library-src/public-suite.tsx",
+      "blocks": [],
+      "preview": "https://shine-blond.vercel.app/library?view=landing",
+      "kind": "composed-example",
+      "component": "Landing"
+    },
+    {
+      "id": "pricing",
+      "name": "The plans",
+      "category": "Marketing",
+      "description": "Room to grow, with clear choices.",
+      "pattern": "collection",
+      "eyebrow": "21 / PRICING",
+      "color": "blue",
+      "source": "site/library-src/public-suite.tsx",
+      "blocks": [],
+      "preview": "https://shine-blond.vercel.app/library?view=pricing",
+      "kind": "composed-example",
+      "component": "Pricing"
+    },
+    {
+      "id": "contact",
+      "name": "The conversation",
+      "category": "Marketing",
+      "description": "A question, an idea or a new beginning.",
+      "pattern": "form-panel",
+      "eyebrow": "22 / CONTACT",
+      "color": "sage",
+      "source": "site/library-src/public-suite.tsx",
+      "blocks": [
+        "form-panel"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=contact",
+      "kind": "composed-example",
+      "component": "Contact"
+    },
+    {
+      "id": "login",
+      "name": "The sign in",
+      "category": "Account",
+      "description": "A familiar way back to the good work.",
+      "pattern": "form-panel",
+      "eyebrow": "23 / SIGN IN",
+      "color": "peach",
+      "source": "site/library-src/public-suite.tsx",
+      "blocks": [
+        "form-panel"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=login",
+      "kind": "composed-example",
+      "component": "Auth"
+    },
+    {
+      "id": "signup",
+      "name": "The new account",
+      "category": "Account",
+      "description": "A warm welcome and a clear first step.",
+      "pattern": "form-panel",
+      "eyebrow": "24 / SIGN UP",
+      "color": "lilac",
+      "source": "site/library-src/public-suite.tsx",
+      "blocks": [
+        "form-panel"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=signup",
+      "kind": "composed-example",
+      "component": "Auth"
+    },
+    {
+      "id": "recovery",
+      "name": "The fresh start",
+      "category": "Account",
+      "description": "Help people find their way back.",
+      "pattern": "form-panel",
+      "eyebrow": "25 / ACCOUNT RECOVERY",
+      "color": "sand",
+      "source": "site/library-src/public-suite.tsx",
+      "blocks": [
+        "form-panel"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=recovery",
+      "kind": "composed-example",
+      "component": "Auth"
+    },
+    {
+      "id": "status",
+      "name": "The way forward",
+      "category": "Account",
+      "description": "Useful recovery for missing, empty and failed states.",
+      "pattern": "async-state",
+      "eyebrow": "26 / RECOVERY STATES",
+      "color": "blue",
+      "source": "site/library-src/public-suite.tsx",
+      "blocks": [
+        "async-state"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=status",
+      "kind": "composed-example",
+      "component": "StatusPage"
+    },
+    {
+      "id": "store",
+      "name": "The studio shop",
+      "category": "Commerce",
+      "description": "A small collection for a thoughtful day.",
+      "pattern": "collection",
+      "eyebrow": "27 / STOREFRONT",
+      "color": "sand",
+      "source": "site/library-src/public-suite.tsx",
+      "blocks": [],
+      "preview": "https://shine-blond.vercel.app/library?view=store",
+      "kind": "composed-example",
+      "component": "Store"
+    },
+    {
+      "id": "product",
+      "name": "The everyday essential",
+      "category": "Commerce",
+      "description": "The details that make a good choice easier.",
+      "pattern": "workspace-tabs",
+      "eyebrow": "28 / PRODUCT DETAIL",
+      "color": "peach",
+      "source": "site/library-src/public-suite.tsx",
+      "blocks": [],
+      "preview": "https://shine-blond.vercel.app/library?view=product",
+      "kind": "composed-example",
+      "component": "Product"
+    },
+    {
+      "id": "cart",
+      "name": "The shopping bag",
+      "category": "Commerce",
+      "description": "A clear picture before the next step.",
+      "pattern": "collection",
+      "eyebrow": "29 / SHOPPING CART",
+      "color": "sage",
+      "source": "site/library-src/public-suite.tsx",
+      "blocks": [
+        "async-state"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=cart",
+      "kind": "composed-example",
+      "component": "Cart"
+    },
+    {
+      "id": "checkout",
+      "name": "The final details",
+      "category": "Commerce",
+      "description": "A complete sample checkout, through confirmation.",
+      "pattern": "form-panel",
+      "eyebrow": "30 / CHECKOUT",
+      "color": "lilac",
+      "source": "site/library-src/public-suite.tsx",
+      "blocks": [
+        "form-panel"
+      ],
+      "preview": "https://shine-blond.vercel.app/library?view=checkout",
+      "kind": "composed-example",
+      "component": "Cart"
+    }
+  ]
+}

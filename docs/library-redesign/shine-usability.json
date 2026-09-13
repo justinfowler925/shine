@@ -93,7 +93,7 @@
         {
           "action": "fill",
           "selector": "input[type=search]",
-          "value": "workspace"
+          "value": "The workspace"
         },
         {
           "action": "count",
