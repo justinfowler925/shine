@@ -1,0 +1,12 @@
+{
+  "workItem": "d0a69618-3d51-44da-a557-e9d134fca443",
+  "scope": "Three additional complete examples; same 32 canonical patterns; preserve eight approved examples",
+  "acceptance": [
+    "11 searchable real previews",
+    "Project creation validation, inspect and status move",
+    "Notification read state and related record navigation",
+    "Team filter, profile and validated add",
+    "Mobile, dark, keyboard, no errors",
+    "Production and 15 destination verification"
+  ]
+}

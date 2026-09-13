@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "job": "Expand the approved interface collection",
+  "category": "dashboard",
+  "primaryTask": "Browse and use project planning, activity and team examples.",
+  "before": {
+    "artifact": "site/library-src/showcase.tsx",
+    "screenshot": "/Users/justinfowler/Projects/shine-delivery-2026-09-12/designed-library/catalog-1440.png"
+  },
+  "defects": [
+    {
+      "id": "projects",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "No complete project board example",
+      "evidence": "The catalog has eight examples but Kanban only appears in the component lab",
+      "expectedEffect": "Create, inspect and move projects",
+      "assertions": [
+        "flow:projects"
+      ]
+    },
+    {
+      "id": "activity",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "No composed activity inbox",
+      "evidence": "Notifications are available only as a component demo",
+      "expectedEffect": "Review unread notifications alongside related activity",
+      "assertions": [
+        "flow:activity"
+      ]
+    },
+    {
+      "id": "team",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "No complete team directory",
+      "evidence": "The existing workspace shows two collaborators but no directory",
+      "expectedEffect": "Search, filter and inspect teammates",
+      "assertions": [
+        "flow:team"
+      ]
+    }
+  ],
+  "productPrecedent": {
+    "name": "Northstar workspace",
+    "reference": "https://shine-blond.vercel.app/library?view=system",
+    "divergences": "Only task-specific content changes; shared shell, cards, typography, actions and tabs are reused."
+  }
+}

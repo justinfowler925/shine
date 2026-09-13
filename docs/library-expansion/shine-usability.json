@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "cite": "shadcn-sidebar-07",
+  "objects": [
+    {
+      "id": "navigation",
+      "selector": "nav[aria-label=\"Library categories\"]",
+      "referenceRole": "navigation",
+      "purpose": "Choose page examples or all reusable patterns"
+    },
+    {
+      "id": "search",
+      "selector": "input[type=search]",
+      "referenceRole": "command",
+      "purpose": "Find the right pattern"
+    },
+    {
+      "id": "previews",
+      "selector": ".template-grid",
+      "referenceRole": "content",
+      "purpose": "Compare actual page previews"
+    },
+    {
+      "id": "object-3",
+      "selector": "select[aria-label=\"Move Evergreen launch\"]",
+      "referenceRole": "interaction",
+      "purpose": "Move a project through the board",
+      "appearsIn": "projects"
+    },
+    {
+      "id": "object-4",
+      "selector": "section[aria-label=\"In motion\"]",
+      "referenceRole": "interaction",
+      "purpose": "Move a project through the board",
+      "appearsIn": "projects"
+    },
+    {
+      "id": "object-5",
+      "selector": ".workspace-metrics>div:nth-child(2)",
+      "referenceRole": "interaction",
+      "purpose": "Move a project through the board",
+      "appearsIn": "projects"
+    },
+    {
+      "id": "object-6",
+      "selector": "button:has-text(\"Notifications (3)\")",
+      "referenceRole": "interaction",
+      "purpose": "Read all notifications and see the unread count clear",
+      "appearsIn": "activity"
+    },
+    {
+      "id": "object-7",
+      "selector": "button:has-text(\"Mark all read\")",
+      "referenceRole": "interaction",
+      "purpose": "Read all notifications and see the unread count clear",
+      "appearsIn": "activity"
+    },
+    {
+      "id": "object-8",
+      "selector": "[role=dialog]",
+      "referenceRole": "interaction",
+      "purpose": "Read all notifications and see the unread count clear",
+      "appearsIn": "activity"
+    },
+    {
+      "id": "object-9",
+      "selector": "input[type=search]",
+      "referenceRole": "interaction",
+      "purpose": "Find and inspect a teammate",
+      "appearsIn": "team"
+    },
+    {
+      "id": "object-10",
+      "selector": ".teammate",
+      "referenceRole": "interaction",
+      "purpose": "Find and inspect a teammate",
+      "appearsIn": "team"
+    },
+    {
+      "id": "object-11",
+      "selector": "button[aria-label=\"View Riley Chen profile\"]",
+      "referenceRole": "interaction",
+      "purpose": "Find and inspect a teammate",
+      "appearsIn": "team"
+    },
+    {
+      "id": "object-12",
+      "selector": "[role=dialog]",
+      "referenceRole": "interaction",
+      "purpose": "Find and inspect a teammate",
+      "appearsIn": "team"
+    }
+  ],
+  "flows": [
+    {
+      "id": "projects",
+      "path": "/library?view=projects",
+      "userJob": "Move a project through the board",
+      "steps": [
+        {
+          "action": "select",
+          "selector": "select[aria-label=\"Move Evergreen launch\"]",
+          "value": "active"
+        },
+        {
+          "action": "text",
+          "selector": "section[aria-label=\"In motion\"]",
+          "value": "Evergreen launch"
+        },
+        {
+          "action": "text",
+          "selector": ".workspace-metrics>div:nth-child(2)",
+          "value": "3"
+        }
+      ]
+    },
+    {
+      "id": "activity",
+      "path": "/library?view=activity",
+      "userJob": "Read all notifications and see the unread count clear",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "button:has-text(\"Notifications (3)\")"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text(\"Mark all read\")"
+        },
+        {
+          "action": "text",
+          "selector": "[role=dialog]",
+          "value": "0 unread"
+        }
+      ]
+    },
+    {
+      "id": "team",
+      "path": "/library?view=team",
+      "userJob": "Find and inspect a teammate",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "input[type=search]",
+          "value": "Riley"
+        },
+        {
+          "action": "count",
+          "selector": ".teammate",
+          "value": 1
+        },
+        {
+          "action": "click",
+          "selector": "button[aria-label=\"View Riley Chen profile\"]"
+        },
+        {
+          "action": "text",
+          "selector": "[role=dialog]",
+          "value": "Portland"
+        }
+      ]
+    }
+  ]
+}
