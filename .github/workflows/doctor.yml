@@ -52,3 +52,6 @@ jobs:
         run: npm ci --ignore-scripts
       - name: browser interaction, visual proof, and designated consumers
         run: node verify/doctor.mjs --ci --full --quiet
+
+      - name: Complete example suite, every page and workflow
+        run: npm run showcase:test
