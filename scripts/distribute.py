@@ -150,7 +150,7 @@ def verify(receipt):
             if sha(data)!=sha(expected_data): raise RuntimeError('hosted block differs: '+block['id'])
             results.append({'block':block['id'],'sha256':sha(data),'bytes':len(data)})
         gallery=[]
-        for name in ['index.html','app.js','app.css']:
+        for name in ['index.html','app.js','app.css'] + [str(path.relative_to(ROOT/'site/library')) for path in sorted((ROOT/'site/library/previews').glob('*.webp'))]:
             data=get(base+('/library' if name=='index.html' else '/library/'+name))
             if sha(data)!=sha((ROOT/'site/library'/name).read_bytes()): raise RuntimeError('hosted library differs: '+name)
             gallery.append({'file':name,'sha256':sha(data)})

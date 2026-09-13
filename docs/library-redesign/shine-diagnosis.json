@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "job": "Choose and use a complete interface example",
+  "category": "dashboard",
+  "primaryTask": "Browse template previews and inspect a coherent working application.",
+  "before": {
+    "artifact": "verify/fixtures/blocks/system.tsx",
+    "screenshot": "/Users/justinfowler/Projects/shine-delivery-2026-09-12/system-expansion/gallery-final/system-1440.png"
+  },
+  "defects": [
+    {
+      "id": "catalog",
+      "bucket": "usability",
+      "severity": "major",
+      "problem": "No visual browsing or pattern search",
+      "evidence": "Only four links and a long fixture stack",
+      "expectedEffect": "Searchable preview cards and labeled component index",
+      "assertions": [
+        "flow:find-template"
+      ]
+    },
+    {
+      "id": "debug",
+      "bucket": "composition",
+      "severity": "major",
+      "problem": "Test simulations dominate the public page",
+      "evidence": "Simulate errors and write counters precede content",
+      "expectedEffect": "Developer controls only in explicit test lab",
+      "assertions": [
+        "flow:public-example"
+      ]
+    },
+    {
+      "id": "composition",
+      "bucket": "composition",
+      "severity": "major",
+      "problem": "Unrelated workflows stacked without a coherent record or hierarchy",
+      "evidence": "Wizard, comments, attachments and permissions form one long column",
+      "expectedEffect": "Account context, useful summary, tabbed tasks and bounded cards",
+      "assertions": [
+        "flow:workspace-tabs"
+      ]
+    }
+  ]
+}

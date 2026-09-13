@@ -1,0 +1,24 @@
+{
+  "outcome": "A polished visual catalog and complete Northstar application examples, not a public test harness.",
+  "target": "https://shine-blond.vercel.app/library",
+  "scope": [
+    "Catalog for all 32 published patterns",
+    "Complete workspace, dashboard, record and settings examples",
+    "Consistent gallery theme and improved wizard/activity composition",
+    "Developer-only failure simulation"
+  ],
+  "preserve": [
+    "All registry imports and interaction contracts",
+    "Existing test fixtures remain reachable with lab=1",
+    "Nucleus and other consumers keep their own tokens and components"
+  ],
+  "acceptance": [
+    "Search narrows real catalog cards and reset restores population",
+    "All six page templates reachable with source/install instructions",
+    "Workspace tabs preserve drafts; create, comment, attachment and permission actions work",
+    "No debug controls in default public views",
+    "Desktop/mobile screenshots inspected; keyboard, contrast, overflow and errors checked",
+    "Source merged, public deployed, 15 distribution destinations verified"
+  ],
+  "workItem": "ec12dc45-70a7-48c6-b7a0-ad964508c036"
+}
