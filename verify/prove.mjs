@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import {verifySurfaceReceipt} from "../integrations/surface-audit.mjs";
+import {checkCompatibility} from "../integrations/compatibility.mjs";
 import {existsSync,mkdtempSync,readFileSync,realpathSync,rmSync,writeFileSync} from 'node:fs';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
@@ -32,12 +34,15 @@ export function checkDefectAssertions(diagnosis,layout,usability){
  }
  return {status:errors.length?'failed':'passed',assertions:out,failures:errors};
 }
-export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPath,project,commit,buildId,receiptPath,storageState,reusePath,coveragePath}){
+export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPath,project,commit,buildId,receiptPath,storageState,reusePath,coveragePath,surfaceContractPath,surfaceReceiptPath}){
  const temp=mkdtempSync(join(tmpdir(),'shine-completion-')),checks={},evidence={};let observed;
  try{
   coveragePath ||= project && existsSync(join(project,"shine-coverage.json")) ? join(project,"shine-coverage.json") : undefined;
   if(coveragePath){try{checks.patternCoverage=verifyCoverage(project,JSON.parse(readFileSync(coveragePath,"utf8")));}catch(error){checks.patternCoverage={status:"failed",reason:error.message};}}
   if(reusePath){try{const result=verifyReuse(project,JSON.parse(readFileSync(reusePath,'utf8')));checks.componentReuse=result;evidence.reuse=result;}catch(error){checks.componentReuse={status:'failed',reason:error.message};}}
+  surfaceContractPath ||= project && existsSync(join(project,"shine-surfaces.json")) ? join(project,"shine-surfaces.json") : undefined;
+  if(surfaceContractPath){try{checks.surfaceWorkflows=verifySurfaceReceipt(project,JSON.parse(readFileSync(surfaceContractPath,"utf8")),surfaceReceiptPath?JSON.parse(readFileSync(surfaceReceiptPath,"utf8")):null);}catch(error){checks.surfaceWorkflows={status:"failed",reason:error.message};}}
+  if(project&&existsSync(join(project,"shine-installation.json"))){try{const manifest=JSON.parse(readFileSync(join(project,"shine-installation.json"),"utf8"));checks.componentCompatibility=checkCompatibility(project,manifest.blocks.map(block=>block.path));}catch(error){checks.componentCompatibility={status:"failed",reason:error.message};}}
   const measurement=join(temp,'measure.json');
   try{await exec(process.execPath,[join(ROOT,'verify/measure.mjs'),target,'--cite',citeId,'--json',measurement,...(storageState?['--storage-state',storageState]:[])],{maxBuffer:5_000_000,timeout:120000});}catch(error){evidence.measureError=String(error.stderr||error.message).slice(-3000);}
   const measure=existsSync(measurement)?JSON.parse(readFileSync(measurement,'utf8')):null;
@@ -68,7 +73,7 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
 }
 if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),opt=n=>args.includes(n)?args[args.indexOf(n)+1]:undefined;
- const report=await prove({target:args[0],citeId:opt('--cite'),layoutPath:opt('--layout'),usabilityPath:opt('--usability'),diagnosisPath:opt('--diagnosis'),project:opt('--project'),commit:opt('--commit'),buildId:opt('--build-id'),receiptPath:opt('--receipt'),storageState:opt('--storage-state'),reusePath:opt('--reuse'),coveragePath:opt('--coverage')});
+ const report=await prove({target:args[0],citeId:opt('--cite'),layoutPath:opt('--layout'),usabilityPath:opt('--usability'),diagnosisPath:opt('--diagnosis'),project:opt('--project'),commit:opt('--commit'),buildId:opt('--build-id'),receiptPath:opt('--receipt'),storageState:opt('--storage-state'),reusePath:opt('--reuse'),coveragePath:opt('--coverage'),surfaceContractPath:opt('--surface-contract'),surfaceReceiptPath:opt('--surface-receipt')});
  if(opt('--json'))writeFileSync(opt('--json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));process.exit(report.status==='passed'?0:1);
 }

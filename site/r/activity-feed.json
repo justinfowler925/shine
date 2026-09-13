@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "activity-feed",
+  "type": "registry:block",
+  "title": "Activity feed",
+  "description": "Timestamped events with explicit timezone, record links and read recovery.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://shine-blond.vercel.app/r/async-state.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/activity-feed.tsx",
+      "type": "registry:component",
+      "target": "components/shine/activity-feed.tsx",
+      "content": "\"use client\";\nimport { useId } from \"react\";\nimport { AsyncState } from \"@/components/shine/async-state\";\nexport type ActivityEvent={id:string;actor:string;description:string;at:string;href?:string};\nexport function ActivityFeed({title,events,timeZone,loading=false,error,onRetry}:{title:string;events:ActivityEvent[];timeZone:string;loading?:boolean;error?:string;onRetry:()=>void}) {\n const id=useId();const format=new Intl.DateTimeFormat(undefined,{dateStyle:\"medium\",timeStyle:\"short\",timeZone});return <section data-product-pattern=\"activity-feed\" aria-labelledby={id} className=\"space-y-4\"><header><h2 id={id} className=\"text-lg font-semibold\">{title}</h2><p className=\"text-sm text-muted-foreground\">Times in {timeZone}</p></header>{loading?<AsyncState state=\"loading\"/>:error?<AsyncState state=\"error\" message={error} onRetry={onRetry}/>:!events.length?<AsyncState state=\"empty\" message=\"Activity will appear here when changes occur.\"/>:<ol className=\"divide-y divide-border\">{events.map(event=><li key={event.id} className=\"space-y-1 py-4\"><p className=\"break-words text-sm\"><strong>{event.actor}</strong> {event.description}</p><time dateTime={event.at} className=\"text-sm text-muted-foreground\">{Number.isFinite(Date.parse(event.at))?format.format(new Date(event.at)):\"Time unavailable\"}</time>{event.href&&<a href={event.href} className=\"block text-sm underline\">View related record<span className=\"sr-only\">: {event.description}</span></a>}</li>)}</ol>}</section>;\n}\n"
+    }
+  ]
+}

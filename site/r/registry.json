@@ -1084,6 +1084,250 @@
           "target": "components/shine/approval-page.tsx"
         }
       ]
+    },
+    {
+      "name": "application-shell",
+      "type": "registry:block",
+      "title": "Application shell",
+      "description": "Responsive sidebar, breadcrumbs, skip navigation and product actions.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "blocks/application-shell.tsx",
+          "type": "registry:component",
+          "target": "components/shine/application-shell.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command-palette",
+      "type": "registry:block",
+      "title": "Command palette",
+      "description": "cmdk search, grouped actions, keyboard navigation, retained failures and guarded execution.",
+      "dependencies": [
+        "cmdk@^1.1.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "dialog"
+      ],
+      "files": [
+        {
+          "path": "blocks/command-palette.tsx",
+          "type": "registry:component",
+          "target": "components/shine/command-palette.tsx"
+        }
+      ]
+    },
+    {
+      "name": "multi-select",
+      "type": "registry:block",
+      "title": "Searchable multiselect",
+      "description": "cmdk filtering and keyboard navigation, controlled selections and accessible dismissal.",
+      "dependencies": [
+        "cmdk@^1.1.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "dialog"
+      ],
+      "files": [
+        {
+          "path": "blocks/multi-select.tsx",
+          "type": "registry:component",
+          "target": "components/shine/multi-select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "form-wizard",
+      "type": "registry:block",
+      "title": "Form wizard",
+      "description": "Validated steps, retained drafts, review and guarded asynchronous completion.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "https://shine-blond.vercel.app/r/form-panel.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/form-wizard.tsx",
+          "type": "registry:component",
+          "target": "components/shine/form-wizard.tsx"
+        }
+      ]
+    },
+    {
+      "name": "activity-feed",
+      "type": "registry:block",
+      "title": "Activity feed",
+      "description": "Timestamped events with explicit timezone, record links and read recovery.",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://shine-blond.vercel.app/r/async-state.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/activity-feed.tsx",
+          "type": "registry:component",
+          "target": "components/shine/activity-feed.tsx"
+        }
+      ]
+    },
+    {
+      "name": "comment-thread",
+      "type": "registry:block",
+      "title": "Comment thread",
+      "description": "Activity and comments with retained failed drafts and asynchronous posting.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "https://shine-blond.vercel.app/r/activity-feed.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/comment-thread.tsx",
+          "type": "registry:component",
+          "target": "components/shine/comment-thread.tsx"
+        }
+      ]
+    },
+    {
+      "name": "attachment-manager",
+      "type": "registry:block",
+      "title": "Attachment manager",
+      "description": "Validated uploads, source downloads and confirmed asynchronous removal.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "alert-dialog",
+        "https://shine-blond.vercel.app/r/file-upload.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/attachment-manager.tsx",
+          "type": "registry:component",
+          "target": "components/shine/attachment-manager.tsx"
+        }
+      ]
+    },
+    {
+      "name": "permissions-panel",
+      "type": "registry:block",
+      "title": "Permissions panel",
+      "description": "Named permission controls, unsaved access review, guarded persistence and reset.",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://shine-blond.vercel.app/r/form-panel.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/permissions-panel.tsx",
+          "type": "registry:component",
+          "target": "components/shine/permissions-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chart-panel",
+      "type": "registry:block",
+      "title": "Chart panel",
+      "description": "Recharts units and legends, missing values, recovery states and accessible source drill-down.",
+      "dependencies": [
+        "recharts@^3.10.1"
+      ],
+      "registryDependencies": [
+        "https://shine-blond.vercel.app/r/async-state.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/chart-panel.tsx",
+          "type": "registry:component",
+          "target": "components/shine/chart-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dashboard-page",
+      "type": "registry:block",
+      "title": "Dashboard page",
+      "description": "Date range, meaningful linked metrics, chart panels and evidence composition.",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://shine-blond.vercel.app/r/chart-panel.json",
+        "https://shine-blond.vercel.app/r/date-range.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/dashboard-page.tsx",
+          "type": "registry:component",
+          "target": "components/shine/dashboard-page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "server-data-grid",
+      "type": "registry:block",
+      "title": "Server record grid",
+      "description": "TanStack manual pagination, search and sorting, large remote populations, column resizing and retained inline edits.",
+      "dependencies": [
+        "@tanstack/react-table@^8.21.3"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "https://shine-blond.vercel.app/r/async-state.json",
+        "https://shine-blond.vercel.app/r/collection.json",
+        "https://shine-blond.vercel.app/r/filter-bar.json"
+      ],
+      "files": [
+        {
+          "path": "blocks/server-data-grid.tsx",
+          "type": "registry:component",
+          "target": "components/shine/server-data-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "saved-views",
+      "type": "registry:block",
+      "title": "Saved views",
+      "description": "Persisted named views and namespaced URL state with validation and back navigation.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "blocks/saved-views.tsx",
+          "type": "registry:component",
+          "target": "components/shine/saved-views.tsx"
+        }
+      ]
+    },
+    {
+      "name": "csv-import",
+      "type": "registry:block",
+      "title": "CSV import",
+      "description": "Papa Parse bounded import, required headers, row validation, preview and guarded commit.",
+      "dependencies": [
+        "papaparse@^5.5.3",
+        "@types/papaparse@^5.3.16"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "blocks/csv-import.tsx",
+          "type": "registry:component",
+          "target": "components/shine/csv-import.tsx"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "permissions-panel",
+  "type": "registry:block",
+  "title": "Permissions panel",
+  "description": "Named permission controls, unsaved access review, guarded persistence and reset.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://shine-blond.vercel.app/r/form-panel.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/permissions-panel.tsx",
+      "type": "registry:component",
+      "target": "components/shine/permissions-panel.tsx",
+      "content": "\"use client\";\nimport { FormPanel } from \"@/components/shine/form-panel\";\nexport function PermissionsPanel({permissions,granted,onSave}:{permissions:{id:string;label:string;description:string}[];granted:string[];onSave:(granted:string[])=>Promise<void>}) {\n return <div data-product-pattern=\"permissions-panel\"><FormPanel title=\"Permissions\" description=\"Review access before saving. Changes take effect after the server confirms them.\" fields={permissions.map(permission=>({name:permission.id,label:permission.label,help:permission.description,type:\"checkbox\"}))} initialValues={Object.fromEntries(permissions.map(permission=>[permission.id,String(granted.includes(permission.id))]))} onSave={async values=>onSave(permissions.filter(permission=>values[permission.id]===\"true\").map(permission=>permission.id))}/></div>;\n}\n"
+    }
+  ]
+}

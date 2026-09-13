@@ -395,6 +395,271 @@
         "record"
       ],
       "kind": "page"
+    },
+    {
+      "id": "application-shell",
+      "export": "ApplicationShell",
+      "title": "Application shell",
+      "description": "Responsive sidebar, breadcrumbs, skip navigation and product actions.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [],
+      "dependencies": [],
+      "matches": [
+        "ApplicationShell"
+      ],
+      "categories": [
+        "dashboard"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "command-palette",
+      "export": "CommandPalette",
+      "title": "Command palette",
+      "description": "cmdk search, grouped actions, keyboard navigation, retained failures and guarded execution.",
+      "primitives": [
+        "button",
+        "dialog"
+      ],
+      "blocks": [],
+      "dependencies": [
+        "cmdk@^1.1.1"
+      ],
+      "matches": [
+        "CommandPalette"
+      ],
+      "categories": [
+        "dashboard",
+        "record"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "multi-select",
+      "export": "MultiSelect",
+      "title": "Searchable multiselect",
+      "description": "cmdk filtering and keyboard navigation, controlled selections and accessible dismissal.",
+      "primitives": [
+        "button",
+        "dialog"
+      ],
+      "blocks": [],
+      "dependencies": [
+        "cmdk@^1.1.1"
+      ],
+      "matches": [
+        "MultiSelect"
+      ],
+      "categories": [
+        "form",
+        "datagrid"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "form-wizard",
+      "export": "FormWizard",
+      "title": "Form wizard",
+      "description": "Validated steps, retained drafts, review and guarded asynchronous completion.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [
+        "form-panel"
+      ],
+      "dependencies": [],
+      "matches": [
+        "FormWizard"
+      ],
+      "categories": [
+        "form"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "activity-feed",
+      "export": "ActivityFeed",
+      "title": "Activity feed",
+      "description": "Timestamped events with explicit timezone, record links and read recovery.",
+      "primitives": [],
+      "blocks": [
+        "async-state"
+      ],
+      "dependencies": [],
+      "matches": [
+        "ActivityFeed"
+      ],
+      "categories": [
+        "record"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "comment-thread",
+      "export": "CommentThread",
+      "title": "Comment thread",
+      "description": "Activity and comments with retained failed drafts and asynchronous posting.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [
+        "activity-feed"
+      ],
+      "dependencies": [],
+      "matches": [
+        "CommentThread"
+      ],
+      "categories": [
+        "record"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "attachment-manager",
+      "export": "AttachmentManager",
+      "title": "Attachment manager",
+      "description": "Validated uploads, source downloads and confirmed asynchronous removal.",
+      "primitives": [
+        "button",
+        "alert-dialog"
+      ],
+      "blocks": [
+        "file-upload"
+      ],
+      "dependencies": [],
+      "matches": [
+        "AttachmentManager"
+      ],
+      "categories": [
+        "record",
+        "form"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "permissions-panel",
+      "export": "PermissionsPanel",
+      "title": "Permissions panel",
+      "description": "Named permission controls, unsaved access review, guarded persistence and reset.",
+      "primitives": [],
+      "blocks": [
+        "form-panel"
+      ],
+      "dependencies": [],
+      "matches": [
+        "PermissionsPanel"
+      ],
+      "categories": [
+        "form"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "chart-panel",
+      "export": "ChartPanel",
+      "title": "Chart panel",
+      "description": "Recharts units and legends, missing values, recovery states and accessible source drill-down.",
+      "primitives": [],
+      "blocks": [
+        "async-state"
+      ],
+      "dependencies": [
+        "recharts@^3.10.1"
+      ],
+      "matches": [
+        "ChartPanel"
+      ],
+      "categories": [
+        "dashboard"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "dashboard-page",
+      "export": "DashboardPage",
+      "title": "Dashboard page",
+      "description": "Date range, meaningful linked metrics, chart panels and evidence composition.",
+      "primitives": [],
+      "blocks": [
+        "chart-panel",
+        "date-range"
+      ],
+      "dependencies": [],
+      "matches": [
+        "DashboardPage"
+      ],
+      "categories": [
+        "dashboard"
+      ],
+      "kind": "page"
+    },
+    {
+      "id": "server-data-grid",
+      "export": "ServerDataGrid",
+      "title": "Server record grid",
+      "description": "TanStack manual pagination, search and sorting, large remote populations, column resizing and retained inline edits.",
+      "primitives": [
+        "button",
+        "input"
+      ],
+      "blocks": [
+        "async-state",
+        "collection",
+        "filter-bar"
+      ],
+      "dependencies": [
+        "@tanstack/react-table@^8.21.3"
+      ],
+      "matches": [
+        "ServerDataGrid"
+      ],
+      "categories": [
+        "datagrid"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "saved-views",
+      "export": "SavedViews",
+      "title": "Saved views",
+      "description": "Persisted named views and namespaced URL state with validation and back navigation.",
+      "primitives": [
+        "button",
+        "input"
+      ],
+      "blocks": [],
+      "dependencies": [],
+      "matches": [
+        "SavedViews"
+      ],
+      "categories": [
+        "datagrid"
+      ],
+      "kind": "block"
+    },
+    {
+      "id": "csv-import",
+      "export": "CsvImport",
+      "title": "CSV import",
+      "description": "Papa Parse bounded import, required headers, row validation, preview and guarded commit.",
+      "primitives": [
+        "button"
+      ],
+      "blocks": [],
+      "dependencies": [
+        "papaparse@^5.5.3",
+        "@types/papaparse@^5.3.16"
+      ],
+      "matches": [
+        "CsvImport"
+      ],
+      "categories": [
+        "datagrid",
+        "form"
+      ],
+      "kind": "block"
     }
   ]
 }

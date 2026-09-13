@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "workItem": "59c9f1da-4ae0-40b4-a507-fac4d15860f0",
+  "outcome": "Shine chooses and maintains complete existing implementations, discovers every application route and UI control, and requires fresh workflow evidence before an audit can pass.",
+  "scope": ["Route/control census with explicit state contracts and source-bound executable proof receipts", "Library-first product/registry/upstream selection with provenance and availability", "Remote tables, URL and saved views, resizing, inline edits and CSV import previews", "Application shell, command palette, multiselect, wizard, activity, comments, attachments and permissions", "Chart panel and composed dashboard with evidence drill-down", "Consumer compatibility checks and three-way block upgrades preserving local edits"],
+  "preserve": ["Nucleus product components, permissions, data ownership and concurrent main changes", "No production data writes during verification", "No licensed template source in the public distributable", "Tailwind nx prefix and product tokens"],
+  "acceptance": ["Every enumerated route and control is classified and stale/missing/failed proof cannot pass", "Existing components win selection; unavailable upstream options never produce a false install promise", "Each new block works through real callbacks, errors, retry, keyboard and mobile layouts", "Remote table totals and sorting reflect the server population and stale requests cannot overwrite newer results", "Installation detects missing tokens/dependencies; upgrades preserve local changes or report conflicts without overwriting", "Nucleus uses the enforcement and upgrade tooling with actual workflow evidence", "All release checks, clean main deployment, both-host installs and all 15 distribution destinations pass"],
+  "delivery": "Source and consumer PRs, immutable local/Studio installs, public gallery and Nucleus deployment, private source-bound proof receipts."
+}

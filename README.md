@@ -711,4 +711,31 @@ Everything the plan compressed out, kept whole. Loaded only when relevant.
 - **Marketplace installs copy the plugin**, breaking relative `../` refs. Symlink shared files.
 - **Figma's Variables REST API is Enterprise-only**, both directions. Confirm seat status before scoping any Figma work.
 
-The [working interface library](https://shine-blond.vercel.app/library/) contains 14 workflow blocks and 5 composed page templates. The 130 design references are a separate catalog, not 130 installable templates. Consumer `shine-coverage.json` contracts classify all 19 implementations and bind reused product components to real import paths and proof files.
+The [working interface library](https://shine-blond.vercel.app/library/) contains 26 workflow blocks and 6 composed page templates. The 130 design references are a separate catalog, not 130 installable templates. Consumer `shine-coverage.json` contracts classify all 32 implementations and bind reused product components to real import paths and proof files.
+
+
+### Complete application workflows and maintenance
+
+The library now includes a sidebar shell, command palette (cmdk), searchable multiselect,
+validated wizard, activity feed, comments, attachment management, permissions, a server-side
+TanStack grid, saved/URL views, Papa Parse CSV import, Recharts panels and a dashboard composition.
+Run `node verify/system-browser.mjs` for the executable examples. The public remote-record demo
+uses 100,000 fictional server records and returns bounded pages; edits are ephemeral demo data.
+
+`integrations/library-select.mjs` searches product exports before Shine and approved upstream
+providers. A private `shine-providers.local.json` can name an authorized local licensed source
+(`sources: [{id, path, authorization: "authorized-use"}]`); it is ignored and never distributed.
+Shine does not include or purchase Tailwind Plus source. Tailwind owns layout and tokens;
+shadcn/Radix owns accessible controls; TanStack, cmdk, Recharts and Papa Parse own their specialized behavior.
+
+`integrations/surface-audit.mjs` enumerates routes and controls and runs declared route/state
+workflows against the current clean build. `ready` checks are baseline smoke evidence, not a
+claim about other interactions. Owners must name reachable route/state proof. Receipts expire,
+and source, theme, dependency or contract changes invalidate them. See
+[the route/state contract](docs/system-expansion/surface-contract.md).
+
+`integrations/upgrade.mjs` records adapted upstream baselines in `.shine/baselines` and
+`shine-installation.json`. Preview first; `--apply` checks compatibility, preserves nonconflicting
+local edits and refuses all writes on conflicts. `integrations/compatibility.mjs` checks installed
+imports, named exports, prefixes and semantic tokens. Browser theme and accessibility checks
+remain required; static compatibility never substitutes for rendered proof.

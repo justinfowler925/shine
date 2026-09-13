@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+import {readFileSync,existsSync,readdirSync,realpathSync} from 'node:fs';
+import {join,resolve,dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createRequire} from 'node:module';
+import {load} from '../verify/deps.mjs';
+export function checkCompatibility(project,paths,{sources={}}={}){
+ const configPath=join(project,'components.json'),errors=[],checked=[];
+ if(!existsSync(configPath))return {status:'failed',errors:['components.json is required; resolve the product kit first']};
+ const config=JSON.parse(readFileSync(configPath,'utf8')),prefix=config.tailwind?.prefix||'',require=createRequire(join(project,'package.json')),ts=load('typescript');
+ const tsconfig=ts.findConfigFile(project,ts.sys.fileExists,'tsconfig.json');const options=tsconfig?ts.parseJsonConfigFileContent(ts.readConfigFile(tsconfig,ts.sys.readFile).config,ts.sys,dirname(tsconfig)).options:{moduleResolution:ts.ModuleResolutionKind.Bundler,jsx:ts.JsxEmit.ReactJSX};
+ const cssFiles=[];const walk=dir=>{if(!existsSync(dir))return;for(const entry of readdirSync(dir,{withFileTypes:true})){if(entry.isSymbolicLink()||['node_modules','.next','dist'].includes(entry.name))continue;const path=join(dir,entry.name);if(entry.isDirectory())walk(path);else if(path.endsWith('.css'))cssFiles.push(path);}};for(const dir of ['src','app','styles'])walk(join(project,dir));if(config.tailwind?.css&&existsSync(join(project,config.tailwind.css)))cssFiles.push(join(project,config.tailwind.css));const css=[...new Set(cssFiles)].map(path=>readFileSync(path,'utf8')).join('\n');
+ for(const path of paths){const source=sources[path]??readFileSync(join(project,path),'utf8'),ast=ts.createSourceFile(path,source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);
+  for(const node of ast.statements){if(!ts.isImportDeclaration(node)||!ts.isStringLiteral(node.moduleSpecifier))continue;const spec=node.moduleSpecifier.text;
+   if(!spec.startsWith('.')&&!spec.startsWith('@/'))try{require.resolve(spec);}catch{errors.push(path+': missing installed dependency '+spec);}
+   if(spec.startsWith('.')||spec.startsWith('@/')){const resolved=ts.resolveModuleName(spec,join(project,path),options,ts.sys).resolvedModule?.resolvedFileName;if(!resolved){errors.push(path+': unresolved component alias '+spec);continue;}const program=ts.createProgram([resolved],options),checker=program.getTypeChecker(),file=program.getSourceFile(resolved),symbol=file&&checker.getSymbolAtLocation(file);const exports=new Set(symbol?checker.getExportsOfModule(symbol).map(item=>item.name):[]);const imports=node.importClause?.namedBindings;if(imports&&ts.isNamedImports(imports))for(const item of imports.elements)if(!exports.has((item.propertyName||item.name).text))errors.push(path+': incompatible component API '+spec+' has no export '+(item.propertyName||item.name).text);}
+  }
+  for(const match of source.matchAll(/className="([^"]+)"/g))for(const token of match[1].split(/\s+/).filter(Boolean)){if(prefix&&!token.startsWith(prefix+':'))errors.push(path+': unprefixed utility '+token);const utility=token.split(':').at(-1),semantic=utility.match(/^(?:bg|text|border|ring|accent)-(background|foreground|muted(?:-foreground)?|primary(?:-foreground)?|secondary(?:-foreground)?|destructive(?:-foreground)?|border|input|ring|card(?:-foreground)?)(?:\/.*)?$/)?.[1];if(semantic&&!new RegExp('--(?:color-)?'+semantic+'\\s*:').test(css))errors.push(path+': missing semantic token '+semantic);}
+  checked.push(path);
+ }
+ const managed=new Set(paths.map(path=>resolve(project,path))),host=ts.createCompilerHost({...options,noEmit:true}),original=host.getSourceFile.bind(host);host.getSourceFile=(file,language,onError,createNew)=>{const key=paths.find(path=>resolve(project,path)===resolve(file));return key&&sources[key]!==undefined?ts.createSourceFile(file,sources[key],language,true,ts.ScriptKind.TSX):original(file,language,onError,createNew);};const program=ts.createProgram([...managed],{...options,noEmit:true},host);for(const diagnostic of ts.getPreEmitDiagnostics(program))if(diagnostic.file&&managed.has(resolve(diagnostic.file.fileName)))errors.push(diagnostic.file.fileName+': '+ts.flattenDiagnosticMessageText(diagnostic.messageText,' '));
+ return {status:errors.length?'failed':'passed',prefix,checked,errors:[...new Set(errors)],scope:'Installed dependencies, component aliases, named exports and consumer TypeScript APIs, literal utilities and semantic tokens. Rendered theme/contrast checks remain mandatory.'};
+}
+if(process.argv[1]&&existsSync(process.argv[1])&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){const a=process.argv.slice(2),i=a.indexOf('--project'),p=resolve(i>=0?a.splice(i,2)[1]:'.'),r=checkCompatibility(p,a);console.log(JSON.stringify(r,null,2));if(r.status==='failed')process.exitCode=1;}

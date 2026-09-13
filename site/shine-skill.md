@@ -19,9 +19,7 @@ dashboard. Read the selected page screenshot and source, then its separate compo
 source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories.
 For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
-`core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`.
-The renderer owns repeated contract mechanics; the spec owns hierarchy, copy, data, and direction.
-Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
+`core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
 constraint. The signature must express this product's job, never generic design decoration.
 For an existing product, render its real components and read `references/diagnose.md`. Complete the packet's
 `shine-diagnosis.json` before editing: primary task, before artifact + screenshot, and 3–8 evidence-backed defects
@@ -37,9 +35,13 @@ Every visible icon needs a distinct semantic job: state, action, object type, or
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports; follow `references/component-layers.md`: Tailwind owns styling/layout, shadcn owns controls, TanStack owns table state. Detect each independently; reuse product components.
 - Use the packet’s `reusableBlocks` plan and `references/reusable-blocks.md`. Import existing product blocks first; otherwise install the matching finished registry block. Bind actual imports in `shine-reuse.json`; include its check in completion. Do not reconstruct a matching block from primitives.
+- Use the packet's `implementationSelection`: inspect matching product exports first, then finished Shine blocks, then available upstream controls. Use `integrations/library-select.mjs --project <path> --job <job>` for a narrower region. Unavailable licensed source is a gap, never permission to copy or a promised installation.
+- For a whole-site audit, run `integrations/surface-audit.mjs --project <path>` before reviewing pages. Write `shine-surfaces.json` covering every discovered route, control owner and required workflow state; prove it with `--contract <file> --run <base-url> --storage-state <private-file> --out <private-receipt>`. Pass `--surface-contract` and `--surface-receipt` to completion. Route readiness is baseline evidence only; declare and exercise interaction, error and recovery states for the workflows under review. Missing, stale, disconnected or wrong-build evidence fails.
+- Track installed registry blocks using `integrations/upgrade.mjs --project <path> --track <block-id> --path <installed-source>`. Review upgrades without `--apply`; applying checks compatibility and performs a three-way merge. Conflicts leave all sources unchanged. Run `integrations/compatibility.mjs --project <path> <installed-sources>` for aliases, dependency, named-export, Tailwind prefix and token checks, then verify actual rendered themes.
 - Read the packet's separate reference, finished-block and finished-page counts. Classify every finished pattern in `shine-coverage.json` using `integrations/coverage.mjs`; bind existing product sources or explain an absent workflow. Include the packet's `--coverage` flag in completion. Raw control census is review evidence, not automatic behavioral proof.
 - For a new list, detail, settings, report or approval page, install the matching finished page template and supply its data/callback contract. Use the working examples at `https://shine-blond.vercel.app/library/`; preserve an existing product page when it already owns the job.
 - For tables with **more than 10 total rows**, keep meaningful KPIs or an infographic above an adjacent collapsed detail table. Count the full dataset, not the visible page. Follow `references/table-summary.md` for state, accessibility and drill-down.
+- Use `server-data-grid` for partial remote datasets, `saved-views` for URL/named views and `csv-import` for validated imports. The client grid never sorts or counts a partial server page as the full population. Use `chart-panel` and `dashboard-page` for units, legends, read states and source drill-down.
 - For record data, reuse the product's shared DataGrid and installed table-state engine.
   Read `references/table-quality.md` and write `shine-tables.json`: shared source, approved
   sibling table, and executable scenarios. Measure and compare both enforce it, including
@@ -65,15 +67,13 @@ exits zero, run product compare when the packet names a product precedent, then 
 never create or edit one. Report the selected template, component implementation, workflow result,
 measure facts, screenshot, receipt, and anything not completed.
 Use the packet's exact `verify/measure.mjs` and `verify/compare.mjs` invocations; do not rebuild flags.
-## Usability is executable, not inferred from craft
 After choosing the reference template, read `references/usability.md`. Before painting, write
 `shine-usability.json` beside the surface: map each user-facing object to the selected reference
 role and express the primary job as browser steps. Run `node verify/usability.mjs <url|page>
 --contract shine-usability.json --cite <selected-template>` after measure and before compare.
 Do not claim usability from contrast, axe or visual comparison. Static dashboards, decorative controls and flows without observable changes fail.
 ## Layout and completion proof
-For broadcast/video use media; for publications use editorial. A chat demo cannot supply TV structure. Reject quarantined references; legacy `not_tested` captures need validated recapture, never manual relabeling.
-Read `../docs/media-layout-proof.md`; write `shine-layout.json` for narrow through wide widths, long content, missing images, loaded media and enlarged text. Measure frame, caption, controls and unused space together; media never exempts its wrapper.
+For broadcast/video use media; for publications use editorial. A chat demo cannot supply TV structure. Reject quarantined references; legacy `not_tested` captures need validated recapture, never manual relabeling. Read `../docs/media-layout-proof.md`; write `shine-layout.json` for narrow through wide widths, long content, missing images, loaded media and enlarged text. Measure frame, caption, controls and unused space together; media never exempts its wrapper.
 Bind critical/major diagnosis defects to executable layout assertion ids or `flow:<id>`. Run the packet’s completion command. Only `verify/prove.mjs` issues overall completion proof: every required category must pass; `not_tested` is incomplete. Browser proof requires a clean source commit and matching rendered commit/build identity.
 Inspect narrow and wide screenshots. Synthetic loading proves geometry, not provider playback or script quality. Separately review spoken summaries for complete sentences, source fidelity and distinction from written coverage; report limitations.
 Skill changes must satisfy `../docs/distribution-dod.md` and every destination in `../distribution.json`; source merge or local install alone is not delivery.
@@ -3532,7 +3532,7 @@ The interactive library at https://shine-blond.vercel.app/library/ imports the g
 
 ## Coverage before generation
 
-`node integrations/coverage.mjs --project <consumer>` reports reference counts separately from 14 finished blocks and five finished pages, plus an AST census of raw forms, files, dates, searches, navigation and tables. Do not report the reference count as installable coverage.
+`node integrations/coverage.mjs --project <consumer>` reports reference counts separately from 26 finished blocks and six finished pages, plus an AST census of raw forms, files, dates, searches, navigation and tables. Do not report the reference count as installable coverage.
 
 Classify every registry pattern in `shine-coverage.json` with `decision: reuse`, actual exported source, importing entrypoints, named executable proof files and a product rationale. Use `decision: not-needed` only when the workflow is absent; existing matching implementations and raw upload/search/navigation controls cannot be declared absent. An `install` or missing decision is unfinished. The packet requires `--coverage shine-coverage.json` in completion. Source binding and proof locations do not replace running the browser tests.
 

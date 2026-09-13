@@ -1,0 +1,643 @@
+[
+  {
+    "id": "shadcn-accordion",
+    "provider": "shadcn",
+    "capabilities": [
+      "accordion"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/accordion",
+    "registryItem": "accordion"
+  },
+  {
+    "id": "shadcn-alert",
+    "provider": "shadcn",
+    "capabilities": [
+      "alert"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/alert",
+    "registryItem": "alert"
+  },
+  {
+    "id": "shadcn-alert-dialog",
+    "provider": "shadcn",
+    "capabilities": [
+      "alert",
+      "dialog"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/alert-dialog",
+    "registryItem": "alert-dialog"
+  },
+  {
+    "id": "shadcn-avatar",
+    "provider": "shadcn",
+    "capabilities": [
+      "avatar"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/avatar",
+    "registryItem": "avatar"
+  },
+  {
+    "id": "shadcn-badge",
+    "provider": "shadcn",
+    "capabilities": [
+      "badge"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/badge",
+    "registryItem": "badge"
+  },
+  {
+    "id": "shadcn-breadcrumb",
+    "provider": "shadcn",
+    "capabilities": [
+      "breadcrumb"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/breadcrumb",
+    "registryItem": "breadcrumb"
+  },
+  {
+    "id": "shadcn-button",
+    "provider": "shadcn",
+    "capabilities": [
+      "button"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/button",
+    "registryItem": "button"
+  },
+  {
+    "id": "shadcn-calendar",
+    "provider": "shadcn",
+    "capabilities": [
+      "calendar"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/calendar",
+    "registryItem": "calendar"
+  },
+  {
+    "id": "shadcn-card",
+    "provider": "shadcn",
+    "capabilities": [
+      "card"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/card",
+    "registryItem": "card"
+  },
+  {
+    "id": "shadcn-chart",
+    "provider": "shadcn",
+    "capabilities": [
+      "chart"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/chart",
+    "registryItem": "chart"
+  },
+  {
+    "id": "shadcn-checkbox",
+    "provider": "shadcn",
+    "capabilities": [
+      "checkbox"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/checkbox",
+    "registryItem": "checkbox"
+  },
+  {
+    "id": "shadcn-collapsible",
+    "provider": "shadcn",
+    "capabilities": [
+      "collapsible"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/collapsible",
+    "registryItem": "collapsible"
+  },
+  {
+    "id": "shadcn-combobox",
+    "provider": "shadcn",
+    "capabilities": [
+      "combobox"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/combobox",
+    "registryItem": "combobox"
+  },
+  {
+    "id": "shadcn-command",
+    "provider": "shadcn",
+    "capabilities": [
+      "command"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/command",
+    "registryItem": "command"
+  },
+  {
+    "id": "shadcn-context-menu",
+    "provider": "shadcn",
+    "capabilities": [
+      "context",
+      "menu"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/context-menu",
+    "registryItem": "context-menu"
+  },
+  {
+    "id": "shadcn-data-table",
+    "provider": "shadcn",
+    "capabilities": [
+      "data",
+      "table"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/data-table",
+    "registryItem": "data-table"
+  },
+  {
+    "id": "shadcn-dialog",
+    "provider": "shadcn",
+    "capabilities": [
+      "dialog"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/dialog",
+    "registryItem": "dialog"
+  },
+  {
+    "id": "shadcn-drawer",
+    "provider": "shadcn",
+    "capabilities": [
+      "drawer"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/drawer",
+    "registryItem": "drawer"
+  },
+  {
+    "id": "shadcn-dropdown-menu",
+    "provider": "shadcn",
+    "capabilities": [
+      "dropdown",
+      "menu"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/dropdown-menu",
+    "registryItem": "dropdown-menu"
+  },
+  {
+    "id": "shadcn-field",
+    "provider": "shadcn",
+    "capabilities": [
+      "field"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/field",
+    "registryItem": "field"
+  },
+  {
+    "id": "shadcn-input",
+    "provider": "shadcn",
+    "capabilities": [
+      "input"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/input",
+    "registryItem": "input"
+  },
+  {
+    "id": "shadcn-input-otp",
+    "provider": "shadcn",
+    "capabilities": [
+      "input",
+      "otp"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/input-otp",
+    "registryItem": "input-otp"
+  },
+  {
+    "id": "shadcn-label",
+    "provider": "shadcn",
+    "capabilities": [
+      "label"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/label",
+    "registryItem": "label"
+  },
+  {
+    "id": "shadcn-menubar",
+    "provider": "shadcn",
+    "capabilities": [
+      "menubar"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/menubar",
+    "registryItem": "menubar"
+  },
+  {
+    "id": "shadcn-navigation-menu",
+    "provider": "shadcn",
+    "capabilities": [
+      "navigation",
+      "menu"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/navigation-menu",
+    "registryItem": "navigation-menu"
+  },
+  {
+    "id": "shadcn-pagination",
+    "provider": "shadcn",
+    "capabilities": [
+      "pagination"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/pagination",
+    "registryItem": "pagination"
+  },
+  {
+    "id": "shadcn-popover",
+    "provider": "shadcn",
+    "capabilities": [
+      "popover"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/popover",
+    "registryItem": "popover"
+  },
+  {
+    "id": "shadcn-progress",
+    "provider": "shadcn",
+    "capabilities": [
+      "progress"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/progress",
+    "registryItem": "progress"
+  },
+  {
+    "id": "shadcn-radio-group",
+    "provider": "shadcn",
+    "capabilities": [
+      "radio",
+      "group"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/radio-group",
+    "registryItem": "radio-group"
+  },
+  {
+    "id": "shadcn-resizable",
+    "provider": "shadcn",
+    "capabilities": [
+      "resizable"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/resizable",
+    "registryItem": "resizable"
+  },
+  {
+    "id": "shadcn-scroll-area",
+    "provider": "shadcn",
+    "capabilities": [
+      "scroll",
+      "area"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/scroll-area",
+    "registryItem": "scroll-area"
+  },
+  {
+    "id": "shadcn-select",
+    "provider": "shadcn",
+    "capabilities": [
+      "select"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/select",
+    "registryItem": "select"
+  },
+  {
+    "id": "shadcn-separator",
+    "provider": "shadcn",
+    "capabilities": [
+      "separator"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/separator",
+    "registryItem": "separator"
+  },
+  {
+    "id": "shadcn-sheet",
+    "provider": "shadcn",
+    "capabilities": [
+      "sheet"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/sheet",
+    "registryItem": "sheet"
+  },
+  {
+    "id": "shadcn-sidebar",
+    "provider": "shadcn",
+    "capabilities": [
+      "sidebar"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/sidebar",
+    "registryItem": "sidebar"
+  },
+  {
+    "id": "shadcn-skeleton",
+    "provider": "shadcn",
+    "capabilities": [
+      "skeleton"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/skeleton",
+    "registryItem": "skeleton"
+  },
+  {
+    "id": "shadcn-slider",
+    "provider": "shadcn",
+    "capabilities": [
+      "slider"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/slider",
+    "registryItem": "slider"
+  },
+  {
+    "id": "shadcn-sonner",
+    "provider": "shadcn",
+    "capabilities": [
+      "sonner"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/sonner",
+    "registryItem": "sonner"
+  },
+  {
+    "id": "shadcn-switch",
+    "provider": "shadcn",
+    "capabilities": [
+      "switch"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/switch",
+    "registryItem": "switch"
+  },
+  {
+    "id": "shadcn-table",
+    "provider": "shadcn",
+    "capabilities": [
+      "table"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/table",
+    "registryItem": "table"
+  },
+  {
+    "id": "shadcn-tabs",
+    "provider": "shadcn",
+    "capabilities": [
+      "tabs"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/tabs",
+    "registryItem": "tabs"
+  },
+  {
+    "id": "shadcn-textarea",
+    "provider": "shadcn",
+    "capabilities": [
+      "textarea"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/textarea",
+    "registryItem": "textarea"
+  },
+  {
+    "id": "shadcn-toggle",
+    "provider": "shadcn",
+    "capabilities": [
+      "toggle"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/toggle",
+    "registryItem": "toggle"
+  },
+  {
+    "id": "shadcn-tooltip",
+    "provider": "shadcn",
+    "capabilities": [
+      "tooltip"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "open-source",
+    "license": "MIT",
+    "source": "https://ui.shadcn.com/docs/components/radix/tooltip",
+    "registryItem": "tooltip"
+  },
+  {
+    "id": "tailwind-plus-application",
+    "provider": "Tailwind Plus",
+    "capabilities": [
+      "application",
+      "sidebar",
+      "navigation",
+      "form",
+      "table",
+      "dashboard"
+    ],
+    "kits": [
+      "shadcn"
+    ],
+    "access": "licensed",
+    "source": "https://tailwindcss.com/plus/ui-blocks/application-ui"
+  }
+]

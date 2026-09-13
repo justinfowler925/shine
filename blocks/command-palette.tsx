@@ -1,0 +1,11 @@
+"use client";
+import { useRef, useState } from "react";
+import { Command } from "cmdk";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
+export type CommandAction = { id: string; label: string; group: string; keywords?: string[]; disabled?: boolean; run: () => void | Promise<void> };
+/** cmdk owns filtering, active descendants and keyboard navigation; Dialog owns focus. */
+export function CommandPalette({ actions, label = "Search and commands" }: { actions: CommandAction[]; label?: string }) {
+ const [open,setOpen]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(""); const lock=useRef(false);
+ return <Dialog open={open} onOpenChange={value=>{if(!lock.current){setOpen(value);setError("");}}}><DialogTrigger asChild><Button variant="outline">{label}</Button></DialogTrigger><DialogContent data-product-pattern="command-palette"><DialogTitle>{label}</DialogTitle><DialogDescription>Search available actions. Use arrow keys and Enter to choose.</DialogDescription><Command className="min-w-0 space-y-3"><Command.Input aria-label={label} disabled={busy} placeholder="Search…" className="h-11 w-full rounded-md border border-input bg-background px-3"/><Command.List className="max-h-80 overflow-y-auto"><Command.Empty className="p-4 text-sm text-muted-foreground">No matching actions.</Command.Empty>{[...new Set(actions.map(action=>action.group))].map(group=><Command.Group key={group} heading={group} className="space-y-1 text-sm">{actions.filter(action=>action.group===group).map(action=><Command.Item key={action.id} value={action.id} keywords={[action.label,...action.keywords||[]]} disabled={busy||action.disabled} className="cursor-pointer rounded-md px-3 py-3 data-[selected=true]:bg-accent data-[disabled=true]:opacity-50" onSelect={async()=>{if(lock.current)return;lock.current=true;setBusy(true);setError("");try{await action.run();setOpen(false);}catch(cause){setError(cause instanceof Error?cause.message:"Action failed. Try again.");}finally{lock.current=false;setBusy(false);}}}>{action.label}</Command.Item>)}</Command.Group>)}</Command.List></Command><p role="alert" className="text-sm text-destructive">{error}</p><p role="status" className="text-sm">{busy?"Working…":""}</p></DialogContent></Dialog>;
+}
