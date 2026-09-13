@@ -5537,6 +5537,12 @@ html[data-theme=dark] body:has(.showcase) {
 .template-grid {
   align-items: start;
 }
+.catalog-sidebar {
+  overflow-y: auto;
+}
+.catalog-sidebar>* {
+  flex-shrink: 0;
+}
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;

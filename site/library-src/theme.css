@@ -22,3 +22,4 @@
 
 html{color-scheme:light}html[data-theme=dark]{color-scheme:dark}body:has(.showcase){background:#f8f9fb}html[data-theme=dark] body:has(.showcase){background:#1e222c}.preview-open{visibility:hidden;transition:none}.template-card:hover .preview-open,.template-card:focus-visible .preview-open{visibility:visible}@media(max-width:540px){.preview-open{visibility:visible}}.browser-dots>span{display:none}
 .template-grid{align-items:start}
+.catalog-sidebar{overflow-y:auto}.catalog-sidebar>*{flex-shrink:0}
