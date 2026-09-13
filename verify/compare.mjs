@@ -48,6 +48,6 @@ export async function compareArtifact({target,citeId,outPath="/tmp/shine-compare
 if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
   const args=process.argv.slice(2),opt=(f)=>args.includes(f)?args[args.indexOf(f)+1]:""; const target=args.find((a,i)=>!a.startsWith("-")&&(i===0||!args[i-1].startsWith("--"))),citeId=opt("--cite");
   if(!target||!citeId){console.error("usage: node verify/compare.mjs <page|url> --cite <id> [--brief id --lane lane --mode existing --diagnosis file --brand-locked]");process.exit(2)}
-  const result=await compareArtifact({target,citeId,outPath:opt("--out")||"/tmp/shine-compare.png",brief:opt("--brief"),lane:opt("--lane"),mode:opt("--mode")||"new",diagnosisPath:opt("--diagnosis"),tableContractPath:opt("--table-contract"),brandLocked:args.includes("--brand-locked")});
+  const result=await compareArtifact({target,citeId,outPath:opt("--out")||"/tmp/shine-compare.png",brief:opt("--brief"),lane:opt("--lane"),mode:opt("--mode")||"new",diagnosisPath:opt("--diagnosis"),tableContractPath:opt("--table-contract"),brandLocked:args.includes("--brand-locked"),writeReceipt:!/^https?:/.test(target)});
   if(result.report)console.log(result.report); if(result.failures.length){console.error(`compare: not a relative of ${citeId}:`);for(const failure of result.failures)console.error(`  ${failure}`)} process.exit(result.status);
 }

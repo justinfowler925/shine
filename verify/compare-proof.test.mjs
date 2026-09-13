@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
 import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
-import { spawnSync } from "node:child_process";
+import { createServer } from "node:http";
+import { promisify } from "node:util";
+import { execFile, spawnSync } from "node:child_process";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -37,6 +39,9 @@ try {
   const weekly=runTarget(join(repo,"corpus/blueprints/shadcn-weekly-board/reference.html"),"--cite","shadcn-weekly-board");
   assert.equal(weekly.status,0,output(weekly));
   assert.doesNotMatch(output(weekly),/no harvested shot|Refusing to compare against nothing/);
+  const beforeRemote=readFileSync(receipt,"utf8"),server=createServer((request,response)=>{const css=request.url.endsWith("shadcn-zinc.css");response.setHeader("content-type",css?"text/css":"text/html");response.end(readFileSync(join(repo,css?"tokens/voices/shadcn-zinc.css":"corpus/blueprints/shadcn-weekly-board/reference.html")));});
+  await new Promise(resolve=>server.listen(0,"127.0.0.1",resolve));
+  try {const remote=await promisify(execFile)(process.execPath,[compare,`http://127.0.0.1:${server.address().port}/weekly`,"--cite","shadcn-weekly-board","--out",join(dir,"remote.png")],{cwd:repo,env,timeout:60000});assert.doesNotMatch(remote.stdout+remote.stderr,/cannot mint an artifact-bound receipt/);assert.equal(readFileSync(receipt,"utf8"),beforeRemote,"HTTP comparison must leave artifact receipts unchanged; completion belongs to prove.mjs");}finally{await new Promise(resolve=>server.close(resolve));}
   const queue=runTarget(join(repo,"corpus/blueprints/shadcn-queue/reference.html"),"--cite","shadcn-queue");
   assert.equal(queue.status,1,output(queue));
   assert.match(output(queue),/table quality:.*not_tested/);
@@ -44,5 +49,5 @@ try {
   const dashboard=runTarget(join(fixtures,"e2e/brutus-session/after.html"),"--cite","shadcn-dashboard-01");
   assert.equal(dashboard.status,1,output(dashboard));
   assert.match(output(dashboard),/table quality:.*not_tested/);
-  console.log("compare proof PASS: import-safe · baseline 0/0 · 11 seeded branches · receipt fail-closed · weekly-board proof; untested queue and dashboard table proofs rejected");
+  console.log("compare proof PASS: import-safe · baseline 0/0 · 11 seeded branches · receipt fail-closed · weekly-board local/HTTP proof with unchanged receipt; untested queue and dashboard table proofs rejected");
 } finally { rmSync(dir,{recursive:true,force:true}); }
