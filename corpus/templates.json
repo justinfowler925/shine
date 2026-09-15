@@ -3331,9 +3331,10 @@
         "required": [
           "form",
           "navigation"
-        ]
+        ],
+        "captureExpect": "nav[aria-label=\"Settings sections\"] a"
       },
-      "note": "corpus/blueprints/shadcn-settings.md is the region map; corpus/blueprints/shadcn-settings/ is authored shadcn source to copy",
+      "note": "corpus/blueprints/shadcn-settings.md is the region map; corpus/blueprints/shadcn-settings/ is authored shadcn source to copy, and reference.html is that source rendered at rest for capture",
       "scope": "page"
     },
     {

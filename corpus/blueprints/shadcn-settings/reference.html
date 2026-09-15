@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-settings" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Settings reference</title>
+<!--
+  Authored reference for the `settings` screen, rendered static from
+  corpus/blueprints/shadcn-settings/page.tsx. The region map and the reasoning
+  live in corpus/blueprints/shadcn-settings.md; this file exists so the row has
+  real pixels to compare against, the way shadcn-blog and shadcn-queue do.
+
+  It is the page at rest: nothing is dirty, so every Save is disabled and every
+  role="status" carries its resting copy. That is the state a comparison should
+  hold a consumer to — a settings page whose save state only exists after an
+  interaction cannot be measured at load.
+-->
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{font:14px/1.5 ui-sans-serif,system-ui,sans-serif;margin:0;color:#18181b;background:#fff}
+main{max-width:1100px;margin:auto;padding:32px 24px}
+h1{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:0}
+h2{font-size:18px;font-weight:600;margin:0}
+p{margin:0}
+.muted{color:#71717a}
+.sub{margin-top:4px}
+.body{display:flex;flex-wrap:wrap;gap:32px;margin-top:32px;align-items:flex-start}
+/* The section list is the page's table of contents and its search substitute,
+   so every name stays visible at rest. */
+nav{width:208px;flex:none}
+nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+nav a{display:block;border-radius:6px;padding:8px 12px;color:#71717a;text-decoration:none}
+nav a[aria-current=true]{background:#f4f4f5;color:#18181b}
+.sections{flex:1;min-width:0;display:flex;flex-direction:column;gap:40px}
+section{scroll-margin-top:80px}
+hr{border:0;border-top:1px solid #e4e4e7;margin:16px 0 0}
+/* Label, control and helper in one row, not one card each: twelve cards read
+   as twelve equal-weight decisions and triple the page's height. */
+.rows>*+*{border-top:1px solid #e4e4e7}
+.row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:16px 0}
+.row>div:first-child{flex:1;min-width:224px}
+label{display:block;font-weight:500}
+input[type=text],input[type=email],select{font:inherit;height:36px;width:256px;max-width:100%;border:1px solid #e4e4e7;border-radius:6px;padding:0 12px;background:#fff;color:#18181b}
+select{width:160px}
+/* A switch is for a binary that applies immediately; it does not sit under the
+   section's Save, so it lives with the other immediate toggles. */
+.switch{appearance:none;margin:0;width:36px;height:20px;border-radius:999px;background:#e4e4e7;position:relative;cursor:pointer}
+.switch:checked{background:#18181b}
+.switch::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:999px;background:#fff;transition:none}
+.switch:checked::after{left:18px}
+.save{display:flex;align-items:center;gap:12px;padding-top:16px}
+button{font:inherit;font-weight:500;height:32px;padding:0 12px;border-radius:6px;border:0;background:#18181b;color:#fff;cursor:pointer}
+button[disabled]{opacity:.5;cursor:default}
+button.ghost{background:transparent;color:#18181b}
+button.destructive{background:#dc2626}
+.danger{border:1px solid rgba(220,38,38,.4);border-radius:8px;padding:16px;margin-top:16px}
+.danger .fields{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px;margin-top:12px}
+.people{list-style:none;margin:0;padding:0}
+.people li{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+</style>
+<main>
+<header>
+<h1>Settings</h1>
+<p class="muted sub">Changes apply to this workspace only.</p>
+</header>
+
+<div class="body">
+<nav aria-label="Settings sections">
+<ul>
+<li><a href="#account" aria-current="true">Account</a></li>
+<li><a href="#notifications">Notifications</a></li>
+<li><a href="#access">Access</a></li>
+<li><a href="#danger">Danger</a></li>
+</ul>
+</nav>
+
+<div class="sections">
+
+<section id="account">
+<h2>Account</h2>
+<p class="muted sub">Who you are on this workspace and how we reach you.</p>
+<hr>
+<div class="rows">
+<div class="row">
+<div><label for="name">Display name</label><p class="muted sub">Shown on records you own.</p></div>
+<div><input id="name" type="text" value="Morgan Lee"></div>
+</div>
+<div class="row">
+<div><label for="email">Email</label><p class="muted sub">Used for sign-in and every notification below.</p></div>
+<div><input id="email" type="email" value="morgan@example.com"></div>
+</div>
+</div>
+<div class="save">
+<button disabled>Save changes</button>
+<p class="muted" role="status">No changes in this section.</p>
+</div>
+</section>
+
+<section id="notifications">
+<h2>Notifications</h2>
+<p class="muted sub">What we tell you about, and where.</p>
+<hr>
+<div class="rows">
+<div class="row">
+<div><label for="digest">Summary email</label><p class="muted sub">A digest of what changed on your records.</p></div>
+<div><select id="digest"><option>Daily</option><option selected>Weekly</option><option>Never</option></select></div>
+</div>
+<div class="row">
+<div><label for="mentions">Mentions</label><p class="muted sub">When someone names you in a note.</p></div>
+<div><input id="mentions" class="switch" type="checkbox" checked></div>
+</div>
+<div class="row">
+<div><label for="deals">Deal movement</label><p class="muted sub">When a deal you own changes stage.</p></div>
+<div><input id="deals" class="switch" type="checkbox"></div>
+</div>
+</div>
+<div class="save">
+<button disabled>Save changes</button>
+<p class="muted" role="status">No changes in this section.</p>
+</div>
+</section>
+
+<section id="access">
+<h2>Access</h2>
+<p class="muted sub">Who else can read and change this workspace.</p>
+<hr>
+<ul class="people rows">
+<li>
+<div><p style="font-weight:500">Priya Shah</p><p class="muted">Can edit</p></div>
+<button class="ghost">Change</button>
+</li>
+<li>
+<div><p style="font-weight:500">Sam Okafor</p><p class="muted">Can view</p></div>
+<button class="ghost">Change</button>
+</li>
+</ul>
+</section>
+
+<section id="danger">
+<h2>Danger</h2>
+<p class="muted sub">Actions that cannot be undone.</p>
+<div class="danger">
+<p style="font-weight:500">Delete this workspace</p>
+<p class="muted sub">Deletes 1,204 records, 38 saved views, and every audit receipt. Not recoverable.</p>
+<div class="fields">
+<div><label for="confirm">Type the workspace name to confirm</label><input id="confirm" class="sub" type="text" placeholder="Revenue Operations"></div>
+<button class="destructive" disabled>Delete workspace</button>
+</div>
+</div>
+</section>
+
+</div>
+</div>
+</main>
+</html>

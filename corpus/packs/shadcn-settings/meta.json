@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-settings",
+  "source": "corpus/blueprints/shadcn-settings/reference.html",
+  "harvested": "2026-09-15",
+  "bytes": 108465,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "Settings reference",
+    "headings": "Settings\nAccount\nNotifications\nAccess\nDanger",
+    "expectedSelector": "nav[aria-label=\"Settings sections\"] a",
+    "expectedCount": 4,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-settings/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-settings/reference.html",
+    "capturedAt": "2026-09-15T19:06:07.546Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "fd6f79cf73597663bd83d655d7658360cef60895a9c33ff4f4148bdd286d6fcd",
+    "shotSha256": "031ae6114f9ccc2bf47d1e3127a2c86dae0b86f3dfa15e33bfd11f88e5d0ef2a"
+  }
+}
