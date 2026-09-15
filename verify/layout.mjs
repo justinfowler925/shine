@@ -31,12 +31,25 @@ export function readLayoutContract(path){
  if(errors.length)throw new Error(errors.join('; '));
  return {...value,viewports,states};
 }
-// A media descendant does not exempt its occupied wrapper from unused-space checks.
-export async function mediaWaste(page){return page.evaluate(()=>{
+// A media descendant does not exempt its occupied wrapper from unused-space
+// checks. It also does not turn a document into a media frame. The finding is
+// that a frame reserves height its media never fills, so it applies where
+// media accounts for the box's occupied content — not to a report, article or
+// any other text document that happens to carry a picture, where the trailing
+// space sits below prose and is a page-layout matter, not a starved frame.
+// Two things scope it: MEDIA_SHARE, and the author's own declaration that an
+// image is decorative.
+export const MEDIA_SHARE=.25;
+export async function mediaWaste(page){return page.evaluate(share=>{
  const visible=e=>{const r=e.getBoundingClientRect(),s=getComputedStyle(e);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden';};
+ // alt="", aria-hidden or role=presentation is the author stating the picture
+ // carries no content. A brand mark at the head of a long report is not the
+ // subject of a media-frame finding, and a screen reader is already told so.
+ // Such an image still occupies space, so it counts toward where content ends.
+ const decorative=e=>e.getAttribute('aria-hidden')==='true'||/^(presentation|none)$/.test(e.getAttribute('role')||'')||(e.tagName==='IMG'&&e.getAttribute('alt')==='');
  const found=[],seen=new Set();
  for(const media of document.querySelectorAll('video,img,canvas')){
-  if(!visible(media))continue;
+  if(!visible(media)||decorative(media))continue;
   let box=media.parentElement;
   for(let depth=0;box&&depth<4&&box!==document.body;depth++,box=box.parentElement){
    // A shell containing the page's main landmark is not a media frame.
@@ -45,16 +58,26 @@ export async function mediaWaste(page){return page.evaluate(()=>{
    const main=box.querySelector('main,[role=main]'),nav=box.querySelector('nav,[role=navigation]');
    if(main&&nav&&!main.contains(nav))break;
    if(seen.has(box)||!visible(box))continue;seen.add(box);
-   const r=box.getBoundingClientRect();let bottom=media.getBoundingClientRect().bottom;
-   for(const leaf of box.querySelectorAll('img,video,canvas'))if(visible(leaf))bottom=Math.max(bottom,leaf.getBoundingClientRect().bottom);
+   const r=box.getBoundingClientRect();let bottom=media.getBoundingClientRect().bottom,top=media.getBoundingClientRect().top,base=bottom;
+   for(const leaf of box.querySelectorAll('img,video,canvas')){
+    if(!visible(leaf))continue;
+    const lr=leaf.getBoundingClientRect();base=Math.max(base,lr.bottom);
+    if(decorative(leaf))continue;
+    top=Math.min(top,lr.top);bottom=Math.max(bottom,lr.bottom);
+   }
    const walker=document.createTreeWalker(box,NodeFilter.SHOW_TEXT);
-   while(walker.nextNode()){const node=walker.currentNode;if(!node.textContent.trim()||!visible(node.parentElement)||/^(SCRIPT|STYLE)$/.test(node.parentElement.tagName))continue;const range=document.createRange();range.selectNodeContents(node);for(const rect of range.getClientRects())bottom=Math.max(bottom,rect.bottom);}
-   const padding=parseFloat(getComputedStyle(box).paddingBottom)||0,gap=r.bottom-bottom-padding;
+   while(walker.nextNode()){const node=walker.currentNode;if(!node.textContent.trim()||!visible(node.parentElement)||/^(SCRIPT|STYLE)$/.test(node.parentElement.tagName))continue;const range=document.createRange();range.selectNodeContents(node);for(const rect of range.getClientRects())base=Math.max(base,rect.bottom);}
+   // Where the box's content ends, and how much of that the media accounts
+   // for. Below a quarter the box is carrying something else — text, records,
+   // a form — and its trailing space is not unfilled media.
+   const occupied=base-r.top;
+   if(occupied<=0||(bottom-top)/occupied<share)continue;
+   const padding=parseFloat(getComputedStyle(box).paddingBottom)||0,gap=r.bottom-base-padding;
    if(gap>64&&gap*r.width>innerWidth*innerHeight*.03)found.push({selector:box.id?'#'+box.id:box.tagName.toLowerCase()+'.'+[...box.classList].join('.'),gap:Math.round(gap*100)/100,area:gap*r.width});
   }
  }
  return found;
-});}
+},MEDIA_SHARE);}
 async function exactlyOne(page,selector){const locator=page.locator(selector);const count=await locator.count();if(count!==1)throw new Error(`${selector}: expected one element, found ${count}`);return locator;}
 async function mutate(page,contract,state){
  if(state==='long-content')for(const item of contract.content)await (await exactlyOne(page,item.selector)).evaluate((el,text)=>{el.textContent=text;},item.text);
