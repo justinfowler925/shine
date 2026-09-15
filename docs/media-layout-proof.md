@@ -14,7 +14,16 @@ pixels across baseline, long-content, missing-media, media-loaded and large-text
 Assertions support gap bounds, aspect ratio, visibility and overflow. Missing or ambiguous targets
 fail. The verifier also detects unused space in media ancestors independently of named assertions.
 Use bounding edges between the actual frame/caption/controls, not a convenient outer card that
-would conceal the defect. Synthetic canvas streams test intrinsic video dimensions and loading;
+would conceal the defect.
+
+That finding is about a frame reserving height its media never fills, so it is scoped to boxes
+where media accounts for at least a quarter of the occupied content. A document is allowed to
+carry a picture: a report or article that opens with a brand mark and then runs for pages of
+prose is not a starved frame, and the space under its last paragraph is a page-layout matter.
+An image marked `alt=""`, `aria-hidden="true"` or `role="presentation"` is decorative by the
+author's own declaration and is not counted as media, though it still counts toward where the
+box's content ends. Neither escape launders a real defect: a media-dominated box is still
+measured, and a decorative image sitting beside a real one does not exempt the frame. Synthetic canvas streams test intrinsic video dimensions and loading;
 they do not prove the real provider connects or that spoken scripts are correct.
 
 Each critical or major diagnosis defect needs a stable `id` and an `assertions` array containing

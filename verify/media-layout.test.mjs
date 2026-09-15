@@ -57,6 +57,25 @@ try{
  assert.deepEqual(await mediaWaste(page),[],'application shell whitespace is not unused logo media space');
  await page.setContent(`<div style="min-height:1200px"><nav><img src="${logo}" alt="Product"></nav><main><h1>Broadcast</h1><section id="empty-player-wrapper" style="height:900px"><img src="${logo}" alt="Poster"></section></main></div>`);
  assert.ok((await mediaWaste(page)).some(row=>row.selector==='#empty-player-wrapper'),'the shell boundary must not exempt empty content media wrappers');
+
+ // A document is allowed to carry a picture. A report that opens with a brand
+ // mark and then runs for pages of prose is not a frame starved of media, and
+ // the trailing space under its last paragraph is a page-layout matter. The
+ // finding needs media to account for the box's occupied content.
+ const prose='<p>'+'Recorded against the register. '.repeat(40)+'</p>';
+ await page.setContent(`<article id="report" style="height:2600px"><header><img src="${logo}" alt="Clearspeed"><span>Confidential</span></header><h1>Project readout</h1>${prose.repeat(6)}</article>`);
+ assert.deepEqual(await mediaWaste(page),[],'a long text document with a brand mark is not unfilled media space');
+ // The same document with the media actually dominating it is still measured.
+ await page.setContent(`<article id="framed" style="height:2600px"><img src="${logo}" alt="Poster" style="width:600px;height:1200px"><p>One line of caption.</p></article>`);
+ assert.ok((await mediaWaste(page)).some(row=>row.selector==='#framed'),'a media-dominated box keeps its unused-space finding');
+ // An image the author declares decorative is not media to be starved of room.
+ await page.setContent(`<main><section id="decorative-only" style="height:900px"><img src="${logo}" alt="" style="width:600px;height:200px"></section></main>`);
+ assert.deepEqual(await mediaWaste(page),[],'alt="" declares a picture decorative');
+ await page.setContent(`<main><section id="hidden-only" style="height:900px"><img src="${logo}" alt="Poster" aria-hidden="true" style="width:600px;height:200px"></section></main>`);
+ assert.deepEqual(await mediaWaste(page),[],'aria-hidden declares a picture decorative');
+ // ...but a decorative image cannot launder a real starved frame beside it.
+ await page.setContent(`<main><section id="mixed" style="height:900px"><img src="${logo}" alt="" style="width:600px;height:60px"><img src="${logo}" alt="Poster" style="width:600px;height:200px"></section></main>`);
+ assert.ok((await mediaWaste(page)).some(row=>row.selector==='#mixed'),'a decorative sibling does not exempt real media');
  await page.setContent('<main><h1>Records</h1><dialog><video hidden></video></dialog></main>');
  assert.equal(await activeSurfaceVideos(page),0,'a closed dialog is a separate workflow');
  await page.locator('dialog').evaluate(dialog=>dialog.showModal());
@@ -83,5 +102,5 @@ try{
  const absentReceipt=join(temp,'absent.json'),incompleteReport=await prove({...options,layoutPath:undefined,receiptPath:absentReceipt});assert.notEqual(incompleteReport.status,'passed');assert.equal(existsSync(absentReceipt),false);
  await new Promise(r=>server.close(r));server=null;
  writeFileSync(join(project,'app.html'),'changed');assert.ok(validateCompletionReceipt(receipt,project).length);
- console.log('media layout PASS: 25 content/media/viewport scenarios; old 442px-gap class rejected; hard and soft 404s quarantined; executable defects; missing-proof and stale-build receipts rejected');
+ console.log('media layout PASS: 25 content/media/viewport scenarios; old 442px-gap class rejected; documents with a brand mark exempt while media-dominated frames and decorative-laundered ones are not; hard and soft 404s quarantined; executable defects; missing-proof and stale-build receipts rejected');
 }finally{if(browser)await browser.close();if(server)await new Promise(r=>server.close(r));rmSync(temp,{recursive:true,force:true});}
