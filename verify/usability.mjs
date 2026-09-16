@@ -9,7 +9,7 @@ import { load } from "./deps.mjs";
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const fail=(message)=>{throw new Error(`usability: ${message}`)};
 const requiredActions=new Set(["click","fill","press","select"]);
-const actions=new Set([...requiredActions,"visible","hidden","text","value","checked","count","enabled","disabled"]);
+const actions=new Set([...requiredActions,"visible","hidden","text","value","checked","count","enabled","disabled","focused"]);
 
 export function readUsabilityContract(path,{citeId=""}={}) {
   if(!path||!existsSync(path)) fail("missing --contract <shine-usability.json>");
@@ -29,7 +29,7 @@ export function readUsabilityContract(path,{citeId=""}={}) {
     if(!flow.steps.some(step=>requiredActions.has(step.action))) errors.push(`flow ${flow.id} has no user action`);
     for(const step of flow.steps) if(!step.action||!step.selector) errors.push(`flow ${flow.id} has a step without action or selector`);
     for(const step of flow.steps) if(!actions.has(step.action))errors.push(`flow ${flow.id} has unknown action ${step.action}`);
-    if(!flow.steps.some(step=>["text","value","checked","count","visible","hidden","enabled","disabled"].includes(step.action)))errors.push(`flow ${flow.id} needs an observable outcome`);
+    if(!flow.steps.some(step=>["text","value","checked","count","visible","hidden","enabled","disabled","focused"].includes(step.action)))errors.push(`flow ${flow.id} needs an observable outcome`);
     if(flow.path&&(!flow.path.startsWith("/")||flow.path.startsWith("//")))errors.push(`flow ${flow.id} path must be same-origin and absolute`);
   }
   if(errors.length) fail(errors.join("; "));
@@ -60,6 +60,7 @@ export async function runStep(page,step) {
   if(step.action==="text") { const expected=step.value||""; await locator.filter({hasText:expected}).waitFor({state:"visible"}); const actual=await locator.textContent(); if(!String(actual||"").includes(expected)) fail(`${step.selector} text did not contain ${JSON.stringify(expected)}`); return; }
   if(step.action==="value") { const actual=await locator.inputValue(); if(actual!==(step.value??"")) fail(`${step.selector} value was ${JSON.stringify(actual)}, expected ${JSON.stringify(step.value??"")}`); return; }
   if(step.action==="count"){if(await page.locator(step.selector).count()!==step.value)fail(`${step.selector} count differs from ${step.value}`);return;}
+  if(step.action==="focused"){const actual=await locator.evaluate(el=>el===document.activeElement);if(actual!==(step.value??true))fail(step.selector+" focused differs");return;}
   if(["checked","enabled","disabled"].includes(step.action)){const actual=step.action==="checked"?await locator.isChecked():step.action==="enabled"?await locator.isEnabled():await locator.isDisabled();if(actual!==(step.value??true))fail(`${step.selector} ${step.action} differs`);return;}
   fail(`unknown action ${step.action}`);
 }

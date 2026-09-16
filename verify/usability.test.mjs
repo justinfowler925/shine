@@ -16,6 +16,7 @@ try {
  writeFileSync(page,'<input id="capture"><div id="queue">No work</div><script>capture.onkeydown=e=>{if(e.key==="Enter")queue.textContent=capture.value}</script>');
  writeFileSync(contract,JSON.stringify(base));
  const result=await proveUsability({target:page,contractPath:contract,citeId:"untitled-table"}); assert.equal(result.status,0); assert.equal(result.flows[0].id,"capture-work");
+ const focus=structuredClone(base);focus.flows[0].steps.push({action:"focused",selector:"#capture"});writeFileSync(contract,JSON.stringify(focus));assert.equal((await proveUsability({target:page,contractPath:contract})).status,0);focus.flows[0].steps.at(-1).selector="#queue";writeFileSync(contract,JSON.stringify(focus));await assert.rejects(()=>proveUsability({target:page,contractPath:contract}),/focused differs/);
  const staticWall=structuredClone(base); staticWall.flows[0].steps[2].value="Never appears"; writeFileSync(contract,JSON.stringify(staticWall));
  await assert.rejects(()=>proveUsability({target:page,contractPath:contract,citeId:"untitled-table"}),/capture-work step 3/);
  const wrongRole=structuredClone(base);wrongRole.objects[0].referenceRole="summary";assert.throws(()=>readUsabilityContract(contract,{citeId:"shadcn-dashboard-01"}),/does not match/);writeFileSync(contract,JSON.stringify(wrongRole));assert.throws(()=>readUsabilityContract(contract),/requires a table object/);
