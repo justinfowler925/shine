@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-marketing",
+  "source": "corpus/blueprints/shadcn-marketing/reference.html",
+  "harvested": "2026-09-16",
+  "bytes": 226592,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "Marketing page reference",
+    "headings": "Every claims decision, with the reasoning that produced it\nMeasured with customers, not modelled\nHow it works\nWhat it does\nPricing\nEvery claims decision, with the reasoning that produced it",
+    "expectedSelector": "[data-region=\"pricing\"] .tier",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-marketing/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-marketing/reference.html",
+    "capturedAt": "2026-09-16T20:05:46.591Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "bfa48b604f39f63485f314dbd08c768802a6c58c81410cf8472a19e0f66a4b8f",
+    "shotSha256": "6bd047f099f215d0b04115cae8aef819195767cc8be8dd688ba2ae389d8987f0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "windmill-charts",
+  "source": "https://windmill-dashboard-react.vercel.app/app/charts",
+  "harvested": "2026-09-16",
+  "bytes": 81445,
+  "capture": {
+    "status": 200,
+    "title": "Windmill Dashboard",
+    "headings": "Charts",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 15,
+    "expectedText": "",
+    "sourceUrl": "https://windmill-dashboard-react.vercel.app/app/charts",
+    "finalUrl": "https://windmill-dashboard-react.vercel.app/app/charts",
+    "capturedAt": "2026-09-16T19:55:02.276Z",
+    "expectedTextMatched": false,
+    "shotSha256": "6fb93aa800a0dbbf140097e20d287683ce745f9dafbda0c5381447c0087a9338"
+  }
+}

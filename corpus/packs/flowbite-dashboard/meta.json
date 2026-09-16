@@ -1,0 +1,19 @@
+{
+  "id": "flowbite-dashboard",
+  "source": "https://flowbite-admin-dashboard.vercel.app/",
+  "harvested": "2026-09-16",
+  "bytes": 641378,
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS Admin Dashboard - Flowbite",
+    "headings": "",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 172,
+    "expectedText": "",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/",
+    "capturedAt": "2026-09-16T19:55:19.058Z",
+    "expectedTextMatched": false,
+    "shotSha256": "38e1e06b4b596a52061db1b78ad8d5bd4d1b1aa7b81a60c16ecb21a3d76bed78"
+  }
+}

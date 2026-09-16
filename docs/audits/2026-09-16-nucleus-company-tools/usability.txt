@@ -1,0 +1,17 @@
+{
+  "status": 0,
+  "cite": "tailadmin-tables",
+  "objects": 10,
+  "flows": [
+    {
+      "id": "find-shine",
+      "userJob": "Narrow the library to Shine and clear the search to get everything back",
+      "steps": 6
+    },
+    {
+      "id": "filter-agent",
+      "userJob": "Show only the two packages that run in Cursor",
+      "steps": 5
+    }
+  ]
+}

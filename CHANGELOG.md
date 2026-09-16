@@ -6,6 +6,31 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- Three composed-page Tailwind kits (MIT) enter the catalog as page-scope references:
+  TailAdmin (dashboard, tables, forms, sign-in, profile, calendar), Windmill (dashboard,
+  tables, forms, charts, login, create account) and Flowbite admin (dashboard, users,
+  products, settings, sign-in, pricing). 215 rows across 14 families; every application
+  surface — dashboard, queue, auth, settings, form, record — now offers three families in
+  its page shortlist where it offered one. The kits join the shadcn and Tailwind build
+  recipes as portable structure, carry their page's component imports as pack sources,
+  and are harvested from their live demos. The packet reserves a shortlist slot for the
+  house kit's page so the shadcn composition is always offered to a shadcn host.
+- `shadcn-record`, `shadcn-checkout` and `shadcn-marketing` have authored `reference.html`
+  renders and validated captures. 211 of 215 references are `passed`; the four that are
+  not are query-only screenshots with no source, which source-mode retrieval never offers.
+- Source excerpts strip Hugo/Astro front matter so an HTML page reads as markup.
+- A real audit pass ran against Nucleus's Company Tools page with this release
+  (`docs/audits/2026-09-16-nucleus-company-tools.md`): the packet selected a TailAdmin
+  page reference with the shadcn queue still offered, measure and two usability flows
+  passed on the live fixture, and the diagnosis recorded three evidenced minor findings
+  without editing the product.
+
+### Fixed
+
+- `measure.mjs` no longer samples text inside a closed `<details>` for contrast. Collapsed
+  content is painted over, so three legible list items reported 1.10:1 and failed a real
+  page. Regression test: `verify/measure-closed-details.test.mjs`, run by the doctor.
+
 - Every catalog row with a public render now has a validated capture: 190 of 197 references
   are `passed` (the seven remaining are query-only screenshots and three region-map
   blueprints with no renderable source). Before this, 8 rows were `passed`, 114 carried

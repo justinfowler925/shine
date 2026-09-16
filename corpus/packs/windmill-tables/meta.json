@@ -1,0 +1,19 @@
+{
+  "id": "windmill-tables",
+  "source": "https://windmill-dashboard-react.vercel.app/app/tables",
+  "harvested": "2026-09-16",
+  "bytes": 125534,
+  "capture": {
+    "status": 200,
+    "title": "Windmill Dashboard",
+    "headings": "Tables\nSimple table\nTable with actions",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 44,
+    "expectedText": "",
+    "sourceUrl": "https://windmill-dashboard-react.vercel.app/app/tables",
+    "finalUrl": "https://windmill-dashboard-react.vercel.app/app/tables",
+    "capturedAt": "2026-09-16T19:56:15.912Z",
+    "expectedTextMatched": false,
+    "shotSha256": "824c01e6168b98381a1422d5063f24073a523f98af30061f267263aef98c06f4"
+  }
+}

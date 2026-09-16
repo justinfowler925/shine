@@ -1,0 +1,19 @@
+{
+  "id": "flowbite-sign-in",
+  "source": "https://flowbite-admin-dashboard.vercel.app/authentication/sign-in/",
+  "harvested": "2026-09-16",
+  "bytes": 34379,
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS Sign in/Login Page - Flowbite",
+    "headings": "\n            Sign in to platform \n        ",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 5,
+    "expectedText": "",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/authentication/sign-in/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/authentication/sign-in/",
+    "capturedAt": "2026-09-16T19:54:26.907Z",
+    "expectedTextMatched": false,
+    "shotSha256": "25b08920d847369e27905201b40f9f83c6cc3b563f5b50c773c01fdaa9a4c770"
+  }
+}

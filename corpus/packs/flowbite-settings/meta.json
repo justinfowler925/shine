@@ -1,0 +1,19 @@
+{
+  "id": "flowbite-settings",
+  "source": "https://flowbite-admin-dashboard.vercel.app/settings/",
+  "harvested": "2026-09-16",
+  "bytes": 384067,
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS User Settings Page - Flowbite",
+    "headings": "User settings",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 99,
+    "expectedText": "",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/settings/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/settings/",
+    "capturedAt": "2026-09-16T19:56:38.426Z",
+    "expectedTextMatched": false,
+    "shotSha256": "1d1dfae0d0e9a88dd1b405d6d6dc82a2133ec639e319ec9e70aa345f3ecc9583"
+  }
+}

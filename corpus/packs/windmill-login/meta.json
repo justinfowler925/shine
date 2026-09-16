@@ -1,0 +1,19 @@
+{
+  "id": "windmill-login",
+  "source": "https://windmill-dashboard-react.vercel.app/login",
+  "harvested": "2026-09-16",
+  "bytes": 146356,
+  "capture": {
+    "status": 200,
+    "title": "Windmill Dashboard",
+    "headings": "Login",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 4,
+    "expectedText": "",
+    "sourceUrl": "https://windmill-dashboard-react.vercel.app/login",
+    "finalUrl": "https://windmill-dashboard-react.vercel.app/login",
+    "capturedAt": "2026-09-16T19:54:16.232Z",
+    "expectedTextMatched": false,
+    "shotSha256": "827ca238c8dbf04c90196b213c10e049c7af7dde1cef73eca9accb736a22c35b"
+  }
+}

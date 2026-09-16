@@ -1,0 +1,19 @@
+{
+  "id": "tailadmin-dashboard",
+  "source": "https://free-react-demo.tailadmin.com/",
+  "harvested": "2026-09-16",
+  "bytes": 243812,
+  "capture": {
+    "status": 200,
+    "title": "React.js Ecommerce Dashboard | TailAdmin - React.js Admin Dashboard Template",
+    "headings": "Menu\nOthers",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 48,
+    "expectedText": "",
+    "sourceUrl": "https://free-react-demo.tailadmin.com/",
+    "finalUrl": "https://free-react-demo.tailadmin.com/",
+    "capturedAt": "2026-09-16T19:55:07.812Z",
+    "expectedTextMatched": false,
+    "shotSha256": "1c853c124462a37b34060b29b66521253047592697b5ef351e3bb7be2f8b2f81"
+  }
+}

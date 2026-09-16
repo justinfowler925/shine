@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "flowbite-products",
+  "screen": "queue",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "flowbite-admin",
+    "mode": "full",
+    "url": "https://github.com/themesberg/flowbite-admin-dashboard.git",
+    "branch": "main",
+    "sha": "229df7ff25808ab2bbda65f03f2397a05f7b4288"
+  },
+  "corpusPath": "flowbite-admin/content/crud/products.html",
+  "entrypoints": [],
+  "structuralSignature": {
+    "pattern": "\\b(DataTable|ProList|List|Table|table)\\b",
+    "files": [
+      "products.html"
+    ]
+  },
+  "files": [
+    {
+      "path": "products.html",
+      "sha256": "5c23e23911990a652926e1cdf6caeaf430a8836645423fc54c75c1a10dd0f655"
+    }
+  ]
+}

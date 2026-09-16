@@ -178,7 +178,7 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   if(packet.status===0)ok("bounded design packet", "9 natural briefs, ambiguity refusal, page/component split, usable source");
   else fail("bounded design packet",`${packet.stderr||packet.stdout}`.trim().slice(-500));
   const diagnosis=spawnSync(process.execPath,[join(SHINE,"verify/diagnosis.test.mjs")],{cwd:SHINE,encoding:"utf8"});
-  for(const [name,file,summary] of [["owned catalog lane","verify/catalog.test.mjs","private rows merge and retrieve; public catalog unchanged; never archived"],["design-lint scope","verify/design-lint-scope.test.mjs","touched lines block; legacy lines note; session baseline; Cursor contract"]]){
+  for(const [name,file,summary] of [["owned catalog lane","verify/catalog.test.mjs","private rows merge and retrieve; public catalog unchanged; never archived"],["design-lint scope","verify/design-lint-scope.test.mjs","touched lines block; legacy lines note; session baseline; Cursor contract"],["measure skips collapsed disclosures","verify/measure-closed-details.test.mjs","closed <details> content is not sampled for contrast"]]){
     const r=spawnSync(process.execPath,[join(SHINE,file)],{cwd:SHINE,encoding:"utf8"});
     if(r.status===0)ok(name,summary);else fail(name,`${r.stderr||r.stdout}`.trim().slice(-500));
   }
@@ -1213,7 +1213,7 @@ if (FULL) {
       // Synonyms: "settings page" used to be an unknown token (exact-match lexicon).
       const syn = spawnSync(process.execPath, [cite, "settings page"], { encoding: "utf8" });
       const sout = `${syn.stdout || ""}${syn.stderr || ""}`;
-      if (syn.status !== 0 || !/Template: shadcn-settings|Template: fluent-nav/.test(sout))
+      if (syn.status !== 0 || !/Template: (shadcn-settings|fluent-nav|flowbite-settings)/.test(sout))
         fail("cite.mjs resolves plain words", `"settings page" → exit ${syn.status}: ${sout.slice(0, 160)}`);
       else ok("cite.mjs resolves plain words", (sout.match(/Template: (\S+)/) || [])[1]);
 

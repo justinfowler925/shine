@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "job": "review the company tools catalog page where staff find an approved skill, check supported agents and install the package",
+  "category": "datagrid",
+  "primaryTask": "Find an approved package by name or agent, read what it is for and its prerequisites, and copy its install command",
+  "before": { "artifact": "/tmp/shine-audit/before.html", "screenshot": "/tmp/shine-audit/before.png" },
+  "verdict": "defects",
+  "checked": ["usability", "completeness", "composition", "craft", "adoption"],
+  "verdictEvidence": "Audit mode against http://localhost:3198/company-tools-fixture (Nucleus main 129aa62+, HOLLOWAY_VISUAL_FIXTURE). measure.mjs --cite tailadmin-tables: axe 0 violations; contrast 26 elements, worst 6.02:1 after excluding collapsed disclosure content; usability.mjs: find-shine and filter-agent flows passed (search narrows 5→1, Clear filters restores 5, Cursor filter shows 2). No usability or completeness defect survived; three craft/composition findings below are evidenced in measure.txt. The likeness failure (table occupies 0% of viewport) is a reference mismatch: the page is a five-card catalog under the 10-row grid threshold, so a table cite is the wrong comparison, not a page defect.",
+  "defects": [
+    {
+      "id": "accent-as-state",
+      "bucket": "craft",
+      "severity": "minor",
+      "assertions": [],
+      "problem": "The primary accent colour is also used for non-interactive labels and badges, so one token carries two meanings",
+      "evidence": "measure.txt composition note: accent colour also used as non-interactive state on \"SKILL LIBRARY\", \"Release: 1.2.0\", \"USE IT WHEN\", \"BEFORE INSTALLING\", \"Cowork setup & first\", \"Final\"; screenshot shows the eyebrow labels and release/status badges in the same orange as the primary action",
+      "expectedEffect": "Eyebrows and status badges move to the muted/secondary tokens so orange means 'act here' only; the five Copy/Install controls read as the actionable elements at a glance"
+    },
+    {
+      "id": "unlabelled-section",
+      "bucket": "composition",
+      "severity": "minor",
+      "assertions": [],
+      "problem": "One of the two marked sections has no heading, so the page's second region is unnamed for assistive tech and for scanning",
+      "evidence": "measure.txt composition note: sections: 2 marked; 1 missing a heading (section.nx:text-foreground)",
+      "expectedEffect": "The section gains a visible h2 (or aria-labelledby to its existing eyebrow), matching the 'Skill library' region's labelled pattern"
+    },
+    {
+      "id": "small-filter-target",
+      "bucket": "craft",
+      "severity": "minor",
+      "assertions": [],
+      "problem": "The agent filter toggles are narrower than the 40px minimum target on the 'All' control",
+      "evidence": "measure.txt composition note: 1 controls under 40px: button\"All\" 32×40",
+      "expectedEffect": "Filter toggles get equal min-width so 'All' matches its siblings and every target is at least 40×40"
+    }
+  ]
+}

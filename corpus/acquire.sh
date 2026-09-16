@@ -180,6 +180,14 @@ sparse_clone tailwindcss      tailwindlabs/tailwindcss main packages/tailwindcss
 
 sparse_clone magicui          magicuidesign/magicui main   apps/www/registry apps/www/content
 sparse_clone cult-ui          nolly-studio/cult-ui  main   apps/www/registry apps/www/content
+# Composed application pages on plain Tailwind (MIT). shadcn publishes one dashboard,
+# sixteen sidebars and ten auth pages; every other application silhouette came from
+# the same kit. These three carry whole pages — dashboard, tables, forms, auth,
+# settings, profile, calendar, pricing — with distinct looks, and their structure
+# ports into a Tailwind or shadcn host without importing a runtime.
+full_clone tailadmin-react    TailAdmin/free-react-tailwind-admin-dashboard main
+full_clone windmill-react     estevanmaito/windmill-dashboard-react         master
+full_clone flowbite-admin     themesberg/flowbite-admin-dashboard           main
 
 # Vendor design systems — behavior/completeness reference; shine tokens stay the visual system.
 # Polaris LICENSE is MIT with Shopify-integration + visual-distinctness restrictions — query only,

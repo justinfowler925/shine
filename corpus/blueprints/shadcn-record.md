@@ -38,5 +38,5 @@ shadcn ships no record block — its 97 blocks are one dashboard, sixteen sideba
 - The regions above are the structure. They are not optional.
 - `corpus/blueprints/shadcn-record/page.tsx` is authored shadcn source — copy it, do not port it.
 - Paint comes from `tokens/voices/shadcn-zinc.css`; fill genuine token gaps in Shine rather than hardcoding.
-- There is no pack shot for this row. `verify/compare.mjs` has nothing to compare against, so say so rather than reporting a likeness score.
+- `corpus/blueprints/shadcn-record/reference.html` is the authored source rendered at rest; its capture is the pack shot `verify/compare.mjs` composites against (captured 2026-09-16, validated by `referenceHealth`).
 - Component-scope references for the pieces (`Card`, `Table`, `Tabs`, `Badge`) come from their own catalog rows, not from this file.

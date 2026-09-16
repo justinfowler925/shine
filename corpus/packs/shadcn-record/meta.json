@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-record",
+  "source": "corpus/blueprints/shadcn-record/reference.html",
+  "harvested": "2026-09-16",
+  "bytes": 80338,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "Record detail reference",
+    "headings": "Zurich — UK claims renewal\nWhat this record needs",
+    "expectedSelector": "[data-region=\"record-decision\"] textarea",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-record/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-record/reference.html",
+    "capturedAt": "2026-09-16T20:05:46.415Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "b4dbfd79ea5d20b33c0415a6492db17af98652934357afe6f74dcb00cc4c8217",
+    "shotSha256": "e939c4f799c0c09814c12f8afa0a6c0e7903d516f828e0df953a108a5751c6e3"
+  }
+}

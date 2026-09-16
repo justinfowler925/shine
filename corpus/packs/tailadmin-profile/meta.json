@@ -1,0 +1,19 @@
+{
+  "id": "tailadmin-profile",
+  "source": "https://free-react-demo.tailadmin.com/profile",
+  "harvested": "2026-09-16",
+  "bytes": 115191,
+  "capture": {
+    "status": 200,
+    "title": "React.js Profile Dashboard | TailAdmin - Next.js Admin Dashboard Template",
+    "headings": "Menu\nOthers\nProfile",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 36,
+    "expectedText": "",
+    "sourceUrl": "https://free-react-demo.tailadmin.com/profile",
+    "finalUrl": "https://free-react-demo.tailadmin.com/profile",
+    "capturedAt": "2026-09-16T19:56:33.057Z",
+    "expectedTextMatched": false,
+    "shotSha256": "c4db062cc75d656c6b50dfe93f9003d6b98b7bd53320e9bcf6676bd781dbfcf6"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "tailadmin-signin",
+  "source": "https://free-react-demo.tailadmin.com/signin",
+  "harvested": "2026-09-16",
+  "bytes": 57275,
+  "capture": {
+    "status": 200,
+    "title": "React.js SignIn Dashboard | TailAdmin - Next.js Admin Dashboard Template",
+    "headings": "Sign In",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 10,
+    "expectedText": "",
+    "sourceUrl": "https://free-react-demo.tailadmin.com/signin",
+    "finalUrl": "https://free-react-demo.tailadmin.com/signin",
+    "capturedAt": "2026-09-16T19:54:10.702Z",
+    "expectedTextMatched": false,
+    "shotSha256": "a784c58b54e400f6eefa4c44e5827058e8c36c4b7d03f11d8712e5e837ba174b"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "windmill-forms",
+  "source": "https://windmill-dashboard-react.vercel.app/app/forms",
+  "harvested": "2026-09-16",
+  "bytes": 65694,
+  "capture": {
+    "status": 200,
+    "title": "Windmill Dashboard",
+    "headings": "Forms\nElements\nValidation\nIcons\nButtons",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 31,
+    "expectedText": "",
+    "sourceUrl": "https://windmill-dashboard-react.vercel.app/app/forms",
+    "finalUrl": "https://windmill-dashboard-react.vercel.app/app/forms",
+    "capturedAt": "2026-09-16T19:55:58.876Z",
+    "expectedTextMatched": false,
+    "shotSha256": "c4e3419946c1cba90ebb4440c18bdd4d44affb56440b9b2406c8a1b7facf1107"
+  }
+}

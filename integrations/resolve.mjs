@@ -17,13 +17,16 @@ const SHINE = resolve(fileURLToPath(new URL("..", import.meta.url)));
 // shadcn or Tailwind host can build them; they are listed after the two house
 // kits so they win only the screens those kits do not publish (marketing regions,
 // onboarding). Mantine/HeroUI/Spectrum/Fluent stay out: their own runtimes.
+// TailAdmin, Windmill and Flowbite are composed pages on plain Tailwind: a
+// Tailwind or shadcn host ports their structure and classes without a runtime.
+const TAILWIND_PAGES = ["tailadmin-react", "windmill-react", "flowbite-admin"];
 export const RECIPE_KITS = {
-  "shadcn-tanstack": ["shadcn-registry", "untitled-ui-react", "magicui", "cult-ui"],
-  shadcn: ["shadcn-registry", "untitled-ui-react", "magicui", "cult-ui"],
-  tailwind: ["untitled-ui-react", "shadcn-registry", "magicui", "cult-ui"],
-  "tailwind-tanstack": ["untitled-ui-react", "shadcn-registry", "magicui", "cult-ui"],
-  tanstack: ["untitled-ui-react", "shadcn-registry", "magicui", "cult-ui"],
-  native: ["untitled-ui-react", "shadcn-registry"],
+  "shadcn-tanstack": ["shadcn-registry", "untitled-ui-react", "magicui", "cult-ui", ...TAILWIND_PAGES],
+  shadcn: ["shadcn-registry", "untitled-ui-react", "magicui", "cult-ui", ...TAILWIND_PAGES],
+  tailwind: ["untitled-ui-react", "shadcn-registry", "magicui", "cult-ui", ...TAILWIND_PAGES],
+  "tailwind-tanstack": ["untitled-ui-react", "shadcn-registry", "magicui", "cult-ui", ...TAILWIND_PAGES],
+  tanstack: ["untitled-ui-react", "shadcn-registry", "magicui", "cult-ui", ...TAILWIND_PAGES],
+  native: ["untitled-ui-react", "shadcn-registry", "flowbite-admin"],
   lex: ["slds"],
 };
 

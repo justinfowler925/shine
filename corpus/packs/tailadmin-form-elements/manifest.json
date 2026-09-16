@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "id": "tailadmin-form-elements",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "tailadmin-react",
+    "mode": "full",
+    "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard.git",
+    "branch": "main",
+    "sha": "e888dd1716b9803b535c7c2fa4f2c6b7d39b3da9"
+  },
+  "corpusPath": "tailadmin-react/src/pages/Forms/FormElements.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "CheckboxComponents.tsx",
+      "sha256": "122fa6df228342484b7fd11504553490789dc1cfa2746bff1119c5c32d853658"
+    },
+    {
+      "path": "DefaultInputs.tsx",
+      "sha256": "1aebdf5361e1e91090a41cc0bcb31d71d248461e9a16ce71790c102a94e12d98"
+    },
+    {
+      "path": "DropZone.tsx",
+      "sha256": "39d13d0d88e702cf542832a7d101fdbfc84f5590e2f1d18d22ddefe6758a06af"
+    },
+    {
+      "path": "FormElements.tsx",
+      "sha256": "f57cb4339f5e5cee4d1207dda5fa2733844e84b9ca5d763b57f5c9fbfe6b1553"
+    },
+    {
+      "path": "InputGroup.tsx",
+      "sha256": "2505dd9dc17617823e1dbe7658c45689ec723c668a1fb57a8880616c1a0ade12"
+    },
+    {
+      "path": "InputStates.tsx",
+      "sha256": "cc6485d988e6d40e0cc5dfe043c47eeec249733cbc7ce8072783c10e39d5513b"
+    },
+    {
+      "path": "PageBreadCrumb.tsx",
+      "sha256": "944a6ea565859bace197020d1894590818c47b6c377579e98e46c29580c54671"
+    },
+    {
+      "path": "RadioButtons.tsx",
+      "sha256": "ffecf6650d68600edeaf418d26473cd2da627bc0e5f72d023d8466c4ac5e7b0d"
+    },
+    {
+      "path": "SelectInputs.tsx",
+      "sha256": "e88f8f38e949fbca3723633d370e4a2d5260cf0595880f6b1b30176c01647f6a"
+    },
+    {
+      "path": "TextAreaInput.tsx",
+      "sha256": "b1d0c922782d0c861992c6eadcb7b4a649c23ccb391b348c281a59fea05e3d63"
+    },
+    {
+      "path": "ToggleSwitch.tsx",
+      "sha256": "b8e4b326b7637e0c295109e6eb99792add5d11cd512d33c7d2ab0af452507919"
+    }
+  ]
+}

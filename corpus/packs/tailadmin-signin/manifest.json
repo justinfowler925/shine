@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "tailadmin-signin",
+  "screen": "auth",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "tailadmin-react",
+    "mode": "full",
+    "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard.git",
+    "branch": "main",
+    "sha": "e888dd1716b9803b535c7c2fa4f2c6b7d39b3da9"
+  },
+  "corpusPath": "tailadmin-react/src/pages/AuthPages/SignIn.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "AuthPageLayout.tsx",
+      "sha256": "ceea7e4a67d4e52a4ba04f98d163bb0a1a61a972f6c3986274929ed2dd652ded"
+    },
+    {
+      "path": "SignInForm.tsx",
+      "sha256": "f8b5853720b5c96e170eec74086fc6ef93de3cf24d7bbfc034f4c7998eb862ba"
+    }
+  ]
+}

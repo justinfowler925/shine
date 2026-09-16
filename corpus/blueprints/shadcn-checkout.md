@@ -4,7 +4,7 @@ Regions, in order. Host: focused page, no app sidebar. Density: comfortable. Pai
 
 shadcn ships no checkout block, and since MUI was deleted on 2026-08-31 (`docs/no-foreign-runtimes.md`) this row is the corpus's only checkout reference. The region graph it inherits is sound — a step sequence beside a persistent order summary — and it is written here as structure rather than carried as someone else's source.
 
-Region map only: no authored source and no pack shot ship for this row. The estate does not build a checkout, so authored TSX here would be untested reference code. The regions below are the whole reference; the paint comes from the shadcn voice sheet.
+No consumer TSX ships for this row: the estate does not build a checkout, so authored component code would be untested reference code. `reference.html` renders the regions below at rest so the row has validated pixels; the paint comes from the shadcn voice sheet.
 
 1. **Order summary** — persistent, never behind a disclosure, and never re-collapsed after step one. On wide hosts it is a right rail that stays visible through every step; on narrow hosts it is a sticky collapsed bar showing the total, expandable in place. The reader is being asked for money and must be able to see what for at the moment they commit.
 2. **Step indicator** — same contract as `shadcn-wizard`: every step visible, state in shape and text, completed steps are links back. Address → Delivery → Payment → Review is the conventional order and deviating from it costs the reader more than it saves.
@@ -42,7 +42,6 @@ Region map only: no authored source and no pack shot ship for this row. The esta
 ## Source of truth
 
 - The regions above are the structure. They are not optional.
-- There is no pack shot for this row, so `verify/compare.mjs` has nothing to compare against. Say so rather than reporting a likeness score.
+- `reference.html` is the region map rendered at rest; its capture is the pack shot `verify/compare.mjs` composites against.
 - Paint comes from `tokens/voices/shadcn-zinc.css`.
-- No authored source and no pack shot ship for this row, so `verify/compare.mjs` has nothing to compare against. Say so rather than reporting a likeness score.
 - Payment-field composition is a compliance surface as well as a design one; do not invent field sets.

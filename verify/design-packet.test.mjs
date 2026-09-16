@@ -5,6 +5,7 @@ import {tmpdir} from "node:os";
 import {join} from "node:path";
 import {fileURLToPath} from "node:url";
 import {classifyJob,createDesignPacket} from "../core/design-packet.mjs";
+import {RECIPE_KITS} from "../integrations/resolve.mjs";
 
 const cases=[
  ["Customer success needs to scan a customer list and quickly fix stale records","datagrid"],
@@ -42,7 +43,13 @@ assert.equal(withSibling.productPrecedent.name,"Government signals");
 assert(withSibling.proof.commands.some((command)=>command.includes("compare-product.mjs")&&command.includes("/cro/gov")));
 
 const dashboard=createDesignPacket({job:cases[2][0],lane:"internal",project:process.cwd(),mode:"new"});
-assert.equal(dashboard.selected.id,"shadcn-dashboard-01","component demo cannot replace the composed page reference");
+// The page slot must be a composed page, never a chart component. Which page wins is
+// a scoring question: with TailAdmin, Windmill and Flowbite dashboards in the catalog
+// the house reference is one candidate among several, and must still be offered.
+assert.equal(dashboard.selected.scope,"page","component demo cannot replace the composed page reference");
+assert.equal(dashboard.selected.screen,"dashboard");
+assert(dashboard.candidates.some(x=>x.id==="shadcn-dashboard-01"),"the house dashboard stays in the page shortlist");
+assert(new Set(dashboard.candidates.map(x=>x.family)).size===dashboard.candidates.length,"page shortlist holds one candidate per family");
 assert(dashboard.componentReferences.some(x=>x.id==="untitled-line-charts"),"Untitled chart should be a component reference");
 assert.equal(dashboard.diagnosis.required,false);
 // A selected reference without a validated capture is named as a gap up front, with
@@ -69,15 +76,18 @@ assert(affine.componentReferences.some(x=>x.id==="untitled-table"&&x.matches.inc
 // is Ant Design Pro. Ordering must not eliminate it, but the packet must say it
 // is a structure to port rather than source to copy.
 assert(affine.selected.scope==="page","a composed page reference is still required");
-if(!["shadcn-registry","untitled-ui-react"].includes(affine.selected.kit)){
+// Buildable is whatever the shadcn/TanStack recipe lists: shadcn, Untitled, Magic UI,
+// cult-ui and the plain-Tailwind page kits. Anything outside that list is a port.
+if(!RECIPE_KITS["shadcn-tanstack"].includes(affine.selected.kit)){
  assert.equal(affine.selected.port,true,"a cross-kit page reference must be flagged as port-not-copy");
  assert.match(affine.selected.portNote,/port the structure to shadcn-registry/);
 }
 
 const affineDash=createDesignPacket({job:"marketing influenced pipeline dashboard",lane:"internal",project:shadcnRepo,mode:"existing",category:"dashboard"});
-assert.equal(affineDash.selected.id,"shadcn-dashboard-01","a buildable page reference must win when one is eligible");
-assert.notEqual(affineDash.selected.port,true,"a same-kit reference is not a port");
+assert(RECIPE_KITS["shadcn-tanstack"].includes(affineDash.selected.kit),"a buildable page reference must win when one is eligible");
+assert.notEqual(affineDash.selected.port,true,"a buildable reference is not a port");
 assert(affineDash.selected.matches.includes("installedKit"));
+assert(affineDash.candidates.some(x=>x.id==="shadcn-dashboard-01"),"the house dashboard is always offered to a shadcn host");
 
 const lex=createDesignPacket({job:"lightning record page for claims",lane:"lex",project:shadcnRepo,mode:"existing",category:"record"});
 assert.equal(lex.selected.kit,"slds","kit affinity must not override the Lightning lane");

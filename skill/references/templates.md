@@ -50,8 +50,13 @@ Reasons are listed under the table.
 | auth | `shadcn-signup-04` | shadcn-registry | source | live | auth, login, signin, signup, sign-up |
 | auth | `shadcn-signup-05` | shadcn-registry | source | live | auth, login, signin, signup, sign-up |
 | auth | `shadcn-login-04` | shadcn-registry | source | live | auth, login, signin, signup |
+| auth | `tailadmin-signin` | tailadmin-react | source | live | auth, login, signin, sign-in |
+| auth | `windmill-login` | windmill-react | source | live | auth, login, signin, sign-in |
+| auth | `windmill-create-account` | windmill-react | source | live | auth, signup, sign-up, register |
+| auth | `flowbite-sign-in` | flowbite-admin | source | live | auth, login, signin, sign-in |
 | blog | `shadcn-blog` | shadcn-registry | blueprint | live | blog, article, editorial, post |
 | broadcast | `shadcn-broadcast` | shadcn-registry | blueprint | live | broadcast, video, media, player, television, presenter |
+| calendar | `tailadmin-calendar` | tailadmin-react | source | live | calendar, schedule, events, agenda, month-view |
 | carousel | `untitled-carousel` | untitled-ui-react | source | live | carousel, gallery, slides, slideshow |
 | carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
 | charts | `shadcn-chart-area-axes` | shadcn-registry | source | live | charts, chart, area, analytics |
@@ -130,16 +135,22 @@ Reasons are listed under the table.
 | charts | `untitled-pie-charts` | untitled-ui-react | source | live | charts, chart, pie, donut, share, breakdown, dataviz |
 | charts | `untitled-progress-circles` | untitled-ui-react | source | live | charts, chart, progress, completion, kpi, dataviz |
 | charts | `untitled-radar-charts` | untitled-ui-react | source | live | charts, chart, radar, profile, comparison, dataviz |
+| charts | `windmill-charts` | windmill-react | source | live | charts, chart, analytics, dataviz |
 | chat | `spectrum-ai-chat` | react-spectrum | source | live | chat, assistant |
 | checkout | `shadcn-checkout` | shadcn-registry | blueprint | live | checkout, payment |
 | command-palette | `shadcn-command` | shadcn-registry | source | live | command-palette, palette, cmdk |
 | dashboard | `shadcn-dashboard-01` | shadcn-registry | source | live | crud, dashboard, list, records |
 | dashboard | `untitled-line-charts` | untitled-ui-react | source | live | dashboard, analytics, charts, dataviz |
+| dashboard | `tailadmin-dashboard` | tailadmin-react | source | live | dashboard, analytics, kpi, ecommerce, metrics |
+| dashboard | `windmill-dashboard` | windmill-react | source | live | dashboard, analytics, kpi, metrics |
+| dashboard | `flowbite-dashboard` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, sales |
 | dashboard | `query-shadcn-blocks` | shadcn-registry | query-only | live | dashboard |
 | dashboard | `query-haze` | haze | query-only | live | dashboard |
 | empty | `shadcn-empty-icon` | shadcn-registry | source | live | empty, ai-generate |
 | form | `untitled-date-picker` | untitled-ui-react | source | live | form, input, date, date-range, calendar, picker |
+| form | `tailadmin-form-elements` | tailadmin-react | source | live | form, input, fields, controls |
 | form | `untitled-file-upload` | untitled-ui-react | source | live | form, input, upload, attachments, dropzone, files |
+| form | `windmill-forms` | windmill-react | source | live | form, input, fields, validation |
 | lex-console | `lex-console` | slds | blueprint | live | lex-console |
 | lex-email | `lex-email` | slds | blueprint | live | lex-email, email |
 | lex-lwr | `lex-lwr` | slds | blueprint | live | lex-lwr |
@@ -203,16 +214,23 @@ Reasons are listed under the table.
 | onboarding | `cult-onboarding` | cult-ui | source | live | onboarding, first-run, tour, intro, steps |
 | onboarding | `cult-intro-disclosure` | cult-ui | source | live | onboarding, intro, whats-new, feature-announcement, disclosure |
 | pagination | `untitled-pagination` | untitled-ui-react | source | live | pagination, paging, page-size, pager |
+| pricing | `flowbite-pricing` | flowbite-admin | source | live | pricing, plans, tiers, marketing, landing |
 | queue | `untitled-table` | untitled-ui-react | source | live | queue, crud, table, records, datagrid |
 | queue | `shadcn-queue` | shadcn-registry | blueprint | live | queue, worklist, triage, inbox, datagrid |
+| queue | `tailadmin-tables` | tailadmin-react | source | live | queue, crud, table, records, datagrid |
+| queue | `windmill-tables` | windmill-react | source | live | queue, crud, table, records, datagrid |
+| queue | `flowbite-users` | flowbite-admin | source | live | queue, crud, table, records, users, admin |
+| queue | `flowbite-products` | flowbite-admin | source | live | queue, crud, table, products, inventory, catalog |
 | record | `shadcn-record` | shadcn-registry | blueprint | live | record, detail, account, opportunity |
+| record | `tailadmin-profile` | tailadmin-react | source | live | record, profile, detail, account, user |
 | settings | `shadcn-settings` | shadcn-registry | blueprint | live | settings, preferences, account |
 | settings | `fluent-nav` | fluentui | source | live | settings |
+| settings | `flowbite-settings` | flowbite-admin | source | live | settings, preferences, account, profile |
 | tabs | `untitled-tabs` | untitled-ui-react | source | live | tabs, sections, segmented, workspace-tabs, section-tabs |
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-197 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+215 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 

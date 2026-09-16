@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "flowbite-pricing",
+  "screen": "pricing",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "flowbite-admin",
+    "mode": "full",
+    "url": "https://github.com/themesberg/flowbite-admin-dashboard.git",
+    "branch": "main",
+    "sha": "229df7ff25808ab2bbda65f03f2397a05f7b4288"
+  },
+  "corpusPath": "flowbite-admin/content/pages/pricing.html",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "pricing.html",
+      "sha256": "d9efe24b51074cb59b7d84d8d31050bd749b41aaa5197364544010aad0f410b2"
+    }
+  ]
+}

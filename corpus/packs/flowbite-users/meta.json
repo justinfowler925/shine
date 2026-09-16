@@ -1,0 +1,19 @@
+{
+  "id": "flowbite-users",
+  "source": "https://flowbite-admin-dashboard.vercel.app/crud/users/",
+  "harvested": "2026-09-16",
+  "bytes": 436388,
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS Users List Page - Flowbite",
+    "headings": "All users",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 149,
+    "expectedText": "",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/crud/users/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/crud/users/",
+    "capturedAt": "2026-09-16T19:56:22.224Z",
+    "expectedTextMatched": false,
+    "shotSha256": "46a6ac48b279808f74a3cd6f489f95ba29acc9e07bf20eb816c37a13b465d3d1"
+  }
+}

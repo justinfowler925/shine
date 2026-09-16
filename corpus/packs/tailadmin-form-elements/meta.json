@@ -1,0 +1,19 @@
+{
+  "id": "tailadmin-form-elements",
+  "source": "https://free-react-demo.tailadmin.com/form-elements",
+  "harvested": "2026-09-16",
+  "bytes": 200756,
+  "capture": {
+    "status": 200,
+    "title": "React.js Form Elements Dashboard | TailAdmin - React.js Admin Dashboard Template",
+    "headings": "Menu\nOthers\nForm Elements",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 66,
+    "expectedText": "",
+    "sourceUrl": "https://free-react-demo.tailadmin.com/form-elements",
+    "finalUrl": "https://free-react-demo.tailadmin.com/form-elements",
+    "capturedAt": "2026-09-16T19:55:53.715Z",
+    "expectedTextMatched": false,
+    "shotSha256": "2dbf6535582c6f67ca820551b550fcecac64984d628057a314dd0402535c1a5d"
+  }
+}

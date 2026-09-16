@@ -1,0 +1,19 @@
+{
+  "id": "flowbite-pricing",
+  "source": "https://flowbite-admin-dashboard.vercel.app/pages/pricing/",
+  "harvested": "2026-09-16",
+  "bytes": 813355,
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS Pricing Page - Flowbite",
+    "headings": "Our pricing plan made simple\nFrequently asked questions",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 56,
+    "expectedText": "",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/pages/pricing/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/pages/pricing/",
+    "capturedAt": "2026-09-16T19:56:04.121Z",
+    "expectedTextMatched": false,
+    "shotSha256": "2fa2e3f63d49bec56baac5181ff7668219b9fd2a1ce4a75febacb6c88a5cf47e"
+  }
+}
