@@ -6,6 +6,12 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- A `catalog` packet category and a `shadcn-catalog` blueprint with a validated capture. A
+  card catalog — a handful of rich records found by search and a few filters, one card per
+  record with its own actions and disclosure — is not a data grid, and the first real audit
+  pass showed the packet forcing a table comparison onto five cards. The audit brief now
+  classifies as `catalog` and selects the catalog reference. 216 rows.
+
 - Three composed-page Tailwind kits (MIT) enter the catalog as page-scope references:
   TailAdmin (dashboard, tables, forms, sign-in, profile, calendar), Windmill (dashboard,
   tables, forms, charts, login, create account) and Flowbite admin (dashboard, users,

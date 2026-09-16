@@ -16,7 +16,8 @@ const cases=[
  ["Explain the fraud detection product and get buyers to request a demo","marketing"],
  ["Researchers ask follow-up questions and inspect citations","voice"],
  ["Workspace owners control access, alerts, and retention","form"],
- ["Adjusters need to understand one claim and take the next action","record"]
+ ["Adjusters need to understand one claim and take the next action","record"],
+ ["Staff browse the company tools catalog to find an approved skill and install the package","catalog"]
 ];
 for(const [job,category] of cases)assert.equal(classifyJob(job).category,category,job);
 assert.throws(()=>classifyJob("Fix the design and UX problems"),/cannot infer/);

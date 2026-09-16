@@ -1225,6 +1225,38 @@
       }
     },
     {
+      "id": "shadcn-catalog",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "shadcn card catalog (search, filters, count, one card per record with actions and disclosure)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "cards",
+        "library",
+        "packages",
+        "directory",
+        "gallery",
+        "showcase",
+        "tools"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form"
+        ],
+        "captureExpect": "[data-region=\"catalog-cards\"] article"
+      },
+      "note": "corpus/blueprints/shadcn-catalog.md is the region map; reference.html renders it at rest for capture",
+      "scope": "page"
+    },
+    {
       "id": "shadcn-chart-area-axes",
       "screen": "charts",
       "kit": "shadcn-registry",

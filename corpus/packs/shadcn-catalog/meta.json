@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-catalog",
+  "source": "corpus/blueprints/shadcn-catalog/reference.html",
+  "harvested": "2026-09-16",
+  "bytes": 160913,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "Card catalog reference",
+    "headings": "Company Tools\nSLED Agent\nShine\nUnfog",
+    "expectedSelector": "[data-region=\"catalog-cards\"] article",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-catalog/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-catalog/reference.html",
+    "capturedAt": "2026-09-16T21:16:54.670Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "84bfac7daa50e1cf5cc557eabd57c1da47bea1e9ec084a635815c0e5fd00e7e6",
+    "shotSha256": "8829196dc84400811ea13aa2483620afe3d02ddb6fc6c0ae762d132dd45c3ca8"
+  }
+}

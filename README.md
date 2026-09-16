@@ -22,12 +22,12 @@ Shine's shadcn catalog and registry work stands on [shadcn/ui](https://github.co
 | Layer | What it does |
 | --- | --- |
 | **UI/UX agent** | `/shine` skill + `shine-ux` subagent — Wireframe, Build, Polish, Audit, Copy, Adoption |
-| **Templates** | `corpus/cite.mjs "<job>"` — 215 rows across 14 visual families, one shortlist slot per family, shadcn as the house kit, Untitled UI as its buildable sibling, Magic UI and cult-ui for marketing and onboarding regions, TailAdmin, Windmill and Flowbite for composed application pages shadcn does not publish. Licensed kits index privately via [`corpus/owned/`](./corpus/owned/README.md). No foreign-runtime kits: [MUI, Ant and Carbon were deleted 2026-08-31](./docs/no-foreign-runtimes.md) |
+| **Templates** | `corpus/cite.mjs "<job>"` — 216 rows across 14 visual families, one shortlist slot per family, shadcn as the house kit, Untitled UI as its buildable sibling, Magic UI and cult-ui for marketing and onboarding regions, TailAdmin, Windmill and Flowbite for composed application pages shadcn does not publish. Licensed kits index privately via [`corpus/owned/`](./corpus/owned/README.md). No foreign-runtime kits: [MUI, Ant and Carbon were deleted 2026-08-31](./docs/no-foreign-runtimes.md) |
 | **Examples** | `npm run untitled:search -- "<job>"` — all 392 public Untitled UI demo exports, including 187 renderable Storybook stories |
 | **Technique transfer** | Measured rules from 18 products + pinned kits (shadcn, Radix, Untitled UI, Spectrum, Fluent, APG, …) |
 | **Tokens** | One DTCG source → CSS, Tailwind v4, artifacts, Python, email, Docs, Office, Salesforce |
 | **Voices** | `tokens/voices/<family>.css` + the kit's own token sources — kit paint is legal via custom-property definitions |
-| **Corpus** | `~/design-corpus` — sparse upstream source; `rg` before inventing any API. 211 of 215 catalog references carry a validated capture (`corpus/harvest.mjs` + `corpus/materialize-packs.mjs`); the rest are query-only shots and region maps |
+| **Corpus** | `~/design-corpus` — sparse upstream source; `rg` before inventing any API. 212 of 216 catalog references carry a validated capture (`corpus/harvest.mjs` + `corpus/materialize-packs.mjs`); the rest are query-only shots and region maps |
 | **Enforcement** | design-lint + stop-sweep, per-edit and turn-end, on both surfaces |
 | **Verification** | `measure.mjs` (axe, per-pixel contrast, composition, family checks) + `compare.mjs` (side-by-side pixels, facts, no verdict) |
 | **Doctor** | `verify/doctor.mjs` — wiring, gate bite (seeded violations), pack payload, compare mismatch |
@@ -711,7 +711,7 @@ Everything the plan compressed out, kept whole. Loaded only when relevant.
 - **Marketplace installs copy the plugin**, breaking relative `../` refs. Symlink shared files.
 - **Figma's Variables REST API is Enterprise-only**, both directions. Confirm seat status before scoping any Figma work.
 
-The [working interface library](https://shine-blond.vercel.app/library/) contains 26 workflow blocks and 6 composed page templates. The 215 design references are a separate catalog, not 215 installable templates. Consumer `shine-coverage.json` contracts classify all 32 implementations and bind reused product components to real import paths and proof files.
+The [working interface library](https://shine-blond.vercel.app/library/) contains 26 workflow blocks and 6 composed page templates. The 216 design references are a separate catalog, not 216 installable templates. Consumer `shine-coverage.json` contracts classify all 32 implementations and bind reused product components to real import paths and proof files.
 
 
 ### Complete application workflows and maintenance

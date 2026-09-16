@@ -21,6 +21,10 @@ const categories={
  marketing:{fallback:"landing marketing conversion",regions:["navigation","evidence-led hero","product proof","workflow","conversion"],controls:["primary evidence action","secondary action"],states:["default","interaction result"]},
  dashboard:{fallback:"dashboard analytics metrics",regions:["application navigation","context header","decision summary","primary visualization","drilldown","exceptions"],controls:["time range","filters","drilldown"],states:["loading","empty","error","populated"]},
  voice:{fallback:"assistant chat citations",regions:["session context","transcript","composer","tool and source state","recovery"],controls:["send","stop or retry","inspect source"],states:["idle","listening or composing","working","success","error"]},
+ // A card catalog is not a data grid: a handful of rich records, each with its own
+ // actions and disclosure, found by search and a couple of filters. Under the ten-row
+ // threshold cards are the right presentation, so the reference must not be a table.
+ catalog:{fallback:"catalog cards library",regions:["context header","search and filter bar","result count","card list","card actions","card detail disclosure"],controls:["search","type filters","clear filters","per-card primary action","expand details"],states:["loading","empty","filtered-empty","error","populated"]},
  record:{fallback:"record detail profile",regions:["record identity","decision summary","detail groups","activity","next actions"],controls:["edit","primary next action","related record navigation"],states:["loading","error","populated","editing","saved"]},
  lex:{fallback:"lightning record",regions:["host context","record highlights","detail","related work","record actions"],controls:["edit","save","cancel"],states:["view","edit","saving","success","error"]}
 };
@@ -33,6 +37,7 @@ const signals={
  dashboard:[[6,/\b(dashboard|cockpit|analytics|metrics?|kpis?|forecast)\b/i],[5,/\b(monday|weekly|daily|monthly)\b.*\b(review|meeting|call)\b/i],[4,/\b(trends?|performance|overview|rollup|portfolio)\b/i]],
  datagrid:[[6,/\b(datagrid|data grid|table|queue|worklist|inbox)\b/i],[5,/\b(triage|bulk|assign owners?|scan|sort|filter)\b/i],[4,/\b(customers?|records?|claims?|cases?|tickets?|items?)\s+(list|queue)\b|\bunresolved support\b/i]],
  form:[[6,/\b(form|checkout|application|intake|wizard|settings|preferences)\b/i],[5,/\b(abandon|drop off|complete|entering|submitted?)\b.*\b(address|field|application|setup|checkout)\b/i],[4,/\b(onboarding|setup|access|alerts?|retention|configure|control)\b/i]],
+ catalog:[[7,/\b(catalog|catalogue|library|directory|gallery|card list|cards)\b/i],[5,/\b(packages?|skills?|tools|plugins?|templates?|apps?)\b.*\b(find|browse|install|choose|pick|discover)\b/i]],
  record:[[6,/\b(record detail|detail page|profile page|case detail|claim detail|customer detail|account detail)\b/i],[5,/\b(one|single|this)\s+(claim|customer|account|case|record|ticket)\b/i],[4,/\b(adjusters?|reviewers?)\b.*\b(claim|case)\b.*\b(next action|decide|understand)\b/i]]
 };
 
