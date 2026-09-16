@@ -92,3 +92,14 @@ assert.match(grid.tableQuality.reference,/table-quality\.md$/);
 
 assert.equal(grid.library.implementations.total,32);
 assert.match(affine.completion.command,/--coverage shine-coverage.json/);
+
+// Python/vanilla web projects have no npm manifest; missing is not malformed.
+const manifestless=mkdtempSync(join(tmpdir(),"shine-python-web-"));
+try {
+ writeFileSync(join(manifestless,"pyproject.toml"),'[project]\nname = "python-web"\n');
+ const packet=createDesignPacket({job:"Inspect a delivery record and its checkpoint",category:"record",lane:"internal",project:manifestless,mode:"existing"});
+ assert.deepEqual(packet.implementationSelection.installedPackages,[]);
+ assert.equal(packet.implementationSelection.candidates.some(x=>x.tier==='shine'&&x.available),false);
+ writeFileSync(join(manifestless,"package.json"),'{broken');
+ assert.throws(()=>createDesignPacket({job:"Inspect a delivery record",category:"record",lane:"internal",project:manifestless,mode:"existing"}),SyntaxError);
+} finally {rmSync(manifestless,{recursive:true,force:true});}
