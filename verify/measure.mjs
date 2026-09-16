@@ -206,7 +206,9 @@ const textTargets = await page.evaluate(() => {
     }
     return false;
   };
+  const modal = [...document.querySelectorAll("dialog:modal")].at(-1);
   for (const el of document.querySelectorAll("h1,h2,h3,h4,h5,h6,p,a,button,span,li,code,label,td,th")) {
+    if (modal && !modal.contains(el)) continue;
     const text = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
     if (!text) continue;
     const r = el.getBoundingClientRect();
