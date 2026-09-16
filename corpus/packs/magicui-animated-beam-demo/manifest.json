@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "magicui-animated-beam-demo",
+  "screen": "marketing-integrations",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/animated-beam-demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "animated-beam-demo.tsx",
+      "sha256": "e47585cf5e93b3a22d868f894d93f75e9316d8f4ab1aca0353a46456ad2cc1e5"
+    },
+    {
+      "path": "animated-beam.tsx",
+      "sha256": "6afa2ee1d01694a428eb8517d48deebe5c6b532dc0ee871800bb9d92aae43e79"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "untitled-header-navigation",
+  "source": "https://www.untitledui.com/react/components/header-navigations",
+  "harvested": "2026-09-16",
+  "bytes": 194197,
+  "capture": {
+    "status": 200,
+    "title": "Free React header navigation components | Untitled UI",
+    "headings": "Header navigation components\nInstallation\nHeader navigation examples",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/header-navigations",
+    "finalUrl": "https://www.untitledui.com/react/components/header-navigations",
+    "capturedAt": "2026-09-16T16:48:55.910Z",
+    "expectedTextMatched": false,
+    "shotSha256": "ef67eba408db171f230dc53adecc2d4b78d3a4c6a7edc8a95f2a92ce257ca433"
+  }
+}

@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-line-dots-custom",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-line-dots-custom",
-  "harvested": "2026-08-31",
-  "bytes": 42055
+  "harvested": "2026-09-16",
+  "bytes": 42055,
+  "capture": {
+    "status": 200,
+    "title": "chart-line-dots-custom - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 9,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-line-dots-custom",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-line-dots-custom",
+    "capturedAt": "2026-09-16T16:51:19.457Z",
+    "expectedTextMatched": false,
+    "shotSha256": "f0f7f611c32bb958254f60ef1cb6cc57c0cf4f5436f8a8aa195c5c64a26d9070"
+  }
 }

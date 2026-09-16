@@ -1,0 +1,19 @@
+{
+  "id": "magicui-globe-demo",
+  "source": "https://magicui.design/docs/components/globe",
+  "harvested": "2026-09-16",
+  "bytes": 199656,
+  "capture": {
+    "status": 200,
+    "title": "Globe | React Components & Templates",
+    "headings": "Command Palette\nGlobe\nInstallation\nUsage\nProps\nCredits",
+    "expectedSelector": "pre",
+    "expectedCount": 5,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/globe",
+    "finalUrl": "https://magicui.design/docs/components/globe",
+    "capturedAt": "2026-09-16T16:59:04.056Z",
+    "expectedTextMatched": false,
+    "shotSha256": "883a719783777878be43818fdd04d4dc20e664bcc0b667ef0b00155cf00770b6"
+  }
+}

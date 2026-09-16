@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-radial-label",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-radial-label",
-  "harvested": "2026-08-31",
-  "bytes": 45558
+  "harvested": "2026-09-16",
+  "bytes": 45558,
+  "capture": {
+    "status": 200,
+    "title": "chart-radial-label - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radial-label",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radial-label",
+    "capturedAt": "2026-09-16T16:53:14.097Z",
+    "expectedTextMatched": false,
+    "shotSha256": "d19f17737c2834939396e8d691d2caf881f0274096314285ed230c818907cafd"
+  }
 }

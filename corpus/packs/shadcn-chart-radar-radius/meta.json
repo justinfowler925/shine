@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-radar-radius",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-radar-radius",
-  "harvested": "2026-08-31",
-  "bytes": 31983
+  "harvested": "2026-09-16",
+  "bytes": 31983,
+  "capture": {
+    "status": 200,
+    "title": "chart-radar-radius - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-radius",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-radius",
+    "capturedAt": "2026-09-16T16:53:07.241Z",
+    "expectedTextMatched": false,
+    "shotSha256": "b96dd89cd65866e032b86202c5d5d31476d0cd338e9b95dcf1c0a2ea5ec6a0bf"
+  }
 }

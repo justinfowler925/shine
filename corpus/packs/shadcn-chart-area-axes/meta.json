@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-area-axes",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-area-axes",
-  "harvested": "2026-08-31",
-  "bytes": 41947
+  "harvested": "2026-09-16",
+  "bytes": 41947,
+  "capture": {
+    "status": 200,
+    "title": "chart-area-axes - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-axes",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-axes",
+    "capturedAt": "2026-09-16T16:49:59.600Z",
+    "expectedTextMatched": false,
+    "shotSha256": "d034bd7a62a994154e151e2845c6f73301e45f117afef947e52afd19b060ef02"
+  }
 }

@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-area-linear",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-area-linear",
-  "harvested": "2026-08-31",
-  "bytes": 33338
+  "harvested": "2026-09-16",
+  "bytes": 33338,
+  "capture": {
+    "status": 200,
+    "title": "chart-area-linear - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-linear",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-linear",
+    "capturedAt": "2026-09-16T16:50:20.557Z",
+    "expectedTextMatched": false,
+    "shotSha256": "49702a524af70e0cab419eca9426048623616776b5efb4aea4e1d7f929ccae6f"
+  }
 }

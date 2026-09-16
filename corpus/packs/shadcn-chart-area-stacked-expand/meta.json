@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-area-stacked-expand",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-area-stacked-expand",
-  "harvested": "2026-08-31",
-  "bytes": 42094
+  "harvested": "2026-09-16",
+  "bytes": 42094,
+  "capture": {
+    "status": 200,
+    "title": "chart-area-stacked-expand - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-stacked-expand",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-stacked-expand",
+    "capturedAt": "2026-09-16T16:50:27.512Z",
+    "expectedTextMatched": false,
+    "shotSha256": "f3acef57b8a1450418be0a3789cb84b62585758c81e8def821e48a6383f13b5a"
+  }
 }

@@ -1,11 +1,19 @@
 {
   "id": "spectrum-ai-chat",
-  "source": "https://react-spectrum.adobe.com/react-spectrum/Chat.html",
-  "harvested": "2026-08-31",
-  "bytes": 34385,
-  "review": {
-    "status": "failed",
-    "reason": "Stored reference screenshot displays Error 404: Page not found; excluded until a successful semantic recapture.",
-    "at": "2026-09-09"
+  "source": "https://react-spectrum.adobe.com/s2/index.html",
+  "harvested": "2026-09-16",
+  "bytes": 3177360,
+  "capture": {
+    "status": 200,
+    "title": "React Spectrum",
+    "headings": "Build apps with polishspeedeaseaccessibilityconsistencyReact SpectrumpolishReact Spectrum\nBuild Once. Adapt Everywhere.\nEverything you need to build beautiful apps.\nRapidly style custom components with Style Macros.\nBuilt for modern development and the modern web.\nReady to get started?",
+    "expectedSelector": "main, h1, nav",
+    "expectedCount": 3,
+    "expectedText": "Spectrum",
+    "sourceUrl": "https://react-spectrum.adobe.com/s2/index.html",
+    "finalUrl": "https://react-spectrum.adobe.com/",
+    "capturedAt": "2026-09-16T17:28:58.356Z",
+    "expectedTextMatched": true,
+    "shotSha256": "96fd0c70c7ce312b3ceb15fdc520806f0c45b7a85fe724575f7a2a8ec4c746a8"
   }
 }

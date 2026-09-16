@@ -1,0 +1,19 @@
+{
+  "id": "magicui-code-comparison-demo",
+  "source": "https://magicui.design/docs/components/code-comparison",
+  "harvested": "2026-09-16",
+  "bytes": 361378,
+  "capture": {
+    "status": 200,
+    "title": "Code Comparison | React Components & Templates",
+    "headings": "Command Palette\nCode Comparison\nInstallation\nUsage\nProps",
+    "expectedSelector": "pre",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/code-comparison",
+    "finalUrl": "https://magicui.design/docs/components/code-comparison",
+    "capturedAt": "2026-09-16T16:56:38.993Z",
+    "expectedTextMatched": false,
+    "shotSha256": "7cc405debbcf95a31e2ae2fea77a2caae43814c1fb4bd5f958ae50d74d05010e"
+  }
+}

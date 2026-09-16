@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "magicui-safari-demo-2",
+  "screen": "marketing-mockup",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/safari-demo-2.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "safari.tsx",
+      "sha256": "2cb6ce69def86020f6860a3dd8696f0998dac340db932a3eee05e990b2e29f3e"
+    }
+  ]
+}

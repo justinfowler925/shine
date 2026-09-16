@@ -1,0 +1,19 @@
+{
+  "id": "magicui-number-ticker-demo-2",
+  "source": "https://magicui.design/docs/components/number-ticker",
+  "harvested": "2026-09-16",
+  "bytes": 227469,
+  "capture": {
+    "status": 200,
+    "title": "Number Ticker | React Components & Templates",
+    "headings": "Command Palette\nNumber Ticker\nInstallation\nExample\nProps",
+    "expectedSelector": "pre",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/number-ticker",
+    "finalUrl": "https://magicui.design/docs/components/number-ticker",
+    "capturedAt": "2026-09-16T16:59:37.997Z",
+    "expectedTextMatched": false,
+    "shotSha256": "8774d43268553651b5b03663a19f4cfe01c14214a99ae260c92fe044567f6873"
+  }
+}

@@ -1,6 +1,19 @@
 {
   "id": "mantine-appshell",
   "source": "https://mantine.dev/app-shell/?e=FullLayout",
-  "harvested": "2026-08-31",
-  "bytes": 38219
+  "harvested": "2026-09-16",
+  "bytes": 38219,
+  "capture": {
+    "status": 200,
+    "title": "AppShell examples | Mantine",
+    "headings": "",
+    "expectedSelector": "a",
+    "expectedCount": 2,
+    "expectedText": "AppShell",
+    "sourceUrl": "https://mantine.dev/app-shell/?e=FullLayout",
+    "finalUrl": "https://mantine.dev/app-shell/?e=FullLayout",
+    "capturedAt": "2026-09-16T17:28:53.999Z",
+    "expectedTextMatched": true,
+    "shotSha256": "c444e69531622df7ad608dc6b0f40dfa9f8ac0aec8ae8397824dd91be48e8702"
+  }
 }

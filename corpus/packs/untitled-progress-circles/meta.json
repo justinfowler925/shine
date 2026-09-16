@@ -1,0 +1,19 @@
+{
+  "id": "untitled-progress-circles",
+  "source": "https://www.untitledui.com/react/components/progress-indicators",
+  "harvested": "2026-09-16",
+  "bytes": 280507,
+  "capture": {
+    "status": 200,
+    "title": "Free React progress indicator components | Untitled UI",
+    "headings": "Progress indicator components\nInstallation\nProgress indicator examples",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/progress-indicators",
+    "finalUrl": "https://www.untitledui.com/react/components/progress-indicators",
+    "capturedAt": "2026-09-16T16:54:23.299Z",
+    "expectedTextMatched": false,
+    "shotSha256": "17e0972cb1d7259068fc862ae09e138dd0fde082a3fee618c5da80679f04fa9b"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "magicui-file-tree-demo",
+  "source": "https://magicui.design/docs/components/file-tree",
+  "harvested": "2026-09-16",
+  "bytes": 402587,
+  "capture": {
+    "status": 200,
+    "title": "File Tree | React Components & Templates",
+    "headings": "Command Palette\nFile Tree\nInstallation\nUsage\nProps",
+    "expectedSelector": "pre",
+    "expectedCount": 5,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/file-tree",
+    "finalUrl": "https://magicui.design/docs/components/file-tree",
+    "capturedAt": "2026-09-16T16:56:43.207Z",
+    "expectedTextMatched": false,
+    "shotSha256": "a17aa0cb7c6d006d4086b9cfdcc770eb5e7c6da184a2a8b9620ecc654c28ef33"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "magicui-avatar-circles-demo",
+  "source": "https://magicui.design/docs/components/avatar-circles",
+  "harvested": "2026-09-16",
+  "bytes": 215145,
+  "capture": {
+    "status": 200,
+    "title": "Avatar Circles | React Components & Templates",
+    "headings": "Command Palette\nAvatar Circles\nInstallation\nUsage\nProps",
+    "expectedSelector": "pre",
+    "expectedCount": 5,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/avatar-circles",
+    "finalUrl": "https://magicui.design/docs/components/avatar-circles",
+    "capturedAt": "2026-09-16T17:01:58.571Z",
+    "expectedTextMatched": false,
+    "shotSha256": "772d8b0786e5f6267dacc9633780a24b9888a02bea5f4094b8afa8407d206c76"
+  }
+}

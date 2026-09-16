@@ -178,6 +178,10 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   if(packet.status===0)ok("bounded design packet", "9 natural briefs, ambiguity refusal, page/component split, usable source");
   else fail("bounded design packet",`${packet.stderr||packet.stdout}`.trim().slice(-500));
   const diagnosis=spawnSync(process.execPath,[join(SHINE,"verify/diagnosis.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  for(const [name,file,summary] of [["owned catalog lane","verify/catalog.test.mjs","private rows merge and retrieve; public catalog unchanged; never archived"],["design-lint scope","verify/design-lint-scope.test.mjs","touched lines block; legacy lines note; session baseline; Cursor contract"]]){
+    const r=spawnSync(process.execPath,[join(SHINE,file)],{cwd:SHINE,encoding:"utf8"});
+    if(r.status===0)ok(name,summary);else fail(name,`${r.stderr||r.stdout}`.trim().slice(-500));
+  }
   if(diagnosis.status===0)ok("existing-surface diagnosis", "before artifact + screenshot, prioritized evidence, hash");
   else fail("existing-surface diagnosis",`${diagnosis.stderr||diagnosis.stdout}`.trim().slice(-500));
   const render=spawnSync(process.execPath,[join(SHINE,"verify/design-spec.test.mjs")],{cwd:SHINE,encoding:"utf8"});

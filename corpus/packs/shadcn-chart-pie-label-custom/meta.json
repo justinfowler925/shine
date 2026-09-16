@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-pie-label-custom",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-pie-label-custom",
-  "harvested": "2026-08-31",
-  "bytes": 24933
+  "harvested": "2026-09-16",
+  "bytes": 24866,
+  "capture": {
+    "status": 200,
+    "title": "chart-pie-label-custom - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-pie-label-custom",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-pie-label-custom",
+    "capturedAt": "2026-09-16T16:52:00.851Z",
+    "expectedTextMatched": false,
+    "shotSha256": "05a762ad487105bdb015e52a527bcf623b6c3958d0b3c7ce9176fe57db36bf22"
+  }
 }

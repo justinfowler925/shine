@@ -1,0 +1,19 @@
+{
+  "id": "magicui-safari-demo",
+  "source": "https://magicui.design/docs/components/safari",
+  "harvested": "2026-09-16",
+  "bytes": 710360,
+  "capture": {
+    "status": 200,
+    "title": "Safari | React Components & Templates",
+    "headings": "Command Palette\nSafari\nInstallation\nExamples\nUsage\nProps\nNotes",
+    "expectedSelector": "pre",
+    "expectedCount": 8,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/safari",
+    "finalUrl": "https://magicui.design/docs/components/safari",
+    "capturedAt": "2026-09-16T17:01:41.958Z",
+    "expectedTextMatched": false,
+    "shotSha256": "1555cc524694c6a0960f2b9471329fe3dfea97e93f4471e684917f75a044afa0"
+  }
+}

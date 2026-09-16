@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "cult-hero-dithering",
+  "screen": "marketing-hero",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "cult-ui",
+    "mode": "sparse",
+    "url": "https://github.com/nolly-studio/cult-ui.git",
+    "branch": "main",
+    "sha": "3b855612fb524cb042cc91b65f0cd575057471cc"
+  },
+  "corpusPath": "cult-ui/apps/www/registry/default/ui/hero-dithering.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "hero-dithering.tsx",
+      "sha256": "cd2b373b4d41743a204a91a0bcd8c3d34bf17dd2c668823d93821b94b8943b1d"
+    }
+  ]
+}

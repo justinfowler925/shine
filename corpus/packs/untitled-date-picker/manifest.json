@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-date-picker",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/date-picker/date-picker.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "date-picker.demo.tsx",
+      "sha256": "b7a2b2a544992195a58233ea4c398bf007ee845bb041630e1363dbd609c9b82a"
+    }
+  ]
+}

@@ -498,7 +498,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI sidebar navigation examples",
       "path": "untitled-ui-react/components/application/app-navigation/sidebar-navigation.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/sidebar-navigations",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
@@ -524,7 +524,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI header navigation (top bar, no rail)",
       "path": "untitled-ui-react/components/application/app-navigation/header-navigation.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/header-navigations",
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
@@ -552,7 +552,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI sidebar featured cards (usage, upgrade and onboarding prompts)",
       "path": "untitled-ui-react/components/application/app-navigation/base-components/featured-cards.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/sidebar-navigations",
       "license": "MIT",
       "kind": "source",
       "startFrom": 3,
@@ -672,7 +672,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI loading indicators (line, dots, spinner, with label)",
       "path": "untitled-ui-react/components/application/loading-indicator/loading-indicator.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/loading-indicators",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
@@ -1029,7 +1029,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI carousel (indicators, arrows, autoplay)",
       "path": "untitled-ui-react/components/application/carousel/carousel.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/carousels",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
@@ -2989,7 +2989,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI activity gauge examples",
       "path": "untitled-ui-react/components/application/charts/activity-gauges.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/activity-gauges",
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
@@ -3018,7 +3018,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI bar chart examples (grouped, stacked, horizontal)",
       "path": "untitled-ui-react/components/application/charts/bar-charts.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/line-bar-charts",
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
@@ -3047,7 +3047,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI pie and donut chart examples",
       "path": "untitled-ui-react/components/application/charts/pie-charts.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/pie-charts",
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
@@ -3077,7 +3077,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI progress circle examples",
       "path": "untitled-ui-react/components/application/charts/progress-circles.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/progress-indicators",
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
@@ -3106,7 +3106,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI radar chart examples",
       "path": "untitled-ui-react/components/application/charts/radar-charts.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/radar-charts",
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
@@ -3232,7 +3232,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI line chart examples",
       "path": "untitled-ui-react/components/application/charts/line-charts.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/line-bar-charts",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
@@ -3317,7 +3317,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI date picker and date range picker",
       "path": "untitled-ui-react/components/application/date-picker/date-picker.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/date-pickers",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
@@ -3346,7 +3346,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI file upload (dropzone, progress, failed items)",
       "path": "untitled-ui-react/components/application/file-upload/file-upload.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/file-uploaders",
       "license": "MIT",
       "kind": "source",
       "startFrom": 2,
@@ -3536,6 +3536,9 @@
       "kit": "magicui",
       "title": "Magic UI code-comparison-demo (developer-facing proof)",
       "path": "magicui/apps/www/registry/example/code-comparison-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/code-comparison.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/code-comparison",
       "license": "MIT",
       "kind": "source",
@@ -3561,6 +3564,9 @@
       "kit": "magicui",
       "title": "Magic UI file-tree-demo (developer-facing proof)",
       "path": "magicui/apps/www/registry/example/file-tree-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/file-tree.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/file-tree",
       "license": "MIT",
       "kind": "source",
@@ -3586,6 +3592,9 @@
       "kit": "magicui",
       "title": "Magic UI terminal-demo (developer-facing proof)",
       "path": "magicui/apps/www/registry/example/terminal-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/terminal.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/terminal",
       "license": "MIT",
       "kind": "source",
@@ -3611,6 +3620,9 @@
       "kit": "magicui",
       "title": "Magic UI terminal-demo-2 (developer-facing proof)",
       "path": "magicui/apps/www/registry/example/terminal-demo-2.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/terminal.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/terminal",
       "license": "MIT",
       "kind": "source",
@@ -3636,6 +3648,12 @@
       "kit": "magicui",
       "title": "Magic UI bento-demo (feature grid with live previews)",
       "path": "magicui/apps/www/registry/example/bento-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/marquee.tsx",
+        "magicui/apps/www/registry/magicui/bento-grid.tsx",
+        "magicui/apps/www/registry/magicui/animated-beam.tsx",
+        "magicui/apps/www/registry/magicui/animated-list.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/marquee",
       "license": "MIT",
       "kind": "source",
@@ -3660,6 +3678,9 @@
       "kit": "magicui",
       "title": "Magic UI bento-demo-vertical (feature grid with live previews)",
       "path": "magicui/apps/www/registry/example/bento-demo-vertical.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/bento-grid.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/bento-grid",
       "license": "MIT",
       "kind": "source",
@@ -3729,6 +3750,9 @@
       "kit": "magicui",
       "title": "Magic UI hero-video-dialog-demo (hero with product video)",
       "path": "magicui/apps/www/registry/example/hero-video-dialog-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/hero-video-dialog.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/hero-video-dialog",
       "license": "MIT",
       "kind": "source",
@@ -3752,6 +3776,9 @@
       "kit": "magicui",
       "title": "Magic UI hero-video-dialog-demo-top-in-bottom-out (hero with product video)",
       "path": "magicui/apps/www/registry/example/hero-video-dialog-demo-top-in-bottom-out.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/hero-video-dialog.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/hero-video-dialog",
       "license": "MIT",
       "kind": "source",
@@ -3775,7 +3802,7 @@
       "kit": "cult-ui",
       "title": "cult-ui hero with color panel (split hero, solid product panel)",
       "path": "cult-ui/apps/www/registry/default/ui/hero-color-panel.tsx",
-      "preview": "https://www.cult-ui.com/docs/components/hero-color-panel",
+      "preview": "https://www.cult-ui.com/docs/components/hero-color-panels",
       "license": "MIT",
       "kind": "source",
       "startFrom": 3,
@@ -3890,6 +3917,9 @@
       "kit": "magicui",
       "title": "Magic UI animated-beam-bidirectional (integrations and reach)",
       "path": "magicui/apps/www/registry/example/animated-beam-bidirectional.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/animated-beam.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/animated-beam",
       "license": "MIT",
       "kind": "source",
@@ -3915,6 +3945,9 @@
       "kit": "magicui",
       "title": "Magic UI animated-beam-demo (integrations and reach)",
       "path": "magicui/apps/www/registry/example/animated-beam-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/animated-beam.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/animated-beam",
       "license": "MIT",
       "kind": "source",
@@ -3940,6 +3973,9 @@
       "kit": "magicui",
       "title": "Magic UI animated-beam-multiple-inputs (integrations and reach)",
       "path": "magicui/apps/www/registry/example/animated-beam-multiple-inputs.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/animated-beam.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/animated-beam",
       "license": "MIT",
       "kind": "source",
@@ -3965,6 +4001,9 @@
       "kit": "magicui",
       "title": "Magic UI animated-beam-multiple-outputs (integrations and reach)",
       "path": "magicui/apps/www/registry/example/animated-beam-multiple-outputs.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/animated-beam.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/animated-beam",
       "license": "MIT",
       "kind": "source",
@@ -3990,6 +4029,9 @@
       "kit": "magicui",
       "title": "Magic UI animated-beam-unidirectional (integrations and reach)",
       "path": "magicui/apps/www/registry/example/animated-beam-unidirectional.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/animated-beam.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/animated-beam",
       "license": "MIT",
       "kind": "source",
@@ -4015,6 +4057,9 @@
       "kit": "magicui",
       "title": "Magic UI dotted-map-demo (integrations and reach)",
       "path": "magicui/apps/www/registry/example/dotted-map-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/dotted-map.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/dotted-map",
       "license": "MIT",
       "kind": "source",
@@ -4040,6 +4085,9 @@
       "kit": "magicui",
       "title": "Magic UI dotted-map-demo-2 (integrations and reach)",
       "path": "magicui/apps/www/registry/example/dotted-map-demo-2.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/dotted-map.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/dotted-map",
       "license": "MIT",
       "kind": "source",
@@ -4065,6 +4113,9 @@
       "kit": "magicui",
       "title": "Magic UI dotted-map-demo-3 (integrations and reach)",
       "path": "magicui/apps/www/registry/example/dotted-map-demo-3.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/dotted-map.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/dotted-map",
       "license": "MIT",
       "kind": "source",
@@ -4090,6 +4141,9 @@
       "kit": "magicui",
       "title": "Magic UI globe-demo (integrations and reach)",
       "path": "magicui/apps/www/registry/example/globe-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/globe.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/globe",
       "license": "MIT",
       "kind": "source",
@@ -4115,6 +4169,9 @@
       "kit": "magicui",
       "title": "Magic UI icon-cloud-demo (integrations and reach)",
       "path": "magicui/apps/www/registry/example/icon-cloud-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/icon-cloud.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/icon-cloud",
       "license": "MIT",
       "kind": "source",
@@ -4140,6 +4197,9 @@
       "kit": "magicui",
       "title": "Magic UI icon-cloud-demo-2 (integrations and reach)",
       "path": "magicui/apps/www/registry/example/icon-cloud-demo-2.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/icon-cloud.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/icon-cloud",
       "license": "MIT",
       "kind": "source",
@@ -4165,6 +4225,9 @@
       "kit": "magicui",
       "title": "Magic UI icon-cloud-demo-3 (integrations and reach)",
       "path": "magicui/apps/www/registry/example/icon-cloud-demo-3.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/icon-cloud.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/icon-cloud",
       "license": "MIT",
       "kind": "source",
@@ -4190,6 +4253,9 @@
       "kit": "magicui",
       "title": "Magic UI orbiting-circles-demo (integrations and reach)",
       "path": "magicui/apps/www/registry/example/orbiting-circles-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/orbiting-circles.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/orbiting-circles",
       "license": "MIT",
       "kind": "source",
@@ -4215,6 +4281,9 @@
       "kit": "magicui",
       "title": "Magic UI animated-circular-progress-bar-demo (outcome metrics)",
       "path": "magicui/apps/www/registry/example/animated-circular-progress-bar-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/animated-circular-progress-bar.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/animated-circular-progress-bar",
       "license": "MIT",
       "kind": "source",
@@ -4239,6 +4308,9 @@
       "kit": "magicui",
       "title": "Magic UI number-ticker-decimal-demo (outcome metrics)",
       "path": "magicui/apps/www/registry/example/number-ticker-decimal-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/number-ticker.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/number-ticker",
       "license": "MIT",
       "kind": "source",
@@ -4263,6 +4335,9 @@
       "kit": "magicui",
       "title": "Magic UI number-ticker-demo (outcome metrics)",
       "path": "magicui/apps/www/registry/example/number-ticker-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/number-ticker.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/number-ticker",
       "license": "MIT",
       "kind": "source",
@@ -4287,6 +4362,9 @@
       "kit": "magicui",
       "title": "Magic UI number-ticker-demo-2 (outcome metrics)",
       "path": "magicui/apps/www/registry/example/number-ticker-demo-2.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/number-ticker.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/number-ticker",
       "license": "MIT",
       "kind": "source",
@@ -4334,6 +4412,9 @@
       "kit": "magicui",
       "title": "Magic UI android-demo (product screenshot in device frame)",
       "path": "magicui/apps/www/registry/example/android-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/android.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/android",
       "license": "MIT",
       "kind": "source",
@@ -4359,6 +4440,9 @@
       "kit": "magicui",
       "title": "Magic UI android-demo-2 (product screenshot in device frame)",
       "path": "magicui/apps/www/registry/example/android-demo-2.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/android.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/android",
       "license": "MIT",
       "kind": "source",
@@ -4384,6 +4468,9 @@
       "kit": "magicui",
       "title": "Magic UI android-demo-3 (product screenshot in device frame)",
       "path": "magicui/apps/www/registry/example/android-demo-3.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/android.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/android",
       "license": "MIT",
       "kind": "source",
@@ -4409,6 +4496,9 @@
       "kit": "magicui",
       "title": "Magic UI iphone-demo (product screenshot in device frame)",
       "path": "magicui/apps/www/registry/example/iphone-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/iphone.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/iphone",
       "license": "MIT",
       "kind": "source",
@@ -4434,6 +4524,9 @@
       "kit": "magicui",
       "title": "Magic UI iphone-demo-2 (product screenshot in device frame)",
       "path": "magicui/apps/www/registry/example/iphone-demo-2.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/iphone.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/iphone",
       "license": "MIT",
       "kind": "source",
@@ -4459,6 +4552,9 @@
       "kit": "magicui",
       "title": "Magic UI iphone-demo-3 (product screenshot in device frame)",
       "path": "magicui/apps/www/registry/example/iphone-demo-3.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/iphone.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/iphone",
       "license": "MIT",
       "kind": "source",
@@ -4484,6 +4580,9 @@
       "kit": "magicui",
       "title": "Magic UI safari-demo (product screenshot in device frame)",
       "path": "magicui/apps/www/registry/example/safari-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/safari.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/safari",
       "license": "MIT",
       "kind": "source",
@@ -4509,6 +4608,9 @@
       "kit": "magicui",
       "title": "Magic UI safari-demo-2 (product screenshot in device frame)",
       "path": "magicui/apps/www/registry/example/safari-demo-2.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/safari.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/safari",
       "license": "MIT",
       "kind": "source",
@@ -4534,6 +4636,9 @@
       "kit": "magicui",
       "title": "Magic UI safari-demo-3 (product screenshot in device frame)",
       "path": "magicui/apps/www/registry/example/safari-demo-3.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/safari.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/safari",
       "license": "MIT",
       "kind": "source",
@@ -4559,6 +4664,9 @@
       "kit": "magicui",
       "title": "Magic UI safari-demo-4 (product screenshot in device frame)",
       "path": "magicui/apps/www/registry/example/safari-demo-4.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/safari.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/safari",
       "license": "MIT",
       "kind": "source",
@@ -4584,6 +4692,9 @@
       "kit": "magicui",
       "title": "Magic UI avatar-circles-demo (social proof)",
       "path": "magicui/apps/www/registry/example/avatar-circles-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/avatar-circles.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/avatar-circles",
       "license": "MIT",
       "kind": "source",
@@ -4609,6 +4720,9 @@
       "kit": "magicui",
       "title": "Magic UI marquee-3d (social proof)",
       "path": "magicui/apps/www/registry/example/marquee-3d.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/marquee.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/marquee",
       "license": "MIT",
       "kind": "source",
@@ -4634,6 +4748,9 @@
       "kit": "magicui",
       "title": "Magic UI marquee-demo (social proof)",
       "path": "magicui/apps/www/registry/example/marquee-demo.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/marquee.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/marquee",
       "license": "MIT",
       "kind": "source",
@@ -4659,6 +4776,9 @@
       "kit": "magicui",
       "title": "Magic UI marquee-demo-vertical (social proof)",
       "path": "magicui/apps/www/registry/example/marquee-demo-vertical.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/marquee.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/marquee",
       "license": "MIT",
       "kind": "source",
@@ -4684,6 +4804,9 @@
       "kit": "magicui",
       "title": "Magic UI marquee-logos (social proof)",
       "path": "magicui/apps/www/registry/example/marquee-logos.tsx",
+      "sources": [
+        "magicui/apps/www/registry/magicui/marquee.tsx"
+      ],
       "preview": "https://magicui.design/docs/components/marquee",
       "license": "MIT",
       "kind": "source",
@@ -4709,7 +4832,11 @@
       "kit": "magicui",
       "title": "Magic UI tweet-card-demo (social proof)",
       "path": "magicui/apps/www/registry/example/tweet-card-demo.tsx",
-      "preview": "https://magicui.design/docs/components/client-tweet-card",
+      "sources": [
+        "magicui/apps/www/registry/magicui/client-tweet-card.tsx",
+        "magicui/apps/www/registry/magicui/tweet-card.tsx"
+      ],
+      "preview": "https://magicui.design/docs/components/tweet-card",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
@@ -4734,7 +4861,11 @@
       "kit": "magicui",
       "title": "Magic UI tweet-card-images (social proof)",
       "path": "magicui/apps/www/registry/example/tweet-card-images.tsx",
-      "preview": "https://magicui.design/docs/components/client-tweet-card",
+      "sources": [
+        "magicui/apps/www/registry/magicui/client-tweet-card.tsx",
+        "magicui/apps/www/registry/magicui/tweet-card.tsx"
+      ],
+      "preview": "https://magicui.design/docs/components/tweet-card",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
@@ -4759,7 +4890,11 @@
       "kit": "magicui",
       "title": "Magic UI tweet-card-meta-preview (social proof)",
       "path": "magicui/apps/www/registry/example/tweet-card-meta-preview.tsx",
-      "preview": "https://magicui.design/docs/components/client-tweet-card",
+      "sources": [
+        "magicui/apps/www/registry/magicui/client-tweet-card.tsx",
+        "magicui/apps/www/registry/magicui/tweet-card.tsx"
+      ],
+      "preview": "https://magicui.design/docs/components/tweet-card",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
@@ -4854,7 +4989,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI pagination (page numbers, dots, line, minimal)",
       "path": "untitled-ui-react/components/application/pagination/pagination.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/pagination",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
@@ -4876,7 +5011,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI table examples (populated, empty, error, offline)",
       "path": "untitled-ui-react/components/application/table/table.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/tables",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,
@@ -5009,7 +5144,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI tabs (underline, button, vertical, with badges)",
       "path": "untitled-ui-react/components/application/tabs/tabs.demo.tsx",
-      "preview": "https://www.untitledui.com/react/components",
+      "preview": "https://www.untitledui.com/react/components/tabs",
       "license": "MIT",
       "kind": "source",
       "startFrom": 1,

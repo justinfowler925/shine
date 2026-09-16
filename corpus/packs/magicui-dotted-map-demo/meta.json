@@ -1,0 +1,19 @@
+{
+  "id": "magicui-dotted-map-demo",
+  "source": "https://magicui.design/docs/components/dotted-map",
+  "harvested": "2026-09-16",
+  "bytes": 547983,
+  "capture": {
+    "status": 200,
+    "title": "Dotted Map | React Components & Templates",
+    "headings": "Command Palette\nDotted Map\nInstallation\nExamples\nUsage\nProps\nTypes",
+    "expectedSelector": "pre",
+    "expectedCount": 10,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/dotted-map",
+    "finalUrl": "https://magicui.design/docs/components/dotted-map",
+    "capturedAt": "2026-09-16T16:58:50.748Z",
+    "expectedTextMatched": false,
+    "shotSha256": "7786307250cfee5e20983ec09ffce7f3721bb68ffab0d54d840d0b570a903a9b"
+  }
+}

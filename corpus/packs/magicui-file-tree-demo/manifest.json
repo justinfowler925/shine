@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "magicui-file-tree-demo",
+  "screen": "marketing-developer",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/file-tree-demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "file-tree-demo.tsx",
+      "sha256": "a47bdce9906e5432120c18ddc1e7a06c04562315a37668edcdbd4e2040105c43"
+    },
+    {
+      "path": "file-tree.tsx",
+      "sha256": "ffc123a907fa76f9bcc4a2bc42fab53473021343399f91e9954e3923b0f07416"
+    }
+  ]
+}

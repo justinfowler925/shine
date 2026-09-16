@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-area-legend",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-area-legend",
-  "harvested": "2026-08-31",
-  "bytes": 42072
+  "harvested": "2026-09-16",
+  "bytes": 42072,
+  "capture": {
+    "status": 200,
+    "title": "chart-area-legend - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-legend",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-legend",
+    "capturedAt": "2026-09-16T16:50:16.976Z",
+    "expectedTextMatched": false,
+    "shotSha256": "a0dc4bbc0eadde7dede4ed64ad3fb5eace3a01875e2c8ff70a18f9c304f76716"
+  }
 }

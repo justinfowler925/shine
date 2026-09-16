@@ -1,0 +1,19 @@
+{
+  "id": "cult-three-d-carousel",
+  "source": "https://www.cult-ui.com/docs/components/three-d-carousel",
+  "harvested": "2026-09-16",
+  "bytes": 404290,
+  "capture": {
+    "status": 200,
+    "title": "3D Carousel · Cult UI",
+    "headings": "3D Carousel\nInstallation\nUsage",
+    "expectedSelector": "pre",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://www.cult-ui.com/docs/components/three-d-carousel",
+    "finalUrl": "https://www.cult-ui.com/docs/components/three-d-carousel",
+    "capturedAt": "2026-09-16T16:49:56.085Z",
+    "expectedTextMatched": false,
+    "shotSha256": "f12c29aa22e99b25ab97c9f9715a08cfb725f830efa1af3d892b920dd6b8af54"
+  }
+}

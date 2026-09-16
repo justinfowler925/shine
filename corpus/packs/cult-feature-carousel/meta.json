@@ -1,0 +1,19 @@
+{
+  "id": "cult-feature-carousel",
+  "source": "https://www.cult-ui.com/docs/components/feature-carousel",
+  "harvested": "2026-09-16",
+  "bytes": 640665,
+  "capture": {
+    "status": 200,
+    "title": "Feature Carousel · Cult UI",
+    "headings": "Feature Carousel\nFeature 2\nInstallation\nUsage\nFeatures\nExamples\nStyle Guide\nAccessibility",
+    "expectedSelector": "pre",
+    "expectedCount": 5,
+    "expectedText": "",
+    "sourceUrl": "https://www.cult-ui.com/docs/components/feature-carousel",
+    "finalUrl": "https://www.cult-ui.com/docs/components/feature-carousel",
+    "capturedAt": "2026-09-16T16:57:06.301Z",
+    "expectedTextMatched": false,
+    "shotSha256": "5f217d050aed649d13890a09c227b3f32b8a9a67a1b01a6c23144a28c667015e"
+  }
+}

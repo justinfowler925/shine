@@ -1,0 +1,19 @@
+{
+  "id": "untitled-file-upload",
+  "source": "https://www.untitledui.com/react/components/file-uploaders",
+  "harvested": "2026-09-16",
+  "bytes": 338226,
+  "capture": {
+    "status": 200,
+    "title": "Free React file upload components | Untitled UI",
+    "headings": "File upload components\nInstallation\nFile upload examples",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/file-uploaders",
+    "finalUrl": "https://www.untitledui.com/react/components/file-uploaders",
+    "capturedAt": "2026-09-16T16:55:15.417Z",
+    "expectedTextMatched": false,
+    "shotSha256": "78157b14549eca77a0205d4380f5ef797a413fa9bc3bf180ba9d600d80894619"
+  }
+}

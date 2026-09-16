@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-bar-charts",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/charts/bar-charts.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "bar-charts.demo.tsx",
+      "sha256": "fa5fbf6236a449486b3d18cf85272c006ce046fde9231ca00fc1d31a3d9d7044"
+    }
+  ]
+}

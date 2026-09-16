@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "magicui-marquee-demo-vertical",
+  "screen": "marketing-proof",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/marquee-demo-vertical.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "marquee-demo-vertical.tsx",
+      "sha256": "c3a238d912831512858884b744d3e58c7f1d891a65493fadc2e0708afc7149a5"
+    },
+    {
+      "path": "marquee.tsx",
+      "sha256": "779f360a107409bfa35cda13bcef7d54cd620a15ab4a0ee50412442a4dd6b9c7"
+    }
+  ]
+}

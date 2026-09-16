@@ -1,0 +1,19 @@
+{
+  "id": "cult-hero-color-panel",
+  "source": "https://www.cult-ui.com/docs/components/hero-color-panels",
+  "harvested": "2026-09-16",
+  "bytes": 1118692,
+  "capture": {
+    "status": 200,
+    "title": "Hero Color Panels · Cult UI",
+    "headings": "Hero Color Panels\nAI SDK Agents\nAI SDK Agents Copy and Paste\nComposable hero\nCursor for Marketing\nInstallation\nUsage\nWhat You Get\nAPI Reference\nCustomization Patterns\nPerformance Notes\nAccessibility Notes\nTroubleshooting",
+    "expectedSelector": "pre",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://www.cult-ui.com/docs/components/hero-color-panels",
+    "finalUrl": "https://www.cult-ui.com/docs/components/hero-color-panels",
+    "capturedAt": "2026-09-16T17:34:44.063Z",
+    "expectedTextMatched": false,
+    "shotSha256": "6f468b6be9f44022262a6a2293ce8eeaee728ca491970373093912ec4673099b"
+  }
+}

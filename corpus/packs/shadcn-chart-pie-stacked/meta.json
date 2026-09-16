@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-pie-stacked",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-pie-stacked",
-  "harvested": "2026-08-31",
-  "bytes": 29757
+  "harvested": "2026-09-16",
+  "bytes": 29766,
+  "capture": {
+    "status": 200,
+    "title": "chart-pie-stacked - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-pie-stacked",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-pie-stacked",
+    "capturedAt": "2026-09-16T16:52:18.111Z",
+    "expectedTextMatched": false,
+    "shotSha256": "b17336342e55e8dc04968866cd81f25c4a677ec47aa040c95d62d000b38d3eda"
+  }
 }

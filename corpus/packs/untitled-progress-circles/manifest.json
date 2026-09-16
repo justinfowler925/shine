@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-progress-circles",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/charts/progress-circles.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "progress-circles.demo.tsx",
+      "sha256": "acf5b8a7264ec4db614ea3b4bb7923457b6a58ece5f20db8ddf44ffb910c0d84"
+    }
+  ]
+}

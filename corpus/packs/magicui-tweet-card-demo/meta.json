@@ -1,0 +1,19 @@
+{
+  "id": "magicui-tweet-card-demo",
+  "source": "https://magicui.design/docs/components/tweet-card",
+  "harvested": "2026-09-16",
+  "bytes": 592464,
+  "capture": {
+    "status": 200,
+    "title": "Tweet Card | React Components & Templates",
+    "headings": "Command Palette\nTweet Card\nInstallation\nUsage\nExamples\nProps\nCredits",
+    "expectedSelector": "pre",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/tweet-card",
+    "finalUrl": "https://magicui.design/docs/components/tweet-card",
+    "capturedAt": "2026-09-16T17:34:50.434Z",
+    "expectedTextMatched": false,
+    "shotSha256": "ece7345a41efe89a6b283b750bd2f6b147f5303112e68bdbc1f52f38b9175232"
+  }
+}

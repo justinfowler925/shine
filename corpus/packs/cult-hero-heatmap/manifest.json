@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "cult-hero-heatmap",
+  "screen": "marketing-hero",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "cult-ui",
+    "mode": "sparse",
+    "url": "https://github.com/nolly-studio/cult-ui.git",
+    "branch": "main",
+    "sha": "3b855612fb524cb042cc91b65f0cd575057471cc"
+  },
+  "corpusPath": "cult-ui/apps/www/registry/default/ui/hero-heatmap.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "hero-heatmap.tsx",
+      "sha256": "50aaccbe305c8f16661a848388df6911ff6f3cd03665b0ed2f7ff8a9c730d258"
+    }
+  ]
+}

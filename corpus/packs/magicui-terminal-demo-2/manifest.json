@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "magicui-terminal-demo-2",
+  "screen": "marketing-developer",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/terminal-demo-2.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "terminal.tsx",
+      "sha256": "a0ece03773e1a17862e049f11f72647b5db44dc1400473bdecd3c0e81f43f2d7"
+    }
+  ]
+}

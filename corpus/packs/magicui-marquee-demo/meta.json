@@ -1,0 +1,19 @@
+{
+  "id": "magicui-marquee-demo",
+  "source": "https://magicui.design/docs/components/marquee",
+  "harvested": "2026-09-16",
+  "bytes": 481109,
+  "capture": {
+    "status": 200,
+    "title": "Marquee | React Components & Templates",
+    "headings": "Command Palette\nMarquee\nInstallation\nExamples\nUsage\nProps",
+    "expectedSelector": "pre",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/marquee",
+    "finalUrl": "https://magicui.design/docs/components/marquee",
+    "capturedAt": "2026-09-16T17:02:07.075Z",
+    "expectedTextMatched": false,
+    "shotSha256": "97c8cd2e154c00382824523d3db3bbec40cdfa20f08ebd9101518c41d5bdbe9f"
+  }
+}

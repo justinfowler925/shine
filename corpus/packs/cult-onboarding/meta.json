@@ -1,0 +1,19 @@
+{
+  "id": "cult-onboarding",
+  "source": "https://www.cult-ui.com/docs/components/onboarding",
+  "harvested": "2026-09-16",
+  "bytes": 752013,
+  "capture": {
+    "status": 200,
+    "title": "Onboarding · Cult UI",
+    "headings": "Onboarding\nInstallation\nUsage\nComponents\nControlled Usage\nSub-steps (Feature Carousel)",
+    "expectedSelector": "pre",
+    "expectedCount": 6,
+    "expectedText": "",
+    "sourceUrl": "https://www.cult-ui.com/docs/components/onboarding",
+    "finalUrl": "https://www.cult-ui.com/docs/components/onboarding",
+    "capturedAt": "2026-09-16T17:03:38.424Z",
+    "expectedTextMatched": false,
+    "shotSha256": "169fc6cd84ac0046062dd0780f25ceb33b7f36817dbefafdc88a9400d9eef3ef"
+  }
+}

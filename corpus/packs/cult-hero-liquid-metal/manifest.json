@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "cult-hero-liquid-metal",
+  "screen": "marketing-hero",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "cult-ui",
+    "mode": "sparse",
+    "url": "https://github.com/nolly-studio/cult-ui.git",
+    "branch": "main",
+    "sha": "3b855612fb524cb042cc91b65f0cd575057471cc"
+  },
+  "corpusPath": "cult-ui/apps/www/registry/default/ui/hero-liquid-metal.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "hero-liquid-metal.tsx",
+      "sha256": "9ff2aefb713d28081d894050f1e95fd2a5b7a49a20f66aa23a113e2418a1c872"
+    }
+  ]
+}

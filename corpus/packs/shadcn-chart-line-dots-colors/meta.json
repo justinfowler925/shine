@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-line-dots-colors",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-line-dots-colors",
-  "harvested": "2026-08-31",
-  "bytes": 32079
+  "harvested": "2026-09-16",
+  "bytes": 32079,
+  "capture": {
+    "status": 200,
+    "title": "chart-line-dots-colors - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-line-dots-colors",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-line-dots-colors",
+    "capturedAt": "2026-09-16T16:51:16.033Z",
+    "expectedTextMatched": false,
+    "shotSha256": "7063626cc7b4a16a7eabdfc8eb68a1f7159ec5dcbe7df53608fed62fb9a3ca35"
+  }
 }

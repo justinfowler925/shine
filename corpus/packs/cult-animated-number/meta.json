@@ -1,0 +1,19 @@
+{
+  "id": "cult-animated-number",
+  "source": "https://www.cult-ui.com/docs/components/animated-number",
+  "harvested": "2026-09-16",
+  "bytes": 292833,
+  "capture": {
+    "status": 200,
+    "title": "AnimatedNumber · Cult UI",
+    "headings": "AnimatedNumber\nInstallation\nUsage",
+    "expectedSelector": "pre",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://www.cult-ui.com/docs/components/animated-number",
+    "finalUrl": "https://www.cult-ui.com/docs/components/animated-number",
+    "capturedAt": "2026-09-16T16:59:43.930Z",
+    "expectedTextMatched": false,
+    "shotSha256": "8a8e880da957a55447aa84bd07cdb68a4aaebf964aab4e83e57ebb6a7b59d3de"
+  }
+}

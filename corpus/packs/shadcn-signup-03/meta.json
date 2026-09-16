@@ -1,6 +1,19 @@
 {
   "id": "shadcn-signup-03",
   "source": "https://ui.shadcn.com/view/new-york-v4/signup-03",
-  "harvested": "2026-08-31",
-  "bytes": 41229
+  "harvested": "2026-09-16",
+  "bytes": 41229,
+  "capture": {
+    "status": 200,
+    "title": "signup-03 - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "form input, input",
+    "expectedCount": 4,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/signup-03",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/signup-03",
+    "capturedAt": "2026-09-16T16:49:34.710Z",
+    "expectedTextMatched": false,
+    "shotSha256": "388c536354b33f899402e203d82233094ca2c99d25def825bc001608502bce9f"
+  }
 }

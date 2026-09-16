@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-area-step",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-area-step",
-  "harvested": "2026-08-31",
-  "bytes": 21633
+  "harvested": "2026-09-16",
+  "bytes": 21633,
+  "capture": {
+    "status": 200,
+    "title": "chart-area-step - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-step",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-step",
+    "capturedAt": "2026-09-16T16:50:30.994Z",
+    "expectedTextMatched": false,
+    "shotSha256": "992068eda57605bbe74b9eef5b4bfd01a9bb6b3e053aa9c6ca760b096a98f231"
+  }
 }

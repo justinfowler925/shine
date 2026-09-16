@@ -1,0 +1,19 @@
+{
+  "id": "magicui-animated-circular-progress-bar-demo",
+  "source": "https://magicui.design/docs/components/animated-circular-progress-bar",
+  "harvested": "2026-09-16",
+  "bytes": 223134,
+  "capture": {
+    "status": 200,
+    "title": "Animated Circular Progress Bar | React Components & Templates",
+    "headings": "Command Palette\nAnimated Circular Progress Bar\nInstallation\nUsage\nProps\nCredits",
+    "expectedSelector": "pre",
+    "expectedCount": 5,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/animated-circular-progress-bar",
+    "finalUrl": "https://magicui.design/docs/components/animated-circular-progress-bar",
+    "capturedAt": "2026-09-16T16:59:25.147Z",
+    "expectedTextMatched": false,
+    "shotSha256": "412460a3e16a00d6a08b3f675eb8c0255f5541fe962e0e79d7ae34d5750c2326"
+  }
+}

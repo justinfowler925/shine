@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "cult-three-d-carousel",
+  "screen": "carousel",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "cult-ui",
+    "mode": "sparse",
+    "url": "https://github.com/nolly-studio/cult-ui.git",
+    "branch": "main",
+    "sha": "3b855612fb524cb042cc91b65f0cd575057471cc"
+  },
+  "corpusPath": "cult-ui/apps/www/registry/default/ui/three-d-carousel.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "three-d-carousel.tsx",
+      "sha256": "943577b58d4a71d7119451675c07ffa1a528540dae5927d55b80a5eb47128556"
+    }
+  ]
+}

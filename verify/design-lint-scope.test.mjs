@@ -5,7 +5,7 @@
 // and fresh repos still lint whole, and --all-lines restores the old scope.
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -65,12 +65,49 @@ try {
   assert.equal(changedLines(fresh), null);
   assert.equal(run(fresh).status, 1, "an untracked file lints whole");
 
-  // 7. scopeFindings keeps line-less findings (frontmatter, slop summaries).
+  // 7. Session baseline: a mid-turn commit must not launder this turn's values into
+  //    "pre-existing". With a session id the diff runs against the commit the session
+  //    started from; without one it runs against HEAD as before.
+  const state = join(dir, "lint-state");
+  const sessionEnv = { ...process.env, SHINE_LINT_SCOPE: "", SHINE_LINT_SESSION: "test-session", SHINE_LINT_STATE_DIR: state };
+  writeFileSync(css, legacy + ".c{color:var(--shine-color-fg)}\n");
+  const first = spawnSync(process.execPath, [lint, css], { encoding: "utf8", env: sessionEnv });
+  assert.equal(first.status, 0, "clean edit under a session must not block");
+  writeFileSync(css, legacy + ".c{color:var(--shine-color-fg)}\n.d{color:#abcdef}\n");
+  git("add", "-A");
+  git("commit", "-qm", "mid-turn commit carrying a violation");
+  assert.equal(run(css).status, 0, "against HEAD the committed violation is invisible (the gap the baseline closes)");
+  const afterCommit = spawnSync(process.execPath, [lint, css], { encoding: "utf8", env: sessionEnv });
+  assert.equal(afterCommit.status, 1, "the session baseline still sees the committed violation");
+  assert.match(afterCommit.stderr, /legacy\.css:4 .*raw hex/);
+  const hookedSession = spawnSync(process.execPath, [lint], { encoding: "utf8", env: { ...process.env, SHINE_LINT_SCOPE: "", SHINE_LINT_STATE_DIR: state }, input: JSON.stringify({ hook_event_name: "PostToolUse", session_id: "test-session", tool_input: { file_path: css } }) });
+  assert.match(hookedSession.stdout, /"decision":\s*"block"/, "hook mode derives the session from the event");
+  // A baseline that is no longer an ancestor falls back to HEAD instead of erroring.
+  writeFileSync(join(state, "orphan"), "");
+  const orphanEnv = { ...sessionEnv, SHINE_LINT_SESSION: "orphan-session" };
+  spawnSync(process.execPath, [lint, css], { encoding: "utf8", env: orphanEnv });
+  git("checkout", "-q", "--orphan", "elsewhere");
+  git("commit", "-qm", "unrelated history");
+  writeFileSync(css, ".z{color:var(--shine-color-fg)}\n");
+  assert.equal(spawnSync(process.execPath, [lint, css], { encoding: "utf8", env: orphanEnv }).status, 0, "a non-ancestor baseline falls back to HEAD");
+  git("checkout", "-q", "-");
+  git("checkout", "-q", "--", "legacy.css");
+
+  // 8. Cursor contract: top-level file_path, exit 2 blocks, clean edits exit 0.
+  writeFileSync(css, readFileSync(css, "utf8") + ".e{color:var(--shine-color-fg)}\n");
+  const cursorClean = spawnSync(process.execPath, [lint], { encoding: "utf8", env: { ...process.env, SHINE_LINT_SCOPE: "" }, input: JSON.stringify({ hook_event_name: "afterFileEdit", conversation_id: "cursor-1", file_path: css }) });
+  assert.equal(cursorClean.status, 0, `Cursor clean edit must not block: ${cursorClean.stderr}`);
+  writeFileSync(css, readFileSync(css, "utf8") + ".f{color:#00ff00}\n");
+  const cursorDirty = spawnSync(process.execPath, [lint], { encoding: "utf8", env: { ...process.env, SHINE_LINT_SCOPE: "" }, input: JSON.stringify({ hook_event_name: "afterFileEdit", conversation_id: "cursor-1", file_path: css }) });
+  assert.equal(cursorDirty.status, 2, "Cursor blocks with exit 2");
+  assert.match(cursorDirty.stderr, /raw hex/);
+
+  // 9. scopeFindings keeps line-less findings (frontmatter, slop summaries).
   const scoped = scopeFindings("/x/a.css", { hard: ["/x/a.css:1  raw hex", "/x/a.css:9  raw hex", "/x/a.css  file-level"], soft: [] }, new Set([9]));
   assert.deepEqual(scoped.hard, ["/x/a.css:9  raw hex", "/x/a.css  file-level"]);
   assert.equal(scoped.preExisting, 1);
 
-  console.log("design-lint scope PASS: touched lines block · legacy lines note · untracked/fresh/--all-lines lint whole");
+  console.log("design-lint scope PASS: touched lines block · legacy lines note · session baseline survives mid-turn commits · Cursor contract · untracked/fresh/--all-lines lint whole");
 } finally {
   rmSync(dir, { recursive: true, force: true });
 }

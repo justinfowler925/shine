@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "magicui-animated-beam-multiple-outputs",
+  "screen": "marketing-integrations",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/animated-beam-multiple-outputs.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "animated-beam-multiple-outputs.tsx",
+      "sha256": "e8203047bd2fe441cc0aa278e53a037b8883bb82b8f2e5d7aa9630a83ddd33d7"
+    },
+    {
+      "path": "animated-beam.tsx",
+      "sha256": "6afa2ee1d01694a428eb8517d48deebe5c6b532dc0ee871800bb9d92aae43e79"
+    }
+  ]
+}

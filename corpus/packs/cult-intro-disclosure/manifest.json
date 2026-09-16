@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "cult-intro-disclosure",
+  "screen": "onboarding",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "cult-ui",
+    "mode": "sparse",
+    "url": "https://github.com/nolly-studio/cult-ui.git",
+    "branch": "main",
+    "sha": "3b855612fb524cb042cc91b65f0cd575057471cc"
+  },
+  "corpusPath": "cult-ui/apps/www/registry/default/ui/intro-disclosure.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "intro-disclosure.tsx",
+      "sha256": "442f82071baea86cc521a78aa820d0fe54c05312ddd28e7d5a1e05a4f7a25a2b"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-loading-indicator",
+  "screen": "async-state",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/loading-indicator/loading-indicator.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "loading-indicator.demo.tsx",
+      "sha256": "a774b293e0854dc56da74d9e3e8da0747b148dd65c416ca4862938a6626f2d44"
+    }
+  ]
+}

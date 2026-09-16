@@ -1,0 +1,19 @@
+{
+  "id": "untitled-date-picker",
+  "source": "https://www.untitledui.com/react/components/date-pickers",
+  "harvested": "2026-09-16",
+  "bytes": 313005,
+  "capture": {
+    "status": 200,
+    "title": "Free React date picker components | Untitled UI",
+    "headings": "Date picker components\nInstallation\nDate picker examples\nCalendar, September 2026\nSeptember 2026\nSeptember 2026\nSeptember 2026\nRange calendar, September to October 2026\nSeptember 2026\nOctober 2026\nSeptember to October 2026\nSeptember 2026\nOctober 2026",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/date-pickers",
+    "finalUrl": "https://www.untitledui.com/react/components/date-pickers",
+    "capturedAt": "2026-09-16T16:55:11.236Z",
+    "expectedTextMatched": false,
+    "shotSha256": "fa79eec790a59bb63a7e890ce835c3346be686c4932bdc463e71b6e20a43e09a"
+  }
+}

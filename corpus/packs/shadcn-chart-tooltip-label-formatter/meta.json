@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-tooltip-label-formatter",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-label-formatter",
-  "harvested": "2026-08-31",
-  "bytes": 22033
+  "harvested": "2026-09-16",
+  "bytes": 21995,
+  "capture": {
+    "status": 200,
+    "title": "chart-tooltip-label-formatter - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 2,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-label-formatter",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-label-formatter",
+    "capturedAt": "2026-09-16T16:53:55.595Z",
+    "expectedTextMatched": false,
+    "shotSha256": "aae91793370b2ba30bb65790bb16ad97bdd8b3eb3bee5abfaa7831626daf612a"
+  }
 }

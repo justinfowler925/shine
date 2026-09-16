@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-tooltip-formatter",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-formatter",
-  "harvested": "2026-08-31",
-  "bytes": 20846
+  "harvested": "2026-09-16",
+  "bytes": 20837,
+  "capture": {
+    "status": 200,
+    "title": "chart-tooltip-formatter - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 2,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-formatter",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-formatter",
+    "capturedAt": "2026-09-16T16:53:38.277Z",
+    "expectedTextMatched": false,
+    "shotSha256": "e4539f2055a554250f3a37af6e41b2d7be013965d4a7d5a1b17e76fa6f772c75"
+  }
 }

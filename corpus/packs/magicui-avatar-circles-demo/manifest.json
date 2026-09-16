@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "magicui-avatar-circles-demo",
+  "screen": "marketing-proof",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/avatar-circles-demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "avatar-circles-demo.tsx",
+      "sha256": "b42ed418bd409cc6400126e1757ab9093d0ff2ae4655163fe7634c288c4f5d3c"
+    },
+    {
+      "path": "avatar-circles.tsx",
+      "sha256": "e0900fa87df8042ad4f98d1ec8168b1504b207eb0211ed19b1ba079d1f9741dd"
+    }
+  ]
+}

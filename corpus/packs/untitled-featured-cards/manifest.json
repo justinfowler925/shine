@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-featured-cards",
+  "screen": "app-shell",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/app-navigation/base-components/featured-cards.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "featured-cards.demo.tsx",
+      "sha256": "166ed0f3db39822701efd5fa1677b464e274d1a8cc56b64b80c70bc372ba20da"
+    }
+  ]
+}

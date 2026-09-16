@@ -1,0 +1,19 @@
+{
+  "id": "magicui-icon-cloud-demo-3",
+  "source": "https://magicui.design/docs/components/icon-cloud",
+  "harvested": "2026-09-16",
+  "bytes": 323750,
+  "capture": {
+    "status": 200,
+    "title": "Icon Cloud | React Components & Templates",
+    "headings": "Command Palette\nIcon Cloud\nInstallation\nWith Images\nWith SVG Icons\nUsage\nProps\nAccessibility",
+    "expectedSelector": "pre",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/icon-cloud",
+    "finalUrl": "https://magicui.design/docs/components/icon-cloud",
+    "capturedAt": "2026-09-16T16:59:16.804Z",
+    "expectedTextMatched": false,
+    "shotSha256": "486440ded5d0ef0fe65cc409a017db495fe3a61f5a5046aecbb0e1fe0f79e4d0"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-tabs",
+  "screen": "tabs",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/tabs/tabs.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "tabs.demo.tsx",
+      "sha256": "f6c0bcaaf3bdc6edfc6a54fcf9e32c9f460260a335b4d4a9f776d6a8f8511565"
+    }
+  ]
+}

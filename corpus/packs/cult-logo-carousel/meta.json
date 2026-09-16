@@ -1,0 +1,19 @@
+{
+  "id": "cult-logo-carousel",
+  "source": "https://www.cult-ui.com/docs/components/logo-carousel",
+  "harvested": "2026-09-16",
+  "bytes": 362459,
+  "capture": {
+    "status": 200,
+    "title": "Logo Carousel · Cult UI",
+    "headings": "Logo Carousel\nInstallation\nUsage\nProps\nExamples\nAdding Custom Logos\nFeatures",
+    "expectedSelector": "pre",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://www.cult-ui.com/docs/components/logo-carousel",
+    "finalUrl": "https://www.cult-ui.com/docs/components/logo-carousel",
+    "capturedAt": "2026-09-16T17:03:32.800Z",
+    "expectedTextMatched": false,
+    "shotSha256": "1c38c04d461967f903a4ebad4b0606571de8636bc70f000d60daec001051b93f"
+  }
+}

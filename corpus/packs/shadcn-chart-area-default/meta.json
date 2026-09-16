@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-area-default",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-area-default",
-  "harvested": "2026-08-31",
-  "bytes": 34152
+  "harvested": "2026-09-16",
+  "bytes": 34152,
+  "capture": {
+    "status": 200,
+    "title": "chart-area-default - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-default",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-default",
+    "capturedAt": "2026-09-16T16:50:03.067Z",
+    "expectedTextMatched": false,
+    "shotSha256": "fedc9598484ef23ebab4d16c98d165ed3b5ca128ffa1887f580ec2933bbc2364"
+  }
 }

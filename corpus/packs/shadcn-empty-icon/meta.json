@@ -1,6 +1,19 @@
 {
   "id": "shadcn-empty-icon",
   "source": "https://ui.shadcn.com/docs/components/empty",
-  "harvested": "2026-08-31",
-  "bytes": 607797
+  "harvested": "2026-09-16",
+  "bytes": 607761,
+  "capture": {
+    "status": 200,
+    "title": "Empty - shadcn/ui",
+    "headings": "Empty\nInstallation#\nUsage#\nComposition#\nOutline#\nBackground#\nAvatar#\nAvatar Group#\nInputGroup#\nRTL#\nAPI Reference#",
+    "expectedSelector": "[data-slot=empty], main",
+    "expectedCount": 8,
+    "expectedText": "Empty",
+    "sourceUrl": "https://ui.shadcn.com/docs/components/empty",
+    "finalUrl": "https://ui.shadcn.com/docs/components/base/empty",
+    "capturedAt": "2026-09-16T17:29:03.407Z",
+    "expectedTextMatched": true,
+    "shotSha256": "bef6a363b298a21857e9910b48bb1139b0dae8adc6afba89fb52e1aab528c234"
+  }
 }

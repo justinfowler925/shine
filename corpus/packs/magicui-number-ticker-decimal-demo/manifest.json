@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "magicui-number-ticker-decimal-demo",
+  "screen": "marketing-metrics",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/number-ticker-decimal-demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "number-ticker.tsx",
+      "sha256": "0f7dcbc6a1962615a877590304e846f33d390002a51f2226f544938577c220f4"
+    }
+  ]
+}

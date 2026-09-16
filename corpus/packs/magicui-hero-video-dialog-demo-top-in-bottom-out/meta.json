@@ -1,0 +1,19 @@
+{
+  "id": "magicui-hero-video-dialog-demo-top-in-bottom-out",
+  "source": "https://magicui.design/docs/components/hero-video-dialog",
+  "harvested": "2026-09-16",
+  "bytes": 448756,
+  "capture": {
+    "status": 200,
+    "title": "Hero Video Dialog | React Components & Templates",
+    "headings": "Command Palette\nHero Video Dialog\nInstallation\nExamples\nUsage\nProps\nAnimation Styles\nNote",
+    "expectedSelector": "pre",
+    "expectedCount": 6,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/hero-video-dialog",
+    "finalUrl": "https://magicui.design/docs/components/hero-video-dialog",
+    "capturedAt": "2026-09-16T16:57:16.946Z",
+    "expectedTextMatched": false,
+    "shotSha256": "ef75c0d5d60fedbeac18171a2303633394b98a4bb24dbd8648d3ba2053a74564"
+  }
+}

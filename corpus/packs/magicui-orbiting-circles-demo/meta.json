@@ -1,0 +1,19 @@
+{
+  "id": "magicui-orbiting-circles-demo",
+  "source": "https://magicui.design/docs/components/orbiting-circles",
+  "harvested": "2026-09-16",
+  "bytes": 270701,
+  "capture": {
+    "status": 200,
+    "title": "Orbiting Circles | React Components & Templates",
+    "headings": "Command Palette\nOrbiting Circles\nInstallation\nUsage\nProps",
+    "expectedSelector": "pre",
+    "expectedCount": 5,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/orbiting-circles",
+    "finalUrl": "https://magicui.design/docs/components/orbiting-circles",
+    "capturedAt": "2026-09-16T16:59:20.974Z",
+    "expectedTextMatched": false,
+    "shotSha256": "12454aab09dc5e03acc276660b0516f3c681962d1a446f4144384d86c91c34f4"
+  }
+}

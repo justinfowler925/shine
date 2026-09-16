@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-bar-negative",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-bar-negative",
-  "harvested": "2026-08-31",
-  "bytes": 23213
+  "harvested": "2026-09-16",
+  "bytes": 23213,
+  "capture": {
+    "status": 200,
+    "title": "chart-bar-negative - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-bar-negative",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-bar-negative",
+    "capturedAt": "2026-09-16T16:51:02.208Z",
+    "expectedTextMatched": false,
+    "shotSha256": "bd6d0442c2889a4aaed5a2cb5bfb72469eb3b7387a0b6be51e4c8edb82b34492"
+  }
 }

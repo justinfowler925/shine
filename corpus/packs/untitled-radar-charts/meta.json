@@ -1,0 +1,19 @@
+{
+  "id": "untitled-radar-charts",
+  "source": "https://www.untitledui.com/react/components/radar-charts",
+  "harvested": "2026-09-16",
+  "bytes": 227436,
+  "capture": {
+    "status": 200,
+    "title": "Free React radar chart components | Untitled UI",
+    "headings": "Radar chart components\nInstallation\nRadar chart examples",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/radar-charts",
+    "finalUrl": "https://www.untitledui.com/react/components/radar-charts",
+    "capturedAt": "2026-09-16T16:54:27.594Z",
+    "expectedTextMatched": false,
+    "shotSha256": "4c53d05dc340a1426a83b4ae44e1a67fe9361a46b4f2c42f8d21267e1dd86c2d"
+  }
+}

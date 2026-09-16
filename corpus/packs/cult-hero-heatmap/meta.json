@@ -1,0 +1,19 @@
+{
+  "id": "cult-hero-heatmap",
+  "source": "https://www.cult-ui.com/docs/components/hero-heatmap",
+  "harvested": "2026-09-16",
+  "bytes": 1819985,
+  "capture": {
+    "status": 200,
+    "title": "Hero Heatmap · Cult UI",
+    "headings": "Hero Heatmap\nAI SDK Agents\nAI SDK Agents Copy and Paste\nAI SDK Agents\nAI SDK Agents Copy and Paste\nComposable hero\nCursor for Marketing\nInstallation\nUsage\nWhat You Get\nAPI Reference\nCustomization Patterns\nPerformance Notes\nAccessibility Notes\nTroubleshooting",
+    "expectedSelector": "pre",
+    "expectedCount": 10,
+    "expectedText": "",
+    "sourceUrl": "https://www.cult-ui.com/docs/components/hero-heatmap",
+    "finalUrl": "https://www.cult-ui.com/docs/components/hero-heatmap",
+    "capturedAt": "2026-09-16T16:58:08.856Z",
+    "expectedTextMatched": false,
+    "shotSha256": "9717eb03c566d61f79ccebe11a271d3a95fb2b391d50b4df830594b15f7ee99e"
+  }
+}

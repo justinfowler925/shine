@@ -1,0 +1,19 @@
+{
+  "id": "magicui-animated-beam-bidirectional",
+  "source": "https://magicui.design/docs/components/animated-beam",
+  "harvested": "2026-09-16",
+  "bytes": 431038,
+  "capture": {
+    "status": 200,
+    "title": "Animated Beam | React Components & Templates",
+    "headings": "Command Palette\nAnimated Beam\nInstallation\nExamples\nUsage\nProps\nCredits",
+    "expectedSelector": "pre",
+    "expectedCount": 9,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/animated-beam",
+    "finalUrl": "https://magicui.design/docs/components/animated-beam",
+    "capturedAt": "2026-09-16T16:58:29.009Z",
+    "expectedTextMatched": false,
+    "shotSha256": "52f79ad6fe14be00632574ddbb2c91b3ed217fd504e282a1b59134677fc819fa"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "magicui-terminal-demo",
+  "source": "https://magicui.design/docs/components/terminal",
+  "harvested": "2026-09-16",
+  "bytes": 351462,
+  "capture": {
+    "status": 200,
+    "title": "Terminal | React Components & Templates",
+    "headings": "Command Palette\nTerminal\nExamples\nInstallation\nUsage\nProps",
+    "expectedSelector": "pre",
+    "expectedCount": 8,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/terminal",
+    "finalUrl": "https://magicui.design/docs/components/terminal",
+    "capturedAt": "2026-09-16T16:56:47.506Z",
+    "expectedTextMatched": false,
+    "shotSha256": "d6753c5a52e64ab57789aa8354a03a43255f2a52f1b0009ebbaa1261012b919e"
+  }
+}

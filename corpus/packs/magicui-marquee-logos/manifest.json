@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "magicui-marquee-logos",
+  "screen": "marketing-proof",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/marquee-logos.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "marquee-logos.tsx",
+      "sha256": "f3fa0681672d7a1d834f7fdac13b4f8cd9b5fc9cedab0061e8b93b3cf7691c03"
+    },
+    {
+      "path": "marquee.tsx",
+      "sha256": "779f360a107409bfa35cda13bcef7d54cd620a15ab4a0ee50412442a4dd6b9c7"
+    }
+  ]
+}

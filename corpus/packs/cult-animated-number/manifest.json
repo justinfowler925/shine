@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "cult-animated-number",
+  "screen": "marketing-metrics",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "cult-ui",
+    "mode": "sparse",
+    "url": "https://github.com/nolly-studio/cult-ui.git",
+    "branch": "main",
+    "sha": "3b855612fb524cb042cc91b65f0cd575057471cc"
+  },
+  "corpusPath": "cult-ui/apps/www/registry/default/ui/animated-number.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "animated-number.tsx",
+      "sha256": "4bfe5dda929871341ff56dca0586c87ede50ed140d5236b523e9185838253f83"
+    }
+  ]
+}

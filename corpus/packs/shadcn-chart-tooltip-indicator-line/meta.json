@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-tooltip-indicator-line",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-indicator-line",
-  "harvested": "2026-08-31",
-  "bytes": 21397
+  "harvested": "2026-09-16",
+  "bytes": 21381,
+  "capture": {
+    "status": 200,
+    "title": "chart-tooltip-indicator-line - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 2,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-indicator-line",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-indicator-line",
+    "capturedAt": "2026-09-16T16:53:45.201Z",
+    "expectedTextMatched": false,
+    "shotSha256": "b568535a712f150a1e574b88058a6a7623ef7971fd16a0201041baf0d9ae395f"
+  }
 }

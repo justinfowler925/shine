@@ -1,6 +1,19 @@
 {
   "id": "shadcn-field-choice-card",
   "source": "https://ui.shadcn.com/docs/components/field",
-  "harvested": "2026-08-31",
-  "bytes": 1297507
+  "harvested": "2026-09-16",
+  "bytes": 1297483,
+  "capture": {
+    "status": 200,
+    "title": "Field - shadcn/ui",
+    "headings": "Field\nInstallation#\nUsage#\nComposition#\nAnatomy#\nForm#\nInput#\nTextarea#\nSelect#\nSlider#\nFieldset#\nCheckbox#\nRadio#\nSwitch#\nChoice Card#\nField Group#\nRTL#\nResponsive Layout#\nValidation and Errors#\nAccessibility#\nAPI Reference#",
+    "expectedSelector": "[data-slot=field], [role=radiogroup], main",
+    "expectedCount": 43,
+    "expectedText": "Field",
+    "sourceUrl": "https://ui.shadcn.com/docs/components/field",
+    "finalUrl": "https://ui.shadcn.com/docs/components/base/field",
+    "capturedAt": "2026-09-16T17:28:40.290Z",
+    "expectedTextMatched": true,
+    "shotSha256": "189e3891ccc4948f69eee78af8200586de9c2ef7d5025307f1a59bfdcff146ed"
+  }
 }

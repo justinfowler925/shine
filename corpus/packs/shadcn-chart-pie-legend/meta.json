@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-pie-legend",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-pie-legend",
-  "harvested": "2026-08-31",
-  "bytes": 20423
+  "harvested": "2026-09-16",
+  "bytes": 20432,
+  "capture": {
+    "status": 200,
+    "title": "chart-pie-legend - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 2,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-pie-legend",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-pie-legend",
+    "capturedAt": "2026-09-16T16:52:07.754Z",
+    "expectedTextMatched": false,
+    "shotSha256": "a14fa28b162c415a248a6d377ca6f0e510d462f77111d9d1f96d90e799924d55"
+  }
 }
