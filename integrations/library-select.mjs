@@ -9,7 +9,7 @@ const aliases={table:['grid','records'],search:['command','filter'],dashboard:['
 export function selectImplementation(project,job,{pattern,upstream=[]}={}){
  pattern ||= /\b(server|remote)\b.*\b(table|grid|records|pagination)\b/i.test(job)?'server-data-grid':/\bcsv\b.*\b(import|preview)\b/i.test(job)?'csv-import':undefined;
  const terms=new Set(words(job).flatMap(word=>[word,...(aliases[word]||[])]));if(!terms.size&&!pattern)throw Error('State the user job or requested pattern');
- const inventory=sourceInventory(project),pkg=JSON.parse(readFileSync(join(project,'package.json'),'utf8')),config=existsSync(join(project,'components.json'))?JSON.parse(readFileSync(join(project,'components.json'),'utf8')):{};
+ const inventory=sourceInventory(project),pkg=existsSync(join(project,'package.json'))?JSON.parse(readFileSync(join(project,'package.json'),'utf8')):{},config=existsSync(join(project,'components.json'))?JSON.parse(readFileSync(join(project,'components.json'),'utf8')):{};
  const score=text=>words(text).filter(word=>terms.has(word)).length;
  const ranked=blocks.map(block=>({block,score:pattern===block.id?100:score([block.id,block.title,block.description,...(block.capabilities||[])].join(' '))})).filter(row=>pattern?row.block.id===pattern:row.score>0).sort((a,b)=>b.score-a.score);
  const declared=existsSync(join(project,'shine-coverage.json'))?JSON.parse(readFileSync(join(project,'shine-coverage.json'),'utf8')).patterns:[];
