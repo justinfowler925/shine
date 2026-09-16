@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "cult-hero-static-radial-gradient",
+  "screen": "marketing-hero",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "cult-ui",
+    "mode": "sparse",
+    "url": "https://github.com/nolly-studio/cult-ui.git",
+    "branch": "main",
+    "sha": "3b855612fb524cb042cc91b65f0cd575057471cc"
+  },
+  "corpusPath": "cult-ui/apps/www/registry/default/ui/hero-static-radial-gradient.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "hero-static-radial-gradient.tsx",
+      "sha256": "93a8c4940814aa292952925b94db71ebb347cd581d2a1aed4222daf108715395"
+    }
+  ]
+}

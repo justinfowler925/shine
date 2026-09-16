@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "cult-onboarding",
+  "screen": "onboarding",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "cult-ui",
+    "mode": "sparse",
+    "url": "https://github.com/nolly-studio/cult-ui.git",
+    "branch": "main",
+    "sha": "3b855612fb524cb042cc91b65f0cd575057471cc"
+  },
+  "corpusPath": "cult-ui/apps/www/registry/default/ui/onboarding.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "onboarding.tsx",
+      "sha256": "2f3d9ccade369395b97828da07c3bcd5c394eb3604611d1d083625936df7a884"
+    }
+  ]
+}

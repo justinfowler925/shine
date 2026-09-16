@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-radial-stacked",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-radial-stacked",
-  "harvested": "2026-08-31",
-  "bytes": 25783
+  "harvested": "2026-09-16",
+  "bytes": 25783,
+  "capture": {
+    "status": 200,
+    "title": "chart-radial-stacked - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radial-stacked",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radial-stacked",
+    "capturedAt": "2026-09-16T16:53:24.453Z",
+    "expectedTextMatched": false,
+    "shotSha256": "a35512c830319f73031dd8cb768f539344ff3bff7da7f4feb76c867ae8c8274c"
+  }
 }

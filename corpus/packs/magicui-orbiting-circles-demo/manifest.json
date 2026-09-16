@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "magicui-orbiting-circles-demo",
+  "screen": "marketing-integrations",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/orbiting-circles-demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "orbiting-circles-demo.tsx",
+      "sha256": "6ff1d9122d2519c15eb4d566557613f4ce541b169db7740f518fab584560a455"
+    },
+    {
+      "path": "orbiting-circles.tsx",
+      "sha256": "859b88b6c22144e5cd4bf04ab49d339090eea13b422d3085a80584e6b9d4da68"
+    }
+  ]
+}

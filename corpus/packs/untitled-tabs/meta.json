@@ -1,0 +1,19 @@
+{
+  "id": "untitled-tabs",
+  "source": "https://www.untitledui.com/react/components/tabs",
+  "harvested": "2026-09-16",
+  "bytes": 329344,
+  "capture": {
+    "status": 200,
+    "title": "Free React tab components | Untitled UI",
+    "headings": "Tab components\nInstallation\nTabs examples\nFAQs",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/tabs",
+    "finalUrl": "https://www.untitledui.com/react/components/tabs",
+    "capturedAt": "2026-09-16T17:04:02.564Z",
+    "expectedTextMatched": false,
+    "shotSha256": "a2fb8499a76b411cf30ed09753318b13f86824764b8cd722e3656b8b20af008c"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "magicui-bento-demo-vertical",
+  "source": "https://magicui.design/docs/components/bento-grid",
+  "harvested": "2026-09-16",
+  "bytes": 309056,
+  "capture": {
+    "status": 200,
+    "title": "Bento Grid | React Components & Templates",
+    "headings": "Command Palette\nBento Grid\nInstallation\nExamples\nUsage",
+    "expectedSelector": "pre",
+    "expectedCount": 6,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/bento-grid",
+    "finalUrl": "https://magicui.design/docs/components/bento-grid",
+    "capturedAt": "2026-09-16T16:56:59.850Z",
+    "expectedTextMatched": false,
+    "shotSha256": "451c8cbdcdf05d338f1bca4634f0b9680ed7f56ff00d42e5158576ae7c408503"
+  }
+}

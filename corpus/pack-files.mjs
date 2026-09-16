@@ -137,6 +137,12 @@ export function collectCorpusSource(row, { corpus, extractDir }) {
     const authored = join(SHINE, "corpus/blueprints", row.id);
     if (existsSync(authored) && statSync(authored).isDirectory()) walk(authored, listed);
   }
+  // Rows may name companion files (the component an example mounts) so a pack is
+  // never just a ten-line demo.
+  for (const rel of row.sources || []) {
+    const companion = join(corpus, rel);
+    if (existsSync(companion)) listed.push(companion);
+  }
   const files = [...new Set(listed)].sort((a, b) => rankSource(a) - rankSource(b) || a.localeCompare(b));
   const picked = pickMustRead(files);
   if (row.entrypoints?.length) {

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "magicui-iphone-demo-2",
+  "screen": "marketing-mockup",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/iphone-demo-2.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "iphone.tsx",
+      "sha256": "64aa5f8f05c2444d2f0f791328a6bc5c0cc73624eb53dde2c5d29cd710c20124"
+    }
+  ]
+}

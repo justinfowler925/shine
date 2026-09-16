@@ -1,6 +1,19 @@
 {
   "id": "shadcn-signup-05",
   "source": "https://ui.shadcn.com/view/new-york-v4/signup-05",
-  "harvested": "2026-08-31",
-  "bytes": 30518
+  "harvested": "2026-09-16",
+  "bytes": 30518,
+  "capture": {
+    "status": 200,
+    "title": "signup-05 - shadcn/ui",
+    "headings": "Welcome to Acme Inc.",
+    "expectedSelector": "form input, input",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/signup-05",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/signup-05",
+    "capturedAt": "2026-09-16T16:49:41.812Z",
+    "expectedTextMatched": false,
+    "shotSha256": "7031bccbff082e9a13b55a1da5b5b50060e4a2054184dcb90c4b58aab9b18dad"
+  }
 }

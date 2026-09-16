@@ -1,0 +1,19 @@
+{
+  "id": "untitled-loading-indicator",
+  "source": "https://www.untitledui.com/react/components/loading-indicators",
+  "harvested": "2026-09-16",
+  "bytes": 212070,
+  "capture": {
+    "status": 200,
+    "title": "Free React loading indicator components | Untitled UI",
+    "headings": "Loading indicator components\nInstallation\nLoading indicator examples",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/loading-indicators",
+    "finalUrl": "https://www.untitledui.com/react/components/loading-indicators",
+    "capturedAt": "2026-09-16T16:49:10.602Z",
+    "expectedTextMatched": false,
+    "shotSha256": "425806d74c290ba645f1a46606d8dcd1890fa8a4a118a8bd655658846f645d24"
+  }
+}

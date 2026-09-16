@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "magicui-bento-demo-vertical",
+  "screen": "marketing-features",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/bento-demo-vertical.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "bento-demo-vertical.tsx",
+      "sha256": "182f7068f2b8c199b5957d62c89c3a8bee126b23e71e3d6d05d16c423775084f"
+    },
+    {
+      "path": "bento-grid.tsx",
+      "sha256": "9c2abcb2a4e51519e56d510299771a2d0e170ab9927a9a792a58614b1837ed47"
+    }
+  ]
+}

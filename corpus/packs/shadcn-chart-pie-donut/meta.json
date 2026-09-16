@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-pie-donut",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-pie-donut",
-  "harvested": "2026-08-31",
-  "bytes": 25370
+  "harvested": "2026-09-16",
+  "bytes": 25376,
+  "capture": {
+    "status": 200,
+    "title": "chart-pie-donut - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-pie-donut",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-pie-donut",
+    "capturedAt": "2026-09-16T16:51:43.668Z",
+    "expectedTextMatched": false,
+    "shotSha256": "7c0add9bce47e3e7818d653d1121f7552a1f8a11c0764463fb45a82dd48d2cb2"
+  }
 }

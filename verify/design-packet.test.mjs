@@ -45,6 +45,12 @@ const dashboard=createDesignPacket({job:cases[2][0],lane:"internal",project:proc
 assert.equal(dashboard.selected.id,"shadcn-dashboard-01","component demo cannot replace the composed page reference");
 assert(dashboard.componentReferences.some(x=>x.id==="untitled-line-charts"),"Untitled chart should be a component reference");
 assert.equal(dashboard.diagnosis.required,false);
+// A selected reference without a validated capture is named as a gap up front, with
+// the harvest command; a validated one is not.
+const unvalidated=createDesignPacket({job:"landing page hero for the fraud detection product",lane:"marketing",project:process.cwd(),mode:"new",category:"marketing"});
+if(unvalidated.selected.referenceHealth.status!=="passed")assert(unvalidated.gaps.some(g=>g.startsWith("reference: ")&&g.includes("harvest.mjs")),"unvalidated reference must be a named gap");
+else assert(!unvalidated.gaps.some(g=>g.startsWith("reference: ")));
+assert(!dashboard.gaps.some(g=>g.startsWith("reference: "))||dashboard.selected.referenceHealth.status!=="passed");
 assert.throws(()=>createDesignPacket({job:""}),/job is required/);
 // Kit affinity. A consumer's installed kit decided the build recipe but had no
 // say in the page reference, so a shadcn/TanStack repo asking for a records

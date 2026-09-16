@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-tooltip-label-custom",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-label-custom",
-  "harvested": "2026-08-31",
-  "bytes": 22641
+  "harvested": "2026-09-16",
+  "bytes": 22669,
+  "capture": {
+    "status": 200,
+    "title": "chart-tooltip-label-custom - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 2,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-label-custom",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-label-custom",
+    "capturedAt": "2026-09-16T16:53:52.125Z",
+    "expectedTextMatched": false,
+    "shotSha256": "96260cab7ecdb97ec38cad28abef3d4d2a37ef39602b990b40d02ca7c9f3f4c4"
+  }
 }

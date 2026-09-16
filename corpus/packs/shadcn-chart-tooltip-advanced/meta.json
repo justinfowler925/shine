@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-tooltip-advanced",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-advanced",
-  "harvested": "2026-08-31",
-  "bytes": 24000
+  "harvested": "2026-09-16",
+  "bytes": 24028,
+  "capture": {
+    "status": 200,
+    "title": "chart-tooltip-advanced - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 2,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-advanced",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-tooltip-advanced",
+    "capturedAt": "2026-09-16T16:53:31.377Z",
+    "expectedTextMatched": false,
+    "shotSha256": "f01b79cfaa0d5d25817cbdf5f8d37b4e9482dab9cb9ab59374dabe6c0a51f813"
+  }
 }

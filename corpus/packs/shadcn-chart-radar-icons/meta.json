@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-radar-icons",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-radar-icons",
-  "harvested": "2026-08-31",
-  "bytes": 33330
+  "harvested": "2026-09-16",
+  "bytes": 33330,
+  "capture": {
+    "status": 200,
+    "title": "chart-radar-icons - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 5,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-icons",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-icons",
+    "capturedAt": "2026-09-16T16:52:49.935Z",
+    "expectedTextMatched": false,
+    "shotSha256": "d51bc2b88c0841a5cd5c6b4ed3e1613909a94d7b0d57145afb753bfb83c204bd"
+  }
 }

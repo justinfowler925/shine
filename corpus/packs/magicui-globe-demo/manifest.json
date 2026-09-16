@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "magicui-globe-demo",
+  "screen": "marketing-integrations",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/globe-demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "globe.tsx",
+      "sha256": "76422bf378c6503883706fe7af90132f7716dbe383fab7728a95c95e4d16cfd0"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "magicui-animated-beam-unidirectional",
+  "screen": "marketing-integrations",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/animated-beam-unidirectional.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "animated-beam-unidirectional.tsx",
+      "sha256": "b3f6ad999443ec9b1c8d080086051c3368a7249577086ff21a93accbe0de9acd"
+    },
+    {
+      "path": "animated-beam.tsx",
+      "sha256": "6afa2ee1d01694a428eb8517d48deebe5c6b532dc0ee871800bb9d92aae43e79"
+    }
+  ]
+}

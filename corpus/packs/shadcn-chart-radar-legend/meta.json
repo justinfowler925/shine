@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-radar-legend",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-radar-legend",
-  "harvested": "2026-08-31",
-  "bytes": 33437
+  "harvested": "2026-09-16",
+  "bytes": 33437,
+  "capture": {
+    "status": 200,
+    "title": "chart-radar-legend - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-legend",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-legend",
+    "capturedAt": "2026-09-16T16:52:56.814Z",
+    "expectedTextMatched": false,
+    "shotSha256": "1a11bcdff0266ec2a5039c92f8f0202b5823449f8e4f0c04fd1f65bf50c2271d"
+  }
 }

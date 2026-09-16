@@ -1,0 +1,19 @@
+{
+  "id": "untitled-carousel",
+  "source": "https://www.untitledui.com/react/components/carousels",
+  "harvested": "2026-09-16",
+  "bytes": 1211775,
+  "capture": {
+    "status": 200,
+    "title": "Free React carousel components | Untitled UI",
+    "headings": "Carousel components\nInstallation\nCarousel examples",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/carousels",
+    "finalUrl": "https://www.untitledui.com/react/components/carousels",
+    "capturedAt": "2026-09-16T16:49:49.497Z",
+    "expectedTextMatched": false,
+    "shotSha256": "739cfc6407e4c16d2feba8628bf46dbd080ed9bd3d796c503ec8cfc64cdbb071"
+  }
+}

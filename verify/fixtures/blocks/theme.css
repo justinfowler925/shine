@@ -1,4 +1,8 @@
-@import "tailwindcss";
+/* source(none): Tailwind v4 otherwise scans the whole repository for class names,
+   so every harvested pack's vendored source under corpus/packs grew the published library
+   stylesheet by tens of kilobytes of utilities nothing in the library uses. Only
+   the declared @source paths count. */
+@import "tailwindcss" source(none);
 @source "../../../blocks";
 @source "./";
 @theme inline {

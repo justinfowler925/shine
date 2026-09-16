@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "magicui-android-demo-2",
+  "screen": "marketing-mockup",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/android-demo-2.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "android.tsx",
+      "sha256": "9235d2e9204078c65ff8077bf8adc6b3ed4b12c55a8354345faa8f8abbddb5cf"
+    }
+  ]
+}

@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-line-linear",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-line-linear",
-  "harvested": "2026-08-31",
-  "bytes": 38097
+  "harvested": "2026-09-16",
+  "bytes": 38097,
+  "capture": {
+    "status": 200,
+    "title": "chart-line-linear - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-line-linear",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-line-linear",
+    "capturedAt": "2026-09-16T16:51:33.360Z",
+    "expectedTextMatched": false,
+    "shotSha256": "46c00df13fd2cac81848c3ab8ea43d327d1ebdad3bb36ffd0228d10fb3a05629"
+  }
 }

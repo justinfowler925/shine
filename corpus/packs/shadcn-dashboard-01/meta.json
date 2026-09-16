@@ -1,7 +1,7 @@
 {
   "id": "shadcn-dashboard-01",
   "source": "https://ui.shadcn.com/view/new-york-v4/dashboard-01",
-  "harvested": "2026-09-13",
+  "harvested": "2026-09-16",
   "bytes": 238589,
   "capture": {
     "status": 200,
@@ -12,7 +12,7 @@
     "expectedText": "",
     "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/dashboard-01",
     "finalUrl": "https://ui.shadcn.com/view/new-york-v4/dashboard-01",
-    "capturedAt": "2026-09-13T10:29:44.956Z",
+    "capturedAt": "2026-09-16T16:55:00.038Z",
     "expectedTextMatched": false,
     "shotSha256": "3331085ce8bf99b53c5b939d4842cccdf9808a0976030ade2416b22681bcb01e"
   }

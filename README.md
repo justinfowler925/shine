@@ -27,7 +27,7 @@ Shine's shadcn catalog and registry work stands on [shadcn/ui](https://github.co
 | **Technique transfer** | Measured rules from 18 products + pinned kits (shadcn, Radix, Untitled UI, Spectrum, Fluent, APG, …) |
 | **Tokens** | One DTCG source → CSS, Tailwind v4, artifacts, Python, email, Docs, Office, Salesforce |
 | **Voices** | `tokens/voices/<family>.css` + the kit's own token sources — kit paint is legal via custom-property definitions |
-| **Corpus** | `~/design-corpus` — sparse upstream source; `rg` before inventing any API |
+| **Corpus** | `~/design-corpus` — sparse upstream source; `rg` before inventing any API. 190 of 197 catalog references carry a validated capture (`corpus/harvest.mjs` + `corpus/materialize-packs.mjs`); the rest are query-only shots and region maps |
 | **Enforcement** | design-lint + stop-sweep, per-edit and turn-end, on both surfaces |
 | **Verification** | `measure.mjs` (axe, per-pixel contrast, composition, family checks) + `compare.mjs` (side-by-side pixels, facts, no verdict) |
 | **Doctor** | `verify/doctor.mjs` — wiring, gate bite (seeded violations), pack payload, compare mismatch |

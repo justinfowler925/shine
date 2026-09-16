@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "magicui-code-comparison-demo",
+  "screen": "marketing-developer",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/code-comparison-demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "code-comparison-demo.tsx",
+      "sha256": "c591b506b2244cc331ce3e3a99984e8cdd403bbafd4fd8170e32d2e7f0a4f945"
+    },
+    {
+      "path": "code-comparison.tsx",
+      "sha256": "a06698296a219ac0d7ffa098f6d5d2bbf38c3f825af5a8b01786fddf16b969ac"
+    }
+  ]
+}

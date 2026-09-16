@@ -1,6 +1,19 @@
 {
   "id": "lex-mobile",
-  "source": "https://www.lightningdesignsystem.com/guidelines/mobile/",
-  "harvested": "2026-08-31",
-  "bytes": 39756
+  "source": "https://www.lightningdesignsystem.com/2e1ef8501/p/391e54-mobile-design",
+  "harvested": "2026-09-16",
+  "bytes": 64178,
+  "capture": {
+    "status": 200,
+    "title": "Mobile Design · Lightning Design System 2",
+    "headings": "Mobile Design\nBest Practices",
+    "expectedSelector": "h1, main, article",
+    "expectedCount": 4,
+    "expectedText": "Mobile",
+    "sourceUrl": "https://www.lightningdesignsystem.com/2e1ef8501/p/391e54-mobile-design",
+    "finalUrl": "https://www.lightningdesignsystem.com/2e1ef8501/p/391e54-mobile-design",
+    "capturedAt": "2026-09-16T17:36:37.668Z",
+    "expectedTextMatched": true,
+    "shotSha256": "cd40d2be8405ba9467f9905e75c7b1edeed674957dcb49c5cbd62267509fc229"
+  }
 }

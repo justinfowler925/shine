@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "cult-hero-color-panel",
+  "screen": "marketing-hero",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "cult-ui",
+    "mode": "sparse",
+    "url": "https://github.com/nolly-studio/cult-ui.git",
+    "branch": "main",
+    "sha": "3b855612fb524cb042cc91b65f0cd575057471cc"
+  },
+  "corpusPath": "cult-ui/apps/www/registry/default/ui/hero-color-panel.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "hero-color-panel.tsx",
+      "sha256": "6db98a0dea11f51ce212fe141f7750086958745233de0663f324d40313c62dfd"
+    }
+  ]
+}

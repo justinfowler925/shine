@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-radial-text",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-radial-text",
-  "harvested": "2026-08-31",
-  "bytes": 28786
+  "harvested": "2026-09-16",
+  "bytes": 28793,
+  "capture": {
+    "status": 200,
+    "title": "chart-radial-text - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radial-text",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radial-text",
+    "capturedAt": "2026-09-16T16:53:27.910Z",
+    "expectedTextMatched": false,
+    "shotSha256": "80cb29143426092e23252041406676bb97036e4df410aa41957dc50a3a44ad6a"
+  }
 }

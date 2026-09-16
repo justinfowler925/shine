@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-radar-grid-circle-no-lines",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-radar-grid-circle-no-lines",
-  "harvested": "2026-08-31",
-  "bytes": 34893
+  "harvested": "2026-09-16",
+  "bytes": 34893,
+  "capture": {
+    "status": 200,
+    "title": "chart-radar-grid-circle-no-lines - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-grid-circle-no-lines",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-grid-circle-no-lines",
+    "capturedAt": "2026-09-16T16:52:35.879Z",
+    "expectedTextMatched": false,
+    "shotSha256": "683566fce70170c6f0d6b093dda52b286f3cb9e821f81faece1609499db4a67f"
+  }
 }

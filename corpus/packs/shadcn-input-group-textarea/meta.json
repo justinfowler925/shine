@@ -1,6 +1,19 @@
 {
   "id": "shadcn-input-group-textarea",
   "source": "https://ui.shadcn.com/docs/components/input-group",
-  "harvested": "2026-08-31",
-  "bytes": 829254
+  "harvested": "2026-09-16",
+  "bytes": 829213,
+  "capture": {
+    "status": 200,
+    "title": "Input Group - shadcn/ui",
+    "headings": "Input Group\nInstallation#\nUsage#\nComposition#\nAlign#\nIcon#\nText#\nButton#\nKbd#\nDropdown#\nSpinner#\nTextarea#\nCustom Input#\nRTL#\nAPI Reference#",
+    "expectedSelector": "textarea, main",
+    "expectedCount": 8,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/docs/components/input-group",
+    "finalUrl": "https://ui.shadcn.com/docs/components/base/input-group",
+    "capturedAt": "2026-09-16T16:47:49.490Z",
+    "expectedTextMatched": false,
+    "shotSha256": "7346bea7ad85b904d04b605a79504293785e1b9f737cb5c628a51c96333da845"
+  }
 }

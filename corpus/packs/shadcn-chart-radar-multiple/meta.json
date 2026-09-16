@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-radar-multiple",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-radar-multiple",
-  "harvested": "2026-08-31",
-  "bytes": 31836
+  "harvested": "2026-09-16",
+  "bytes": 31836,
+  "capture": {
+    "status": 200,
+    "title": "chart-radar-multiple - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-multiple",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-multiple",
+    "capturedAt": "2026-09-16T16:53:03.683Z",
+    "expectedTextMatched": false,
+    "shotSha256": "f0af3ab6a4e2d73f6f5a28a37b26ac14fd5ec7dc048a5553369c6cc95e5e580c"
+  }
 }

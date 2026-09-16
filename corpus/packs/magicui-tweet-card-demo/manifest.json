@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "magicui-tweet-card-demo",
+  "screen": "marketing-proof",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/tweet-card-demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "tweet-card.tsx",
+      "sha256": "6d3c76c487e091b0da0327f17df7bd358286a86214a526316050a9fbccf3143e"
+    }
+  ]
+}

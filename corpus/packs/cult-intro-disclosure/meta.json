@@ -1,0 +1,19 @@
+{
+  "id": "cult-intro-disclosure",
+  "source": "https://www.cult-ui.com/docs/components/intro-disclosure",
+  "harvested": "2026-09-16",
+  "bytes": 532271,
+  "capture": {
+    "status": 200,
+    "title": "Intro Disclosure · Cult UI",
+    "headings": "Intro Disclosure\nIntroDisclosure Demo\nFeatures\nInstallation\nUsage\nExamples\nIntroDisclosure Demo",
+    "expectedSelector": "pre",
+    "expectedCount": 6,
+    "expectedText": "",
+    "sourceUrl": "https://www.cult-ui.com/docs/components/intro-disclosure",
+    "finalUrl": "https://www.cult-ui.com/docs/components/intro-disclosure",
+    "capturedAt": "2026-09-16T17:03:44.003Z",
+    "expectedTextMatched": false,
+    "shotSha256": "285b25dde76380e5b41994cc1ca6eb4c3d705a1f24e5d8dced5c360e5366b627"
+  }
+}

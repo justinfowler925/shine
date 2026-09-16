@@ -1,6 +1,19 @@
 {
   "id": "shadcn-login-05",
   "source": "https://ui.shadcn.com/view/new-york-v4/login-05",
-  "harvested": "2026-08-31",
-  "bytes": 29140
+  "harvested": "2026-09-16",
+  "bytes": 29140,
+  "capture": {
+    "status": 200,
+    "title": "login-05 - shadcn/ui",
+    "headings": "Welcome to Acme Inc.",
+    "expectedSelector": "form input, input",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/login-05",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/login-05",
+    "capturedAt": "2026-09-16T16:49:24.430Z",
+    "expectedTextMatched": false,
+    "shotSha256": "44e71623b4ed4ca28c1bcc5a9feda1c6450bea6a30b698b574e3236cf85204c7"
+  }
 }

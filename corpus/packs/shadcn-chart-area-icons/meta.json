@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-area-icons",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-area-icons",
-  "harvested": "2026-08-31",
-  "bytes": 42157
+  "harvested": "2026-09-16",
+  "bytes": 42157,
+  "capture": {
+    "status": 200,
+    "title": "chart-area-icons - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 5,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-icons",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-icons",
+    "capturedAt": "2026-09-16T16:50:10.026Z",
+    "expectedTextMatched": false,
+    "shotSha256": "dc19e2d01772e16fb16ce41adce9e266a4a00985fbc816c3a32c58d6439eeb88"
+  }
 }

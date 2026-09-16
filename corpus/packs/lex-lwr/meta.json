@@ -1,6 +1,19 @@
 {
   "id": "lex-lwr",
-  "source": "https://www.lightningdesignsystem.com/guidelines/overview/",
-  "harvested": "2026-08-31",
-  "bytes": 342205
+  "source": "https://www.lightningdesignsystem.com/2e1ef8501/p/355656-patterns",
+  "harvested": "2026-09-16",
+  "bytes": 341424,
+  "capture": {
+    "status": 200,
+    "title": "Patterns · Lightning Design System 2",
+    "headings": "Patterns\nGuiding Principles\nLightning Design Patterns",
+    "expectedSelector": "h1, main, article",
+    "expectedCount": 4,
+    "expectedText": "Lightning",
+    "sourceUrl": "https://www.lightningdesignsystem.com/2e1ef8501/p/355656-patterns",
+    "finalUrl": "https://www.lightningdesignsystem.com/2e1ef8501/p/355656-patterns",
+    "capturedAt": "2026-09-16T17:31:53.993Z",
+    "expectedTextMatched": true,
+    "shotSha256": "157c560147d42bc080d967143ffa7a0023de3c367169c67b69b37376654672c6"
+  }
 }

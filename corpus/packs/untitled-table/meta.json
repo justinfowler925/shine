@@ -1,6 +1,19 @@
 {
   "id": "untitled-table",
-  "source": "https://github.com/untitleduico/react/blob/d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e/components/application/table/table.story.tsx",
-  "harvested": "2026-08-25",
-  "bytes": 185596
+  "source": "https://www.untitledui.com/react/components/tables",
+  "harvested": "2026-09-16",
+  "bytes": 1971228,
+  "capture": {
+    "status": 200,
+    "title": "Free React table components | Untitled UI",
+    "headings": "Table components\nTeam members\nInstallation\nSizes\nTeam members\nTable examples\nTeam members\nTeam members\nCustomers\nCustomers\nFiles uploaded\nFiles uploaded\nVendor movements\nNo vendors found\nTeam members\nSomething went wrong...\nUsers\nNo users found\nIntegrations\nAdd your first integration\nUsers\nInvite your first user\nMy orders\nYou're offline",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/tables",
+    "finalUrl": "https://www.untitledui.com/react/components/tables",
+    "capturedAt": "2026-09-16T17:03:53.400Z",
+    "expectedTextMatched": false,
+    "shotSha256": "e2bb2f13b0eede989e9af0227451e4dbc66e20306d85b98c345a7162e61a6095"
+  }
 }

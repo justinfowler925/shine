@@ -1,6 +1,19 @@
 {
   "id": "shadcn-signup-02",
   "source": "https://ui.shadcn.com/view/new-york-v4/signup-02",
-  "harvested": "2026-08-31",
-  "bytes": 58141
+  "harvested": "2026-09-16",
+  "bytes": 58141,
+  "capture": {
+    "status": 200,
+    "title": "signup-02 - shadcn/ui",
+    "headings": "Create your account",
+    "expectedSelector": "form input, input",
+    "expectedCount": 4,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/signup-02",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/signup-02",
+    "capturedAt": "2026-09-16T16:49:31.304Z",
+    "expectedTextMatched": false,
+    "shotSha256": "75c03d9a355ae4f1ab34538a638d85f6f4ae312e49b0db1d7037acb82ac7cf45"
+  }
 }

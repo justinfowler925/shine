@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-radar-charts",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/charts/radar-charts.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "radar-charts.demo.tsx",
+      "sha256": "13a3c8c1b153aaab5b23ed6d5f6dd8750dbdadcf77f11cba9c3b0d6264d8486b"
+    }
+  ]
+}

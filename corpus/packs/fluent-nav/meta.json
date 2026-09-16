@@ -1,6 +1,19 @@
 {
   "id": "fluent-nav",
   "source": "https://react.fluentui.dev/?path=/docs/components-navdrawer--docs",
-  "harvested": "2026-08-31",
-  "bytes": 47192
+  "harvested": "2026-09-16",
+  "bytes": 47192,
+  "capture": {
+    "status": 200,
+    "title": "Storybook",
+    "headings": "",
+    "expectedSelector": "iframe, #storybook-root, main",
+    "expectedCount": 2,
+    "expectedText": "",
+    "sourceUrl": "https://react.fluentui.dev/?path=/docs/components-navdrawer--docs",
+    "finalUrl": "https://storybooks.fluentui.dev/react/?path=/docs/components-navdrawer--docs",
+    "capturedAt": "2026-09-16T17:03:58.698Z",
+    "expectedTextMatched": false,
+    "shotSha256": "ac4a16d46c5aa1be22a8ee0feb517e5bb9db55da59c01adc26f7523053d8dc91"
+  }
 }

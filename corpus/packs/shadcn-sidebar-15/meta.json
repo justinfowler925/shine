@@ -1,6 +1,19 @@
 {
   "id": "shadcn-sidebar-15",
   "source": "https://ui.shadcn.com/view/new-york-v4/sidebar-15",
-  "harvested": "2026-08-31",
-  "bytes": 100723
+  "harvested": "2026-09-16",
+  "bytes": 99355,
+  "capture": {
+    "status": 200,
+    "title": "sidebar-15 - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "[data-slot=sidebar], aside, [data-slot]",
+    "expectedCount": 152,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/sidebar-15",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/sidebar-15",
+    "capturedAt": "2026-09-16T16:48:44.902Z",
+    "expectedTextMatched": false,
+    "shotSha256": "02ecaebfbc06d0cc430375a6c68fcbe8a43c2c876a74970083b64d47d08d9f53"
+  }
 }

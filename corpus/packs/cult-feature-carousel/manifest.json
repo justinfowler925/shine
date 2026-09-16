@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "cult-feature-carousel",
+  "screen": "marketing-features",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "cult-ui",
+    "mode": "sparse",
+    "url": "https://github.com/nolly-studio/cult-ui.git",
+    "branch": "main",
+    "sha": "3b855612fb524cb042cc91b65f0cd575057471cc"
+  },
+  "corpusPath": "cult-ui/apps/www/registry/default/ui/feature-carousel.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "feature-carousel.tsx",
+      "sha256": "a828813d9c8fb8807857564a600cc36eddef7bb03b5711bc9dac40efca905873"
+    }
+  ]
+}

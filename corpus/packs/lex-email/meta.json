@@ -1,6 +1,19 @@
 {
   "id": "lex-email",
-  "source": "https://www.lightningdesignsystem.com/guidelines/email/",
-  "harvested": "2026-08-31",
-  "bytes": 46992
+  "source": "https://help.salesforce.com/s/articleView?id=sf.email_templates_lightning.htm&type=5",
+  "harvested": "2026-09-16",
+  "bytes": 255453,
+  "capture": {
+    "status": 200,
+    "title": "Salesforce Help | Article",
+    "headings": "Cookie Consent Manager\nCookie Consent Manager",
+    "expectedSelector": "h1, main, article",
+    "expectedCount": 2,
+    "expectedText": "Email",
+    "sourceUrl": "https://help.salesforce.com/s/articleView?id=sf.email_templates_lightning.htm&type=5",
+    "finalUrl": "https://help.salesforce.com/s/articleView?id=sf.email_templates_lightning.htm&type=5",
+    "capturedAt": "2026-09-16T17:38:20.029Z",
+    "expectedTextMatched": true,
+    "shotSha256": "85c9d3dc74866a0efa2c835cd4b3e42975941b842efd2c6e64f681b1e4f85fb5"
+  }
 }

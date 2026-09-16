@@ -6,6 +6,34 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- Every catalog row with a public render now has a validated capture: 190 of 197 references
+  are `passed` (the seven remaining are query-only screenshots and three region-map
+  blueprints with no renderable source). Before this, 8 rows were `passed`, 114 carried
+  legacy captures with no HTTP or content evidence, and 74 had no screenshot, so `prove.mjs`
+  could issue completion for exactly eight references. `harvest.mjs` maps Untitled UI, Magic
+  UI and cult-ui rows from their `preview` pages the way it already mapped shadcn blocks,
+  paces requests and retries transport failures, and every shadcn target names the block's
+  rendered control instead of `body` (which `captureHealth` rejects, and which is why the
+  legacy captures never refreshed). Moved Lightning and Spectrum pages point at their current
+  URLs. Magic UI rows carry the component source beside the example so a pack is never a
+  ten-line demo.
+- The design packet names an unvalidated reference as a `reference:` gap up front, with the
+  harvest command and any validated alternatives, instead of letting completion fail at the
+  end of a build.
+- `verify/catalog.test.mjs` exercises the owned kit lane end to end against temp
+  directories: a manifest indexes into the private file, the public catalog is byte-identical,
+  bad rows are reported, the private file is ignored and never tracked. `SHINE_OWNED_DIR` and
+  `SHINE_CATALOG_OUT` are the generator's test seams. The doctor runs it, and the lint scope
+  test, on every lane.
+- `design-lint` compares against the commit a session started from, not HEAD: a mid-turn
+  commit no longer turns that turn's off-token values into "pre-existing" ones. The baseline
+  is keyed by session and repository under the temp dir; `SHINE_LINT_BASE` overrides it, a
+  baseline that stops being an ancestor falls back to HEAD, and the stop sweep passes the
+  session through. The Cursor hook contract (top-level `file_path`, exit 2) is now tested.
+- The library build's Tailwind import is `source(none)`: it scans only the declared
+  `@source` paths, so harvested pack sources can no longer grow the published stylesheet.
+  `site/library/app.css` shrinks from 183 KB to 125 KB with the same 49 browser checks.
+
 - The catalog grows from 130 to 197 rows and from 10 to 11 visual families. Untitled UI now
   contributes 16 cite-able rows derived from the shipped examples catalog (header navigation,
   featured cards, bar/pie/radar charts, gauges, progress circles, tabs, pagination, date

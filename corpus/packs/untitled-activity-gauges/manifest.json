@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-activity-gauges",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/charts/activity-gauges.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "activity-gauges.demo.tsx",
+      "sha256": "19f3eddadd1a2cfd314eefa269d701eee19d2469901ddf8ce4a40c27c0ed5ef4"
+    }
+  ]
+}

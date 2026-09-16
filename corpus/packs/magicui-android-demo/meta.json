@@ -1,0 +1,19 @@
+{
+  "id": "magicui-android-demo",
+  "source": "https://magicui.design/docs/components/android",
+  "harvested": "2026-09-16",
+  "bytes": 1197637,
+  "capture": {
+    "status": 200,
+    "title": "Android | React Components & Templates",
+    "headings": "Command Palette\nAndroid\nInstallation\nExamples\nUsage\nProps",
+    "expectedSelector": "pre",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/android",
+    "finalUrl": "https://magicui.design/docs/components/android",
+    "capturedAt": "2026-09-16T17:00:03.277Z",
+    "expectedTextMatched": false,
+    "shotSha256": "20ab39f03ef009c84a9f3af0fb6c3fab2512ded0fd856bc515476fb0d255451c"
+  }
+}

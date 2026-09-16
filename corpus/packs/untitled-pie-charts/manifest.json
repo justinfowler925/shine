@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-pie-charts",
+  "screen": "charts",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/charts/pie-charts.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "pie-charts.demo.tsx",
+      "sha256": "b1db5ec6d5c0efc260ecb82c1e3dec35e6a816fd4825f7da262760dfa7926dd9"
+    }
+  ]
+}

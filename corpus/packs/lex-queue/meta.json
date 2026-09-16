@@ -1,6 +1,19 @@
 {
   "id": "lex-queue",
   "source": "https://www.lightningdesignsystem.com/components/data-tables/",
-  "harvested": "2026-08-31",
-  "bytes": 125407
+  "harvested": "2026-09-16",
+  "bytes": 127309,
+  "capture": {
+    "status": 200,
+    "title": "Data Table · Lightning Design System 2",
+    "headings": "Data Table\nOverview\n\nTypes\nAppearance\nBehaviors\nRelated Components",
+    "expectedSelector": "h1, table, main",
+    "expectedCount": 5,
+    "expectedText": "",
+    "sourceUrl": "https://www.lightningdesignsystem.com/components/data-tables/",
+    "finalUrl": "https://www.lightningdesignsystem.com/2e1ef8501/p/86f13a-data-table",
+    "capturedAt": "2026-09-16T16:56:25.043Z",
+    "expectedTextMatched": false,
+    "shotSha256": "3ebcc23db530988fdd765ca1729e796b4324d6b760bca53ff4298337baad45c4"
+  }
 }

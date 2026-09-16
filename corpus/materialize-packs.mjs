@@ -22,7 +22,7 @@ const catalog = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "u
 const byId = new Map((catalog.templates ?? []).map((t) => [t.id, t]));
 const lockLines = readFileSync(join(SHINE, "corpus/corpus.lock"), "utf8").split(/\r?\n/).filter((l) => l && !l.startsWith("#"));
 const pins = new Map(lockLines.map((line) => { const [name, mode, url, branch, sha] = line.split("\t"); return [name, { name, mode, url, branch, sha }]; }));
-const kitPin = { fluentui: "fluentui", "react-spectrum": "react-spectrum", magicui: "magicui", mantine: "mantine", heroui: "heroui", tremor: "tremor", "shadcn-registry": "shadcn-registry", "untitled-ui-react": "untitled-ui-react" };
+const kitPin = { fluentui: "fluentui", "react-spectrum": "react-spectrum", magicui: "magicui", mantine: "mantine", heroui: "heroui", tremor: "tremor", "shadcn-registry": "shadcn-registry", "untitled-ui-react": "untitled-ui-react", "cult-ui": "cult-ui" };
 const sha256 = (p) => createHash("sha256").update(readFileSync(p)).digest("hex");
 const signatures = { crud: /\b(DataGrid|ProTable|Table)\b/, queue: /\b(DataTable|ProList|List|Table|table)\b/ };
 
@@ -54,7 +54,7 @@ for (const id of dirs) {
   writeFileSync(join(dir, "tokens.css"), header + (body.startsWith("/*") ? body : `\n${body}`));
 
   const { show, files } = collectCorpusSource(row, { corpus: CORPUS, extractDir: EXTRACT });
-  const picks = row.entrypoints?.length ? files : (show.length ? show : files.slice(0, 3));
+  const picks = row.entrypoints?.length || row.sources?.length ? files : (show.length ? show : files.slice(0, 3));
   if (!picks.length) {
     failed.push(`${id}: no corpus source at ${row.path || "(none)"} — run corpus/acquire.sh`);
     continue;

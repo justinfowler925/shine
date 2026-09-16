@@ -21,9 +21,11 @@
 // is new. `--all-lines` (CLI) or SHINE_LINT_SCOPE=file restores whole-file
 // blocking for audits and fixtures.
 
-import { readFileSync, realpathSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
-import { basename, dirname, resolve } from "node:path";
+import { createHash } from "node:crypto";
+import { tmpdir } from "node:os";
+import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const DESIGN_EXT = /\.(tsx|jsx|css|html|svelte|vue)$/;
@@ -324,7 +326,39 @@ function lintSkillFrontmatter(path, text) {
   return { hard, soft: [] };
 }
 
-// The new-side line numbers of every hunk in `git diff -U0 HEAD -- <path>`.
+// The comparison base for "what did this turn change". HEAD is wrong the moment
+// an agent commits mid-turn: everything it just wrote becomes "pre-existing" and
+// the gate goes quiet. So the first time a session touches a repository, the
+// commit it started from is recorded (keyed by session + repo, under the temp
+// dir) and every later diff in that session compares against that baseline.
+// SHINE_LINT_BASE overrides it; a baseline that is no longer an ancestor (rebase,
+// branch switch) falls back to HEAD. Sessions without an id (plain CLI) use HEAD.
+export function sessionBaseline(git, top, session = process.env.SHINE_LINT_SESSION) {
+  if (process.env.SHINE_LINT_BASE) return process.env.SHINE_LINT_BASE;
+  if (!session) return "HEAD";
+  const key = createHash("sha256").update(`${session}\n${top}`).digest("hex").slice(0, 24);
+  const dir = join(process.env.SHINE_LINT_STATE_DIR || join(tmpdir(), "shine-lint"), key);
+  const file = join(dir, "base");
+  let base = existsSync(file) ? readFileSync(file, "utf8").trim() : "";
+  if (!base) {
+    base = git("rev-parse", "HEAD").trim();
+    try {
+      mkdirSync(dir, { recursive: true });
+      writeFileSync(file, base + "\n");
+    } catch {
+      /* unwritable temp: fall back to HEAD each time */
+    }
+    return base;
+  }
+  try {
+    git("merge-base", "--is-ancestor", base, "HEAD");
+    return base;
+  } catch {
+    return "HEAD";
+  }
+}
+
+// The new-side line numbers of every hunk in `git diff -U0 <base> -- <path>`.
 // Returns null when the whole file is in scope: whole-file mode requested, no
 // repository, no HEAD commit yet, or an untracked file (everything in it is new).
 export function changedLines(path) {
@@ -332,8 +366,9 @@ export function changedLines(path) {
   const absolute = resolve(path);
   const git = (...args) =>
     execFileSync("git", args, { cwd: dirname(absolute), encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+  let top;
   try {
-    git("rev-parse", "--show-toplevel");
+    top = git("rev-parse", "--show-toplevel").trim();
   } catch {
     return null;
   }
@@ -342,14 +377,17 @@ export function changedLines(path) {
   } catch {
     return null;
   }
+  const base = sessionBaseline(git, top);
+  // Untracked at the baseline means every line is this session's work, even if a
+  // mid-turn commit has since tracked it.
   try {
-    git("ls-files", "--error-unmatch", "--", absolute);
+    git("cat-file", "-e", `${base}:${git("ls-files", "--full-name", "--", absolute).trim() || "\u0000"}`);
   } catch {
     return null;
   }
   let diff;
   try {
-    diff = git("diff", "-U0", "HEAD", "--", absolute);
+    diff = git("diff", "-U0", base, "--", absolute);
   } catch {
     return null;
   }
@@ -468,6 +506,8 @@ if (isEntrypoint) process.stdin.on("end", () => {
   }
   const path = eventPath(event);
   if (!path) process.exit(0);
+  const session = event?.session_id || event?.conversation_id || "";
+  if (session && !process.env.SHINE_LINT_SESSION) process.env.SHINE_LINT_SESSION = String(session);
   const { hard, soft, kind } = lintPath(path);
   // The frontmatter invariant is not pragma-escapable, so it must not be told it is.
   const remedy =

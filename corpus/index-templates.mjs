@@ -25,6 +25,11 @@ import { homedir } from "node:os";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CORPUS = resolve(process.env.DESIGN_CORPUS || join(homedir(), "design-corpus"));
+// Test seams: where owned manifests are read from and where the catalog files are
+// written. Defaults are the real locations; verify/catalog.test.mjs points both at
+// temp directories so it can exercise the owned lane without touching the repo.
+const OWNED_DIR = resolve(process.env.SHINE_OWNED_DIR || join(CORPUS, "owned"));
+const OUT_DIR = resolve(process.env.SHINE_CATALOG_OUT || join(SHINE, "corpus"));
 
 const REQUIRED = [
   "dashboard",
@@ -289,82 +294,82 @@ if (existsSync(shadcnRegistry)) {
 // page or the line-chart component the packet test expects.
 const UNTITLED_DEMOS = {
   "application/app-navigation/sidebar-navigation.demo.tsx": {
-    id: "untitled-sidebar-navigation", screen: "app-shell", rank: 1,
+    id: "untitled-sidebar-navigation", preview: "https://www.untitledui.com/react/components/sidebar-navigations", screen: "app-shell", rank: 1,
     title: "Untitled UI sidebar navigation examples",
     jobs: ["app-shell", "navigation", "sidebar"], required: ["navigation"],
   },
   "application/app-navigation/header-navigation.demo.tsx": {
-    id: "untitled-header-navigation", screen: "app-shell", rank: 2,
+    id: "untitled-header-navigation", preview: "https://www.untitledui.com/react/components/header-navigations", screen: "app-shell", rank: 2,
     title: "Untitled UI header navigation (top bar, no rail)",
     jobs: ["app-shell", "navigation", "header", "topbar", "horizontal-nav"], required: ["navigation"],
   },
   "application/app-navigation/base-components/featured-cards.demo.tsx": {
-    id: "untitled-featured-cards", screen: "app-shell", rank: 3,
+    id: "untitled-featured-cards", preview: "https://www.untitledui.com/react/components/sidebar-navigations", screen: "app-shell", rank: 3,
     title: "Untitled UI sidebar featured cards (usage, upgrade and onboarding prompts)",
     jobs: ["app-shell", "navigation", "featured", "usage", "upgrade-prompt"], required: ["navigation"],
   },
   "application/table/table.demo.tsx": {
-    id: "untitled-table", screen: "queue", rank: 1,
+    id: "untitled-table", preview: "https://www.untitledui.com/react/components/tables", screen: "queue", rank: 1,
     title: "Untitled UI table examples (populated, empty, error, offline)",
     jobs: ["queue", "crud", "table", "records", "datagrid"], required: ["table"],
   },
   "application/charts/line-charts.demo.tsx": {
-    id: "untitled-line-charts", screen: "dashboard", rank: 1,
+    id: "untitled-line-charts", preview: "https://www.untitledui.com/react/components/line-bar-charts", screen: "dashboard", rank: 1,
     title: "Untitled UI line chart examples",
     jobs: ["dashboard", "analytics", "charts", "dataviz"], required: ["chart"],
   },
   "application/charts/bar-charts.demo.tsx": {
-    id: "untitled-bar-charts", screen: "charts", rank: 2,
+    id: "untitled-bar-charts", preview: "https://www.untitledui.com/react/components/line-bar-charts", screen: "charts", rank: 2,
     title: "Untitled UI bar chart examples (grouped, stacked, horizontal)",
     jobs: ["charts", "chart", "bar", "comparison", "analytics", "dataviz"], required: ["chart"],
   },
   "application/charts/pie-charts.demo.tsx": {
-    id: "untitled-pie-charts", screen: "charts", rank: 2,
+    id: "untitled-pie-charts", preview: "https://www.untitledui.com/react/components/pie-charts", screen: "charts", rank: 2,
     title: "Untitled UI pie and donut chart examples",
     jobs: ["charts", "chart", "pie", "donut", "share", "breakdown", "dataviz"], required: ["chart"],
   },
   "application/charts/radar-charts.demo.tsx": {
-    id: "untitled-radar-charts", screen: "charts", rank: 2,
+    id: "untitled-radar-charts", preview: "https://www.untitledui.com/react/components/radar-charts", screen: "charts", rank: 2,
     title: "Untitled UI radar chart examples",
     jobs: ["charts", "chart", "radar", "profile", "comparison", "dataviz"], required: ["chart"],
   },
   "application/charts/activity-gauges.demo.tsx": {
-    id: "untitled-activity-gauges", screen: "charts", rank: 2,
+    id: "untitled-activity-gauges", preview: "https://www.untitledui.com/react/components/activity-gauges", screen: "charts", rank: 2,
     title: "Untitled UI activity gauge examples",
     jobs: ["charts", "chart", "gauge", "kpi", "target", "dataviz"], required: ["chart"],
   },
   "application/charts/progress-circles.demo.tsx": {
-    id: "untitled-progress-circles", screen: "charts", rank: 2,
+    id: "untitled-progress-circles", preview: "https://www.untitledui.com/react/components/progress-indicators", screen: "charts", rank: 2,
     title: "Untitled UI progress circle examples",
     jobs: ["charts", "chart", "progress", "completion", "kpi", "dataviz"], required: ["chart"],
   },
   "application/tabs/tabs.demo.tsx": {
-    id: "untitled-tabs", screen: "tabs", rank: 1,
+    id: "untitled-tabs", preview: "https://www.untitledui.com/react/components/tabs", screen: "tabs", rank: 1,
     title: "Untitled UI tabs (underline, button, vertical, with badges)",
     jobs: SCREEN_JOBS.tabs,
   },
   "application/pagination/pagination.demo.tsx": {
-    id: "untitled-pagination", screen: "pagination", rank: 1,
+    id: "untitled-pagination", preview: "https://www.untitledui.com/react/components/pagination", screen: "pagination", rank: 1,
     title: "Untitled UI pagination (page numbers, dots, line, minimal)",
     jobs: SCREEN_JOBS.pagination,
   },
   "application/date-picker/date-picker.demo.tsx": {
-    id: "untitled-date-picker", screen: "form", rank: 1,
+    id: "untitled-date-picker", preview: "https://www.untitledui.com/react/components/date-pickers", screen: "form", rank: 1,
     title: "Untitled UI date picker and date range picker",
     jobs: ["form", "input", "date", "date-range", "calendar", "picker"], required: ["form"],
   },
   "application/file-upload/file-upload.demo.tsx": {
-    id: "untitled-file-upload", screen: "form", rank: 2,
+    id: "untitled-file-upload", preview: "https://www.untitledui.com/react/components/file-uploaders", screen: "form", rank: 2,
     title: "Untitled UI file upload (dropzone, progress, failed items)",
     jobs: ["form", "input", "upload", "attachments", "dropzone", "files"], required: ["form"],
   },
   "application/loading-indicator/loading-indicator.demo.tsx": {
-    id: "untitled-loading-indicator", screen: "async-state", rank: 1,
+    id: "untitled-loading-indicator", preview: "https://www.untitledui.com/react/components/loading-indicators", screen: "async-state", rank: 1,
     title: "Untitled UI loading indicators (line, dots, spinner, with label)",
     jobs: SCREEN_JOBS["async-state"],
   },
   "application/carousel/carousel.demo.tsx": {
-    id: "untitled-carousel", screen: "carousel", rank: 1,
+    id: "untitled-carousel", preview: "https://www.untitledui.com/react/components/carousels", screen: "carousel", rank: 1,
     title: "Untitled UI carousel (indicators, arrows, autoplay)",
     jobs: SCREEN_JOBS.carousel,
   },
@@ -385,7 +390,9 @@ if (existsSync(untitledCatalog)) {
     push({
       id: t.id, screen: t.screen, kit: "untitled-ui-react", title: t.title,
       path: `untitled-ui-react/components/${rel}`,
-      preview: "https://www.untitledui.com/react/components",
+      // Each row names the public page that renders its examples so harvest.mjs can
+      // capture real pixels; the generic components index proves nothing.
+      preview: t.preview || "https://www.untitledui.com/react/components",
       license: "MIT", kind: "source", startFrom: t.rank, jobs: t.jobs,
       scope: "component", ...(t.required ? { reference: { required: t.required } } : {}),
     });
@@ -424,10 +431,15 @@ if (existsSync(magicRegistry)) {
     }
     const file = item.files?.find((f) => f.type === "registry:example")?.path;
     if (!file) continue;
-    const component = (item.registryDependencies ?? []).find((dep) => dep.startsWith("@magicui/"))?.slice("@magicui/".length);
+    // Prefer the dependency that has a docs page (client-tweet-card has none; tweet-card does).
+    const deps = (item.registryDependencies ?? []).filter((dep) => dep.startsWith("@magicui/")).map((dep) => dep.slice("@magicui/".length));
+    const component = deps.find((dep) => exists(`magicui/apps/www/content/docs/components/${dep}.mdx`)) || deps[0];
+    // The example file is a few lines that mount the component; the component itself
+    // is the readable source, so both go into the pack.
+    const sources = deps.map((dep) => `magicui/apps/www/registry/magicui/${dep}.tsx`).filter((rel) => exists(rel));
     push({
       id: `magicui-${item.name}`, screen: family.screen, kit: "magicui", title: family.title(item.name),
-      path: `magicui/apps/www/${file}`,
+      path: `magicui/apps/www/${file}`, ...(sources.length ? { sources } : {}),
       preview: component ? `https://magicui.design/docs/components/${component}` : "https://magicui.design",
       license: "MIT", kind: "source", startFrom: family.rank, jobs: family.jobs, scope: "component",
     });
@@ -442,7 +454,7 @@ if (existsSync(magicRegistry)) {
 // component source and carries its own jobs. Five hero treatments give the
 // marketing-hero screen a third family beside Magic UI and the shadcn region map.
 for (const t of [
-  { name: "hero-color-panel", screen: "marketing-hero", rank: 3, title: "cult-ui hero with color panel (split hero, solid product panel)", jobs: ["marketing-hero", "hero", "landing", "split", "panel"] },
+  { name: "hero-color-panel", docs: "hero-color-panels", screen: "marketing-hero", rank: 3, title: "cult-ui hero with color panel (split hero, solid product panel)", jobs: ["marketing-hero", "hero", "landing", "split", "panel"] },
   { name: "hero-dithering", screen: "marketing-hero", rank: 3, title: "cult-ui hero with dithered texture", jobs: ["marketing-hero", "hero", "landing", "texture", "editorial"] },
   { name: "hero-heatmap", screen: "marketing-hero", rank: 3, title: "cult-ui hero with data heatmap backdrop", jobs: ["marketing-hero", "hero", "landing", "data", "heatmap"] },
   { name: "hero-liquid-metal", screen: "marketing-hero", rank: 3, title: "cult-ui hero with liquid metal shader", jobs: ["marketing-hero", "hero", "landing", "shader", "premium"] },
@@ -458,7 +470,8 @@ for (const t of [
   if (!exists(rel)) continue;
   push({
     id: `cult-${t.name}`, screen: t.screen, kit: "cult-ui", title: t.title, path: rel,
-    preview: `https://www.cult-ui.com/docs/components/${t.name}`,
+    // The docs slug occasionally differs from the component file name.
+    preview: `https://www.cult-ui.com/docs/components/${t.docs || t.name}`,
     license: "MIT", kind: "source", startFrom: t.rank, jobs: t.jobs, scope: "component",
   });
 }
@@ -622,7 +635,7 @@ push({
 // corpus/catalog.mjs. Each kit is a directory under ~/design-corpus/owned/<kit>/
 // with a manifest.json declaring `templates`; see corpus/owned/README.md.
 const ownedRows = [];
-const ownedDir = join(CORPUS, "owned");
+const ownedDir = OWNED_DIR;
 const ownedManifests = [];
 if (existsSync(join(ownedDir, "manifest.json"))) ownedManifests.push(join(ownedDir, "manifest.json"));
 if (existsSync(ownedDir)) {
@@ -637,7 +650,7 @@ for (const manifestPath of ownedManifests) {
   for (const row of manifest.templates ?? []) {
     const problems = [];
     for (const key of ["id", "screen", "title", "path"]) if (!row[key]) problems.push(`missing ${key}`);
-    if (row.path && !exists(row.path)) problems.push(`path not on disk: ${row.path}`);
+    if (row.path && !exists(row.path) && !existsSync(resolve(ownedDir, "..", row.path))) problems.push(`path not on disk: ${row.path}`);
     if (templates.some((t) => t.id === row.id) || ownedRows.some((t) => t.id === row.id)) problems.push("id collides with a catalog row");
     if (problems.length) {
       console.warn(`owned row ${row.id || "?"} in ${manifestPath} skipped: ${problems.join("; ")}`);
@@ -656,7 +669,7 @@ for (const manifestPath of ownedManifests) {
     });
   }
 }
-const ownedPath = join(SHINE, "corpus/templates.owned.json");
+const ownedPath = join(OUT_DIR, "templates.owned.json");
 
 // ---- query-only previews (screenshots, no source) --------------------------
 const qoManifest = join(SHINE, "corpus/query-only.json");
@@ -684,7 +697,7 @@ const catalog = {
 // to templates.json and never encoded here, so the generator produced 49 rows
 // against the file's 138 and the documented regenerate command destroyed 89 rows.
 const checkOnly = process.argv.includes("--check");
-const jsonPath = join(SHINE, "corpus/templates.json");
+const jsonPath = join(OUT_DIR, "templates.json");
 const rendered = JSON.stringify(catalog, null, 2) + "\n";
 if (checkOnly) {
   const onDisk = existsSync(jsonPath) ? readFileSync(jsonPath, "utf8") : "";
@@ -744,7 +757,7 @@ if (retiredRows.length) {
   for (const t of retiredRows) md.push(`- \`${t.id}\` — ${t.retiredReason}`);
   md.push("");
 }
-const mdPath = join(SHINE, "skill/references/templates.md");
+const mdPath = process.env.SHINE_CATALOG_OUT ? join(OUT_DIR, "templates.md") : join(SHINE, "skill/references/templates.md");
 writeFileSync(mdPath, md.join("\n") + "\n");
 
 console.log(`templates.json: ${templates.length} rows; templates.md regenerated${ownedRows.length ? `; templates.owned.json: ${ownedRows.length} private rows` : ""}`);

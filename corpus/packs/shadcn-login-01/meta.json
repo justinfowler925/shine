@@ -1,6 +1,19 @@
 {
   "id": "shadcn-login-01",
   "source": "https://ui.shadcn.com/view/new-york-v4/login-01",
-  "harvested": "2026-08-31",
-  "bytes": 27960
+  "harvested": "2026-09-16",
+  "bytes": 27960,
+  "capture": {
+    "status": 200,
+    "title": "login-01 - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "form input, input",
+    "expectedCount": 2,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/login-01",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/login-01",
+    "capturedAt": "2026-09-16T16:49:14.105Z",
+    "expectedTextMatched": false,
+    "shotSha256": "b0b93d1c3eb05349470b7ab7ed6298fcb2fe5af91f75554b0b3eca5863f1c311"
+  }
 }

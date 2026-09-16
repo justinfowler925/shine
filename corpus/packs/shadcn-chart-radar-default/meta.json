@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-radar-default",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-radar-default",
-  "harvested": "2026-08-31",
-  "bytes": 32000
+  "harvested": "2026-09-16",
+  "bytes": 32000,
+  "capture": {
+    "status": 200,
+    "title": "chart-radar-default - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-default",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-default",
+    "capturedAt": "2026-09-16T16:52:22.036Z",
+    "expectedTextMatched": false,
+    "shotSha256": "1f7cadbe387ed1cc2d11b6f27f9f159df85a3a7652098e41e78304e2162ec375"
+  }
 }

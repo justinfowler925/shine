@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "id": "magicui-bento-demo",
+  "screen": "marketing-features",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/bento-demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "animated-beam.tsx",
+      "sha256": "6afa2ee1d01694a428eb8517d48deebe5c6b532dc0ee871800bb9d92aae43e79"
+    },
+    {
+      "path": "animated-list.tsx",
+      "sha256": "9363c5afa61d7aab1919b4500f7325cc8871b35103d5dd60a2a1625fe5e7dc58"
+    },
+    {
+      "path": "bento-demo.tsx",
+      "sha256": "5a2dc970025a6b120eea0fa65c1b84f12f20cfe20983790c2db5b457a6f69add"
+    },
+    {
+      "path": "bento-grid.tsx",
+      "sha256": "9c2abcb2a4e51519e56d510299771a2d0e170ab9927a9a792a58614b1837ed47"
+    },
+    {
+      "path": "marquee.tsx",
+      "sha256": "779f360a107409bfa35cda13bcef7d54cd620a15ab4a0ee50412442a4dd6b9c7"
+    }
+  ]
+}

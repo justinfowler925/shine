@@ -1,0 +1,19 @@
+{
+  "id": "cult-hero-liquid-metal",
+  "source": "https://www.cult-ui.com/docs/components/hero-liquid-metal",
+  "harvested": "2026-09-16",
+  "bytes": 1362493,
+  "capture": {
+    "status": 200,
+    "title": "Hero Liquid Metal · Cult UI",
+    "headings": "Hero Liquid Metal\nAI SDK Agents\nAI SDK Agents Copy and Paste\nAI SDK Agents\nAI SDK Agents Copy and Paste\nComposable hero\nCursor for Marketing\nInstallation\nUsage\nWhat You Get\nAPI Reference\nCustomization Patterns\nPerformance Notes\nAccessibility Notes\nTroubleshooting",
+    "expectedSelector": "pre",
+    "expectedCount": 9,
+    "expectedText": "",
+    "sourceUrl": "https://www.cult-ui.com/docs/components/hero-liquid-metal",
+    "finalUrl": "https://www.cult-ui.com/docs/components/hero-liquid-metal",
+    "capturedAt": "2026-09-16T16:58:16.648Z",
+    "expectedTextMatched": false,
+    "shotSha256": "f4f106cbf1a9d60965670f09f5465371a9dcca0375cd615c9ddc83496e7d52c0"
+  }
+}

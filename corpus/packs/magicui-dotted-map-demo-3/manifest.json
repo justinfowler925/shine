@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "magicui-dotted-map-demo-3",
+  "screen": "marketing-integrations",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/dotted-map-demo-3.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "dotted-map.tsx",
+      "sha256": "9cf9a7edbed239b6e8cfdad588a97400d059ccf8f391d94f3cf033261a5ef7d9"
+    }
+  ]
+}

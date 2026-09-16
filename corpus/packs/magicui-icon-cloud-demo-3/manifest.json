@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "magicui-icon-cloud-demo-3",
+  "screen": "marketing-integrations",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "magicui",
+    "mode": "sparse",
+    "url": "https://github.com/magicuidesign/magicui.git",
+    "branch": "main",
+    "sha": "5543371f99eaa6d1549a8dec864e78ee0b4515f2"
+  },
+  "corpusPath": "magicui/apps/www/registry/example/icon-cloud-demo-3.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "icon-cloud-demo-3.tsx",
+      "sha256": "3ac2197ee5522330261ef338fedb814d9584e02da1b39fd454bbc54df899cc75"
+    },
+    {
+      "path": "icon-cloud.tsx",
+      "sha256": "243e182efdb70940b01452135160747011b01ba6766a8d5e47ba93b526ae105f"
+    }
+  ]
+}

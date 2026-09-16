@@ -1,6 +1,19 @@
 {
   "id": "untitled-sidebar-navigation",
-  "source": "https://github.com/untitleduico/react/blob/d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e/components/application/app-navigation/sidebar-navigation.story.tsx",
-  "harvested": "2026-08-25",
-  "bytes": 40334
+  "source": "https://www.untitledui.com/react/components/sidebar-navigations",
+  "harvested": "2026-09-16",
+  "bytes": 679438,
+  "capture": {
+    "status": 200,
+    "title": "Free React sidebar navigation components | Untitled UI",
+    "headings": "Sidebar navigation components\nInstallation\nFeatured cards",
+    "expectedSelector": "main h2[id], h2[id]",
+    "expectedCount": 2,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/sidebar-navigations",
+    "finalUrl": "https://www.untitledui.com/react/components/sidebar-navigations",
+    "capturedAt": "2026-09-16T17:28:45.232Z",
+    "expectedTextMatched": false,
+    "shotSha256": "f6592695ab66a59f059e5940e755f333ca3e451e4df2d74048b7b72ee06131b4"
+  }
 }

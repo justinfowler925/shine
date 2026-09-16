@@ -34,21 +34,23 @@ const TARGETS = {
   "shadcn-login-04": { url: "https://ui.shadcn.com/view/new-york-v4/login-04", mode: "full", expect: "input" },
   "shadcn-command": { url: "https://ui.shadcn.com/docs/components/command", mode: "full", expect: "[cmdk-root], main" },
   "shadcn-input-group-textarea": { url: "https://ui.shadcn.com/docs/components/input-group", mode: "full", expect: "textarea, main" },
-  "shadcn-field-choice-card": { url: "https://ui.shadcn.com/docs/components/field", mode: "full", expect: "main" },
-  "shadcn-empty-icon": { url: "https://ui.shadcn.com/docs/components/empty", mode: "full", expect: "main" },
-  "mantine-appshell": { url: "https://mantine.dev/app-shell/?e=FullLayout", mode: "viewport", expect: "a" },
+  "shadcn-field-choice-card": { url: "https://ui.shadcn.com/docs/components/field", mode: "full", expect: "[data-slot=field], [role=radiogroup], main", expectedText: "Field" },
+  "shadcn-empty-icon": { url: "https://ui.shadcn.com/docs/components/empty", mode: "full", expect: "[data-slot=empty], main", expectedText: "Empty" },
+  "mantine-appshell": { url: "https://mantine.dev/app-shell/?e=FullLayout", mode: "viewport", expect: "a", expectedText: "AppShell" },
   "fluent-nav": { url: "https://react.fluentui.dev/?path=/docs/components-navdrawer--docs", mode: "full", expect: "iframe, #storybook-root, main" },
-  "magicui-hero": { url: "https://magicui.design/docs/components/hero-video-dialog", mode: "full", expect: "h1, main" },
+  "magicui-hero": { url: "https://magicui.design/docs/components/hero-video-dialog", mode: "full", expect: "pre, h1", expectedText: "Hero Video Dialog" },
   "tremor-charts": { url: "https://blocks.tremor.so/blocks", mode: "full", expect: "h1, main, [class*='tremor']" },
   "heroui-next-app": { url: "https://www.heroui.com/docs/components/navbar", mode: "full", expect: "nav, header, main" },
-  "spectrum-ai-chat": { url: "https://react-spectrum.adobe.com/react-spectrum/Chat.html", mode: "full", expect: "main, h1" },
-  "lex-record": { url: "https://www.lightningdesignsystem.com/components/page-headers/", mode: "full", expect: "h1, main, .slds-page-header, article" },
-  "lex-record-narrow": { url: "https://www.lightningdesignsystem.com/components/page-headers/", mode: "viewport", expect: "h1, main, .slds-page-header, article", viewport: { width: 494, height: 900 } },
-  "lex-queue": { url: "https://www.lightningdesignsystem.com/components/data-tables/", mode: "full", expect: "h1, table, main" },
-  "lex-console": { url: "https://www.lightningdesignsystem.com/components/tabs/", mode: "full", expect: "h1, main" },
-  "lex-email": { url: "https://www.lightningdesignsystem.com/guidelines/email/", mode: "full", expect: "h1, main, article" },
-  "lex-mobile": { url: "https://www.lightningdesignsystem.com/guidelines/mobile/", mode: "viewport", expect: "h1, main, article", viewport: { width: 390, height: 844 } },
-  "lex-lwr": { url: "https://www.lightningdesignsystem.com/guidelines/overview/", mode: "full", expect: "h1, main, article" },
+  "spectrum-ai-chat": { url: "https://react-spectrum.adobe.com/s2/index.html", mode: "full", expect: "main, h1, nav", expectedText: "Spectrum" },
+  "lex-record": { url: "https://www.lightningdesignsystem.com/components/page-headers/", mode: "full", expect: "h1, main, .slds-page-header, article", expectedText: "Page Header" },
+  "lex-record-narrow": { url: "https://www.lightningdesignsystem.com/components/page-headers/", mode: "viewport", expect: "h1, main, .slds-page-header, article", expectedText: "Page Header", viewport: { width: 494, height: 900 } },
+  "lex-queue": { url: "https://www.lightningdesignsystem.com/components/data-tables/", mode: "full", expect: "h1, table, main", expectedText: "Data Table" },
+  "lex-console": { url: "https://www.lightningdesignsystem.com/components/tabs/", mode: "full", expect: "h1, main", expectedText: "Tabs" },
+  "lex-email": { // SLDS 2 dropped the email guideline page; Salesforce Help's Lightning email
+  // template article is the remaining public reference for the 600px-table shape.
+  url: "https://help.salesforce.com/s/articleView?id=sf.email_templates_lightning.htm&type=5", mode: "full", waitUntil: "load", settleMs: 9_000, expect: "h1, main, article", expectedText: "Email" },
+  "lex-mobile": { url: "https://www.lightningdesignsystem.com/2e1ef8501/p/391e54-mobile-design", mode: "viewport", waitUntil: "load", expect: "h1, main, article", expectedText: "Mobile", viewport: { width: 390, height: 844 } },
+  "lex-lwr": { url: "https://www.lightningdesignsystem.com/2e1ef8501/p/355656-patterns", mode: "full", expect: "h1, main, article", expectedText: "Lightning" },
 };
 
 // shadcn blocks are harvested from their own standalone preview route rather
@@ -56,9 +58,35 @@ const TARGETS = {
 // canonical URL, so the mapping is data, not a table to maintain.
 const shadcnTarget = (row) => (
   row.kit === "shadcn-registry" && /^https:\/\/ui\.shadcn\.com\/view\//.test(row.preview || "")
-    ? { url: row.preview, mode: "full", expect: "body" }
+    // A bare `body` proves nothing (captureHealth rejects it, which is why every
+    // shadcn pack stayed a legacy capture): name the block's rendered control.
+    ? { url: row.preview, mode: "full", expect: /^chart-/.test(row.id.slice("shadcn-".length)) ? "svg.recharts-surface, [data-chart], svg" : /^(login|signup)-/.test(row.id.slice("shadcn-".length)) ? "form input, input" : "[data-slot=sidebar], aside, [data-slot]" }
     : null
 );
+
+// Untitled UI, Magic UI and cult-ui rows carry their public component page as
+// `preview`, so like shadcn they are mapped from data rather than a table. Each
+// page renders the row's examples; the selector names the rendered-examples
+// region so a 404, consent wall or rate-limit page cannot pass as a reference.
+const kitTarget = (row) => {
+  const url = row.preview || "";
+  if (row.kit === "untitled-ui-react" && /^https:\/\/www\.untitledui\.com\/react\/components\/[a-z0-9-]+$/.test(url))
+    // Every component page anchors its sections (h2[id]); the examples heading's id
+    // varies by page, so the anchored heading is the stable, semantic expectation.
+    return { url, mode: "full", expect: "main h2[id], h2[id]" };
+  if (row.kit === "magicui" && /^https:\/\/magicui\.design\/docs\/components\/[a-z0-9-]+$/.test(url))
+    return { url, mode: "full", expect: "pre" };
+  if (row.kit === "cult-ui" && /^https:\/\/www\.cult-ui\.com\/docs\/components\/[a-z0-9-]+$/.test(url))
+    return { url, mode: "full", expect: "pre" };
+  return null;
+};
+
+// Sites rate-limit bursts (cult-ui answers 429 to curl-speed traffic). Space the
+// requests and retry a non-2xx or network failure with backoff before recording
+// a failed review.
+const PAUSE_MS = Number(process.env.SHINE_HARVEST_PAUSE_MS || 1500);
+const ATTEMPTS = 3;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const catalog = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "utf8"));
 const rows = catalog.templates ?? [];
@@ -79,7 +107,7 @@ const skipped = [];
 const failed = [];
 
 for (const row of wanted) {
-  const t = TARGETS[row.id] || shadcnTarget(row);
+  const t = TARGETS[row.id] || shadcnTarget(row) || kitTarget(row);
   if (!t) {
     if (row.kind !== "query-only") skipped.push(`${row.id} (${row.kind}${row.kind === "blueprint" ? ": no public renderable target" : ": no harvest target mapped"})`);
     continue;
@@ -87,11 +115,29 @@ for (const row of wanted) {
   const dir = join(PACKS, row.id);
   const shot = join(dir, "shot.png");
   try {
-    const page = await ctx.newPage();
-    if (t.viewport) await page.setViewportSize(t.viewport);
-    const response=await page.goto(t.url, { waitUntil: "networkidle", timeout: 45_000 });
-    await page.waitForTimeout(1_200); // let charts/fonts settle
-    const capture=await inspectReferencePage(page,response,{url:t.url,expect:t.expect,expectedText:t.expectedText});
+    let page, response, capture, lastError;
+    for (let attempt = 1; attempt <= ATTEMPTS; attempt += 1) {
+      page = await ctx.newPage();
+      if (t.viewport) await page.setViewportSize(t.viewport);
+      try {
+        // zeroheight pages keep a websocket open, so networkidle never arrives; a
+        // target may name a lighter load state.
+        response = await page.goto(t.url, { waitUntil: t.waitUntil || "networkidle", timeout: 45_000 });
+        await page.waitForTimeout(t.settleMs || 1_200); // let charts/fonts (or a slow SPA) settle
+        capture = await inspectReferencePage(page, response, { url: t.url, expect: t.expect, expectedText: t.expectedText });
+        lastError = null;
+        break;
+      } catch (error) {
+        lastError = error;
+        await page.close();
+        // Only transport failures are worth a retry; a missing selector is the same
+        // answer every time.
+        if (attempt === ATTEMPTS || !/HTTP \d|timeout|net::|navigation|challenge|just a moment/i.test(error.message)) throw error;
+        console.warn(`retry ${row.id} (${attempt}/${ATTEMPTS}): ${error.message.split("\n")[0]}`);
+        await sleep(PAUSE_MS * attempt * 4);
+      }
+    }
+    if (lastError) throw lastError;
     const found = await page.locator(t.expect).first().count();
     if (!found) throw new Error(`expected selector ${JSON.stringify(t.expect)} not found — wrong page?`);
     // kill animations so the shot is stable
@@ -119,6 +165,7 @@ for (const row of wanted) {
     );
     harvested.push(`${row.id} (${Math.round(bytes / 1024)}KB)`);
     console.log(`ok    ${row.id}  ${Math.round(bytes / 1024)}KB  ${t.url}`);
+    await sleep(PAUSE_MS);
   } catch (e) {
     mkdirSync(dir,{recursive:true});
     const metaPath=join(dir,'meta.json');

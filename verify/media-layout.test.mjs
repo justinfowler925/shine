@@ -21,7 +21,9 @@ try{
  const packet=createDesignPacket({job:'Repair the embedded broadcast player',project:root,lane:'internal'});
  assert.equal(packet.selected.id,'shadcn-broadcast');assert.equal(packet.selected.referenceHealth.status,'passed');assert.equal(packet.layout.required,true);assert.ok(packet.completion.command.includes('prove.mjs'));
  assert.equal(createDesignPacket({job:'Read the editorial publication',project:root,lane:'internal'}).selected.id,'shadcn-blog');
- assert.equal(referenceHealth(root,'spectrum-ai-chat').status,'failed');
+ // A stored 404 capture is excluded. Built as a fixture: the catalog row this once
+ // leaned on (spectrum-ai-chat) has since been recaptured successfully.
+ {const brokenRoot=mkdtempSync(join(tmpdir(),'shine-broken-ref-')),brokenDir=join(brokenRoot,'corpus/packs/broken');mkdirSync(brokenDir,{recursive:true});writeFileSync(join(brokenDir,'shot.png'),'png');writeFileSync(join(brokenDir,'meta.json'),JSON.stringify({review:{status:'failed',reason:'Stored reference screenshot displays Error 404: Page not found'}}));assert.equal(referenceHealth(brokenRoot,'broken').status,'failed');rmSync(brokenRoot,{recursive:true,force:true});}
  const valid={status:200,title:'Broadcast demo',headings:'The broadcast',expectedSelector:'video',expectedCount:1,sourceUrl:'https://example.test/player',finalUrl:'https://example.test/player'};
  assert.equal(captureHealth(valid).status,'passed');
  for(const patch of [{status:404},{title:'Error 404: Page not found'},{title:'Just a moment...'},{expectedSelector:'main, h1'},{expectedCount:0}])assert.equal(captureHealth({...valid,...patch}).status,'failed');

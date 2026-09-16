@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-line-multiple",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-line-multiple",
-  "harvested": "2026-08-31",
-  "bytes": 54306
+  "harvested": "2026-09-16",
+  "bytes": 54306,
+  "capture": {
+    "status": 200,
+    "title": "chart-line-multiple - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-line-multiple",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-line-multiple",
+    "capturedAt": "2026-09-16T16:51:36.797Z",
+    "expectedTextMatched": false,
+    "shotSha256": "94ce79f460bef88d9946d3f1bd7a86561b9f30d1a4a4d9524400644497618f53"
+  }
 }

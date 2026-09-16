@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-carousel",
+  "screen": "carousel",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/carousel/carousel.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "carousel.demo.tsx",
+      "sha256": "c9cd27ed6b787b1887e37f67785aec4970ac4abdc5ae99e73098ba54b9111488"
+    }
+  ]
+}

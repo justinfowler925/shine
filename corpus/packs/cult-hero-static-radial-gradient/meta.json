@@ -1,0 +1,19 @@
+{
+  "id": "cult-hero-static-radial-gradient",
+  "source": "https://www.cult-ui.com/docs/components/hero-static-radial-gradient",
+  "harvested": "2026-09-16",
+  "bytes": 1747653,
+  "capture": {
+    "status": 200,
+    "title": "Hero Static Radial Gradient · Cult UI",
+    "headings": "Hero Static Radial Gradient\nAI SDK Agents\nAI SDK Agents Copy and Paste\nComposable hero\nCursor for Marketing\nInstallation\nUsage\nWhat You Get\nAPI Reference\nCustomization Patterns\nPerformance Notes\nAccessibility Notes\nTroubleshooting",
+    "expectedSelector": "pre",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://www.cult-ui.com/docs/components/hero-static-radial-gradient",
+    "finalUrl": "https://www.cult-ui.com/docs/components/hero-static-radial-gradient",
+    "capturedAt": "2026-09-16T16:58:24.516Z",
+    "expectedTextMatched": false,
+    "shotSha256": "af6d161beec8c184e6c49d31e3f10652ae49f2a3453698b837ef5163facae587"
+  }
+}

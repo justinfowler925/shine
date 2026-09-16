@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-pagination",
+  "screen": "pagination",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/pagination/pagination.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "pagination.demo.tsx",
+      "sha256": "bb6b9e7ceb9dbb2e4958fc0c9cc036645a973de9788659ae8dfc59047d28cdbb"
+    }
+  ]
+}

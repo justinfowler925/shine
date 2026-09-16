@@ -1,6 +1,19 @@
 {
   "id": "lex-console",
   "source": "https://www.lightningdesignsystem.com/components/tabs/",
-  "harvested": "2026-08-31",
-  "bytes": 94879
+  "harvested": "2026-09-16",
+  "bytes": 91756,
+  "capture": {
+    "status": 200,
+    "title": "Tabs · Lightning Design System 2",
+    "headings": "Tabs\nOverview\nUsage\nTypes\nAppearance\nBehaviors\nRelated Components",
+    "expectedSelector": "h1, main",
+    "expectedCount": 3,
+    "expectedText": "Tabs",
+    "sourceUrl": "https://www.lightningdesignsystem.com/components/tabs/",
+    "finalUrl": "https://www.lightningdesignsystem.com/2e1ef8501/p/1152cf-tabs",
+    "capturedAt": "2026-09-16T17:29:13.631Z",
+    "expectedTextMatched": true,
+    "shotSha256": "5eb6d5683a6506376ec9c27dba19083a63a08111fbce4056c3c20e317ff6bf73"
+  }
 }

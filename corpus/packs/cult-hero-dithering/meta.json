@@ -1,0 +1,19 @@
+{
+  "id": "cult-hero-dithering",
+  "source": "https://www.cult-ui.com/docs/components/hero-dithering",
+  "harvested": "2026-09-16",
+  "bytes": 976852,
+  "capture": {
+    "status": 200,
+    "title": "Hero Dithering · Cult UI",
+    "headings": "Hero Dithering\nAI SDK Agents\nAI SDK Agents Copy and Paste\nComposable hero\nCursor for Marketing\nInstallation\nUsage\nWhat You Get\nAPI Reference\nCustomization Patterns\nPerformance Notes\nAccessibility Notes\nTroubleshooting",
+    "expectedSelector": "pre",
+    "expectedCount": 8,
+    "expectedText": "",
+    "sourceUrl": "https://www.cult-ui.com/docs/components/hero-dithering",
+    "finalUrl": "https://www.cult-ui.com/docs/components/hero-dithering",
+    "capturedAt": "2026-09-16T16:57:57.823Z",
+    "expectedTextMatched": false,
+    "shotSha256": "ad7b362bb46822025917c345fb6edae916e0b5caa0d2b06fac1555e9338ea221"
+  }
+}

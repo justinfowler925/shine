@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-radar-dots",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-radar-dots",
-  "harvested": "2026-08-31",
-  "bytes": 33095
+  "harvested": "2026-09-16",
+  "bytes": 33095,
+  "capture": {
+    "status": 200,
+    "title": "chart-radar-dots - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-dots",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radar-dots",
+    "capturedAt": "2026-09-16T16:52:25.483Z",
+    "expectedTextMatched": false,
+    "shotSha256": "d4396574913438b585cc67e88ff69988f96e90d967d4e4958936a88c54fe725e"
+  }
 }

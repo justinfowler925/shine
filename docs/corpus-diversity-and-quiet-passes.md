@@ -72,6 +72,36 @@ vacuously. `verify/design-lint-scope.test.mjs` locks each case.
 diagnosis, keeps measure and usability, drops compare and completion, and sets
 `editing.allowed: false`. The skill text says so in one paragraph.
 
+## The second pass: proving the rows
+
+The first PR added 67 rows and none of them had a validated capture. The census said
+why that was not new: only 8 of 130 rows were `passed`; 114 were legacy captures with no
+HTTP or content evidence and 74 had no screenshot. `prove.mjs` requires
+`referenceValidity` to pass, so completion had only ever been reachable for eight
+references — and the shadcn harvest target expected `body`, a selector `captureHealth`
+rejects, so the legacy packs could never refresh.
+
+`harvest.mjs` now maps Untitled UI, Magic UI and cult-ui rows from their `preview`
+pages (each Untitled row names the public component page that renders its examples),
+names the rendered control for every shadcn block, paces requests and retries transport
+failures, and points the Lightning and Spectrum targets at pages that still exist. After
+the harvest and materialize passes, 190 of 197 rows are `passed`; the seven that are not
+are query-only screenshots and three region-map blueprints with no renderable source. The
+packet now says up front when a selected reference is unvalidated, with the harvest
+command and any validated alternative.
+
+Two things surfaced along the way. A test asserted that `spectrum-ai-chat` was a failed
+404 capture and broke the moment it was recaptured; it builds its own broken fixture now.
+And the library build's Tailwind scan was reading the whole repository, so the new pack
+sources grew the published stylesheet by 44 KB of utilities nothing uses; `source(none)`
+limits it to the declared paths and the stylesheet shrinks by a third.
+
+CI for the two personal-account repositories was also silently off: Actions were disabled
+on both, there was no runner registered for either, and the doctor had not run since
+2026-08-30. Runners `justin-macbook-shine` and `justin-macbook-portfolio` are registered
+from the same package as the Nucleus runner, Actions are enabled, the portfolio guard
+targets its runner, and the doctor ran both lanes on main under Node 22.
+
 ## What did not change
 
 Mantine, HeroUI, Spectrum and Fluent stay at one retired or single row each. They carry

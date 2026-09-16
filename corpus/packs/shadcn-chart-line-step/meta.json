@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-line-step",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-line-step",
-  "harvested": "2026-08-31",
-  "bytes": 21481
+  "harvested": "2026-09-16",
+  "bytes": 21481,
+  "capture": {
+    "status": 200,
+    "title": "chart-line-step - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-line-step",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-line-step",
+    "capturedAt": "2026-09-16T16:51:40.240Z",
+    "expectedTextMatched": false,
+    "shotSha256": "ceec9a35d14d7818f5651c26adc5a88a201ba239885890056765e010a2c35f7b"
+  }
 }

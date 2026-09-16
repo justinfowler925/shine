@@ -1,0 +1,19 @@
+{
+  "id": "untitled-bar-charts",
+  "source": "https://www.untitledui.com/react/components/line-bar-charts",
+  "harvested": "2026-09-16",
+  "bytes": 404721,
+  "capture": {
+    "status": 200,
+    "title": "Free React line & bar chart components | Untitled UI",
+    "headings": "Line & bar chart components\nInstallation\nChart examples",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/line-bar-charts",
+    "finalUrl": "https://www.untitledui.com/react/components/line-bar-charts",
+    "capturedAt": "2026-09-16T16:54:14.800Z",
+    "expectedTextMatched": false,
+    "shotSha256": "3e04adaedbb1d6e97b745658af17614cb1e67fbf89c2876cf3cbda2b6ef38c3c"
+  }
+}

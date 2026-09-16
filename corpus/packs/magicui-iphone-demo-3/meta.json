@@ -1,0 +1,19 @@
+{
+  "id": "magicui-iphone-demo-3",
+  "source": "https://magicui.design/docs/components/iphone",
+  "harvested": "2026-09-16",
+  "bytes": 517082,
+  "capture": {
+    "status": 200,
+    "title": "iPhone | React Components & Templates",
+    "headings": "Command Palette\niPhone\nInstallation\nExamples\nUsage\nProps\nNotes",
+    "expectedSelector": "pre",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://magicui.design/docs/components/iphone",
+    "finalUrl": "https://magicui.design/docs/components/iphone",
+    "capturedAt": "2026-09-16T17:01:36.677Z",
+    "expectedTextMatched": false,
+    "shotSha256": "871feb8f0d5457a8f286b06a47223b7bd8e0fc6154e0a9da15748e52d36dfbc0"
+  }
+}

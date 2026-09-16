@@ -65,7 +65,10 @@ process.stdin.on("end", () => {
   }
   if (!changed.length) process.exit(0);
 
-  const res = spawnSync("node", [LINT, ...changed], { encoding: "utf8" });
+  // Same session baseline as the per-edit lint, so a mid-turn commit cannot turn
+  // this turn's off-token values into "pre-existing" ones at the sweep.
+  const session = event.session_id || event.conversation_id || "";
+  const res = spawnSync("node", [LINT, ...changed], { encoding: "utf8", env: { ...process.env, ...(session ? { SHINE_LINT_SESSION: String(session) } : {}) } });
   if (res.status !== 0 && res.status !== 1) {
     failClosed(`shine stop-sweep: design-lint exited ${res.status} — refusing to fail open`, event);
   }

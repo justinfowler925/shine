@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-radial-grid",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-radial-grid",
-  "harvested": "2026-08-31",
-  "bytes": 40115
+  "harvested": "2026-09-16",
+  "bytes": 40115,
+  "capture": {
+    "status": 200,
+    "title": "chart-radial-grid - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radial-grid",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-radial-grid",
+    "capturedAt": "2026-09-16T16:53:10.670Z",
+    "expectedTextMatched": false,
+    "shotSha256": "e5c66fc2aefbdcfb93c5f52ed67157ccff52aed27cd046ae43e6cc101e5f8503"
+  }
 }

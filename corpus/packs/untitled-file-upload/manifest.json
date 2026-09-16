@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-file-upload",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/file-upload/file-upload.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "file-upload.demo.tsx",
+      "sha256": "5e445d8a5b86e7316791dd51b12a28a37eccb21271a691364ae7e14f03804117"
+    }
+  ]
+}

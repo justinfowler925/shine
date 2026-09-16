@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-area-gradient",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-area-gradient",
-  "harvested": "2026-08-31",
-  "bytes": 53653
+  "harvested": "2026-09-16",
+  "bytes": 53653,
+  "capture": {
+    "status": 200,
+    "title": "chart-area-gradient - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-gradient",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-area-gradient",
+    "capturedAt": "2026-09-16T16:50:06.563Z",
+    "expectedTextMatched": false,
+    "shotSha256": "33da1daf59f1ba48291b31df3b91e565f3a81f1c74d45e770f4dded663f71e79"
+  }
 }

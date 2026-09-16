@@ -1,6 +1,19 @@
 {
   "id": "shadcn-chart-bar-active",
   "source": "https://ui.shadcn.com/view/new-york-v4/chart-bar-active",
-  "harvested": "2026-08-31",
-  "bytes": 32360
+  "harvested": "2026-09-16",
+  "bytes": 32360,
+  "capture": {
+    "status": 200,
+    "title": "chart-bar-active - shadcn/ui",
+    "headings": "",
+    "expectedSelector": "svg.recharts-surface, [data-chart], svg",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/view/new-york-v4/chart-bar-active",
+    "finalUrl": "https://ui.shadcn.com/view/new-york-v4/chart-bar-active",
+    "capturedAt": "2026-09-16T16:50:34.461Z",
+    "expectedTextMatched": false,
+    "shotSha256": "4586ed311d98fc7a9681c13641d682e27b84be3e2dd6a0cdd38bafc84fea4df1"
+  }
 }

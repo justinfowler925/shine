@@ -1,0 +1,19 @@
+{
+  "id": "untitled-pagination",
+  "source": "https://www.untitledui.com/react/components/pagination",
+  "harvested": "2026-09-16",
+  "bytes": 298354,
+  "capture": {
+    "status": 200,
+    "title": "Free React pagination components | Untitled UI",
+    "headings": "Pagination components\nInstallation\nPagination examples",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/pagination",
+    "finalUrl": "https://www.untitledui.com/react/components/pagination",
+    "capturedAt": "2026-09-16T17:03:48.479Z",
+    "expectedTextMatched": false,
+    "shotSha256": "daf2903ab043b8680eb74c2f5d533b416e18f2edfd7f5ff0f05260f7a1062a50"
+  }
+}

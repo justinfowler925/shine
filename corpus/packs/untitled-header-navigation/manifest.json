@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-header-navigation",
+  "screen": "app-shell",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/app-navigation/header-navigation.demo.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "header-navigation.demo.tsx",
+      "sha256": "a8a7eb5f6b9efa2c7df343920abe0efb6c608c529427eba3271d31b7ec312b2e"
+    }
+  ]
+}

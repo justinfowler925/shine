@@ -1,6 +1,19 @@
 {
   "id": "lex-record",
   "source": "https://www.lightningdesignsystem.com/components/page-headers/",
-  "harvested": "2026-08-31",
-  "bytes": 1318101
+  "harvested": "2026-09-16",
+  "bytes": 1318499,
+  "capture": {
+    "status": 200,
+    "title": "Page Headers - Lightning Design System",
+    "headings": "Page Headers\nSections\nOpportunitiesRecently Viewed\nAbout Page header#\nBase#\nRohde Corp - 80,000 Widgets\nObject Home#\nOpportunitiesRecently Viewed\nOpportunitiesRecently Viewed listssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss\nOpportunitiesRecently Viewed\nOpportunitiesRecently Viewed\nOpportunitiesRecently Viewed\nRecord Home#\nOpportunityAcme - 1,200 Widgets\nRecord Home Vertical#\nBurlington Textile Weaving Plant Generator\nRelated List#\nContacts (will truncate)\nOverview of CSS Classes#\nPage Headers Release Notes\n2.25.0 - Upcoming\n2.15.0\n2.8.0\n2.7.1\n2.7.0\nCookie Consent Manager",
+    "expectedSelector": "h1, main, .slds-page-header, article",
+    "expectedCount": 24,
+    "expectedText": "",
+    "sourceUrl": "https://www.lightningdesignsystem.com/components/page-headers/",
+    "finalUrl": "https://v1.lightningdesignsystem.com/components/page-headers/",
+    "capturedAt": "2026-09-16T16:56:29.916Z",
+    "expectedTextMatched": false,
+    "shotSha256": "2a8337e1c73a54d1315b6c25fbe6a860068076f39522f7868c877299876d0dc2"
+  }
 }

@@ -1,6 +1,19 @@
 {
   "id": "shadcn-command",
   "source": "https://ui.shadcn.com/docs/components/command",
-  "harvested": "2026-08-31",
-  "bytes": 397412
+  "harvested": "2026-09-16",
+  "bytes": 397375,
+  "capture": {
+    "status": 200,
+    "title": "Command - shadcn/ui",
+    "headings": "Command\nAbout#\nInstallation#\nUsage#\nComposition#\nBasic#\nCommand Palette\nShortcuts#\nCommand Palette\nGroups#\nCommand Palette\nScrollable#\nCommand Palette\nRTL#\nAPI Reference#",
+    "expectedSelector": "[cmdk-root], main",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://ui.shadcn.com/docs/components/command",
+    "finalUrl": "https://ui.shadcn.com/docs/components/base/command",
+    "capturedAt": "2026-09-16T16:54:56.380Z",
+    "expectedTextMatched": false,
+    "shotSha256": "9ecaa1017df75b023cd211d393cbd8380ae734203da121e1f10bb6c17f2d9823"
+  }
 }

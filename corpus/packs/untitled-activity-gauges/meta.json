@@ -1,0 +1,19 @@
+{
+  "id": "untitled-activity-gauges",
+  "source": "https://www.untitledui.com/react/components/activity-gauges",
+  "harvested": "2026-09-16",
+  "bytes": 293226,
+  "capture": {
+    "status": 200,
+    "title": "Free React activity gauge components | Untitled UI",
+    "headings": "Activity gauge components\nInstallation\nActivity gauge examples",
+    "expectedSelector": "h2[id$=\"-examples\"], main [class*=\"example\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/activity-gauges",
+    "finalUrl": "https://www.untitledui.com/react/components/activity-gauges",
+    "capturedAt": "2026-09-16T16:54:10.507Z",
+    "expectedTextMatched": false,
+    "shotSha256": "b9547e4add4d7830bdf6ad4a6f126bb64ece23bcd9da248168bac45fadac3e09"
+  }
+}
