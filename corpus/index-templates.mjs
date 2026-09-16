@@ -112,6 +112,9 @@ const SCREEN_JOBS = {
   carousel: ["carousel", "gallery", "slides", "slideshow"],
   onboarding: ["onboarding", "first-run", "tour", "intro", "whats-new", "feature-announcement"],
   calendar: ["calendar", "schedule", "events", "agenda", "month-view"],
+  // Deliberately no "list", "records" or "table": measure's queue likeness rule keys
+  // on those jobs and would demand a table where cards are the right presentation.
+  catalog: ["catalog", "cards", "library", "packages", "directory", "gallery", "showcase", "tools"],
   pricing: ["pricing", "plans", "tiers", "marketing", "landing"],
   // The marketing lane. Until 2026-09-16 it was two rows (one hero component and a
   // region map), so every landing page came out of the same silhouette. These
@@ -667,6 +670,10 @@ for (const t of [
   // untitled-table on score, and untitled-table must stay the default table
   // reference (pinned by art-direction.test) — kit affinity, not raw score, is
   // what should hand a shadcn host this row.
+  // A card catalog: search, a few filters, a count, and one rich card per record with
+  // its own actions and disclosure. The Nucleus Company Tools audit (docs/audits) showed
+  // the packet had no home for this shape and forced a table comparison onto five cards.
+  { id: "shadcn-catalog", screen: "catalog", title: "shadcn card catalog (search, filters, count, one card per record with actions and disclosure)", jobs: SCREEN_JOBS.catalog, required: ["form"], captureExpect: '[data-region="catalog-cards"] article', note: "corpus/blueprints/shadcn-catalog.md is the region map; reference.html renders it at rest for capture" },
   { id: "shadcn-queue", screen: "queue", title: "shadcn work queue (triage grid, no chart)", jobs: ["queue", "worklist", "triage", "inbox", "datagrid"], required: ["navigation", "table"], captureExpect: '[data-region="queue-grid"]', startFrom: 2 },
 ]) {
   // Blueprints live in Shine, not the acquired corpus, so exists() is wrong here.

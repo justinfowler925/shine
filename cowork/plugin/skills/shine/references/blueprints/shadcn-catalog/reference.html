@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-catalog" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Card catalog reference</title>
+<!--
+  Authored reference for the `catalog` screen: a small library of rich records found
+  by search and a few filters, one card per record with its own actions and detail.
+  The region map and the reasoning live in shadcn-catalog.md. At rest: no search,
+  the All filter selected, every record showing, every disclosure closed.
+-->
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{font:14px/1.5 ui-sans-serif,system-ui,sans-serif;margin:0;color:#18181b;background:#fff}
+main{max-width:1100px;margin:auto;padding:32px 24px}
+h1{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:4px 0 0}
+h2{font-size:20px;font-weight:600;margin:0}
+h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#71717a;font-weight:600;margin:0 0 6px}
+p{margin:0}
+.muted{color:#71717a}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#71717a}
+.counts{display:flex;gap:16px;margin-top:8px;color:#71717a}
+.counts strong{color:#18181b;font-variant-numeric:tabular-nums}
+/* Search and filters narrow the same list in place. */
+.bar{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin-top:24px;padding-top:24px;border-top:1px solid #e4e4e7}
+.search{flex:1;min-width:280px}
+label{display:block;font-weight:500;margin-bottom:6px}
+input[type=search]{font:inherit;width:100%;height:40px;border:1px solid #e4e4e7;border-radius:6px;padding:0 12px;background:#fff;color:#18181b}
+.filters{display:inline-flex;gap:4px;background:#f4f4f5;padding:4px;border-radius:8px}
+.filters button{font:inherit;font-weight:500;min-width:72px;height:40px;padding:0 12px;border:0;border-radius:6px;background:transparent;color:#71717a;cursor:pointer}
+.filters button[aria-pressed=true]{background:#fff;color:#18181b;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+button,.button{font:inherit;font-weight:500;height:40px;padding:0 14px;border-radius:6px;border:1px solid transparent;background:#18181b;color:#fff;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.outline{background:#fff;color:#18181b;border-color:#e4e4e7}
+.count{margin-top:12px;color:#71717a}
+/* One card per record; cards are peers. */
+.cards{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
+article{border:1px solid #e4e4e7;border-radius:8px;padding:24px}
+.meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.badges{display:flex;gap:6px}
+.badge{display:inline-flex;align-items:center;height:22px;padding:0 8px;border:1px solid #e4e4e7;border-radius:6px;font-size:12px;font-weight:500;color:#18181b;background:#fff}
+.source{font-size:12px;color:#71717a}
+article h2{margin-top:12px}
+article>p.summary{margin-top:6px;max-width:72ch}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.cols>div{border-left:2px solid #e4e4e7;padding-left:12px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+details{margin-top:16px;border-top:1px solid #e4e4e7;padding-top:12px}
+summary{cursor:pointer;font-weight:500;color:#18181b}
+details p{margin-top:8px;color:#71717a}
+</style>
+<main>
+<header data-region="catalog-header">
+<p class="eyebrow">Approved internal tools</p>
+<h1>Company Tools</h1>
+<p class="muted">Find the right skill, check its supported agents, and install the approved package.</p>
+<div class="counts"><span><strong>5</strong> packages</span><span><strong>26</strong> package contents</span></div>
+</header>
+
+<form class="bar" role="search" aria-label="Filter the catalog" data-region="catalog-filters">
+<div class="search"><label for="q">Search company tools</label><input id="q" type="search" name="q" placeholder="Name, job or agent"></div>
+<div class="filters" role="group" aria-label="Agent">
+<button type="button" aria-pressed="true">All</button>
+<button type="button" aria-pressed="false">Claude</button>
+<button type="button" aria-pressed="false">Codex</button>
+<button type="button" aria-pressed="false">Cursor</button>
+</div>
+<button type="reset" class="outline">Clear filters</button>
+</form>
+<p class="count" role="status" data-region="catalog-count">5 packages</p>
+
+<ul class="cards" data-region="catalog-cards">
+<li><article aria-labelledby="card-sled">
+<div class="meta"><div class="badges"><span class="badge">Claude</span><span class="badge">Preview</span><span class="badge">Release 1.2.0</span></div><span class="source">Original method source · c9d511f</span></div>
+<h2 id="card-sled">SLED Agent</h2>
+<p class="summary muted">Research any US state, test workflow fit, map buyers and trace funding, and turn sourced intelligence into a capture plan.</p>
+<div class="cols"><div><h3>Use it when</h3><p>Entering a new state, choosing an agency use case, reviewing a deal, drafting outreach.</p></div><div><h3>Before installing</h3><p>Use the Enterprise workspace in Cowork; live research needs web tools.</p></div></div>
+<div class="actions"><button type="button">Copy install command</button><a class="button outline" href="#sled">Open setup guide</a></div>
+<details><summary>Package details and manual install</summary><p>Contents, checksums and the manual steps for each agent.</p></details>
+</article></li>
+<li><article aria-labelledby="card-shine">
+<div class="meta"><div class="badges"><span class="badge">Claude</span><span class="badge">Codex</span><span class="badge">Cursor</span><span class="badge">Final</span></div><span class="source">Verified public source · main @ 6f95b4e</span></div>
+<h2 id="card-shine">Shine</h2>
+<p class="summary muted">Design authority for interfaces and visual deliverables: real template structure, installed component systems, interaction contracts and browser proof.</p>
+<div class="cols"><div><h3>Use it when</h3><p>Designing, building, auditing or polishing UI, dashboards, forms, landing pages, charts, decks or email.</p></div><div><h3>Before installing</h3><p>Node 20+; the executable verifiers need the full repository edition.</p></div></div>
+<div class="actions"><button type="button">Copy install command</button><a class="button outline" href="#shine">Open setup guide</a></div>
+<details><summary>Package details and manual install</summary><p>Contents, checksums and the manual steps for each agent.</p></details>
+</article></li>
+<li><article aria-labelledby="card-unfog">
+<div class="meta"><div class="badges"><span class="badge">Claude</span><span class="badge">Codex</span><span class="badge">Cursor</span><span class="badge">Final</span></div><span class="source">Verified public source · main @ 4c1e2a9</span></div>
+<h2 id="card-unfog">Unfog</h2>
+<p class="summary muted">Turns an underspecified request into an evidence-backed execution contract and carries it to completion.</p>
+<div class="cols"><div><h3>Use it when</h3><p>A build, change or review request states a direction but omits scope, acceptance or delivery.</p></div><div><h3>Before installing</h3><p>Works alongside Shine; no external services.</p></div></div>
+<div class="actions"><button type="button">Copy install command</button><a class="button outline" href="#unfog">Open setup guide</a></div>
+<details><summary>Package details and manual install</summary><p>Contents, checksums and the manual steps for each agent.</p></details>
+</article></li>
+</ul>
+</main>
+</html>

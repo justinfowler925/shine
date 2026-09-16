@@ -22,6 +22,7 @@
     "marketing-developer": {"informationShape":"narrative","interaction":"conversion","tone":"technical","type":"ui","image":"none","signature":"terminal/code/tree"},
     "marketing-integrations": {"informationShape":"navigation","interaction":"conversion","tone":"expressive","type":"display","image":"illustration","signature":"hub/spokes/reach"},
     "onboarding": {"informationShape":"form","interaction":"form","tone":"reassuring","type":"humanist","image":"product","signature":"steps/media/advance"},
+    "catalog": {"informationShape":"mixed","interaction":"browsing","tone":"restrained","type":"ui","image":"product","signature":"search/cards/action"},
     "calendar": {"informationShape":"records","interaction":"navigation","tone":"restrained","type":"ui","image":"none","signature":"month-grid/event/detail"},
     "pricing": {"informationShape":"transaction","interaction":"conversion","tone":"reassuring","type":"numeric","image":"none","signature":"tiers/features/cta"},
     "tabs": {"informationShape":"navigation","interaction":"navigation","tone":"restrained","type":"ui","image":"none","signature":"tablist/panel"},

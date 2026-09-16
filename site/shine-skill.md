@@ -4382,6 +4382,7 @@ Reasons are listed under the table.
 | calendar | `tailadmin-calendar` | tailadmin-react | source | live | calendar, schedule, events, agenda, month-view |
 | carousel | `untitled-carousel` | untitled-ui-react | source | live | carousel, gallery, slides, slideshow |
 | carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
+| catalog | `shadcn-catalog` | shadcn-registry | blueprint | live | catalog, cards, library, packages, directory, gallery, showcase, tools |
 | charts | `shadcn-chart-area-axes` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-default` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-gradient` | shadcn-registry | source | live | charts, chart, area, analytics |
@@ -4553,7 +4554,7 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-215 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+216 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 

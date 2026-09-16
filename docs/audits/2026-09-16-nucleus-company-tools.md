@@ -24,10 +24,10 @@ Files: [`packet-summary.json`](./2026-09-16-nucleus-company-tools/packet-summary
 - `measure.mjs` sampled text inside a closed `<details>` and reported 1.10:1 for legible
   `#111` on `#fff`. Collapsed content is painted over. Fixed in the same release with a
   regression test.
-- The category list has no home for a card catalog. `datagrid` produces a table cite, and
-  the likeness check then asks where the table is. A five-item card list sits under the
-  ten-row grid threshold and is a legitimate static presentation; the packet's category
-  set should say so rather than force a grid comparison. Open.
+- The category list had no home for a card catalog. `datagrid` produced a table cite, and
+  the likeness check then asked where the table was. Fixed in the following release: a
+  `catalog` category, a `shadcn-catalog` blueprint with a validated capture, and this brief
+  now classifies as `catalog` and selects that reference with `flowbite-products` beside it.
 
 ## What it did not do
 
