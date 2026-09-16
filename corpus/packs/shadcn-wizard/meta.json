@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-wizard",
+  "source": "corpus/blueprints/shadcn-wizard/reference.html",
+  "harvested": "2026-09-16",
+  "bytes": 47385,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "Request an exception — wizard reference",
+    "headings": "Request an exception\nAccount",
+    "expectedSelector": "[data-region=\"wizard\"] form input[name=\"account\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-wizard/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-wizard/reference.html",
+    "capturedAt": "2026-09-16T00:42:46.339Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "5c62f3ab26d786526c3cb8000e5b66cf188765b56946f16fcb91593f76bc2e5a",
+    "shotSha256": "088a9a9dad91074dcb881ecbd49ce4c6eba37be42fdb003f0ccffed8cf9979e2"
+  }
+}

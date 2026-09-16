@@ -3411,7 +3411,8 @@
         "required": [
           "form",
           "navigation"
-        ]
+        ],
+        "captureExpect": "[data-region=\"wizard\"] form input[name=\"account\"]"
       },
       "note": "corpus/blueprints/shadcn-wizard.md is the region map; corpus/blueprints/shadcn-wizard/ is authored shadcn source to copy",
       "scope": "page"

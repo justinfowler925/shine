@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "id": "shadcn-wizard",
+  "screen": "wizard",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "page.tsx",
+      "sha256": "ba84ed7dce1bbb318d18ce16d07cfc72446af878f4d1a03e96bb2cc9b2d4a1e2"
+    },
+    {
+      "path": "reference.html",
+      "sha256": "5c62f3ab26d786526c3cb8000e5b66cf188765b56946f16fcb91593f76bc2e5a"
+    },
+    {
+      "path": "shadcn-wizard.md",
+      "sha256": "9bca4b589f4d0d012cd58cafd08f98752cb030ba0788f44e2811d6478a228c8f"
+    }
+  ]
+}
