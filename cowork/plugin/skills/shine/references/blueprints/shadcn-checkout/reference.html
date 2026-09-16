@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-checkout" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Checkout reference</title>
+<!--
+  Authored reference for the `checkout` screen. The region map and the reasoning
+  live in shadcn-checkout.md; this file renders those regions at rest so the row
+  has real pixels to compare against. The estate builds no checkout, so this is a
+  reference render, not consumer code.
+
+  At rest: the reader is on the Payment step (Address and Delivery completed and
+  linked back), the order summary is a persistent right rail with the total in
+  the page's largest number, every unchosen line carries its explanation, and the
+  commit names the amount. The pending and declined regions mount with their
+  resting copy so they are announced when they change.
+-->
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{font:14px/1.5 ui-sans-serif,system-ui,sans-serif;margin:0;color:#18181b;background:#fff}
+main{max-width:1100px;margin:auto;padding:32px 24px}
+h1{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:0}
+h2{font-size:16px;font-weight:600;margin:0}
+p{margin:0}
+.muted{color:#71717a}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:40px;margin-top:24px;align-items:start}
+/* Every step visible, state in shape and text; completed steps are links back. */
+ol.steps{list-style:none;margin:0;padding:0;display:flex;gap:8px;flex-wrap:wrap}
+ol.steps li{display:flex;align-items:center;gap:8px}
+ol.steps li+li::before{content:"";display:block;width:24px;height:1px;background:#e4e4e7}
+.step{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:999px;border:1px solid #e4e4e7;text-decoration:none;color:#18181b}
+.step .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:999px;font-size:12px;background:#f4f4f5}
+.step.done .n{background:#18181b;color:#fff}
+.step[aria-current=step]{border-color:#18181b}
+.step.todo{color:#71717a}
+form{margin-top:24px;display:flex;flex-direction:column;gap:16px}
+fieldset{border:0;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+legend{font-weight:600;margin-bottom:12px;padding:0}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.wide{grid-column:1/-1}
+label{font-weight:500}
+input{font:inherit;height:36px;border:1px solid #e4e4e7;border-radius:6px;padding:0 12px;background:#fff;color:#18181b;font-variant-numeric:tabular-nums}
+input::placeholder{color:#71717a}
+.help{font-size:12px;color:#71717a}
+.card-fields{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+[role=alert],[role=status]{font-size:14px}
+.commit{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:8px}
+button,.button{font:inherit;font-weight:500;height:36px;padding:0 16px;border-radius:6px;border:1px solid transparent;background:#18181b;color:#fff;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.ghost{background:transparent;color:#18181b}
+button[disabled]{opacity:.5;cursor:default}
+/* Persistent, never behind a disclosure: the reader is being asked for money and
+   must see what for at the moment they commit. */
+aside{border:1px solid #e4e4e7;border-radius:8px;padding:24px;position:sticky;top:24px}
+aside ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+aside li{display:flex;justify-content:space-between;gap:16px}
+aside .item p:last-child{font-size:12px;color:#71717a}
+.money{font-variant-numeric:tabular-nums;white-space:nowrap}
+dl.costs{margin:16px 0 0;padding-top:16px;border-top:1px solid #e4e4e7;display:grid;grid-template-columns:1fr auto;gap:8px 16px}
+dl.costs dt{color:#71717a}
+dl.costs dd{margin:0;text-align:right}
+dl.costs .why{grid-column:1/-1;font-size:12px;color:#71717a;margin-top:-4px}
+dl.costs .total dt,dl.costs .total dd{color:#18181b;font-weight:600;font-size:20px;padding-top:8px;border-top:1px solid #e4e4e7}
+</style>
+<main>
+<header>
+<h1>Checkout</h1>
+<p class="muted">Renewal for Zurich UK claims · 3 items</p>
+</header>
+
+<div class="layout">
+<section data-region="checkout-steps">
+<nav aria-label="Checkout steps" data-region="step-indicator">
+<ol class="steps">
+<li><a class="step done" href="#address"><span class="n">✓</span>Address</a></li>
+<li><a class="step done" href="#delivery"><span class="n">✓</span>Delivery</a></li>
+<li><span class="step" aria-current="step"><span class="n">3</span>Payment</span></li>
+<li><span class="step todo"><span class="n">4</span>Review</span></li>
+</ol>
+</nav>
+
+<form aria-labelledby="payment-heading" data-region="step-body">
+<fieldset>
+<legend id="payment-heading">Payment</legend>
+<div class="field wide">
+<label for="cc-name">Name on card</label>
+<input id="cc-name" name="cc-name" autocomplete="cc-name" placeholder="As printed on the card">
+</div>
+<div class="field wide">
+<label for="cc-number">Card number</label>
+<div class="card-fields">
+<input id="cc-number" name="cc-number" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" aria-describedby="card-error">
+<input id="cc-exp" name="cc-exp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM / YY" aria-label="Expiry" aria-describedby="card-error">
+<input id="cc-csc" name="cc-csc" inputmode="numeric" autocomplete="cc-csc" placeholder="CVC" aria-label="Security code" aria-describedby="card-error">
+</div>
+<p class="help" id="card-error" role="alert">Card details are checked when you continue; a declined card is reported here.</p>
+</div>
+<div class="field">
+<label for="postal">Billing postcode</label>
+<input id="postal" name="postal-code" autocomplete="postal-code" placeholder="SW1A 1AA">
+</div>
+<div class="field">
+<label for="tel">Phone for delivery questions</label>
+<input id="tel" name="tel" type="tel" autocomplete="tel" placeholder="+44">
+</div>
+</fieldset>
+<div class="commit">
+<a class="button ghost" href="#delivery">← Back to delivery</a>
+<div>
+<button type="submit" data-primary>Continue to review</button>
+<p class="muted" role="status" data-pending-status>Nothing pending. Continue checks the card before the review step.</p>
+</div>
+</div>
+</form>
+</section>
+
+<aside aria-labelledby="summary-heading" data-region="order-summary">
+<h2 id="summary-heading">Order summary</h2>
+<ul>
+<li class="item"><div><p>Claims renewal · 12 months</p><p>Enterprise tier, 40 seats</p></div><span class="money">$189,000</span></li>
+<li class="item"><div><p>Onboarding workshop</p><p>2 days, on site</p></div><span class="money">$12,000</span></li>
+<li class="item"><div><p>Priority support</p><p>Annual</p></div><span class="money">$8,000</span></li>
+</ul>
+<dl class="costs" data-region="cost-breakdown">
+<dt>Subtotal</dt><dd class="money">$209,000.00</dd>
+<dt>Delivery</dt><dd class="money">$0.00</dd>
+<div class="why">Electronic delivery; no shipping applies.</div>
+<dt>Tax</dt><dd class="money">$0.00</dd>
+<div class="why">Reverse charge under the buyer's UK VAT registration.</div>
+<div class="total" style="display:contents"><dt>Total</dt><dd class="money">$209,000.00</dd></div>
+</dl>
+<p class="muted" style="margin-top:16px">You will confirm every value on the Review step before anything is charged. The final button reads <strong>Pay $209,000.00</strong>.</p>
+</aside>
+</div>
+</main>
+</html>

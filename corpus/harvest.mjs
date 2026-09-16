@@ -76,8 +76,15 @@ const kitTarget = (row) => {
     return { url, mode: "full", expect: "main h2[id], h2[id]" };
   if (row.kit === "magicui" && /^https:\/\/magicui\.design\/docs\/components\/[a-z0-9-]+$/.test(url))
     return { url, mode: "full", expect: "pre" };
-  if (row.kit === "cult-ui" && /^https:\/\/www\.cult-ui\.com\/docs\/components\/[a-z0-9-]+$/.test(url))
+  if (row.kit === "cult-ui" && /^https:\/\/www\.cult-ui\.com\/docs\/(components|blocks)\/[a-z0-9-]+$/.test(url))
     return { url, mode: "full", expect: "pre" };
+  // Composed Tailwind pages: the live demo is the page itself.
+  if (row.kit === "tailadmin-react" && /^https:\/\/free-react-demo\.tailadmin\.com\//.test(url))
+    return { url, mode: "full", expect: "nav, aside, table, form, input, svg", settleMs: 3_000 };
+  if (row.kit === "windmill-react" && /^https:\/\/windmill-dashboard-react\.vercel\.app\//.test(url))
+    return { url, mode: "full", expect: "nav, aside, table, form, input, svg", settleMs: 3_000 };
+  if (row.kit === "flowbite-admin" && /^https:\/\/flowbite-admin-dashboard\.vercel\.app\//.test(url))
+    return { url, mode: "full", expect: "nav, aside, table, form, input, svg", settleMs: 3_000 };
   return null;
 };
 

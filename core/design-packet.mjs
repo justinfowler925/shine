@@ -45,7 +45,8 @@ export function classifyJob(job,explicit=""){
 }
 
 const excerpt=(path)=>{
- const source=readFileSync(path,"utf8"),found=source.search(/^export\s+(?:default\s+)?(?:function|const|class)\b/m),start=Math.max(0,found);
+ // Hugo/Astro-style HTML pages open with front matter; the markup is the excerpt.
+ const source=readFileSync(path,"utf8").replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/,""),found=source.search(/^export\s+(?:default\s+)?(?:function|const|class)\b/m),start=Math.max(0,found);
  const imports=source.slice(0,Math.min(start,1400)).trim(),body=source.slice(start,start+3000).trim();
  return [imports,body].filter(Boolean).join("\n\n/* selected implementation */\n").slice(0,4400);
 };
@@ -84,7 +85,15 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  // component packs scoring on the same brief (70 shadcn chart blocks buried the
  // dashboard page reference), which read as "no composed page reference".
  const ranked=retrieval.selected.map(shape);
- const candidates=ranked.filter(item=>item.scope==="page").slice(0,3),components=ranked.filter(item=>item.scope==="component").slice(0,3);
+ // The house kit's page reference must stay in the shortlist even when three other
+ // Tailwind kits outscore it on a job word: product precedent and the consumer's own
+ // components are shadcn, so the shadcn composition has to remain an offered choice.
+ const recipeKits=RECIPE_KITS[recipeKey]||[],houseKit=recipeKits.includes("shadcn-registry")?"shadcn-registry":recipeKits[0];
+ const pages=ranked.filter(item=>item.scope==="page");
+ let candidates=pages.slice(0,3);
+ const housePage=pages.find(item=>item.kit===houseKit);
+ if(housePage&&!candidates.includes(housePage))candidates=[...candidates.slice(0,2),housePage];
+ const components=ranked.filter(item=>item.scope==="component").slice(0,3);
  const allCandidates=[...candidates,...components];
  if(!candidates.length)throw new Error(`no composed page reference matched ${JSON.stringify(job)}; use --category or add a catalog page row`);
  const selected=candidates[0],examples=findUntitledExamples(job,3);

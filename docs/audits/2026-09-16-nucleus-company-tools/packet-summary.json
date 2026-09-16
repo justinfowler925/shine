@@ -1,0 +1,41 @@
+{
+  "mode": "audit",
+  "job": "review the company tools catalog page where staff find an approved skill, check supported agents and install the package",
+  "category": "datagrid",
+  "editing": {
+    "allowed": false,
+    "instruction": "Audit edits nothing: deliver shine-diagnosis.json, the before screenshot and the measure/usability facts, then stop. Building is a separate, explicit request."
+  },
+  "selected": {
+    "id": "tailadmin-tables",
+    "kit": "tailadmin-react",
+    "family": "tailadmin",
+    "referenceHealth": "passed"
+  },
+  "candidates": [
+    {
+      "id": "tailadmin-tables",
+      "family": "tailadmin"
+    },
+    {
+      "id": "windmill-tables",
+      "family": "windmill"
+    },
+    {
+      "id": "shadcn-queue",
+      "family": "shadcn-zinc"
+    }
+  ],
+  "componentReferences": [
+    "untitled-table"
+  ],
+  "gaps": [
+    "diversity: catalog has 5 materially distinct source-usable candidates for this brief"
+  ],
+  "completion": {
+    "required": false,
+    "command": null,
+    "requires": [],
+    "instruction": "An audit issues no completion receipt. Report the diagnosis (verdict, defects, evidence), the measure facts and the screenshot. Nothing may be edited in this mode."
+  }
+}

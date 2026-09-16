@@ -1,0 +1,19 @@
+{
+  "id": "flowbite-products",
+  "source": "https://flowbite-admin-dashboard.vercel.app/crud/products/",
+  "harvested": "2026-09-16",
+  "bytes": 476658,
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS Products Page - Flowbite",
+    "headings": "All products",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 155,
+    "expectedText": "",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/crud/products/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/crud/products/",
+    "capturedAt": "2026-09-16T19:56:27.663Z",
+    "expectedTextMatched": false,
+    "shotSha256": "3b56f14e153e5da0a2cc237d3339280dcb6d117633be55134cad6975b3d6db15"
+  }
+}

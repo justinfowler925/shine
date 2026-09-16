@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "id": "tailadmin-dashboard",
+  "screen": "dashboard",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "tailadmin-react",
+    "mode": "full",
+    "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard.git",
+    "branch": "main",
+    "sha": "e888dd1716b9803b535c7c2fa4f2c6b7d39b3da9"
+  },
+  "corpusPath": "tailadmin-react/src/pages/Dashboard/Ecommerce.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "DemographicCard.tsx",
+      "sha256": "34bce591fc25c52157b0c3b3df255f9ee626f271d25fb35b49c1497aff7a1f01"
+    },
+    {
+      "path": "Ecommerce.tsx",
+      "sha256": "bb76922f951ba1d73aeea4f10cfe65b3c82cbe794ac8b9d1b954ef54339755ae"
+    },
+    {
+      "path": "EcommerceMetrics.tsx",
+      "sha256": "758ad65b19354e3fdb64c74c6d9a7684406bb54df41ef4f8eb612bff0b872c08"
+    },
+    {
+      "path": "MonthlySalesChart.tsx",
+      "sha256": "261f8cd6435ed8f9e2492054ceb7c23c85d20acab3f9f105b3e908835ae43a79"
+    },
+    {
+      "path": "MonthlyTarget.tsx",
+      "sha256": "bff8b5da326c71fb19ccede36954f56068baf8070620b0cb6b30aba54478f9ad"
+    },
+    {
+      "path": "RecentOrders.tsx",
+      "sha256": "2855c00fafb0bfab62c4b2715f8a63f31be9dfb12869205b37d547f89e51a5df"
+    },
+    {
+      "path": "StatisticsChart.tsx",
+      "sha256": "0a0939a440f2974ca82bcf97c1c3e90edc5ffbbeb801cc997522fd6522a91ebe"
+    }
+  ]
+}

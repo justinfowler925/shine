@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "tailadmin-tables",
+  "screen": "queue",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "tailadmin-react",
+    "mode": "full",
+    "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard.git",
+    "branch": "main",
+    "sha": "e888dd1716b9803b535c7c2fa4f2c6b7d39b3da9"
+  },
+  "corpusPath": "tailadmin-react/src/pages/Tables/BasicTables.tsx",
+  "entrypoints": [],
+  "structuralSignature": {
+    "pattern": "\\b(DataTable|ProList|List|Table|table)\\b",
+    "files": [
+      "BasicTableOne.tsx"
+    ]
+  },
+  "files": [
+    {
+      "path": "BasicTableOne.tsx",
+      "sha256": "c339848288dbb9579adc62d89a029f57f88d747e733e510d880b5b91ebdc6ea7"
+    },
+    {
+      "path": "ComponentCard.tsx",
+      "sha256": "f7ff1b220a026a9b6a76c3b4acabaea1e3f0d1417f261b8a0f4c00a6b544c18c"
+    },
+    {
+      "path": "PageBreadCrumb.tsx",
+      "sha256": "944a6ea565859bace197020d1894590818c47b6c377579e98e46c29580c54671"
+    }
+  ]
+}

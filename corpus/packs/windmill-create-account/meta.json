@@ -1,0 +1,19 @@
+{
+  "id": "windmill-create-account",
+  "source": "https://windmill-dashboard-react.vercel.app/create-account",
+  "harvested": "2026-09-16",
+  "bytes": 369145,
+  "capture": {
+    "status": 200,
+    "title": "Windmill Dashboard",
+    "headings": "Create account",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 6,
+    "expectedText": "",
+    "sourceUrl": "https://windmill-dashboard-react.vercel.app/create-account",
+    "finalUrl": "https://windmill-dashboard-react.vercel.app/create-account",
+    "capturedAt": "2026-09-16T19:54:21.362Z",
+    "expectedTextMatched": false,
+    "shotSha256": "fc7183f3f234ebb2903acb7ea7354eb6bcaa43f635268ab33270744c699d8207"
+  }
+}

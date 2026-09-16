@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "id": "shadcn-marketing",
+  "screen": "marketing",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "reference.html",
+      "sha256": "bfa48b604f39f63485f314dbd08c768802a6c58c81410cf8472a19e0f66a4b8f"
+    },
+    {
+      "path": "shadcn-marketing.md",
+      "sha256": "db9ea59f668f326bccda560f4456b78327e48a6b6097256021efe116da75bb9a"
+    }
+  ]
+}

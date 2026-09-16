@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "id": "windmill-login",
+  "screen": "auth",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "windmill-react",
+    "mode": "full",
+    "url": "https://github.com/estevanmaito/windmill-dashboard-react.git",
+    "branch": "master",
+    "sha": "da542836f945d08639fc34a3b6f91315965dc030"
+  },
+  "corpusPath": "windmill-react/src/pages/Login.js",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "index.js",
+      "sha256": "626115b34903c08ab40dbe351999fd7ff6923f92a4a4bea6f712ba36a8b8a192"
+    },
+    {
+      "path": "login-office-dark.jpeg",
+      "sha256": "0e1a7a62f335f0c0d623f6370f3853afbe155d78a4b525d492376fc8f5c0ee0f"
+    },
+    {
+      "path": "login-office.jpeg",
+      "sha256": "d5ff382f6146469e65b5b0651ef0576cc9f19c903bd9db438398aa95a310700e"
+    },
+    {
+      "path": "Login.js",
+      "sha256": "0314e20f1dfc5d3f0406c94fa381db8d34b842b2267083193e765801ae5a8e76"
+    }
+  ]
+}

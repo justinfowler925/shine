@@ -1,0 +1,130 @@
+{
+ "version": 1,
+ "cite": "tailadmin-tables",
+ "objects": [
+  {
+   "id": "workspace",
+   "selector": "[data-testid=company-tools-workspace]",
+   "referenceRole": "navigation",
+   "purpose": "Land on the approved skill library"
+  },
+  {
+   "id": "search",
+   "selector": "[data-testid=company-tools-search-form] input[type=search]",
+   "referenceRole": "search",
+   "purpose": "Find a package by name or job"
+  },
+  {
+   "id": "list",
+   "selector": "[data-testid=company-tools-list]",
+   "referenceRole": "table",
+   "purpose": "See every approved package with its agents and release"
+  },
+  {
+   "id": "first-package",
+   "selector": "[data-testid=company-tool-sled-agent]",
+   "referenceRole": "row",
+   "purpose": "Read one package's use case, prerequisites and install"
+  },
+  {
+   "id": "copy-install",
+   "selector": "[data-testid=copy-shine]",
+   "referenceRole": "row action",
+   "purpose": "Copy the install command for Shine"
+  },
+  {
+   "id": "packages",
+   "selector": "[data-testid=company-tools-list] article",
+   "referenceRole": "row",
+   "purpose": "One approved package per card"
+  },
+  {
+   "id": "shine-package",
+   "selector": "[data-testid=company-tool-shine]",
+   "referenceRole": "row",
+   "purpose": "The Shine package card"
+  },
+  {
+   "id": "clear",
+   "selector": "text=Clear filters",
+   "referenceRole": "command",
+   "purpose": "Return to the whole library"
+  },
+  {
+   "id": "cursor-filter",
+   "selector": "button:has-text('Cursor')",
+   "referenceRole": "filter",
+   "purpose": "Show packages that run in Cursor"
+  },
+  {
+   "id": "all-filter",
+   "selector": "button:has-text('All')",
+   "referenceRole": "filter",
+   "purpose": "Show every agent"
+  }
+ ],
+ "flows": [
+  {
+   "id": "find-shine",
+   "userJob": "Narrow the library to Shine and clear the search to get everything back",
+   "steps": [
+    {
+     "action": "count",
+     "selector": "[data-testid=company-tools-list] article",
+     "value": 5
+    },
+    {
+     "action": "fill",
+     "selector": "[data-testid=company-tools-search-form] input[type=search]",
+     "value": "Shine"
+    },
+    {
+     "action": "count",
+     "selector": "[data-testid=company-tools-list] article",
+     "value": 1
+    },
+    {
+     "action": "visible",
+     "selector": "[data-testid=company-tool-shine]"
+    },
+    {
+     "action": "click",
+     "selector": "text=Clear filters"
+    },
+    {
+     "action": "count",
+     "selector": "[data-testid=company-tools-list] article",
+     "value": 5
+    }
+   ]
+  },
+  {
+   "id": "filter-agent",
+   "userJob": "Show only the two packages that run in Cursor",
+   "steps": [
+    {
+     "action": "click",
+     "selector": "button:has-text('Cursor')"
+    },
+    {
+     "action": "visible",
+     "selector": "[data-testid=company-tool-shine]"
+    },
+    {
+     "action": "count",
+     "selector": "[data-testid=company-tools-list] article",
+     "value": 2
+    },
+    {
+     "action": "click",
+     "selector": "button:has-text('All')"
+    },
+    {
+     "action": "count",
+     "selector": "[data-testid=company-tools-list] article",
+     "value": 5
+    }
+   ]
+  }
+ ]
+}

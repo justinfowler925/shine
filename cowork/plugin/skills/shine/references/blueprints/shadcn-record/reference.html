@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-record" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Record detail reference</title>
+<!--
+  Authored reference for the `record` screen, rendered static from
+  corpus/blueprints/shadcn-record/page.tsx so the row has real pixels to compare
+  against. The region map and the reasoning live in shadcn-record.md.
+
+  It is the page at rest: nothing has been decided, so the rationale is empty,
+  the decision submit is disabled with its reason visible, the status region
+  carries its resting copy, and the Activity tab is the one showing.
+-->
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{font:14px/1.5 ui-sans-serif,system-ui,sans-serif;margin:0;color:#18181b;background:#fff}
+main{max-width:1024px;margin:auto;padding:32px 24px}
+h1{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:4px 0 0}
+h2{font-size:16px;font-weight:600;margin:0}
+p{margin:0}
+.muted{color:#71717a}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#71717a}
+header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px}
+.state{display:flex;align-items:center;gap:8px;margin-top:8px}
+.badge{display:inline-flex;align-items:center;height:22px;padding:0 8px;border:1px solid #e4e4e7;border-radius:6px;font-size:12px;font-weight:500}
+.actions{display:flex;gap:8px}
+button,.button{font:inherit;font-weight:500;height:32px;padding:0 12px;border-radius:6px;border:1px solid transparent;background:#18181b;color:#fff;cursor:pointer;display:inline-flex;align-items:center;gap:4px;text-decoration:none}
+.outline{background:#fff;color:#18181b;border-color:#e4e4e7}
+.ghost{background:transparent;color:#18181b}
+button[disabled]{opacity:.5;cursor:default}
+hr{border:0;border-top:1px solid #e4e4e7;margin:24px 0}
+/* Only the fields that decide the action: four, not sixty. */
+dl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:0}
+dt{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#71717a}
+dd{margin:4px 0 0;font-size:16px;font-weight:500;font-variant-numeric:tabular-nums}
+.card{border:1px solid #e4e4e7;border-radius:8px;margin-top:24px}
+.card>header{display:block;padding:24px 24px 0}
+.card>div{padding:16px 24px 24px;display:flex;flex-direction:column;gap:12px}
+label{display:block;font-weight:500}
+textarea{font:inherit;width:100%;min-height:76px;border:1px solid #e4e4e7;border-radius:6px;padding:8px 12px;background:#fff;color:#18181b;resize:vertical}
+textarea::placeholder{color:#71717a}
+.decide{display:flex;align-items:center;gap:12px}
+/* Alternatives the reader switches between, not a sequence they read through. */
+.tabs{margin-top:24px}
+[role=tablist]{display:inline-flex;gap:4px;background:#f4f4f5;padding:4px;border-radius:8px}
+[role=tab]{font:inherit;font-weight:500;height:28px;padding:0 12px;border:0;border-radius:6px;background:transparent;color:#71717a;cursor:pointer}
+[role=tab][aria-selected=true]{background:#fff;color:#18181b;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+[role=tabpanel]{margin-top:8px}
+[role=tabpanel][hidden]{display:none}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-weight:500;color:#71717a;height:40px;padding:0 8px;border-bottom:1px solid #e4e4e7}
+td{padding:12px 8px;border-bottom:1px solid #e4e4e7;vertical-align:top}
+.when{width:96px;font-variant-numeric:tabular-nums;color:#71717a}
+.who{width:160px}
+</style>
+<main>
+<header data-region="record-identity">
+<div>
+<p class="eyebrow">Account record</p>
+<h1>Zurich — UK claims renewal</h1>
+<div class="state"><span class="badge">Negotiation</span><span class="muted">Renewal · Europe · owned by Morgan Lee</span></div>
+</div>
+<div class="actions">
+<a class="button outline" href="#source">Open in CRM ↗</a>
+<button type="button" data-primary>Record decision</button>
+</div>
+</header>
+
+<hr>
+
+<dl data-region="record-facts">
+<div><dt>Owner</dt><dd>Morgan Lee</dd></div>
+<div><dt>Stage</dt><dd>Negotiation</dd></div>
+<div><dt>Due</dt><dd>12 Feb</dd></div>
+<div><dt>Value</dt><dd>$209,000</dd></div>
+</dl>
+
+<section class="card" data-region="record-decision">
+<header><h2>What this record needs</h2></header>
+<div>
+<p class="muted">The renewal date passed without a confirmed outcome. Confirm the new date or hand it back to the owner with what is missing.</p>
+<label for="rationale">Decision and rationale</label>
+<textarea id="rationale" rows="3" placeholder="Record the judgment, not a status update."></textarea>
+<div class="decide">
+<button type="button" disabled aria-describedby="decision-status">✓ Record decision</button>
+<p class="muted" role="status" id="decision-status" data-record-status>Nothing recorded on this record yet. Write a rationale to enable the decision.</p>
+</div>
+</div>
+</section>
+
+<div class="tabs" data-region="record-evidence">
+<div role="tablist" aria-label="Evidence">
+<button role="tab" id="tab-activity" aria-selected="true" aria-controls="panel-activity" type="button">Activity</button>
+<button role="tab" id="tab-related" aria-selected="false" aria-controls="panel-related" tabindex="-1" type="button">Related</button>
+<button role="tab" id="tab-source" aria-selected="false" aria-controls="panel-source" tabindex="-1" type="button">Provenance</button>
+</div>
+<div role="tabpanel" id="panel-activity" aria-labelledby="tab-activity">
+<table data-shine-contract="presentation">
+<thead><tr><th class="when">When</th><th class="who">Who</th><th>What changed</th></tr></thead>
+<tbody>
+<tr><td class="when">2 Feb</td><td class="who">Morgan Lee</td><td>Moved to Negotiation from Proposal</td></tr>
+<tr><td class="when">28 Jan</td><td class="who">Priya Shah</td><td>Logged a call: pricing agreed in principle</td></tr>
+<tr><td class="when">19 Jan</td><td class="who">System</td><td>Renewal date confirmed against the contract</td></tr>
+</tbody>
+</table>
+</div>
+<div role="tabpanel" id="panel-related" aria-labelledby="tab-related" hidden>
+<ul class="related"></ul>
+</div>
+<div role="tabpanel" id="panel-source" aria-labelledby="tab-source" hidden>
+<p class="muted">Read from Salesforce · 2 Feb, 09:14</p>
+</div>
+</div>
+</main>
+</html>

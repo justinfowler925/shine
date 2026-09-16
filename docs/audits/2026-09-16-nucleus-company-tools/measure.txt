@@ -1,0 +1,18 @@
+  note: 3 off-scale spacing value(s), 3.2px×52, 8.8px×52, 14px×2 — em-derived is fine, ad-hoc is not
+  note: type scale 13.3333px/14px collision skipped — kit-faithful DNA (adapted); house lane still tight
+mode=light  bodyBg=rgb(248, 248, 248)  bodyColor=rgb(17, 17, 17)
+tokens: {"--background":null,"--foreground":null,"--primary":null,"--border":null,"--ring":null,"--radius":null,"--shine-color-bg":"#fff","--shine-color-fg":"#111","--shine-color-primary":"#ed5925","--shine-color-border":"#ececec","--shine-color-ring":"#112578"}
+fontSizes: 12px×77  13.3333px×18  14px×37  16px×146  18px×1  28px×6
+axe: 0 violations, 1 incomplete
+contrast: 26 text elements measured, worst 6.02:1
+theme: light rgb(248, 248, 248) / other rgb(248, 248, 248) — single mode, declared color-scheme:light
+
+composition notes (judgement, not blocking):
+  • 15 controls in 4 visual treatments; 1 filled (primary-looking). Largest group: 10× rgb(255, 255, 255) [Clear filters, Copy open the , Download train, Copy build the]
+  • density: content~100% chrome~16% of viewport
+  • sections: 2 marked; 1 missing a heading (section.nx:text-foreground)
+  • 1 controls under 40px: button"All" 32×40
+  • accent colour also used as non-interactive state on "SKILL LIBRARY", "Release: 1.2.0", "USE IT WHEN", "BEFORE INSTALLING", "Cowork setup & first", "Final" — one token, two meanings: every use is a legal token and the vocabulary still collapsed
+
+FAIL
+  ✗ likeness: tailadmin/queue cite table occupies 0.0% of viewport — the table is the focal object, not a strip under a hero

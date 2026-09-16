@@ -4,7 +4,7 @@ Regions, in order. Host: standalone page, no app shell. Density: comfortable. Pa
 
 shadcn is an application kit. It ships no marketing block, no hero, and no pricing table, and that is a deliberate boundary rather than a gap in the corpus — all 97 shadcn blocks are one dashboard, sixteen sidebars, ten auth pages and seventy charts. Since MUI was deleted on 2026-08-31 (`docs/no-foreign-runtimes.md`), the corpus's other marketing row is `magicui-hero`, for the hero alone. Its region graph ports; its source does not.
 
-Region map only: no authored source ships for this row. The estate builds marketing *analytics* (screen `dashboard`, well covered by shadcn), not marketing *pages*, so authored TSX here would be untested reference code.
+No consumer TSX ships for this row: the estate builds marketing *analytics* (screen `dashboard`), not marketing *pages*, so authored component code would be untested reference code. `reference.html` renders the regions below at rest so the row has validated pixels.
 
 1. **Hero** — one claim, one supporting sentence, one primary action. The claim is the most specific true thing about the product, not a category name; if the headline would fit a competitor unchanged, it is not a headline. One filled `Button`; a secondary action is a `ghost` link beside it, never a second filled button.
 2. **Proof** — the evidence for the claim, immediately after it: named customers, a measured number with its source, or a screenshot of the actual product. Anonymous logos and unattributed numbers read as decoration and are skipped.
@@ -45,5 +45,5 @@ Region map only: no authored source ships for this row. The estate builds market
 - The regions above are the structure. They are not optional.
 - `magicui-hero`'s shot is the structural pixel reference for the hero region only; its source is not to be copied.
 - Paint comes from `tokens/voices/shadcn-zinc.css`.
-- No authored source and no pack shot ship for this row, so `verify/compare.mjs` has nothing to compare against. Say so rather than reporting a likeness score.
+- `reference.html` is the region map rendered at rest; its capture is the pack shot `verify/compare.mjs` composites against. Magic UI, cult-ui and Flowbite now carry the hero, proof, metrics, pricing and integration regions as component and page rows of their own.
 - For a marketing *analytics* surface, this is the wrong row: cite a `dashboard` row instead.

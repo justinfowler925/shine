@@ -19,7 +19,7 @@
 //   DESIGN_CORPUS=/path node corpus/index-templates.mjs
 
 import { existsSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
 
@@ -69,6 +69,11 @@ const KIT_FAMILY = {
   // profiles made every cult row a near-duplicate of the Magic UI row for the same
   // screen, so the second family never reached the shortlist.
   "cult-ui": { family: "cult", density: "comfortable" },
+  // Composed application pages on plain Tailwind. Each is its own family so the
+  // shortlist can hold three application silhouettes instead of one.
+  "tailadmin-react": { family: "tailadmin", density: "comfortable" },
+  "windmill-react": { family: "windmill", density: "comfortable" },
+  "flowbite-admin": { family: "flowbite", density: "compact" },
   shine: { family: "shine", density: "dense" },
   slds: { family: "slds", density: "compact" },
 };
@@ -106,6 +111,8 @@ const SCREEN_JOBS = {
   "async-state": ["loading", "spinner", "pending", "async", "skeleton"],
   carousel: ["carousel", "gallery", "slides", "slideshow"],
   onboarding: ["onboarding", "first-run", "tour", "intro", "whats-new", "feature-announcement"],
+  calendar: ["calendar", "schedule", "events", "agenda", "month-view"],
+  pricing: ["pricing", "plans", "tiers", "marketing", "landing"],
   // The marketing lane. Until 2026-09-16 it was two rows (one hero component and a
   // region map), so every landing page came out of the same silhouette. These
   // screens split a landing page into the regions a marketer actually briefs,
@@ -531,6 +538,68 @@ for (const t of singles) {
   });
 }
 
+// ---- composed application pages from Tailwind kits ---------------------------
+// Until 2026-09-16 every page-scope reference for an application surface was
+// shadcn: the dashboard, all sixteen sidebars, all ten auth pages. The family cap
+// could not produce a second look because there was none. These MIT kits publish
+// whole pages on plain Tailwind with distinct paint and composition, and their
+// live demos are the harvest targets. Structure ports; the runtime is Tailwind.
+const TAILWIND_PAGES = [
+  // TailAdmin (React + Tailwind v4, MIT). Soft, card-heavy, blue accent.
+  { id: "tailadmin-dashboard", kit: "tailadmin-react", screen: "dashboard", rank: 2, path: "tailadmin-react/src/pages/Dashboard/Ecommerce.tsx", preview: "https://free-react-demo.tailadmin.com/", title: "TailAdmin ecommerce dashboard (metrics, charts, recent orders)", jobs: ["dashboard", "analytics", "kpi", "ecommerce", "metrics"], required: ["navigation", "summary", "chart", "table"] },
+  { id: "tailadmin-tables", kit: "tailadmin-react", screen: "queue", rank: 3, path: "tailadmin-react/src/pages/Tables/BasicTables.tsx", preview: "https://free-react-demo.tailadmin.com/basic-tables", title: "TailAdmin basic tables page", jobs: ["queue", "crud", "table", "records", "datagrid"], required: ["navigation", "table"] },
+  { id: "tailadmin-form-elements", kit: "tailadmin-react", screen: "form", rank: 2, path: "tailadmin-react/src/pages/Forms/FormElements.tsx", preview: "https://free-react-demo.tailadmin.com/form-elements", title: "TailAdmin form elements page (grouped inputs, selects, toggles, uploads)", jobs: ["form", "input", "fields", "controls"], required: ["navigation", "form"] },
+  { id: "tailadmin-signin", kit: "tailadmin-react", screen: "auth", rank: 3, path: "tailadmin-react/src/pages/AuthPages/SignIn.tsx", preview: "https://free-react-demo.tailadmin.com/signin", title: "TailAdmin sign-in (split layout, brand panel)", jobs: ["auth", "login", "signin", "sign-in"], required: ["form"] },
+  { id: "tailadmin-profile", kit: "tailadmin-react", screen: "record", rank: 2, path: "tailadmin-react/src/pages/UserProfiles.tsx", preview: "https://free-react-demo.tailadmin.com/profile", title: "TailAdmin user profile (identity card, info sections, address)", jobs: ["record", "profile", "detail", "account", "user"], required: ["navigation"] },
+  { id: "tailadmin-calendar", kit: "tailadmin-react", screen: "calendar", rank: 1, path: "tailadmin-react/src/pages/Calendar.tsx", preview: "https://free-react-demo.tailadmin.com/calendar", title: "TailAdmin calendar (month grid, event dialog)", jobs: SCREEN_JOBS.calendar, required: ["navigation"] },
+  // Windmill (React + Tailwind, MIT). Purple accent, dense cards, dark mode.
+  { id: "windmill-dashboard", kit: "windmill-react", screen: "dashboard", rank: 3, path: "windmill-react/src/pages/Dashboard.js", preview: "https://windmill-dashboard-react.vercel.app/app/dashboard", title: "Windmill dashboard (info cards, client table, charts)", jobs: ["dashboard", "analytics", "kpi", "metrics"], required: ["navigation", "summary", "chart", "table"] },
+  { id: "windmill-tables", kit: "windmill-react", screen: "queue", rank: 4, path: "windmill-react/src/pages/Tables.js", preview: "https://windmill-dashboard-react.vercel.app/app/tables", title: "Windmill tables (paginated client tables with actions)", jobs: ["queue", "crud", "table", "records", "datagrid"], required: ["navigation", "table"] },
+  { id: "windmill-forms", kit: "windmill-react", screen: "form", rank: 3, path: "windmill-react/src/pages/Forms.js", preview: "https://windmill-dashboard-react.vercel.app/app/forms", title: "Windmill forms page (labelled fields, validation states)", jobs: ["form", "input", "fields", "validation"], required: ["navigation", "form"] },
+  { id: "windmill-charts", kit: "windmill-react", screen: "charts", rank: 3, path: "windmill-react/src/pages/Charts.js", preview: "https://windmill-dashboard-react.vercel.app/app/charts", title: "Windmill charts page (doughnut, line, bar cards)", jobs: ["charts", "chart", "analytics", "dataviz"], required: ["navigation", "chart"] },
+  { id: "windmill-login", kit: "windmill-react", screen: "auth", rank: 4, path: "windmill-react/src/pages/Login.js", preview: "https://windmill-dashboard-react.vercel.app/login", title: "Windmill login (split image, social sign-in)", jobs: ["auth", "login", "signin", "sign-in"], required: ["form"] },
+  { id: "windmill-create-account", kit: "windmill-react", screen: "auth", rank: 5, path: "windmill-react/src/pages/CreateAccount.js", preview: "https://windmill-dashboard-react.vercel.app/create-account", title: "Windmill create account", jobs: ["auth", "signup", "sign-up", "register"], required: ["form"] },
+  // Flowbite admin (HTML + Tailwind, MIT). Gray/blue, dense tables, stacked layouts.
+  { id: "flowbite-dashboard", kit: "flowbite-admin", screen: "dashboard", rank: 4, path: "flowbite-admin/content/_index.html", preview: "https://flowbite-admin-dashboard.vercel.app/", title: "Flowbite admin dashboard (sales chart, stats, latest transactions)", jobs: ["dashboard", "analytics", "kpi", "metrics", "sales"], required: ["navigation", "summary", "chart", "table"] },
+  { id: "flowbite-users", kit: "flowbite-admin", screen: "queue", rank: 5, path: "flowbite-admin/content/crud/users.html", preview: "https://flowbite-admin-dashboard.vercel.app/crud/users/", title: "Flowbite users list (search, bulk select, edit/delete modals)", jobs: ["queue", "crud", "table", "records", "users", "admin"], required: ["navigation", "table"] },
+  { id: "flowbite-products", kit: "flowbite-admin", screen: "queue", rank: 6, path: "flowbite-admin/content/crud/products.html", preview: "https://flowbite-admin-dashboard.vercel.app/crud/products/", title: "Flowbite products list (catalog table with drawers)", jobs: ["queue", "crud", "table", "products", "inventory", "catalog"], required: ["navigation", "table"] },
+  { id: "flowbite-settings", kit: "flowbite-admin", screen: "settings", rank: 3, path: "flowbite-admin/content/settings.html", preview: "https://flowbite-admin-dashboard.vercel.app/settings/", title: "Flowbite settings (profile, sessions, notifications, password)", jobs: ["settings", "preferences", "account", "profile"], required: ["navigation", "form"] },
+  { id: "flowbite-sign-in", kit: "flowbite-admin", screen: "auth", rank: 6, path: "flowbite-admin/content/authentication/sign-in.html", preview: "https://flowbite-admin-dashboard.vercel.app/authentication/sign-in/", title: "Flowbite sign-in (centered card)", jobs: ["auth", "login", "signin", "sign-in"], required: ["form"] },
+  { id: "flowbite-pricing", kit: "flowbite-admin", screen: "pricing", rank: 1, path: "flowbite-admin/content/pages/pricing.html", preview: "https://flowbite-admin-dashboard.vercel.app/pages/pricing/", title: "Flowbite pricing page (three tiers, FAQ)", jobs: SCREEN_JOBS.pricing, required: ["navigation"] },
+];
+// A page file in these kits is often a thin wrapper that mounts components (TailAdmin's
+// SignIn is 17 lines importing SignInForm). The pack needs the components too, so a
+// row carries its page's direct imports — "@/x" (kit src alias) and relative paths —
+// as companion sources when they resolve to files on disk.
+const companionSources = (rel) => {
+  const kit = rel.split("/")[0];
+  const abs = join(CORPUS, rel);
+  if (!existsSync(abs)) return [];
+  const source = readFileSync(abs, "utf8");
+  const out = [];
+  for (const m of source.matchAll(/from\s+["']([^"']+)["']/g)) {
+    const spec = m[1];
+    let base;
+    if (spec.startsWith("@/")) base = join(CORPUS, kit, "src", spec.slice(2));
+    else if (spec.startsWith(".")) base = resolve(dirname(abs), spec);
+    else continue;
+    const candidate = [base, ...[".tsx", ".ts", ".jsx", ".js"].map((ext) => base + ext), ...["index.tsx", "index.jsx", "index.js"].map((name) => join(base, name))]
+      .find((path) => existsSync(path) && statSync(path).isFile());
+    if (candidate) out.push(relative(CORPUS, candidate));
+  }
+  return [...new Set(out)];
+};
+for (const t of TAILWIND_PAGES) {
+  if (!exists(t.path)) continue;
+  const sources = companionSources(t.path);
+  push({
+    id: t.id, screen: t.screen, kit: t.kit, title: t.title, path: t.path, preview: t.preview,
+    ...(sources.length ? { sources } : {}),
+    license: "MIT", kind: "source", startFrom: t.rank, jobs: t.jobs, scope: "page",
+    ...(t.required ? { reference: { required: t.required } } : {}),
+  });
+}
+
 // ---- LEX blueprints ----------------------------------------------------------
 // No public renderable source exists for Lightning surfaces, so these rows carry
 // no corpus path. Structure and org-measured facts live in references/salesforce.md;
@@ -568,14 +637,17 @@ for (const t of [
 // structure is not kit-specific and the estate builds none of them, so authored
 // source there would be untested reference code.
 for (const t of [
-  { id: "shadcn-record", screen: "record", title: "shadcn record detail (identity, facts, decision, evidence)", jobs: ["record", "detail", "account", "opportunity"], required: ["form", "table"] },
+  { id: "shadcn-record", screen: "record", title: "shadcn record detail (identity, facts, decision, evidence)", jobs: ["record", "detail", "account", "opportunity"], required: ["form", "table"], captureExpect: '[data-region="record-decision"] textarea', note: "corpus/blueprints/shadcn-record.md is the region map; corpus/blueprints/shadcn-record/ is authored shadcn source to copy, and reference.html is that source rendered at rest for capture" },
   // captureExpect and the note were hand-edited into templates.json on the release
   // machine and never encoded here, so the first regenerate anywhere else dropped
   // them and reference-contract failed. Declared now, where --check can see them.
   { id: "shadcn-settings", screen: "settings", title: "shadcn settings (visible section nav, per-section save)", jobs: ["settings", "preferences", "account"], required: ["form", "navigation"], captureExpect: 'nav[aria-label="Settings sections"] a', note: "corpus/blueprints/shadcn-settings.md is the region map; corpus/blueprints/shadcn-settings/ is authored shadcn source to copy, and reference.html is that source rendered at rest for capture" },
   { id: "shadcn-wizard", screen: "wizard", title: "shadcn wizard (step list, review before commit)", jobs: ["wizard", "stepper", "multi-step", "onboarding"], required: ["form", "navigation"], captureExpect: '[data-region="wizard"] form input[name="account"]' },
-  { id: "shadcn-checkout", screen: "checkout", title: "shadcn checkout (persistent order summary) — region map only", jobs: ["checkout", "payment"], required: ["form", "summary"] },
-  { id: "shadcn-marketing", screen: "marketing", title: "shadcn marketing page (claim, proof, pricing) — region map only", jobs: ["marketing", "landing", "pricing"] },
+  // Checkout and marketing were region maps with no pixels: compare had nothing to
+  // hold a consumer to and completion could never cite them. reference.html renders
+  // each region map at rest; the estate still builds neither, so there is no TSX.
+  { id: "shadcn-checkout", screen: "checkout", title: "shadcn checkout (persistent order summary, step body, cost breakdown)", jobs: ["checkout", "payment"], required: ["form", "summary"], captureExpect: '[data-region="order-summary"] dl', note: "corpus/blueprints/shadcn-checkout.md is the region map; reference.html renders it at rest for capture; no consumer TSX is authored because the estate builds no checkout" },
+  { id: "shadcn-marketing", screen: "marketing", title: "shadcn marketing page (claim, proof, capabilities, pricing, close)", jobs: ["marketing", "landing", "pricing"], captureExpect: '[data-region="pricing"] .tier', note: "corpus/blueprints/shadcn-marketing.md is the region map; reference.html renders it at rest for capture; no consumer TSX is authored because the estate builds no marketing page" },
   // The blog screen had exactly one row, MUI's. Deleting MUI would have deleted
   // the screen, so the region map carries it: an editorial column is measure and
   // rhythm, not kit chrome, and shadcn publishes no block for it.

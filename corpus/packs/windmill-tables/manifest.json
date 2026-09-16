@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "windmill-tables",
+  "screen": "queue",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "windmill-react",
+    "mode": "full",
+    "url": "https://github.com/estevanmaito/windmill-dashboard-react.git",
+    "branch": "master",
+    "sha": "da542836f945d08639fc34a3b6f91315965dc030"
+  },
+  "corpusPath": "windmill-react/src/pages/Tables.js",
+  "entrypoints": [],
+  "structuralSignature": {
+    "pattern": "\\b(DataTable|ProList|List|Table|table)\\b",
+    "files": [
+      "Tables.js"
+    ]
+  },
+  "files": [
+    {
+      "path": "index.js",
+      "sha256": "626115b34903c08ab40dbe351999fd7ff6923f92a4a4bea6f712ba36a8b8a192"
+    },
+    {
+      "path": "tableData.js",
+      "sha256": "af8629509f83f3a42fb0ede19f2a2b487eabf6594e110795712a7f3ba94ae1a2"
+    },
+    {
+      "path": "Tables.js",
+      "sha256": "680383284eadeb37979b75787c5121078e66a18fe2e9436ac609fdbc1e79df4a"
+    }
+  ]
+}

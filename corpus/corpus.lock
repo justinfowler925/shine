@@ -45,3 +45,6 @@ blueprint	sparse	https://github.com/palantir/blueprint.git	develop	933c7de615166
 park-ui	sparse	https://github.com/chakra-ui/park-ui.git	main	102769cc91a9d36753dbc5893c74b7954b495efe	components/react packages
 rsuite	sparse	https://github.com/rsuite/rsuite.git	main	d5e12c76bd46f48b762cf95b8524bd3d60cadf8a	src docs
 grommet	sparse	https://github.com/grommet/grommet.git	master	035651f9a5c2a5481290b3f90bce9dd70113bdd8	src storybook
+tailadmin-react	full	https://github.com/TailAdmin/free-react-tailwind-admin-dashboard.git	main	e888dd1716b9803b535c7c2fa4f2c6b7d39b3da9	*
+windmill-react	full	https://github.com/estevanmaito/windmill-dashboard-react.git	master	da542836f945d08639fc34a3b6f91315965dc030	*
+flowbite-admin	full	https://github.com/themesberg/flowbite-admin-dashboard.git	main	229df7ff25808ab2bbda65f03f2397a05f7b4288	*

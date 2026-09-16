@@ -969,6 +969,129 @@
       ]
     },
     {
+      "id": "tailadmin-signin",
+      "screen": "auth",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin sign-in (split layout, brand panel)",
+      "path": "tailadmin-react/src/pages/AuthPages/SignIn.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/signin",
+      "sources": [
+        "tailadmin-react/src/components/auth/SignInForm.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx",
+        "tailadmin-react/src/pages/AuthPages/AuthPageLayout.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "auth",
+        "login",
+        "signin",
+        "sign-in"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "form"
+        ]
+      },
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "windmill-login",
+      "screen": "auth",
+      "kit": "windmill-react",
+      "title": "Windmill login (split image, social sign-in)",
+      "path": "windmill-react/src/pages/Login.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/login",
+      "sources": [
+        "windmill-react/src/assets/img/login-office.jpeg",
+        "windmill-react/src/assets/img/login-office-dark.jpeg",
+        "windmill-react/src/icons/index.js"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 4,
+      "jobs": [
+        "auth",
+        "login",
+        "signin",
+        "sign-in"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "form"
+        ]
+      },
+      "dna": {
+        "family": "windmill",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "windmill-create-account",
+      "screen": "auth",
+      "kit": "windmill-react",
+      "title": "Windmill create account",
+      "path": "windmill-react/src/pages/CreateAccount.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/create-account",
+      "sources": [
+        "windmill-react/src/assets/img/create-account-office.jpeg",
+        "windmill-react/src/assets/img/create-account-office-dark.jpeg",
+        "windmill-react/src/icons/index.js"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 5,
+      "jobs": [
+        "auth",
+        "signup",
+        "sign-up",
+        "register"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "form"
+        ]
+      },
+      "dna": {
+        "family": "windmill",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "flowbite-sign-in",
+      "screen": "auth",
+      "kit": "flowbite-admin",
+      "title": "Flowbite sign-in (centered card)",
+      "path": "flowbite-admin/content/authentication/sign-in.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/authentication/sign-in/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 6,
+      "jobs": [
+        "auth",
+        "login",
+        "signin",
+        "sign-in"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "form"
+        ]
+      },
+      "dna": {
+        "family": "flowbite",
+        "density": "compact"
+      }
+    },
+    {
       "id": "shadcn-blog",
       "screen": "blog",
       "kit": "shadcn-registry",
@@ -1022,6 +1145,39 @@
       },
       "note": "Authored native HTML media blueprint compatible with shadcn; not an upstream block.",
       "scope": "page"
+    },
+    {
+      "id": "tailadmin-calendar",
+      "screen": "calendar",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin calendar (month grid, event dialog)",
+      "path": "tailadmin-react/src/pages/Calendar.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/calendar",
+      "sources": [
+        "tailadmin-react/src/components/calendar/Calendar.tsx",
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "calendar",
+        "schedule",
+        "events",
+        "agenda",
+        "month-view"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation"
+        ]
+      },
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
     },
     {
       "id": "untitled-carousel",
@@ -3130,6 +3286,40 @@
       }
     },
     {
+      "id": "windmill-charts",
+      "screen": "charts",
+      "kit": "windmill-react",
+      "title": "Windmill charts page (doughnut, line, bar cards)",
+      "path": "windmill-react/src/pages/Charts.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/app/charts",
+      "sources": [
+        "windmill-react/src/components/Chart/ChartCard.js",
+        "windmill-react/src/components/Chart/ChartLegend.js",
+        "windmill-react/src/components/Typography/PageTitle.js",
+        "windmill-react/src/utils/demo/chartsData.js"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "charts",
+        "chart",
+        "analytics",
+        "dataviz"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "chart"
+        ]
+      },
+      "dna": {
+        "family": "windmill",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "spectrum-ai-chat",
       "screen": "chat",
       "kit": "react-spectrum",
@@ -3153,7 +3343,7 @@
       "id": "shadcn-checkout",
       "screen": "checkout",
       "kit": "shadcn-registry",
-      "title": "shadcn checkout (persistent order summary) — region map only",
+      "title": "shadcn checkout (persistent order summary, step body, cost breakdown)",
       "preview": "",
       "license": "MIT",
       "kind": "blueprint",
@@ -3170,9 +3360,10 @@
         "required": [
           "form",
           "summary"
-        ]
+        ],
+        "captureExpect": "[data-region=\"order-summary\"] dl"
       },
-      "note": "corpus/blueprints/shadcn-checkout.md is the region map; shadcn publishes no block for this screen",
+      "note": "corpus/blueprints/shadcn-checkout.md is the region map; reference.html renders it at rest for capture; no consumer TSX is authored because the estate builds no checkout",
       "scope": "page"
     },
     {
@@ -3251,6 +3442,118 @@
       "dna": {
         "family": "untitled",
         "density": "comfortable"
+      }
+    },
+    {
+      "id": "tailadmin-dashboard",
+      "screen": "dashboard",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin ecommerce dashboard (metrics, charts, recent orders)",
+      "path": "tailadmin-react/src/pages/Dashboard/Ecommerce.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/",
+      "sources": [
+        "tailadmin-react/src/components/common/PageMeta.tsx",
+        "tailadmin-react/src/components/ecommerce/DemographicCard.tsx",
+        "tailadmin-react/src/components/ecommerce/EcommerceMetrics.tsx",
+        "tailadmin-react/src/components/ecommerce/MonthlySalesChart.tsx",
+        "tailadmin-react/src/components/ecommerce/MonthlyTarget.tsx",
+        "tailadmin-react/src/components/ecommerce/RecentOrders.tsx",
+        "tailadmin-react/src/components/ecommerce/StatisticsChart.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "dashboard",
+        "analytics",
+        "kpi",
+        "ecommerce",
+        "metrics"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "chart",
+          "table"
+        ]
+      },
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "windmill-dashboard",
+      "screen": "dashboard",
+      "kit": "windmill-react",
+      "title": "Windmill dashboard (info cards, client table, charts)",
+      "path": "windmill-react/src/pages/Dashboard.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/app/dashboard",
+      "sources": [
+        "windmill-react/src/components/CTA.js",
+        "windmill-react/src/components/Cards/InfoCard.js",
+        "windmill-react/src/components/Chart/ChartCard.js",
+        "windmill-react/src/components/Chart/ChartLegend.js",
+        "windmill-react/src/components/Typography/PageTitle.js",
+        "windmill-react/src/icons/index.js",
+        "windmill-react/src/components/RoundIcon.js",
+        "windmill-react/src/utils/demo/tableData.js",
+        "windmill-react/src/utils/demo/chartsData.js"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "dashboard",
+        "analytics",
+        "kpi",
+        "metrics"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "chart",
+          "table"
+        ]
+      },
+      "dna": {
+        "family": "windmill",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "flowbite-dashboard",
+      "screen": "dashboard",
+      "kit": "flowbite-admin",
+      "title": "Flowbite admin dashboard (sales chart, stats, latest transactions)",
+      "path": "flowbite-admin/content/_index.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 4,
+      "jobs": [
+        "dashboard",
+        "analytics",
+        "kpi",
+        "metrics",
+        "sales"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "chart",
+          "table"
+        ]
+      },
+      "dna": {
+        "family": "flowbite",
+        "density": "compact"
       }
     },
     {
@@ -3341,6 +3644,48 @@
       }
     },
     {
+      "id": "tailadmin-form-elements",
+      "screen": "form",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin form elements page (grouped inputs, selects, toggles, uploads)",
+      "path": "tailadmin-react/src/pages/Forms/FormElements.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/form-elements",
+      "sources": [
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx",
+        "tailadmin-react/src/components/form/form-elements/CheckboxComponents.tsx",
+        "tailadmin-react/src/components/form/form-elements/DefaultInputs.tsx",
+        "tailadmin-react/src/components/form/form-elements/DropZone.tsx",
+        "tailadmin-react/src/components/form/form-elements/FileInputExample.tsx",
+        "tailadmin-react/src/components/form/form-elements/InputGroup.tsx",
+        "tailadmin-react/src/components/form/form-elements/InputStates.tsx",
+        "tailadmin-react/src/components/form/form-elements/RadioButtons.tsx",
+        "tailadmin-react/src/components/form/form-elements/SelectInputs.tsx",
+        "tailadmin-react/src/components/form/form-elements/TextAreaInput.tsx",
+        "tailadmin-react/src/components/form/form-elements/ToggleSwitch.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "form",
+        "input",
+        "fields",
+        "controls"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "form"
+        ]
+      },
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "untitled-file-upload",
       "screen": "form",
       "kit": "untitled-ui-react",
@@ -3366,6 +3711,40 @@
       },
       "dna": {
         "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "windmill-forms",
+      "screen": "form",
+      "kit": "windmill-react",
+      "title": "Windmill forms page (labelled fields, validation states)",
+      "path": "windmill-react/src/pages/Forms.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/app/forms",
+      "sources": [
+        "windmill-react/src/components/CTA.js",
+        "windmill-react/src/components/Typography/PageTitle.js",
+        "windmill-react/src/components/Typography/SectionTitle.js",
+        "windmill-react/src/icons/index.js"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "form",
+        "input",
+        "fields",
+        "validation"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "form"
+        ]
+      },
+      "dna": {
+        "family": "windmill",
         "density": "comfortable"
       }
     },
@@ -3513,7 +3892,7 @@
       "id": "shadcn-marketing",
       "screen": "marketing",
       "kit": "shadcn-registry",
-      "title": "shadcn marketing page (claim, proof, pricing) — region map only",
+      "title": "shadcn marketing page (claim, proof, capabilities, pricing, close)",
       "preview": "",
       "license": "MIT",
       "kind": "blueprint",
@@ -3527,7 +3906,10 @@
         "family": "shadcn-zinc",
         "density": "comfortable"
       },
-      "note": "corpus/blueprints/shadcn-marketing.md is the region map; shadcn publishes no block for this screen",
+      "reference": {
+        "captureExpect": "[data-region=\"pricing\"] .tier"
+      },
+      "note": "corpus/blueprints/shadcn-marketing.md is the region map; reference.html renders it at rest for capture; no consumer TSX is authored because the estate builds no marketing page",
       "scope": "page"
     },
     {
@@ -5006,6 +5388,34 @@
       }
     },
     {
+      "id": "flowbite-pricing",
+      "screen": "pricing",
+      "kit": "flowbite-admin",
+      "title": "Flowbite pricing page (three tiers, FAQ)",
+      "path": "flowbite-admin/content/pages/pricing.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/pages/pricing/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "pricing",
+        "plans",
+        "tiers",
+        "marketing",
+        "landing"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation"
+        ]
+      },
+      "dna": {
+        "family": "flowbite",
+        "density": "compact"
+      }
+    },
+    {
       "id": "untitled-table",
       "screen": "queue",
       "kit": "untitled-ui-react",
@@ -5064,6 +5474,137 @@
       "scope": "page"
     },
     {
+      "id": "tailadmin-tables",
+      "screen": "queue",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin basic tables page",
+      "path": "tailadmin-react/src/pages/Tables/BasicTables.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/basic-tables",
+      "sources": [
+        "tailadmin-react/src/components/common/ComponentCard.tsx",
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx",
+        "tailadmin-react/src/components/tables/BasicTables/BasicTableOne.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "queue",
+        "crud",
+        "table",
+        "records",
+        "datagrid"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "table"
+        ]
+      },
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "windmill-tables",
+      "screen": "queue",
+      "kit": "windmill-react",
+      "title": "Windmill tables (paginated client tables with actions)",
+      "path": "windmill-react/src/pages/Tables.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/app/tables",
+      "sources": [
+        "windmill-react/src/components/Typography/PageTitle.js",
+        "windmill-react/src/components/Typography/SectionTitle.js",
+        "windmill-react/src/components/CTA.js",
+        "windmill-react/src/icons/index.js",
+        "windmill-react/src/utils/demo/tableData.js"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 4,
+      "jobs": [
+        "queue",
+        "crud",
+        "table",
+        "records",
+        "datagrid"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "table"
+        ]
+      },
+      "dna": {
+        "family": "windmill",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "flowbite-users",
+      "screen": "queue",
+      "kit": "flowbite-admin",
+      "title": "Flowbite users list (search, bulk select, edit/delete modals)",
+      "path": "flowbite-admin/content/crud/users.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/crud/users/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 5,
+      "jobs": [
+        "queue",
+        "crud",
+        "table",
+        "records",
+        "users",
+        "admin"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "table"
+        ]
+      },
+      "dna": {
+        "family": "flowbite",
+        "density": "compact"
+      }
+    },
+    {
+      "id": "flowbite-products",
+      "screen": "queue",
+      "kit": "flowbite-admin",
+      "title": "Flowbite products list (catalog table with drawers)",
+      "path": "flowbite-admin/content/crud/products.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/crud/products/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 6,
+      "jobs": [
+        "queue",
+        "crud",
+        "table",
+        "products",
+        "inventory",
+        "catalog"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "table"
+        ]
+      },
+      "dna": {
+        "family": "flowbite",
+        "density": "compact"
+      }
+    },
+    {
       "id": "shadcn-record",
       "screen": "record",
       "kit": "shadcn-registry",
@@ -5086,10 +5627,47 @@
         "required": [
           "form",
           "table"
+        ],
+        "captureExpect": "[data-region=\"record-decision\"] textarea"
+      },
+      "note": "corpus/blueprints/shadcn-record.md is the region map; corpus/blueprints/shadcn-record/ is authored shadcn source to copy, and reference.html is that source rendered at rest for capture",
+      "scope": "page"
+    },
+    {
+      "id": "tailadmin-profile",
+      "screen": "record",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin user profile (identity card, info sections, address)",
+      "path": "tailadmin-react/src/pages/UserProfiles.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/profile",
+      "sources": [
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx",
+        "tailadmin-react/src/components/UserProfile/DangerZone.tsx",
+        "tailadmin-react/src/components/UserProfile/Security.tsx",
+        "tailadmin-react/src/components/UserProfile/UserAddressCard.tsx",
+        "tailadmin-react/src/components/UserProfile/UserMetaCard.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "record",
+        "profile",
+        "detail",
+        "account",
+        "user"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation"
         ]
       },
-      "note": "corpus/blueprints/shadcn-record.md is the region map; corpus/blueprints/shadcn-record/ is authored shadcn source to copy",
-      "scope": "page"
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
     },
     {
       "id": "shadcn-settings",
@@ -5137,6 +5715,34 @@
         "density": "comfortable"
       },
       "scope": "page"
+    },
+    {
+      "id": "flowbite-settings",
+      "screen": "settings",
+      "kit": "flowbite-admin",
+      "title": "Flowbite settings (profile, sessions, notifications, password)",
+      "path": "flowbite-admin/content/settings.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/settings/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "settings",
+        "preferences",
+        "account",
+        "profile"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "form"
+        ]
+      },
+      "dna": {
+        "family": "flowbite",
+        "density": "compact"
+      }
     },
     {
       "id": "untitled-tabs",

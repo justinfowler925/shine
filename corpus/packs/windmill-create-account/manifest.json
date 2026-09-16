@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "id": "windmill-create-account",
+  "screen": "auth",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "windmill-react",
+    "mode": "full",
+    "url": "https://github.com/estevanmaito/windmill-dashboard-react.git",
+    "branch": "master",
+    "sha": "da542836f945d08639fc34a3b6f91315965dc030"
+  },
+  "corpusPath": "windmill-react/src/pages/CreateAccount.js",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "create-account-office-dark.jpeg",
+      "sha256": "fe02c2e905b4cd35dec42ee583102d72a56ce22b23c6c7a9326bcf8f604b7451"
+    },
+    {
+      "path": "create-account-office.jpeg",
+      "sha256": "a36f44e9e20e0d039dcc0585c051ba1deaffe3c2b281d96f44070749f056465e"
+    },
+    {
+      "path": "CreateAccount.js",
+      "sha256": "3d9fea4428a1e9a2dfa399034d501a2e34bdaf1722f826c5d6e8d52539f1002b"
+    },
+    {
+      "path": "index.js",
+      "sha256": "626115b34903c08ab40dbe351999fd7ff6923f92a4a4bea6f712ba36a8b8a192"
+    }
+  ]
+}

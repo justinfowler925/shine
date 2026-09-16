@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "id": "windmill-dashboard",
+  "screen": "dashboard",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "windmill-react",
+    "mode": "full",
+    "url": "https://github.com/estevanmaito/windmill-dashboard-react.git",
+    "branch": "master",
+    "sha": "da542836f945d08639fc34a3b6f91315965dc030"
+  },
+  "corpusPath": "windmill-react/src/pages/Dashboard.js",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "chartsData.js",
+      "sha256": "a554cd4884daf283dc6a9285b5634334a2a0d167a6df31346dc966d8be692682"
+    },
+    {
+      "path": "Dashboard.js",
+      "sha256": "d09ab5eec701e47f09cceb52bf326c6e230f4335ebcac37a9a1c8ddfc80336d3"
+    },
+    {
+      "path": "index.js",
+      "sha256": "626115b34903c08ab40dbe351999fd7ff6923f92a4a4bea6f712ba36a8b8a192"
+    },
+    {
+      "path": "tableData.js",
+      "sha256": "af8629509f83f3a42fb0ede19f2a2b487eabf6594e110795712a7f3ba94ae1a2"
+    }
+  ]
+}

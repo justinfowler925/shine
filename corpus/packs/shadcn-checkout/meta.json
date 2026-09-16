@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-checkout",
+  "source": "corpus/blueprints/shadcn-checkout/reference.html",
+  "harvested": "2026-09-16",
+  "bytes": 98973,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "Checkout reference",
+    "headings": "Checkout\nOrder summary",
+    "expectedSelector": "[data-region=\"order-summary\"] dl",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-checkout/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-checkout/reference.html",
+    "capturedAt": "2026-09-16T20:05:46.506Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "004cffc3317f9b131463009c87cb67640e0b9f9c5de32e2431e66202cbff2af1",
+    "shotSha256": "6de3fe3c3aa45e30b20d8ae2609ba4f7ad96f958863079807be2607893f79b5b"
+  }
+}

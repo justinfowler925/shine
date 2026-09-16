@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "flowbite-users",
+  "screen": "queue",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "flowbite-admin",
+    "mode": "full",
+    "url": "https://github.com/themesberg/flowbite-admin-dashboard.git",
+    "branch": "main",
+    "sha": "229df7ff25808ab2bbda65f03f2397a05f7b4288"
+  },
+  "corpusPath": "flowbite-admin/content/crud/users.html",
+  "entrypoints": [],
+  "structuralSignature": {
+    "pattern": "\\b(DataTable|ProList|List|Table|table)\\b",
+    "files": [
+      "users.html"
+    ]
+  },
+  "files": [
+    {
+      "path": "users.html",
+      "sha256": "b8497881fc1bb429ccab5191d96686a4b8fa1854db6da0684291deab2a8dcfb3"
+    }
+  ]
+}

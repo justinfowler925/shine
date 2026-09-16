@@ -102,6 +102,23 @@ on both, there was no runner registered for either, and the doctor had not run s
 from the same package as the Nucleus runner, Actions are enabled, the portfolio guard
 targets its runner, and the doctor ran both lanes on main under Node 22.
 
+## The third pass: application surfaces
+
+Marketing and onboarding had three families after the first two passes; every
+application surface still had one page-scope family, shadcn. The lever was not another
+component library but composed pages on plain Tailwind: TailAdmin, Windmill and Flowbite
+admin publish whole dashboards, tables, forms, auth pages, settings and profiles under
+MIT, each with a distinct look, and their structure ports into a Tailwind or shadcn host
+without a runtime. Eighteen page rows, harvested from the live demos, give the dashboard,
+queue, auth, settings, form and record shortlists three families each. The house kit's
+page keeps a reserved slot so a shadcn host is always offered the shadcn composition
+beside the alternatives.
+
+The three region-map blueprints that had no pixels now render at rest in
+`reference.html` and carry validated captures. 211 of 215 references are `passed`. The
+remaining four are query-only screenshots of paid stores, which carry no source and are
+excluded from source-mode retrieval by design.
+
 ## What did not change
 
 Mantine, HeroUI, Spectrum and Fluent stay at one retired or single row each. They carry

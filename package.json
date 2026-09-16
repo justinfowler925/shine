@@ -39,6 +39,7 @@
     "diagnosis:test": "node verify/diagnosis.test.mjs",
  "catalog:test": "node verify/catalog.test.mjs",
  "lint:test": "node verify/design-lint-scope.test.mjs",
+ "measure:test": "node verify/measure-closed-details.test.mjs",
     "reference:test": "node verify/reference-contract.test.mjs",
     "voice:test": "node verify/voice-contrast.test.mjs",
     "slds:test": "node verify/slds-tokens.test.mjs",

@@ -212,6 +212,10 @@ const textTargets = await page.evaluate(() => {
     if (modal && !modal.contains(el)) continue;
     const text = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
     if (!text) continue;
+    // Content of a closed <details> is not readable: it is collapsed behind the
+    // summary, and its glyph box samples whatever is painted over it. Three list
+    // items inside a closed "setup" disclosure reported 1.10:1 for #111 on #fff.
+    if (el.closest("details:not([open])") && !el.closest("summary")) continue;
     const r = el.getBoundingClientRect();
     if (r.width < 4 || r.height < 4 || r.bottom < 0 || r.top > innerHeight) continue;
     if (isOverflowClipped(el)) continue;

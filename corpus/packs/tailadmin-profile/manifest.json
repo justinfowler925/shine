@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "id": "tailadmin-profile",
+  "screen": "record",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "tailadmin-react",
+    "mode": "full",
+    "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard.git",
+    "branch": "main",
+    "sha": "e888dd1716b9803b535c7c2fa4f2c6b7d39b3da9"
+  },
+  "corpusPath": "tailadmin-react/src/pages/UserProfiles.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "DangerZone.tsx",
+      "sha256": "2550f92303b5e5eb17bae2450177d89e652317e0d9617a1367ad386425538800"
+    },
+    {
+      "path": "PageBreadCrumb.tsx",
+      "sha256": "944a6ea565859bace197020d1894590818c47b6c377579e98e46c29580c54671"
+    },
+    {
+      "path": "Security.tsx",
+      "sha256": "5d8330f298afebdacf583ad2704441656412a84da320b2d143fa54c3e42e16b4"
+    },
+    {
+      "path": "UserAddressCard.tsx",
+      "sha256": "57ec5664f47954da358d902f311af141ea94a94f77afe01b58bda5eeddae5c59"
+    },
+    {
+      "path": "UserMetaCard.tsx",
+      "sha256": "d743212bfcb9f30e424f91a85c26fcd898a9666b1c033dd57a7c086830b25c8f"
+    }
+  ]
+}

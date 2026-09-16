@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "flowbite-settings",
+  "screen": "settings",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "flowbite-admin",
+    "mode": "full",
+    "url": "https://github.com/themesberg/flowbite-admin-dashboard.git",
+    "branch": "main",
+    "sha": "229df7ff25808ab2bbda65f03f2397a05f7b4288"
+  },
+  "corpusPath": "flowbite-admin/content/settings.html",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "settings.html",
+      "sha256": "7af82d4507c3cb9ad46b76a1a365f46fa4a013be546aa52e60f82d0d8a89bfe0"
+    }
+  ]
+}

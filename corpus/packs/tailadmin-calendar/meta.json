@@ -1,0 +1,19 @@
+{
+  "id": "tailadmin-calendar",
+  "source": "https://free-react-demo.tailadmin.com/calendar",
+  "harvested": "2026-09-16",
+  "bytes": 80548,
+  "capture": {
+    "status": 200,
+    "title": "React.js Calendar Dashboard | TailAdmin - Next.js Admin Dashboard Template",
+    "headings": "Menu\nOthers\nSeptember 2026",
+    "expectedSelector": "nav, aside, table, form, input, svg",
+    "expectedCount": 30,
+    "expectedText": "",
+    "sourceUrl": "https://free-react-demo.tailadmin.com/calendar",
+    "finalUrl": "https://free-react-demo.tailadmin.com/calendar",
+    "capturedAt": "2026-09-16T19:54:56.959Z",
+    "expectedTextMatched": false,
+    "shotSha256": "14da6ccc9d8fc030e564dab4d2072afaa031346fbfef2157e976d5502c22d816"
+  }
+}

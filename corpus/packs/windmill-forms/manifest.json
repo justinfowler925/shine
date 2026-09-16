@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "windmill-forms",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "windmill-react",
+    "mode": "full",
+    "url": "https://github.com/estevanmaito/windmill-dashboard-react.git",
+    "branch": "master",
+    "sha": "da542836f945d08639fc34a3b6f91315965dc030"
+  },
+  "corpusPath": "windmill-react/src/pages/Forms.js",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "Forms.js",
+      "sha256": "5a95531b4c4316204d8de24e470bdba3644b9dec197d7019fcbf480bdbd4fbe6"
+    },
+    {
+      "path": "index.js",
+      "sha256": "626115b34903c08ab40dbe351999fd7ff6923f92a4a4bea6f712ba36a8b8a192"
+    }
+  ]
+}
