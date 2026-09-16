@@ -4,9 +4,10 @@ import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { blocks, sourceInventory, verifyReuse } from './blocks.mjs';
 import { load } from '../verify/deps.mjs';
+import {loadTemplates} from '../corpus/catalog.mjs';
 const root=resolve(fileURLToPath(new URL('..',import.meta.url)));
 export function libraryInventory(){
- const references=JSON.parse(readFileSync(join(root,'corpus/templates.json'),'utf8')).templates;
+ const references=loadTemplates(root);
  return {references:{total:references.length,pages:references.filter(row=>row.scope==='page').length,components:references.filter(row=>row.scope==='component').length,retired:references.filter(row=>row.selectable===false).length},implementations:{blocks:blocks.filter(row=>row.kind!=='page').length,pages:blocks.filter(row=>row.kind==='page').length,total:blocks.length},patterns:blocks.map(row=>({id:row.id,kind:row.kind||'block',title:row.title,registry:'https://shine-blond.vercel.app/r/'+row.id+'.json'}))};
 }
 /** Raw element census is a review aid, not a claim of behavioral equivalence. */

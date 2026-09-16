@@ -22,6 +22,7 @@ import { load, pathTo } from "./deps.mjs";
 import {mediaWaste} from './layout.mjs';
 import { auditTables } from "./table-quality.mjs";
 import { evaluateDataGrids } from "./contracts/table.mjs";
+import { loadCatalog } from "../corpus/catalog.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
@@ -801,7 +802,7 @@ for (const check of tableQuality.checks) {
 const citeRow = (() => {
   if (!citeWant) return null;
   try {
-    const cat = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "utf8"));
+    const cat = loadCatalog(SHINE);
     return (cat.templates ?? []).find((t) => t.id === citeWant) || null;
   } catch {
     return null;

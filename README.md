@@ -22,7 +22,7 @@ Shine's shadcn catalog and registry work stands on [shadcn/ui](https://github.co
 | Layer | What it does |
 | --- | --- |
 | **UI/UX agent** | `/shine` skill + `shine-ux` subagent — Wireframe, Build, Polish, Audit, Copy, Adoption |
-| **Templates** | `corpus/cite.mjs "<job>"` — 129 rows, one shortlist slot per visual family, shadcn as the house kit and Untitled UI as its buildable sibling. No foreign-runtime kits: [MUI, Ant and Carbon were deleted 2026-08-31](./docs/no-foreign-runtimes.md) |
+| **Templates** | `corpus/cite.mjs "<job>"` — 197 rows across 11 visual families, one shortlist slot per family, shadcn as the house kit, Untitled UI as its buildable sibling, Magic UI and cult-ui for the marketing and onboarding regions shadcn does not publish. Licensed kits index privately via [`corpus/owned/`](./corpus/owned/README.md). No foreign-runtime kits: [MUI, Ant and Carbon were deleted 2026-08-31](./docs/no-foreign-runtimes.md) |
 | **Examples** | `npm run untitled:search -- "<job>"` — all 392 public Untitled UI demo exports, including 187 renderable Storybook stories |
 | **Technique transfer** | Measured rules from 18 products + pinned kits (shadcn, Radix, Untitled UI, Spectrum, Fluent, APG, …) |
 | **Tokens** | One DTCG source → CSS, Tailwind v4, artifacts, Python, email, Docs, Office, Salesforce |
@@ -711,7 +711,7 @@ Everything the plan compressed out, kept whole. Loaded only when relevant.
 - **Marketplace installs copy the plugin**, breaking relative `../` refs. Symlink shared files.
 - **Figma's Variables REST API is Enterprise-only**, both directions. Confirm seat status before scoping any Figma work.
 
-The [working interface library](https://shine-blond.vercel.app/library/) contains 26 workflow blocks and 6 composed page templates. The 130 design references are a separate catalog, not 130 installable templates. Consumer `shine-coverage.json` contracts classify all 32 implementations and bind reused product components to real import paths and proof files.
+The [working interface library](https://shine-blond.vercel.app/library/) contains 26 workflow blocks and 6 composed page templates. The 197 design references are a separate catalog, not 197 installable templates. Consumer `shine-coverage.json` contracts classify all 32 implementations and bind reused product components to real import paths and proof files.
 
 
 ### Complete application workflows and maintenance

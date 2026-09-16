@@ -24,6 +24,9 @@ export async function activeSurfaceVideos(page){
 }
 export function checkDefectAssertions(diagnosis,layout,usability){
  const errors=[],out=[];
+ // A no-change verdict binds nothing: the diagnosis proved the surface sound and
+ // the other categories (layout, usability, comparison) still have to pass.
+ if(diagnosis.verdict==='no-change')return {status:'passed',verdict:'no-change',assertions:[],failures:[]};
  for(const [index,defect] of diagnosis.defects.entries()){
   if(!['critical','major'].includes(defect.severity))continue;
   if(!defect.id||!Array.isArray(defect.assertions)||!defect.assertions.length){errors.push(`defect ${index+1} needs an id and executable assertion ids`);continue;}
@@ -32,7 +35,7 @@ export function checkDefectAssertions(diagnosis,layout,usability){
    else{const results=layout.checks?.filter(c=>c.id===id)||[];if(!layout.scenarios||results.length!==layout.scenarios||results.some(r=>r.status!=='passed'))errors.push(`${defect.id}: ${id} must pass in every layout scenario`);else out.push({defect:defect.id,assertion:id,status:'passed',scenarios:results.length});}
   }
  }
- return {status:errors.length?'failed':'passed',assertions:out,failures:errors};
+ return {status:errors.length?'failed':'passed',verdict:diagnosis.verdict||'defects',assertions:out,failures:errors};
 }
 export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPath,project,commit,buildId,receiptPath,storageState,reusePath,coveragePath,surfaceContractPath,surfaceReceiptPath}){
  const temp=mkdtempSync(join(tmpdir(),'shine-completion-')),checks={},evidence={};let observed;

@@ -3,9 +3,10 @@ import { readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { readDesignSpec } from "./design-spec.mjs";
+import {loadTemplates} from "../corpus/catalog.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
-const templates=JSON.parse(readFileSync(join(ROOT,"corpus/templates.json"),"utf8")).templates;
+const templates=loadTemplates(ROOT);
 
 const esc = (value) =>
   String(value ?? "").replace(

@@ -34,8 +34,12 @@ Two kinds → run the stricter first (adoption before craft; contracts before po
 
 ## 2. NAME — four buckets, usability first
 
-Write 3–6 defects, each in one bucket. Craft without a usability or completeness defect
-above it is the wrong pass.
+Write only the defects you can evidence, each in one bucket — one is enough, eight is the
+cap. Craft without a usability or completeness defect above it is the wrong pass. If nothing
+survives the screenshot and the measure output, the diagnosis is `verdict: no-change`: say what
+you exercised in `verdictEvidence`, list every bucket in `checked`, and stop. A pass that
+invents findings to fill a count is a defect in the reviewer, not in the surface. In audit mode
+this file is the deliverable; nothing gets edited.
 
 ### Usability (can they finish the job?)
 - Primary action visible in ~3 seconds? Competing CTAs?

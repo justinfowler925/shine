@@ -10,9 +10,20 @@
 //
 // Escapes: a `shine-lint: off` comment in the first five lines of a file,
 // files under tokens/, dist/, node_modules/, corpus dirs, or generated files.
+//
+// Scope: the lint blocks only on lines the current change touched. A file is
+// compared against git HEAD; hard hits on lines that were already there arrive
+// as a single soft note ("pre-existing … left alone") instead of a block. The
+// old whole-file behaviour meant that touching one line in a stylesheet forced
+// a repaint of every legacy value in it — which is how "fix the button label"
+// turned into an unrequested restyle of the page. Untracked files, repos with
+// no commit yet, and paths outside any repo are linted whole: every line there
+// is new. `--all-lines` (CLI) or SHINE_LINT_SCOPE=file restores whole-file
+// blocking for audits and fixtures.
 
 import { readFileSync, realpathSync } from "node:fs";
-import { basename, resolve } from "node:path";
+import { execFileSync } from "node:child_process";
+import { basename, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const DESIGN_EXT = /\.(tsx|jsx|css|html|svelte|vue)$/;
@@ -313,6 +324,66 @@ function lintSkillFrontmatter(path, text) {
   return { hard, soft: [] };
 }
 
+// The new-side line numbers of every hunk in `git diff -U0 HEAD -- <path>`.
+// Returns null when the whole file is in scope: whole-file mode requested, no
+// repository, no HEAD commit yet, or an untracked file (everything in it is new).
+export function changedLines(path) {
+  if (process.env.SHINE_LINT_SCOPE === "file") return null;
+  const absolute = resolve(path);
+  const git = (...args) =>
+    execFileSync("git", args, { cwd: dirname(absolute), encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+  try {
+    git("rev-parse", "--show-toplevel");
+  } catch {
+    return null;
+  }
+  try {
+    git("rev-parse", "--verify", "--quiet", "HEAD");
+  } catch {
+    return null;
+  }
+  try {
+    git("ls-files", "--error-unmatch", "--", absolute);
+  } catch {
+    return null;
+  }
+  let diff;
+  try {
+    diff = git("diff", "-U0", "HEAD", "--", absolute);
+  } catch {
+    return null;
+  }
+  const lines = new Set();
+  for (const m of diff.matchAll(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@/gm)) {
+    const start = Number(m[1]);
+    const count = m[2] === undefined ? 1 : Number(m[2]);
+    for (let i = 0; i < count; i += 1) lines.add(start + i);
+  }
+  return lines;
+}
+
+// Keep hard hits on touched lines; fold the rest into one soft note. Findings
+// are "<path>:<line>  …" strings, so the line is read back off the prefix.
+export function scopeFindings(path, findings, scope) {
+  if (!scope) return findings;
+  const escaped = path.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const prefix = new RegExp("^" + escaped + ":(\\d+)\\b");
+  const inScope = (finding) => {
+    const m = prefix.exec(finding);
+    return !m || scope.has(Number(m[1]));
+  };
+  const hard = findings.hard.filter(inScope);
+  const skipped = findings.hard.length - hard.length;
+  const soft = findings.soft.filter(inScope);
+  if (skipped) {
+    soft.push(
+      `${path}  ${skipped} pre-existing off-token value${skipped === 1 ? "" : "s"} on lines this change did not ` +
+        "touch — left alone. Fix them only if that is the task; `--all-lines` lists them.",
+    );
+  }
+  return { ...findings, hard, soft, preExisting: skipped };
+}
+
 function lintPath(path) {
   if (EXEMPT_PATH.test(path)) return { hard: [], soft: [] };
   // Resolve before matching: invoked as `design-lint.mjs SKILL.md` from the skill directory
@@ -337,7 +408,7 @@ function lintPath(path) {
   // A `.css` file is a stylesheet by definition. Every other host language has to prove it
   // is carrying one, or every backend module in the repo becomes a false positive.
   if (!design && !UI_MARKER.test(text)) return { hard: [], soft: [] };
-  return lintText(path, text);
+  return scopeFindings(path, lintText(path, text), changedLines(path));
 }
 
 // Everything below runs only when this file is the process entrypoint. Without the guard,
@@ -350,7 +421,9 @@ const isEntrypoint =
 // ---- direct CLI mode: any path argument wins; hook mode is stdin-only ----
 if (isEntrypoint && process.argv.length > 2) {
   let bad = false;
-  for (const p of process.argv.slice(2)) {
+  const paths = process.argv.slice(2).filter((arg) => arg !== "--all-lines");
+  if (paths.length !== process.argv.length - 2) process.env.SHINE_LINT_SCOPE = "file";
+  for (const p of paths) {
     const { hard, soft } = lintPath(p);
     hard.forEach((v) => (bad = true, console.error(`BLOCK ${v}`)));
     soft.forEach((v) => console.error(`note  ${v}`));

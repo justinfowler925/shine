@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
 import { collectCorpusSource, packSourceFiles } from "./pack-files.mjs";
 import { retrieveDirections } from "./art-direction.mjs";
+import { loadCatalog } from "./catalog.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CORPUS = resolve(process.env.DESIGN_CORPUS || join(homedir(), "design-corpus"));
@@ -27,7 +28,7 @@ const die = (code, msg) => {
 };
 
 if (!existsSync(CATALOG)) die(2, `cite: missing ${CATALOG}`);
-const catalog = JSON.parse(readFileSync(CATALOG, "utf8"));
+const catalog = loadCatalog(SHINE);
 const templates = catalog.templates ?? [];
 
 const argv = process.argv.slice(2);
