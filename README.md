@@ -728,6 +728,15 @@ providers. A private `shine-providers.local.json` can name an authorized local l
 Shine does not include or purchase Tailwind Plus source. Tailwind owns layout and tokens;
 shadcn/Radix owns accessible controls; TanStack, cmdk, Recharts and Papa Parse own their specialized behavior.
 
+`integrations/mcp-ssh-bridge.py` keeps a remote stdio MCP server alive for the host. Shine's media
+production pair, Hollywood, runs on a Mac Studio behind `ssh ... department.py serve`; registered as
+bare ssh, every laptop sleep past sshd's ClientAlive window (180 s) reset the link and Claude reported
+`Server disconnected` for the rest of the session. The bridge respawns ssh with backoff, replays the
+host's `initialize` handshake, replays idempotent list requests, and fails in-flight tool calls with a
+retryable JSON-RPC `-32000` so the host retries instead of hanging. Register the bridge as the MCP
+command with ssh keepalives (`integrations/mcp-ssh-bridge.example.json`); the real profile with user,
+host and key path lives in an ignored `integrations/<name>.local.json` and is never distributed.
+
 `integrations/surface-audit.mjs` enumerates routes and controls and runs declared route/state
 workflows against the current clean build. `ready` checks are baseline smoke evidence, not a
 claim about other interactions. Owners must name reachable route/state proof. Receipts expire,

@@ -90,6 +90,11 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   kits; `magicui`'s direction profile is `shadcn-tanstack`, not `native`.
 - `shadcn-settings` `captureExpect` and note are encoded in the generator; they had been
   hand-edited into the committed catalog and dropped on the first regenerate elsewhere.
+- `integrations/mcp-ssh-bridge.py`: a reconnecting stdio bridge for MCP servers reached over ssh.
+  It respawns the link after laptop sleep or a Tailscale rebind, replays the `initialize` handshake
+  and idempotent list requests, and returns a retryable JSON-RPC error for tool calls that were in
+  flight. Fixes the Hollywood MCP dropping to `Server disconnected` after every overnight sleep.
+  Real profiles live in ignored `integrations/*.local.json`; an example profile is committed.
 
 ## [4.0.2] — 2026-09-01
 
