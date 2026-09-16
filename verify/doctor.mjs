@@ -692,7 +692,9 @@ if (!CI) {
   const afterSrc = readFileSync(afterPaint, "utf8");
   if (/shine-lint:\s*off/.test(afterSrc)) fail("pragma-free kit paint", "unfucked/after.html carries a shine-lint pragma");
   else {
-    const lintAfter = spawnSync("node", [lint, afterPaint], { encoding: "utf8" });
+    // --all-lines: the fixture is a committed, unchanged file, and the per-edit lint
+    // now scopes blocking to touched lines — without it this check passes vacuously.
+    const lintAfter = spawnSync("node", [lint, "--all-lines", afterPaint], { encoding: "utf8" });
     if (lintAfter.status === 0) ok("pragma-free kit paint", "after.html lints clean, no pragma");
     else fail("pragma-free kit paint", `lint exit ${lintAfter.status}: ${(lintAfter.stderr || "").slice(0, 160)}`);
   }
@@ -1265,7 +1267,7 @@ if (FULL) {
     if (noDna.length) fail("catalog DNA", `${noDna.length} rows missing dna.family (${noDna.slice(0, 3).map((t) => t.id).join(", ")})`);
     else ok("catalog DNA", `${(catalog.templates ?? []).length} rows`);
 
-    const kitPages = ["mantine", "magicui", "fluentui", "react-spectrum", "untitled-ui-react"];
+    const kitPages = ["mantine", "magicui", "fluentui", "react-spectrum", "untitled-ui-react", "cult-ui"];
     const missingKits = kitPages.filter((k) => !(catalog.templates ?? []).some((t) => t.kit === k));
     if (missingKits.length) fail("catalog kit pages", `no cite-able page for: ${missingKits.join(", ")}`);
       else ok("catalog kit pages", kitPages.join(", "));

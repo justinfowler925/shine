@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-13",
+  "generated": "2026-09-16",
   "corpus": "/Users/justinfowler/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
@@ -519,6 +519,62 @@
       }
     },
     {
+      "id": "untitled-header-navigation",
+      "screen": "app-shell",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI header navigation (top bar, no rail)",
+      "path": "untitled-ui-react/components/application/app-navigation/header-navigation.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "app-shell",
+        "navigation",
+        "header",
+        "topbar",
+        "horizontal-nav"
+      ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "navigation"
+        ]
+      },
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "untitled-featured-cards",
+      "screen": "app-shell",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI sidebar featured cards (usage, upgrade and onboarding prompts)",
+      "path": "untitled-ui-react/components/application/app-navigation/base-components/featured-cards.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "app-shell",
+        "navigation",
+        "featured",
+        "usage",
+        "upgrade-prompt"
+      ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "navigation"
+        ]
+      },
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "mantine-appshell",
       "screen": "app-shell",
       "kit": "mantine",
@@ -609,6 +665,29 @@
         "sidebar"
       ],
       "scope": "page"
+    },
+    {
+      "id": "untitled-loading-indicator",
+      "screen": "async-state",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI loading indicators (line, dots, spinner, with label)",
+      "path": "untitled-ui-react/components/application/loading-indicator/loading-indicator.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "loading",
+        "spinner",
+        "pending",
+        "async",
+        "skeleton"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
     },
     {
       "id": "shadcn-login-01",
@@ -943,6 +1022,51 @@
       },
       "note": "Authored native HTML media blueprint compatible with shadcn; not an upstream block.",
       "scope": "page"
+    },
+    {
+      "id": "untitled-carousel",
+      "screen": "carousel",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI carousel (indicators, arrows, autoplay)",
+      "path": "untitled-ui-react/components/application/carousel/carousel.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "carousel",
+        "gallery",
+        "slides",
+        "slideshow"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "cult-three-d-carousel",
+      "screen": "carousel",
+      "kit": "cult-ui",
+      "title": "cult-ui 3D carousel (media gallery)",
+      "path": "cult-ui/apps/www/registry/default/ui/three-d-carousel.tsx",
+      "preview": "https://www.cult-ui.com/docs/components/three-d-carousel",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "carousel",
+        "gallery",
+        "slides",
+        "media",
+        "3d"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "cult",
+        "density": "comfortable"
+      }
     },
     {
       "id": "shadcn-chart-area-axes",
@@ -2860,6 +2984,152 @@
       "retiredReason": "shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it"
     },
     {
+      "id": "untitled-activity-gauges",
+      "screen": "charts",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI activity gauge examples",
+      "path": "untitled-ui-react/components/application/charts/activity-gauges.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "charts",
+        "chart",
+        "gauge",
+        "kpi",
+        "target",
+        "dataviz"
+      ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "chart"
+        ]
+      },
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "untitled-bar-charts",
+      "screen": "charts",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI bar chart examples (grouped, stacked, horizontal)",
+      "path": "untitled-ui-react/components/application/charts/bar-charts.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "charts",
+        "chart",
+        "bar",
+        "comparison",
+        "analytics",
+        "dataviz"
+      ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "chart"
+        ]
+      },
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "untitled-pie-charts",
+      "screen": "charts",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI pie and donut chart examples",
+      "path": "untitled-ui-react/components/application/charts/pie-charts.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "charts",
+        "chart",
+        "pie",
+        "donut",
+        "share",
+        "breakdown",
+        "dataviz"
+      ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "chart"
+        ]
+      },
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "untitled-progress-circles",
+      "screen": "charts",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI progress circle examples",
+      "path": "untitled-ui-react/components/application/charts/progress-circles.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "charts",
+        "chart",
+        "progress",
+        "completion",
+        "kpi",
+        "dataviz"
+      ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "chart"
+        ]
+      },
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "untitled-radar-charts",
+      "screen": "charts",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI radar chart examples",
+      "path": "untitled-ui-react/components/application/charts/radar-charts.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "charts",
+        "chart",
+        "radar",
+        "profile",
+        "comparison",
+        "dataviz"
+      ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "chart"
+        ]
+      },
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "spectrum-ai-chat",
       "screen": "chat",
       "kit": "react-spectrum",
@@ -3042,6 +3312,64 @@
       }
     },
     {
+      "id": "untitled-date-picker",
+      "screen": "form",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI date picker and date range picker",
+      "path": "untitled-ui-react/components/application/date-picker/date-picker.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "form",
+        "input",
+        "date",
+        "date-range",
+        "calendar",
+        "picker"
+      ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "form"
+        ]
+      },
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "untitled-file-upload",
+      "screen": "form",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI file upload (dropzone, progress, failed items)",
+      "path": "untitled-ui-react/components/application/file-upload/file-upload.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "form",
+        "input",
+        "upload",
+        "attachments",
+        "dropzone",
+        "files"
+      ],
+      "scope": "component",
+      "reference": {
+        "required": [
+          "form"
+        ]
+      },
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "lex-console",
       "screen": "lex-console",
       "kit": "slds",
@@ -3203,6 +3531,178 @@
       "scope": "page"
     },
     {
+      "id": "magicui-code-comparison-demo",
+      "screen": "marketing-developer",
+      "kit": "magicui",
+      "title": "Magic UI code-comparison-demo (developer-facing proof)",
+      "path": "magicui/apps/www/registry/example/code-comparison-demo.tsx",
+      "preview": "https://magicui.design/docs/components/code-comparison",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "developer",
+        "docs",
+        "code",
+        "terminal",
+        "landing",
+        "api"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-file-tree-demo",
+      "screen": "marketing-developer",
+      "kit": "magicui",
+      "title": "Magic UI file-tree-demo (developer-facing proof)",
+      "path": "magicui/apps/www/registry/example/file-tree-demo.tsx",
+      "preview": "https://magicui.design/docs/components/file-tree",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "developer",
+        "docs",
+        "code",
+        "terminal",
+        "landing",
+        "api"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-terminal-demo",
+      "screen": "marketing-developer",
+      "kit": "magicui",
+      "title": "Magic UI terminal-demo (developer-facing proof)",
+      "path": "magicui/apps/www/registry/example/terminal-demo.tsx",
+      "preview": "https://magicui.design/docs/components/terminal",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "developer",
+        "docs",
+        "code",
+        "terminal",
+        "landing",
+        "api"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-terminal-demo-2",
+      "screen": "marketing-developer",
+      "kit": "magicui",
+      "title": "Magic UI terminal-demo-2 (developer-facing proof)",
+      "path": "magicui/apps/www/registry/example/terminal-demo-2.tsx",
+      "preview": "https://magicui.design/docs/components/terminal",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "developer",
+        "docs",
+        "code",
+        "terminal",
+        "landing",
+        "api"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-bento-demo",
+      "screen": "marketing-features",
+      "kit": "magicui",
+      "title": "Magic UI bento-demo (feature grid with live previews)",
+      "path": "magicui/apps/www/registry/example/bento-demo.tsx",
+      "preview": "https://magicui.design/docs/components/marquee",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "features",
+        "feature-grid",
+        "capabilities",
+        "landing",
+        "benefits"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-bento-demo-vertical",
+      "screen": "marketing-features",
+      "kit": "magicui",
+      "title": "Magic UI bento-demo-vertical (feature grid with live previews)",
+      "path": "magicui/apps/www/registry/example/bento-demo-vertical.tsx",
+      "preview": "https://magicui.design/docs/components/bento-grid",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "features",
+        "feature-grid",
+        "capabilities",
+        "landing",
+        "benefits"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "cult-feature-carousel",
+      "screen": "marketing-features",
+      "kit": "cult-ui",
+      "title": "cult-ui feature carousel (stepped feature walkthrough)",
+      "path": "cult-ui/apps/www/registry/default/ui/feature-carousel.tsx",
+      "preview": "https://www.cult-ui.com/docs/components/feature-carousel",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "marketing",
+        "features",
+        "carousel",
+        "capabilities",
+        "walkthrough",
+        "landing"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "cult",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "magicui-hero",
       "screen": "marketing-hero",
       "kit": "magicui",
@@ -3222,6 +3722,1153 @@
         "density": "editorial"
       },
       "scope": "page"
+    },
+    {
+      "id": "magicui-hero-video-dialog-demo",
+      "screen": "marketing-hero",
+      "kit": "magicui",
+      "title": "Magic UI hero-video-dialog-demo (hero with product video)",
+      "path": "magicui/apps/www/registry/example/hero-video-dialog-demo.tsx",
+      "preview": "https://magicui.design/docs/components/hero-video-dialog",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "marketing-hero",
+        "hero",
+        "landing",
+        "video",
+        "launch"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-hero-video-dialog-demo-top-in-bottom-out",
+      "screen": "marketing-hero",
+      "kit": "magicui",
+      "title": "Magic UI hero-video-dialog-demo-top-in-bottom-out (hero with product video)",
+      "path": "magicui/apps/www/registry/example/hero-video-dialog-demo-top-in-bottom-out.tsx",
+      "preview": "https://magicui.design/docs/components/hero-video-dialog",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "marketing-hero",
+        "hero",
+        "landing",
+        "video",
+        "launch"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "cult-hero-color-panel",
+      "screen": "marketing-hero",
+      "kit": "cult-ui",
+      "title": "cult-ui hero with color panel (split hero, solid product panel)",
+      "path": "cult-ui/apps/www/registry/default/ui/hero-color-panel.tsx",
+      "preview": "https://www.cult-ui.com/docs/components/hero-color-panel",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "marketing-hero",
+        "hero",
+        "landing",
+        "split",
+        "panel"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "cult",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "cult-hero-dithering",
+      "screen": "marketing-hero",
+      "kit": "cult-ui",
+      "title": "cult-ui hero with dithered texture",
+      "path": "cult-ui/apps/www/registry/default/ui/hero-dithering.tsx",
+      "preview": "https://www.cult-ui.com/docs/components/hero-dithering",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "marketing-hero",
+        "hero",
+        "landing",
+        "texture",
+        "editorial"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "cult",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "cult-hero-heatmap",
+      "screen": "marketing-hero",
+      "kit": "cult-ui",
+      "title": "cult-ui hero with data heatmap backdrop",
+      "path": "cult-ui/apps/www/registry/default/ui/hero-heatmap.tsx",
+      "preview": "https://www.cult-ui.com/docs/components/hero-heatmap",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "marketing-hero",
+        "hero",
+        "landing",
+        "data",
+        "heatmap"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "cult",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "cult-hero-liquid-metal",
+      "screen": "marketing-hero",
+      "kit": "cult-ui",
+      "title": "cult-ui hero with liquid metal shader",
+      "path": "cult-ui/apps/www/registry/default/ui/hero-liquid-metal.tsx",
+      "preview": "https://www.cult-ui.com/docs/components/hero-liquid-metal",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "marketing-hero",
+        "hero",
+        "landing",
+        "shader",
+        "premium"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "cult",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "cult-hero-static-radial-gradient",
+      "screen": "marketing-hero",
+      "kit": "cult-ui",
+      "title": "cult-ui hero with static radial backdrop",
+      "path": "cult-ui/apps/www/registry/default/ui/hero-static-radial-gradient.tsx",
+      "preview": "https://www.cult-ui.com/docs/components/hero-static-radial-gradient",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "marketing-hero",
+        "hero",
+        "landing",
+        "radial",
+        "minimal"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "cult",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "magicui-animated-beam-bidirectional",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI animated-beam-bidirectional (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/animated-beam-bidirectional.tsx",
+      "preview": "https://magicui.design/docs/components/animated-beam",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-animated-beam-demo",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI animated-beam-demo (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/animated-beam-demo.tsx",
+      "preview": "https://magicui.design/docs/components/animated-beam",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-animated-beam-multiple-inputs",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI animated-beam-multiple-inputs (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/animated-beam-multiple-inputs.tsx",
+      "preview": "https://magicui.design/docs/components/animated-beam",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-animated-beam-multiple-outputs",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI animated-beam-multiple-outputs (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/animated-beam-multiple-outputs.tsx",
+      "preview": "https://magicui.design/docs/components/animated-beam",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-animated-beam-unidirectional",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI animated-beam-unidirectional (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/animated-beam-unidirectional.tsx",
+      "preview": "https://magicui.design/docs/components/animated-beam",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-dotted-map-demo",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI dotted-map-demo (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/dotted-map-demo.tsx",
+      "preview": "https://magicui.design/docs/components/dotted-map",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-dotted-map-demo-2",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI dotted-map-demo-2 (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/dotted-map-demo-2.tsx",
+      "preview": "https://magicui.design/docs/components/dotted-map",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-dotted-map-demo-3",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI dotted-map-demo-3 (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/dotted-map-demo-3.tsx",
+      "preview": "https://magicui.design/docs/components/dotted-map",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-globe-demo",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI globe-demo (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/globe-demo.tsx",
+      "preview": "https://magicui.design/docs/components/globe",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-icon-cloud-demo",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI icon-cloud-demo (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/icon-cloud-demo.tsx",
+      "preview": "https://magicui.design/docs/components/icon-cloud",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-icon-cloud-demo-2",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI icon-cloud-demo-2 (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/icon-cloud-demo-2.tsx",
+      "preview": "https://magicui.design/docs/components/icon-cloud",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-icon-cloud-demo-3",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI icon-cloud-demo-3 (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/icon-cloud-demo-3.tsx",
+      "preview": "https://magicui.design/docs/components/icon-cloud",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-orbiting-circles-demo",
+      "screen": "marketing-integrations",
+      "kit": "magicui",
+      "title": "Magic UI orbiting-circles-demo (integrations and reach)",
+      "path": "magicui/apps/www/registry/example/orbiting-circles-demo.tsx",
+      "preview": "https://magicui.design/docs/components/orbiting-circles",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "integrations",
+        "ecosystem",
+        "network",
+        "global",
+        "landing",
+        "connectors"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-animated-circular-progress-bar-demo",
+      "screen": "marketing-metrics",
+      "kit": "magicui",
+      "title": "Magic UI animated-circular-progress-bar-demo (outcome metrics)",
+      "path": "magicui/apps/www/registry/example/animated-circular-progress-bar-demo.tsx",
+      "preview": "https://magicui.design/docs/components/animated-circular-progress-bar",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "stats",
+        "metrics",
+        "counters",
+        "landing",
+        "outcomes"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-number-ticker-decimal-demo",
+      "screen": "marketing-metrics",
+      "kit": "magicui",
+      "title": "Magic UI number-ticker-decimal-demo (outcome metrics)",
+      "path": "magicui/apps/www/registry/example/number-ticker-decimal-demo.tsx",
+      "preview": "https://magicui.design/docs/components/number-ticker",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "stats",
+        "metrics",
+        "counters",
+        "landing",
+        "outcomes"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-number-ticker-demo",
+      "screen": "marketing-metrics",
+      "kit": "magicui",
+      "title": "Magic UI number-ticker-demo (outcome metrics)",
+      "path": "magicui/apps/www/registry/example/number-ticker-demo.tsx",
+      "preview": "https://magicui.design/docs/components/number-ticker",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "stats",
+        "metrics",
+        "counters",
+        "landing",
+        "outcomes"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-number-ticker-demo-2",
+      "screen": "marketing-metrics",
+      "kit": "magicui",
+      "title": "Magic UI number-ticker-demo-2 (outcome metrics)",
+      "path": "magicui/apps/www/registry/example/number-ticker-demo-2.tsx",
+      "preview": "https://magicui.design/docs/components/number-ticker",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "stats",
+        "metrics",
+        "counters",
+        "landing",
+        "outcomes"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "cult-animated-number",
+      "screen": "marketing-metrics",
+      "kit": "cult-ui",
+      "title": "cult-ui animated number (metric counter)",
+      "path": "cult-ui/apps/www/registry/default/ui/animated-number.tsx",
+      "preview": "https://www.cult-ui.com/docs/components/animated-number",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "marketing",
+        "stats",
+        "metrics",
+        "counters",
+        "landing"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "cult",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "magicui-android-demo",
+      "screen": "marketing-mockup",
+      "kit": "magicui",
+      "title": "Magic UI android-demo (product screenshot in device frame)",
+      "path": "magicui/apps/www/registry/example/android-demo.tsx",
+      "preview": "https://magicui.design/docs/components/android",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "screenshot",
+        "device",
+        "mockup",
+        "product-shot",
+        "landing",
+        "demo"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-android-demo-2",
+      "screen": "marketing-mockup",
+      "kit": "magicui",
+      "title": "Magic UI android-demo-2 (product screenshot in device frame)",
+      "path": "magicui/apps/www/registry/example/android-demo-2.tsx",
+      "preview": "https://magicui.design/docs/components/android",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "screenshot",
+        "device",
+        "mockup",
+        "product-shot",
+        "landing",
+        "demo"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-android-demo-3",
+      "screen": "marketing-mockup",
+      "kit": "magicui",
+      "title": "Magic UI android-demo-3 (product screenshot in device frame)",
+      "path": "magicui/apps/www/registry/example/android-demo-3.tsx",
+      "preview": "https://magicui.design/docs/components/android",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "screenshot",
+        "device",
+        "mockup",
+        "product-shot",
+        "landing",
+        "demo"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-iphone-demo",
+      "screen": "marketing-mockup",
+      "kit": "magicui",
+      "title": "Magic UI iphone-demo (product screenshot in device frame)",
+      "path": "magicui/apps/www/registry/example/iphone-demo.tsx",
+      "preview": "https://magicui.design/docs/components/iphone",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "screenshot",
+        "device",
+        "mockup",
+        "product-shot",
+        "landing",
+        "demo"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-iphone-demo-2",
+      "screen": "marketing-mockup",
+      "kit": "magicui",
+      "title": "Magic UI iphone-demo-2 (product screenshot in device frame)",
+      "path": "magicui/apps/www/registry/example/iphone-demo-2.tsx",
+      "preview": "https://magicui.design/docs/components/iphone",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "screenshot",
+        "device",
+        "mockup",
+        "product-shot",
+        "landing",
+        "demo"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-iphone-demo-3",
+      "screen": "marketing-mockup",
+      "kit": "magicui",
+      "title": "Magic UI iphone-demo-3 (product screenshot in device frame)",
+      "path": "magicui/apps/www/registry/example/iphone-demo-3.tsx",
+      "preview": "https://magicui.design/docs/components/iphone",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "screenshot",
+        "device",
+        "mockup",
+        "product-shot",
+        "landing",
+        "demo"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-safari-demo",
+      "screen": "marketing-mockup",
+      "kit": "magicui",
+      "title": "Magic UI safari-demo (product screenshot in device frame)",
+      "path": "magicui/apps/www/registry/example/safari-demo.tsx",
+      "preview": "https://magicui.design/docs/components/safari",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "screenshot",
+        "device",
+        "mockup",
+        "product-shot",
+        "landing",
+        "demo"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-safari-demo-2",
+      "screen": "marketing-mockup",
+      "kit": "magicui",
+      "title": "Magic UI safari-demo-2 (product screenshot in device frame)",
+      "path": "magicui/apps/www/registry/example/safari-demo-2.tsx",
+      "preview": "https://magicui.design/docs/components/safari",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "screenshot",
+        "device",
+        "mockup",
+        "product-shot",
+        "landing",
+        "demo"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-safari-demo-3",
+      "screen": "marketing-mockup",
+      "kit": "magicui",
+      "title": "Magic UI safari-demo-3 (product screenshot in device frame)",
+      "path": "magicui/apps/www/registry/example/safari-demo-3.tsx",
+      "preview": "https://magicui.design/docs/components/safari",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "screenshot",
+        "device",
+        "mockup",
+        "product-shot",
+        "landing",
+        "demo"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-safari-demo-4",
+      "screen": "marketing-mockup",
+      "kit": "magicui",
+      "title": "Magic UI safari-demo-4 (product screenshot in device frame)",
+      "path": "magicui/apps/www/registry/example/safari-demo-4.tsx",
+      "preview": "https://magicui.design/docs/components/safari",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "screenshot",
+        "device",
+        "mockup",
+        "product-shot",
+        "landing",
+        "demo"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-avatar-circles-demo",
+      "screen": "marketing-proof",
+      "kit": "magicui",
+      "title": "Magic UI avatar-circles-demo (social proof)",
+      "path": "magicui/apps/www/registry/example/avatar-circles-demo.tsx",
+      "preview": "https://magicui.design/docs/components/avatar-circles",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "logos",
+        "testimonials",
+        "social-proof",
+        "customers",
+        "landing",
+        "trust"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-marquee-3d",
+      "screen": "marketing-proof",
+      "kit": "magicui",
+      "title": "Magic UI marquee-3d (social proof)",
+      "path": "magicui/apps/www/registry/example/marquee-3d.tsx",
+      "preview": "https://magicui.design/docs/components/marquee",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "logos",
+        "testimonials",
+        "social-proof",
+        "customers",
+        "landing",
+        "trust"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-marquee-demo",
+      "screen": "marketing-proof",
+      "kit": "magicui",
+      "title": "Magic UI marquee-demo (social proof)",
+      "path": "magicui/apps/www/registry/example/marquee-demo.tsx",
+      "preview": "https://magicui.design/docs/components/marquee",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "logos",
+        "testimonials",
+        "social-proof",
+        "customers",
+        "landing",
+        "trust"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-marquee-demo-vertical",
+      "screen": "marketing-proof",
+      "kit": "magicui",
+      "title": "Magic UI marquee-demo-vertical (social proof)",
+      "path": "magicui/apps/www/registry/example/marquee-demo-vertical.tsx",
+      "preview": "https://magicui.design/docs/components/marquee",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "logos",
+        "testimonials",
+        "social-proof",
+        "customers",
+        "landing",
+        "trust"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-marquee-logos",
+      "screen": "marketing-proof",
+      "kit": "magicui",
+      "title": "Magic UI marquee-logos (social proof)",
+      "path": "magicui/apps/www/registry/example/marquee-logos.tsx",
+      "preview": "https://magicui.design/docs/components/marquee",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "logos",
+        "testimonials",
+        "social-proof",
+        "customers",
+        "landing",
+        "trust"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-tweet-card-demo",
+      "screen": "marketing-proof",
+      "kit": "magicui",
+      "title": "Magic UI tweet-card-demo (social proof)",
+      "path": "magicui/apps/www/registry/example/tweet-card-demo.tsx",
+      "preview": "https://magicui.design/docs/components/client-tweet-card",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "logos",
+        "testimonials",
+        "social-proof",
+        "customers",
+        "landing",
+        "trust"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-tweet-card-images",
+      "screen": "marketing-proof",
+      "kit": "magicui",
+      "title": "Magic UI tweet-card-images (social proof)",
+      "path": "magicui/apps/www/registry/example/tweet-card-images.tsx",
+      "preview": "https://magicui.design/docs/components/client-tweet-card",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "logos",
+        "testimonials",
+        "social-proof",
+        "customers",
+        "landing",
+        "trust"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "magicui-tweet-card-meta-preview",
+      "screen": "marketing-proof",
+      "kit": "magicui",
+      "title": "Magic UI tweet-card-meta-preview (social proof)",
+      "path": "magicui/apps/www/registry/example/tweet-card-meta-preview.tsx",
+      "preview": "https://magicui.design/docs/components/client-tweet-card",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "logos",
+        "testimonials",
+        "social-proof",
+        "customers",
+        "landing",
+        "trust"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "magicui",
+        "density": "editorial"
+      }
+    },
+    {
+      "id": "cult-logo-carousel",
+      "screen": "marketing-proof",
+      "kit": "cult-ui",
+      "title": "cult-ui logo carousel (customer logos, cycling)",
+      "path": "cult-ui/apps/www/registry/default/ui/logo-carousel.tsx",
+      "preview": "https://www.cult-ui.com/docs/components/logo-carousel",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "marketing",
+        "logos",
+        "customers",
+        "social-proof",
+        "carousel",
+        "landing"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "cult",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "cult-onboarding",
+      "screen": "onboarding",
+      "kit": "cult-ui",
+      "title": "cult-ui onboarding flow (stepped first-run with media)",
+      "path": "cult-ui/apps/www/registry/default/ui/onboarding.tsx",
+      "preview": "https://www.cult-ui.com/docs/components/onboarding",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "onboarding",
+        "first-run",
+        "tour",
+        "intro",
+        "steps"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "cult",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "cult-intro-disclosure",
+      "screen": "onboarding",
+      "kit": "cult-ui",
+      "title": "cult-ui intro disclosure (feature announcement, dismissible)",
+      "path": "cult-ui/apps/www/registry/default/ui/intro-disclosure.tsx",
+      "preview": "https://www.cult-ui.com/docs/components/intro-disclosure",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 2,
+      "jobs": [
+        "onboarding",
+        "intro",
+        "whats-new",
+        "feature-announcement",
+        "disclosure"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "cult",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "untitled-pagination",
+      "screen": "pagination",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI pagination (page numbers, dots, line, minimal)",
+      "path": "untitled-ui-react/components/application/pagination/pagination.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "pagination",
+        "paging",
+        "page-size",
+        "pager"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
     },
     {
       "id": "untitled-table",
@@ -3355,6 +5002,29 @@
         "density": "comfortable"
       },
       "scope": "page"
+    },
+    {
+      "id": "untitled-tabs",
+      "screen": "tabs",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI tabs (underline, button, vertical, with badges)",
+      "path": "untitled-ui-react/components/application/tabs/tabs.demo.tsx",
+      "preview": "https://www.untitledui.com/react/components",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 1,
+      "jobs": [
+        "tabs",
+        "sections",
+        "segmented",
+        "workspace-tabs",
+        "section-tabs"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
     },
     {
       "id": "shadcn-weekly-board",

@@ -4,6 +4,40 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ## Unreleased
 
+### Added
+
+- The catalog grows from 130 to 197 rows and from 10 to 11 visual families. Untitled UI now
+  contributes 16 cite-able rows derived from the shipped examples catalog (header navigation,
+  featured cards, bar/pie/radar charts, gauges, progress circles, tabs, pagination, date
+  picker, file upload, loading indicators, carousel) instead of 3. Magic UI contributes 44
+  marketing region examples across six new marketing screens (features, proof, metrics,
+  mockup, developer, integrations) and cult-ui 11 hero, proof, metrics, onboarding and
+  carousel components — both install through the shadcn registry, so a shadcn or Tailwind
+  host can build them. Every unclassified upstream example is reported by the generator, not
+  silently indexed.
+- `corpus/catalog.mjs` is the single catalog reader. Licensed kits (Tailwind Plus, Untitled
+  UI PRO) index from `~/design-corpus/owned/<kit>/manifest.json` into a gitignored
+  `corpus/templates.owned.json` that every reader merges and nothing publishes. See
+  `corpus/owned/README.md`.
+- `design-packet.mjs --mode audit`: diagnosis, measure and report with `editing.allowed:
+  false` and no completion receipt. A review no longer has to run as `existing`, which
+  required fixing what it named.
+- `shine-diagnosis.json` accepts `verdict: no-change` with `verdictEvidence` and full bucket
+  coverage in `checked`. The defect floor drops from 3 to 1 and the mandatory critical/major
+  finding is gone: the quota produced invented defects and inflated severities.
+
+### Changed
+
+- `design-lint` blocks only on lines the change touched (`git diff -U0 HEAD`). Legacy
+  off-token values in the same file arrive as one soft note instead of a block, so fixing a
+  label no longer forces a repaint of the stylesheet. Untracked files, repos without a
+  commit and paths outside a repo still lint whole; `--all-lines` or `SHINE_LINT_SCOPE=file`
+  restores whole-file blocking. The doctor runs its fixture check with `--all-lines`.
+- `magicui` and `cult-ui` join the shadcn and Tailwind build recipes after the two house
+  kits; `magicui`'s direction profile is `shadcn-tanstack`, not `native`.
+- `shadcn-settings` `captureExpect` and note are encoded in the generator; they had been
+  hand-edited into the committed catalog and dropped on the first regenerate elsewhere.
+
 ## [4.0.2] — 2026-09-01
 
 ### Fixed

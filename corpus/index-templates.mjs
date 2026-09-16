@@ -18,7 +18,7 @@
 //   node corpus/index-templates.mjs
 //   DESIGN_CORPUS=/path node corpus/index-templates.mjs
 
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
@@ -57,6 +57,13 @@ const KIT_FAMILY = {
   fluentui: { family: "fluent", density: "comfortable" },
   "react-spectrum": { family: "spectrum", density: "comfortable" },
   magicui: { family: "magicui", density: "editorial" },
+  // cult-ui is shadcn-registry-compatible (Tailwind + shadcn primitives + motion),
+  // so unlike Mantine/HeroUI it can be built in the consumers. It exists in the
+  // catalog for the marketing and onboarding silhouettes shadcn does not publish.
+  // Profile deliberately differs from magicui on density, tone and type: identical
+  // profiles made every cult row a near-duplicate of the Magic UI row for the same
+  // screen, so the second family never reached the shortlist.
+  "cult-ui": { family: "cult", density: "comfortable" },
   shine: { family: "shine", density: "dense" },
   slds: { family: "slds", density: "compact" },
 };
@@ -86,6 +93,24 @@ const SCREEN_JOBS = {
   "lex-lwr": ["lex-lwr"],
   "lex-email": ["lex-email", "email"],
   "lex-mobile": ["lex-mobile"],
+  // Component screens that had no home: retrieval could only reach these via
+  // untitled:search, never via cite, so the packet could not hand them over.
+  tabs: ["tabs", "sections", "segmented", "workspace-tabs", "section-tabs"],
+  pagination: ["pagination", "paging", "page-size", "pager"],
+  form: ["form", "input", "date", "date-range", "upload", "attachments"],
+  "async-state": ["loading", "spinner", "pending", "async", "skeleton"],
+  carousel: ["carousel", "gallery", "slides", "slideshow"],
+  onboarding: ["onboarding", "first-run", "tour", "intro", "whats-new", "feature-announcement"],
+  // The marketing lane. Until 2026-09-16 it was two rows (one hero component and a
+  // region map), so every landing page came out of the same silhouette. These
+  // screens split a landing page into the regions a marketer actually briefs,
+  // each with its own signature so the shortlist can hold three distinct looks.
+  "marketing-features": ["marketing", "features", "feature-grid", "capabilities", "landing", "benefits"],
+  "marketing-proof": ["marketing", "logos", "testimonials", "social-proof", "customers", "landing", "trust"],
+  "marketing-metrics": ["marketing", "stats", "metrics", "counters", "landing", "outcomes"],
+  "marketing-mockup": ["marketing", "screenshot", "device", "mockup", "product-shot", "landing", "demo"],
+  "marketing-developer": ["marketing", "developer", "docs", "code", "terminal", "landing", "api"],
+  "marketing-integrations": ["marketing", "integrations", "ecosystem", "network", "global", "landing", "connectors"],
 };
 
 const exists = (rel) => existsSync(join(CORPUS, rel));
@@ -248,36 +273,193 @@ if (existsSync(shadcnRegistry)) {
 }
 
 // ---- Untitled UI public examples -------------------------------------------
-// The exhaustive inventory lives in untitledui-examples.json. These composed
-// examples are the primary directions worth putting in template retrieval.
-for (const t of [
-  {
+// The exhaustive inventory lives in untitledui-examples.json (392 exports across 36
+// demo files). Until 2026-09-16 exactly three of those files were cite-able rows,
+// so the "buildable sibling" contributed one table, one sidebar and one line chart
+// to retrieval and nothing else: header navigation, bar/pie/radar charts, gauges,
+// tabs, pagination, date pickers, file upload and loading states were reachable
+// only through untitled:search, which the packet never consults for a cite.
+//
+// Rows are derived from the shipped examples catalog by declared demo file, the
+// same shape as BLOCK_FAMILIES: a demo file the catalog knows but this table does
+// not classify is reported, never silently indexed. Ranks keep the three original
+// rows as the defaults their screens already pin (art-direction.test asserts
+// untitled-table is the default table reference); the new chart rows sit on the
+// "charts" screen, not "dashboard", so they cannot displace the composed dashboard
+// page or the line-chart component the packet test expects.
+const UNTITLED_DEMOS = {
+  "application/app-navigation/sidebar-navigation.demo.tsx": {
     id: "untitled-sidebar-navigation", screen: "app-shell", rank: 1,
     title: "Untitled UI sidebar navigation examples",
-    path: "untitled-ui-react/components/application/app-navigation/sidebar-navigation.demo.tsx",
-    jobs: ["app-shell", "navigation", "sidebar"],
-    required: ["navigation"],
+    jobs: ["app-shell", "navigation", "sidebar"], required: ["navigation"],
   },
-  {
+  "application/app-navigation/header-navigation.demo.tsx": {
+    id: "untitled-header-navigation", screen: "app-shell", rank: 2,
+    title: "Untitled UI header navigation (top bar, no rail)",
+    jobs: ["app-shell", "navigation", "header", "topbar", "horizontal-nav"], required: ["navigation"],
+  },
+  "application/app-navigation/base-components/featured-cards.demo.tsx": {
+    id: "untitled-featured-cards", screen: "app-shell", rank: 3,
+    title: "Untitled UI sidebar featured cards (usage, upgrade and onboarding prompts)",
+    jobs: ["app-shell", "navigation", "featured", "usage", "upgrade-prompt"], required: ["navigation"],
+  },
+  "application/table/table.demo.tsx": {
     id: "untitled-table", screen: "queue", rank: 1,
     title: "Untitled UI table examples (populated, empty, error, offline)",
-    path: "untitled-ui-react/components/application/table/table.demo.tsx",
-    jobs: ["queue", "crud", "table", "records", "datagrid"],
-    required: ["table"],
+    jobs: ["queue", "crud", "table", "records", "datagrid"], required: ["table"],
   },
-  {
+  "application/charts/line-charts.demo.tsx": {
     id: "untitled-line-charts", screen: "dashboard", rank: 1,
     title: "Untitled UI line chart examples",
-    path: "untitled-ui-react/components/application/charts/line-charts.demo.tsx",
-    jobs: ["dashboard", "analytics", "charts", "dataviz"],
-    required: ["chart"],
+    jobs: ["dashboard", "analytics", "charts", "dataviz"], required: ["chart"],
   },
+  "application/charts/bar-charts.demo.tsx": {
+    id: "untitled-bar-charts", screen: "charts", rank: 2,
+    title: "Untitled UI bar chart examples (grouped, stacked, horizontal)",
+    jobs: ["charts", "chart", "bar", "comparison", "analytics", "dataviz"], required: ["chart"],
+  },
+  "application/charts/pie-charts.demo.tsx": {
+    id: "untitled-pie-charts", screen: "charts", rank: 2,
+    title: "Untitled UI pie and donut chart examples",
+    jobs: ["charts", "chart", "pie", "donut", "share", "breakdown", "dataviz"], required: ["chart"],
+  },
+  "application/charts/radar-charts.demo.tsx": {
+    id: "untitled-radar-charts", screen: "charts", rank: 2,
+    title: "Untitled UI radar chart examples",
+    jobs: ["charts", "chart", "radar", "profile", "comparison", "dataviz"], required: ["chart"],
+  },
+  "application/charts/activity-gauges.demo.tsx": {
+    id: "untitled-activity-gauges", screen: "charts", rank: 2,
+    title: "Untitled UI activity gauge examples",
+    jobs: ["charts", "chart", "gauge", "kpi", "target", "dataviz"], required: ["chart"],
+  },
+  "application/charts/progress-circles.demo.tsx": {
+    id: "untitled-progress-circles", screen: "charts", rank: 2,
+    title: "Untitled UI progress circle examples",
+    jobs: ["charts", "chart", "progress", "completion", "kpi", "dataviz"], required: ["chart"],
+  },
+  "application/tabs/tabs.demo.tsx": {
+    id: "untitled-tabs", screen: "tabs", rank: 1,
+    title: "Untitled UI tabs (underline, button, vertical, with badges)",
+    jobs: SCREEN_JOBS.tabs,
+  },
+  "application/pagination/pagination.demo.tsx": {
+    id: "untitled-pagination", screen: "pagination", rank: 1,
+    title: "Untitled UI pagination (page numbers, dots, line, minimal)",
+    jobs: SCREEN_JOBS.pagination,
+  },
+  "application/date-picker/date-picker.demo.tsx": {
+    id: "untitled-date-picker", screen: "form", rank: 1,
+    title: "Untitled UI date picker and date range picker",
+    jobs: ["form", "input", "date", "date-range", "calendar", "picker"], required: ["form"],
+  },
+  "application/file-upload/file-upload.demo.tsx": {
+    id: "untitled-file-upload", screen: "form", rank: 2,
+    title: "Untitled UI file upload (dropzone, progress, failed items)",
+    jobs: ["form", "input", "upload", "attachments", "dropzone", "files"], required: ["form"],
+  },
+  "application/loading-indicator/loading-indicator.demo.tsx": {
+    id: "untitled-loading-indicator", screen: "async-state", rank: 1,
+    title: "Untitled UI loading indicators (line, dots, spinner, with label)",
+    jobs: SCREEN_JOBS["async-state"],
+  },
+  "application/carousel/carousel.demo.tsx": {
+    id: "untitled-carousel", screen: "carousel", rank: 1,
+    title: "Untitled UI carousel (indicators, arrows, autoplay)",
+    jobs: SCREEN_JOBS.carousel,
+  },
+};
+const untitledCatalog = join(SHINE, "corpus/untitledui-examples.json");
+if (existsSync(untitledCatalog)) {
+  const examples = JSON.parse(readFileSync(untitledCatalog, "utf8")).examples ?? [];
+  const demoFiles = [...new Set(examples.map((item) => item.sourceFile.replace(/^untitled-ui-react\/components\//, "")))].sort();
+  const unclassified = [];
+  for (const rel of demoFiles) {
+    const t = UNTITLED_DEMOS[rel];
+    if (!t) {
+      // base/ atoms and foundations are components a page region imports, not
+      // starting points; they stay reachable through untitled:search.
+      if (rel.startsWith("application/")) unclassified.push(rel);
+      continue;
+    }
+    push({
+      id: t.id, screen: t.screen, kit: "untitled-ui-react", title: t.title,
+      path: `untitled-ui-react/components/${rel}`,
+      preview: "https://www.untitledui.com/react/components",
+      license: "MIT", kind: "source", startFrom: t.rank, jobs: t.jobs,
+      scope: "component", ...(t.required ? { reference: { required: t.required } } : {}),
+    });
+  }
+  if (unclassified.length) {
+    console.warn(`Untitled UI application demos not classified by UNTITLED_DEMOS (add a row or say why not): ${unclassified.join(", ")}`);
+  }
+}
+
+// ---- Magic UI marketing examples ---------------------------------------------
+// Magic UI is Tailwind + shadcn + motion, installable through the shadcn registry,
+// so its examples can be built in the consumers. The registry publishes 168
+// examples; most are decorative (background patterns, text effects, buttons,
+// confetti, cursors) and are declared as such below rather than indexed. The
+// rest are the composed marketing regions a landing page is briefed in, and they
+// are the second visual family the marketing lane has ever had.
+const MAGICUI_FAMILIES = [
+  { match: /^hero-video-dialog-demo/, screen: "marketing-hero", rank: 2, jobs: ["marketing-hero", "hero", "landing", "video", "launch"], title: (n) => `Magic UI ${n} (hero with product video)` },
+  { match: /^bento-demo/, screen: "marketing-features", rank: 1, jobs: SCREEN_JOBS["marketing-features"], title: (n) => `Magic UI ${n} (feature grid with live previews)` },
+  { match: /^(marquee-logos|marquee-demo|marquee-demo-vertical|marquee-3d|avatar-circles-demo|tweet-card-demo|tweet-card-images|tweet-card-meta-preview)$/, screen: "marketing-proof", rank: 1, jobs: SCREEN_JOBS["marketing-proof"], title: (n) => `Magic UI ${n} (social proof)` },
+  { match: /^(number-ticker-demo|number-ticker-demo-2|number-ticker-decimal-demo|animated-circular-progress-bar-demo)$/, screen: "marketing-metrics", rank: 1, jobs: SCREEN_JOBS["marketing-metrics"], title: (n) => `Magic UI ${n} (outcome metrics)` },
+  { match: /^(safari-demo|iphone-demo|android-demo)(-\d)?$/, screen: "marketing-mockup", rank: 1, jobs: SCREEN_JOBS["marketing-mockup"], title: (n) => `Magic UI ${n} (product screenshot in device frame)` },
+  { match: /^(terminal-demo(-\d)?|code-comparison-demo|file-tree-demo)$/, screen: "marketing-developer", rank: 1, jobs: SCREEN_JOBS["marketing-developer"], title: (n) => `Magic UI ${n} (developer-facing proof)` },
+  { match: /^(globe-demo|orbiting-circles-demo|icon-cloud-demo(-\d)?|animated-beam-(demo|unidirectional|bidirectional|multiple-inputs|multiple-outputs)|dotted-map-demo(-\d)?)$/, screen: "marketing-integrations", rank: 1, jobs: SCREEN_JOBS["marketing-integrations"], title: (n) => `Magic UI ${n} (integrations and reach)` },
+];
+const MAGICUI_DECORATIVE = /pattern|grid|text|button|confetti|cursor|pointer|lens|blur|border-beam|shine-border|ripple|meteors|particles|warp|backlight|light-rays|noise|glare|magic-card|neon|theme-toggler|scroll|dock|animated-list|pixel-image|highlighter|glyph|morphing|aurora|hyper|word-rotate|typing|sparkles|spinning|comic|kinetic|video|cool-mode|retro/;
+const magicRegistry = join(CORPUS, "magicui/apps/www/registry.json");
+if (existsSync(magicRegistry)) {
+  const items = (JSON.parse(readFileSync(magicRegistry, "utf8")).items ?? []).filter((item) => item.type === "registry:example");
+  const unclassified = [];
+  for (const item of items.sort((a, b) => a.name.localeCompare(b.name))) {
+    const family = MAGICUI_FAMILIES.find((f) => f.match.test(item.name));
+    if (!family) {
+      if (!MAGICUI_DECORATIVE.test(item.name)) unclassified.push(item.name);
+      continue;
+    }
+    const file = item.files?.find((f) => f.type === "registry:example")?.path;
+    if (!file) continue;
+    const component = (item.registryDependencies ?? []).find((dep) => dep.startsWith("@magicui/"))?.slice("@magicui/".length);
+    push({
+      id: `magicui-${item.name}`, screen: family.screen, kit: "magicui", title: family.title(item.name),
+      path: `magicui/apps/www/${file}`,
+      preview: component ? `https://magicui.design/docs/components/${component}` : "https://magicui.design",
+      license: "MIT", kind: "source", startFrom: family.rank, jobs: family.jobs, scope: "component",
+    });
+  }
+  if (unclassified.length) {
+    console.warn(`Magic UI examples neither classified nor declared decorative: ${unclassified.join(", ")}`);
+  }
+}
+
+// ---- cult-ui marketing and onboarding components ------------------------------
+// Declared singles: cult-ui publishes no example pages, so each row points at the
+// component source and carries its own jobs. Five hero treatments give the
+// marketing-hero screen a third family beside Magic UI and the shadcn region map.
+for (const t of [
+  { name: "hero-color-panel", screen: "marketing-hero", rank: 3, title: "cult-ui hero with color panel (split hero, solid product panel)", jobs: ["marketing-hero", "hero", "landing", "split", "panel"] },
+  { name: "hero-dithering", screen: "marketing-hero", rank: 3, title: "cult-ui hero with dithered texture", jobs: ["marketing-hero", "hero", "landing", "texture", "editorial"] },
+  { name: "hero-heatmap", screen: "marketing-hero", rank: 3, title: "cult-ui hero with data heatmap backdrop", jobs: ["marketing-hero", "hero", "landing", "data", "heatmap"] },
+  { name: "hero-liquid-metal", screen: "marketing-hero", rank: 3, title: "cult-ui hero with liquid metal shader", jobs: ["marketing-hero", "hero", "landing", "shader", "premium"] },
+  { name: "hero-static-radial-gradient", screen: "marketing-hero", rank: 3, title: "cult-ui hero with static radial backdrop", jobs: ["marketing-hero", "hero", "landing", "radial", "minimal"] },
+  { name: "logo-carousel", screen: "marketing-proof", rank: 2, title: "cult-ui logo carousel (customer logos, cycling)", jobs: ["marketing", "logos", "customers", "social-proof", "carousel", "landing"] },
+  { name: "feature-carousel", screen: "marketing-features", rank: 2, title: "cult-ui feature carousel (stepped feature walkthrough)", jobs: ["marketing", "features", "carousel", "capabilities", "walkthrough", "landing"] },
+  { name: "animated-number", screen: "marketing-metrics", rank: 2, title: "cult-ui animated number (metric counter)", jobs: ["marketing", "stats", "metrics", "counters", "landing"] },
+  { name: "onboarding", screen: "onboarding", rank: 1, title: "cult-ui onboarding flow (stepped first-run with media)", jobs: ["onboarding", "first-run", "tour", "intro", "steps"] },
+  { name: "intro-disclosure", screen: "onboarding", rank: 2, title: "cult-ui intro disclosure (feature announcement, dismissible)", jobs: ["onboarding", "intro", "whats-new", "feature-announcement", "disclosure"] },
+  { name: "three-d-carousel", screen: "carousel", rank: 2, title: "cult-ui 3D carousel (media gallery)", jobs: ["carousel", "gallery", "slides", "media", "3d"] },
 ]) {
+  const rel = `cult-ui/apps/www/registry/default/ui/${t.name}.tsx`;
+  if (!exists(rel)) continue;
   push({
-    id: t.id, screen: t.screen, kit: "untitled-ui-react", title: t.title,
-    path: t.path, preview: "https://www.untitledui.com/react/components",
-    license: "MIT", kind: "source", startFrom: t.rank, jobs: t.jobs,
-    scope: "component", reference: { required: t.required },
+    id: `cult-${t.name}`, screen: t.screen, kit: "cult-ui", title: t.title, path: rel,
+    preview: `https://www.cult-ui.com/docs/components/${t.name}`,
+    license: "MIT", kind: "source", startFrom: t.rank, jobs: t.jobs, scope: "component",
   });
 }
 
@@ -374,7 +556,10 @@ for (const t of [
 // source there would be untested reference code.
 for (const t of [
   { id: "shadcn-record", screen: "record", title: "shadcn record detail (identity, facts, decision, evidence)", jobs: ["record", "detail", "account", "opportunity"], required: ["form", "table"] },
-  { id: "shadcn-settings", screen: "settings", title: "shadcn settings (visible section nav, per-section save)", jobs: ["settings", "preferences", "account"], required: ["form", "navigation"] },
+  // captureExpect and the note were hand-edited into templates.json on the release
+  // machine and never encoded here, so the first regenerate anywhere else dropped
+  // them and reference-contract failed. Declared now, where --check can see them.
+  { id: "shadcn-settings", screen: "settings", title: "shadcn settings (visible section nav, per-section save)", jobs: ["settings", "preferences", "account"], required: ["form", "navigation"], captureExpect: 'nav[aria-label="Settings sections"] a', note: "corpus/blueprints/shadcn-settings.md is the region map; corpus/blueprints/shadcn-settings/ is authored shadcn source to copy, and reference.html is that source rendered at rest for capture" },
   { id: "shadcn-wizard", screen: "wizard", title: "shadcn wizard (step list, review before commit)", jobs: ["wizard", "stepper", "multi-step", "onboarding"], required: ["form", "navigation"], captureExpect: '[data-region="wizard"] form input[name="account"]' },
   { id: "shadcn-checkout", screen: "checkout", title: "shadcn checkout (persistent order summary) — region map only", jobs: ["checkout", "payment"], required: ["form", "summary"] },
   { id: "shadcn-marketing", screen: "marketing", title: "shadcn marketing page (claim, proof, pricing) — region map only", jobs: ["marketing", "landing", "pricing"] },
@@ -424,13 +609,54 @@ push({
   scope: "page",
 });
 
-// ---- owned (Atlas-licensed, not republished) --------------------------------
-const ownedManifest = join(CORPUS, "owned/manifest.json");
-if (existsSync(ownedManifest)) {
-  for (const row of JSON.parse(readFileSync(ownedManifest, "utf8")).templates ?? []) {
-    push({ ...row, kind: "owned" });
+// ---- owned (licensed, never republished) -------------------------------------
+// Licensed kits — Tailwind Plus, Untitled UI PRO, a purchased Figma file — may be
+// used in the consumers' end products but not redistributed. Shine is a public
+// repository with a public registry and site, so their rows cannot live in the
+// committed catalog either: templates.json is generated on whatever machine runs
+// this script and checked with --check on every other one, and a row whose source
+// exists on one laptop is a hand-edit everywhere else.
+//
+// So owned kits are indexed into corpus/templates.owned.json — gitignored, never
+// packaged (the Nucleus archive is `git archive`), merged at read time by
+// corpus/catalog.mjs. Each kit is a directory under ~/design-corpus/owned/<kit>/
+// with a manifest.json declaring `templates`; see corpus/owned/README.md.
+const ownedRows = [];
+const ownedDir = join(CORPUS, "owned");
+const ownedManifests = [];
+if (existsSync(join(ownedDir, "manifest.json"))) ownedManifests.push(join(ownedDir, "manifest.json"));
+if (existsSync(ownedDir)) {
+  for (const entry of readdirSync(ownedDir).sort()) {
+    const manifest = join(ownedDir, entry, "manifest.json");
+    if (statSync(join(ownedDir, entry)).isDirectory() && existsSync(manifest)) ownedManifests.push(manifest);
   }
 }
+for (const manifestPath of ownedManifests) {
+  const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+  const kit = manifest.kit || manifest.id || "owned";
+  for (const row of manifest.templates ?? []) {
+    const problems = [];
+    for (const key of ["id", "screen", "title", "path"]) if (!row[key]) problems.push(`missing ${key}`);
+    if (row.path && !exists(row.path)) problems.push(`path not on disk: ${row.path}`);
+    if (templates.some((t) => t.id === row.id) || ownedRows.some((t) => t.id === row.id)) problems.push("id collides with a catalog row");
+    if (problems.length) {
+      console.warn(`owned row ${row.id || "?"} in ${manifestPath} skipped: ${problems.join("; ")}`);
+      continue;
+    }
+    ownedRows.push({
+      ...row,
+      kit: row.kit || kit,
+      kind: "owned",
+      license: row.license || manifest.license || "proprietary",
+      publication: "private-reference-only",
+      startFrom: row.startFrom ?? 1,
+      scope: row.scope || "page",
+      dna: row.dna || KIT_FAMILY[row.kit || kit] || { family: manifest.family || kit, density: manifest.density || "comfortable" },
+      jobs: row.jobs || SCREEN_JOBS[row.screen] || [row.screen],
+    });
+  }
+}
+const ownedPath = join(SHINE, "corpus/templates.owned.json");
 
 // ---- query-only previews (screenshots, no source) --------------------------
 const qoManifest = join(SHINE, "corpus/query-only.json");
@@ -480,6 +706,11 @@ if (checkOnly) {
   process.exit(1);
 }
 writeFileSync(jsonPath, rendered);
+if (ownedRows.length) {
+  writeFileSync(ownedPath, JSON.stringify({ generated: catalog.generated, corpus: CORPUS, publication: "private-reference-only", templates: ownedRows }, null, 2) + "\n");
+} else if (existsSync(ownedPath)) {
+  rmSync(ownedPath);
+}
 
 // ---- templates.md — thin generated index ------------------------------------
 const md = [];
@@ -516,4 +747,4 @@ if (retiredRows.length) {
 const mdPath = join(SHINE, "skill/references/templates.md");
 writeFileSync(mdPath, md.join("\n") + "\n");
 
-console.log(`templates.json: ${templates.length} rows; templates.md regenerated`);
+console.log(`templates.json: ${templates.length} rows; templates.md regenerated${ownedRows.length ? `; templates.owned.json: ${ownedRows.length} private rows` : ""}`);

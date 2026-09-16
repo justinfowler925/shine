@@ -5,6 +5,7 @@ import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { load } from "./deps.mjs";
+import {loadTemplates} from "../corpus/catalog.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const fail=(message)=>{throw new Error(`usability: ${message}`)};
@@ -33,7 +34,7 @@ export function readUsabilityContract(path,{citeId=""}={}) {
     if(flow.path&&(!flow.path.startsWith("/")||flow.path.startsWith("//")))errors.push(`flow ${flow.id} path must be same-origin and absolute`);
   }
   if(errors.length) fail(errors.join("; "));
-  const templates=JSON.parse(readFileSync(resolve(ROOT,"corpus/templates.json"),"utf8")).templates||[];
+  const templates=loadTemplates(ROOT);
   const template=templates.find(row=>row.id===value.cite); if(!template) fail(`unknown reference cite ${value.cite}`);
   const roles=new Set(value.objects.map(object=>object.referenceRole));
   for(const role of template.reference?.required||[]) if(!roles.has(role)) errors.push(`selected reference ${value.cite} requires a ${role} object`);

@@ -13,12 +13,16 @@ const SHINE = resolve(fileURLToPath(new URL("..", import.meta.url)));
 // can port either. The kits that carried their own runtime and theming — MUI,
 // Ant Design Pro, Carbon — were deleted from the corpus on 2026-08-31 rather
 // than merely excluded here (docs/no-foreign-runtimes.md).
+// magicui and cult-ui install through the shadcn registry on Tailwind, so a
+// shadcn or Tailwind host can build them; they are listed after the two house
+// kits so they win only the screens those kits do not publish (marketing regions,
+// onboarding). Mantine/HeroUI/Spectrum/Fluent stay out: their own runtimes.
 export const RECIPE_KITS = {
-  "shadcn-tanstack": ["shadcn-registry", "untitled-ui-react"],
-  shadcn: ["shadcn-registry", "untitled-ui-react"],
-  tailwind: ["untitled-ui-react", "shadcn-registry"],
-  "tailwind-tanstack": ["untitled-ui-react", "shadcn-registry"],
-  tanstack: ["untitled-ui-react", "shadcn-registry"],
+  "shadcn-tanstack": ["shadcn-registry", "untitled-ui-react", "magicui", "cult-ui"],
+  shadcn: ["shadcn-registry", "untitled-ui-react", "magicui", "cult-ui"],
+  tailwind: ["untitled-ui-react", "shadcn-registry", "magicui", "cult-ui"],
+  "tailwind-tanstack": ["untitled-ui-react", "shadcn-registry", "magicui", "cult-ui"],
+  tanstack: ["untitled-ui-react", "shadcn-registry", "magicui", "cult-ui"],
   native: ["untitled-ui-react", "shadcn-registry"],
   lex: ["slds"],
 };

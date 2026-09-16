@@ -12,7 +12,7 @@ Resolve this installed tree, then create the packet before planning or editing:
 ```sh
 SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}/.cursor/skills/shine")
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
-node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new> --project "$PWD"
+node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit> --project "$PWD"
 ```
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
 dashboard. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
@@ -21,9 +21,9 @@ For new media/editorial surfaces, build from the selected source in the installe
 For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
 constraint. The signature must express this product's job, never generic design decoration.
-For an existing product, render its real components and read `references/diagnose.md`. Complete the packet's
-`shine-diagnosis.json` before editing: primary task, before artifact + screenshot, and 3–8 evidence-backed defects
-across usability, completeness, composition, craft, or adoption. Preserve the product architecture.
+For an existing product, render its real components and read `references/diagnose.md`. Complete the packet's `shine-diagnosis.json` before editing: primary task, before artifact + screenshot, and only the defects you can evidence (1–8) across usability, completeness, composition, craft, or adoption. One real defect is a complete diagnosis; if nothing survives the screenshot and measure, record `verdict: no-change` with `verdictEvidence` and all five buckets in `checked`, then stop. Inventing defects or inflating severity to fill a count is a reviewer defect. Preserve the product architecture.
+## Audit edits nothing
+A review request (audit, review, assess, "what's wrong", "don't change anything") runs the packet with `--mode audit`: look, diagnose, measure, report. Edit no product file and issue no completion receipt (`editing.allowed` is false). Building is a separate, explicit request. In `existing` mode change only what a named defect requires: design-lint blocks off-token values on the lines you touched and reports pre-existing ones as notes; leave those unless the diagnosis names them.
 ## Product precedent outranks the catalog
 For an existing product, inventory shipped sibling surfaces before accepting the external reference. Find the closest page presenting the same information object or supporting the same user job. If one exists, rerun the packet with `--product-reference <page-or-url> --product-reference-name <name>`.
 The sibling owns product conventions; the catalog may fill a gap but must not replace working card anatomy, toolbar behavior, expansion, actions, states, terminology, or responsive behavior. Name the sibling and every justified divergence in the diagnosis.
@@ -35,7 +35,7 @@ Every visible icon needs a distinct semantic job: state, action, object type, or
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports; follow `references/component-layers.md`: Tailwind owns styling/layout, shadcn owns controls, TanStack owns table state. Detect each independently; reuse product components.
 - Use the packet’s `reusableBlocks` plan and `references/reusable-blocks.md`. Import existing product blocks first; otherwise install the matching finished registry block. Bind actual imports in `shine-reuse.json`; include its check in completion. Do not reconstruct a matching block from primitives.
-- Use the packet's `implementationSelection`: inspect matching product exports first, then finished Shine blocks, then available upstream controls. Use `integrations/library-select.mjs --project <path> --job <job>` for a narrower region. Unavailable licensed source is a gap, never permission to copy or a promised installation.
+- Use the packet's `implementationSelection`: inspect matching product exports first, then finished Shine blocks, then available upstream controls. Use `integrations/library-select.mjs --project <path> --job <job>` for a narrower region. Unavailable licensed source is a gap, never permission to copy or a promised installation. A licensed kit the consumer owns (Tailwind Plus, Untitled UI PRO) is indexed privately through `corpus/owned/README.md`: its rows cite, measure and compare like public rows and never enter the published catalog.
 - For a whole-site audit, run `integrations/surface-audit.mjs --project <path>` before reviewing pages. Write `shine-surfaces.json` covering every discovered route, control owner and required workflow state; prove it with `--contract <file> --run <base-url> --storage-state <private-file> --out <private-receipt>`. Pass `--surface-contract` and `--surface-receipt` to completion. Route readiness is baseline evidence only; declare and exercise interaction, error and recovery states for the workflows under review. Missing, stale, disconnected or wrong-build evidence fails.
 - Track installed registry blocks using `integrations/upgrade.mjs --project <path> --track <block-id> --path <installed-source>`. Review upgrades without `--apply`; applying checks compatibility and performs a three-way merge. Conflicts leave all sources unchanged. Run `integrations/compatibility.mjs --project <path> <installed-sources>` for aliases, dependency, named-export, Tailwind prefix and token checks, then verify actual rendered themes.
 - Read the packet's separate reference, finished-block and finished-page counts. Classify every finished pattern in `shine-coverage.json` using `integrations/coverage.mjs`; bind existing product sources or explain an absent workflow. Include the packet's `--coverage` flag in completion. Raw control census is review evidence, not automatic behavioral proof.
@@ -2127,8 +2127,12 @@ Two kinds → run the stricter first (adoption before craft; contracts before po
 
 ## 2. NAME — four buckets, usability first
 
-Write 3–6 defects, each in one bucket. Craft without a usability or completeness defect
-above it is the wrong pass.
+Write only the defects you can evidence, each in one bucket — one is enough, eight is the
+cap. Craft without a usability or completeness defect above it is the wrong pass. If nothing
+survives the screenshot and the measure output, the diagnosis is `verdict: no-change`: say what
+you exercised in `verdictEvidence`, list every bucket in `checked`, and stop. A pass that
+invents findings to fill a count is a defect in the reviewer, not in the surface. In audit mode
+this file is the deliverable; nothing gets edited.
 
 ### Usability (can they finish the job?)
 - Primary action visible in ~3 seconds? Competing CTAs?
@@ -4352,10 +4356,13 @@ Reasons are listed under the table.
 | app-shell | `shadcn-sidebar-15` | shadcn-registry | source | live | app-shell, shell, nav, sidebar |
 | app-shell | `shadcn-sidebar-16` | shadcn-registry | source | live | app-shell, shell, nav, sidebar |
 | app-shell | `untitled-sidebar-navigation` | untitled-ui-react | source | live | app-shell, navigation, sidebar |
+| app-shell | `untitled-header-navigation` | untitled-ui-react | source | live | app-shell, navigation, header, topbar, horizontal-nav |
+| app-shell | `untitled-featured-cards` | untitled-ui-react | source | live | app-shell, navigation, featured, usage, upgrade-prompt |
 | app-shell | `mantine-appshell` | mantine | source | **retired** | app-shell, shell, nav, sidebar |
 | app-shell | `heroui-next-app` | heroui | source | **retired** | app-shell, shell, nav, sidebar |
 | app-shell | `query-adminlte` | adminlte | query-only | live | app-shell, shell, nav, sidebar |
 | app-shell | `query-primeblocks` | primeblocks | query-only | live | app-shell, shell, nav, sidebar |
+| async-state | `untitled-loading-indicator` | untitled-ui-react | source | live | loading, spinner, pending, async, skeleton |
 | auth | `shadcn-login-01` | shadcn-registry | source | live | auth, login, signin, signup, sign-in |
 | auth | `shadcn-login-02` | shadcn-registry | source | live | auth, login, signin, signup, sign-in |
 | auth | `shadcn-login-03` | shadcn-registry | source | live | auth, login, signin, signup, sign-in |
@@ -4368,6 +4375,8 @@ Reasons are listed under the table.
 | auth | `shadcn-login-04` | shadcn-registry | source | live | auth, login, signin, signup |
 | blog | `shadcn-blog` | shadcn-registry | blueprint | live | blog, article, editorial, post |
 | broadcast | `shadcn-broadcast` | shadcn-registry | blueprint | live | broadcast, video, media, player, television, presenter |
+| carousel | `untitled-carousel` | untitled-ui-react | source | live | carousel, gallery, slides, slideshow |
+| carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
 | charts | `shadcn-chart-area-axes` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-default` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-gradient` | shadcn-registry | source | live | charts, chart, area, analytics |
@@ -4439,6 +4448,11 @@ Reasons are listed under the table.
 | charts | `shadcn-chart-tooltip-label-formatter` | shadcn-registry | source | live | charts, chart, tooltip, analytics |
 | charts | `shadcn-chart-tooltip-label-none` | shadcn-registry | source | live | charts, chart, tooltip, analytics |
 | charts | `tremor-charts` | tremor | source | **retired** | charts, chart, dataviz |
+| charts | `untitled-activity-gauges` | untitled-ui-react | source | live | charts, chart, gauge, kpi, target, dataviz |
+| charts | `untitled-bar-charts` | untitled-ui-react | source | live | charts, chart, bar, comparison, analytics, dataviz |
+| charts | `untitled-pie-charts` | untitled-ui-react | source | live | charts, chart, pie, donut, share, breakdown, dataviz |
+| charts | `untitled-progress-circles` | untitled-ui-react | source | live | charts, chart, progress, completion, kpi, dataviz |
+| charts | `untitled-radar-charts` | untitled-ui-react | source | live | charts, chart, radar, profile, comparison, dataviz |
 | chat | `spectrum-ai-chat` | react-spectrum | source | live | chat, assistant |
 | checkout | `shadcn-checkout` | shadcn-registry | blueprint | live | checkout, payment |
 | command-palette | `shadcn-command` | shadcn-registry | source | live | command-palette, palette, cmdk |
@@ -4447,6 +4461,8 @@ Reasons are listed under the table.
 | dashboard | `query-shadcn-blocks` | shadcn-registry | query-only | live | dashboard |
 | dashboard | `query-haze` | haze | query-only | live | dashboard |
 | empty | `shadcn-empty-icon` | shadcn-registry | source | live | empty, ai-generate |
+| form | `untitled-date-picker` | untitled-ui-react | source | live | form, input, date, date-range, calendar, picker |
+| form | `untitled-file-upload` | untitled-ui-react | source | live | form, input, upload, attachments, dropzone, files |
 | lex-console | `lex-console` | slds | blueprint | live | lex-console |
 | lex-email | `lex-email` | slds | blueprint | live | lex-email, email |
 | lex-lwr | `lex-lwr` | slds | blueprint | live | lex-lwr |
@@ -4455,16 +4471,71 @@ Reasons are listed under the table.
 | lex-record | `lex-record` | slds | blueprint | live | lex-record, record, detail, lightning, lwc |
 | lex-record | `lex-record-narrow` | slds | blueprint | live | lex-record-narrow, lex-record |
 | marketing | `shadcn-marketing` | shadcn-registry | blueprint | live | marketing, landing, pricing |
+| marketing-developer | `magicui-code-comparison-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
+| marketing-developer | `magicui-file-tree-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
+| marketing-developer | `magicui-terminal-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
+| marketing-developer | `magicui-terminal-demo-2` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
+| marketing-features | `magicui-bento-demo` | magicui | source | live | marketing, features, feature-grid, capabilities, landing, benefits |
+| marketing-features | `magicui-bento-demo-vertical` | magicui | source | live | marketing, features, feature-grid, capabilities, landing, benefits |
+| marketing-features | `cult-feature-carousel` | cult-ui | source | live | marketing, features, carousel, capabilities, walkthrough, landing |
 | marketing-hero | `magicui-hero` | magicui | source | live | marketing-hero, hero, landing |
+| marketing-hero | `magicui-hero-video-dialog-demo` | magicui | source | live | marketing-hero, hero, landing, video, launch |
+| marketing-hero | `magicui-hero-video-dialog-demo-top-in-bottom-out` | magicui | source | live | marketing-hero, hero, landing, video, launch |
+| marketing-hero | `cult-hero-color-panel` | cult-ui | source | live | marketing-hero, hero, landing, split, panel |
+| marketing-hero | `cult-hero-dithering` | cult-ui | source | live | marketing-hero, hero, landing, texture, editorial |
+| marketing-hero | `cult-hero-heatmap` | cult-ui | source | live | marketing-hero, hero, landing, data, heatmap |
+| marketing-hero | `cult-hero-liquid-metal` | cult-ui | source | live | marketing-hero, hero, landing, shader, premium |
+| marketing-hero | `cult-hero-static-radial-gradient` | cult-ui | source | live | marketing-hero, hero, landing, radial, minimal |
+| marketing-integrations | `magicui-animated-beam-bidirectional` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-animated-beam-demo` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-animated-beam-multiple-inputs` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-animated-beam-multiple-outputs` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-animated-beam-unidirectional` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-dotted-map-demo` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-dotted-map-demo-2` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-dotted-map-demo-3` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-globe-demo` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-icon-cloud-demo` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-icon-cloud-demo-2` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-icon-cloud-demo-3` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-integrations | `magicui-orbiting-circles-demo` | magicui | source | live | marketing, integrations, ecosystem, network, global, landing, connectors |
+| marketing-metrics | `magicui-animated-circular-progress-bar-demo` | magicui | source | live | marketing, stats, metrics, counters, landing, outcomes |
+| marketing-metrics | `magicui-number-ticker-decimal-demo` | magicui | source | live | marketing, stats, metrics, counters, landing, outcomes |
+| marketing-metrics | `magicui-number-ticker-demo` | magicui | source | live | marketing, stats, metrics, counters, landing, outcomes |
+| marketing-metrics | `magicui-number-ticker-demo-2` | magicui | source | live | marketing, stats, metrics, counters, landing, outcomes |
+| marketing-metrics | `cult-animated-number` | cult-ui | source | live | marketing, stats, metrics, counters, landing |
+| marketing-mockup | `magicui-android-demo` | magicui | source | live | marketing, screenshot, device, mockup, product-shot, landing, demo |
+| marketing-mockup | `magicui-android-demo-2` | magicui | source | live | marketing, screenshot, device, mockup, product-shot, landing, demo |
+| marketing-mockup | `magicui-android-demo-3` | magicui | source | live | marketing, screenshot, device, mockup, product-shot, landing, demo |
+| marketing-mockup | `magicui-iphone-demo` | magicui | source | live | marketing, screenshot, device, mockup, product-shot, landing, demo |
+| marketing-mockup | `magicui-iphone-demo-2` | magicui | source | live | marketing, screenshot, device, mockup, product-shot, landing, demo |
+| marketing-mockup | `magicui-iphone-demo-3` | magicui | source | live | marketing, screenshot, device, mockup, product-shot, landing, demo |
+| marketing-mockup | `magicui-safari-demo` | magicui | source | live | marketing, screenshot, device, mockup, product-shot, landing, demo |
+| marketing-mockup | `magicui-safari-demo-2` | magicui | source | live | marketing, screenshot, device, mockup, product-shot, landing, demo |
+| marketing-mockup | `magicui-safari-demo-3` | magicui | source | live | marketing, screenshot, device, mockup, product-shot, landing, demo |
+| marketing-mockup | `magicui-safari-demo-4` | magicui | source | live | marketing, screenshot, device, mockup, product-shot, landing, demo |
+| marketing-proof | `magicui-avatar-circles-demo` | magicui | source | live | marketing, logos, testimonials, social-proof, customers, landing, trust |
+| marketing-proof | `magicui-marquee-3d` | magicui | source | live | marketing, logos, testimonials, social-proof, customers, landing, trust |
+| marketing-proof | `magicui-marquee-demo` | magicui | source | live | marketing, logos, testimonials, social-proof, customers, landing, trust |
+| marketing-proof | `magicui-marquee-demo-vertical` | magicui | source | live | marketing, logos, testimonials, social-proof, customers, landing, trust |
+| marketing-proof | `magicui-marquee-logos` | magicui | source | live | marketing, logos, testimonials, social-proof, customers, landing, trust |
+| marketing-proof | `magicui-tweet-card-demo` | magicui | source | live | marketing, logos, testimonials, social-proof, customers, landing, trust |
+| marketing-proof | `magicui-tweet-card-images` | magicui | source | live | marketing, logos, testimonials, social-proof, customers, landing, trust |
+| marketing-proof | `magicui-tweet-card-meta-preview` | magicui | source | live | marketing, logos, testimonials, social-proof, customers, landing, trust |
+| marketing-proof | `cult-logo-carousel` | cult-ui | source | live | marketing, logos, customers, social-proof, carousel, landing |
+| onboarding | `cult-onboarding` | cult-ui | source | live | onboarding, first-run, tour, intro, steps |
+| onboarding | `cult-intro-disclosure` | cult-ui | source | live | onboarding, intro, whats-new, feature-announcement, disclosure |
+| pagination | `untitled-pagination` | untitled-ui-react | source | live | pagination, paging, page-size, pager |
 | queue | `untitled-table` | untitled-ui-react | source | live | queue, crud, table, records, datagrid |
 | queue | `shadcn-queue` | shadcn-registry | blueprint | live | queue, worklist, triage, inbox, datagrid |
 | record | `shadcn-record` | shadcn-registry | blueprint | live | record, detail, account, opportunity |
 | settings | `shadcn-settings` | shadcn-registry | blueprint | live | settings, preferences, account |
 | settings | `fluent-nav` | fluentui | source | live | settings |
+| tabs | `untitled-tabs` | untitled-ui-react | source | live | tabs, sections, segmented, workspace-tabs, section-tabs |
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-130 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+197 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
