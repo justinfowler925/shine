@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-wizard" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Request an exception — wizard reference</title>
+<link rel="stylesheet" href="../../../tokens/voices/shadcn-zinc.css">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fafafa;color:#18181b;font:15px/1.6 var(--shine-font-sans,system-ui)}
+main{max-width:760px;margin:56px auto;padding:0 28px}h1{font-size:28px;letter-spacing:-.03em;margin:0}h2{font-size:20px;margin-top:0}
+p{color:#52525b}.steps{display:flex;gap:12px;padding:24px 0;list-style:none;border-bottom:1px solid #d4d4d8}.steps li{flex:1}
+button,input,select,textarea{font:inherit}button{cursor:pointer;background:#fff;color:#18181b;border:1px solid #d4d4d8;border-radius:6px;padding:9px 15px;min-height:42px}
+button:disabled{opacity:.5;cursor:default}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #71717a;outline-offset:3px}
+.steps button{border:0;padding:6px;background:transparent;text-align:left;width:100%}.steps [aria-current=step]{background:#18181b;color:white}
+.panel{background:white;border:1px solid #d4d4d8;border-radius:10px;padding:28px;margin-top:28px}
+label{display:block;font-weight:600;margin:18px 0 6px}input,select,textarea{width:100%;border:1px solid #a1a1aa;border-radius:6px;padding:10px;background:white;color:#18181b}
+small{color:#52525b}footer{display:flex;justify-content:space-between;align-items:center;margin-top:28px;border-top:1px solid #e4e4e7;padding-top:20px}.primary{background:#18181b;color:white}
+[role=alert]{color:#991b1b}dl>div{border-bottom:1px solid #e4e4e7;padding:12px 0}dt{font-weight:600}dd{margin:4px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:600px){main{margin:24px auto;padding:0 16px}.steps{gap:4px}.steps button{font-size:12px}.panel{padding:20px}}
+</style></head>
+<body><main data-region="wizard"><header><p>ACCOUNT OPERATIONS</p><h1>Request an exception</h1><p>Explain the account, scope and business reason. Review every answer before submitting.</p></header>
+<nav aria-label="Request steps"><ol class="steps"></ol></nav>
+<form class="panel" novalidate><h2 tabindex="-1"></h2><p id="description"></p><p role="alert" hidden></p><section id="fields"></section><footer><button type="button" id="back">Back</button><small id="position"></small><button class="primary" type="submit">Continue</button></footer></form>
+<p>Draft answers stay available when you return to an earlier step. This authored reference sends no data.</p>
+</main><script>
+const steps=['Account','Scope','Justification','Review'],values={account:'',region:'',owner:'',justification:''};
+let current=0,furthest=0;
+const form=document.querySelector('form'),fields=document.querySelector('#fields'),heading=document.querySelector('h2'),alert=document.querySelector('[role=alert]');
+const required=[['account'],['region','owner'],['justification'],[]];
+const labels={account:'Account',region:'Region',owner:'Owner',justification:'Justification'};
+function field(key,type='input'){
+ const label=document.createElement('label');label.htmlFor=key;label.textContent=labels[key];fields.append(label);
+ const input=document.createElement(type);input.id=key;input.name=key;input.required=true;
+ if(type==='select')for(const value of ['', 'Americas','EMEA','APAC']){const option=document.createElement('option');option.value=value;option.textContent=value||'Choose a region';input.append(option);}
+ if(type==='textarea')input.rows=5;
+ input.value=values[key];input.addEventListener('input',()=>values[key]=input.value);fields.append(input);
+}
+function render(focus=true){
+ const list=document.querySelector('.steps');list.replaceChildren();
+ steps.forEach((name,index)=>{const li=document.createElement('li'),b=document.createElement('button');b.type='button';b.textContent=(index+1)+'. '+name;b.disabled=index>furthest;if(index===current)b.setAttribute('aria-current','step');b.onclick=()=>{current=index;render()};li.append(b);list.append(li)});
+ heading.textContent=steps[current];document.querySelector('#description').textContent=['Choose the account this request applies to.','Name the region and person responsible for this exception.','Describe why the standard process does not meet the account’s needs.','Confirm the complete request. You can edit any answer before submitting.'][current];
+ fields.replaceChildren();alert.hidden=true;
+ if(current===0)field('account');
+ if(current===1){field('region','select');field('owner')}
+ if(current===2)field('justification','textarea');
+ if(current===3){const dl=document.createElement('dl');for(const key of Object.keys(values)){const row=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd'),edit=document.createElement('button');dt.textContent=labels[key];dd.textContent=values[key];edit.type='button';edit.textContent='Edit '+labels[key];edit.onclick=()=>{current=key==='account'?0:key==='justification'?2:1;render()};row.append(dt,dd,edit);dl.append(row)}fields.append(dl)}
+ document.querySelector('#back').disabled=current===0;document.querySelector('#position').textContent='Step '+(current+1)+' of 4';form.querySelector('[type=submit]').textContent=current===3?'Submit request':'Continue';
+ if(focus)heading.focus();
+}
+document.querySelector('#back').onclick=()=>{current--;render()};
+form.onsubmit=e=>{e.preventDefault();const missing=required[current].filter(key=>!values[key].trim());if(missing.length){alert.textContent='Complete '+missing.map(k=>labels[k]).join(', ')+'.';alert.hidden=false;document.getElementById(missing[0]).focus();return}
+ if(current===3){form.replaceChildren();const title=document.createElement('h2');title.textContent='Request submitted';const status=document.createElement('p');status.setAttribute('role','status');status.textContent='Your example request is complete. No data was sent.';form.append(title,status);return}
+ current++;furthest=Math.max(furthest,current);render()};
+render(false);
+</script></body></html>

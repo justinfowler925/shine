@@ -375,7 +375,7 @@ for (const t of [
 for (const t of [
   { id: "shadcn-record", screen: "record", title: "shadcn record detail (identity, facts, decision, evidence)", jobs: ["record", "detail", "account", "opportunity"], required: ["form", "table"] },
   { id: "shadcn-settings", screen: "settings", title: "shadcn settings (visible section nav, per-section save)", jobs: ["settings", "preferences", "account"], required: ["form", "navigation"] },
-  { id: "shadcn-wizard", screen: "wizard", title: "shadcn wizard (step list, review before commit)", jobs: ["wizard", "stepper", "multi-step", "onboarding"], required: ["form", "navigation"] },
+  { id: "shadcn-wizard", screen: "wizard", title: "shadcn wizard (step list, review before commit)", jobs: ["wizard", "stepper", "multi-step", "onboarding"], required: ["form", "navigation"], captureExpect: '[data-region="wizard"] form input[name="account"]' },
   { id: "shadcn-checkout", screen: "checkout", title: "shadcn checkout (persistent order summary) — region map only", jobs: ["checkout", "payment"], required: ["form", "summary"] },
   { id: "shadcn-marketing", screen: "marketing", title: "shadcn marketing page (claim, proof, pricing) — region map only", jobs: ["marketing", "landing", "pricing"] },
   // The blog screen had exactly one row, MUI's. Deleting MUI would have deleted

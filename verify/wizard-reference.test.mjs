@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {load} from './deps.mjs';
+import {referenceHealth} from '../corpus/reference-health.mjs';
+const root=resolve(import.meta.dirname,'..');
+const row=JSON.parse(readFileSync(root+'/corpus/templates.json')).templates.find(t=>t.id==='shadcn-wizard');
+assert.ok(row.reference.captureExpect);
+assert.equal(referenceHealth(root,row.id).status,'passed');
+const {chromium}=load('playwright'),browser=await chromium.launch();
+try {
+ const page=await browser.newPage();
+ await page.goto(pathToFileURL(root+'/corpus/blueprints/shadcn-wizard/reference.html').href);
+ await page.getByRole('button',{name:'Continue',exact:true}).click();
+ assert.match(await page.getByRole('alert').innerText(),/Account/);
+ await page.getByLabel('Account',{exact:true}).fill('Example account');
+ await page.getByRole('button',{name:'Continue',exact:true}).click();
+ await page.getByLabel('Region',{exact:true}).selectOption('EMEA');
+ await page.getByLabel('Owner',{exact:true}).fill('Example owner');
+ await page.getByRole('button',{name:'Continue',exact:true}).click();
+ await page.getByLabel('Justification',{exact:true}).fill('A bounded regional exception.');
+ await page.getByRole('button',{name:'Continue',exact:true}).click();
+ assert.match(await page.locator('dl').innerText(),/Example account/);
+ await page.getByRole('button',{name:'Edit Account',exact:true}).click();
+ assert.equal(await page.getByLabel('Account',{exact:true}).inputValue(),'Example account');
+ await page.getByLabel('Account',{exact:true}).fill('Corrected account');
+ await page.getByRole('button',{name:'4. Review',exact:true}).click();
+ assert.match(await page.locator('dl').innerText(),/Corrected account/);
+ assert.match(await page.locator('dl').innerText(),/bounded regional/);
+ await page.setViewportSize({width:390,height:844});
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ await page.getByRole('button',{name:'Submit request',exact:true}).click();
+ assert.match(await page.getByRole('status').innerText(),/No data was sent/);
+ console.log('PASS wizard capture, required-field rejection, preserved back/edit state, review, mobile, submit');
+}finally{await browser.close();}
