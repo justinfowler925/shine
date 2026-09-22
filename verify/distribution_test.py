@@ -43,6 +43,15 @@ class Distribution(unittest.TestCase):
                 if valid:self.assertEqual(dist.access_boundary(url)['status'],307)
                 else:
                     with self.assertRaises(RuntimeError):dist.access_boundary(url)
+    def test_api_boundary_requires_a_real_session_refusal(self):
+        import urllib.error
+        for path,status,body,valid in [('/api/company-tools/shine/download',401,{'code':'SESSION_REQUIRED','error':'Sign in'},True),('/api/company-tools/shine/download',401,{'code':'SESSION_INVALID','error':'Sign in'},True),('/api/company-tools/shine/download',401,{'error':'Unknown error'},False),('/company-tools',401,{'code':'SESSION_REQUIRED','error':'Sign in'},False),('/api/company-tools/shine/download',200,{'code':'SESSION_REQUIRED','error':'Sign in'},False)]:
+            url='https://example.test'+path
+            error=urllib.error.HTTPError(url,status,'probe',{},io.BytesIO(json.dumps(body).encode()))
+            with self.subTest(path=path,status=status,body=body),patch.object(dist.urllib.request.OpenerDirector,'open',side_effect=error):
+                if valid:self.assertEqual(dist.access_boundary(url)['status'],401)
+                else:
+                    with self.assertRaises(RuntimeError):dist.access_boundary(url)
     def test_extra_destination_cannot_be_silently_skipped(self):
         with tempfile.TemporaryDirectory() as temp,patch.dict(dist.CONFIG,{'requiredDestinations':dist.CONFIG['requiredDestinations']+['new-agent']}),patch.object(dist,'get',side_effect=RuntimeError('offline')),contextlib.redirect_stdout(io.StringIO()):
             out=pathlib.Path(temp)/'proof.json';self.assertEqual(dist.verify(out),1);self.assertEqual(json.loads(out.read_text())['checks']['new-agent']['status'],'not_tested')
