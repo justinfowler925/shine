@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "provenance-for-ai-answers",
+  "title": "Show sources when an assistant asserts facts about records",
+  "kind": "strong-default",
+  "domains": ["human-ai-collaboration", "content"],
+  "tags": ["provenance", "citations", "alexis", "trust", "sources"],
+  "problemCues": "Assistant explains a chart point or record without showing where the claim came from",
+  "preconditions": "Grounded data exists in the product",
+  "decision": "Pair spoken or written claims with inspectable sources or record identifiers. Hide neither the artifact nor the citation behind the avatar.",
+  "tradeoffs": "More UI chrome",
+  "exceptions": "Purely procedural coaching with no factual claim",
+  "source": "skill/references/ai-surfaces.md Trust and provenance",
+  "example": "Alexis why-this with source records",
+  "validatedBy": "Scenario requires visible source for the selected point",
+  "reviewedAt": "2026-09-22"
+}

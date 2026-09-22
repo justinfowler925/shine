@@ -82,19 +82,34 @@
   </main>
   <script type="module">
     import { createRecordsStore } from "./store.mjs";
+    import { createRoleStore } from "./store-role.mjs";
 
-    const store = createRecordsStore();
+    const params = new URLSearchParams(location.search);
+    const role = params.get("role") === "viewer" ? "viewer" : "editor";
+    const store = createRoleStore({ role, inner: createRecordsStore() });
+    document.documentElement.dataset.role = role;
+
     const rowsEl = document.getElementById("rows");
     const editor = document.getElementById("editor");
     const empty = document.getElementById("empty");
     const status = document.getElementById("status");
     const draftFlag = document.getElementById("draft-flag");
+    const saveBtn = editor.querySelector('button[type="submit"]');
+    const failBtn = document.getElementById("fail-next");
     let selectedId = null;
     let draft = null;
 
     function setStatus(message, tone = "") {
       status.textContent = message;
       status.dataset.tone = tone;
+    }
+
+    function applyRoleChrome() {
+      const allowed = store.canSave();
+      saveBtn.disabled = !allowed;
+      failBtn.disabled = !allowed;
+      saveBtn.title = allowed ? "" : store.forbiddenReason();
+      if (!allowed) setStatus(store.forbiddenReason(), "danger");
     }
 
     function renderList() {
@@ -134,7 +149,8 @@
       document.getElementById("title").value = row.title;
       document.getElementById("owner").value = row.owner;
       document.getElementById("notes").value = row.notes || "";
-      setStatus(`Editing ${row.title}`);
+      setStatus(store.canSave() ? `Editing ${row.title}` : store.forbiddenReason(), store.canSave() ? "" : "danger");
+      applyRoleChrome();
       renderList();
     }
 
@@ -154,19 +170,22 @@
         setStatus("Saved.", "ok");
         renderList();
       } catch (error) {
-        draftFlag.hidden = false;
+        const forbidden = error.code === "FORBIDDEN";
+        draftFlag.hidden = forbidden;
         document.getElementById("title").value = draft.title;
         document.getElementById("owner").value = draft.owner;
         document.getElementById("notes").value = draft.notes;
-        setStatus(`${error.message}. Draft retained — fix and retry.`, "danger");
+        const suffix = forbidden ? "" : " Draft retained — fix and retry.";
+        setStatus(`${error.message}.${suffix}`, "danger");
       }
     });
 
-    document.getElementById("fail-next").addEventListener("click", () => {
+    failBtn.addEventListener("click", () => {
       store.armSaveFailure();
       setStatus("Next save will fail once.", "danger");
     });
 
+    applyRoleChrome();
     renderList();
   </script>
 </body>

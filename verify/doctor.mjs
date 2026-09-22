@@ -186,7 +186,7 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   }
   if(diagnosis.status===0)ok("existing-surface diagnosis", "before artifact + screenshot, prioritized evidence, hash");
   else fail("existing-surface diagnosis",`${diagnosis.stderr||diagnosis.stdout}`.trim().slice(-500));
-  for(const [name,file,summary] of [["expert case schema","verify/case.test.mjs","resumable case + 12/8 expert briefs"],["case knowledge flow","verify/case-flow.test.mjs","open pilot attaches retrieved principles"],["design knowledge retrieve","verify/knowledge.test.mjs","principle records validate and retrieve by task"],["records pilot store","verify/records-pilot-store.test.mjs","draft retained across save failure and retry"]]){
+  for(const [name,file,summary] of [["expert case schema","verify/case.test.mjs","resumable case + 12/8 expert briefs"],["case knowledge flow","verify/case-flow.test.mjs","open pilot attaches retrieved principles"],["design knowledge retrieve","verify/knowledge.test.mjs","principle records validate and retrieve by task"],["judgment eval harness","verify/judgment-eval.test.mjs","8 learning variants machine floor ≥7/8"],["records pilot store","verify/records-pilot-store.test.mjs","draft retained across save failure and retry"],["records pilot role adapter","verify/records-pilot-role.test.mjs","viewer forbidden save explained"],["records pilot browser","verify/records-pilot-browser.mjs","list edit fail retry + viewer gate"]]){
     const r=spawnSync(process.execPath,[join(SHINE,file)],{cwd:SHINE,encoding:"utf8"});
     if(r.status===0)ok(name,summary);else fail(name,`${r.stderr||r.stdout}`.trim().slice(-500));
   }

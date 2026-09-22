@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {loadPrinciples, retrievePrinciples, validatePrinciple} from "../knowledge/retrieve.mjs";
 
 const principles = loadPrinciples();
-assert.ok(principles.length >= 12, `expected at least 12 seed principles, found ${principles.length}`);
+assert.ok(principles.length >= 20, `expected at least 20 seed principles, found ${principles.length}`);
 for (const item of principles) assert.deepEqual(validatePrinciple(item), []);
 
 const hits = retrievePrinciples("Alexis chart interrupt selection voice why this");
