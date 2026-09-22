@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "product-owners-before-catalog",
+  "title": "Reuse product component owners before installing registry blocks",
+  "kind": "product-convention",
+  "domains": ["interaction", "implementation"],
+  "tags": ["owners", "shadcn", "reuse", "blocks", "implementation"],
+  "problemCues": "Building or fixing a screen inside an existing product with shared controls",
+  "preconditions": "Consumer has installed owners or sibling surfaces for the same object",
+  "decision": "Inventory shipped sibling surfaces and product exports first. Prefer installed product owners, then finished Shine blocks, then upstream controls. Never create a parallel control for the same object.",
+  "tradeoffs": "May diverge from the catalog reference visually; preserves product conventions and upgrade paths",
+  "exceptions": "Greenfield apps with no owners yet — establish contracts explicitly, then install finished packs",
+  "source": "skill/SKILL.md; integrations/library-select.mjs; references/component-layers.md",
+  "example": "Nucleus ClearSpeed profile owners.json",
+  "validatedBy": "shine-reuse.json binds actual imports; completion requires reuse check",
+  "reviewedAt": "2026-09-22"
+}

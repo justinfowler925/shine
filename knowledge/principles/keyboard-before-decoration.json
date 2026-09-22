@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "keyboard-before-decoration",
+  "title": "Ship keyboard and assistive semantics before visual polish",
+  "kind": "accessibility-requirement",
+  "domains": ["accessibility", "interaction"],
+  "tags": ["keyboard", "a11y", "focus", "aria"],
+  "problemCues": "New control or workflow without proven keyboard path",
+  "preconditions": "Interactive UI in a supported web stack",
+  "decision": "Name focus order, roles, and recoverable errors before craft polish. Follow W3C APG patterns for custom widgets. Automated axe checks are necessary but not sufficient.",
+  "tradeoffs": "Slower first paint of visual design",
+  "exceptions": "Static editorial content with no custom widgets",
+  "source": "W3C APG; skill/references/usability.md; verify/measure.mjs",
+  "example": "DataGrid row actions operable by keyboard",
+  "validatedBy": "measure + usability objects; critical a11y findings block completion",
+  "reviewedAt": "2026-09-22"
+}

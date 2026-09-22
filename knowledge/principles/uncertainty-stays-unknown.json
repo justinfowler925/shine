@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "uncertainty-stays-unknown",
+  "title": "Leave unknown metrics unknown instead of inventing confidence",
+  "kind": "strong-default",
+  "domains": ["data-visualization", "content"],
+  "tags": ["kpi", "unknown", "honesty", "dashboard", "report"],
+  "problemCues": "Dashboard or summary band missing a value or confidence",
+  "preconditions": "Metric provenance available or explicitly absent",
+  "decision": "Render unknown/unavailable states honestly. Do not substitute decorative numbers or false precision. KPI actions that filter details only apply when the metric is real.",
+  "tradeoffs": "Less flashy demos",
+  "exceptions": "Explicitly labeled estimates with method disclosed",
+  "source": "skill/references/dataviz.md; table-summary doctrine",
+  "example": "Fleet health uncertain metrics brief",
+  "validatedBy": "Fixtures include unknown metric; measure does not require fake values",
+  "reviewedAt": "2026-09-22"
+}

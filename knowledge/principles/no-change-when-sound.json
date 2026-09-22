@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "no-change-when-sound",
+  "title": "Record no-change when the surface already solves the task",
+  "kind": "strong-default",
+  "domains": ["task-analysis", "human-ai-collaboration"],
+  "tags": ["diagnosis", "no-change", "healthy", "audit"],
+  "problemCues": "Review or audit of an existing screen that may already be usable",
+  "preconditions": "Screenshot and measure available; agent inspected real states",
+  "decision": "Prefer verdict no-change with verdictEvidence and every diagnosis bucket checked. Do not invent defects to fill a quota or inflate severity.",
+  "tradeoffs": "Fewer visible edits; higher trust that changes are necessary",
+  "exceptions": "Named evidenced defects across usability, completeness, composition, craft, or adoption — one real defect is enough",
+  "source": "core/diagnosis.mjs; skill/references/diagnose.md",
+  "example": "Audit mode packet with editing.allowed false",
+  "validatedBy": "validateDiagnosis rejects empty defects without no-change; accepts no-change with full checked list",
+  "reviewedAt": "2026-09-22"
+}

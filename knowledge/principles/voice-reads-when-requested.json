@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "voice-reads-when-requested",
+  "title": "Speech summarizes by default and reads exactly when the task requires it",
+  "kind": "strong-default",
+  "domains": ["content", "multimodal-interaction"],
+  "tags": ["voice", "avatar", "speech", "verbatim", "accessibility"],
+  "problemCues": "Assistant speaks about numbers, policies, or form values on screen",
+  "preconditions": "Visible artifact remains available independently of narration",
+  "decision": "Default to concise spoken summary with the artifact on screen. Allow exact reading when the user asks or when accuracy of a specific value is the task. Do not treat brief-summary guidance as a universal ban on verbatim speech.",
+  "tradeoffs": "Exact reading is slower; summary risks omitting a critical value",
+  "exceptions": "Captions and transcripts must still expose the full content for accessibility",
+  "source": "skill/references/voice.md refined by 2026-09-22 expert roadmap",
+  "example": "Alexis reading a selected KPI on request",
+  "validatedBy": "Scenario matrix includes summarize vs exact-read requests without losing the artifact",
+  "reviewedAt": "2026-09-22"
+}

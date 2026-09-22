@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "chat-only-when-dialogue-is-the-job",
+  "title": "Use chat when the interaction is dialogue, not as a default shell",
+  "kind": "strong-default",
+  "domains": ["human-ai-collaboration", "information-architecture"],
+  "tags": ["chat", "assistant", "alexis", "topology"],
+  "problemCues": "Adding an AI assistant to a working SaaS screen; temptation to wrap the app in a chat sidebar",
+  "preconditions": "Task objects exist outside the transcript",
+  "decision": "Choose topology before components. Prefer shared working material with conversation as a modality. Reach for chat when the interaction genuinely is turn-taking dialogue. Do not treat anti-chat guidance as a ban on Alexis conversation.",
+  "tradeoffs": "Chat is familiar but hides structure; structured workspaces need more design",
+  "exceptions": "Support troubleshooting and open-ended Q&A where the transcript is the artifact",
+  "source": "skill/references/ai-surfaces.md refined by 2026-09-22 expert roadmap",
+  "example": "Alexis chart workspace with optional transcript",
+  "validatedBy": "Diagnosis names topology choice; chat-only shells fail multimodal continuity briefs",
+  "reviewedAt": "2026-09-22"
+}

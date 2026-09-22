@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "upgrade-without-clobber",
+  "title": "Track registry installs and review three-way upgrades before apply",
+  "kind": "product-convention",
+  "domains": ["implementation"],
+  "tags": ["upgrade", "registry", "merge", "blocks"],
+  "problemCues": "Installed Shine/registry block may have newer upstream",
+  "preconditions": "Block tracked with upgrade.mjs path",
+  "decision": "Track installed baseline. Review three-way changes without --apply first. Applying checks compatibility; conflicts leave all sources unchanged.",
+  "tradeoffs": "Manual review cost on upgrades",
+  "exceptions": "Untracked one-off forks explicitly owned by the consumer",
+  "source": "integrations/upgrade.mjs; skill/SKILL.md",
+  "example": "records pilot upgrade track on DataGrid",
+  "validatedBy": "upgrade check receipt; conflict leaves tree unchanged",
+  "reviewedAt": "2026-09-22"
+}

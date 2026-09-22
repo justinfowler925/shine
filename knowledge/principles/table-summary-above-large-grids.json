@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "table-summary-above-large-grids",
+  "title": "Summarize large tables with KPI band above collapsed detail",
+  "kind": "strong-default",
+  "domains": ["data-visualization", "information-architecture"],
+  "tags": ["table", "datagrid", "kpi", "summary", "report"],
+  "problemCues": "More than ten total rows; users need overview before scanning detail rows",
+  "preconditions": "Full dataset count known before search/pagination; shared DataGrid features remain",
+  "decision": "Show useful KPI boxes or an infographic above an immediately adjacent, initially collapsed detail table. Count the full dataset, not the visible page. KPI actions open and filter related details; unknown metrics stay unknown.",
+  "tradeoffs": "Adds vertical space and a collapse control; worth it when overview decisions dominate raw row scanning",
+  "exceptions": "Fewer than or equal to ten total rows; or an explicit product owner instruction to keep a flat table",
+  "source": "skill/references/table-summary.md; Shine PRs 71-72; ca27e30",
+  "example": "Nucleus weekly board / report pages with summary census",
+  "validatedBy": "Browser measure plus usability objects for summary band and grid; compare against product sibling",
+  "reviewedAt": "2026-09-22"
+}

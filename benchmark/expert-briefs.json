@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "title": "Shine expert-agent briefs (Phase 0 freeze)",
+  "workItemId": "540fff5d-9b21-4aef-9fb4-3eaac06e9183",
+  "note": "12 learning + 8 held-out. Held-out briefs stay sealed until Phase 5. Separate from benchmark/briefs.json design-spec corpus.",
+  "learning": [
+    {
+      "id": "learn-dense-ops-queue",
+      "set": "learning",
+      "family": "records-search",
+      "category": "datagrid",
+      "lane": "saas",
+      "brief": "Dense operations queue: triage unresolved support tickets, assign owner, preserve filters across refresh",
+      "tags": ["dense-operations"]
+    },
+    {
+      "id": "learn-complex-form",
+      "set": "learning",
+      "family": "forms-validation",
+      "category": "form",
+      "lane": "saas",
+      "brief": "Complex multi-section workspace settings form with cross-field validation and sticky save/cancel",
+      "tags": ["complex-form"]
+    },
+    {
+      "id": "learn-approval-queue",
+      "set": "learning",
+      "family": "approvals-async",
+      "category": "datagrid",
+      "lane": "internal",
+      "brief": "Approval queue with async job states, bulk decide, and recovery after failed submit",
+      "tags": ["approval-queue"]
+    },
+    {
+      "id": "learn-csv-import",
+      "set": "learning",
+      "family": "imports-files-media",
+      "category": "form",
+      "lane": "saas",
+      "brief": "CSV import wizard with preview, row errors, partial success, and retry of failed rows",
+      "tags": ["import"]
+    },
+    {
+      "id": "learn-report-drilldown",
+      "set": "learning",
+      "family": "reporting-drilldown",
+      "category": "dashboard",
+      "lane": "internal",
+      "brief": "Report with KPI summary above a collapsible detail table and drill-down into one exception cohort",
+      "tags": ["report"]
+    },
+    {
+      "id": "learn-ambiguous-intent",
+      "set": "learning",
+      "family": "workspace-navigation",
+      "category": "record",
+      "lane": "saas",
+      "brief": "Ambiguous request: improve the customer screen — diagnose whether navigation, record detail, or queue is the real job",
+      "tags": ["ambiguous-intent"]
+    },
+    {
+      "id": "learn-no-change-healthy",
+      "set": "learning",
+      "family": "records-search",
+      "category": "datagrid",
+      "lane": "saas",
+      "brief": "Healthy records queue that already meets task, a11y, and recovery — expect verdict no-change with evidence",
+      "tags": ["no-change"]
+    },
+    {
+      "id": "learn-multimodal-continuity",
+      "set": "learning",
+      "family": "ai-collaboration",
+      "category": "voice",
+      "lane": "saas",
+      "brief": "Alexis chart task: ask about a metric, click a point, ask why this, interrupt, edit a filter, switch to typing, resume",
+      "tags": ["multimodal", "alexis"]
+    },
+    {
+      "id": "learn-permissions-panel",
+      "set": "learning",
+      "family": "membership-settings",
+      "category": "form",
+      "lane": "saas",
+      "brief": "Membership and role permissions panel with forbidden actions explained, not silently missing",
+      "tags": ["permissions"]
+    },
+    {
+      "id": "learn-record-edit-persist",
+      "set": "learning",
+      "family": "records-search",
+      "category": "record",
+      "lane": "saas",
+      "brief": "Records inspect edit persist: list, open, edit, save through consumer adapter with draft retention on failure",
+      "tags": ["pilot-conventional"]
+    },
+    {
+      "id": "learn-ai-review-proposed-change",
+      "set": "learning",
+      "family": "ai-collaboration",
+      "category": "voice",
+      "lane": "internal",
+      "brief": "AI proposes a field change; human reviews, edits, accepts or rejects with visible proposed/running/failed/completed states",
+      "tags": ["ai-review"]
+    },
+    {
+      "id": "learn-shell-nav",
+      "set": "learning",
+      "family": "workspace-navigation",
+      "category": "dashboard",
+      "lane": "saas",
+      "brief": "Application shell navigation with command palette and deep-link into a filtered queue without losing context",
+      "tags": ["shell"]
+    }
+  ],
+  "heldOut": [
+    {
+      "id": "hold-billing-exceptions",
+      "set": "held-out",
+      "family": "approvals-async",
+      "category": "datagrid",
+      "lane": "internal",
+      "brief": "Billing exception queue with partial batch approval and compensations after mid-flight failure",
+      "tags": ["held-out"],
+      "sealedUntil": "phase-5"
+    },
+    {
+      "id": "hold-onboarding-wizard",
+      "set": "held-out",
+      "family": "forms-validation",
+      "category": "form",
+      "lane": "saas",
+      "brief": "Employee onboarding wizard spanning identity, access, and notifications with abandon/resume",
+      "tags": ["held-out"],
+      "sealedUntil": "phase-5"
+    },
+    {
+      "id": "hold-media-attachment",
+      "set": "held-out",
+      "family": "imports-files-media",
+      "category": "record",
+      "lane": "saas",
+      "brief": "Record attachment manager with upload failure, virus-scan pending, and keyboard alternatives",
+      "tags": ["held-out"],
+      "sealedUntil": "phase-5"
+    },
+    {
+      "id": "hold-fleet-dashboard",
+      "set": "held-out",
+      "family": "reporting-drilldown",
+      "category": "dashboard",
+      "lane": "saas",
+      "brief": "Fleet health dashboard with uncertain metrics left unknown and drill into offline devices",
+      "tags": ["held-out"],
+      "sealedUntil": "phase-5"
+    },
+    {
+      "id": "hold-lex-case",
+      "set": "held-out",
+      "family": "records-search",
+      "category": "lex",
+      "lane": "lex",
+      "brief": "Lightning service case console — keep current lex level; do not expand stack scope in scoring",
+      "tags": ["held-out", "lex-deferred"],
+      "sealedUntil": "phase-5"
+    },
+    {
+      "id": "hold-no-change-settings",
+      "set": "held-out",
+      "family": "membership-settings",
+      "category": "form",
+      "lane": "saas",
+      "brief": "Sound settings surface — expect no-change; inventing defects fails the brief",
+      "tags": ["held-out", "no-change"],
+      "sealedUntil": "phase-5"
+    },
+    {
+      "id": "hold-ambiguous-report",
+      "set": "held-out",
+      "family": "reporting-drilldown",
+      "category": "dashboard",
+      "lane": "internal",
+      "brief": "Ambiguous ask to fix analytics — must choose report vs dashboard vs queue with stated uncertainty",
+      "tags": ["held-out", "ambiguous-intent"],
+      "sealedUntil": "phase-5"
+    },
+    {
+      "id": "hold-alexis-doc-timestamp",
+      "set": "held-out",
+      "family": "ai-collaboration",
+      "category": "voice",
+      "lane": "saas",
+      "brief": "Alexis second artifact type: document region or video timestamp selection with why-this continuity after interrupt",
+      "tags": ["held-out", "multimodal", "alexis"],
+      "sealedUntil": "phase-5"
+    }
+  ]
+}

@@ -186,6 +186,10 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   }
   if(diagnosis.status===0)ok("existing-surface diagnosis", "before artifact + screenshot, prioritized evidence, hash");
   else fail("existing-surface diagnosis",`${diagnosis.stderr||diagnosis.stdout}`.trim().slice(-500));
+  for(const [name,file,summary] of [["expert case schema","verify/case.test.mjs","resumable case + 12/8 expert briefs"],["case knowledge flow","verify/case-flow.test.mjs","open pilot attaches retrieved principles"],["design knowledge retrieve","verify/knowledge.test.mjs","principle records validate and retrieve by task"],["records pilot store","verify/records-pilot-store.test.mjs","draft retained across save failure and retry"]]){
+    const r=spawnSync(process.execPath,[join(SHINE,file)],{cwd:SHINE,encoding:"utf8"});
+    if(r.status===0)ok(name,summary);else fail(name,`${r.stderr||r.stdout}`.trim().slice(-500));
+  }
   const render=spawnSync(process.execPath,[join(SHINE,"verify/design-spec.test.mjs")],{cwd:SHINE,encoding:"utf8"});
   if(render.status===0)ok("renderer obeys design lint", "7 categories render with zero hard violations");
   else fail("renderer obeys design lint",`${render.stderr||render.stdout}`.trim().slice(-500));

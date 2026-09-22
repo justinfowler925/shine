@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "title": "Shine Phase 0 baseline receipt",
+  "workItemId": "540fff5d-9b21-4aef-9fb4-3eaac06e9183",
+  "observedAt": "2026-09-22T23:30:00.000Z",
+  "sourceSha": "12dd2714a3de0ad40b96922a985bf05f68493021",
+  "packageVersion": "4.0.2",
+  "environment": {
+    "worktree": "/Users/justinfowler/Projects/shine-expert-agent",
+    "branch": "feat/shine-expert-agent-phase0",
+    "installedRelease": "/Users/justinfowler/.local/share/shine/releases/12dd2714a3de0ad40b96922a985bf05f68493021",
+    "node": "v26.7.0",
+    "note": "node_modules symlinked from installed release for contract tests in this worktree"
+  },
+  "checks": [
+    {
+      "id": "case.test",
+      "command": "node verify/case.test.mjs",
+      "result": "pass"
+    },
+    {
+      "id": "case-flow.test",
+      "command": "node verify/case-flow.test.mjs",
+      "result": "pass"
+    },
+    {
+      "id": "knowledge.test",
+      "command": "node verify/knowledge.test.mjs",
+      "result": "pass",
+      "detail": ">=12 principles"
+    },
+    {
+      "id": "records-pilot-store.test",
+      "command": "node verify/records-pilot-store.test.mjs",
+      "result": "pass"
+    },
+    {
+      "id": "validate-briefs",
+      "command": "node core/case.mjs validate-briefs",
+      "result": "pass",
+      "detail": "12 learning + 8 held-out"
+    },
+    {
+      "id": "agent-production.contract",
+      "command": "node benchmark/agent-production.test.mjs",
+      "result": "pass",
+      "detail": "11 fail paths bite 20/20; positive path and dual entry discovery pass"
+    }
+  ],
+  "knownFailures": [
+    {
+      "id": "agent-designjson-only",
+      "severity": "blocking-for-expert-agent",
+      "detail": "benchmark/agent-production.mjs restricts the agent to editing design.json; deterministic harness renders and verifies. Does not prove real SaaS feature delivery."
+    },
+    {
+      "id": "scaffold-adapter-only",
+      "severity": "known",
+      "detail": "integrations/scaffold.mjs labels output adapter-only; not workflow proof."
+    },
+    {
+      "id": "distribution-verify-not-run",
+      "severity": "missing-evidence",
+      "detail": "python3 scripts/distribute.py verify was not run for this Phase 0 slice. 15 destinations are inventoried only."
+    },
+    {
+      "id": "doctor-full-not-run",
+      "severity": "missing-evidence",
+      "detail": "node verify/doctor.mjs --full was not run as Phase 0 exit proof."
+    },
+    {
+      "id": "no-consumer-e2e-yet",
+      "severity": "expected",
+      "detail": "Records pilot has in-memory store with fail/retry only; no product consumer integration yet."
+    },
+    {
+      "id": "alexis-runtime-absent",
+      "severity": "expected",
+      "detail": "Multimodal shared-state runtime not implemented; pilot task is selected only."
+    }
+  ],
+  "catalog": {
+    "blocks": 26,
+    "pages": 6,
+    "total": 32,
+    "examples": 30,
+    "templates": 216,
+    "destinations": 15
+  }
+}
