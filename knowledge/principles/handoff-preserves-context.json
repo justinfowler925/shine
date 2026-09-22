@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "id": "handoff-preserves-context",
+  "title": "Preserve drafts and selection across voice/text handoff",
+  "kind": "experimental-hypothesis",
+  "domains": [
+    "multimodal-interaction"
+  ],
+  "tags": [
+    "handoff",
+    "voice",
+    "text",
+    "draft",
+    "alexis",
+    "selection"
+  ],
+  "problemCues": "User switches from speaking to typing mid-task",
+  "preconditions": "Shared task state exists",
+  "decision": "Voice, text, and direct manipulation can alternate without losing drafts, selection, or context.",
+  "tradeoffs": "Shared state model required",
+  "exceptions": "Stateless FAQ turns with no working material",
+  "source": "roadmap multimodal criteria; ai-surfaces handoff",
+  "example": "Alexis typed handoff after interrupt",
+  "validatedBy": "Scripted modality switch keeps draft",
+  "reviewedAt": "2026-09-22"
+}

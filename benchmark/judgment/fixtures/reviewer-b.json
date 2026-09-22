@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "reviewerId": "fixture-reviewer-b",
+  "reviews": [
+    {"variantId":"j1-no-change-queue","overall":"usable","dimensions":{"task-fit":"usable","control":"usable","accessibility":"usable","uncertainty":"usable","modality":"usable"}},
+    {"variantId":"j2-dense-ops","overall":"usable","dimensions":{"task-fit":"usable","control":"usable","accessibility":"usable","uncertainty":"usable","modality":"usable"}},
+    {"variantId":"j3-large-report","overall":"usable","dimensions":{"task-fit":"usable","control":"usable","accessibility":"usable","uncertainty":"usable","modality":"usable"}},
+    {"variantId":"j4-alexis-chart","overall":"needs-minor-revision","dimensions":{"task-fit":"usable","control":"needs-minor-revision","accessibility":"usable","uncertainty":"usable","modality":"usable"}},
+    {"variantId":"j5-persist-adapter","overall":"usable","dimensions":{"task-fit":"usable","control":"usable","accessibility":"usable","uncertainty":"usable","modality":"usable"}},
+    {"variantId":"j6-ai-review","overall":"usable","dimensions":{"task-fit":"usable","control":"usable","accessibility":"usable","uncertainty":"usable","modality":"usable"}},
+    {"variantId":"j7-ambiguous","overall":"usable","dimensions":{"task-fit":"usable","control":"usable","accessibility":"usable","uncertainty":"usable","modality":"usable"}},
+    {"variantId":"j8-permissions","overall":"usable","dimensions":{"task-fit":"usable","control":"usable","accessibility":"usable","uncertainty":"usable","modality":"usable"}}
+  ]
+}

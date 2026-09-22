@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "id": "streaming-progress-visible",
+  "title": "Show streamed agent work as progress, not a frozen spinner",
+  "kind": "strong-default",
+  "domains": [
+    "human-ai-collaboration"
+  ],
+  "tags": [
+    "streaming",
+    "progress",
+    "agent",
+    "loading",
+    "chat"
+  ],
+  "problemCues": "Long AI operation with only an indeterminate spinner",
+  "preconditions": "Stream or multi-step agent work",
+  "decision": "Expose staged progress and partial results when available. Keep stop/cancel reachable.",
+  "tradeoffs": "More state plumbing",
+  "exceptions": "Sub-300ms operations that would flicker",
+  "source": "skill/references/ai-surfaces.md Streaming",
+  "example": "AI research copilot",
+  "validatedBy": "Usability includes stop and partial result",
+  "reviewedAt": "2026-09-22"
+}

@@ -52,6 +52,9 @@
     <div class="layout">
       <section aria-labelledby="list-heading">
         <h2 id="list-heading">Records</h2>
+        <label for="filter">Filter</label>
+        <input id="filter" type="search" placeholder="Filter by title or owner" autocomplete="off" />
+        <p class="status" id="filter-empty" hidden>No matching records. <button type="button" class="secondary" id="clear-filter">Clear filter</button></p>
         <table>
           <thead>
             <tr><th scope="col">Title</th><th scope="col">Owner</th><th scope="col">Status</th></tr>
@@ -94,10 +97,13 @@
     const empty = document.getElementById("empty");
     const status = document.getElementById("status");
     const draftFlag = document.getElementById("draft-flag");
+    const filterInput = document.getElementById("filter");
+    const filterEmpty = document.getElementById("filter-empty");
     const saveBtn = editor.querySelector('button[type="submit"]');
     const failBtn = document.getElementById("fail-next");
     let selectedId = null;
     let draft = null;
+    let filter = "";
 
     function setStatus(message, tone = "") {
       status.textContent = message;
@@ -112,9 +118,17 @@
       if (!allowed) setStatus(store.forbiddenReason(), "danger");
     }
 
-    function renderList() {
+    function filteredRows() {
+      const q = filter.trim().toLowerCase();
       const rows = store.list();
+      if (!q) return rows;
+      return rows.filter((row) => `${row.title} ${row.owner} ${row.status}`.toLowerCase().includes(q));
+    }
+
+    function renderList() {
+      const rows = filteredRows();
       rowsEl.innerHTML = "";
+      filterEmpty.hidden = rows.length > 0;
       for (const row of rows) {
         const tr = document.createElement("tr");
         tr.tabIndex = 0;
@@ -183,6 +197,16 @@
     failBtn.addEventListener("click", () => {
       store.armSaveFailure();
       setStatus("Next save will fail once.", "danger");
+    });
+
+    filterInput.addEventListener("input", () => {
+      filter = filterInput.value;
+      renderList();
+    });
+    document.getElementById("clear-filter").addEventListener("click", () => {
+      filter = "";
+      filterInput.value = "";
+      renderList();
     });
 
     applyRoleChrome();

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "id": "status-not-color-only",
+  "title": "Never encode status with colour alone",
+  "kind": "accessibility-requirement",
+  "domains": [
+    "accessibility",
+    "data-visualization"
+  ],
+  "tags": [
+    "status",
+    "color",
+    "badge",
+    "dataviz",
+    "glyph"
+  ],
+  "problemCues": "Red/green badges or chart direction without text or glyph",
+  "preconditions": "Status or direction shown",
+  "decision": "Pair colour with text or glyph. Direction is per-metric because up can be bad.",
+  "tradeoffs": "Slightly denser labels",
+  "exceptions": "None for status that affects decisions",
+  "source": "skill/references/interaction.md; dataviz.md",
+  "example": "Churn up is bad",
+  "validatedBy": "Contrast + non-color cue present",
+  "reviewedAt": "2026-09-22"
+}

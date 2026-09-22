@@ -79,6 +79,14 @@ try {
     assert.equal(await page.getByRole("button", {name: "Save", exact: true}).isDisabled(), true);
   });
 
+  await page.goto(`${base}/index.html`);
+  await page.getByLabel("Filter").fill("absent-term");
+  await check("filtered empty recovers", async () => {
+    await page.getByText(/No matching records/i).waitFor();
+    await page.getByRole("button", {name: "Clear filter"}).click();
+    assert.equal(await page.locator("#rows tr").count(), 3);
+  });
+
   console.log(`records-pilot browser PASS: ${checked} checks`);
 } finally {
   await browser.close();

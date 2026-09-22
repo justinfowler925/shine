@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "id": "links-are-links",
+  "title": "Use links for navigation and buttons for actions",
+  "kind": "accessibility-requirement",
+  "domains": [
+    "accessibility",
+    "interaction"
+  ],
+  "tags": [
+    "link",
+    "button",
+    "navigation",
+    "keyboard"
+  ],
+  "problemCues": "Div onClick used as navigation or button styled as bare text without role",
+  "preconditions": "Interactive web UI",
+  "decision": "Links are anchors with href. Buttons perform actions. Fake navigation fails keyboard and assistive tech contracts.",
+  "tradeoffs": "Slightly more markup care",
+  "exceptions": "None for supported web stacks",
+  "source": "skill/references/interaction.md",
+  "example": "Record related navigation",
+  "validatedBy": "Measure/a11y flags role mismatches",
+  "reviewedAt": "2026-09-22"
+}

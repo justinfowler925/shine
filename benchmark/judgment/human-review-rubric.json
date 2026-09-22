@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "title": "Phase 1 human judgment review rubric",
+  "workItemId": "8cc1002c-b510-4b95-8f01-c66a2b34c442",
+  "note": "Two independent reviewers score blinded recommendations. Machine eval is necessary but not sufficient for Phase 1 exit.",
+  "passRule": {
+    "variants": 8,
+    "minimumUsableWithoutMajorRedesign": 7,
+    "disallowCriticalAccessibilityOrControlFailure": true,
+    "reportDisagreements": true
+  },
+  "scores": ["usable", "needs-minor-revision", "major-redesign", "critical-fail"],
+  "dimensions": [
+    {
+      "id": "task-fit",
+      "prompt": "Does the recommendation solve the stated user job?"
+    },
+    {
+      "id": "control",
+      "prompt": "Does the user retain control, with clear recovery on failure?"
+    },
+    {
+      "id": "accessibility",
+      "prompt": "Are there critical keyboard or assistive failures?"
+    },
+    {
+      "id": "uncertainty",
+      "prompt": "Is uncertainty acknowledged when evidence is missing?"
+    },
+    {
+      "id": "modality",
+      "prompt": "Is the modality choice appropriate (ui / multimodal / ai-collaboration)?"
+    }
+  ],
+  "usableMeans": "Scores usable or needs-minor-revision on every dimension, with no critical-fail on accessibility or control.",
+  "instructions": [
+    "Reviewers do not see which system produced the recommendation when practical.",
+    "Do not silently replace difficult variants; revise the rubric and report disagreements.",
+    "Held-out implementation briefs remain sealed until Phase 5."
+  ]
+}

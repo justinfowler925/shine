@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "id": "confirm-destructive",
+  "title": "Confirm destructive actions or provide undo",
+  "kind": "strong-default",
+  "domains": [
+    "interaction",
+    "content"
+  ],
+  "tags": [
+    "destructive",
+    "confirm",
+    "undo",
+    "delete",
+    "bulk"
+  ],
+  "problemCues": "Delete or irreversible bulk action with a single click and no recovery",
+  "preconditions": "Action cannot be trivially reversed by the user",
+  "decision": "Confirm destructive actions or provide Undo. Do not rely on toast alone for irreversible writes.",
+  "tradeoffs": "Extra step on rare actions",
+  "exceptions": "Low-risk reversible toggles with clear off state",
+  "source": "skill/references/interaction.md",
+  "example": "Bulk archive queue",
+  "validatedBy": "Usability includes confirm or undo path",
+  "reviewedAt": "2026-09-22"
+}

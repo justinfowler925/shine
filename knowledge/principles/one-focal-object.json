@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "id": "one-focal-object",
+  "title": "Give each view one focal object",
+  "kind": "strong-default",
+  "domains": [
+    "visual-hierarchy",
+    "information-architecture"
+  ],
+  "tags": [
+    "layout",
+    "dashboard",
+    "focal",
+    "hero",
+    "queue"
+  ],
+  "problemCues": "Dashboard or page with six equal modules competing for attention",
+  "preconditions": "Composable regions exist",
+  "decision": "One focal object per view. Supporting modules stay secondary. Six equal cards is an index, not a dashboard.",
+  "tradeoffs": "Requires ranking content",
+  "exceptions": "Directory/catalog pages whose job is browsing many peers",
+  "source": "skill/references/layout.md; patterns.md",
+  "example": "Revenue command dashboard",
+  "validatedBy": "Region graph names a single primary",
+  "reviewedAt": "2026-09-22"
+}

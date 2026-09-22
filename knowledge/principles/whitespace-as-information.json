@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "id": "whitespace-as-information",
+  "title": "Use whitespace to group jobs, not as leftover padding",
+  "kind": "strong-default",
+  "domains": [
+    "visual-hierarchy"
+  ],
+  "tags": [
+    "layout",
+    "spacing",
+    "density",
+    "gestalt"
+  ],
+  "problemCues": "Toolbar mixing nav, filters, and destructive actions in one visual group",
+  "preconditions": "Multi-control chrome",
+  "decision": "Proximity groups one job. Keep three gap tiers; dense UIs cut padding, never leading.",
+  "tradeoffs": "More layout discipline",
+  "exceptions": "Host platforms that own spacing tokens exclusively",
+  "source": "skill/references/layout.md; interaction.md Gestalt",
+  "example": "Queue toolbar grouping",
+  "validatedBy": "Craft review flags mixed-job toolbars",
+  "reviewedAt": "2026-09-22"
+}

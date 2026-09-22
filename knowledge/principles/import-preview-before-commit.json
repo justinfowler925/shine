@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "id": "import-preview-before-commit",
+  "title": "Preview import rows and errors before committing writes",
+  "kind": "strong-default",
+  "domains": [
+    "interaction",
+    "implementation"
+  ],
+  "tags": [
+    "import",
+    "csv",
+    "preview",
+    "partial",
+    "retry"
+  ],
+  "problemCues": "CSV or file import that writes immediately without preview",
+  "preconditions": "Bulk ingest path",
+  "decision": "Show preview, row errors, partial success, and retry of failed rows before treating import as complete.",
+  "tradeoffs": "Extra step",
+  "exceptions": "Append-only logs where preview is impossible \u2014 then stream with clear failure ledger",
+  "source": "learn-csv-import brief; csv-import block",
+  "example": "CSV import wizard",
+  "validatedBy": "Usability covers preview and partial failure",
+  "reviewedAt": "2026-09-22"
+}
