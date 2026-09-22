@@ -5379,7 +5379,7 @@ claim an unregistered skill is covered by Shine's release.
 6. Run `python3 scripts/distribute.py verify --receipt <path>` on the Studio. Public file
    bodies must match canonical hashes. Nucleus computes the deployed ZIP checksum on its server
    at `/api/company-tools/shine/release`; compare it to the exact source package and check its
-   timestamp. Anonymous and invalid-cookie requests to the catalog/download must redirect to login.
+   timestamp. Anonymous and invalid-cookie requests must be refused: the catalog redirects to login; the download API returns a structured session-required/invalid/expired 401.
    No Studio sign-in or protected ZIP download is needed. This establishes package integrity and
    access protection, not an authenticated end-to-end file transfer. Missing evidence is incomplete.
    Studio receipts cover the ten hosted destinations; independently verify the five local agent

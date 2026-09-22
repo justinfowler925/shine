@@ -102,6 +102,13 @@ def access_boundary(url,cookie=None):
     try:
         with urllib.request.build_opener(NoRedirect).open(request,timeout=30) as response: raise RuntimeError('protected surface admitted an unauthenticated request')
     except urllib.error.HTTPError as response:
+        # Nucleus API clients receive a structured session error; document routes redirect.
+        if urllib.parse.urlparse(url).path.startswith('/api/') and response.code == 401:
+            try: body=json.loads(response.read())
+            except (ValueError, UnicodeError): raise RuntimeError('API refusal is not a structured session error')
+            if body.get('code') not in ('SESSION_REQUIRED','SESSION_EXPIRED','SESSION_INVALID') or not isinstance(body.get('error'),str) or not body['error']:
+                raise RuntimeError('API refusal is not a recognized session error')
+            return {'status':401,'code':body['code']}
         target=urllib.parse.urlparse(urllib.parse.urljoin(url,response.headers.get('Location','')))
         origin=urllib.parse.urlparse(url)
         if response.code not in (302,303,307,308) or target.netloc!=origin.netloc or target.path!='/login' or urllib.parse.parse_qs(target.query).get('reason')!=['required']:
