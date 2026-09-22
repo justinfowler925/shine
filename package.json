@@ -37,9 +37,9 @@
     "packet:test": "node verify/design-packet.test.mjs",
     "render:test": "node verify/design-spec.test.mjs",
     "diagnosis:test": "node verify/diagnosis.test.mjs",
- "catalog:test": "node verify/catalog.test.mjs",
- "lint:test": "node verify/design-lint-scope.test.mjs",
- "measure:test": "node verify/measure-closed-details.test.mjs",
+    "catalog:test": "node verify/catalog.test.mjs",
+    "lint:test": "node verify/design-lint-scope.test.mjs",
+    "measure:test": "node verify/measure-closed-details.test.mjs",
     "reference:test": "node verify/reference-contract.test.mjs",
     "voice:test": "node verify/voice-contrast.test.mjs",
     "slds:test": "node verify/slds-tokens.test.mjs",
@@ -59,7 +59,9 @@
     "library:test": "node verify/coverage.test.mjs && node verify/library-browser.mjs",
     "system:test": "node verify/system-tools.test.mjs && node verify/system-browser.mjs",
     "showcase:test": "node verify/showcase-browser.mjs",
-    "showcase:capture": "node verify/capture-showcase.mjs"
+    "showcase:capture": "node verify/capture-showcase.mjs",
+    "integration:test": "node verify/integration-readiness.test.mjs",
+    "untitled:browser": "node verify/untitled-browser.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",

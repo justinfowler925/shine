@@ -24,6 +24,8 @@ jobs:
         run: npm ci --ignore-scripts
       - name: fast import and seeded gates
         run: node verify/doctor.mjs --ci --quiet
+      - name: Integration readiness and private edition integrity
+        run: npm run integration:test
       - name: workflow lanes cannot disappear
         run: node verify/workflow-contract.test.mjs
       - name: tokens build is committed

@@ -14,12 +14,20 @@ def clean(root):
     run('git','merge-base','--is-ancestor','origin/main','HEAD',cwd=root)
 def write(path,value):
     path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(value,indent=2)+'\n')
+def edition_check(path,current):
+    validator=current/'verify/edition.mjs'
+    script="import {verifySkillDeployment} from "+json.dumps(validator.resolve().as_uri())+";const r=verifySkillDeployment(process.argv[1],process.argv[2]);console.log(JSON.stringify(r));if(r.status!=='passed')process.exit(1)"
+    result=subprocess.run(['node','--input-type=module','-e',script,str(path),str(current)],capture_output=True,text=True)
+    if result.returncode: raise RuntimeError('Private edition invalid or stale; rebuild it before distributing: '+result.stdout.strip())
+    return json.loads(result.stdout)
 def link():
     current=pathlib.Path('~/.local/share/shine/current').expanduser()
     for key,(name,suffix) in CONFIG['links'].items():
         path=pathlib.Path(name).expanduser(); target=current/suffix
         if not target.exists(): raise RuntimeError(f'{key}: installed target missing')
         if path.exists() and not path.is_symlink(): raise RuntimeError(f'{key}: refusing to replace a real directory/file: {path}')
+        if suffix=='skill' and path.is_symlink() and (path.resolve().parent/'clearspeed-edition.json').exists():
+            edition_check(path,current);print(f'{key}: preserved validated private edition {path.resolve()}');continue
         path.parent.mkdir(parents=True,exist_ok=True)
         temp=path.with_name(path.name+'.release-next');temp.unlink(missing_ok=True);temp.symlink_to(target);temp.replace(path)
         print(f'{key}: {path} -> {target}')
@@ -114,7 +122,9 @@ def verify(receipt):
     for key,(name,suffix) in CONFIG['links'].items():
         def local(name=name,suffix=suffix):
             path=pathlib.Path(name).expanduser()
-            if not path.is_symlink() or path.resolve()!=(current/suffix).resolve(): raise RuntimeError('stale or missing agent link')
+            if not path.is_symlink(): raise RuntimeError('missing agent link')
+            if suffix=='skill': edition_check(path,current)
+            elif path.resolve()!=(current/suffix).resolve(): raise RuntimeError('stale agent link')
             release=json.loads((current/'release.json').read_text())
             if release['sha']!=expected['sourceRevision'] or sha((current/'skill/SKILL.md').read_bytes())!=expected['skillSha256']: raise RuntimeError('installed release differs')
             if path.is_file() and sha(path.read_bytes())!=sha((ROOT/suffix).read_bytes()): raise RuntimeError('compatibility agent differs')

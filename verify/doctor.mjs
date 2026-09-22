@@ -24,6 +24,7 @@
 //   --ci     skip machine-local checks (hook wirings, skill symlinks, vendored copies)
 //   --quiet  print only failures (for a sessionStart hook)
 
+import { verifySkillDeployment } from "./edition.mjs";
 import { readFileSync, readdirSync, existsSync, realpathSync, mkdirSync, mkdtempSync, writeFileSync, statSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { join, dirname, resolve } from "node:path";
@@ -63,6 +64,7 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
 
 {
   for (const [name,file,needle] of [
+    ["integration readiness and edition integrity", "verify/integration-readiness.test.mjs", "edition integrity"],
     ["benchmark output quality gates", "benchmark/quality.test.mjs", "clone structure"],
     ["functional originality gates", "verify/originality.test.mjs", "attribute stamp"],
   ]) {
@@ -273,12 +275,14 @@ if (!CI) {
   for (const [surface, p] of [
     ["Cursor", join(HOME, ".cursor/skills/shine")],
     ["Codex", join(HOME, ".agents/skills/shine")],
+    ["Claude", join(HOME, ".claude/skills/shine")],
   ]) {
     const want = join(SHINE, "skill");
     if (!existsSync(p)) fail(`${surface} skill deployed`, `missing: ln -s ${want} ${p}`);
-    else if (realpathSync(p) !== realpathSync(want))
-      fail(`${surface} skill deployed`, `points at ${realpathSync(p)}, not ${want}`);
-    else ok(`${surface} skill deployed`, p.replace(HOME, "~"));
+    else { const check=verifySkillDeployment(p,SHINE);
+      if(check.status!=="passed")fail(`${surface} skill deployed`,check.reason);
+      else ok(`${surface} skill deployed`,`${check.kind}${check.profile ? " / "+check.profile : ""}: ${p.replace(HOME,"~")}`);
+    }
   }
 }
 
