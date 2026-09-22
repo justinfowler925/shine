@@ -28,6 +28,7 @@ export const RECIPE_KITS = {
   tanstack: ["untitled-ui-react", "shadcn-registry", "magicui", "cult-ui", ...TAILWIND_PAGES],
   native: ["untitled-ui-react", "shadcn-registry", "flowbite-admin"],
   lex: ["slds"],
+  untitled: ["untitled-ui-react", ...TAILWIND_PAGES],
 };
 
 export const RECIPES = {
@@ -48,6 +49,7 @@ export const RECIPES = {
 };
 
 // Styling, interactive primitives and data state are independent capabilities.
+RECIPES.untitled = { packages: ["react-aria-components", "tailwindcss"], cite: "untitled-table", imports: [], api: [], contract: "Untitled public source on React Aria; verify source closure, aliases, consumer theme tokens and interactions before import" };
 RECIPES.shadcn = { packages: [], cite: "shadcn-dashboard-01", imports: [], api: [], contract: "installed shadcn controls; consumer tokens and layout; no table engine required" };
 RECIPES.tailwind = { packages: ["tailwindcss"], cite: "untitled-table", imports: [], api: [], contract: "Tailwind layout and styling around existing consumer components and semantic HTML" };
 RECIPES.tanstack = { ...RECIPES["shadcn-tanstack"], contract: "consumer table chrome over installed TanStack state; no shadcn imports" };
@@ -71,6 +73,7 @@ export function detectProject(project) {
   const shadcn = Boolean(config);
   const tanstack = Boolean(deps["@tanstack/react-table"]);
   const installed = shadcn ? [tanstack ? "shadcn-tanstack" : "shadcn"] : tailwind ? [tanstack ? "tailwind-tanstack" : "tailwind"] : tanstack ? ["tanstack"] : [];
+  if (deps["react-aria-components"] && tailwind && !shadcn) installed.splice(0,installed.length,"untitled");
   const lex = existsSync(join(root, "sfdx-project.json")) || existsSync(join(root, "force-app"));
   const framework = lex ? "lex" : deps.next ? "next" : deps.vite ? "vite" : deps.react ? "react" : "native";
   const managers = [["pnpm-lock.yaml", "pnpm"], ["yarn.lock", "yarn"], ["bun.lock", "bun"], ["bun.lockb", "bun"], ["package-lock.json", "npm"]];
