@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "title": "Phase 1 judgment-eval variants (learning-derived)",
+  "note": "Eight blinded decision variants for initial qualification. Held-out implementation briefs stay sealed in expert-briefs.json.",
+  "variants": [
+    {
+      "id": "j1-no-change-queue",
+      "sourceBrief": "learn-no-change-healthy",
+      "job": "Audit a healthy support queue that already meets task, keyboard, and recovery — recommend changes only if evidenced",
+      "expected": {
+        "verdict": "no-change",
+        "mustHitPrincipleIds": ["no-change-when-sound"],
+        "mustNotClaim": ["redesign-shell", "replace-datagrid"],
+        "modality": "ui"
+      }
+    },
+    {
+      "id": "j2-dense-ops",
+      "sourceBrief": "learn-dense-ops-queue",
+      "job": "Dense operations queue: triage unresolved tickets, assign owner, keep filters across refresh",
+      "expected": {
+        "verdict": "change",
+        "mustHitPrincipleIds": ["empty-filtered-error-loading", "url-reflects-state"],
+        "preferredPatterns": ["datagrid", "queue"],
+        "modality": "ui"
+      }
+    },
+    {
+      "id": "j3-large-report",
+      "sourceBrief": "learn-report-drilldown",
+      "job": "Report with many rows needing overview before detail drill-down into one exception cohort",
+      "expected": {
+        "verdict": "change",
+        "mustHitPrincipleIds": ["table-summary-above-large-grids", "uncertainty-stays-unknown"],
+        "preferredPatterns": ["summary-table", "report"],
+        "modality": "ui"
+      }
+    },
+    {
+      "id": "j4-alexis-chart",
+      "sourceBrief": "learn-multimodal-continuity",
+      "job": "Alexis chart task with click why-this, interrupt, filter edit, and typed handoff",
+      "expected": {
+        "verdict": "change",
+        "mustHitPrincipleIds": ["shared-selection-for-multimodal", "interrupt-cancels-stale-work"],
+        "modality": "multimodal",
+        "mustNotClaim": ["chat-sidebar-only"]
+      }
+    },
+    {
+      "id": "j5-persist-adapter",
+      "sourceBrief": "learn-record-edit-persist",
+      "job": "Records inspect edit persist through consumer adapter with draft retention on failure",
+      "expected": {
+        "verdict": "change",
+        "mustHitPrincipleIds": ["adapter-not-mock-completion", "draft-retention-on-failure"],
+        "preferredPatterns": ["record-editor", "form"],
+        "modality": "ui"
+      }
+    },
+    {
+      "id": "j6-ai-review",
+      "sourceBrief": "learn-ai-review-proposed-change",
+      "job": "AI proposes a field change; human reviews, edits, accepts or rejects with visible action states",
+      "expected": {
+        "verdict": "change",
+        "mustHitPrincipleIds": ["observable-agent-actions"],
+        "modality": "ai-collaboration"
+      }
+    },
+    {
+      "id": "j7-ambiguous",
+      "sourceBrief": "learn-ambiguous-intent",
+      "job": "Ambiguous request to improve the customer screen — diagnose whether navigation, record detail, or queue is the real job",
+      "expected": {
+        "verdict": "change",
+        "mustHitPrincipleIds": ["sibling-before-catalog"],
+        "requireUncertainty": true,
+        "modality": "ui"
+      }
+    },
+    {
+      "id": "j8-permissions",
+      "sourceBrief": "learn-permissions-panel",
+      "job": "Membership and role permissions panel with forbidden actions explained, not silently missing",
+      "expected": {
+        "verdict": "change",
+        "mustHitPrincipleIds": ["explain-forbidden-actions"],
+        "preferredPatterns": ["settings", "permissions"],
+        "modality": "ui"
+      }
+    }
+  ]
+}

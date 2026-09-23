@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "one-primary-action",
+  "title": "Keep one primary action per view",
+  "kind": "strong-default",
+  "domains": ["interaction", "visual-hierarchy"],
+  "tags": ["primary", "hick", "toolbar", "form", "cta"],
+  "problemCues": "Multiple filled buttons competing for the next step",
+  "preconditions": "Task has a dominant next action",
+  "decision": "One primary per view. Secondary actions use quieter treatments. Competing filled treatments fail craft review.",
+  "tradeoffs": "Requires ranking actions",
+  "exceptions": "Paired confirm/cancel where cancel is explicitly secondary",
+  "source": "skill/references/interaction.md Fitts/Hick",
+  "example": "Record save as sole filled action",
+  "validatedBy": "Design-lint / review notes competing primaries",
+  "reviewedAt": "2026-09-22"
+}

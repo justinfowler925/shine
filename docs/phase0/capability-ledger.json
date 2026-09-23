@@ -1,0 +1,1126 @@
+{
+  "schemaVersion": 1,
+  "title": "Shine Phase 0 capability ledger",
+  "workItemId": "540fff5d-9b21-4aef-9fb4-3eaac06e9183",
+  "roadmap": "fowler-brain/strategy/plans/2026-09-22-shine-expert-saas-system-roadmap.md",
+  "identity": {
+    "observedAt": "2026-09-22T23:08:52.817441+00:00",
+    "packageVersion": "4.0.2",
+    "worktreeSha": "12dd2714a3de0ad40b96922a985bf05f68493021",
+    "installedReleaseSha": "12dd2714a3de0ad40b96922a985bf05f68493021",
+    "installedMatchesWorktree": true,
+    "originMain": "12dd2714a3de0ad40b96922a985bf05f68493021",
+    "shineNativeCoreWarning": "~/Projects/shine-native-core is on fix/shine-native-core @ fa1d8bc \u2014 not release authority; do not release from it blind.",
+    "clearspeedEditionPath": "/Users/justinfowler/.local/share/shine/editions/12dd2714a3de0ad40b96922a985bf05f68493021-clearspeed-f04bac3351ed",
+    "clearspeedEditionPresent": true,
+    "catalogBlocks": 26,
+    "catalogPages": 6,
+    "catalogTotal": 32,
+    "examplesTotal": 30,
+    "templatesTotal": 216,
+    "requiredDestinations": 15,
+    "destinationIds": [
+      "source",
+      "local-codex",
+      "local-cursor",
+      "local-claude",
+      "local-codex-alias",
+      "local-cursor-alias",
+      "public-skill",
+      "public-markdown",
+      "public-plugin",
+      "public-page",
+      "public-blocks",
+      "portfolio-registry",
+      "portfolio-page",
+      "nucleus-package",
+      "nucleus-access-boundary"
+    ]
+  },
+  "supportBoundary": {
+    "v1Stacks": [
+      "React/TypeScript web",
+      "consumer shadcn-compatible controls",
+      "Tailwind (consumer prefix)"
+    ],
+    "deferredStacks": [
+      "Lightning/lex (keep current level)",
+      "native mobile",
+      "other frameworks until separately qualified"
+    ],
+    "consumerResponsibilities": [
+      "auth",
+      "billing",
+      "databases",
+      "business policy",
+      "provider media pipelines"
+    ],
+    "shineOwns": [
+      "UX design judgment",
+      "component/pattern selection",
+      "implementation in consumer architecture",
+      "verification",
+      "upgrade tracking",
+      "delivery evidence"
+    ],
+    "eightFamilies": [
+      "workspace-navigation",
+      "records-search",
+      "forms-validation",
+      "approvals-async",
+      "imports-files-media",
+      "reporting-drilldown",
+      "membership-settings",
+      "ai-collaboration"
+    ]
+  },
+  "catalog": [
+    {
+      "id": "async-state",
+      "kind": "block",
+      "title": "Async state",
+      "categories": [
+        "datagrid",
+        "record",
+        "dashboard",
+        "form"
+      ],
+      "family": "approvals-async",
+      "sourcePath": "blocks/async-state.tsx",
+      "bytes": 1373,
+      "status": "runnable",
+      "export": "AsyncState",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "collection",
+      "kind": "block",
+      "title": "Collection disclosure",
+      "categories": [
+        "datagrid",
+        "dashboard"
+      ],
+      "family": "records-search",
+      "sourcePath": "blocks/collection.tsx",
+      "bytes": 1293,
+      "status": "runnable",
+      "export": "Collection",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "data-grid",
+      "kind": "block",
+      "title": "Record data grid",
+      "categories": [
+        "datagrid"
+      ],
+      "family": "records-search",
+      "sourcePath": "blocks/data-grid.tsx",
+      "bytes": 9843,
+      "status": "runnable",
+      "export": "DataGrid",
+      "dependencies": [
+        "@tanstack/react-table@^8.21.3"
+      ],
+      "blocks": [
+        "async-state",
+        "collection"
+      ]
+    },
+    {
+      "id": "record-editor",
+      "kind": "block",
+      "title": "Record editor",
+      "categories": [
+        "form",
+        "record"
+      ],
+      "family": "forms-validation",
+      "sourcePath": "blocks/record-editor.tsx",
+      "bytes": 5780,
+      "status": "runnable",
+      "export": "RecordEditor",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "detail-sheet",
+      "kind": "block",
+      "title": "Record detail sheet",
+      "categories": [
+        "record",
+        "datagrid"
+      ],
+      "family": "records-search",
+      "sourcePath": "blocks/detail-sheet.tsx",
+      "bytes": 1162,
+      "status": "runnable",
+      "export": "DetailSheet",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "workspace-tabs",
+      "kind": "block",
+      "title": "Tabbed workspace",
+      "categories": [
+        "form",
+        "record",
+        "dashboard",
+        "datagrid"
+      ],
+      "family": "workspace-navigation",
+      "sourcePath": "blocks/workspace-tabs.tsx",
+      "bytes": 1312,
+      "status": "runnable",
+      "export": "WorkspaceTabs",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "application-nav",
+      "kind": "block",
+      "title": "Application navigation",
+      "categories": [
+        "datagrid",
+        "record",
+        "dashboard",
+        "form"
+      ],
+      "family": "workspace-navigation",
+      "sourcePath": "blocks/application-nav.tsx",
+      "bytes": 1225,
+      "status": "runnable",
+      "export": "ApplicationNav",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "filter-bar",
+      "kind": "block",
+      "title": "Search and filter bar",
+      "categories": [
+        "datagrid",
+        "dashboard"
+      ],
+      "family": "records-search",
+      "sourcePath": "blocks/filter-bar.tsx",
+      "bytes": 1921,
+      "status": "runnable",
+      "export": "FilterBar",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "date-range",
+      "kind": "block",
+      "title": "Date range",
+      "categories": [
+        "dashboard",
+        "form"
+      ],
+      "family": "forms-validation",
+      "sourcePath": "blocks/date-range.tsx",
+      "bytes": 2492,
+      "status": "runnable",
+      "export": "DateRange",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "form-panel",
+      "kind": "block",
+      "title": "Validated form panel",
+      "categories": [
+        "form",
+        "record"
+      ],
+      "family": "forms-validation",
+      "sourcePath": "blocks/form-panel.tsx",
+      "bytes": 6357,
+      "status": "runnable",
+      "export": "FormPanel",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "file-upload",
+      "kind": "block",
+      "title": "File upload",
+      "categories": [
+        "form",
+        "record"
+      ],
+      "family": "imports-files-media",
+      "sourcePath": "blocks/file-upload.tsx",
+      "bytes": 4816,
+      "status": "runnable",
+      "export": "FileUpload",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "notification-center",
+      "kind": "block",
+      "title": "Notification center",
+      "categories": [
+        "dashboard",
+        "record"
+      ],
+      "family": "approvals-async",
+      "sourcePath": "blocks/notification-center.tsx",
+      "bytes": 2684,
+      "status": "runnable",
+      "export": "NotificationCenter",
+      "dependencies": [],
+      "blocks": [
+        "detail-sheet"
+      ]
+    },
+    {
+      "id": "calendar-agenda",
+      "kind": "block",
+      "title": "Calendar agenda",
+      "categories": [
+        "dashboard",
+        "record"
+      ],
+      "family": "reporting-drilldown",
+      "sourcePath": "blocks/calendar-agenda.tsx",
+      "bytes": 4635,
+      "status": "runnable",
+      "export": "CalendarAgenda",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "kanban-board",
+      "kind": "block",
+      "title": "Kanban board",
+      "categories": [
+        "dashboard",
+        "datagrid"
+      ],
+      "family": "records-search",
+      "sourcePath": "blocks/kanban-board.tsx",
+      "bytes": 3365,
+      "status": "runnable",
+      "export": "KanbanBoard",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "record-list-page",
+      "kind": "page",
+      "title": "Record list page",
+      "categories": [
+        "datagrid"
+      ],
+      "family": "records-search",
+      "sourcePath": "blocks/record-list-page.tsx",
+      "bytes": 2132,
+      "status": "runnable",
+      "export": "RecordListPage",
+      "dependencies": [],
+      "blocks": [
+        "data-grid",
+        "detail-sheet",
+        "record-editor"
+      ]
+    },
+    {
+      "id": "record-detail-page",
+      "kind": "page",
+      "title": "Record detail page",
+      "categories": [
+        "record"
+      ],
+      "family": "records-search",
+      "sourcePath": "blocks/record-detail-page.tsx",
+      "bytes": 2251,
+      "status": "runnable",
+      "export": "RecordDetailPage",
+      "dependencies": [],
+      "blocks": [
+        "workspace-tabs",
+        "form-panel"
+      ]
+    },
+    {
+      "id": "settings-page",
+      "kind": "page",
+      "title": "Settings page",
+      "categories": [
+        "form"
+      ],
+      "family": "forms-validation",
+      "sourcePath": "blocks/settings-page.tsx",
+      "bytes": 1337,
+      "status": "runnable",
+      "export": "SettingsPage",
+      "dependencies": [],
+      "blocks": [
+        "workspace-tabs",
+        "form-panel"
+      ]
+    },
+    {
+      "id": "report-page",
+      "kind": "page",
+      "title": "Report page",
+      "categories": [
+        "dashboard"
+      ],
+      "family": "reporting-drilldown",
+      "sourcePath": "blocks/report-page.tsx",
+      "bytes": 1709,
+      "status": "runnable",
+      "export": "ReportPage",
+      "dependencies": [],
+      "blocks": [
+        "date-range",
+        "data-grid"
+      ]
+    },
+    {
+      "id": "approval-page",
+      "kind": "page",
+      "title": "Approval page",
+      "categories": [
+        "datagrid",
+        "record"
+      ],
+      "family": "approvals-async",
+      "sourcePath": "blocks/approval-page.tsx",
+      "bytes": 4843,
+      "status": "runnable",
+      "export": "ApprovalPage",
+      "dependencies": [],
+      "blocks": [
+        "data-grid"
+      ]
+    },
+    {
+      "id": "application-shell",
+      "kind": "block",
+      "title": "Application shell",
+      "categories": [
+        "dashboard"
+      ],
+      "family": "workspace-navigation",
+      "sourcePath": "blocks/application-shell.tsx",
+      "bytes": 2072,
+      "status": "runnable",
+      "export": "ApplicationShell",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "command-palette",
+      "kind": "block",
+      "title": "Command palette",
+      "categories": [
+        "dashboard",
+        "record"
+      ],
+      "family": "workspace-navigation",
+      "sourcePath": "blocks/command-palette.tsx",
+      "bytes": 2365,
+      "status": "runnable",
+      "export": "CommandPalette",
+      "dependencies": [
+        "cmdk@^1.1.1"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "multi-select",
+      "kind": "block",
+      "title": "Searchable multiselect",
+      "categories": [
+        "form",
+        "datagrid"
+      ],
+      "family": "records-search",
+      "sourcePath": "blocks/multi-select.tsx",
+      "bytes": 2130,
+      "status": "runnable",
+      "export": "MultiSelect",
+      "dependencies": [
+        "cmdk@^1.1.1"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "form-wizard",
+      "kind": "block",
+      "title": "Form wizard",
+      "categories": [
+        "form"
+      ],
+      "family": "forms-validation",
+      "sourcePath": "blocks/form-wizard.tsx",
+      "bytes": 2519,
+      "status": "runnable",
+      "export": "FormWizard",
+      "dependencies": [],
+      "blocks": [
+        "form-panel"
+      ]
+    },
+    {
+      "id": "activity-feed",
+      "kind": "block",
+      "title": "Activity feed",
+      "categories": [
+        "record"
+      ],
+      "family": "approvals-async",
+      "sourcePath": "blocks/activity-feed.tsx",
+      "bytes": 1480,
+      "status": "runnable",
+      "export": "ActivityFeed",
+      "dependencies": [],
+      "blocks": [
+        "async-state"
+      ]
+    },
+    {
+      "id": "comment-thread",
+      "kind": "block",
+      "title": "Comment thread",
+      "categories": [
+        "record"
+      ],
+      "family": "ai-collaboration",
+      "sourcePath": "blocks/comment-thread.tsx",
+      "bytes": 1714,
+      "status": "runnable",
+      "export": "CommentThread",
+      "dependencies": [],
+      "blocks": [
+        "activity-feed"
+      ]
+    },
+    {
+      "id": "attachment-manager",
+      "kind": "block",
+      "title": "Attachment manager",
+      "categories": [
+        "record",
+        "form"
+      ],
+      "family": "imports-files-media",
+      "sourcePath": "blocks/attachment-manager.tsx",
+      "bytes": 2507,
+      "status": "runnable",
+      "export": "AttachmentManager",
+      "dependencies": [],
+      "blocks": [
+        "file-upload"
+      ]
+    },
+    {
+      "id": "permissions-panel",
+      "kind": "block",
+      "title": "Permissions panel",
+      "categories": [
+        "form"
+      ],
+      "family": "membership-settings",
+      "sourcePath": "blocks/permissions-panel.tsx",
+      "bytes": 821,
+      "status": "runnable",
+      "export": "PermissionsPanel",
+      "dependencies": [],
+      "blocks": [
+        "form-panel"
+      ]
+    },
+    {
+      "id": "chart-panel",
+      "kind": "block",
+      "title": "Chart panel",
+      "categories": [
+        "dashboard"
+      ],
+      "family": "reporting-drilldown",
+      "sourcePath": "blocks/chart-panel.tsx",
+      "bytes": 2644,
+      "status": "runnable",
+      "export": "ChartPanel",
+      "dependencies": [
+        "recharts@^3.10.1"
+      ],
+      "blocks": [
+        "async-state"
+      ]
+    },
+    {
+      "id": "dashboard-page",
+      "kind": "page",
+      "title": "Dashboard page",
+      "categories": [
+        "dashboard"
+      ],
+      "family": "reporting-drilldown",
+      "sourcePath": "blocks/dashboard-page.tsx",
+      "bytes": 1397,
+      "status": "runnable",
+      "export": "DashboardPage",
+      "dependencies": [],
+      "blocks": [
+        "chart-panel",
+        "date-range"
+      ]
+    },
+    {
+      "id": "server-data-grid",
+      "kind": "block",
+      "title": "Server record grid",
+      "categories": [
+        "datagrid"
+      ],
+      "family": "records-search",
+      "sourcePath": "blocks/server-data-grid.tsx",
+      "bytes": 8707,
+      "status": "runnable",
+      "export": "ServerDataGrid",
+      "dependencies": [
+        "@tanstack/react-table@^8.21.3"
+      ],
+      "blocks": [
+        "async-state",
+        "collection",
+        "filter-bar"
+      ]
+    },
+    {
+      "id": "saved-views",
+      "kind": "block",
+      "title": "Saved views",
+      "categories": [
+        "datagrid"
+      ],
+      "family": "records-search",
+      "sourcePath": "blocks/saved-views.tsx",
+      "bytes": 3155,
+      "status": "runnable",
+      "export": "SavedViews",
+      "dependencies": [],
+      "blocks": []
+    },
+    {
+      "id": "csv-import",
+      "kind": "block",
+      "title": "CSV import",
+      "categories": [
+        "datagrid",
+        "form"
+      ],
+      "family": "imports-files-media",
+      "sourcePath": "blocks/csv-import.tsx",
+      "bytes": 4290,
+      "status": "runnable",
+      "export": "CsvImport",
+      "dependencies": [
+        "papaparse@^5.5.3",
+        "@types/papaparse@^5.3.16"
+      ],
+      "blocks": []
+    }
+  ],
+  "examples": [
+    {
+      "id": "dashboard",
+      "title": "The overview",
+      "family": "Dashboards",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "system",
+      "title": "The workspace",
+      "family": "Workspaces",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "list",
+      "title": "The register",
+      "family": "Records",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "detail",
+      "title": "The record",
+      "family": "Records",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "settings",
+      "title": "The settings",
+      "family": "Forms",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "approvals",
+      "title": "The review",
+      "family": "Records",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "report",
+      "title": "The report",
+      "family": "Dashboards",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "remote",
+      "title": "The big picture",
+      "family": "Records",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "projects",
+      "title": "The project board",
+      "family": "Workspaces",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "activity",
+      "title": "The pulse",
+      "family": "Workspaces",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "team",
+      "title": "The team",
+      "family": "Workspaces",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "calendar",
+      "title": "The schedule",
+      "family": "Workspaces",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "files",
+      "title": "The document room",
+      "family": "Workspaces",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "onboarding",
+      "title": "The beginning",
+      "family": "Forms",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "support",
+      "title": "The help desk",
+      "family": "Records",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "billing",
+      "title": "The billing desk",
+      "family": "Records",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "help",
+      "title": "The handbook",
+      "family": "Workspaces",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "editor",
+      "title": "The writing room",
+      "family": "Workspaces",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "article",
+      "title": "The guide",
+      "family": "Workspaces",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "landing",
+      "title": "The welcome",
+      "family": "Marketing",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "pricing",
+      "title": "The plans",
+      "family": "Marketing",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "contact",
+      "title": "The conversation",
+      "family": "Marketing",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "login",
+      "title": "The sign in",
+      "family": "Account",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "signup",
+      "title": "The new account",
+      "family": "Account",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "recovery",
+      "title": "The fresh start",
+      "family": "Account",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "status",
+      "title": "The way forward",
+      "family": "Account",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "store",
+      "title": "The studio shop",
+      "family": "Commerce",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "product",
+      "title": "The everyday essential",
+      "family": "Commerce",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "cart",
+      "title": "The shopping bag",
+      "family": "Commerce",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    },
+    {
+      "id": "checkout",
+      "title": "The final details",
+      "family": "Commerce",
+      "kind": "composed-example",
+      "status": "example-not-registry-template",
+      "note": "Composed library example; not an additional installable registry template."
+    }
+  ],
+  "tools": [
+    {
+      "path": "core/design-packet.mjs",
+      "role": "design-packet",
+      "exists": true,
+      "bytes": 19402
+    },
+    {
+      "path": "core/diagnosis.mjs",
+      "role": "diagnosis",
+      "exists": true,
+      "bytes": 4993
+    },
+    {
+      "path": "core/design-spec.mjs",
+      "role": "design-spec",
+      "exists": true,
+      "bytes": 4886
+    },
+    {
+      "path": "core/render-spec.mjs",
+      "role": "render-spec",
+      "exists": true,
+      "bytes": 14678
+    },
+    {
+      "path": "integrations/resolve.mjs",
+      "role": "resolve",
+      "exists": true,
+      "bytes": 12399
+    },
+    {
+      "path": "integrations/library-select.mjs",
+      "role": "library-select",
+      "exists": true,
+      "bytes": 8754
+    },
+    {
+      "path": "integrations/blocks.mjs",
+      "role": "blocks",
+      "exists": true,
+      "bytes": 7391
+    },
+    {
+      "path": "integrations/compatibility.mjs",
+      "role": "compatibility",
+      "exists": true,
+      "bytes": 4805
+    },
+    {
+      "path": "integrations/coverage.mjs",
+      "role": "coverage",
+      "exists": true,
+      "bytes": 5598
+    },
+    {
+      "path": "integrations/upgrade.mjs",
+      "role": "upgrade",
+      "exists": true,
+      "bytes": 5798
+    },
+    {
+      "path": "integrations/scaffold.mjs",
+      "role": "scaffold-adapter-only",
+      "exists": true,
+      "bytes": 3113
+    },
+    {
+      "path": "integrations/surface-audit.mjs",
+      "role": "surface-audit",
+      "exists": true,
+      "bytes": 11057
+    },
+    {
+      "path": "integrations/readiness.mjs",
+      "role": "readiness",
+      "exists": true,
+      "bytes": 4132
+    },
+    {
+      "path": "verify/measure.mjs",
+      "role": "measure",
+      "exists": true,
+      "bytes": 47745
+    },
+    {
+      "path": "verify/usability.mjs",
+      "role": "usability",
+      "exists": true,
+      "bytes": 8153
+    },
+    {
+      "path": "verify/compare.mjs",
+      "role": "compare",
+      "exists": true,
+      "bytes": 5981
+    },
+    {
+      "path": "verify/prove.mjs",
+      "role": "prove",
+      "exists": true,
+      "bytes": 9251
+    },
+    {
+      "path": "verify/doctor.mjs",
+      "role": "doctor",
+      "exists": true,
+      "bytes": 97447
+    },
+    {
+      "path": "verify/completion-receipt.mjs",
+      "role": "completion-receipt",
+      "exists": true,
+      "bytes": 3265
+    },
+    {
+      "path": "benchmark/agent-production.mjs",
+      "role": "agent-benchmark-designjson-only",
+      "exists": true,
+      "bytes": 20238
+    },
+    {
+      "path": "benchmark/briefs.json",
+      "role": "benchmark-briefs-existing",
+      "exists": true,
+      "bytes": 2659
+    }
+  ],
+  "gaps": [
+    {
+      "id": "knowledge-system",
+      "severity": "blocking",
+      "detail": "No knowledge/ directory or principle-record schema for task-specific design judgment."
+    },
+    {
+      "id": "case-schema",
+      "severity": "blocking",
+      "detail": "No resumable case workflow schema beyond design-packet JSON; no checkpoints for interrupted implementation sessions."
+    },
+    {
+      "id": "agent-real-edit",
+      "severity": "blocking",
+      "detail": "benchmark/agent-production.mjs restricts the agent to editing design.json only; does not prove real SaaS feature delivery."
+    },
+    {
+      "id": "scaffold-adapter-only",
+      "severity": "known",
+      "detail": "integrations/scaffold.mjs labels output adapter-only; not a rendered workflow proof."
+    },
+    {
+      "id": "expert-briefs",
+      "severity": "blocking",
+      "detail": "Roadmap requires 12 learning + 8 held-out briefs with multimodal/no-change cases; existing briefs.json has 24 design-spec briefs without held-out freeze."
+    },
+    {
+      "id": "multimodal-shared-state",
+      "severity": "later",
+      "detail": "Alexis shared identifiers / interruption contracts not implemented in Shine core."
+    },
+    {
+      "id": "eight-family-completeness",
+      "severity": "later",
+      "detail": "Families partially covered by blocks/pages; AI collaboration and multimodal packs incomplete."
+    }
+  ],
+  "statusCounts": {
+    "catalogRunnable": 32,
+    "catalogMissing": 0,
+    "toolsPresent": 21,
+    "toolsMissing": 0
+  },
+  "familyCoverage": {
+    "workspace-navigation": {
+      "catalogEntries": [
+        "workspace-tabs",
+        "application-nav",
+        "application-shell",
+        "command-palette"
+      ],
+      "count": 4
+    },
+    "records-search": {
+      "catalogEntries": [
+        "collection",
+        "data-grid",
+        "detail-sheet",
+        "filter-bar",
+        "kanban-board",
+        "record-list-page",
+        "record-detail-page",
+        "multi-select",
+        "server-data-grid",
+        "saved-views"
+      ],
+      "count": 10
+    },
+    "forms-validation": {
+      "catalogEntries": [
+        "record-editor",
+        "date-range",
+        "form-panel",
+        "settings-page",
+        "form-wizard"
+      ],
+      "count": 5
+    },
+    "approvals-async": {
+      "catalogEntries": [
+        "async-state",
+        "notification-center",
+        "approval-page",
+        "activity-feed"
+      ],
+      "count": 4
+    },
+    "imports-files-media": {
+      "catalogEntries": [
+        "file-upload",
+        "attachment-manager",
+        "csv-import"
+      ],
+      "count": 3
+    },
+    "reporting-drilldown": {
+      "catalogEntries": [
+        "calendar-agenda",
+        "report-page",
+        "chart-panel",
+        "dashboard-page"
+      ],
+      "count": 4
+    },
+    "membership-settings": {
+      "catalogEntries": [
+        "permissions-panel"
+      ],
+      "count": 1
+    },
+    "ai-collaboration": {
+      "catalogEntries": [
+        "comment-thread"
+      ],
+      "count": 1
+    },
+    "unassigned": {
+      "catalogEntries": [],
+      "count": 0
+    }
+  }
+}

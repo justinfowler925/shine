@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "adapter-not-mock-completion",
+  "title": "Treat mock callbacks as incomplete integration evidence",
+  "kind": "strong-default",
+  "domains": ["implementation", "verification"],
+  "tags": ["adapter", "persist", "integration", "scaffold"],
+  "problemCues": "Scaffolded or demo data layer claims a workflow is done",
+  "preconditions": "Workflow mutates or loads product data",
+  "decision": "Require real consumer adapter bindings for persist/load paths. Adapter-only scaffolds are starting points, not completion proof. Auth, policy, and media pipelines stay behind explicit adapters.",
+  "tradeoffs": "Slower demos; honest delivery receipts",
+  "exceptions": "Isolated fixtures explicitly labeled synthetic for teaching or held-out scoring",
+  "source": "integrations/scaffold.mjs; roadmap Phase 2 exit gate",
+  "example": "records-inspect-edit-persist pilot",
+  "validatedBy": "Usability/completion evidence names the adapter; mock-only success fails the pilot gate",
+  "reviewedAt": "2026-09-22"
+}

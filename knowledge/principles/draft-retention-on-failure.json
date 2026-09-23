@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "draft-retention-on-failure",
+  "title": "Retain edited drafts when save or submit fails",
+  "kind": "strong-default",
+  "domains": ["interaction", "forms"],
+  "tags": ["draft", "retry", "persist", "save", "form", "record"],
+  "problemCues": "Failed save clears the form or reverts without telling the user",
+  "preconditions": "Mutable record or form with network/adapter write",
+  "decision": "Keep the user's draft visible after failure and offer retry. Distinguish cancelled work from completed writes.",
+  "tradeoffs": "Must track dirty state carefully",
+  "exceptions": "Idempotent deletes that cannot be locally reconstructed — then say so and offer undo if available",
+  "source": "roadmap Phase 2; records pilot",
+  "example": "records-inspect-edit-persist",
+  "validatedBy": "Pilot browser proof: failed save keeps field values",
+  "reviewedAt": "2026-09-22"
+}

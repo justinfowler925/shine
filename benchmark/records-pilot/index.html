@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shine records pilot</title>
+  <style>
+    :root {
+      --ink: #111111;
+      --muted: #555e7d;
+      --line: #ececec;
+      --canvas: #ffffff;
+      --subtle: #f8f8f8;
+      --action: #0a1648;
+      --danger: #8a1f11;
+      --ok: #0a1648;
+      --focus: #1e68d5;
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--subtle); }
+    main { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
+    h1 { font-size: 1.35rem; margin: 0 0 0.25rem; }
+    .lede { color: var(--muted); margin: 0 0 1.25rem; }
+    .layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; }
+    @media (max-width: 800px) { .layout { grid-template-columns: 1fr; } }
+    section { background: var(--canvas); border: 1px solid var(--line); padding: 1rem; }
+    section h2 { font-size: 0.95rem; margin: 0 0 0.75rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 0.55rem 0.4rem; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+    tr[aria-selected="true"] { background: #f7f8ff; }
+    button, input, textarea {
+      font: inherit; border: 1px solid var(--line); border-radius: 0; padding: 0.45rem 0.65rem; background: #fff;
+    }
+    button { cursor: pointer; background: var(--action); color: #fff; border-color: var(--action); }
+    button.secondary { background: #fff; color: var(--ink); border-color: var(--line); }
+    button:focus-visible, input:focus-visible, textarea:focus-visible, tr:focus-visible {
+      outline: 2px solid var(--focus); outline-offset: 2px;
+    }
+    label { display: block; font-size: 0.85rem; color: var(--muted); margin: 0.6rem 0 0.25rem; }
+    .row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
+    .status { min-height: 1.25rem; font-size: 0.9rem; color: var(--muted); }
+    .status[data-tone="danger"] { color: var(--danger); }
+    .status[data-tone="ok"] { color: var(--ok); }
+    .draft { font-size: 0.85rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Records inspect → edit → persist</h1>
+    <p class="lede">Phase 2 pilot fixture. Uses an in-memory adapter with intentional save failure/retry. Not a product skin.</p>
+    <div class="layout">
+      <section aria-labelledby="list-heading">
+        <h2 id="list-heading">Records</h2>
+        <label for="filter">Filter</label>
+        <input id="filter" type="search" placeholder="Filter by title or owner" autocomplete="off" />
+        <p class="status" id="filter-empty" hidden>No matching records. <button type="button" class="secondary" id="clear-filter">Clear filter</button></p>
+        <table>
+          <thead>
+            <tr><th scope="col">Title</th><th scope="col">Owner</th><th scope="col">Status</th></tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </section>
+      <section aria-labelledby="detail-heading">
+        <h2 id="detail-heading">Detail</h2>
+        <p id="empty" class="status">Select a record to edit.</p>
+        <form id="editor" hidden>
+          <input type="hidden" id="record-id" />
+          <label for="title">Title</label>
+          <input id="title" name="title" required />
+          <label for="owner">Owner</label>
+          <input id="owner" name="owner" required />
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" rows="4"></textarea>
+          <p class="draft" id="draft-flag" hidden>Unsaved draft retained after a failed save.</p>
+          <div class="row">
+            <button type="submit">Save</button>
+            <button type="button" class="secondary" id="fail-next">Arm next save failure</button>
+          </div>
+        </form>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+  </main>
+  <script type="module">
+    import { createRecordsStore } from "./store.mjs";
+    import { createRoleStore } from "./store-role.mjs";
+
+    const params = new URLSearchParams(location.search);
+    const role = params.get("role") === "viewer" ? "viewer" : "editor";
+    const store = createRoleStore({ role, inner: createRecordsStore() });
+    document.documentElement.dataset.role = role;
+
+    const rowsEl = document.getElementById("rows");
+    const editor = document.getElementById("editor");
+    const empty = document.getElementById("empty");
+    const status = document.getElementById("status");
+    const draftFlag = document.getElementById("draft-flag");
+    const filterInput = document.getElementById("filter");
+    const filterEmpty = document.getElementById("filter-empty");
+    const saveBtn = editor.querySelector('button[type="submit"]');
+    const failBtn = document.getElementById("fail-next");
+    let selectedId = null;
+    let draft = null;
+    let filter = "";
+
+    function setStatus(message, tone = "") {
+      status.textContent = message;
+      status.dataset.tone = tone;
+    }
+
+    function applyRoleChrome() {
+      const allowed = store.canSave();
+      saveBtn.disabled = !allowed;
+      failBtn.disabled = !allowed;
+      saveBtn.title = allowed ? "" : store.forbiddenReason();
+      if (!allowed) setStatus(store.forbiddenReason(), "danger");
+    }
+
+    function filteredRows() {
+      const q = filter.trim().toLowerCase();
+      const rows = store.list();
+      if (!q) return rows;
+      return rows.filter((row) => `${row.title} ${row.owner} ${row.status}`.toLowerCase().includes(q));
+    }
+
+    function renderList() {
+      const rows = filteredRows();
+      rowsEl.innerHTML = "";
+      filterEmpty.hidden = rows.length > 0;
+      for (const row of rows) {
+        const tr = document.createElement("tr");
+        tr.tabIndex = 0;
+        tr.dataset.id = row.id;
+        tr.setAttribute("aria-selected", row.id === selectedId ? "true" : "false");
+        tr.innerHTML = `<td>${escapeHtml(row.title)}</td><td>${escapeHtml(row.owner)}</td><td>${escapeHtml(row.status)}</td>`;
+        tr.addEventListener("click", () => select(row.id));
+        tr.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            select(row.id);
+          }
+        });
+        rowsEl.appendChild(tr);
+      }
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (ch) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[ch]);
+    }
+
+    function select(id) {
+      selectedId = id;
+      draft = null;
+      draftFlag.hidden = true;
+      const row = store.get(id);
+      empty.hidden = true;
+      editor.hidden = false;
+      document.getElementById("record-id").value = row.id;
+      document.getElementById("title").value = row.title;
+      document.getElementById("owner").value = row.owner;
+      document.getElementById("notes").value = row.notes || "";
+      setStatus(store.canSave() ? `Editing ${row.title}` : store.forbiddenReason(), store.canSave() ? "" : "danger");
+      applyRoleChrome();
+      renderList();
+    }
+
+    editor.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const id = document.getElementById("record-id").value;
+      const patch = {
+        title: document.getElementById("title").value.trim(),
+        owner: document.getElementById("owner").value.trim(),
+        notes: document.getElementById("notes").value,
+      };
+      draft = { id, ...patch };
+      try {
+        await store.save(id, patch);
+        draft = null;
+        draftFlag.hidden = true;
+        setStatus("Saved.", "ok");
+        renderList();
+      } catch (error) {
+        const forbidden = error.code === "FORBIDDEN";
+        draftFlag.hidden = forbidden;
+        document.getElementById("title").value = draft.title;
+        document.getElementById("owner").value = draft.owner;
+        document.getElementById("notes").value = draft.notes;
+        const suffix = forbidden ? "" : " Draft retained — fix and retry.";
+        setStatus(`${error.message}.${suffix}`, "danger");
+      }
+    });
+
+    failBtn.addEventListener("click", () => {
+      store.armSaveFailure();
+      setStatus("Next save will fail once.", "danger");
+    });
+
+    filterInput.addEventListener("input", () => {
+      filter = filterInput.value;
+      renderList();
+    });
+    document.getElementById("clear-filter").addEventListener("click", () => {
+      filter = "";
+      filterInput.value = "";
+      renderList();
+    });
+
+    applyRoleChrome();
+    renderList();
+  </script>
+</body>
+</html>

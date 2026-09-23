@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "sibling-before-catalog",
+  "title": "Prefer a product sibling surface before an external catalog page",
+  "kind": "product-convention",
+  "domains": ["task-analysis", "implementation"],
+  "tags": ["sibling", "ambiguous", "customer", "inventory", "product-reference"],
+  "problemCues": "Ambiguous ask to improve a customer or account screen",
+  "preconditions": "Existing product has related routes",
+  "decision": "Inventory shipped sibling surfaces for the same object before accepting an external reference. Name the sibling and every justified divergence.",
+  "tradeoffs": "May delay catalog-driven redesign",
+  "exceptions": "Greenfield with no siblings",
+  "source": "skill/SKILL.md product precedent",
+  "example": "Ambiguous customer screen brief",
+  "validatedBy": "Diagnosis names sibling or records none found",
+  "reviewedAt": "2026-09-22"
+}

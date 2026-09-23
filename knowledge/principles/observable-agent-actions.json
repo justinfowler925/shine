@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "observable-agent-actions",
+  "title": "Expose proposed, running, failed, and completed agent actions",
+  "kind": "strong-default",
+  "domains": ["human-ai-collaboration", "interaction"],
+  "tags": ["progress", "failure", "approval", "agent", "states"],
+  "problemCues": "Assistant proposes edits or runs tools while the user watches a working surface",
+  "preconditions": "Actions can be typed and cancelled",
+  "decision": "Give every agent operation distinct proposed/running/failed/completed states with explicit recovery. Do not collapse failures into a chat apology without a retry path on the artifact.",
+  "tradeoffs": "More UI states to design and test",
+  "exceptions": "Purely informational spoken summaries with no side effects",
+  "source": "skill/references/ai-surfaces.md; roadmap multimodal criteria",
+  "example": "AI review proposed field change brief",
+  "validatedBy": "Usability contract includes failure and retry objects",
+  "reviewedAt": "2026-09-22"
+}

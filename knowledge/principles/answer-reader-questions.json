@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "id": "answer-reader-questions",
+  "title": "Treat every surface as answers to the reader's questions",
+  "kind": "strong-default",
+  "domains": [
+    "content",
+    "information-architecture"
+  ],
+  "tags": [
+    "copy",
+    "landing",
+    "marketing",
+    "beliefs",
+    "headline"
+  ],
+  "problemCues": "Marketing or product surface that leads with features instead of reader outcomes",
+  "preconditions": "Surface a person reads before acting",
+  "decision": "Every element answers a reader question or is decoration. Name the carrying element for outcome, fit, time-to-value, effort, and trust before polishing.",
+  "tradeoffs": "Slower first draft",
+  "exceptions": "Internal dense ops UIs where the user already knows the job",
+  "source": "skill/references/copy.md",
+  "example": "Landing belief pass",
+  "validatedBy": "Copy audit names carrying elements or gaps",
+  "reviewedAt": "2026-09-22"
+}

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "interrupt-cancels-stale-work",
+  "title": "Interrupts cancel stale narration and queued visual actions",
+  "kind": "experimental-hypothesis",
+  "domains": ["multimodal-interaction"],
+  "tags": ["interrupt", "cancel", "alexis", "voice", "latency"],
+  "problemCues": "User stops speech or changes selection while assistant is acting",
+  "preconditions": "Cancellable action queue and shared selection ids",
+  "decision": "Stopping speech also cancels stale narration and queued visual actions where appropriate. Distinguish cancelled work from completed writes. Provisional targets: local stop ack p95 ≤300ms, audible stop p95 ≤500ms after baseline.",
+  "tradeoffs": "Harder session orchestration",
+  "exceptions": "Already-committed idempotent writes that must surface as completed with undo if available",
+  "source": "roadmap Phase 3 exit gate; Sesame timing research as reference only",
+  "example": "alexis-chart-why-this interrupt step",
+  "validatedBy": "Scripted interrupt scenarios; no wrong-record mutation after cancel",
+  "reviewedAt": "2026-09-22"
+}

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "id": "reduced-motion",
+  "title": "Honor prefers-reduced-motion and avoid transition all",
+  "kind": "accessibility-requirement",
+  "domains": [
+    "accessibility",
+    "motion"
+  ],
+  "tags": [
+    "motion",
+    "animation",
+    "reduced-motion",
+    "prefers"
+  ],
+  "problemCues": "Decorative motion without a reduced-motion path",
+  "preconditions": "CSS/JS animation present",
+  "decision": "Respect prefers-reduced-motion. Animate transform/opacity only. Never transition:all. Command palettes and theme toggles: no motion.",
+  "tradeoffs": "Less flourish",
+  "exceptions": "Essential status that remains perceivable without motion",
+  "source": "skill/references/interaction.md; motion.md",
+  "example": "Sheet open animation",
+  "validatedBy": "Reduced-motion fixture keeps usability",
+  "reviewedAt": "2026-09-22"
+}

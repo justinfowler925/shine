@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "url-reflects-state",
+  "title": "Reflect filters, tabs, and pagination in the URL",
+  "kind": "strong-default",
+  "domains": ["interaction", "information-architecture"],
+  "tags": ["url", "filters", "tabs", "pagination", "queue", "share"],
+  "problemCues": "Queue or settings where refresh loses the user's place",
+  "preconditions": "Browser-hosted app with shareable views",
+  "decision": "URL reflects filters, tabs, pagination, and expanded panels so refresh and share preserve context.",
+  "tradeoffs": "Routing complexity",
+  "exceptions": "Ephemeral drafts that must not leak via URL",
+  "source": "skill/references/interaction.md",
+  "example": "Dense ops queue filter persistence",
+  "validatedBy": "Reload keeps filter chips; deep link opens same cohort",
+  "reviewedAt": "2026-09-22"
+}

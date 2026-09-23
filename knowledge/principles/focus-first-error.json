@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "focus-first-error",
+  "title": "On submit failure, focus the first invalid field",
+  "kind": "accessibility-requirement",
+  "domains": ["accessibility", "forms"],
+  "tags": ["form", "validation", "focus", "error", "wizard", "settings"],
+  "problemCues": "Form submit with validation errors shown only as a toast",
+  "preconditions": "Editable form fields",
+  "decision": "Show errors inline next to fields; on submit, move focus to the first error. Toast alone is insufficient.",
+  "tradeoffs": "Slightly more form wiring",
+  "exceptions": "Global outage banners unrelated to field validation",
+  "source": "skill/references/interaction.md",
+  "example": "Complex settings form",
+  "validatedBy": "Usability step asserts focus on first invalid control",
+  "reviewedAt": "2026-09-22"
+}

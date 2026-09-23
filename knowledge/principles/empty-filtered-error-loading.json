@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "empty-filtered-error-loading",
+  "title": "Keep empty, filtered-empty, error, and loading as four distinct states",
+  "kind": "strong-default",
+  "domains": ["interaction", "content"],
+  "tags": ["empty", "error", "loading", "queue", "datagrid", "triage"],
+  "problemCues": "List or queue surfaces that collapse failure and empty into one message",
+  "preconditions": "Collection-backed UI",
+  "decision": "Ship four states with distinct copy and one recovery action each. Filtered-empty must offer clear filters; error must offer retry.",
+  "tradeoffs": "More fixtures to maintain",
+  "exceptions": "Static read-only directories with no async load",
+  "source": "skill/references/interaction.md",
+  "example": "Dense operations queue",
+  "validatedBy": "Measure/usability fixtures cover all four states",
+  "reviewedAt": "2026-09-22"
+}

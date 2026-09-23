@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "shared-selection-for-multimodal",
+  "title": "Bind speech and clicks to shared selectable objects",
+  "kind": "experimental-hypothesis",
+  "domains": ["multimodal-interaction", "human-ai-collaboration"],
+  "tags": ["alexis", "selection", "avatar", "voice", "chart", "interrupt"],
+  "problemCues": "Person and assistant share charts, documents, or records across voice, text, and direct manipulation",
+  "preconditions": "Application can identify artifacts and selections; writes go through typed commands",
+  "decision": "Give task, artifact, selection, version, turn, and action stable identifiers. UI selection becomes bounded model context. User edits remain authoritative; cancel stale actions after interrupt.",
+  "tradeoffs": "Requires state plumbing beyond a chat sidebar or avatar tile",
+  "exceptions": "Single-turn spoken summaries with no shared working material — plain UI or transcript may win",
+  "source": "fowler-brain notes/2026-09-22-shine-alexis-multimodal-design-direction.md; skill/references/ai-surfaces.md",
+  "example": "Alexis chart why-this pilot",
+  "validatedBy": "Scripted interrupt and wrong-referent tests; drafts survive modality switches",
+  "reviewedAt": "2026-09-22"
+}

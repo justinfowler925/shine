@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "explain-forbidden-actions",
+  "title": "Explain forbidden actions instead of silently omitting them",
+  "kind": "strong-default",
+  "domains": ["human-ai-collaboration", "content"],
+  "tags": ["permissions", "membership", "role", "forbidden", "settings"],
+  "problemCues": "Role or membership settings where some actions are unauthorized",
+  "preconditions": "Authorization decisions are known to the UI",
+  "decision": "Show forbidden actions as disabled or documented with a reason. Do not silently remove controls in a way that makes the mental model incomplete.",
+  "tradeoffs": "More visible constraints; clearer trust",
+  "exceptions": "Security-sensitive affordances that would reveal attack surface if enumerated — then use a generic unauthorized state",
+  "source": "skill/references/usability.md; learn-permissions-panel brief",
+  "example": "Permissions panel with role-gated edit",
+  "validatedBy": "Usability includes an unauthorized explanation object",
+  "reviewedAt": "2026-09-22"
+}

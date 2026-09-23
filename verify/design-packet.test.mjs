@@ -26,6 +26,11 @@ assert.equal(classifyJob("Fix the design and UX problems","form").category,"form
 const grid=createDesignPacket({job:cases[0][0],lane:"internal",project:process.cwd()});
 assert.equal(grid.version,7);assert.equal(grid.category,"datagrid");assert.equal(grid.selected.scope,"page");
 assert(grid.componentReferences.some(x=>x.id==="untitled-table"));
+assert.equal(grid.knowledge.required,true);
+assert.ok(Array.isArray(grid.knowledge.principles));
+assert.ok(grid.knowledge.principles.length>=1,"packet should retrieve at least one principle for a records job");
+assert.ok(grid.judgment?.verdict);
+assert.ok(grid.judgment?.modality);
 for(const item of ["search","sort","filters","column visibility","pagination","row selection","row actions"])assert(grid.controlInventory.includes(item),item);
 assert.deepEqual(grid.requiredStates,["loading","empty","filtered-empty","error","populated"]);
 assert(grid.selected.paths.sourceExcerpts.length>0);
