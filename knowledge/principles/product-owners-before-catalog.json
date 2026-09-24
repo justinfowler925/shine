@@ -11,7 +11,7 @@
   "tradeoffs": "May diverge from the catalog reference visually; preserves product conventions and upgrade paths",
   "exceptions": "Greenfield apps with no owners yet — establish contracts explicitly, then install finished packs",
   "source": "skill/SKILL.md; integrations/library-select.mjs; references/component-layers.md",
-  "example": "Nucleus ClearSpeed profile owners.json",
+  "example": "Nucleus Clearspeed profile owners.json",
   "validatedBy": "shine-reuse.json binds actual imports; completion requires reuse check",
   "reviewedAt": "2026-09-22"
 }
