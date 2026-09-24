@@ -11,7 +11,7 @@ Machine ledger: [`capability-ledger.json`](./capability-ledger.json)
 | Package | `4.0.2` |
 | Installed release SHA | `12dd2714a3de0ad40b96922a985bf05f68493021` |
 | `origin/main` | same SHA — install matches main |
-| ClearSpeed edition | present under `~/.local/share/shine/editions/12dd271…-clearspeed-…` |
+| Clearspeed edition | present under `~/.local/share/shine/editions/12dd271…-clearspeed-…` |
 | Catalog | **32** entries (26 blocks + 6 pages), all source-present |
 | Examples | **30** composed examples (not extra registry templates) |
 | Corpus templates | **216** rows |
