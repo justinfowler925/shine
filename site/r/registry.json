@@ -788,9 +788,9 @@
       "name": "data-grid",
       "type": "registry:block",
       "title": "Record data grid",
-      "description": "Client-side TanStack v8 grid with sorting, search, filters, columns, pagination, selection, actions and recovery. Never use for a partial server-paged dataset.",
+      "description": "Client-side TanStack v9 grid with sorting, search, filters, columns, pagination, selection, actions and recovery. Never use for a partial server-paged dataset.",
       "dependencies": [
-        "@tanstack/react-table@^8.21.3"
+        "@tanstack/react-table@^9.2.4"
       ],
       "registryDependencies": [
         "button",
@@ -1274,7 +1274,7 @@
       "title": "Server record grid",
       "description": "TanStack manual pagination, search and sorting, large remote populations, column resizing and retained inline edits.",
       "dependencies": [
-        "@tanstack/react-table@^8.21.3"
+        "@tanstack/react-table@^9.2.4"
       ],
       "registryDependencies": [
         "button",

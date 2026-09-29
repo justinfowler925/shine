@@ -1,6 +1,6 @@
 "use client";
 import { useId, useMemo, useRef, useState, type ReactNode } from "react";
-import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable, type ColumnDef, type ColumnFiltersState, type RowSelectionState, type SortingState, type VisibilityState } from "@tanstack/react-table";
+import { columnFilteringFeature, columnVisibilityFeature, createFilteredRowModel, createPaginatedRowModel, createSortedRowModel, filterFns, flexRender, globalFilteringFeature, rowPaginationFeature, rowSelectionFeature, rowSortingFeature, sortFns, tableFeatures, useTable, type ColumnDef, type ColumnFiltersState, type RowData, type RowSelectionState, type SortingState, type ColumnVisibilityState } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -9,31 +9,38 @@ import { Table, TableHeader, TableHead, TableBody, TableRow, TableCell } from "@
 import { AsyncState } from "@/components/shine/async-state";
 import { Collection } from "@/components/shine/collection";
 
+/** Everything this grid uses, registered once (TanStack Table v9). Type consumer columns as `ColumnDef<DataGridFeatures, Row>`. */
+export const dataGridFeatures = tableFeatures({
+  columnFilteringFeature, globalFilteringFeature, rowSortingFeature, rowPaginationFeature, rowSelectionFeature, columnVisibilityFeature,
+  filteredRowModel: createFilteredRowModel(), sortedRowModel: createSortedRowModel(), paginatedRowModel: createPaginatedRowModel(),
+  filterFns, sortFns,
+});
+export type DataGridFeatures = typeof dataGridFeatures;
 type Filter = { column: string; label: string; options: { value: string; label: string }[] };
-export type DataGridProps<T> = {
-  title: string; rows: T[]; columns: ColumnDef<T>[]; getRowId: (row: T) => string; rowLabel: (row: T) => string;
+export type DataGridProps<T extends RowData> = {
+  title: string; rows: T[]; columns: ColumnDef<DataGridFeatures, T>[]; getRowId: (row: T) => string; rowLabel: (row: T) => string;
   onOpen: (row: T) => void; columnLabels: Record<string, string>; filters?: Filter[]; summary?: ReactNode;
   state?: "ready" | "loading" | "error"; errorMessage?: string; onRetry: () => void; emptyMessage: string;
   bulkAction?: { label: string; run: (rows: T[]) => Promise<void> }; revealKey?: string;
 };
 /** Complete client-side grid. Remote paging must use the consumer's server grid, never silently page a partial dataset. */
-export function DataGrid<T>({ title, rows, columns, getRowId, rowLabel, onOpen, columnLabels, filters = [], summary, state = "ready", errorMessage = "The source could not be read.", onRetry, emptyMessage, bulkAction, revealKey }: DataGridProps<T>) {
+export function DataGrid<T extends RowData>({ title, rows, columns, getRowId, rowLabel, onOpen, columnLabels, filters = [], summary, state = "ready", errorMessage = "The source could not be read.", onRetry, emptyMessage, bulkAction, revealKey }: DataGridProps<T>) {
   const id = useId(), running = useRef(false);
   const callbacks = useRef({ rowLabel, onOpen });
   callbacks.current = { rowLabel, onOpen };
   const selectable = Boolean(bulkAction);
   const [query, setQuery] = useState(""), [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]), [visibility, setVisibility] = useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]), [visibility, setVisibility] = useState<ColumnVisibilityState>({});
   const [selection, setSelection] = useState<RowSelectionState>({}), [busy, setBusy] = useState(false), [actionError, setActionError] = useState(""), [notice, setNotice] = useState("");
-  const resolvedColumns = useMemo<ColumnDef<T>[]>(() => [
-    ...(selectable ? [{ id: "selection", enableSorting: false, enableHiding: false, header: ({ table }) => <Checkbox aria-label="Select this page" checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")} onCheckedChange={checked => table.toggleAllPageRowsSelected(Boolean(checked))} />, cell: ({ row }) => <Checkbox aria-label={`Select ${callbacks.current.rowLabel(row.original)}`} checked={row.getIsSelected()} onCheckedChange={checked => row.toggleSelected(Boolean(checked))} /> } satisfies ColumnDef<T>] : []),
+  const resolvedColumns = useMemo<ColumnDef<DataGridFeatures, T>[]>(() => [
+    ...(selectable ? [{ id: "selection", enableSorting: false, enableHiding: false, header: ({ table }) => <Checkbox aria-label="Select this page" checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")} onCheckedChange={checked => table.toggleAllPageRowsSelected(Boolean(checked))} />, cell: ({ row }) => <Checkbox aria-label={`Select ${callbacks.current.rowLabel(row.original)}`} checked={row.getIsSelected()} onCheckedChange={checked => row.toggleSelected(Boolean(checked))} /> } satisfies ColumnDef<DataGridFeatures, T>] : []),
     ...columns,
     { id: "actions", enableSorting: false, enableHiding: false, header: "Actions", cell: ({ row }) => <Button className="min-h-11" variant="ghost" type="button" aria-label={`Open ${callbacks.current.rowLabel(row.original)}`} onClick={() => callbacks.current.onOpen(row.original)}>Open</Button> },
   ], [columns, selectable]);
-  const table = useReactTable({ data: rows, columns: resolvedColumns, getRowId, state: { globalFilter: query, sorting, columnFilters, columnVisibility: visibility, rowSelection: selection }, onGlobalFilterChange: setQuery, onSortingChange: setSorting, onColumnFiltersChange: setColumnFilters, onColumnVisibilityChange: setVisibility, onRowSelectionChange: setSelection, getCoreRowModel: getCoreRowModel(), getFilteredRowModel: getFilteredRowModel(), getSortedRowModel: getSortedRowModel(), getPaginationRowModel: getPaginationRowModel(), initialState: { pagination: { pageIndex: 0, pageSize: 10 } } });
+  const table = useTable({ features: dataGridFeatures, data: rows, columns: resolvedColumns, getRowId, state: { globalFilter: query, sorting, columnFilters, columnVisibility: visibility, rowSelection: selection }, onGlobalFilterChange: setQuery, onSortingChange: setSorting, onColumnFiltersChange: setColumnFilters, onColumnVisibilityChange: setVisibility, onRowSelectionChange: setSelection, initialState: { pagination: { pageIndex: 0, pageSize: 10 } } });
   const clear = () => { setQuery(""); setColumnFilters([]); table.setPageIndex(0); };
   const filtered = table.getFilteredRowModel().rows.length, selected = table.getSelectedRowModel().rows;
-  const page = table.getState().pagination, count = table.getRowModel().rows.length;
+  const page = table.state.pagination, count = table.getRowModel().rows.length;
   return <Collection title={title} total={state === "ready" ? rows.length : null} summary={summary} revealKey={revealKey}>
     <div data-product-pattern="data-grid" data-grid className="min-w-0 space-y-4" aria-busy={state === "loading"}>
       <div data-grid-toolbar className="flex flex-wrap items-end gap-3">

@@ -46,7 +46,7 @@
       "id": "data-grid",
       "export": "DataGrid",
       "title": "Record data grid",
-      "description": "Client-side TanStack v8 grid with sorting, search, filters, columns, pagination, selection, actions and recovery. Never use for a partial server-paged dataset.",
+      "description": "Client-side TanStack v9 grid with sorting, search, filters, columns, pagination, selection, actions and recovery. Never use for a partial server-paged dataset.",
       "primitives": [
         "button",
         "input",
@@ -59,7 +59,7 @@
         "collection"
       ],
       "dependencies": [
-        "@tanstack/react-table@^8.21.3"
+        "@tanstack/react-table@^9.2.4"
       ],
       "matches": [
         "DataGrid",
@@ -610,7 +610,7 @@
         "filter-bar"
       ],
       "dependencies": [
-        "@tanstack/react-table@^8.21.3"
+        "@tanstack/react-table@^9.2.4"
       ],
       "matches": [
         "ServerDataGrid"

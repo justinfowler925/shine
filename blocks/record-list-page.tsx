@@ -1,11 +1,12 @@
 "use client";
 import { useRef, useState, type ReactNode } from "react";
+import type { RowData } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { DataGrid, type DataGridProps } from "@/components/shine/data-grid";
 import { DetailSheet } from "@/components/shine/detail-sheet";
 import { RecordEditor, type EditorField } from "@/components/shine/record-editor";
 /** A complete list → detail → edit workflow. Product adapters own reads and writes. */
-export function RecordListPage<T>({ title, description, grid, details, editor }: {
+export function RecordListPage<T extends RowData>({ title, description, grid, details, editor }: {
  title: string; description: string; grid: Omit<DataGridProps<T>, "onOpen">;
  details: (row: T) => ReactNode;
  editor?: { fields: EditorField[]; values: (row: T) => Record<string, string>; save: (row: T, values: Record<string, string>) => Promise<void> };
