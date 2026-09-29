@@ -3,7 +3,7 @@
   "version": "4.0.2",
   "private": "true",
   "type": "module",
-  "description": "shine \u2014 design authority. Root deps are the ones the verification loop needs; the token pipeline has its own package.json under tokens/.",
+  "description": "shine — design authority. Root deps are the ones the verification loop needs; the token pipeline has its own package.json under tokens/.",
   "scripts": {
     "build": "npm run build --prefix tokens",
     "verify": "npm run verify --prefix tokens",
@@ -70,7 +70,7 @@
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",
     "@tailwindcss/postcss": "^4.3.3",
-    "@tanstack/react-table": "^8.21.3",
+    "@tanstack/react-table": "^9.2.4",
     "@types/papaparse": "^5.3.16",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",

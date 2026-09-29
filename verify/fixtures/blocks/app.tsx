@@ -7,10 +7,11 @@ import { WorkspaceTabs } from "@/components/shine/workspace-tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { ColumnDef } from "@tanstack/react-table";
+import type { DataGridFeatures } from "@/components/shine/data-grid";
 
 type Row = { id: string; name: string; owner: string; amount: number };
 const seed: Row[] = Array.from({length: 12}, (_, i) => ({id:String(i+1),name:`Account ${String(i+1).padStart(2,"0")}`,owner:i%2?"Riley":"Sam",amount:(i+1)*100}));
-const columns: ColumnDef<Row>[] = [{accessorKey:"name",header:"Account"},{accessorKey:"owner",header:"Owner",filterFn:"equalsString"},{accessorKey:"amount",header:"Amount"}];
+const columns: ColumnDef<DataGridFeatures, Row>[] = [{accessorKey:"name",header:"Account"},{accessorKey:"owner",header:"Owner",filterFn:"equalsString"},{accessorKey:"amount",header:"Amount"}];
 function Notes(){return <label className="flex flex-col gap-2">Workspace notes<Input aria-label="Workspace notes" /></label>;}
 function App(){
  const [rows,setRows]=useState(seed),[state,setState]=useState<"ready"|"loading"|"error">("ready"),[active,setActive]=useState<Row|null>(null),[editing,setEditing]=useState<Row|null>(null);

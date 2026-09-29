@@ -1,8 +1,9 @@
 "use client";
 import type { ReactNode } from "react";
+import type { RowData } from "@tanstack/react-table";
 import { DateRange, type DateRangeValue } from "@/components/shine/date-range";
 import { DataGrid, type DataGridProps } from "@/components/shine/data-grid";
-export function ReportPage<T>({ title, description, period, onPeriodChange, onApplyPeriod, metrics, evidence, explanation, visualization }: {
+export function ReportPage<T extends RowData>({ title, description, period, onPeriodChange, onApplyPeriod, metrics, evidence, explanation, visualization }: {
  title: string; description: string; period: DateRangeValue; onPeriodChange: (period: DateRangeValue) => void; onApplyPeriod: (period: DateRangeValue) => Promise<void>;
  metrics: { label: string; value: string; detail: string }[]; evidence: DataGridProps<T>; explanation: string; visualization?: ReactNode;
 }) {
