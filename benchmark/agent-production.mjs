@@ -9,7 +9,9 @@ import {seedDesignSpec,validateDesignSpec} from "../core/design-spec.mjs";
 import {renderDesignSpec} from "../core/render-spec.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
-const CODEX="/Applications/ChatGPT.app/Contents/Resources/codex";
+// The Codex CLI moved out of the ChatGPT app bundle; accept an override, the
+// bundled path, or the standalone install, whichever exists.
+const CODEX=[process.env.CODEX_BIN,"/Applications/ChatGPT.app/Contents/Resources/codex",`${process.env.HOME||""}/.local/bin/codex`].find(path=>path&&existsSync(path))||"/Applications/ChatGPT.app/Contents/Resources/codex";
 const MODEL="gpt-5.6-luna";
 export const BUDGETS={timeoutMs:180000,maxFreshInputTokens:100000,maxOutputTokens:12000};
 const sha=value=>createHash("sha256").update(value).digest("hex");
