@@ -3,6 +3,7 @@ import {chromium} from "playwright";
 import {createHash} from "node:crypto";
 import {closeSync,copyFileSync,existsSync,mkdirSync,openSync,readFileSync,realpathSync,rmSync,symlinkSync,writeFileSync} from "node:fs";
 import {execFile,spawn,spawnSync} from "node:child_process";
+import {tmpdir} from "node:os";
 import {basename,dirname,join,resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 import {seedDesignSpec,validateDesignSpec} from "../core/design-spec.mjs";
@@ -150,7 +151,7 @@ export async function runCodexProduction({brief,skillRoot,outDir,model=MODEL}){
 }
 
 if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
- const arg=name=>{const i=process.argv.indexOf(name);return i>=0?process.argv[i+1]:null};const briefId=arg("--brief"),skillRoot=realpathSync(resolve(arg("--skill-root")||".")),outDir=resolve(arg("--out")||join("/private/tmp","shine-agent",briefId||"run"));
+ const arg=name=>{const i=process.argv.indexOf(name);return i>=0?process.argv[i+1]:null};const briefId=arg("--brief"),skillRoot=realpathSync(resolve(arg("--skill-root")||".")),outDir=resolve(arg("--out")||join(tmpdir(),"shine-agent",briefId||"run"));
  const briefs=JSON.parse(readFileSync(join(ROOT,"benchmark/briefs.json"),"utf8"));const brief=briefs.find(x=>x.id===briefId);if(!brief)throw new Error(`unknown brief ${briefId}`);brief.arm=arg("--arm")||"current";
  const surface=arg("--surface")||"codex",record=surface==="cursor"?await runCursorProduction({brief,skillRoot,outDir}):await runCodexProduction({brief,skillRoot,outDir});console.log(JSON.stringify({record:join(outDir,"record.json"),status:record.status,gaps:record.gaps},null,2));if(record.gaps.length)process.exit(1);
 }

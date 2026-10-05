@@ -8,7 +8,7 @@ on:
 jobs:
   benchmark-smoke:
     name: benchmark-smoke
-    runs-on: [self-hosted, macOS, ARM64, shine]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -16,6 +16,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
       - run: npm ci
       - run: npm run benchmark:test
       - run: npm run benchmark:quality
@@ -24,7 +25,7 @@ jobs:
   benchmark-full:
     name: deterministic-full
     if: github.event_name != 'pull_request'
-    runs-on: [self-hosted, macOS, ARM64, shine]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,6 +33,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
       - run: npm ci
       - run: npm run benchmark:full
       - uses: actions/upload-artifact@v4
@@ -43,7 +45,7 @@ jobs:
   native-agent-release:
     name: native-agent-release
     if: github.event_name == 'workflow_dispatch'
-    runs-on: [self-hosted, macOS, ARM64, shine]
+    runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
@@ -52,14 +54,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
       - run: npm ci
+      - name: install Playwright Chromium
+        run: npx playwright install --with-deps chromium
       - name: Six-category bounded native-agent evaluation
         env:
           SHINE_AGENT_CONCURRENCY: 1
           SHINE_AGENT_TIMEOUT_MS: 180000
-        run: npm run benchmark:agent:representative
+        # Portable /tmp out dir (os.tmpdir). Set repo variable
+        # SHINE_AGENT_BASELINE_ROOT when dispatching this lane with a baseline tree.
+        run: npm run benchmark:agent:representative -- --out /tmp/shine-production-corpus
       - uses: actions/upload-artifact@v4
         with:
           name: shine-native-agent-review
-          path: /private/tmp/shine-production-corpus
+          path: /tmp/shine-production-corpus
           retention-days: 30
