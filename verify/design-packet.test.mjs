@@ -40,6 +40,8 @@ assert.equal(grid.usability.required,true);
 assert.match(grid.usability.commands[0],/verify\/usability\.mjs/);
 assert.match(grid.proof.commands[2],/--mode existing --diagnosis shine-diagnosis\.json/);
 assert.equal(grid.diagnosis.required,true);
+assert.match(grid.diagnosis.command,/--lane internal/);
+assert.match(grid.diagnosis.instruction,/primaryTaskCheck/);
 assert.equal(grid.productPrecedent.required,true);
 assert.equal(grid.productPrecedent.provided,false);
 

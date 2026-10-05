@@ -41,10 +41,44 @@ you exercised in `verdictEvidence`, list every bucket in `checked`, and stop. A 
 invents findings to fill a count is a defect in the reviewer, not in the surface. In audit mode
 this file is the deliverable; nothing gets edited.
 
+### SaaS product-UX checks (lane=saas Operate pages)
+
+For `lane=saas` and page categories `datagrid|dashboard|form|record|lex`, the diagnosis
+schema requires three structured fields — **presence** is machine-gated; **honesty of the
+note** stays agent judgment. No screenshot OCR. Marketing / media / voice / editorial do not
+need these fields.
+
+| Field | Ask | When `ok: true` means |
+|---|---|---|
+| `primaryTaskCheck` | Can a new operator name and start the primary job in ~3s from the first viewport? | The primary task is legible and reachable without hunting |
+| `emptyErrorTriadCheck` | Do loading / empty / error (and filtered-empty when filters exist) read as distinct states on **non-table** surfaces too? | Triad is covered or honestly N/A with why |
+| `competingCtaCheck` | Is there one filled primary, or do peer CTAs compete for the same job? | Weight budget matches the job; competitors named or cleared |
+
+Fill each as `{ "ok": boolean, "note": "…" }` (note ≥8 characters). On `verdict: defects`, still
+fill the checks — a craft-only defect list that skips product UX is incomplete for SaaS. On
+`verdict: no-change`, the checks plus full `checked` buckets are how you prove you looked.
+
+Primary-task defects bind to executable proof. Example for an Operate queue:
+
+```json
+{
+  "id": "primary-assign-owner",
+  "bucket": "usability",
+  "severity": "critical",
+  "assertions": ["flow:assign-owner"],
+  "problem": "Operators cannot assign an owner from the first viewport.",
+  "evidence": "Assign control is below the fold at 1280; no keyboard path reaches it in three steps.",
+  "expectedEffect": "Assign-owner flow completes from the queue without scrolling past chrome."
+}
+```
+
+`flow:assign-owner` must match an id in `shine-usability.json`. Critical/major usability defects
+without assertion ids fail `prove` `defectAssertions` — do not leave `assertions: []`.
+
 ### Usability (can they finish the job?)
-- Primary action visible in ~3 seconds? Competing CTAs?
+- Primary action visible in ~3 seconds? Competing CTAs? → also `primaryTaskCheck` / `competingCtaCheck`
 - Path: notification → committed change — where does the user invent the next step?
-- Empty / error / loading as real states, not voids?
+- Empty / error / loading as real states, not voids? → also `emptyErrorTriadCheck`
 - Hover-only actions; no keyboard path to finish?
 - The job of the screen vs what the layout actually offers.
 
