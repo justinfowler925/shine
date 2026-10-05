@@ -34,6 +34,12 @@ import {
   densityFailureMessage,
   densityGateApplies,
 } from "./density.mjs";
+import {
+  evaluateKpiFloor,
+  formatKpiFailures,
+  kpiDashboardGateApplies,
+  kpiFailureNotes,
+} from "./kpi.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
@@ -354,6 +360,7 @@ for (const t of textTargets) {
 // gate with false positives is a gate someone switches off.
 const dataGrids = await page.evaluate(evaluateDataGrids);
 const incompletePrimitives = await page.evaluate(evaluateIncompletePrimitives);
+const kpiFloor = await page.evaluate(evaluateKpiFloor);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
 const compose = await page.evaluate(() => {
   const vis = (el) => {
@@ -835,6 +842,25 @@ for (const check of tableQuality.checks) {
 
 // Incomplete primitives — DOM-safe audit subset (icon-only unnamed, unlabeled
 // fields, confirm-less destructive). Toast-only / hover-only stay agent judgment.
+const kpiCiteId = citeWant || compose.citeId || "";
+const kpiCiteRow = (() => {
+  if (!kpiCiteId) return null;
+  try {
+    const cat = loadCatalog();
+    return (cat.templates ?? []).find((t) => t.id === kpiCiteId) || null;
+  } catch {
+    return null;
+  }
+})();
+const kpiDashboardGate = kpiDashboardGateApplies({
+  citeScreen: kpiCiteRow?.screen || "",
+  citeKind: kpiCiteRow?.kind || "",
+  citeJobs: kpiCiteRow?.jobs || [],
+  dashboardProbe: !!kpiFloor.dashboardProbe,
+});
+for (const msg of formatKpiFailures(kpiFloor, { dashboardGate: kpiDashboardGate })) {
+  failures.push(msg);
+}
 for (const msg of formatIncompletePrimitiveFailures(incompletePrimitives)) failures.push(msg);
 
 // Likeness checks key off the --cite FLAG, never off page attributes. The old
@@ -929,7 +955,7 @@ if (compose.voice === "kit-faithful" && compose.dnaChroma && accentC != null) {
   }
 }
 
-const report = { scope:"single-viewport styling and accessibility; not overall completion", mediaGaps, url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, incompletePrimitives, themeSwitches, failures };
+const report = { scope:"single-viewport styling and accessibility; not overall completion", mediaGaps, url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, incompletePrimitives, kpi: kpiFloor, kpiDashboardGate, themeSwitches, failures };
 const jsonOut = opt("--json"); // written once at the end, after notes are attached
 
 console.log(`mode=${report.mode}  bodyBg=${measured.bodyBg}  bodyColor=${measured.bodyColor}`);
@@ -962,6 +988,7 @@ notes.push(
         ? ` (shell floor${laneWant ? `, lane=${laneWant}` : ""})`
         : ""),
 );
+for (const n of kpiFailureNotes(kpiFloor, { dashboardGate: kpiDashboardGate })) notes.push(n);
 if (compose.sectionCount) {
   notes.push(
     `sections: ${compose.sectionCount} marked; ${compose.sectionsMissingJob.length} missing a heading` +

@@ -26,7 +26,8 @@ measure     getComputedStyle + getBoundingClientRect     ← the non-negotiable 
 a11y        axe-core injected offline from node_modules
 contrast    per-pixel worst-case + p5 for text over gradients
 lint        scale/cardinality on COMPUTED values
-compose     voids, type-step collisions, hierarchy (primary), density (shell floor), theme
+compose     voids, type-step collisions, hierarchy (primary), density (shell floor),
+            theme, dashboard KPI floor (`data-shine-kpi` + equal-card / focal)
 critique    screenshot → multimodal, max 3 passes, LAST
 ```
 
@@ -48,6 +49,12 @@ runs on the prove path, not only on standalone compare.
 `settings`, `form`, `queue`, `record`, … — see `usability.md`), missing or shallow
 `shine-usability.json` makes `prove` report `interactions: failed` (not `not_tested`).
 Other screens still soft-incomplete when usability is skipped. Details in `usability.md`.
+
+**Dashboard / KPI floor (M5):** when the cite screen is `dashboard` or the page sets
+`data-shine-probe="dashboard"`, ≥3 equal-weight summary cards with no focal
+chart/table/queue hard-fail. Elements that opt into `data-shine-kpi` must carry
+`data-unit` and `data-baseline`. Without the attribute, unit/baseline stays an agent
+checklist in `dashboards.md`. Dashboard recipes require the attribute.
 
 **Playwright, axe-core and sharp live in shine's root `package.json`.** Run `npm install`
 at the repo root. `verify/deps.mjs` resolves shine-first and keeps a sibling checkout as

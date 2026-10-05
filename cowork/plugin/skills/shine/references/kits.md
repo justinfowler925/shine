@@ -87,6 +87,11 @@ before locking the brief.
    object**, queue.
 2. Charts: Recharts + `dataviz.md` encoding rules; D3 for custom/SSR.
 3. KPI decidability over decoration.
+4. **Require** `data-shine-kpi` on every metric card with non-empty `data-unit` and
+   `data-baseline` (optional `data-good-direction`). Mark the primary chart/table
+   `data-region="focal"`. Measure hard-fails equal-weight KPI soup without a focal on
+   dashboard cites / `data-shine-probe="dashboard"` — see `dashboards.md` § Machine floor.
+   The `dashboard-page` block ships this convention.
 
 ### Marketing hero
 

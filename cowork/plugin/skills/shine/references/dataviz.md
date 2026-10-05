@@ -122,5 +122,12 @@ Consistency here does more for perceived quality than any visual treatment:
 
 - Page composition, metric cards, direction semantics → `dashboards.md`
 - Mark-count thresholds, SVG vs canvas, render budgets → `performance.md`
+- Streaming agent charts, approval gates → `ai-surfaces.md`
+
+### Machine floor (M5)
+
+Chart taste stays agent. When a metric card opts into `data-shine-kpi`, measure requires
+`data-unit` and `data-baseline` (see `dashboards.md` § Machine floor). Axis-with-units on
+charts remains agent unless the dashboard recipe stamps KPI markers.
 - Library choice and maintenance status → `ecosystem.md`
 - Contrast policy and OKLCH ramp construction → `color-type.md`
