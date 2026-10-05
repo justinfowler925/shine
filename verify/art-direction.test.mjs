@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { axisDistance, candidateAxes, directionMetadata, retrieveDirections } from "../corpus/art-direction.mjs";
+import { axisDistance, candidateAxes, directionMetadata, operatePageIntent, retrieveDirections } from "../corpus/art-direction.mjs";
 import catalog from "../corpus/templates.json" with { type: "json" };
 
 const templates = catalog.templates;
@@ -87,11 +87,19 @@ try {
   assert.equal(pairHistory.selected[0].score, pairPlain.selected[0].score, "history must not override eligibility score");
 } finally { rmSync(dir, { recursive: true, force: true }); }
 const plain = retrieveDirections(templates, "saas queue datagrid");
-assert.equal(plain.selected[0].template.id, "untitled-table", "Untitled is the default table reference");
+assert.equal(plain.selected[0].template.scope || "page", "page", "Operate queue briefs prefer a composed page cite");
+assert.equal(plain.selected[0].template.screen, "queue", "queue brief must resolve to a queue page");
+assert.notEqual(plain.selected[0].template.screen, "charts", "chart atoms are not the primary Operate cite");
+assert.ok(plain.selected[0].matches.includes("operatePage"), "operate page tier marks the primary composed cite");
+const queueWithRoom = retrieveDirections(templates, "saas queue datagrid", { limit: 8 });
+assert.ok(queueWithRoom.selected.some((item) => item.template.id === "untitled-table"), "Untitled table remains a secondary region/component ref");
 assert.ok(plain.exclusions.some((item) => item.template.selectable === false && item.reasons.some((reason) => reason.startsWith("retired:"))), "retired rows must be excluded with a retired: reason, not silently ranked");
 const hybrid = retrieveDirections(templates, "Untitled UI shadcn CEO judgment queue datagrid");
-assert.equal(hybrid.selected[0].template.id, "untitled-table", "visual reference and implementation framework are independent");
+assert.equal(hybrid.selected[0].template.scope || "page", "page", "page cite still wins when Untitled is named for visual reference");
+assert.equal(hybrid.selected[0].template.screen, "queue");
 assert.deepEqual(plain.brief.demandedSlop, []);
 assert.ok(plain.selected.every((item) => !directionMetadata.slopStyles.some((style) => item.axes.signature.includes(style))));
 assert.deepEqual(retrieveDirections(templates, "gradient saas queue datagrid").brief.demandedSlop, ["gradient"]);
-console.log("art direction PASS: determinism=20/20 · distance>=3 · constraints/license/framework/history/gaps/slop verified");
+assert.equal(operatePageIntent({ tokens: ["dashboard", "analytics"] }).screen, "dashboard");
+assert.equal(operatePageIntent({ tokens: ["analytics"] }).chartExplicit, true);
+console.log("art direction PASS: determinism=20/20 · distance>=3 · constraints/license/framework/history/gaps/slop · operate page bias verified");

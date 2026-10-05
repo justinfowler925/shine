@@ -64,7 +64,44 @@ export function axisDistance(a, b) {
   return constrainedAxes.reduce((sum, axis) => sum + (a[axis] !== b[axis] ? 1 : 0), 0) + (a.signature !== b.signature ? 1 : 0);
 }
 
-const baseScore = (template, brief) => {
+/** Composed SaaS Operate screens — page cites, not chart atoms. */
+export const OPERATE_PAGE_SCREENS = Object.freeze(["dashboard", "settings", "form", "queue", "record", "crud"]);
+
+/**
+ * Soft Operate briefs (dashboard / settings / form / queue / record) must not
+ * retrieve `screen:charts` atoms as the primary page cite. Chart-led wording
+ * without a page screen (`charts`, `analytics` alone) keeps chart atoms.
+ */
+export function operatePageIntent(brief) {
+  const tokens = brief?.tokens || [];
+  const chartLed = hasAny(tokens, ["charts", "chart"]);
+  for (const screen of OPERATE_PAGE_SCREENS) {
+    if (tokens.includes(screen)) {
+      return { screen: screen === "crud" ? "queue" : screen, chartExplicit: false };
+    }
+  }
+  if (hasAny(tokens, ["cockpit", "kpi", "kpis"])) return { screen: "dashboard", chartExplicit: false };
+  if (hasAny(tokens, ["preferences", "configuration"])) return { screen: "settings", chartExplicit: false };
+  if (hasAny(tokens, ["wizard", "checkout", "intake"])) return { screen: "form", chartExplicit: false };
+  if (hasAny(tokens, ["datagrid", "worklist", "inbox", "triage"])) return { screen: "queue", chartExplicit: false };
+  if (tokens.includes("profile") && !hasAny(tokens, ["marketing"])) return { screen: "record", chartExplicit: false };
+  if (chartLed || hasAny(tokens, ["analytics", "dataviz"])) return { screen: null, chartExplicit: true };
+  return { screen: null, chartExplicit: false };
+}
+
+const operateScreenMatch = (template, operateScreen) => {
+  if (!operateScreen) return false;
+  if (template.screen === operateScreen) return true;
+  if (operateScreen === "queue" && template.screen === "crud") return true;
+  if (operateScreen === "form" && template.screen === "settings") return true;
+  if (operateScreen === "settings" && template.screen === "form") return true;
+  return false;
+};
+
+const isComposedOperatePage = (template) =>
+  (template.scope || "page") === "page" && template.screen !== "charts";
+
+const baseScore = (template, brief, intent = { screen: null, chartExplicit: false }) => {
   const jobs = (template.jobs || []).map((job) => job.toLowerCase());
   const bag = new Set(words([template.id, template.screen, template.title, ...jobs].join(" ")));
   const query = brief.tokens.join("-");
@@ -79,6 +116,18 @@ const baseScore = (template, brief) => {
     if (["app-shell","dashboard"].includes(template.screen)) score -= 25;
   }
   if (brief.lane === "lex") score += template.kit === "slds" ? 80 : -20;
+  // Operate page bias: demote chart atoms and component demos, prefer composed
+  // pages. Deltas stay modest so charts remain eligible as secondary region refs.
+  // Skip on the Lightning lane — the SLDS ± score is what keeps non-LEX pages
+  // below the eligibility floor; an Operate boost must not re-admit them.
+  if (brief.lane !== "lex" && intent.screen && !intent.chartExplicit) {
+    if (template.screen === "charts") score -= 45;
+    else if (isComposedOperatePage(template)) {
+      score += operateScreenMatch(template, intent.screen) ? 50 : 15;
+    } else {
+      score -= 25;
+    }
+  }
   return score;
 };
 
@@ -91,6 +140,9 @@ const historyCounts = (path) => {
 
 export function retrieveDirections(templates, text, constraints = {}) {
   const brief = normalizeBrief(text, constraints);
+  const intent = operatePageIntent(brief);
+  brief.operatePage = intent.screen;
+  brief.chartExplicit = intent.chartExplicit;
   const history = historyCounts(constraints.history);
   const exclusions = [];
   const eligible = [];
@@ -103,7 +155,7 @@ export function retrieveDirections(templates, text, constraints = {}) {
     if (brief.framework !== "unspecified" && axes.framework !== brief.framework) reasons.push(`framework: needs ${brief.framework}, candidate is ${axes.framework}`);
     if (brief.lane === "lex" && axes.lane !== "lex") reasons.push("lane: Lightning requires SLDS/LEX structure");
     if (brief.lane !== "lex" && axes.lane === "lex") reasons.push("lane: LEX blueprint does not fit this host");
-    const score = baseScore(template, brief);
+    const score = baseScore(template, brief, intent);
     if (reasons.length) exclusions.push({ template, axes, score, reasons });
     else if (score >= 40) {
       const matches = constrainedAxes.filter((axis) => brief[axis] !== "unspecified" && brief[axis] === axes[axis]);
@@ -142,6 +194,21 @@ export function retrieveDirections(templates, text, constraints = {}) {
       kitGaps.push(`kit: no eligible candidate is built on ${installedKits.join(", ")} — the selected reference is a structure to port, not source to copy`);
     }
   }
+  // Operate page tier. Soft dashboard/settings/form/queue/record jobs must
+  // surface a composed page as the primary cite; chart atoms and component
+  // demos stay in the list as secondary region refs. Order, never eliminate —
+  // the same thin-corpus rule as kit affinity. Lightning keeps its own lane.
+  if (brief.lane !== "lex" && intent.screen && !intent.chartExplicit && ranked.length) {
+    const pagePrimary = (candidate) => isComposedOperatePage(candidate.template);
+    ranked = [
+      ...ranked.filter(pagePrimary).map((candidate) => (
+        candidate.matches.includes("operatePage")
+          ? candidate
+          : { ...candidate, matches: [...candidate.matches, "operatePage"] }
+      )),
+      ...ranked.filter((candidate) => !pagePrimary(candidate)),
+    ];
+  }
   const limit = Number.isInteger(constraints.limit) && constraints.limit > 0 ? constraints.limit : 3;
   const selected = [];
   for (const candidate of ranked) {
@@ -168,6 +235,6 @@ export function retrieveDirections(templates, text, constraints = {}) {
   const gaps = [...kitGaps, ...constrainedAxes.filter((axis) => brief[axis] !== "unspecified" && !represented.has(`${axis}:${brief[axis]}`)).map((axis) => `${axis}: no eligible candidate matches ${brief[axis]}`)];
   if (!selected.length) gaps.unshift(`job: no source-usable catalog row matches ${JSON.stringify(text)}`);
   else if (selected.length < limit) gaps.push(`diversity: catalog has ${selected.length} materially distinct source-usable candidate${selected.length === 1 ? "" : "s"} for this brief`);
-  if (brief.job === "unspecified" && selected.length) brief.job = selected[0].template.screen;
+  if (brief.job === "unspecified" && selected.length) brief.job = intent.screen || selected[0].template.screen;
   return { brief, selected, exclusions: exclusions.sort((a,b) => b.score-a.score || a.template.id.localeCompare(b.template.id)), gaps };
 }
