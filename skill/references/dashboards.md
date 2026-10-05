@@ -92,6 +92,30 @@ actions/queue   what needs a human, and the way to do it
 - **Time range belongs in one place and applies globally**, with per-module overrides
   marked explicitly on the module. Two competing time controls is a bug factory.
 
+### Machine floor (M5) — opt-in `data-shine-kpi`
+
+Decidability narrative (the four questions, direction semantics, queue rationale) stays
+**agent** judgment. Measure adds a small machine floor when the cite screen is
+`dashboard` or the page sets `data-shine-probe="dashboard"`:
+
+| Gate | When | Fail |
+|---|---|---|
+| Equal-weight KPI soup | ≥3 peer summary cards and no focal chart/table/queue beyond them | Hard-fail — hierarchy already catches competing filled CTAs; this catches cards-as-the-page |
+| Unit + baseline markers | Element opts into `data-shine-kpi` | Hard-fail unless `data-unit` and `data-baseline` are non-empty |
+
+```html
+<div data-shine-kpi data-unit="USD" data-baseline="vs last 30d" data-good-direction="up">
+  …
+</div>
+<section data-region="focal">…primary chart or table…</section>
+```
+
+Dashboard recipes (`kits.md`, `blocks/dashboard-page.tsx`) **require** the attribute on
+metric cards. Pages that omit `data-shine-kpi` keep the agent checklist only (this file's
+four questions) — measure will not invent unit/baseline failures from bare numbers.
+`data-good-direction` is optional for the machine floor; still required by the direction
+rule above for agent review.
+
 ## Density
 
 Data-heavy surfaces need a real density switch, not a single compromise spacing:

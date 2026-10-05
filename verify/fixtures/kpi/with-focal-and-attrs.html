@@ -1,0 +1,58 @@
+<!-- M5 positive: equal KPI row + one focal chart — (a) must pass. KPIs stamped with required attrs. -->
+<!doctype html>
+<html lang="en" data-cite="shadcn-dashboard-01" data-shine-probe="dashboard">
+<head>
+  <meta charset="utf-8" />
+  <title>KPI row with focal chart</title>
+  <style>
+    :root { color-scheme: light; }
+    body { margin: 0; font: 15px/1.5 system-ui, sans-serif; background: #fafaf9; color: #1c1917; }
+    main { padding: 24px; max-width: 1100px; }
+    h1 { font-size: 22px; margin: 0 0 16px; }
+    .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+    .kpi {
+      border: 1px solid #d6d3d1; border-radius: 8px; padding: 20px; background: #fff;
+      min-height: 110px;
+    }
+    .kpi .label { font-size: 13px; color: #78716c; }
+    .kpi .value { font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 8px; }
+    .kpi .ctx { font-size: 12px; color: #78716c; margin-top: 6px; }
+    [data-region="focal"] {
+      border: 1px solid #d6d3d1; border-radius: 8px; padding: 16px; background: #fff;
+      min-height: 320px;
+    }
+    svg { display: block; width: 100%; height: 280px; }
+    button { margin-top: 16px; background: #1c1917; color: #fff; border: 0; padding: 10px 16px; font: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Revenue cockpit</h1>
+    <section class="kpi-row" data-summary aria-label="Summary metrics">
+      <div class="kpi" data-shine-kpi data-unit="USD" data-baseline="vs last 30d" data-good-direction="up">
+        <div class="label">ARR</div><div class="value">$1.2M</div>
+        <div class="ctx">+8% vs last 30d</div>
+      </div>
+      <div class="kpi" data-shine-kpi data-unit="%" data-baseline="target 110%" data-good-direction="up">
+        <div class="label">NRR</div><div class="value">112%</div>
+        <div class="ctx">target 110%</div>
+      </div>
+      <div class="kpi" data-shine-kpi data-unit="USD" data-baseline="vs last 30d" data-good-direction="up">
+        <div class="label">Pipeline</div><div class="value">$4.8M</div>
+        <div class="ctx">+12% vs last 30d</div>
+      </div>
+    </section>
+    <section data-region="focal" aria-label="Pipeline by stage">
+      <h2 style="font-size:16px;margin:0 0 12px">Pipeline by stage</h2>
+      <svg viewBox="0 0 640 280" role="img" aria-label="Pipeline bar chart">
+        <rect x="40" y="40" width="80" height="200" fill="#44403c" />
+        <rect x="160" y="80" width="80" height="160" fill="#57534e" />
+        <rect x="280" y="100" width="80" height="140" fill="#78716c" />
+        <rect x="400" y="140" width="80" height="100" fill="#a8a29e" />
+        <rect x="520" y="180" width="80" height="60" fill="#d6d3d1" />
+      </svg>
+    </section>
+    <p><button type="button" data-primary>Open exceptions</button></p>
+  </main>
+</body>
+</html>

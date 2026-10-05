@@ -1,0 +1,41 @@
+<!-- M5 adversarial: data-shine-kpi present without required unit/baseline attrs. -->
+<!doctype html>
+<html lang="en" data-cite="shadcn-dashboard-01" data-shine-probe="dashboard">
+<head>
+  <meta charset="utf-8" />
+  <title>KPI missing attrs</title>
+  <style>
+    :root { color-scheme: light; }
+    body { margin: 0; font: 15px/1.5 system-ui, sans-serif; background: #fafaf9; color: #1c1917; }
+    main { padding: 24px; max-width: 1100px; }
+    .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+    .kpi { border: 1px solid #d6d3d1; border-radius: 8px; padding: 20px; background: #fff; min-height: 100px; }
+    .value { font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    [data-region="focal"] { border: 1px solid #d6d3d1; border-radius: 8px; padding: 16px; background: #fff; min-height: 320px; }
+    svg { display: block; width: 100%; height: 280px; }
+    button { background: #1c1917; color: #fff; border: 0; padding: 10px 16px; font: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Revenue cockpit</h1>
+    <section class="kpi-row" data-summary>
+      <div class="kpi" data-shine-kpi>
+        <div>ARR</div><div class="value">$1.2M</div>
+      </div>
+      <div class="kpi" data-shine-kpi data-unit="%" data-baseline="target 110%">
+        <div>NRR</div><div class="value">112%</div>
+      </div>
+      <div class="kpi" data-shine-kpi data-unit="USD">
+        <div>Pipeline</div><div class="value">$4.8M</div>
+      </div>
+    </section>
+    <section data-region="focal">
+      <svg viewBox="0 0 640 280" role="img" aria-label="Trend chart">
+        <polyline points="20,200 120,160 220,180 320,100 420,120 520,60 620,80" fill="none" stroke="#1c1917" stroke-width="3" />
+      </svg>
+    </section>
+    <p><button type="button" data-primary>Open</button></p>
+  </main>
+</body>
+</html>
