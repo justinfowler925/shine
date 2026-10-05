@@ -77,6 +77,11 @@ or prove reports `competingCtaProof: failed`. Doctor bite:
 
 
 
+
+**Pattern recommender (P5):** read `packet.recommendation` before editing — primary page
+cite, antiPatterns, restructure vs repaint hints, kitRecipe, confidence
+(`corpus/recommend.mjs`).
+
 **Settings/forms corpus (P2):** cite floors require ≥6 settings pages and ≥6 form+record
 pages; form/settings/record cites hard-fail `aria-invalid` without an accessible message
 (`verify/form-heuristics.mjs`).
