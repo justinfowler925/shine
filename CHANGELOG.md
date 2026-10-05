@@ -12,6 +12,12 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   the gate. Marketing and wireframe surfaces stay out of this requirement. Green prove always
   mints `~/.cache/shine/last-completion.json`. See `skill/references/verification.md`.
 
+### Fixed
+
+- **Doctor fixup after expert harvest.** Materialize P2 blueprint packs (tokens.css +
+  provenance manifests), enlarge page shots above the 30KB floor, and bump
+  `coverage.test.mjs` reference total to 224.
+
 ### Added
 
 - **Nucleus golden-path prove (P6).** `verify/fixtures/nucleus-golden/` fail→pass measure
