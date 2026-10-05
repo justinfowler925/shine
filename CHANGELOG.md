@@ -14,6 +14,10 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Nucleus golden-path prove (P6).** `verify/fixtures/nucleus-golden/` fail→pass measure
+  with log receipts and distinct CTA/card defect crops (not twin full-page shots).
+  Doctor bite via `verify/nucleus-golden.test.mjs`; write-up in `docs/nucleus-golden-prove.md`.
+
 - **Pattern recommender / cite v2 (P5).** `corpus/recommend.mjs` emits primary cite,
   antiPatterns, restructureHints, kitRecipe, and confidence; design-packet writes
   `recommendation` into the packet; cite CLI prints the summary. Doctor runs

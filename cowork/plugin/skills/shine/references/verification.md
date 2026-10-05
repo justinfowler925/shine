@@ -78,6 +78,10 @@ or prove reports `competingCtaProof: failed`. Doctor bite:
 
 
 
+
+**Nucleus golden-path prove (P6):** `verify/fixtures/nucleus-golden/receipts/` holds fail→pass
+measure logs and distinct defect crops. Run `node verify/nucleus-golden.test.mjs`.
+
 **Pattern recommender (P5):** read `packet.recommendation` before editing — primary page
 cite, antiPatterns, restructure vs repaint hints, kitRecipe, confidence
 (`corpus/recommend.mjs`).

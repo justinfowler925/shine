@@ -1,37 +1,23 @@
 # Nucleus golden fixture
 
-Distilled Company Tools / Operate shell for expert-track attach when a live Nucleus
-checkout is unavailable. **No production secrets.**
+Distilled Company Tools / Operate shell for expert-track P4a/P6.
 
 ## Files
 
 | Path | Intent |
 |---|---|
-| `before.html` | Dual filled primaries + equal KPI card soup + “Welcome to your dashboard” filler |
-| `after.html` | Single Install primary, searchable catalog, reversible Clear filters, honest empty |
+| `before.html` | Dual filled primaries + KPI/card soup + “Welcome to your dashboard” |
+| `after.html` | Single Install primary, focal install list, searchable catalog, honest empty |
+| `receipts/before-measure.log` | Fail log (cta-pressure + composition-slop + kpi) |
+| `receipts/after-measure.log` | Pass log |
+| `receipts/*-crop.png` | Defect crops — not twin full-page screenshots |
 
 ## Scripted path
 
 ```sh
-# Fail closed on seeded bloat (CTA pressure + composition detectors as they land)
-node verify/measure.mjs verify/fixtures/nucleus-golden/before.html \
-  --cite shadcn-catalog --lane saas
-
-# After expert pass
-node verify/measure.mjs verify/fixtures/nucleus-golden/after.html \
-  --cite shadcn-catalog --lane saas
-
-# Automated fail→pass bite
+node verify/measure.mjs verify/fixtures/nucleus-golden/before.html --cite shadcn-catalog --lane saas
+node verify/measure.mjs verify/fixtures/nucleus-golden/after.html --cite shadcn-catalog --lane saas
 node verify/nucleus-golden.test.mjs
 ```
 
-Packet / diagnosis against the fixture (audit mode):
-
-```sh
-node core/design-packet.mjs \
-  --job "Company Tools: find a package and install it" \
-  --lane saas --mode audit --category catalog
-```
-
-Proof standard: fail→pass **logs** and cropped defect evidence — not identical
-full-page before/after screenshots.
+See `docs/nucleus-golden-prove.md`.

@@ -1,0 +1,24 @@
+
+FAIL
+  ✗ axe: color-contrast(serious,1)
+  ✗ spacing: 4 distinct off-scale values (max 3) — 6px×9, 10px×12, 14px×6, 18px×20; e.g. a paddingRight; a paddingLeft; a paddingRight
+  ✗ type scale: 13px and 14px are a 1.077 step (used 5× and 6×) — below the ~1.12 UI band, so two steps are doing one job. Cardinality passing is not the scale being right
+  ✗ type scale: 14px and 15px are a 1.071 step (used 6× and 6×) — below the ~1.12 UI band, so two steps are doing one job. Cardinality passing is not the scale being right
+  ✗ cta-pressure: 2 competing filled treatments in main [Install packag, Export catalog] — Operate pages allow one filled primary; demote peers to outline/ghost or bind competingCtaCheck.ok=false to a flow: (expert P1)
+  ✗ composition-slop: 5 equal-weight Card roots in main with no focal region — card soup; collapse peers or add a table/chart/queue focal (anti-patterns.md § card soup; expert P3)
+  ✗ composition-slop: filler empty-state copy "Welcome to your dashboard" — replace with job-specific instructional copy (copy.md; expert P3)
+  ✗ kpi: 4 equal-weight summary cards with no focal region (largest card ~22752px², focal ~0px²) — a dashboard needs one primary chart/table/queue beyond the KPI row (dashboards.md § page architecture)
+
+mode=light  bodyBg=rgb(244, 244, 245)  bodyColor=rgb(24, 24, 27)
+tokens: {"--background":null,"--foreground":null,"--primary":null,"--border":null,"--ring":null,"--radius":null,"--shine-color-bg":null,"--shine-color-fg":null,"--shine-color-primary":null,"--shine-color-border":null,"--shine-color-ring":null}
+fontSizes: 12px×4  13px×5  14px×24  15px×6  20px×1  24px×4
+axe: 1 violations, 0 incomplete
+contrast: 17 text elements measured, worst 4.83:1
+theme: light rgb(244, 244, 245) / other rgb(244, 244, 245) — single mode, declared color-scheme:light
+
+composition notes (judgement, not blocking):
+  • 2 controls in 2 visual treatments; 2 filled (primary-looking). Largest group: 1× rgb(24, 24, 27) [Install packag]
+  • density: content~17% chrome~27% of viewport
+  • kpi: 4 summary-card candidate(s), 4 equal-weight, no focal beyond cards, no data-shine-kpi (agent checklist)
+  • sections: 2 marked; 1 missing a heading (section.kpi-row)
+  • accent colour also used as non-interactive state on "Nucleus", "Company Tools", "Admin", "Adoption", "12", "28" — one token, two meanings: every use is a legal token and the vocabulary still collapsed
