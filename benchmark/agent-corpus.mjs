@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 import {existsSync,mkdirSync,readFileSync,writeFileSync} from "node:fs";
+import {tmpdir} from "node:os";
 import {join,resolve} from "node:path";
 import {spawnSync} from "node:child_process";
 import {hydrateRunRecord,runCodexProduction,validateRunRecord} from "./agent-production.mjs";
 import {loadAgentCorpus,scoreAgentCorpus} from "./agent-score.mjs";
 
 const ROOT=resolve(new URL("..",import.meta.url).pathname),arg=name=>{const i=process.argv.indexOf(name);return i<0?null:process.argv[i+1]};
-const out=resolve(arg("--out")||"/private/tmp/shine-production-corpus"),baseline=resolve(arg("--baseline-root")||"/Users/justinfowler/Projects/shine-baseline-9f6a2cf"),current=resolve(arg("--current-root")||ROOT),only=arg("--only"),set=arg("--set");
+const out=resolve(arg("--out")||join(tmpdir(),"shine-production-corpus"));
+const baseline=resolve(arg("--baseline-root")||process.env.SHINE_AGENT_BASELINE_ROOT||join(tmpdir(),"shine-baseline-missing"));
+const current=resolve(arg("--current-root")||ROOT),only=arg("--only"),set=arg("--set");
 const representative=new Set(JSON.parse(readFileSync(join(ROOT,"benchmark/representative.json"),"utf8")));
 const briefs=JSON.parse(readFileSync(join(ROOT,"benchmark/briefs.json"),"utf8")).filter(x=>(!only||x.id===only)&&(!set||set!=="representative"||representative.has(x.id)));mkdirSync(out,{recursive:true});
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));

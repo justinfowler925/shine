@@ -98,9 +98,10 @@ limits it to the declared paths and the stylesheet shrinks by a third.
 
 CI for the two personal-account repositories was also silently off: Actions were disabled
 on both, there was no runner registered for either, and the doctor had not run since
-2026-08-30. Runners `justin-macbook-shine` and `justin-macbook-portfolio` are registered
+2026-08-30. Runners `justin-macbook-shine` and `justin-macbook-portfolio` were registered
 from the same package as the Nucleus runner, Actions are enabled, the portfolio guard
-targets its runner, and the doctor ran both lanes on main under Node 22.
+targets its runner, and the doctor ran both lanes on main under Node 22. Shine CI has
+since moved to GitHub-hosted `ubuntu-latest` only (no self-hosted runners).
 
 ## The third pass: application surfaces
 

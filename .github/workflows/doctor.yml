@@ -1,7 +1,7 @@
 name: shine
 
-# Both checks run on the repo-registered self-hosted runner. The personal account's
-# hosted runners are billing-locked; ubuntu-latest would fail before a step starts.
+# GitHub-hosted runners only. Bootstrap Node + deps (+ Playwright for --full)
+# on a clean ubuntu-latest image; do not pin machine-local runner labels.
 on:
   push:
     branches: [main]
@@ -11,17 +11,20 @@ on:
 jobs:
   doctor-default:
     name: doctor-default
-    runs-on: [self-hosted, macOS, ARM64, shine]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
       - name: install root deps
         run: npm ci
       - name: install pinned integration runtimes
         working-directory: verify/fixtures/integrations
         run: npm ci --ignore-scripts
+      - name: install Playwright Chromium
+        run: npx playwright install --with-deps chromium
       - name: fast import and seeded gates
         run: node verify/doctor.mjs --ci --quiet
       - name: Integration readiness and private edition integrity
@@ -41,17 +44,20 @@ jobs:
 
   doctor-full:
     name: doctor-full
-    runs-on: [self-hosted, macOS, ARM64, shine]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
       - name: install root deps
         run: npm ci
       - name: install pinned integration runtimes
         working-directory: verify/fixtures/integrations
         run: npm ci --ignore-scripts
+      - name: install Playwright Chromium
+        run: npx playwright install --with-deps chromium
       - name: browser interaction, visual proof, and designated consumers
         run: node verify/doctor.mjs --ci --full --quiet
 

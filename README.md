@@ -267,7 +267,7 @@ npm run sync-consumers   # re-vendor token copies into consumer apps
 ```
 
 Symlinks mean both IDEs read the new skill/agents immediately. No separate “publish”
-step. GitHub Actions runs `doctor.yml` on a self-hosted runner when needed. Local `node verify/doctor.mjs` remains the session-start gate.
+step. GitHub Actions runs `doctor.yml` on GitHub-hosted `ubuntu-latest` runners. Local `node verify/doctor.mjs` remains the session-start gate.
 
 ### 8. Consumers (tokens into apps)
 
@@ -320,7 +320,7 @@ See [`tokens/README.md`](./tokens/README.md) § Private brand lanes.
 | Check | How |
 | --- | --- |
 | Wiring + gates + tokens | `node verify/doctor.mjs` (and `--full` for composition fixtures) |
-| GitHub Actions | `doctor` on every PR via the self-hosted runner (justin-macbook-shine) |
+| GitHub Actions | `doctor` on every PR via GitHub-hosted `ubuntu-latest` |
 | License | MIT |
 | Homepage | https://shine-blond.vercel.app |
 
@@ -564,15 +564,16 @@ node verify/doctor.mjs --ci     # the machine-independent subset
 ```
 
 **The local doctor is the gate for machine wirings; CI runs the `--ci` subset.**
-`.github/workflows/` runs the `--ci` lane on the self-hosted runner (`justin-macbook-shine`;
-hosted runners cannot start on this account — billing-locked by choice). That registration
-followed the old repo object when this repo was scrubbed and recreated, so every run sat
-`queued` until it expired while the runner reported itself healthy under the old name —
-re-registered in #18; verify a runner by `gh api repos/O/R/actions/runners`, never by its
-own config file. The machine-local checks (hook wirings, skill symlinks, vendored copies)
-only ever execute on the laptop, which is why the token-freshness checks (every src token
-present in every target, **and** every dimension's emitted value equal to source) live in
-the doctor rather than only in CI.
+`.github/workflows/` runs the `--ci` (and `--ci --full`) lanes on GitHub-hosted
+`ubuntu-latest` runners only — no self-hosted runners or custom machine labels.
+Workflows bootstrap with `actions/setup-node`, `npm ci`, and
+`npx playwright install --with-deps chromium` so a clean image can run doctor and
+browser checks without a pre-baked Mac environment or the full `~/design-corpus`
+checkout (committed `corpus/packs/` covers the CI path). The machine-local checks
+(hook wirings, skill symlinks, vendored copies) only ever execute on the laptop,
+which is why the token-freshness checks (every src token present in every target,
+**and** every dimension's emitted value equal to source) live in the doctor rather
+than only in CI.
 
 It proves the gates *bite* rather than merely exist, and it fails when a consumer's
 vendored token copy is stale. Run it after any change to a hook, the skill frontmatter,
