@@ -54,14 +54,18 @@ export function candidateAxes(template, brief) {
   const axes = { job: template.screen, lane: lexScreen ? "lex" : template.screen.startsWith("marketing") ? "marketing" : brief.lane, audience: brief.audience, ...screen, ...kit };
   for (const [axis, fallback] of Object.entries({ audience:"general", informationShape:"mixed", brand:"neutral", interaction:"browsing", tone:"restrained", type:"ui", image:"none", framework:"native" }))
     if (!axes[axis] || axes[axis] === "unspecified") axes[axis] = fallback;
-  axes.density = template.dna?.density || axes.density || "comfortable";
+  // Canonicalize density: legacy `compact` / `high-density` DNA equals axis `dense`
+  // so "dense dashboard" briefs match Flowbite/Windmill/SLDS rows.
+  const rawDensity = template.dna?.density || axes.density || "comfortable";
+  axes.density = rawDensity === "compact" || rawDensity === "high-density" ? "dense" : rawDensity;
   axes.signature = `${template.dna?.family || template.kit}:${axes.signature || template.screen}:${axes.density}:${axes.type}:${axes.image}`;
   return axes;
 }
 
 const constrainedAxes = ["lane","audience","density","informationShape","brand","interaction","tone","type","image","framework"];
+const axisValue = (axes, axis) => (axis === "density" && (axes[axis] === "compact" || axes[axis] === "high-density") ? "dense" : axes[axis]);
 export function axisDistance(a, b) {
-  return constrainedAxes.reduce((sum, axis) => sum + (a[axis] !== b[axis] ? 1 : 0), 0) + (a.signature !== b.signature ? 1 : 0);
+  return constrainedAxes.reduce((sum, axis) => sum + (axisValue(a, axis) !== axisValue(b, axis) ? 1 : 0), 0) + (a.signature !== b.signature ? 1 : 0);
 }
 
 /** Composed SaaS Operate screens — page cites, not chart atoms. */
@@ -158,7 +162,7 @@ export function retrieveDirections(templates, text, constraints = {}) {
     const score = baseScore(template, brief, intent);
     if (reasons.length) exclusions.push({ template, axes, score, reasons });
     else if (score >= 40) {
-      const matches = constrainedAxes.filter((axis) => brief[axis] !== "unspecified" && brief[axis] === axes[axis]);
+      const matches = constrainedAxes.filter((axis) => brief[axis] !== "unspecified" && axisValue(brief, axis) === axisValue(axes, axis));
       eligible.push({ template, axes, score: score + matches.length * 8, matches, history: history[template.id] || 0 });
     }
   }

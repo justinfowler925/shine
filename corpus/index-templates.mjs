@@ -71,11 +71,13 @@ const KIT_FAMILY = {
   "cult-ui": { family: "cult", density: "comfortable" },
   // Composed application pages on plain Tailwind. Each is its own family so the
   // shortlist can hold three application silhouettes instead of one.
+  // Density uses the canonical axis value `dense` (not `compact`): cite matching
+  // is exact-string, and "dense dashboard" briefs must hit these rows.
   "tailadmin-react": { family: "tailadmin", density: "comfortable" },
-  "windmill-react": { family: "windmill", density: "comfortable" },
-  "flowbite-admin": { family: "flowbite", density: "compact" },
+  "windmill-react": { family: "windmill", density: "dense" },
+  "flowbite-admin": { family: "flowbite", density: "dense" },
   shine: { family: "shine", density: "dense" },
-  slds: { family: "slds", density: "compact" },
+  slds: { family: "slds", density: "dense" },
 };
 
 const SCREEN_JOBS = {
@@ -107,7 +109,7 @@ const SCREEN_JOBS = {
   // untitled:search, never via cite, so the packet could not hand them over.
   tabs: ["tabs", "sections", "segmented", "workspace-tabs", "section-tabs"],
   pagination: ["pagination", "paging", "page-size", "pager"],
-  form: ["form", "input", "date", "date-range", "upload", "attachments"],
+  form: ["form", "form-app", "input", "date", "date-range", "upload", "attachments"],
   "async-state": ["loading", "spinner", "pending", "async", "skeleton"],
   carousel: ["carousel", "gallery", "slides", "slideshow"],
   onboarding: ["onboarding", "first-run", "tour", "intro", "whats-new", "feature-announcement"],
@@ -503,7 +505,10 @@ const singles = [
     license: "MIT",
   },
   {
-    id: "fluent-nav", screen: "settings", kit: "fluentui", rank: 2,
+    // Weak settings stand-in (nav shell, no field rows). Kept so the settings
+    // shortlist still has three families until a third real settings page lands;
+    // shadcn-settings.md says do not cite it as the settings reference.
+    id: "fluent-nav", screen: "settings", kit: "fluentui", rank: 3,
     title: "Fluent UI NavDrawer",
     path: "fluentui/packages/react-components/react-nav",
     preview: "https://react.fluentui.dev",
@@ -551,22 +556,27 @@ const TAILWIND_PAGES = [
   // TailAdmin (React + Tailwind v4, MIT). Soft, card-heavy, blue accent.
   { id: "tailadmin-dashboard", kit: "tailadmin-react", screen: "dashboard", rank: 2, path: "tailadmin-react/src/pages/Dashboard/Ecommerce.tsx", preview: "https://free-react-demo.tailadmin.com/", title: "TailAdmin ecommerce dashboard (metrics, charts, recent orders)", jobs: ["dashboard", "analytics", "kpi", "ecommerce", "metrics"], required: ["navigation", "summary", "chart", "table"] },
   { id: "tailadmin-tables", kit: "tailadmin-react", screen: "queue", rank: 3, path: "tailadmin-react/src/pages/Tables/BasicTables.tsx", preview: "https://free-react-demo.tailadmin.com/basic-tables", title: "TailAdmin basic tables page", jobs: ["queue", "crud", "table", "records", "datagrid"], required: ["navigation", "table"] },
-  { id: "tailadmin-form-elements", kit: "tailadmin-react", screen: "form", rank: 2, path: "tailadmin-react/src/pages/Forms/FormElements.tsx", preview: "https://free-react-demo.tailadmin.com/form-elements", title: "TailAdmin form elements page (grouped inputs, selects, toggles, uploads)", jobs: ["form", "input", "fields", "controls"], required: ["navigation", "form"] },
+  { id: "tailadmin-form-elements", kit: "tailadmin-react", screen: "form", rank: 2, path: "tailadmin-react/src/pages/Forms/FormElements.tsx", preview: "https://free-react-demo.tailadmin.com/form-elements", title: "TailAdmin form elements page (grouped inputs, selects, toggles, uploads)", jobs: ["form", "form-app", "input", "fields", "controls"], required: ["navigation", "form"] },
   { id: "tailadmin-signin", kit: "tailadmin-react", screen: "auth", rank: 3, path: "tailadmin-react/src/pages/AuthPages/SignIn.tsx", preview: "https://free-react-demo.tailadmin.com/signin", title: "TailAdmin sign-in (split layout, brand panel)", jobs: ["auth", "login", "signin", "sign-in"], required: ["form"] },
   { id: "tailadmin-profile", kit: "tailadmin-react", screen: "record", rank: 2, path: "tailadmin-react/src/pages/UserProfiles.tsx", preview: "https://free-react-demo.tailadmin.com/profile", title: "TailAdmin user profile (identity card, info sections, address)", jobs: ["record", "profile", "detail", "account", "user"], required: ["navigation"] },
   { id: "tailadmin-calendar", kit: "tailadmin-react", screen: "calendar", rank: 1, path: "tailadmin-react/src/pages/Calendar.tsx", preview: "https://free-react-demo.tailadmin.com/calendar", title: "TailAdmin calendar (month grid, event dialog)", jobs: SCREEN_JOBS.calendar, required: ["navigation"] },
   // Windmill (React + Tailwind, MIT). Purple accent, dense cards, dark mode.
-  { id: "windmill-dashboard", kit: "windmill-react", screen: "dashboard", rank: 3, path: "windmill-react/src/pages/Dashboard.js", preview: "https://windmill-dashboard-react.vercel.app/app/dashboard", title: "Windmill dashboard (info cards, client table, charts)", jobs: ["dashboard", "analytics", "kpi", "metrics"], required: ["navigation", "summary", "chart", "table"] },
+  { id: "windmill-dashboard", kit: "windmill-react", screen: "dashboard", rank: 3, path: "windmill-react/src/pages/Dashboard.js", preview: "https://windmill-dashboard-react.vercel.app/app/dashboard", title: "Windmill dashboard (info cards, client table, charts)", jobs: ["dashboard", "analytics", "kpi", "metrics", "dense"], required: ["navigation", "summary", "chart", "table"] },
   { id: "windmill-tables", kit: "windmill-react", screen: "queue", rank: 4, path: "windmill-react/src/pages/Tables.js", preview: "https://windmill-dashboard-react.vercel.app/app/tables", title: "Windmill tables (paginated client tables with actions)", jobs: ["queue", "crud", "table", "records", "datagrid"], required: ["navigation", "table"] },
-  { id: "windmill-forms", kit: "windmill-react", screen: "form", rank: 3, path: "windmill-react/src/pages/Forms.js", preview: "https://windmill-dashboard-react.vercel.app/app/forms", title: "Windmill forms page (labelled fields, validation states)", jobs: ["form", "input", "fields", "validation"], required: ["navigation", "form"] },
+  { id: "windmill-forms", kit: "windmill-react", screen: "form", rank: 3, path: "windmill-react/src/pages/Forms.js", preview: "https://windmill-dashboard-react.vercel.app/app/forms", title: "Windmill forms page (labelled fields, validation states)", jobs: ["form", "form-app", "input", "fields", "validation"], required: ["navigation", "form"] },
   { id: "windmill-charts", kit: "windmill-react", screen: "charts", rank: 3, path: "windmill-react/src/pages/Charts.js", preview: "https://windmill-dashboard-react.vercel.app/app/charts", title: "Windmill charts page (doughnut, line, bar cards)", jobs: ["charts", "chart", "analytics", "dataviz"], required: ["navigation", "chart"] },
   { id: "windmill-login", kit: "windmill-react", screen: "auth", rank: 4, path: "windmill-react/src/pages/Login.js", preview: "https://windmill-dashboard-react.vercel.app/login", title: "Windmill login (split image, social sign-in)", jobs: ["auth", "login", "signin", "sign-in"], required: ["form"] },
   { id: "windmill-create-account", kit: "windmill-react", screen: "auth", rank: 5, path: "windmill-react/src/pages/CreateAccount.js", preview: "https://windmill-dashboard-react.vercel.app/create-account", title: "Windmill create account", jobs: ["auth", "signup", "sign-up", "register"], required: ["form"] },
   // Flowbite admin (HTML + Tailwind, MIT). Gray/blue, dense tables, stacked layouts.
-  { id: "flowbite-dashboard", kit: "flowbite-admin", screen: "dashboard", rank: 4, path: "flowbite-admin/content/_index.html", preview: "https://flowbite-admin-dashboard.vercel.app/", title: "Flowbite admin dashboard (sales chart, stats, latest transactions)", jobs: ["dashboard", "analytics", "kpi", "metrics", "sales"], required: ["navigation", "summary", "chart", "table"] },
+  { id: "flowbite-dashboard", kit: "flowbite-admin", screen: "dashboard", rank: 4, path: "flowbite-admin/content/_index.html", preview: "https://flowbite-admin-dashboard.vercel.app/", title: "Flowbite admin dashboard (sales chart, stats, latest transactions)", jobs: ["dashboard", "analytics", "kpi", "metrics", "sales", "dense"], required: ["navigation", "summary", "chart", "table"] },
+  // Second and third dense dashboard silhouettes from the same kit: top-nav stacked
+  // vs sidebar chrome. Distinct composition from the homepage dashboard so a dense
+  // dashboard brief can shortlist more than one Flowbite look beside Windmill.
+  { id: "flowbite-stacked", kit: "flowbite-admin", screen: "dashboard", rank: 5, path: "flowbite-admin/content/layouts/stacked.html", preview: "https://flowbite-admin-dashboard.vercel.app/layouts/stacked/", title: "Flowbite stacked dashboard (top nav, sales chart, dense widgets)", jobs: ["dashboard", "analytics", "kpi", "metrics", "dense", "stacked"], required: ["navigation", "summary", "chart"] },
+  { id: "flowbite-sidebar-layout", kit: "flowbite-admin", screen: "dashboard", rank: 6, path: "flowbite-admin/content/layouts/sidebar.html", preview: "https://flowbite-admin-dashboard.vercel.app/layouts/sidebar/", title: "Flowbite sidebar dashboard (rail chrome, dense widget grid)", jobs: ["dashboard", "analytics", "kpi", "metrics", "dense", "app-shell"], required: ["navigation", "summary", "chart"] },
   { id: "flowbite-users", kit: "flowbite-admin", screen: "queue", rank: 5, path: "flowbite-admin/content/crud/users.html", preview: "https://flowbite-admin-dashboard.vercel.app/crud/users/", title: "Flowbite users list (search, bulk select, edit/delete modals)", jobs: ["queue", "crud", "table", "records", "users", "admin"], required: ["navigation", "table"] },
   { id: "flowbite-products", kit: "flowbite-admin", screen: "queue", rank: 6, path: "flowbite-admin/content/crud/products.html", preview: "https://flowbite-admin-dashboard.vercel.app/crud/products/", title: "Flowbite products list (catalog table with drawers)", jobs: ["queue", "crud", "table", "products", "inventory", "catalog"], required: ["navigation", "table"] },
-  { id: "flowbite-settings", kit: "flowbite-admin", screen: "settings", rank: 3, path: "flowbite-admin/content/settings.html", preview: "https://flowbite-admin-dashboard.vercel.app/settings/", title: "Flowbite settings (profile, sessions, notifications, password)", jobs: ["settings", "preferences", "account", "profile"], required: ["navigation", "form"] },
+  { id: "flowbite-settings", kit: "flowbite-admin", screen: "settings", rank: 2, path: "flowbite-admin/content/settings.html", preview: "https://flowbite-admin-dashboard.vercel.app/settings/", title: "Flowbite settings (profile, sessions, notifications, password)", jobs: ["settings", "preferences", "account", "profile"], required: ["navigation", "form"] },
   { id: "flowbite-sign-in", kit: "flowbite-admin", screen: "auth", rank: 6, path: "flowbite-admin/content/authentication/sign-in.html", preview: "https://flowbite-admin-dashboard.vercel.app/authentication/sign-in/", title: "Flowbite sign-in (centered card)", jobs: ["auth", "login", "signin", "sign-in"], required: ["form"] },
   { id: "flowbite-pricing", kit: "flowbite-admin", screen: "pricing", rank: 1, path: "flowbite-admin/content/pages/pricing.html", preview: "https://flowbite-admin-dashboard.vercel.app/pages/pricing/", title: "Flowbite pricing page (three tiers, FAQ)", jobs: SCREEN_JOBS.pricing, required: ["navigation"] },
 ];
@@ -645,6 +655,10 @@ for (const t of [
   // machine and never encoded here, so the first regenerate anywhere else dropped
   // them and reference-contract failed. Declared now, where --check can see them.
   { id: "shadcn-settings", screen: "settings", title: "shadcn settings (visible section nav, per-section save)", jobs: ["settings", "preferences", "account"], required: ["form", "navigation"], captureExpect: 'nav[aria-label="Settings sections"] a', note: "corpus/blueprints/shadcn-settings.md is the region map; corpus/blueprints/shadcn-settings/ is authored shadcn source to copy, and reference.html is that source rendered at rest for capture" },
+  // Single-page form-app (create/edit entity). Distinct from wizard (multi-step)
+  // and from kit form-element galleries (TailAdmin/Windmill): one primary submit,
+  // grouped fields, validation summary, cancel. shadcn publishes no form block.
+  { id: "shadcn-form", screen: "form", title: "shadcn form-app (grouped fields, validation summary, primary submit)", jobs: ["form", "form-app", "input", "fields", "create", "edit"], required: ["form"], captureExpect: '[data-region="form-app"] form button[type="submit"]', note: "corpus/blueprints/shadcn-form.md is the region map; corpus/blueprints/shadcn-form/ is authored shadcn source to copy, and reference.html is that source rendered at rest for capture" },
   { id: "shadcn-wizard", screen: "wizard", title: "shadcn wizard (step list, review before commit)", jobs: ["wizard", "stepper", "multi-step", "onboarding"], required: ["form", "navigation"], captureExpect: '[data-region="wizard"] form input[name="account"]' },
   // Checkout and marketing were region maps with no pixels: compare had nothing to
   // hold a consumer to and completion could never cite them. reference.html renders
