@@ -25,6 +25,14 @@ Score against `contracts.md`, `foundations.md`, `patterns.md`, `anti-patterns.md
    citation** (or a `patterns.md` principle) and, if fixes were applied, **remeasure
    before/after numbers**. Prioritize completeness before cosmetic tweaks.
 
+## SaaS product-UX (lane=saas Operate pages)
+
+Before scoring craft, confirm `diagnose.md` §2 SaaS product-UX checks are filled on the
+diagnosis for `datagrid|dashboard|form|record|lex`: `primaryTaskCheck`,
+`emptyErrorTriadCheck`, `competingCtaCheck`. Schema enforces presence only; audit still
+judges whether the notes match the screenshot. Non-table empty/error triad and competing
+CTAs belong here even when axe and measure are green.
+
 ## Incomplete-primitive fails (always flag)
 
 ### Machine (DOM-detectable — `verify/incomplete-primitives.mjs` / measure)
