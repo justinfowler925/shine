@@ -29,6 +29,11 @@ import {
   formatIncompletePrimitiveFailures,
 } from "./incomplete-primitives.mjs";
 import { loadCatalog } from "../corpus/catalog.mjs";
+import {
+  APP_SHELL_CONTENT_SHARE_FLOOR,
+  densityFailureMessage,
+  densityGateApplies,
+} from "./density.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
@@ -37,12 +42,13 @@ const AXE_PATH = pathTo("axe-core/axe.min.js");
 const args = process.argv.slice(2);
 const target = args.find((a) => !a.startsWith("--"));
 if (!target) {
-  console.error("usage: node verify/measure.mjs <url|file.html> [--dark] [--json out] [--shot out] [--cite id]");
+  console.error("usage: node verify/measure.mjs <url|file.html> [--dark] [--json out] [--shot out] [--cite id] [--lane lane]");
   process.exit(2);
 }
 const dark = args.includes("--dark");
 const opt = (name) => (args.includes(name) ? args[args.indexOf(name) + 1] : null);
 const citeWant = opt("--cite");
+const laneWant = (opt("--lane") || "").toLowerCase();
 const url = /^https?:/.test(target) ? target : pathToFileURL(target).href;
 
 const SPACE_SCALE = [0, 1, 2, 4, 8, 12, 16, 24, 32, 48, 64];
@@ -487,8 +493,9 @@ const compose = await page.evaluate(() => {
 
   // 7. Density / chrome share. Count leaf text/media boxes only — summing ancestors
   // double-counts and made an empty main report 73% "content". Chrome = nav/aside/header
-  // top boxes. Marketing heroes are mostly image — never hard-fail those. App shells opt
-  // in with data-shine-probe="app-shell" (doctor fixture).
+  // top boxes. Marketing heroes are mostly image — never hard-fail those unless they
+  // opt into data-shine-probe="app-shell". SaaS/internal shells and shell cites fail
+  // closed without the probe (verify/density.mjs).
   let contentArea = 0;
   let chromeArea = 0;
   for (const el of all) {
@@ -791,13 +798,34 @@ if (compose.filledCount > 2) {
       `(techniques.md §Hierarchy; foundations Hierarchy)`,
   );
 }
-// Density hard-fail only when the page opts into the app-shell probe — marketing heroes
-// are mostly media and would false-fail a global content-share floor.
-if (compose.appShellProbe && compose.contentShare < 0.28) {
+// Density cite may come from --cite or the page's data-cite (fail closed without probe).
+// Likeness below still keys only off the --cite FLAG — never page self-labeling.
+const densityCiteId = citeWant || compose.citeId || "";
+const densityCiteRow = (() => {
+  if (!densityCiteId) return null;
+  try {
+    const cat = loadCatalog(SHINE);
+    return (cat.templates ?? []).find((t) => t.id === densityCiteId) || null;
+  } catch {
+    return null;
+  }
+})();
+
+// Density: fail closed for saas/internal shells and shell cites without requiring
+// data-shine-probe. Marketing / wireframe / known non-shell cites stay note-only
+// unless the probe is set (legacy opt-in). Compact-vs-comfortable stays agent.
+const densityApplies = densityGateApplies({
+  lane: laneWant,
+  citeScreen: densityCiteRow?.screen || "",
+  citeKind: "", // catalog `kind` is source/blueprint — not a screen; use screen/jobs
+  citeJobs: densityCiteRow?.jobs || [],
+  appShellProbe: compose.appShellProbe,
+  isWireframe,
+  citeId: densityCiteId,
+});
+if (densityApplies && compose.contentShare < APP_SHELL_CONTENT_SHARE_FLOOR) {
   failures.push(
-    `density: app-shell content share ${(compose.contentShare * 100).toFixed(1)}% of viewport ` +
-      `(chrome ${(compose.chromeShare * 100).toFixed(1)}%) — content is losing to chrome; ` +
-      `raise the main region's job or collapse nav (techniques.md §Hierarchy & density)`,
+    densityFailureMessage({ contentShare: compose.contentShare, chromeShare: compose.chromeShare }),
   );
 }
 
@@ -928,7 +956,11 @@ if (compose.controlCount) {
 }
 notes.push(
   `density: content~${(compose.contentShare * 100).toFixed(0)}% chrome~${(compose.chromeShare * 100).toFixed(0)}% of viewport` +
-    (compose.appShellProbe ? " (app-shell probe)" : ""),
+    (compose.appShellProbe
+      ? " (app-shell probe)"
+      : densityApplies
+        ? ` (shell floor${laneWant ? `, lane=${laneWant}` : ""})`
+        : ""),
 );
 if (compose.sectionCount) {
   notes.push(

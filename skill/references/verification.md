@@ -26,15 +26,19 @@ measure     getComputedStyle + getBoundingClientRect     ← the non-negotiable 
 a11y        axe-core injected offline from node_modules
 contrast    per-pixel worst-case + p5 for text over gradients
 lint        scale/cardinality on COMPUTED values
-compose     voids, type-step collisions, hierarchy (primary), density (app-shell probe), theme
+compose     voids, type-step collisions, hierarchy (primary), density (shell floor), theme
 critique    screenshot → multimodal, max 3 passes, LAST
 ```
 
-**Composition hard-fails (2026-08-10):** void regions; type steps below ~1.12 UI band
-used ≥5× each; undeclared non-switching theme; controls with zero filled primary;
-more than two competing filled treatments; `data-shine-probe="app-shell"` with content
-share &lt; 28% of viewport. Section-job gaps and density on non-probe pages print as notes.
-Prove bite with `node verify/doctor.mjs --full`.
+**Composition hard-fails (2026-08-10; density fail-closed 2026-10):** void regions; type
+steps below ~1.12 UI band used ≥5× each; undeclared non-switching theme; controls with
+zero filled primary; more than two competing filled treatments; **app-shell content share
+&lt; 28% of viewport** when any of: `data-shine-probe="app-shell"`, `--lane saas|internal`
+(unknown / shell cite), or cite screen/kind ∈ `{app-shell,dashboard,settings}`. Omitting
+the probe no longer dodges the floor on Operate shells. Marketing, wireframe, and known
+non-shell cites stay note-only. Compact-vs-comfortable product density stays agent
+(`dashboards.md`). Prove bite with `node verify/doctor.mjs --full` and
+`node verify/density.test.mjs`.
 
 **Completion lane:** `verify/prove.mjs` accepts `--lane` (same values as compare). Packet
 completion passes the job lane so saas/marketing originality (`data-shine-signature`)
