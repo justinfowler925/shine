@@ -1881,6 +1881,30 @@ actions/queue   what needs a human, and the way to do it
 - **Time range belongs in one place and applies globally**, with per-module overrides
   marked explicitly on the module. Two competing time controls is a bug factory.
 
+### Machine floor (M5) — opt-in `data-shine-kpi`
+
+Decidability narrative (the four questions, direction semantics, queue rationale) stays
+**agent** judgment. Measure adds a small machine floor when the cite screen is
+`dashboard` or the page sets `data-shine-probe="dashboard"`:
+
+| Gate | When | Fail |
+|---|---|---|
+| Equal-weight KPI soup | ≥3 peer summary cards and no focal chart/table/queue beyond them | Hard-fail — hierarchy already catches competing filled CTAs; this catches cards-as-the-page |
+| Unit + baseline markers | Element opts into `data-shine-kpi` | Hard-fail unless `data-unit` and `data-baseline` are non-empty |
+
+```html
+<div data-shine-kpi data-unit="USD" data-baseline="vs last 30d" data-good-direction="up">
+  …
+</div>
+<section data-region="focal">…primary chart or table…</section>
+```
+
+Dashboard recipes (`kits.md`, `blocks/dashboard-page.tsx`) **require** the attribute on
+metric cards. Pages that omit `data-shine-kpi` keep the agent checklist only (this file's
+four questions) — measure will not invent unit/baseline failures from bare numbers.
+`data-good-direction` is optional for the machine floor; still required by the direction
+rule above for agent review.
+
 ## Density
 
 Data-heavy surfaces need a real density switch, not a single compromise spacing:
@@ -2143,6 +2167,13 @@ Consistency here does more for perceived quality than any visual treatment:
 
 - Page composition, metric cards, direction semantics → `dashboards.md`
 - Mark-count thresholds, SVG vs canvas, render budgets → `performance.md`
+- Streaming agent charts, approval gates → `ai-surfaces.md`
+
+### Machine floor (M5)
+
+Chart taste stays agent. When a metric card opts into `data-shine-kpi`, measure requires
+`data-unit` and `data-baseline` (see `dashboards.md` § Machine floor). Axis-with-units on
+charts remains agent unless the dashboard recipe stamps KPI markers.
 - Library choice and maintenance status → `ecosystem.md`
 - Contrast policy and OKLCH ramp construction → `color-type.md`
 
@@ -2941,6 +2972,11 @@ before locking the brief.
    object**, queue.
 2. Charts: Recharts + `dataviz.md` encoding rules; D3 for custom/SSR.
 3. KPI decidability over decoration.
+4. **Require** `data-shine-kpi` on every metric card with non-empty `data-unit` and
+   `data-baseline` (optional `data-good-direction`). Mark the primary chart/table
+   `data-region="focal"`. Measure hard-fails equal-weight KPI soup without a focal on
+   dashboard cites / `data-shine-probe="dashboard"` — see `dashboards.md` § Machine floor.
+   The `dashboard-page` block ships this convention.
 
 ### Marketing hero
 
@@ -4832,7 +4868,8 @@ measure     getComputedStyle + getBoundingClientRect     ← the non-negotiable 
 a11y        axe-core injected offline from node_modules
 contrast    per-pixel worst-case + p5 for text over gradients
 lint        scale/cardinality on COMPUTED values
-compose     voids, type-step collisions, hierarchy (primary), density (shell floor), theme
+compose     voids, type-step collisions, hierarchy (primary), density (shell floor),
+            theme, dashboard KPI floor (`data-shine-kpi` + equal-card / focal)
 critique    screenshot → multimodal, max 3 passes, LAST
 ```
 
@@ -4854,6 +4891,12 @@ runs on the prove path, not only on standalone compare.
 `settings`, `form`, `queue`, `record`, … — see `usability.md`), missing or shallow
 `shine-usability.json` makes `prove` report `interactions: failed` (not `not_tested`).
 Other screens still soft-incomplete when usability is skipped. Details in `usability.md`.
+
+**Dashboard / KPI floor (M5):** when the cite screen is `dashboard` or the page sets
+`data-shine-probe="dashboard"`, ≥3 equal-weight summary cards with no focal
+chart/table/queue hard-fail. Elements that opt into `data-shine-kpi` must carry
+`data-unit` and `data-baseline`. Without the attribute, unit/baseline stays an agent
+checklist in `dashboards.md`. Dashboard recipes require the attribute.
 
 **Playwright, axe-core and sharp live in shine's root `package.json`.** Run `npm install`
 at the repo root. `verify/deps.mjs` resolves shine-first and keeps a sibling checkout as
