@@ -14,6 +14,12 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Nucleus golden fixture + Clearspeed attach profile (P4a).** Fixture
+  `verify/fixtures/nucleus-golden/{before,after}.html` seeds Company Tools–shaped
+  bloat and an expert pass; `skill/references/clearspeed/profile-instructions.md`
+  and `docs/nucleus-attach.md` document the repeatable attach path; `consumers.example`
+  notes a Nucleus token row. Doctor runs `verify/nucleus-golden.test.mjs`.
+
 - **Primary-job CTA pressure (P1).** Operate page cites hard-fail in `measure` when more
   than one distinct filled treatment appears in `main` (`verify/cta-pressure.mjs`).
   `competingCtaCheck.ok: false` must bind a `flow:` on a critical/major defect or prove

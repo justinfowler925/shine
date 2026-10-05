@@ -10,13 +10,23 @@ import { OPERATE_PROVE_SCREENS, isOperateProveScreen } from "../hooks/receipt.mj
 
 export { OPERATE_PROVE_SCREENS, isOperateProveScreen };
 
+/** Screens that get main-region CTA pressure. Includes catalog (Company Tools). */
+export const CTA_PRESSURE_SCREENS = Object.freeze([
+  ...OPERATE_PROVE_SCREENS,
+  "catalog",
+]);
+
+export function isCtaPressureScreen(screen) {
+  return CTA_PRESSURE_SCREENS.includes(String(screen || "").trim().toLowerCase());
+}
+
 export function normalizeScreen(value) {
   return String(value || "").trim().toLowerCase();
 }
 
 function shellHintFromJobs(jobs = []) {
   for (const job of jobs) {
-    if (isOperateProveScreen(job)) return normalizeScreen(job);
+    if (isCtaPressureScreen(job)) return normalizeScreen(job);
   }
   return "";
 }
@@ -38,12 +48,12 @@ export function ctaPressureGateApplies({
   if (/marketing|hero/.test(id)) return false;
 
   const screen = normalizeScreen(citeScreen) || shellHintFromJobs(citeJobs);
-  if (screen && isOperateProveScreen(screen)) return true;
+  if (screen && isCtaPressureScreen(screen)) return true;
 
   const laneNorm = normalizeScreen(lane);
   if (laneNorm === "saas" || laneNorm === "internal") {
     // Operate lane + any non-marketing cite id that looks like a page packet.
-    if (screen && !isOperateProveScreen(screen)) return false;
+    if (screen && !isCtaPressureScreen(screen)) return false;
     if (citeId || screen) return true;
   }
   return false;

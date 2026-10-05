@@ -13,3 +13,8 @@
 # my-site|personal-site|~/Projects/my-site/assets/tokens.css
 # my-app|personal-artifact|~/Projects/my-app/src/styles/shine-tokens.css
 # brand-app|brand-theme|~/Projects/brand-app/src/styles/shine-theme.css
+
+# Nucleus (Clearspeed Operate) — token vendor path for measure-consumers / sync-consumers
+# when Justin's machine has a local checkout. Paths are examples only.
+# nucleus-app|brand-theme|~/Projects/nucleus/src/styles/shine-theme.css
+
