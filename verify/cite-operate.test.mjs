@@ -16,7 +16,10 @@ const OPERATE_JOBS = [
   { query: "dense dashboard", screen: "dashboard" },
   { query: "settings page", screen: "settings" },
   { query: "account settings", screen: "settings" },
+  { query: "notification settings", screen: "settings" },
+  { query: "billing settings", screen: "settings" },
   { query: "form", screen: "form" },
+  { query: "invite teammate form", screen: "form" },
   { query: "queue", screen: "queue" },
   { query: "record", screen: "record" },
 ];
@@ -57,9 +60,9 @@ assert.ok(
 // Inventory floors from the harvest slice (page-scope, selectable).
 const pages = templates.filter((t) => (t.scope || "page") === "page" && t.selectable !== false);
 const count = (screen, pred = () => true) => pages.filter((t) => t.screen === screen && pred(t)).length;
-assert.ok(count("settings") >= 3, `settings page rows ≥3, got ${count("settings")}`);
+assert.ok(count("settings") >= 6, `settings page rows ≥6 (P2 harvest), got ${count("settings")}`);
 assert.ok(count("dashboard", (t) => t.dna?.density === "dense") >= 3, `dense dashboard page rows ≥3, got ${count("dashboard", (t) => t.dna?.density === "dense")}`);
-assert.ok(count("form") + count("record") >= 4, `form+record pages ≥4 (form-app/record floor), got form=${count("form")} record=${count("record")}`);
+assert.ok(count("form") + count("record") >= 6, `form+record pages ≥6 (P2 harvest), got form=${count("form")} record=${count("record")}`);
 
 // Chart-led briefs without a page screen still retrieve chart atoms.
 const chartsOnly = retrieveDirections(templates, "charts", { lane: "saas" });

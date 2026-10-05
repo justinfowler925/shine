@@ -1456,6 +1456,10 @@ fails the unmarked data table.
 
 Record tables already fail closed without `shine-tables.json`. Operate page screens (dashboard, settings, form, queue, record, and siblings listed in `usability.md`) likewise cannot complete prove with missing or shallow `shine-usability.json`: interactions status is **`failed`**, not a soft `not_tested`.
 
+### Form invalid state (P2)
+
+When a control sets `aria-invalid="true"`, an accessible error message MUST exist via `aria-describedby` or a linked `role="alert"`. Measure fails closed through `verify/form-heuristics.mjs` on form/settings/record cites.
+
 
 ---
 
@@ -3040,6 +3044,19 @@ before locking the brief.
 Kit: Untitled UI table batch-actions layout (corpus/packs/untitled-table/source/table.demo.tsx:LINE)
 Mapped to: shine toolbar + destructive behind menu (contracts Table SHOULD)
 ```
+
+## Operate settings / forms (P2)
+
+| Job | Primary cite |
+|---|---|
+| Account / profile settings | `shadcn-settings` |
+| Notification preferences | `shadcn-settings-notifications` |
+| Billing / seats | `shadcn-settings-billing` |
+| Member policy | `shadcn-settings-members` |
+| Invite teammate | `shadcn-form-invite` |
+| Account record | `shadcn-record-account` |
+
+Form MUST: associated labels; `aria-invalid="true"` needs an accessible message (`verify/form-heuristics.mjs`).
 
 
 ---
@@ -4741,6 +4758,7 @@ Reasons are listed under the table.
 | dashboard | `query-haze` | haze | query-only | live | dashboard |
 | empty | `shadcn-empty-icon` | shadcn-registry | source | live | empty, ai-generate |
 | form | `shadcn-form` | shadcn-registry | blueprint | live | form, form-app, input, fields, create, edit |
+| form | `shadcn-form-invite` | shadcn-registry | blueprint | live | form, form-app, invite, invite-teammate |
 | form | `untitled-date-picker` | untitled-ui-react | source | live | form, input, date, date-range, calendar, picker |
 | form | `tailadmin-form-elements` | tailadmin-react | source | live | form, form-app, input, fields, controls |
 | form | `untitled-file-upload` | untitled-ui-react | source | live | form, input, upload, attachments, dropzone, files |
@@ -4816,15 +4834,19 @@ Reasons are listed under the table.
 | queue | `flowbite-users` | flowbite-admin | source | live | queue, crud, table, records, users, admin |
 | queue | `flowbite-products` | flowbite-admin | source | live | queue, crud, table, products, inventory, catalog |
 | record | `shadcn-record` | shadcn-registry | blueprint | live | record, detail, account, opportunity |
+| record | `shadcn-record-account` | shadcn-registry | blueprint | live | record, account, detail, customer |
 | record | `tailadmin-profile` | tailadmin-react | source | live | record, profile, detail, account, user |
 | settings | `shadcn-settings` | shadcn-registry | blueprint | live | settings, preferences, account |
+| settings | `shadcn-settings-billing` | shadcn-registry | blueprint | live | settings, billing, plan, seats |
+| settings | `shadcn-settings-members` | shadcn-registry | blueprint | live | settings, members, roles, access |
+| settings | `shadcn-settings-notifications` | shadcn-registry | blueprint | live | settings, notifications, preferences, alerts |
 | settings | `flowbite-settings` | flowbite-admin | source | live | settings, preferences, account, profile |
 | settings | `fluent-nav` | fluentui | source | live | settings |
 | tabs | `untitled-tabs` | untitled-ui-react | source | live | tabs, sections, segmented, workspace-tabs, section-tabs |
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-219 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+224 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
@@ -4964,6 +4986,11 @@ or prove reports `competingCtaProof: failed`. Doctor bite:
 `node verify/cta-pressure.test.mjs`.
 
 
+
+
+**Settings/forms corpus (P2):** cite floors require ≥6 settings pages and ≥6 form+record
+pages; form/settings/record cites hard-fail `aria-invalid` without an accessible message
+(`verify/form-heuristics.mjs`).
 
 **Composition slop (P3):** Operate saas cites hard-fail on ≥4 equal Card roots without a
 focal, marketing DNA glow/gradient/display clusters, and filler empty phrases such as

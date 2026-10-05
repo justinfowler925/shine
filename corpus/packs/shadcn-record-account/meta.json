@@ -1,0 +1,12 @@
+{
+  "id": "shadcn-record-account",
+  "source": "corpus/blueprints/shadcn-record-account/reference.html",
+  "harvested": "2026-10-05",
+  "provenance": "Authored blueprint, expert-track P2",
+  "capture": {
+    "status": 200,
+    "title": "Account record",
+    "sourceUrl": "corpus/blueprints/shadcn-record-account/reference.html",
+    "capturedAt": "2026-10-05T18:38:03.407Z"
+  }
+}

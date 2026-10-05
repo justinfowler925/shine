@@ -1,0 +1,12 @@
+{
+  "id": "shadcn-settings-notifications",
+  "source": "corpus/blueprints/shadcn-settings-notifications/reference.html",
+  "harvested": "2026-10-05",
+  "provenance": "Authored blueprint, expert-track P2",
+  "capture": {
+    "status": 200,
+    "title": "Notification settings",
+    "sourceUrl": "corpus/blueprints/shadcn-settings-notifications/reference.html",
+    "capturedAt": "2026-10-05T18:38:03.194Z"
+  }
+}

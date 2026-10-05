@@ -55,6 +55,11 @@ import {
   evaluateCompositionSlop,
   formatCompositionSlopFailures,
 } from "./composition-slop.mjs";
+import {
+  formHeuristicGateApplies,
+  evaluateFormHeuristics,
+  formatFormHeuristicFailures,
+} from "./form-heuristics.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
@@ -378,6 +383,7 @@ const incompletePrimitives = await page.evaluate(evaluateIncompletePrimitives);
 const kpiFloor = await page.evaluate(evaluateKpiFloor);
 const ctaPressure = await page.evaluate(evaluateMainCtaPressure);
 const compositionSlop = await page.evaluate(evaluateCompositionSlop);
+const formHeuristics = await page.evaluate(evaluateFormHeuristics);
 const copyHeuristics = await page.evaluate(evaluateCopyHeuristics);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
 const compose = await page.evaluate(() => {
@@ -866,6 +872,28 @@ if (compose.filledCount > 2) {
     citeId: slopCiteId,
   });
   for (const f of formatCompositionSlopFailures(compositionSlop, { gate: slopApplies })) {
+    failures.push(f);
+  }
+}
+{
+  const formCiteId = citeWant || compose.citeId || "";
+  const formCiteRow = (() => {
+    if (!formCiteId) return null;
+    try {
+      const cat = loadCatalog(SHINE);
+      return (cat.templates ?? []).find((t) => t.id === formCiteId) || null;
+    } catch {
+      return null;
+    }
+  })();
+  const formApplies = formHeuristicGateApplies({
+    lane: laneWant,
+    citeScreen: formCiteRow?.screen || "",
+    citeJobs: formCiteRow?.jobs || [],
+    isWireframe,
+    citeId: formCiteId,
+  });
+  for (const f of formatFormHeuristicFailures(formHeuristics, { gate: formApplies })) {
     failures.push(f);
   }
 }

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-settings-members">
+<head><meta charset="utf-8"/><title>Member settings</title><style>
+:root{color-scheme:light;--bg:#fafafa;--panel:#fff;--ink:#18181b;--muted:#71717a;--line:#e4e4e7;--accent:#18181b;--accent-ink:#fafafa}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+.shell{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+aside{background:var(--panel);border-right:1px solid var(--line);padding:24px 16px}
+aside h1{font-size:15px;margin:0 0 12px}
+nav a{display:block;padding:8px 10px;color:var(--ink);text-decoration:none;border-radius:6px}
+nav a[aria-current=page]{background:#f4f4f5;font-weight:600}
+main{padding:32px 40px;max-width:720px}
+h2{margin:0 0 6px;font-size:22px;letter-spacing:-.02em}.lede{margin:0 0 20px;color:var(--muted)}
+label{display:grid;gap:6px;margin:0 0 14px;font-size:13px;font-weight:600}
+input,select,textarea{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.actions{display:flex;gap:10px;margin-top:8px}
+button.primary{background:var(--accent);color:var(--accent-ink);border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600}
+button.ghost{background:transparent;border:1px solid var(--line);padding:10px 16px;border-radius:8px;font:inherit}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px}
+.error{color:#b91c1c;font-size:12px;font-weight:500}
+</style></head>
+<body>
+<div class="shell">
+<aside><h1>Workspace</h1><nav aria-label="Settings sections">
+<a href="#m">Profile</a><a href="#m">Billing</a><a href="#m" aria-current="page">Members</a>
+</nav></aside>
+<main id="m" data-region="settings-members">
+<div class="card">
+<h2>Members</h2>
+<p class="lede">Roles for people who open this workspace on Monday.</p>
+<label>Default role<select id="role"><option>Viewer</option><option selected>Operator</option><option>Admin</option></select></label>
+<label>Require SSO<input id="sso" type="checkbox" checked /></label>
+<div class="actions"><button class="primary" type="button" id="save">Save member policy</button></div>
+<p id="status" role="status"></p>
+</div>
+</main>
+</div>
+<script>document.getElementById("save").onclick=()=>{document.getElementById("status").textContent="Member policy saved"}</script>
+</body></html>
