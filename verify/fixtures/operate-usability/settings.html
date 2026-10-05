@@ -1,0 +1,64 @@
+<!doctype html>
+<!-- shine-lint: off color,type,spacing — adversarial doctor fixture: pretty Operate
+     settings that look complete while a stub shine-usability.json must still fail. -->
+<html lang="en" data-cite="shadcn-settings">
+<head>
+  <meta charset="utf-8" />
+  <title>Account settings</title>
+  <style>
+    :root { color-scheme: light; --bg: #fafafa; --panel: #ffffff; --ink: #18181b; --muted: #71717a; --line: #e4e4e7; --accent: #18181b; --accent-ink: #fafafa; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: linear-gradient(180deg, #f4f4f5 0%, var(--bg) 40%); color: var(--ink); font: 15px/1.5 "Segoe UI", system-ui, sans-serif; }
+    .shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+    aside { background: var(--panel); border-right: 1px solid var(--line); padding: 28px 20px; }
+    aside h1 { font-size: 18px; margin: 0 0 8px; letter-spacing: -0.02em; }
+    aside p { margin: 0 0 24px; color: var(--muted); font-size: 13px; }
+    nav[aria-label="Settings sections"] { display: grid; gap: 4px; }
+    nav a { color: var(--ink); text-decoration: none; padding: 10px 12px; border-radius: 8px; }
+    nav a[aria-current="page"] { background: #f4f4f5; font-weight: 600; }
+    main { padding: 40px 48px; max-width: 720px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 28px; box-shadow: 0 1px 2px rgb(0 0 0 / 4%); }
+    h2 { margin: 0 0 6px; font-size: 22px; letter-spacing: -0.03em; }
+    .lede { margin: 0 0 24px; color: var(--muted); }
+    label { display: grid; gap: 6px; margin: 0 0 16px; font-size: 13px; font-weight: 600; }
+    input { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); }
+    .actions { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+    button#save { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 8px; padding: 10px 16px; font: inherit; font-weight: 600; cursor: pointer; }
+    #status { margin: 0; color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <h1>Workspace</h1>
+      <p>Profile, sessions, and notification defaults.</p>
+      <nav aria-label="Settings sections">
+        <a href="#profile" aria-current="page">Profile</a>
+        <a href="#profile">Notifications</a>
+        <a href="#profile">Security</a>
+      </nav>
+    </aside>
+    <main id="profile">
+      <div class="card">
+        <h2>Profile</h2>
+        <p class="lede">Update the name teammates see on shared records. Changes apply after save.</p>
+        <label>Display name
+          <input id="name" value="Ada Lovelace" autocomplete="nickname" />
+        </label>
+        <div class="actions">
+          <button id="save" type="button">Save changes</button>
+          <p id="status" role="status">Unsaved</p>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const name = document.getElementById("name");
+    const status = document.getElementById("status");
+    document.getElementById("save").onclick = () => {
+      status.textContent = "Saved " + name.value.trim();
+    };
+    name.oninput = () => { status.textContent = "Unsaved"; };
+  </script>
+</body>
+</html>
