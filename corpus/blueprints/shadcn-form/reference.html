@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-form" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Form-app reference</title>
+<!--
+  Authored reference for the Operate form-app screen, rendered static from
+  corpus/blueprints/shadcn-form/page.tsx. Region map: shadcn-form.md.
+
+  At rest: empty required fields, no validation summary, submit enabled, status
+  carries resting copy. That is the state compare should hold a consumer to.
+-->
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{font:14px/1.5 ui-sans-serif,system-ui,sans-serif;margin:0;color:#18181b;background:#fff}
+main{max-width:768px;margin:auto;padding:32px 24px}
+h1{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:0}
+h2{font-size:18px;font-weight:600;margin:0;padding-bottom:8px}
+p{margin:0}
+.muted{color:#71717a}
+.sub{margin-top:4px}
+form{margin-top:32px;display:flex;flex-direction:column;gap:32px}
+section{display:flex;flex-direction:column}
+.rows>*+*{border-top:1px solid #e4e4e7}
+.row{display:grid;gap:8px;padding:16px 0}
+@media(min-width:640px){.row{grid-template-columns:minmax(0,14rem) minmax(0,1fr);gap:24px;align-items:start}}
+label{display:block;font-weight:500}
+.req{color:#71717a;font-weight:400}
+input,select,textarea{font:inherit;width:100%;max-width:100%;border:1px solid #e4e4e7;border-radius:6px;padding:8px 12px;background:#fff;color:#18181b}
+input,select{height:36px;padding:0 12px}
+textarea{min-height:76px;resize:vertical}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;border-top:1px solid #e4e4e7;padding-top:24px}
+button{font:inherit;font-weight:500;height:36px;padding:0 14px;border-radius:6px;border:1px solid transparent;cursor:pointer}
+button[type=submit]{background:#18181b;color:#fff}
+.outline{background:#fff;color:#18181b;border-color:#e4e4e7}
+</style>
+<main data-region="form-app">
+<header>
+<h1>Create opportunity</h1>
+<p class="muted sub">Saves a new opportunity on the account and opens its record.</p>
+</header>
+
+<form novalidate>
+<section aria-labelledby="basics-heading">
+<h2 id="basics-heading">Basics</h2>
+<div class="rows">
+<div class="row">
+<div>
+<label for="field-name">Opportunity name <span class="req">· Required</span></label>
+<p class="muted">The name the team will search for.</p>
+</div>
+<div><input id="field-name" name="name" aria-required="true"></div>
+</div>
+<div class="row">
+<div>
+<label for="field-account">Account <span class="req">· Required</span></label>
+<p class="muted">Which customer this opportunity belongs to.</p>
+</div>
+<div>
+<select id="field-account" name="account" aria-required="true">
+<option value="">Select account</option>
+<option value="zurich">Zurich — UK claims</option>
+<option value="northwind">Northwind Logistics</option>
+<option value="contoso">Contoso Retail</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="owner-heading">
+<h2 id="owner-heading">Owner &amp; timing</h2>
+<div class="rows">
+<div class="row">
+<div>
+<label for="field-owner">Owner <span class="req">· Required</span></label>
+<p class="muted">Who is accountable for the next step.</p>
+</div>
+<div>
+<select id="field-owner" name="owner" aria-required="true">
+<option value="">Select owner</option>
+<option value="morgan">Morgan Lee</option>
+<option value="jordan">Jordan Ng</option>
+<option value="riley">Riley Cho</option>
+</select>
+</div>
+</div>
+<div class="row">
+<div>
+<label for="field-closeDate">Expected close <span class="req">· Required</span></label>
+<p class="muted">Target date for a decision, not a forecast lock.</p>
+</div>
+<div><input id="field-closeDate" name="closeDate" type="date" aria-required="true"></div>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="notes-heading">
+<h2 id="notes-heading">Notes</h2>
+<div class="rows">
+<div class="row">
+<div>
+<label for="field-notes">Notes</label>
+<p class="muted">Optional context for the next owner.</p>
+</div>
+<div><textarea id="field-notes" name="notes" rows="3"></textarea></div>
+</div>
+</div>
+</section>
+
+<div class="actions">
+<button type="submit">Create opportunity</button>
+<button type="button" class="outline">Cancel</button>
+<p class="muted" role="status">No changes saved yet.</p>
+</div>
+</form>
+</main>

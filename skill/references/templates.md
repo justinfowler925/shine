@@ -143,15 +143,18 @@ Reasons are listed under the table.
 | dashboard | `shadcn-dashboard-01` | shadcn-registry | source | live | crud, dashboard, list, records |
 | dashboard | `untitled-line-charts` | untitled-ui-react | source | live | dashboard, analytics, charts, dataviz |
 | dashboard | `tailadmin-dashboard` | tailadmin-react | source | live | dashboard, analytics, kpi, ecommerce, metrics |
-| dashboard | `windmill-dashboard` | windmill-react | source | live | dashboard, analytics, kpi, metrics |
-| dashboard | `flowbite-dashboard` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, sales |
+| dashboard | `windmill-dashboard` | windmill-react | source | live | dashboard, analytics, kpi, metrics, dense |
+| dashboard | `flowbite-dashboard` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, sales, dense |
+| dashboard | `flowbite-stacked` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, dense, stacked |
+| dashboard | `flowbite-sidebar-layout` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, dense, app-shell |
 | dashboard | `query-shadcn-blocks` | shadcn-registry | query-only | live | dashboard |
 | dashboard | `query-haze` | haze | query-only | live | dashboard |
 | empty | `shadcn-empty-icon` | shadcn-registry | source | live | empty, ai-generate |
+| form | `shadcn-form` | shadcn-registry | blueprint | live | form, form-app, input, fields, create, edit |
 | form | `untitled-date-picker` | untitled-ui-react | source | live | form, input, date, date-range, calendar, picker |
-| form | `tailadmin-form-elements` | tailadmin-react | source | live | form, input, fields, controls |
+| form | `tailadmin-form-elements` | tailadmin-react | source | live | form, form-app, input, fields, controls |
 | form | `untitled-file-upload` | untitled-ui-react | source | live | form, input, upload, attachments, dropzone, files |
-| form | `windmill-forms` | windmill-react | source | live | form, input, fields, validation |
+| form | `windmill-forms` | windmill-react | source | live | form, form-app, input, fields, validation |
 | lex-console | `lex-console` | slds | blueprint | live | lex-console |
 | lex-email | `lex-email` | slds | blueprint | live | lex-email, email |
 | lex-lwr | `lex-lwr` | slds | blueprint | live | lex-lwr |
@@ -225,13 +228,13 @@ Reasons are listed under the table.
 | record | `shadcn-record` | shadcn-registry | blueprint | live | record, detail, account, opportunity |
 | record | `tailadmin-profile` | tailadmin-react | source | live | record, profile, detail, account, user |
 | settings | `shadcn-settings` | shadcn-registry | blueprint | live | settings, preferences, account |
-| settings | `fluent-nav` | fluentui | source | live | settings |
 | settings | `flowbite-settings` | flowbite-admin | source | live | settings, preferences, account, profile |
+| settings | `fluent-nav` | fluentui | source | live | settings |
 | tabs | `untitled-tabs` | untitled-ui-react | source | live | tabs, sections, segmented, workspace-tabs, section-tabs |
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-216 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+219 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 

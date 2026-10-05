@@ -1,0 +1,21 @@
+{
+  "id": "flowbite-stacked",
+  "source": "https://flowbite-admin-dashboard.vercel.app/layouts/stacked/",
+  "harvested": "2026-10-05",
+  "bytes": 88971,
+  "mode": "viewport",
+  "provenance": "Local Hugo build of flowbite-admin pin + archived app.css (Vercel demo HTTP 429 during harvest)",
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS Dashboard Stacked Layout - Flowbite",
+    "headings": "",
+    "expectedSelector": "nav, aside, table, form, input, svg, main",
+    "expectedCount": 118,
+    "expectedText": "",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/layouts/stacked/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/layouts/stacked/",
+    "capturedAt": "2026-10-05T10:04:12.016Z",
+    "expectedTextMatched": false,
+    "shotSha256": "6bad11cda6c40723d4de81a616b06a08903b0be57529bb02e981e3c3f049520c"
+  }
+}

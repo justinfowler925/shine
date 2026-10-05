@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-form",
+  "source": "corpus/blueprints/shadcn-form/reference.html",
+  "harvested": "2026-10-05",
+  "bytes": 65118,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "Form-app reference",
+    "headings": "Create opportunity\nBasics\nOwner & timing\nNotes",
+    "expectedSelector": "[data-region=\"form-app\"] form button[type=\"submit\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-form/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-form/reference.html",
+    "capturedAt": "2026-10-05T10:01:28.032Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "9036022241831c5c3d155f22dd456e7bd2cdb72a081da3a1fdc2947bd677701c",
+    "shotSha256": "2bf9c7e8f7f7f0fd8b8080fce804dcf198e2de827da54ab37a134913b26dd9d6"
+  }
+}

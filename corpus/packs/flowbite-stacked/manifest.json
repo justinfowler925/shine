@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "flowbite-stacked",
+  "screen": "dashboard",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "flowbite-admin",
+    "mode": "full",
+    "url": "https://github.com/themesberg/flowbite-admin-dashboard.git",
+    "branch": "main",
+    "sha": "229df7ff25808ab2bbda65f03f2397a05f7b4288"
+  },
+  "corpusPath": "flowbite-admin/content/layouts/stacked.html",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "stacked.html",
+      "sha256": "0814bae71ce642a26ccfb94441f3646f97042176e0f2fc76ac9c70a990398efc"
+    }
+  ]
+}

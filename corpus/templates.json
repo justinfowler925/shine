@@ -1,6 +1,6 @@
 {
-  "generated": "2026-09-16",
-  "corpus": "/Users/justinfowler/design-corpus",
+  "generated": "2026-10-05",
+  "corpus": "/home/ubuntu/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
     "marketing",
@@ -1029,7 +1029,7 @@
       },
       "dna": {
         "family": "windmill",
-        "density": "comfortable"
+        "density": "dense"
       }
     },
     {
@@ -1061,7 +1061,7 @@
       },
       "dna": {
         "family": "windmill",
-        "density": "comfortable"
+        "density": "dense"
       }
     },
     {
@@ -1088,7 +1088,7 @@
       },
       "dna": {
         "family": "flowbite",
-        "density": "compact"
+        "density": "dense"
       }
     },
     {
@@ -3348,7 +3348,7 @@
       },
       "dna": {
         "family": "windmill",
-        "density": "comfortable"
+        "density": "dense"
       }
     },
     {
@@ -3541,7 +3541,8 @@
         "dashboard",
         "analytics",
         "kpi",
-        "metrics"
+        "metrics",
+        "dense"
       ],
       "scope": "page",
       "reference": {
@@ -3554,7 +3555,7 @@
       },
       "dna": {
         "family": "windmill",
-        "density": "comfortable"
+        "density": "dense"
       }
     },
     {
@@ -3572,7 +3573,8 @@
         "analytics",
         "kpi",
         "metrics",
-        "sales"
+        "sales",
+        "dense"
       ],
       "scope": "page",
       "reference": {
@@ -3585,7 +3587,69 @@
       },
       "dna": {
         "family": "flowbite",
-        "density": "compact"
+        "density": "dense"
+      }
+    },
+    {
+      "id": "flowbite-stacked",
+      "screen": "dashboard",
+      "kit": "flowbite-admin",
+      "title": "Flowbite stacked dashboard (top nav, sales chart, dense widgets)",
+      "path": "flowbite-admin/content/layouts/stacked.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/layouts/stacked/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 5,
+      "jobs": [
+        "dashboard",
+        "analytics",
+        "kpi",
+        "metrics",
+        "dense",
+        "stacked"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "chart"
+        ]
+      },
+      "dna": {
+        "family": "flowbite",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "flowbite-sidebar-layout",
+      "screen": "dashboard",
+      "kit": "flowbite-admin",
+      "title": "Flowbite sidebar dashboard (rail chrome, dense widget grid)",
+      "path": "flowbite-admin/content/layouts/sidebar.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/layouts/sidebar/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 6,
+      "jobs": [
+        "dashboard",
+        "analytics",
+        "kpi",
+        "metrics",
+        "dense",
+        "app-shell"
+      ],
+      "scope": "page",
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "chart"
+        ]
+      },
+      "dna": {
+        "family": "flowbite",
+        "density": "dense"
       }
     },
     {
@@ -3647,6 +3711,36 @@
       }
     },
     {
+      "id": "shadcn-form",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "shadcn form-app (grouped fields, validation summary, primary submit)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "create",
+        "edit"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form"
+        ],
+        "captureExpect": "[data-region=\"form-app\"] form button[type=\"submit\"]"
+      },
+      "note": "corpus/blueprints/shadcn-form.md is the region map; corpus/blueprints/shadcn-form/ is authored shadcn source to copy, and reference.html is that source rendered at rest for capture",
+      "scope": "page"
+    },
+    {
       "id": "untitled-date-picker",
       "screen": "form",
       "kit": "untitled-ui-react",
@@ -3701,6 +3795,7 @@
       "startFrom": 2,
       "jobs": [
         "form",
+        "form-app",
         "input",
         "fields",
         "controls"
@@ -3764,6 +3859,7 @@
       "startFrom": 3,
       "jobs": [
         "form",
+        "form-app",
         "input",
         "fields",
         "validation"
@@ -3777,7 +3873,7 @@
       },
       "dna": {
         "family": "windmill",
-        "density": "comfortable"
+        "density": "dense"
       }
     },
     {
@@ -3794,7 +3890,7 @@
       ],
       "dna": {
         "family": "slds",
-        "density": "compact"
+        "density": "dense"
       },
       "note": "references/salesforce.md is the structure source; no public source exists",
       "scope": "page"
@@ -3814,7 +3910,7 @@
       ],
       "dna": {
         "family": "slds",
-        "density": "compact"
+        "density": "dense"
       },
       "note": "references/salesforce.md is the structure source; no public source exists",
       "scope": "page"
@@ -3833,7 +3929,7 @@
       ],
       "dna": {
         "family": "slds",
-        "density": "compact"
+        "density": "dense"
       },
       "note": "references/salesforce.md is the structure source; no public source exists",
       "scope": "page"
@@ -3852,7 +3948,7 @@
       ],
       "dna": {
         "family": "slds",
-        "density": "compact"
+        "density": "dense"
       },
       "note": "references/salesforce.md is the structure source; no public source exists",
       "scope": "page"
@@ -3872,7 +3968,7 @@
       ],
       "dna": {
         "family": "slds",
-        "density": "compact"
+        "density": "dense"
       },
       "note": "references/salesforce.md is the structure source; no public source exists",
       "scope": "page"
@@ -3895,7 +3991,7 @@
       ],
       "dna": {
         "family": "slds",
-        "density": "compact"
+        "density": "dense"
       },
       "note": "references/salesforce.md is the structure source; no public source exists",
       "scope": "page"
@@ -3915,7 +4011,7 @@
       ],
       "dna": {
         "family": "slds",
-        "density": "compact"
+        "density": "dense"
       },
       "note": "references/salesforce.md is the structure source; no public source exists",
       "scope": "page"
@@ -5444,7 +5540,7 @@
       },
       "dna": {
         "family": "flowbite",
-        "density": "compact"
+        "density": "dense"
       }
     },
     {
@@ -5573,7 +5669,7 @@
       },
       "dna": {
         "family": "windmill",
-        "density": "comfortable"
+        "density": "dense"
       }
     },
     {
@@ -5603,7 +5699,7 @@
       },
       "dna": {
         "family": "flowbite",
-        "density": "compact"
+        "density": "dense"
       }
     },
     {
@@ -5633,7 +5729,7 @@
       },
       "dna": {
         "family": "flowbite",
-        "density": "compact"
+        "density": "dense"
       }
     },
     {
@@ -5730,25 +5826,6 @@
       "scope": "page"
     },
     {
-      "id": "fluent-nav",
-      "screen": "settings",
-      "kit": "fluentui",
-      "title": "Fluent UI NavDrawer",
-      "path": "fluentui/packages/react-components/react-nav",
-      "preview": "https://react.fluentui.dev",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 2,
-      "jobs": [
-        "settings"
-      ],
-      "dna": {
-        "family": "fluent",
-        "density": "comfortable"
-      },
-      "scope": "page"
-    },
-    {
       "id": "flowbite-settings",
       "screen": "settings",
       "kit": "flowbite-admin",
@@ -5757,7 +5834,7 @@
       "preview": "https://flowbite-admin-dashboard.vercel.app/settings/",
       "license": "MIT",
       "kind": "source",
-      "startFrom": 3,
+      "startFrom": 2,
       "jobs": [
         "settings",
         "preferences",
@@ -5773,8 +5850,27 @@
       },
       "dna": {
         "family": "flowbite",
-        "density": "compact"
+        "density": "dense"
       }
+    },
+    {
+      "id": "fluent-nav",
+      "screen": "settings",
+      "kit": "fluentui",
+      "title": "Fluent UI NavDrawer",
+      "path": "fluentui/packages/react-components/react-nav",
+      "preview": "https://react.fluentui.dev",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "settings"
+      ],
+      "dna": {
+        "family": "fluent",
+        "density": "comfortable"
+      },
+      "scope": "page"
     },
     {
       "id": "untitled-tabs",

@@ -37,6 +37,30 @@ for (const { query, screen } of OPERATE_JOBS) {
   }
 }
 
+// M4b inventory: dense dashboard briefs prefer dense DNA pages; form-app is a page.
+const dense = retrieveDirections(templates, "dense dashboard", { lane: "saas", limit: 6 });
+assert.equal(dense.selected[0].template.screen, "dashboard");
+assert.equal(dense.selected[0].axes.density, "dense", `dense dashboard primary should be dense DNA, got ${dense.selected[0].template.id} density=${dense.selected[0].axes.density}`);
+assert.ok(
+  dense.selected.some((c) => c.template.dna?.density === "dense" || c.axes.density === "dense"),
+  "dense dashboard shortlist must include a dense page row",
+);
+
+const formApp = retrieveDirections(templates, "form-app", { lane: "saas", limit: 6 });
+assert.equal(formApp.selected[0].template.scope || "page", "page");
+assert.equal(formApp.selected[0].template.screen, "form", `form-app primary must be form page, got ${formApp.selected[0].template.id}`);
+assert.ok(
+  (formApp.selected[0].template.jobs || []).includes("form-app") || formApp.selected[0].template.id === "shadcn-form",
+  "form-app primary should carry form-app job or be shadcn-form",
+);
+
+// Inventory floors from the harvest slice (page-scope, selectable).
+const pages = templates.filter((t) => (t.scope || "page") === "page" && t.selectable !== false);
+const count = (screen, pred = () => true) => pages.filter((t) => t.screen === screen && pred(t)).length;
+assert.ok(count("settings") >= 3, `settings page rows ≥3, got ${count("settings")}`);
+assert.ok(count("dashboard", (t) => t.dna?.density === "dense") >= 3, `dense dashboard page rows ≥3, got ${count("dashboard", (t) => t.dna?.density === "dense")}`);
+assert.ok(count("form") + count("record") >= 4, `form+record pages ≥4 (form-app/record floor), got form=${count("form")} record=${count("record")}`);
+
 // Chart-led briefs without a page screen still retrieve chart atoms.
 const chartsOnly = retrieveDirections(templates, "charts", { lane: "saas" });
 assert.equal(chartsOnly.selected[0].template.screen, "charts", "explicit charts job keeps chart atoms");
