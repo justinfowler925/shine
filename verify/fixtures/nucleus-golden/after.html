@@ -1,5 +1,6 @@
 <!-- Nucleus-shaped Company Tools after expert pass — single primary, catalog focal, real empty copy. -->
 <!doctype html>
+<!-- shine-lint: off color,type,spacing — Nucleus golden after fixture; P6 proves CTA/composition/copy structure -->
 <html lang="en" data-cite="shadcn-catalog">
 <head>
   <meta charset="utf-8" />
@@ -9,33 +10,33 @@
     * { box-sizing: border-box; }
     body { margin: 0; font: 14px/1.5 system-ui, sans-serif; background: #fafafa; color: #18181b; }
     .shell { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
-    aside { background: #fff; border-right: 1px solid #e4e4e7; padding: 20px 16px; }
-    aside h1 { font-size: 15px; margin: 0 0 16px; }
+    aside { background: #fff; border-right: 1px solid #e4e4e7; padding: 16px; }
+    aside h1 { font-size: 16px; margin: 0 0 16px; }
     aside a { display: block; padding: 8px 10px; color: #18181b; text-decoration: none; border-radius: 6px; }
     aside a[aria-current="page"] { background: #f4f4f5; font-weight: 600; }
-    main { padding: 28px 32px; max-width: 960px; }
-    .toolbar { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
-    h1 { margin: 0 0 4px; font-size: 22px; letter-spacing: -0.02em; }
-    .lede { margin: 0; color: #71717a; font-size: 13px; }
-    button#install { background: #18181b; color: #fafafa; border: 0; padding: 10px 14px; border-radius: 8px; font: inherit; font-weight: 600; }
-    button#clear { background: transparent; color: #18181b; border: 1px solid #d4d4d8; padding: 10px 14px; border-radius: 8px; font: inherit; }
+    main { padding: 32px; max-width: 960px; }
+    .toolbar { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+    h1 { margin: 0 0 4px; font-size: 24px; letter-spacing: -0.02em; }
+    .lede { margin: 0; color: #52525b; font-size: 12px; }
+    button#install { background: #18181b; color: #fafafa; border: 0; padding: 12px 16px; border-radius: 8px; font: inherit; font-weight: 600; }
+    button#clear { background: transparent; color: #18181b; border: 1px solid #d4d4d8; padding: 12px 16px; border-radius: 8px; font: inherit; }
     .filters { display: flex; gap: 8px; margin-bottom: 16px; }
     .filters input {
-      flex: 1; font: inherit; padding: 10px 12px; border: 1px solid #e4e4e7; border-radius: 8px;
+      flex: 1; font: inherit; padding: 12px 12px; border: 1px solid #e4e4e7; border-radius: 8px;
     }
-    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .card {
       background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; padding: 18px;
     }
     .card h2 { margin: 0 0 6px; font-size: 16px; }
-    .card p { margin: 0 0 12px; color: #71717a; font-size: 13px; }
-    .card .meta { font-size: 12px; color: #a1a1aa; }
+    .card p { margin: 0 0 12px; color: #52525b; font-size: 12px; }
+    .card .meta { font-size: 12px; color: #71717a; }
     [data-empty] {
       display: none; margin-top: 16px; padding: 24px; border: 1px dashed #d4d4d8;
       border-radius: 12px; background: #fff;
     }
     [data-empty].show { display: block; }
-    #status { margin: 12px 0 0; color: #71717a; font-size: 13px; min-height: 1.2em; }
+    #status { margin: 12px 0 0; color: #52525b; font-size: 12px; min-height: 1.2em; }
   </style>
 </head>
 <body>
@@ -63,16 +64,25 @@
         <input id="q" type="search" placeholder="Search packages" aria-label="Search packages" />
       </div>
       <section class="cards" aria-label="Tool catalog" id="catalog">
-        <article class="card" data-name="shine"><h2>Shine</h2><p>Design authority skill and gates for Operate surfaces.</p><div class="meta">Installed · v4</div></article>
-        <article class="card" data-name="grid kit"><h2>Grid Kit</h2><p>Shared DataGrid primitives used across Admin queues.</p><div class="meta">Installed · v2</div></article>
-        <article class="card" data-name="audit pack"><h2>Audit Pack</h2><p>Weekly board helpers and adoption receipts.</p><div class="meta">Available</div></article>
-        <article class="card" data-name="tokens"><h2>Tokens</h2><p>Brand and personal CSS packages.</p><div class="meta">Available</div></article>
+        <article class="card" data-slot="card" data-name="shine"><h2>Shine</h2><p>Design authority skill and gates for Operate surfaces.</p><div class="meta">Installed · v4</div></article>
+        <article class="card" data-slot="card" data-name="grid kit"><h2>Grid Kit</h2><p>Shared DataGrid primitives used across Admin queues.</p><div class="meta">Installed · v2</div></article>
+        <article class="card" data-slot="card" data-name="audit pack"><h2>Audit Pack</h2><p>Weekly board helpers and adoption receipts.</p><div class="meta">Available</div></article>
+      </section>
+      <section data-region="focal" data-shine-focal aria-label="Install activity" class="focal" style="margin-top:16px;background:#fff;border:1px solid #e4e4e7;border-radius:12px;padding:16px;min-height:240px">
+        <h2 style="margin:0 0 12px;font-size:16px">Recent installs</h2>
+        <ul style="margin:0;padding:0;list-style:none">
+          <li style="padding:12px 0;border-bottom:1px solid #f4f4f5"><strong>Shine</strong> · Installed · Ada</li>
+          <li style="padding:12px 0;border-bottom:1px solid #f4f4f5"><strong>Grid Kit</strong> · Installed · Ada</li>
+          <li style="padding:12px 0;border-bottom:1px solid #f4f4f5"><strong>Audit Pack</strong> · Available</li>
+          <li style="padding:12px 0;border-bottom:1px solid #f4f4f5"><strong>Tokens</strong> · Available</li>
+          <li style="padding:12px 0"><strong>Adoption</strong> · Available</li>
+        </ul>
       </section>
       <div data-empty id="empty">
         <strong>No packages match this search.</strong>
         <p>Clear filters to see the full catalog, or install a package your team already uses.</p>
       </div>
-      <p id="status" role="status"></p>
+      <p id="status" role="status" hidden></p>
     </main>
   </div>
   <script>
@@ -89,16 +99,16 @@
         if (hit) shown++;
       }
       empty.classList.toggle("show", shown === 0);
-      status.textContent = term ? `${shown} match${shown === 1 ? "" : "es"}` : "";
+      if (term) { status.hidden = false; status.textContent = `${shown} match${shown === 1 ? "" : "es"}`; } else { status.hidden = true; status.textContent = ""; }
     }
     q.addEventListener("input", filter);
     document.getElementById("clear").onclick = () => {
       q.value = "";
       filter();
-      status.textContent = "Filters cleared";
+      status.hidden = false; status.textContent = "Filters cleared";
     };
     document.getElementById("install").onclick = () => {
-      status.textContent = "Install dialog opened";
+      status.hidden = false; status.textContent = "Install dialog opened";
     };
   </script>
 </body>

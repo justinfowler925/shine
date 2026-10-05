@@ -1,0 +1,16 @@
+
+  note: 3 off-scale spacing value(s), 6px×3, 10px×6, 18px×12 — em-derived is fine, ad-hoc is not
+mode=light  bodyBg=rgb(250, 250, 250)  bodyColor=rgb(24, 24, 27)
+tokens: {"--background":null,"--foreground":null,"--primary":null,"--border":null,"--ring":null,"--radius":null,"--shine-color-bg":null,"--shine-color-fg":null,"--shine-color-primary":null,"--shine-color-border":null,"--shine-color-ring":null}
+fontSizes: 12px×7  14px×28  16px×5  24px×1
+axe: 0 violations, 0 incomplete
+contrast: 20 text elements measured, worst 7.41:1
+theme: light rgb(250, 250, 250) / other rgb(250, 250, 250) — single mode, declared color-scheme:light
+
+composition notes (judgement, not blocking):
+  • 2 controls in 2 visual treatments; 1 filled (primary-looking). Largest group: 1× rgba(0, 0, 0, 0) [Clear filters]
+  • density: content~28% chrome~19% of viewport
+  • sections: 2 marked; 0 missing a heading
+  • accent colour also used as non-interactive state on "Nucleus", "Company Tools", "Admin", "Adoption", "Shine", "Grid Kit" — one token, two meanings: every use is a legal token and the vocabulary still collapsed
+
+MEASURE PASS (partial evidence) — text ≥ threshold, spacing on scale, axe clean, no void regions, type steps distinct, hierarchy ok, theme accounted for
