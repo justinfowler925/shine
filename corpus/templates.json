@@ -3741,6 +3741,34 @@
       "scope": "page"
     },
     {
+      "id": "shadcn-form-invite",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "shadcn invite form (email, role, message, validation)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "form",
+        "form-app",
+        "invite",
+        "invite-teammate"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form"
+        ],
+        "captureExpect": "[data-region=\"form-app\"] form button[type=\"submit\"]"
+      },
+      "note": "P2 authored invite form-app blueprint",
+      "scope": "page"
+    },
+    {
       "id": "untitled-date-picker",
       "screen": "form",
       "kit": "untitled-ui-react",
@@ -5762,6 +5790,35 @@
       "scope": "page"
     },
     {
+      "id": "shadcn-record-account",
+      "screen": "record",
+      "kit": "shadcn-registry",
+      "title": "shadcn account record (facts, decision, activity table)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "record",
+        "account",
+        "detail",
+        "customer"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form",
+          "table"
+        ],
+        "captureExpect": "[data-region=\"record-decision\"] textarea"
+      },
+      "note": "P2 authored account record blueprint",
+      "scope": "page"
+    },
+    {
       "id": "tailadmin-profile",
       "screen": "record",
       "kit": "tailadmin-react",
@@ -5823,6 +5880,93 @@
         "captureExpect": "nav[aria-label=\"Settings sections\"] a"
       },
       "note": "corpus/blueprints/shadcn-settings.md is the region map; corpus/blueprints/shadcn-settings/ is authored shadcn source to copy, and reference.html is that source rendered at rest for capture",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-settings-billing",
+      "screen": "settings",
+      "kit": "shadcn-registry",
+      "title": "shadcn billing settings (plan, seats, invoice email)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "settings",
+        "billing",
+        "plan",
+        "seats"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form",
+          "navigation"
+        ],
+        "captureExpect": "[data-region=\"settings-billing\"] #save"
+      },
+      "note": "P2 authored Operate billing settings blueprint",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-settings-members",
+      "screen": "settings",
+      "kit": "shadcn-registry",
+      "title": "shadcn member settings (default role, SSO policy)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "settings",
+        "members",
+        "roles",
+        "access"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form",
+          "navigation"
+        ],
+        "captureExpect": "[data-region=\"settings-members\"] #save"
+      },
+      "note": "P2 authored Operate member policy settings blueprint",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-settings-notifications",
+      "screen": "settings",
+      "kit": "shadcn-registry",
+      "title": "shadcn notification settings (digest, Slack, severity)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "settings",
+        "notifications",
+        "preferences",
+        "alerts"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form",
+          "navigation"
+        ],
+        "captureExpect": "[data-region=\"settings-notifications\"] #save"
+      },
+      "note": "P2 authored Operate notifications settings blueprint",
       "scope": "page"
     },
     {

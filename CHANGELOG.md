@@ -14,6 +14,10 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Settings/forms corpus + form contracts (P2).** +3 settings and +2 form/record
+  authored page blueprints with shots; cite golden floors raised; kits recipes point at
+  them; `verify/form-heuristics.mjs` fails closed when `aria-invalid` lacks a message.
+
 - **Composition slop detectors (P3).** Measure hard-fails Operate saas cites for
   equal-weight Card soup without a focal, marketing DNA glow/gradient/display clusters,
   and known filler empty-state phrases (`verify/composition-slop.mjs`). Doctor runs

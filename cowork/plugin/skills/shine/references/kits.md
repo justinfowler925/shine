@@ -121,3 +121,16 @@ before locking the brief.
 Kit: Untitled UI table batch-actions layout (corpus/packs/untitled-table/source/table.demo.tsx:LINE)
 Mapped to: shine toolbar + destructive behind menu (contracts Table SHOULD)
 ```
+
+## Operate settings / forms (P2)
+
+| Job | Primary cite |
+|---|---|
+| Account / profile settings | `shadcn-settings` |
+| Notification preferences | `shadcn-settings-notifications` |
+| Billing / seats | `shadcn-settings-billing` |
+| Member policy | `shadcn-settings-members` |
+| Invite teammate | `shadcn-form-invite` |
+| Account record | `shadcn-record-account` |
+
+Form MUST: associated labels; `aria-invalid="true"` needs an accessible message (`verify/form-heuristics.mjs`).

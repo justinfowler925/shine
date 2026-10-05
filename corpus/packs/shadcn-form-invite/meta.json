@@ -1,0 +1,12 @@
+{
+  "id": "shadcn-form-invite",
+  "source": "corpus/blueprints/shadcn-form-invite/reference.html",
+  "harvested": "2026-10-05",
+  "provenance": "Authored blueprint, expert-track P2",
+  "capture": {
+    "status": 200,
+    "title": "Invite teammate",
+    "sourceUrl": "corpus/blueprints/shadcn-form-invite/reference.html",
+    "capturedAt": "2026-10-05T18:38:03.354Z"
+  }
+}

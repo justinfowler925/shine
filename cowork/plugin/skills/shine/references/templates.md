@@ -151,6 +151,7 @@ Reasons are listed under the table.
 | dashboard | `query-haze` | haze | query-only | live | dashboard |
 | empty | `shadcn-empty-icon` | shadcn-registry | source | live | empty, ai-generate |
 | form | `shadcn-form` | shadcn-registry | blueprint | live | form, form-app, input, fields, create, edit |
+| form | `shadcn-form-invite` | shadcn-registry | blueprint | live | form, form-app, invite, invite-teammate |
 | form | `untitled-date-picker` | untitled-ui-react | source | live | form, input, date, date-range, calendar, picker |
 | form | `tailadmin-form-elements` | tailadmin-react | source | live | form, form-app, input, fields, controls |
 | form | `untitled-file-upload` | untitled-ui-react | source | live | form, input, upload, attachments, dropzone, files |
@@ -226,15 +227,19 @@ Reasons are listed under the table.
 | queue | `flowbite-users` | flowbite-admin | source | live | queue, crud, table, records, users, admin |
 | queue | `flowbite-products` | flowbite-admin | source | live | queue, crud, table, products, inventory, catalog |
 | record | `shadcn-record` | shadcn-registry | blueprint | live | record, detail, account, opportunity |
+| record | `shadcn-record-account` | shadcn-registry | blueprint | live | record, account, detail, customer |
 | record | `tailadmin-profile` | tailadmin-react | source | live | record, profile, detail, account, user |
 | settings | `shadcn-settings` | shadcn-registry | blueprint | live | settings, preferences, account |
+| settings | `shadcn-settings-billing` | shadcn-registry | blueprint | live | settings, billing, plan, seats |
+| settings | `shadcn-settings-members` | shadcn-registry | blueprint | live | settings, members, roles, access |
+| settings | `shadcn-settings-notifications` | shadcn-registry | blueprint | live | settings, notifications, preferences, alerts |
 | settings | `flowbite-settings` | flowbite-admin | source | live | settings, preferences, account, profile |
 | settings | `fluent-nav` | fluentui | source | live | settings |
 | tabs | `untitled-tabs` | untitled-ui-react | source | live | tabs, sections, segmented, workspace-tabs, section-tabs |
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-219 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+224 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 

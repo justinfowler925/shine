@@ -377,3 +377,7 @@ fails the unmarked data table.
 | Operate SaaS job proof | `usability.md` + `shine-usability.json` — prove fails closed for dashboard/settings/form/queue/record/… |
 
 Record tables already fail closed without `shine-tables.json`. Operate page screens (dashboard, settings, form, queue, record, and siblings listed in `usability.md`) likewise cannot complete prove with missing or shallow `shine-usability.json`: interactions status is **`failed`**, not a soft `not_tested`.
+
+### Form invalid state (P2)
+
+When a control sets `aria-invalid="true"`, an accessible error message MUST exist via `aria-describedby` or a linked `role="alert"`. Measure fails closed through `verify/form-heuristics.mjs` on form/settings/record cites.

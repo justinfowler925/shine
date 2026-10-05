@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-record-account">
+<head><meta charset="utf-8"/><title>Account record</title><style>
+:root{color-scheme:light;--bg:#fafafa;--panel:#fff;--ink:#18181b;--muted:#71717a;--line:#e4e4e7;--accent:#18181b;--accent-ink:#fafafa}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+.shell{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+aside{background:var(--panel);border-right:1px solid var(--line);padding:24px 16px}
+aside h1{font-size:15px;margin:0 0 12px}
+nav a{display:block;padding:8px 10px;color:var(--ink);text-decoration:none;border-radius:6px}
+nav a[aria-current=page]{background:#f4f4f5;font-weight:600}
+main{padding:32px 40px;max-width:720px}
+h2{margin:0 0 6px;font-size:22px;letter-spacing:-.02em}.lede{margin:0 0 20px;color:var(--muted)}
+label{display:grid;gap:6px;margin:0 0 14px;font-size:13px;font-weight:600}
+input,select,textarea{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.actions{display:flex;gap:10px;margin-top:8px}
+button.primary{background:var(--accent);color:var(--accent-ink);border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600}
+button.ghost{background:transparent;border:1px solid var(--line);padding:10px 16px;border-radius:8px;font:inherit}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px}
+.error{color:#b91c1c;font-size:12px;font-weight:500}
+
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.facts div{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px}
+.facts dt{font-size:12px;color:var(--muted)}.facts dd{margin:4px 0 0;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}
+</style></head>
+<body>
+<div class="shell">
+<aside><h1>Accounts</h1><nav aria-label="Records"><a href="#r" aria-current="page">Acme Corp</a></nav></aside>
+<main id="r" data-region="record">
+<h2>Acme Corp</h2>
+<p class="lede">Customer record — owner, stage, and recent activity.</p>
+<div class="actions"><button class="primary" type="button" id="save">Save record</button><button class="ghost" type="button">Share</button></div>
+<section class="facts" aria-label="Account facts">
+<div><dt>Owner</dt><dd>Ada Lovelace</dd></div>
+<div><dt>Stage</dt><dd>Expansion</dd></div>
+<div><dt>ARR</dt><dd>$240k</dd></div>
+<div><dt>Region</dt><dd>AMER</dd></div>
+</section>
+<section data-region="record-decision">
+<label>Next step<textarea rows="3">Schedule adoption review</textarea></label>
+</section>
+<section>
+<table aria-label="Recent activity">
+<thead><tr><th>When</th><th>Event</th><th>Who</th></tr></thead>
+<tbody>
+<tr><td>Mon</td><td>Opened Company Tools</td><td>Ada</td></tr>
+<tr><td>Tue</td><td>Installed Shine</td><td>Ada</td></tr>
+</tbody>
+</table>
+</section>
+<p id="status" role="status"></p>
+</main>
+</div>
+<script>document.getElementById("save").onclick=()=>{document.getElementById("status").textContent="Record saved"}</script>
+</body></html>

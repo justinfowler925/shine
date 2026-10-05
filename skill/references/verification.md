@@ -76,6 +76,11 @@ or prove reports `competingCtaProof: failed`. Doctor bite:
 
 
 
+
+**Settings/forms corpus (P2):** cite floors require ≥6 settings pages and ≥6 form+record
+pages; form/settings/record cites hard-fail `aria-invalid` without an accessible message
+(`verify/form-heuristics.mjs`).
+
 **Composition slop (P3):** Operate saas cites hard-fail on ≥4 equal Card roots without a
 focal, marketing DNA glow/gradient/display clusters, and filler empty phrases such as
 “Welcome to your dashboard” (`verify/composition-slop.mjs`).
