@@ -14,9 +14,18 @@ import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 import { isDesignCandidate } from "./design-lint.mjs";
 import { citeGaps, CITE_EXEMPT } from "./cite-gate.mjs";
-import { RENDERABLE_ARTIFACT, artifactClaim, citeClaim, citeIdsIn, proveGaps } from "./receipt.mjs";
+import {
+  RENDERABLE_ARTIFACT,
+  artifactClaim,
+  citeClaim,
+  citeIdsIn,
+  operateProveGaps,
+  proveGaps,
+} from "./receipt.mjs";
+import { operateUsabilityScreen } from "../verify/usability.mjs";
 
 const LINT = join(dirname(fileURLToPath(import.meta.url)), "design-lint.mjs");
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 // Claude Code sends hook_event_name "Stop" and a stop_hook_active flag; Cursor sends
 // "stop" plus its own conversation fields and has neither.
@@ -120,6 +129,22 @@ process.stdin.on("end", () => {
         "\nProve with verify/compare.mjs --cite <id> before finishing. A component source is not a\n" +
         "compare target: render the surface to an artifact (a fixture route, or a self-contained\n" +
         "html capture) and compare that.",
+      event,
+    );
+  }
+
+  // Operate SaaS page cites: compare alone is partial. Agents must run prove.mjs
+  // (usability + measure + compare + …) and hold a fresh completion receipt.
+  const missingCompletion = operateProveGaps(claims, {
+    screenForCite: (cite) => operateUsabilityScreen(cite, ROOT),
+  });
+  if (missingCompletion.length) {
+    failClosed(
+      "shine prove (stop sweep): Operate SaaS UI cited this turn has no fresh prove.mjs completion:\n" +
+        missingCompletion.join("\n") +
+        "\nRun verify/prove.mjs --cite <id> --lane saas (with usability / layout / diagnosis as the\n" +
+        "packet requires). A compare.mjs receipt is not overall completion. Marketing and\n" +
+        "wireframe surfaces are not gated here.",
       event,
     );
   }

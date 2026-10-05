@@ -16,10 +16,11 @@ import {
  saasCopyCheckKeys,
 } from '../core/diagnosis.mjs';
 import {proveLayout} from './layout.mjs';
-import {interactionsCheckForError,proveUsability} from './usability.mjs';
+import {interactionsCheckForError,operateUsabilityScreen,proveUsability} from './usability.mjs';
 import {compareArtifact} from './compare.mjs';
 import {load} from './deps.mjs';
 import {bindBrowser,writeCompletionReceipt} from './completion-receipt.mjs';
+import {writeCompletionProveReceipt} from '../hooks/receipt.mjs';
 import {verifyReuse} from '../integrations/blocks.mjs';
 import {verifyCoverage} from '../integrations/coverage.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'),exec=promisify(execFile);
@@ -113,7 +114,21 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
   else {binding={artifact:resolve(target),artifactSha256:hash(readFileSync(target)),...observed};checks.buildBinding={status:'passed',kind:'local-file'};}
   const status=Object.values(checks).every(c=>c.status==='passed')?'passed':Object.values(checks).some(c=>c.status==='failed')?'failed':'incomplete';
   const report={version:1,status,checks,evidence};
-  if(status==='passed'&&receiptPath){writeCompletionReceipt(receiptPath,report,binding);report.receipt=resolve(receiptPath);}
+  if(status==='passed'){
+   // Always mint the stop-sweep completion store on green — Operate cannot skip prove.
+   const localTarget=/^https?:/.test(target)?undefined:resolve(target);
+   try{
+    writeCompletionProveReceipt({
+     cite:citeId,
+     target:localTarget,
+     lane,
+     screen:operateUsabilityScreen(citeId,ROOT)||"",
+     checks,
+     binding,
+    });
+   }catch(error){evidence.completionReceiptError=error.message;}
+   if(receiptPath){writeCompletionReceipt(receiptPath,report,binding);report.receipt=resolve(receiptPath);}
+  }
   return report;
  }catch(error){return {version:1,status:'failed',checks,error:error.message};}finally{rmSync(temp,{recursive:true,force:true});}
 }

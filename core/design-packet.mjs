@@ -12,6 +12,7 @@ import {planBlocks} from "../integrations/blocks.mjs";
 import {loadTemplates} from "../corpus/catalog.mjs";
 import {retrievePrinciples} from "../knowledge/retrieve.mjs";
 import {recommend} from "../benchmark/judgment-eval.mjs";
+import {isOperateProveScreen} from "../hooks/receipt.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const catalog=loadTemplates(ROOT);
@@ -135,6 +136,13 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   packetMode:mode,
   instruction:"Wireframe/Polish/Copy/Adoption are skill procedure phases, not --mode values. Map: wireframe→new; build→new|existing; polish→existing (references/polish.md); audit→audit; copy|adoption→audit|existing. For lane=saas, fill copy/adoption diagnosis check fields; prove binds them via copyAdoption + defectAssertions (assertion ids when flows exist). Lightweight measure heuristics catch missing title/H1 and stub empty-state copy — not a full NLP critic.",
  };
+ // Operate SaaS page cites: completion is mandatory — stop-sweep fails without a
+ // fresh prove.mjs receipt. Marketing / non-allowlisted screens stay soft.
+ const operateCompletion=isOperateProveScreen(selected.screen);
+ packet.completion.required=operateCompletion;
+ if(operateCompletion){
+  packet.completion.instruction="Operate SaaS completion is mandatory. Run prove.mjs before finishing; compare.mjs alone is partial and will not clear stop-sweep. Pass the same --lane as compare so saas originality is enforced. Wireframe surfaces skip this gate until Build.";
+ }
  if(mode==="audit"){
   packet.proof.commands=packet.proof.commands.filter((command)=>!/compare\.mjs/.test(command));
   packet.completion={required:false,command:null,requires:[],instruction:"An audit issues no completion receipt. Report the diagnosis (verdict, defects, evidence), the measure facts and the screenshot. For lane=saas, copy/adoption check fields must be present in the diagnosis even when you only report; prove on a later build pass binds those fields. Nothing may be edited in this mode."};
