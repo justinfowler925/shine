@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import {checkDefectAssertions} from "./prove.mjs";
+import {checkCopyAdoptionPresence,checkDefectAssertions} from "./prove.mjs";
 
 // M3b: usability-bucket critical/major defects must bind executable assertions.
 // Content honesty stays agent; this gate is assertion presence + flow resolution.
@@ -85,4 +85,35 @@ assert.equal(checkDefectAssertions({
 // no-change still binds nothing.
 assert.equal(checkDefectAssertions({verdict:"no-change",defects:[]},layoutPassed,usabilityPassed).status,"passed");
 
-console.log("prove defect-assertions PASS: usability critical requires flow: binding");
+// Adoption-bucket critical/major also needs assertion ids (same path as usability).
+const adoptionCritical={
+ defects:[{
+  id:"monday-ritual",
+  bucket:"adoption",
+  severity:"critical",
+  assertions:["flow:assign-owner"],
+  problem:"No ritual owns the queue",
+  evidence:"Managers rebuild numbers in a spreadsheet before Monday",
+  expectedEffect:"Monday call runs off this screen",
+ }],
+};
+assert.equal(checkDefectAssertions(adoptionCritical,layoutPassed,usabilityPassed).status,"passed");
+assert.equal(checkDefectAssertions({
+ defects:[{...adoptionCritical.defects[0],assertions:[]}],
+},layoutPassed,usabilityPassed).status,"failed");
+
+// copyAdoption presence gate
+const saasFull={
+ lane:"saas",
+ category:"dashboard",
+ copyHeadlineCheck:{ok:true,note:"H1 names the revenue exceptions job"},
+ copyBeliefCheck:{ok:true,note:"Five beliefs mapped to carrying elements"},
+ copyInstructionalCheck:{ok:true,note:"Empty state names the first useful action"},
+ adoptionRitualCheck:{ok:true,note:"Monday forecast call owns this screen"},
+ adoptionPrivateWinCheck:{ok:true,note:"Managers get a ranked short list"},
+ adoptionAbsenceCheck:{ok:true,note:"A week offline breaks the forecast call"},
+};
+assert.equal(checkCopyAdoptionPresence(saasFull,{lane:"saas"}).status,"passed");
+assert.equal(checkCopyAdoptionPresence({lane:"saas",category:"dashboard"},{lane:"saas"}).status,"failed");
+
+console.log("prove defect-assertions PASS: usability/adoption critical requires flow: binding · copyAdoption presence");

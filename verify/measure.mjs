@@ -40,6 +40,11 @@ import {
   kpiDashboardGateApplies,
   kpiFailureNotes,
 } from "./kpi.mjs";
+import {
+  copyHeuristicGateApplies,
+  evaluateCopyHeuristics,
+  formatCopyHeuristicFailures,
+} from "./copy-adoption.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
@@ -361,6 +366,7 @@ for (const t of textTargets) {
 const dataGrids = await page.evaluate(evaluateDataGrids);
 const incompletePrimitives = await page.evaluate(evaluateIncompletePrimitives);
 const kpiFloor = await page.evaluate(evaluateKpiFloor);
+const copyHeuristics = await page.evaluate(evaluateCopyHeuristics);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
 const compose = await page.evaluate(() => {
   const vis = (el) => {
@@ -862,6 +868,15 @@ for (const msg of formatKpiFailures(kpiFloor, { dashboardGate: kpiDashboardGate 
   failures.push(msg);
 }
 for (const msg of formatIncompletePrimitiveFailures(incompletePrimitives)) failures.push(msg);
+const copyHeuristicGate = copyHeuristicGateApplies({
+  lane: laneWant,
+  citeScreen: kpiCiteRow?.screen || "",
+  citeKind: kpiCiteRow?.kind || "",
+  isWireframe,
+});
+for (const msg of formatCopyHeuristicFailures(copyHeuristics, { gate: copyHeuristicGate })) {
+  failures.push(msg);
+}
 
 // Likeness checks key off the --cite FLAG, never off page attributes. The old
 // attestation ("--cite X but page data-cite is Y") measured self-labeling: a page
@@ -955,7 +970,7 @@ if (compose.voice === "kit-faithful" && compose.dnaChroma && accentC != null) {
   }
 }
 
-const report = { scope:"single-viewport styling and accessibility; not overall completion", mediaGaps, url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, incompletePrimitives, kpi: kpiFloor, kpiDashboardGate, themeSwitches, failures };
+const report = { scope:"single-viewport styling and accessibility; not overall completion", mediaGaps, url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, incompletePrimitives, kpi: kpiFloor, kpiDashboardGate, copyHeuristics, copyHeuristicGate, themeSwitches, failures };
 const jsonOut = opt("--json"); // written once at the end, after notes are attached
 
 console.log(`mode=${report.mode}  bodyBg=${measured.bodyBg}  bodyColor=${measured.bodyColor}`);

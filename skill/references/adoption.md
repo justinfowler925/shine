@@ -146,9 +146,14 @@ pilot cohort. Widening a permset over a cohort with zero actions multiplies zero
 
 Adoption is a **procedure phase**, not a packet `--mode` (see `SKILL.md` / README § Modes).
 Run under `--mode audit` or `--mode existing` when the diagnosis names adoption
-blockers. There is **no** adoption prove category or receipt in v1 — findings live in
-the diagnosis `adoption` bucket / audit report. Density and stub upgrades after the
-ritual is sound are Polish (`polish.md`).
+blockers.
+
+**Machine proof (presence + assertion binding — not ritual NLP):** for `lane=saas`
+Operate categories (`datagrid|dashboard|form|record|lex`), the diagnosis schema
+requires `adoptionRitualCheck`, `adoptionPrivateWinCheck`, and `adoptionAbsenceCheck`
+(`diagnose.md`). `prove` binds them via `copyAdoption`, and critical/major `adoption`
+bucket defects need `flow:` / layout assertion ids when flows exist. Ritual honesty
+stays agent. Density and stub upgrades after the ritual is sound are Polish (`polish.md`).
 
 ## Cross-references
 

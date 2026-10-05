@@ -8,7 +8,13 @@ import {join,dirname,resolve} from 'node:path';
 import {tmpdir} from 'node:os';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {referenceHealth,hash} from '../corpus/reference-health.mjs';
-import {readDiagnosis} from '../core/diagnosis.mjs';
+import {
+ readDiagnosis,
+ requiresSaasAdoptionChecks,
+ requiresSaasCopyChecks,
+ saasAdoptionCheckKeys,
+ saasCopyCheckKeys,
+} from '../core/diagnosis.mjs';
 import {proveLayout} from './layout.mjs';
 import {interactionsCheckForError,proveUsability} from './usability.mjs';
 import {compareArtifact} from './compare.mjs';
@@ -17,6 +23,7 @@ import {bindBrowser,writeCompletionReceipt} from './completion-receipt.mjs';
 import {verifyReuse} from '../integrations/blocks.mjs';
 import {verifyCoverage} from '../integrations/coverage.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'),exec=promisify(execFile);
+const text=(value)=>String(value||"").trim();
 // Closed native dialogs are separate workflows. Hidden players in the active
 // surface still require a loaded-media scenario, including poster-first players.
 export async function activeSurfaceVideos(page){
@@ -37,6 +44,29 @@ export function checkDefectAssertions(diagnosis,layout,usability){
  }
  return {status:errors.length?'failed':'passed',verdict:diagnosis.verdict||'defects',assertions:out,failures:errors};
 }
+
+/** Presence gate for saas copy + adoption diagnosis buckets. Honesty of notes stays agent. */
+export function checkCopyAdoptionPresence(diagnosis,{lane}={}){
+ const failures=[],required=[];
+ if(requiresSaasCopyChecks(diagnosis,{lane})){
+  for(const key of saasCopyCheckKeys){
+   required.push(key);
+   if(!diagnosis?.[key]||typeof diagnosis[key]!=="object"||text(diagnosis[key].note).length<8){
+    failures.push(`${key} missing or note too short for saas copy proof`);
+   }
+  }
+ }
+ if(requiresSaasAdoptionChecks(diagnosis,{lane})){
+  for(const key of saasAdoptionCheckKeys){
+   required.push(key);
+   if(!diagnosis?.[key]||typeof diagnosis[key]!=="object"||text(diagnosis[key].note).length<8){
+    failures.push(`${key} missing or note too short for saas adoption proof`);
+   }
+  }
+ }
+ if(!required.length)return {status:"passed",required:[],failures:[],skipped:true};
+ return {status:failures.length?"failed":"passed",required,failures,skipped:false};
+}
 // Lane defaults to internal when omitted so programmatic callers and media/lex
 // fixtures keep prior behavior. Packet completion always passes --lane explicitly
 // (design-packet defaults lane to saas); saas/marketing originality then bites.
@@ -50,7 +80,7 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
   if(surfaceContractPath){try{checks.surfaceWorkflows=verifySurfaceReceipt(project,JSON.parse(readFileSync(surfaceContractPath,"utf8")),surfaceReceiptPath?JSON.parse(readFileSync(surfaceReceiptPath,"utf8")):null);}catch(error){checks.surfaceWorkflows={status:"failed",reason:error.message};}}
   if(project&&existsSync(join(project,"shine-installation.json"))){try{const manifest=JSON.parse(readFileSync(join(project,"shine-installation.json"),"utf8"));checks.componentCompatibility=checkCompatibility(project,manifest.blocks.map(block=>block.path));}catch(error){checks.componentCompatibility={status:"failed",reason:error.message};}}
   const measurement=join(temp,'measure.json');
-  try{await exec(process.execPath,[join(ROOT,'verify/measure.mjs'),target,'--cite',citeId,'--json',measurement,...(storageState?['--storage-state',storageState]:[])],{maxBuffer:5_000_000,timeout:120000});}catch(error){evidence.measureError=String(error.stderr||error.message).slice(-3000);}
+  try{await exec(process.execPath,[join(ROOT,'verify/measure.mjs'),target,'--cite',citeId,'--json',measurement,...(lane?['--lane',lane]:[]),...(storageState?['--storage-state',storageState]:[])],{maxBuffer:5_000_000,timeout:120000});}catch(error){evidence.measureError=String(error.stderr||error.message).slice(-3000);}
   const measure=existsSync(measurement)?JSON.parse(readFileSync(measurement,'utf8')):null;
   checks.accessibility={status:measure?(measure.axe?.violations?.length||measure.failures?.some(f=>/contrast|axe|text.*measur/i.test(f))?'failed':'passed'):'not_tested'};
   checks.styling={status:measure?(measure.failures.length?'failed':'passed'):'not_tested',failures:measure?.failures||[evidence.measureError||'measurement missing']};
@@ -62,7 +92,16 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
   if(checks.referenceValidity.status==='passed'){
    try{const comparison=await compareArtifact({target,citeId,outPath:join(temp,'compare.png'),lane,brief,mode:diagnosisPath?'existing':'new',diagnosisPath,writeReceipt:false,storageState});checks.visualComparison={status:comparison.status===0?'passed':'failed',failures:comparison.failures,lane};}catch(error){checks.visualComparison={status:'failed',reason:error.message,lane};}
   }else checks.visualComparison={status:'not_tested',reason:'reference capture is not verified',lane};
-  if(diagnosisPath){try{const {value}=readDiagnosis(diagnosisPath);checks.defectAssertions=checkDefectAssertions(value,layout,usability);}catch(error){checks.defectAssertions={status:'failed',reason:error.message};}}
+  if(diagnosisPath){
+   try{
+    const {value}=readDiagnosis(diagnosisPath,{lane});
+    checks.defectAssertions=checkDefectAssertions(value,layout,usability);
+    checks.copyAdoption=checkCopyAdoptionPresence(value,{lane});
+   }catch(error){
+    checks.defectAssertions={status:'failed',reason:error.message};
+    checks.copyAdoption={status:'failed',reason:error.message};
+   }
+  }
   const {chromium}=load('playwright'),browser=await chromium.launch();
   try{const page=await browser.newPage({...(storageState?{storageState}:{})});const response=await page.goto(/^https?:/.test(target)?target:pathToFileURL(resolve(target)).href,{waitUntil:'networkidle'});
    const meta=await page.evaluate(()=>({sourceCommit:document.querySelector('meta[name="shine-source-commit"]')?.content,buildId:document.querySelector('meta[name="shine-build-id"]')?.content}));

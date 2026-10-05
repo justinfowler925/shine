@@ -140,8 +140,14 @@ flag; three or more means the copy was generated and never reflected on:
 
 Copy is a **procedure phase**, not a packet `--mode` (see `SKILL.md` / README § Modes).
 Run under `--mode audit` (report only) or `--mode existing` when fixing named copy
-defects. There is **no** copy prove category or receipt in v1 — findings live in the
-diagnosis / audit report.
+defects.
+
+**Machine proof (presence + light heuristics — not NLP):** for `lane=saas` and
+categories `datagrid|dashboard|form|record|lex|marketing|catalog`, the diagnosis
+schema requires `copyHeadlineCheck`, `copyBeliefCheck`, and `copyInstructionalCheck`
+(`diagnose.md`). `prove` binds them via `copyAdoption`. Measure hard-fails missing
+page title+H1 and stub empty-state copy when the copy heuristic gate applies. Belief
+honesty and sequence judgment stay agent.
 
 - Runs as part of **Audit** whenever the surface carries persuasive or instructional
   copy; standalone when asked to "review the copy", "tighten the messaging", or

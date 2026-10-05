@@ -73,10 +73,11 @@ technique cite (`direction.md`).
 | App-shell content share | measure when shell rules apply | Density pass must not dodge shell grammar |
 | Table / usability / layout contracts | fail closed when written | Upgrade stubs so contracts are real |
 | Optical alignment / micro-motion taste | none | Agent checklist only |
-| Copy beliefs / adoption ritual | diagnosis buckets; no prove categories | Out of scope here — use `copy.md` / `adoption.md` |
+| Copy beliefs / adoption ritual | diagnosis check-field presence + light title/empty heuristics; honesty agent | Out of scope here — use `copy.md` / `adoption.md` |
 
-**No new prove categories for copy or adoption in v1.** Polish completion uses the
-existing packet proof path (`measure` → usability → compare → `prove`).
+Polish completion uses the existing packet proof path (`measure` → usability →
+compare → `prove`). Copy/adoption ship as diagnosis fields + `copyAdoption` prove
+presence (not a separate NLP category).
 
 ---
 

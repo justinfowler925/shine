@@ -36,7 +36,7 @@
     "layers:test": "node verify/component-layers.test.mjs",
     "packet:test": "node verify/design-packet.test.mjs",
     "render:test": "node verify/design-spec.test.mjs",
-    "diagnosis:test": "node verify/diagnosis.test.mjs && node verify/prove-defect-assertions.test.mjs",
+    "diagnosis:test": "node verify/diagnosis.test.mjs && node verify/prove-defect-assertions.test.mjs && node verify/copy-adoption.test.mjs",
     "case:test": "node verify/case.test.mjs && node verify/case-flow.test.mjs",
     "knowledge:test": "node verify/knowledge.test.mjs",
     "judgment:test": "node verify/judgment-eval.test.mjs && node verify/human-review.test.mjs",
