@@ -32,6 +32,12 @@ button.ghost{background:transparent;border:1px solid var(--line);padding:10px 16
 <div class="actions"><button class="primary" type="button" id="save">Save member policy</button></div>
 <p id="status" role="status"></p>
 </div>
+<aside class="help-panel" style="margin-top:24px;padding:24px;background:#fff;border:1px solid #e4e4e7;border-radius:12px">
+<h3 style="margin:0 0 12px;font-size:16px">Operator notes</h3>
+<ul style="margin:0;padding-left:20px;color:#52525b;line-height:1.7">
+<li>SSO is required for Admin seats.</li><li>Viewers cannot install Company Tools packages.</li><li>Operators can open Monday adoption boards.</li><li>Invite links expire after seven days.</li><li>Remove inactive members from Security → Sessions.</li>
+</ul>
+</aside>
 </main>
 </div>
 <script>document.getElementById("save").onclick=()=>{document.getElementById("status").textContent="Member policy saved"}</script>
