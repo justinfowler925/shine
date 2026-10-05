@@ -56,6 +56,13 @@ chart/table/queue hard-fail. Elements that opt into `data-shine-kpi` must carry
 `data-unit` and `data-baseline`. Without the attribute, unit/baseline stays an agent
 checklist in `dashboards.md`. Dashboard recipes require the attribute.
 
+**Copy / adoption proof:** for `lane=saas`, diagnosis requires copy check fields
+(Operate + marketing/catalog) and adoption check fields (Operate). `prove` reports
+`copyAdoption` for presence and binds critical/major `adoption` defects to assertion
+ids. Measure hard-fails missing `document.title`+visible H1 and stub empty-state copy
+when `--lane saas|marketing` or the cite screen is a known Operate/marketing page
+(`verify/copy-adoption.mjs`). Not a full NLP critic — belief/ritual honesty stays agent.
+
 **Playwright, axe-core and sharp live in shine's root `package.json`.** Run `npm install`
 at the repo root. `verify/deps.mjs` resolves shine-first and keeps a sibling checkout as
 fallback only. Wireframe pages (`data-shine-wireframe`) skip craft hard-fails in
