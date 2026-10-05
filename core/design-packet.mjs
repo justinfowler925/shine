@@ -5,6 +5,7 @@ import {dirname, join, resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 import {referenceHealth} from '../corpus/reference-health.mjs';
 import {retrieveDirections} from "../corpus/art-direction.mjs";
+import {recommendPattern,formatRecommendationSummary} from "../corpus/recommend.mjs";
 import {findUntitledExamples} from "../corpus/untitledui.mjs";
 import {detectProject, resolveIntegration, RECIPES, RECIPE_KITS} from "../integrations/resolve.mjs";
 import {libraryInventory} from "../integrations/coverage.mjs";
@@ -131,6 +132,10 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  // Tiny phase hint: procedure phases are documentation for the agent, not a
  // second mode enum. Copy/Adoption use diagnosis check fields + prove presence
  // gates (not a separate NLP prove category).
+ const recommendation=recommendPattern(catalog,`${job} ${categories[kind].fallback}`,{lane,limit:6,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[]});
+ packet.recommendation=recommendation;
+ packet.recommendationSummary=formatRecommendationSummary(recommendation);
+ packet.recommendation.instruction="Read packet.recommendation before editing: primary cite, antiPatterns, restructureHints (restructure vs repaint), kitRecipe, confidence.";
  packet.procedure={
   phases:["wireframe","build","polish","audit","copy","adoption"],
   packetMode:mode,

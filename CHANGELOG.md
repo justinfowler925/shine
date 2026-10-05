@@ -14,6 +14,11 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Pattern recommender / cite v2 (P5).** `corpus/recommend.mjs` emits primary cite,
+  antiPatterns, restructureHints, kitRecipe, and confidence; design-packet writes
+  `recommendation` into the packet; cite CLI prints the summary. Doctor runs
+  `verify/recommend.test.mjs` (8+ Nucleus-like Operate jobs).
+
 - **Settings/forms corpus + form contracts (P2).** +3 settings and +2 form/record
   authored page blueprints with shots; cite golden floors raised; kits recipes point at
   them; `verify/form-heuristics.mjs` fails closed when `aria-invalid` lacks a message.

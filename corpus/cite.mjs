@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
 import { collectCorpusSource, packSourceFiles } from "./pack-files.mjs";
 import { retrieveDirections } from "./art-direction.mjs";
+import { recommendPattern, formatRecommendationSummary } from "./recommend.mjs";
 import { loadCatalog } from "./catalog.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -88,11 +89,18 @@ const packTokens = join(packDir, "tokens.css");
 const family = row.dna?.family || "shine";
 const voiceCss = join(SHINE, "tokens/voices", `${family}.css`);
 
+const primary = retrieval.selected[0];
+const recommendation = recommendPattern(templates, arg, {
+  lane:value("--lane"), audience:value("--audience"), density:value("--density"), informationShape:value("--shape"),
+  brand:value("--brand"), interaction:value("--interaction"), tone:value("--tone"), type:value("--type"), image:value("--image"),
+  framework:value("--framework"), licenseMode:value("--license") || "source", history:value("--history")
+});
+
 const out = [];
 out.push(`Brief axes: ${["job","lane","audience","density","informationShape","brand","interaction","tone","type","image","framework"].map((axis) => `${axis}=${retrieval.brief[axis]}`).join(" · ")}`);
 if (retrieval.brief.demandedSlop.length) out.push(`Demanded style (brief-explicit only): ${retrieval.brief.demandedSlop.join(", ")}`);
 out.push(`Template: ${row.id} — ${row.title || ""}`);
-const primary = retrieval.selected[0];
+out.push(formatRecommendationSummary(recommendation));
 out.push(`Direction: ${["job","lane","audience","density","informationShape","brand","interaction","tone","type","image","framework","signature"].map((axis) => `${axis}=${primary.axes[axis]}`).join(" · ")}`);
 out.push(`Why eligible: score=${primary.score}; matched axes=${primary.matches.join(", ") || "job"}; history tie-break count=${primary.history}`);
 out.push(`Kit: ${row.kit}   Kind: ${row.kind}   License: ${row.license || ""}`);

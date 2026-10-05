@@ -16,7 +16,7 @@ node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <interna
 ```
 Packet `--mode` is only `existing` \| `new` \| `audit`. Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`; not packet modes. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP).
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
-dashboard. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
+dashboard. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
 source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories. For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
