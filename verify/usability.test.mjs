@@ -2,9 +2,11 @@
 import assert from "node:assert/strict";
 import {mkdtempSync,rmSync,writeFileSync} from "node:fs";
 import {tmpdir} from "node:os";
-import {join} from "node:path";
-import {proveUsability,readUsabilityContract} from "./usability.mjs";
+import {dirname,join} from "node:path";
+import {fileURLToPath} from "node:url";
+import {proveUsability,readUsabilityContract,requiresOperateUsability,interactionsCheckForError} from "./usability.mjs";
 
+const repo=join(dirname(fileURLToPath(import.meta.url)),"..");
 const dir=mkdtempSync(join(tmpdir(),"shine-usability-")),page=join(dir,"page.html"),contract=join(dir,"shine-usability.json");
 const base={version:1,cite:"untitled-table",objects:[
  {id:"queue",selector:"#queue",referenceRole:"table",purpose:"See work that needs a decision"},
@@ -30,5 +32,8 @@ try {
  const external=structuredClone(base);external.flows[0].path="//other.example/path";writeFileSync(contract,JSON.stringify(external));assert.throws(()=>readUsabilityContract(contract),/same-origin/);
  const confirm=structuredClone(base);confirm.flows[0].steps=[{action:"fill",selector:"#capture",value:"Confirmed"},{action:"press",selector:"#capture",value:"Enter",dialog:{accept:true,message:"Save change?"}},{action:"text",selector:"#queue",value:"Confirmed"}];
  writeFileSync(page,'<input id="capture"><div id="queue">No work</div><script>capture.onkeydown=e=>{if(e.key==="Enter"&&confirm("Save change?"))queue.textContent=capture.value}</script>');writeFileSync(contract,JSON.stringify(confirm));assert.equal((await proveUsability({target:page,contractPath:contract})).status,0);
+ assert.equal(requiresOperateUsability("shadcn-settings",repo),true);
+ assert.equal(requiresOperateUsability("shadcn-blog",repo),false);
+ assert.equal(interactionsCheckForError("untitled-table",undefined,new Error("missing"),{root:repo}).status,"failed");
  console.log("usability PASS: reference objects + executable user task reject static walls");
 } finally {rmSync(dir,{recursive:true,force:true});}

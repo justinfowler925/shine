@@ -40,6 +40,11 @@ Prove bite with `node verify/doctor.mjs --full`.
 completion passes the job lane so saas/marketing originality (`data-shine-signature`)
 runs on the prove path, not only on standalone compare.
 
+**Operate usability on prove (M1a):** for allowlisted SaaS page screens (`dashboard`,
+`settings`, `form`, `queue`, `record`, … — see `usability.md`), missing or shallow
+`shine-usability.json` makes `prove` report `interactions: failed` (not `not_tested`).
+Other screens still soft-incomplete when usability is skipped. Details in `usability.md`.
+
 **Playwright, axe-core and sharp live in shine's root `package.json`.** Run `npm install`
 at the repo root. `verify/deps.mjs` resolves shine-first and keeps a sibling checkout as
 fallback only. Wireframe pages (`data-shine-wireframe`) skip craft hard-fails in

@@ -2,6 +2,12 @@
 
 Visual similarity and accessibility are necessary but do not establish that a person can complete a job. Every existing or new product surface therefore carries a small `shine-usability.json` beside its design diagnosis/spec and proves it in a real browser.
 
+## Operate SaaS screens — fail closed on prove
+
+For Operate-lane page cites whose `screen` is one of `dashboard`, `settings`, `form`, `queue`, `record`, `wizard`, `app-shell`, `lex-record`, `lex-queue`, `onboarding`, `checkout`, or `command-palette`, `verify/prove.mjs` treats missing or invalid usability as **`interactions: failed`** (not `not_tested`). Shallow contracts fail the same way: every flow needs ≥3 steps, a real user action (`click` / `fill` / `press` / `select`), and an observable state outcome. Marketing, charts, blog, and other non-allowlisted screens keep the softer `not_tested` → incomplete path when no contract is supplied.
+
+Do not ship an Operate SaaS surface on craft-green alone. Write the contract before claiming completion.
+
 ```json
 {
   "version": 1,
