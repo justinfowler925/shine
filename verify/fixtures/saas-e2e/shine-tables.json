@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "grids": [
+    {
+      "selector": "#exceptions-table",
+      "kind": "static",
+      "reason": "Read-only revenue exception summary ordered by ARR at risk; triage opens the record via the page primary, not in-row editors."
+    }
+  ]
+}

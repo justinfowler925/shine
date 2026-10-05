@@ -1,0 +1,234 @@
+<!doctype html>
+<!-- shine SaaS E2E BEFORE — Operate dashboard with intentional incomplete-primitive (unnamed icon button). -->
+<html lang="en"
+  data-cite="windmill-dashboard"
+  data-shine-voice="adapted"
+  data-shine-adaptation="Operate revenue shell with KPI stamps and static exception table"
+  data-shine-probe="dashboard">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Revenue exceptions — before</title>
+  <link rel="stylesheet" href="../../../corpus/packs/windmill-dashboard/tokens.css" />
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font: 15px/1.45 "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fafaf9;
+      color: #0c0a09;
+    }
+    .shell { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+    aside.rail {
+      background: #fff;
+      border-right: 1px solid #e7e5e4;
+      padding: 24px 16px;
+    }
+    aside.rail .brand {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+      text-transform: uppercase; color: #57534e; margin: 0 0 20px;
+    }
+    aside.rail nav { display: grid; gap: 4px; }
+    aside.rail a {
+      color: #0c0a09; text-decoration: none; padding: 8px 12px; border-radius: 8px;
+      font-size: 15px;
+    }
+    aside.rail a[aria-current="page"] { background: #e7e5e4; font-weight: 600; }
+    main { padding: 28px 32px 48px; min-width: 0; }
+    .page-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 24px; margin-bottom: 20px;
+    }
+    .page-head h1 { margin: 0; font-size: 24px; letter-spacing: -0.03em; }
+    .page-head p { margin: 8px 0 0; color: #57534e; max-width: 42ch; font-size: 15px; }
+    [data-shine-signature] {
+      min-width: 220px; min-height: 96px; padding: 16px;
+      background: #ea580c; color: #0c0a09; border-radius: 12px;
+      display: flex; flex-direction: column; justify-content: space-between; gap: 8px;
+    }
+    [data-shine-signature] small {
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      color: #0c0a09;
+    }
+    [data-shine-signature] strong { font-size: 18px; line-height: 1.25; }
+    [data-shine-signature] span { font-size: 12px; color: #0c0a09; }
+    .toolbar { display: flex; gap: 12px; align-items: center; margin: 0 0 20px; flex-wrap: wrap; }
+    .toolbar label { display: grid; gap: 4px; font-size: 12px; font-weight: 600; color: #57534e; }
+    input[type="search"] {
+      font: inherit; min-height: 44px; min-width: 260px; padding: 8px 12px;
+      border: 1px solid #e7e5e4; border-radius: 8px; background: #fff; color: #0c0a09;
+    }
+    button {
+      font: inherit; min-height: 44px; padding: 8px 16px; border-radius: 8px;
+      border: 1px solid #e7e5e4; background: #fff; color: #0c0a09; cursor: pointer;
+    }
+    button.primary, [data-primary] {
+      background: #0c0a09; color: #fafaf9; border-color: #0c0a09; font-weight: 600;
+    }
+    button.icon {
+      width: 44px; height: 44px; padding: 0; display: inline-grid; place-items: center;
+    }
+    .kpi-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px;
+    }
+    .kpi {
+      background: #fff; border: 1px solid #e7e5e4; border-radius: 8px; padding: 20px; min-height: 112px;
+    }
+    .kpi .label { font-size: 13px; color: #57534e; }
+    .kpi .value { font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 8px; }
+    .kpi .ctx { font-size: 12px; color: #57534e; margin-top: 8px; }
+    [data-region="focal"] {
+      background: #fff; border: 1px solid #e7e5e4; border-radius: 8px; padding: 16px;
+      margin-bottom: 20px; min-height: 300px;
+    }
+    [data-region="focal"] h2 { margin: 0 0 12px; font-size: 15px; font-weight: 600; }
+    svg { display: block; width: 100%; height: 260px; }
+    .table-wrap {
+      background: #fff; border: 1px solid #e7e5e4; border-radius: 8px; padding: 8px 0 0; overflow: auto;
+    }
+    .table-wrap h2 { margin: 0 16px 8px; font-size: 15px; font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid #e7e5e4; font-size: 15px; }
+    th { color: #57534e; font-weight: 600; font-size: 13px; background: #fafaf9; }
+    #status { margin: 0; color: #57534e; font-size: 13px; min-width: 12ch; }
+
+
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; }
+      aside.rail {
+        border-right: 0;
+        border-bottom: 1px solid #e7e5e4;
+        padding: 16px;
+      }
+      aside.rail nav { display: flex; flex-wrap: wrap; gap: 4px; }
+      main { padding: 20px 16px 40px; }
+      .page-head { flex-direction: column; align-items: stretch; }
+      [data-shine-signature] { min-width: 0; }
+      .kpi-row { grid-template-columns: 1fr; }
+      .toolbar { align-items: stretch; }
+      input[type="search"] { min-width: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="shell">
+    <aside class="rail" data-sidebar aria-label="Product navigation">
+      <p class="brand">Northwind Ops</p>
+      <nav aria-label="Primary">
+        <a href="#exceptions" aria-current="page">Exceptions</a>
+        <a href="#exceptions">Accounts</a>
+        <a href="#exceptions">Pipelines</a>
+        <a href="#exceptions">Settings</a>
+      </nav>
+    </aside>
+    <main id="exceptions">
+      <header class="page-head">
+        <div>
+          <h1>Revenue exceptions</h1>
+          <p id="lede">Decide which at-risk renewals need an owner before Friday commit.</p>
+        </div>
+        <aside data-shine-signature="revenue-exception-desk">
+          <small>Live proof</small>
+          <strong>Revenue risk desk — 4 accounts need owners</strong>
+          <span>Updated now</span>
+        </aside>
+      </header>
+
+      <div class="toolbar" role="search" data-toolbar>
+        <label>Filter exceptions
+          <input id="filter" type="search" value="" placeholder="Account or owner" autocomplete="off" />
+        </label>
+        <!-- INTENTIONAL DEFECT: incomplete-primitive icon-only-unnamed -->
+        <button type="button" class="icon" id="more">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="13" cy="8" r="1.5" fill="currentColor"/></svg>
+        </button>
+        <button type="button" class="primary" id="open" data-primary>Open next exception</button>
+        <p id="status" role="status">Ready</p>
+        <button type="button" id="row-action" data-row-action>Assign owner</button>
+      </div>
+      <nav data-pagination aria-label="Exception pagination" style="display:flex;gap:8px;align-items:center;margin:0 0 16px;color:#57534e;font-size:13px">
+        <span>Page 1 of 1</span>
+        <button type="button" disabled>Previous</button>
+        <button type="button" disabled>Next</button>
+      </nav>
+
+      <section class="kpi-row" data-summary aria-label="Summary metrics">
+        <div class="kpi" data-shine-kpi data-unit="USD" data-baseline="vs last 30d" data-good-direction="up">
+          <div class="label" id="kpi-lede">ARR at risk</div>
+          <div class="value">$840k</div>
+          <div class="ctx">+12% vs last 30d</div>
+        </div>
+        <div class="kpi" data-shine-kpi data-unit="count" data-baseline="target under 3" data-good-direction="down">
+          <div class="label">Unowned</div>
+          <div class="value">4</div>
+          <div class="ctx">target under 3</div>
+        </div>
+        <div class="kpi" data-shine-kpi data-unit="days" data-baseline="vs commit Friday" data-good-direction="down">
+          <div class="label">Days to commit</div>
+          <div class="value">3</div>
+          <div class="ctx">vs commit Friday</div>
+        </div>
+      </section>
+
+      <section data-region="focal" aria-label="ARR at risk by stage">
+        <h2>ARR at risk by stage</h2>
+        <svg viewBox="0 0 640 260" role="img" aria-label="Revenue risk bar chart by stage">
+          <rect x="40" y="30" width="90" height="200" fill="#0c0a09" />
+          <rect x="160" y="70" width="90" height="160" fill="#292524" />
+          <rect x="280" y="100" width="90" height="130" fill="#44403c" />
+          <rect x="400" y="140" width="90" height="90" fill="#78716c" />
+          <rect x="520" y="180" width="90" height="50" fill="#a8a29e" />
+        </svg>
+      </section>
+
+      <section class="table-wrap" aria-labelledby="table-title">
+        <h2 id="table-title">Exception queue</h2>
+        <table id="exceptions-table">
+          <thead>
+            <tr>
+              <th scope="col" aria-sort="none" data-sort>Account</th>
+              <th scope="col">ARR</th>
+              <th scope="col">Stage</th>
+              <th scope="col">Owner</th>
+              <th scope="col">Risk</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-row="acme"><td>Acme Robotics</td><td>$210k</td><td>Renewal</td><td>Unowned</td><td>High</td></tr>
+            <tr data-row="north"><td>Northwind Labs</td><td>$180k</td><td>Expansion</td><td>Unowned</td><td>High</td></tr>
+            <tr data-row="globe"><td>Globe Freight</td><td>$150k</td><td>Renewal</td><td>Maya Chen</td><td>Medium</td></tr>
+            <tr data-row="orbit"><td>Orbit Health</td><td>$160k</td><td>Pilot</td><td>Unowned</td><td>High</td></tr>
+            <tr data-row="pine"><td>Pine Analytics</td><td>$140k</td><td>Renewal</td><td>Unowned</td><td>Medium</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+  <script>
+    const filter = document.getElementById("filter");
+    const status = document.getElementById("status");
+    const rows = [...document.querySelectorAll("#exceptions-table tbody tr")];
+    filter.addEventListener("input", () => {
+      const q = filter.value.trim().toLowerCase();
+      let visible = 0;
+      for (const row of rows) {
+        const hit = !q || row.textContent.toLowerCase().includes(q);
+        row.hidden = !hit;
+        if (hit) visible += 1;
+      }
+      status.textContent = q ? `Filtered ${visible}` : "Ready";
+    });
+    document.getElementById("row-action").addEventListener("click", () => {
+      const next = rows.find((row) => !row.hidden);
+      status.textContent = next ? `Assigned ${next.cells[0].textContent}` : "Queue empty";
+    });
+    document.getElementById("open").addEventListener("click", () => {
+      const next = rows.find((row) => !row.hidden);
+      status.textContent = next ? `Opened ${next.cells[0].textContent}` : "Queue empty";
+    });
+  </script>
+</body>
+</html>

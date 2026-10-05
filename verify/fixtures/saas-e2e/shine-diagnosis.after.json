@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "job": "Prove revenue exceptions Operate dashboard after incomplete-primitive fix",
+  "category": "dashboard",
+  "lane": "saas",
+  "primaryTask": "Decide which at-risk renewal to open next and assign an owner",
+  "before": {
+    "artifact": "verify/fixtures/saas-e2e/after.html",
+    "screenshot": "verify/fixtures/saas-e2e/after.png"
+  },
+  "verdict": "no-change",
+  "checked": [
+    "usability",
+    "completeness",
+    "composition",
+    "craft",
+    "adoption"
+  ],
+  "verdictEvidence": "Measure PASS after aria-label on overflow; density 82% content; KPI stamps present with focal chart; usability flow open-next-exception passes.",
+  "primaryTaskCheck": {
+    "ok": true,
+    "note": "Open next exception remains the single filled primary above the fold"
+  },
+  "emptyErrorTriadCheck": {
+    "ok": true,
+    "note": "Filtered-empty status text is distinct; static fixture has no async error path"
+  },
+  "competingCtaCheck": {
+    "ok": true,
+    "note": "One filled primary; overflow named and outline; no competing filled CTA"
+  },
+  "defects": []
+}

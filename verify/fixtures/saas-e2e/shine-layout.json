@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "noMediaReason": "Operate revenue desk has no media frame; chart is inline SVG.",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 1400
+    },
+    {
+      "width": 768,
+      "height": 1200
+    },
+    {
+      "width": 1280,
+      "height": 1000
+    },
+    {
+      "width": 1440,
+      "height": 1000
+    }
+  ],
+  "content": [
+    {
+      "selector": "#lede",
+      "text": "Decide which at-risk renewals need an owner before Friday commit. The desk carries ARR risk, unowned count, and days-to-commit so operators can open the next exception without hunting across chrome. Additional context covers renewals, expansions, pilots, and handoffs between account owners when the queue is dense."
+    },
+    {
+      "selector": "#kpi-lede",
+      "text": "ARR at risk summarizes the dollars that need an owner this week. Operators read the figure against last-thirty-day baseline, then open the next exception from the toolbar primary. Supporting copy stays short so the KPI stamp remains scannable under large-text stress."
+    }
+  ],
+  "checks": [
+    {
+      "id": "primary-visible",
+      "type": "visible",
+      "selector": "#open"
+    },
+    {
+      "id": "table-visible",
+      "type": "visible",
+      "selector": "#exceptions-table"
+    },
+    {
+      "id": "summary-visible",
+      "type": "visible",
+      "selector": "[data-summary]"
+    },
+    {
+      "id": "nav-visible",
+      "type": "visible",
+      "selector": "nav[aria-label=\"Primary\"]"
+    }
+  ]
+}
