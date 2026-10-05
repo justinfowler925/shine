@@ -13,7 +13,9 @@
 // lint      scale/cardinality assertions on COMPUTED values, not source strings
 //
 // Exit 1 if any hard failure: axe violations, contrast < 4.5:1 worst-case on
-// body text (3:1 for >=24px), off-scale spacing, font-size cardinality > 6.
+// body text (3:1 for >=24px), off-scale spacing, font-size cardinality > 6,
+// or DOM-detectable incomplete primitives (icon-only unnamed, unlabeled fields,
+// confirm-less destructive).
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve as presolve } from "node:path";
@@ -22,6 +24,10 @@ import { load, pathTo } from "./deps.mjs";
 import {mediaWaste} from './layout.mjs';
 import { auditTables } from "./table-quality.mjs";
 import { evaluateDataGrids } from "./contracts/table.mjs";
+import {
+  evaluateIncompletePrimitives,
+  formatIncompletePrimitiveFailures,
+} from "./incomplete-primitives.mjs";
 import { loadCatalog } from "../corpus/catalog.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -341,6 +347,7 @@ for (const t of textTargets) {
 // unambiguous; the judgement ones print every run as notes and never block, because a
 // gate with false positives is a gate someone switches off.
 const dataGrids = await page.evaluate(evaluateDataGrids);
+const incompletePrimitives = await page.evaluate(evaluateIncompletePrimitives);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
 const compose = await page.evaluate(() => {
   const vis = (el) => {
@@ -798,6 +805,10 @@ for (const check of tableQuality.checks) {
   if (check.status !== "passed") failures.push(`contract: DataGrid missing or inert ${check.name}: ${check.status}: ${check.reason}`);
 }
 
+// Incomplete primitives — DOM-safe audit subset (icon-only unnamed, unlabeled
+// fields, confirm-less destructive). Toast-only / hover-only stay agent judgment.
+for (const msg of formatIncompletePrimitiveFailures(incompletePrimitives)) failures.push(msg);
+
 // Likeness checks key off the --cite FLAG, never off page attributes. The old
 // attestation ("--cite X but page data-cite is Y") measured self-labeling: a page
 // could satisfy it by stamping three attributes and fail it while being a perfect
@@ -890,7 +901,7 @@ if (compose.voice === "kit-faithful" && compose.dnaChroma && accentC != null) {
   }
 }
 
-const report = { scope:"single-viewport styling and accessibility; not overall completion", mediaGaps, url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, themeSwitches, failures };
+const report = { scope:"single-viewport styling and accessibility; not overall completion", mediaGaps, url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, incompletePrimitives, themeSwitches, failures };
 const jsonOut = opt("--json"); // written once at the end, after notes are attached
 
 console.log(`mode=${report.mode}  bodyBg=${measured.bodyBg}  bodyColor=${measured.bodyColor}`);

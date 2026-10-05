@@ -27,9 +27,17 @@ Score against `contracts.md`, `foundations.md`, `patterns.md`, `anti-patterns.md
 
 ## Incomplete-primitive fails (always flag)
 
-- Bare `<table>` / static grid where DataGrid contract applies
-- Icon buttons without accessible names
-- Inputs with placeholder-only labels
+### Machine (DOM-detectable — `verify/incomplete-primitives.mjs` / measure)
+
+These fail closed when the DOM makes them unambiguous:
+
+- Icon-only buttons / controls without an accessible name (`aria-label`, `aria-labelledby`, title, or text)
+- Form controls without label association (`<label for>` / wrapping `<label>` / `aria-label` / `aria-labelledby`) — placeholder alone does **not** count
+- Destructive controls (verb-led: delete / destroy / purge / wipe / erase / remove…) without a confirm-dialog pattern (`data-confirm` / `data-shine-confirm` / `aria-haspopup="dialog"` / `aria-controls`→dialog / action already inside a dialog)
+
+### Agent judgment (not hard-failed by measure yet)
+
+- Bare `<table>` / static grid where DataGrid contract applies (covered separately by table contract gates)
 - Red borders without linked error text / `aria-invalid`
 - Loading indistinguishable from empty
 - Filter-empty conflated with true empty
@@ -37,8 +45,10 @@ Score against `contracts.md`, `foundations.md`, `patterns.md`, `anti-patterns.md
 - Hover-only row actions
 - Missing sticky header / horizontal overflow affordance on wide tables
 - Double-submit (no busy/disabled on async buttons)
-- Destructive actions without confirm
+- Toast-only errors (submit failure only in a toast)
 - Status/meaning by color alone
+
+Flag the agent list in the audit report even when measure is green.
 
 ## Report template
 

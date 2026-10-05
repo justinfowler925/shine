@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- shine-lint: off color,type,spacing — paired clean fixture: same jobs with names,
+     labels, and a confirm pattern on destructive. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Incomplete primitives — good</title>
+  <style>
+    :root { color-scheme: light; }
+    body { margin: 0; padding: 32px; font: 15px/1.5 system-ui, sans-serif; background: #fafafa; color: #18181b; }
+    main { max-width: 560px; }
+    h1 { font-size: 22px; margin: 0 0 8px; }
+    p { margin: 0 0 20px; color: #52525b; }
+    .row { display: flex; gap: 12px; align-items: center; margin: 0 0 20px; flex-wrap: wrap; }
+    label { display: grid; gap: 6px; font-size: 13px; font-weight: 600; }
+    button, input { font: inherit; padding: 10px 14px; border-radius: 8px; border: 1px solid #d4d4d8; background: #fff; color: #18181b; }
+    button.primary { background: #18181b; color: #fafafa; border-color: #18181b; }
+    button.icon { width: 40px; height: 40px; padding: 0; display: inline-grid; place-items: center; }
+    button.danger { color: #b91c1c; border-color: #fecaca; }
+    dialog { border: 1px solid #d4d4d8; border-radius: 12px; padding: 24px; max-width: 360px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Workspace members</h1>
+    <p>Invite teammates and remove accounts that no longer need access.</p>
+    <div class="row">
+      <button type="button" class="icon" id="more" aria-label="Open member actions">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="13" cy="8" r="1.5" fill="currentColor"/></svg>
+      </button>
+      <label>Email address
+        <input id="email" type="email" value="ada@example.com" autocomplete="email" />
+      </label>
+      <button type="button" class="primary">Save</button>
+    </div>
+    <div class="row">
+      <button type="button" class="danger" id="delete" aria-haspopup="dialog" aria-controls="confirm-delete">Delete account</button>
+    </div>
+  </main>
+  <dialog id="confirm-delete" data-confirm-dialog>
+    <p>Delete this account? This cannot be undone.</p>
+    <form method="dialog" class="row">
+      <button type="submit" value="cancel">Cancel</button>
+      <button type="submit" value="confirm" class="danger">Delete account</button>
+    </form>
+  </dialog>
+</body>
+</html>
