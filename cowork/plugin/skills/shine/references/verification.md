@@ -75,6 +75,11 @@ or prove reports `competingCtaProof: failed`. Doctor bite:
 `node verify/cta-pressure.test.mjs`.
 
 
+
+**Composition slop (P3):** Operate saas cites hard-fail on ≥4 equal Card roots without a
+focal, marketing DNA glow/gradient/display clusters, and filler empty phrases such as
+“Welcome to your dashboard” (`verify/composition-slop.mjs`).
+
 **Nucleus golden fixture (P4a):** when a Nucleus checkout is absent, use
 `verify/fixtures/nucleus-golden/` plus `skill/references/clearspeed/profile-instructions.md`
 (`docs/nucleus-attach.md`). `node verify/nucleus-golden.test.mjs` bites fail→pass on

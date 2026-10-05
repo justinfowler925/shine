@@ -561,6 +561,11 @@ zero violations on everything else:
 
 Brand-specific visual bans (a logo gradient applied to chrome, the accent used as a body fill, emoji, retired product names) live in that brand`s own kit and copy checker — still flag them in audits on brand-locked surfaces.
 
+## Machine detectors (P3)
+
+`verify/composition-slop.mjs` hard-fails a DOM-safe subset: equal Card soup without a focal, marketing DNA utility clusters on saas Operate, and known filler empty-state phrases. Hover-only / toast-only remain agent.
+
+
 
 ---
 
@@ -4958,6 +4963,11 @@ two filled treatments on any surface; Operate tightens to one. Diagnosis
 or prove reports `competingCtaProof: failed`. Doctor bite:
 `node verify/cta-pressure.test.mjs`.
 
+
+
+**Composition slop (P3):** Operate saas cites hard-fail on ≥4 equal Card roots without a
+focal, marketing DNA glow/gradient/display clusters, and filler empty phrases such as
+“Welcome to your dashboard” (`verify/composition-slop.mjs`).
 
 **Nucleus golden fixture (P4a):** when a Nucleus checkout is absent, use
 `verify/fixtures/nucleus-golden/` plus `skill/references/clearspeed/profile-instructions.md`
