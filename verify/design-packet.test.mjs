@@ -121,6 +121,18 @@ assert.match(dashboard.completion.command,/--lane internal/);
 assert.match(unvalidated.completion.command,/--lane marketing/);
 assert.match(lex.completion.command,/--lane lex/);
 
+// Procedure phases are skill routing, not packet --mode values.
+assert.deepEqual(grid.procedure.phases,["wireframe","build","polish","audit","copy","adoption"]);
+assert.equal(grid.procedure.packetMode,"existing");
+assert.match(grid.procedure.instruction,/not --mode values/);
+assert.match(grid.procedure.instruction,/no copy\/adoption prove/);
+const auditPacket=createDesignPacket({job:cases[2][0],lane:"internal",project:process.cwd(),mode:"audit"});
+assert.equal(auditPacket.editing.allowed,false);
+assert.equal(auditPacket.completion.required,false);
+assert.equal(auditPacket.procedure.packetMode,"audit");
+assert.match(auditPacket.completion.instruction,/copy or adoption/);
+assert.match(auditPacket.completion.instruction,/no copy\/adoption prove/);
+
 // Python/vanilla web projects have no npm manifest; missing is not malformed.
 const manifestless=mkdtempSync(join(tmpdir(),"shine-python-web-"));
 try {

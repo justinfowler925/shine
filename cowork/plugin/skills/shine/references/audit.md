@@ -106,8 +106,14 @@ Citation column is required for Critical/Major. Threshold-only rows are incomple
 
 ## Mode notes
 
+Audit is the packet `--mode audit` procedure. Wireframe / Polish / Copy / Adoption
+are sibling **procedure phases**, not additional packet modes (see `SKILL.md` /
+README § Modes). When the diagnosis includes copy or adoption defects — or lists
+those buckets in `checked` — name them in the report; v1 has no copy/adoption prove
+receipts.
+
 - **Audit only:** stop after the report.
-- **Polish after audit:** work the prioritized list top-down; upgrade stubs to contracts;
-  cite before each edit; remeasure; avoid unrelated redesign.
+- **Polish after audit:** follow `polish.md` — work the prioritized list top-down;
+  upgrade stubs to contracts; cite before each edit; remeasure; avoid unrelated redesign.
 - **Brand-locked:** also run `brand-checker` for copy/token compliance; UI
   completeness still uses this rubric.

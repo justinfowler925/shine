@@ -111,7 +111,7 @@ Named Table / Form / Dialog / Select loads `contracts.md` MUST **in this pass**.
 3. Composition that causes wrong actions or abandonment
 4. Adoption blockers on internal tools
 5. Craft that reads as slop for the chosen voice
-6. Polish (density, optical alignment, micro-motion)
+6. Polish (density, optical alignment, micro-motion) — `polish.md`
 
 Never spend a pass on craft while a Critical completeness hole is open.
 
@@ -154,6 +154,7 @@ read as relatives, the match or the paint is wrong.
 | Known job, invented layout | `corpus/cite.mjs <job>` — match a row |
 | Nobody will open this | `adoption.md` |
 | Table/form missing states | `contracts.md` |
+| Job works; stubs / density / optical | `polish.md` |
 | Queue / batch / empty | `cite.mjs queue` → `untitled-table` |
 | Wrong hierarchy / equal peers | `techniques.md` §Hierarchy, `kits.md` |
 | Numbers undecidable | `dashboards.md` |

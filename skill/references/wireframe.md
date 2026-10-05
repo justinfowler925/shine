@@ -8,6 +8,10 @@ citing kits. It emits a gray-box HTML artifact whose regions come from that temp
 then a **locked brief**. Build applies cite DNA and does not invent a
 competing IA unless the user says `unlock structure`.
 
+Wireframe is a **procedure phase**, not a packet `--mode`. Use
+`design-packet.mjs --mode new` after the brief locks; see `SKILL.md` / README § Modes
+for the phase → packet map. Polish / Copy / Adoption are sibling phases, not packet modes.
+
 **Not Wireframe:** craft (chroma, tracking, shadows), brand paint, real charts, or
 shipping React. Craft hard-fails in `measure.mjs` wait until Build.
 

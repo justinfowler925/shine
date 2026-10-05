@@ -37,16 +37,22 @@ Shine's shadcn catalog and registry work stands on [shadcn/ui](https://github.co
 
 ## Modes
 
-| Mode | When |
-| --- | --- |
-| **Wireframe** | New surface / no UI yet — discovery with cited options → gray-box → locked brief |
-| **Build** | Paint under shine tokens from a locked brief (or existing shell) |
-| **Polish** | Upgrade stubs in place; cite + remeasure |
-| **Audit** | Score and report; change nothing unless asked |
-| **Copy** | Presentation as argument — beliefs, sequence, slop tells |
-| **Adoption** | Will anyone open it? Ritual, persona, path — first for internal tools |
+Skill **procedure phases** (agent routing) are not the same as packet `--mode`
+(`existing` \| `new` \| `audit` in `core/design-packet.mjs`). Wireframe, Polish,
+Copy, and Adoption are phases with reference files — they do **not** add packet
+modes or prove categories.
 
-Default: **Wireframe** if new; otherwise **Build** unless the ask is clearly a review.
+| Procedure phase | When | Packet `--mode` | Reference |
+| --- | --- | --- | --- |
+| **Wireframe** | New surface / no UI yet — discovery → gray-box → locked brief | `new` | `skill/references/wireframe.md` |
+| **Build** | Paint under shine tokens from a locked brief (or existing shell) | `new` or `existing` | `skill/SKILL.md` § Build |
+| **Polish** | Upgrade stubs in place; density / optical; cite + remeasure | `existing` | `skill/references/polish.md` |
+| **Audit** | Score and report; change nothing unless asked | `audit` | `skill/references/audit.md` |
+| **Copy** | Presentation as argument — beliefs, sequence, slop tells | `audit` or `existing` (no copy prove category) | `skill/references/copy.md` |
+| **Adoption** | Will anyone open it? Ritual, persona, path — first for internal tools | `audit` or `existing` (no adoption prove category) | `skill/references/adoption.md` |
+
+Default procedure: **Wireframe** if new; otherwise **Build** unless the ask is clearly a review.
+Copy and Adoption findings ride in diagnosis buckets / the audit report; v1 does not add prove receipts for them.
 
 **V4 notes:** [docs/RELEASE-v4.md](./docs/RELEASE-v4.md) · [V3 archive](./docs/RELEASE-v3.md) · [CHANGELOG](./CHANGELOG.md)
 
@@ -487,7 +493,8 @@ Files dedupe by target path (last wins) and `cssVars`/`css` deep-merge — that'
 
 Non-negotiables at the **top** of each `SKILL.md` — after compaction only the first 5,000 tokens of a skill are re-attached, 25,000 across all.
 
-- `SKILL.md` — index and routing, under 500 lines (Wireframe / Audit / Build / Polish / Copy / Adoption)
+- `SKILL.md` — index and routing, under 500 lines (procedure phases: Wireframe / Audit / Build / Polish / Copy / Adoption → packet `existing|new|audit`)
+- `references/polish.md` — Polish phase: density, optical, contracts upgrade, remeasure (not a packet mode)
 - `references/contracts.md` — ported from the Cursor `ui-ux` skill, plus shadcn's own MIT Agent Skill (`skills/shadcn/rules/*.md`, Incorrect/Correct pairs)
 - `references/taste.md` — the positive authority
 - `references/corpus.md`, `color-type.md`, `motion.md`
