@@ -36,5 +36,29 @@
   "competingCtaCheck": {
     "ok": true,
     "note": "Single filled Open next exception primary; overflow and filter are outline weight only"
+  },
+  "copyHeadlineCheck": {
+    "ok": true,
+    "note": "H1 Revenue exceptions names the desk job; browser title matches Operate surface"
+  },
+  "copyBeliefCheck": {
+    "ok": true,
+    "note": "KPI stamps state Open exceptions / At risk ARR / Avg age with units \u2014 belief is measurable not slogan"
+  },
+  "copyInstructionalCheck": {
+    "ok": true,
+    "note": "Primary Open next exception and filter Unowned instruct the next action without filler microcopy"
+  },
+  "adoptionRitualCheck": {
+    "ok": true,
+    "note": "Filter\u2192open next exception is a repeatable AM ritual on the same desk each morning"
+  },
+  "adoptionPrivateWinCheck": {
+    "ok": true,
+    "note": "Clearing an unowned exception into Assign owner is a private win before standup"
+  },
+  "adoptionAbsenceCheck": {
+    "ok": true,
+    "note": "No toast parade or empty-state cheerleading; absence of noise keeps the queue honest"
   }
 }

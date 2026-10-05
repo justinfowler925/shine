@@ -14,7 +14,8 @@
     "completeness",
     "composition",
     "craft",
-    "adoption"
+    "adoption",
+    "copy"
   ],
   "verdictEvidence": "Measure PASS after aria-label on overflow; density 82% content; KPI stamps present with focal chart; usability flow open-next-exception passes.",
   "primaryTaskCheck": {
@@ -29,5 +30,29 @@
     "ok": true,
     "note": "One filled primary; overflow named and outline; no competing filled CTA"
   },
-  "defects": []
+  "defects": [],
+  "copyHeadlineCheck": {
+    "ok": true,
+    "note": "H1 Revenue exceptions names the desk job; browser title matches Operate surface"
+  },
+  "copyBeliefCheck": {
+    "ok": true,
+    "note": "KPI stamps state Open exceptions / At risk ARR / Avg age with units \u2014 belief is measurable not slogan"
+  },
+  "copyInstructionalCheck": {
+    "ok": true,
+    "note": "Primary Open next exception and filter Unowned instruct the next action without filler microcopy"
+  },
+  "adoptionRitualCheck": {
+    "ok": true,
+    "note": "Filter\u2192open next exception is a repeatable AM ritual on the same desk each morning"
+  },
+  "adoptionPrivateWinCheck": {
+    "ok": true,
+    "note": "Clearing an unowned exception into Assign owner is a private win before standup"
+  },
+  "adoptionAbsenceCheck": {
+    "ok": true,
+    "note": "No toast parade or empty-state cheerleading; absence of noise keeps the queue honest"
+  }
 }
