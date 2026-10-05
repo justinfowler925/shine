@@ -45,6 +45,11 @@ import {
   evaluateCopyHeuristics,
   formatCopyHeuristicFailures,
 } from "./copy-adoption.mjs";
+import {
+  ctaPressureGateApplies,
+  evaluateMainCtaPressure,
+  formatCtaPressureFailures,
+} from "./cta-pressure.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
@@ -366,6 +371,7 @@ for (const t of textTargets) {
 const dataGrids = await page.evaluate(evaluateDataGrids);
 const incompletePrimitives = await page.evaluate(evaluateIncompletePrimitives);
 const kpiFloor = await page.evaluate(evaluateKpiFloor);
+const ctaPressure = await page.evaluate(evaluateMainCtaPressure);
 const copyHeuristics = await page.evaluate(evaluateCopyHeuristics);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
 const compose = await page.evaluate(() => {
@@ -810,6 +816,30 @@ if (compose.filledCount > 2) {
     `hierarchy: ${compose.filledCount} competing filled treatments — one primary per view ` +
       `(techniques.md §Hierarchy; foundations Hierarchy)`,
   );
+}
+
+// Operate CTA pressure (P1): >1 filled treatment in main hard-fails for Operate cites.
+{
+  const ctaCiteId = citeWant || compose.citeId || "";
+  const ctaCiteRow = (() => {
+    if (!ctaCiteId) return null;
+    try {
+      const cat = loadCatalog(SHINE);
+      return (cat.templates ?? []).find((t) => t.id === ctaCiteId) || null;
+    } catch {
+      return null;
+    }
+  })();
+  const ctaApplies = ctaPressureGateApplies({
+    lane: laneWant,
+    citeScreen: ctaCiteRow?.screen || "",
+    citeJobs: ctaCiteRow?.jobs || [],
+    isWireframe,
+    citeId: ctaCiteId,
+  });
+  for (const f of formatCtaPressureFailures(ctaPressure, { gate: ctaApplies })) {
+    failures.push(f);
+  }
 }
 // Density cite may come from --cite or the page's data-cite (fail closed without probe).
 // Likeness below still keys only off the --cite FLAG — never page self-labeling.

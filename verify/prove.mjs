@@ -21,6 +21,7 @@ import {compareArtifact} from './compare.mjs';
 import {load} from './deps.mjs';
 import {bindBrowser,writeCompletionReceipt} from './completion-receipt.mjs';
 import {writeCompletionProveReceipt} from '../hooks/receipt.mjs';
+import {checkCompetingCtaFlowBinding} from './cta-pressure.mjs';
 import {verifyReuse} from '../integrations/blocks.mjs';
 import {verifyCoverage} from '../integrations/coverage.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'),exec=promisify(execFile);
@@ -98,6 +99,7 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
     const {value}=readDiagnosis(diagnosisPath,{lane});
     checks.defectAssertions=checkDefectAssertions(value,layout,usability);
     checks.copyAdoption=checkCopyAdoptionPresence(value,{lane});
+    checks.competingCtaProof=checkCompetingCtaFlowBinding(value);
    }catch(error){
     checks.defectAssertions={status:'failed',reason:error.message};
     checks.copyAdoption={status:'failed',reason:error.message};
