@@ -1410,6 +1410,9 @@ fails the unmarked data table.
 | Composable React stack | shadcn + Radix + TanStack Table/Form |
 | Visual variants | Untitled UI / Plus UI |
 | Chat embeds | OpenAI Apps SDK UI |
+| Operate SaaS job proof | `usability.md` + `shine-usability.json` — prove fails closed for dashboard/settings/form/queue/record/… |
+
+Record tables already fail closed without `shine-tables.json`. Operate page screens (dashboard, settings, form, queue, record, and siblings listed in `usability.md`) likewise cannot complete prove with missing or shallow `shine-usability.json`: interactions status is **`failed`**, not a soft `not_tested`.
 
 
 ---
@@ -4572,6 +4575,12 @@ Reasons are listed under the table.
 
 Visual similarity and accessibility are necessary but do not establish that a person can complete a job. Every existing or new product surface therefore carries a small `shine-usability.json` beside its design diagnosis/spec and proves it in a real browser.
 
+## Operate SaaS screens — fail closed on prove
+
+For Operate-lane page cites whose `screen` is one of `dashboard`, `settings`, `form`, `queue`, `record`, `wizard`, `app-shell`, `lex-record`, `lex-queue`, `onboarding`, `checkout`, or `command-palette`, `verify/prove.mjs` treats missing or invalid usability as **`interactions: failed`** (not `not_tested`). Shallow contracts fail the same way: every flow needs ≥3 steps, a real user action (`click` / `fill` / `press` / `select`), and an observable state outcome. Marketing, charts, blog, and other non-allowlisted screens keep the softer `not_tested` → incomplete path when no contract is supplied.
+
+Do not ship an Operate SaaS surface on craft-green alone. Write the contract before claiming completion.
+
 ```json
 {
   "version": 1,
@@ -4650,6 +4659,11 @@ Prove bite with `node verify/doctor.mjs --full`.
 **Completion lane:** `verify/prove.mjs` accepts `--lane` (same values as compare). Packet
 completion passes the job lane so saas/marketing originality (`data-shine-signature`)
 runs on the prove path, not only on standalone compare.
+
+**Operate usability on prove (M1a):** for allowlisted SaaS page screens (`dashboard`,
+`settings`, `form`, `queue`, `record`, … — see `usability.md`), missing or shallow
+`shine-usability.json` makes `prove` report `interactions: failed` (not `not_tested`).
+Other screens still soft-incomplete when usability is skipped. Details in `usability.md`.
 
 **Playwright, axe-core and sharp live in shine's root `package.json`.** Run `npm install`
 at the repo root. `verify/deps.mjs` resolves shine-first and keeps a sibling checkout as

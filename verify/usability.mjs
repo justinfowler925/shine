@@ -12,6 +12,49 @@ const fail=(message)=>{throw new Error(`usability: ${message}`)};
 const requiredActions=new Set(["click","fill","press","select"]);
 const actions=new Set([...requiredActions,"visible","hidden","text","value","checked","count","enabled","disabled","focused"]);
 
+// Operate-lane SaaS page screens: prove must not greenlight missing or trivial
+// usability as `not_tested`. Policy is hard-fail (`interactions: failed`).
+export const OPERATE_USABILITY_SCREENS=new Set([
+  "dashboard","settings","form","queue","record","wizard",
+  "app-shell","lex-record","lex-queue","onboarding","checkout","command-palette",
+]);
+
+export function operateUsabilityScreen(citeId,root=ROOT){
+  if(!citeId)return null;
+  const template=loadTemplates(root).find(row=>row.id===citeId);
+  return template?.screen||null;
+}
+
+export function requiresOperateUsability(citeId,root=ROOT){
+  const screen=operateUsabilityScreen(citeId,root);
+  return Boolean(screen&&OPERATE_USABILITY_SCREENS.has(screen));
+}
+
+/** Prove-path status when usability throws. Operate screens fail closed. */
+export function interactionsCheckForError(citeId,usabilityPath,error,{root=ROOT}={}){
+  const reason=error?.message||String(error);
+  const required=requiresOperateUsability(citeId,root);
+  if(required){
+    const screen=operateUsabilityScreen(citeId,root);
+    const missing=!usabilityPath||!existsSync(usabilityPath);
+    return {
+      status:"failed",
+      reason:missing
+        ?`Operate SaaS screen "${screen}" requires shine-usability.json; missing or skipped contract cannot pass interactions`
+        :reason,
+      required:true,
+      screen,
+      policy:"failed",
+    };
+  }
+  return {
+    status:usabilityPath&&existsSync(usabilityPath)?"failed":"not_tested",
+    reason,
+    required:false,
+    screen:operateUsabilityScreen(citeId,root),
+  };
+}
+
 export function readUsabilityContract(path,{citeId=""}={}) {
   if(!path||!existsSync(path)) fail("missing --contract <shine-usability.json>");
   let value; try { value=JSON.parse(readFileSync(path,"utf8")); } catch { fail("contract is not valid JSON"); }

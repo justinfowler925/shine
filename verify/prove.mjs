@@ -10,7 +10,7 @@ import {fileURLToPath,pathToFileURL} from 'node:url';
 import {referenceHealth,hash} from '../corpus/reference-health.mjs';
 import {readDiagnosis} from '../core/diagnosis.mjs';
 import {proveLayout} from './layout.mjs';
-import {proveUsability} from './usability.mjs';
+import {interactionsCheckForError,proveUsability} from './usability.mjs';
 import {compareArtifact} from './compare.mjs';
 import {load} from './deps.mjs';
 import {bindBrowser,writeCompletionReceipt} from './completion-receipt.mjs';
@@ -56,7 +56,8 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
   checks.styling={status:measure?(measure.failures.length?'failed':'passed'):'not_tested',failures:measure?.failures||[evidence.measureError||'measurement missing']};
   const layout=await proveLayout({target,contractPath:layoutPath,storageState});checks.layout={status:layout.status,scenarios:layout.scenarios,failures:layout.failures};evidence.layout=layout;
   let usability;
-  try{usability=await proveUsability({target,contractPath:usabilityPath,citeId,storageState});checks.interactions={status:'passed',flows:usability.flows};}catch(error){usability={status:1,flows:[]};checks.interactions={status:usabilityPath&&existsSync(usabilityPath)?'failed':'not_tested',reason:error.message};}
+  try{usability=await proveUsability({target,contractPath:usabilityPath,citeId,storageState});checks.interactions={status:'passed',flows:usability.flows};}
+  catch(error){usability={status:1,flows:[]};checks.interactions=interactionsCheckForError(citeId,usabilityPath,error);}
   checks.referenceValidity=referenceHealth(ROOT,citeId);
   if(checks.referenceValidity.status==='passed'){
    try{const comparison=await compareArtifact({target,citeId,outPath:join(temp,'compare.png'),lane,brief,mode:diagnosisPath?'existing':'new',diagnosisPath,writeReceipt:false,storageState});checks.visualComparison={status:comparison.status===0?'passed':'failed',failures:comparison.failures,lane};}catch(error){checks.visualComparison={status:'failed',reason:error.message,lane};}

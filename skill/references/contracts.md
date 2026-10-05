@@ -374,3 +374,6 @@ fails the unmarked data table.
 | Composable React stack | shadcn + Radix + TanStack Table/Form |
 | Visual variants | Untitled UI / Plus UI |
 | Chat embeds | OpenAI Apps SDK UI |
+| Operate SaaS job proof | `usability.md` + `shine-usability.json` — prove fails closed for dashboard/settings/form/queue/record/… |
+
+Record tables already fail closed without `shine-tables.json`. Operate page screens (dashboard, settings, form, queue, record, and siblings listed in `usability.md`) likewise cannot complete prove with missing or shallow `shine-usability.json`: interactions status is **`failed`**, not a soft `not_tested`.
