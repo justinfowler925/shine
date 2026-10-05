@@ -14,6 +14,11 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Primary-job CTA pressure (P1).** Operate page cites hard-fail in `measure` when more
+  than one distinct filled treatment appears in `main` (`verify/cta-pressure.mjs`).
+  `competingCtaCheck.ok: false` must bind a `flow:` on a critical/major defect or prove
+  reports `competingCtaProof: failed`. Doctor runs `verify/cta-pressure.test.mjs`.
+
 - **Copy / adoption proof for `lane=saas`.** Diagnosis requires
   `copyHeadlineCheck` / `copyBeliefCheck` / `copyInstructionalCheck` (Operate +
   marketing/catalog) and `adoptionRitualCheck` / `adoptionPrivateWinCheck` /

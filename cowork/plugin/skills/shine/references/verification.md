@@ -65,6 +65,15 @@ chart/table/queue hard-fail. Elements that opt into `data-shine-kpi` must carry
 `data-unit` and `data-baseline`. Without the attribute, unit/baseline stays an agent
 checklist in `dashboards.md`. Dashboard recipes require the attribute.
 
+
+**Primary-job CTA pressure (P1):** for Operate page cites (`settings` / `dashboard` /
+`form` / `queue` / `record` / …), more than one distinct filled treatment in `main`
+hard-fails in `measure` (`verify/cta-pressure.mjs`). Global hierarchy still fails above
+two filled treatments on any surface; Operate tightens to one. Diagnosis
+`competingCtaCheck.ok: false` must bind a critical/major defect to a `flow:` assertion
+or prove reports `competingCtaProof: failed`. Doctor bite:
+`node verify/cta-pressure.test.mjs`.
+
 **Copy / adoption proof:** for `lane=saas`, diagnosis requires copy check fields
 (Operate + marketing/catalog) and adoption check fields (Operate). `prove` reports
 `copyAdoption` for presence and binds critical/major `adoption` defects to assertion

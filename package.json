@@ -1,9 +1,9 @@
 {
   "name": "@shine/root",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "private": "true",
   "type": "module",
-  "description": "shine — design authority. Root deps are the ones the verification loop needs; the token pipeline has its own package.json under tokens/.",
+  "description": "shine \u2014 design authority. Root deps are the ones the verification loop needs; the token pipeline has its own package.json under tokens/.",
   "scripts": {
     "build": "npm run build --prefix tokens",
     "verify": "npm run verify --prefix tokens",

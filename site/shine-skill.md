@@ -2235,6 +2235,11 @@ need these fields.
 | `emptyErrorTriadCheck` | Do loading / empty / error (and filtered-empty when filters exist) read as distinct states on **non-table** surfaces too? | Triad is covered or honestly N/A with why |
 | `competingCtaCheck` | Is there one filled primary, or do peer CTAs compete for the same job? | Weight budget matches the job; competitors named or cleared |
 
+**Machine pressure (P1):** for Operate page cites, `measure` hard-fails when **more than one**
+distinct filled treatment appears in `main` (`verify/cta-pressure.mjs`). Sidebar/nav filled
+controls do not count. If you set `competingCtaCheck.ok: false`, bind a critical/major defect
+to a `flow:` that demotes or removes the peer — prove fails closed without that binding.
+
 ### SaaS copy checks (lane=saas Operate + marketing/catalog)
 
 For `lane=saas` and categories `datagrid|dashboard|form|record|lex|marketing|catalog`, fill
@@ -4943,6 +4948,15 @@ Prove bite: `node verify/operate-prove-mandatory.test.mjs` and `node verify/doct
 chart/table/queue hard-fail. Elements that opt into `data-shine-kpi` must carry
 `data-unit` and `data-baseline`. Without the attribute, unit/baseline stays an agent
 checklist in `dashboards.md`. Dashboard recipes require the attribute.
+
+
+**Primary-job CTA pressure (P1):** for Operate page cites (`settings` / `dashboard` /
+`form` / `queue` / `record` / …), more than one distinct filled treatment in `main`
+hard-fails in `measure` (`verify/cta-pressure.mjs`). Global hierarchy still fails above
+two filled treatments on any surface; Operate tightens to one. Diagnosis
+`competingCtaCheck.ok: false` must bind a critical/major defect to a `flow:` assertion
+or prove reports `competingCtaProof: failed`. Doctor bite:
+`node verify/cta-pressure.test.mjs`.
 
 **Copy / adoption proof:** for `lane=saas`, diagnosis requires copy check fields
 (Operate + marketing/catalog) and adoption check fields (Operate). `prove` reports

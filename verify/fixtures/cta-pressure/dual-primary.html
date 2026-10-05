@@ -1,0 +1,51 @@
+<!-- P1 adversarial: two filled primaries in main — must fail under Operate settings cite. -->
+<!doctype html>
+<html lang="en" data-cite="shadcn-settings">
+<head>
+  <meta charset="utf-8" />
+  <title>Workspace settings — dual primary</title>
+  <style>
+    :root { color-scheme: light; }
+    body { margin: 0; font: 15px/1.5 system-ui, sans-serif; background: #fafaf9; color: #1c1917; }
+    .shell { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+    aside { background: #fff; border-right: 1px solid #e7e5e4; padding: 24px 16px; }
+    aside a { display: block; padding: 8px 10px; color: #1c1917; text-decoration: none; }
+    main { padding: 40px 48px; max-width: 640px; }
+    h1 { font-size: 22px; margin: 0 0 8px; }
+    .lede { color: #78716c; margin: 0 0 24px; }
+    label { display: grid; gap: 6px; margin: 0 0 16px; font-weight: 600; font-size: 13px; }
+    input { font: inherit; padding: 10px 12px; border: 1px solid #d6d3d1; border-radius: 8px; }
+    .actions { display: flex; gap: 12px; margin-top: 8px; }
+    /* Two distinct filled treatments — competing primaries */
+    button#save { background: #1c1917; color: #fafaf9; border: 0; padding: 10px 16px; font: inherit; font-weight: 600; border-radius: 8px; }
+    button#export { background: #57534e; color: #fafaf9; border: 0; padding: 10px 16px; font: inherit; font-weight: 600; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <nav aria-label="Settings">
+        <a href="#profile" aria-current="page">Profile</a>
+        <a href="#profile">Security</a>
+      </nav>
+    </aside>
+    <main id="profile">
+      <h1>Profile</h1>
+      <p class="lede">Two filled actions compete for the same job weight.</p>
+      <label>Display name
+        <input id="name" value="Ada Lovelace" autocomplete="nickname" />
+      </label>
+      <div class="actions">
+        <button id="save" type="button">Save changes</button>
+        <button id="export" type="button">Export workspace</button>
+      </div>
+      <p id="status" role="status">Unsaved</p>
+    </main>
+  </div>
+  <script>
+    document.getElementById("save").onclick = () => {
+      document.getElementById("status").textContent = "Saved";
+    };
+  </script>
+</body>
+</html>
