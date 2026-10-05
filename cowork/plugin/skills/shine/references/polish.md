@@ -7,8 +7,18 @@ restyle the product, or open a greenfield Wireframe.
 
 **Not Polish:** discovery (`wireframe.md`), full Build from a locked brief, Audit-only
 reporting (`audit.md`), persuasion copy (`copy.md`), or “will they open it?”
-(`adoption.md`). Those are sibling procedure phases — see the mode map in
-`SKILL.md` / README § Modes.
+(`adoption.md`). Sibling procedure phases map to packet `--mode` as:
+
+| Procedure phase | Packet `--mode` | Open |
+|---|---|---|
+| Wireframe | `new` | `wireframe.md` |
+| Build | `new` or `existing` | `SKILL.md` § Build |
+| Polish | `existing` | this file |
+| Audit | `audit` | `audit.md`, `diagnose.md` |
+| Copy | `audit` or `existing` | `copy.md` |
+| Adoption | `audit` or `existing` | `adoption.md` |
+
+Also see README § Modes.
 
 **Gate:** agent judgment. Measure still hard-fails craft floors (axe, contrast,
 voids, hierarchy, theme). Optical alignment and micro-motion taste stay agent —

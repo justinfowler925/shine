@@ -14,24 +14,11 @@ SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
 node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit> --project "$PWD"
 ```
-Packet `--mode` is only `existing` \| `new` \| `audit`. Skill procedure phases
-(Wireframe / Build / Polish / Audit / Copy / Adoption) route which references you
-read; they are not extra packet modes and do not add prove categories.
-
-| Procedure phase | Packet `--mode` | Open |
-|---|---|---|
-| Wireframe | `new` | `references/wireframe.md` |
-| Build | `new` or `existing` | this file § Build |
-| Polish | `existing` | `references/polish.md` |
-| Audit | `audit` | `references/audit.md`, `references/diagnose.md` |
-| Copy | `audit` or `existing` | `references/copy.md` |
-| Adoption | `audit` or `existing` | `references/adoption.md` |
-
+Packet `--mode` is only `existing` \| `new` \| `audit`. Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`; not packet modes; no extra prove categories.
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
 dashboard. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
 source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
-For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories.
-For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
+For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories. For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
 constraint. The signature must express this product's job, never generic design decoration.
 For an existing product, render its real components and read `references/diagnose.md`. Complete the packet's `shine-diagnosis.json` before editing: primary task, before artifact + screenshot, and only the defects you can evidence (1–8) across usability, completeness, composition, craft, or adoption. One real defect is a complete diagnosis; if nothing survives the screenshot and measure, record `verdict: no-change` with `verdictEvidence` and all five buckets in `checked`, then stop. Inventing defects or inflating severity to fill a count is a reviewer defect. Preserve the product architecture.
@@ -3631,8 +3618,18 @@ restyle the product, or open a greenfield Wireframe.
 
 **Not Polish:** discovery (`wireframe.md`), full Build from a locked brief, Audit-only
 reporting (`audit.md`), persuasion copy (`copy.md`), or “will they open it?”
-(`adoption.md`). Those are sibling procedure phases — see the mode map in
-`SKILL.md` / README § Modes.
+(`adoption.md`). Sibling procedure phases map to packet `--mode` as:
+
+| Procedure phase | Packet `--mode` | Open |
+|---|---|---|
+| Wireframe | `new` | `wireframe.md` |
+| Build | `new` or `existing` | `SKILL.md` § Build |
+| Polish | `existing` | this file |
+| Audit | `audit` | `audit.md`, `diagnose.md` |
+| Copy | `audit` or `existing` | `copy.md` |
+| Adoption | `audit` or `existing` | `adoption.md` |
+
+Also see README § Modes.
 
 **Gate:** agent judgment. Measure still hard-fails craft floors (axe, contrast,
 voids, hierarchy, theme). Optical alignment and micro-motion taste stay agent —
