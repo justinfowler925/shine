@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "cite": "shadcn-settings",
+  "objects": [
+    {
+      "id": "nav",
+      "selector": "nav[aria-label=\"Settings sections\"]",
+      "referenceRole": "navigation",
+      "purpose": "Jump between settings sections"
+    },
+    {
+      "id": "name",
+      "selector": "#name",
+      "referenceRole": "form",
+      "purpose": "Edit the display name"
+    }
+  ],
+  "flows": [
+    {
+      "id": "glance",
+      "userJob": "Look at the polished settings shell",
+      "steps": [
+        { "action": "visible", "selector": "nav[aria-label=\"Settings sections\"]" },
+        { "action": "visible", "selector": "#name" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "cite": "shadcn-settings",
+  "objects": [
+    {
+      "id": "nav",
+      "selector": "nav[aria-label=\"Settings sections\"]",
+      "referenceRole": "navigation",
+      "purpose": "Jump between settings sections"
+    },
+    {
+      "id": "name",
+      "selector": "#name",
+      "referenceRole": "form",
+      "purpose": "Edit the display name teammates see"
+    },
+    {
+      "id": "save",
+      "selector": "#save",
+      "referenceRole": "command",
+      "purpose": "Commit profile changes"
+    },
+    {
+      "id": "status",
+      "selector": "#status",
+      "referenceRole": "state",
+      "purpose": "Observe whether the profile save stuck"
+    }
+  ],
+  "flows": [
+    {
+      "id": "save-profile",
+      "userJob": "Change the display name and confirm it saved",
+      "steps": [
+        { "action": "fill", "selector": "#name", "value": "Ada" },
+        { "action": "click", "selector": "#save" },
+        { "action": "text", "selector": "#status", "value": "Saved Ada" }
+      ]
+    }
+  ]
+}

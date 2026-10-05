@@ -35,5 +35,20 @@ try {
  assert.equal(requiresOperateUsability("shadcn-settings",repo),true);
  assert.equal(requiresOperateUsability("shadcn-blog",repo),false);
  assert.equal(interactionsCheckForError("untitled-table",undefined,new Error("missing"),{root:repo}).status,"failed");
- console.log("usability PASS: reference objects + executable user task reject static walls");
+
+ // M1b doctor fixtures: pretty Operate settings + stub must refuse; complete must run.
+ const fixtureRoot=join(repo,"verify/fixtures/operate-usability");
+ const settingsPage=join(fixtureRoot,"settings.html");
+ const stubPath=join(fixtureRoot,"stub-usability.json");
+ const completePath=join(fixtureRoot,"complete-usability.json");
+ assert.throws(()=>readUsabilityContract(stubPath,{citeId:"shadcn-settings"}),/three steps|user action|observable outcome/);
+ assert.equal(
+  interactionsCheckForError("shadcn-settings",stubPath,new Error("usability: every flow needs id, userJob, and at least three steps"),{root:repo}).status,
+  "failed",
+ );
+ const fixtureProve=await proveUsability({target:settingsPage,contractPath:completePath,citeId:"shadcn-settings"});
+ assert.equal(fixtureProve.status,0);
+ assert.equal(fixtureProve.flows[0].id,"save-profile");
+
+ console.log("usability PASS: reference objects + executable user task reject static walls; operate-usability fixtures bite");
 } finally {rmSync(dir,{recursive:true,force:true});}

@@ -158,7 +158,7 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
 }
 
 {
-  for(const script of ["verify/blocks.test.mjs","verify/coverage.test.mjs","verify/system-tools.test.mjs","verify/surface-audit-browser.mjs","verify/system-browser.mjs","verify/blocks-browser.mjs","verify/library-browser.mjs","verify/usability.test.mjs"]){
+  for(const script of ["verify/blocks.test.mjs","verify/coverage.test.mjs","verify/system-tools.test.mjs","verify/surface-audit-browser.mjs","verify/system-browser.mjs","verify/blocks-browser.mjs","verify/library-browser.mjs","verify/usability.test.mjs","verify/prove-interactions.test.mjs"]){
     const result=spawnSync(process.execPath,[join(SHINE,script)],{cwd:SHINE,encoding:"utf8",timeout:120000});
     if(result.status===0)ok(script,result.stdout.trim().slice(-250));else fail(script,`${result.stderr||result.stdout}`.trim().slice(-1200));
   }
@@ -167,6 +167,90 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   const table=spawnSync(process.execPath,[join(SHINE,"verify/table-quality.test.mjs")],{cwd:SHINE,encoding:"utf8"});
   if(table.status===0)ok("table quality rejects incomplete custom patterns",table.stdout.trim().slice(-300));
   else fail("table quality rejects incomplete custom patterns",`${table.stderr||table.stdout}`.trim().slice(-800));
+
+  // M1b: pretty Operate settings + stub usability must fail; complete minimal contract ok.
+  // Reuses M1a failed policy — doctor proves the gate bites on committed fixtures.
+  {
+    const settingsPage = join(SHINE, "verify/fixtures/operate-usability/settings.html");
+    const stubContract = join(SHINE, "verify/fixtures/operate-usability/stub-usability.json");
+    const completeContract = join(SHINE, "verify/fixtures/operate-usability/complete-usability.json");
+    const usabilityCli = join(SHINE, "verify/usability.mjs");
+    const proveCli = join(SHINE, "verify/prove.mjs");
+    if (![settingsPage, stubContract, completeContract].every((p) => existsSync(p))) {
+      fail("operate usability fixtures", "verify/fixtures/operate-usability/{settings.html,stub-usability.json,complete-usability.json} required");
+    } else {
+      const stub = spawnSync(
+        process.execPath,
+        [usabilityCli, settingsPage, "--contract", stubContract, "--cite", "shadcn-settings"],
+        { cwd: SHINE, encoding: "utf8", timeout: 60_000 },
+      );
+      const stubOut = `${stub.stderr || ""}${stub.stdout || ""}`;
+      if (stub.status !== 0 && /three steps|user action|observable outcome/i.test(stubOut))
+        ok("usability gate fails a pretty settings stub", "shallow shine-usability.json rejected");
+      else
+        fail(
+          "usability gate fails a pretty settings stub",
+          `exit ${stub.status}; ${stubOut.trim().slice(-300)}`,
+        );
+
+      const complete = spawnSync(
+        process.execPath,
+        [usabilityCli, settingsPage, "--contract", completeContract, "--cite", "shadcn-settings"],
+        { cwd: SHINE, encoding: "utf8", timeout: 60_000, env: { ...process.env, NODE_PATH } },
+      );
+      if (complete.status === 0) ok("usability gate passes a complete settings contract", "minimal Operate flow executes");
+      else
+        fail(
+          "usability gate passes a complete settings contract",
+          `exit ${complete.status}; ${(complete.stderr || complete.stdout || "").trim().slice(-400)}`,
+        );
+
+      const stubProveJson = join(tmpdir(), `shine-doctor-stub-prove-${process.pid}.json`);
+      const stubProve = spawnSync(
+        process.execPath,
+        [proveCli, settingsPage, "--cite", "shadcn-settings", "--usability", stubContract, "--json", stubProveJson],
+        { cwd: SHINE, encoding: "utf8", timeout: 120_000, env: { ...process.env, NODE_PATH } },
+      );
+      let stubInteractions = "";
+      try {
+        stubInteractions = existsSync(stubProveJson)
+          ? JSON.parse(readFileSync(stubProveJson, "utf8")).checks?.interactions?.status
+          : "";
+      } catch {
+        stubInteractions = "";
+      }
+      if (stubProve.status !== 0 && stubInteractions === "failed")
+        ok("prove interactions fail a pretty settings stub", "Operate policy=failed on shallow contract");
+      else
+        fail(
+          "prove interactions fail a pretty settings stub",
+          `exit ${stubProve.status}; interactions=${stubInteractions || "missing"}; ${(stubProve.stderr || stubProve.stdout || "").trim().slice(-300)}`,
+        );
+
+      const completeProveJson = join(tmpdir(), `shine-doctor-complete-prove-${process.pid}.json`);
+      const completeProve = spawnSync(
+        process.execPath,
+        [proveCli, settingsPage, "--cite", "shadcn-settings", "--usability", completeContract, "--json", completeProveJson],
+        { cwd: SHINE, encoding: "utf8", timeout: 180_000, env: { ...process.env, NODE_PATH } },
+      );
+      let completeInteractions = "";
+      try {
+        completeInteractions = existsSync(completeProveJson)
+          ? JSON.parse(readFileSync(completeProveJson, "utf8")).checks?.interactions?.status
+          : "";
+      } catch {
+        completeInteractions = "";
+      }
+      // Overall prove may still fail styling/compare; doctor only claims interactions ok.
+      if (completeInteractions === "passed")
+        ok("prove interactions pass a complete settings contract", "non-trivial Operate usability still green");
+      else
+        fail(
+          "prove interactions pass a complete settings contract",
+          `exit ${completeProve.status}; interactions=${completeInteractions || "missing"}; ${(completeProve.stderr || completeProve.stdout || "").trim().slice(-300)}`,
+        );
+    }
+  }
   const distribution=spawnSync("python3",[join(SHINE,"verify/distribution_test.py")],{cwd:SHINE,encoding:"utf8",timeout:120000});
   if(distribution.status===0)ok("complete skill distribution", "deterministic exports, stale and missing targets refused");
   else fail("complete skill distribution",`${distribution.stderr||distribution.stdout}`.trim().slice(-1200));
