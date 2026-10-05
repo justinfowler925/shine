@@ -128,3 +128,8 @@ zero violations on everything else:
 ## When brand mode applies
 
 Brand-specific visual bans (a logo gradient applied to chrome, the accent used as a body fill, emoji, retired product names) live in that brand`s own kit and copy checker — still flag them in audits on brand-locked surfaces.
+
+## Machine detectors (P3)
+
+`verify/composition-slop.mjs` hard-fails a DOM-safe subset: equal Card soup without a focal, marketing DNA utility clusters on saas Operate, and known filler empty-state phrases. Hover-only / toast-only remain agent.
+

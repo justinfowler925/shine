@@ -14,6 +14,11 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Composition slop detectors (P3).** Measure hard-fails Operate saas cites for
+  equal-weight Card soup without a focal, marketing DNA glow/gradient/display clusters,
+  and known filler empty-state phrases (`verify/composition-slop.mjs`). Doctor runs
+  `verify/composition-slop.test.mjs`.
+
 - **Nucleus golden fixture + Clearspeed attach profile (P4a).** Fixture
   `verify/fixtures/nucleus-golden/{before,after}.html` seeds Company Tools–shaped
   bloat and an expert pass; `skill/references/clearspeed/profile-instructions.md`

@@ -50,6 +50,11 @@ import {
   evaluateMainCtaPressure,
   formatCtaPressureFailures,
 } from "./cta-pressure.mjs";
+import {
+  compositionSlopGateApplies,
+  evaluateCompositionSlop,
+  formatCompositionSlopFailures,
+} from "./composition-slop.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
@@ -372,6 +377,7 @@ const dataGrids = await page.evaluate(evaluateDataGrids);
 const incompletePrimitives = await page.evaluate(evaluateIncompletePrimitives);
 const kpiFloor = await page.evaluate(evaluateKpiFloor);
 const ctaPressure = await page.evaluate(evaluateMainCtaPressure);
+const compositionSlop = await page.evaluate(evaluateCompositionSlop);
 const copyHeuristics = await page.evaluate(evaluateCopyHeuristics);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
 const compose = await page.evaluate(() => {
@@ -838,6 +844,28 @@ if (compose.filledCount > 2) {
     citeId: ctaCiteId,
   });
   for (const f of formatCtaPressureFailures(ctaPressure, { gate: ctaApplies })) {
+    failures.push(f);
+  }
+}
+{
+  const slopCiteId = citeWant || compose.citeId || "";
+  const slopCiteRow = (() => {
+    if (!slopCiteId) return null;
+    try {
+      const cat = loadCatalog(SHINE);
+      return (cat.templates ?? []).find((t) => t.id === slopCiteId) || null;
+    } catch {
+      return null;
+    }
+  })();
+  const slopApplies = compositionSlopGateApplies({
+    lane: laneWant,
+    citeScreen: slopCiteRow?.screen || "",
+    citeJobs: slopCiteRow?.jobs || [],
+    isWireframe,
+    citeId: slopCiteId,
+  });
+  for (const f of formatCompositionSlopFailures(compositionSlop, { gate: slopApplies })) {
     failures.push(f);
   }
 }
