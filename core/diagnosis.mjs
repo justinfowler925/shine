@@ -15,7 +15,30 @@ const severities=new Set(["critical","major","minor"]);
 export const verdicts=new Set(["defects","no-change"]);
 const text=(value)=>String(value||"").trim();
 
-export function validateDiagnosis(value,{requireFiles=true}={}){
+// Operate-lane SaaS page categories: product-UX check fields are required when
+// lane=saas. Marketing / media / voice / editorial stay optional (backward-compat).
+// Machine gate = field *presence* only; honesty of the note stays agent judgment.
+// No screenshot OCR or evidence-vs-shot verification in v1.
+export const saasPageCategories=new Set(["datagrid","dashboard","form","record","lex"]);
+export const saasProductUxCheckKeys=["primaryTaskCheck","emptyErrorTriadCheck","competingCtaCheck"];
+
+export function requiresSaasProductUxChecks(value,{lane}={}){
+ const resolved=text(lane||value?.lane);
+ if(resolved!=="saas")return false;
+ return saasPageCategories.has(text(value?.category));
+}
+
+function validateSaasProductUxCheck(value,key,errors){
+ const check=value?.[key];
+ if(!check||typeof check!=="object"||Array.isArray(check)){
+  errors.push(`${key} is required for saas page diagnoses (object with note)`);
+  return;
+ }
+ if(text(check.note).length<8)errors.push(`${key}.note is missing (at least 8 characters)`);
+ if(check.ok!==undefined&&typeof check.ok!=="boolean")errors.push(`${key}.ok must be a boolean when present`);
+}
+
+export function validateDiagnosis(value,{requireFiles=true,lane}={}){
  const errors=[];
  if(value?.version!==1)errors.push("version must be 1");
  if(text(value?.job).length<8)errors.push("job is missing");
@@ -27,6 +50,9 @@ export function validateDiagnosis(value,{requireFiles=true}={}){
  if(requireFiles&&text(value?.before?.screenshot)&&!existsSync(resolve(value.before.screenshot)))errors.push("before.screenshot does not exist");
  const verdict=value?.verdict===undefined?"defects":value.verdict;
  if(!verdicts.has(verdict))errors.push("verdict must be defects or no-change");
+ if(requiresSaasProductUxChecks(value,{lane})){
+  for(const key of saasProductUxCheckKeys)validateSaasProductUxCheck(value,key,errors);
+ }
  const defects=Array.isArray(value?.defects)?value.defects:[];
  if(verdict==="no-change"){
   if(defects.length)errors.push("a no-change verdict cannot carry defects: name them under verdict defects, or drop them");
@@ -51,15 +77,22 @@ export function readDiagnosis(path,options={}){
  return {value,path:absolute,hash:createHash("sha256").update(readFileSync(absolute)).digest("hex"),verdict:value.verdict||"defects"};
 }
 
-export function seedDiagnosis({job,category}){
- return {version:1,job,category,primaryTask:"",before:{artifact:"",screenshot:""},
+export function emptySaasProductUxChecks(){
+ return Object.fromEntries(saasProductUxCheckKeys.map((key)=>[key,{ok:false,note:""}]));
+}
+
+export function seedDiagnosis({job,category,lane=""}){
+ const base={version:1,job,category,primaryTask:"",before:{artifact:"",screenshot:""},
   verdict:"defects",
-  guidance:"Keep only defects you can evidence from the before screenshot or measure output. One real defect is a valid pass. If nothing is wrong, set verdict to no-change, list all five buckets in checked, and write verdictEvidence; do not invent defects or inflate severity to satisfy a count.",
+  guidance:"Keep only defects you can evidence from the before screenshot or measure output. One real defect is a valid pass. If nothing is wrong, set verdict to no-change, list all five buckets in checked, and write verdictEvidence; do not invent defects or inflate severity to satisfy a count. For lane=saas Operate page categories, fill primaryTaskCheck, emptyErrorTriadCheck, and competingCtaCheck (presence is machine-gated; honesty of the note is yours).",
   checked:[],
   verdictEvidence:"",
   defects:[
    {id:"primary-workflow",assertions:[],bucket:"usability",severity:"major",problem:"",evidence:"",expectedEffect:""}
   ]};
+ if(text(lane))base.lane=text(lane);
+ if(requiresSaasProductUxChecks(base))Object.assign(base,emptySaasProductUxChecks());
+ return base;
 }
 
 if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
@@ -67,11 +100,11 @@ if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.ur
  try{
   if(command==="init"){
    const out=resolve(opt("--out")||"shine-diagnosis.json");
-   writeFileSync(out,JSON.stringify(seedDiagnosis({job:opt("--job"),category:opt("--category")}),null,2)+"\n");
+   writeFileSync(out,JSON.stringify(seedDiagnosis({job:opt("--job"),category:opt("--category"),lane:opt("--lane")}),null,2)+"\n");
    console.log(out);
   }else if(command==="check"){
-   const result=readDiagnosis(opt("--file")||args[1]);
+   const result=readDiagnosis(opt("--file")||args[1],{lane:opt("--lane")||undefined});
    console.log(`diagnosis PASS ${result.hash} verdict=${result.verdict} defects=${result.value.defects?.length||0}`);
-  }else throw new Error("usage: diagnosis.mjs init --job <job> --category <category> --out <file> | check --file <file>");
+  }else throw new Error("usage: diagnosis.mjs init --job <job> --category <category> [--lane saas] --out <file> | check --file <file> [--lane saas]");
  }catch(error){console.error(`diagnosis: ${error.message}`);process.exit(1)}
 }
