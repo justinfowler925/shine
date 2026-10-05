@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "cite": "windmill-dashboard",
+  "objects": [
+    {
+      "id": "nav",
+      "selector": "nav[aria-label=\"Primary\"]",
+      "referenceRole": "navigation",
+      "purpose": "Move between Operate surfaces in the shell"
+    },
+    {
+      "id": "summary",
+      "selector": "[data-summary]",
+      "referenceRole": "summary",
+      "purpose": "Read ARR at risk, unowned count, and days to commit"
+    },
+    {
+      "id": "chart",
+      "selector": "[data-region=\"focal\"]",
+      "referenceRole": "chart",
+      "purpose": "See ARR at risk by stage before opening a row"
+    },
+    {
+      "id": "table",
+      "selector": "#exceptions-table",
+      "referenceRole": "table",
+      "purpose": "Scan which accounts carry ARR risk"
+    },
+    {
+      "id": "filter",
+      "selector": "#filter",
+      "referenceRole": "search",
+      "purpose": "Narrow the exception queue by account or owner"
+    },
+    {
+      "id": "open",
+      "selector": "#open",
+      "referenceRole": "command",
+      "purpose": "Open the next visible revenue exception"
+    },
+    {
+      "id": "status",
+      "selector": "#status",
+      "referenceRole": "state",
+      "purpose": "Observe whether filter or open stuck"
+    }
+  ],
+  "flows": [
+    {
+      "id": "open-next-exception",
+      "userJob": "Filter to an unowned account and open the next exception",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "#filter",
+          "value": "Acme"
+        },
+        {
+          "action": "text",
+          "selector": "#status",
+          "value": "Filtered 1"
+        },
+        {
+          "action": "click",
+          "selector": "#open"
+        },
+        {
+          "action": "text",
+          "selector": "#status",
+          "value": "Opened Acme Robotics"
+        }
+      ]
+    }
+  ]
+}

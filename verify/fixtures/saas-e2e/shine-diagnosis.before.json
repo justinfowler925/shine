@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "job": "Fix incomplete toolbar control on revenue exceptions Operate dashboard",
+  "category": "dashboard",
+  "primaryTask": "Decide which at-risk renewal to open next and assign an owner",
+  "before": {
+    "artifact": "verify/fixtures/saas-e2e/before.html",
+    "screenshot": "verify/fixtures/saas-e2e/before.png"
+  },
+  "verdict": "defects",
+  "guidance": "Keep only defects you can evidence from the before screenshot or measure output. One real defect is a valid pass. If nothing is wrong, set verdict to no-change, list all five buckets in checked, and write verdictEvidence; do not invent defects or inflate severity to satisfy a count. For lane=saas Operate page categories, fill primaryTaskCheck, emptyErrorTriadCheck, and competingCtaCheck (presence is machine-gated; honesty of the note is yours).",
+  "checked": [],
+  "verdictEvidence": "",
+  "defects": [
+    {
+      "id": "overflow-unnamed",
+      "assertions": [
+        "flow:open-next-exception"
+      ],
+      "bucket": "usability",
+      "severity": "major",
+      "problem": "Toolbar overflow is an icon-only button with no accessible name, so keyboard and AT users cannot operate secondary actions.",
+      "evidence": "measure FAIL incomplete-primitive icon-only-unnamed on button#more; axe button-name critical.",
+      "expectedEffect": "Overflow control exposes an accessible name and measure incomplete-primitives passes."
+    }
+  ],
+  "lane": "saas",
+  "primaryTaskCheck": {
+    "ok": true,
+    "note": "Open next exception is above the fold and startable in under 3s from the toolbar primary"
+  },
+  "emptyErrorTriadCheck": {
+    "ok": true,
+    "note": "Filter empty shows Filtered 0 status; no loading spinner needed for static fixture; error not applicable"
+  },
+  "competingCtaCheck": {
+    "ok": true,
+    "note": "Single filled Open next exception primary; overflow and filter are outline weight only"
+  },
+  "copyHeadlineCheck": {
+    "ok": true,
+    "note": "H1 Revenue exceptions names the desk job; browser title matches Operate surface"
+  },
+  "copyBeliefCheck": {
+    "ok": true,
+    "note": "KPI stamps state Open exceptions / At risk ARR / Avg age with units \u2014 belief is measurable not slogan"
+  },
+  "copyInstructionalCheck": {
+    "ok": true,
+    "note": "Primary Open next exception and filter Unowned instruct the next action without filler microcopy"
+  },
+  "adoptionRitualCheck": {
+    "ok": true,
+    "note": "Filter\u2192open next exception is a repeatable AM ritual on the same desk each morning"
+  },
+  "adoptionPrivateWinCheck": {
+    "ok": true,
+    "note": "Clearing an unowned exception into Assign owner is a private win before standup"
+  },
+  "adoptionAbsenceCheck": {
+    "ok": true,
+    "note": "No toast parade or empty-state cheerleading; absence of noise keeps the queue honest"
+  }
+}
