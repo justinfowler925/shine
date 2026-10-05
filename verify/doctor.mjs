@@ -264,7 +264,7 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   if(packet.status===0)ok("bounded design packet", "9 natural briefs, ambiguity refusal, page/component split, usable source");
   else fail("bounded design packet",`${packet.stderr||packet.stdout}`.trim().slice(-500));
   const diagnosis=spawnSync(process.execPath,[join(SHINE,"verify/diagnosis.test.mjs")],{cwd:SHINE,encoding:"utf8"});
-  for(const [name,file,summary] of [["owned catalog lane","verify/catalog.test.mjs","private rows merge and retrieve; public catalog unchanged; never archived"],["design-lint scope","verify/design-lint-scope.test.mjs","touched lines block; legacy lines note; session baseline; Cursor contract"],["measure skips collapsed disclosures","verify/measure-closed-details.test.mjs","closed <details> content is not sampled for contrast"]]){
+  for(const [name,file,summary] of [["owned catalog lane","verify/catalog.test.mjs","private rows merge and retrieve; public catalog unchanged; never archived"],["design-lint scope","verify/design-lint-scope.test.mjs","touched lines block; legacy lines note; session baseline; Cursor contract"],["measure skips collapsed disclosures","verify/measure-closed-details.test.mjs","closed <details> content is not sampled for contrast"],["density fail-closed for saas shells","verify/density.test.mjs","saas/internal lane or shell cite hard-fails without probe; marketing/wireframe/non-shell unchanged"]]){
     const r=spawnSync(process.execPath,[join(SHINE,file)],{cwd:SHINE,encoding:"utf8"});
     if(r.status===0)ok(name,summary);else fail(name,`${r.stderr||r.stdout}`.trim().slice(-500));
   }
@@ -1044,6 +1044,20 @@ if (FULL) {
   const densGood = run(densityGood);
   if (!/density:/.test(densGood.stderr)) ok("compose gate passes a dense app shell");
   else fail("compose gate passes a dense app shell", densGood.stderr.match(/density:.*/)?.[0] ?? "");
+
+  // M2: chrome-heavy shell WITHOUT data-shine-probe still fails under --lane saas.
+  const densityNoProbe = join(SHINE, "verify/fixtures/density-shell-no-probe.html");
+  const densNoProbe = spawnSync(process.execPath, [measure, densityNoProbe, "--lane", "saas"], {
+    encoding: "utf8",
+    env: { ...process.env, NODE_PATH },
+  });
+  if (densNoProbe.status === 1 && /density: app-shell content share/.test(`${densNoProbe.stderr}${densNoProbe.stdout}`))
+    ok("compose gate catches chrome-heavy shell without probe (saas lane)");
+  else
+    fail(
+      "compose gate catches chrome-heavy shell without probe (saas lane)",
+      `exit ${densNoProbe.status}; stderr ${JSON.stringify((densNoProbe.stderr || densNoProbe.stdout).slice(-220))}`,
+    );
 
   const prettyTable = join(SHINE, "verify/fixtures/pretty-empty-table.html");
   const fullTable = join(SHINE, "verify/fixtures/full-table.html");

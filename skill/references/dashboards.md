@@ -106,6 +106,12 @@ Cut **padding** between modes; never cut line-height below 1.33 (SKILL.md rule 5
 common mistake is squeezing leading, which destroys scannability while saving almost
 nothing.
 
+**Machine vs agent:** Compact-vs-comfortable (this table) is **agent** judgment.
+Chrome-vs-content on Operate shells is **machine** — `measure.mjs` hard-fails when
+content share is under 28% of the viewport for `lane=saas|internal` or cites whose
+screen is `app-shell` / `dashboard` / `settings`, with or without
+`data-shine-probe="app-shell"`. See `verification.md` § composition hard-fails.
+
 ## Change over time
 
 - **Sparklines** for shape without precision — no axes, no gridlines, one series, ≥ 20

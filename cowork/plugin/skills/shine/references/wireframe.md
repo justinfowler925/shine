@@ -93,6 +93,7 @@ Or a path the user names. Keep HTML + brief adjacent.
 - Root: `data-shine-wireframe` on a wrapper (or `<body>`).
 - `color-scheme: light` on `:root` / `<html>` (declared single mode).
 - Do **not** set `data-shine-probe="app-shell"` (density gate is for Build app shells).
+  Wireframe pages also skip the saas/internal shell density floor until Build.
 - Regions: `.wf-region` with `data-label`, `data-job`, `data-cite`.
 - Exactly **one** control with `data-primary` (filled primary).
 - States as `.wf-state` text: `[empty]`, `[loading]`, `[error]`, `[filtered-empty]`.

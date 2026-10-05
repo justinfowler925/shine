@@ -26,4 +26,4 @@ Consecutive surfaces in one product **must not** share a macrostructure (Hallmar
 - Three identical `grid-cols-3` feature cards as the page
 - Hero as sidebar + KPI cards
 - Related lists as 14 API-name columns
-- Chrome > content on an app-shell (`data-shine-probe="app-shell"`)
+- Chrome > content on an app-shell / dashboard / settings (measure density floor; probe optional under saas|internal — see `verification.md`)

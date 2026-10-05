@@ -1854,6 +1854,12 @@ Cut **padding** between modes; never cut line-height below 1.33 (SKILL.md rule 5
 common mistake is squeezing leading, which destroys scannability while saving almost
 nothing.
 
+**Machine vs agent:** Compact-vs-comfortable (this table) is **agent** judgment.
+Chrome-vs-content on Operate shells is **machine** — `measure.mjs` hard-fails when
+content share is under 28% of the viewport for `lane=saas|internal` or cites whose
+screen is `app-shell` / `dashboard` / `settings`, with or without
+`data-shine-probe="app-shell"`. See `verification.md` § composition hard-fails.
+
 ## Change over time
 
 - **Sparklines** for shape without precision — no axes, no gridlines, one series, ≥ 20
@@ -2922,7 +2928,7 @@ Consecutive surfaces in one product **must not** share a macrostructure (Hallmar
 - Three identical `grid-cols-3` feature cards as the page
 - Hero as sidebar + KPI cards
 - Related lists as 14 API-name columns
-- Chrome > content on an app-shell (`data-shine-probe="app-shell"`)
+- Chrome > content on an app-shell / dashboard / settings (measure density floor; probe optional under saas|internal — see `verification.md`)
 
 
 ---
@@ -4656,15 +4662,19 @@ measure     getComputedStyle + getBoundingClientRect     ← the non-negotiable 
 a11y        axe-core injected offline from node_modules
 contrast    per-pixel worst-case + p5 for text over gradients
 lint        scale/cardinality on COMPUTED values
-compose     voids, type-step collisions, hierarchy (primary), density (app-shell probe), theme
+compose     voids, type-step collisions, hierarchy (primary), density (shell floor), theme
 critique    screenshot → multimodal, max 3 passes, LAST
 ```
 
-**Composition hard-fails (2026-08-10):** void regions; type steps below ~1.12 UI band
-used ≥5× each; undeclared non-switching theme; controls with zero filled primary;
-more than two competing filled treatments; `data-shine-probe="app-shell"` with content
-share &lt; 28% of viewport. Section-job gaps and density on non-probe pages print as notes.
-Prove bite with `node verify/doctor.mjs --full`.
+**Composition hard-fails (2026-08-10; density fail-closed 2026-10):** void regions; type
+steps below ~1.12 UI band used ≥5× each; undeclared non-switching theme; controls with
+zero filled primary; more than two competing filled treatments; **app-shell content share
+&lt; 28% of viewport** when any of: `data-shine-probe="app-shell"`, `--lane saas|internal`
+(unknown / shell cite), or cite screen/kind ∈ `{app-shell,dashboard,settings}`. Omitting
+the probe no longer dodges the floor on Operate shells. Marketing, wireframe, and known
+non-shell cites stay note-only. Compact-vs-comfortable product density stays agent
+(`dashboards.md`). Prove bite with `node verify/doctor.mjs --full` and
+`node verify/density.test.mjs`.
 
 **Completion lane:** `verify/prove.mjs` accepts `--lane` (same values as compare). Packet
 completion passes the job lane so saas/marketing originality (`data-shine-signature`)
@@ -5195,6 +5205,7 @@ Or a path the user names. Keep HTML + brief adjacent.
 - Root: `data-shine-wireframe` on a wrapper (or `<body>`).
 - `color-scheme: light` on `:root` / `<html>` (declared single mode).
 - Do **not** set `data-shine-probe="app-shell"` (density gate is for Build app shells).
+  Wireframe pages also skip the saas/internal shell density floor until Build.
 - Regions: `.wf-region` with `data-label`, `data-job`, `data-cite`.
 - Exactly **one** control with `data-primary` (filled primary).
 - States as `.wf-state` text: `[empty]`, `[loading]`, `[error]`, `[filtered-empty]`.
