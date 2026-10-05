@@ -128,10 +128,23 @@ if (show.length) {
 }
 if (alternates.length) {
   out.push(``);
-  out.push(`Also consider:`);
+  const operatePage = retrieval.brief.operatePage;
+  const pageAlts = [];
+  const regionAlts = [];
   for (const alt of alternates) {
     const candidate = retrieval.selected.find((item) => item.template.id === alt.id);
-    out.push(`  ${alt.id} — ${alt.title || alt.screen}; semantic distance ${candidate.distance}; matches ${(candidate.matches || []).join(", ") || "job"}`);
+    const line = `  ${alt.id} — ${alt.title || alt.screen}; semantic distance ${candidate.distance}; matches ${(candidate.matches || []).join(", ") || "job"}`;
+    const region = alt.screen === "charts" || (alt.scope || "page") === "component";
+    if (operatePage && region) regionAlts.push(line);
+    else pageAlts.push(line);
+  }
+  if (pageAlts.length) {
+    out.push(`Also consider:`);
+    for (const line of pageAlts) out.push(line);
+  }
+  if (regionAlts.length) {
+    out.push(pageAlts.length ? `Secondary region / component refs (not the page cite):` : `Also consider (secondary region / component refs):`);
+    for (const line of regionAlts) out.push(line);
   }
 }
 const explained = retrieval.exclusions.slice(0, 4);

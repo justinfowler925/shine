@@ -1267,6 +1267,11 @@ if (FULL) {
     ok("brief-specific art direction", "20/20 deterministic; distance, exclusions, history, gaps and slop gated");
   else fail("brief-specific art direction", `${artDirection.stderr || artDirection.stdout}`.trim().slice(-400));
 
+  const citeOperate = spawnSync(process.execPath, [join(SHINE, "verify/cite-operate.test.mjs")], { encoding: "utf8" });
+  if (citeOperate.status === 0 && /cite operate PASS/.test(citeOperate.stdout))
+    ok("Operate cite page bias", "dashboard/settings/form/queue/record primaries are composed pages; charts demoted");
+  else fail("Operate cite page bias", `${citeOperate.stderr || citeOperate.stdout}`.trim().slice(-400));
+
   if (!/core\/design-packet\.mjs/.test(skill))
     fail("SKILL.md packet command", "missing `core/design-packet.mjs` — deterministic selection is bypassed");
   else ok("SKILL.md packet command", "core/design-packet.mjs");
@@ -1325,12 +1330,13 @@ if (FULL) {
 
       const queue = spawnSync(process.execPath, [cite, "queue"], { encoding: "utf8" });
       const qout = `${queue.stdout || ""}${queue.stderr || ""}`;
+      const queuePrimary = (qout.match(/Template: (\S+)/) || [])[1] || "";
       if (queue.status !== 0) fail("cite.mjs queue", `exit ${queue.status}: ${qout.slice(0, 200)}`);
-      else if (/sidebar-07/.test(qout) && !/untitled-table|shadcn-dashboard-01/.test(qout))
+      else if (/sidebar-07/.test(qout) && !/shadcn-queue|tailadmin-tables|windmill-tables|flowbite-users|untitled-table/.test(qout))
         fail("cite.mjs queue", "returned an app-shell instead of a queue page");
-      else if (!/untitled-table|shadcn-dashboard-01/.test(qout))
-        fail("cite.mjs queue", "expected untitled-table or shadcn-dashboard-01");
-      else ok("cite.mjs queue", (qout.match(/Template: (\S+)/) || [])[1] || "queue page");
+      else if (!/^(shadcn-queue|tailadmin-tables|windmill-tables|flowbite-users|flowbite-products)$/.test(queuePrimary))
+        fail("cite.mjs queue", `expected a composed queue page primary, got ${queuePrimary || qout.slice(0, 120)}`);
+      else ok("cite.mjs queue", queuePrimary || "queue page");
 
       const lex = spawnSync(process.execPath, [cite, "lightning record"], { encoding: "utf8" });
       const lout = `${lex.stdout || ""}${lex.stderr || ""}`;
