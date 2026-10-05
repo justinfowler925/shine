@@ -37,7 +37,10 @@ export function checkDefectAssertions(diagnosis,layout,usability){
  }
  return {status:errors.length?'failed':'passed',verdict:diagnosis.verdict||'defects',assertions:out,failures:errors};
 }
-export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPath,project,commit,buildId,receiptPath,storageState,reusePath,coveragePath,surfaceContractPath,surfaceReceiptPath}){
+// Lane defaults to internal when omitted so programmatic callers and media/lex
+// fixtures keep prior behavior. Packet completion always passes --lane explicitly
+// (design-packet defaults lane to saas); saas/marketing originality then bites.
+export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPath,project,commit,buildId,receiptPath,storageState,reusePath,coveragePath,surfaceContractPath,surfaceReceiptPath,lane="internal",brief=""}){
  const temp=mkdtempSync(join(tmpdir(),'shine-completion-')),checks={},evidence={};let observed;
  try{
   coveragePath ||= project && existsSync(join(project,"shine-coverage.json")) ? join(project,"shine-coverage.json") : undefined;
@@ -56,8 +59,8 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
   try{usability=await proveUsability({target,contractPath:usabilityPath,citeId,storageState});checks.interactions={status:'passed',flows:usability.flows};}catch(error){usability={status:1,flows:[]};checks.interactions={status:usabilityPath&&existsSync(usabilityPath)?'failed':'not_tested',reason:error.message};}
   checks.referenceValidity=referenceHealth(ROOT,citeId);
   if(checks.referenceValidity.status==='passed'){
-   try{const comparison=await compareArtifact({target,citeId,outPath:join(temp,'compare.png'),lane:'internal',mode:diagnosisPath?'existing':'new',diagnosisPath,writeReceipt:false,storageState});checks.visualComparison={status:comparison.status===0?'passed':'failed',failures:comparison.failures};}catch(error){checks.visualComparison={status:'failed',reason:error.message};}
-  }else checks.visualComparison={status:'not_tested',reason:'reference capture is not verified'};
+   try{const comparison=await compareArtifact({target,citeId,outPath:join(temp,'compare.png'),lane,brief,mode:diagnosisPath?'existing':'new',diagnosisPath,writeReceipt:false,storageState});checks.visualComparison={status:comparison.status===0?'passed':'failed',failures:comparison.failures,lane};}catch(error){checks.visualComparison={status:'failed',reason:error.message,lane};}
+  }else checks.visualComparison={status:'not_tested',reason:'reference capture is not verified',lane};
   if(diagnosisPath){try{const {value}=readDiagnosis(diagnosisPath);checks.defectAssertions=checkDefectAssertions(value,layout,usability);}catch(error){checks.defectAssertions={status:'failed',reason:error.message};}}
   const {chromium}=load('playwright'),browser=await chromium.launch();
   try{const page=await browser.newPage({...(storageState?{storageState}:{})});const response=await page.goto(/^https?:/.test(target)?target:pathToFileURL(resolve(target)).href,{waitUntil:'networkidle'});
@@ -76,7 +79,7 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
 }
 if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),opt=n=>args.includes(n)?args[args.indexOf(n)+1]:undefined;
- const report=await prove({target:args[0],citeId:opt('--cite'),layoutPath:opt('--layout'),usabilityPath:opt('--usability'),diagnosisPath:opt('--diagnosis'),project:opt('--project'),commit:opt('--commit'),buildId:opt('--build-id'),receiptPath:opt('--receipt'),storageState:opt('--storage-state'),reusePath:opt('--reuse'),coveragePath:opt('--coverage'),surfaceContractPath:opt('--surface-contract'),surfaceReceiptPath:opt('--surface-receipt')});
+ const report=await prove({target:args[0],citeId:opt('--cite'),layoutPath:opt('--layout'),usabilityPath:opt('--usability'),diagnosisPath:opt('--diagnosis'),project:opt('--project'),commit:opt('--commit'),buildId:opt('--build-id'),receiptPath:opt('--receipt'),storageState:opt('--storage-state'),reusePath:opt('--reuse'),coveragePath:opt('--coverage'),surfaceContractPath:opt('--surface-contract'),surfaceReceiptPath:opt('--surface-receipt'),lane:opt('--lane')||'internal',brief:opt('--brief')||''});
  if(opt('--json'))writeFileSync(opt('--json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));process.exit(report.status==='passed'?0:1);
 }

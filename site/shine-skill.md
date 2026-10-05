@@ -2277,7 +2277,7 @@ quietly substituting the nearest generic SaaS look.
 ## After first paint
 
 1. `node verify/measure.mjs <path> --shot out.png --cite <id>`
-2. `node verify/compare.mjs <path> --cite <id> --brief <brief-id> --lane <lane>` when the template has a harvested shot — read the composite and structural/visual facts; if the two sides don't read as relatives, fix the match or the paint. SaaS/marketing mark one visible owned moment with `data-shine-signature`; cross-brief structural clones fail. LEX and explicit brand-locked adaptations belong instead of performing originality and use `--brand-locked`.
+2. `node verify/compare.mjs <path> --cite <id> --brief <brief-id> --lane <lane>` when the template has a harvested shot — read the composite and structural/visual facts; if the two sides don't read as relatives, fix the match or the paint. SaaS/marketing mark one visible owned moment with `data-shine-signature`; cross-brief structural clones fail. LEX and explicit brand-locked adaptations belong instead of performing originality and use `--brand-locked`. Completion uses the same lane: `node verify/prove.mjs <path> --cite <id> --lane <lane> …` (packet `completion.command` already includes it).
 
 Banned report language: "tighten spacing", "more modern", "shine-paint".
 
@@ -4646,6 +4646,10 @@ used ≥5× each; undeclared non-switching theme; controls with zero filled prim
 more than two competing filled treatments; `data-shine-probe="app-shell"` with content
 share &lt; 28% of viewport. Section-job gaps and density on non-probe pages print as notes.
 Prove bite with `node verify/doctor.mjs --full`.
+
+**Completion lane:** `verify/prove.mjs` accepts `--lane` (same values as compare). Packet
+completion passes the job lane so saas/marketing originality (`data-shine-signature`)
+runs on the prove path, not only on standalone compare.
 
 **Playwright, axe-core and sharp live in shine's root `package.json`.** Run `npm install`
 at the repo root. `verify/deps.mjs` resolves shine-first and keeps a sibling checkout as
