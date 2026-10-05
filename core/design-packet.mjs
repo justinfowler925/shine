@@ -66,6 +66,9 @@ const packPaths=row=>{
 
 export function createDesignPacket({job,lane="saas",project=process.cwd(),framework="",category="",mode="existing",productReference="",productReferenceName=""}){
  if(!job?.trim())throw new Error("job is required");
+ // Packet --mode is only existing|new|audit. Skill procedure phases (Wireframe,
+ // Build, Polish, Copy, Adoption) are agent routing — see skill/references/polish.md
+ // and README § Modes — not extra packet modes and not prove categories.
  // audit: look, name, measure, report. It edits nothing and issues no completion
  // receipt. It exists because "review this UI" kept turning into a restyle: the
  // only modes were existing (which requires fixing every named defect) and new.
@@ -124,9 +127,16 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   const alternatives=allCandidates.filter(item=>item.id!==selected.id&&item.referenceHealth?.status==="passed").map(item=>item.id);
   packet.gaps=[...packet.gaps,`reference: ${selected.id} is ${selected.referenceHealth?.status||"unknown"} (${(selected.referenceHealth?.reasons||[]).join("; ")||"no validated capture"}); completion proof will fail referenceValidity until it is harvested (node corpus/harvest.mjs ${selected.id} && node corpus/materialize-packs.mjs ${selected.id})${alternatives.length?`; validated alternatives: ${alternatives.join(", ")}`:""}`];
  }
+ // Tiny phase hint: procedure phases are documentation for the agent, not a
+ // second mode enum. Copy/Adoption stay diagnosis/report concerns in v1.
+ packet.procedure={
+  phases:["wireframe","build","polish","audit","copy","adoption"],
+  packetMode:mode,
+  instruction:"Wireframe/Polish/Copy/Adoption are skill procedure phases, not --mode values. Map: wireframe→new; build→new|existing; polish→existing (references/polish.md); audit→audit; copy|adoption→audit|existing with diagnosis buckets only — no copy/adoption prove categories in v1.",
+ };
  if(mode==="audit"){
   packet.proof.commands=packet.proof.commands.filter((command)=>!/compare\.mjs/.test(command));
-  packet.completion={required:false,command:null,requires:[],instruction:"An audit issues no completion receipt. Report the diagnosis (verdict, defects, evidence), the measure facts and the screenshot. Nothing may be edited in this mode."};
+  packet.completion={required:false,command:null,requires:[],instruction:"An audit issues no completion receipt. Report the diagnosis (verdict, defects, evidence), the measure facts and the screenshot. When the diagnosis includes copy or adoption defects — or lists those buckets in checked — name them in the report; there is no copy/adoption prove category in v1. Nothing may be edited in this mode."};
  }
  return packet;
 }

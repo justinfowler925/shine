@@ -14,6 +14,19 @@ SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
 node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit> --project "$PWD"
 ```
+Packet `--mode` is only `existing` \| `new` \| `audit`. Skill procedure phases
+(Wireframe / Build / Polish / Audit / Copy / Adoption) route which references you
+read; they are not extra packet modes and do not add prove categories.
+
+| Procedure phase | Packet `--mode` | Open |
+|---|---|---|
+| Wireframe | `new` | `references/wireframe.md` |
+| Build | `new` or `existing` | this file § Build |
+| Polish | `existing` | `references/polish.md` |
+| Audit | `audit` | `references/audit.md`, `references/diagnose.md` |
+| Copy | `audit` or `existing` | `references/copy.md` |
+| Adoption | `audit` or `existing` | `references/adoption.md` |
+
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
 dashboard. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
 source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
@@ -23,14 +36,14 @@ For other new standalone surfaces, put brief-specific design judgment in a small
 constraint. The signature must express this product's job, never generic design decoration.
 For an existing product, render its real components and read `references/diagnose.md`. Complete the packet's `shine-diagnosis.json` before editing: primary task, before artifact + screenshot, and only the defects you can evidence (1–8) across usability, completeness, composition, craft, or adoption. One real defect is a complete diagnosis; if nothing survives the screenshot and measure, record `verdict: no-change` with `verdictEvidence` and all five buckets in `checked`, then stop. Inventing defects or inflating severity to fill a count is a reviewer defect. Preserve the product architecture.
 ## Audit edits nothing
-A review request (audit, review, assess, "what's wrong", "don't change anything") runs the packet with `--mode audit`: look, diagnose, measure, report. Edit no product file and issue no completion receipt (`editing.allowed` is false). Building is a separate, explicit request. In `existing` mode change only what a named defect requires: design-lint blocks off-token values on the lines you touched and reports pre-existing ones as notes; leave those unless the diagnosis names them.
+A review request (audit, review, assess, "what's wrong", "don't change anything") runs the packet with `--mode audit`: look, diagnose, measure, report. Edit no product file and issue no completion receipt (`editing.allowed` is false). Building is a separate, explicit request. In `existing` mode change only what a named defect requires: design-lint blocks off-token values on the lines you touched and reports pre-existing ones as notes; leave those unless the diagnosis names them. When the diagnosis names copy or adoption defects (or lists those buckets in `checked`), say so in the audit report — there is no copy/adoption prove receipt in v1.
 ## Product precedent outranks the catalog
 For an existing product, inventory shipped sibling surfaces before accepting the external reference. Find the closest page presenting the same information object or supporting the same user job. If one exists, rerun the packet with `--product-reference <page-or-url> --product-reference-name <name>`.
 The sibling owns product conventions; the catalog may fill a gap but must not replace working card anatomy, toolbar behavior, expansion, actions, states, terminology, or responsive behavior. Name the sibling and every justified divergence in the diagnosis.
 Reuse or extract its component and CSS vocabulary; never create a parallel component for the same object. Mark shared shells with stable `data-product-pattern` values and run the packet's product-compare command.
 Every visible icon needs a distinct semantic job: state, action, object type, or direction. If nearby text already supplies all meaning, remove it; decoration is not semantics.
 ## Build
-- Existing surface: fix defects in diagnosis priority order; do not paint before usability and completeness are sound.
+- Existing surface: fix defects in diagnosis priority order; do not paint before usability and completeness are sound. After the job works, density / optical / stub upgrades are the Polish phase (`references/polish.md`) under `--mode existing`.
 - New surface: state the information hierarchy and primary workflow in the design spec, then build; ask discovery
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports; follow `references/component-layers.md`: Tailwind owns styling/layout, shadcn owns controls, TanStack owns table state. Detect each independently; reuse product components.
@@ -59,8 +72,8 @@ For decks, PDFs, reports, and email, read `references/cross-media.md` and choose
 lane. Preserve the hierarchy and evidence; a website screenshot pasted onto a slide is not a deck.
 Only when the packet cannot answer a genuinely advanced requirement, read one focused reference:
 `references/contracts.md`, `references/interaction.md`, `references/adoption.md`,
-`references/cross-media.md`, or `references/salesforce.md`. Ordinary tables, forms, and page
-structures need none of them.
+`references/polish.md`, `references/copy.md`, `references/cross-media.md`, or
+`references/salesforce.md`. Ordinary tables, forms, and page structures need none of them.
 ## Prove
 Exercise the primary workflow in the rendered product. Run the packet's measure command until it
 exits zero, run product compare when the packet names a product precedent, then run catalog compare. These are partial checks; finish with the packet’s completion command. A receipt is generated only by the verifier;
@@ -230,12 +243,21 @@ pilot cohort. Widening a permset over a cohort with zero actions multiplies zero
     unfinished.
 14. An empty state that explains the feature instead of doing the first useful thing.
 
+## Mode notes
+
+Adoption is a **procedure phase**, not a packet `--mode` (see `SKILL.md` / README § Modes).
+Run under `--mode audit` or `--mode existing` when the diagnosis names adoption
+blockers. There is **no** adoption prove category or receipt in v1 — findings live in
+the diagnosis `adoption` bucket / audit report. Density and stub upgrades after the
+ritual is sound are Polish (`polish.md`).
+
 ## Cross-references
 
 This file is about whether the surface is opened. Once someone is looking at it:
 
 - What goes on the screen, queue design, alert rationale, scorecards without backfire → `dashboards.md`
 - Screen composition → `patterns.md` · component baselines → `contracts.md`
+- In-place craft after the job works → `polish.md`
 - The words on it → `copy.md`
 
 ## Reporting an adoption finding
@@ -660,9 +682,15 @@ Citation column is required for Critical/Major. Threshold-only rows are incomple
 
 ## Mode notes
 
+Audit is the packet `--mode audit` procedure. Wireframe / Polish / Copy / Adoption
+are sibling **procedure phases**, not additional packet modes (see `SKILL.md` /
+README § Modes). When the diagnosis includes copy or adoption defects — or lists
+those buckets in `checked` — name them in the report; v1 has no copy/adoption prove
+receipts.
+
 - **Audit only:** stop after the report.
-- **Polish after audit:** work the prioritized list top-down; upgrade stubs to contracts;
-  cite before each edit; remeasure; avoid unrelated redesign.
+- **Polish after audit:** follow `polish.md` — work the prioritized list top-down;
+  upgrade stubs to contracts; cite before each edit; remeasure; avoid unrelated redesign.
 - **Brand-locked:** also run `brand-checker` for copy/token compliance; UI
   completeness still uses this rubric.
 
@@ -1577,6 +1605,11 @@ flag; three or more means the copy was generated and never reflected on:
 
 ## Mode notes
 
+Copy is a **procedure phase**, not a packet `--mode` (see `SKILL.md` / README § Modes).
+Run under `--mode audit` (report only) or `--mode existing` when fixing named copy
+defects. There is **no** copy prove category or receipt in v1 — findings live in the
+diagnosis / audit report.
+
 - Runs as part of **Audit** whenever the surface carries persuasive or instructional
   copy; standalone when asked to "review the copy", "tighten the messaging", or
   "does this land?"
@@ -1584,7 +1617,7 @@ flag; three or more means the copy was generated and never reflected on:
   voice and terminology compliance still go through the brand`s own kit. Both must
   pass — on-brand copy that answers no question is still a fail here.
 - This pass changes words and element order. It does not restructure components —
-  that's Build/Polish territory under contracts.md.
+  that's Build/Polish territory under `contracts.md` and `polish.md`.
 
 
 ---
@@ -2231,7 +2264,7 @@ Named Table / Form / Dialog / Select loads `contracts.md` MUST **in this pass**.
 3. Composition that causes wrong actions or abandonment
 4. Adoption blockers on internal tools
 5. Craft that reads as slop for the chosen voice
-6. Polish (density, optical alignment, micro-motion)
+6. Polish (density, optical alignment, micro-motion) — `polish.md`
 
 Never spend a pass on craft while a Critical completeness hole is open.
 
@@ -2274,6 +2307,7 @@ read as relatives, the match or the paint is wrong.
 | Known job, invented layout | `corpus/cite.mjs <job>` — match a row |
 | Nobody will open this | `adoption.md` |
 | Table/form missing states | `contracts.md` |
+| Job works; stubs / density / optical | `polish.md` |
 | Queue / batch / empty | `cite.mjs queue` → `untitled-table` |
 | Wrong hierarchy / equal peers | `techniques.md` §Hierarchy, `kits.md` |
 | Numbers undecidable | `dashboards.md` |
@@ -3546,6 +3580,97 @@ technique will fix.
 - Chart mark counts and library weight → `dataviz.md`, `ecosystem.md`
 - Streaming and latency masking for model output → `ai-surfaces.md`
 - Motion durations and reduced-motion → `motion.md`
+
+
+---
+
+## Reference: polish.md
+
+# Polish — upgrade in place after the job works
+
+Polish is a **procedure phase**, not a packet `--mode`. Run it with
+`design-packet.mjs --mode existing` after usability and completeness are sound.
+It upgrades stubs, density, and optical craft **in place**; it does not invent IA,
+restyle the product, or open a greenfield Wireframe.
+
+**Not Polish:** discovery (`wireframe.md`), full Build from a locked brief, Audit-only
+reporting (`audit.md`), persuasion copy (`copy.md`), or “will they open it?”
+(`adoption.md`). Those are sibling procedure phases — see the mode map in
+`SKILL.md` / README § Modes.
+
+**Gate:** agent judgment. Measure still hard-fails craft floors (axe, contrast,
+voids, hierarchy, theme). Optical alignment and micro-motion taste stay agent —
+no polish-specific prove category in v1.
+
+---
+
+## Enter / skip
+
+| Enter when | Skip / escalate when |
+|---|---|
+| Primary job works; contracts cover named controls | Usability or Critical completeness still open → Build / `contracts.md` first |
+| Diagnosis names craft, density, or stub-upgrade defects | No UI yet → `wireframe.md` |
+| Audit report says “polish” / stubs remain after a pass | Adoption ritual missing on an internal tool → `adoption.md` before pixels |
+| User asked to tighten spacing, optical alignment, or motion | Words don't persuade → `copy.md` (this file does not rewrite the argument) |
+
+Never spend a Polish pass on craft while a Critical completeness hole is open
+(`diagnose.md` § Prioritize).
+
+---
+
+## Loop (cite → upgrade → remeasure)
+
+1. **Cite** — keep or refresh `data-cite` for the page; do not swap families for a
+   spacing tweak. Read the harvested shot before editing.
+2. **Upgrade stubs** — named Table / Form / Dialog / Select / etc. climb the
+   MUST ladder in `contracts.md` (and `table-quality.md` / `usability.md` where
+   applicable). A stub that only looks finished is still a completeness defect.
+3. **Density** — chrome vs content, instrumental gaps, compact vs comfortable for
+   the lane (`techniques.md` § Hierarchy & density, `dashboards.md`,
+   `direction.md` Operate). Prefer cutting padding over leading; one gap value for
+   most of the page is a smell.
+4. **Optical** — alignment of columns/baselines, nested radius
+   (`child = parent − padding`), equal peers that should not be, tracking on
+   display type, hairline borders vs fill jumps (`techniques.md`, `taste.md`).
+5. **Micro-motion** — only after density/optical; 150ms mode, named properties,
+   reduced-motion (`motion.md`). Never `transition: all`.
+6. **Remeasure** — `node verify/measure.mjs <path> --shot /tmp/after.png --cite <id>`,
+   then usability/compare/prove via the packet when the job requires completion.
+   Report before/after for every Critical/Major you claimed to fix.
+
+Banned report language: "tighten spacing", "more modern", "shine-paint" without a
+technique cite (`direction.md`).
+
+---
+
+## What machine proof covers (and what it does not)
+
+| Concern | Machine today | Polish role |
+|---|---|---|
+| Axe / contrast / voids / hierarchy / theme | measure hard-fail | Clear these if still red |
+| App-shell content share | measure when shell rules apply | Density pass must not dodge shell grammar |
+| Table / usability / layout contracts | fail closed when written | Upgrade stubs so contracts are real |
+| Optical alignment / micro-motion taste | none | Agent checklist only |
+| Copy beliefs / adoption ritual | diagnosis buckets; no prove categories | Out of scope here — use `copy.md` / `adoption.md` |
+
+**No new prove categories for copy or adoption in v1.** Polish completion uses the
+existing packet proof path (`measure` → usability → compare → `prove`).
+
+---
+
+## Cross-references
+
+| Need | Open |
+|---|---|
+| Order of operations / severity | `diagnose.md` |
+| Audit report → prioritized list | `audit.md` |
+| MUST ladder for named controls | `contracts.md` |
+| Technique → token transfer | `techniques.md`, `taste.md` |
+| Motion budgets | `motion.md` |
+| Remeasure semantics | `verification.md` |
+| Wireframe lock before first paint | `wireframe.md` |
+| Persuasion / instructional words | `copy.md` |
+| Ritual / persona / path | `adoption.md` |
 
 
 ---
@@ -5164,6 +5289,10 @@ Wireframe discovers **structure** with the user by picking a catalog template, t
 citing kits. It emits a gray-box HTML artifact whose regions come from that template,
 then a **locked brief**. Build applies cite DNA and does not invent a
 competing IA unless the user says `unlock structure`.
+
+Wireframe is a **procedure phase**, not a packet `--mode`. Use
+`design-packet.mjs --mode new` after the brief locks; see `SKILL.md` / README § Modes
+for the phase → packet map. Polish / Copy / Adoption are sibling phases, not packet modes.
 
 **Not Wireframe:** craft (chroma, tracking, shadows), brand paint, real charts, or
 shipping React. Craft hard-fails in `measure.mjs` wait until Build.

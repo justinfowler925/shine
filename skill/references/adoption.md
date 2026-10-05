@@ -142,12 +142,21 @@ pilot cohort. Widening a permset over a cohort with zero actions multiplies zero
     unfinished.
 14. An empty state that explains the feature instead of doing the first useful thing.
 
+## Mode notes
+
+Adoption is a **procedure phase**, not a packet `--mode` (see `SKILL.md` / README § Modes).
+Run under `--mode audit` or `--mode existing` when the diagnosis names adoption
+blockers. There is **no** adoption prove category or receipt in v1 — findings live in
+the diagnosis `adoption` bucket / audit report. Density and stub upgrades after the
+ritual is sound are Polish (`polish.md`).
+
 ## Cross-references
 
 This file is about whether the surface is opened. Once someone is looking at it:
 
 - What goes on the screen, queue design, alert rationale, scorecards without backfire → `dashboards.md`
 - Screen composition → `patterns.md` · component baselines → `contracts.md`
+- In-place craft after the job works → `polish.md`
 - The words on it → `copy.md`
 
 ## Reporting an adoption finding

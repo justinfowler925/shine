@@ -14,6 +14,19 @@ SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
 node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit> --project "$PWD"
 ```
+Packet `--mode` is only `existing` \| `new` \| `audit`. Skill procedure phases
+(Wireframe / Build / Polish / Audit / Copy / Adoption) route which references you
+read; they are not extra packet modes and do not add prove categories.
+
+| Procedure phase | Packet `--mode` | Open |
+|---|---|---|
+| Wireframe | `new` | `references/wireframe.md` |
+| Build | `new` or `existing` | this file § Build |
+| Polish | `existing` | `references/polish.md` |
+| Audit | `audit` | `references/audit.md`, `references/diagnose.md` |
+| Copy | `audit` or `existing` | `references/copy.md` |
+| Adoption | `audit` or `existing` | `references/adoption.md` |
+
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
 dashboard. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
 source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
@@ -23,14 +36,14 @@ For other new standalone surfaces, put brief-specific design judgment in a small
 constraint. The signature must express this product's job, never generic design decoration.
 For an existing product, render its real components and read `references/diagnose.md`. Complete the packet's `shine-diagnosis.json` before editing: primary task, before artifact + screenshot, and only the defects you can evidence (1–8) across usability, completeness, composition, craft, or adoption. One real defect is a complete diagnosis; if nothing survives the screenshot and measure, record `verdict: no-change` with `verdictEvidence` and all five buckets in `checked`, then stop. Inventing defects or inflating severity to fill a count is a reviewer defect. Preserve the product architecture.
 ## Audit edits nothing
-A review request (audit, review, assess, "what's wrong", "don't change anything") runs the packet with `--mode audit`: look, diagnose, measure, report. Edit no product file and issue no completion receipt (`editing.allowed` is false). Building is a separate, explicit request. In `existing` mode change only what a named defect requires: design-lint blocks off-token values on the lines you touched and reports pre-existing ones as notes; leave those unless the diagnosis names them.
+A review request (audit, review, assess, "what's wrong", "don't change anything") runs the packet with `--mode audit`: look, diagnose, measure, report. Edit no product file and issue no completion receipt (`editing.allowed` is false). Building is a separate, explicit request. In `existing` mode change only what a named defect requires: design-lint blocks off-token values on the lines you touched and reports pre-existing ones as notes; leave those unless the diagnosis names them. When the diagnosis names copy or adoption defects (or lists those buckets in `checked`), say so in the audit report — there is no copy/adoption prove receipt in v1.
 ## Product precedent outranks the catalog
 For an existing product, inventory shipped sibling surfaces before accepting the external reference. Find the closest page presenting the same information object or supporting the same user job. If one exists, rerun the packet with `--product-reference <page-or-url> --product-reference-name <name>`.
 The sibling owns product conventions; the catalog may fill a gap but must not replace working card anatomy, toolbar behavior, expansion, actions, states, terminology, or responsive behavior. Name the sibling and every justified divergence in the diagnosis.
 Reuse or extract its component and CSS vocabulary; never create a parallel component for the same object. Mark shared shells with stable `data-product-pattern` values and run the packet's product-compare command.
 Every visible icon needs a distinct semantic job: state, action, object type, or direction. If nearby text already supplies all meaning, remove it; decoration is not semantics.
 ## Build
-- Existing surface: fix defects in diagnosis priority order; do not paint before usability and completeness are sound.
+- Existing surface: fix defects in diagnosis priority order; do not paint before usability and completeness are sound. After the job works, density / optical / stub upgrades are the Polish phase (`references/polish.md`) under `--mode existing`.
 - New surface: state the information hierarchy and primary workflow in the design spec, then build; ask discovery
   questions only when missing product decisions would materially change the result.
 - Preserve the consumer's installed design system. Run `integrations/resolve.mjs` before imports; follow `references/component-layers.md`: Tailwind owns styling/layout, shadcn owns controls, TanStack owns table state. Detect each independently; reuse product components.
@@ -59,8 +72,8 @@ For decks, PDFs, reports, and email, read `references/cross-media.md` and choose
 lane. Preserve the hierarchy and evidence; a website screenshot pasted onto a slide is not a deck.
 Only when the packet cannot answer a genuinely advanced requirement, read one focused reference:
 `references/contracts.md`, `references/interaction.md`, `references/adoption.md`,
-`references/cross-media.md`, or `references/salesforce.md`. Ordinary tables, forms, and page
-structures need none of them.
+`references/polish.md`, `references/copy.md`, `references/cross-media.md`, or
+`references/salesforce.md`. Ordinary tables, forms, and page structures need none of them.
 ## Prove
 Exercise the primary workflow in the rendered product. Run the packet's measure command until it
 exits zero, run product compare when the packet names a product precedent, then run catalog compare. These are partial checks; finish with the packet’s completion command. A receipt is generated only by the verifier;

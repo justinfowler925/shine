@@ -138,6 +138,11 @@ flag; three or more means the copy was generated and never reflected on:
 
 ## Mode notes
 
+Copy is a **procedure phase**, not a packet `--mode` (see `SKILL.md` / README § Modes).
+Run under `--mode audit` (report only) or `--mode existing` when fixing named copy
+defects. There is **no** copy prove category or receipt in v1 — findings live in the
+diagnosis / audit report.
+
 - Runs as part of **Audit** whenever the surface carries persuasive or instructional
   copy; standalone when asked to "review the copy", "tighten the messaging", or
   "does this land?"
@@ -145,4 +150,4 @@ flag; three or more means the copy was generated and never reflected on:
   voice and terminology compliance still go through the brand`s own kit. Both must
   pass — on-brand copy that answers no question is still a fail here.
 - This pass changes words and element order. It does not restructure components —
-  that's Build/Polish territory under contracts.md.
+  that's Build/Polish territory under `contracts.md` and `polish.md`.
