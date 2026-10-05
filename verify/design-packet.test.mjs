@@ -114,6 +114,10 @@ assert.match(grid.tableQuality.reference,/table-quality\.md$/);
 
 assert.equal(grid.library.implementations.total,32);
 assert.match(affine.completion.command,/--coverage shine-coverage.json/);
+assert.match(grid.completion.command,/--lane internal/,"completion must pass the packet lane to prove");
+assert.match(dashboard.completion.command,/--lane internal/);
+assert.match(unvalidated.completion.command,/--lane marketing/);
+assert.match(lex.completion.command,/--lane lex/);
 
 // Python/vanilla web projects have no npm manifest; missing is not malformed.
 const manifestless=mkdtempSync(join(tmpdir(),"shine-python-web-"));

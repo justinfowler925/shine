@@ -36,6 +36,10 @@ more than two competing filled treatments; `data-shine-probe="app-shell"` with c
 share &lt; 28% of viewport. Section-job gaps and density on non-probe pages print as notes.
 Prove bite with `node verify/doctor.mjs --full`.
 
+**Completion lane:** `verify/prove.mjs` accepts `--lane` (same values as compare). Packet
+completion passes the job lane so saas/marketing originality (`data-shine-signature`)
+runs on the prove path, not only on standalone compare.
+
 **Playwright, axe-core and sharp live in shine's root `package.json`.** Run `npm install`
 at the repo root. `verify/deps.mjs` resolves shine-first and keeps a sibling checkout as
 fallback only. Wireframe pages (`data-shine-wireframe`) skip craft hard-fails in

@@ -47,6 +47,6 @@ quietly substituting the nearest generic SaaS look.
 ## After first paint
 
 1. `node verify/measure.mjs <path> --shot out.png --cite <id>`
-2. `node verify/compare.mjs <path> --cite <id> --brief <brief-id> --lane <lane>` when the template has a harvested shot — read the composite and structural/visual facts; if the two sides don't read as relatives, fix the match or the paint. SaaS/marketing mark one visible owned moment with `data-shine-signature`; cross-brief structural clones fail. LEX and explicit brand-locked adaptations belong instead of performing originality and use `--brand-locked`.
+2. `node verify/compare.mjs <path> --cite <id> --brief <brief-id> --lane <lane>` when the template has a harvested shot — read the composite and structural/visual facts; if the two sides don't read as relatives, fix the match or the paint. SaaS/marketing mark one visible owned moment with `data-shine-signature`; cross-brief structural clones fail. LEX and explicit brand-locked adaptations belong instead of performing originality and use `--brand-locked`. Completion uses the same lane: `node verify/prove.mjs <path> --cite <id> --lane <lane> …` (packet `completion.command` already includes it).
 
 Banned report language: "tighten spacing", "more modern", "shine-paint".
