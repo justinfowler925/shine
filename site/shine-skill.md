@@ -14,7 +14,7 @@ SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
 node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit> --project "$PWD"
 ```
-Packet `--mode` is only `existing` \| `new` \| `audit`. Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`; not packet modes; no extra prove categories.
+Packet `--mode` is only `existing` \| `new` \| `audit`. Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`; not packet modes. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP).
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
 dashboard. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
 source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
@@ -23,7 +23,7 @@ For new media/editorial surfaces, build from the selected source in the installe
 constraint. The signature must express this product's job, never generic design decoration.
 For an existing product, render its real components and read `references/diagnose.md`. Complete the packet's `shine-diagnosis.json` before editing: primary task, before artifact + screenshot, and only the defects you can evidence (1–8) across usability, completeness, composition, craft, or adoption. One real defect is a complete diagnosis; if nothing survives the screenshot and measure, record `verdict: no-change` with `verdictEvidence` and all five buckets in `checked`, then stop. Inventing defects or inflating severity to fill a count is a reviewer defect. Preserve the product architecture.
 ## Audit edits nothing
-A review request (audit, review, assess, "what's wrong", "don't change anything") runs the packet with `--mode audit`: look, diagnose, measure, report. Edit no product file and issue no completion receipt (`editing.allowed` is false). Building is a separate, explicit request. In `existing` mode change only what a named defect requires: design-lint blocks off-token values on the lines you touched and reports pre-existing ones as notes; leave those unless the diagnosis names them. When the diagnosis names copy or adoption defects (or lists those buckets in `checked`), say so in the audit report — there is no copy/adoption prove receipt in v1.
+A review request (audit, review, assess, "what's wrong", "don't change anything") runs the packet with `--mode audit`: look, diagnose, measure, report. Edit no product file and issue no completion receipt (`editing.allowed` is false). Building is a separate, explicit request. In `existing` mode change only what a named defect requires: design-lint blocks off-token values on the lines you touched and reports pre-existing ones as notes; leave those unless the diagnosis names them. For `lane=saas`, fill copy/adoption diagnosis check fields (`diagnose.md`); `prove` binds them via `copyAdoption`, and measure applies light title/empty-copy heuristics. Belief and ritual honesty stay agent.
 ## Product precedent outranks the catalog
 For an existing product, inventory shipped sibling surfaces before accepting the external reference. Find the closest page presenting the same information object or supporting the same user job. If one exists, rerun the packet with `--product-reference <page-or-url> --product-reference-name <name>`.
 The sibling owns product conventions; the catalog may fill a gap but must not replace working card anatomy, toolbar behavior, expansion, actions, states, terminology, or responsive behavior. Name the sibling and every justified divergence in the diagnosis.
@@ -234,9 +234,14 @@ pilot cohort. Widening a permset over a cohort with zero actions multiplies zero
 
 Adoption is a **procedure phase**, not a packet `--mode` (see `SKILL.md` / README § Modes).
 Run under `--mode audit` or `--mode existing` when the diagnosis names adoption
-blockers. There is **no** adoption prove category or receipt in v1 — findings live in
-the diagnosis `adoption` bucket / audit report. Density and stub upgrades after the
-ritual is sound are Polish (`polish.md`).
+blockers.
+
+**Machine proof (presence + assertion binding — not ritual NLP):** for `lane=saas`
+Operate categories (`datagrid|dashboard|form|record|lex`), the diagnosis schema
+requires `adoptionRitualCheck`, `adoptionPrivateWinCheck`, and `adoptionAbsenceCheck`
+(`diagnose.md`). `prove` binds them via `copyAdoption`, and critical/major `adoption`
+bucket defects need `flow:` / layout assertion ids when flows exist. Ritual honesty
+stays agent. Density and stub upgrades after the ritual is sound are Polish (`polish.md`).
 
 ## Cross-references
 
@@ -671,9 +676,8 @@ Citation column is required for Critical/Major. Threshold-only rows are incomple
 
 Audit is the packet `--mode audit` procedure. Wireframe / Polish / Copy / Adoption
 are sibling **procedure phases**, not additional packet modes (see `SKILL.md` /
-README § Modes). When the diagnosis includes copy or adoption defects — or lists
-those buckets in `checked` — name them in the report; v1 has no copy/adoption prove
-receipts.
+README § Modes). For `lane=saas`, copy/adoption diagnosis check fields must be present
+even on audit-only reports; a later build pass binds them via `prove` `copyAdoption`.
 
 - **Audit only:** stop after the report.
 - **Polish after audit:** follow `polish.md` — work the prioritized list top-down;
@@ -1594,8 +1598,14 @@ flag; three or more means the copy was generated and never reflected on:
 
 Copy is a **procedure phase**, not a packet `--mode` (see `SKILL.md` / README § Modes).
 Run under `--mode audit` (report only) or `--mode existing` when fixing named copy
-defects. There is **no** copy prove category or receipt in v1 — findings live in the
-diagnosis / audit report.
+defects.
+
+**Machine proof (presence + light heuristics — not NLP):** for `lane=saas` and
+categories `datagrid|dashboard|form|record|lex|marketing|catalog`, the diagnosis
+schema requires `copyHeadlineCheck`, `copyBeliefCheck`, and `copyInstructionalCheck`
+(`diagnose.md`). `prove` binds them via `copyAdoption`. Measure hard-fails missing
+page title+H1 and stub empty-state copy when the copy heuristic gate applies. Belief
+honesty and sequence judgment stay agent.
 
 - Runs as part of **Audit** whenever the surface carries persuasive or instructional
   copy; standalone when asked to "review the copy", "tighten the messaging", or
@@ -2225,11 +2235,37 @@ need these fields.
 | `emptyErrorTriadCheck` | Do loading / empty / error (and filtered-empty when filters exist) read as distinct states on **non-table** surfaces too? | Triad is covered or honestly N/A with why |
 | `competingCtaCheck` | Is there one filled primary, or do peer CTAs compete for the same job? | Weight budget matches the job; competitors named or cleared |
 
-Fill each as `{ "ok": boolean, "note": "…" }` (note ≥8 characters). On `verdict: defects`, still
-fill the checks — a craft-only defect list that skips product UX is incomplete for SaaS. On
-`verdict: no-change`, the checks plus full `checked` buckets are how you prove you looked.
+### SaaS copy checks (lane=saas Operate + marketing/catalog)
 
-Primary-task defects bind to executable proof. Example for an Operate queue:
+For `lane=saas` and categories `datagrid|dashboard|form|record|lex|marketing|catalog`, fill
+three copy fields (see `copy.md`). Presence is machine-gated; belief honesty stays agent.
+Measure also hard-fails missing `document.title`+H1 and stub empty-state copy when the copy
+heuristic gate applies — not a full NLP critic.
+
+| Field | Ask | When `ok: true` means |
+|---|---|---|
+| `copyHeadlineCheck` | Does the first screen answer “what is this / what do I get”? | Title or H1 carries belief 1 in the reader’s words |
+| `copyBeliefCheck` | Are the five Hormozi beliefs mapped to carrying elements (or gaps named)? | Each belief has an element or an honest gap |
+| `copyInstructionalCheck` | Do empty / error / CTA microcopy say what happens next? | No “No data” stubs; CTAs are verb + outcome |
+
+### SaaS adoption checks (lane=saas Operate pages)
+
+Same Operate categories as product-UX. Four gates in `adoption.md`; three fields are required
+in the diagnosis so agents cannot skip the bucket. Ritual honesty stays agent.
+
+| Field | Ask | When `ok: true` means |
+|---|---|---|
+| `adoptionRitualCheck` | Which recurring meeting or moment runs this surface? | Ritual named with owner |
+| `adoptionPrivateWinCheck` | Per persona, what one fact can’t they get by asking a person? | Private win stated |
+| `adoptionAbsenceCheck` | What breaks if nobody opens it for a week? | Absence cost named (not “nothing”) |
+
+Fill each as `{ "ok": boolean, "note": "…" }` (note ≥8 characters). On `verdict: defects`, still
+fill the checks — a craft-only defect list that skips product UX / copy / adoption is incomplete
+for SaaS. On `verdict: no-change`, the checks plus full `checked` buckets are how you prove you
+looked. `prove` surfaces `copyAdoption` for these fields and binds critical/major defects
+(including `adoption` bucket) to assertion ids.
+
+Primary-task and adoption defects bind to executable proof. Example for an Operate queue:
 
 ```json
 {
@@ -2243,8 +2279,9 @@ Primary-task defects bind to executable proof. Example for an Operate queue:
 }
 ```
 
-`flow:assign-owner` must match an id in `shine-usability.json`. Critical/major usability defects
-without assertion ids fail `prove` `defectAssertions` — do not leave `assertions: []`.
+`flow:assign-owner` must match an id in `shine-usability.json`. Critical/major usability **and
+adoption** defects without assertion ids fail `prove` `defectAssertions` — do not leave
+`assertions: []`.
 
 ### Usability (can they finish the job?)
 - Primary action visible in ~3 seconds? Competing CTAs? → also `primaryTaskCheck` / `competingCtaCheck`
@@ -3684,10 +3721,11 @@ technique cite (`direction.md`).
 | App-shell content share | measure when shell rules apply | Density pass must not dodge shell grammar |
 | Table / usability / layout contracts | fail closed when written | Upgrade stubs so contracts are real |
 | Optical alignment / micro-motion taste | none | Agent checklist only |
-| Copy beliefs / adoption ritual | diagnosis buckets; no prove categories | Out of scope here — use `copy.md` / `adoption.md` |
+| Copy beliefs / adoption ritual | diagnosis check-field presence + light title/empty heuristics; honesty agent | Out of scope here — use `copy.md` / `adoption.md` |
 
-**No new prove categories for copy or adoption in v1.** Polish completion uses the
-existing packet proof path (`measure` → usability → compare → `prove`).
+Polish completion uses the existing packet proof path (`measure` → usability →
+compare → `prove`). Copy/adoption ship as diagnosis fields + `copyAdoption` prove
+presence (not a separate NLP category).
 
 ---
 
@@ -4894,6 +4932,13 @@ Other screens still soft-incomplete when usability is skipped. Details in `usabi
 chart/table/queue hard-fail. Elements that opt into `data-shine-kpi` must carry
 `data-unit` and `data-baseline`. Without the attribute, unit/baseline stays an agent
 checklist in `dashboards.md`. Dashboard recipes require the attribute.
+
+**Copy / adoption proof:** for `lane=saas`, diagnosis requires copy check fields
+(Operate + marketing/catalog) and adoption check fields (Operate). `prove` reports
+`copyAdoption` for presence and binds critical/major `adoption` defects to assertion
+ids. Measure hard-fails missing `document.title`+visible H1 and stub empty-state copy
+when `--lane saas|marketing` or the cite screen is a known Operate/marketing page
+(`verify/copy-adoption.mjs`). Not a full NLP critic — belief/ritual honesty stays agent.
 
 **Playwright, axe-core and sharp live in shine's root `package.json`.** Run `npm install`
 at the repo root. `verify/deps.mjs` resolves shine-first and keeps a sibling checkout as

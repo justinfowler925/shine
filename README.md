@@ -48,11 +48,11 @@ modes or prove categories.
 | **Build** | Paint under shine tokens from a locked brief (or existing shell) | `new` or `existing` | `skill/SKILL.md` § Build |
 | **Polish** | Upgrade stubs in place; density / optical; cite + remeasure | `existing` | `skill/references/polish.md` |
 | **Audit** | Score and report; change nothing unless asked | `audit` | `skill/references/audit.md` |
-| **Copy** | Presentation as argument — beliefs, sequence, slop tells | `audit` or `existing` (no copy prove category) | `skill/references/copy.md` |
-| **Adoption** | Will anyone open it? Ritual, persona, path — first for internal tools | `audit` or `existing` (no adoption prove category) | `skill/references/adoption.md` |
+| **Copy** | Presentation as argument — beliefs, sequence, slop tells | `audit` or `existing` (saas copy check fields + heuristics) | `skill/references/copy.md` |
+| **Adoption** | Will anyone open it? Ritual, persona, path — first for internal tools | `audit` or `existing` (saas adoption check fields + assertion bind) | `skill/references/adoption.md` |
 
 Default procedure: **Wireframe** if new; otherwise **Build** unless the ask is clearly a review.
-Copy and Adoption findings ride in diagnosis buckets / the audit report; v1 does not add prove receipts for them.
+Copy and Adoption findings ride in diagnosis check fields + the `adoption` bucket; for `lane=saas`, `prove` binds presence via `copyAdoption` and measure applies light title/empty heuristics — not a full NLP critic.
 
 **V4 notes:** [docs/RELEASE-v4.md](./docs/RELEASE-v4.md) · [V3 archive](./docs/RELEASE-v3.md) · [CHANGELOG](./CHANGELOG.md)
 

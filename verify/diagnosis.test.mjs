@@ -4,9 +4,15 @@ import {tmpdir} from "node:os";
 import {join} from "node:path";
 import {
  buckets,
+ emptySaasAdoptionChecks,
+ emptySaasCopyChecks,
  emptySaasProductUxChecks,
  readDiagnosis,
+ requiresSaasAdoptionChecks,
+ requiresSaasCopyChecks,
  requiresSaasProductUxChecks,
+ saasAdoptionCheckKeys,
+ saasCopyCheckKeys,
  saasPageCategories,
  saasProductUxCheckKeys,
  seedDiagnosis,
@@ -56,18 +62,33 @@ assert.equal(requiresSaasProductUxChecks({lane:"saas",category:"marketing"}),fal
 assert.equal(requiresSaasProductUxChecks({category:"dashboard"}),false,"missing lane stays backward-compatible");
 assert.equal(requiresSaasProductUxChecks({lane:"internal",category:"dashboard"}),false);
 
-const saasChecks={
+const saasProductChecks={
  primaryTaskCheck:{ok:false,note:"Assign owner is below the fold at 1280; primary job is not startable in 3s"},
  emptyErrorTriadCheck:{ok:true,note:"Loading, empty, and error are distinct; filtered-empty shows Clear filters"},
  competingCtaCheck:{ok:true,note:"Single filled Assign primary; secondary actions are outline only"},
 };
+const saasCopyChecks={
+ copyHeadlineCheck:{ok:true,note:"H1 names the support queue and the assign-owner job"},
+ copyBeliefCheck:{ok:true,note:"Beliefs 1–5 mapped; proof sits next to time-to-value claim"},
+ copyInstructionalCheck:{ok:true,note:"Empty and error states name the next fix, not only the fault"},
+};
+const saasAdoptionChecks={
+ adoptionRitualCheck:{ok:true,note:"Daily triage standup projects this queue first"},
+ adoptionPrivateWinCheck:{ok:true,note:"Agents see the three tickets their lead will raise"},
+ adoptionAbsenceCheck:{ok:true,note:"A week offline would leave owners unassigned before SLA"},
+};
+const saasChecks={...saasProductChecks,...saasCopyChecks,...saasAdoptionChecks};
 const saasValid={...valid,lane:"saas",category:"datagrid",...saasChecks};
-assert.deepEqual(validateDiagnosis(saasValid),[],"saas page with product-UX checks must validate");
-assert.deepEqual(validateDiagnosis({...valid,category:"dashboard"},{lane:"saas"}).filter((e)=>/primaryTaskCheck|emptyErrorTriadCheck|competingCtaCheck/.test(e)).length,3,"options.lane=saas requires the three checks");
+assert.deepEqual(validateDiagnosis(saasValid),[],"saas page with product-UX+copy+adoption checks must validate");
+assert.deepEqual(validateDiagnosis({...valid,category:"dashboard"},{lane:"saas"}).filter((e)=>/primaryTaskCheck|emptyErrorTriadCheck|competingCtaCheck/.test(e)).length,3,"options.lane=saas requires the three product-UX checks");
+assert.equal(requiresSaasCopyChecks({lane:"saas",category:"datagrid"}),true);
+assert.equal(requiresSaasAdoptionChecks({lane:"saas",category:"datagrid"}),true);
 
 const missingChecks={...valid,lane:"saas",category:"form"};
 const missingErrors=validateDiagnosis(missingChecks,{requireFiles:false});
 for(const key of saasProductUxCheckKeys)assert.match(missingErrors.join(" "),new RegExp(key),"each saas product-UX check must be required");
+for(const key of saasCopyCheckKeys)assert.match(missingErrors.join(" "),new RegExp(key),"each saas copy check must be required");
+for(const key of saasAdoptionCheckKeys)assert.match(missingErrors.join(" "),new RegExp(key),"each saas adoption check must be required");
 
 const shortNote={...saasValid,primaryTaskCheck:{ok:true,note:"ok"}};
 assert.match(validateDiagnosis(shortNote,{requireFiles:false}).join(" "),/primaryTaskCheck\.note/);
@@ -75,22 +96,32 @@ assert.match(validateDiagnosis(shortNote,{requireFiles:false}).join(" "),/primar
 const badOk={...saasValid,competingCtaCheck:{ok:"yes",note:"Competing CTAs reviewed against weight budget"}};
 assert.match(validateDiagnosis(badOk,{requireFiles:false}).join(" "),/competingCtaCheck\.ok/);
 
-// Non-saas categories keep working without the checks even when lane=saas.
-const marketing={...valid,lane:"saas",category:"marketing"};
-assert.deepEqual(validateDiagnosis(marketing),[],"marketing saas diagnoses do not require product-UX checks");
+// Marketing needs copy checks, not product-UX or adoption.
+const marketing={...valid,lane:"saas",category:"marketing",...saasCopyChecks};
+assert.deepEqual(validateDiagnosis(marketing),[],"marketing saas diagnoses need copy checks only");
+assert.equal(requiresSaasProductUxChecks(marketing),false);
+assert.equal(requiresSaasAdoptionChecks(marketing),false);
+assert.match(validateDiagnosis({...valid,lane:"saas",category:"marketing"},{requireFiles:false}).join(" "),/copyHeadlineCheck/);
 
-// Seed with lane=saas + Operate category stubs the three checks (empty notes fail until filled).
+// Seed with lane=saas + Operate category stubs product+copy+adoption checks.
 const saasSeed=seedDiagnosis({job:"Fix the weekly revenue dashboard",category:"dashboard",lane:"saas"});
 assert.equal(saasSeed.lane,"saas");
 for(const key of saasProductUxCheckKeys)assert.deepEqual(saasSeed[key],{ok:false,note:""});
+for(const key of saasCopyCheckKeys)assert.deepEqual(saasSeed[key],{ok:false,note:""});
+for(const key of saasAdoptionCheckKeys)assert.deepEqual(saasSeed[key],{ok:false,note:""});
 assert.match(validateDiagnosis({...saasSeed,primaryTask:"Decide which revenue exception to open next",before:{artifact,screenshot:shot}},{requireFiles:false}).join(" "),/note is missing/);
 assert.match(saasSeed.guidance,/primaryTaskCheck/);
+assert.match(saasSeed.guidance,/copy\/adoption/);
 assert.deepEqual(emptySaasProductUxChecks().primaryTaskCheck,{ok:false,note:""});
+assert.deepEqual(emptySaasCopyChecks().copyHeadlineCheck,{ok:false,note:""});
+assert.deepEqual(emptySaasAdoptionChecks().adoptionRitualCheck,{ok:false,note:""});
 
-// no-change on saas pages still needs the product-UX checks.
+// no-change on saas pages still needs the product-UX + copy + adoption checks.
 const saasSound={...sound,lane:"saas",category:"record",...saasChecks};
-assert.deepEqual(validateDiagnosis(saasSound),[],"saas no-change with product-UX checks must validate");
+assert.deepEqual(validateDiagnosis(saasSound),[],"saas no-change with product-UX+copy+adoption checks must validate");
 const saasSoundMissing={...sound,lane:"saas",category:"record"};
 assert.match(validateDiagnosis(saasSoundMissing,{requireFiles:false}).join(" "),/primaryTaskCheck/);
+assert.match(validateDiagnosis(saasSoundMissing,{requireFiles:false}).join(" "),/copyHeadlineCheck/);
+assert.match(validateDiagnosis(saasSoundMissing,{requireFiles:false}).join(" "),/adoptionRitualCheck/);
 
-console.log("diagnosis PASS: evidence hashed · 1–8 real defects · no-change verdict · saas product-UX check presence");
+console.log("diagnosis PASS: evidence hashed · 1–8 real defects · no-change verdict · saas product-UX + copy + adoption check presence");

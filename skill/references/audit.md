@@ -108,9 +108,8 @@ Citation column is required for Critical/Major. Threshold-only rows are incomple
 
 Audit is the packet `--mode audit` procedure. Wireframe / Polish / Copy / Adoption
 are sibling **procedure phases**, not additional packet modes (see `SKILL.md` /
-README § Modes). When the diagnosis includes copy or adoption defects — or lists
-those buckets in `checked` — name them in the report; v1 has no copy/adoption prove
-receipts.
+README § Modes). For `lane=saas`, copy/adoption diagnosis check fields must be present
+even on audit-only reports; a later build pass binds them via `prove` `copyAdoption`.
 
 - **Audit only:** stop after the report.
 - **Polish after audit:** follow `polish.md` — work the prioritized list top-down;

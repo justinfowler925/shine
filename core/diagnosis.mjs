@@ -22,20 +22,46 @@ const text=(value)=>String(value||"").trim();
 export const saasPageCategories=new Set(["datagrid","dashboard","form","record","lex"]);
 export const saasProductUxCheckKeys=["primaryTaskCheck","emptyErrorTriadCheck","competingCtaCheck"];
 
+// Copy checks: persuasive + instructional surfaces under lane=saas (Operate pages
+// plus marketing/catalog). Presence only — belief honesty stays agent (copy.md).
+export const saasCopyCategories=new Set(["datagrid","dashboard","form","record","lex","marketing","catalog"]);
+export const saasCopyCheckKeys=["copyHeadlineCheck","copyBeliefCheck","copyInstructionalCheck"];
+
+// Adoption checks: Operate pages only (tools someone opens on a Tuesday).
+// Presence only — ritual honesty stays agent (adoption.md).
+export const saasAdoptionCategories=saasPageCategories;
+export const saasAdoptionCheckKeys=["adoptionRitualCheck","adoptionPrivateWinCheck","adoptionAbsenceCheck"];
+
 export function requiresSaasProductUxChecks(value,{lane}={}){
  const resolved=text(lane||value?.lane);
  if(resolved!=="saas")return false;
  return saasPageCategories.has(text(value?.category));
 }
 
-function validateSaasProductUxCheck(value,key,errors){
+export function requiresSaasCopyChecks(value,{lane}={}){
+ const resolved=text(lane||value?.lane);
+ if(resolved!=="saas")return false;
+ return saasCopyCategories.has(text(value?.category));
+}
+
+export function requiresSaasAdoptionChecks(value,{lane}={}){
+ const resolved=text(lane||value?.lane);
+ if(resolved!=="saas")return false;
+ return saasAdoptionCategories.has(text(value?.category));
+}
+
+function validateSaasCheck(value,key,errors,label){
  const check=value?.[key];
  if(!check||typeof check!=="object"||Array.isArray(check)){
-  errors.push(`${key} is required for saas page diagnoses (object with note)`);
+  errors.push(`${key} is required for saas ${label} diagnoses (object with note)`);
   return;
  }
  if(text(check.note).length<8)errors.push(`${key}.note is missing (at least 8 characters)`);
  if(check.ok!==undefined&&typeof check.ok!=="boolean")errors.push(`${key}.ok must be a boolean when present`);
+}
+
+function validateSaasProductUxCheck(value,key,errors){
+ validateSaasCheck(value,key,errors,"page");
 }
 
 export function validateDiagnosis(value,{requireFiles=true,lane}={}){
@@ -52,6 +78,12 @@ export function validateDiagnosis(value,{requireFiles=true,lane}={}){
  if(!verdicts.has(verdict))errors.push("verdict must be defects or no-change");
  if(requiresSaasProductUxChecks(value,{lane})){
   for(const key of saasProductUxCheckKeys)validateSaasProductUxCheck(value,key,errors);
+ }
+ if(requiresSaasCopyChecks(value,{lane})){
+  for(const key of saasCopyCheckKeys)validateSaasCheck(value,key,errors,"copy");
+ }
+ if(requiresSaasAdoptionChecks(value,{lane})){
+  for(const key of saasAdoptionCheckKeys)validateSaasCheck(value,key,errors,"adoption");
  }
  const defects=Array.isArray(value?.defects)?value.defects:[];
  if(verdict==="no-change"){
@@ -81,10 +113,18 @@ export function emptySaasProductUxChecks(){
  return Object.fromEntries(saasProductUxCheckKeys.map((key)=>[key,{ok:false,note:""}]));
 }
 
+export function emptySaasCopyChecks(){
+ return Object.fromEntries(saasCopyCheckKeys.map((key)=>[key,{ok:false,note:""}]));
+}
+
+export function emptySaasAdoptionChecks(){
+ return Object.fromEntries(saasAdoptionCheckKeys.map((key)=>[key,{ok:false,note:""}]));
+}
+
 export function seedDiagnosis({job,category,lane=""}){
  const base={version:1,job,category,primaryTask:"",before:{artifact:"",screenshot:""},
   verdict:"defects",
-  guidance:"Keep only defects you can evidence from the before screenshot or measure output. One real defect is a valid pass. If nothing is wrong, set verdict to no-change, list all five buckets in checked, and write verdictEvidence; do not invent defects or inflate severity to satisfy a count. For lane=saas Operate page categories, fill primaryTaskCheck, emptyErrorTriadCheck, and competingCtaCheck (presence is machine-gated; honesty of the note is yours).",
+  guidance:"Keep only defects you can evidence from the before screenshot or measure output. One real defect is a valid pass. If nothing is wrong, set verdict to no-change, list all five buckets in checked, and write verdictEvidence; do not invent defects or inflate severity to satisfy a count. For lane=saas Operate page categories, fill primaryTaskCheck, emptyErrorTriadCheck, competingCtaCheck, and the copy/adoption check fields (presence is machine-gated; honesty of the note is yours). Bind critical/major usability and adoption defects to flow:<id> assertions when a usability flow exists.",
   checked:[],
   verdictEvidence:"",
   defects:[
@@ -92,6 +132,8 @@ export function seedDiagnosis({job,category,lane=""}){
   ]};
  if(text(lane))base.lane=text(lane);
  if(requiresSaasProductUxChecks(base))Object.assign(base,emptySaasProductUxChecks());
+ if(requiresSaasCopyChecks(base))Object.assign(base,emptySaasCopyChecks());
+ if(requiresSaasAdoptionChecks(base))Object.assign(base,emptySaasAdoptionChecks());
  return base;
 }
 

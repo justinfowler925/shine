@@ -54,11 +54,37 @@ need these fields.
 | `emptyErrorTriadCheck` | Do loading / empty / error (and filtered-empty when filters exist) read as distinct states on **non-table** surfaces too? | Triad is covered or honestly N/A with why |
 | `competingCtaCheck` | Is there one filled primary, or do peer CTAs compete for the same job? | Weight budget matches the job; competitors named or cleared |
 
-Fill each as `{ "ok": boolean, "note": "…" }` (note ≥8 characters). On `verdict: defects`, still
-fill the checks — a craft-only defect list that skips product UX is incomplete for SaaS. On
-`verdict: no-change`, the checks plus full `checked` buckets are how you prove you looked.
+### SaaS copy checks (lane=saas Operate + marketing/catalog)
 
-Primary-task defects bind to executable proof. Example for an Operate queue:
+For `lane=saas` and categories `datagrid|dashboard|form|record|lex|marketing|catalog`, fill
+three copy fields (see `copy.md`). Presence is machine-gated; belief honesty stays agent.
+Measure also hard-fails missing `document.title`+H1 and stub empty-state copy when the copy
+heuristic gate applies — not a full NLP critic.
+
+| Field | Ask | When `ok: true` means |
+|---|---|---|
+| `copyHeadlineCheck` | Does the first screen answer “what is this / what do I get”? | Title or H1 carries belief 1 in the reader’s words |
+| `copyBeliefCheck` | Are the five Hormozi beliefs mapped to carrying elements (or gaps named)? | Each belief has an element or an honest gap |
+| `copyInstructionalCheck` | Do empty / error / CTA microcopy say what happens next? | No “No data” stubs; CTAs are verb + outcome |
+
+### SaaS adoption checks (lane=saas Operate pages)
+
+Same Operate categories as product-UX. Four gates in `adoption.md`; three fields are required
+in the diagnosis so agents cannot skip the bucket. Ritual honesty stays agent.
+
+| Field | Ask | When `ok: true` means |
+|---|---|---|
+| `adoptionRitualCheck` | Which recurring meeting or moment runs this surface? | Ritual named with owner |
+| `adoptionPrivateWinCheck` | Per persona, what one fact can’t they get by asking a person? | Private win stated |
+| `adoptionAbsenceCheck` | What breaks if nobody opens it for a week? | Absence cost named (not “nothing”) |
+
+Fill each as `{ "ok": boolean, "note": "…" }` (note ≥8 characters). On `verdict: defects`, still
+fill the checks — a craft-only defect list that skips product UX / copy / adoption is incomplete
+for SaaS. On `verdict: no-change`, the checks plus full `checked` buckets are how you prove you
+looked. `prove` surfaces `copyAdoption` for these fields and binds critical/major defects
+(including `adoption` bucket) to assertion ids.
+
+Primary-task and adoption defects bind to executable proof. Example for an Operate queue:
 
 ```json
 {
@@ -72,8 +98,9 @@ Primary-task defects bind to executable proof. Example for an Operate queue:
 }
 ```
 
-`flow:assign-owner` must match an id in `shine-usability.json`. Critical/major usability defects
-without assertion ids fail `prove` `defectAssertions` — do not leave `assertions: []`.
+`flow:assign-owner` must match an id in `shine-usability.json`. Critical/major usability **and
+adoption** defects without assertion ids fail `prove` `defectAssertions` — do not leave
+`assertions: []`.
 
 ### Usability (can they finish the job?)
 - Primary action visible in ~3 seconds? Competing CTAs? → also `primaryTaskCheck` / `competingCtaCheck`

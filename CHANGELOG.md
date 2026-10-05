@@ -6,6 +6,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Copy / adoption proof for `lane=saas`.** Diagnosis requires
+  `copyHeadlineCheck` / `copyBeliefCheck` / `copyInstructionalCheck` (Operate +
+  marketing/catalog) and `adoptionRitualCheck` / `adoptionPrivateWinCheck` /
+  `adoptionAbsenceCheck` (Operate). `prove` binds them via `copyAdoption` and
+  assertion ids on critical/major adoption defects; measure hard-fails missing
+  title+H1 and stub empty-state copy when the copy heuristic gate applies
+  (`verify/copy-adoption.mjs`). Presence only — belief/ritual honesty stays agent.
+  Doctor runs `verify/copy-adoption.test.mjs`.
+
 - A `catalog` packet category and a `shadcn-catalog` blueprint with a validated capture. A
   card catalog — a handful of rich records found by search and a few filters, one card per
   record with its own actions and disclosure — is not a data grid, and the first real audit

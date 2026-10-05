@@ -42,6 +42,8 @@ assert.match(grid.proof.commands[2],/--mode existing --diagnosis shine-diagnosis
 assert.equal(grid.diagnosis.required,true);
 assert.match(grid.diagnosis.command,/--lane internal/);
 assert.match(grid.diagnosis.instruction,/primaryTaskCheck/);
+assert.match(grid.diagnosis.instruction,/copyHeadlineCheck/);
+assert.match(grid.diagnosis.instruction,/adoptionRitualCheck/);
 assert.equal(grid.productPrecedent.required,true);
 assert.equal(grid.productPrecedent.provided,false);
 
@@ -125,13 +127,18 @@ assert.match(lex.completion.command,/--lane lex/);
 assert.deepEqual(grid.procedure.phases,["wireframe","build","polish","audit","copy","adoption"]);
 assert.equal(grid.procedure.packetMode,"existing");
 assert.match(grid.procedure.instruction,/not --mode values/);
-assert.match(grid.procedure.instruction,/no copy\/adoption prove/);
+assert.match(grid.procedure.instruction,/copyAdoption/);
+assert.match(grid.proof.commands[0],/--lane internal/);
+assert.ok(grid.completion.requires.includes("copyAdoption"),"existing completion lists copyAdoption (skipped unless lane=saas)");
+const saasExisting=createDesignPacket({job:cases[0][0],lane:"saas",project:process.cwd(),mode:"existing"});
+assert.ok(saasExisting.completion.requires.includes("copyAdoption"),"saas existing completion requires copyAdoption");
+assert.match(saasExisting.proof.commands[0],/--lane saas/);
+assert.match(saasExisting.diagnosis.instruction,/copyHeadlineCheck/);
 const auditPacket=createDesignPacket({job:cases[2][0],lane:"internal",project:process.cwd(),mode:"audit"});
 assert.equal(auditPacket.editing.allowed,false);
 assert.equal(auditPacket.completion.required,false);
 assert.equal(auditPacket.procedure.packetMode,"audit");
-assert.match(auditPacket.completion.instruction,/copy or adoption/);
-assert.match(auditPacket.completion.instruction,/no copy\/adoption prove/);
+assert.match(auditPacket.completion.instruction,/copy\/adoption check fields/);
 
 // Python/vanilla web projects have no npm manifest; missing is not malformed.
 const manifestless=mkdtempSync(join(tmpdir(),"shine-python-web-"));
