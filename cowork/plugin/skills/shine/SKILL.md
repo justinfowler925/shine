@@ -63,7 +63,7 @@ Only when the packet cannot answer a genuinely advanced requirement, read one fo
 `references/salesforce.md`. Ordinary tables, forms, and page structures need none of them.
 ## Prove
 Exercise the primary workflow in the rendered product. Run the packet's measure command until it
-exits zero, run product compare when the packet names a product precedent, then run catalog compare. These are partial checks; finish with the packet’s completion command. A receipt is generated only by the verifier;
+exits zero, run product compare when the packet names a product precedent, then run catalog compare. These are partial checks; finish with the packet’s completion command. Operate SaaS pages (dashboard/settings/form/queue/record/app-shell/…) cannot finish on compare alone — stop-sweep requires a fresh `prove.mjs` receipt; see `references/verification.md`. A receipt is generated only by the verifier;
 never create or edit one. Report the selected template, component implementation, workflow result,
 measure facts, screenshot, receipt, and anything not completed.
 Use the packet's exact `verify/measure.mjs` and `verify/compare.mjs` invocations; do not rebuild flags.

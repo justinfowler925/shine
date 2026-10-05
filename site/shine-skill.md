@@ -63,7 +63,7 @@ Only when the packet cannot answer a genuinely advanced requirement, read one fo
 `references/salesforce.md`. Ordinary tables, forms, and page structures need none of them.
 ## Prove
 Exercise the primary workflow in the rendered product. Run the packet's measure command until it
-exits zero, run product compare when the packet names a product precedent, then run catalog compare. These are partial checks; finish with the packet’s completion command. A receipt is generated only by the verifier;
+exits zero, run product compare when the packet names a product precedent, then run catalog compare. These are partial checks; finish with the packet’s completion command. Operate SaaS pages (dashboard/settings/form/queue/record/app-shell/…) cannot finish on compare alone — stop-sweep requires a fresh `prove.mjs` receipt; see `references/verification.md`. A receipt is generated only by the verifier;
 never create or edit one. Report the selected template, component implementation, workflow result,
 measure facts, screenshot, receipt, and anything not completed.
 Use the packet's exact `verify/measure.mjs` and `verify/compare.mjs` invocations; do not rebuild flags.
@@ -4834,7 +4834,9 @@ Visual similarity and accessibility are necessary but do not establish that a pe
 
 ## Operate SaaS screens — fail closed on prove
 
-For Operate-lane page cites whose `screen` is one of `dashboard`, `settings`, `form`, `queue`, `record`, `wizard`, `app-shell`, `lex-record`, `lex-queue`, `onboarding`, `checkout`, or `command-palette`, `verify/prove.mjs` treats missing or invalid usability as **`interactions: failed`** (not `not_tested`). Shallow contracts fail the same way: every flow needs ≥3 steps, a real user action (`click` / `fill` / `press` / `select`), and an observable state outcome. Marketing, charts, blog, and other non-allowlisted screens keep the softer `not_tested` → incomplete path when no contract is supplied.
+For Operate-lane page cites whose `screen` is one of `dashboard`, `settings`, `form`, `queue`, `record`, `wizard`, `app-shell`, `lex-record`, `lex-queue`, `onboarding`, `checkout`, `command-palette`, or `crud`, `verify/prove.mjs` treats missing or invalid usability as **`interactions: failed`** (not `not_tested`). Shallow contracts fail the same way: every flow needs ≥3 steps, a real user action (`click` / `fill` / `press` / `select`), and an observable state outcome. Marketing, charts, blog, and other non-allowlisted screens keep the softer `not_tested` → incomplete path when no contract is supplied.
+
+**Mandatory completion:** the same allowlist cannot clear `hooks/stop-sweep.mjs` without a fresh `prove.mjs` completion receipt. Running `compare.mjs` alone is partial and will be blocked. Marketing and wireframe surfaces are out of this gate.
 
 Do not ship an Operate SaaS surface on craft-green alone. Write the contract before claiming completion.
 
@@ -4926,6 +4928,15 @@ runs on the prove path, not only on standalone compare.
 `settings`, `form`, `queue`, `record`, … — see `usability.md`), missing or shallow
 `shine-usability.json` makes `prove` report `interactions: failed` (not `not_tested`).
 Other screens still soft-incomplete when usability is skipped. Details in `usability.md`.
+
+**Operate prove is mandatory (stop-sweep):** for the same allowlist (plus `app-shell`),
+a turn that changes cited Operate UI **fails closed** without a fresh `prove.mjs`
+completion receipt (`~/.cache/shine/last-completion.json`, 20 min). A `compare.mjs`
+receipt alone is partial evidence and does **not** clear the gate. Green `prove.mjs`
+always mints the completion store. Marketing, non-allowlisted screens, and
+`data-shine-wireframe` surfaces are not blocked by this gate (wireframe still needs
+compare when cited). Packet sets `completion.required: true` for Operate cites.
+Prove bite: `node verify/operate-prove-mandatory.test.mjs` and `node verify/doctor.mjs`.
 
 **Dashboard / KPI floor (M5):** when the cite screen is `dashboard` or the page sets
 `data-shine-probe="dashboard"`, ≥3 equal-weight summary cards with no focal

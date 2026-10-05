@@ -4,7 +4,9 @@ Visual similarity and accessibility are necessary but do not establish that a pe
 
 ## Operate SaaS screens — fail closed on prove
 
-For Operate-lane page cites whose `screen` is one of `dashboard`, `settings`, `form`, `queue`, `record`, `wizard`, `app-shell`, `lex-record`, `lex-queue`, `onboarding`, `checkout`, or `command-palette`, `verify/prove.mjs` treats missing or invalid usability as **`interactions: failed`** (not `not_tested`). Shallow contracts fail the same way: every flow needs ≥3 steps, a real user action (`click` / `fill` / `press` / `select`), and an observable state outcome. Marketing, charts, blog, and other non-allowlisted screens keep the softer `not_tested` → incomplete path when no contract is supplied.
+For Operate-lane page cites whose `screen` is one of `dashboard`, `settings`, `form`, `queue`, `record`, `wizard`, `app-shell`, `lex-record`, `lex-queue`, `onboarding`, `checkout`, `command-palette`, or `crud`, `verify/prove.mjs` treats missing or invalid usability as **`interactions: failed`** (not `not_tested`). Shallow contracts fail the same way: every flow needs ≥3 steps, a real user action (`click` / `fill` / `press` / `select`), and an observable state outcome. Marketing, charts, blog, and other non-allowlisted screens keep the softer `not_tested` → incomplete path when no contract is supplied.
+
+**Mandatory completion:** the same allowlist cannot clear `hooks/stop-sweep.mjs` without a fresh `prove.mjs` completion receipt. Running `compare.mjs` alone is partial and will be blocked. Marketing and wireframe surfaces are out of this gate.
 
 Do not ship an Operate SaaS surface on craft-green alone. Write the contract before claiming completion.
 

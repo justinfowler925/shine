@@ -4,6 +4,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ## Unreleased
 
+### Changed
+
+- **Operate prove is mandatory.** Stop-sweep fails closed when SaaS Operate page cites
+  (`dashboard` / `settings` / `form` / `queue` / `record` / `app-shell` / …) change without a
+  fresh `verify/prove.mjs` completion receipt. A `compare.mjs` receipt alone no longer clears
+  the gate. Marketing and wireframe surfaces stay out of this requirement. Green prove always
+  mints `~/.cache/shine/last-completion.json`. See `skill/references/verification.md`.
+
 ### Added
 
 - **Copy / adoption proof for `lane=saas`.** Diagnosis requires

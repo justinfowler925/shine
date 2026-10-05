@@ -6,6 +6,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { load } from "./deps.mjs";
 import {loadTemplates} from "../corpus/catalog.mjs";
+import { OPERATE_PROVE_SCREENS, isOperateProveScreen } from "../hooks/receipt.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const fail=(message)=>{throw new Error(`usability: ${message}`)};
@@ -14,10 +15,8 @@ const actions=new Set([...requiredActions,"visible","hidden","text","value","che
 
 // Operate-lane SaaS page screens: prove must not greenlight missing or trivial
 // usability as `not_tested`. Policy is hard-fail (`interactions: failed`).
-export const OPERATE_USABILITY_SCREENS=new Set([
-  "dashboard","settings","form","queue","record","wizard",
-  "app-shell","lex-record","lex-queue","onboarding","checkout","command-palette",
-]);
+// Same allowlist as mandatory prove completion (hooks/receipt.mjs).
+export const OPERATE_USABILITY_SCREENS=new Set(OPERATE_PROVE_SCREENS);
 
 export function operateUsabilityScreen(citeId,root=ROOT){
   if(!citeId)return null;
@@ -27,7 +26,7 @@ export function operateUsabilityScreen(citeId,root=ROOT){
 
 export function requiresOperateUsability(citeId,root=ROOT){
   const screen=operateUsabilityScreen(citeId,root);
-  return Boolean(screen&&OPERATE_USABILITY_SCREENS.has(screen));
+  return Boolean(screen&&isOperateProveScreen(screen));
 }
 
 /** Prove-path status when usability throws. Operate screens fail closed. */

@@ -50,6 +50,15 @@ runs on the prove path, not only on standalone compare.
 `shine-usability.json` makes `prove` report `interactions: failed` (not `not_tested`).
 Other screens still soft-incomplete when usability is skipped. Details in `usability.md`.
 
+**Operate prove is mandatory (stop-sweep):** for the same allowlist (plus `app-shell`),
+a turn that changes cited Operate UI **fails closed** without a fresh `prove.mjs`
+completion receipt (`~/.cache/shine/last-completion.json`, 20 min). A `compare.mjs`
+receipt alone is partial evidence and does **not** clear the gate. Green `prove.mjs`
+always mints the completion store. Marketing, non-allowlisted screens, and
+`data-shine-wireframe` surfaces are not blocked by this gate (wireframe still needs
+compare when cited). Packet sets `completion.required: true` for Operate cites.
+Prove bite: `node verify/operate-prove-mandatory.test.mjs` and `node verify/doctor.mjs`.
+
 **Dashboard / KPI floor (M5):** when the cite screen is `dashboard` or the page sets
 `data-shine-probe="dashboard"`, ≥3 equal-weight summary cards with no focal
 chart/table/queue hard-fail. Elements that opt into `data-shine-kpi` must carry

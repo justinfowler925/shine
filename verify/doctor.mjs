@@ -35,7 +35,7 @@ import { dependencyClosure, inspectPack } from "../corpus/pack-files.mjs";
 import { detectProject, RECIPES, resolveIntegration, verifyRecipeApi } from "../integrations/resolve.mjs";
 import { scaffold } from "../integrations/scaffold.mjs";
 import { citeGaps } from "../hooks/cite-gate.mjs";
-import { artifactClaim, proveGaps, readProveReceipt, writeProveReceipt } from "../hooks/receipt.mjs";
+import { artifactClaim, proveGaps, readProveReceipt, writeCompletionProveReceipt, writeProveReceipt } from "../hooks/receipt.mjs";
 import { DATAGRID_CAPABILITIES, dataGridContractGaps } from "./contracts/table.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -310,6 +310,9 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
   const sweepProof=spawnSync(process.execPath,[join(SHINE,"verify/stop-sweep-proof.test.mjs")],{cwd:SHINE,encoding:"utf8"});
   if(sweepProof.status===0)ok("stop-sweep proof keying", "component sources claim their cite; artifacts stay bound to their bytes");
   else fail("stop-sweep proof keying",`${sweepProof.stderr||sweepProof.stdout}`.trim().slice(-800));
+  const operateProve=spawnSync(process.execPath,[join(SHINE,"verify/operate-prove-mandatory.test.mjs")],{cwd:SHINE,encoding:"utf8"});
+  if(operateProve.status===0)ok("Operate prove mandatory", "missing/stale completion fails; green prove passes; marketing/wireframe exempt");
+  else fail("Operate prove mandatory",`${operateProve.stderr||operateProve.stdout}`.trim().slice(-800));
 }
 
 // ---- 1b. tools resolve from the loaded skill, never a hardcoded checkout --
@@ -768,21 +771,70 @@ if (!CI) {
   gitP("init", "-q", ".");
   gitP("add", "-A");
   const rec = join(proveDir, "last-prove.json");
+  const completionRec = join(proveDir, "last-completion.json");
   const feedProve = (event) =>
     spawnSync("node", [sweep], {
       input: JSON.stringify({ ...event, cwd: proveDir }),
       encoding: "utf8",
-      env: { ...process.env, SHINE_RECEIPT: rec },
+      env: { ...process.env, SHINE_RECEIPT: rec, SHINE_COMPLETION_RECEIPT: completionRec },
     });
   const noProve = feedProve({ hook_event_name: "stop", conversation_id: "doctor" });
   if (noProve.status === 2 && /compare\.mjs/.test(noProve.stderr)) ok("stop sweep requires prove", "cited page without compare is blocked");
   else fail("stop sweep requires prove", `exit ${noProve.status}: ${(noProve.stderr || noProve.stdout).slice(0, 160)}`);
   process.env.SHINE_RECEIPT = rec;
   writeProveReceipt({ cite: "untitled-table", target: proveHtml, templateShot: proofShot, proof: receiptProof });
+  // untitled-table is Operate (queue): compare alone must not clear stop-sweep.
+  const compareOnlyOperate = feedProve({ hook_event_name: "stop", conversation_id: "doctor" });
+  if (
+    compareOnlyOperate.status === 2 &&
+    /prove\.mjs completion|Operate SaaS/.test(compareOnlyOperate.stderr)
+  )
+    ok("stop sweep requires prove.mjs for Operate", "compare receipt alone blocked");
+  else
+    fail(
+      "stop sweep requires prove.mjs for Operate",
+      `exit ${compareOnlyOperate.status}: ${(compareOnlyOperate.stderr || compareOnlyOperate.stdout).slice(0, 200)}`,
+    );
+
+  process.env.SHINE_COMPLETION_RECEIPT = completionRec;
+  writeCompletionProveReceipt({
+    cite: "untitled-table",
+    target: proveHtml,
+    lane: "saas",
+    screen: "queue",
+    checks: Object.fromEntries(
+      ["accessibility", "styling", "layout", "interactions", "referenceValidity", "visualComparison", "buildBinding"].map(
+        (k) => [k, { status: "passed" }],
+      ),
+    ),
+  });
   delete process.env.SHINE_RECEIPT;
+  delete process.env.SHINE_COMPLETION_RECEIPT;
   const yesProve = feedProve({ hook_event_name: "stop", conversation_id: "doctor" });
-  if (yesProve.status === 0) ok("stop sweep accepts a proved cite", "receipt present");
+  if (yesProve.status === 0) ok("stop sweep accepts a proved cite", "compare + prove.mjs completion present");
   else fail("stop sweep accepts a proved cite", `exit ${yesProve.status}: ${(yesProve.stderr || yesProve.stdout).slice(0, 160)}`);
+
+  // Marketing cite: compare alone still clears (no Operate mandatory prove).
+  const mktDir = mkdtempSync(join(tmpdir(), "shine-prove-mkt-"));
+  const mktHtml = join(mktDir, "hero.html");
+  writeFileSync(mktHtml, '<!doctype html><html><body><main data-cite="magicui-hero">ok</main></body></html>\n');
+  const gitM = (...a) => spawnSync("git", a, { cwd: mktDir, encoding: "utf8" });
+  gitM("init", "-q", ".");
+  gitM("add", "-A");
+  const mktCompare = join(mktDir, "last-prove.json");
+  const mktComplete = join(mktDir, "last-completion.json");
+  const feedMkt = (event) =>
+    spawnSync("node", [sweep], {
+      input: JSON.stringify({ ...event, cwd: mktDir }),
+      encoding: "utf8",
+      env: { ...process.env, SHINE_RECEIPT: mktCompare, SHINE_COMPLETION_RECEIPT: mktComplete },
+    });
+  process.env.SHINE_RECEIPT = mktCompare;
+  writeProveReceipt({ cite: "magicui-hero", target: mktHtml, templateShot: proofShot, proof: receiptProof });
+  delete process.env.SHINE_RECEIPT;
+  const mktSweep = feedMkt({ hook_event_name: "stop", conversation_id: "doctor" });
+  if (mktSweep.status === 0) ok("stop sweep skips mandatory prove for marketing", "compare-only marketing clears");
+  else fail("stop sweep skips mandatory prove for marketing", `exit ${mktSweep.status}: ${(mktSweep.stderr || mktSweep.stdout).slice(0, 160)}`);
 
   const afterPaint = join(SHINE, "verify/fixtures/unfucked/after.html");
   const afterSrc = readFileSync(afterPaint, "utf8");
