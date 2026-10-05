@@ -74,6 +74,12 @@ two filled treatments on any surface; Operate tightens to one. Diagnosis
 or prove reports `competingCtaProof: failed`. Doctor bite:
 `node verify/cta-pressure.test.mjs`.
 
+
+**Nucleus golden fixture (P4a):** when a Nucleus checkout is absent, use
+`verify/fixtures/nucleus-golden/` plus `skill/references/clearspeed/profile-instructions.md`
+(`docs/nucleus-attach.md`). `node verify/nucleus-golden.test.mjs` bites fail→pass on
+seeded Company Tools–shaped bloat without twin full-page screenshots.
+
 **Copy / adoption proof:** for `lane=saas`, diagnosis requires copy check fields
 (Operate + marketing/catalog) and adoption check fields (Operate). `prove` reports
 `copyAdoption` for presence and binds critical/major `adoption` defects to assertion

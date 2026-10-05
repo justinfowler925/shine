@@ -14,6 +14,7 @@ import {
   evaluateMainCtaPressure,
   formatCtaPressureFailures,
   isOperateProveScreen,
+  isCtaPressureScreen,
 } from "./cta-pressure.mjs";
 
 const SHINE = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -23,6 +24,8 @@ const { chromium } = load("playwright");
 
 assert.equal(isOperateProveScreen("settings"), true);
 assert.equal(isOperateProveScreen("marketing"), false);
+assert.equal(isCtaPressureScreen("catalog"), true);
+assert.equal(isOperateProveScreen("catalog"), false);
 assert.equal(ctaPressureGateApplies({ citeScreen: "settings" }), true);
 assert.equal(ctaPressureGateApplies({ citeScreen: "dashboard", lane: "saas" }), true);
 assert.equal(ctaPressureGateApplies({ isWireframe: true, citeScreen: "settings" }), false);

@@ -1,0 +1,81 @@
+<!-- Nucleus-shaped Company Tools / settings bloat — dual filled CTAs + equal card soup.
+     Adversarial golden fixture for expert-track P4a/P6. No production secrets. -->
+<!doctype html>
+<html lang="en" data-cite="shadcn-catalog" data-shine-probe="dashboard">
+<head>
+  <meta charset="utf-8" />
+  <title>Company Tools</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 14px/1.5 system-ui, sans-serif; background: #f4f4f5; color: #18181b; }
+    .shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+    aside { background: #fff; border-right: 1px solid #e4e4e7; padding: 20px 16px; }
+    aside h1 { font-size: 15px; margin: 0 0 16px; }
+    aside a { display: block; padding: 8px 10px; color: #18181b; text-decoration: none; border-radius: 6px; }
+    aside a[aria-current="page"] { background: #f4f4f5; font-weight: 600; }
+    header.page {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 28px; background: #fff; border-bottom: 1px solid #e4e4e7;
+    }
+    header.page h2 { margin: 0; font-size: 20px; }
+    .header-actions { display: flex; gap: 10px; }
+    button.filled-a { background: #18181b; color: #fafafa; border: 0; padding: 10px 14px; border-radius: 8px; font: inherit; font-weight: 600; }
+    button.filled-b { background: #3f3f46; color: #fafafa; border: 0; padding: 10px 14px; border-radius: 8px; font: inherit; font-weight: 600; }
+    main { padding: 24px 28px; }
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+    .kpi {
+      background: #fff; border: 1px solid #e4e4e7; border-radius: 10px; padding: 16px;
+      min-height: 96px;
+    }
+    .kpi .label { font-size: 12px; color: #71717a; }
+    .kpi .value { font-size: 24px; font-weight: 600; margin-top: 6px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .card {
+      background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; padding: 18px;
+      min-height: 140px;
+    }
+    .card h3 { margin: 0 0 6px; font-size: 15px; }
+    .card p { margin: 0; color: #71717a; font-size: 13px; }
+    .empty { margin-top: 24px; padding: 28px; background: #fff; border: 1px dashed #d4d4d8; border-radius: 12px; text-align: center; color: #a1a1aa; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <h1>Nucleus</h1>
+      <nav aria-label="Operate">
+        <a href="#tools" aria-current="page">Company Tools</a>
+        <a href="#tools">Admin</a>
+        <a href="#tools">Adoption</a>
+      </nav>
+    </aside>
+    <div>
+      <header class="page">
+        <h2>Company Tools</h2>
+      </header>
+      <main id="tools">
+        <div class="header-actions" style="display:flex;gap:10px;margin:0 0 16px">
+          <button type="button" class="filled-a" id="install">Install package</button>
+          <button type="button" class="filled-b" id="export">Export catalog</button>
+        </div>
+        <section class="kpi-row" data-summary aria-label="Summary metrics">
+          <div class="kpi"><div class="label">Installed</div><div class="value">12</div></div>
+          <div class="kpi"><div class="label">Available</div><div class="value">28</div></div>
+          <div class="kpi"><div class="label">Updates</div><div class="value">3</div></div>
+          <div class="kpi"><div class="label">Teams</div><div class="value">7</div></div>
+        </section>
+        <section class="cards" aria-label="Tool catalog">
+          <article class="card"><h3>Shine</h3><p>Design authority skill and gates.</p></article>
+          <article class="card"><h3>Grid Kit</h3><p>Shared DataGrid primitives.</p></article>
+          <article class="card"><h3>Audit Pack</h3><p>Weekly board helpers.</p></article>
+          <article class="card"><h3>Adoption</h3><p>Open-Monday ritual metrics.</p></article>
+          <article class="card"><h3>Tokens</h3><p>Brand and personal CSS.</p></article>
+        </section>
+        <div class="empty" data-empty>Welcome to your dashboard</div>
+        <p id="status" role="status" hidden></p>
+      </main>
+    </div>
+  </div>
+  </body>
+</html>

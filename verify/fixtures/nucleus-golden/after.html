@@ -1,0 +1,105 @@
+<!-- Nucleus-shaped Company Tools after expert pass — single primary, catalog focal, real empty copy. -->
+<!doctype html>
+<html lang="en" data-cite="shadcn-catalog">
+<head>
+  <meta charset="utf-8" />
+  <title>Company Tools</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 14px/1.5 system-ui, sans-serif; background: #fafafa; color: #18181b; }
+    .shell { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+    aside { background: #fff; border-right: 1px solid #e4e4e7; padding: 20px 16px; }
+    aside h1 { font-size: 15px; margin: 0 0 16px; }
+    aside a { display: block; padding: 8px 10px; color: #18181b; text-decoration: none; border-radius: 6px; }
+    aside a[aria-current="page"] { background: #f4f4f5; font-weight: 600; }
+    main { padding: 28px 32px; max-width: 960px; }
+    .toolbar { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    h1 { margin: 0 0 4px; font-size: 22px; letter-spacing: -0.02em; }
+    .lede { margin: 0; color: #71717a; font-size: 13px; }
+    button#install { background: #18181b; color: #fafafa; border: 0; padding: 10px 14px; border-radius: 8px; font: inherit; font-weight: 600; }
+    button#clear { background: transparent; color: #18181b; border: 1px solid #d4d4d8; padding: 10px 14px; border-radius: 8px; font: inherit; }
+    .filters { display: flex; gap: 8px; margin-bottom: 16px; }
+    .filters input {
+      flex: 1; font: inherit; padding: 10px 12px; border: 1px solid #e4e4e7; border-radius: 8px;
+    }
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .card {
+      background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; padding: 18px;
+    }
+    .card h2 { margin: 0 0 6px; font-size: 16px; }
+    .card p { margin: 0 0 12px; color: #71717a; font-size: 13px; }
+    .card .meta { font-size: 12px; color: #a1a1aa; }
+    [data-empty] {
+      display: none; margin-top: 16px; padding: 24px; border: 1px dashed #d4d4d8;
+      border-radius: 12px; background: #fff;
+    }
+    [data-empty].show { display: block; }
+    #status { margin: 12px 0 0; color: #71717a; font-size: 13px; min-height: 1.2em; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <h1>Nucleus</h1>
+      <nav aria-label="Operate">
+        <a href="#tools" aria-current="page">Company Tools</a>
+        <a href="#tools">Admin</a>
+        <a href="#tools">Adoption</a>
+      </nav>
+    </aside>
+    <main id="tools">
+      <div class="toolbar">
+        <div>
+          <h1>Company Tools</h1>
+          <p class="lede">Install and manage packages your workspace already owns.</p>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button type="button" id="clear">Clear filters</button>
+          <button type="button" id="install">Install package</button>
+        </div>
+      </div>
+      <div class="filters">
+        <input id="q" type="search" placeholder="Search packages" aria-label="Search packages" />
+      </div>
+      <section class="cards" aria-label="Tool catalog" id="catalog">
+        <article class="card" data-name="shine"><h2>Shine</h2><p>Design authority skill and gates for Operate surfaces.</p><div class="meta">Installed · v4</div></article>
+        <article class="card" data-name="grid kit"><h2>Grid Kit</h2><p>Shared DataGrid primitives used across Admin queues.</p><div class="meta">Installed · v2</div></article>
+        <article class="card" data-name="audit pack"><h2>Audit Pack</h2><p>Weekly board helpers and adoption receipts.</p><div class="meta">Available</div></article>
+        <article class="card" data-name="tokens"><h2>Tokens</h2><p>Brand and personal CSS packages.</p><div class="meta">Available</div></article>
+      </section>
+      <div data-empty id="empty">
+        <strong>No packages match this search.</strong>
+        <p>Clear filters to see the full catalog, or install a package your team already uses.</p>
+      </div>
+      <p id="status" role="status"></p>
+    </main>
+  </div>
+  <script>
+    const q = document.getElementById("q");
+    const empty = document.getElementById("empty");
+    const cards = [...document.querySelectorAll("#catalog .card")];
+    const status = document.getElementById("status");
+    function filter() {
+      const term = q.value.trim().toLowerCase();
+      let shown = 0;
+      for (const card of cards) {
+        const hit = !term || card.dataset.name.includes(term);
+        card.hidden = !hit;
+        if (hit) shown++;
+      }
+      empty.classList.toggle("show", shown === 0);
+      status.textContent = term ? `${shown} match${shown === 1 ? "" : "es"}` : "";
+    }
+    q.addEventListener("input", filter);
+    document.getElementById("clear").onclick = () => {
+      q.value = "";
+      filter();
+      status.textContent = "Filters cleared";
+    };
+    document.getElementById("install").onclick = () => {
+      status.textContent = "Install dialog opened";
+    };
+  </script>
+</body>
+</html>
