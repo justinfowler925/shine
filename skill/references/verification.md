@@ -86,6 +86,11 @@ measure logs and distinct defect crops. Run `node verify/nucleus-golden.test.mjs
 cite, antiPatterns, restructure vs repaint hints, kitRecipe, confidence
 (`corpus/recommend.mjs`).
 
+**Denoise + DDR (N0):** `--mode denoise` loads `denoise.md`; refuses without `--category`.
+Packet emits `ddr` / `ddrId` + `constitutionIds`; denoise Actor implement requires
+`status: accepted` (`--accept` or `core/ddr.mjs accept`). Prove receipts link `ddrId`.
+No polish until `primaryTaskCheck` green.
+
 **Settings/forms corpus (P2):** cite floors require ≥6 settings pages and ≥6 form+record
 pages; form/settings/record cites hard-fail `aria-invalid` without an accessible message
 (`verify/form-heuristics.mjs`).

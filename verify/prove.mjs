@@ -72,7 +72,7 @@ export function checkCopyAdoptionPresence(diagnosis,{lane}={}){
 // Lane defaults to internal when omitted so programmatic callers and media/lex
 // fixtures keep prior behavior. Packet completion always passes --lane explicitly
 // (design-packet defaults lane to saas); saas/marketing originality then bites.
-export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPath,project,commit,buildId,receiptPath,storageState,reusePath,coveragePath,surfaceContractPath,surfaceReceiptPath,lane="internal",brief=""}){
+export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPath,project,commit,buildId,receiptPath,storageState,reusePath,coveragePath,surfaceContractPath,surfaceReceiptPath,lane="internal",brief="",ddrId=""}){
  const temp=mkdtempSync(join(tmpdir(),'shine-completion-')),checks={},evidence={};let observed;
  try{
   coveragePath ||= project && existsSync(join(project,"shine-coverage.json")) ? join(project,"shine-coverage.json") : undefined;
@@ -127,16 +127,18 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
      screen:operateUsabilityScreen(citeId,ROOT)||"",
      checks,
      binding,
+     ddrId,
     });
    }catch(error){evidence.completionReceiptError=error.message;}
    if(receiptPath){writeCompletionReceipt(receiptPath,report,binding);report.receipt=resolve(receiptPath);}
+   if(ddrId)report.ddrId=ddrId;
   }
   return report;
  }catch(error){return {version:1,status:'failed',checks,error:error.message};}finally{rmSync(temp,{recursive:true,force:true});}
 }
 if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),opt=n=>args.includes(n)?args[args.indexOf(n)+1]:undefined;
- const report=await prove({target:args[0],citeId:opt('--cite'),layoutPath:opt('--layout'),usabilityPath:opt('--usability'),diagnosisPath:opt('--diagnosis'),project:opt('--project'),commit:opt('--commit'),buildId:opt('--build-id'),receiptPath:opt('--receipt'),storageState:opt('--storage-state'),reusePath:opt('--reuse'),coveragePath:opt('--coverage'),surfaceContractPath:opt('--surface-contract'),surfaceReceiptPath:opt('--surface-receipt'),lane:opt('--lane')||'internal',brief:opt('--brief')||''});
+ const report=await prove({target:args[0],citeId:opt('--cite'),layoutPath:opt('--layout'),usabilityPath:opt('--usability'),diagnosisPath:opt('--diagnosis'),project:opt('--project'),commit:opt('--commit'),buildId:opt('--build-id'),receiptPath:opt('--receipt'),storageState:opt('--storage-state'),reusePath:opt('--reuse'),coveragePath:opt('--coverage'),surfaceContractPath:opt('--surface-contract'),surfaceReceiptPath:opt('--surface-receipt'),lane:opt('--lane')||'internal',brief:opt('--brief')||'',ddrId:opt('--ddr')||''});
  if(opt('--json'))writeFileSync(opt('--json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));process.exit(report.status==='passed'?0:1);
 }

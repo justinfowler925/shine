@@ -14,6 +14,7 @@ import {loadTemplates} from "../corpus/catalog.mjs";
 import {retrievePrinciples} from "../knowledge/retrieve.mjs";
 import {recommend} from "../benchmark/judgment-eval.mjs";
 import {isOperateProveScreen} from "../hooks/receipt.mjs";
+import {buildDdr, OPERATE_DENOISE_CONSTITUTION} from "./ddr.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const catalog=loadTemplates(ROOT);
@@ -66,17 +67,37 @@ const packPaths=row=>{
  return {shot:existsSync(join(dir,"shot.png"))?join(dir,"shot.png"):null,tokens:existsSync(join(dir,"tokens.css"))?join(dir,"tokens.css"):null,sourceExcerpts:ranked.map(path=>({path,excerpt:excerpt(path)}))};
 };
 
-export function createDesignPacket({job,lane="saas",project=process.cwd(),framework="",category="",mode="existing",productReference="",productReferenceName=""}){
+/** Map Operate denoise shorthand categories onto packet kinds. */
+const DENOISE_CATEGORY_ALIASES=Object.freeze({
+ queue:"datagrid",
+ worklist:"datagrid",
+ triage:"datagrid",
+ settings:"form",
+ preferences:"form",
+});
+
+export function normalizePacketCategory(category=""){
+ const raw=String(category||"").trim().toLowerCase();
+ if(!raw)return "";
+ return DENOISE_CATEGORY_ALIASES[raw]||raw;
+}
+
+export function createDesignPacket({job,lane="saas",project=process.cwd(),framework="",category="",mode="existing",productReference="",productReferenceName="",accept=false,ddrStatus=""}){
  if(!job?.trim())throw new Error("job is required");
- // Packet --mode is only existing|new|audit. Skill procedure phases (Wireframe,
+ // Packet --mode: existing|new|audit|denoise. Skill procedure phases (Wireframe,
  // Build, Polish, Copy, Adoption) are agent routing — see skill/references/polish.md
  // and README § Modes — not extra packet modes and not prove categories.
  // audit: look, name, measure, report. It edits nothing and issues no completion
- // receipt. It exists because "review this UI" kept turning into a restyle: the
- // only modes were existing (which requires fixing every named defect) and new.
- if(!["existing","new","audit"].includes(mode))throw new Error("mode must be existing, new or audit");
- const reviewing=mode==="existing"||mode==="audit";
- const detected=detectProject(project),classification=classifyJob(job,category),kind=classification.category;
+ // receipt. denoise: cleanup path (skill/references/denoise.md) — triage→restructure
+ // →prove; refuse without --category when ambiguous; DDR must be accepted before Actor.
+ if(!["existing","new","audit","denoise"].includes(mode))throw new Error("mode must be existing, new, audit or denoise");
+ const reviewing=mode==="existing"||mode==="audit"||mode==="denoise";
+ const explicitCategory=normalizePacketCategory(category);
+ // Denoise fail-closed: always lock category explicitly (no silent inference).
+ if(mode==="denoise"&&!explicitCategory){
+  throw new Error(`denoise refuses without --category (queue|settings|catalog|record|dashboard|datagrid|form|…); job was ${JSON.stringify(job)}`);
+ }
+ const detected=detectProject(project),classification=classifyJob(job,explicitCategory),kind=classification.category;
  // The installed kit decides the build recipe, so it must also constrain which
  // page reference can win — otherwise the packet contradicts itself.
  //
@@ -110,7 +131,9 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  if(!candidates.length)throw new Error(`no composed page reference matched ${JSON.stringify(job)}; use --category or add a catalog page row`);
  const selected=candidates[0],examples=findUntitledExamples(job,3);
  const starter=kind==="datagrid"&&recipeKey==="native"?join(ROOT,"verify/fixtures/table-quality/candidate.html"):kind==="marketing"?join(ROOT,"verify/fixtures/marketing.html"):null;
- const diagnosis=reviewing?{required:true,reference:join(ROOT,"skill/references/diagnose.md"),command:`node ${join(ROOT,"core/diagnosis.mjs")} init --job ${JSON.stringify(job)} --category ${kind} --lane ${lane} --out shine-diagnosis.json`,verdicts:["defects","no-change"],instruction:"Name only defects you can evidence; one real defect is a complete diagnosis. If the surface is sound, record verdict no-change with verdictEvidence and every bucket in checked, and stop. Do not invent defects or inflate severity to satisfy a count. For lane=saas Operate page categories, fill primaryTaskCheck, emptyErrorTriadCheck, competingCtaCheck, plus copyHeadlineCheck/copyBeliefCheck/copyInstructionalCheck and adoptionRitualCheck/adoptionPrivateWinCheck/adoptionAbsenceCheck (schema checks presence; honesty of the note is yours). Marketing/catalog saas jobs need the copy checks. Bind critical/major usability and adoption defects to flow:<id> assertions when a usability flow exists."}:{required:false};
+ const diagnosis=reviewing?{required:true,reference:join(ROOT,"skill/references/diagnose.md"),command:`node ${join(ROOT,"core/diagnosis.mjs")} init --job ${JSON.stringify(job)} --category ${kind} --lane ${lane} --out shine-diagnosis.json`,verdicts:["defects","no-change"],instruction:mode==="denoise"
+  ?"Denoise diagnose order (locked): primary job → competing CTA → empty/error triad → composition (dual-focal, KPI soup, wrong cite) → craft. No polish until primaryTaskCheck is green. Name only evidenced defects. For lane=saas Operate pages fill primaryTaskCheck, emptyErrorTriadCheck, competingCtaCheck, plus copy/adoption checks. Bind critical/major usability defects to flow:<id>. Emit shine-restructure.json when restructureRequired."
+  :"Name only defects you can evidence; one real defect is a complete diagnosis. If the surface is sound, record verdict no-change with verdictEvidence and every bucket in checked, and stop. Do not invent defects or inflate severity to satisfy a count. For lane=saas Operate page categories, fill primaryTaskCheck, emptyErrorTriadCheck, competingCtaCheck, plus copyHeadlineCheck/copyBeliefCheck/copyInstructionalCheck and adoptionRitualCheck/adoptionPrivateWinCheck/adoptionAbsenceCheck (schema checks presence; honesty of the note is yours). Marketing/catalog saas jobs need the copy checks. Bind critical/major usability and adoption defects to flow:<id> assertions when a usability flow exists."}:{required:false};
  const usability={required:true,reference:join(ROOT,"skill/references/usability.md"),contract:"shine-usability.json",commands:[`node ${join(ROOT,"verify/usability.mjs")} <artifact> --contract shine-usability.json --cite ${selected.id}`]};
  const productPrecedent=reviewing?{required:true,provided:Boolean(productReference),name:productReferenceName||productReference||null,reference:productReference||null,instruction:productReference?"Reuse or extract the sibling conventions; document justified differences in shine-diagnosis.json.":"Inventory shipped sibling surfaces. If the same object or user job exists, rerun with --product-reference and --product-reference-name before editing."}:null;
  const productCommands=productReference?[`node ${join(ROOT,"verify/compare-product.mjs")} <artifact> ${JSON.stringify(productReference)} --name ${JSON.stringify(productReferenceName||productReference)}`]:[];
@@ -120,7 +143,22 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  reusableBlocks.command=`node ${join(ROOT,"integrations/blocks.mjs")} --project ${JSON.stringify(resolve(project))} --contract shine-reuse.json`;
  const knowledgeHits=retrievePrinciples(job,{limit:6});
  const judgment=recommend(job,{limit:6});
- const packet={version:7,editing:{allowed:mode!=="audit",instruction:mode==="audit"?"Audit edits nothing: deliver shine-diagnosis.json, the before screenshot and the measure/usability facts, then stop. Building is a separate, explicit request.":"Fix diagnosed defects in priority order; leave what the diagnosis did not name."},knowledge:{required:true,principles:knowledgeHits,instruction:"Apply retrieved principles with task-specific judgment. Do not treat the list as a checklist to satisfy; expose uncertainty when evidence conflicts."},judgment:{verdict:judgment.verdict,modality:judgment.modality,patterns:judgment.patterns,uncertainty:judgment.uncertainty,rationale:judgment.rationale,command:`node ${join(ROOT,"benchmark/judgment-eval.mjs")}`,instruction:"Machine recommendation is a starting point. Phase 1 human review remains authoritative for expertise claims."},implementationSelection:selectImplementation(project,job),surfaceAudit:{contract:"shine-surfaces.json",census:`node ${join(ROOT,"integrations/surface-audit.mjs")} --project ${JSON.stringify(resolve(project))}`,instruction:"Whole-site audits must classify every discovered route and control owner, declare workflow states, execute them against the current build, and pass the generated receipt to completion with --surface-contract and --surface-receipt. Ready-state smoke checks do not prove other workflows."},upgrades:{track:`node ${join(ROOT,"integrations/upgrade.mjs")} --project ${JSON.stringify(resolve(project))} --track <block> --path <installed-source>`,check:`node ${join(ROOT,"integrations/upgrade.mjs")} --project ${JSON.stringify(resolve(project))}`,instruction:"Track the installed baseline, review three-way changes, and apply only conflict-free compatible upgrades."},library:libraryInventory(),coverage:{contract:"shine-coverage.json",command:`node ${join(ROOT,"integrations/coverage.mjs")} --project ${JSON.stringify(resolve(project))} --contract shine-coverage.json`,instruction:"Classify the complete finished-pattern population; bind existing product implementations before installing. References are not finished blocks."},reusableBlocks,job,lane,mode,category:kind,classification,project:detected,selected,candidates,componentReferences:components,examples,starter,diagnosis,productPrecedent,usability,tableQuality:{presentation:{pattern:"summary-and-accordion",threshold:"more than 10 total dataset rows before table search and pagination",defaultExpanded:false,reference:join(ROOT,"skill/references/table-summary.md"),instruction:"Keep meaningful KPIs or an infographic visible above the adjacent collapsed shared DataGrid; preserve state and provide real drill-down."},required:"every record table, including tables nested inside dashboards",contract:"shine-tables.json",reference:join(ROOT,"skill/references/table-quality.md"),example:join(ROOT,"verify/fixtures/table-quality/shine-tables.json"),enforcedBy:["measure","compare"]},regionGraph:categories[kind].regions,controlInventory:categories[kind].controls,requiredStates:categories[kind].states,integration:{key:recipeKey,layers:recipeKey==="lex"?{styling:{name:"slds"},components:{name:"lightning"},data:{name:"lightning-datatable"}}:resolvedIntegration?.layers||detected.layers,validated:recipeKey==="lex"||Boolean(resolvedIntegration),validationError:integrationError,reference:join(ROOT,"skill/references/component-layers.md"),contract:integrationRecipe.contract,packages:integrationRecipe.packages,imports:integrationError?[]:integrationRecipe.imports},proof:{artifactAttribute:`data-cite=\"${selected.id}\"`,commands:[`node ${join(ROOT,"verify/measure.mjs")} <artifact> --cite ${selected.id} --lane ${lane} --shot /tmp/shine-after.png`,...usability.commands,...productCommands,`node ${join(ROOT,"verify/compare.mjs")} <artifact> --cite ${selected.id} --lane ${lane}${mode==="existing"?" --mode existing --diagnosis shine-diagnosis.json":""}`]},layout:{required:true,contract:'shine-layout.json',command:`node ${join(ROOT,'verify/layout.mjs')} <artifact> --contract shine-layout.json`,viewports:[390,768,1280,1440,1920],states:['baseline','long-content','missing-media',...(kind==='media'?['media-loaded']:[]),'large-text']},completion:{command:`node ${join(ROOT,'verify/prove.mjs')} <artifact> --cite ${selected.id} --lane ${lane} --layout shine-layout.json --usability shine-usability.json --project ${JSON.stringify(resolve(project))}${reusableBlocks.required?' --reuse shine-reuse.json --coverage shine-coverage.json':''}${mode==='existing'?' --diagnosis shine-diagnosis.json':''}`,requires:[...(reusableBlocks.required?['reuse','patternCoverage']:[]),'accessibility','styling','layout','interactions','referenceValidity','visualComparison','buildBinding',...(mode==='existing'?['defectAssertions','copyAdoption']:[])],instruction:'Individual checks are partial evidence. Only the aggregate verifier can issue completion proof. Pass the same --lane as compare so saas/marketing originality is enforced on completion. For lane=saas existing jobs, copyAdoption proves diagnosis copy/adoption check fields are present.'},gaps:retrieval.gaps};
+ // Denoise: DDR starts proposed (Actor blocked) until --accept.
+ // Other modes: DDR auto-accepted on mint for backward compatibility; still emit ddrId.
+ const statusWanted=mode==="denoise"
+  ?((ddrStatus==="accepted"||accept)?"accepted":"proposed")
+  :((ddrStatus==="proposed"&&!accept)?"proposed":"accepted");
+ const ddrAccepted=statusWanted==="accepted";
+ const editingAllowed=mode!=="audit"&&(mode!=="denoise"||ddrAccepted);
+ const editingInstruction=mode==="audit"
+  ?"Audit edits nothing: deliver shine-diagnosis.json, the before screenshot and the measure/usability facts, then stop. Building is a separate, explicit request."
+  :mode==="denoise"&&!ddrAccepted
+   ?"DDR not accepted — refuse denoise implement. Rerun with --accept or: node core/ddr.mjs accept shine-packet.json"
+   :mode==="denoise"
+    ?"Denoise: fix structure defects in diagnose order; no polish until primaryTaskCheck green; leave what diagnosis did not name."
+    :"Fix diagnosed defects in priority order; leave what the diagnosis did not name.";
+ const packet={version:8,editing:{allowed:editingAllowed,instruction:editingInstruction},knowledge:{required:true,principles:knowledgeHits,instruction:"Apply retrieved principles with task-specific judgment. Do not treat the list as a checklist to satisfy; expose uncertainty when evidence conflicts."},judgment:{verdict:judgment.verdict,modality:judgment.modality,patterns:judgment.patterns,uncertainty:judgment.uncertainty,rationale:judgment.rationale,command:`node ${join(ROOT,"benchmark/judgment-eval.mjs")}`,instruction:"Machine recommendation is a starting point. Phase 1 human review remains authoritative for expertise claims."},implementationSelection:selectImplementation(project,job),surfaceAudit:{contract:"shine-surfaces.json",census:`node ${join(ROOT,"integrations/surface-audit.mjs")} --project ${JSON.stringify(resolve(project))}`,instruction:"Whole-site audits must classify every discovered route and control owner, declare workflow states, execute them against the current build, and pass the generated receipt to completion with --surface-contract and --surface-receipt. Ready-state smoke checks do not prove other workflows."},upgrades:{track:`node ${join(ROOT,"integrations/upgrade.mjs")} --project ${JSON.stringify(resolve(project))} --track <block> --path <installed-source>`,check:`node ${join(ROOT,"integrations/upgrade.mjs")} --project ${JSON.stringify(resolve(project))}`,instruction:"Track the installed baseline, review three-way changes, and apply only conflict-free compatible upgrades."},library:libraryInventory(),coverage:{contract:"shine-coverage.json",command:`node ${join(ROOT,"integrations/coverage.mjs")} --project ${JSON.stringify(resolve(project))} --contract shine-coverage.json`,instruction:"Classify the complete finished-pattern population; bind existing product implementations before installing. References are not finished blocks."},reusableBlocks,job,lane,mode,category:kind,classification,project:detected,selected,candidates,componentReferences:components,examples,starter,diagnosis,productPrecedent,usability,tableQuality:{presentation:{pattern:"summary-and-accordion",threshold:"more than 10 total dataset rows before table search and pagination",defaultExpanded:false,reference:join(ROOT,"skill/references/table-summary.md"),instruction:"Keep meaningful KPIs or an infographic visible above the adjacent collapsed shared DataGrid; preserve state and provide real drill-down."},required:"every record table, including tables nested inside dashboards",contract:"shine-tables.json",reference:join(ROOT,"skill/references/table-quality.md"),example:join(ROOT,"verify/fixtures/table-quality/shine-tables.json"),enforcedBy:["measure","compare"]},regionGraph:categories[kind].regions,controlInventory:categories[kind].controls,requiredStates:categories[kind].states,integration:{key:recipeKey,layers:recipeKey==="lex"?{styling:{name:"slds"},components:{name:"lightning"},data:{name:"lightning-datatable"}}:resolvedIntegration?.layers||detected.layers,validated:recipeKey==="lex"||Boolean(resolvedIntegration),validationError:integrationError,reference:join(ROOT,"skill/references/component-layers.md"),contract:integrationRecipe.contract,packages:integrationRecipe.packages,imports:integrationError?[]:integrationRecipe.imports},proof:{artifactAttribute:`data-cite=\"${selected.id}\"`,commands:[`node ${join(ROOT,"verify/measure.mjs")} <artifact> --cite ${selected.id} --lane ${lane} --shot /tmp/shine-after.png`,...usability.commands,...productCommands,`node ${join(ROOT,"verify/compare.mjs")} <artifact> --cite ${selected.id} --lane ${lane}${(mode==="existing"||mode==="denoise")?" --mode existing --diagnosis shine-diagnosis.json":""}`]},layout:{required:true,contract:'shine-layout.json',command:`node ${join(ROOT,'verify/layout.mjs')} <artifact> --contract shine-layout.json`,viewports:[390,768,1280,1440,1920],states:['baseline','long-content','missing-media',...(kind==='media'?['media-loaded']:[]),'large-text']},completion:{command:null,requires:[...(reusableBlocks.required?['reuse','patternCoverage']:[]),'accessibility','styling','layout','interactions','referenceValidity','visualComparison','buildBinding',...((mode==='existing'||mode==='denoise')?['defectAssertions','copyAdoption']:[])],instruction:'Individual checks are partial evidence. Only the aggregate verifier can issue completion proof. Pass the same --lane as compare so saas/marketing originality is enforced on completion. For lane=saas existing/denoise jobs, copyAdoption proves diagnosis copy/adoption check fields are present. Link prove receipt to packet.ddr.ddrId via --ddr.'},gaps:retrieval.gaps};
+ // completion.command filled after DDR mint so --ddr can bind.
  // A reference whose capture has not been validated cannot carry completion:
  // prove.mjs requires referenceValidity to pass. Say so in the packet, up front,
  // with the passed alternatives, instead of letting the agent discover it at the
@@ -136,10 +174,42 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
  packet.recommendation.instruction="Read packet.recommendation before editing: primary cite, antiPatterns, restructureHints (restructure vs repaint), kitRecipe, confidence.";
+ const restructureHints=recommendation.restructureHints||[];
+ const needsRestructure=restructureHints.some((h)=>String(h).startsWith("restructure:"));
+ packet.ddr=buildDdr({
+  job,
+  lane,
+  category:kind,
+  mode,
+  primaryCite:selected.id,
+  antiCites:(recommendation.antiPatterns||[]).slice(0,6),
+  restructureVsRepaint:needsRestructure?"restructure":"repaint",
+  restructureOps:needsRestructure?["cta-budget","set-focal","kpi-collapse","rebind-cite"].filter(Boolean):[],
+  constitutionIds:lane==="saas"||mode==="denoise"?[...OPERATE_DENOISE_CONSTITUTION]:["prove-mandatory"],
+  openRisks:packet.gaps.slice(0,4),
+  status:statusWanted,
+  ctaBudget:lane==="saas"||mode==="denoise"?1:null,
+  focalRegion:mode==="denoise"||kind==="datagrid"?"worklist":null,
+  productSibling:productReferenceName||productReference||null,
+ });
+ packet.ddrId=packet.ddr.ddrId;
+ packet.completion.command=`node ${join(ROOT,"verify/prove.mjs")} <artifact> --cite ${selected.id} --lane ${lane} --layout shine-layout.json --usability shine-usability.json --project ${JSON.stringify(resolve(project))} --ddr ${packet.ddr.ddrId}${reusableBlocks.required?" --reuse shine-reuse.json --coverage shine-coverage.json":""}${(mode==="existing"||mode==="denoise")?" --diagnosis shine-diagnosis.json":""}`;
+ if(mode==="denoise"){
+  packet.denoise={
+   required:true,
+   reference:join(ROOT,"skill/references/denoise.md"),
+   instruction:"No polish until primaryTaskCheck green. Refuse paint while restructureHints start with restructure: and primary task is red. Prove links ddrId.",
+   polishAllowed:false,
+  };
+ }
  packet.procedure={
-  phases:["wireframe","build","polish","audit","copy","adoption"],
+  phases:mode==="denoise"
+   ?["denoise","wireframe","build","polish","audit","copy","adoption"]
+   :["wireframe","build","polish","audit","copy","adoption"],
   packetMode:mode,
-  instruction:"Wireframe/Polish/Copy/Adoption are skill procedure phases, not --mode values. Map: wireframe→new; build→new|existing; polish→existing (references/polish.md); audit→audit; copy|adoption→audit|existing. For lane=saas, fill copy/adoption diagnosis check fields; prove binds them via copyAdoption + defectAssertions (assertion ids when flows exist). Lightweight measure heuristics catch missing title/H1 and stub empty-state copy — not a full NLP critic.",
+  instruction:mode==="denoise"
+   ?"Denoise is a packet --mode (skill/references/denoise.md). Triage→structure decisions→restructure→prove. Wireframe/Polish/Copy/Adoption remain procedure phases. No polish until primaryTaskCheck green. DDR must be accepted before Actor."
+   :"Wireframe/Polish/Copy/Adoption are skill procedure phases, not --mode values. Map: wireframe→new; build→new|existing; polish→existing (references/polish.md); audit→audit; copy|adoption→audit|existing; denoise→denoise. For lane=saas, fill copy/adoption diagnosis check fields; prove binds them via copyAdoption + defectAssertions (assertion ids when flows exist). Lightweight measure heuristics catch missing title/H1 and stub empty-state copy — not a full NLP critic.",
  };
  // Operate SaaS page cites: completion is mandatory — stop-sweep fails without a
  // fresh prove.mjs receipt. Marketing / non-allowlisted screens stay soft.
@@ -157,5 +227,5 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
 
 if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),opt=n=>args.includes(n)?args[args.indexOf(n)+1]:"";
- try{process.stdout.write(JSON.stringify(createDesignPacket({job:opt("--job")||args[0],lane:opt("--lane")||"saas",project:resolve(opt("--project")||process.cwd()),framework:opt("--framework"),category:opt("--category"),mode:opt("--mode")||"existing",productReference:opt("--product-reference"),productReferenceName:opt("--product-reference-name")}),null,2)+"\n");}catch(error){console.error(`shine packet: ${error.message}`);process.exit(1)}
+ try{process.stdout.write(JSON.stringify(createDesignPacket({job:opt("--job")||args[0],lane:opt("--lane")||"saas",project:resolve(opt("--project")||process.cwd()),framework:opt("--framework"),category:opt("--category"),mode:opt("--mode")||"existing",productReference:opt("--product-reference"),productReferenceName:opt("--product-reference-name"),accept:args.includes("--accept"),ddrStatus:opt("--ddr-status")}),null,2)+"\n");}catch(error){console.error(`shine packet: ${error.message}`);process.exit(1)}
 }

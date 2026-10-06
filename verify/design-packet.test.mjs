@@ -24,7 +24,10 @@ assert.throws(()=>classifyJob("Fix the design and UX problems"),/cannot infer/);
 assert.equal(classifyJob("Fix the design and UX problems","form").category,"form");
 
 const grid=createDesignPacket({job:cases[0][0],lane:"internal",project:process.cwd()});
-assert.equal(grid.version,7);assert.equal(grid.category,"datagrid");assert.equal(grid.selected.scope,"page");
+assert.equal(grid.version,8);assert.equal(grid.category,"datagrid");assert.equal(grid.selected.scope,"page");
+assert.ok(grid.ddr?.ddrId?.startsWith("ddr_"),"packet emits ddrId");
+assert.equal(grid.ddr.status,"accepted","non-denoise DDR auto-accepted for compat");
+assert.ok(Array.isArray(grid.ddr.constitutionIds)&&grid.ddr.constitutionIds.length>=1);
 assert(grid.componentReferences.some(x=>x.id==="untitled-table"));
 assert.equal(grid.knowledge.required,true);
 assert.ok(Array.isArray(grid.knowledge.principles));
