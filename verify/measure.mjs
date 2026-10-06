@@ -60,6 +60,16 @@ import {
   evaluateFormHeuristics,
   formatFormHeuristicFailures,
 } from "./form-heuristics.mjs";
+import {
+  dualFocalGateApplies,
+  evaluateDualFocal,
+  formatDualFocalFailures,
+} from "./dual-focal.mjs";
+import {
+  kpiSoupGateApplies,
+  evaluateKpiSoup,
+  formatKpiSoupFailures,
+} from "./kpi-soup.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
@@ -383,6 +393,8 @@ const incompletePrimitives = await page.evaluate(evaluateIncompletePrimitives);
 const kpiFloor = await page.evaluate(evaluateKpiFloor);
 const ctaPressure = await page.evaluate(evaluateMainCtaPressure);
 const compositionSlop = await page.evaluate(evaluateCompositionSlop);
+const dualFocal = await page.evaluate(evaluateDualFocal);
+const kpiSoup = await page.evaluate(evaluateKpiSoup);
 const formHeuristics = await page.evaluate(evaluateFormHeuristics);
 const copyHeuristics = await page.evaluate(evaluateCopyHeuristics);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
@@ -872,6 +884,38 @@ if (compose.filledCount > 2) {
     citeId: slopCiteId,
   });
   for (const f of formatCompositionSlopFailures(compositionSlop, { gate: slopApplies })) {
+    failures.push(f);
+  }
+}
+{
+  const dfCiteId = citeWant || compose.citeId || "";
+  const dfCiteRow = (() => {
+    if (!dfCiteId) return null;
+    try {
+      const cat = loadCatalog(SHINE);
+      return (cat.templates ?? []).find((t) => t.id === dfCiteId) || null;
+    } catch {
+      return null;
+    }
+  })();
+  const dfApplies = dualFocalGateApplies({
+    lane: laneWant,
+    citeScreen: dfCiteRow?.screen || "",
+    citeJobs: dfCiteRow?.jobs || [],
+    isWireframe,
+    citeId: dfCiteId,
+  });
+  for (const f of formatDualFocalFailures(dualFocal, { gate: dfApplies })) {
+    failures.push(f);
+  }
+  const soupApplies = kpiSoupGateApplies({
+    lane: laneWant,
+    citeScreen: dfCiteRow?.screen || "",
+    citeJobs: dfCiteRow?.jobs || [],
+    isWireframe,
+    citeId: dfCiteId,
+  });
+  for (const f of formatKpiSoupFailures(kpiSoup, { gate: soupApplies })) {
     failures.push(f);
   }
 }
