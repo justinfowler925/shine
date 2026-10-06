@@ -60,15 +60,27 @@ const contrast = existsSync(join(tokensDir, "scripts/contrast-gate.mjs"))
   ? join(tokensDir, "scripts/contrast-gate.mjs")
   : join(SOURCE, "tokens/scripts/contrast-gate.mjs");
 
+function hasTerrazzo(nm) {
+  return (
+    existsSync(join(nm, "@terrazzo/cli/bin/cli.js")) ||
+    existsSync(join(nm, ".bin/terrazzo"))
+  );
+}
+
 function ensureNm() {
   const nm = join(tokensDir, "node_modules");
-  if (existsSync(nm) || lstatSync(nm, { throwIfNoEntry: false })?.isSymbolicLink()) return;
+  if (hasTerrazzo(nm)) return;
+  // Staged edition copies often have an empty/incomplete node_modules — replace
+  // with a symlink to a checkout that has @terrazzo/cli.
+  if (existsSync(nm) || lstatSync(nm, { throwIfNoEntry: false })?.isSymbolicLink()) {
+    rmSync(nm, { recursive: true, force: true });
+  }
   for (const candidate of [
     join(SOURCE, "tokens/node_modules"),
     join(SOURCE, "node_modules"),
     join(dirname(tokensDir), "node_modules"),
   ]) {
-    if (existsSync(candidate)) {
+    if (hasTerrazzo(candidate) || existsSync(candidate)) {
       symlinkSync(candidate, nm);
       return;
     }
@@ -124,22 +136,29 @@ if (genRun.status !== 0) {
 
 let buildStatus = 1;
 let buildOut = "";
-const terrazzoBin = join(tokensDir, "node_modules/@terrazzo/cli/bin/terrazzo.js");
-if (existsSync(terrazzoBin)) {
+const terrazzoBins = [
+  join(tokensDir, "node_modules/@terrazzo/cli/bin/cli.js"),
+  join(tokensDir, "node_modules/.bin/terrazzo"),
+  join(SOURCE, "tokens/node_modules/@terrazzo/cli/bin/cli.js"),
+  join(SOURCE, "tokens/node_modules/.bin/terrazzo"),
+];
+for (const terrazzoBin of terrazzoBins) {
+  if (!existsSync(terrazzoBin)) continue;
   const build = spawnSync(process.execPath, [terrazzoBin, "build", "--config", "terrazzo.brand.mjs"], {
     cwd: tokensDir,
     encoding: "utf8",
   });
   buildStatus = build.status;
   buildOut = (build.stdout || "") + (build.stderr || "");
+  if (buildStatus === 0) break;
 }
 if (buildStatus !== 0) {
-  const npx = spawnSync("npx", ["terrazzo", "build", "--config", "terrazzo.brand.mjs"], {
+  const npmBuild = spawnSync("npm", ["exec", "--", "terrazzo", "build", "--config", "terrazzo.brand.mjs"], {
     cwd: tokensDir,
     encoding: "utf8",
   });
-  buildStatus = npx.status;
-  buildOut = (npx.stdout || "") + (npx.stderr || "");
+  buildStatus = npmBuild.status;
+  buildOut = (npmBuild.stdout || "") + (npmBuild.stderr || "");
 }
 if (buildStatus !== 0) {
   console.error(buildOut);
