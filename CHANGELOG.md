@@ -12,6 +12,12 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   `--accept` / `core/ddr.mjs accept`. Prove completion receipts may link `ddrId`.
   Doctor bite: `verify/denoise-packet.test.mjs`.
 
+- **Reflexion stub + easy denoise kit (N2–N4).** Atlas-shaped critic
+  (`core/reflexion.mjs`: done|partial|blocked|error, one call, bound retry, lessons
+  require `ddrId`). `verify/preflight-slop.mjs` ports vibe-check `ai-slop-*` signals.
+  Opt-in Snapline + Impeccable adapters under `verify/adapters/` (cite never overridden).
+  Operate filler deny-list expanded (N4). Sled fixtures promoted to `verify/fixtures/denoise/`.
+
 ### Changed
 
 - **Operate prove is mandatory.** Stop-sweep fails closed when SaaS Operate page cites

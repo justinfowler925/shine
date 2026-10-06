@@ -79,6 +79,13 @@ Max **3** measure rounds per surface. Each round clears a **named** defect.
 
 Impeccable `distill` / `quieter` and Snapline adapters are **opt-in after** cite locked + CTA/focal ops. They never override `data-cite`. See adapters in `verify/adapters/`.
 
+```sh
+node "$ROOT/verify/preflight-slop.mjs" <artifact.html>          # N2 vibe signals
+node "$ROOT/verify/adapters/snapline.mjs" stop.json             # N3 opt-in
+node "$ROOT/verify/adapters/impeccable.mjs" --mode distill --structure-green --cite <id>
+node "$ROOT/core/reflexion.mjs" --fail "cta-pressure: …" --ddr <ddrId>   # on measure/prove fail
+```
+
 ## Constitution IDs (critic must cite)
 
 Packet `ddr.constitutionIds` for Operate denoise defaults:

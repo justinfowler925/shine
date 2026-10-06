@@ -37,6 +37,8 @@
     "benchmark:agent:full": "node benchmark/agent-corpus.mjs",
     "layers:test": "node verify/component-layers.test.mjs",
     "packet:test": "node verify/design-packet.test.mjs && node verify/denoise-packet.test.mjs",
+    "reflexion": "node core/reflexion.mjs",
+    "preflight:slop": "node verify/preflight-slop.mjs",
     "render:test": "node verify/design-spec.test.mjs",
     "diagnosis:test": "node verify/diagnosis.test.mjs && node verify/prove-defect-assertions.test.mjs && node verify/copy-adoption.test.mjs",
     "case:test": "node verify/case.test.mjs && node verify/case-flow.test.mjs",

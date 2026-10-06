@@ -1,0 +1,69 @@
+<!doctype html>
+<!-- shine-lint: off color,type,spacing — SledCapture expert pass skeleton -->
+<html lang="en" data-cite="shadcn-queue" data-shine-probe="app-shell">
+<head>
+<meta charset="utf-8"/>
+<title>SLED Capture — Queue</title>
+<style>
+:root{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.45 system-ui,sans-serif;background:#fafafa;color:#18181b}
+.shell{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+aside{background:#fff;border-right:1px solid #e4e4e7;padding:16px}
+aside a{display:block;padding:8px 10px;color:inherit;text-decoration:none;background:transparent}
+aside a[aria-current]{background:#f4f4f5;font-weight:600}
+main{padding:20px 24px}
+.tabs{display:flex;gap:8px;margin-bottom:12px;border-bottom:1px solid #e4e4e7}
+.tabs button{border:0;border-bottom:2px solid transparent;background:transparent;padding:8px 12px;font:inherit;color:#52525b}
+.tabs button[aria-selected=true]{font-weight:600;color:#18181b;border-bottom-color:#18181b;background:transparent}
+.strip{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 12px;font-size:14px;color:#52525b}
+.strip strong{color:#18181b;font-size:16px}
+.grid-wrap{background:#fff;border:1px solid #e4e4e7;border-radius:8px;padding:16px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.toolbar select,.toolbar input{padding:8px;border:1px solid #e4e4e7;border-radius:4px;font:inherit;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border-bottom:1px solid #e4e4e7;padding:8px;text-align:left}
+.btn{border:1px solid #e4e4e7;background:#fff;padding:8px 12px;border-radius:4px;font:inherit;font-size:14px;margin:0 4px 4px 0}
+.btn.filled{background:#18181b;color:#fafafa;border-color:#18181b;font-weight:600}
+.btn.ghost{border-color:transparent;background:transparent}
+details{margin-top:16px}
+h1{font-size:20px;margin:0 0 8px}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside><strong>Nucleus</strong><nav aria-label="Operate"><a href="#q" aria-current="page">SLED Capture</a></nav></aside>
+<main id="q" data-shine-main>
+  <div class="tabs" role="tablist"><button type="button" role="tab" aria-selected="true">Queue</button><button type="button" role="tab">Research signals</button><button type="button" role="tab">Usul & coverage</button></div>
+  <div class="strip" aria-label="Queue status" data-summary>
+    <div><span>Open</span> <strong>214</strong></div>
+    <div><span>Due soon undecided</span> <strong>27</strong></div>
+    <div><span>Second look</span> <strong>6</strong></div>
+  </div>
+  <div class="grid-wrap" data-product-pattern="paged-notice-queue" data-region="focal" data-shine-focal>
+    <h1 data-grid-title>Queue</h1>
+    <p>Decide pursue, review, or dismiss. Today's ten is a saved view filter on this grid, not a second page.</p>
+    <div class="toolbar">
+      <input aria-label="Search notices" placeholder="Search title, agency"/>
+      <select aria-label="Show"><option>Open</option></select>
+      <select aria-label="State"><option>All states</option></select>
+      <button type="button" class="btn">Filters</button>
+    </div>
+    <table role="grid" data-shine-datagrid>
+      <thead><tr><th>Notice</th><th>Class · priority</th><th>Due</th><th>Decision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>NV DPS voice risk RFI</strong></td><td>Qualified · 82</td><td>Oct 12</td>
+          <td><button type="button" class="btn filled">Pursue</button><button type="button" class="btn">Review</button><button type="button" class="btn">Dismiss</button><button type="button" class="btn ghost">Assign lead</button></td></tr>
+        <tr><td><strong>OH Medicaid identity services</strong></td><td>Discovery · 61</td><td>Oct 20</td>
+          <td><button type="button" class="btn filled">Pursue</button><button type="button" class="btn">Review</button><button type="button" class="btn">Dismiss</button></td></tr>
+        <tr><td><strong>CO DOC screening SOW</strong></td><td>Discovery · 74</td><td>Oct 9</td>
+          <td><button type="button" class="btn filled">Pursue</button><button type="button" class="btn">Review</button><button type="button" class="btn">Dismiss</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <details><summary>How summary figures are measured</summary><p>Open matches the Open view. Due-soon counts undecided notices inside the configured window.</p></details>
+  <p>No published notices match these filters. Clear filters to restore the open queue.</p>
+</main>
+</div>
+</body>
+</html>
