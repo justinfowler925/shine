@@ -3,6 +3,7 @@ import {createHash} from "node:crypto";
 import {existsSync, readFileSync, realpathSync, writeFileSync} from "node:fs";
 import {resolve} from "node:path";
 import {fileURLToPath} from "node:url";
+import {buildRestructurePlan} from "../verify/restructure/schema.mjs";
 
 export const buckets=new Set(["usability","completeness","composition","craft","adoption"]);
 const severities=new Set(["critical","major","minor"]);
@@ -21,6 +22,8 @@ const text=(value)=>String(value||"").trim();
 // No screenshot OCR or evidence-vs-shot verification in v1.
 export const saasPageCategories=new Set(["datagrid","dashboard","form","record","lex"]);
 export const saasProductUxCheckKeys=["primaryTaskCheck","emptyErrorTriadCheck","competingCtaCheck"];
+/** Denoise / Operate composition checks — presence gated like product-UX (N7). */
+export const saasRestructureCheckKeys=["dualFocalCheck","kpiSoupCheck","citeHonestyCheck"];
 
 // Copy checks: persuasive + instructional surfaces under lane=saas (Operate pages
 // plus marketing/catalog). Presence only — belief honesty stays agent (copy.md).
@@ -78,6 +81,16 @@ export function validateDiagnosis(value,{requireFiles=true,lane}={}){
  if(!verdicts.has(verdict))errors.push("verdict must be defects or no-change");
  if(requiresSaasProductUxChecks(value,{lane})){
   for(const key of saasProductUxCheckKeys)validateSaasProductUxCheck(value,key,errors);
+  // Restructure checks are soft-present for saas Operate: if any key is present, validate shape.
+  for(const key of saasRestructureCheckKeys){
+   if(value?.[key]!==undefined)validateSaasProductUxCheck(value,key,errors);
+  }
+  if(value?.restructureRequired!==undefined&&typeof value.restructureRequired!=="boolean"){
+   errors.push("restructureRequired must be a boolean when present");
+  }
+  if(value?.restructureOps!==undefined&&!Array.isArray(value.restructureOps)){
+   errors.push("restructureOps must be an array when present");
+  }
  }
  if(requiresSaasCopyChecks(value,{lane})){
   for(const key of saasCopyCheckKeys)validateSaasCheck(value,key,errors,"copy");
@@ -121,17 +134,122 @@ export function emptySaasAdoptionChecks(){
  return Object.fromEntries(saasAdoptionCheckKeys.map((key)=>[key,{ok:false,note:""}]));
 }
 
+export function emptySaasRestructureChecks(){
+ return Object.fromEntries(saasRestructureCheckKeys.map((key)=>[key,{ok:false,note:""}]));
+}
+
+/**
+ * Derive restructure ops from diagnosis check fields + category.
+ * Used by emit-restructure and denoise loop.
+ */
+export function deriveRestructureOps(diagnosis={}){
+ const ops=[];
+ const category=text(diagnosis.category);
+ const job=text(diagnosis.job);
+ if(diagnosis.competingCtaCheck?.ok===false){
+  ops.push({op:"cta-budget",scope:"main",maxFilled:1,preferLabels:["Pursue","Save"],demotePolicy:"outline"});
+ }
+ if(diagnosis.dualFocalCheck?.ok===false){
+  ops.push({op:"collapse-peer-grids",mode:"xor-saved-view",keepTitleIncludes:["Queue"],foldTitleIncludes:["David"]});
+ }
+ if(diagnosis.kpiSoupCheck?.ok===false){
+  ops.push({op:"kpi-collapse",maxVisible:3,rest:"details",selector:".metrics .metric, [data-shine-kpi]"});
+ }
+ if(diagnosis.citeHonestyCheck?.ok===false||(/settings|sources|recipes/i.test(job)&&/queue|datagrid/i.test(category))){
+  ops.push({op:"rebind-cite",from:"shadcn-queue",to:"shadcn-settings",whenCategory:"settings"});
+ }
+ // Always offer set-focal when any composition/usability structure defect is red.
+ if(
+  diagnosis.dualFocalCheck?.ok===false||
+  diagnosis.kpiSoupCheck?.ok===false||
+  diagnosis.primaryTaskCheck?.ok===false||
+  Array.isArray(diagnosis.restructureOps)
+ ){
+  if(!ops.some((o)=>o.op==="set-focal")){
+   ops.push({op:"set-focal",attr:"data-region",value:"focal",on:"primary-worklist"});
+  }
+ }
+ if(Array.isArray(diagnosis.restructureOps)){
+  for(const op of diagnosis.restructureOps){
+   if(op&&typeof op==="object"&&op.op&&!ops.some((o)=>o.op===op.op))ops.push(op);
+  }
+ }
+ return ops;
+}
+
+/** Refuse polish/paint while restructure is required and primary task is red (N10). */
+export function assertDenoisePaintAllowed(diagnosis={}){
+ const primaryRed=diagnosis.primaryTaskCheck?.ok===false;
+ const restructure=
+  diagnosis.restructureRequired===true||
+  (Array.isArray(diagnosis.restructureOps)&&diagnosis.restructureOps.length>0)||
+  saasRestructureCheckKeys.some((k)=>diagnosis[k]?.ok===false)||
+  diagnosis.competingCtaCheck?.ok===false;
+ if(restructure&&primaryRed){
+  throw new Error(
+   "denoise refuse paint: restructure still required and primaryTaskCheck is red — apply shine-restructure ops before polish",
+  );
+ }
+ return true;
+}
+
+/**
+ * Emit shine-restructure/v1 from a diagnosis (and optional cite).
+ */
+export function emitRestructureFromDiagnosis(diagnosis,{citePrimary="",antiCites=[]}={}){
+ const category=text(diagnosis.category)||"queue";
+ const job=text(diagnosis.job)||"Denoise Operate surface";
+ const ops=deriveRestructureOps(diagnosis);
+ const restructureRequired=
+  diagnosis.restructureRequired===true||
+  ops.length>0||
+  diagnosis.competingCtaCheck?.ok===false||
+  saasRestructureCheckKeys.some((k)=>diagnosis[k]?.ok===false);
+ const cite=
+  citePrimary||
+  (category==="form"||/settings/i.test(job)?"shadcn-settings":"shadcn-queue");
+ const plan=buildRestructurePlan({
+  job,
+  category:category==="datagrid"?"queue":category,
+  lane:text(diagnosis.lane)||"saas",
+  citePrimary:cite,
+  antiCites:antiCites.length?antiCites:["shadcn-dashboard-01","magicui-*"],
+  ops:ops.length
+   ?ops
+   :[
+     {op:"cta-budget",scope:"main",maxFilled:1,preferLabels:["Pursue"],demotePolicy:"outline"},
+     {op:"set-focal",attr:"data-region",value:"focal",on:"primary-worklist"},
+    ],
+  measureMustClear:["cta-pressure","dual-focal","kpi-soup","composition-slop"],
+  humanGate:ops.some((o)=>o.op==="collapse-peer-grids"),
+ });
+ plan.restructureRequired=restructureRequired;
+ plan.fromDiagnosis={
+  competingCtaCheck:diagnosis.competingCtaCheck?.ok,
+  dualFocalCheck:diagnosis.dualFocalCheck?.ok,
+  kpiSoupCheck:diagnosis.kpiSoupCheck?.ok,
+  citeHonestyCheck:diagnosis.citeHonestyCheck?.ok,
+  primaryTaskCheck:diagnosis.primaryTaskCheck?.ok,
+ };
+ return plan;
+}
+
 export function seedDiagnosis({job,category,lane=""}){
  const base={version:1,job,category,primaryTask:"",before:{artifact:"",screenshot:""},
   verdict:"defects",
-  guidance:"Keep only defects you can evidence from the before screenshot or measure output. One real defect is a valid pass. If nothing is wrong, set verdict to no-change, list all five buckets in checked, and write verdictEvidence; do not invent defects or inflate severity to satisfy a count. For lane=saas Operate page categories, fill primaryTaskCheck, emptyErrorTriadCheck, competingCtaCheck, and the copy/adoption check fields (presence is machine-gated; honesty of the note is yours). Bind critical/major usability and adoption defects to flow:<id> assertions when a usability flow exists.",
+  guidance:"Keep only defects you can evidence from the before screenshot or measure output. One real defect is a valid pass. If nothing is wrong, set verdict to no-change, list all five buckets in checked, and write verdictEvidence; do not invent defects or inflate severity to satisfy a count. For lane=saas Operate page categories, fill primaryTaskCheck, emptyErrorTriadCheck, competingCtaCheck, dualFocalCheck, kpiSoupCheck, citeHonestyCheck, and the copy/adoption check fields (presence is machine-gated; honesty of the note is yours). Set restructureRequired + restructureOps when structure is red. Emit shine-restructure.json via: node core/diagnosis.mjs emit-restructure --file shine-diagnosis.json. Bind critical/major usability and adoption defects to flow:<id> assertions when a usability flow exists. Denoise: no polish while restructureRequired and primaryTaskCheck is red.",
   checked:[],
   verdictEvidence:"",
+  restructureRequired:false,
+  restructureOps:[],
   defects:[
    {id:"primary-workflow",assertions:[],bucket:"usability",severity:"major",problem:"",evidence:"",expectedEffect:""}
   ]};
  if(text(lane))base.lane=text(lane);
- if(requiresSaasProductUxChecks(base))Object.assign(base,emptySaasProductUxChecks());
+ if(requiresSaasProductUxChecks(base)){
+  Object.assign(base,emptySaasProductUxChecks());
+  Object.assign(base,emptySaasRestructureChecks());
+ }
  if(requiresSaasCopyChecks(base))Object.assign(base,emptySaasCopyChecks());
  if(requiresSaasAdoptionChecks(base))Object.assign(base,emptySaasAdoptionChecks());
  return base;
@@ -147,6 +265,19 @@ if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.ur
   }else if(command==="check"){
    const result=readDiagnosis(opt("--file")||args[1],{lane:opt("--lane")||undefined});
    console.log(`diagnosis PASS ${result.hash} verdict=${result.verdict} defects=${result.value.defects?.length||0}`);
-  }else throw new Error("usage: diagnosis.mjs init --job <job> --category <category> [--lane saas] --out <file> | check --file <file> [--lane saas]");
+  }else if(command==="emit-restructure"){
+   const file=resolve(opt("--file")||"shine-diagnosis.json");
+   const diagnosis=JSON.parse(readFileSync(file,"utf8"));
+   const plan=emitRestructureFromDiagnosis(diagnosis,{citePrimary:opt("--cite")});
+   const out=resolve(opt("--out")||"shine-restructure.json");
+   writeFileSync(out,JSON.stringify(plan,null,2)+"\n");
+   // Mirror ops back onto diagnosis when --write-diagnosis
+   if(args.includes("--write-diagnosis")){
+    diagnosis.restructureRequired=plan.restructureRequired!==false;
+    diagnosis.restructureOps=plan.ops;
+    writeFileSync(file,JSON.stringify(diagnosis,null,2)+"\n");
+   }
+   console.log(out);
+  }else throw new Error("usage: diagnosis.mjs init --job <job> --category <category> [--lane saas] --out <file> | check --file <file> [--lane saas] | emit-restructure --file <diagnosis> [--out shine-restructure.json] [--cite id] [--write-diagnosis]");
  }catch(error){console.error(`diagnosis: ${error.message}`);process.exit(1)}
 }
