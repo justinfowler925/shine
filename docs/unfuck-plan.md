@@ -154,7 +154,7 @@ brain rule names the shipped loop; demo before/after committed.
 
 `measure.mjs` (axe, per-pixel contrast, composition/void checks), the token pipeline and
 house/brand lanes, design-lint + stop-sweep + doctor wiring, the corpus pins and
-`acquire.sh`, contracts/adoption/salesforce doctrine, CI on GitHub-hosted `ubuntu-latest` (formerly self-hosted).
+`acquire.sh`, contracts/adoption/salesforce doctrine, CI on self-hosted Mac `shine` runner (GitHub-hosted billing-locked on Free account).
 
 ## Decisions taken (veto anytime)
 

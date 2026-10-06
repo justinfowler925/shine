@@ -101,7 +101,7 @@ on both, there was no runner registered for either, and the doctor had not run s
 2026-08-30. Runners `justin-macbook-shine` and `justin-macbook-portfolio` were registered
 from the same package as the Nucleus runner, Actions are enabled, the portfolio guard
 targets its runner, and the doctor ran both lanes on main under Node 22. Shine CI has
-since moved to GitHub-hosted `ubuntu-latest` only (no self-hosted runners).
+runs on self-hosted Mac `shine` runner while GitHub-hosted remains billing-locked.
 
 ## The third pass: application surfaces
 

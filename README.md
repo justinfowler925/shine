@@ -267,7 +267,7 @@ npm run sync-consumers   # re-vendor token copies into consumer apps
 ```
 
 Symlinks mean both IDEs read the new skill/agents immediately. No separate “publish”
-step. GitHub Actions runs `doctor.yml` on GitHub-hosted `ubuntu-latest` runners. Local `node verify/doctor.mjs` remains the session-start gate.
+step. GitHub Actions runs `doctor.yml` on the repo self-hosted Mac runner (`shine` label) while GitHub-hosted runners stay billing-locked for this account. Local `node verify/doctor.mjs` remains the session-start gate.
 
 ### 8. Consumers (tokens into apps)
 
@@ -320,7 +320,7 @@ See [`tokens/README.md`](./tokens/README.md) § Private brand lanes.
 | Check | How |
 | --- | --- |
 | Wiring + gates + tokens | `node verify/doctor.mjs` (and `--full` for composition fixtures) |
-| GitHub Actions | `doctor` on every PR via GitHub-hosted `ubuntu-latest` |
+| GitHub Actions | `doctor` on every PR via self-hosted Mac (`shine` label; hosted billing-locked) |
 | License | MIT |
 | Homepage | https://shine-blond.vercel.app |
 
@@ -565,7 +565,7 @@ node verify/doctor.mjs --ci     # the machine-independent subset
 
 **The local doctor is the gate for machine wirings; CI runs the `--ci` subset.**
 `.github/workflows/` runs the `--ci` (and `--ci --full`) lanes on GitHub-hosted
-`ubuntu-latest` runners only — no self-hosted runners or custom machine labels.
+Self-hosted Mac runner labels `[self-hosted, macOS, ARM64, shine]` — GitHub-hosted `ubuntu-latest` is billing-locked on this Free account.
 Workflows bootstrap with `actions/setup-node`, `npm ci`, and
 `npx playwright install --with-deps chromium` so a clean image can run doctor and
 browser checks without a pre-baked Mac environment or the full `~/design-corpus`
