@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-dashboard-01" data-shine-probe="dashboard">
+<head>
+<meta charset="utf-8"/><title>SLED — Usul & coverage</title>
+<style>
+body{margin:0;font:14px/1.45 system-ui,sans-serif;background:#f4f4f5;color:#18181b}
+main{padding:24px;max-width:1100px;margin:0 auto}
+.metrics{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0 20px}
+.metric{flex:1 1 9rem;min-height:96px;padding:14px;border:1px solid #e4e4e7;border-radius:8px;background:#fff}
+.metric span{display:block;font-size:12px;color:#71717a}.metric strong{font-size:22px}
+.card{border:1px solid #e4e4e7;border-radius:10px;background:#fff;padding:14px;margin-bottom:14px;min-height:140px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #e4e4e7;padding:8px;text-align:left}
+.badge{display:inline-block;border:1px solid #e4e4e7;border-radius:999px;padding:1px 8px;font-size:11px;margin:0 4px 4px 0;color:#71717a}
+</style>
+</head>
+<body>
+<main data-shine-main aria-label="Usul pipeline, velocity and coverage lift">
+  <h1>Usul &amp; coverage</h1>
+  <section aria-label="Usul velocity figures">
+    <h2>Velocity</h2>
+    <div class="metrics">
+      <div class="metric"><span>Active now</span><strong>22</strong><span>by owner</span></div>
+      <div class="metric"><span>Entered Usul</span><strong>4 / 11</strong><span>7 / 30 days</span></div>
+      <div class="metric"><span>Stage changes</span><strong>17</strong><span>over 45 days</span></div>
+      <div class="metric"><span>Value worked</span><strong>$4.1M</strong><span>active deals</span></div>
+      <div class="metric"><span>Median days</span><strong>38 d</strong><span>active</span></div>
+      <div class="metric"><span>Aging</span><strong>6</strong><span>stuck</span></div>
+      <div class="metric"><span>History</span><strong>52</strong><span>captures</span></div>
+    </div>
+    <p><span class="badge">In Review → Drafting</span><span class="badge">Pursuing → Submitted</span><span class="badge">Track → Stand down</span></p>
+  </section>
+  <section class="card"><h3>Usul pipeline</h3><table><thead><tr><th>Record</th><th>Stage</th><th>Owner</th></tr></thead><tbody><tr><td>NV DPS</td><td>In Review</td><td>Sean</td></tr></tbody></table></section>
+  <section class="card"><h3>By week</h3><p>Second equal grid</p></section>
+  <section class="card"><h3>Deals worked by owner</h3><p>Third equal grid</p></section>
+  <section class="card"><h3>Observed changes</h3><p>Fourth equal grid</p></section>
+  <section class="card"><h3>Aging deals</h3><p>Fifth equal grid</p></section>
+  <section class="card"><h3>Coverage lift</h3><p>Sixth equal panel</p></section>
+</main>
+</body>
+</html>
