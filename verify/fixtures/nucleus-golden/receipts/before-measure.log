@@ -8,6 +8,9 @@ FAIL
   ✗ composition-slop: 5 equal-weight Card roots in main with no focal region — card soup; collapse peers or add a table/chart/queue focal (anti-patterns.md § card soup; expert P3)
   ✗ composition-slop: filler empty-state copy "Welcome to your dashboard" — replace with job-specific instructional copy (copy.md; expert P3)
   ✗ kpi: 4 equal-weight summary cards with no focal region (largest card ~22752px², focal ~0px²) — a dashboard needs one primary chart/table/queue beyond the KPI row (dashboards.md § page architecture)
+  ✗ preflight-slop: ai-slop-cta-mania: ≥2 filled primary treatments detected in static HTML (kinds≈2, toolbarFilled=2)
+  ✗ preflight-slop: ai-slop-card-carnival: ≥4 card-like roots in markup (count=5) — card carnival
+  ✗ preflight-slop: ai-slop-filler-copy: filler empty/dashboard copy phrase in markup
 
 mode=light  bodyBg=rgb(244, 244, 245)  bodyColor=rgb(24, 24, 27)
 tokens: {"--background":null,"--foreground":null,"--primary":null,"--border":null,"--ring":null,"--radius":null,"--shine-color-bg":null,"--shine-color-fg":null,"--shine-color-primary":null,"--shine-color-border":null,"--shine-color-ring":null}
@@ -20,5 +23,7 @@ composition notes (judgement, not blocking):
   • 2 controls in 2 visual treatments; 2 filled (primary-looking). Largest group: 1× rgb(24, 24, 27) [Install packag]
   • density: content~17% chrome~27% of viewport
   • kpi: 4 summary-card candidate(s), 4 equal-weight, no focal beyond cards, no data-shine-kpi (agent checklist)
+  • preflight-slop: ai-slop-kpi-strip: ≥4 metric/KPI markers (count=9) — KPI strip / soup risk
+  • preflight-slop: ai-slop-nested-cards: nested card-like containers detected
   • sections: 2 marked; 1 missing a heading (section.kpi-row)
   • accent colour also used as non-interactive state on "Nucleus", "Company Tools", "Admin", "Adoption", "12", "28" — one token, two meanings: every use is a legal token and the vocabulary still collapsed
