@@ -16,6 +16,8 @@
     "render": "node core/render-spec.mjs",
     "materialize": "node corpus/materialize-packs.mjs",
     "sync-consumers": "bash scripts/sync-consumers.sh",
+    "edition:install": "node scripts/install-clearspeed-edition.mjs",
+    "edition:package": "node scripts/package-clearspeed-edition.mjs",
     "skill-listing": "node site/scripts/skill-listing.mjs",
     "measure-consumers": "node verify/measure-consumers.mjs",
     "compare": "node verify/compare.mjs",
