@@ -8,7 +8,7 @@ on:
 jobs:
   benchmark-smoke:
     name: benchmark-smoke
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, ARM64, shine]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -16,7 +16,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
       - run: npm ci
       - run: npm run benchmark:test
       - run: npm run benchmark:quality
@@ -25,7 +24,7 @@ jobs:
   benchmark-full:
     name: deterministic-full
     if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, ARM64, shine]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,7 +32,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
       - run: npm ci
       - run: npm run benchmark:full
       - uses: actions/upload-artifact@v4
@@ -45,7 +43,7 @@ jobs:
   native-agent-release:
     name: native-agent-release
     if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, ARM64, shine]
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
@@ -54,10 +52,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
       - run: npm ci
-      - name: install Playwright Chromium
-        run: npx playwright install --with-deps chromium
       - name: Six-category bounded native-agent evaluation
         env:
           SHINE_AGENT_CONCURRENCY: 1

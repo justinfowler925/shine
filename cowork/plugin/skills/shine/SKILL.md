@@ -12,12 +12,10 @@ Resolve this installed tree, then create the packet before planning or editing:
 ```sh
 SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}/.cursor/skills/shine")
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
-node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit> --project "$PWD"
+node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit|denoise> --project "$PWD"
 ```
-Packet `--mode` is only `existing` \| `new` \| `audit`. Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`; not packet modes. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP).
-If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
-dashboard. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
-source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
+Packet `--mode` is `existing` \| `new` \| `audit` \| `denoise` (denoise also loads `references/denoise.md`). Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP). Every packet emits a Design Decision Record (`packet.ddr` / `ddrId`, `constitutionIds`, `status`); denoise starts `proposed` — refuse Actor implement until `--accept` (or `node core/ddr.mjs accept`); prove receipts link `ddrId`.
+If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed dashboard. Denoise **always** requires `--category`. For bloated Operate cleanup: locked order primary job → competing CTA → empty/error triad → composition → craft; **no polish until `primaryTaskCheck` is green**; refuse paint while `restructureHints` still require restructure. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories. For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
 constraint. The signature must express this product's job, never generic design decoration.
@@ -73,10 +71,7 @@ role and express the primary job as browser steps. Run `node verify/usability.mj
 --contract shine-usability.json --cite <selected-template>` after measure and before compare.
 Do not claim usability from contrast, axe or visual comparison. Static dashboards, decorative controls and flows without observable changes fail.
 ## Layout and completion proof
-For broadcast/video use media; for publications use editorial. A chat demo cannot supply TV structure. Reject quarantined references; legacy `not_tested` captures need validated recapture, never manual relabeling. Read `references/media-layout-proof.md`; write `shine-layout.json` for narrow through wide widths, long content, missing images, loaded media and enlarged text. Measure frame, caption, controls and unused space together; media never exempts its wrapper.
+For broadcast/video use media; for publications use editorial. A chat demo cannot supply TV structure. Reject quarantined references; legacy `not_tested` captures need validated recapture, never manual relabeling. Read `../docs/media-layout-proof.md`; write `shine-layout.json` for narrow through wide widths, long content, missing images, loaded media and enlarged text. Measure frame, caption, controls and unused space together; media never exempts its wrapper.
 Bind critical/major diagnosis defects to executable layout assertion ids or `flow:<id>`. Run the packet’s completion command. Only `verify/prove.mjs` issues overall completion proof: every required category must pass; `not_tested` is incomplete. Browser proof requires a clean source commit and matching rendered commit/build identity.
 Inspect narrow and wide screenshots. Synthetic loading proves geometry, not provider playback or script quality. Separately review spoken summaries for complete sentences, source fidelity and distinction from written coverage; report limitations.
-Skill changes must satisfy `references/distribution-dod.md` and every destination in `../distribution.json`; source merge or local install alone is not delivery.
-
-
-This guidance download does not include Node tools. Executable verifiers require the full repository install. Never claim executable completion from this file alone.
+Skill changes must satisfy `../docs/distribution-dod.md` and every destination in `../distribution.json`; source merge or local install alone is not delivery.

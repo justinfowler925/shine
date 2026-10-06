@@ -1,7 +1,8 @@
 name: shine
 
-# GitHub-hosted runners only. Bootstrap Node + deps (+ Playwright for --full)
-# on a clean ubuntu-latest image; do not pin machine-local runner labels.
+# Repo-registered self-hosted Mac runner. GitHub-hosted ubuntu-latest is
+# blocked for this account ("account is locked due to a billing issue") —
+# same Free workaround as alicia-ci. Unlock hosted later via Settings → Billing.
 on:
   push:
     branches: [main]
@@ -11,20 +12,17 @@ on:
 jobs:
   doctor-default:
     name: doctor-default
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, ARM64, shine]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
       - name: install root deps
         run: npm ci
       - name: install pinned integration runtimes
         working-directory: verify/fixtures/integrations
         run: npm ci --ignore-scripts
-      - name: install Playwright Chromium
-        run: npx playwright install --with-deps chromium
       - name: fast import and seeded gates
         run: node verify/doctor.mjs --ci --quiet
       - name: Integration readiness and private edition integrity
@@ -44,20 +42,17 @@ jobs:
 
   doctor-full:
     name: doctor-full
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, ARM64, shine]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
       - name: install root deps
         run: npm ci
       - name: install pinned integration runtimes
         working-directory: verify/fixtures/integrations
         run: npm ci --ignore-scripts
-      - name: install Playwright Chromium
-        run: npx playwright install --with-deps chromium
       - name: browser interaction, visual proof, and designated consumers
         run: node verify/doctor.mjs --ci --full --quiet
 
