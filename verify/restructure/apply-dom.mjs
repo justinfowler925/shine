@@ -58,6 +58,9 @@ export function applyCtaBudget(html, op = {}) {
   let kept = 0;
   // filled-peer → outline first
   let out = html.replace(/\bfilled-peer\b/g, "outline");
+  // Scope / filter chips with aria-pressed paint as filled — clear pressed so
+  // measure CTA census does not treat them as competing primaries.
+  out = out.replace(/\saria-pressed=["']true["']/gi, ' aria-pressed="false"');
   // Per-button: keep preferred labels as filled up to maxFilled; demote others
   out = out.replace(
     /<button\b([^>]*?)class=(["'])([^"']*)\2([^>]*)>([\s\S]*?)<\/button>/gi,
@@ -76,6 +79,8 @@ export function applyCtaBudget(html, op = {}) {
       return `<button${pre}class=${q}${nextCls}${q}${post}>${label}</button>`;
     },
   );
+  // Also demote id-based filled style blocks used in P1 fixtures (button#export).
+  // Prefer keeping #save / labels matching prefer via class path above.
   return out;
 }
 

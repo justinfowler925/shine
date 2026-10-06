@@ -81,6 +81,23 @@ before locking the brief.
 2. Active state, mobile drawer, page header (title, description, one primary).
 3. Adoption pass if internal (`adoption.md`).
 
+### Worklist-first (Operate triage) — N9
+
+Installable first-viewport recipe for Monday decide jobs (Sled Capture class). Prefer this
+over dashboard chrome when the job is triage / queue / inbox.
+
+1. **One work object in the fold** — `data-region="focal"` on a single DataGrid / worklist.
+2. **CTA budget = 1** — one filled job verb (e.g. Pursue); peers outline/ghost/segmented.
+3. **KPI encyclopedia off-path** — ≤3 summary chips; rest in `<details data-shine-kpi-rest>`.
+4. **No peer grids** — second ranking (e.g. “David’s 10”) is a saved-view / filter XOR, never
+   a second `role="grid"` peer. Detect: `dual-focal`; plan: `collapse-peer-grids`.
+5. **Cite** — `shadcn-queue` (or product sibling). Anti-cites: `shadcn-dashboard-01` as page
+   lead, chart atoms, magicui. Packet `recommendation.restructureHints` must clear before polish.
+6. **Golden fixture** — `verify/fixtures/denoise/queue-cta-{before,after}.html` +
+   `npm run denoise:eval`. Doctor bites dual-CTA and card/KPI soup.
+
+Kit recipe string (cite v2): `shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts`.
+
 ### Dashboard
 
 1. Structure from `patterns.md` / `dashboards.md` — context bar, KPI row, **one focal

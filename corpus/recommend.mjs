@@ -104,9 +104,24 @@ function restructureHints(retrieval, primary, job) {
   if (/queue|triage|inbox/i.test(job) && screen === "charts") {
     hints.push("restructure: queue job retrieved a chart atom — demote charts; pick a page cite");
   }
+  // N10 — cite v2 restructureHints[] emit concrete ops when Operate triage language is present.
+  const triageJob = /queue|triage|inbox|pursue|worklist|decide|dismiss|notice/i.test(job);
+  if (triageJob || screen === "queue" || intent === "queue") {
+    hints.push("restructure: cta-budget maxFilled=1 (prefer job verb; demote peer filled)");
+    hints.push("restructure: collapse-peer-grids xor-saved-view when dual worklists share the route");
+    hints.push("restructure: kpi-collapse maxVisible=3 when ≥4 equal metrics compete with the work object");
+    hints.push("restructure: set-focal data-region=focal on the primary worklist");
+  }
+  if (/settings|sources|recipes|preferences/i.test(job) && screen === "queue") {
+    hints.push("restructure: rebind-cite shadcn-queue → shadcn-settings (category honesty)");
+  }
+  if (/dashboard|cockpit|kpi/i.test(job) && /queue|triage|inbox|pursue/i.test(job)) {
+    hints.push("restructure: dashboard→worklist — demote health/KPI chrome; cite shadcn-queue not dashboard-01");
+  }
   if (!hints.length) {
     hints.push("repaint-ok: primary page cite matches Operate intent — fix named defects only; polish after usability");
   }
+  // Denoise refuses paint while any restructure: hint remains and primaryTask is red.
   return hints;
 }
 
