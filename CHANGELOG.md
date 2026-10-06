@@ -18,6 +18,16 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   Opt-in Snapline + Impeccable adapters under `verify/adapters/` (cite never overridden).
   Operate filler deny-list expanded (N4). Sled fixtures promoted to `verify/fixtures/denoise/`.
 
+- **Dual-focal + KPI soup + restructure DOM (N6–N7).** Measure hard-fails peer
+  worklists (`dual-focal`) and ≥4 equal metrics on queue cites (`kpi-soup`).
+  `shine-restructure/v1` + `apply-dom.mjs` (cta-budget, kpi-collapse, set-focal,
+  rebind-cite; collapse-peer-grids plan-only). `npm run denoise:eval` scorecard.
+
+- **TSX AST + worklist kit + denoise loop (N8–N11).** `apply-tsx.mjs` safe ops
+  (dual-grid plan-only). Worklist-first recipe in `kits.md`. Cite v2
+  `restructureHints[]` emit concrete ops. `npm run denoise:loop` golden FAIL→PASS
+  path (`docs/denoise-golden-prove.md`).
+
 ### Changed
 
 - **Operate prove is mandatory.** Stop-sweep fails closed when SaaS Operate page cites

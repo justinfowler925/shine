@@ -105,7 +105,9 @@ Packet `ddr.constitutionIds` for Operate denoise defaults:
 Every gate bite is **measure/prove FAIL→PASS** with a **cropped defect receipt**.  
 Identical full-page “twin” screenshots are invalid proof.
 
-Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs`.
+Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs`.  
+Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
+TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`).
 
 ## Related
 
