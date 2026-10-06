@@ -12,7 +12,7 @@ export const CARD_SOUP_MIN = 4;
 export const CARD_AREA_EQUALITY_RATIO = 0.78;
 export const FOCAL_MIN_RATIO = 1.4;
 
-/** Filler empty-state phrases that must never ship on Operate. */
+/** Filler empty-state phrases that must never ship on Operate (N4 deny-list). */
 export const FILLER_EMPTY_PHRASES = Object.freeze([
   /^welcome to your dashboard\.?$/i,
   /^welcome to .+!$/,
@@ -23,6 +23,11 @@ export const FILLER_EMPTY_PHRASES = Object.freeze([
   /^coming soon\.?$/i,
   /^lorem ipsum\b/i,
   /^your (amazing )?content (goes|here)/i,
+  /^start building something (amazing|great)\.?$/i,
+  /^drop your content here\.?$/i,
+  /^placeholder text\.?$/i,
+  /^todo:\s*add .+/i,
+  /^click here to get started\.?$/i,
 ]);
 
 /** Marketing DNA class / style tells — illegal on saas Operate chrome. */
@@ -141,6 +146,11 @@ export function evaluateCompositionSlop() {
     /^coming soon\.?$/i,
     /^lorem ipsum\b/i,
     /^your (amazing )?content (goes|here)/i,
+    /^start building something (amazing|great)\.?$/i,
+    /^drop your content here\.?$/i,
+    /^placeholder text\.?$/i,
+    /^todo:\s*add .+/i,
+    /^click here to get started\.?$/i,
   ];
   const fillerHits = [];
   const emptyEls = [
