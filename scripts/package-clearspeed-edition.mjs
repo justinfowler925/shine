@@ -190,7 +190,12 @@ const skill = join(edition, "skill");
 for (const path of [join(HOME, ".cursor/skills/shine"), join(HOME, ".claude/skills/shine"), join(HOME, ".agents/skills/shine")]) {
   linkOrReplace(path, skill);
 }
-for (const path of [join(HOME, ".cursor/agents/shine-ux.md"), join(HOME, ".Codex/agents/shine-ux.md")]) {
+for (const path of [
+  join(HOME, ".cursor/agents/shine-ux.md"),
+  join(HOME, ".Codex/agents/shine-ux.md"),
+  join(HOME, ".claude/agents/shine-ux.md"),
+  join(HOME, ".agents/agents/shine-ux.md"),
+]) {
   linkOrReplace(path, join(edition, "agents/shine-ux.md"));
 }
 
@@ -203,6 +208,11 @@ mergeHooks(join(HOME, ".Codex/hooks.json"), {
   PostToolUse: [{ matcher: "Edit|Write|MultiEdit", hooks: [{ type: "command", command: "$HOME/.agents/skills/shine/run-hook.sh design-lint.mjs", timeout: 15, statusMessage: "shine design-lint" }], _needle: "design-lint.mjs" }],
   Stop: [{ hooks: [{ type: "command", command: "$HOME/.agents/skills/shine/run-hook.sh stop-sweep.mjs", timeout: 20, statusMessage: "shine stop sweep" }], _needle: "stop-sweep.mjs" }],
   SessionStart: [{ hooks: [{ type: "command", command: "$HOME/.agents/skills/shine/run-hook.sh doctor.mjs --quiet", timeout: 30, statusMessage: "shine doctor" }], _needle: "doctor.mjs" }],
+});
+mergeHooks(join(HOME, ".claude/settings.json"), {
+  PostToolUse: [{ matcher: "Edit|Write|MultiEdit", hooks: [{ type: "command", command: "$HOME/.claude/skills/shine/run-hook.sh design-lint.mjs", timeout: 15, statusMessage: "shine design-lint" }], _needle: "shine/run-hook.sh design-lint" }],
+  Stop: [{ hooks: [{ type: "command", command: "$HOME/.claude/skills/shine/run-hook.sh stop-sweep.mjs", timeout: 20, statusMessage: "shine stop sweep" }], _needle: "shine/run-hook.sh stop-sweep" }],
+  SessionStart: [{ hooks: [{ type: "command", command: "$HOME/.claude/skills/shine/run-hook.sh doctor.mjs --quiet", timeout: 30, statusMessage: "shine doctor" }], _needle: "shine/run-hook.sh doctor" }],
 });
 
 const doctor = spawnSync(process.execPath, [join(release, "verify/doctor.mjs"), "--quiet"], { encoding: "utf8", cwd: release, timeout: 120000 });
