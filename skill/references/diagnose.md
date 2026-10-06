@@ -5,6 +5,10 @@ operations so every fix starts from a named defect and ends with a source.
 
 ## 0. Route first
 
+- **Denoise / cleanup** (bloated Operate, Sled-class, “dashboard as queue”) →
+  `denoise.md` first. Packet `--mode denoise` requires `--category` and an accepted DDR.
+  Diagnose order locked: primary job → CTA → empty/error → composition → craft. No polish
+  until `primaryTaskCheck` is green.
 - **No existing UI** (new screen/page/tool), or the user said wireframe/sketch/low-fi →
   `wireframe.md` before anything here.
 - A `shine-wireframe/<slug>.brief.md` with `Status: LOCKED` → structure is given; do not

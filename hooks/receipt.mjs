@@ -193,6 +193,7 @@ export function writeCompletionProveReceipt({
   checks,
   binding = null,
   tool = "prove.mjs",
+  ddrId = "",
 }) {
   if (!cite) throw new Error("completion prove receipt requires cite");
   if (!checksComplete(checks)) throw new Error("cannot mint completion prove receipt without all checks passed");
@@ -207,6 +208,7 @@ export function writeCompletionProveReceipt({
     checks,
     binding: binding || null,
     at: Date.now(),
+    ...(ddrId ? { ddrId, ddrLinked: true } : {}),
   };
   if (target && existsSync(target) && RENDERABLE_ARTIFACT.test(target)) {
     const claim = artifactClaim(target, cite);

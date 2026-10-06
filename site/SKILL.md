@@ -12,12 +12,15 @@ Resolve this installed tree, then create the packet before planning or editing:
 ```sh
 SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}/.cursor/skills/shine")
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
-node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit> --project "$PWD"
+node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit|denoise> --project "$PWD"
 ```
-Packet `--mode` is only `existing` \| `new` \| `audit`. Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`; not packet modes. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP).
+Packet `--mode` is `existing` \| `new` \| `audit` \| `denoise`. Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`; not packet modes (except denoise, which is both a packet mode and a cleanup path — `references/denoise.md`). Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP).
+Every packet emits a Design Decision Record (`packet.ddr` / `ddrId`, `constitutionIds`, `status`). Denoise starts `proposed` — Actor implement is refused until `--accept` (or `node core/ddr.mjs accept`). Prove receipts link `ddrId`.
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
-dashboard. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
+dashboard. Denoise **always** requires `--category`. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
 source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
+## Denoise (cleanup)
+For bloated Operate surfaces (“denoise”, Sled-class cleanup, dashboard-as-queue): `--mode denoise --category <…>` and read `references/denoise.md`. Order is locked: primary job → competing CTA → empty/error triad → composition → craft. **No polish until `primaryTaskCheck` is green.** Refuse paint while `restructureHints` still require restructure and the primary task is red.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories. For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
 constraint. The signature must express this product's job, never generic design decoration.

@@ -4,6 +4,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ## Unreleased
 
+### Added
+
+- **Denoise skill mode + DDR (N0).** `--mode denoise` loads `skill/references/denoise.md`,
+  refuses without `--category`, and emits a Design Decision Record (`ddrId`,
+  `constitutionIds`, `status` proposed→accepted). Actor implement is fail-closed until
+  `--accept` / `core/ddr.mjs accept`. Prove completion receipts may link `ddrId`.
+  Doctor bite: `verify/denoise-packet.test.mjs`.
+
 ### Changed
 
 - **Operate prove is mandatory.** Stop-sweep fails closed when SaaS Operate page cites
