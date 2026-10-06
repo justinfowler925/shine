@@ -30,7 +30,7 @@ import {
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { homedir } from "node:os";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 
 const SOURCE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
@@ -231,9 +231,17 @@ async function main() {
   rmSync(stage, { recursive: true, force: true });
   mkdirSync(stage, { recursive: true });
 
-  // Runtime entries (everything except skill) must resolve to the base release.
+  const brandJson = join(profileSrc, "brand.json");
+  const hasBrandOverlay = existsSync(brandJson);
+
+  // Runtime entries (everything except skill) must resolve to the base release,
+  // except tokens when the Clearspeed profile owns a brand.json overlay.
   for (const entry of readdirSync(base, { withFileTypes: true })) {
     if (entry.name === "skill") continue;
+    if (entry.name === "tokens" && hasBrandOverlay) {
+      cpSync(join(base, entry.name), join(stage, entry.name), { recursive: true, dereference: true });
+      continue;
+    }
     if (entry.name === "node_modules" || entry.name === ".git") {
       // Prefer symlink to keep edition light; doctor/verify still resolve through base.
       symlinkSync(join(base, entry.name), join(stage, entry.name));
@@ -246,12 +254,31 @@ async function main() {
   cpSync(join(base, "skill"), join(stage, "skill"), { recursive: true });
   writeFileSync(join(stage, "skill/SKILL.md"), editionSkill(base, profileSrc));
 
+  if (hasBrandOverlay) {
+    const apply = spawnSync(
+      process.execPath,
+      [
+        join(SOURCE, "scripts/apply-clearspeed-brand.mjs"),
+        "--tokens",
+        join(stage, "tokens"),
+        "--brand",
+        brandJson,
+      ],
+      { encoding: "utf8", cwd: SOURCE },
+    );
+    if (apply.status !== 0) {
+      rmSync(stage, { recursive: true, force: true });
+      throw new Error(apply.stderr || apply.stdout || "Clearspeed brand apply failed");
+    }
+  }
+
   const manifest = {
     skill: "shine",
     profile: "clearspeed",
     profileVersion,
     baseRelease: sha,
     profileHash,
+    brandAccent: hasBrandOverlay ? "#ED5925" : null,
     createdAt: new Date().toISOString(),
     sourceBase: base,
   };
