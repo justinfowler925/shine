@@ -53,12 +53,17 @@ installing that base (or use the offline `.tgz`). Receipt for the offline bundle
 `company-tools/releases/shine-clearspeed.json` (points at Studio `shine-dist/`; the
 `.tgz` itself is not stored in git).
 
-## Brand palette note
+## Brand palette
 
-The Clearspeed **edition** is a skill/profile overlay (Nucleus attach path, diagnosis
-order). It does **not** recolor the brand token lane. Placeholder action `#4338ca` in
-`tokens/` stays until a consumer syncs real Clearspeed brand artifacts (`#ED5925`) via
-`npm run sync-consumers` / product tokens. Do not treat edition install as a brand
-token cutover.
+The Clearspeed edition **owns** the brand accent. Profile source of truth:
+
+`skill/references/clearspeed/brand.json` → Signal Orange `#ED5925` (hover `#D24A1B`).
+
+`install-clearspeed-edition.mjs` materializes `edition/tokens` (not a base symlink) and
+runs `scripts/apply-clearspeed-brand.mjs` so the edition tree carries Clearspeed orange
+instead of the public placeholder indigo. The base release `tokens/` lane stays
+placeholder on purpose; only the private edition is recolored. `verify/edition.mjs`
+fails closed if `#4338ca` remains or `#ED5925` is missing from the profile / edition
+tokens.
 
 See `docs/nucleus-attach.md` and `docs/distribution-dod.md`.

@@ -10,6 +10,8 @@ separate design system.
 - Shine attaches as a **Company Tools** package (`distribution.json` → `consumers.nucleus`)
 - House kit: **shadcn / Tailwind** + living TanStack DataGrid — not Mantine/HeroUI
 - Default lane: **`saas`** (or `internal` for dense cockpits). Marketing DNA is wrong here.
+- Brand accent: **Signal Orange `#ED5925`** (hover `#D24A1B`) from `brand.json` in this
+  profile — the edition materializes brand tokens; never use placeholder indigo.
 
 ## Attach path (repeatable)
 

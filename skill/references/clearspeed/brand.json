@@ -1,0 +1,24 @@
+{
+  "//": "Clearspeed Shine edition brand palette — source of truth for the private edition overlay.",
+  "//accent": "Signal Orange #ED5925 (action/CTA). Hover #D24A1B. Never invent indigo placeholders here.",
+  "//build": "install-clearspeed-edition.mjs applies this via SHINE_BRAND_OVERRIDE into the edition tokens tree.",
+  "color": {
+    "brand": {
+      "canvas": "#ffffff",
+      "canvas-subtle": "#f8f8f8",
+      "navy": "#112578",
+      "anchor": "#0a1648",
+      "action": "#ED5925",
+      "action-hover": "#D24A1B",
+      "tint": "#f7f8ff",
+      "hairline": "#ececec",
+      "text": "#111111",
+      "text-muted": "#555e7d"
+    }
+  },
+  "font": {
+    "display": ["Cal Sans", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
+    "body": ["Roboto", "Helvetica Neue", "Arial", "sans-serif"],
+    "ui": ["Jura", "Roboto", "Helvetica Neue", "Arial", "sans-serif"]
+  }
+}

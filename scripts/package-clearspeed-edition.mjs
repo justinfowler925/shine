@@ -72,9 +72,13 @@ async function main() {
 
   // Copy release tree. Follow symlinks so the laptop gets real files.
   cpSync(base, join(stage, "release"), { recursive: true, dereference: true });
-  // Edition: copy skill + manifest; runtime dirs are rewritten to point at packaged release on install.
+  // Edition: copy skill + manifest + materialized brand tokens; other runtime
+  // dirs are rewritten to point at the packaged release on install.
   cpSync(join(edition, "skill"), join(stage, "edition/skill"), { recursive: true, dereference: true });
   cpSync(join(edition, "clearspeed-edition.json"), join(stage, "edition/clearspeed-edition.json"));
+  if (existsSync(join(edition, "tokens"))) {
+    cpSync(join(edition, "tokens"), join(stage, "edition/tokens"), { recursive: true, dereference: true });
+  }
 
   const receipt = {
     version: 1,
@@ -162,8 +166,13 @@ const stageEd = join(root, "editions", "." + editionName + "." + process.pid);
 mkdirSync(join(root, "editions"), { recursive: true });
 rmSync(stageEd, { recursive: true, force: true });
 mkdirSync(stageEd, { recursive: true });
+const hasBrandTokens = existsSync(join(editionSrc, "tokens"));
 for (const entry of readdirSync(release, { withFileTypes: true })) {
   if (entry.name === "skill") continue;
+  if (entry.name === "tokens" && hasBrandTokens) {
+    cpSync(join(editionSrc, "tokens"), join(stageEd, "tokens"), { recursive: true });
+    continue;
+  }
   symlinkSync(join(release, entry.name), join(stageEd, entry.name));
 }
 cpSync(join(editionSrc, "skill"), join(stageEd, "skill"), { recursive: true });
