@@ -167,6 +167,52 @@ function codexHookShape() {
   };
 }
 
+function claudeHookShape() {
+  const cmd = (tool) => `$HOME/.claude/skills/shine/run-hook.sh ${tool}`;
+  return {
+    PostToolUse: [
+      {
+        matcher: "Edit|Write|MultiEdit",
+        hooks: [
+          {
+            type: "command",
+            command: cmd("design-lint.mjs"),
+            timeout: 15,
+            statusMessage: "shine design-lint",
+          },
+        ],
+        _needle: "shine/run-hook.sh design-lint",
+      },
+    ],
+    Stop: [
+      {
+        hooks: [
+          {
+            type: "command",
+            command: cmd("stop-sweep.mjs"),
+            timeout: 20,
+            statusMessage: "shine stop sweep",
+          },
+        ],
+        _needle: "shine/run-hook.sh stop-sweep",
+      },
+    ],
+    SessionStart: [
+      {
+        hooks: [
+          {
+            type: "command",
+            command: cmd("doctor.mjs --quiet"),
+            timeout: 30,
+            statusMessage: "shine doctor",
+          },
+        ],
+        _needle: "shine/run-hook.sh doctor",
+      },
+    ],
+  };
+}
+
 async function main() {
   const base = resolveBase();
   const { profileDigest, editionSkill, verifySkillDeployment } = await loadEditionApi(base);
@@ -240,6 +286,8 @@ async function main() {
     for (const [name, path] of [
       ["cursor-agent", join(HOME, ".cursor/agents/shine-ux.md")],
       ["codex-agent", join(HOME, ".Codex/agents/shine-ux.md")],
+      ["claude-agent", join(HOME, ".claude/agents/shine-ux.md")],
+      ["agents-agent", join(HOME, ".agents/agents/shine-ux.md")],
     ]) {
       linkOrReplace(path, join(edition, "agents/shine-ux.md"));
       links[name] = { path, target: realpathSync(path) };
@@ -249,6 +297,7 @@ async function main() {
   if (doHooks) {
     mergeHooks(join(HOME, ".cursor/hooks.json"), cursorHookShape(), { cursorTopLevel: true });
     mergeHooks(join(HOME, ".Codex/hooks.json"), codexHookShape());
+    mergeHooks(join(HOME, ".claude/settings.json"), claudeHookShape());
   }
 
   const final = verifySkillDeployment(skillPath, base);

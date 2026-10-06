@@ -49,6 +49,16 @@ node shine-clearspeed-<sha7>-<profileHash12>/install.mjs
 
 `company-tools/packages/shine.zip` remains the **generic** attested source package
 (`distribute.py prepare`). ClearSpeed agents still rebuild/link the edition after
-installing that base (or use the offline `.tgz`).
+installing that base (or use the offline `.tgz`). Receipt for the offline bundle:
+`company-tools/releases/shine-clearspeed.json` (points at Studio `shine-dist/`; the
+`.tgz` itself is not stored in git).
+
+## Brand palette note
+
+The Clearspeed **edition** is a skill/profile overlay (Nucleus attach path, diagnosis
+order). It does **not** recolor the brand token lane. Placeholder action `#4338ca` in
+`tokens/` stays until a consumer syncs real Clearspeed brand artifacts (`#ED5925`) via
+`npm run sync-consumers` / product tokens. Do not treat edition install as a brand
+token cutover.
 
 See `docs/nucleus-attach.md` and `docs/distribution-dod.md`.
