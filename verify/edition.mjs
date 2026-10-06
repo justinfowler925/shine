@@ -36,7 +36,9 @@ export function verifySkillDeployment(skill,base){try{
   }
   if(realpathSync(join(edition,e.name))!==realpathSync(join(base,e.name)))throw Error('Edition runtime differs: '+e.name);
  }
- const walk=(dir)=>{for(const e of readdirSync(dir,{withFileTypes:true})){const p=join(dir,e.name),rel=relative(join(base,'skill'),p);if(rel==='SKILL.md')continue;if(e.isDirectory())walk(p);else if(!readFileSync(join(skill,rel)).equals(readFileSync(p)))throw Error('Inherited skill reference differs: '+rel);}};walk(join(base,'skill'));
+ // Clearspeed profile is edition-owned when brand.json is present — do not
+ // require byte-identity with the base release's profile copy.
+ const walk=(dir)=>{for(const e of readdirSync(dir,{withFileTypes:true})){const p=join(dir,e.name),rel=relative(join(base,'skill'),p);if(rel==='SKILL.md')continue;if(brandOverlay&&(rel==='references/clearspeed'||rel.startsWith('references/clearspeed/')))continue;if(e.isDirectory())walk(p);else if(!readFileSync(join(skill,rel)).equals(readFileSync(p)))throw Error('Inherited skill reference differs: '+rel);}};walk(join(base,'skill'));
  assertClearspeedBrand(edition,profile);
  return {status:'passed',kind:'edition',profile:manifest.profile,profileVersion:manifest.profileVersion,baseRelease:revision,profileHash:manifest.profileHash,brandAccent:brandOverlay?'#ED5925':null};
  }catch(error){return {status:'failed',reason:error.message};}}

@@ -45,11 +45,20 @@ const doHooks = flag("--hooks") || (!flag("--no-hooks") && doLink);
 const profileVersion = opt("--profile-version") || "1";
 
 function loadEditionApi(base) {
-  const editionPath = join(base, "verify/edition.mjs");
+  // Prefer the checkout's verifier when installing from a shine tree that owns
+  // the Clearspeed edition scripts (brand overlay gates live here).
+  const fromSource = join(SOURCE, "verify/edition.mjs");
+  const editionPath = existsSync(fromSource) ? fromSource : join(base, "verify/edition.mjs");
   if (!existsSync(editionPath)) {
     throw new Error(`edition validator missing at ${editionPath}`);
   }
   return import(pathToFileURL(editionPath).href);
+}
+
+function resolveProfileSrc(base) {
+  const fromSource = join(SOURCE, "skill/references/clearspeed");
+  if (existsSync(join(fromSource, "profile-instructions.md"))) return fromSource;
+  return join(base, "skill/references/clearspeed");
 }
 
 function resolveBase() {
@@ -217,7 +226,9 @@ async function main() {
   const base = resolveBase();
   const { profileDigest, editionSkill, verifySkillDeployment } = await loadEditionApi(base);
   const sha = baseReleaseId(base);
-  const profileSrc = join(base, "skill/references/clearspeed");
+  // Edition profile is owned by the checkout running install (SOURCE), not the
+  // immutable base release — otherwise brand.json never lands until a re-release.
+  const profileSrc = resolveProfileSrc(base);
   if (!existsSync(join(profileSrc, "profile-instructions.md"))) {
     throw new Error(`Clearspeed profile missing at ${profileSrc}/profile-instructions.md`);
   }
@@ -250,8 +261,11 @@ async function main() {
     symlinkSync(join(base, entry.name), join(stage, entry.name));
   }
 
-  // Skill tree: inherit base bytes, then replace SKILL.md with the edition loader.
+  // Skill tree: inherit base bytes, overlay Clearspeed profile from SOURCE, then
+  // replace SKILL.md with the edition loader.
   cpSync(join(base, "skill"), join(stage, "skill"), { recursive: true });
+  rmSync(join(stage, "skill/references/clearspeed"), { recursive: true, force: true });
+  cpSync(profileSrc, join(stage, "skill/references/clearspeed"), { recursive: true });
   writeFileSync(join(stage, "skill/SKILL.md"), editionSkill(base, profileSrc));
 
   if (hasBrandOverlay) {
