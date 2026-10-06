@@ -40,6 +40,14 @@ Copy `consumers.example` → `consumers.local` and point a row at the Nucleus to
 vendor path when you want `npm run sync-consumers` / `measure-consumers` on Justin's
 machine. This VM often has no `consumers.local`; doctor notes consumers unconfigured.
 
+### `@shadcn/lint` (Nucleus CI)
+
+Primary Tailwind design-system lint for Operate components. Recipe + Clearspeed
+token map: `skill/references/clearspeed/shadcn-lint.md`. Install
+`@shadcn/lint@0.2.0` in Nucleus; warn on `src/components/**`; do not triple-stack
+Oxlint/Biome TW plugins. Changed-line `ui:clearspeed` remains the hex/font/motion
+diff gate — not a second TW DS linter.
+
 ### Golden fixture (no checkout required)
 
 `verify/fixtures/nucleus-golden/`:
