@@ -12,12 +12,10 @@ Resolve this installed tree, then create the packet before planning or editing:
 ```sh
 SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}/.cursor/skills/shine")
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
-node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit> --project "$PWD"
+node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit|denoise> --project "$PWD"
 ```
-Packet `--mode` is only `existing` \| `new` \| `audit`. Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`; not packet modes. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP).
-If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed
-dashboard. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI
-source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
+Packet `--mode` is `existing` \| `new` \| `audit` \| `denoise` (denoise also loads `references/denoise.md`). Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP). Every packet emits a Design Decision Record (`packet.ddr` / `ddrId`, `constitutionIds`, `status`); denoise starts `proposed` — refuse Actor implement until `--accept` (or `node core/ddr.mjs accept`); prove receipts link `ddrId`.
+If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed dashboard. Denoise **always** requires `--category`. For bloated Operate cleanup: locked order primary job → competing CTA → empty/error triad → composition → craft; **no polish until `primaryTaskCheck` is green**; refuse paint while `restructureHints` still require restructure. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories. For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
 constraint. The signature must express this product's job, never generic design decoration.
@@ -477,6 +475,7 @@ Do **not** default to these looks — reach for them only when the brief pins th
 - Multiple competing CTAs of equal weight
 - Sections with three jobs and three headlines
 - Decorative gradient as the only visual idea (no real product/context anchor)
+- **Metric-grid / nested-card bans** (no-slop-ui family): ≥4 equal KPI tiles ahead of the work object; Card-in-Card carnival without a focal worklist — see denoise.md + `preflight-slop.mjs` (`ai-slop-metric-grid`, `ai-slop-nested-cards`)
 
 ## Interaction fails
 
@@ -2186,6 +2185,128 @@ charts remains agent unless the dashboard recipe stamps KPI markers.
 
 ---
 
+## Reference: denoise.md
+
+# Denoise — cleanup mode (N0)
+
+One cleanup path for bloated Operate surfaces: **triage → structure decisions → restructure → prove**.  
+No craft polish until `primaryTaskCheck` is green. Prove is mandatory for Operate cites.
+
+Load this file when the packet has `--mode denoise`, the user says “denoise”, or a Sled-class cleanup is requested.
+
+## Start
+
+```sh
+node "$ROOT/core/design-packet.mjs" \
+  --job "<Monday job in one sentence>" \
+  --lane saas \
+  --mode denoise \
+  --category <queue|settings|catalog|record|dashboard|datagrid|form|…> \
+  --project "$PWD"
+```
+
+Ambiguous jobs **refuse** without `--category`. Do not guess dashboard.
+
+Accept the Design Decision Record before Actor implement:
+
+```sh
+node "$ROOT/core/design-packet.mjs" … --accept
+# or accept a written packet: node "$ROOT/core/ddr.mjs" accept shine-packet.json
+```
+
+`editing.allowed` stays false while `ddr.status !== "accepted"`. Supersede; do not rewrite history.
+
+## Diagnose order (Operate — locked)
+
+1. Primary job (`primaryTaskCheck`) — stranger names and starts it in ~3s  
+2. Competing CTA (`competingCtaCheck` / measure `cta-pressure`)  
+3. Empty / error / loading triad  
+4. Composition (dual-focal, KPI soup, card soup, wrong cite)  
+5. Craft (tokens, glow, density)
+
+Craft-only Operate packets fail presence checks. If usability/completeness is highest severity → **restructure**, then repaint.
+
+## Ambiguous → decision table
+
+| Ambiguous signal | Decision | Op / gate |
+|---|---|---|
+| Dashboard chrome on a Monday triage job | Worklist, not dashboard. Cite `shadcn-queue` (or settings/record), never chart/dashboard page lead | `dashboard→worklist` · anti-dashboard |
+| Two DataGrids / two worklists same route | One grid. Peer → saved view / filter / XOR | `collapse-peer-grids` · `dual-focal` |
+| ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost | `cta-budget` · `cta-pressure` |
+| ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details>` | `kpi-collapse` · `kpi-soup` |
+| Settings job with queue cite | Rebind cite to category truth | `rebind-cite` |
+| Equal Card roots, no focal | One `data-region="focal"` | `set-focal` · `composition-slop` |
+| Can’t name category in one sentence | **Stop.** Refuse until `--category` | packet gate |
+| Craft ranked above usability | Out of order. Restructure before repaint | `restructureRequired` |
+
+## Kill list (fail closed when machine-detectable)
+
+- Dual filled primaries in main  
+- Dual peer worklists / grids (`dual-focal`)  
+- KPI soup on queue/triage (≥4 equal metrics ahead of work object)  
+- Card soup without focal  
+- Wrong cite (settings job + queue cite)  
+- Filler copy (“Welcome to your dashboard”, …)  
+- Marketing DNA on Operate chrome  
+- Paint while `recommendation.restructureHints` still start with `restructure:` and primaryTask is red  
+
+## Loop (fail→pass, no green theater)
+
+```
+1 packet     --mode denoise --category <…> --job "…"  → accept DDR
+2 static     vibe / preflight-slop / Card·Badge counts
+3 cite       shot + restructureHints[]
+4 diagnose   shine-diagnosis.json + shine-restructure.json
+5 apply      DOM/AST auto-safe ops (verify/restructure/*)
+6 agent      humanGate ops (dual-grid XOR, god-split) — never silent grid delete
+7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID)
+8 usability  primary-job flow + prove.mjs completion (links ddrId)
+9 stop-sweep Operate cannot finish on compare alone
+```
+
+Max **3** measure rounds per surface. Each round clears a **named** defect.
+
+Impeccable `distill` / `quieter` and Snapline adapters are **opt-in after** cite locked + CTA/focal ops. They never override `data-cite`. See adapters in `verify/adapters/`.
+
+```sh
+node "$ROOT/verify/preflight-slop.mjs" <artifact.html>          # N2 vibe signals
+node "$ROOT/verify/adapters/snapline.mjs" stop.json             # N3 opt-in
+node "$ROOT/verify/adapters/impeccable.mjs" --mode distill --structure-green --cite <id>
+node "$ROOT/core/reflexion.mjs" --fail "cta-pressure: …" --ddr <ddrId>   # on measure/prove fail
+```
+
+## Constitution IDs (critic must cite)
+
+Packet `ddr.constitutionIds` for Operate denoise defaults:
+
+| ID | Rule |
+|---|---|
+| `cta-pressure` | Exactly one filled primary in main |
+| `dual-focal-ban` | No peer worklists/grids for the same job |
+| `kpi-soup-off-path` | KPI encyclopedia off the decide path |
+| `primary-task-3s` | Stranger starts the job in ~3s |
+| `cite-honesty` | Page cite matches category (no queue-on-settings lie) |
+| `prove-mandatory` | Fresh prove.mjs receipt; compare alone insufficient |
+| `restructure-before-repaint` | No polish while structure red |
+
+## Proof bar
+
+Every gate bite is **measure/prove FAIL→PASS** with a **cropped defect receipt**.  
+Identical full-page “twin” screenshots are invalid proof.
+
+Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs`.  
+Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
+TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`).
+
+## Related
+
+- Playbook (human 30–60 min): Project `docs/ui-denoise-playbook.md`  
+- Expert gates: P0 prove · P1 CTA · P3 composition · P5 cite v2 · P6 golden  
+- Restructure schema: `verify/restructure/schema.mjs` · `shine-restructure/v1`
+
+
+---
+
 ## Reference: diagnose.md
 
 # Diagnose — how to find what is wrong
@@ -2195,6 +2316,10 @@ operations so every fix starts from a named defect and ends with a source.
 
 ## 0. Route first
 
+- **Denoise / cleanup** (bloated Operate, Sled-class, “dashboard as queue”) →
+  `denoise.md` first. Packet `--mode denoise` requires `--category` and an accepted DDR.
+  Diagnose order locked: primary job → CTA → empty/error → composition → craft. No polish
+  until `primaryTaskCheck` is green.
 - **No existing UI** (new screen/page/tool), or the user said wireframe/sketch/low-fi →
   `wireframe.md` before anything here.
 - A `shine-wireframe/<slug>.brief.md` with `Status: LOCKED` → structure is given; do not
@@ -2962,7 +3087,7 @@ before locking the brief.
 |---|---|---|
 | App shell | `shadcn-sidebar-07` | shadcn sidebar — § App shell |
 | Dashboard | `shadcn-dashboard-01` | Recharts/D3 + `dashboards.md` — not Tremor atoms |
-| Queue / insight stream | `untitled-table` | toolbar, batch, empty/loading/error |
+| Queue / insight stream | `shadcn-queue` | worklist-first (§ Worklist-first); TanStack + table-quality; `untitled-table` chrome only |
 | Data table | `untitled-table` / `shadcn-dashboard-01` | § DataGrid |
 | Form / settings | `shadcn-settings` | `contracts.md` completeness; Polaris query-only |
 | Landing | `shadcn-marketing` | hero budget; `magicui-hero` for marketing-hero |
@@ -3003,6 +3128,23 @@ before locking the brief.
 1. shadcn sidebar blocks for structure; Polaris (query-only) for admin nav density cues.
 2. Active state, mobile drawer, page header (title, description, one primary).
 3. Adoption pass if internal (`adoption.md`).
+
+### Worklist-first (Operate triage) — N9
+
+Installable first-viewport recipe for Monday decide jobs (Sled Capture class). Prefer this
+over dashboard chrome when the job is triage / queue / inbox.
+
+1. **One work object in the fold** — `data-region="focal"` on a single DataGrid / worklist.
+2. **CTA budget = 1** — one filled job verb (e.g. Pursue); peers outline/ghost/segmented.
+3. **KPI encyclopedia off-path** — ≤3 summary chips; rest in `<details data-shine-kpi-rest>`.
+4. **No peer grids** — second ranking (e.g. “David’s 10”) is a saved-view / filter XOR, never
+   a second `role="grid"` peer. Detect: `dual-focal`; plan: `collapse-peer-grids`.
+5. **Cite** — `shadcn-queue` (or product sibling). Anti-cites: `shadcn-dashboard-01` as page
+   lead, chart atoms, magicui. Packet `recommendation.restructureHints` must clear before polish.
+6. **Golden fixture** — `verify/fixtures/denoise/queue-cta-{before,after}.html` +
+   `npm run denoise:eval`. Doctor bites dual-CTA and card/KPI soup.
+
+Kit recipe string (cite v2): `shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts`.
 
 ### Dashboard
 
@@ -4996,6 +5138,19 @@ measure logs and distinct defect crops. Run `node verify/nucleus-golden.test.mjs
 **Pattern recommender (P5):** read `packet.recommendation` before editing — primary page
 cite, antiPatterns, restructure vs repaint hints, kitRecipe, confidence
 (`corpus/recommend.mjs`).
+
+**Denoise + DDR (N0):** `--mode denoise` loads `denoise.md`; refuses without `--category`.
+Packet emits `ddr` / `ddrId` + `constitutionIds`; denoise Actor implement requires
+`status: accepted` (`--accept` or `core/ddr.mjs accept`). Prove receipts link `ddrId`.
+No polish until `primaryTaskCheck` green.
+
+**Dual-focal + KPI soup (N6):** Operate queue/triage cites hard-fail ≥2 peer
+worklists/grids (`verify/dual-focal.mjs`) and ≥4 equal metric tiles
+(`verify/kpi-soup.mjs`). Dashboard equal-card floor stays in `kpi.mjs`.
+
+**Restructure + denoise-eval (N7):** `shine-restructure/v1` plans apply via
+`verify/restructure/apply-dom.mjs`. `npm run denoise:eval` scores fixture pairs.
+Dual-grid remains detect+plan (no silent delete).
 
 **Settings/forms corpus (P2):** cite floors require ≥6 settings pages and ≥6 form+record
 pages; form/settings/record cites hard-fail `aria-invalid` without an accessible message
