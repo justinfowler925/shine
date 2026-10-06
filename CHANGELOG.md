@@ -28,6 +28,11 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   `restructureHints[]` emit concrete ops. `npm run denoise:loop` golden FAIL→PASS
   path (`docs/denoise-golden-prove.md`).
 
+- **Denoise residuals wiring.** `diagnosis.mjs emit-restructure` writes
+  `shine-restructure.json` from dualFocal/kpiSoup/citeHonesty/competingCta checks;
+  `assertDenoisePaintAllowed` refuse-paint; preflight-slop failures fold into
+  `measure.mjs`; kits Queue cite → `shadcn-queue`.
+
 ### Changed
 
 - **Operate prove is mandatory.** Stop-sweep fails closed when SaaS Operate page cites

@@ -70,6 +70,7 @@ import {
   evaluateKpiSoup,
   formatKpiSoupFailures,
 } from "./kpi-soup.mjs";
+import { scanPreflightSlop } from "./preflight-slop.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
@@ -1100,7 +1101,29 @@ if (compose.voice === "kit-faithful" && compose.dnaChroma && accentC != null) {
   }
 }
 
-const report = { scope:"single-viewport styling and accessibility; not overall completion", mediaGaps, url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, incompletePrimitives, kpi: kpiFloor, kpiDashboardGate, copyHeuristics, copyHeuristicGate, themeSwitches, failures };
+// N2 — vibe-check / preflight-slop on local HTML artifacts (seconds-to-soup).
+// Failures promote into the same measure gate; notes stay advisory.
+let preflightSlop = null;
+if (!/^https?:/i.test(target) && /\.html?$/i.test(target)) {
+  try {
+    const html = readFileSync(presolve(target), "utf8");
+    const operateGate =
+      laneWant === "saas" ||
+      laneWant === "internal" ||
+      /queue|settings|dashboard|form|record|catalog|app-shell/i.test(String(citeWant || ""));
+    preflightSlop = scanPreflightSlop(html, {
+      gate: operateGate,
+      screen: String(citeWant || compose.citeId || ""),
+    });
+    for (const f of preflightSlop.failures || []) {
+      failures.push(`preflight-slop: ${f}`);
+    }
+  } catch {
+    /* missing/unreadable artifact — browser path already owns the hard fail */
+  }
+}
+
+const report = { scope:"single-viewport styling and accessibility; not overall completion", mediaGaps, url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, incompletePrimitives, kpi: kpiFloor, kpiDashboardGate, copyHeuristics, copyHeuristicGate, themeSwitches, preflightSlop, failures };
 const jsonOut = opt("--json"); // written once at the end, after notes are attached
 
 console.log(`mode=${report.mode}  bodyBg=${measured.bodyBg}  bodyColor=${measured.bodyColor}`);
@@ -1134,6 +1157,9 @@ notes.push(
         : ""),
 );
 for (const n of kpiFailureNotes(kpiFloor, { dashboardGate: kpiDashboardGate })) notes.push(n);
+if (preflightSlop?.notes?.length) {
+  for (const n of preflightSlop.notes) notes.push(`preflight-slop: ${n}`);
+}
 if (compose.sectionCount) {
   notes.push(
     `sections: ${compose.sectionCount} marked; ${compose.sectionsMissingJob.length} missing a heading` +

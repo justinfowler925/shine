@@ -14,6 +14,7 @@ import { runReflexion } from "../core/reflexion.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { applyDomRestructure } from "./restructure/apply-dom.mjs";
 import { buildRestructurePlan } from "./restructure/schema.mjs";
+import { emitRestructureFromDiagnosis, seedDiagnosis } from "../core/diagnosis.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const MAX_ROUNDS = 3;
@@ -74,22 +75,43 @@ export async function runDenoiseLoop({
   writeFileSync(currentPath, html);
 
   const pre = scanPreflightSlop(html, { gate: true, screen: category });
-  const plan = buildRestructurePlan({
+  // N7: diagnosis seeds restructure checks → emit shine-restructure.json
+  const diagnosis = seedDiagnosis({
     job,
-    category: category === "queue" ? "queue" : category,
-    citePrimary: cite || packet.selected?.id || "shadcn-queue",
-    antiCites: packet.recommendation?.antiPatterns?.slice(0, 4) || [],
-    ops: [
-      { op: "cta-budget", maxFilled: 1, preferLabels: ["Pursue", "Save"], demotePolicy: "outline" },
-      { op: "kpi-collapse", maxVisible: 3, rest: "details" },
-      { op: "set-focal", attr: "data-region", value: "focal" },
-      ...(pre.signals.some((s) => s.id === "ai-slop-card-carnival")
-        ? []
-        : []),
-      { op: "collapse-peer-grids", mode: "xor-saved-view", keepTitleIncludes: ["Queue"], foldTitleIncludes: ["David"] },
-    ],
-    measureMustClear: ["cta-pressure", "dual-focal", "kpi-soup"],
+    category: category === "queue" ? "datagrid" : category,
+    lane: "saas",
   });
+  diagnosis.primaryTask = job;
+  diagnosis.primaryTaskCheck = { ok: false, note: "Denoise loop starting from seeded bloat fixture" };
+  diagnosis.emptyErrorTriadCheck = { ok: true, note: "Triad assumed covered for loop seed" };
+  diagnosis.competingCtaCheck = {
+    ok: !pre.signals.some((s) => s.id === "ai-slop-cta-mania"),
+    note: "From preflight-slop cta-mania signal",
+  };
+  diagnosis.dualFocalCheck = { ok: false, note: "Assume peer grids until measure clears dual-focal" };
+  diagnosis.kpiSoupCheck = {
+    ok: !pre.signals.some((s) => s.id === "ai-slop-kpi-strip"),
+    note: "From preflight-slop kpi-strip signal",
+  };
+  diagnosis.citeHonestyCheck = { ok: true, note: `Cite ${cite}` };
+  diagnosis.restructureRequired = true;
+  writeFileSync(join(out, "shine-diagnosis.json"), JSON.stringify(diagnosis, null, 2) + "\n");
+  const plan =
+    emitRestructureFromDiagnosis(diagnosis, {
+      citePrimary: cite || packet.selected?.id || "shadcn-queue",
+      antiCites: packet.recommendation?.antiPatterns?.slice(0, 4) || [],
+    }) ||
+    buildRestructurePlan({
+      job,
+      category: category === "queue" ? "queue" : category,
+      citePrimary: cite || packet.selected?.id || "shadcn-queue",
+      ops: [
+        { op: "cta-budget", maxFilled: 1, preferLabels: ["Pursue", "Save"], demotePolicy: "outline" },
+        { op: "kpi-collapse", maxVisible: 3, rest: "details" },
+        { op: "set-focal", attr: "data-region", value: "focal" },
+        { op: "collapse-peer-grids", mode: "xor-saved-view", keepTitleIncludes: ["Queue"], foldTitleIncludes: ["David"] },
+      ],
+    });
   writeFileSync(join(out, "shine-restructure.json"), JSON.stringify(plan, null, 2) + "\n");
 
   // Round 1: apply DOM auto-safe ops

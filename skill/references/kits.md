@@ -39,7 +39,7 @@ before locking the brief.
 |---|---|---|
 | App shell | `shadcn-sidebar-07` | shadcn sidebar — § App shell |
 | Dashboard | `shadcn-dashboard-01` | Recharts/D3 + `dashboards.md` — not Tremor atoms |
-| Queue / insight stream | `untitled-table` | toolbar, batch, empty/loading/error |
+| Queue / insight stream | `shadcn-queue` | worklist-first (§ Worklist-first); TanStack + table-quality; `untitled-table` chrome only |
 | Data table | `untitled-table` / `shadcn-dashboard-01` | § DataGrid |
 | Form / settings | `shadcn-settings` | `contracts.md` completeness; Polaris query-only |
 | Landing | `shadcn-marketing` | hero budget; `magicui-hero` for marketing-hero |
