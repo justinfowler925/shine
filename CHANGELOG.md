@@ -6,6 +6,16 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate slop anti-patterns expand.** `knowledge/anti-patterns/` quartet
+  (dual-focal-grids, kpi-soup, competing-filled-ctas, wrong-cite-category) gains
+  aliases, examples, fixtures/crops, restructureOps, skillAbCaseIds, and
+  `operate-slop` tags. Measure formatters for dual-focal / kpi-soup / cta-pressure
+  cite `anti-pattern:<id>`; wrong-cite gets `formatWrongCiteFailures` +
+  `cite-honesty` prefix. Helpers: `loadOperateSlopAntiPatterns`,
+  `resolveAntiPattern`, `withAntiPatternCite` in `knowledge/retrieve.mjs`.
+  Doctor bite: `verify/anti-patterns-operate.test.mjs` (loads
+  `knowledge/anti-patterns/*.json`).
+
 - **Skill A/B denoise deepen — more pinned pairs + crops↔reflexionVerdict.**
   Pinned cases grow to 6 (adds Usul focal crop + stacked Sled CTA+KPI bloat).
   Per-case `shine-skill-ab-receipt/v1` stamps Atlas `reflexionVerdict`

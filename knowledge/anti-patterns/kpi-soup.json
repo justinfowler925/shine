@@ -5,15 +5,29 @@
   "kind": "operate-bloat",
   "domains": ["composition", "dataviz"],
   "lanes": ["saas", "internal"],
-  "screens": ["queue", "dashboard", "weekly-board", "catalog"],
-  "tags": ["kpi", "metric", "kpi-soup", "nucleus"],
-  "cues": "≥4 equal KPI tiles or metric cards competing with the primary worklist",
+  "screens": ["queue", "dashboard", "weekly-board", "catalog", "app-shell", "settings", "record"],
+  "tags": ["kpi", "metric", "kpi-soup", "operate-slop", "nucleus"],
+  "aliases": ["kpi-soup", "metric-soup", "kpi-encyclopedia"],
+  "cues": "≥4 equal KPI tiles or metric cards competing with the primary worklist — dashboard DNA on a triage decide path",
   "ban": "KPI encyclopedia must not own the decide path on triage/queue surfaces.",
-  "remediation": "Collapse to ≤3 chips; park the rest in details; keep the work object focal.",
+  "remediation": "Collapse to ≤3 chips (kpi-collapse); park the rest in <details>; keep the work object focal; re-measure kpi-soup.",
+  "examples": [
+    "SLED Capture: ten equal SledKpiSummary tiles after the triage grid",
+    "Usul velocity: seven equal .metric tiles ahead of the pipeline table"
+  ],
+  "restructureOps": ["kpi-collapse"],
   "detector": "kpi-soup",
   "measureFailurePrefix": "kpi-soup",
   "constitutionIds": ["kpi-soup-off-path"],
   "severity": "major",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-kpi-before.html",
+    "after": "verify/fixtures/denoise/queue-kpi-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-kpi-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-kpi-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-kpi", "queue-sled-bloat"],
+  "cropPairId": "queue-kpi",
   "source": "skill/references/anti-patterns.md",
   "validatedBy": "verify/dual-focal.test.mjs"
 }

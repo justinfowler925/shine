@@ -2,7 +2,7 @@
 
 Hard bans and common failures. Hitting these is an audit fail (Critical/Major for incomplete components; Minor/Major for visual slop depending on severity).
 
-**Machine-readable library (S2):** Nucleus-weighted Operate bloat tells live as JSON next to principles — `knowledge/anti-patterns/*.json`. Retrieve with `node knowledge/retrieve.mjs --anti "queue triage CTA"`. Measure/composition-slop failure lines cite `anti-pattern:<id>`. Prose below remains the human audit checklist.
+**Machine-readable library (S2):** Nucleus-weighted Operate bloat tells live as JSON next to principles — `knowledge/anti-patterns/*.json`. Retrieve with `node knowledge/retrieve.mjs --anti "queue triage CTA"`. Measure/composition-slop failure lines cite `anti-pattern:<id>`. **Operate slop quartet** (dual-focal-grids, kpi-soup, competing-filled-ctas, wrong-cite-category) carries fixtures + aliases + restructureOps; doctor bite `verify/anti-patterns-operate.test.mjs` loads `knowledge/anti-patterns/*.json`. Prose below remains the human audit checklist.
 
 ## Incomplete components (functional)
 

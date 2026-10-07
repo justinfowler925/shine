@@ -5,15 +5,29 @@
   "kind": "operate-bloat",
   "domains": ["cite", "information-architecture"],
   "lanes": ["saas", "internal"],
-  "screens": ["queue", "settings", "catalog", "record", "form", "dashboard"],
-  "tags": ["cite", "category", "rebind-cite", "nucleus"],
-  "cues": "Settings job with queue cite, catalog with datagrid cite, or chart atom as page lead",
+  "screens": ["queue", "settings", "catalog", "record", "form", "dashboard", "chat"],
+  "tags": ["cite", "category", "rebind-cite", "cite-honesty", "operate-slop", "nucleus"],
+  "aliases": ["wrong-cite", "cite-honesty", "category-mismatch"],
+  "cues": "Settings/Sources job with queue cite, catalog with datagrid cite, or chart atom as page lead — category truth broken",
   "ban": "Page cite must match category truth; chart atoms never lead Operate triage.",
-  "remediation": "Rebind cite (rebind-cite op); fix packet --category; re-run cite + measure.",
+  "remediation": "Rebind cite (rebind-cite op); fix packet --category; re-run cite + measure; write cite-ban only after a real prove fail with doctorBiteOk.",
+  "examples": [
+    "SLED Sources: data-cite=shadcn-queue on a settings/directory job",
+    "Chart atom selected as primary page cite for a queue triage brief"
+  ],
+  "restructureOps": ["rebind-cite"],
   "detector": "cite-operate",
-  "measureFailurePrefix": null,
+  "measureFailurePrefix": "cite-honesty",
   "constitutionIds": ["cite-honesty"],
   "severity": "critical",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/sources-cite-before.html",
+    "after": "verify/fixtures/denoise/sources-cite-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/sources-cite-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/sources-cite-after-crop.html"
+  },
+  "skillAbCaseIds": ["sources-cite"],
+  "cropPairId": "sources-cite",
   "source": "skill/references/anti-patterns.md",
   "validatedBy": "verify/cite-operate.test.mjs"
 }

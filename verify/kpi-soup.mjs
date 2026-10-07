@@ -2,8 +2,12 @@
 // queue/triage cites → fail-closed (dashboard KPI floor stays in kpi.mjs).
 
 import { isOperateProveScreen } from "../hooks/receipt.mjs";
+import { withAntiPatternCite } from "../knowledge/retrieve.mjs";
 
 export const KPI_SOUP_MIN = 4;
+
+/** Library id — knowledge/anti-patterns/kpi-soup.json */
+export const KPI_SOUP_ANTI_PATTERN_ID = "kpi-soup";
 
 export function normalizeScreen(value) {
   return String(value || "").trim().toLowerCase();
@@ -77,8 +81,11 @@ export function formatKpiSoupFailures(soup, { gate = false } = {}) {
   if (!gate || !soup) return [];
   if (soup.equalMetricCount >= KPI_SOUP_MIN) {
     return [
-      `kpi-soup: ${soup.equalMetricCount} equal metric tiles in main — ` +
-        `collapse to ≤3 chips and park the rest in <details> (kpi-collapse; denoise N6)`,
+      withAntiPatternCite(
+        `kpi-soup: ${soup.equalMetricCount} equal metric tiles in main — ` +
+          `collapse to ≤3 chips and park the rest in <details> (kpi-collapse; denoise N6)`,
+        KPI_SOUP_ANTI_PATTERN_ID,
+      ),
     ];
   }
   return [];

@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 import {
+  OPERATE_SLOP_ANTI_PATTERN_IDS,
   antiPatternBansForScreen,
   getAntiPattern,
   loadAntiPatterns,
+  loadOperateSlopAntiPatterns,
   loadPrinciples,
   machineDetectableAntiPatterns,
   retrieveAntiPatterns,
@@ -57,6 +59,10 @@ const machine = machineDetectableAntiPatterns();
 assert.ok(machine.length >= 6, `expected machine-detectable subset, got ${machine.length}`);
 assert.ok(machine.every((item) => item.detector));
 
+const operateSlop = loadOperateSlopAntiPatterns(anti);
+assert.equal(operateSlop.length, OPERATE_SLOP_ANTI_PATTERN_IDS.length);
+assert.ok(operateSlop.every((item) => (item.tags || []).includes("operate-slop")));
+
 console.log(
-  `knowledge.test.mjs: ok (${principles.length} principles · ${anti.length} anti-patterns · ${machine.length} machine)`,
+  `knowledge.test.mjs: ok (${principles.length} principles · ${anti.length} anti-patterns · ${machine.length} machine · ${operateSlop.length} Operate slop)`,
 );

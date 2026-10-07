@@ -24,6 +24,14 @@ export const antiPatternKinds = new Set([
   "interaction-fail",
 ]);
 
+/** Nucleus Operate slop quartet — dual-focal, KPI soup, CTA pressure, wrong cite. */
+export const OPERATE_SLOP_ANTI_PATTERN_IDS = Object.freeze([
+  "dual-focal-grids",
+  "kpi-soup",
+  "competing-filled-ctas",
+  "wrong-cite-category",
+]);
+
 export function validatePrinciple(value) {
   const errors = [];
   if (value?.version !== 1) errors.push("version must be 1");
@@ -56,6 +64,23 @@ export function validateAntiPattern(value) {
   if (text(value?.validatedBy).length < 4) errors.push("validatedBy missing");
   if (!["critical", "major", "minor"].includes(value?.severity)) {
     errors.push("severity must be critical|major|minor");
+  }
+  // Expanded Operate-slop records: when fixtures are present, require both paths.
+  if (value?.fixtures != null) {
+    if (typeof value.fixtures !== "object") errors.push("fixtures must be an object");
+    else {
+      if (text(value.fixtures.before).length < 8) errors.push("fixtures.before missing");
+      if (text(value.fixtures.after).length < 8) errors.push("fixtures.after missing");
+    }
+  }
+  if (value?.aliases != null && !Array.isArray(value.aliases)) {
+    errors.push("aliases must be an array");
+  }
+  if (value?.examples != null && !Array.isArray(value.examples)) {
+    errors.push("examples must be an array");
+  }
+  if (value?.restructureOps != null && !Array.isArray(value.restructureOps)) {
+    errors.push("restructureOps must be an array");
   }
   return errors;
 }
@@ -153,6 +178,79 @@ export function machineDetectableAntiPatterns(antiPatterns = null) {
 export function getAntiPattern(id, antiPatterns = null) {
   const want = text(id);
   return (antiPatterns || loadAntiPatterns()).find((item) => item.id === want) || null;
+}
+
+/**
+ * Operate slop quartet loaded from knowledge/anti-patterns/*.json.
+ * Fail-closed if any required id is missing from the on-disk library.
+ */
+export function loadOperateSlopAntiPatterns(antiPatterns = null) {
+  const corpus = antiPatterns || loadAntiPatterns();
+  const byId = new Map(corpus.map((item) => [item.id, item]));
+  const missing = OPERATE_SLOP_ANTI_PATTERN_IDS.filter((id) => !byId.has(id));
+  if (missing.length) {
+    throw new Error(`Operate slop anti-patterns missing: ${missing.join(", ")}`);
+  }
+  return OPERATE_SLOP_ANTI_PATTERN_IDS.map((id) => byId.get(id));
+}
+
+/** Stable `anti-pattern:<id>` token for measure / composition failure lines. */
+export function formatAntiPatternCite(id) {
+  const want = text(id);
+  if (!want) throw new Error("formatAntiPatternCite requires id");
+  return `anti-pattern:${want}`;
+}
+
+/**
+ * Append library cite to a measure failure line when the anti-pattern exists.
+ * Keeps the detector prefix intact for denoise/skill-ab parsers.
+ */
+export function withAntiPatternCite(failureLine, antiPatternId) {
+  const line = text(failureLine);
+  const cite = formatAntiPatternCite(antiPatternId);
+  if (!line) return cite;
+  if (line.includes(cite)) return line;
+  return `${line} — ${cite} (knowledge/anti-patterns/${antiPatternId}.json)`;
+}
+
+/**
+ * Resolve library row by id or alias (e.g. cta-pressure → competing-filled-ctas).
+ */
+export function resolveAntiPattern(idOrAlias, antiPatterns = null) {
+  const want = text(idOrAlias).toLowerCase();
+  if (!want) return null;
+  const corpus = antiPatterns || loadAntiPatterns();
+  const direct = corpus.find((item) => item.id === want);
+  if (direct) return direct;
+  return (
+    corpus.find((item) =>
+      (item.aliases || []).map((a) => String(a).toLowerCase()).includes(want),
+    ) || null
+  );
+}
+
+/**
+ * Format a cite-honesty / wrong-cite failure that cites the library row.
+ * Used by doctor bites and diagnosis/learn when category truth breaks.
+ */
+export function formatWrongCiteFailures({
+  citeId = "",
+  category = "",
+  note = "",
+  gate = true,
+} = {}) {
+  if (!gate) return [];
+  const row = getAntiPattern("wrong-cite-category");
+  const cite = citeId || "unknown-cite";
+  const cat = category || "unknown-category";
+  const detail = text(note) || `page cite ${cite} does not match category ${cat}`;
+  const prefix = row?.measureFailurePrefix || "cite-honesty";
+  return [
+    withAntiPatternCite(
+      `${prefix}: ${detail} — rebind cite / fix packet --category`,
+      "wrong-cite-category",
+    ),
+  ];
 }
 
 /** Screen-keyed ban strings for recommend / packet antiPatterns[]. */
