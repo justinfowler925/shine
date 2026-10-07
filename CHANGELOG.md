@@ -41,6 +41,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   browser E2E list/edit/fail/retry without inventing SSO bypasses.
   `docs/records-pilot-nucleus-adapter.md`.
 
+- **Records pilot E2E deepen (S6).** Full pilot-task state matrix over the
+  Nucleus-shaped adapter: loading, empty (`--seed empty`), filtered-empty,
+  validation (400), stale-write (409 + reload/retry), list refresh after PATCH,
+  fresh GET persistence proof. Doctor bite
+  `verify/records-pilot-nucleus-bite.mjs` fail-closes FORBIDDEN / SAVE_FAILED /
+  VALIDATION / STALE_WRITE and asserts doctor wiring.
+
 - **Denoise skill mode + DDR (N0).** `--mode denoise` loads `skill/references/denoise.md`,
   refuses without `--category`, and emits a Design Decision Record (`ddrId`,
   `constitutionIds`, `status` proposed→accepted). Actor implement is fail-closed until
