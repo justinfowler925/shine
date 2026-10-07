@@ -52,7 +52,53 @@ export const CITE_FAIL_CATEGORIES = Object.freeze([
   "category-honesty",
 ]);
 
+/**
+ * Packet/recommend category aliases → repertoire ban categories.
+ * Denoise packets map queue→datagrid and settings→form; bans stay job-shaped.
+ */
+export const CITE_BAN_CATEGORY_ALIASES = Object.freeze({
+  datagrid: "queue",
+  worklist: "queue",
+  triage: "queue",
+  form: "settings",
+  preferences: "settings",
+});
+
 const text = (value) => String(value || "").trim();
+
+/** Exact cite id or family wildcard (magicui-*). */
+export function citeIdMatchesBan(citeId, banCiteId) {
+  const cite = text(citeId).toLowerCase();
+  const ban = text(banCiteId).toLowerCase();
+  if (!cite || !ban) return false;
+  if (ban.endsWith("*")) {
+    const prefix = ban.slice(0, -1);
+    return prefix.length > 0 && cite.startsWith(prefix);
+  }
+  return cite === ban;
+}
+
+/** Normalize edition for anti-cite lookup (clearspeed-operate ↔ clearspeed). */
+export function normalizeEditionForAntiCite(edition) {
+  const ed = text(edition).toLowerCase();
+  if (!ed) return "";
+  if (ed === "clearspeed-operate" || ed === "clearspeed_operate") return "clearspeed";
+  return ed;
+}
+
+/** Categories to check when resolving learned bans for a packet/recommend screen. */
+export function citeBanLookupCategories(category = "", screen = "") {
+  const out = [];
+  const push = (c) => {
+    const v = text(c).toLowerCase();
+    if (v && !out.includes(v)) out.push(v);
+  };
+  push(category);
+  push(screen);
+  push(CITE_BAN_CATEGORY_ALIASES[text(category).toLowerCase()]);
+  push(CITE_BAN_CATEGORY_ALIASES[text(screen).toLowerCase()]);
+  return out;
+}
 
 /** Banned preference / RLAIF payload keys — machine oracles only. */
 export const PREFERENCE_KEYS = Object.freeze([
@@ -521,9 +567,12 @@ export function episodesForDdr(ddrId, { storePath = DEFAULT_STORE, store = null 
 
 /** Operate demotion bans for a category (cite golden / recommend consumers). */
 export function citeBansFor(category, { storePath = DEFAULT_STORE, store = null } = {}) {
-  const cat = text(category).toLowerCase();
+  const cats = citeBanLookupCategories(category);
   const current = store || loadRepertoire(storePath);
-  return (current.citeBans || []).filter((b) => !cat || text(b.category).toLowerCase() === cat);
+  if (!cats.length) return [...(current.citeBans || [])];
+  return (current.citeBans || []).filter((b) =>
+    cats.includes(text(b.category).toLowerCase()),
+  );
 }
 
 /** Edition anti-cites for an edition (+ optional category). */
@@ -531,15 +580,165 @@ export function editionAntiCitesFor(
   edition,
   { category = "", storePath = DEFAULT_STORE, store = null } = {},
 ) {
-  const ed = text(edition).toLowerCase();
+  const ed = normalizeEditionForAntiCite(edition);
   if (!ed) return [];
-  const cat = text(category).toLowerCase();
+  const cats = citeBanLookupCategories(category);
   const current = store || loadRepertoire(storePath);
   return (current.editionAntiCites || []).filter((b) => {
-    if (text(b.edition).toLowerCase() !== ed) return false;
-    if (cat && b.category && text(b.category).toLowerCase() !== cat) return false;
+    if (normalizeEditionForAntiCite(b.edition) !== ed) return false;
+    if (cats.length && b.category && !cats.includes(text(b.category).toLowerCase())) {
+      return false;
+    }
     return true;
   });
+}
+
+/**
+ * All learned operate demotions + edition anti-cites that apply to a cite.
+ * Used by recommend/packet fail-close.
+ */
+export function learnedCiteBansFor(
+  citeId,
+  {
+    category = "",
+    screen = "",
+    edition = "",
+    storePath = DEFAULT_STORE,
+    store = null,
+  } = {},
+) {
+  const cats = citeBanLookupCategories(category, screen);
+  const catKey = cats[0] || text(category) || text(screen);
+  const operate = citeBansFor(catKey, { storePath, store }).filter((b) =>
+    citeIdMatchesBan(citeId, b.citeId),
+  );
+  const editionBans = edition
+    ? editionAntiCitesFor(edition, { category: catKey, storePath, store }).filter((b) =>
+        citeIdMatchesBan(citeId, b.citeId),
+      )
+    : [];
+  // Also check other lookup categories when catKey alone is thin (datagrid↔queue).
+  const extraOperate = cats.slice(1).flatMap((c) =>
+    citeBansFor(c, { storePath, store }).filter((b) => citeIdMatchesBan(citeId, b.citeId)),
+  );
+  const seen = new Set();
+  const out = [];
+  for (const ban of [...operate, ...extraOperate, ...editionBans]) {
+    const key = ban.id || `${ban.citeId}:${ban.category || ""}:${ban.edition || ""}:${ban.ddrId}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(ban);
+  }
+  return out;
+}
+
+/**
+ * Fail-close a typed recommendation when primary (or shortlist head) hits a
+ * learned wrong-cite ban. Demotes to the next non-banned shortlist page, or
+ * nulls primary when every candidate is banned.
+ *
+ * @returns {{ recommendation, citeBanFailClosed }}
+ */
+export function enforceCiteBansOnRecommendation(
+  recommendation,
+  {
+    category = "",
+    screen = "",
+    edition = "",
+    storePath = DEFAULT_STORE,
+    store = null,
+    shortlist = null,
+  } = {},
+) {
+  const rec = recommendation || {};
+  const list = Array.isArray(shortlist)
+    ? shortlist
+    : Array.isArray(rec.shortlist)
+      ? rec.shortlist
+      : [];
+  const primaryId = text(rec.primary?.id);
+  if (!primaryId) {
+    return { recommendation: rec, citeBanFailClosed: null };
+  }
+  const hits = learnedCiteBansFor(primaryId, {
+    category,
+    screen: screen || rec.primary?.screen || "",
+    edition,
+    storePath,
+    store,
+  });
+  if (!hits.length) {
+    return { recommendation: rec, citeBanFailClosed: null };
+  }
+  const ban = hits[0];
+  const bannedCite = primaryId;
+  let replacement = null;
+  for (const row of list) {
+    const id = text(row?.id);
+    if (!id || id === bannedCite) continue;
+    const rowHits = learnedCiteBansFor(id, {
+      category,
+      screen: screen || row.screen || "",
+      edition,
+      storePath,
+      store,
+    });
+    if (!rowHits.length) {
+      replacement = row;
+      break;
+    }
+  }
+
+  const reason =
+    `cite-ban: ${bannedCite} banned for ${ban.category || category || "category"}` +
+    ` (${ban.failCategory}; ${ban.ddrId}) — fail-closed` +
+    (replacement ? `; demote to ${replacement.id}` : "; no non-banned shortlist cite");
+
+  const anti = `anti-cite: ${ban.citeId} (operate-demotion; ${ban.failCategory}; ${ban.ddrId}; fail-closed)`;
+  const antiPatterns = [...(rec.antiPatterns || [])];
+  if (!antiPatterns.some((a) => String(a).includes(ban.citeId))) {
+    antiPatterns.unshift(anti);
+  }
+
+  const restructureHints = [...(rec.restructureHints || [])];
+  if (!restructureHints.some((h) => /rebind-cite/i.test(String(h)))) {
+    restructureHints.unshift("restructure:rebind-cite");
+  }
+
+  let nextPrimary = null;
+  if (replacement) {
+    nextPrimary = {
+      id: replacement.id,
+      screen: replacement.screen || rec.primary?.screen || screen || "",
+      scope: replacement.scope || "page",
+      title: replacement.title || replacement.id,
+      kit: replacement.kit || rec.primary?.kit || null,
+      score: replacement.score ?? rec.primary?.score ?? 0,
+      matches: replacement.matches || ["cite-ban-demote"],
+      demotedFrom: bannedCite,
+    };
+  }
+
+  const citeBanFailClosed = {
+    bannedCite,
+    ban,
+    reason,
+    replacedWith: replacement?.id || null,
+    failClosed: true,
+  };
+
+  return {
+    recommendation: {
+      ...rec,
+      primary: nextPrimary,
+      antiPatterns: antiPatterns.slice(0, 10),
+      restructureHints,
+      confidence: nextPrimary ? Math.min(rec.confidence ?? 0.5, 0.55) : 0,
+      citeBanFailClosed,
+      gaps: [...(rec.gaps || []), reason],
+    },
+    citeBanFailClosed,
+  };
 }
 
 /**
@@ -557,15 +756,30 @@ export function inferCiteBansFromProveFail({
 } = {}) {
   const id = text(ddrId);
   if (!id.startsWith("ddr_")) {
-    return { citeBan: null, editionAntiCite: null, refused: "ddrId required" };
+    return {
+      citeBan: null,
+      editionAntiCite: null,
+      episode: null,
+      refused: "ddrId required",
+    };
   }
   const failList = (failures || []).map((f) => text(f)).filter(Boolean);
   if (!failList.length) {
-    return { citeBan: null, editionAntiCite: null, refused: "real prove fail required" };
+    return {
+      citeBan: null,
+      editionAntiCite: null,
+      episode: null,
+      refused: "real prove fail required",
+    };
   }
   const citeFail = failList.find((f) => isCiteFailCategory(f));
   if (!citeFail) {
-    return { citeBan: null, editionAntiCite: null, refused: "fail not cite-related" };
+    return {
+      citeBan: null,
+      editionAntiCite: null,
+      episode: null,
+      refused: "fail not cite-related",
+    };
   }
   const failCategory =
     CITE_FAIL_CATEGORIES.find((c) => citeFail.toLowerCase().includes(c)) || "cite-honesty";
@@ -574,14 +788,16 @@ export function inferCiteBansFromProveFail({
     return {
       citeBan: null,
       editionAntiCite: null,
+      episode: null,
       refused: "observedCite required (wrong cite that failed prove)",
     };
   }
   const cat = text(category) || "queue";
+  const expected = text(expectedCite);
   const why =
     text(reason) ||
     `Prove fail ${failCategory}: demote ${banned}` +
-      (text(expectedCite) ? ` (expected ${text(expectedCite)})` : "");
+      (expected ? ` (expected ${expected})` : "");
 
   const citeBan = {
     kind: "operate-demotion",
@@ -591,11 +807,11 @@ export function inferCiteBansFromProveFail({
     failCategory,
     ddrId: id,
     observedCite: banned,
-    expectedCite: text(expectedCite) || null,
+    expectedCite: expected || null,
   };
 
   let editionAntiCite = null;
-  const ed = text(edition).toLowerCase();
+  const ed = normalizeEditionForAntiCite(edition) || text(edition).toLowerCase();
   if (ed) {
     editionAntiCite = {
       edition: ed,
@@ -608,7 +824,19 @@ export function inferCiteBansFromProveFail({
     };
   }
 
-  return { citeBan, editionAntiCite, refused: null, failCategory };
+  // Episodic ban lesson — persists with the operate demotion so the next
+  // recommend/packet fail-closes on the wrong-cite category (not preference).
+  const episode = {
+    ddrId: id,
+    failCategory,
+    lesson: why,
+    verdict: "partial",
+    nextStep: expected
+      ? `Demote ${banned}; rebind cite to ${expected} before paint`
+      : `Demote ${banned}; rebind-cite before paint (wrong-cite category ${failCategory})`,
+  };
+
+  return { citeBan, editionAntiCite, episode, refused: null, failCategory };
 }
 
 /**
@@ -796,6 +1024,7 @@ export function commitCiteBansFromProveFail(opts = {}) {
       reason: inferred.refused || "nothing to ban",
       citeBan: null,
       editionAntiCite: null,
+      episode: null,
       bumped: false,
     };
   }
@@ -807,6 +1036,7 @@ export function commitCiteBansFromProveFail(opts = {}) {
     at,
     citeBan: inferred.citeBan,
     editionAntiCite: inferred.editionAntiCite,
+    episode: inferred.episode,
   });
 
   return {

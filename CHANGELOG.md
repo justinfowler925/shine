@@ -6,6 +6,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Cite-ban learn deepen (episodic + fail-close).** Wrong-cite prove fails
+  persist an episodic lesson alongside `citeBans[]` / `editionAntiCites[]`.
+  `enforceCiteBansOnRecommendation` demotes banned recommend primaries (or nulls
+  them); design packets demote banned `selected` cites or refuse paint.
+  Helpers: `citeIdMatchesBan`, `learnedCiteBansFor`, datagrid↔queue /
+  clearspeed-operate↔clearspeed aliases. Doctor bite:
+  `verify/cite-ban-learn-deepen-bite.mjs`.
+
 - **D10 XOR dual-grid recommend deepen.** Denoise recommend emits typed
   `recommendation.xorSavedView` (before/after fixtures + FAIL→PASS crops) for
   queue/triage jobs; denoise packets bind `packet.xorSavedView` and DDR

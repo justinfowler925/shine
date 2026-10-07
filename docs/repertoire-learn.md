@@ -14,7 +14,7 @@ edition anti-cites** written only after real cite-related prove fails, and
 | Field | Role |
 |---|---|
 | `entries[]` | Proven recipe: job, category, primaryCite, kitRecipe, restructureHints, ddrId, proveFailCategories |
-| `episodes[]` | Reflexion lesson after real prove fail **or** edition-sibling resolve lesson (`failCategory: edition-sibling`) |
+| `episodes[]` | Reflexion lesson after real prove fail, **cite-ban episodic lesson** (same wrong-cite fail category), **or** edition-sibling resolve lesson (`failCategory: edition-sibling`) |
 | `citeBans[]` | Operate demotions (`kind: operate-demotion`) after cite-honesty / wrong-cite prove fails |
 | `editionAntiCites[]` | Edition-scoped anti-cites (e.g. `clearspeed`) after the same prove fails |
 | `siblingPrefs[]` | Proven edition-sibling → cite/kit mapping; boosts `resolveEditionSibling` on the next packet |
@@ -64,13 +64,15 @@ node verify/learn.test.mjs
 
 ## Hooks
 
-- `inferCiteBansFromProveFail` — builds ban payloads only when failures are cite-related + `ddrId` + observed cite.
-- `commitCiteBansFromProveFail` — doctor-gated write of operate demotion and optional edition anti-cite.
+- `inferCiteBansFromProveFail` — builds ban + **episodic** payloads only when failures are cite-related + `ddrId` + observed cite.
+- `commitCiteBansFromProveFail` — doctor-gated write of operate demotion, optional edition anti-cite, **and** episodic wrong-cite lesson.
+- `enforceCiteBansOnRecommendation` / `learnedCiteBansFor` — fail-close recommend/packet when primary/selected hits a learned ban (demote to next shortlist cite or refuse paint).
 - `inferSiblingLearnFromResolve` / `commitSiblingLearnFromResolve` — doctor-gated siblingPref + episodic lesson when cite/kit resolves via edition siblings.
 - `siblingPrefsFor` — scored lookup; `resolveEditionSibling({ learnedPrefs })` boosts proven sibling ids (+8).
 - `core/reflexion.mjs` — after prove/measure fail, attaches inferred bans; commits when `doctorBiteOk` + `observedCite` are passed.
-- `corpus/recommend.mjs` — surfaces learned bans as `anti-cite:` strings; loads siblingPrefs into resolve; optional commit when `doctorBiteOk` + `ddrId`.
-- `core/design-packet.mjs` — saas packets with `doctorBiteOk` persist sibling learn after `editionSibling` attach.
+- `corpus/recommend.mjs` — surfaces learned bans as `anti-cite:` strings; **fail-closes** banned primary; loads siblingPrefs into resolve; optional commit when `doctorBiteOk` + `ddrId`.
+- `core/design-packet.mjs` — saas packets demote/refuse banned `selected` cite; `doctorBiteOk` persists sibling learn after `editionSibling` attach.
+- Doctor bite: `verify/cite-ban-learn-deepen-bite.mjs`.
 
 ## Non-goals
 

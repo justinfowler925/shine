@@ -15,11 +15,13 @@ partial/blocked (`core/constitution.mjs`).
 ClearSpeed Operate **edition sibling map** lives in
 `editions/clearspeed-operate/siblings.json` (enterprise §4) — Nucleus / Sled
 Capture surfaces for cite + kit selection (`core/edition-siblings.mjs`).
-Proven job→cite→kit repertoire, episodic prove-fail lessons, Operate cite bans,
+Proven job→cite→kit repertoire, episodic prove-fail lessons, Operate cite bans
+(with **episodic wrong-cite lessons** that fail-close recommend/packet),
 edition anti-cites, and **sibling prefs** (prefer proven edition-sibling → cite/kit
 on the next packet) live in `repertoire/repertoire.json` (enterprise learn —
 doctor-gated version bump; write bans only after real cite-related prove fails;
-write sibling prefs when cite/kit resolves via edition siblings).
+write sibling prefs when cite/kit resolves via edition siblings). Doctor bite:
+`verify/cite-ban-learn-deepen-bite.mjs`.
 
 DDR Action/Observation audit trails (enterprise §5) live under
 `SHINE_AUDIT_DIR` / `~/.cache/shine/audit/` via `core/audit-trail.mjs` — append-only
