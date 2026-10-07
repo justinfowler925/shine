@@ -253,6 +253,87 @@ export function formatWrongCiteFailures({
   ];
 }
 
+/** Match `anti-pattern:<id>` tokens in measure / composition failure lines. */
+const ANTI_PATTERN_CITE_RE = /anti-pattern:([a-z0-9][a-z0-9-]*)/gi;
+
+/**
+ * Prefix → catalog id for Operate slop measure defects (dual-focal, kpi-soup,
+ * cta-pressure, cite-honesty). Built from on-disk library rows.
+ */
+export function operateDefectPrefixToAntiPatternId(antiPatterns = null) {
+  const map = new Map();
+  for (const row of loadOperateSlopAntiPatterns(antiPatterns)) {
+    const prefix = text(row.measureFailurePrefix);
+    if (prefix) map.set(prefix, row.id);
+  }
+  return map;
+}
+
+/**
+ * Extract `anti-pattern:<id>` ids cited in a failure line.
+ */
+export function extractAntiPatternCites(failureLine) {
+  const raw = String(failureLine || "");
+  const ids = [];
+  for (const match of raw.matchAll(ANTI_PATTERN_CITE_RE)) {
+    ids.push(String(match[1]).toLowerCase());
+  }
+  return ids;
+}
+
+/**
+ * Fail-closed gate for measure: when an Operate slop defect fires, the failure
+ * line must cite the matching `anti-pattern:<id>` from knowledge/anti-patterns.
+ * Returns additional failure strings (never mutates the input array).
+ *
+ * Meta-failures use prefix `anti-pattern-cite:` so they do not re-trigger.
+ */
+export function enforceOperateAntiPatternCites(failures, { antiPatterns = null } = {}) {
+  const corpus = antiPatterns || loadAntiPatterns();
+  const catalogIds = new Set(corpus.map((item) => item.id));
+  const prefixToId = operateDefectPrefixToAntiPatternId(corpus);
+  const extras = [];
+
+  for (const line of failures || []) {
+    const raw = String(line || "");
+    if (raw.startsWith("anti-pattern-cite:")) continue;
+
+    let matchedPrefix = null;
+    let expectedId = null;
+    for (const [prefix, id] of prefixToId) {
+      if (raw.startsWith(`${prefix}:`)) {
+        matchedPrefix = prefix;
+        expectedId = id;
+        break;
+      }
+    }
+    if (!matchedPrefix || !expectedId) continue;
+
+    const cites = extractAntiPatternCites(raw);
+    if (!cites.length) {
+      extras.push(
+        `anti-pattern-cite: ${matchedPrefix} defect fired without citing ` +
+          `anti-pattern:${expectedId} (knowledge/anti-patterns/${expectedId}.json) — fail-closed`,
+      );
+      continue;
+    }
+    if (!cites.includes(expectedId)) {
+      extras.push(
+        `anti-pattern-cite: ${matchedPrefix} defect cited anti-pattern:${cites[0]} ` +
+          `but matching catalog id is anti-pattern:${expectedId} — fail-closed`,
+      );
+      continue;
+    }
+    if (!catalogIds.has(expectedId)) {
+      extras.push(
+        `anti-pattern-cite: anti-pattern:${expectedId} missing from knowledge catalog — fail-closed`,
+      );
+    }
+  }
+
+  return extras;
+}
+
 /** Screen-keyed ban strings for recommend / packet antiPatterns[]. */
 export function antiPatternBansForScreen(screen, {limit = 6, antiPatterns = null} = {}) {
   const corpus = antiPatterns || loadAntiPatterns();
