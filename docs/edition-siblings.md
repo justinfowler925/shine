@@ -37,14 +37,20 @@ node core/edition-siblings.mjs resolve \
   --job "Decide Pursue/Review/Dismiss on the next notice"
 ```
 
-`resolveEditionSibling` → `{ sibling, preferredCite, kitRecipe, antiCites, owners, reason }`.
+`resolveEditionSibling` → `{ sibling, preferredCite, kitRecipe, antiCites, owners, reason, learnedPrefer }`.
+
+Optional `learnedPrefs` (from repertoire `siblingPrefs[]`) boost proven sibling
+ids so the **next packet** prefers a mapping that already resolved cite/kit.
 
 `recommendPattern(…, { edition: "clearspeed-operate" })` applies the map:
 `productSibling`, kit override, sibling anti-cites, promote preferred cite when it
-is already on the shortlist.
+is already on the shortlist, and attaches `learnedSiblingPrefer` when repertoire
+boosted the pick.
 
 SaaS design packets attach `packet.editionSibling` and set `ddr.productSibling`
-when `--product-reference` is omitted.
+when `--product-reference` is omitted. With `doctorBiteOk`, packet mint also
+calls `commitSiblingLearnFromResolve` (episodic + `siblingPrefs`) — see
+`docs/repertoire-learn.md`.
 
 ## Edition verify / doctor
 

@@ -17,6 +17,7 @@ import {isOperateProveScreen} from "../hooks/receipt.mjs";
 import {buildDdr} from "./ddr.mjs";
 import {assertNewSurfaceBrief, readBrief, wireframeBriefRef} from "./wireframe-brief.mjs";
 import {resolveEditionSibling} from "./edition-siblings.mjs";
+import {commitSiblingLearnFromResolve, siblingPrefsFor} from "./learn.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const catalog=loadTemplates(ROOT);
@@ -84,7 +85,7 @@ export function normalizePacketCategory(category=""){
  return DENOISE_CATEGORY_ALIASES[raw]||raw;
 }
 
-export function createDesignPacket({job,lane="saas",project=process.cwd(),framework="",category="",mode="existing",productReference="",productReferenceName="",accept=false,ddrStatus="",wireframeBrief="",slug="",requireWireframeLock=false}){
+export function createDesignPacket({job,lane="saas",project=process.cwd(),framework="",category="",mode="existing",productReference="",productReferenceName="",accept=false,ddrStatus="",wireframeBrief="",slug="",requireWireframeLock=false,doctorBiteOk=false,learnStorePath=undefined,learnStore=undefined}){
  if(!job?.trim())throw new Error("job is required");
  // Packet --mode: existing|new|audit|denoise. Skill procedure phases (Wireframe,
  // Build, Polish, Copy, Adoption) are agent routing — see skill/references/polish.md
@@ -174,13 +175,14 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  // Tiny phase hint: procedure phases are documentation for the agent, not a
  // second mode enum. Copy/Adoption use diagnosis check fields + prove presence
  // gates (not a separate NLP prove category).
- const recommendation=recommendPattern(catalog,`${job} ${categories[kind].fallback}`,{lane,limit:6,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[],category:kind,edition:lane==="saas"?"clearspeed-operate":""});
+ const recommendation=recommendPattern(catalog,`${job} ${categories[kind].fallback}`,{lane,limit:6,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[],category:kind,edition:lane==="saas"?"clearspeed-operate":"",learnStorePath,learnStore});
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
  packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns, restructureHints (restructure vs repaint), kitRecipe, confidence.";
  const restructureHints=recommendation.restructureHints||[];
  const needsRestructure=restructureHints.some((h)=>String(h).startsWith("restructure:"));
- const siblingResolved=lane==="saas"?resolveEditionSibling({category:kind,screen:recommendation?.primary?.screen||"",job,editionId:"clearspeed-operate"}):null;
+ const learnedHits=lane==="saas"?siblingPrefsFor(kind,{edition:"clearspeed-operate",job,storePath:learnStorePath,store:learnStore}):[];
+ const siblingResolved=lane==="saas"?resolveEditionSibling({category:kind,screen:recommendation?.primary?.screen||"",job,editionId:"clearspeed-operate",learnedPrefs:learnedHits.map((h)=>h.pref)}):null;
  const siblingLabel=productReferenceName||productReference||recommendation?.productSibling?.name||siblingResolved?.sibling?.name||null;
  // Wireframe brief lock (enterprise plan §3): mode=new surfaces bind
  // shine-wireframe/<slug>.brief.md; structure locked until "unlock structure".
@@ -221,6 +223,24 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    reason:siblingResolved.reason,
    instruction:"Edition sibling map (enterprise §4): prefer this Nucleus/Sled surface for conventions before external catalog fashion. Pass --product-reference to bind a concrete page.",
   };
+  // Repertoire→sibling learn: when cite/kit resolves via edition siblings, persist
+  // episodic + siblingPref (doctor-gated) so the next packet prefers that mapping.
+  if(doctorBiteOk&&packet.ddr?.ddrId){
+   try{
+    packet.siblingLearn=commitSiblingLearnFromResolve({
+     storePath:learnStorePath,
+     store:learnStore,
+     doctorBiteOk:true,
+     ddrId:packet.ddr.ddrId,
+     edition:"clearspeed-operate",
+     category:kind,
+     job,
+     resolved:siblingResolved,
+    });
+   }catch(error){
+    packet.siblingLearnError=error.message;
+   }
+  }
  }
  packet.ddrId=packet.ddr.ddrId;
  if(mode==="new"){

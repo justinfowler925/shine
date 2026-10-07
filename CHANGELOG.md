@@ -6,6 +6,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Repertoire → sibling learn (edition prefer).** When cite/kit resolves via
+  the ClearSpeed Operate edition sibling map, `commitSiblingLearnFromResolve`
+  persists `siblingPrefs[]` + an episodic `edition-sibling` lesson (doctor-gated).
+  `resolveEditionSibling({ learnedPrefs })` / recommend / saas packets boost the
+  proven sibling on the next packet. CLI `npm run learn -- sibling-prefs|commit-sibling`.
+  Doctor: `verify/learn.test.mjs` · `verify/edition-siblings.test.mjs`.
+  Docs: `docs/repertoire-learn.md` · `docs/edition-siblings.md`.
+
 - **DDR audit trail auto-append (decision path).** Packet `accept` /
   `refuse` via `core/ddr.mjs` and green `verify/prove.mjs --ddr` auto-append
   Action/Observation events through `recordDdrDecision` /

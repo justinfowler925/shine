@@ -120,7 +120,9 @@ function cueScore(job, cues = []) {
 
 /**
  * Resolve the best Nucleus/Sled sibling for cite + kit selection.
- * @returns {{ sibling: object|null, preferredCite: string|null, kitRecipe: string|null, antiCites: string[], owners: string[], reason: string }}
+ * Optional `learnedPrefs` (from repertoire siblingPrefs) boost proven mappings
+ * so the next packet prefers a sibling that already resolved cite/kit.
+ * @returns {{ sibling: object|null, preferredCite: string|null, kitRecipe: string|null, antiCites: string[], owners: string[], reason: string, learnedPrefer: object|null }}
  */
 export function resolveEditionSibling({
   category = "",
@@ -128,10 +130,16 @@ export function resolveEditionSibling({
   job = "",
   editionId = DEFAULT_OPERATE_SIBLING_EDITION,
   map = null,
+  learnedPrefs = [],
 } = {}) {
   const doc = map || loadEditionSiblingMap(editionId);
   const cat = normalizeSiblingCategory(category);
   const scr = lower(screen);
+  const prefs = Array.isArray(learnedPrefs) ? learnedPrefs : [];
+  const preferBoost = (siblingId) => {
+    const hit = prefs.find((p) => text(p?.siblingId) === text(siblingId));
+    return hit ? 8 : 0;
+  };
   const scored = doc.siblings.map((s) => {
     let score = 0;
     if (cat && s.categories.map(normalizeSiblingCategory).includes(cat)) score += 6;
@@ -141,6 +149,7 @@ export function resolveEditionSibling({
     if (s.id === "sled-capture-queue" && (cat === "queue" || scr === "queue") && cueScore(job, s.jobCues) === 0) {
       score += 1;
     }
+    score += preferBoost(s.id);
     return { s, score };
   });
   scored.sort((a, b) => b.score - a.score || a.s.id.localeCompare(b.s.id));
@@ -153,40 +162,54 @@ export function resolveEditionSibling({
       antiCites: [],
       owners: [],
       reason: "no sibling matched — record null + why before inventing chrome",
+      learnedPrefer: null,
     };
   }
   const tied = scored.filter((row) => row.score === best.score);
   const cueBest = Math.max(...tied.map((row) => cueScore(job, row.s.jobCues)));
   let pick = best;
   if (tied.length > 1 && cueBest === 0) {
-    // Ambiguous category without job cues — use Operate defaults; else refuse.
-    const defaults = {
-      queue: "sled-capture-queue",
-      settings: "sled-capture-sources",
-      catalog: "nucleus-company-tools",
-      record: "sled-capture-record",
-    };
-    const defId = defaults[cat];
-    const def = defId && tied.find((row) => row.s.id === defId);
-    if (!def) {
-      return {
-        sibling: null,
-        preferredCite: null,
-        kitRecipe: null,
-        antiCites: [],
-        owners: [],
-        reason: `ambiguous siblings (${tied.map((t) => t.s.id).join(", ")}) — add job cues or --product-reference`,
+    // Learned sibling prefer breaks Operate-default ambiguity when present.
+    const learnedHit = tied.find((row) => preferBoost(row.s.id) > 0);
+    if (learnedHit) {
+      pick = learnedHit;
+    } else {
+      // Ambiguous category without job cues — use Operate defaults; else refuse.
+      const defaults = {
+        queue: "sled-capture-queue",
+        settings: "sled-capture-sources",
+        catalog: "nucleus-company-tools",
+        record: "sled-capture-record",
       };
+      const defId = defaults[cat];
+      const def = defId && tied.find((row) => row.s.id === defId);
+      if (!def) {
+        return {
+          sibling: null,
+          preferredCite: null,
+          kitRecipe: null,
+          antiCites: [],
+          owners: [],
+          reason: `ambiguous siblings (${tied.map((t) => t.s.id).join(", ")}) — add job cues or --product-reference`,
+          learnedPrefer: null,
+        };
+      }
+      pick = def;
     }
-    pick = def;
   }
+  const learnedPrefer =
+    prefs.find((p) => text(p?.siblingId) === text(pick.s.id)) || null;
+  const preferNote = learnedPrefer
+    ? `; repertoire sibling prefer ${learnedPrefer.siblingId}`
+    : "";
   return {
     sibling: pick.s,
     preferredCite: pick.s.preferredCite,
     kitRecipe: pick.s.kitRecipe,
     antiCites: [...pick.s.antiCites],
     owners: [...pick.s.owners],
-    reason: `matched ${pick.s.id} (score ${pick.score})`,
+    reason: `matched ${pick.s.id} (score ${pick.score})${preferNote}`,
+    learnedPrefer,
   };
 }
 

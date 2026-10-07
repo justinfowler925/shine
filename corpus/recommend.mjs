@@ -5,7 +5,12 @@
 
 import { retrieveDirections, operatePageIntent } from "./art-direction.mjs";
 import { antiPatternBansForScreen } from "../knowledge/retrieve.mjs";
-import { citeBansFor, editionAntiCitesFor } from "../core/learn.mjs";
+import {
+  citeBansFor,
+  commitSiblingLearnFromResolve,
+  editionAntiCitesFor,
+  siblingPrefsFor,
+} from "../core/learn.mjs";
 import {
   applySiblingToRecommendation,
   editionUsesSiblingMap,
@@ -198,14 +203,57 @@ export function recommendPattern(templates, job, constraints = {}) {
   };
   // Enterprise §4 — edition sibling map: product sibling first → kit → cite.
   // Opt-in via edition=clearspeed|clearspeed-operate (design-packet saas passes this).
+  // Learned siblingPrefs boost proven mappings on the next packet.
   if (editionUsesSiblingMap(edition)) {
+    const editionId = edition === "clearspeed" ? "clearspeed-operate" : edition;
+    const category = constraints.category || screen;
+    const learnedHits = siblingPrefsFor(category, {
+      edition: editionId,
+      job,
+      storePath: constraints.learnStorePath,
+      store: constraints.learnStore,
+    });
+    const learnedPrefs = learnedHits.map((h) => h.pref);
     const resolved = resolveEditionSibling({
-      category: constraints.category || screen,
+      category,
       screen,
       job,
-      editionId: edition === "clearspeed" ? "clearspeed-operate" : edition,
+      editionId,
+      learnedPrefs,
     });
     rec = applySiblingToRecommendation(rec, resolved, { templates });
+    if (resolved.learnedPrefer) {
+      rec.learnedSiblingPrefer = {
+        siblingId: resolved.learnedPrefer.siblingId,
+        preferredCite: resolved.learnedPrefer.preferredCite,
+        ddrId: resolved.learnedPrefer.ddrId,
+        reason: resolved.reason,
+      };
+    }
+    // Persist episodic sibling prefer when cite/kit resolved via edition siblings
+    // (doctor-gated; next packet resolve boosts this mapping).
+    if (
+      constraints.doctorBiteOk &&
+      constraints.ddrId &&
+      resolved?.sibling &&
+      resolved.preferredCite &&
+      resolved.kitRecipe
+    ) {
+      try {
+        rec.siblingLearn = commitSiblingLearnFromResolve({
+          storePath: constraints.learnStorePath,
+          store: constraints.learnStore,
+          doctorBiteOk: true,
+          ddrId: constraints.ddrId,
+          edition: editionId,
+          category,
+          job,
+          resolved,
+        });
+      } catch (error) {
+        rec.siblingLearnError = error.message;
+      }
+    }
   }
   return rec;
 }
