@@ -51,6 +51,25 @@ assert.ok(packet.recommendation?.primary?.id, "packet.recommendation.primary");
 assert.ok(packet.recommendationSummary?.startsWith("recommendation:"));
 assert.match(packet.recommendation.instruction || "", /before editing/i);
 
+// Records / worklist jobs bind shine-tables.json fixture into recommend + denoise packet
+const recordsRec = recommendPattern(templates, "records inspect edit persist worklist", {
+  lane: "saas",
+  category: "record",
+  limit: 6,
+});
+assert.ok(recordsRec.tableQuality?.fixture, "records job tableQuality.fixture");
+assert.match(recordsRec.tableQuality.fixture, /records-worklist\/shine-tables\.json$/);
+assert.match(formatRecommendationSummary(recordsRec), /tableQuality/);
+const denoiseRecords = createDesignPacket({
+  job: "Records inspect → edit → persist",
+  lane: "saas",
+  mode: "denoise",
+  category: "record",
+  project: SHINE,
+  accept: true,
+});
+assert.match(denoiseRecords.tableQuality.example, /records-worklist\/shine-tables\.json$/);
+
 // CLI smoke
 const cite = spawnSync(process.execPath, [join(SHINE, "corpus/cite.mjs"), "settings page", "--lane", "saas"], {
   encoding: "utf8",

@@ -79,6 +79,14 @@ Static information can use `kind: "static"` with a nonempty `reason` explaining 
 presentation purpose. Interactive tables cannot use this exemption. This is not an escape
 for operational records that are missing their expected controls.
 
+Operate **list → detail** worklists (records pilot) may use `kind: "worklist"` with a
+nonempty `reason` explaining why the surface is not a full DataGrid. Required cases:
+`search`, `rowAction`, `loading`, `empty`, `filteredEmpty`. Worklist skips shared-source
+and product-pattern comparison — those remain mandatory for `kind: "records"`. Denoise
+recommend for records/worklist jobs emits
+`verify/fixtures/records-worklist/shine-tables.json` on `recommendation.tableQuality.fixture`
+(pilot companion selectors: `benchmark/records-pilot/shine-tables.json`).
+
 ## Interpretation and maintenance
 
 Checks report `passed`, `failed`, `not_tested`, or `tool_error`; only passed is success.

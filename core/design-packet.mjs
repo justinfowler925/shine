@@ -178,7 +178,20 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  const recommendation=recommendPattern(catalog,`${job} ${categories[kind].fallback}`,{lane,limit:6,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[],category:kind,edition:lane==="saas"?"clearspeed-operate":"",learnStorePath,learnStore});
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns, restructureHints (restructure vs repaint), kitRecipe, confidence.";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns, restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json).";
+ // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
+ if(recommendation.tableQuality?.fixture){
+  packet.tableQuality={
+   ...packet.tableQuality,
+   kind:recommendation.tableQuality.kind||packet.tableQuality.kind,
+   fixture:join(ROOT,recommendation.tableQuality.fixture),
+   example:join(ROOT,recommendation.tableQuality.fixture),
+   pilotCompanion:recommendation.tableQuality.pilotCompanion
+    ?join(ROOT,recommendation.tableQuality.pilotCompanion)
+    :packet.tableQuality.pilotCompanion,
+   instruction:recommendation.tableQuality.instruction||packet.tableQuality.instruction,
+  };
+ }
  const restructureHints=recommendation.restructureHints||[];
  const needsRestructure=restructureHints.some((h)=>String(h).startsWith("restructure:"));
  const learnedHits=lane==="saas"?siblingPrefsFor(kind,{edition:"clearspeed-operate",job,storePath:learnStorePath,store:learnStore}):[];

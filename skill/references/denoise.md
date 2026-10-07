@@ -44,6 +44,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 | Ambiguous signal | Decision | Op / gate |
 |---|---|---|
 | Dashboard chrome on a Monday triage job | Worklist, not dashboard. Cite `shadcn-queue` (or settings/record), never chart/dashboard page lead | `dashboard→worklist` · anti-dashboard |
+| Records list→detail without `shine-tables.json` | Write `kind: worklist` contract (search, rowAction, loading/empty/filtered-empty); copy from `recommendation.tableQuality.fixture` | `verify/fixtures/records-worklist/shine-tables.json` |
 | Two DataGrids / two worklists same route | One grid. Peer title → filter chip + shared DataGrid (XOR) | `collapse-peer-grids` plan → D10 XOR recipe · `dual-focal` |
 | ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost | `cta-budget` · `cta-pressure` |
 | ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details>` | `kpi-collapse` · `kpi-soup` |

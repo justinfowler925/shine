@@ -10,7 +10,8 @@
 | Nucleus-shaped HTTP client | `benchmark/records-pilot/adapters/nucleus-shaped.mjs` |
 | Local Operate records API | `benchmark/records-pilot/nucleus-api-server.mjs` |
 | Pilot UI wiring | `benchmark/records-pilot/index.html?adapter=nucleus-shaped&api=…` |
-| Unit + browser + doctor bite | `verify/records-pilot-nucleus-{adapter.test,browser,bite}.mjs` |
+| Worklist table-quality | `benchmark/records-pilot/shine-tables.json` + `verify/fixtures/records-worklist/` |
+| Unit + browser + doctor bite | `verify/records-pilot-nucleus-{adapter.test,browser,bite}.mjs` · `verify/records-pilot-table-quality-bite.mjs` |
 
 ## Observable states (pilot-tasks)
 
@@ -47,9 +48,14 @@ npm run records-pilot:test
 node verify/records-pilot-nucleus-adapter.test.mjs
 node verify/records-pilot-nucleus-browser.mjs
 node verify/records-pilot-nucleus-bite.mjs
+node verify/records-pilot-table-quality-bite.mjs
 ```
 
-Doctor (`verify/doctor.mjs`) invokes adapter + browser + bite under the expert/records block.
+Doctor (`verify/doctor.mjs`) invokes adapter + browser + bites under the expert/records block.
+
+### Table-quality / denoise recommend
+
+Operate list→detail uses `kind: "worklist"` (search, rowAction, loading, empty, filteredEmpty) — not the full DataGrid ladder. Denoise recommend for records/worklist jobs emits `recommendation.tableQuality.fixture` → `verify/fixtures/records-worklist/shine-tables.json`. Pilot selectors live in `benchmark/records-pilot/shine-tables.json` (`executableFixture` points at that prove surface).
 
 ## Non-claims
 

@@ -53,14 +53,17 @@
     <p class="lede">Phase 2 pilot fixture. Memory or Nucleus-shaped HTTP adapter with intentional save failure/retry, validation, and stale-write recovery. Not a product skin.</p>
     <p class="lede" id="adapter-label">adapter: memory</p>
     <div class="layout">
-      <section aria-labelledby="list-heading">
+      <section aria-labelledby="list-heading" data-region="focal">
         <h2 id="list-heading">Records</h2>
-        <label for="filter">Filter</label>
-        <input id="filter" type="search" placeholder="Filter by title or owner" autocomplete="off" />
+        <div id="toolbar" role="search">
+          <label for="filter">Filter</label>
+          <input id="filter" type="search" placeholder="Filter by title or owner" autocomplete="off" />
+          <button type="button" class="secondary" id="clear-filter">Clear filter</button>
+        </div>
         <p class="status" id="list-loading" hidden>Loading records…</p>
         <p class="status" id="list-empty" hidden>No records yet.</p>
-        <p class="status" id="filter-empty" hidden>No matching records. <button type="button" class="secondary" id="clear-filter">Clear filter</button></p>
-        <table>
+        <p class="status" id="filter-empty" hidden>No matching records.</p>
+        <table id="records">
           <thead>
             <tr><th scope="col">Title</th><th scope="col">Owner</th><th scope="col">Status</th></tr>
           </thead>
@@ -196,7 +199,7 @@
           tr.tabIndex = 0;
           tr.dataset.id = row.id;
           tr.setAttribute("aria-selected", row.id === selectedId ? "true" : "false");
-          tr.innerHTML = `<td>${escapeHtml(row.title)}</td><td>${escapeHtml(row.owner)}</td><td>${escapeHtml(row.status)}</td>`;
+          tr.innerHTML = `<td class="title">${escapeHtml(row.title)}</td><td>${escapeHtml(row.owner)}</td><td>${escapeHtml(row.status)}</td>`;
           tr.addEventListener("click", () => { void select(row.id); });
           tr.addEventListener("keydown", (event) => {
             if (event.key === "Enter" || event.key === " ") {

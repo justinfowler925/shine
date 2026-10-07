@@ -6,6 +6,10 @@ import { createHash } from 'node:crypto';
 import { load } from './deps.mjs';
 
 export const REQUIRED_CASES = ['sort', 'search', 'filter', 'pagination', 'visibility', 'rowAction', 'loading', 'empty', 'filteredEmpty', 'error', 'retry', 'keyboard'];
+/** Operate list→detail worklist (records pilot): not a full DataGrid ladder. */
+export const WORKLIST_CASES = ['search', 'rowAction', 'loading', 'empty', 'filteredEmpty'];
+/** Keep in sync with corpus/recommend.mjs RECORDS_WORKLIST_TABLE_FIXTURE. */
+export const RECORDS_WORKLIST_TABLE_FIXTURE = 'verify/fixtures/records-worklist/shine-tables.json';
 const hash = value => createHash('sha256').update(value).digest('hex');
 const asUrl = value => /^(https?|file):/.test(value) ? value : pathToFileURL(resolve(value)).href;
 const same = (a,b) => JSON.stringify(a) === JSON.stringify(b);
@@ -195,6 +199,21 @@ export async function auditTables({page,target,contractPath,timeout=3000}) {
         if(await table.count()!==1||await table.locator('button,input,select,a,[tabindex],[role="button"]').count())throw new Error('interactive records cannot opt out as static');
         return grid.reason;
       });continue;
+    }
+    if(grid.kind==='worklist'){
+      await check(`${prefix} worklist presentation`,async()=>{
+        if(!grid.reason?.trim())throw new Error('worklist table requires reason (why not full records DataGrid)');
+        const table=page.locator(grid.selector);
+        if(await table.count()!==1)throw new Error('worklist selector must identify exactly one table');
+        if(grid.toolbar && await page.locator(grid.toolbar).count()!==1)throw new Error('worklist toolbar must be uniquely scoped');
+        if(grid.title && !await page.locator(grid.title).isVisible())throw new Error('worklist title must be visible');
+        return grid.reason;
+      });
+      for(const name of WORKLIST_CASES)await check(`${prefix} ${name}`,async()=>{
+        const test=grid.cases?.[name];validateCase(name,test?.steps);
+        return scenario(page.context(),asUrl(target),test,timeout,grid.selector,name);
+      });
+      continue;
     }
     await check(`${prefix} shared implementation`,()=>sourceProof(grid.source,resolve(dirname(path),contract.project||'.')));
     await check(`${prefix} product pattern`,async()=>{

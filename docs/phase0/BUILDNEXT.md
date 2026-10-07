@@ -13,6 +13,7 @@ Extends Phase 0. Work items: `540fff5d-…` (roadmap) / `eba14d23-…` (this sli
 | Nucleus-shaped consumer | `adapters/nucleus-shaped.mjs` + local `/api/operate/records` harness |
 | Consumer E2E | `verify/records-pilot-nucleus-browser.mjs` — list/edit/fail/retry + filter/empty/validation/stale-write |
 | Doctor bite | `verify/records-pilot-nucleus-bite.mjs` — FORBIDDEN / SAVE_FAILED / VALIDATION / STALE_WRITE fail-closed |
+| Worklist table-quality | `kind=worklist` fixture + denoise recommend `tableQuality.fixture`; bite `verify/records-pilot-table-quality-bite.mjs` |
 
 ## Non-claims
 
