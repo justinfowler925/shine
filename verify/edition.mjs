@@ -11,6 +11,13 @@ import {
  validateEditionSiblingMap,
  DEFAULT_OPERATE_SIBLING_EDITION,
 } from '../core/edition-siblings.mjs';
+import {
+ CLEARSPEED_BRAND_ACCENT,
+ assertClearspeedBrandAccent,
+ brandAccentFromBrand,
+ normalizeBrandAccent,
+} from '../core/clearspeed-brand-accent.mjs';
+export {CLEARSPEED_BRAND_ACCENT,assertClearspeedBrandAccent,normalizeBrandAccent};
 export function profileDigest(path){const files=[];const walk=dir=>{for(const e of readdirSync(dir,{withFileTypes:true})){if(e.isSymbolicLink())throw Error('Profile symlinks are not allowed');const p=join(dir,e.name);if(e.isDirectory())walk(p);else if(e.isFile())files.push(p);}};walk(path);const h=createHash('sha256');for(const p of files.sort())h.update(relative(path,p).replaceAll('\\','/')).update(readFileSync(p));return h.digest('hex');}
 /**
  * Edition verify bite: ClearSpeed Operate DDR must carry the full catalog ids.
@@ -39,20 +46,42 @@ export function verifyEditionSiblingMap({editionId=DEFAULT_OPERATE_SIBLING_EDITI
 }
 export function editionSkill(base,profile){return readFileSync(join(base,'skill/SKILL.md'),'utf8').replace('# Shine\n','# Shine\n'+readFileSync(join(profile,'profile-instructions.md'),'utf8')).replace(/Use for UI,\s+UX,[\s\S]*?visual polish\./,m=>m+' Includes the Clearspeed application profile for Nucleus and Clearspeed work.');}
 function walkTextFiles(dir,out=[]){for(const e of readdirSync(dir,{withFileTypes:true})){if(e.name==='node_modules'||e.name==='.git')continue;const p=join(dir,e.name);if(e.isSymbolicLink())continue;if(e.isDirectory())walkTextFiles(p,out);else if(e.isFile())out.push(p);}return out;}
-function assertClearspeedBrand(edition,profile){
+/**
+ * Fail closed when edition manifest brandAccent drifts from Signal Orange or
+ * disagrees with brand.json action (sync-tokens machine seam).
+ */
+export function assertEditionBrandAccent(manifest,brand){
+ if(!brand){
+  if(manifest?.brandAccent!=null&&normalizeBrandAccent(manifest.brandAccent)!==''){
+   // No overlay — manifest must not claim a ClearSpeed accent.
+   throw Error('clearspeed-edition.json brandAccent set without brand.json overlay');
+  }
+  return null;
+ }
+ const fromBrand=brandAccentFromBrand(brand);
+ const fromManifest=assertClearspeedBrandAccent(manifest?.brandAccent,'clearspeed-edition.json brandAccent');
+ if(fromManifest!==fromBrand){
+  throw Error(`edition brandAccent ${fromManifest} drifts from brand.json action ${fromBrand}`);
+ }
+ return fromManifest;
+}
+function assertClearspeedBrand(edition,profile,manifest){
  const brandFile=join(profile,'brand.json');
- if(!existsSync(brandFile))return;
+ if(!existsSync(brandFile)){
+  assertEditionBrandAccent(manifest,null);
+  return null;
+ }
  const brand=JSON.parse(readFileSync(brandFile,'utf8'));
- const action=String(brand?.color?.brand?.action||'');
- if(action.toUpperCase()!=='#ED5925')throw Error('Clearspeed brand.json action must be #ED5925');
+ const brandAccent=assertEditionBrandAccent(manifest,brand);
  const tokens=join(edition,'tokens');
  if(!existsSync(tokens)||lstatSync(tokens).isSymbolicLink())throw Error('Clearspeed brand overlay requires a materialized tokens tree');
  const blob=walkTextFiles(tokens).map(f=>readFileSync(f,'utf8')).join('\n');
  if(/#4338ca/i.test(blob))throw Error('Placeholder #4338ca remains in edition tokens');
- if(!/#ED5925/i.test(blob))throw Error('Clearspeed #ED5925 missing from edition tokens');
+ if(!/#ED5925/i.test(blob))throw Error(`Clearspeed ${CLEARSPEED_BRAND_ACCENT} missing from edition tokens`);
  const profileBlob=walkTextFiles(profile).map(f=>readFileSync(f,'utf8')).join('\n');
  if(/#4338ca/i.test(profileBlob))throw Error('Placeholder #4338ca remains in Clearspeed profile');
- if(!/#ED5925/i.test(profileBlob))throw Error('Clearspeed #ED5925 missing from profile');
+ if(!/#ED5925/i.test(profileBlob))throw Error(`Clearspeed ${CLEARSPEED_BRAND_ACCENT} missing from profile`);
+ return brandAccent;
 }
 export function verifySkillDeployment(skill,base){try{
  base=realpathSync(base);skill=realpathSync(skill);if(skill===join(base,'skill'))return {status:'passed',kind:'base'};
@@ -73,6 +102,6 @@ export function verifySkillDeployment(skill,base){try{
  // Clearspeed profile is edition-owned when brand.json is present — do not
  // require byte-identity with the base release's profile copy.
  const walk=(dir)=>{for(const e of readdirSync(dir,{withFileTypes:true})){const p=join(dir,e.name),rel=relative(join(base,'skill'),p);if(rel==='SKILL.md')continue;if(brandOverlay&&(rel==='references/clearspeed'||rel.startsWith('references/clearspeed/')))continue;if(e.isDirectory())walk(p);else if(!readFileSync(join(skill,rel)).equals(readFileSync(p)))throw Error('Inherited skill reference differs: '+rel);}};walk(join(base,'skill'));
- assertClearspeedBrand(edition,profile);
- return {status:'passed',kind:'edition',profile:manifest.profile,profileVersion:manifest.profileVersion,baseRelease:revision,profileHash:manifest.profileHash,brandAccent:brandOverlay?'#ED5925':null};
+ const brandAccent=assertClearspeedBrand(edition,profile,manifest);
+ return {status:'passed',kind:'edition',profile:manifest.profile,profileVersion:manifest.profileVersion,baseRelease:revision,profileHash:manifest.profileHash,brandAccent};
  }catch(error){return {status:'failed',reason:error.message};}}

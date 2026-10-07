@@ -6,6 +6,12 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **ClearSpeed edition `brandAccent` fail-closed.** Shared
+  `core/clearspeed-brand-accent.mjs` (`#ED5925`) wires sync-tokens kit
+  `brandAccent`, install manifest write, and `verify/edition.mjs` /
+  doctor bites so edition accent drift from Signal Orange fails closed.
+  Doctor: `verify/sync-tokens.test.mjs`.
+
 - **Records/worklist operate pilot table-quality.** `kind: "worklist"` in
   `verify/table-quality.mjs` (search, rowAction, loading, empty, filteredEmpty)
   with executable fixture `verify/fixtures/records-worklist/shine-tables.json`.

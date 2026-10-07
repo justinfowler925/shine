@@ -31,6 +31,10 @@ import { join, resolve, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { homedir } from "node:os";
 import { execFileSync, spawnSync } from "node:child_process";
+import {
+  CLEARSPEED_BRAND_ACCENT,
+  brandAccentFromBrand,
+} from "../core/clearspeed-brand-accent.mjs";
 
 const SOURCE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
@@ -244,6 +248,11 @@ async function main() {
 
   const brandJson = join(profileSrc, "brand.json");
   const hasBrandOverlay = existsSync(brandJson);
+  let brandAccent = null;
+  if (hasBrandOverlay) {
+    // sync-tokens machine seam — refuse install if action drifts from Signal Orange.
+    brandAccent = brandAccentFromBrand(JSON.parse(readFileSync(brandJson, "utf8")));
+  }
 
   // Runtime entries (everything except skill) must resolve to the base release,
   // except tokens when the Clearspeed profile owns a brand.json overlay.
@@ -292,7 +301,7 @@ async function main() {
     profileVersion,
     baseRelease: sha,
     profileHash,
-    brandAccent: hasBrandOverlay ? "#ED5925" : null,
+    brandAccent: brandAccent || null,
     createdAt: new Date().toISOString(),
     sourceBase: base,
   };
@@ -342,6 +351,16 @@ async function main() {
   }
 
   const final = verifySkillDeployment(skillPath, base);
+  if (
+    final.status === "passed" &&
+    final.kind === "edition" &&
+    brandAccent &&
+    final.brandAccent !== CLEARSPEED_BRAND_ACCENT
+  ) {
+    throw new Error(
+      `edition brandAccent drifted: ${final.brandAccent} (need ${CLEARSPEED_BRAND_ACCENT})`,
+    );
+  }
   const report = {
     status: final.status,
     kind: final.kind,
@@ -350,6 +369,7 @@ async function main() {
     baseRelease: sha,
     profileHash,
     profileVersion,
+    brandAccent: final.brandAccent ?? brandAccent,
     links,
     hooks: doHooks,
   };

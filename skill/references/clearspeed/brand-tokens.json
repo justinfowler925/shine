@@ -6,6 +6,7 @@
     "plugin": "clearspeed-brand (Cowork / Cursor skill snapshots)"
   },
   "retiredGenerator": "Old clearspeed-brand/sync-tokens.mjs pointed at dead ~/Projects/shine/tokens/dist/clearspeed/office.json and treated Shine tokens as authority — retired 2026-10-07 (S7).",
+  "brandAccent": "#ed5925",
   "theme": {
     "colors": {
       "dk1": "#111111",
