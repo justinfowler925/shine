@@ -44,7 +44,7 @@ modes or prove categories.
 
 | Procedure phase | When | Packet `--mode` | Reference |
 | --- | --- | --- | --- |
-| **Wireframe** | New surface / no UI yet — discovery → gray-box → locked brief | `new` | `skill/references/wireframe.md` |
+| **Wireframe** | New surface / no UI yet — discovery → gray-box → **machine-locked** brief (`shine-wireframe/<slug>.brief.md`; unlock only via `unlock structure`) | `new` | `skill/references/wireframe.md` · `core/wireframe-brief.mjs` |
 | **Build** | Paint under shine tokens from a locked brief (or existing shell) | `new` or `existing` | `skill/SKILL.md` § Build |
 | **Polish** | Upgrade stubs in place; density / optical; cite + remeasure | `existing` | `skill/references/polish.md` |
 | **Audit** | Score and report; change nothing unless asked | `audit` | `skill/references/audit.md` |
@@ -331,7 +331,8 @@ See [`tokens/README.md`](./tokens/README.md) § Private brand lanes.
 | Path | Use |
 | --- | --- |
 | [`README.md`](./README.md) § Install & deploy | Codex + Cursor wiring; VS Code not supported |
-| [`skill/references/wireframe.md`](./skill/references/wireframe.md) | Discovery → gray-box → locked brief |
+| [`skill/references/wireframe.md`](./skill/references/wireframe.md) | Discovery → gray-box → locked brief (`core/wireframe-brief.mjs`) |
+| [`core/critic-actor-host.mjs`](./core/critic-actor-host.mjs) | Critic≠Actor host round + finalize-after-clearance |
 | [`skill/references/`](./skill/references/) | Contracts, taste, kits, techniques, dashboards, … |
 | [`agents/shine-ux.md`](./agents/shine-ux.md) | Thin executor subagent |
 | [`research/director-plan.md`](./research/director-plan.md) | Director loop: job → diagnose → retrieve → DNA → prove |

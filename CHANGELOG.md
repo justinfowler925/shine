@@ -6,6 +6,20 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Wireframe brief lock.** Machine lock for new surfaces at
+  `shine-wireframe/<slug>.brief.md` (`core/wireframe-brief.mjs`): Status
+  DRAFT→LOCKED→UNLOCKED; structure fields immutable while LOCKED until the user
+  says `unlock structure`; Build/paint fail-closed via `assertBuildMayPaint` /
+  `assertNewSurfaceBrief`. Packet `mode=new` binds `ddr.wireframeBrief` and
+  `--require-wireframe-lock`. Doctor bite: `verify/wireframe-brief.test.mjs`.
+
+- **Critic ≠ Actor host orchestrator.** `core/critic-actor-host.mjs` closes thin
+  wiring after #137: shared `runCriticActorHostRound`, `assertActorMayImplement`,
+  `hostFinalizeAfterClearance` (Host finalizes when measure clears after a
+  Critic→Actor `partial` — `hostAccept` no longer stays null), `assertHostFinalized`.
+  Denoise loop uses the host module (no inline accept/plan). Doctor bite:
+  `verify/critic-actor-host.test.mjs`.
+
 - **Operate corpus deepen (S3+).** +2 catalog (`shadcn-catalog-skills`,
   `shadcn-catalog-tools`), +2 chat (`shadcn-chat-support`, `shadcn-chat-inbox`),
   +2 dense cockpits (`shadcn-cockpit-adoption`, `shadcn-cockpit-compliance`).

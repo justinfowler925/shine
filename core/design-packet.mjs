@@ -15,6 +15,7 @@ import {retrievePrinciples} from "../knowledge/retrieve.mjs";
 import {recommend} from "../benchmark/judgment-eval.mjs";
 import {isOperateProveScreen} from "../hooks/receipt.mjs";
 import {buildDdr, OPERATE_DENOISE_CONSTITUTION} from "./ddr.mjs";
+import {assertNewSurfaceBrief, readBrief, wireframeBriefRef} from "./wireframe-brief.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const catalog=loadTemplates(ROOT);
@@ -82,7 +83,7 @@ export function normalizePacketCategory(category=""){
  return DENOISE_CATEGORY_ALIASES[raw]||raw;
 }
 
-export function createDesignPacket({job,lane="saas",project=process.cwd(),framework="",category="",mode="existing",productReference="",productReferenceName="",accept=false,ddrStatus=""}){
+export function createDesignPacket({job,lane="saas",project=process.cwd(),framework="",category="",mode="existing",productReference="",productReferenceName="",accept=false,ddrStatus="",wireframeBrief="",slug="",requireWireframeLock=false}){
  if(!job?.trim())throw new Error("job is required");
  // Packet --mode: existing|new|audit|denoise. Skill procedure phases (Wireframe,
  // Build, Polish, Copy, Adoption) are agent routing — see skill/references/polish.md
@@ -176,6 +177,17 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.recommendation.instruction="Read packet.recommendation before editing: primary cite, antiPatterns, restructureHints (restructure vs repaint), kitRecipe, confidence.";
  const restructureHints=recommendation.restructureHints||[];
  const needsRestructure=restructureHints.some((h)=>String(h).startsWith("restructure:"));
+ // Wireframe brief lock (enterprise plan §3): mode=new surfaces bind
+ // shine-wireframe/<slug>.brief.md; structure locked until "unlock structure".
+ const briefPath=wireframeBrief||(slug?join(resolve(project),"shine-wireframe",`${String(slug).trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}.brief.md`):"");
+ let briefRef=null;
+ if(briefPath&&existsSync(briefPath)){
+  briefRef=wireframeBriefRef(briefPath,readBrief(briefPath));
+ }else if(briefPath){
+  briefRef=wireframeBriefRef(briefPath,null);
+ }else if(mode==="new"){
+  briefRef=null; // assertNewSurfaceBrief may refuse when requireWireframeLock
+ }
  packet.ddr=buildDdr({
   job,
   lane,
@@ -191,8 +203,27 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   ctaBudget:lane==="saas"||mode==="denoise"?1:null,
   focalRegion:mode==="denoise"||kind==="datagrid"?"worklist":null,
   productSibling:productReferenceName||productReference||null,
+  wireframeBrief:briefRef,
  });
  packet.ddrId=packet.ddr.ddrId;
+ if(mode==="new"){
+  packet.wireframe={
+   required:true,
+   reference:join(ROOT,"skill/references/wireframe.md"),
+   brief:briefRef,
+   instruction:briefRef?.structureLocked
+    ?`Structure LOCKED at ${briefRef.path} — honour regions/primary/kit; unlock only if user says "unlock structure".`
+    :"New surface: discover → gray-box → lock shine-wireframe/<slug>.brief.md before Build paint. Structure immutable while LOCKED.",
+  };
+  // Fail-closed on Build/Actor path. Discovery may mint with a DRAFT brief bound.
+  if(requireWireframeLock){
+   assertNewSurfaceBrief(packet);
+  }else if(ddrAccepted){
+   packet.editing.instruction=
+    (packet.editing.instruction?packet.editing.instruction+" ":"")+
+    `mode=new: lock shine-wireframe/<slug>.brief.md before paint (node core/wireframe-brief.mjs --require via design-packet --require-wireframe-lock); structure locked until "unlock structure".`;
+  }
+ }
  packet.completion.command=`node ${join(ROOT,"verify/prove.mjs")} <artifact> --cite ${selected.id} --lane ${lane} --layout shine-layout.json --usability shine-usability.json --project ${JSON.stringify(resolve(project))} --ddr ${packet.ddr.ddrId}${reusableBlocks.required?" --reuse shine-reuse.json --coverage shine-coverage.json":""}${(mode==="existing"||mode==="denoise")?" --diagnosis shine-diagnosis.json":""}`;
  if(mode==="denoise"){
   packet.denoise={
@@ -227,5 +258,5 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
 
 if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),opt=n=>args.includes(n)?args[args.indexOf(n)+1]:"";
- try{process.stdout.write(JSON.stringify(createDesignPacket({job:opt("--job")||args[0],lane:opt("--lane")||"saas",project:resolve(opt("--project")||process.cwd()),framework:opt("--framework"),category:opt("--category"),mode:opt("--mode")||"existing",productReference:opt("--product-reference"),productReferenceName:opt("--product-reference-name"),accept:args.includes("--accept"),ddrStatus:opt("--ddr-status")}),null,2)+"\n");}catch(error){console.error(`shine packet: ${error.message}`);process.exit(1)}
+ try{process.stdout.write(JSON.stringify(createDesignPacket({job:opt("--job")||args[0],lane:opt("--lane")||"saas",project:resolve(opt("--project")||process.cwd()),framework:opt("--framework"),category:opt("--category"),mode:opt("--mode")||"existing",productReference:opt("--product-reference"),productReferenceName:opt("--product-reference-name"),accept:args.includes("--accept"),ddrStatus:opt("--ddr-status"),wireframeBrief:opt("--wireframe-brief"),slug:opt("--slug"),requireWireframeLock:args.includes("--require-wireframe-lock")}),null,2)+"\n");}catch(error){console.error(`shine packet: ${error.message}`);process.exit(1)}
 }

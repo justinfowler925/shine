@@ -14,7 +14,7 @@ SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
 node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit|denoise> --project "$PWD"
 ```
-Packet `--mode` is `existing` \| `new` \| `audit` \| `denoise` (denoise also loads `references/denoise.md`). Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP). Every packet emits a Design Decision Record (`packet.ddr` / `ddrId`, `constitutionIds`, `status`); denoise starts `proposed` — refuse Actor implement until `--accept` (or `node core/ddr.mjs accept`); prove receipts link `ddrId`.
+Packet `--mode` is `existing` \| `new` \| `audit` \| `denoise` (denoise also loads `references/denoise.md`). Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP). Every packet emits a Design Decision Record (`packet.ddr` / `ddrId`, `constitutionIds`, `status`); denoise starts `proposed` — refuse Actor implement until `--accept` (or `node core/ddr.mjs accept`); prove receipts link `ddrId`. New surfaces: lock `shine-wireframe/<slug>.brief.md` via `core/wireframe-brief.mjs` (structure immutable until user says `unlock structure`); packet `--mode new --require-wireframe-lock`. Critic≠Actor host: `core/critic-actor-host.mjs`.
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed dashboard. Denoise **always** requires `--category`. For bloated Operate cleanup: locked order primary job → competing CTA → empty/error triad → composition → craft; **no polish until `primaryTaskCheck` is green**; refuse paint while `restructureHints` still require restructure. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories. For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
@@ -2269,15 +2269,21 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 
 ### Critic ≠ Actor (S1)
 
-Diagnose/critic and implement are **separate turns** with distinct principals:
+Diagnose/critic and implement are **separate turns** with distinct principals.
+Host orchestration lives in `core/critic-actor-host.mjs` (do not inline accept/plan
+in callers — denoise-loop uses `runCriticActorHostRound`).
 
 | Role | Identity (default) | May |
 |---|---|---|
 | **Critic** | `shine-critic` | One call, no tools, ≤400 tokens; emit Atlas verdict `done\|partial\|blocked\|error` |
-| **Actor** | `shine-actor` | Execute one `partial` nextStep; never accepts the review |
-| **Host** | `shine-host` | Accepts `done` / finalizes; third principal only |
+| **Actor** | `shine-actor` | Execute one `partial` nextStep via `planActorPass`; never accepts the review |
+| **Host** | `shine-host` | Accepts `done`; finalizes after Actor clears measure (`hostFinalizeAfterClearance`); third principal only |
 
 **Self-accept ban:** Critic cannot accept its own verdict; Actor/worker cannot accept the critic verdict on its own work. Unknown verdict → `partial`.
+
+**Host finalize:** when measure goes green after a Critic→Actor `partial` pass, Host
+must call `hostFinalizeAfterClearance` — `hostAccept` must not stay null on a cleared
+receipt (`assertHostFinalized`).
 
 Max **3** measure rounds per surface. Each round clears a **named** defect.
 
@@ -5814,7 +5820,10 @@ Do **not** require craft measure PASS on the gray-box.
 
 ## Locked brief
 
-Write `shine-wireframe/<slug>.brief.md` **and** `DESIGN.md` on lock (`direction.md`):
+Write `shine-wireframe/<slug>.brief.md` **and** `DESIGN.md` on lock (`direction.md`).
+**Machine lock** (enterprise plan §3): `node core/wireframe-brief.mjs` owns Status.
+Structure fields are immutable while `Status: LOCKED` until the user says
+`unlock structure`.
 
 ```markdown
 # Wireframe brief: <name>
@@ -5837,15 +5846,34 @@ DESIGN.md: shine-wireframe/<slug>.DESIGN.md
 Unlock: only if user says "unlock structure"
 ```
 
+```sh
+# Draft → lock (refuses incomplete briefs)
+node "$ROOT/core/wireframe-brief.mjs" write --slug <slug> --title "…" --primary "Pursue" …
+node "$ROOT/core/wireframe-brief.mjs" lock shine-wireframe/<slug>.brief.md
+
+# Packet for new surface binds the brief; Build refuses unlock/DRAFT
+node "$ROOT/core/design-packet.mjs" --mode new --job "…" --slug <slug> --require-wireframe-lock
+
+# Structure change — user must say the phrase
+node "$ROOT/core/wireframe-brief.mjs" unlock shine-wireframe/<slug>.brief.md --phrase "unlock structure"
+# …edit regions/primary/kit… then re-lock before paint
+node "$ROOT/core/wireframe-brief.mjs" lock shine-wireframe/<slug>.brief.md
+node "$ROOT/core/wireframe-brief.mjs" check shine-wireframe/<slug>.brief.md --paint
+```
+
+`ddr.wireframeBrief` on mode=`new` packets records `{ path, status, structureLocked }`.
+`assertStructureLocked` / `assertBuildMayPaint` / `assertNewSurfaceBrief` are fail-closed.
+
 `DESIGN.md` names: lane, cite, voice, job, signature, palette (from pack), type pairing, layout ASCII, Salesforce host width if lex.
 
 ### Build handoff rules
 
-1. Read the brief before any paint.
-2. Honour regions, primary, and kit recipe.
+1. Read the brief before any paint (`wireframe-brief.mjs check --paint`).
+2. Honour regions, primary, and kit recipe — do not invent competing IA while LOCKED.
 3. Upgrade placeholders to contract MUST states.
 4. Remeasure with `measure.mjs` after paint.
 5. If the brief is missing or `Status` is not `LOCKED`, do not invent IA — return to Wireframe.
+6. Unlock only when the user says `unlock structure`; re-lock before paint.
 
 ---
 
