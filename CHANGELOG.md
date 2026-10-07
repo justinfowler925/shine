@@ -6,6 +6,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Measure fail-closed on Operate anti-pattern cites.** When Operate slop
+  defects fire (`dual-focal`, `kpi-soup`, `cta-pressure`, `cite-honesty`),
+  `verify/measure.mjs` requires each failure line to cite the matching
+  `anti-pattern:<id>` from `knowledge/anti-patterns`. Missing or mismatched
+  cites append `anti-pattern-cite:` failures. Helpers:
+  `enforceOperateAntiPatternCites`, `operateDefectPrefixToAntiPatternId`,
+  `extractAntiPatternCites` in `knowledge/retrieve.mjs`. Doctor bite:
+  `verify/measure-anti-pattern-cite.test.mjs`.
+
 - **Operate slop anti-patterns expand.** `knowledge/anti-patterns/` quartet
   (dual-focal-grids, kpi-soup, competing-filled-ctas, wrong-cite-category) gains
   aliases, examples, fixtures/crops, restructureOps, skillAbCaseIds, and

@@ -71,6 +71,7 @@ import {
   formatKpiSoupFailures,
 } from "./kpi-soup.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
+import { enforceOperateAntiPatternCites } from "../knowledge/retrieve.mjs";
 
 const SHINE = presolve(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = load("playwright");
@@ -1121,6 +1122,12 @@ if (!/^https?:/i.test(target) && /\.html?$/i.test(target)) {
   } catch {
     /* missing/unreadable artifact — browser path already owns the hard fail */
   }
+}
+
+// Operate slop defects must cite matching anti-pattern:<id> from the catalog.
+// Formatters already attach cites; this gate fail-closes if a defect line regresses.
+for (const f of enforceOperateAntiPatternCites(failures)) {
+  failures.push(f);
 }
 
 const report = { scope:"single-viewport styling and accessibility; not overall completion", mediaGaps, url, mode: dark ? "dark" : "light", measured, axe, contrast, compose, incompletePrimitives, kpi: kpiFloor, kpiDashboardGate, copyHeuristics, copyHeuristicGate, themeSwitches, preflightSlop, failures };
