@@ -123,7 +123,7 @@ export function applyKpiCollapse(html, op = {}) {
   return html;
 }
 
-/** Set data-region=focal on primary worklist (first role=grid wrap or table). */
+/** Set data-region=focal on primary work object (grid wrap, grid table, card, or main). */
 export function applySetFocal(html, op = {}) {
   const attr = op.attr || "data-region";
   const value = op.value || "focal";
@@ -135,7 +135,21 @@ export function applySetFocal(html, op = {}) {
       `$1 ${attr}="${value}"`,
     );
   }
-  return html.replace(/(<table\b[^>]*role=["']grid["'])/, `$1 ${attr}="${value}"`);
+  if (/<table\b[^>]*role=["']grid["']/.test(html)) {
+    return html.replace(/(<table\b[^>]*role=["']grid["'])/, `$1 ${attr}="${value}"`);
+  }
+  // Card soup (Usul-class): first .card section/div becomes the focal work object.
+  if (/class=["'][^"']*\bcard\b/.test(html)) {
+    return html.replace(
+      /(<(?:section|div|article)\b[^>]*class=["'][^"']*\bcard\b[^"']*["'])/,
+      `$1 ${attr}="${value}"`,
+    );
+  }
+  if (/<table\b/.test(html)) {
+    return html.replace(/(<table\b)/, `$1 ${attr}="${value}"`);
+  }
+  // Last resort: stamp the shine main region so composition-slop can clear.
+  return html.replace(/(<[a-z]+[^>]*data-shine-main\b[^>]*)/i, `$1 ${attr}="${value}"`);
 }
 
 export function applyRebindCite(html, op = {}) {
