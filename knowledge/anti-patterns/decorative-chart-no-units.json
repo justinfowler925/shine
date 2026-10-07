@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "decorative-chart-no-units",
+  "title": "Decorative chart without units or job fit",
+  "kind": "operate-bloat",
+  "domains": ["dataviz", "cite"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "dashboard", "catalog"],
+  "tags": ["chart", "cite", "kpi", "nucleus"],
+  "cues": "Chart atom forced as page cite, or KPI/chart with no units/comparison on a triage job",
+  "ban": "Do not lead Operate triage with a chart atom; charts need units and a real decide job.",
+  "remediation": "Demote chart page cites; pick a composed page cite; stamp data-shine-kpi with units.",
+  "detector": "cite-operate",
+  "measureFailurePrefix": null,
+  "constitutionIds": ["cite-honesty", "kpi-soup-off-path"],
+  "severity": "major",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/cite-operate.test.mjs"
+}

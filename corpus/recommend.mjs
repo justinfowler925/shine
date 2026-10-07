@@ -1,11 +1,13 @@
 // Pattern recommender (cite v2 / art-direction) — expert-track P5.
 // Emits a typed recommendation: primary page cite, anti-cites, restructure vs
 // repaint hints, kit recipe, and confidence — not just a shortlist.
+// Anti-pattern strings prefer knowledge/anti-patterns/*.json (S2).
 
 import { retrieveDirections, operatePageIntent } from "./art-direction.mjs";
+import { antiPatternBansForScreen } from "../knowledge/retrieve.mjs";
 
-/** Nucleus-weighted anti-patterns keyed by screen / job family. */
-const ANTI_BY_SCREEN = {
+/** Fallback prose when the JSON library is unavailable (tests may stub). */
+const ANTI_BY_SCREEN_FALLBACK = {
   catalog: [
     "table/datagrid cite on a card catalog (Company Tools lesson)",
     "equal-weight Card soup without a focal search+list region",
@@ -50,6 +52,16 @@ const ANTI_BY_SCREEN = {
     "paint before the primary job is reachable",
   ],
 };
+
+function antiPatternsForScreen(screen) {
+  try {
+    const fromLib = antiPatternBansForScreen(screen, { limit: 4 });
+    if (fromLib.length) return fromLib;
+  } catch {
+    /* fall through */
+  }
+  return ANTI_BY_SCREEN_FALLBACK[screen] || ANTI_BY_SCREEN_FALLBACK.default;
+}
 
 const KIT_RECIPE_BY_SCREEN = {
   catalog: "shadcn-catalog + search/filter contracts; product Company Tools sibling wins",
@@ -146,7 +158,7 @@ export function recommendPattern(templates, job, constraints = {}) {
       }
     : null;
   const screen = screenOf(retrieval, job);
-  const antiPatterns = ANTI_BY_SCREEN[screen] || ANTI_BY_SCREEN.default;
+  const antiPatterns = antiPatternsForScreen(screen);
   // Also surface excluded chart atoms as anti-cites when Operate intent is set.
   const antiCites = (retrieval.exclusions || [])
     .filter((e) => e.template?.screen === "charts")

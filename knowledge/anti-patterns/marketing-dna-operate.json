@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "marketing-dna-operate",
+  "title": "Marketing DNA on Operate chrome",
+  "kind": "operate-bloat",
+  "domains": ["craft", "composition"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "settings", "form", "record", "catalog", "dashboard", "app-shell", "approval"],
+  "tags": ["marketing", "glow", "gradient", "serif", "composition-slop", "nucleus"],
+  "cues": "Glow utilities, purple/indigo gradients, or display/serif marketing type on saas Operate",
+  "ban": "Operate chrome cannot ship marketing DNA (glow, gradient clusters, display serif).",
+  "remediation": "Strip glow/gradient/display-serif clusters; keep Clearspeed product tokens.",
+  "detector": "composition-slop",
+  "measureFailurePrefix": "composition-slop",
+  "constitutionIds": ["cite-honesty"],
+  "severity": "major",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/composition-slop.test.mjs"
+}

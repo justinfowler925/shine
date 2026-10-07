@@ -2,6 +2,8 @@
 
 Hard bans and common failures. Hitting these is an audit fail (Critical/Major for incomplete components; Minor/Major for visual slop depending on severity).
 
+**Machine-readable library (S2):** Nucleus-weighted Operate bloat tells live as JSON next to principles — `knowledge/anti-patterns/*.json`. Retrieve with `node knowledge/retrieve.mjs --anti "queue triage CTA"`. Measure/composition-slop failure lines cite `anti-pattern:<id>`. Prose below remains the human audit checklist.
+
 ## Incomplete components (functional)
 
 - Bare tables without toolbar/sort/page/states when DataGrid applies
@@ -45,6 +47,7 @@ Do **not** default to these looks — reach for them only when the brief pins th
 - Multiple competing CTAs of equal weight
 - Sections with three jobs and three headlines
 - Decorative gradient as the only visual idea (no real product/context anchor)
+- **Metric-grid / nested-card bans** (no-slop-ui family): ≥4 equal KPI tiles ahead of the work object; Card-in-Card carnival without a focal worklist — see denoise.md + `preflight-slop.mjs` (`ai-slop-metric-grid`, `ai-slop-nested-cards`)
 
 ## Interaction fails
 

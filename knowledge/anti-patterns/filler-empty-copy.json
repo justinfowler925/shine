@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "filler-empty-copy",
+  "title": "Filler empty-state copy on Operate",
+  "kind": "operate-bloat",
+  "domains": ["copy", "composition"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "settings", "form", "record", "catalog", "dashboard"],
+  "tags": ["filler", "empty", "copy", "composition-slop", "nucleus"],
+  "cues": "Welcome to your dashboard, Coming soon, Lorem ipsum, or other belief-free empty phrases",
+  "ban": "Filler empty phrases fail closed on Operate; empty states must be job-specific.",
+  "remediation": "Rewrite empty/filtered/error copy for the Monday job; re-run composition-slop.",
+  "detector": "composition-slop",
+  "measureFailurePrefix": "composition-slop",
+  "constitutionIds": ["cite-honesty"],
+  "severity": "major",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/composition-slop.test.mjs"
+}

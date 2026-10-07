@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "wrong-cite-category",
+  "title": "Wrong page cite for the Operate category",
+  "kind": "operate-bloat",
+  "domains": ["cite", "information-architecture"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "settings", "catalog", "record", "form", "dashboard"],
+  "tags": ["cite", "category", "rebind-cite", "nucleus"],
+  "cues": "Settings job with queue cite, catalog with datagrid cite, or chart atom as page lead",
+  "ban": "Page cite must match category truth; chart atoms never lead Operate triage.",
+  "remediation": "Rebind cite (rebind-cite op); fix packet --category; re-run cite + measure.",
+  "detector": "cite-operate",
+  "measureFailurePrefix": null,
+  "constitutionIds": ["cite-honesty"],
+  "severity": "critical",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/cite-operate.test.mjs"
+}

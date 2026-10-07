@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "card-soup",
+  "title": "Equal-weight Card soup without a focal",
+  "kind": "operate-bloat",
+  "domains": ["composition"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "catalog", "settings", "dashboard", "record", "approval"],
+  "tags": ["card", "focal", "composition-slop", "nucleus"],
+  "cues": "Equal Card roots in main with no data-region=focal or worklist",
+  "ban": "Do not ship ≥4 equal-weight Card roots without a focal work object on Operate.",
+  "remediation": "Mark one focal via data-region=focal or collapse peers into a worklist/table.",
+  "detector": "composition-slop",
+  "measureFailurePrefix": "composition-slop",
+  "constitutionIds": ["primary-task-3s"],
+  "severity": "major",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/composition-slop.test.mjs"
+}
