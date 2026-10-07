@@ -6,6 +6,16 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Skill-listing CI + pre-commit content gate.** Doctor already ran
+  `site/scripts/skill-listing.mjs --check`; AST / skill-doc PRs still landed
+  STALE when Mac doctor was queued and merges used `--admin`. Tighten:
+  named fail-fast `skill-listing content gate` step on both `doctor-*` jobs
+  (workflow-contract locked), git pre-commit bite via
+  `hooks/git-pre-commit-skill-listing.sh` (`npm prepare` /
+  `npm run hooks:install`), and stop-sweep fail-closed when this turn touched
+  `skill/` / listing surfaces. Refresh in the same PR:
+  `npm run skill-listing -- --write`.
+
 - **set-focal / NO-FOCAL TSX AST deepen.** `apply-tsx.mjs` `set-focal` uses the
   TypeScript compiler AST (not regex) to stamp `data-region="focal"` on the primary
   work object — prefers DataGrid / `role="grid"` / `{"grid"}` / `data-shine-records` /

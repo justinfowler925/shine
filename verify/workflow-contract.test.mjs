@@ -10,11 +10,15 @@ const required = [
   [/^  doctor-default:\s*$/m, "doctor-default job"],
   [/^  doctor-full:\s*$/m, "doctor-full job"],
   [/runs-on: \[self-hosted, macOS, ARM64, shine\]/, "self-hosted runner"],
+  [/node site\/scripts\/skill-listing\.mjs --check/, "skill-listing content gate"],
   [/node verify\/doctor\.mjs --ci --quiet/, "default doctor command"],
   [/node verify\/doctor\.mjs --ci --full --quiet/, "full doctor command"],
   [/working-directory: verify\/fixtures\/integrations[\s\S]*?npm ci --ignore-scripts/, "real integration dependencies"],
 ];
 const missing = required.filter(([pattern]) => !pattern.test(source)).map(([, label]) => label);
+// Both lanes must fail-fast on STALE listing before the heavier doctor run.
+const listingSteps = [...source.matchAll(/^\s+- name: skill-listing content gate\s*$/gm)];
+if (listingSteps.length < 2) missing.push("skill-listing content gate on both doctor jobs");
 for (const [pattern, label] of [
   [/^  benchmark-smoke:\s*$/m, "benchmark-smoke job"],
   [/^  benchmark-full:\s*$/m, "benchmark-full job"],

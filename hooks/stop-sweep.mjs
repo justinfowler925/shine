@@ -58,20 +58,45 @@ process.stdin.on("end", () => {
   if (event.stop_hook_active) process.exit(0);
 
   const cwd = event.cwd || process.cwd();
-  let changed = [];
+  let porcelain = [];
   try {
-    changed = execSync("git status --porcelain", { cwd, encoding: "utf8" })
+    porcelain = execSync("git status --porcelain", { cwd, encoding: "utf8" })
       .split("\n")
-      .filter((l) => l.trim() && !l.startsWith(" D") && !l.startsWith("D "))
-      .map((l) => join(cwd, l.slice(3).trim()))
-      // One shared predicate with the per-edit lint, so the two gates cannot
-      // disagree about what counts as UI.
-      .filter((f) => isDesignCandidate(f));
+      .filter((l) => l.trim() && !l.startsWith(" D") && !l.startsWith("D "));
   } catch (e) {
     const msg = `${e.stderr || e.message || e}`;
     if (/not a git repository/i.test(msg)) process.exit(0);
     failClosed(`shine stop-sweep: git status failed — ${msg.split("\n")[0]}`, event);
   }
+
+  // Skill homepage listing drifts whenever skill/references (or SKILL.md) change.
+  // AST deepen PRs have landed STALE while Mac doctor was still queued. Bite here
+  // when this turn touched the skill tree — refresh in the same turn/PR.
+  const skillTouched = porcelain.some((l) =>
+    /^(skill\/|site\/index\.html|site\/SKILL\.md|cowork\/plugin\/skills\/shine\/)/.test(
+      l.slice(3).trim().replace(/\\/g, "/"),
+    ),
+  );
+  if (skillTouched) {
+    const listing = spawnSync(process.execPath, [join(ROOT, "site/scripts/skill-listing.mjs"), "--check"], {
+      encoding: "utf8",
+      cwd: ROOT,
+    });
+    if (listing.status !== 0) {
+      failClosed(
+        "shine skill-listing (stop sweep): skill tree / site listing is STALE after this turn:\n" +
+          `${(listing.stderr || listing.stdout).trim()}\n` +
+          "Fix in THIS PR: npm run skill-listing -- --write",
+        event,
+      );
+    }
+  }
+
+  const changed = porcelain
+    .map((l) => join(cwd, l.slice(3).trim()))
+    // One shared predicate with the per-edit lint, so the two gates cannot
+    // disagree about what counts as UI.
+    .filter((f) => isDesignCandidate(f));
   if (!changed.length) process.exit(0);
 
   // Same session baseline as the per-edit lint, so a mid-turn commit cannot turn

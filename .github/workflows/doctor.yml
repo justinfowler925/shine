@@ -23,6 +23,11 @@ jobs:
       - name: install pinned integration runtimes
         working-directory: verify/fixtures/integrations
         run: npm ci --ignore-scripts
+      # Fail-fast content gate: homepage skill tree + public SKILL.md must match
+      # disk. Doctor also runs this, but AST/skill-doc PRs have landed STALE when
+      # Mac doctor was still queued and merges used --admin. Named step first.
+      - name: skill-listing content gate
+        run: node site/scripts/skill-listing.mjs --check
       - name: fast import and seeded gates
         run: node verify/doctor.mjs --ci --quiet
       - name: Integration readiness and private edition integrity
@@ -53,6 +58,8 @@ jobs:
       - name: install pinned integration runtimes
         working-directory: verify/fixtures/integrations
         run: npm ci --ignore-scripts
+      - name: skill-listing content gate
+        run: node site/scripts/skill-listing.mjs --check
       - name: browser interaction, visual proof, and designated consumers
         run: node verify/doctor.mjs --ci --full --quiet
 
