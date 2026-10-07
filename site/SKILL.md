@@ -25,6 +25,7 @@ A review request (audit, review, assess, "what's wrong", "don't change anything"
 ## Product precedent outranks the catalog
 For an existing product, inventory shipped sibling surfaces before accepting the external reference. Find the closest page presenting the same information object or supporting the same user job. If one exists, rerun the packet with `--product-reference <page-or-url> --product-reference-name <name>`.
 The sibling owns product conventions; the catalog may fill a gap but must not replace working card anatomy, toolbar behavior, expansion, actions, states, terminology, or responsive behavior. Name the sibling and every justified divergence in the diagnosis.
+ClearSpeed Operate: use the edition sibling map (`knowledge/editions/clearspeed-operate/siblings.json` · `docs/edition-siblings.md`) for Nucleus / Sled Capture cite + kit selection before catalog fashion.
 Reuse or extract its component and CSS vocabulary; never create a parallel component for the same object. Mark shared shells with stable `data-product-pattern` values and run the packet's product-compare command.
 Every visible icon needs a distinct semantic job: state, action, object type, or direction. If nearby text already supplies all meaning, remove it; decoration is not semantics.
 ## Build

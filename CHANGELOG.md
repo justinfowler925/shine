@@ -6,6 +6,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **ClearSpeed Operate edition sibling map (enterprise §4).**
+  `knowledge/editions/clearspeed-operate/siblings.json` maps Operate jobs to
+  Nucleus / Sled Capture sibling surfaces for cite + kit selection
+  (product sibling first → kit → cite). `core/edition-siblings.mjs` resolves
+  siblings; recommend + saas packets attach `productSibling` / `editionSibling`.
+  Edition verify `verifyEditionSiblingMap` + doctor bite
+  `verify/edition-siblings.test.mjs`. Docs: `docs/edition-siblings.md`.
+
 - **Operate prove constitution receipts + edition catalog bite.**
   `verify/prove.mjs` stamps `constitutionIds` / `constitutionEdition` onto
   completion receipts (saas defaults to the full ClearSpeed Operate catalog).

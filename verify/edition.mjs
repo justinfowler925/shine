@@ -6,6 +6,11 @@ import {
  assertDdrHasEditionCatalog,
  DEFAULT_OPERATE_CONSTITUTION_ID,
 } from '../core/constitution.mjs';
+import {
+ loadEditionSiblingMap,
+ validateEditionSiblingMap,
+ DEFAULT_OPERATE_SIBLING_EDITION,
+} from '../core/edition-siblings.mjs';
 export function profileDigest(path){const files=[];const walk=dir=>{for(const e of readdirSync(dir,{withFileTypes:true})){if(e.isSymbolicLink())throw Error('Profile symlinks are not allowed');const p=join(dir,e.name);if(e.isDirectory())walk(p);else if(e.isFile())files.push(p);}};walk(path);const h=createHash('sha256');for(const p of files.sort())h.update(relative(path,p).replaceAll('\\','/')).update(readFileSync(p));return h.digest('hex');}
 /**
  * Edition verify bite: ClearSpeed Operate DDR must carry the full catalog ids.
@@ -17,6 +22,19 @@ export function verifyOperateDdrConstitution(ddr,{editionId=DEFAULT_OPERATE_CONS
   return {status:'passed',editionId:result.editionId,constitutionIds:result.constitutionIds,ddrId:ddr?.ddrId||null};
  }catch(error){
   return {status:'failed',reason:error.message,editionId,ddrId:ddr?.ddrId||null};
+ }
+}
+/**
+ * Edition verify bite: sibling map must load + validate (enterprise §4).
+ */
+export function verifyEditionSiblingMap({editionId=DEFAULT_OPERATE_SIBLING_EDITION}={}){
+ try{
+  const doc=loadEditionSiblingMap(editionId);
+  const errors=validateEditionSiblingMap(doc);
+  if(errors.length)throw Error(errors.join('; '));
+  return {status:'passed',editionId:doc.editionId,siblings:doc.siblings.length,owners:doc.owners.length};
+ }catch(error){
+  return {status:'failed',reason:error.message,editionId};
  }
 }
 export function editionSkill(base,profile){return readFileSync(join(base,'skill/SKILL.md'),'utf8').replace('# Shine\n','# Shine\n'+readFileSync(join(profile,'profile-instructions.md'),'utf8')).replace(/Use for UI,\s+UX,[\s\S]*?visual polish\./,m=>m+' Includes the Clearspeed application profile for Nucleus and Clearspeed work.');}

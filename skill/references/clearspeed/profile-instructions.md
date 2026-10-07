@@ -93,3 +93,11 @@ Restructure (regions / IA / cite / contracts) before repaint.
 - Company Tools catalog category (`catalog`, not `datagrid`) — lesson from
   `docs/audits/2026-09-16-nucleus-company-tools.md`
 - Admin Adoption: KPI strip with a collapsed table focal, not six equal cards
+
+## Edition sibling map (cite + kit)
+
+Machine map: `knowledge/editions/clearspeed-operate/siblings.json` (enterprise §4).
+Resolve with `node core/edition-siblings.mjs resolve --category queue --job "…"`.
+SaaS packets attach `editionSibling` + `ddr.productSibling`; recommend with
+`edition=clearspeed-operate` prefers sibling kit / cite over catalog fashion.
+See `docs/edition-siblings.md`.

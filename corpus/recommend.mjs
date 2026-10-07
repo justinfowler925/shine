@@ -6,6 +6,11 @@
 import { retrieveDirections, operatePageIntent } from "./art-direction.mjs";
 import { antiPatternBansForScreen } from "../knowledge/retrieve.mjs";
 import { citeBansFor, editionAntiCitesFor } from "../core/learn.mjs";
+import {
+  applySiblingToRecommendation,
+  editionUsesSiblingMap,
+  resolveEditionSibling,
+} from "../core/edition-siblings.mjs";
 
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
@@ -175,7 +180,7 @@ export function recommendPattern(templates, job, constraints = {}) {
         (b) => `anti-cite: ${b.citeId} (edition:${b.edition}; ${b.failCategory}; ${b.ddrId})`,
       )
     : [];
-  return {
+  let rec = {
     primary,
     antiPatterns: [...antiPatterns, ...antiCites, ...learnedBans, ...learnedEdition].slice(0, 10),
     restructureHints: restructureHints(retrieval, primary, job),
@@ -189,7 +194,20 @@ export function recommendPattern(templates, job, constraints = {}) {
     })),
     gaps: retrieval.gaps || [],
     brief: retrieval.brief,
+    productSibling: null,
   };
+  // Enterprise §4 — edition sibling map: product sibling first → kit → cite.
+  // Opt-in via edition=clearspeed|clearspeed-operate (design-packet saas passes this).
+  if (editionUsesSiblingMap(edition)) {
+    const resolved = resolveEditionSibling({
+      category: constraints.category || screen,
+      screen,
+      job,
+      editionId: edition === "clearspeed" ? "clearspeed-operate" : edition,
+    });
+    rec = applySiblingToRecommendation(rec, resolved, { templates });
+  }
+  return rec;
 }
 
 export function formatRecommendationSummary(rec) {
