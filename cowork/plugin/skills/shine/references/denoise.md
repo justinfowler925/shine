@@ -18,14 +18,16 @@ node "$ROOT/core/design-packet.mjs" \
 
 Ambiguous jobs **refuse** without `--category`. Do not guess dashboard.
 
-Accept the Design Decision Record before Actor implement:
+Accept the Design Decision Record before Actor implement (auto-appends audit
+`accept-ddr`). Host may refuse a proposal (`refuse-ddr` + `status: refused`):
 
 ```sh
 node "$ROOT/core/design-packet.mjs" … --accept
 # or accept a written packet: node "$ROOT/core/ddr.mjs" accept shine-packet.json
+# or refuse: node "$ROOT/core/ddr.mjs" refuse shine-packet.json --reason "…"
 ```
 
-`editing.allowed` stays false while `ddr.status !== "accepted"`. Supersede; do not rewrite history.
+`editing.allowed` stays false while `ddr.status !== "accepted"`. Supersede; do not rewrite history. Green `prove.mjs --ddr` auto-links the completion receipt on the audit trail.
 
 ## Diagnose order (Operate — locked)
 

@@ -148,13 +148,15 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  // Denoise: DDR starts proposed (Actor blocked) until --accept.
  // Other modes: DDR auto-accepted on mint for backward compatibility; still emit ddrId.
  const statusWanted=mode==="denoise"
-  ?((ddrStatus==="accepted"||accept)?"accepted":"proposed")
-  :((ddrStatus==="proposed"&&!accept)?"proposed":"accepted");
+  ?(ddrStatus==="refused"?"refused":(ddrStatus==="accepted"||accept)?"accepted":"proposed")
+  :(ddrStatus==="refused"?"refused":(ddrStatus==="proposed"&&!accept)?"proposed":"accepted");
  const ddrAccepted=statusWanted==="accepted";
- const editingAllowed=mode!=="audit"&&(mode!=="denoise"||ddrAccepted);
+ const editingAllowed=mode!=="audit"&&(mode!=="denoise"||ddrAccepted)&&statusWanted!=="refused";
  const editingInstruction=mode==="audit"
   ?"Audit edits nothing: deliver shine-diagnosis.json, the before screenshot and the measure/usability facts, then stop. Building is a separate, explicit request."
-  :mode==="denoise"&&!ddrAccepted
+  :statusWanted==="refused"
+   ?"DDR refused — refuse Actor implement. Mint a revised packet or: node core/ddr.mjs refuse was already applied."
+   :mode==="denoise"&&!ddrAccepted
    ?"DDR not accepted — refuse denoise implement. Rerun with --accept or: node core/ddr.mjs accept shine-packet.json"
    :mode==="denoise"
     ?"Denoise: fix structure defects in diagnose order; no polish until primaryTaskCheck green; leave what diagnosis did not name."

@@ -10,7 +10,7 @@ import { tmpdir } from "node:os";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createDesignPacket, normalizePacketCategory } from "../core/design-packet.mjs";
-import { acceptDdr, assertDdrAccepted, OPERATE_DENOISE_CONSTITUTION } from "../core/ddr.mjs";
+import { acceptDdr, assertDdrAccepted, refuseDdr, OPERATE_DENOISE_CONSTITUTION } from "../core/ddr.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const denoiseMd = join(ROOT, "skill/references/denoise.md");
@@ -106,7 +106,11 @@ assert.match(skill, /references\/denoise\.md/);
 assert.ok(OPERATE_DENOISE_CONSTITUTION.includes("cta-pressure"));
 const acceptedDdr = acceptDdr({ ...proposed.ddr, status: "proposed" });
 assert.equal(acceptedDdr.status, "accepted");
+const refusedDdr = refuseDdr({ ...proposed.ddr, status: "proposed" }, { reason: "ambiguous category" });
+assert.equal(refusedDdr.status, "refused");
+assert.match(refusedDdr.refuseReason || "", /ambiguous/);
+assert.throws(() => acceptDdr(refusedDdr), /refused/);
 
 console.log(
-  "denoise-packet PASS: denoise.md · category refuse · DDR proposed→accepted · numbered constitutionIds · --accept gate",
+  "denoise-packet PASS: denoise.md · category refuse · DDR proposed→accepted|refused · numbered constitutionIds · --accept gate",
 );

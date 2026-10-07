@@ -40,6 +40,7 @@ export const TRAIL_STATUSES = Object.freeze(["active", "superseded"]);
 export const ACTION_TYPES = Object.freeze([
   "mint-ddr",
   "accept-ddr",
+  "refuse-ddr",
   "implement",
   "measure",
   "prove",
@@ -227,6 +228,60 @@ export function appendAndSave(ddrId, event, { auditDir = defaultAuditDir() } = {
   const next = appendEvent(trail, event);
   saveTrail(next, { auditDir });
   return next;
+}
+
+/**
+ * Decision-path auto-append: packet accept|refuse → Action on the ddrId trail.
+ * Inits the trail (mint-ddr) when missing. Not only the manual `append` CLI.
+ * @param {string} ddrId
+ * @param {{ decision: "accept"|"refuse", reason?: string|null, source?: string }} opts
+ */
+export function recordDdrDecision(
+  ddrId,
+  { decision, reason = null, source = "ddr.mjs" } = {},
+  { auditDir = defaultAuditDir() } = {},
+) {
+  const d = text(decision);
+  if (d !== "accept" && d !== "refuse") {
+    throw new Error("recordDdrDecision: decision must be accept|refuse");
+  }
+  return appendAndSave(
+    ddrId,
+    {
+      kind: "action",
+      type: d === "accept" ? "accept-ddr" : "refuse-ddr",
+      payload: {
+        status: d === "accept" ? "accepted" : "refused",
+        reason: reason ? text(reason) : null,
+        source: text(source) || "ddr.mjs",
+      },
+    },
+    { auditDir },
+  );
+}
+
+/**
+ * Decision-path auto-append: prove completion → action:prove + receipt-linked hash.
+ * Wired from verify/prove.mjs when --ddr is set — not only manual link-receipt.
+ */
+export function recordProveCompletion(ddrId, receipt, { auditDir = defaultAuditDir() } = {}) {
+  if (!receipt || typeof receipt !== "object") {
+    throw new Error("recordProveCompletion requires a receipt object");
+  }
+  appendAndSave(
+    ddrId,
+    {
+      kind: "action",
+      type: "prove",
+      payload: {
+        tool: receipt.tool || "prove.mjs",
+        verdict: receipt.verdict || receipt.status || null,
+        cite: receipt.cite || null,
+      },
+    },
+    { auditDir },
+  );
+  return linkProveReceiptAndSave(ddrId, receipt, { auditDir });
 }
 
 /**

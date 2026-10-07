@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * Design Decision Record (DDR) helpers — ADR-lite on the Shine packet.
- * Immutable ddrId; status proposed → accepted; supersede don't edit.
+ * Immutable ddrId; status proposed → accepted|refused; supersede don't edit.
  * Prove receipts may link ddrId. Actor implement requires status=accepted.
+ * Accept/refuse auto-append Action events via core/audit-trail.mjs.
  */
 
 import { createHash, randomUUID } from "node:crypto";
@@ -14,8 +15,9 @@ import {
   operateConstitutionIds,
   resolveOperateConstitution,
 } from "./constitution.mjs";
+import { recordDdrDecision } from "./audit-trail.mjs";
 
-export const DDR_STATUSES = Object.freeze(["proposed", "accepted", "superseded"]);
+export const DDR_STATUSES = Object.freeze(["proposed", "accepted", "refused", "superseded"]);
 
 /** Default Operate denoise constitution — critic must cite these IDs. */
 export const OPERATE_DENOISE_CONSTITUTION = Object.freeze(operateConstitutionIds());
@@ -88,10 +90,14 @@ export function buildDdr({
     wireframeBrief,
     supersedes,
     acceptedAt: status === "accepted" ? new Date().toISOString() : null,
+    refusedAt: status === "refused" ? new Date().toISOString() : null,
+    refuseReason: null,
     instruction:
       status === "accepted"
         ? "DDR accepted — Actor may implement. Prove receipt must link ddrId. Critic must cite constitutionIds. Supersede to change decisions."
-        : "DDR proposed — refuse Actor implement until status=accepted (--accept or ddr.mjs accept).",
+        : status === "refused"
+          ? "DDR refused — Actor must not implement. Mint a revised packet (new ddrId)."
+          : "DDR proposed — refuse Actor implement until status=accepted (--accept or ddr.mjs accept).",
   };
 }
 
@@ -110,12 +116,38 @@ export function assertDdrAccepted(ddr, { action = "implement" } = {}) {
 export function acceptDdr(ddr) {
   if (!ddr?.ddrId) throw new Error("cannot accept DDR without ddrId");
   if (ddr.status === "superseded") throw new Error(`DDR ${ddr.ddrId} is superseded — mint a new packet`);
+  if (ddr.status === "refused") {
+    throw new Error(`DDR ${ddr.ddrId} is refused — mint a new packet (do not revive a refused DDR)`);
+  }
   return {
     ...ddr,
     status: "accepted",
     acceptedAt: ddr.acceptedAt || new Date().toISOString(),
+    refusedAt: null,
+    refuseReason: null,
     instruction:
       "DDR accepted — Actor may implement. Prove receipt must link ddrId. Supersede to change decisions.",
+  };
+}
+
+/**
+ * Host refuses a proposed DDR — Actor must not implement.
+ * Audit trail auto-appends action:refuse-ddr when recordAudit is true (CLI default).
+ */
+export function refuseDdr(ddr, { reason = "" } = {}) {
+  if (!ddr?.ddrId) throw new Error("cannot refuse DDR without ddrId");
+  if (ddr.status === "superseded") throw new Error(`DDR ${ddr.ddrId} is superseded — mint a new packet`);
+  if (ddr.status === "accepted") {
+    throw new Error(`DDR ${ddr.ddrId} is accepted — supersede to change decisions, do not refuse in place`);
+  }
+  return {
+    ...ddr,
+    status: "refused",
+    refusedAt: new Date().toISOString(),
+    refuseReason: String(reason || "").trim() || null,
+    acceptedAt: null,
+    instruction:
+      "DDR refused — Actor must not implement. Mint a revised packet (new ddrId) or supersede with a corrected proposal.",
   };
 }
 
@@ -167,9 +199,15 @@ export function linkReceiptToDdr(receipt, ddrId, { constitutionIds = null, const
   };
 }
 
+function optFlag(args, name) {
+  const i = args.indexOf(name);
+  return i >= 0 ? args[i + 1] : undefined;
+}
+
 if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const cmd = args[0];
+  const auditDir = optFlag(args, "--audit-dir") || undefined;
   try {
     if (cmd === "accept") {
       const path = resolve(args[1] || "shine-packet.json");
@@ -184,14 +222,66 @@ if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.me
           "DDR accepted. Fix diagnosed defects in priority order; denoise: no polish until primaryTaskCheck green.",
       };
       writeFileSync(path, JSON.stringify(packet, null, 2) + "\n");
-      process.stdout.write(JSON.stringify({ ok: true, ddrId: packet.ddr.ddrId, status: packet.ddr.status }, null, 2) + "\n");
+      const trail = recordDdrDecision(
+        packet.ddr.ddrId,
+        { decision: "accept", source: "ddr.mjs accept" },
+        auditDir ? { auditDir } : {},
+      );
+      process.stdout.write(
+        JSON.stringify(
+          {
+            ok: true,
+            ddrId: packet.ddr.ddrId,
+            status: packet.ddr.status,
+            auditSeq: trail.events.at(-1)?.seq,
+            auditEvents: trail.events.length,
+          },
+          null,
+          2,
+        ) + "\n",
+      );
+    } else if (cmd === "refuse") {
+      const path = resolve(args[1] || "shine-packet.json");
+      if (!existsSync(path)) throw new Error(`missing packet ${path}`);
+      const packet = JSON.parse(readFileSync(path, "utf8"));
+      if (!packet.ddr) throw new Error("packet has no ddr block");
+      packet.ddr = refuseDdr(packet.ddr, { reason: optFlag(args, "--reason") || "" });
+      packet.editing = {
+        ...(packet.editing || {}),
+        allowed: false,
+        instruction:
+          "DDR refused — refuse Actor implement. Mint a revised packet or supersede with a corrected proposal.",
+      };
+      writeFileSync(path, JSON.stringify(packet, null, 2) + "\n");
+      const trail = recordDdrDecision(
+        packet.ddr.ddrId,
+        {
+          decision: "refuse",
+          reason: packet.ddr.refuseReason,
+          source: "ddr.mjs refuse",
+        },
+        auditDir ? { auditDir } : {},
+      );
+      process.stdout.write(
+        JSON.stringify(
+          {
+            ok: true,
+            ddrId: packet.ddr.ddrId,
+            status: packet.ddr.status,
+            auditSeq: trail.events.at(-1)?.seq,
+            auditEvents: trail.events.length,
+          },
+          null,
+          2,
+        ) + "\n",
+      );
     } else if (cmd === "check") {
       const path = resolve(args[1] || "shine-packet.json");
       const packet = JSON.parse(readFileSync(path, "utf8"));
       assertDdrAccepted(packet.ddr);
       process.stdout.write(JSON.stringify({ ok: true, ddrId: packet.ddr.ddrId }, null, 2) + "\n");
     } else {
-      throw new Error("usage: ddr.mjs accept <packet.json> | check <packet.json>");
+      throw new Error("usage: ddr.mjs accept|refuse|check <packet.json> [--reason …] [--audit-dir …]");
     }
   } catch (error) {
     console.error(`shine ddr: ${error.message}`);
