@@ -20,6 +20,10 @@ import {
   hostFinalizeAfterClearance,
   planRepairFromMeasure,
 } from "../core/critic-actor-host.mjs";
+import {
+  assertAtlasReflexionVerdict,
+  resolveStopReflexionVerdict,
+} from "../core/reflexion.mjs";
 import { autoAppendDenoiseLoop } from "../core/audit-trail.mjs";
 import {
   STRUCTURE_PHASE_RESTRUCTURE,
@@ -346,6 +350,15 @@ export async function runDenoiseLoop({
     });
   }
 
+  // Atlas stop stamp: cleared → done; else last critic verdict; missing → error.
+  const reflexionVerdict = assertAtlasReflexionVerdict(
+    resolveStopReflexionVerdict({
+      cleared: lastMeasure.status === 0,
+      reflexion,
+      hostAccepted: Boolean(hostAccept?.accepted),
+    }),
+  );
+
   const receipt = {
     version: 1,
     job,
@@ -375,6 +388,8 @@ export async function runDenoiseLoop({
       hostAccept,
     },
     rounds,
+    // Atlas reflexion stop stamp (done|partial|blocked|error) — doctor fail-closed if missing.
+    reflexionVerdict,
     status: lastMeasure.status === 0 ? "passed" : "failed",
     measureCleared: lastMeasure.status === 0,
     proof: "measure FAIL→PASS rounds — not twin screenshots",

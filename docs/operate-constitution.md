@@ -44,9 +44,11 @@ Host wiring: `core/critic-actor-host.mjs` + `verify/denoise-loop.mjs` pass
 ## Prove receipts
 
 `verify/prove.mjs` stamps `constitutionIds` + `constitutionEdition` onto the
-completion receipt (`hooks/receipt.mjs`) alongside `ddrId`. SaaS / denoise
-defaults to the full ClearSpeed Operate catalog when `--constitution-ids` is
-omitted. Operate stop-sweep gaps if a completion receipt omits the ids.
+completion receipt (`hooks/receipt.mjs`) alongside `ddrId`, plus the Atlas
+`reflexionVerdict` (`done|partial|blocked|error`). Green prove completions stamp
+`reflexionVerdict: "done"`. SaaS / denoise defaults to the full ClearSpeed Operate
+catalog when `--constitution-ids` is omitted. Operate stop-sweep gaps if a
+completion receipt omits the catalog ids **or** the Atlas verdict.
 
 ```sh
 node verify/prove.mjs <artifact> --cite shadcn-queue --lane saas --ddr <ddrId>
@@ -54,6 +56,19 @@ node verify/prove.mjs <artifact> --cite shadcn-queue --lane saas --ddr <ddrId>
 #   --constitution-ids cta-pressure,dual-focal-ban,…
 #   --constitution-edition clearspeed-operate
 ```
+
+## Atlas reflexion stop stamp
+
+`core/reflexion.mjs` → `resolveStopReflexionVerdict` / `assertAtlasReflexionVerdict`.
+
+| Surface | Stamp |
+|---|---|
+| Green `prove.mjs` completion | `reflexionVerdict: "done"` |
+| `denoise-loop.mjs` stop receipt | cleared → `done`; else last critic verdict; missing → `error` |
+
+Mint and Operate gaps **fail-closed** when the field is missing or not one of
+`done|partial|blocked|error`. Doctor: `verify/reflexion.test.mjs` ·
+`verify/operate-prove-mandatory.test.mjs` · `verify/denoise-loop.test.mjs`.
 
 ## Edition verify bite
 

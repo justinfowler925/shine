@@ -9,13 +9,16 @@ import {
   DEFAULT_HOST_ID,
   VERDICTS,
   acceptVerdict,
+  assertAtlasReflexionVerdict,
   assertDistinctPrincipals,
   canAcceptVerdict,
   compressTranscript,
   createAgentIdentity,
   heuristicCritic,
+  isAtlasReflexionVerdict,
   normalizeVerdict,
   planActorPass,
+  resolveStopReflexionVerdict,
   runCriticTurn,
   runReflexion,
   shouldRetry,
@@ -24,6 +27,18 @@ import {
 assert.deepEqual(VERDICTS, ["done", "partial", "blocked", "error"]);
 assert.equal(normalizeVerdict("PARTIAL"), "partial");
 assert.equal(normalizeVerdict("unknown"), "partial");
+assert.equal(isAtlasReflexionVerdict("done"), true);
+assert.equal(isAtlasReflexionVerdict("passed"), false);
+assert.equal(assertAtlasReflexionVerdict("DONE"), "done");
+assert.throws(() => assertAtlasReflexionVerdict(""), /missing/);
+assert.throws(() => assertAtlasReflexionVerdict("passed"), /done\|partial\|blocked\|error/);
+assert.equal(resolveStopReflexionVerdict({ cleared: true }), "done");
+assert.equal(resolveStopReflexionVerdict({ hostAccepted: true }), "done");
+assert.equal(
+  resolveStopReflexionVerdict({ cleared: false, reflexion: { verdict: "blocked" } }),
+  "blocked",
+);
+assert.equal(resolveStopReflexionVerdict({ cleared: false, reflexion: null }), "error");
 
 const critic = createAgentIdentity({ role: "critic", agentId: DEFAULT_CRITIC_ID });
 const actor = createAgentIdentity({ role: "actor", agentId: DEFAULT_ACTOR_ID });
@@ -118,5 +133,5 @@ try {
 }
 
 console.log(
-  "reflexion PASS: Atlas verdicts · Critic≠Actor · self-accept ban · host accept · bound retry",
+  "reflexion PASS: Atlas verdicts · stop stamp · Critic≠Actor · self-accept ban · host accept · bound retry",
 );

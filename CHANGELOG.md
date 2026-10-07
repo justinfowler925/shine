@@ -6,6 +6,16 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Atlas reflexion verdict on prove + denoise-loop stop.** Green
+  `verify/prove.mjs` completion receipts and `denoise-loop` stop receipts stamp
+  `reflexionVerdict` ∈ `done|partial|blocked|error` (cleared → `done`). Mint and
+  Operate stop-sweep **fail-closed** if missing. Helpers:
+  `resolveStopReflexionVerdict`, `assertAtlasReflexionVerdict`,
+  `isAtlasReflexionVerdict` in `core/reflexion.mjs`. Doctor bites:
+  `verify/reflexion.test.mjs` · `verify/operate-prove-mandatory.test.mjs` ·
+  `verify/denoise-loop.test.mjs`. Docs: `docs/operate-constitution.md` ·
+  `skill/references/denoise.md` (+ site/cowork mirrors).
+
 - **Wireframe-brief structure lock in denoise-loop.** Once primary job/regions
   are LOCKED (wireframe brief or auto-lock from `shine-restructure.json`),
   REPAINT that changes structure is refuse-closed without a RESTRUCTURE packet

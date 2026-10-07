@@ -26,6 +26,7 @@ import {verifyReuse} from '../integrations/blocks.mjs';
 import {verifyCoverage} from '../integrations/coverage.mjs';
 import {assertDdrHasEditionCatalog,resolveProveConstitution} from '../core/constitution.mjs';
 import {recordProveCompletion} from '../core/audit-trail.mjs';
+import {resolveStopReflexionVerdict} from '../core/reflexion.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'),exec=promisify(execFile);
 const text=(value)=>String(value||"").trim();
 // Closed native dialogs are separate workflows. Hidden players in the active
@@ -141,6 +142,8 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
    const localTarget=/^https?:/.test(target)?undefined:resolve(target);
    let completionReceipt=null;
    try{
+    // Green prove completion always stamps Atlas reflexionVerdict=done (stop).
+    const reflexionVerdict=resolveStopReflexionVerdict({cleared:true});
     completionReceipt=writeCompletionProveReceipt({
      cite:citeId,
      target:localTarget,
@@ -151,7 +154,9 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
      ddrId,
      constitutionIds:constitution.constitutionIds,
      constitutionEdition:constitution.constitutionEdition||"",
+     reflexionVerdict,
     });
+    report.reflexionVerdict=reflexionVerdict;
    }catch(error){evidence.completionReceiptError=error.message;}
    // Decision-path audit: auto-append prove + receipt-linked hash when --ddr is set.
    if(ddrId&&completionReceipt){

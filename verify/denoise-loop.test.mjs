@@ -41,6 +41,14 @@ try {
   assert.equal(receipt.structureLock?.repaintStructureRefuse, true);
   assert.ok(receipt.structureLock?.primaryAction);
   assert.ok(Array.isArray(receipt.structureLock?.regions));
+  // Atlas reflexion stop stamp — fail-closed if missing / unknown.
+  assert.ok(
+    ["done", "partial", "blocked", "error"].includes(receipt.reflexionVerdict),
+    `reflexionVerdict must be Atlas stamp, got ${receipt.reflexionVerdict}`,
+  );
+  if (receipt.status === "passed" || receipt.measureCleared) {
+    assert.equal(receipt.reflexionVerdict, "done", "cleared denoise stop stamps done");
+  }
   // When critic/actor rounds ran and measure cleared, host must have finalized.
   const criticRounds = (receipt.rounds || []).filter(
     (r) => r.turn === "critic" || r.turn === "actor" || r.reflexion,
@@ -83,7 +91,7 @@ try {
   assert.ok(rec.restructureHints.some((h) => /cta-budget|collapse-peer|kpi-collapse|set-focal/.test(h)));
 
   console.log(
-    `denoise-loop PASS: ddrId · ops · receipt · status=${receipt.status} · rounds=${receipt.rounds.length}`,
+    `denoise-loop PASS: ddrId · ops · receipt · reflexionVerdict=${receipt.reflexionVerdict} · status=${receipt.status} · rounds=${receipt.rounds.length}`,
   );
 } finally {
   rmSync(out, { recursive: true, force: true });
