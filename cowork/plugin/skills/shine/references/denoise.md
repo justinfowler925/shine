@@ -47,7 +47,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 | Records list→detail without `shine-tables.json` | Write `kind: worklist` contract (search, rowAction, loading/empty/filtered-empty); copy from `recommendation.tableQuality.fixture` | `verify/fixtures/records-worklist/shine-tables.json` |
 | Two DataGrids / two worklists same route | One grid. Peer title → filter chip + shared DataGrid (XOR); copy FAIL→PASS crops from `recommendation.xorSavedView.cropBefore/cropAfter` | `collapse-peer-grids` plan → D10 XOR recipe · `dual-focal` · `queue-dual-grid-*` fixtures |
 | ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost. Consumer TSX: `apply-tsx` AST `cta-budget` (maxFilled=1); copy FAIL→PASS crops from `recommendation.ctaPressureAst.cropBefore/cropAfter` | `cta-budget` · `cta-pressure` · `queue-cta-tsx-*` |
-| ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details>` | `kpi-collapse` · `kpi-soup` |
+| ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details data-shine-kpi-rest>`. Consumer TSX: `apply-tsx` AST `kpi-collapse` (maxVisible=3); copy FAIL→PASS crops from `recommendation.kpiSoupAst.cropBefore/cropAfter` | `kpi-collapse` · `kpi-soup` · `queue-kpi-tsx-*` |
 | Settings job with queue cite | Rebind cite to category truth | `rebind-cite` |
 | Equal Card roots, no focal | One `data-region="focal"` | `set-focal` · `composition-slop` |
 | Can’t name category in one sentence | **Stop.** Refuse until `--category` | packet gate |
@@ -71,7 +71,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 2 static     vibe / preflight-slop / Card·Badge counts
 3 cite       shot + restructureHints[]
 4 diagnose   shine-diagnosis.json + shine-restructure.json   ← Critic turn
-5 apply      DOM/AST auto-safe ops (verify/restructure/*) — TSX `cta-budget` via TypeScript AST (maxFilled=1; variant default / {"default"} / missing)     ← Actor turn
+5 apply      DOM/AST auto-safe ops (verify/restructure/*) — TSX `cta-budget` via TypeScript AST (maxFilled=1; variant default / {"default"} / missing); TSX `kpi-collapse` via TypeScript AST (maxVisible=3; className metric / {"metric"} / data-shine-kpi)     ← Actor turn
 6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
 7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
 8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done

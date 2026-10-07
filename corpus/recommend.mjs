@@ -43,6 +43,18 @@ export const CTA_PRESSURE_AST_FIXTURES = Object.freeze({
   maxFilled: 1,
 });
 
+/** Repo-relative KPI soup TSX AST FAIL→PASS fixtures (maxVisible=3). */
+export const KPI_SOUP_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-kpi-soup.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-kpi-soup-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-kpi-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-kpi-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-kpi-tsx",
+  op: "kpi-collapse",
+  maxVisible: 3,
+});
+
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
   catalog: [
@@ -201,6 +213,41 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
 }
 
 /**
+ * KPI soup TSX AST fixture binding for Operate queue / triage jobs.
+ * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
+ * apply-tsx kpi-collapse (maxVisible=3) — not only the prose restructure hint.
+ */
+export function kpiSoupAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval"].includes(category) ||
+    ["queue", "approval"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|kpi[- ]?soup|kpi[- ]?collapse|metric soup|equal metrics?)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: KPI_SOUP_AST_FIXTURES.op,
+    maxVisible: KPI_SOUP_AST_FIXTURES.maxVisible,
+    rest: "details",
+    fixtureTsx: KPI_SOUP_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: KPI_SOUP_AST_FIXTURES.tsxAstHard,
+    cropBefore: KPI_SOUP_AST_FIXTURES.cropBefore,
+    cropAfter: KPI_SOUP_AST_FIXTURES.cropAfter,
+    cropPairId: KPI_SOUP_AST_FIXTURES.cropPairId,
+    helper: KPI_SOUP_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "KPI encyclopedia on a decide path in consumer TSX: apply verify/restructure/apply-tsx.mjs kpi-collapse (TypeScript AST, maxVisible=3; park rest in <details data-shine-kpi-rest>). Handles className=\"metric\", className={\"metric\"}, and data-shine-kpi / data-kpi markers. Copy FAIL→PASS crop paths from recommendation.kpiSoupAst.cropBefore/cropAfter; prove kpi-soup clears with ≤3 visible tiles.",
+  };
+}
+
+/**
  * CTA pressure TSX AST fixture binding for Operate queue / triage jobs.
  * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
  * apply-tsx cta-budget (maxFilled=1) — not only the prose restructure hint.
@@ -338,6 +385,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    kpiSoupAst: kpiSoupAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     xorSavedView: xorSavedViewForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -443,6 +495,9 @@ export function formatRecommendationSummary(rec) {
   const cta = rec.ctaPressureAst?.fixtureTsx
     ? ` · ctaPressureAst ${rec.ctaPressureAst.mode}@${rec.ctaPressureAst.cropPairId}`
     : "";
+  const kpi = rec.kpiSoupAst?.fixtureTsx
+    ? ` · kpiSoupAst ${rec.kpiSoupAst.mode}@${rec.kpiSoupAst.cropPairId}`
+    : "";
   const xor = rec.xorSavedView?.fixtureBefore
     ? ` · xorSavedView ${rec.xorSavedView.mode}@${rec.xorSavedView.cropPairId}`
     : "";
@@ -451,6 +506,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${xor}${ban}`
   );
 }

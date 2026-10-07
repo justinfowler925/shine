@@ -6,6 +6,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **KPI soup TSX AST deepen (maxVisible=3).** `apply-tsx.mjs` `kpi-collapse` uses the
+  TypeScript compiler AST (not regex) to park excess metric JSX in
+  `<details data-shine-kpi-rest>` — `className="metric"`, `className={"metric"}`, and
+  `data-shine-kpi` / `data-kpi` markers. Denoise recommend emits typed
+  `recommendation.kpiSoupAst` (TSX fixtures + FAIL→PASS crops); packets bind
+  `packet.kpiSoupAst`. Crop pair `queue-kpi-tsx`. Doctor bite:
+  `verify/kpi-soup-ast-bite.mjs`.
+
 - **CTA pressure TSX AST deepen (maxFilled=1).** `apply-tsx.mjs` `cta-budget` uses the
   TypeScript compiler AST (not regex) to demote competing filled `Button` primaries —
   `variant="default"`, `variant={"default"}`, and missing variant. Denoise recommend emits

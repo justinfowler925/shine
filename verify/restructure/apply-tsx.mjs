@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * N8 — TSX AST safe ops for consumer checkouts.
- * Auto-safe: rebind-cite, set-focal, cta-budget demote (maxFilled=1 via TS compiler AST).
+ * Auto-safe: rebind-cite, set-focal, cta-budget demote (maxFilled=1 via TS compiler AST),
+ * kpi-collapse (maxVisible=3 → <details data-shine-kpi-rest> via TS compiler AST).
  * collapse-peer-grids → plan markdown only (never auto-deletes grids).
  *
  * Uses TypeScript compiler API (devDependency). Dry-run by default; --write to apply.
@@ -53,11 +54,20 @@ export function applyTsxRestructure(source, plan) {
         applied.push("cta-budget");
       }
     } else if (op.op === "kpi-collapse") {
-      // KPI collapse on TSX is presentation-structure only when metrics are literal JSX —
-      // if unsafe, emit plan note rather than inventing Nucleus handlers.
-      plans.push(
-        "## kpi-collapse (TSX)\n\nWrap excess metric JSX in `<details>` manually if metrics are dynamic.\nDOM apply-dom.mjs remains preferred for fixtures.\n",
-      );
+      const next = kpiCollapseTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("kpi-collapse");
+      } else {
+        // Plan-only when soup remains (dynamic .map / spread) — not when already ≤maxVisible.
+        const census = countMetricTilesTsx(text);
+        const maxVisible = op.maxVisible ?? 3;
+        if (census.dynamic || census.tiles > maxVisible) {
+          plans.push(
+            "## kpi-collapse (TSX)\n\nWrap excess metric JSX in `<details data-shine-kpi-rest>` manually if metrics are dynamic (`.map`, spread).\nDOM apply-dom.mjs remains preferred for HTML fixtures.\n",
+          );
+        }
+      }
     }
   }
 
@@ -170,6 +180,222 @@ export function ctaBudgetTsx(source, op = {}) {
     out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
   }
   return out;
+}
+
+/**
+ * Count literal metric tiles in TSX (same AST rules as kpiCollapseTsx).
+ * @param {string} source
+ * @returns {{ tiles: number, labels: string[], containers: number, dynamic: boolean }}
+ */
+export function countMetricTilesTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const labels = [];
+  let containers = 0;
+  let dynamic = false;
+  visitMetricContainers(sf, (opening, node) => {
+    containers += 1;
+    const { tiles, unsafe } = metricTilesInContainer(node, sf);
+    if (unsafe) dynamic = true;
+    for (const t of tiles) labels.push(labelFromJsx(t, sf));
+  });
+  return { tiles: labels.length, labels, containers, dynamic };
+}
+
+/**
+ * Collapse excess literal metric JSX via TypeScript AST (maxVisible=3).
+ * Keeps the first maxVisible peer tiles; wraps the rest in
+ * `<details data-shine-kpi-rest><summary>More metrics</summary>…</details>`.
+ * Handles:
+ * - className="metric" / className={"metric"} / className={'metric foo'}
+ * - data-shine-kpi / data-kpi markers without className
+ * - multiline attrs + nested text children
+ * Skips containers with dynamic children (.map / spreads) — caller emits plan note.
+ * Never invents Nucleus handlers or deletes the work object.
+ */
+export function kpiCollapseTsx(source, op = {}) {
+  const maxVisible = op.maxVisible ?? 3;
+  const restSummary = op.summary || "More metrics";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+
+  visitMetricContainers(sf, (_opening, node) => {
+    if (!ts.isJsxElement(node)) return;
+    const { tiles, unsafe, alreadyCollapsed } = metricTilesInContainer(node, sf);
+    if (unsafe || alreadyCollapsed) return;
+    if (tiles.length <= maxVisible) return;
+
+    const visible = tiles.slice(0, maxVisible);
+    const rest = tiles.slice(maxVisible);
+    // Replace from first tile start through last tile end with visible + details.
+    const rangeStart = visible[0].getStart(sf);
+    const rangeEnd = rest[rest.length - 1].getEnd();
+    const indent = indentBefore(text, rangeStart);
+    const innerIndent = indent + "  ";
+    const visibleSrc = visible.map((t) => text.slice(t.getStart(sf), t.getEnd())).join(`\n${indent}`);
+    const restSrc = rest
+      .map((t) => text.slice(t.getStart(sf), t.getEnd()))
+      .join(`\n${innerIndent}`);
+    const replacement =
+      `${visibleSrc}\n${indent}` +
+      `<details data-shine-kpi-rest>\n${innerIndent}<summary>${restSummary}</summary>\n${innerIndent}` +
+      `${restSrc}\n${indent}</details>`;
+    edits.push({ start: rangeStart, end: rangeEnd, replacement });
+  });
+
+  if (!edits.length) return text;
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) {
+    out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  }
+  return out;
+}
+
+/**
+ * @param {ts.Node} root
+ * @param {(opening: ts.JsxOpeningLikeElement, node: ts.JsxElement | ts.JsxSelfClosingElement) => void} fn
+ */
+function visitMetricContainers(root, fn) {
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isMetricsContainerOpening(node.openingElement, sfOf(node))) {
+      fn(node.openingElement, node);
+    } else if (ts.isJsxSelfClosingElement(node) && isMetricsContainerOpening(node, sfOf(node))) {
+      fn(node, node);
+    }
+    ts.forEachChild(node, walk);
+  };
+  // SourceFile is always the root we walk; capture via getSourceFile.
+  walk(root);
+}
+
+/** @param {ts.Node} node */
+function sfOf(node) {
+  return node.getSourceFile();
+}
+
+/**
+ * Metrics band: className contains word "metrics", or aria-label ~ key figures,
+ * or data-region / data-sled-kpis markers.
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isMetricsContainerOpening(opening, sf) {
+  if (classNameHasWord(opening, "metrics", sf)) return true;
+  const aria = findJsxAttr(opening, "aria-label", sf);
+  const ariaText = attrStringValue(aria, sf);
+  if (ariaText && /key figures|metrics|kpi/i.test(ariaText)) return true;
+  if (findJsxAttr(opening, "data-sled-kpis", sf)) return true;
+  const region = findJsxAttr(opening, "data-region", sf);
+  const regionText = attrStringValue(region, sf);
+  if (regionText && /kpi|metrics|summary/i.test(regionText)) return true;
+  return false;
+}
+
+/**
+ * @param {ts.JsxElement} container
+ * @param {ts.SourceFile} sf
+ * @returns {{ tiles: Array<ts.JsxElement | ts.JsxSelfClosingElement>, unsafe: boolean, alreadyCollapsed: boolean }}
+ */
+function metricTilesInContainer(container, sf) {
+  /** @type {Array<ts.JsxElement | ts.JsxSelfClosingElement>} */
+  const tiles = [];
+  let unsafe = false;
+  let alreadyCollapsed = false;
+  if (!ts.isJsxElement(container)) return { tiles, unsafe: true, alreadyCollapsed };
+
+  for (const child of container.children) {
+    if (ts.isJsxText(child)) {
+      if (child.text.trim()) {
+        /* ignore whitespace-only */
+      }
+      continue;
+    }
+    if (ts.isJsxExpression(child)) {
+      // `{items.map(...)}` / spreads — not auto-safe.
+      if (child.expression) unsafe = true;
+      continue;
+    }
+    if (ts.isJsxElement(child) || ts.isJsxSelfClosingElement(child)) {
+      const opening = ts.isJsxElement(child) ? child.openingElement : child;
+      const tag = jsxTagName(opening);
+      if (tag === "details" && findJsxAttr(opening, "data-shine-kpi-rest", sf)) {
+        alreadyCollapsed = true;
+        continue;
+      }
+      if (isMetricTileOpening(opening, sf)) {
+        tiles.push(child);
+      }
+    }
+  }
+  return { tiles, unsafe, alreadyCollapsed };
+}
+
+/**
+ * Metric tile: className word "metric" (after stripping "metrics"), or data-shine-kpi / data-kpi.
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isMetricTileOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-kpi", sf)) return true;
+  if (findJsxAttr(opening, "data-kpi", sf)) return true;
+  const cn = classNameText(opening, sf);
+  if (!cn) return false;
+  // "metrics" container class must not count as a tile; strip then look for "metric".
+  return /\bmetric\b/.test(cn.replace(/\bmetrics\b/g, " "));
+}
+
+/**
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {string} word
+ * @param {ts.SourceFile} sf
+ */
+function classNameHasWord(opening, word, sf) {
+  const cn = classNameText(opening, sf);
+  if (!cn) return false;
+  return new RegExp(`\\b${escapeRe(word)}\\b`).test(cn);
+}
+
+/**
+ * Resolve static className string from attr (string / {"…"} / {'…'} / `…`).
+ * Dynamic expressions return null (caller treats as non-match / unsafe elsewhere).
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function classNameText(opening, sf) {
+  const attr = findJsxAttr(opening, "className", sf) || findJsxAttr(opening, "class", sf);
+  return attrStringValue(attr, sf);
+}
+
+/**
+ * @param {ts.JsxAttribute | null} attr
+ * @param {ts.SourceFile} sf
+ */
+function attrStringValue(attr, sf) {
+  if (!attr?.initializer) {
+    // Boolean JSX attr present with no value (data-shine-kpi) — signal emptiness via "".
+    if (attr && !attr.initializer) return "";
+    return null;
+  }
+  if (ts.isStringLiteral(attr.initializer)) return attr.initializer.text;
+  if (ts.isJsxExpression(attr.initializer)) {
+    const expr = attr.initializer.expression;
+    if (!expr) return null;
+    if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) return expr.text;
+    return null;
+  }
+  return null;
+}
+
+/** Indentation (spaces/tabs) preceding `pos` on its line. */
+function indentBefore(text, pos) {
+  let i = pos - 1;
+  while (i >= 0 && text[i] !== "\n") i -= 1;
+  const lineStart = i + 1;
+  const m = /^[ \t]*/.exec(text.slice(lineStart, pos));
+  return m ? m[0] : "";
 }
 
 /**

@@ -17,6 +17,8 @@ import {
   buildCtaAstAfterCropHtml,
   buildKpiBeforeCropHtml,
   buildKpiAfterCropHtml,
+  buildKpiAstBeforeCropHtml,
+  buildKpiAstAfterCropHtml,
   buildWrongCiteBeforeCropHtml,
   buildWrongCiteAfterCropHtml,
   buildDualGridBeforeCropHtml,
@@ -33,6 +35,7 @@ const RECEIPTS = join(SHINE, "verify/fixtures/denoise/receipts");
 assert.notEqual(buildCtaBeforeCropHtml(), buildCtaAfterCropHtml(), "CTA crops must not be twins");
 assert.notEqual(buildCtaAstBeforeCropHtml(), buildCtaAstAfterCropHtml(), "CTA AST crops must not be twins");
 assert.notEqual(buildKpiBeforeCropHtml(), buildKpiAfterCropHtml(), "KPI crops must not be twins");
+assert.notEqual(buildKpiAstBeforeCropHtml(), buildKpiAstAfterCropHtml(), "KPI AST crops must not be twins");
 assert.notEqual(buildWrongCiteBeforeCropHtml(), buildWrongCiteAfterCropHtml(), "cite crops must not be twins");
 assert.notEqual(
   buildDualGridBeforeCropHtml(),
@@ -42,11 +45,12 @@ assert.notEqual(
 assert.notEqual(buildUsulFocalBeforeCropHtml(), buildUsulFocalAfterCropHtml(), "usul crops must not be twins");
 assert.notEqual(buildSledBloatBeforeCropHtml(), buildSledBloatAfterCropHtml(), "sled-bloat crops must not be twins");
 
-assert.ok(DEFECT_CROP_PAIRS.length >= 7, "at least 7 pinned crop pairs");
+assert.ok(DEFECT_CROP_PAIRS.length >= 8, "at least 8 pinned crop pairs");
 for (const id of [
   "queue-cta",
   "queue-cta-tsx",
   "queue-kpi",
+  "queue-kpi-tsx",
   "sources-cite",
   "queue-dual-grid",
   "usul-focal",
@@ -81,5 +85,5 @@ assert.match(read("usul-focal-after-crop.html"), /data-region="focal"/);
 assert.match(read("queue-sled-bloat-after-crop.html"), /data-shine-kpi-rest/);
 
 console.log(
-  `defect-crops PASS: ${DEFECT_CROP_PAIRS.length} FAIL→PASS pairs (CTA · CTA-TSX-AST · KPI · wrong-cite · dual-grid XOR · Usul focal · Sled bloat)`,
+  `defect-crops PASS: ${DEFECT_CROP_PAIRS.length} FAIL→PASS pairs (CTA · CTA-TSX-AST · KPI · KPI-TSX-AST · wrong-cite · dual-grid XOR · Usul focal · Sled bloat)`,
 );
