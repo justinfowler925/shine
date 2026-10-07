@@ -5,7 +5,7 @@
  * then scores them against expected principle/modality/verdict gates.
  * Human review remains authoritative for the Phase 1 exit gate; this is the machine rubric.
  */
-import {readFileSync} from "node:fs";
+import {mkdirSync, readFileSync, writeFileSync} from "node:fs";
 import {dirname, join, resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 import {retrievePrinciples} from "../knowledge/retrieve.mjs";
@@ -108,8 +108,65 @@ export function evaluateJudgment({casesPath} = {}) {
   };
 }
 
+/**
+ * Blinded packets for live Phase 1 human review.
+ * Omits expected gates; anonymizes variant ids as R1…R8.
+ * key.json maps R* → real ids — open only after both score sheets are filled.
+ */
+export function emitBlindedPackets({casesPath, outDir = join(ROOT, "benchmark/judgment/blinded")} = {}) {
+  const data = loadJudgmentCases(casesPath);
+  const packets = {
+    schemaVersion: 1,
+    title: "Phase 1 blinded judgment packets",
+    note: "Score these packets only. Do not open key.json or cases.json expected fields until both reviewers finish.",
+    passRule: {
+      variants: 8,
+      minimumUsableWithoutMajorRedesign: 7,
+    },
+    packets: data.variants.map((variant, index) => {
+      const recommendation = recommend(variant.job);
+      return {
+        packetId: `R${index + 1}`,
+        job: variant.job,
+        recommendation: {
+          verdict: recommendation.verdict,
+          modality: recommendation.modality,
+          patterns: recommendation.patterns,
+          principles: recommendation.principles,
+          claims: recommendation.claims,
+          uncertainty: recommendation.uncertainty,
+          rationale: recommendation.rationale,
+        },
+      };
+    }),
+  };
+  const key = {
+    schemaVersion: 1,
+    title: "Phase 1 blinded packet key (sealed until after scoring)",
+    sealed: true,
+    map: data.variants.map((variant, index) => ({
+      packetId: `R${index + 1}`,
+      variantId: variant.id,
+      sourceBrief: variant.sourceBrief,
+    })),
+  };
+  return {outDir, packets, key};
+}
+
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
+  if (process.argv.includes("--blinded")) {
+    const {outDir, packets, key} = emitBlindedPackets();
+    mkdirSync(outDir, {recursive: true});
+    writeFileSync(join(outDir, "packets.json"), `${JSON.stringify(packets, null, 2)}\n`);
+    writeFileSync(join(outDir, "key.json"), `${JSON.stringify(key, null, 2)}\n`);
+    console.log(JSON.stringify({
+      wrote: [join(outDir, "packets.json"), join(outDir, "key.json")],
+      packets: packets.packets.length,
+      note: "Share packets.json with reviewers; keep key.json sealed until after scoring.",
+    }, null, 2));
+    process.exit(0);
+  }
   const report = evaluateJudgment();
   console.log(JSON.stringify(report, null, 2));
   process.exit(report.meetsMachineFloor ? 0 : 1);
