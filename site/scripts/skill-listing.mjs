@@ -10,6 +10,11 @@
 //   node site/scripts/skill-listing.mjs --check   exit 1 and print the drift
 //   node site/scripts/skill-listing.mjs --write   rewrite the block in place
 //
+// Gates that call --check: doctor (site skill listing current), both doctor-* CI
+// jobs (named fail-fast step), git pre-commit (hooks/git-pre-commit-skill-listing.sh),
+// and stop-sweep when this turn touched skill/ or the listing surfaces. AST /
+// skill-doc PRs must --write in the same PR — do not land STALE.
+//
 // Alignment is reproduced exactly as the page already had it, including the one-column
 // difference between the <strong>-wrapped rows and the plain ones — so a run against an
 // already-current page is a no-op, byte for byte.
@@ -87,6 +92,7 @@ if (check) {
   if (!problems.length) problems.push("block differs only in whitespace");
   console.error(`skill-listing: STALE — ${problems.join("; ")}`);
   console.error("  fix: node site/scripts/skill-listing.mjs --write");
+  console.error("  AST / skill-doc PRs: refresh the listing in the SAME PR — do not land STALE.");
   process.exit(1);
 }
 

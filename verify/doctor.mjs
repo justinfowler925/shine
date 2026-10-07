@@ -1726,7 +1726,10 @@ if (FULL) {
     ok("site skill listing current", (r.stdout.trim().split("— ")[1] ?? "matches disk"));
   } else {
     const why = (r.stderr || r.stdout).trim().split("\n")[0].replace(/^skill-listing: (STALE — )?/, "");
-    fail("site skill listing current", `${why} — fix: npm run skill-listing -- --write`);
+    fail(
+      "site skill listing current",
+      `${why} — fix: npm run skill-listing -- --write (same PR as skill/AST docs; do not land STALE)`,
+    );
   }
 }
 
