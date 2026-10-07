@@ -2,6 +2,9 @@
 
 Small, source-backed principle records live in `principles/*.json`.
 Nucleus-weighted anti-patterns live in `anti-patterns/*.json` (S2).
+Operate slop quartet (dual-focal, KPI soup, CTA pressure, wrong cite) is tagged
+`operate-slop` with fixtures + aliases; measure formatters cite `anti-pattern:<id>`.
+Doctor bite: `verify/anti-patterns-operate.test.mjs`.
 ClearSpeed Operate **numbered constitution** lives in
 `constitutions/clearspeed-operate.json` (enterprise §3) — packet
 `ddr.constitutionIds` / `ddr.constitution[]`; critic must cite on

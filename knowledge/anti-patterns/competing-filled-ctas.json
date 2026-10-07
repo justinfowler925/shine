@@ -5,15 +5,29 @@
   "kind": "operate-bloat",
   "domains": ["interaction", "visual-hierarchy"],
   "lanes": ["saas", "internal"],
-  "screens": ["queue", "settings", "form", "record", "catalog", "approval", "dashboard"],
-  "tags": ["cta", "cta-pressure", "hierarchy", "nucleus"],
-  "cues": "Two or more filled primary buttons of equal weight in the main content region",
+  "screens": ["queue", "settings", "form", "record", "catalog", "approval", "dashboard", "app-shell"],
+  "tags": ["cta", "cta-pressure", "hierarchy", "operate-slop", "nucleus"],
+  "aliases": ["cta-pressure", "competing-cta", "dual-primary"],
+  "cues": "Two or more filled primary buttons of equal weight in the main content region — Pursue + Assign lead both variant=default",
   "ban": "Operate main allows exactly one filled primary; peers must be outline/ghost.",
-  "remediation": "Apply cta-budget maxFilled=1; prefer the Monday job verb; demote Export/New peers.",
+  "remediation": "Apply cta-budget maxFilled=1; prefer the Monday job verb; demote Export/New/Assign peers; bind competingCtaCheck.ok=false to a flow: assertion.",
+  "examples": [
+    "SLED Capture pursued row: Pursue + Assign lead both filled",
+    "Settings form: Save + Export both painted as primary"
+  ],
+  "restructureOps": ["cta-budget"],
   "detector": "cta-pressure",
   "measureFailurePrefix": "cta-pressure",
   "constitutionIds": ["cta-pressure"],
   "severity": "critical",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-cta-before.html",
+    "after": "verify/fixtures/denoise/queue-cta-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-cta-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-cta-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-cta", "queue-sled-bloat"],
+  "cropPairId": "queue-cta",
   "source": "skill/references/anti-patterns.md",
   "validatedBy": "verify/cta-pressure.test.mjs"
 }

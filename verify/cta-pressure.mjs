@@ -7,8 +7,12 @@
 // tightens Operate to a single filled primary in main.
 
 import { OPERATE_PROVE_SCREENS, isOperateProveScreen } from "../hooks/receipt.mjs";
+import { withAntiPatternCite } from "../knowledge/retrieve.mjs";
 
 export { OPERATE_PROVE_SCREENS, isOperateProveScreen };
+
+/** Library id — knowledge/anti-patterns/competing-filled-ctas.json */
+export const CTA_PRESSURE_ANTI_PATTERN_ID = "competing-filled-ctas";
 
 /** Screens that get main-region CTA pressure. Includes catalog (Company Tools). */
 export const CTA_PRESSURE_SCREENS = Object.freeze([
@@ -127,15 +131,21 @@ export function formatCtaPressureFailures(cta, { gate = false } = {}) {
   if (!gate || !cta) return [];
   if (cta.mainControlCount > 0 && cta.mainFilledCount === 0) {
     return [
-      `cta-pressure: ${cta.mainControlCount} controls in main and 0 filled primary treatments — ` +
-        `nothing reads as the primary job action (diagnose.md competingCtaCheck; techniques.md §Hierarchy)`,
+      withAntiPatternCite(
+        `cta-pressure: ${cta.mainControlCount} controls in main and 0 filled primary treatments — ` +
+          `nothing reads as the primary job action (diagnose.md competingCtaCheck; techniques.md §Hierarchy)`,
+        CTA_PRESSURE_ANTI_PATTERN_ID,
+      ),
     ];
   }
   if (cta.mainFilledCount > 1) {
     const samples = (cta.mainFilledSamples || []).filter(Boolean).join(", ") || "unnamed";
     return [
-      `cta-pressure: ${cta.mainFilledCount} competing filled treatments in main [${samples}] — ` +
-        `Operate pages allow one filled primary; demote peers to outline/ghost or bind competingCtaCheck.ok=false to a flow: (expert P1)`,
+      withAntiPatternCite(
+        `cta-pressure: ${cta.mainFilledCount} competing filled treatments in main [${samples}] — ` +
+          `Operate pages allow one filled primary; demote peers to outline/ghost or bind competingCtaCheck.ok=false to a flow: (expert P1)`,
+        CTA_PRESSURE_ANTI_PATTERN_ID,
+      ),
     ];
   }
   return [];

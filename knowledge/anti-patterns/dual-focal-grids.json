@@ -5,15 +5,29 @@
   "kind": "operate-bloat",
   "domains": ["composition", "information-architecture"],
   "lanes": ["saas", "internal"],
-  "screens": ["queue", "dashboard", "weekly-board"],
-  "tags": ["dual-focal", "datagrid", "xor", "nucleus"],
-  "cues": "Two peer worklists or DataGrids on the same triage route",
+  "screens": ["queue", "dashboard", "weekly-board", "app-shell"],
+  "tags": ["dual-focal", "datagrid", "xor", "operate-slop", "nucleus"],
+  "aliases": ["dual-focal", "dual-grid", "peer-grids"],
+  "cues": "Two peer worklists or DataGrids on the same triage route — e.g. David's 10 today + Queue both painting full grids with the same cite",
   "ban": "One job gets one focal grid; peers fold to saved-view / filter / XOR — never silent delete.",
-  "remediation": "Emit collapse-peer-grids plan; keep one grid in the fold; re-measure dual-focal.",
+  "remediation": "Emit collapse-peer-grids plan; run dual-grid XOR (peer title → filter chip + shared DataGrid); keep one grid in the fold; re-measure dual-focal.",
+  "examples": [
+    "SLED Capture: David's 10 DataGrid + Queue DataGrid as peer focals",
+    "Weekly board with two equal worklists competing for the fold"
+  ],
+  "restructureOps": ["collapse-peer-grids"],
   "detector": "dual-focal",
   "measureFailurePrefix": "dual-focal",
   "constitutionIds": ["dual-focal-ban"],
   "severity": "critical",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-dual-grid-before.html",
+    "after": "verify/fixtures/denoise/queue-dual-grid-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-dual-grid-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-dual-grid-fold-crop.html"
+  },
+  "skillAbCaseIds": ["queue-dual-grid"],
+  "cropPairId": "queue-dual-grid",
   "source": "skill/references/anti-patterns.md",
   "validatedBy": "verify/dual-focal.test.mjs"
 }

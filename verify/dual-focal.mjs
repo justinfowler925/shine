@@ -2,7 +2,11 @@
 // collapse-peer-grids remains plan-only for AST/DOM; agent closes via xor-saved-view.mjs.
 
 import { OPERATE_PROVE_SCREENS, isOperateProveScreen } from "../hooks/receipt.mjs";
+import { withAntiPatternCite } from "../knowledge/retrieve.mjs";
 import { isCtaPressureScreen } from "./cta-pressure.mjs";
+
+/** Library id — knowledge/anti-patterns/dual-focal-grids.json */
+export const DUAL_FOCAL_ANTI_PATTERN_ID = "dual-focal-grids";
 
 export const DUAL_FOCAL_MIN_GRIDS = 2;
 
@@ -77,8 +81,11 @@ export function formatDualFocalFailures(dual, { gate = false } = {}) {
   if (dual.peerGridCount >= DUAL_FOCAL_MIN_GRIDS) {
     const titles = (dual.titles || []).join(" + ") || "unnamed peers";
     return [
-      `dual-focal: ${dual.peerGridCount} peer worklists/grids in main [${titles}] — ` +
-        `Operate triage allows one focal work object; fold peers as saved-view/XOR (collapse-peer-grids plan; expert N6)`,
+      withAntiPatternCite(
+        `dual-focal: ${dual.peerGridCount} peer worklists/grids in main [${titles}] — ` +
+          `Operate triage allows one focal work object; fold peers as saved-view/XOR (collapse-peer-grids plan; expert N6)`,
+        DUAL_FOCAL_ANTI_PATTERN_ID,
+      ),
     ];
   }
   return [];
