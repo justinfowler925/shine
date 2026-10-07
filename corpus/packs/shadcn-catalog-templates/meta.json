@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-catalog-templates",
+  "source": "corpus/blueprints/shadcn-catalog-templates/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 121838,
+  "provenance": "Authored blueprint, S3 Operate corpus depth",
+  "capture": {
+    "status": 200,
+    "title": "Template gallery",
+    "headings": "Page templates\nWork queue\nSettings sections\nOps cockpit\nCard catalog",
+    "expectedSelector": "[data-region=\"catalog-cards\"] article",
+    "expectedCount": 4,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-catalog-templates/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-catalog-templates/reference.html",
+    "capturedAt": "2026-10-07T01:04:33.066Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "78f0d32c37559dfc30a040d082ad374f21bb45047df48b59363826564d28fd49",
+    "shotSha256": "ad8f65b74dbf4d45edd7cf19ad5ad5d3ce7a14798d94aac4c6a57951ea8dbb42"
+  }
+}

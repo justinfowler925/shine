@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "shadcn-cockpit-revenue",
+  "screen": "dashboard",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "reference.html",
+      "sha256": "b68a3c9fa7586f8ee23728a099314bf958a23c73e57860227dcfe852c54eb1e2"
+    }
+  ]
+}

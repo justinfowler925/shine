@@ -71,7 +71,10 @@ role and express the primary job as browser steps. Run `node verify/usability.mj
 --contract shine-usability.json --cite <selected-template>` after measure and before compare.
 Do not claim usability from contrast, axe or visual comparison. Static dashboards, decorative controls and flows without observable changes fail.
 ## Layout and completion proof
-For broadcast/video use media; for publications use editorial. A chat demo cannot supply TV structure. Reject quarantined references; legacy `not_tested` captures need validated recapture, never manual relabeling. Read `../docs/media-layout-proof.md`; write `shine-layout.json` for narrow through wide widths, long content, missing images, loaded media and enlarged text. Measure frame, caption, controls and unused space together; media never exempts its wrapper.
+For broadcast/video use media; for publications use editorial. A chat demo cannot supply TV structure. Reject quarantined references; legacy `not_tested` captures need validated recapture, never manual relabeling. Read `references/media-layout-proof.md`; write `shine-layout.json` for narrow through wide widths, long content, missing images, loaded media and enlarged text. Measure frame, caption, controls and unused space together; media never exempts its wrapper.
 Bind critical/major diagnosis defects to executable layout assertion ids or `flow:<id>`. Run the packet’s completion command. Only `verify/prove.mjs` issues overall completion proof: every required category must pass; `not_tested` is incomplete. Browser proof requires a clean source commit and matching rendered commit/build identity.
 Inspect narrow and wide screenshots. Synthetic loading proves geometry, not provider playback or script quality. Separately review spoken summaries for complete sentences, source fidelity and distinction from written coverage; report limitations.
-Skill changes must satisfy `../docs/distribution-dod.md` and every destination in `../distribution.json`; source merge or local install alone is not delivery.
+Skill changes must satisfy `references/distribution-dod.md` and every destination in `../distribution.json`; source merge or local install alone is not delivery.
+
+
+This guidance download does not include Node tools. Executable verifiers require the full repository install. Never claim executable completion from this file alone.

@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-cockpit-revenue",
+  "source": "corpus/blueprints/shadcn-cockpit-revenue/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 58530,
+  "provenance": "Authored blueprint, S3 Operate corpus depth",
+  "capture": {
+    "status": 200,
+    "title": "Revenue cockpit",
+    "headings": "Revenue\nRevenue cockpit",
+    "expectedSelector": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]",
+    "expectedCount": 4,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-cockpit-revenue/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-cockpit-revenue/reference.html",
+    "capturedAt": "2026-10-07T01:04:33.498Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "b68a3c9fa7586f8ee23728a099314bf958a23c73e57860227dcfe852c54eb1e2",
+    "shotSha256": "04fdea269de24d2e94d8baf4bb85d2270f5434126381d1fc1354db52198b3cdb"
+  }
+}
