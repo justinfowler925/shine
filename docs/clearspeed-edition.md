@@ -64,8 +64,10 @@ ClearSpeed **machine** seam is `skill/references/clearspeed/brand.json` → Sign
 `install-clearspeed-edition.mjs` materializes `edition/tokens` (not a base symlink) and
 runs `scripts/apply-clearspeed-brand.mjs` so the edition tree carries Clearspeed orange
 instead of the public placeholder indigo. The base release `tokens/` lane stays
-placeholder on purpose; only the private edition is recolored. `verify/edition.mjs`
-fails closed if `#4338ca` remains or `#ED5925` is missing from the profile / edition
-tokens.
+placeholder on purpose; only the private edition is recolored. Manifest
+`brandAccent` is written from `brand.json` action via
+`core/clearspeed-brand-accent.mjs` and must stay `#ED5925`. `verify/edition.mjs`
+fails closed if `#4338ca` remains, `#ED5925` is missing from the profile / edition
+tokens, or `clearspeed-edition.json` `brandAccent` drifts from Signal Orange.
 
 See `docs/nucleus-attach.md` and `docs/distribution-dod.md`.

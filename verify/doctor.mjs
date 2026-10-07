@@ -66,7 +66,7 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
 {
   for (const [name,file,needle] of [
     ["integration readiness and edition integrity", "verify/integration-readiness.test.mjs", "edition integrity"],
-    ["ClearSpeed sync-tokens rewrite (S7)", "verify/sync-tokens.test.mjs", "sync-tokens emit/check"],
+    ["ClearSpeed sync-tokens + brandAccent #ED5925", "verify/sync-tokens.test.mjs", "brandAccent fail-closed"],
     ["benchmark output quality gates", "benchmark/quality.test.mjs", "clone structure"],
     ["functional originality gates", "verify/originality.test.mjs", "attribute stamp"],
   ]) {
@@ -374,7 +374,10 @@ if (!CI) {
     if (!existsSync(p)) fail(`${surface} skill deployed`, `missing: ln -s ${want} ${p}`);
     else { const check=verifySkillDeployment(p,SHINE);
       if(check.status!=="passed")fail(`${surface} skill deployed`,check.reason);
-      else ok(`${surface} skill deployed`,`${check.kind}${check.profile ? " / "+check.profile : ""}: ${p.replace(HOME,"~")}`);
+      else if(check.kind==="edition"&&check.brandAccent&&String(check.brandAccent).toUpperCase()!=="#ED5925"){
+        fail(`${surface} skill deployed`,`edition brandAccent drifted from #ED5925: ${check.brandAccent}`);
+      }
+      else ok(`${surface} skill deployed`,`${check.kind}${check.profile ? " / "+check.profile : ""}${check.brandAccent?` brandAccent ${check.brandAccent}`:""}: ${p.replace(HOME,"~")}`);
     }
   }
 }
