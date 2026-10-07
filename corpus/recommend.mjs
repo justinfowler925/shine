@@ -9,6 +9,7 @@ import {
   citeBansFor,
   commitSiblingLearnFromResolve,
   editionAntiCitesFor,
+  enforceCiteBansOnRecommendation,
   siblingPrefsFor,
 } from "../core/learn.mjs";
 import {
@@ -250,27 +251,36 @@ export function recommendPattern(templates, job, constraints = {}) {
     .slice(0, 3)
     .map((e) => `anti-cite: ${e.template.id} (${(e.reasons || []).join("; ") || "excluded"})`);
   // Learned Operate demotions + edition anti-cites (doctor-gated prove-fail commits).
-  const learnedBans = citeBansFor(screen).map(
+  const learnOpts = {
+    storePath: constraints.learnStorePath,
+    store: constraints.learnStore,
+  };
+  const banCategory = constraints.category || screen;
+  const learnedBans = citeBansFor(banCategory, learnOpts).map(
     (b) => `anti-cite: ${b.citeId} (operate-demotion; ${b.failCategory}; ${b.ddrId})`,
   );
   const edition = String(constraints.edition || "").trim().toLowerCase();
   const learnedEdition = edition
-    ? editionAntiCitesFor(edition, { category: screen }).map(
+    ? editionAntiCitesFor(edition, { category: banCategory, ...learnOpts }).map(
         (b) => `anti-cite: ${b.citeId} (edition:${b.edition}; ${b.failCategory}; ${b.ddrId})`,
       )
     : [];
+  const shortlist = retrieval.selected.map((c) => ({
+    id: c.template.id,
+    screen: c.template.screen,
+    scope: c.template.scope || "page",
+    score: c.score,
+    title: c.template.title,
+    kit: c.template.kit,
+    matches: c.matches || [],
+  }));
   let rec = {
     primary,
     antiPatterns: [...antiPatterns, ...antiCites, ...learnedBans, ...learnedEdition].slice(0, 10),
     restructureHints: restructureHints(retrieval, primary, job),
     kitRecipe: KIT_RECIPE_BY_SCREEN[screen] || KIT_RECIPE_BY_SCREEN.default,
     confidence: confidenceFor(retrieval, primary),
-    shortlist: retrieval.selected.map((c) => ({
-      id: c.template.id,
-      screen: c.template.screen,
-      scope: c.template.scope || "page",
-      score: c.score,
-    })),
+    shortlist,
     gaps: retrieval.gaps || [],
     brief: retrieval.brief,
     productSibling: null,
@@ -280,7 +290,33 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    citeBanFailClosed: null,
   };
+  // Wrong-cite episodic bans persist → fail-close recommend when primary is banned.
+  const enforced = enforceCiteBansOnRecommendation(rec, {
+    category: banCategory,
+    screen,
+    edition,
+    shortlist,
+    ...learnOpts,
+  });
+  rec = enforced.recommendation;
+  if (enforced.citeBanFailClosed && rec.primary) {
+    rec.kitRecipe =
+      KIT_RECIPE_BY_SCREEN[rec.primary.screen] || rec.kitRecipe || KIT_RECIPE_BY_SCREEN.default;
+    rec.restructureHints = restructureHints(
+      retrieval,
+      {
+        id: rec.primary.id,
+        screen: rec.primary.screen,
+        score: rec.primary.score,
+      },
+      job,
+    );
+    if (!rec.restructureHints.some((h) => /rebind-cite/i.test(String(h)))) {
+      rec.restructureHints = ["restructure:rebind-cite", ...rec.restructureHints];
+    }
+  }
   // Enterprise §4 — edition sibling map: product sibling first → kit → cite.
   // Opt-in via edition=clearspeed|clearspeed-operate (design-packet saas passes this).
   // Learned siblingPrefs boost proven mappings on the next packet.
@@ -339,7 +375,12 @@ export function recommendPattern(templates, job, constraints = {}) {
 }
 
 export function formatRecommendationSummary(rec) {
-  if (!rec?.primary) return "recommendation: none — catalog gap";
+  if (!rec?.primary) {
+    if (rec?.citeBanFailClosed?.failClosed) {
+      return `recommendation: none — cite-ban fail-closed (${rec.citeBanFailClosed.bannedCite})`;
+    }
+    return "recommendation: none — catalog gap";
+  }
   const action = (rec.restructureHints || [])[0]?.startsWith("restructure:")
     ? "restructure"
     : "repaint-ok";
@@ -349,8 +390,11 @@ export function formatRecommendationSummary(rec) {
   const xor = rec.xorSavedView?.fixtureBefore
     ? ` · xorSavedView ${rec.xorSavedView.mode}@${rec.xorSavedView.cropPairId}`
     : "";
+  const ban = rec.citeBanFailClosed?.failClosed
+    ? ` · cite-ban demote ${rec.citeBanFailClosed.bannedCite}→${rec.primary.id}`
+    : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${xor}`
+    `${rec.kitRecipe}${table}${xor}${ban}`
   );
 }

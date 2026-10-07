@@ -267,6 +267,9 @@ assert.equal(banned.citeBan.citeId, "shadcn-dashboard-01");
 assert.equal(banned.citeBan.ddrId, "ddr_test_cite_ban_001");
 assert.equal(banned.editionAntiCite.edition, "clearspeed");
 assert.equal(banned.editionAntiCite.citeId, "shadcn-dashboard-01");
+assert.ok(banned.episode, "episodic wrong-cite ban persists with operate demotion");
+assert.equal(banned.episode.failCategory, "cite-honesty");
+assert.match(banned.episode.nextStep, /rebind|Demote/i);
 
 assert.throws(
   () =>
@@ -305,6 +308,12 @@ assert.throws(
 const afterBan = loadRepertoire(storePath);
 assert.ok(afterBan.citeBans.some((b) => b.ddrId === "ddr_test_cite_ban_001"));
 assert.ok(afterBan.editionAntiCites.some((b) => b.edition === "clearspeed"));
+assert.ok(
+  afterBan.episodes.some(
+    (e) => e.ddrId === "ddr_test_cite_ban_001" && e.failCategory === "cite-honesty",
+  ),
+  "episodic ban row written for wrong-cite category",
+);
 
 // Sibling learn: refuse without doctor; skip incomplete resolve; commit + prefer.
 assert.throws(
@@ -397,5 +406,5 @@ assert.match(packetSrc, /commitSiblingLearnFromResolve/);
 rmSync(dir, { recursive: true, force: true });
 
 console.log(
-  "learn PASS: repertoire job→cite→kit+hints · episodic ddrId · cite-ban/edition anti-cite after prove fail · sibling prefer after edition resolve · doctor-gated bump · no preference/RLAIF",
+  "learn PASS: repertoire job→cite→kit+hints · episodic ddrId · cite-ban/edition anti-cite + episodic ban after prove fail · sibling prefer after edition resolve · doctor-gated bump · no preference/RLAIF",
 );

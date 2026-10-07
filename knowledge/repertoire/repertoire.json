@@ -54,6 +54,24 @@
       "verdict": "done",
       "nextStep": "Prefer sibling sled-capture-queue (cite shadcn-queue) on next queue packet",
       "at": "2026-10-07T00:00:00.000Z"
+    },
+    {
+      "id": "seed-cite-ban-queue-dashboard",
+      "ddrId": "ddr_seed_sled_queue_cta",
+      "failCategory": "cite-honesty",
+      "lesson": "Sled triage proved cite-honesty fail with dashboard silhouette on a decide-Pursue job.",
+      "verdict": "partial",
+      "nextStep": "Demote shadcn-dashboard-01; rebind cite to shadcn-queue before paint",
+      "at": "2026-10-07T00:00:00.000Z"
+    },
+    {
+      "id": "seed-cite-ban-settings-queue",
+      "ddrId": "ddr_seed_sled_sources",
+      "failCategory": "cite-honesty",
+      "lesson": "Sources settings job failed cite-honesty with queue cite — rebind to shadcn-settings.",
+      "verdict": "partial",
+      "nextStep": "Demote shadcn-queue; rebind cite to shadcn-settings before paint",
+      "at": "2026-10-07T00:00:00.000Z"
     }
   ],
   "citeBans": [

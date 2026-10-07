@@ -17,7 +17,11 @@ import {isOperateProveScreen} from "../hooks/receipt.mjs";
 import {buildDdr} from "./ddr.mjs";
 import {assertNewSurfaceBrief, readBrief, wireframeBriefRef} from "./wireframe-brief.mjs";
 import {resolveEditionSibling} from "./edition-siblings.mjs";
-import {commitSiblingLearnFromResolve, siblingPrefsFor} from "./learn.mjs";
+import {
+  commitSiblingLearnFromResolve,
+  learnedCiteBansFor,
+  siblingPrefsFor,
+} from "./learn.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const catalog=loadTemplates(ROOT);
@@ -132,7 +136,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  const components=ranked.filter(item=>item.scope==="component").slice(0,3);
  const allCandidates=[...candidates,...components];
  if(!candidates.length)throw new Error(`no composed page reference matched ${JSON.stringify(job)}; use --category or add a catalog page row`);
- const selected=candidates[0],examples=findUntitledExamples(job,3);
+ let selected=candidates[0];const examples=findUntitledExamples(job,3);
  const starter=kind==="datagrid"&&recipeKey==="native"?join(ROOT,"verify/fixtures/table-quality/candidate.html"):kind==="marketing"?join(ROOT,"verify/fixtures/marketing.html"):null;
  const diagnosis=reviewing?{required:true,reference:join(ROOT,"skill/references/diagnose.md"),command:`node ${join(ROOT,"core/diagnosis.mjs")} init --job ${JSON.stringify(job)} --category ${kind} --lane ${lane} --out shine-diagnosis.json`,verdicts:["defects","no-change"],instruction:mode==="denoise"
   ?"Denoise diagnose order (locked): primary job → competing CTA → empty/error triad → composition (dual-focal, KPI soup, wrong cite) → craft. No polish until primaryTaskCheck is green. Name only evidenced defects. For lane=saas Operate pages fill primaryTaskCheck, emptyErrorTriadCheck, competingCtaCheck, plus copy/adoption checks. Bind critical/major usability defects to flow:<id>. Emit shine-restructure.json when restructureRequired."
@@ -175,10 +179,72 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  // Tiny phase hint: procedure phases are documentation for the agent, not a
  // second mode enum. Copy/Adoption use diagnosis check fields + prove presence
  // gates (not a separate NLP prove category).
- const recommendation=recommendPattern(catalog,`${job} ${categories[kind].fallback}`,{lane,limit:6,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[],category:kind,edition:lane==="saas"?"clearspeed-operate":"",learnStorePath,learnStore});
+ const editionForLearn=lane==="saas"?"clearspeed-operate":"";
+ const recommendation=recommendPattern(catalog,`${job} ${categories[kind].fallback}`,{lane,limit:6,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[],category:kind,edition:editionForLearn,learnStorePath,learnStore});
+ // Episodic wrong-cite bans fail-close packet selected cite (demote or refuse paint).
+ const selectedBanHits=learnedCiteBansFor(selected.id,{
+  category:kind,
+  screen:selected.screen||"",
+  edition:editionForLearn,
+  storePath:learnStorePath,
+  store:learnStore,
+ });
+ let citeBanFailClosed=recommendation.citeBanFailClosed||null;
+ if(selectedBanHits.length){
+  const ban=selectedBanHits[0];
+  const altId=recommendation.primary?.id&&recommendation.primary.id!==selected.id
+   ?recommendation.primary.id
+   :null;
+  const alt=altId
+   ?allCandidates.find((item)=>item.id===altId)||candidates.find((item)=>item.id===altId)||null
+   :null;
+  if(alt){
+   const bannedCite=selected.id;
+   selected=alt;
+   candidates=[alt,...candidates.filter((item)=>item.id!==alt.id)].slice(0,3);
+   packet.selected=selected;
+   packet.candidates=candidates;
+   packet.proof={
+    ...packet.proof,
+    artifactAttribute:`data-cite=\"${selected.id}\"`,
+    commands:[
+     `node ${join(ROOT,"verify/measure.mjs")} <artifact> --cite ${selected.id} --lane ${lane} --shot /tmp/shine-after.png`,
+     ...usability.commands.map((cmd)=>cmd.replace(/--cite\s+\S+/g,`--cite ${selected.id}`)),
+     ...productCommands,
+     `node ${join(ROOT,"verify/compare.mjs")} <artifact> --cite ${selected.id} --lane ${lane}${(mode==="existing"||mode==="denoise")?" --mode existing --diagnosis shine-diagnosis.json":""}`,
+    ],
+   };
+   packet.usability={
+    ...usability,
+    commands:[`node ${join(ROOT,"verify/usability.mjs")} <artifact> --contract shine-usability.json --cite ${selected.id}`],
+   };
+   citeBanFailClosed={
+    bannedCite,
+    ban,
+    reason:`cite-ban: ${bannedCite} banned — fail-closed; packet demote to ${selected.id}`,
+    replacedWith:selected.id,
+    failClosed:true,
+   };
+   packet.gaps=[...packet.gaps,citeBanFailClosed.reason];
+  }else{
+   citeBanFailClosed={
+    bannedCite:selected.id,
+    ban,
+    reason:`cite-ban: ${selected.id} banned for ${ban.category||kind} (${ban.failCategory}; ${ban.ddrId}) — fail-closed; no non-banned packet cite`,
+    replacedWith:null,
+    failClosed:true,
+   };
+   packet.gaps=[...packet.gaps,citeBanFailClosed.reason];
+   packet.editing={
+    allowed:false,
+    instruction:`Refuse paint: learned cite-ban fail-closed on ${selected.id} (${ban.failCategory}; ${ban.ddrId}). Rebind cite (restructure:rebind-cite) before Actor implement.`,
+   };
+  }
+ }
+ packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns, restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), xorSavedView.fixture*/crop* (D10 dual-grid XOR FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), xorSavedView.fixture*/crop* (D10 dual-grid XOR FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
