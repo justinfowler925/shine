@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-catalog-integrations" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width"/><title>Integrations catalog</title>
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{font:14px/1.5 ui-sans-serif,system-ui,sans-serif;margin:0;color:#18181b;background:#fff}
+main{max-width:1100px;margin:auto;padding:32px 24px}
+h1{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:4px 0 0}
+h2{font-size:18px;font-weight:600;margin:0}
+h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#71717a;font-weight:600;margin:0 0 6px}
+p{margin:0}.muted{color:#71717a}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#71717a}
+.counts{display:flex;gap:16px;margin-top:8px;color:#71717a}.counts strong{color:#18181b;font-variant-numeric:tabular-nums}
+.bar{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin-top:24px;padding-top:24px;border-top:1px solid #e4e4e7}
+.search{flex:1;min-width:280px}label{display:block;font-weight:500;margin-bottom:6px}
+input[type=search]{font:inherit;width:100%;height:40px;border:1px solid #e4e4e7;border-radius:6px;padding:0 12px;background:#fff}
+.filters{display:inline-flex;gap:4px;background:#f4f4f5;padding:4px;border-radius:8px}
+.filters button{font:inherit;font-weight:500;min-width:72px;height:40px;padding:0 12px;border:0;border-radius:6px;background:transparent;color:#71717a;cursor:pointer}
+.filters button[aria-pressed=true]{background:#fff;color:#18181b;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+button,.button{font:inherit;font-weight:500;height:40px;padding:0 14px;border-radius:6px;border:1px solid transparent;background:#18181b;color:#fff;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.outline{background:#fff;color:#18181b;border-color:#e4e4e7}.count{margin-top:12px;color:#71717a}
+.cards{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
+article{border:1px solid #e4e4e7;border-radius:8px;padding:24px}
+.meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.badges{display:flex;gap:6px}.badge{display:inline-flex;align-items:center;height:22px;padding:0 8px;border:1px solid #e4e4e7;border-radius:6px;font-size:12px;font-weight:500}
+article h2{margin-top:12px}article>p.summary{margin-top:6px;max-width:72ch}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.cols>div{border-left:2px solid #e4e4e7;padding-left:12px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+details{margin-top:16px;border-top:1px solid #e4e4e7;padding-top:12px}summary{cursor:pointer;font-weight:500}
+</style></head>
+<body>
+<main>
+<header data-region="catalog-header">
+<p class="eyebrow">Workspace integrations</p>
+<h1>Connected apps</h1>
+<p class="muted">Install approved connectors. Each card carries when to use it and what it needs before connect.</p>
+<div class="counts"><span><strong>4</strong> integrations</span><span><strong>12</strong> scopes</span></div>
+</header>
+<form class="bar" role="search" aria-label="Filter integrations" data-region="catalog-filters">
+<div class="search"><label for="q">Search integrations</label><input id="q" type="search" name="q" placeholder="Name, vendor, or job"></div>
+<div class="filters" role="group" aria-label="Type">
+<button type="button" aria-pressed="true">All</button>
+<button type="button" aria-pressed="false">CRM</button>
+<button type="button" aria-pressed="false">Chat</button>
+<button type="button" aria-pressed="false">Storage</button>
+</div>
+<button type="reset" class="outline">Clear filters</button>
+</form>
+<p class="count" role="status" data-region="catalog-count">4 integrations</p>
+<ul class="cards" data-region="catalog-cards">
+<li><article aria-labelledby="card-sf">
+<div class="meta"><div class="badges"><span class="badge">CRM</span><span class="badge">Final</span></div><span class="muted">Salesforce · OAuth</span></div>
+<h2 id="card-sf">Salesforce</h2>
+<p class="summary muted">Sync accounts, opportunities, and activity into Nucleus Operate queues.</p>
+<div class="cols"><div><h3>Use it when</h3><p>Reps live in Salesforce and Operate needs the same pipeline facts.</p></div><div><h3>Before connecting</h3><p>Admin can create Connected Apps; sandbox first.</p></div></div>
+<div class="actions"><button type="button">Connect Salesforce</button><a class="button outline" href="#sf">Open setup</a></div>
+<details><summary>Scopes and rotate keys</summary><p>api, refresh_token, offline_access. Rotate from Admin → Integrations.</p></details>
+</article></li>
+<li><article aria-labelledby="card-slack">
+<div class="meta"><div class="badges"><span class="badge">Chat</span><span class="badge">Final</span></div><span class="muted">Slack · Bot token</span></div>
+<h2 id="card-slack">Slack</h2>
+<p class="summary muted">Post triage alerts and digest digests to approved channels.</p>
+<div class="cols"><div><h3>Use it when</h3><p>Operators want queue pressure without opening Nucleus.</p></div><div><h3>Before connecting</h3><p>Workspace admin; channel allow-list ready.</p></div></div>
+<div class="actions"><button type="button">Connect Slack</button><a class="button outline" href="#slack">Open setup</a></div>
+<details><summary>Scopes and rotate keys</summary><p>chat:write, channels:read. Rotate bot token quarterly.</p></details>
+</article></li>
+<li><article aria-labelledby="card-gdrive">
+<div class="meta"><div class="badges"><span class="badge">Storage</span><span class="badge">Preview</span></div><span class="muted">Google Drive · OAuth</span></div>
+<h2 id="card-gdrive">Google Drive</h2>
+<p class="summary muted">Attach evidence folders to records without leaving the detail page.</p>
+<div class="cols"><div><h3>Use it when</h3><p>Evidence lives in shared drives, not Nucleus blob storage.</p></div><div><h3>Before connecting</h3><p>Domain-wide consent; pick a shared drive root.</p></div></div>
+<div class="actions"><button type="button">Connect Drive</button><a class="button outline" href="#gdrive">Open setup</a></div>
+<details><summary>Scopes and rotate keys</summary><p>drive.readonly. Preview status — no write path yet.</p></details>
+</article></li>
+</ul>
+</main>
+</body></html>

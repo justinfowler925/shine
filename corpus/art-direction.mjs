@@ -69,11 +69,11 @@ export function axisDistance(a, b) {
 }
 
 /** Composed SaaS Operate screens — page cites, not chart atoms. */
-export const OPERATE_PAGE_SCREENS = Object.freeze(["dashboard", "settings", "form", "queue", "record", "crud"]);
+export const OPERATE_PAGE_SCREENS = Object.freeze(["dashboard", "settings", "form", "queue", "record", "crud", "catalog", "chat"]);
 
 /**
- * Soft Operate briefs (dashboard / settings / form / queue / record) must not
- * retrieve `screen:charts` atoms as the primary page cite. Chart-led wording
+ * Soft Operate briefs (dashboard / settings / form / queue / record / catalog / chat)
+ * must not retrieve `screen:charts` atoms as the primary page cite. Chart-led wording
  * without a page screen (`charts`, `analytics` alone) keeps chart atoms.
  */
 export function operatePageIntent(brief) {
@@ -88,6 +88,12 @@ export function operatePageIntent(brief) {
   if (hasAny(tokens, ["preferences", "configuration"])) return { screen: "settings", chartExplicit: false };
   if (hasAny(tokens, ["wizard", "checkout", "intake"])) return { screen: "form", chartExplicit: false };
   if (hasAny(tokens, ["datagrid", "worklist", "inbox", "triage"])) return { screen: "queue", chartExplicit: false };
+  if (hasAny(tokens, ["integrations", "connectors", "packages", "gallery", "directory", "showcase"])) {
+    return { screen: "catalog", chartExplicit: false };
+  }
+  if (hasAny(tokens, ["assistant", "sidecar", "conversation", "copilot"])) {
+    return { screen: "chat", chartExplicit: false };
+  }
   if (tokens.includes("profile") && !hasAny(tokens, ["marketing"])) return { screen: "record", chartExplicit: false };
   if (chartLed || hasAny(tokens, ["analytics", "dataviz"])) return { screen: null, chartExplicit: true };
   return { screen: null, chartExplicit: false };

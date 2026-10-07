@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-cockpit-ops" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc" data-dna-density="dense">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width"/><title>Ops cockpit</title>
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{margin:0;font:13px/1.4 ui-sans-serif,system-ui,sans-serif;color:#18181b;background:#f4f4f5}
+.shell{display:grid;grid-template-columns:200px 1fr;min-height:100vh}
+aside{background:#fff;border-right:1px solid #e4e4e7;padding:16px 12px}
+aside h1{font-size:13px;margin:0 0 12px;font-weight:600}
+nav a{display:block;padding:7px 10px;border-radius:6px;color:#18181b;text-decoration:none;font-weight:500}
+nav a[aria-current=page]{background:#f4f4f5;font-weight:600}
+main{padding:16px 20px}
+.context{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:12px}
+.context h2{margin:0;font-size:18px;letter-spacing:-.02em;font-weight:600}
+.context .meta{color:#71717a;font-size:12px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border:1px solid #e4e4e7;border-radius:8px;padding:12px 14px;text-decoration:none;color:inherit;display:block}
+.kpi .label{font-size:11px;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:.04em}
+.kpi .value{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin-top:4px}
+.kpi .cmp{font-size:12px;margin-top:4px;color:#52525b}
+.kpi .cmp[data-good-direction=up][data-sentiment=good],.kpi .cmp[data-good-direction=down][data-sentiment=good]{color:#15803d}
+.kpi .cmp[data-sentiment=bad]{color:#b91c1c}
+.kpi .asof{font-size:11px;color:#a1a1aa;margin-top:4px}
+.panel{background:#fff;border:1px solid #e4e4e7;border-radius:8px;overflow:hidden}
+.panel header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #e4e4e7}
+.panel header h3{margin:0;font-size:14px;font-weight:600}
+.panel .tools{display:flex;gap:8px}
+.panel input{font:inherit;height:32px;padding:0 10px;border:1px solid #e4e4e7;border-radius:6px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{padding:8px 14px;text-align:left;border-bottom:1px solid #f4f4f5}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#71717a;font-weight:600;background:#fafafa}
+td button{font:inherit;height:28px;padding:0 10px;border-radius:6px;border:1px solid #e4e4e7;background:#fff;cursor:pointer}
+</style></head>
+<body>
+<div class="shell">
+<aside><h1>Operate</h1><nav aria-label="Primary">
+<a href="#c" aria-current="page">Ops cockpit</a><a href="#q">Queue</a><a href="#s">Settings</a>
+</nav></aside>
+<main>
+<div class="context" data-region="cockpit-context">
+<h2>Ops cockpit</h2>
+<span class="meta">Workspace · last 7d · refreshed 2m ago</span>
+</div>
+<div class="kpis" data-region="cockpit-kpis" aria-label="Key metrics">
+<a class="kpi" href="#backlog" data-shine-kpi>
+<span class="label">Open backlog</span>
+<span class="value">128</span>
+<span class="cmp" data-good-direction="down" data-sentiment="good">▼ 12 vs prior 7d</span>
+<span class="asof">as of 2m ago</span>
+</a>
+<a class="kpi" href="#sla" data-shine-kpi>
+<span class="label">SLA breach risk</span>
+<span class="value">7</span>
+<span class="cmp" data-good-direction="down" data-sentiment="bad">▲ 2 vs prior 7d</span>
+<span class="asof">as of 2m ago</span>
+</a>
+<a class="kpi" href="#mttr" data-shine-kpi>
+<span class="label">Median cycle h</span>
+<span class="value">4.6</span>
+<span class="cmp" data-good-direction="down" data-sentiment="good">▼ 0.8 vs prior 7d</span>
+<span class="asof">as of 2m ago</span>
+</a>
+<a class="kpi" href="#owners" data-shine-kpi>
+<span class="label">Unowned rows</span>
+<span class="value">19</span>
+<span class="cmp" data-good-direction="down" data-sentiment="good">▼ 5 vs prior 7d</span>
+<span class="asof">as of 2m ago</span>
+</a>
+</div>
+<section class="panel" data-region="cockpit-focal" aria-labelledby="focal-h">
+<header>
+<h3 id="focal-h">At-risk work</h3>
+<div class="tools"><label class="visually-hidden" for="q" style="position:absolute;width:1px;height:1px;overflow:hidden">Search</label><input id="q" type="search" placeholder="Search rows"/></div>
+</header>
+<table>
+<thead><tr><th>Item</th><th>Owner</th><th>Age</th><th>Risk</th><th></th></tr></thead>
+<tbody>
+<tr><td>Company Tools attest lag</td><td>Alex</td><td>14h</td><td>SLA</td><td><button type="button">Open</button></td></tr>
+<tr><td>Queue density fail · Admin</td><td>—</td><td>9h</td><td>Unowned</td><td><button type="button">Claim</button></td></tr>
+<tr><td>Edition tip drift · Studio</td><td>Jordan</td><td>6h</td><td>Watch</td><td><button type="button">Open</button></td></tr>
+<tr><td>Nucleus zip hash mismatch</td><td>Alex</td><td>3h</td><td>SLA</td><td><button type="button">Open</button></td></tr>
+</tbody>
+</table>
+</section>
+</main>
+</div>
+</body></html>
