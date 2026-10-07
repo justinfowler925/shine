@@ -21,6 +21,10 @@ import {
   planRepairFromMeasure,
 } from "../core/critic-actor-host.mjs";
 import {
+  isCiteFailCategory,
+  observedCiteFromFailures,
+} from "../core/learn.mjs";
+import {
   assertAtlasReflexionVerdict,
   resolveStopReflexionVerdict,
 } from "../core/reflexion.mjs";
@@ -63,7 +67,9 @@ function measure(file, cite) {
       /* fall through */
     }
   }
-  for (const m of text.matchAll(/\b(cta-pressure|dual-focal|kpi-soup|composition-slop)[^\n]*/g)) {
+  for (const m of text.matchAll(
+    /\b(cta-pressure|dual-focal|kpi-soup|composition-slop|cite-honesty|wrong-cite|rebind-cite|category-honesty)[^\n]*/g,
+  )) {
     failures.push(m[0]);
   }
   return { status: run.status, failures: [...new Set(failures)], text: text.slice(-1500) };
@@ -83,6 +89,15 @@ export async function runDenoiseLoop({
   auditDir = null,
   /** Optional LOCKED shine-wireframe/<slug>.brief.md — structure gate. */
   wireframeBrief = "",
+  /**
+   * Cite-ban learn (doctor-gated). When measure cite-honesty fires, host rounds
+   * pass observedCite into reflexion; set doctorBiteOk to commit repertoire bans.
+   */
+  doctorBiteOk = false,
+  observedCite = "",
+  expectedCite = "",
+  edition = "clearspeed-operate",
+  learnStorePath = undefined,
 } = {}) {
   const out = outDir || join(ROOT, "verify/fixtures/denoise/.loop");
   mkdirSync(out, { recursive: true });
@@ -221,6 +236,13 @@ export async function runDenoiseLoop({
     round++;
     // measure→repair→critic host cycle: Critic diagnose (≠ last repair worker)
     // → Actor plan → (repair below) → measure; next iteration is post-repair Critic.
+    // Cite-ban learn: when cite-honesty (etc.) fires, pass observedCite into
+    // host→reflexion; commit only when doctorBiteOk (doctor-gated version bump).
+    const citeBanFires = lastMeasure.failures.some((f) => isCiteFailCategory(f));
+    const resolvedObserved = citeBanFires
+      ? observedCite || observedCiteFromFailures(lastMeasure.failures) || ""
+      : "";
+    const resolvedExpected = citeBanFires ? expectedCite || cite : "";
     const hostRound = await planRepairFromMeasure({
       goal: job,
       failures: lastMeasure.failures,
@@ -234,6 +256,12 @@ export async function runDenoiseLoop({
       retriesUsed,
       requireConstitutionCitation: true,
       lastRepairWorkerId,
+      doctorBiteOk: Boolean(doctorBiteOk) && citeBanFires && Boolean(resolvedObserved),
+      observedCite: resolvedObserved,
+      expectedCite: resolvedExpected,
+      category: citeBanFires ? category : "",
+      edition: citeBanFires ? edition : "",
+      learnStorePath,
     });
     criticRan = true;
     reflexion = hostRound.reflexion;
@@ -254,6 +282,14 @@ export async function runDenoiseLoop({
       criticAgentId: reflexion.criticAgentId,
       actorAgentId: reflexion.actorAgentId,
       lastRepairWorkerId,
+      citeBanLearn: reflexion.citeBanLearn
+        ? {
+            citeId: reflexion.citeBanLearn.citeBan?.citeId || null,
+            ddrId: reflexion.citeBanLearn.citeBan?.ddrId || null,
+            skipped: reflexion.citeBanLearn.skipped || false,
+          }
+        : null,
+      inferredCiteBan: reflexion.inferredCiteBan?.citeId || null,
       source: "denoise-loop.mjs",
     });
 
@@ -420,6 +456,11 @@ if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.me
     cite: opt("--cite") || "shadcn-queue",
     outDir: opt("--out") || "",
     wireframeBrief: opt("--wireframe-brief") || "",
+    doctorBiteOk: args.includes("--doctor-ok"),
+    observedCite: opt("--observed-cite") || "",
+    expectedCite: opt("--expected-cite") || "",
+    edition: opt("--edition") || "clearspeed-operate",
+    learnStorePath: opt("--learn-store") || undefined,
   });
   process.stdout.write(JSON.stringify(receipt, null, 2) + "\n");
   process.exit(receipt.status === "passed" ? 0 : 1);

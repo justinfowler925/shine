@@ -318,6 +318,29 @@ export function isCiteFailCategory(failCategory) {
   return CITE_FAIL_CATEGORIES.some((c) => f === c || f.startsWith(`${c}:`) || f.includes(c));
 }
 
+/**
+ * Pull the wrong (observed) cite id out of cite-honesty / wrong-cite measure lines.
+ * Prefer `page cite <id>`; fall back to a cite id immediately after the fail prefix.
+ */
+export function observedCiteFromFailures(failures = []) {
+  for (const raw of failures || []) {
+    const line = text(raw);
+    if (!line || !isCiteFailCategory(line)) continue;
+    const page = line.match(/\bpage cite\s+([a-z0-9][a-z0-9._*-]*)/i);
+    if (page?.[1] && looksLikeCiteId(page[1], { allowWildcard: true })) {
+      return page[1];
+    }
+    for (const prefix of CITE_FAIL_CATEGORIES) {
+      const re = new RegExp(`\\b${prefix}:\\s*([a-z0-9][a-z0-9._*-]*)`, "i");
+      const m = line.match(re);
+      if (m?.[1] && looksLikeCiteId(m[1], { allowWildcard: true })) {
+        return m[1];
+      }
+    }
+  }
+  return "";
+}
+
 function entryId({ job, primaryCite, kitRecipe, ddrId }) {
   return createHash("sha256")
     .update([job, primaryCite, kitRecipe, ddrId].join("\0"))

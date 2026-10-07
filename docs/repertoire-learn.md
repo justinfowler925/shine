@@ -70,9 +70,11 @@ node verify/learn.test.mjs
 - `inferSiblingLearnFromResolve` / `commitSiblingLearnFromResolve` — doctor-gated siblingPref + episodic lesson when cite/kit resolves via edition siblings.
 - `siblingPrefsFor` — scored lookup; `resolveEditionSibling({ learnedPrefs })` boosts proven sibling ids (+8).
 - `core/reflexion.mjs` — after prove/measure fail, attaches inferred bans; commits when `doctorBiteOk` + `observedCite` are passed.
+- `core/critic-actor-host.mjs` — host rounds pass `doctorBiteOk` / `observedCite` / `expectedCite` / `category` / `edition` / `learnStorePath` through to reflexion (cite-ban learn on measure→repair).
+- `verify/denoise-loop.mjs` — when cite-honesty fires, resolves `observedCite` (opt or `observedCiteFromFailures`) and forwards doctor-gated learn opts; `--doctor-ok` / `--observed-cite` / `--learn-store` CLI.
 - `corpus/recommend.mjs` — surfaces learned bans as `anti-cite:` strings; **fail-closes** banned primary; loads siblingPrefs into resolve; optional commit when `doctorBiteOk` + `ddrId`.
 - `core/design-packet.mjs` — saas packets demote/refuse banned `selected` cite; `doctorBiteOk` persists sibling learn after `editionSibling` attach.
-- Doctor bite: `verify/cite-ban-learn-deepen-bite.mjs`.
+- Doctor bites: `verify/cite-ban-learn-deepen-bite.mjs` · `verify/reflexion-cite-doctor-bite.mjs`.
 
 ## Non-goals
 

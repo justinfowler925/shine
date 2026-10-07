@@ -20,8 +20,9 @@ Proven job→cite→kit repertoire, episodic prove-fail lessons, Operate cite ba
 edition anti-cites, and **sibling prefs** (prefer proven edition-sibling → cite/kit
 on the next packet) live in `repertoire/repertoire.json` (enterprise learn —
 doctor-gated version bump; write bans only after real cite-related prove fails;
-write sibling prefs when cite/kit resolves via edition siblings). Doctor bite:
-`verify/cite-ban-learn-deepen-bite.mjs`.
+write sibling prefs when cite/kit resolves via edition siblings). Doctor bites:
+`verify/cite-ban-learn-deepen-bite.mjs` ·
+`verify/reflexion-cite-doctor-bite.mjs` (host `doctorBiteOk`+`observedCite`).
 
 DDR Action/Observation audit trails (enterprise §5) live under
 `SHINE_AUDIT_DIR` / `~/.cache/shine/audit/` via `core/audit-trail.mjs` — append-only
