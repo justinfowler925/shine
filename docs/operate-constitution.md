@@ -68,5 +68,6 @@ node verify/constitution.test.mjs
 ## Related
 
 - Enterprise plan §3 Decision compiler — `constitutionIds[]`
+- `docs/edition-siblings.md` (enterprise §4 Edition profile sibling map)
 - `docs/ddr-audit-trail.md` (enterprise §5)
 - `skill/references/denoise.md` · Constitution IDs

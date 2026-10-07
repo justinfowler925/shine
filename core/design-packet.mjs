@@ -16,6 +16,7 @@ import {recommend} from "../benchmark/judgment-eval.mjs";
 import {isOperateProveScreen} from "../hooks/receipt.mjs";
 import {buildDdr} from "./ddr.mjs";
 import {assertNewSurfaceBrief, readBrief, wireframeBriefRef} from "./wireframe-brief.mjs";
+import {resolveEditionSibling} from "./edition-siblings.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const catalog=loadTemplates(ROOT);
@@ -171,12 +172,14 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  // Tiny phase hint: procedure phases are documentation for the agent, not a
  // second mode enum. Copy/Adoption use diagnosis check fields + prove presence
  // gates (not a separate NLP prove category).
- const recommendation=recommendPattern(catalog,`${job} ${categories[kind].fallback}`,{lane,limit:6,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[]});
+ const recommendation=recommendPattern(catalog,`${job} ${categories[kind].fallback}`,{lane,limit:6,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[],category:kind,edition:lane==="saas"?"clearspeed-operate":""});
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: primary cite, antiPatterns, restructureHints (restructure vs repaint), kitRecipe, confidence.";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns, restructureHints (restructure vs repaint), kitRecipe, confidence.";
  const restructureHints=recommendation.restructureHints||[];
  const needsRestructure=restructureHints.some((h)=>String(h).startsWith("restructure:"));
+ const siblingResolved=lane==="saas"?resolveEditionSibling({category:kind,screen:recommendation?.primary?.screen||"",job,editionId:"clearspeed-operate"}):null;
+ const siblingLabel=productReferenceName||productReference||recommendation?.productSibling?.name||siblingResolved?.sibling?.name||null;
  // Wireframe brief lock (enterprise plan §3): mode=new surfaces bind
  // shine-wireframe/<slug>.brief.md; structure locked until "unlock structure".
  const briefPath=wireframeBrief||(slug?join(resolve(project),"shine-wireframe",`${String(slug).trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}.brief.md`):"");
@@ -200,11 +203,23 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   // constitutionIds omitted → buildDdr resolves numbered ClearSpeed Operate edition
   openRisks:packet.gaps.slice(0,4),
   status:statusWanted,
-  ctaBudget:lane==="saas"||mode==="denoise"?1:null,
-  focalRegion:mode==="denoise"||kind==="datagrid"?"worklist":null,
-  productSibling:productReferenceName||productReference||null,
+  ctaBudget:lane==="saas"||mode==="denoise"?(siblingResolved?.sibling?.ctaBudget??1):null,
+  focalRegion:mode==="denoise"||kind==="datagrid"?(siblingResolved?.sibling?.focalRegion||"worklist"):(siblingResolved?.sibling?.focalRegion||null),
+  productSibling:siblingLabel,
   wireframeBrief:briefRef,
  });
+ if(siblingResolved?.sibling&&!productReference){
+  packet.editionSibling={
+   id:siblingResolved.sibling.id,
+   name:siblingResolved.sibling.name,
+   route:siblingResolved.sibling.route||null,
+   preferredCite:siblingResolved.preferredCite,
+   kitRecipe:siblingResolved.kitRecipe,
+   owners:siblingResolved.owners,
+   reason:siblingResolved.reason,
+   instruction:"Edition sibling map (enterprise §4): prefer this Nucleus/Sled surface for conventions before external catalog fashion. Pass --product-reference to bind a concrete page.",
+  };
+ }
  packet.ddrId=packet.ddr.ddrId;
  if(mode==="new"){
   packet.wireframe={
