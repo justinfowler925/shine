@@ -1,0 +1,50 @@
+{
+  "$schema": "shine-repertoire/v1",
+  "version": 1,
+  "bar": "machine prove/measure only — no preference / RLAIF",
+  "entries": [
+    {
+      "id": "sled-queue-cta",
+      "job": "Decide Pursue/Review/Dismiss on the next notice",
+      "category": "queue",
+      "primaryCite": "shadcn-queue",
+      "kitRecipe": "shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts",
+      "restructureHints": [
+        "restructure:cta-budget",
+        "restructure:collapse-peer-grids",
+        "restructure:kpi-collapse",
+        "restructure:set-focal"
+      ],
+      "ddrId": "ddr_seed_sled_queue_cta",
+      "proveFailCategories": ["cta-pressure", "dual-focal", "kpi-soup"],
+      "validatedBy": "verify/denoise-loop.test.mjs + verify/skill-ab-eval.test.mjs",
+      "at": "2026-10-07T00:00:00.000Z"
+    },
+    {
+      "id": "sled-sources-cite",
+      "job": "Fix or pause a matching recipe",
+      "category": "settings",
+      "primaryCite": "shadcn-settings",
+      "kitRecipe": "shadcn-settings (+ notifications/billing/members variants); contracts.md Form MUST",
+      "restructureHints": [
+        "restructure:rebind-cite",
+        "restructure:cta-budget"
+      ],
+      "ddrId": "ddr_seed_sled_sources",
+      "proveFailCategories": ["cite-honesty", "cta-pressure"],
+      "validatedBy": "verify/skill-ab-eval.test.mjs",
+      "at": "2026-10-07T00:00:00.000Z"
+    }
+  ],
+  "episodes": [
+    {
+      "id": "seed-cta-budget",
+      "ddrId": "ddr_seed_sled_queue_cta",
+      "failCategory": "cta-pressure",
+      "lesson": "Dual filled Pursue+Assign buried the Monday decide job — apply cta-budget maxFilled=1 before paint.",
+      "verdict": "partial",
+      "nextStep": "Apply cta-budget maxFilled=1; demote Assign to outline.",
+      "at": "2026-10-07T00:00:00.000Z"
+    }
+  ]
+}
