@@ -432,6 +432,8 @@ won:
 
 Hard bans and common failures. Hitting these is an audit fail (Critical/Major for incomplete components; Minor/Major for visual slop depending on severity).
 
+**Machine-readable library (S2):** Nucleus-weighted Operate bloat tells live as JSON next to principles — `knowledge/anti-patterns/*.json`. Retrieve with `node knowledge/retrieve.mjs --anti "queue triage CTA"`. Measure/composition-slop failure lines cite `anti-pattern:<id>`. Prose below remains the human audit checklist.
+
 ## Incomplete components (functional)
 
 - Bare tables without toolbar/sort/page/states when DataGrid applies
@@ -2231,7 +2233,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 | Ambiguous signal | Decision | Op / gate |
 |---|---|---|
 | Dashboard chrome on a Monday triage job | Worklist, not dashboard. Cite `shadcn-queue` (or settings/record), never chart/dashboard page lead | `dashboard→worklist` · anti-dashboard |
-| Two DataGrids / two worklists same route | One grid. Peer → saved view / filter / XOR | `collapse-peer-grids` · `dual-focal` |
+| Two DataGrids / two worklists same route | One grid. Peer title → filter chip + shared DataGrid (XOR) | `collapse-peer-grids` plan → D10 XOR recipe · `dual-focal` |
 | ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost | `cta-budget` · `cta-pressure` |
 | ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details>` | `kpi-collapse` · `kpi-soup` |
 | Settings job with queue cite | Rebind cite to category truth | `rebind-cite` |
@@ -2256,13 +2258,26 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 1 packet     --mode denoise --category <…> --job "…"  → accept DDR
 2 static     vibe / preflight-slop / Card·Badge counts
 3 cite       shot + restructureHints[]
-4 diagnose   shine-diagnosis.json + shine-restructure.json
-5 apply      DOM/AST auto-safe ops (verify/restructure/*)
-6 agent      humanGate ops (dual-grid XOR, god-split) — never silent grid delete
-7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID)
-8 usability  primary-job flow + prove.mjs completion (links ddrId)
-9 stop-sweep Operate cannot finish on compare alone
+4 diagnose   shine-diagnosis.json + shine-restructure.json   ← Critic turn
+5 apply      DOM/AST auto-safe ops (verify/restructure/*)     ← Actor turn
+6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
+7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
+8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done
+9 usability  primary-job flow + prove.mjs completion (links ddrId)
+10 stop-sweep Operate cannot finish on compare alone
 ```
+
+### Critic ≠ Actor (S1)
+
+Diagnose/critic and implement are **separate turns** with distinct principals:
+
+| Role | Identity (default) | May |
+|---|---|---|
+| **Critic** | `shine-critic` | One call, no tools, ≤400 tokens; emit Atlas verdict `done\|partial\|blocked\|error` |
+| **Actor** | `shine-actor` | Execute one `partial` nextStep; never accepts the review |
+| **Host** | `shine-host` | Accepts `done` / finalizes; third principal only |
+
+**Self-accept ban:** Critic cannot accept its own verdict; Actor/worker cannot accept the critic verdict on its own work. Unknown verdict → `partial`.
 
 Max **3** measure rounds per surface. Each round clears a **named** defect.
 
@@ -2272,7 +2287,7 @@ Impeccable `distill` / `quieter` and Snapline adapters are **opt-in after** cite
 node "$ROOT/verify/preflight-slop.mjs" <artifact.html>          # N2 vibe signals
 node "$ROOT/verify/adapters/snapline.mjs" stop.json             # N3 opt-in
 node "$ROOT/verify/adapters/impeccable.mjs" --mode distill --structure-green --cite <id>
-node "$ROOT/core/reflexion.mjs" --fail "cta-pressure: …" --ddr <ddrId>   # on measure/prove fail
+node "$ROOT/core/reflexion.mjs" --fail "cta-pressure: …" --ddr <ddrId>   # Critic turn
 ```
 
 ## Constitution IDs (critic must cite)
@@ -2294,9 +2309,11 @@ Packet `ddr.constitutionIds` for Operate denoise defaults:
 Every gate bite is **measure/prove FAIL→PASS** with a **cropped defect receipt**.  
 Identical full-page “twin” screenshots are invalid proof.
 
-Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs`.  
+Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs` (dual-grid = detect → XOR after PASS).  
 Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
-TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`).
+XOR recipe: `npm run restructure:xor -- --html verify/fixtures/denoise/queue-dual-grid-before.html --out /tmp/xor.html`.  
+TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). AST stays plan-only for `collapse-peer-grids`.  
+Kit: `kits.md` § Dual-grid XOR (D10).
 
 ## Related
 
@@ -3138,13 +3155,39 @@ over dashboard chrome when the job is triage / queue / inbox.
 2. **CTA budget = 1** — one filled job verb (e.g. Pursue); peers outline/ghost/segmented.
 3. **KPI encyclopedia off-path** — ≤3 summary chips; rest in `<details data-shine-kpi-rest>`.
 4. **No peer grids** — second ranking (e.g. “David’s 10”) is a saved-view / filter XOR, never
-   a second `role="grid"` peer. Detect: `dual-focal`; plan: `collapse-peer-grids`.
+   a second `role="grid"` peer. Detect: `dual-focal`; plan: `collapse-peer-grids` (plan-only
+   in AST/DOM runners — never silent delete). Agent close: § Dual-grid XOR below.
 5. **Cite** — `shadcn-queue` (or product sibling). Anti-cites: `shadcn-dashboard-01` as page
    lead, chart atoms, magicui. Packet `recommendation.restructureHints` must clear before polish.
 6. **Golden fixture** — `verify/fixtures/denoise/queue-cta-{before,after}.html` +
-   `npm run denoise:eval`. Doctor bites dual-CTA and card/KPI soup.
+   `queue-dual-grid-{before,after}.html` + `npm run denoise:eval`. Doctor bites dual-CTA,
+   dual-grid XOR, and card/KPI soup.
 
 Kit recipe string (cite v2): `shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts`.
+
+### Dual-grid XOR (D10) — agent-assisted close
+
+Close the dual-focal loop: **detect → plan → XOR recipe → prove**. AST/DOM auto paths stay
+plan-only for `collapse-peer-grids`. Agents apply this recipe explicitly — never silent
+dual-grid delete.
+
+1. **Detect** — `dual-focal` when ≥2 peer `.grid-wrap` / `[role=grid]` worklists share main.
+2. **Plan** — emit `collapse-peer-grids` with `mode: "xor-saved-view"`,
+   `keepTitleIncludes` (e.g. `["Queue"]`), `foldTitleIncludes` (e.g. `["David"]`).
+3. **Peer title → filter chip** — fold the peer’s `data-grid-title` into a
+   `data-shine-xor-views` chip (`aria-pressed` XOR). Default pressed = kept worklist;
+   peer chip pressed = filtered view. Do **not** leave a second `role="grid"`.
+4. **Shared DataGrid state** — one table / `DataGrid` (`data-shine-shared-grid`) owns rows.
+   Chip toggles the same row model (TanStack `columnFilters` / URL via `saved-views` block /
+   product filter state). Reuse `blocks/saved-views.tsx` + `blocks/filter-bar.tsx` patterns;
+   do not fork a second grid component.
+5. **Focal** — `data-region="focal"` on the remaining wrap.
+6. **Apply helper** — `node verify/restructure/xor-saved-view.mjs --html <file> --keep Queue --fold David`
+   (also used by `denoise:eval` / `denoise:loop`). HumanGate stays true on the plan.
+7. **Prove** — measure `dual-focal` FAIL→PASS; crop the fold so one grid is visible
+   (`verify/fixtures/denoise/receipts/queue-dual-grid-fold-crop.html`). Twin full-page shots invalid.
+
+Fixtures: `verify/fixtures/denoise/queue-dual-grid-{before,after}.html`.
 
 ### Dashboard
 
@@ -4810,7 +4853,9 @@ Reasons are listed under the table.
 | carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
 | catalog | `shadcn-catalog` | shadcn-registry | blueprint | live | catalog, cards, library, packages, directory, gallery, showcase, tools |
 | catalog | `shadcn-catalog-integrations` | shadcn-registry | blueprint | live | catalog, cards, library, integrations, connectors, plugins, directory |
+| catalog | `shadcn-catalog-skills` | shadcn-registry | blueprint | live | catalog, cards, library, skills, agents, packages, directory |
 | catalog | `shadcn-catalog-templates` | shadcn-registry | blueprint | live | catalog, cards, library, templates, gallery, showcase, directory |
+| catalog | `shadcn-catalog-tools` | shadcn-registry | blueprint | live | catalog, cards, library, tools, packages, company-tools, directory |
 | charts | `shadcn-chart-area-axes` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-default` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-gradient` | shadcn-registry | source | live | charts, chart, area, analytics |
@@ -4889,14 +4934,18 @@ Reasons are listed under the table.
 | charts | `untitled-radar-charts` | untitled-ui-react | source | live | charts, chart, radar, profile, comparison, dataviz |
 | charts | `windmill-charts` | windmill-react | source | live | charts, chart, analytics, dataviz |
 | chat | `shadcn-chat` | shadcn-registry | blueprint | live | chat, assistant, conversation, thread |
+| chat | `shadcn-chat-inbox` | shadcn-registry | blueprint | live | chat, assistant, inbox, threads, conversation |
 | chat | `shadcn-chat-sidecar` | shadcn-registry | blueprint | live | chat, assistant, sidecar, conversation, copilot |
+| chat | `shadcn-chat-support` | shadcn-registry | blueprint | live | chat, assistant, support, triage, ticket, conversation |
 | chat | `spectrum-ai-chat` | react-spectrum | source | live | chat, assistant |
 | checkout | `shadcn-checkout` | shadcn-registry | blueprint | live | checkout, payment |
 | command-palette | `shadcn-command` | shadcn-registry | source | live | command-palette, palette, cmdk |
-| dashboard | `shadcn-cockpit-ops` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, ops, console, dense |
-| dashboard | `shadcn-cockpit-revenue` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, revenue, pipeline, dense |
 | dashboard | `shadcn-dashboard-01` | shadcn-registry | source | live | crud, dashboard, list, records |
 | dashboard | `untitled-line-charts` | untitled-ui-react | source | live | dashboard, analytics, charts, dataviz |
+| dashboard | `shadcn-cockpit-adoption` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, adoption, workspaces, dense |
+| dashboard | `shadcn-cockpit-compliance` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, compliance, risk, findings, dense |
+| dashboard | `shadcn-cockpit-ops` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, ops, console, dense |
+| dashboard | `shadcn-cockpit-revenue` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, revenue, pipeline, dense |
 | dashboard | `tailadmin-dashboard` | tailadmin-react | source | live | dashboard, analytics, kpi, ecommerce, metrics |
 | dashboard | `windmill-dashboard` | windmill-react | source | live | dashboard, analytics, kpi, metrics, dense |
 | dashboard | `flowbite-dashboard` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, sales, dense |
@@ -4994,7 +5043,7 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-230 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+236 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
@@ -5157,9 +5206,9 @@ No polish until `primaryTaskCheck` green.
 worklists/grids (`verify/dual-focal.mjs`) and ≥4 equal metric tiles
 (`verify/kpi-soup.mjs`). Dashboard equal-card floor stays in `kpi.mjs`.
 
-**Restructure + denoise-eval (N7/D10):** `shine-restructure/v1` plans apply via
+**Restructure + denoise-eval (N7):** `shine-restructure/v1` plans apply via
 `verify/restructure/apply-dom.mjs`. `npm run denoise:eval` scores fixture pairs.
-Dual-grid: detect → agent XOR (`xor-saved-view.mjs`) → after PASS; AST/DOM stay plan-only (no silent delete).
+Dual-grid: detect → agent XOR recipe (`xor-saved-view.mjs`) → measure PASS; AST/DOM stay plan-only (no silent delete).
 
 **Settings/forms corpus (P2):** cite floors require ≥6 settings pages and ≥6 form+record
 pages; form/settings/record cites hard-fail `aria-invalid` without an accessible message

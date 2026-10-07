@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "shadcn-catalog-skills",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "reference.html",
+      "sha256": "b66df800bcc27421ac607aa5cddbda8e66e425019f11545150d3b1d66770769e"
+    }
+  ]
+}

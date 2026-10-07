@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "shadcn-cockpit-compliance",
+  "screen": "dashboard",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "reference.html",
+      "sha256": "e95ce39b5f3181c46ee9f70f63b546fdbddbcd4a06e14c2dd29db55271d2ecc5"
+    }
+  ]
+}

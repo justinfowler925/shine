@@ -6,6 +6,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate corpus deepen (S3+).** +2 catalog (`shadcn-catalog-skills`,
+  `shadcn-catalog-tools`), +2 chat (`shadcn-chat-support`, `shadcn-chat-inbox`),
+  +2 dense cockpits (`shadcn-cockpit-adoption`, `shadcn-cockpit-compliance`).
+  Cite floors: catalog ≥5, chat ≥5, dense dashboard ≥7, dense cockpit jobs ≥4.
+  Soft `analytics`/`metrics` prefer composed dashboard; chart demotion −70;
+  explicit `chart`/`charts`/`dataviz` keep chart atoms.
+
 - **Critic ≠ Actor turns (S1).** `core/reflexion.mjs` separates diagnose/critic from
   Actor implement: distinct principals, Atlas verdicts `done|partial|blocked|error`,
   self-accept ban (critic and actor cannot accept the review — host only),

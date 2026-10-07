@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-chat-support",
+  "source": "corpus/blueprints/shadcn-chat-support/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 54049,
+  "provenance": "Authored blueprint, S3 Operate corpus deepen",
+  "capture": {
+    "status": 200,
+    "title": "Support chat",
+    "headings": "Support triage",
+    "expectedSelector": "[data-region=\"chat-composer\"] #send",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-chat-support/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-chat-support/reference.html",
+    "capturedAt": "2026-10-07T14:29:37.435Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "083c71432ba574ad756b61194f1a48849325533b7e2737ed2fa6737275abb195",
+    "shotSha256": "1205a7c05db8cd5cbfefa4ffb785ab51c95609176c87313789981ac65b4edcb3"
+  }
+}

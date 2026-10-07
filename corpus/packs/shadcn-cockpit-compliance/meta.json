@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-cockpit-compliance",
+  "source": "corpus/blueprints/shadcn-cockpit-compliance/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 57975,
+  "provenance": "Authored blueprint, S3 Operate corpus deepen",
+  "capture": {
+    "status": 200,
+    "title": "Compliance cockpit",
+    "headings": "Operate\nCompliance cockpit",
+    "expectedSelector": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]",
+    "expectedCount": 4,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-cockpit-compliance/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-cockpit-compliance/reference.html",
+    "capturedAt": "2026-10-07T14:29:37.699Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "e95ce39b5f3181c46ee9f70f63b546fdbddbcd4a06e14c2dd29db55271d2ecc5",
+    "shotSha256": "fe0b4b4a8d80e7faf29d2d8cb1120eebd6ad8599f53d7fa811cbfd6af56ec5bc"
+  }
+}

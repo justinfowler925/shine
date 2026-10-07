@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-catalog-skills" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width"/><title>Skills catalog</title>
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{font:14px/1.5 ui-sans-serif,system-ui,sans-serif;margin:0;color:#18181b;background:#fff}
+main{max-width:1100px;margin:auto;padding:32px 24px}
+h1{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:4px 0 0}
+h2{font-size:18px;font-weight:600;margin:0}
+h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#71717a;font-weight:600;margin:0 0 6px}
+p{margin:0}.muted{color:#71717a}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#71717a}
+.counts{display:flex;gap:16px;margin-top:8px;color:#71717a}.counts strong{color:#18181b;font-variant-numeric:tabular-nums}
+.bar{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin-top:24px;padding-top:24px;border-top:1px solid #e4e4e7}
+.search{flex:1;min-width:280px}label{display:block;font-weight:500;margin-bottom:6px}
+input[type=search]{font:inherit;width:100%;height:40px;border:1px solid #e4e4e7;border-radius:6px;padding:0 12px;background:#fff}
+.filters{display:inline-flex;gap:4px;background:#f4f4f5;padding:4px;border-radius:8px}
+.filters button{font:inherit;font-weight:500;min-width:72px;height:40px;padding:0 12px;border:0;border-radius:6px;background:transparent;color:#71717a;cursor:pointer}
+.filters button[aria-pressed=true]{background:#fff;color:#18181b;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+button,.button{font:inherit;font-weight:500;height:40px;padding:0 14px;border-radius:6px;border:1px solid transparent;background:#18181b;color:#fff;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.outline{background:#fff;color:#18181b;border-color:#e4e4e7}.count{margin-top:12px;color:#71717a}
+.cards{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
+article{border:1px solid #e4e4e7;border-radius:8px;padding:24px}
+.meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.badges{display:flex;gap:6px}.badge{display:inline-flex;align-items:center;height:22px;padding:0 8px;border:1px solid #e4e4e7;border-radius:6px;font-size:12px;font-weight:500}
+article h2{margin-top:12px}article>p.summary{margin-top:6px;max-width:72ch}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.cols>div{border-left:2px solid #e4e4e7;padding-left:12px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+details{margin-top:16px;border-top:1px solid #e4e4e7;padding-top:12px}summary{cursor:pointer;font-weight:500}
+</style></head>
+<body>
+<main>
+<header data-region="catalog-header">
+<p class="eyebrow">Agent skills</p>
+<h1>Workspace skills</h1>
+<p class="muted">Install approved skills for Cursor and Claude. Each card names the host and what it needs before use.</p>
+<div class="counts"><span><strong>4</strong> skills</span><span><strong>2</strong> hosts</span></div>
+</header>
+<form class="bar" role="search" aria-label="Filter skills" data-region="catalog-filters">
+<div class="search"><label for="q">Search skills</label><input id="q" type="search" name="q" placeholder="Name, host, or job"></div>
+<div class="filters" role="group" aria-label="Host">
+<button type="button" aria-pressed="true">All</button>
+<button type="button" aria-pressed="false">Cursor</button>
+<button type="button" aria-pressed="false">Claude</button>
+<button type="button" aria-pressed="false">Both</button>
+</div>
+<button type="reset" class="outline">Clear filters</button>
+</form>
+<p class="count" role="status" data-region="catalog-count">4 skills</p>
+<ul class="cards" data-region="catalog-cards">
+<li><article aria-labelledby="card-shine">
+<div class="meta"><div class="badges"><span class="badge">Cursor</span><span class="badge">Final</span></div><span class="muted">Operate · design gates</span></div>
+<h2 id="card-shine">Shine</h2>
+<p class="summary muted">Cite, measure, prove Operate pages without inventing charts or card soup.</p>
+<div class="cols"><div><h3>Use it when</h3><p>Agents edit Nucleus Admin, Company Tools, or queues.</p></div><div><h3>Before installing</h3><p>ClearSpeed edition profile; product sibling inventory ready.</p></div></div>
+<div class="actions"><button type="button">Install Shine</button><a class="button outline" href="#shine">Open setup</a></div>
+<details><summary>Hosts and rotate</summary><p>Cursor + Claude. Pin tip SHA from shine.json.</p></details>
+</article></li>
+<li><article aria-labelledby="card-unfog">
+<div class="meta"><div class="badges"><span class="badge">Both</span><span class="badge">Final</span></div><span class="muted">Clarity · copy</span></div>
+<h2 id="card-unfog">Unfog</h2>
+<p class="summary muted">Strip filler headlines and belief-free empty states from Operate copy.</p>
+<div class="cols"><div><h3>Use it when</h3><p>Diagnosis flags filler empty or marketing DNA on an Operate surface.</p></div><div><h3>Before installing</h3><p>Copy contract present; no marketing brand skill override.</p></div></div>
+<div class="actions"><button type="button">Install Unfog</button><a class="button outline" href="#unfog">Open setup</a></div>
+<details><summary>Hosts and rotate</summary><p>Cursor + Claude. Quarterly tip sync.</p></details>
+</article></li>
+<li><article aria-labelledby="card-sled">
+<div class="meta"><div class="badges"><span class="badge">Claude</span><span class="badge">Preview</span></div><span class="muted">Capture · prove</span></div>
+<h2 id="card-sled">SLED Agent</h2>
+<p class="summary muted">Capture real surfaces for fail→pass prove when SSO checkout is absent.</p>
+<div class="cols"><div><h3>Use it when</h3><p>Prove needs a live crop and Nucleus SSO is blocked.</p></div><div><h3>Before installing</h3><p>Claude-only; dump path writable.</p></div></div>
+<div class="actions"><button type="button">Install SLED</button><a class="button outline" href="#sled">Open setup</a></div>
+<details><summary>Hosts and rotate</summary><p>Claude only. Preview — no Cursor path yet.</p></details>
+</article></li>
+</ul>
+</main>
+</body></html>

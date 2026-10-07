@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-chat-support" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width"/><title>Support chat</title>
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{margin:0;font:14px/1.5 ui-sans-serif,system-ui,sans-serif;color:#18181b;background:#fff;height:100vh;display:grid;grid-template-rows:56px auto 1fr auto}
+header{display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid #e4e4e7}
+header h1{font-size:15px;margin:0;font-weight:600}
+.status{font-size:12px;color:#71717a;display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:#16a34a}
+.ticket{display:flex;flex-wrap:wrap;gap:12px 20px;padding:12px 20px;border-bottom:1px solid #e4e4e7;background:#fafafa;font-size:13px}
+.ticket .label{color:#71717a;font-size:11px;text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.ticket strong{font-weight:600}
+main{overflow:auto;padding:24px 20px;max-width:760px;width:100%;margin:0 auto}
+.thread{display:flex;flex-direction:column;gap:16px}
+.msg{max-width:85%;padding:12px 14px;border-radius:12px;border:1px solid #e4e4e7;background:#fafafa}
+.msg[data-role=user]{align-self:flex-end;background:#18181b;color:#fafafa;border-color:#18181b}
+.msg[data-role=assistant]{align-self:flex-start}
+.msg .meta{font-size:11px;color:#71717a;margin-bottom:6px}
+.msg[data-role=user] .meta{color:#a1a1aa}
+.msg p{margin:0}.provenance{margin-top:8px;font-size:12px;color:#71717a}
+.composer{border-top:1px solid #e4e4e7;padding:16px 20px;background:#fff}
+.composer form{max-width:760px;margin:0 auto;display:grid;gap:8px}
+label{font-weight:600;font-size:13px}
+textarea{font:inherit;min-height:72px;padding:12px;border:1px solid #e4e4e7;border-radius:10px;resize:vertical}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.hint{font-size:12px;color:#71717a}
+button{font:inherit;font-weight:600;height:40px;padding:0 16px;border:0;border-radius:8px;background:#18181b;color:#fff;cursor:pointer}
+</style></head>
+<body>
+<header data-region="chat-header">
+<h1>Support triage</h1>
+<p class="status" role="status"><span class="dot" aria-hidden="true"></span> Linked to ticket OPS-1842</p>
+</header>
+<div class="ticket" data-region="chat-ticket" aria-label="Ticket context">
+<div><div class="label">Ticket</div><strong>OPS-1842</strong></div>
+<div><div class="label">Surface</div><strong>Company Tools catalog</strong></div>
+<div><div class="label">Severity</div><strong>High · SLA 4h</strong></div>
+<div><div class="label">Owner</div><strong>Unassigned</strong></div>
+</div>
+<main data-region="chat-thread" aria-label="Conversation">
+<div class="thread">
+<div class="msg" data-role="user"><div class="meta">Reporter · 18m ago</div><p>Install Shine fails — attestation hash mismatch on tip edition.</p></div>
+<div class="msg" data-role="assistant" data-region="chat-assistant">
+<div class="meta">Support assistant · streaming complete</div>
+<p>Tip shine.json expects SHA 58157e59. Workspace still has c8c462e7. Re-run distribute prepare and reinstall the package.</p>
+<p class="provenance">Sources: shine.json · OPS-1842 · distribute verify</p>
+</div>
+</div>
+</main>
+<div class="composer" data-region="chat-composer">
+<form aria-label="Reply on ticket">
+<label for="prompt">Reply</label>
+<textarea id="prompt" name="prompt" placeholder="Ask for logs, reassign, or propose a fix…"></textarea>
+<div class="row">
+<span class="hint">Keep ticket context pinned — do not start a second thread.</span>
+<button type="submit" id="send">Send</button>
+</div>
+</form>
+</div>
+<script>document.querySelector("form").onsubmit=(e)=>{e.preventDefault();const t=document.getElementById("prompt");if(!t.value.trim())return;const thread=document.querySelector(".thread");const el=document.createElement("div");el.className="msg";el.dataset.role="user";el.innerHTML=`<div class="meta">You · just now</div><p>${t.value.replace(/</g,"&lt;")}</p>`;thread.appendChild(el);t.value="";document.querySelector(".status").textContent="Drafting…"}</script>
+</body></html>
