@@ -17,6 +17,9 @@ import {
   resolveEditionSibling,
 } from "../core/edition-siblings.mjs";
 
+/** Repo-relative shine-tables.json fixture for Operate records/worklist jobs. */
+export const RECORDS_WORKLIST_TABLE_FIXTURE = "verify/fixtures/records-worklist/shine-tables.json";
+
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
   catalog: [
@@ -149,6 +152,32 @@ function restructureHints(retrieval, primary, job) {
 }
 
 /**
+ * Table-quality fixture binding for Operate records / worklist jobs.
+ * Denoise recommend must emit a concrete shine-tables.json path — not only prose.
+ */
+export function tableQualityForRecordsJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const text = String(job || "");
+  const recordsJob =
+    ["record", "datagrid", "queue", "worklist", "triage"].includes(category) ||
+    ["record", "queue"].includes(screen) ||
+    /\b(records?|worklist|inspect\s*→\s*edit|list\s*→\s*detail|datagrid|data grid)\b/i.test(text);
+  if (!recordsJob) return null;
+  const fullGrid = /\b(sort|pagination|column visibility|tanstack|datagrid|data grid)\b/i.test(text);
+  return {
+    contract: "shine-tables.json",
+    fixture: RECORDS_WORKLIST_TABLE_FIXTURE,
+    kind: fullGrid ? "records" : "worklist",
+    reference: "skill/references/table-quality.md",
+    pilotCompanion: "benchmark/records-pilot/shine-tables.json",
+    instruction: fullGrid
+      ? "Full DataGrid: write shine-tables.json with kind=records (shared source + required cases). Worklist fixture is the Operate list→detail starter."
+      : "Operate list→detail: write shine-tables.json with kind=worklist (search, rowAction, loading, empty, filteredEmpty). Copy from recommendation.tableQuality.fixture; full kind=records stays on the product DataGrid owner.",
+  };
+}
+
+/**
  * @param {object[]} templates
  * @param {string} job
  * @param {object} [constraints]
@@ -200,6 +229,7 @@ export function recommendPattern(templates, job, constraints = {}) {
     gaps: retrieval.gaps || [],
     brief: retrieval.brief,
     productSibling: null,
+    tableQuality: tableQualityForRecordsJob(job, { category: constraints.category, screen }),
   };
   // Enterprise §4 — edition sibling map: product sibling first → kit → cite.
   // Opt-in via edition=clearspeed|clearspeed-operate (design-packet saas passes this).
@@ -263,8 +293,11 @@ export function formatRecommendationSummary(rec) {
   const action = (rec.restructureHints || [])[0]?.startsWith("restructure:")
     ? "restructure"
     : "repaint-ok";
+  const table = rec.tableQuality?.fixture
+    ? ` · tableQuality ${rec.tableQuality.kind}@${rec.tableQuality.fixture}`
+    : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}`
+    `${rec.kitRecipe}${table}`
   );
 }

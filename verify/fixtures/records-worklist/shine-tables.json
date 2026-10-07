@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "project": ".",
+  "grids": [
+    {
+      "selector": "#records",
+      "title": "h1",
+      "toolbar": "#toolbar",
+      "kind": "worklist",
+      "reason": "Operate records list→detail worklist (Phase 0/2 pilot). Filter + open row + loading/empty/filtered-empty prove the Monday job; full DataGrid sort/pagination/column visibility stays on the shared Nucleus TanStack owner via kind=records.",
+      "cases": {
+        "search": {
+          "steps": [
+            {
+              "op": "rows",
+              "selector": "tbody .title",
+              "equals": [
+                "Acme renewal",
+                "Bravo intake",
+                "Cedar handoff",
+                "Delta follow-up"
+              ]
+            },
+            {
+              "op": "fill",
+              "selector": "#filter",
+              "value": "Acme"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .title",
+              "equals": ["Acme renewal"]
+            },
+            {
+              "op": "fill",
+              "selector": "#filter",
+              "value": ""
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .title",
+              "equals": [
+                "Acme renewal",
+                "Bravo intake",
+                "Cedar handoff",
+                "Delta follow-up"
+              ]
+            }
+          ]
+        },
+        "rowAction": {
+          "steps": [
+            {
+              "op": "text",
+              "selector": "#detail",
+              "equals": ""
+            },
+            {
+              "op": "click",
+              "selector": "tbody tr:first-child"
+            },
+            {
+              "op": "text",
+              "selector": "#detail",
+              "equals": "Editing Acme renewal"
+            }
+          ]
+        },
+        "loading": {
+          "steps": [
+            {
+              "op": "visible",
+              "selector": "#loading"
+            },
+            {
+              "op": "hidden",
+              "selector": "#empty"
+            }
+          ],
+          "routes": [
+            {
+              "url": "**/data.json",
+              "responses": [{ "hold": true }]
+            }
+          ]
+        },
+        "empty": {
+          "steps": [
+            {
+              "op": "visible",
+              "selector": "#empty"
+            },
+            {
+              "op": "hidden",
+              "selector": "#loading"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .title",
+              "equals": []
+            }
+          ],
+          "routes": [
+            {
+              "url": "**/data.json",
+              "responses": [{ "body": [] }]
+            }
+          ]
+        },
+        "filteredEmpty": {
+          "steps": [
+            {
+              "op": "rows",
+              "selector": "tbody .title",
+              "equals": [
+                "Acme renewal",
+                "Bravo intake",
+                "Cedar handoff",
+                "Delta follow-up"
+              ]
+            },
+            {
+              "op": "fill",
+              "selector": "#filter",
+              "value": "Nobody matches this"
+            },
+            {
+              "op": "visible",
+              "selector": "#filtered"
+            },
+            {
+              "op": "hidden",
+              "selector": "#empty"
+            },
+            {
+              "op": "rows",
+              "selector": "tbody .title",
+              "equals": []
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

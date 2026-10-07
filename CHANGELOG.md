@@ -6,6 +6,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Records/worklist operate pilot table-quality.** `kind: "worklist"` in
+  `verify/table-quality.mjs` (search, rowAction, loading, empty, filteredEmpty)
+  with executable fixture `verify/fixtures/records-worklist/shine-tables.json`.
+  Denoise recommend emits `recommendation.tableQuality.fixture` for records /
+  worklist jobs; denoise packets bind it into `tableQuality.example`. Pilot
+  companion selectors: `benchmark/records-pilot/shine-tables.json`. Doctor bite:
+  `verify/records-pilot-table-quality-bite.mjs`.
+
 - **Denoise + enterprise live DoD tracker.** `docs/shine-denoise-enterprise-dod.md`
   records tip `e8eaea1` (#162) / denoise `b043a41` (#161) merge/deploy/CI/ClearSpeed
   host posture for PRs #149–#161 (honest PARTIAL until tip Actions green + hosts tip-synced).

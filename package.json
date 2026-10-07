@@ -60,7 +60,7 @@
     "judgment:test": "node verify/judgment-eval.test.mjs && node verify/human-review.test.mjs",
     "judgment:blinded": "node benchmark/judgment-eval.mjs --blinded",
     "judgment:review": "node benchmark/judgment/human-review.mjs",
-    "records-pilot:test": "node verify/records-pilot-store.test.mjs && node verify/records-pilot-role.test.mjs && node verify/records-pilot-browser.mjs && node verify/records-pilot-nucleus-adapter.test.mjs && node verify/records-pilot-nucleus-browser.mjs && node verify/records-pilot-nucleus-bite.mjs",
+    "records-pilot:test": "node verify/records-pilot-store.test.mjs && node verify/records-pilot-role.test.mjs && node verify/records-pilot-browser.mjs && node verify/records-pilot-nucleus-adapter.test.mjs && node verify/records-pilot-nucleus-browser.mjs && node verify/records-pilot-nucleus-bite.mjs && node verify/records-pilot-table-quality-bite.mjs",
     "catalog:test": "node verify/catalog.test.mjs",
     "cite:test": "node verify/art-direction.test.mjs && node verify/cite-operate.test.mjs",
     "lint:test": "node verify/design-lint-scope.test.mjs",

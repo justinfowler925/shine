@@ -2234,6 +2234,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 | Ambiguous signal | Decision | Op / gate |
 |---|---|---|
 | Dashboard chrome on a Monday triage job | Worklist, not dashboard. Cite `shadcn-queue` (or settings/record), never chart/dashboard page lead | `dashboard→worklist` · anti-dashboard |
+| Records list→detail without `shine-tables.json` | Write `kind: worklist` contract (search, rowAction, loading/empty/filtered-empty); copy from `recommendation.tableQuality.fixture` | `verify/fixtures/records-worklist/shine-tables.json` |
 | Two DataGrids / two worklists same route | One grid. Peer title → filter chip + shared DataGrid (XOR) | `collapse-peer-grids` plan → D10 XOR recipe · `dual-focal` |
 | ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost | `cta-budget` · `cta-pressure` |
 | ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details>` | `kpi-collapse` · `kpi-soup` |
@@ -4390,6 +4391,14 @@ Do not mock unrelated requests or replace the table implementation in an accepta
 Static information can use `kind: "static"` with a nonempty `reason` explaining its
 presentation purpose. Interactive tables cannot use this exemption. This is not an escape
 for operational records that are missing their expected controls.
+
+Operate **list → detail** worklists (records pilot) may use `kind: "worklist"` with a
+nonempty `reason` explaining why the surface is not a full DataGrid. Required cases:
+`search`, `rowAction`, `loading`, `empty`, `filteredEmpty`. Worklist skips shared-source
+and product-pattern comparison — those remain mandatory for `kind: "records"`. Denoise
+recommend for records/worklist jobs emits
+`verify/fixtures/records-worklist/shine-tables.json` on `recommendation.tableQuality.fixture`
+(pilot companion selectors: `benchmark/records-pilot/shine-tables.json`).
 
 ## Interpretation and maintenance
 

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "project": ".",
+  "grids": [
+    {
+      "selector": "#records",
+      "title": "h1",
+      "toolbar": "#toolbar",
+      "kind": "worklist",
+      "reason": "Operate records pilot list→detail worklist. Selectors align with the pilot UI (#records / #toolbar). Executable table-quality scenarios (search, rowAction, loading, empty, filteredEmpty) are proven at verify/fixtures/records-worklist/shine-tables.json — the path denoise recommend emits for records/worklist jobs. Full DataGrid ladder remains kind=records on the Nucleus TanStack owner.",
+      "executableFixture": "verify/fixtures/records-worklist/shine-tables.json"
+    }
+  ]
+}
