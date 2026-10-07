@@ -6,6 +6,18 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Critic ≠ Actor turns (S1).** `core/reflexion.mjs` separates diagnose/critic from
+  Actor implement: distinct principals, Atlas verdicts `done|partial|blocked|error`,
+  self-accept ban (critic and actor cannot accept the review — host only),
+  `runCriticTurn` / `planActorPass` / `acceptVerdict`. Denoise loop + `denoise.md`
+  wire the turn split. Doctor bite: `verify/reflexion.test.mjs`.
+
+- **Machine-readable anti-patterns JSON (S2).** Nucleus-weighted Operate bloat tells
+  in `knowledge/anti-patterns/*.json` (card soup, KPI soup, competing CTAs, dual-focal,
+  marketing DNA, filler empty, wrong cite, …). `knowledge/retrieve.mjs` loads/retrieves;
+  composition-slop failures cite `anti-pattern:<id>`; recommend prefers library bans.
+  Doctor bite via `verify/knowledge.test.mjs`.
+
 - **Dual-grid XOR recipe (D10).** Agent-assisted close for `collapse-peer-grids`:
   peer title → filter chip + shared DataGrid state (`verify/restructure/xor-saved-view.mjs`).
   AST/DOM runners stay plan-only (no silent delete). Fixtures

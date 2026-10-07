@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "empty-filtered-error-conflated",
+  "title": "Empty ≡ filtered-empty ≡ error conflated",
+  "kind": "operate-bloat",
+  "domains": ["interaction", "completeness"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "catalog", "settings", "record", "form"],
+  "tags": ["empty", "filtered", "error", "triad", "nucleus"],
+  "cues": "One blank state used for no rows, active filters, and load/submit failures",
+  "ban": "Empty, filtered-empty, and error must be distinct instructional states.",
+  "remediation": "Fill emptyErrorTriadCheck with three distinct treatments; bind to usability flows.",
+  "detector": "diagnosis",
+  "measureFailurePrefix": null,
+  "constitutionIds": ["primary-task-3s"],
+  "severity": "major",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/diagnosis.test.mjs"
+}

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "competing-filled-ctas",
+  "title": "Competing filled primary CTAs in main",
+  "kind": "operate-bloat",
+  "domains": ["interaction", "visual-hierarchy"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "settings", "form", "record", "catalog", "approval", "dashboard"],
+  "tags": ["cta", "cta-pressure", "hierarchy", "nucleus"],
+  "cues": "Two or more filled primary buttons of equal weight in the main content region",
+  "ban": "Operate main allows exactly one filled primary; peers must be outline/ghost.",
+  "remediation": "Apply cta-budget maxFilled=1; prefer the Monday job verb; demote Export/New peers.",
+  "detector": "cta-pressure",
+  "measureFailurePrefix": "cta-pressure",
+  "constitutionIds": ["cta-pressure"],
+  "severity": "critical",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/cta-pressure.test.mjs"
+}

@@ -10,7 +10,14 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 import { createDesignPacket } from "../core/design-packet.mjs";
-import { runReflexion } from "../core/reflexion.mjs";
+import {
+  DEFAULT_ACTOR_ID,
+  DEFAULT_CRITIC_ID,
+  DEFAULT_HOST_ID,
+  acceptVerdict,
+  planActorPass,
+  runCriticTurn,
+} from "../core/reflexion.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { applyDomRestructure } from "./restructure/apply-dom.mjs";
 import { applyXorSavedView } from "./restructure/xor-saved-view.mjs";
@@ -143,17 +150,49 @@ export async function runDenoiseLoop({
   });
 
   let reflexion = null;
+  let hostAccept = null;
   let round = 1;
+  let retriesUsed = 0;
   while (lastMeasure.status !== 0 && round < MAX_ROUNDS) {
     round++;
-    reflexion = await runReflexion({
+    // Critic turn (diagnose only) — distinct principal from Actor.
+    reflexion = await runCriticTurn({
       goal: job,
       failures: lastMeasure.failures,
       tried: applied.applied,
       ddrId: packet.ddrId,
       constitutionIds: packet.ddr.constitutionIds,
+      criticAgentId: DEFAULT_CRITIC_ID,
+      actorAgentId: DEFAULT_ACTOR_ID,
     });
-    // Heuristic second pass: re-apply cta/kpi/focal if still failing
+    // Self-accept ban: neither critic nor actor may accept; host finalizes done.
+    if (reflexion.verdict === "done") {
+      hostAccept = acceptVerdict({ reflexion, acceptorId: DEFAULT_HOST_ID });
+    }
+    const actorPlan = planActorPass(reflexion, {
+      actorAgentId: DEFAULT_ACTOR_ID,
+      retriesUsed,
+    });
+    if (!actorPlan.proceed) {
+      rounds.push({
+        round,
+        turn: "critic",
+        reflexion: {
+          verdict: reflexion.verdict,
+          nextStep: reflexion.nextStep,
+          criticAgentId: reflexion.criticAgentId,
+          actorAgentId: reflexion.actorAgentId,
+          selfAcceptBanned: true,
+        },
+        actor: actorPlan,
+        hostAccept,
+        measureStatus: lastMeasure.status,
+        failures: lastMeasure.failures,
+      });
+      break;
+    }
+    // Actor implement turn — one imperative next step; never accepts its own review.
+    retriesUsed++;
     const again = applyDomRestructure(html, plan);
     html = again.html;
     currentPath = join(out, `round-${round}.html`);
@@ -161,11 +200,18 @@ export async function runDenoiseLoop({
     lastMeasure = measure(currentPath, cite);
     rounds.push({
       round,
-      reflexion: { verdict: reflexion.verdict, nextStep: reflexion.nextStep },
+      turn: "actor",
+      reflexion: {
+        verdict: reflexion.verdict,
+        nextStep: reflexion.nextStep,
+        criticAgentId: reflexion.criticAgentId,
+        actorAgentId: reflexion.actorAgentId,
+        selfAcceptBanned: true,
+      },
+      actor: actorPlan,
       measureStatus: lastMeasure.status,
       failures: lastMeasure.failures,
     });
-    if (reflexion.verdict !== "partial") break;
   }
 
   const receipt = {
@@ -179,6 +225,13 @@ export async function runDenoiseLoop({
     preflight: pre.signals.map((s) => s.id),
     opsApplied: applied.applied,
     humanGateRequired: applied.humanGate,
+    criticActor: {
+      criticAgentId: DEFAULT_CRITIC_ID,
+      actorAgentId: DEFAULT_ACTOR_ID,
+      hostAgentId: DEFAULT_HOST_ID,
+      selfAcceptBanned: true,
+      hostAccept,
+    },
     rounds,
     status: lastMeasure.status === 0 ? "passed" : "failed",
     proof: "measure FAIL→PASS rounds — not twin screenshots",

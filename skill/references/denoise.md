@@ -67,13 +67,26 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 1 packet     --mode denoise --category <…> --job "…"  → accept DDR
 2 static     vibe / preflight-slop / Card·Badge counts
 3 cite       shot + restructureHints[]
-4 diagnose   shine-diagnosis.json + shine-restructure.json
-5 apply      DOM/AST auto-safe ops (verify/restructure/*)
+4 diagnose   shine-diagnosis.json + shine-restructure.json   ← Critic turn
+5 apply      DOM/AST auto-safe ops (verify/restructure/*)     ← Actor turn
 6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
 7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
-8 usability  primary-job flow + prove.mjs completion (links ddrId)
-9 stop-sweep Operate cannot finish on compare alone
+8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done
+9 usability  primary-job flow + prove.mjs completion (links ddrId)
+10 stop-sweep Operate cannot finish on compare alone
 ```
+
+### Critic ≠ Actor (S1)
+
+Diagnose/critic and implement are **separate turns** with distinct principals:
+
+| Role | Identity (default) | May |
+|---|---|---|
+| **Critic** | `shine-critic` | One call, no tools, ≤400 tokens; emit Atlas verdict `done\|partial\|blocked\|error` |
+| **Actor** | `shine-actor` | Execute one `partial` nextStep; never accepts the review |
+| **Host** | `shine-host` | Accepts `done` / finalizes; third principal only |
+
+**Self-accept ban:** Critic cannot accept its own verdict; Actor/worker cannot accept the critic verdict on its own work. Unknown verdict → `partial`.
 
 Max **3** measure rounds per surface. Each round clears a **named** defect.
 
@@ -83,7 +96,7 @@ Impeccable `distill` / `quieter` and Snapline adapters are **opt-in after** cite
 node "$ROOT/verify/preflight-slop.mjs" <artifact.html>          # N2 vibe signals
 node "$ROOT/verify/adapters/snapline.mjs" stop.json             # N3 opt-in
 node "$ROOT/verify/adapters/impeccable.mjs" --mode distill --structure-green --cite <id>
-node "$ROOT/core/reflexion.mjs" --fail "cta-pressure: …" --ddr <ddrId>   # on measure/prove fail
+node "$ROOT/core/reflexion.mjs" --fail "cta-pressure: …" --ddr <ddrId>   # Critic turn
 ```
 
 ## Constitution IDs (critic must cite)

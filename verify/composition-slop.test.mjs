@@ -28,17 +28,29 @@ try {
   const soup = await page.evaluate(evaluateCompositionSlop);
   assert.ok(soup.equalCardCount >= 4, JSON.stringify(soup));
   assert.equal(soup.hasFocal, false);
-  assert.ok(formatCompositionSlopFailures(soup, { gate: true }).some((f) => /card soup|equal-weight Card/.test(f)));
+  assert.ok(
+    formatCompositionSlopFailures(soup, { gate: true }).some(
+      (f) => /anti-pattern:card-soup/.test(f) && /equal-weight Card/.test(f),
+    ),
+  );
 
   await page.goto(pathToFileURL(join(FIX, "marketing-dna.html")).href, { waitUntil: "load" });
   const dna = await page.evaluate(evaluateCompositionSlop);
   assert.ok(dna.marketingHits.length, JSON.stringify(dna));
-  assert.ok(formatCompositionSlopFailures(dna, { gate: true }).some((f) => /marketing DNA/.test(f)));
+  assert.ok(
+    formatCompositionSlopFailures(dna, { gate: true }).some(
+      (f) => /anti-pattern:marketing-dna-operate/.test(f) && /marketing DNA/.test(f),
+    ),
+  );
 
   await page.goto(pathToFileURL(join(FIX, "filler-empty.html")).href, { waitUntil: "load" });
   const filler = await page.evaluate(evaluateCompositionSlop);
   assert.ok(filler.fillerHits.length, JSON.stringify(filler));
-  assert.ok(formatCompositionSlopFailures(filler, { gate: true }).some((f) => /filler empty/.test(f)));
+  assert.ok(
+    formatCompositionSlopFailures(filler, { gate: true }).some(
+      (f) => /anti-pattern:filler-empty-copy/.test(f) && /filler empty/.test(f),
+    ),
+  );
 
   await page.goto(pathToFileURL(join(FIX, "clean-settings.html")).href, { waitUntil: "load" });
   const clean = await page.evaluate(evaluateCompositionSlop);

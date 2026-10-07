@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "kpi-soup",
+  "title": "Equal-weight KPI soup ahead of the work object",
+  "kind": "operate-bloat",
+  "domains": ["composition", "dataviz"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "dashboard", "weekly-board", "catalog"],
+  "tags": ["kpi", "metric", "kpi-soup", "nucleus"],
+  "cues": "≥4 equal KPI tiles or metric cards competing with the primary worklist",
+  "ban": "KPI encyclopedia must not own the decide path on triage/queue surfaces.",
+  "remediation": "Collapse to ≤3 chips; park the rest in details; keep the work object focal.",
+  "detector": "kpi-soup",
+  "measureFailurePrefix": "kpi-soup",
+  "constitutionIds": ["kpi-soup-off-path"],
+  "severity": "major",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/dual-focal.test.mjs"
+}

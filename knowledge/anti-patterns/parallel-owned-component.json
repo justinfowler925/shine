@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "parallel-owned-component",
+  "title": "Parallel component for a product-owned object",
+  "kind": "operate-bloat",
+  "domains": ["adoption", "reuse"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "record", "catalog", "settings", "form"],
+  "tags": ["sibling", "reuse", "datagrid", "nucleus"],
+  "cues": "New DataGrid/dialog/filter invented beside an existing Nucleus owner",
+  "ban": "Product owners win before catalog fashion; never create a parallel for the same object.",
+  "remediation": "Inventory siblings with --product-reference; bind shine-reuse.json; delete the parallel.",
+  "detector": null,
+  "measureFailurePrefix": null,
+  "constitutionIds": ["cite-honesty"],
+  "severity": "critical",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/recommend.test.mjs"
+}

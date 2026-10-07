@@ -4,9 +4,18 @@
 //   (a) ≥N equal Card roots in main without a focal region
 //   (b) marketing DNA utility clusters on lane=saas Operate cites
 //   (c) empty-state copy matching known filler phrases
+//
+// Failure messages cite knowledge/anti-patterns/*.json ids (S2).
 
 import { OPERATE_PROVE_SCREENS, isOperateProveScreen } from "../hooks/receipt.mjs";
 import { isCtaPressureScreen } from "./cta-pressure.mjs";
+
+/** Library ids for machine-readable anti-patterns (knowledge/anti-patterns). */
+export const ANTI_PATTERN_IDS = Object.freeze({
+  cardSoup: "card-soup",
+  marketingDna: "marketing-dna-operate",
+  fillerEmpty: "filler-empty-copy",
+});
 
 export const CARD_SOUP_MIN = 4;
 export const CARD_AREA_EQUALITY_RATIO = 0.78;
@@ -191,19 +200,22 @@ export function formatCompositionSlopFailures(slop, { gate = false } = {}) {
   if (slop.equalCardCount >= CARD_SOUP_MIN && !slop.hasFocal) {
     failures.push(
       `composition-slop: ${slop.equalCardCount} equal-weight Card roots in main with no focal region — ` +
-        `card soup; collapse peers or add a table/chart/queue focal (anti-patterns.md § card soup; expert P3)`,
+        `anti-pattern:${ANTI_PATTERN_IDS.cardSoup}; collapse peers or add a table/chart/queue focal ` +
+        `(knowledge/anti-patterns/card-soup.json; expert P3)`,
     );
   }
   if (slop.marketingHits?.length) {
     failures.push(
       `composition-slop: marketing DNA on saas Operate surface (${slop.marketingHits.join(", ")}) — ` +
-        `Operate chrome cannot ship glow/gradient/display-serif clusters (anti-patterns.md; expert P3)`,
+        `anti-pattern:${ANTI_PATTERN_IDS.marketingDna}; Operate chrome cannot ship glow/gradient/display-serif ` +
+        `(knowledge/anti-patterns/marketing-dna-operate.json; expert P3)`,
     );
   }
   if (slop.fillerHits?.length) {
     const sample = slop.fillerHits.map((h) => `"${h.text}"`).join("; ");
     failures.push(
-      `composition-slop: filler empty-state copy ${sample} — replace with job-specific instructional copy (copy.md; expert P3)`,
+      `composition-slop: filler empty-state copy ${sample} — anti-pattern:${ANTI_PATTERN_IDS.fillerEmpty}; ` +
+        `replace with job-specific instructional copy (knowledge/anti-patterns/filler-empty-copy.json; expert P3)`,
     );
   }
   return failures;

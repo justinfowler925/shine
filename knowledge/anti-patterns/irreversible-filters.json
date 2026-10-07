@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "irreversible-filters",
+  "title": "Filter chips that are not reversible",
+  "kind": "operate-bloat",
+  "domains": ["interaction"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "catalog", "dashboard"],
+  "tags": ["filter", "chips", "url-state", "nucleus"],
+  "cues": "Active filters with no clear/remove affordance or URL reflection",
+  "ban": "Every applied filter must be dismissible and reflected in shareable state.",
+  "remediation": "Expose clear-all / per-chip remove; keep filters in the URL or named view.",
+  "detector": null,
+  "measureFailurePrefix": null,
+  "constitutionIds": ["primary-task-3s"],
+  "severity": "major",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "agent review + usability flows"
+}

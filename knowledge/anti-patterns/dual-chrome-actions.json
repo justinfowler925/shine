@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "dual-chrome-actions",
+  "title": "Duplicate chrome actions competing with the job",
+  "kind": "operate-bloat",
+  "domains": ["interaction", "composition"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "settings", "catalog", "app-shell"],
+  "tags": ["chrome", "cta", "toolbar", "nucleus"],
+  "cues": "Header/sidebar Export/New/Save peers that equal the main job verb weight",
+  "ban": "Chrome actions must not compete at filled-primary weight with the Monday job.",
+  "remediation": "Demote chrome peers; keep one filled job verb in main; outline the rest.",
+  "detector": "cta-pressure",
+  "measureFailurePrefix": "cta-pressure",
+  "constitutionIds": ["cta-pressure"],
+  "severity": "major",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/cta-pressure.test.mjs"
+}

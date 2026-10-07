@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "dual-focal-grids",
+  "title": "Peer DataGrids / dual focals for one job",
+  "kind": "operate-bloat",
+  "domains": ["composition", "information-architecture"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "dashboard", "weekly-board"],
+  "tags": ["dual-focal", "datagrid", "xor", "nucleus"],
+  "cues": "Two peer worklists or DataGrids on the same triage route",
+  "ban": "One job gets one focal grid; peers fold to saved-view / filter / XOR — never silent delete.",
+  "remediation": "Emit collapse-peer-grids plan; keep one grid in the fold; re-measure dual-focal.",
+  "detector": "dual-focal",
+  "measureFailurePrefix": "dual-focal",
+  "constitutionIds": ["dual-focal-ban"],
+  "severity": "critical",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/dual-focal.test.mjs"
+}
