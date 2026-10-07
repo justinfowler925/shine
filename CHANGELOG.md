@@ -6,6 +6,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **DDR audit trail (enterprise §5).** `core/audit-trail.mjs` stores an
+  append-only Action/Observation event log keyed by immutable `ddrId`, links
+  prove completion receipts by content hash (`proveReceiptHash`), and supersedes
+  via forward links — never rewriting history. `supersedeDdr` now returns
+  `{ superseded, next }`. CLI `npm run audit`; doctor bite
+  `verify/audit-trail.test.mjs`.
+
 - **Cite-ban / edition anti-cite learn hooks.** Extends `core/learn.mjs` +
   `knowledge/repertoire/repertoire.json` with `citeBans[]` (Operate demotions)
   and `editionAntiCites[]`. `commitCiteBansFromProveFail` / `inferCiteBansFromProveFail`
