@@ -2,7 +2,8 @@
 /**
  * N8 — TSX AST safe ops for consumer checkouts.
  * Auto-safe: rebind-cite (wrong-cite → category truth via TS compiler AST),
- * set-focal, worklist-first (records/worklist before KPI chrome via TS compiler AST),
+ * set-focal (NO-FOCAL / composition-slop → data-region=focal via TS compiler AST),
+ * worklist-first (records/worklist before KPI chrome via TS compiler AST),
  * cta-budget demote (maxFilled=1 via TS compiler AST),
  * kpi-collapse (maxVisible=3 → <details data-shine-kpi-rest> via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
@@ -203,22 +204,139 @@ export function rebindCiteTsx(source, op = {}) {
   return out;
 }
 
+/**
+ * Census for NO-FOCAL / composition-slop: worklist + equal-card candidates and
+ * whether any already carries data-region=focal (string or {"focal"}).
+ * @param {string} source
+ * @returns {{ candidates: number, worklists: number, cards: number, hasFocal: boolean, dynamic: boolean }}
+ */
+export function countEqualCardsWithoutFocalTsx(source) {
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const { worklists, cards, hasFocal, dynamic } = collectFocalCandidates(sf);
+  return {
+    candidates: worklists.length + cards.length,
+    worklists: worklists.length,
+    cards: cards.length,
+    hasFocal,
+    dynamic,
+  };
+}
+
+/**
+ * Stamp data-region=focal on the primary work object via TypeScript AST.
+ * Prefer worklist (DataGrid / role=grid / queue|worklist|records pattern /
+ * data-shine-records); else first equal Card / className card section.
+ * Handles string and {"…"} attr forms on siblings; dynamic .map bands stay untouched.
+ * @param {string} source
+ * @param {{ attr?: string, value?: string }} [op]
+ */
 export function setFocalTsx(source, op = {}) {
   const attr = op.attr || "data-region";
   const value = op.value || "focal";
-  if (new RegExp(`${attr}=["']${value}["']`).test(source)) return source;
-  // Prefer first DataGrid / role="grid" / element with data-product-pattern containing queue
-  const patterns = [
-    /(<DataGrid\b)/,
-    /(<(?:div|section|main)\b[^>]*data-product-pattern=["'][^"']*queue[^"']*["'][^>]*)/,
-    /(<(?:table|div|section)\b[^>]*role=["']grid["'][^>]*)/,
-  ];
-  for (const re of patterns) {
-    if (re.test(source)) {
-      return source.replace(re, `$1 ${attr}="${value}"`);
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const { worklists, cards, hasFocal, dynamic } = collectFocalCandidates(sf, attr, value);
+  if (hasFocal) return text;
+  if (dynamic && !worklists.length && !cards.length) return text;
+
+  const primary = worklists[0] || cards[0] || null;
+  if (!primary) return text;
+
+  const opening = ts.isJsxElement(primary) ? primary.openingElement : primary;
+  if (findJsxAttr(opening, attr, sf)) {
+    const existing = attrStringValue(findJsxAttr(opening, attr, sf), sf);
+    if (existing === value) return text;
+    // Rewrite existing attr value (string or {"…"}).
+    const a = findJsxAttr(opening, attr, sf);
+    if (!a?.initializer) return text;
+    if (ts.isStringLiteral(a.initializer)) {
+      return (
+        text.slice(0, a.initializer.getStart(sf)) +
+        `"${value}"` +
+        text.slice(a.initializer.getEnd())
+      );
     }
+    if (ts.isJsxExpression(a.initializer) && a.initializer.expression) {
+      const expr = a.initializer.expression;
+      if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
+        const quote = text[expr.getStart(sf)] === "'" ? "'" : '"';
+        return text.slice(0, expr.getStart(sf)) + `${quote}${value}${quote}` + text.slice(expr.getEnd());
+      }
+    }
+    return text;
   }
-  return source;
+
+  const openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+  const nextOpen = ensureJsxOpenAttrs(openSrc, { [attr]: value });
+  if (nextOpen === openSrc) return text;
+  return text.slice(0, opening.getStart(sf)) + nextOpen + text.slice(opening.getEnd());
+}
+
+/**
+ * @param {ts.SourceFile} sf
+ * @param {string} [attr]
+ * @param {string} [value]
+ */
+function collectFocalCandidates(sf, attr = "data-region", value = "focal") {
+  /** @type {Array<ts.JsxElement | ts.JsxSelfClosingElement>} */
+  const worklists = [];
+  /** @type {Array<ts.JsxElement | ts.JsxSelfClosingElement>} */
+  const cards = [];
+  let hasFocal = false;
+  let dynamic = false;
+
+  const walk = (node) => {
+    if (ts.isJsxExpression(node) && node.expression) {
+      const t = node.expression.getText();
+      if (/\.map\s*\(|\.\.\./.test(t)) dynamic = true;
+    }
+    if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const opening = ts.isJsxElement(node) ? node.openingElement : node;
+      const region = findJsxAttr(opening, attr, sf);
+      const regionVal = attrStringValue(region, sf);
+      if (regionVal === value) hasFocal = true;
+
+      if (isWorklistFocalOpening(opening, sf)) {
+        worklists.push(node);
+      } else if (isEqualCardFocalOpening(opening, sf)) {
+        cards.push(node);
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { worklists, cards, hasFocal, dynamic };
+}
+
+/**
+ * Primary work object: DataGrid, role=grid / {"grid"}, data-shine-records,
+ * data-product-pattern queue|worklist|records, className grid-wrap.
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isWorklistFocalOpening(opening, sf) {
+  const tag = jsxTagName(opening);
+  if (tag === "DataGrid") return true;
+  if (findJsxAttr(opening, "data-shine-records", sf)) return true;
+  const role = attrStringValue(findJsxAttr(opening, "role", sf), sf);
+  if (role === "grid") return true;
+  const pattern = attrStringValue(findJsxAttr(opening, "data-product-pattern", sf), sf);
+  if (pattern && /queue|worklist|records|triage|inbox/i.test(pattern)) return true;
+  if (classNameHasWord(opening, "grid-wrap", sf)) return true;
+  return false;
+}
+
+/**
+ * Equal Card / className card panel (Usul composition soup).
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isEqualCardFocalOpening(opening, sf) {
+  const tag = jsxTagName(opening);
+  if (tag === "Card") return true;
+  if (classNameHasWord(opening, "card", sf)) return true;
+  return false;
 }
 
 /**

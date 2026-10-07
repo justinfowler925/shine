@@ -92,6 +92,19 @@ export const WRONG_CITE_AST_FIXTURES = Object.freeze({
   to: "shadcn-settings",
 });
 
+/** Repo-relative set-focal / NO-FOCAL TSX AST FAIL→PASS fixtures (equal Card soup → focal). */
+export const SET_FOCAL_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/usul-no-focal.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/usul-no-focal-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/usul-focal-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/usul-focal-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "usul-focal-tsx",
+  op: "set-focal",
+  attr: "data-region",
+  value: "focal",
+});
+
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
   catalog: [
@@ -210,6 +223,12 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: kpi-collapse maxVisible=3 when ≥4 equal metrics compete with the work object");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
+  }
+  if (
+    /usul|card soup|equal cards?|composition[- ]?slop|no[- ]?focal|set[- ]?focal|focal region/i.test(job) &&
+    !(triageJob || screen === "queue" || intent === "queue")
+  ) {
+    hints.push("restructure: set-focal data-region=focal on the primary work object");
   }
   if (/settings|sources|recipes|preferences/i.test(job) && screen === "queue") {
     hints.push("restructure: rebind-cite shadcn-queue → shadcn-settings (category honesty)");
@@ -357,6 +376,46 @@ export function wrongCiteAstForSettingsJob(job, constraints = {}) {
     reference: "skill/references/denoise.md",
     instruction:
       "Wrong category stamp on a settings/sources job in consumer TSX: refuse paint until rebound. Apply verify/restructure/apply-tsx.mjs rebind-cite (TypeScript AST; from shadcn-queue → to shadcn-settings). Handles data-cite=\"…\", data-cite={\"…\"}, dataCite=\"…\", and dataCite={\"…\"}. Copy FAIL→PASS crop paths from recommendation.wrongCiteAst.cropBefore/cropAfter; prove cite-honesty clears with category-truth stamp. Learned cite-ban fail-close also binds this fixture on refuse.",
+  };
+}
+
+/**
+ * set-focal / NO-FOCAL TSX AST fixture binding for Operate composition jobs.
+ * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
+ * apply-tsx set-focal (stamp data-region=focal on primary work object) — not only prose.
+ */
+export function setFocalAstForCompositionJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  // Settings/form stay on wrong-cite path — do not bind Usul focal fixture.
+  if (["settings", "form", "sources", "preferences"].includes(category)) return null;
+  const compositionJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "record", "records", "dashboard"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "record", "dashboard"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|records?|usul|set[- ]?focal|no[- ]?focal|composition[- ]?slop|card soup|equal cards?|focal region|data-region)\b/i.test(
+      text,
+    );
+  if (!compositionJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: SET_FOCAL_AST_FIXTURES.op,
+    attr: SET_FOCAL_AST_FIXTURES.attr,
+    value: SET_FOCAL_AST_FIXTURES.value,
+    on: "primary-work-object",
+    fixtureTsx: SET_FOCAL_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: SET_FOCAL_AST_FIXTURES.tsxAstHard,
+    cropBefore: SET_FOCAL_AST_FIXTURES.cropBefore,
+    cropAfter: SET_FOCAL_AST_FIXTURES.cropAfter,
+    cropPairId: SET_FOCAL_AST_FIXTURES.cropPairId,
+    helper: SET_FOCAL_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Equal Card / worklist roots with no data-region=focal in consumer TSX: apply verify/restructure/apply-tsx.mjs set-focal (TypeScript AST; stamp data-region=\"focal\" on the primary work object). Prefers DataGrid / role=\"grid\" / {\"grid\"} / data-shine-records / data-product-pattern queue|worklist|records / className grid-wrap; else first Card / className=\"card\" / {\"card\"}. Copy FAIL→PASS crop paths from recommendation.setFocalAst.cropBefore/cropAfter; prove composition-slop clears with one focal.",
   };
 }
 
@@ -552,6 +611,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    setFocalAst: setFocalAstForCompositionJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     wrongCiteAst: wrongCiteAstForSettingsJob(job, {
       category: constraints.category,
       screen,
@@ -689,6 +753,9 @@ export function formatRecommendationSummary(rec) {
   const worklist = rec.worklistFirstAst?.fixtureTsx
     ? ` · worklistFirstAst ${rec.worklistFirstAst.mode}@${rec.worklistFirstAst.cropPairId}`
     : "";
+  const setFocal = rec.setFocalAst?.fixtureTsx
+    ? ` · setFocalAst ${rec.setFocalAst.mode}@${rec.setFocalAst.cropPairId}`
+    : "";
   const xor = rec.xorSavedView?.fixtureBefore
     ? ` · xorSavedView ${rec.xorSavedView.mode}@${rec.xorSavedView.cropPairId}`
     : "";
@@ -697,6 +764,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${dual}${worklist}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

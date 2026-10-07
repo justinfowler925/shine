@@ -49,7 +49,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 | ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost. Consumer TSX: `apply-tsx` AST `cta-budget` (maxFilled=1); copy FAIL→PASS crops from `recommendation.ctaPressureAst.cropBefore/cropAfter` | `cta-budget` · `cta-pressure` · `queue-cta-tsx-*` |
 | ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details data-shine-kpi-rest>`. Consumer TSX: `apply-tsx` AST `kpi-collapse` (maxVisible=3); copy FAIL→PASS crops from `recommendation.kpiSoupAst.cropBefore/cropAfter` | `kpi-collapse` · `kpi-soup` · `queue-kpi-tsx-*` |
 | Settings job with queue cite | Rebind cite to category truth. Consumer TSX: `apply-tsx` AST `rebind-cite` (`data-cite` / `dataCite` string + `{"…"}`); refuse paint until rebound; copy FAIL→PASS crops from `recommendation.wrongCiteAst.cropBefore/cropAfter` | `rebind-cite` AST · `wrong-cite` · `sources-cite-tsx-*` |
-| Equal Card roots, no focal | One `data-region="focal"` | `set-focal` · `composition-slop` |
+| Equal Card roots, no focal | One `data-region="focal"`. Consumer TSX: `apply-tsx` AST `set-focal`; copy FAIL→PASS crops from `recommendation.setFocalAst.cropBefore/cropAfter` | `set-focal` AST · `composition-slop` · `usul-focal-tsx-*` |
 | Can’t name category in one sentence | **Stop.** Refuse until `--category` | packet gate |
 | Craft ranked above usability | Out of order. Restructure before repaint | `restructureRequired` |
 
@@ -169,7 +169,7 @@ Pinned crop pairs (HTML crops under `verify/fixtures/denoise/receipts/`):
 | `dual-focal` / XOR | `queue-dual-grid-before-crop.html` → `queue-dual-grid-fold-crop.html` |
 | `dual-focal` (TSX AST) | `queue-dual-grid-tsx-{before,after}-crop.html` |
 | composition / worklist-first (TSX AST) | `queue-worklist-first-tsx-{before,after}-crop.html` |
-| composition / `set-focal` | `usul-focal-{before,after}-crop.html` |
+| composition / `set-focal` | `usul-focal-{before,after}-crop.html` · TSX AST `usul-focal-tsx-{before,after}-crop.html` |
 | CTA + KPI stacked | `queue-sled-bloat-{before,after}-crop.html` |
 
 Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs` (dual-grid = detect → XOR after PASS; crop pairs required).  

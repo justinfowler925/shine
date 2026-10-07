@@ -202,6 +202,23 @@ Fixtures: `verify/fixtures/denoise/tsx/queue-kpi-chrome-first.tsx` ·
 `queue-worklist-first-ast.tsx`.  
 Doctor: `verify/worklist-first-ast-bite.mjs` / `npm run worklist-first:ast-bite`.
 
+### set-focal TSX AST (NO-FOCAL / composition-slop deepen)
+
+Equal Card / worklist roots with no `data-region="focal"` in consumer TSX are stamped by
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `set-focal`.
+
+1. **Detect** — composition-slop / NO-FOCAL when ≥2 equal Card / worklist hosts lack focal.
+2. **Recommend** — typed `recommendation.setFocalAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Prefers DataGrid / `role="grid"` / `{"grid"}` / `data-shine-records` /
+   `data-product-pattern` queue|worklist|records / `className` grid-wrap; else first
+   Card / `className="card"` / `{"card"}`.
+4. **Prove** — crop pair `usul-focal-tsx` (`usul-focal-tsx-{before,after}-crop.html`).
+   Twin full-page invalid. DOM Usul crop `usul-focal` remains the HTML companion.
+
+Fixtures: `verify/fixtures/denoise/tsx/usul-no-focal.tsx` · `usul-no-focal-ast.tsx`.  
+Doctor: `verify/set-focal-ast-bite.mjs` / `npm run set-focal:ast-bite`.
+
 ### Denoise-loop e2e — measure→AST repair→Critic≠Actor→prove
 
 Fixture-queue doctor bite for the full denoise agent cycle (not twin screenshots):

@@ -6,6 +6,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **set-focal / NO-FOCAL TSX AST deepen.** `apply-tsx.mjs` `set-focal` uses the
+  TypeScript compiler AST (not regex) to stamp `data-region="focal"` on the primary
+  work object — prefers DataGrid / `role="grid"` / `{"grid"}` / `data-shine-records` /
+  `data-product-pattern` queue|worklist|records / `className` grid-wrap; else first
+  Card / `className="card"` / `{"card"}`. Denoise recommend emits typed
+  `recommendation.setFocalAst` (TSX fixtures + FAIL→PASS crops); packets bind
+  `packet.setFocalAst`. Crop pair `usul-focal-tsx`. Doctor bite:
+  `verify/set-focal-ast-bite.mjs` / `npm run set-focal:ast-bite`.
+
 - **Denoise-loop e2e (measure→AST repair→Critic≠Actor→prove).** `runDenoiseLoop`
   accepts `tsxPath` (Actor repair via `applyTsxRestructure`), `mintProve` (completion
   receipt stamps `reflexionVerdict` + `constitutionIds`), and `cropPairId` (FAIL→PASS

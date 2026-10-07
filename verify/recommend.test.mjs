@@ -99,6 +99,11 @@ assert.match(queueRec.worklistFirstAst.fixtureTsx, /queue-kpi-chrome-first\.tsx$
 assert.match(queueRec.worklistFirstAst.cropAfter, /queue-worklist-first-tsx-after-crop\.html$/);
 assert.match(formatRecommendationSummary(queueRec), /worklistFirstAst/);
 assert.equal(queueRec.worklistFirstAst.op, "worklist-first");
+assert.ok(queueRec.setFocalAst?.fixtureTsx, "queue job setFocalAst.fixtureTsx");
+assert.match(queueRec.setFocalAst.fixtureTsx, /usul-no-focal\.tsx$/);
+assert.match(queueRec.setFocalAst.cropAfter, /usul-focal-tsx-after-crop\.html$/);
+assert.match(formatRecommendationSummary(queueRec), /setFocalAst/);
+assert.equal(queueRec.setFocalAst.op, "set-focal");
 assert.equal(queueRec.wrongCiteAst, null, "queue job must not bind wrongCiteAst");
 const settingsRec = recommendPattern(catalog.templates, "account settings preferences", {
   lane: "saas",
@@ -131,6 +136,9 @@ assert.match(denoiseQueue.dualFocalAst.cropAfter, /queue-dual-grid-tsx-after-cro
 assert.equal(denoiseQueue.dualFocalAst.xorMode, "xor-saved-view");
 assert.match(denoiseQueue.worklistFirstAst.cropAfter, /queue-worklist-first-tsx-after-crop\.html$/);
 assert.equal(denoiseQueue.worklistFirstAst.op, "worklist-first");
+assert.match(denoiseQueue.setFocalAst.cropAfter, /usul-focal-tsx-after-crop\.html$/);
+assert.equal(denoiseQueue.setFocalAst.op, "set-focal");
+assert.ok((denoiseQueue.ddr.restructureOps || []).includes("set-focal"));
 assert.equal(denoiseQueue.wrongCiteAst, undefined, "queue packet must not bind wrongCiteAst");
 const denoiseSettings = createDesignPacket({
   job: "Sources & recipes settings wrong-cite AST",
@@ -143,6 +151,7 @@ const denoiseSettings = createDesignPacket({
 assert.match(denoiseSettings.wrongCiteAst.cropAfter, /sources-cite-tsx-after-crop\.html$/);
 assert.equal(denoiseSettings.wrongCiteAst.op, "rebind-cite");
 assert.equal(denoiseSettings.wrongCiteAst.refusePaintUntilRebound, true);
+assert.equal(denoiseSettings.setFocalAst, undefined, "settings packet must not bind setFocalAst");
 
 // CLI smoke
 const cite = spawnSync(process.execPath, [join(SHINE, "corpus/cite.mjs"), "settings page", "--lane", "saas"], {
@@ -152,5 +161,5 @@ assert.equal(cite.status, 0, cite.stderr);
 assert.match(cite.stdout, /recommendation:/);
 
 console.log(
-  `recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI · xorSavedView · ctaPressureAst · kpiSoupAst · dualFocalAst · worklistFirstAst · wrongCiteAst`,
+  `recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI · xorSavedView · ctaPressureAst · kpiSoupAst · dualFocalAst · worklistFirstAst · setFocalAst · wrongCiteAst`,
 );
