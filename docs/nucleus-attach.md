@@ -17,12 +17,25 @@ profile give a repeatable attach path: audit a Nucleus-shaped surface → diagno
 node verify/measure.mjs verify/fixtures/nucleus-golden/before.html \
   --cite shadcn-catalog --lane saas
 
-# Expert pass
+# Expert pass + operable primary job
 node verify/measure.mjs verify/fixtures/nucleus-golden/after.html \
   --cite shadcn-catalog --lane saas
+node verify/usability.mjs verify/fixtures/nucleus-golden/after.html \
+  --contract verify/fixtures/nucleus-golden/shine-usability.json --cite shadcn-catalog
 
 node verify/nucleus-golden.test.mjs
 ```
+
+### Real-surface-shaped substitute (no SSO)
+
+When `justin-fowler_cspd/nucleus` is 404 / SSO absent, use the SLED Capture fixture distilled
+from the Project sled dump — still fail→pass with cropped defects + operable pursue:
+
+```sh
+node verify/sled-capture-prove.test.mjs
+```
+
+See `docs/sled-capture-prove.md`. Do **not** invent Workspace auth bypasses.
 
 With a real checkout on Justin's machine:
 

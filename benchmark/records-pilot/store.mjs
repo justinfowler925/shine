@@ -1,6 +1,6 @@
 /**
- * Isolated records pilot fixture — Phase 2 starting point.
- * Synthetic in-memory adapter; replace with consumer data layer in product integrations.
+ * Isolated records pilot fixture — Phase 2 starting point / memory adapter.
+ * Nucleus-shaped HTTP consumer: `adapters/nucleus-shaped.mjs` + local harness server.
  */
 export function createRecordsStore(seed = [
   {id: "r1", title: "Acme renewal", owner: "Alex", status: "open", notes: ""},

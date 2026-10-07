@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "cite": "shadcn-queue",
+  "objects": [
+    {
+      "id": "nav",
+      "selector": "nav[aria-label=\"Operate\"]",
+      "referenceRole": "navigation",
+      "purpose": "Stay inside Nucleus Operate while working the SLED Capture queue"
+    },
+    {
+      "id": "summary",
+      "selector": "[data-summary]",
+      "referenceRole": "summary",
+      "purpose": "Read open, due-soon, and second-look counts before deciding"
+    },
+    {
+      "id": "search",
+      "selector": "#q-search",
+      "referenceRole": "search",
+      "purpose": "Narrow the open queue by notice title or agency"
+    },
+    {
+      "id": "grid",
+      "selector": "#notices",
+      "referenceRole": "table",
+      "purpose": "Scan which notices still need a pursue decision"
+    },
+    {
+      "id": "notice-nv",
+      "selector": "#rows tr[data-id=\"n1\"]",
+      "referenceRole": "row",
+      "purpose": "Select the NV DPS notice before pursuing"
+    },
+    {
+      "id": "pursue",
+      "selector": "#pursue",
+      "referenceRole": "command",
+      "purpose": "Pursue the selected notice as the single filled primary"
+    },
+    {
+      "id": "status",
+      "selector": "#status",
+      "referenceRole": "state",
+      "purpose": "Observe filter matches and pursue confirmation"
+    }
+  ],
+  "flows": [
+    {
+      "id": "search-and-pursue",
+      "userJob": "Filter to NV DPS and pursue the selected notice",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "#q-search",
+          "value": "NV DPS"
+        },
+        {
+          "action": "text",
+          "selector": "#status",
+          "value": "1 match"
+        },
+        {
+          "action": "click",
+          "selector": "#rows tr[data-id=\"n1\"]"
+        },
+        {
+          "action": "text",
+          "selector": "#status",
+          "value": "Selected NV DPS voice risk RFI"
+        },
+        {
+          "action": "click",
+          "selector": "#pursue"
+        },
+        {
+          "action": "text",
+          "selector": "#status",
+          "value": "Pursuing NV DPS voice risk RFI"
+        }
+      ]
+    }
+  ]
+}

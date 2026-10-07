@@ -1,0 +1,134 @@
+#!/usr/bin/env node
+/**
+ * S6 — Records pilot → Nucleus-shaped consumer E2E (list/edit/fail/retry).
+ * Boots the local Nucleus-shaped API + static pilot UI; no SSO bypass.
+ */
+import assert from "node:assert/strict";
+import { createServer } from "node:http";
+import { readFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { spawn } from "node:child_process";
+import { chromium } from "playwright";
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const pilot = join(root, "benchmark/records-pilot");
+
+function contentType(path) {
+  if (path.endsWith(".html")) return "text/html; charset=utf-8";
+  if (path.endsWith(".mjs") || path.endsWith(".js")) return "text/javascript; charset=utf-8";
+  return "text/plain; charset=utf-8";
+}
+
+function startApi() {
+  return new Promise((resolveListen, reject) => {
+    const child = spawn(process.execPath, [join(pilot, "nucleus-api-server.mjs"), "--port", "0"], {
+      cwd: root,
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    let buf = "";
+    const onData = (chunk) => {
+      buf += chunk;
+      const line = buf.trim().split("\n").filter(Boolean).pop();
+      if (!line) return;
+      try {
+        const info = JSON.parse(line);
+        if (info.baseUrl) {
+          child.stdout.off("data", onData);
+          resolveListen({ child, baseUrl: info.baseUrl });
+        }
+      } catch {
+        /* keep buffering */
+      }
+    };
+    child.stdout.on("data", onData);
+    child.stderr.on("data", (c) => process.stderr.write(c));
+    child.on("error", reject);
+    child.on("exit", (code) => {
+      if (code) reject(new Error(`nucleus-api-server exited ${code}`));
+    });
+    setTimeout(() => reject(new Error("nucleus-api-server start timeout")), 10_000);
+  });
+}
+
+const staticServer = createServer((req, res) => {
+  const url = new URL(req.url, "http://127.0.0.1");
+  let rel = url.pathname === "/" ? "/index.html" : url.pathname;
+  rel = rel.replace(/^\//, "");
+  if (rel.includes("..")) {
+    res.writeHead(400);
+    res.end("bad path");
+    return;
+  }
+  try {
+    const body = readFileSync(join(pilot, rel));
+    res.writeHead(200, { "content-type": contentType(rel) });
+    res.end(body);
+  } catch {
+    res.writeHead(404);
+    res.end("missing");
+  }
+});
+
+const { child: apiChild, baseUrl: apiBase } = await startApi();
+await new Promise((r) => staticServer.listen(0, "127.0.0.1", r));
+const uiBase = `http://127.0.0.1:${staticServer.address().port}`;
+
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+page.setDefaultTimeout(8000);
+let checked = 0;
+const check = async (name, fn) => {
+  await fn();
+  checked += 1;
+  console.log(`PASS ${name}`);
+};
+
+try {
+  const url = `${uiBase}/index.html?adapter=nucleus-shaped&api=${encodeURIComponent(apiBase)}`;
+  await page.goto(url);
+  await page.getByRole("heading", { name: "Records inspect → edit → persist" }).waitFor();
+  await page.getByText(/adapter:\s*nucleus-shaped/i).waitFor();
+
+  await check("lists three records over HTTP", async () => {
+    await page.locator("#rows tr").first().waitFor();
+    assert.equal(await page.locator("#rows tr").count(), 3);
+  });
+
+  await page.locator("#rows tr").first().click();
+  await check("opens editor from nucleus-shaped get", async () => {
+    await page.locator("#editor").waitFor({ state: "visible" });
+    assert.match(await page.locator("#title").inputValue(), /Acme/);
+  });
+
+  await page.locator("#notes").fill("kept after nucleus-shaped failure");
+  await page.getByRole("button", { name: "Arm next save failure" }).click();
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await check("failed save retains draft", async () => {
+    await page.getByText(/save failed/i).waitFor();
+    assert.equal(await page.locator("#notes").inputValue(), "kept after nucleus-shaped failure");
+    assert.match(await page.locator("#status").innerText(), /Draft retained/i);
+    assert.equal(await page.locator("#draft-flag").evaluate((el) => el.hidden), false);
+  });
+
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await check("retry persists through PATCH", async () => {
+    await page.getByText("Saved.", { exact: true }).waitFor();
+    assert.equal(await page.locator("#draft-flag").isVisible(), false);
+  });
+
+  await page.goto(
+    `${uiBase}/index.html?adapter=nucleus-shaped&api=${encodeURIComponent(apiBase)}&role=viewer`,
+  );
+  await page.locator("#rows tr").first().click();
+  await check("viewer forbidden over HTTP", async () => {
+    await page.getByText(/role is viewer/i).waitFor();
+    assert.equal(await page.getByRole("button", { name: "Save", exact: true }).isDisabled(), true);
+  });
+
+  console.log(`records-pilot nucleus-shaped browser PASS: ${checked} checks · api ${apiBase}`);
+} finally {
+  await browser.close();
+  await new Promise((r) => staticServer.close(r));
+  apiChild.kill("SIGTERM");
+}

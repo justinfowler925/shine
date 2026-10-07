@@ -1,0 +1,155 @@
+<!-- Nucleus SLED Capture queue after expert pass — single Pursue primary, one focal grid, operable search→pursue.
+     Distilled from Project sled-audit-fixtures + sled-source-dump (SledCapture). No production secrets / no SSO. -->
+<!doctype html>
+<!-- shine-lint: off color,type,spacing — sled-capture-prove after; S4 real-surface-shaped prove -->
+<html lang="en" data-cite="shadcn-queue" data-shine-probe="app-shell">
+<head>
+<meta charset="utf-8"/>
+<title>SLED Capture — Queue</title>
+<style>
+:root{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.45 system-ui,sans-serif;background:#fafafa;color:#18181b}
+.shell{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+aside{background:#fff;border-right:1px solid #e4e4e7;padding:16px}
+aside a{display:block;padding:8px 10px;color:inherit;text-decoration:none}
+aside a[aria-current]{background:#f4f4f5;font-weight:600}
+main{padding:24px 28px;max-width:1100px}
+.tabs{display:flex;gap:8px;margin-bottom:16px;border-bottom:1px solid #e4e4e7}
+.tabs button{border:0;border-bottom:2px solid transparent;background:transparent;padding:10px 12px;font:inherit;color:#52525b}
+.tabs button[aria-selected=true]{font-weight:600;color:#18181b;border-bottom-color:#18181b}
+.strip{display:flex;flex-wrap:wrap;gap:20px;margin:0 0 16px;font-size:14px;color:#52525b}
+.strip strong{color:#18181b;font-size:16px}
+.grid-wrap{background:#fff;border:1px solid #e4e4e7;border-radius:8px;padding:20px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0 16px}
+.toolbar input,.toolbar select{padding:10px 12px;border:1px solid #e4e4e7;border-radius:4px;font:inherit;background:#fff;min-height:40px}
+.btn{border:1px solid #e4e4e7;background:#fff;color:#18181b;padding:10px 14px;border-radius:4px;font:inherit;min-height:40px}
+.btn.filled{background:#18181b;color:#fafafa;border-color:#18181b;font-weight:600}
+.btn.filled:disabled{background:#fff;color:#18181b;border-color:#a1a1aa;font-weight:600;cursor:not-allowed}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border-bottom:1px solid #e4e4e7;padding:12px 8px;text-align:left}
+tbody tr{cursor:pointer}
+tbody tr[aria-selected=true]{background:#f4f4f5}
+h1{font-size:20px;margin:0 0 8px}
+.lede{margin:0 0 4px;color:#52525b}
+details{margin-top:16px}
+#empty{display:none;margin-top:12px;padding:16px;border:1px dashed #d4d4d8;border-radius:8px;background:#fff}
+#empty.show{display:block}
+#status{margin:12px 0 0;color:#52525b;min-height:1.2em;font-size:14px}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+  <strong>Nucleus</strong>
+  <nav aria-label="Operate">
+    <a href="#q" aria-current="page">SLED Capture</a>
+    <a href="#q">PM Tracker</a>
+  </nav>
+</aside>
+<main id="q" data-shine-main>
+  <div class="tabs" role="tablist" aria-label="SLED Capture sections">
+    <button type="button" role="tab" aria-selected="true">Queue</button>
+    <button type="button" role="tab" aria-selected="false">Research signals</button>
+    <button type="button" role="tab" aria-selected="false">Usul &amp; coverage</button>
+  </div>
+  <div class="strip" aria-label="Queue status" data-summary>
+    <div><span>Open</span> <strong>214</strong></div>
+    <div><span>Due soon undecided</span> <strong>27</strong></div>
+    <div><span>Second look</span> <strong>6</strong></div>
+  </div>
+  <div class="grid-wrap" data-product-pattern="paged-notice-queue" data-region="focal" data-shine-focal data-product-pattern-alt="sled-capture">
+    <h1 data-grid-title>Queue</h1>
+    <p class="lede">Decide pursue, review, or dismiss. Today’s ten is a saved view on this grid, not a second page.</p>
+    <div class="toolbar">
+      <input id="q-search" type="search" aria-label="Search notices" placeholder="Search title, agency"/>
+      <select id="q-show" aria-label="Show"><option>Open</option><option>All</option></select>
+      <button type="button" class="btn" id="clear">Clear filters</button>
+      <button type="button" class="btn filled" id="pursue">Pursue selected</button>
+    </div>
+    <table id="notices" role="table">
+      <thead>
+        <tr><th>Notice</th><th>Class · priority</th><th>Due</th><th>State</th></tr>
+      </thead>
+      <tbody id="rows">
+        <tr data-name="nv dps voice risk rfi" data-id="n1">
+          <td><strong>NV DPS voice risk RFI</strong></td><td>Qualified · 82</td><td>Oct 12</td><td class="state">Open</td>
+        </tr>
+        <tr data-name="oh medicaid identity services" data-id="n2">
+          <td><strong>OH Medicaid identity services</strong></td><td>Discovery · 61</td><td>Oct 20</td><td class="state">Open</td>
+        </tr>
+        <tr data-name="co doc screening sow" data-id="n3">
+          <td><strong>CO DOC screening SOW</strong></td><td>Discovery · 74</td><td>Oct 9</td><td class="state">Open</td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="empty" data-empty>
+      <strong>No published notices match these filters.</strong>
+      <p>Clear filters to restore the open queue.</p>
+    </div>
+  </div>
+  <details>
+    <summary>How summary figures are measured</summary>
+    <p>Open matches the Open view. Due-soon counts undecided notices inside the configured window.</p>
+  </details>
+  <p id="status" role="status" aria-live="polite" hidden></p>
+</main>
+</div>
+<script>
+  const search = document.getElementById("q-search");
+  const rows = [...document.querySelectorAll("#rows tr")];
+  const empty = document.getElementById("empty");
+  const status = document.getElementById("status");
+  const pursue = document.getElementById("pursue");
+  let selected = null;
+
+  function setStatus(text) {
+    status.hidden = !text;
+    status.textContent = text || "";
+  }
+
+  function filter() {
+    const term = search.value.trim().toLowerCase();
+    let shown = 0;
+    for (const row of rows) {
+      const hit = !term || row.dataset.name.includes(term);
+      row.hidden = !hit;
+      if (hit) shown++;
+      if (!hit && row === selected) {
+        selected = null;
+        row.removeAttribute("aria-selected");
+        pursue.disabled = true;
+      }
+    }
+    empty.classList.toggle("show", shown === 0);
+    setStatus(term ? `${shown} match${shown === 1 ? "" : "es"}` : "");
+  }
+
+  function select(row) {
+    for (const r of rows) r.removeAttribute("aria-selected");
+    selected = row;
+    row.setAttribute("aria-selected", "true");
+    pursue.disabled = false;
+    setStatus(`Selected ${row.querySelector("strong").textContent}`);
+  }
+
+  for (const row of rows) {
+    row.addEventListener("click", () => select(row));
+  }
+  search.addEventListener("input", filter);
+  search.addEventListener("change", filter);
+  document.getElementById("clear").onclick = () => {
+    search.value = "";
+    filter();
+    setStatus("Filters cleared");
+  };
+  pursue.onclick = () => {
+    if (!selected) return;
+    selected.querySelector(".state").textContent = "Pursuing";
+    setStatus(`Pursuing ${selected.querySelector("strong").textContent}`);
+  };
+  // Rest state: first open notice selected so Pursue reads as the filled primary.
+  select(rows[0]);
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+
+FAIL
+  ✗ axe: color-contrast(serious,1), page-has-heading-one(moderate,1)
+  ✗ type scale: 7 distinct font sizes under 32px (max 6, the token scale): 11, 12, 13, 14, 15, 21, 22
+  ✗ spacing: 4 distinct off-scale values (max 3) — 6px×54, 10px×48, 14px×12, 17.43px×6; e.g. a paddingRight; a paddingLeft; a paddingRight
+  ✗ type scale: 11px and 12px are a 1.091 step (used 6× and 48×) — below the ~1.12 UI band, so two steps are doing one job. Cardinality passing is not the scale being right
+  ✗ type scale: 12px and 13px are a 1.083 step (used 48× and 20×) — below the ~1.12 UI band, so two steps are doing one job. Cardinality passing is not the scale being right
+  ✗ type scale: 13px and 14px are a 1.077 step (used 20× and 8×) — below the ~1.12 UI band, so two steps are doing one job. Cardinality passing is not the scale being right
+  ✗ hierarchy: 3 competing filled treatments — one primary per view (techniques.md §Hierarchy; foundations Hierarchy)
+  ✗ cta-pressure: 3 competing filled treatments in main [All, Pursue, Needs a second, Pursue, Assign lead] — Operate pages allow one filled primary; demote peers to outline/ghost or bind competingCtaCheck.ok=false to a flow: (expert P1)
+  ✗ dual-focal: 2 peer worklists/grids in main [David's 10 today + Queue] — Operate triage allows one focal work object; fold peers as saved-view/XOR (collapse-peer-grids plan; expert N6)
+  ✗ kpi-soup: 4 equal metric tiles in main — collapse to ≤3 chips and park the rest in <details> (kpi-collapse; denoise N6)
+  ✗ contract: DataGrid missing or inert coverage: failed: every discovered table must match exactly one contract; layout labels do not exempt records
+  ✗ contract: DataGrid missing or inert #notices static presentation: failed: interactive records cannot opt out as static
+  ✗ preflight-slop: ai-slop-cta-mania: ≥2 filled primary treatments detected in static HTML (kinds≈2, toolbarFilled=2)
+  ✗ preflight-slop: ai-slop-kpi-strip: ≥4 metric/KPI markers (count=22) — KPI strip / soup risk
+
+mode=light  bodyBg=rgb(244, 244, 245)  bodyColor=rgb(24, 24, 27)
+tokens: {"--background":null,"--foreground":null,"--primary":null,"--border":null,"--ring":null,"--radius":null,"--shine-color-bg":null,"--shine-color-fg":null,"--shine-color-primary":null,"--shine-color-border":null,"--shine-color-ring":null}
+fontSizes: 11px×6  12px×48  13px×40  14px×37  15px×3  21px×3  22px×10
+axe: 2 violations, 1 incomplete
+contrast: 40 text elements measured, worst 4.83:1
+theme: light rgb(244, 244, 245) / other rgb(244, 244, 245) — single mode, declared color-scheme:light
+
+composition notes (judgement, not blocking):
+  • 27 controls in 5 visual treatments; 3 filled (primary-looking). Largest group: 21× rgb(255, 255, 255) [Research signa, Usul & coverag, Goals, Sources & reci]
+  • density: content~73% chrome~30% of viewport (app-shell probe)
+  • preflight-slop: ai-slop-metric-grid: metric-grid cluster pattern (no-slop-ui ban family)
+  • preflight-slop: ai-slop-nested-cards: nested card-like containers detected
+  • sections: 4 marked; 0 missing a heading
+  • 32 controls under 40px: button"Queue" 72×38, button"Research signals" 135×38, button"Usul & coverage" 133×38, button"Goals" 63×38, button"Sources & recipe" 142×38 …+27
+  • accent colour also used as non-interactive state on "Nucleus", "SLED Capture", "PM Tracker", "David's 10 today", "Notice", "Class · priority" — one token, two meanings: every use is a legal token and the vocabulary still collapsed
