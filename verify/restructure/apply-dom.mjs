@@ -163,7 +163,10 @@ export function formatPeerGridPlan(op = {}, plan = {}) {
     `- Keep worklist whose title matches: ${keep}`,
     `- Fold peer whose title matches: ${fold} → saved-view / filter chip / XOR`,
     `- Mode: ${op.mode || "xor-saved-view"}`,
-    `- After agent applies: one [role=grid] in the fold; re-run measure dual-focal`,
+    `- Agent close (D10): run \`node verify/restructure/xor-saved-view.mjs --html <file> --keep ${keep} --fold ${fold}\``,
+    `- Recipe: peer title → filter chip + shared DataGrid state (kits.md § Dual-grid XOR)`,
+    `- After agent applies: one [role=grid] in the fold; re-run measure dual-focal FAIL→PASS`,
+    `- Crop proof: verify/fixtures/denoise/receipts/queue-dual-grid-fold-crop.html`,
     "",
   ].join("\n");
 }

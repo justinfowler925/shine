@@ -6,6 +6,12 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Dual-grid XOR recipe (D10).** Agent-assisted close for `collapse-peer-grids`:
+  peer title → filter chip + shared DataGrid state (`verify/restructure/xor-saved-view.mjs`).
+  AST/DOM runners stay plan-only (no silent delete). Fixtures
+  `queue-dual-grid-{before,after}.html` + fold crop receipt; `denoise:eval` bar is
+  detect→XOR after PASS. Kit in `kits.md` § Dual-grid XOR; `npm run restructure:xor`.
+
 - **Operate corpus depth (S3).** +2 catalog (`shadcn-catalog-integrations`,
   `shadcn-catalog-templates`), +2 chat (`shadcn-chat`, `shadcn-chat-sidecar`),
   +2 dense cockpits (`shadcn-cockpit-ops`, `shadcn-cockpit-revenue`). Cite floors:

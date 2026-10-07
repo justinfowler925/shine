@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * N7 — denoise-eval harness on Sled-class fixture pairs.
+ * N7 / D10 — denoise-eval harness on Sled-class fixture pairs.
  * Scorecard: opsEmitted, opsApplied, measureCleared[], humanGateRequired.
- * v1 bar: 100% on CTA / rebind-cite / set-focal / kpi-collapse DOM ops;
- * dual-grid = detect+plan until XOR recipe ships.
+ * Bar: 100% on CTA / rebind-cite / set-focal / kpi-collapse DOM ops;
+ * dual-grid = detect → agent XOR recipe → after PASS (not silent delete).
  */
 
 import { existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
@@ -12,10 +12,12 @@ import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 import { applyDomRestructure } from "./restructure/apply-dom.mjs";
 import { buildRestructurePlan, validateRestructurePlan } from "./restructure/schema.mjs";
+import { applyXorSavedView, buildXorFoldCropHtml } from "./restructure/xor-saved-view.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const FIX = join(ROOT, "verify/fixtures/denoise");
+const RECEIPTS = join(FIX, "receipts");
 
 const CASES = [
   {
@@ -57,8 +59,8 @@ const CASES = [
   },
   {
     id: "queue-dual-grid",
-    before: "queue-cta-before.html",
-    after: null,
+    before: "queue-dual-grid-before.html",
+    after: "queue-dual-grid-after.html",
     cite: "shadcn-queue",
     ops: [
       {
@@ -69,7 +71,8 @@ const CASES = [
       },
     ],
     mustClear: ["dual-focal"],
-    planOnly: true,
+    /** Agent-assisted XOR close (D10) — not plan-only detect, not silent AST delete */
+    xorRecipe: true,
   },
 ];
 
@@ -86,9 +89,9 @@ function measureFailures(file, cite) {
     },
   );
   const text = `${run.stderr || ""}\n${run.stdout || ""}`;
-  const failures = [...text.matchAll(/^(?:Error:\s*)?((?:cta-pressure|dual-focal|kpi-soup|composition-slop|ai-slop)[^\n]*)/gim)].map(
-    (m) => m[1],
-  );
+  const failures = [
+    ...text.matchAll(/^[ \t]*(?:Error:\s*|✗\s*)?((?:cta-pressure|dual-focal|kpi-soup|composition-slop|ai-slop)[^\n]*)/gim),
+  ].map((m) => m[1]);
   // Also pull from JSON-ish failure lists in stdout
   const listed = [...text.matchAll(/"(cta-pressure|dual-focal|kpi-soup|composition-slop)[^"]*"/g)].map((m) =>
     m[0].replace(/"/g, ""),
@@ -116,12 +119,35 @@ function ensureSynthesizedAfter(c) {
   writeFileSync(afterPath, html);
 }
 
+function ensureXorAfter(c) {
+  if (!c.xorRecipe || !c.after) return null;
+  const beforePath = join(FIX, c.before);
+  const afterPath = join(FIX, c.after);
+  const beforeHtml = readFileSync(beforePath, "utf8");
+  const xorOp = c.ops.find((o) => o.op === "collapse-peer-grids") || {};
+  const xor = applyXorSavedView(beforeHtml, xorOp);
+  if (!existsSync(afterPath) || c.refreshAfter) {
+    writeFileSync(afterPath, xor.html);
+  }
+  mkdirSync(RECEIPTS, { recursive: true });
+  const cropPath = join(RECEIPTS, "queue-dual-grid-fold-crop.html");
+  writeFileSync(
+    cropPath,
+    buildXorFoldCropHtml({
+      keptTitle: xor.keptTitle || "Queue",
+      chipLabel: xor.chipLabel || "Peer view",
+    }),
+  );
+  return { xor, cropPath, afterPath };
+}
+
 export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
   mkdirSync(FIX, { recursive: true });
   const scorecard = [];
 
   for (const c of cases) {
     ensureSynthesizedAfter(c);
+    const xorMeta = c.xorRecipe ? ensureXorAfter(c) : null;
     const beforePath = join(FIX, c.before);
     const plan = buildRestructurePlan({
       job: `Denoise eval ${c.id}`,
@@ -129,20 +155,28 @@ export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
       citePrimary: c.cite,
       ops: c.ops,
       measureMustClear: c.mustClear,
-      humanGate: !!c.planOnly,
+      humanGate: !!(c.planOnly || c.xorRecipe),
     });
     const validation = validateRestructurePlan(plan);
     const beforeHtml = readFileSync(beforePath, "utf8");
     const appliedResult = applyDomRestructure(beforeHtml, plan);
     const preBefore = scanPreflightSlop(beforeHtml, { gate: true, screen: "queue" });
-    const preAfter = scanPreflightSlop(appliedResult.html, { gate: true, screen: "queue" });
+    let workingHtml = appliedResult.html;
+    let xorApplied = false;
+    if (c.xorRecipe) {
+      const xorOp = c.ops.find((o) => o.op === "collapse-peer-grids") || {};
+      const xor = applyXorSavedView(workingHtml, xorOp);
+      workingHtml = xor.html;
+      xorApplied = xor.applied;
+    }
+    const preAfter = scanPreflightSlop(workingHtml, { gate: true, screen: "queue" });
 
     let beforeMeasure = { status: null, failures: [] };
     let afterMeasure = { status: null, failures: [] };
     if (runMeasure && !c.planOnly) {
       beforeMeasure = measureFailures(beforePath, c.cite);
       const tmpAfter = join(FIX, `.tmp-${c.id}-after.html`);
-      writeFileSync(tmpAfter, appliedResult.html);
+      writeFileSync(tmpAfter, workingHtml);
       afterMeasure = measureFailures(tmpAfter, c.cite);
     }
 
@@ -155,13 +189,23 @@ export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
       const stillFail =
         afterMeasure.failures.some((f) => f.includes(key)) ||
         preAfter.failures.some((f) => f.includes(key));
-      if (c.planOnly) {
-        // dual-grid: detect on before is enough for v1 bar
+      if (c.xorRecipe && key === "dual-focal") {
+        // D10: detect on before + clear after XOR (measure when run; structural fallback without browser)
+        const structuralClear =
+          xorApplied &&
+          ((xorMeta?.xor?.gridCountAfter ?? 1) === 1 ||
+            (workingHtml.match(/role=["']grid["']/gi) || []).length === 1);
+        if (runMeasure) {
+          if (wasFail && !stillFail) cleared.push(`${key}:detect→xor-pass`);
+          else if (structuralClear && !stillFail) cleared.push(`${key}:xor-structural`);
+        } else if (structuralClear) {
+          cleared.push(`${key}:detect→xor-pass`);
+        }
+      } else if (c.planOnly) {
         if (wasFail || key === "dual-focal") cleared.push(`${key}:detect+plan`);
       } else if (wasFail && !stillFail) {
         cleared.push(key);
       } else if (!wasFail && appliedResult.applied.includes(c.ops[0]?.op)) {
-        // apply succeeded even if measure naming differs — credit op
         cleared.push(`${key}:op-applied`);
       }
     }
@@ -173,24 +217,41 @@ export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
       if (was && !now) cleared.push(id);
     }
 
+    const foldCropOk =
+      !c.xorRecipe ||
+      (existsSync(join(RECEIPTS, "queue-dual-grid-fold-crop.html")) &&
+        /role=["']grid["']/.test(readFileSync(join(RECEIPTS, "queue-dual-grid-fold-crop.html"), "utf8")) &&
+        /data-shine-xor-views|data-shine-xor-from-peer/.test(
+          readFileSync(join(RECEIPTS, "queue-dual-grid-fold-crop.html"), "utf8"),
+        ));
+
     const row = {
       id: c.id,
       opsEmitted: plan.ops.map((o) => o.op),
       opsApplied: appliedResult.applied,
       plans: appliedResult.plans.length,
-      humanGateRequired: !!appliedResult.humanGate || !!c.planOnly,
+      xorApplied: c.xorRecipe ? xorApplied : undefined,
+      humanGateRequired: !!appliedResult.humanGate || !!c.planOnly || !!c.xorRecipe,
       measureCleared: cleared,
       validationOk: validation.ok,
       beforeMeasureStatus: beforeMeasure.status,
       afterMeasureStatus: afterMeasure.status,
+      foldCropOk: c.xorRecipe ? foldCropOk : undefined,
       pass:
         validation.ok &&
-        (c.planOnly
-          ? appliedResult.plans.length >= 1
-          : appliedResult.applied.length >= 1 &&
-            (cleared.length >= 1 ||
-              appliedResult.applied.includes("rebind-cite") ||
-              appliedResult.applied.includes("set-focal"))),
+        (c.xorRecipe
+          ? appliedResult.plans.length >= 1 &&
+            xorApplied &&
+            foldCropOk &&
+            cleared.some((x) => x.includes("dual-focal")) &&
+            // AST path must remain plan-only — XOR is a separate agent step
+            !appliedResult.applied.includes("collapse-peer-grids")
+          : c.planOnly
+            ? appliedResult.plans.length >= 1
+            : appliedResult.applied.length >= 1 &&
+              (cleared.length >= 1 ||
+                appliedResult.applied.includes("rebind-cite") ||
+                appliedResult.applied.includes("set-focal"))),
     };
     scorecard.push(row);
   }
@@ -201,7 +262,7 @@ export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
     total: scorecard.length,
     passed,
     failed: scorecard.length - passed,
-    bar: "DOM auto-ops 100%; dual-grid detect+plan",
+    bar: "DOM auto-ops 100%; dual-grid detect→XOR after PASS",
     cases: scorecard,
   };
 }

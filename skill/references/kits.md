@@ -90,13 +90,39 @@ over dashboard chrome when the job is triage / queue / inbox.
 2. **CTA budget = 1** — one filled job verb (e.g. Pursue); peers outline/ghost/segmented.
 3. **KPI encyclopedia off-path** — ≤3 summary chips; rest in `<details data-shine-kpi-rest>`.
 4. **No peer grids** — second ranking (e.g. “David’s 10”) is a saved-view / filter XOR, never
-   a second `role="grid"` peer. Detect: `dual-focal`; plan: `collapse-peer-grids`.
+   a second `role="grid"` peer. Detect: `dual-focal`; plan: `collapse-peer-grids` (plan-only
+   in AST/DOM runners — never silent delete). Agent close: § Dual-grid XOR below.
 5. **Cite** — `shadcn-queue` (or product sibling). Anti-cites: `shadcn-dashboard-01` as page
    lead, chart atoms, magicui. Packet `recommendation.restructureHints` must clear before polish.
 6. **Golden fixture** — `verify/fixtures/denoise/queue-cta-{before,after}.html` +
-   `npm run denoise:eval`. Doctor bites dual-CTA and card/KPI soup.
+   `queue-dual-grid-{before,after}.html` + `npm run denoise:eval`. Doctor bites dual-CTA,
+   dual-grid XOR, and card/KPI soup.
 
 Kit recipe string (cite v2): `shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts`.
+
+### Dual-grid XOR (D10) — agent-assisted close
+
+Close the dual-focal loop: **detect → plan → XOR recipe → prove**. AST/DOM auto paths stay
+plan-only for `collapse-peer-grids`. Agents apply this recipe explicitly — never silent
+dual-grid delete.
+
+1. **Detect** — `dual-focal` when ≥2 peer `.grid-wrap` / `[role=grid]` worklists share main.
+2. **Plan** — emit `collapse-peer-grids` with `mode: "xor-saved-view"`,
+   `keepTitleIncludes` (e.g. `["Queue"]`), `foldTitleIncludes` (e.g. `["David"]`).
+3. **Peer title → filter chip** — fold the peer’s `data-grid-title` into a
+   `data-shine-xor-views` chip (`aria-pressed` XOR). Default pressed = kept worklist;
+   peer chip pressed = filtered view. Do **not** leave a second `role="grid"`.
+4. **Shared DataGrid state** — one table / `DataGrid` (`data-shine-shared-grid`) owns rows.
+   Chip toggles the same row model (TanStack `columnFilters` / URL via `saved-views` block /
+   product filter state). Reuse `blocks/saved-views.tsx` + `blocks/filter-bar.tsx` patterns;
+   do not fork a second grid component.
+5. **Focal** — `data-region="focal"` on the remaining wrap.
+6. **Apply helper** — `node verify/restructure/xor-saved-view.mjs --html <file> --keep Queue --fold David`
+   (also used by `denoise:eval` / `denoise:loop`). HumanGate stays true on the plan.
+7. **Prove** — measure `dual-focal` FAIL→PASS; crop the fold so one grid is visible
+   (`verify/fixtures/denoise/receipts/queue-dual-grid-fold-crop.html`). Twin full-page shots invalid.
+
+Fixtures: `verify/fixtures/denoise/queue-dual-grid-{before,after}.html`.
 
 ### Dashboard
 

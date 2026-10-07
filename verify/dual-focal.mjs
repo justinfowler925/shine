@@ -1,5 +1,5 @@
-// N6 — Dual-focal detector: ≥2 peer worklists/grids in main → fail-closed.
-// collapse-peer-grids remains plan-only for AST; detection is machine-red.
+// N6 / D10 — Dual-focal detector: ≥2 peer worklists/grids in main → fail-closed.
+// collapse-peer-grids remains plan-only for AST/DOM; agent closes via xor-saved-view.mjs.
 
 import { OPERATE_PROVE_SCREENS, isOperateProveScreen } from "../hooks/receipt.mjs";
 import { isCtaPressureScreen } from "./cta-pressure.mjs";
