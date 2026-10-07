@@ -142,6 +142,23 @@ Competing filled `Button` primaries in consumer TSX are demoted by **TypeScript 
 Fixtures: `verify/fixtures/denoise/tsx/queue-dual-cta{,-ast}.tsx`.  
 Doctor: `verify/cta-pressure-ast-bite.mjs` / `npm run cta-pressure:ast-bite`.
 
+### KPI soup TSX AST (N8 deepen) — maxVisible=3
+
+Equal metric tiles competing with the work object in consumer TSX are collapsed by
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `kpi-collapse`.
+
+1. **Detect** — measure `kpi-soup` when ≥4 equal metrics on queue/triage cites.
+2. **Recommend** — typed `recommendation.kpiSoupAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Keeps first `maxVisible=3` peer tiles; wraps the rest in
+   `<details data-shine-kpi-rest><summary>More metrics</summary>…</details>`.  
+   Handles `className="metric"`, `className={"metric"}`, and **`data-shine-kpi` /
+   `data-kpi`** markers. Dynamic `.map` bands stay plan-only.
+4. **Prove** — crop pair `queue-kpi-tsx` (`queue-kpi-tsx-{before,after}-crop.html`). Twin full-page invalid.
+
+Fixtures: `verify/fixtures/denoise/tsx/queue-kpi-soup{,-ast}.tsx`.  
+Doctor: `verify/kpi-soup-ast-bite.mjs` / `npm run kpi-soup:ast-bite`.
+
 ### Dashboard
 
 1. Structure from `patterns.md` / `dashboards.md` — context bar, KPI row, **one focal

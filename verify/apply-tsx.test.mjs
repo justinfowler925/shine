@@ -7,6 +7,8 @@ import {
   applyTsxRestructure,
   ctaBudgetTsx,
   countFilledButtonsTsx,
+  countMetricTilesTsx,
+  kpiCollapseTsx,
   rebindCiteTsx,
   setFocalTsx,
 } from "./restructure/apply-tsx.mjs";
@@ -16,6 +18,8 @@ const FIX = join(dirname(fileURLToPath(import.meta.url)), "fixtures/denoise/tsx"
 const dual = readFileSync(join(FIX, "queue-dual-cta.tsx"), "utf8");
 const hard = readFileSync(join(FIX, "queue-dual-cta-ast.tsx"), "utf8");
 const settings = readFileSync(join(FIX, "settings-wrong-cite.tsx"), "utf8");
+const kpiSoup = readFileSync(join(FIX, "queue-kpi-soup.tsx"), "utf8");
+const kpiHard = readFileSync(join(FIX, "queue-kpi-soup-ast.tsx"), "utf8");
 
 const cta = ctaBudgetTsx(dual, { maxFilled: 1, preferLabels: ["Pursue"] });
 assert.match(cta, /variant="default">Pursue/);
@@ -63,4 +67,24 @@ const settingsPlan = buildRestructurePlan({
 const settingsResult = applyTsxRestructure(settings, settingsPlan);
 assert.ok(settingsResult.applied.includes("rebind-cite"));
 
-console.log("apply-tsx PASS: cta-budget AST · set-focal · rebind-cite · dual-grid plan-only");
+// KPI soup AST: literal + expression className / data-shine-kpi
+const beforeKpi = countMetricTilesTsx(kpiSoup);
+assert.ok(beforeKpi.tiles >= 6, JSON.stringify(beforeKpi));
+const kpiAfter = kpiCollapseTsx(kpiSoup, { maxVisible: 3 });
+assert.equal(countMetricTilesTsx(kpiAfter).tiles, 3);
+assert.match(kpiAfter, /data-shine-kpi-rest/);
+const beforeKpiHard = countMetricTilesTsx(kpiHard);
+assert.ok(beforeKpiHard.tiles >= 6, JSON.stringify(beforeKpiHard));
+const kpiHardAfter = kpiCollapseTsx(kpiHard, { maxVisible: 3 });
+assert.equal(countMetricTilesTsx(kpiHardAfter).tiles, 3);
+assert.match(kpiHardAfter, /className=\{\s*["']metrics["']\s*\}/);
+assert.match(kpiHardAfter, /data-shine-kpi-rest/);
+const kpiPlan = buildRestructurePlan({
+  job: "Collapse KPI soup",
+  category: "queue",
+  ops: [{ op: "kpi-collapse", maxVisible: 3, rest: "details" }],
+});
+const kpiResult = applyTsxRestructure(kpiHard, kpiPlan);
+assert.ok(kpiResult.applied.includes("kpi-collapse"));
+
+console.log("apply-tsx PASS: cta-budget AST · kpi-collapse AST · set-focal · rebind-cite · dual-grid plan-only");

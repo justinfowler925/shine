@@ -84,6 +84,11 @@ assert.ok(queueRec.ctaPressureAst?.fixtureTsx, "queue job ctaPressureAst.fixture
 assert.match(queueRec.ctaPressureAst.fixtureTsx, /queue-dual-cta\.tsx$/);
 assert.match(queueRec.ctaPressureAst.cropAfter, /queue-cta-tsx-after-crop\.html$/);
 assert.match(formatRecommendationSummary(queueRec), /ctaPressureAst/);
+assert.ok(queueRec.kpiSoupAst?.fixtureTsx, "queue job kpiSoupAst.fixtureTsx");
+assert.match(queueRec.kpiSoupAst.fixtureTsx, /queue-kpi-soup\.tsx$/);
+assert.match(queueRec.kpiSoupAst.cropAfter, /queue-kpi-tsx-after-crop\.html$/);
+assert.match(formatRecommendationSummary(queueRec), /kpiSoupAst/);
+assert.equal(queueRec.kpiSoupAst.maxVisible, 3);
 const denoiseQueue = createDesignPacket({
   job: "Queue triage dual worklist XOR saved-view",
   lane: "saas",
@@ -97,6 +102,9 @@ assert.ok((denoiseQueue.ddr.restructureOps || []).includes("collapse-peer-grids"
 assert.match(denoiseQueue.ctaPressureAst.cropAfter, /queue-cta-tsx-after-crop\.html$/);
 assert.ok((denoiseQueue.ddr.restructureOps || []).includes("cta-budget"));
 assert.equal(denoiseQueue.ctaPressureAst.maxFilled, 1);
+assert.match(denoiseQueue.kpiSoupAst.cropAfter, /queue-kpi-tsx-after-crop\.html$/);
+assert.ok((denoiseQueue.ddr.restructureOps || []).includes("kpi-collapse"));
+assert.equal(denoiseQueue.kpiSoupAst.maxVisible, 3);
 
 // CLI smoke
 const cite = spawnSync(process.execPath, [join(SHINE, "corpus/cite.mjs"), "settings page", "--lane", "saas"], {
@@ -106,5 +114,5 @@ assert.equal(cite.status, 0, cite.stderr);
 assert.match(cite.stdout, /recommendation:/);
 
 console.log(
-  `recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI · xorSavedView · ctaPressureAst`,
+  `recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI · xorSavedView · ctaPressureAst · kpiSoupAst`,
 );

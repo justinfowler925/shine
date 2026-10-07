@@ -244,7 +244,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -275,6 +275,24 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    helper:join(ROOT,c.helper||"verify/restructure/apply-tsx.mjs"),
    reference:c.reference||"skill/references/denoise.md",
    instruction:c.instruction||"Apply apply-tsx cta-budget (AST, maxFilled=1) on consumer Button TSX.",
+  };
+ }
+ // Denoise / queue jobs: bind KPI soup TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.kpiSoupAst?.fixtureTsx){
+  const k=recommendation.kpiSoupAst;
+  packet.kpiSoupAst={
+   mode:k.mode||"tsx-ast",
+   op:k.op||"kpi-collapse",
+   maxVisible:k.maxVisible??3,
+   rest:k.rest||"details",
+   fixtureTsx:join(ROOT,k.fixtureTsx),
+   fixtureTsxAst:join(ROOT,k.fixtureTsxAst||k.fixtureTsx),
+   cropBefore:join(ROOT,k.cropBefore),
+   cropAfter:join(ROOT,k.cropAfter),
+   cropPairId:k.cropPairId||"queue-kpi-tsx",
+   helper:join(ROOT,k.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:k.reference||"skill/references/denoise.md",
+   instruction:k.instruction||"Apply apply-tsx kpi-collapse (AST, maxVisible=3) on consumer metric TSX.",
   };
  }
  // Denoise / queue jobs: bind D10 XOR dual-grid FAIL→PASS fixture + crop paths.

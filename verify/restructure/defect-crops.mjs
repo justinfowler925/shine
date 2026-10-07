@@ -151,6 +151,64 @@ export function buildCtaAstAfterCropHtml() {
   });
 }
 
+/**
+ * TSX AST KPI soup FAIL crop — mirrors queue-kpi-soup-ast.tsx
+ * (className={"metrics"}, className={"metric"}, data-shine-kpi) before apply-tsx.
+ */
+export function buildKpiAstBeforeCropHtml() {
+  const tiles = [
+    ["Open queue", "214", "metric"],
+    ["New", "12 / 41", "metric-expr"],
+    ["High score", "33", "data-shine-kpi"],
+    ["Due soon", "27", "metric"],
+    ["Decisions 7d", "48", "metric-expr"],
+    ["Coverage", "31 / 50", "metric"],
+    ["Usul", "22", "data-shine-kpi"],
+    ["Missed", "9", "metric"],
+  ]
+    .map(
+      ([label, value, kind]) =>
+        `<div class="metric" data-kpi="${label}" data-tsx-metric="${kind}"><span>${label}</span><strong>${value}</strong></div>`,
+    )
+    .join("\n        ");
+  return wrap({
+    title: "KPI AST crop FAIL — eight equal tiles",
+    cropId: "kpi-soup-tsx-before",
+    cite: "shadcn-queue",
+    caption:
+      "Crop FAIL: eight equal metric tiles in TSX (className metric / {\"metric\"} / data-shine-kpi) — kpi-soup; apply-tsx AST kpi-collapse.",
+    body: `  <h1>Summary · TSX KPI soup</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-kpi-soup-ast.tsx">Before apply-tsx kpi-collapse (maxVisible=3)</p>
+  <div class="metrics" aria-label="SLED Capture key figures" data-sled-kpis data-shine-tsx-ast="before">
+        ${tiles}
+  </div>`,
+  });
+}
+
+/**
+ * TSX AST KPI soup PASS crop — after apply-tsx keeps ≤3 visible + details.
+ */
+export function buildKpiAstAfterCropHtml() {
+  return wrap({
+    title: "KPI AST crop PASS — collapsed",
+    cropId: "kpi-soup-tsx-after",
+    cite: "shadcn-queue",
+    caption:
+      "Crop PASS: three visible metrics; remainder in details via TSX AST kpi-collapse maxVisible=3.",
+    body: `  <h1>Summary · TSX collapsed</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-kpi-soup-ast.tsx">After apply-tsx kpi-collapse (maxVisible=3)</p>
+  <div class="metrics" aria-label="SLED Capture key figures" data-sled-kpis data-shine-tsx-ast="after">
+        <div class="metric" data-kpi="Open queue" data-tsx-metric="metric"><span>Open queue</span><strong>214</strong></div>
+        <div class="metric" data-kpi="New" data-tsx-metric="metric-expr"><span>New</span><strong>12 / 41</strong></div>
+        <div class="metric" data-kpi="High score" data-tsx-metric="data-shine-kpi"><span>High score</span><strong>33</strong></div>
+        <details data-shine-kpi-rest><summary>More metrics</summary>
+          <div class="metric" data-kpi="Due soon"><span>Due soon</span><strong>27</strong></div>
+          <div class="metric" data-kpi="Missed"><span>Missed</span><strong>9</strong></div>
+        </details>
+  </div>`,
+  });
+}
+
 /** KPI soup: ten equal metric tiles on a triage job. */
 export function buildKpiBeforeCropHtml() {
   const tiles = [
@@ -399,6 +457,16 @@ export const DEFECT_CROP_PAIRS = [
     afterMust: [/data-shine-kpi-rest/, /More metrics/],
   },
   {
+    id: "queue-kpi-tsx",
+    defect: "kpi-soup",
+    beforeCrop: "queue-kpi-tsx-before-crop.html",
+    afterCrop: "queue-kpi-tsx-after-crop.html",
+    buildBefore: buildKpiAstBeforeCropHtml,
+    buildAfter: buildKpiAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /data-kpi=/, /Open queue/, /data-tsx-metric/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-kpi-rest/, /More metrics/],
+  },
+  {
     id: "sources-cite",
     defect: "wrong-cite",
     beforeCrop: "sources-cite-before-crop.html",
@@ -507,10 +575,16 @@ export function assertCropPairOk(pair, read) {
     if (grids !== 1) errors.push(`${pair.id} after must have exactly 1 grid, got ${grids}`);
   }
   // KPI before should show many tiles; after collapses
-  if ((pair.id === "queue-kpi" || pair.id === "queue-sled-bloat") && before && after) {
+  if ((pair.id === "queue-kpi" || pair.id === "queue-kpi-tsx" || pair.id === "queue-sled-bloat") && before && after) {
     const beforeTiles = (before.match(/data-kpi=/g) || []).length;
     if (beforeTiles < 8) errors.push(`${pair.id} before needs ≥8 kpi tiles, got ${beforeTiles}`);
     if (!/data-shine-kpi-rest/.test(after)) errors.push(`${pair.id} after needs kpi-rest details`);
+  }
+  // TSX AST KPI after: ≤3 visible tiles outside details
+  if (pair.id === "queue-kpi-tsx" && before && after) {
+    const afterVisible = after.replace(/<details[\s\S]*?<\/details>/gi, "");
+    const visibleTiles = (afterVisible.match(/data-kpi=/g) || []).length;
+    if (visibleTiles > 3) errors.push(`${pair.id} after visible tiles must be ≤3, got ${visibleTiles}`);
   }
   // Usul after must stamp focal; before must not
   if (pair.id === "usul-focal" && before && after) {

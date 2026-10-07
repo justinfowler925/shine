@@ -90,7 +90,8 @@
     "constitution": "node core/constitution.mjs",
     "constitution:test": "node verify/constitution.test.mjs",
     "xor-saved-view:recommend-bite": "node verify/xor-saved-view-recommend-bite.mjs",
-    "cta-pressure:ast-bite": "node verify/cta-pressure-ast-bite.mjs"
+    "cta-pressure:ast-bite": "node verify/cta-pressure-ast-bite.mjs",
+    "kpi-soup:ast-bite": "node verify/kpi-soup-ast-bite.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",
