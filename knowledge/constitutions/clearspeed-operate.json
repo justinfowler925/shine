@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "id": "clearspeed-operate",
+  "edition": "clearspeed",
+  "lane": "saas",
+  "title": "ClearSpeed Operate constitution",
+  "source": "docs/shine-enterprise-agent-plan.md §3 · skill/references/denoise.md · skill/references/clearspeed/",
+  "instruction": "Numbered edition principles. Packet ddr.constitutionIds carries these ids; the critic must cite at least one on every partial/blocked turn.",
+  "principles": [
+    {
+      "n": 1,
+      "id": "cta-pressure",
+      "title": "One filled primary in main",
+      "rule": "Operate main allows exactly one filled primary CTA; peers are outline/ghost.",
+      "antiPatternIds": ["competing-filled-ctas", "dual-chrome-actions"]
+    },
+    {
+      "n": 2,
+      "id": "dual-focal-ban",
+      "title": "No peer worklists for one job",
+      "rule": "One triage job may not own two peer DataGrids/worklists in the fold.",
+      "antiPatternIds": ["dual-focal-grids"]
+    },
+    {
+      "n": 3,
+      "id": "kpi-soup-off-path",
+      "title": "KPI encyclopedia off the decide path",
+      "rule": "Equal metric cards must not own the Monday decide path; collapse to ≤3 chips or park in details.",
+      "antiPatternIds": ["kpi-soup", "decorative-chart-no-units"]
+    },
+    {
+      "n": 4,
+      "id": "primary-task-3s",
+      "title": "Stranger starts the job in ~3s",
+      "rule": "A stranger must name and start the primary Monday job in about three seconds.",
+      "antiPatternIds": ["card-soup", "empty-filtered-error-conflated", "irreversible-filters"]
+    },
+    {
+      "n": 5,
+      "id": "cite-honesty",
+      "title": "Page cite matches category",
+      "rule": "Page-scope cite must match the job category — no queue cite on settings, no dashboard-01 as triage lead.",
+      "antiPatternIds": ["wrong-cite-category", "marketing-dna-operate", "filler-empty-copy", "parallel-owned-component"]
+    },
+    {
+      "n": 6,
+      "id": "prove-mandatory",
+      "title": "Fresh prove receipt required",
+      "rule": "Operate completion needs a fresh prove.mjs receipt linked to ddrId; compare alone is partial.",
+      "antiPatternIds": []
+    },
+    {
+      "n": 7,
+      "id": "restructure-before-repaint",
+      "title": "Restructure before polish",
+      "rule": "No craft polish while structure is red (restructureHints / primaryTaskCheck).",
+      "antiPatternIds": []
+    }
+  ]
+}

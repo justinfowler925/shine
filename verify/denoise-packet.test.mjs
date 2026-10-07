@@ -60,6 +60,10 @@ assert.ok(proposed.procedure.phases.includes("denoise"));
 for (const id of ["cta-pressure", "dual-focal-ban", "kpi-soup-off-path", "prove-mandatory"]) {
   assert.ok(proposed.ddr.constitutionIds.includes(id), id);
 }
+assert.equal(proposed.ddr.constitutionEdition, "clearspeed-operate");
+assert.ok(Array.isArray(proposed.ddr.constitution) && proposed.ddr.constitution.length >= 7);
+assert.equal(proposed.ddr.constitution[0].n, 1);
+assert.equal(proposed.ddr.constitution[0].id, "cta-pressure");
 assert.equal(proposed.ddr.ctaBudget, 1);
 assert.throws(() => assertDdrAccepted(proposed.ddr), /refuse implement|status is proposed/);
 
@@ -104,5 +108,5 @@ const acceptedDdr = acceptDdr({ ...proposed.ddr, status: "proposed" });
 assert.equal(acceptedDdr.status, "accepted");
 
 console.log(
-  "denoise-packet PASS: denoise.md · category refuse · DDR proposed→accepted · constitutionIds · --accept gate",
+  "denoise-packet PASS: denoise.md · category refuse · DDR proposed→accepted · numbered constitutionIds · --accept gate",
 );

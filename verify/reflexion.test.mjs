@@ -49,6 +49,7 @@ const cta = heuristicCritic({ failures: ["cta-pressure: 2 filled in main"] });
 assert.equal(cta.verdict, "partial");
 assert.match(cta.nextStep, /cta-budget/);
 assert.ok(cta.antiPatternIds?.includes("competing-filled-ctas"));
+assert.ok(cta.constitutionIds?.includes("cta-pressure"));
 
 const blocked = heuristicCritic({ failures: ["denoise refuses without --category"] });
 assert.equal(blocked.verdict, "blocked");
