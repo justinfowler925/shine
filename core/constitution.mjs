@@ -189,6 +189,84 @@ export function assertCriticCitesConstitution(
 }
 
 /**
+ * Fail-closed: Operate DDR must carry the full edition catalog ids.
+ * Used by edition verify + prove receipt wiring (enterprise §3 / §4).
+ */
+export function assertDdrHasEditionCatalog(
+  ddr,
+  {
+    editionId = DEFAULT_OPERATE_CONSTITUTION_ID,
+    requiredIds = null,
+  } = {},
+) {
+  if (!ddr || typeof ddr !== "object") {
+    throw new Error("DDR missing — ClearSpeed Operate catalog constitutionIds required");
+  }
+  const catalog = requiredIds?.length
+    ? [...requiredIds]
+    : operateConstitutionIds(loadConstitution(editionId));
+  const ids = Array.isArray(ddr.constitutionIds)
+    ? ddr.constitutionIds.map(text).filter(Boolean)
+    : [];
+  if (!ids.length) {
+    throw new Error(
+      `DDR ${ddr.ddrId || "(missing)"} omits constitutionIds — ClearSpeed Operate catalog required`,
+    );
+  }
+  const missing = catalog.filter((id) => !ids.includes(id));
+  if (missing.length) {
+    throw new Error(
+      `DDR ${ddr.ddrId || "(missing)"} omits catalog constitutionIds: ${missing.join(", ")}`,
+    );
+  }
+  const edition = text(ddr.constitutionEdition);
+  if (edition && edition !== editionId) {
+    throw new Error(
+      `DDR ${ddr.ddrId || "(missing)"} constitutionEdition ${edition} != ${editionId}`,
+    );
+  }
+  return { ok: true, editionId, constitutionIds: catalog, present: ids };
+}
+
+/**
+ * Resolve constitution ids stamped onto prove.mjs completion receipts.
+ * SaaS / denoise defaults to the full ClearSpeed Operate catalog.
+ */
+export function resolveProveConstitution({
+  lane = "internal",
+  mode = "",
+  constitutionIds = null,
+  constitutionEdition = null,
+} = {}) {
+  const operate = lane === "saas" || mode === "denoise";
+  const editionId =
+    text(constitutionEdition) || (operate ? DEFAULT_OPERATE_CONSTITUTION_ID : "");
+  let provided = [];
+  if (Array.isArray(constitutionIds)) {
+    provided = constitutionIds.map(text).filter(Boolean);
+  } else if (typeof constitutionIds === "string" && text(constitutionIds)) {
+    provided = text(constitutionIds)
+      .split(/[\s,]+/)
+      .map(text)
+      .filter(Boolean);
+  }
+  if (provided.length) {
+    return {
+      constitutionIds: provided,
+      constitutionEdition: editionId || null,
+    };
+  }
+  if (operate) {
+    const id = editionId || DEFAULT_OPERATE_CONSTITUTION_ID;
+    return {
+      constitutionIds: operateConstitutionIds(loadConstitution(id)),
+      constitutionEdition: id,
+    };
+  }
+  return { constitutionIds: [], constitutionEdition: editionId || null };
+}
+
+/**
  * Enforce citation: attach normalized cited ids, or mark verdict=error when missing.
  */
 export function enforceCriticConstitutionCitation(

@@ -24,6 +24,7 @@ import {writeCompletionProveReceipt} from '../hooks/receipt.mjs';
 import {checkCompetingCtaFlowBinding} from './cta-pressure.mjs';
 import {verifyReuse} from '../integrations/blocks.mjs';
 import {verifyCoverage} from '../integrations/coverage.mjs';
+import {assertDdrHasEditionCatalog,resolveProveConstitution} from '../core/constitution.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'),exec=promisify(execFile);
 const text=(value)=>String(value||"").trim();
 // Closed native dialogs are separate workflows. Hidden players in the active
@@ -72,8 +73,9 @@ export function checkCopyAdoptionPresence(diagnosis,{lane}={}){
 // Lane defaults to internal when omitted so programmatic callers and media/lex
 // fixtures keep prior behavior. Packet completion always passes --lane explicitly
 // (design-packet defaults lane to saas); saas/marketing originality then bites.
-export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPath,project,commit,buildId,receiptPath,storageState,reusePath,coveragePath,surfaceContractPath,surfaceReceiptPath,lane="internal",brief="",ddrId=""}){
+export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPath,project,commit,buildId,receiptPath,storageState,reusePath,coveragePath,surfaceContractPath,surfaceReceiptPath,lane="internal",brief="",ddrId="",constitutionIds=null,constitutionEdition="",mode=""}){
  const temp=mkdtempSync(join(tmpdir(),'shine-completion-')),checks={},evidence={};let observed;
+ const constitution=resolveProveConstitution({lane,mode,constitutionIds,constitutionEdition});
  try{
   coveragePath ||= project && existsSync(join(project,"shine-coverage.json")) ? join(project,"shine-coverage.json") : undefined;
   if(coveragePath){try{checks.patternCoverage=verifyCoverage(project,JSON.parse(readFileSync(coveragePath,"utf8")));}catch(error){checks.patternCoverage={status:"failed",reason:error.message};}}
@@ -114,10 +116,27 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
   let binding;
   if(/^https?:/.test(target)){try{binding=bindBrowser({target,project,expectedCommit:commit,expectedBuild:buildId,observed});checks.buildBinding={status:'passed',commit:binding.commit,buildId:binding.buildId};}catch(error){checks.buildBinding={status:'not_tested',reason:error.message};}}
   else {binding={artifact:resolve(target),artifactSha256:hash(readFileSync(target)),...observed};checks.buildBinding={status:'passed',kind:'local-file'};}
+  // Operate prove recipe: saas/denoise + ddrId must carry the full edition catalog.
+  if(ddrId&&(lane==='saas'||mode==='denoise')){
+   try{
+    assertDdrHasEditionCatalog({
+     ddrId,
+     constitutionIds:constitution.constitutionIds,
+     constitutionEdition:constitution.constitutionEdition,
+    });
+    checks.constitutionCatalog={status:'passed',editionId:constitution.constitutionEdition,count:constitution.constitutionIds.length};
+   }catch(error){
+    evidence.constitutionCatalogError=error.message;
+    checks.constitutionCatalog={status:'failed',reason:error.message};
+   }
+  }else if(constitution.constitutionIds.length){
+   checks.constitutionCatalog={status:'passed',editionId:constitution.constitutionEdition||null,count:constitution.constitutionIds.length,optional:true};
+  }
   const status=Object.values(checks).every(c=>c.status==='passed')?'passed':Object.values(checks).some(c=>c.status==='failed')?'failed':'incomplete';
   const report={version:1,status,checks,evidence};
   if(status==='passed'){
    // Always mint the stop-sweep completion store on green — Operate cannot skip prove.
+   // SaaS receipts stamp constitutionIds (catalog default when omitted).
    const localTarget=/^https?:/.test(target)?undefined:resolve(target);
    try{
     writeCompletionProveReceipt({
@@ -128,17 +147,23 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
      checks,
      binding,
      ddrId,
+     constitutionIds:constitution.constitutionIds,
+     constitutionEdition:constitution.constitutionEdition||"",
     });
    }catch(error){evidence.completionReceiptError=error.message;}
    if(receiptPath){writeCompletionReceipt(receiptPath,report,binding);report.receipt=resolve(receiptPath);}
    if(ddrId)report.ddrId=ddrId;
+   if(constitution.constitutionIds.length){
+    report.constitutionIds=constitution.constitutionIds;
+    report.constitutionEdition=constitution.constitutionEdition;
+   }
   }
   return report;
  }catch(error){return {version:1,status:'failed',checks,error:error.message};}finally{rmSync(temp,{recursive:true,force:true});}
 }
 if(process.argv[1]&&realpathSync(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),opt=n=>args.includes(n)?args[args.indexOf(n)+1]:undefined;
- const report=await prove({target:args[0],citeId:opt('--cite'),layoutPath:opt('--layout'),usabilityPath:opt('--usability'),diagnosisPath:opt('--diagnosis'),project:opt('--project'),commit:opt('--commit'),buildId:opt('--build-id'),receiptPath:opt('--receipt'),storageState:opt('--storage-state'),reusePath:opt('--reuse'),coveragePath:opt('--coverage'),surfaceContractPath:opt('--surface-contract'),surfaceReceiptPath:opt('--surface-receipt'),lane:opt('--lane')||'internal',brief:opt('--brief')||'',ddrId:opt('--ddr')||''});
+ const report=await prove({target:args[0],citeId:opt('--cite'),layoutPath:opt('--layout'),usabilityPath:opt('--usability'),diagnosisPath:opt('--diagnosis'),project:opt('--project'),commit:opt('--commit'),buildId:opt('--build-id'),receiptPath:opt('--receipt'),storageState:opt('--storage-state'),reusePath:opt('--reuse'),coveragePath:opt('--coverage'),surfaceContractPath:opt('--surface-contract'),surfaceReceiptPath:opt('--surface-receipt'),lane:opt('--lane')||'internal',brief:opt('--brief')||'',ddrId:opt('--ddr')||'',constitutionIds:opt('--constitution-ids')||null,constitutionEdition:opt('--constitution-edition')||'',mode:opt('--mode')||''});
  if(opt('--json'))writeFileSync(opt('--json'),JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));process.exit(report.status==='passed'?0:1);
 }

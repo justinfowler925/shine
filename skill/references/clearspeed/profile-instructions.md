@@ -73,7 +73,8 @@ Do not invent Workspace auth bypasses.
 SaaS / denoise packets emit `ddr.constitutionIds` from
 `knowledge/constitutions/clearspeed-operate.json` (n=1…7: `cta-pressure` …
 `restructure-before-repaint`). Critic partial/blocked turns must cite ≥1 id or
-number — see `docs/operate-constitution.md`.
+number. Prove completion receipts stamp the same catalog ids; edition verify
+fails if a DDR omits any — see `docs/operate-constitution.md`.
 
 ## Diagnosis order (hard)
 
