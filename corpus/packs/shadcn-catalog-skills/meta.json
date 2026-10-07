@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-catalog-skills",
+  "source": "corpus/blueprints/shadcn-catalog-skills/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 112240,
+  "provenance": "Authored blueprint, S3 Operate corpus deepen",
+  "capture": {
+    "status": 200,
+    "title": "Skills catalog",
+    "headings": "Workspace skills\nShine\nUnfog\nSLED Agent",
+    "expectedSelector": "[data-region=\"catalog-cards\"] article",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-catalog-skills/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-catalog-skills/reference.html",
+    "capturedAt": "2026-10-07T14:29:37.161Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "b66df800bcc27421ac607aa5cddbda8e66e425019f11545150d3b1d66770769e",
+    "shotSha256": "7e325cc63bdde17701494de4c8646c30d4a0dfb93b8d44b614508cbc4978b488"
+  }
+}

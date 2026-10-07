@@ -4856,7 +4856,9 @@ Reasons are listed under the table.
 | carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
 | catalog | `shadcn-catalog` | shadcn-registry | blueprint | live | catalog, cards, library, packages, directory, gallery, showcase, tools |
 | catalog | `shadcn-catalog-integrations` | shadcn-registry | blueprint | live | catalog, cards, library, integrations, connectors, plugins, directory |
+| catalog | `shadcn-catalog-skills` | shadcn-registry | blueprint | live | catalog, cards, library, skills, agents, packages, directory |
 | catalog | `shadcn-catalog-templates` | shadcn-registry | blueprint | live | catalog, cards, library, templates, gallery, showcase, directory |
+| catalog | `shadcn-catalog-tools` | shadcn-registry | blueprint | live | catalog, cards, library, tools, packages, company-tools, directory |
 | charts | `shadcn-chart-area-axes` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-default` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-gradient` | shadcn-registry | source | live | charts, chart, area, analytics |
@@ -4935,14 +4937,18 @@ Reasons are listed under the table.
 | charts | `untitled-radar-charts` | untitled-ui-react | source | live | charts, chart, radar, profile, comparison, dataviz |
 | charts | `windmill-charts` | windmill-react | source | live | charts, chart, analytics, dataviz |
 | chat | `shadcn-chat` | shadcn-registry | blueprint | live | chat, assistant, conversation, thread |
+| chat | `shadcn-chat-inbox` | shadcn-registry | blueprint | live | chat, assistant, inbox, threads, conversation |
 | chat | `shadcn-chat-sidecar` | shadcn-registry | blueprint | live | chat, assistant, sidecar, conversation, copilot |
+| chat | `shadcn-chat-support` | shadcn-registry | blueprint | live | chat, assistant, support, triage, ticket, conversation |
 | chat | `spectrum-ai-chat` | react-spectrum | source | live | chat, assistant |
 | checkout | `shadcn-checkout` | shadcn-registry | blueprint | live | checkout, payment |
 | command-palette | `shadcn-command` | shadcn-registry | source | live | command-palette, palette, cmdk |
-| dashboard | `shadcn-cockpit-ops` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, ops, console, dense |
-| dashboard | `shadcn-cockpit-revenue` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, revenue, pipeline, dense |
 | dashboard | `shadcn-dashboard-01` | shadcn-registry | source | live | crud, dashboard, list, records |
 | dashboard | `untitled-line-charts` | untitled-ui-react | source | live | dashboard, analytics, charts, dataviz |
+| dashboard | `shadcn-cockpit-adoption` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, adoption, workspaces, dense |
+| dashboard | `shadcn-cockpit-compliance` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, compliance, risk, findings, dense |
+| dashboard | `shadcn-cockpit-ops` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, ops, console, dense |
+| dashboard | `shadcn-cockpit-revenue` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, revenue, pipeline, dense |
 | dashboard | `tailadmin-dashboard` | tailadmin-react | source | live | dashboard, analytics, kpi, ecommerce, metrics |
 | dashboard | `windmill-dashboard` | windmill-react | source | live | dashboard, analytics, kpi, metrics, dense |
 | dashboard | `flowbite-dashboard` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, sales, dense |
@@ -5040,7 +5046,7 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-230 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+236 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 

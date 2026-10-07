@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-catalog-tools",
+  "source": "corpus/blueprints/shadcn-catalog-tools/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 116362,
+  "provenance": "Authored blueprint, S3 Operate corpus deepen",
+  "capture": {
+    "status": 200,
+    "title": "Company Tools catalog",
+    "headings": "Internal packages\nshine.zip\nunfog.zip\nsled-agent.zip",
+    "expectedSelector": "[data-region=\"catalog-cards\"] article",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-catalog-tools/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-catalog-tools/reference.html",
+    "capturedAt": "2026-10-07T14:29:37.308Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "0ee6e2f5cf4d16a81b63b02441a0db6e170f5876fbf116b2bc1ef7c018eef3bd",
+    "shotSha256": "1044db2eb9da1314e5211a57ee11aa3788547ad89b3431afd67c178057fbda06"
+  }
+}

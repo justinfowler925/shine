@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-chat-inbox",
+  "source": "corpus/blueprints/shadcn-chat-inbox/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 51832,
+  "provenance": "Authored blueprint, S3 Operate corpus deepen",
+  "capture": {
+    "status": 200,
+    "title": "Chat inbox",
+    "headings": "Inbox\nOPS-1842 · attestation",
+    "expectedSelector": "[data-region=\"chat-composer\"] #send",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-chat-inbox/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-chat-inbox/reference.html",
+    "capturedAt": "2026-10-07T14:29:37.513Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "78b066a0c8835d13ce6b7aa15979e0ee7d8358ca94083294d4de45c35e0fb4a5",
+    "shotSha256": "02b8c17f058be0fbfaf8ebacae0fed6d6de9e2deaa8a98687ed87de467fb55cb"
+  }
+}
