@@ -4,9 +4,10 @@
 **Verified:** 2026-10-07T19:30Z  
 **Verdict: PARTIAL** — tip `b043a41` (#161) is **merged + skill-deployed** (live `release.json` matches). Tip Actions (`doctor-*` / `benchmark-smoke`) are **queued**, not green. Local tip checkout fails `skill-listing --check` (stale line counts) — tip doctor will fail when the Mac runner drains the queue unless listing is refreshed. ClearSpeed hosts trail tip (laptop `@77ee84b`, Studio S8 last **15/15** `@6f28cff`). Hosted `ubuntu-latest` still billing-locked; CI is Free self-hosted Mac.
 
-**Tip under test:** Shine `main` = `b043a41b973ff534d92debb9432a9d1e36b11e69` (#161 on top of #149–#160).  
+**Tip under test / `main` HEAD:** `e8eaea1eff63a8e83614c2baa68bc495e22818a1` (#162 DoD tracker on top of #161 `b043a41`).  
+**Denoise product tip (pre-docs):** `b043a41b973ff534d92debb9432a9d1e36b11e69` (#161).  
 **Last `shine` workflow SUCCESS on `main`:** `368acb0…` (#147) — https://github.com/justinfowler925/shine/actions/runs/37653218861  
-**Do not treat `77ee84b` / `3cb2ab7` / `d7a12e64` as tip** — superseded by #161.
+**Do not treat `77ee84b` / `3cb2ab7` / `d7a12e64` as tip** — superseded by #161/#162.
 
 Plans (Project store): `shine-denoise-build-plan.md` · `shine-enterprise-agent-plan.md`  
 Related in-repo DoD: [`distribution-dod.md`](./distribution-dod.md) (15/15 destinations) · [`phase0/DOD.md`](./phase0/DOD.md)
@@ -84,7 +85,7 @@ Admin-merged through queue is the live pattern for #159–#161; do not read empt
 
 ## 3. Shine `main` tip — surface present
 
-**HEAD:** `b043a41b973ff534d92debb9432a9d1e36b11e69`
+**HEAD:** `e8eaea1eff63a8e83614c2baa68bc495e22818a1` (docs #162) · denoise tip `b043a41…` (#161)
 
 Includes #149–#161 denoise deepen (fixtures, constitutionIds, sibling map/learn, DDR + denoise-loop audit append, Critic≠Actor host, wireframe-brief lock, `reflexionVerdict`, skill A/B deepen, Operate slop anti-patterns, measure anti-pattern cite fail-closed) on top of earlier N0–N11 / DDR / Reflexion / CI-unblock stack.
 
