@@ -6,6 +6,12 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Dual-grid XOR recipe (D10).** Agent-assisted close for `collapse-peer-grids`:
+  peer title → filter chip + shared DataGrid state (`verify/restructure/xor-saved-view.mjs`).
+  AST/DOM runners stay plan-only (no silent delete). Fixtures
+  `queue-dual-grid-{before,after}.html` + fold crop receipt; `denoise:eval` bar is
+  detect→XOR after PASS. Kit in `kits.md` § Dual-grid XOR; `npm run restructure:xor`.
+
 - **SLED Capture real-surface prove (S4).** When Nucleus checkout/SSO is absent,
   `verify/fixtures/sled-capture-prove/` (from Project sled dump) fail→pass measure
   with distinct CTA/KPI crops plus operable search→pursue usability. Nucleus golden

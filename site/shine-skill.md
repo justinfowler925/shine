@@ -5151,9 +5151,9 @@ No polish until `primaryTaskCheck` green.
 worklists/grids (`verify/dual-focal.mjs`) and ≥4 equal metric tiles
 (`verify/kpi-soup.mjs`). Dashboard equal-card floor stays in `kpi.mjs`.
 
-**Restructure + denoise-eval (N7):** `shine-restructure/v1` plans apply via
+**Restructure + denoise-eval (N7/D10):** `shine-restructure/v1` plans apply via
 `verify/restructure/apply-dom.mjs`. `npm run denoise:eval` scores fixture pairs.
-Dual-grid remains detect+plan (no silent delete).
+Dual-grid: detect → agent XOR (`xor-saved-view.mjs`) → after PASS; AST/DOM stay plan-only (no silent delete).
 
 **Settings/forms corpus (P2):** cite floors require ≥6 settings pages and ≥6 form+record
 pages; form/settings/record cites hard-fail `aria-invalid` without an accessible message
