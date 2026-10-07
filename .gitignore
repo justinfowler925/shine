@@ -20,3 +20,8 @@ integrations/*.local.json
 # denoise-eval working copies
 verify/fixtures/denoise/.tmp-*.html
 verify/fixtures/skill-ab/.work/
+
+# Phase 1 live human-review emits (regenerate with npm run judgment:blinded)
+benchmark/judgment/blinded/packets.json
+benchmark/judgment/blinded/key.json
+benchmark/judgment/live/
