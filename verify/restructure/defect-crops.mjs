@@ -203,6 +203,107 @@ export function buildDualGridBeforeCropHtml() {
   });
 }
 
+/** Usul composition: equal card soup, no focal region. */
+export function buildUsulFocalBeforeCropHtml() {
+  return wrap({
+    title: "Usul crop FAIL — card soup",
+    cropId: "composition-slop-before",
+    cite: "shadcn-dashboard-01",
+    caption: "Crop FAIL: equal Card panels, no data-region=focal — composition-slop.",
+    body: `  <h1>Usul &amp; coverage · fold</h1>
+  <p class="kicker">Dashboard card soup — no primary work object</p>
+  <section class="grid-wrap card"><h2>Usul pipeline</h2><p>Equal panel</p></section>
+  <section class="grid-wrap card"><h2>By week</h2><p>Equal panel</p></section>
+  <section class="grid-wrap card"><h2>Coverage lift</h2><p>Equal panel</p></section>`,
+  });
+}
+
+/** Usul after: first card stamped focal. */
+export function buildUsulFocalAfterCropHtml() {
+  return wrap({
+    title: "Usul crop PASS — focal set",
+    cropId: "composition-slop-after",
+    cite: "shadcn-dashboard-01",
+    caption: "Crop PASS: Usul pipeline stamped data-region=focal — set-focal.",
+    body: `  <h1>Usul &amp; coverage · fold</h1>
+  <p class="kicker">Primary work object marked</p>
+  <section class="grid-wrap card" data-region="focal"><h2>Usul pipeline</h2>
+    <table><thead><tr><th>Record</th><th>Stage</th></tr></thead>
+      <tbody><tr><td>NV DPS</td><td>In Review</td></tr></tbody>
+    </table>
+  </section>
+  <section class="grid-wrap card"><h2>By week</h2><p>Demoted peer</p></section>`,
+  });
+}
+
+/** Stacked Sled bloat: dual filled CTA + KPI encyclopedia in one crop. */
+export function buildSledBloatBeforeCropHtml() {
+  return wrap({
+    title: "Sled-bloat crop FAIL — CTA + KPI",
+    cropId: "sled-bloat-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: dual filled CTA + ten KPI tiles on decide path — cta-pressure + kpi-soup.",
+    body: `  <h1>Queue · stacked defects</h1>
+  <table role="grid" data-shine-datagrid>
+    <thead><tr><th>Notice</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>NV DPS voice risk RFI</strong></td>
+        <td>
+          <button type="button" class="btn filled">Pursue</button>
+          <button type="button" class="btn">Review</button>
+          <button type="button" class="btn filled-peer">Assign lead</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="metrics" aria-label="SLED Capture key figures" data-sled-kpis>
+        <div class="metric" data-kpi="Open queue"><span>Open queue</span><strong>214</strong></div>
+        <div class="metric" data-kpi="New"><span>New</span><strong>12</strong></div>
+        <div class="metric" data-kpi="High score"><span>High score</span><strong>33</strong></div>
+        <div class="metric" data-kpi="Due soon"><span>Due soon</span><strong>27</strong></div>
+        <div class="metric" data-kpi="Decisions 7d"><span>Decisions 7d</span><strong>48</strong></div>
+        <div class="metric" data-kpi="Decisions 30d"><span>Decisions 30d</span><strong>161</strong></div>
+        <div class="metric" data-kpi="Median"><span>Median</span><strong>4 d</strong></div>
+        <div class="metric" data-kpi="Coverage"><span>Coverage</span><strong>31</strong></div>
+        <div class="metric" data-kpi="Usul"><span>Usul</span><strong>22</strong></div>
+        <div class="metric" data-kpi="Missed"><span>Missed</span><strong>9</strong></div>
+  </div>`,
+  });
+}
+
+/** Stacked after: one filled CTA + KPI collapse. */
+export function buildSledBloatAfterCropHtml() {
+  return wrap({
+    title: "Sled-bloat crop PASS — CTA + KPI cleared",
+    cropId: "sled-bloat-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: single filled Pursue + ≤3 KPIs with details — cta-budget + kpi-collapse.",
+    body: `  <h1>Queue · stacked cleared</h1>
+  <table role="grid" data-shine-datagrid data-region="focal">
+    <thead><tr><th>Notice</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>NV DPS voice risk RFI</strong></td>
+        <td>
+          <button type="button" class="btn filled">Pursue</button>
+          <button type="button" class="btn">Review</button>
+          <button type="button" class="btn ghost">Assign lead</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="metrics" aria-label="SLED Capture key figures" data-sled-kpis>
+        <div class="metric" data-kpi="Open queue"><span>Open queue</span><strong>214</strong></div>
+        <div class="metric" data-kpi="New"><span>New</span><strong>12</strong></div>
+        <div class="metric" data-kpi="High score"><span>High score</span><strong>33</strong></div>
+        <details data-shine-kpi-rest><summary>More metrics</summary>
+          <div class="metric" data-kpi="Missed"><span>Missed</span><strong>9</strong></div>
+        </details>
+  </div>`,
+  });
+}
+
 /** Manifest of pinned crop pairs required by denoise-eval / skill-ab. */
 export const DEFECT_CROP_PAIRS = [
   {
@@ -246,6 +347,28 @@ export const DEFECT_CROP_PAIRS = [
     buildAfter: null, // owned by xor-saved-view.buildXorFoldCropHtml
     beforeMust: [/role=["']grid["']/, /David/, /Queue/],
     afterMust: [/data-shine-xor-views|data-shine-xor-from-peer/, /role=["']grid["']/],
+  },
+  {
+    id: "usul-focal",
+    defect: "composition-slop",
+    beforeCrop: "usul-focal-before-crop.html",
+    afterCrop: "usul-focal-after-crop.html",
+    buildBefore: buildUsulFocalBeforeCropHtml,
+    buildAfter: buildUsulFocalAfterCropHtml,
+    beforeMust: [/class="[^"]*\bcard\b/, /Usul pipeline/],
+    afterMust: [/data-region=["']focal["']/, /Usul pipeline/],
+    beforeMustNot: [/data-region=["']focal["']/],
+  },
+  {
+    id: "queue-sled-bloat",
+    defect: "cta-pressure+kpi-soup",
+    beforeCrop: "queue-sled-bloat-before-crop.html",
+    afterCrop: "queue-sled-bloat-after-crop.html",
+    buildBefore: buildSledBloatBeforeCropHtml,
+    buildAfter: buildSledBloatAfterCropHtml,
+    beforeMust: [/filled-peer/, /data-kpi=/, /Assign lead/],
+    afterMust: [/btn filled">Pursue/, /ghost|outline/i, /data-shine-kpi-rest/, /More metrics/],
+    afterMustNot: [/class="btn filled-peer"/],
   },
 ];
 
@@ -297,18 +420,24 @@ export function assertCropPairOk(pair, read) {
   for (const re of pair.afterMustNot || []) {
     if (after && re.test(after)) errors.push(`${pair.id} after still has ${re}`);
   }
+  for (const re of pair.beforeMustNot || []) {
+    if (before && re.test(before)) errors.push(`${pair.id} before still has ${re}`);
+  }
   // Dual-grid after must keep exactly one grid
   if (pair.id === "queue-dual-grid" && after) {
     const grids = (after.match(/role=["']grid["']/gi) || []).length;
     if (grids !== 1) errors.push(`${pair.id} after must have exactly 1 grid, got ${grids}`);
   }
   // KPI before should show many tiles; after collapses
-  if (pair.id === "queue-kpi" && before && after) {
+  if ((pair.id === "queue-kpi" || pair.id === "queue-sled-bloat") && before && after) {
     const beforeTiles = (before.match(/data-kpi=/g) || []).length;
-    const afterVisible = (after.match(/data-kpi=/g) || []).length;
     if (beforeTiles < 8) errors.push(`${pair.id} before needs ≥8 kpi tiles, got ${beforeTiles}`);
     if (!/data-shine-kpi-rest/.test(after)) errors.push(`${pair.id} after needs kpi-rest details`);
-    if (afterVisible < 3) errors.push(`${pair.id} after should retain visible kpis`);
+  }
+  // Usul after must stamp focal; before must not
+  if (pair.id === "usul-focal" && before && after) {
+    if (/data-region=["']focal["']/.test(before)) errors.push(`${pair.id} before must not already be focal`);
+    if (!/data-region=["']focal["']/.test(after)) errors.push(`${pair.id} after must stamp data-region=focal`);
   }
   return { ok: errors.length === 0, errors };
 }

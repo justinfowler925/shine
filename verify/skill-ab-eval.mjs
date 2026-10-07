@@ -22,6 +22,11 @@ import {
   emitRestructureFromDiagnosis,
   seedDiagnosis,
 } from "../core/diagnosis.mjs";
+import {
+  assertAtlasReflexionVerdict,
+  isAtlasReflexionVerdict,
+  resolveStopReflexionVerdict,
+} from "../core/reflexion.mjs";
 import { applyDomRestructure } from "./restructure/apply-dom.mjs";
 import { applyXorSavedView, buildXorFoldCropHtml } from "./restructure/xor-saved-view.mjs";
 import {
@@ -268,7 +273,77 @@ function cropStatusForCase(c) {
     const path = join(RECEIPTS, name);
     return existsSync(path) ? readFileSync(path, "utf8") : "";
   };
-  return { required: true, ...assertCropPairOk(pair, read) };
+  const checked = assertCropPairOk(pair, read);
+  return {
+    required: true,
+    ...checked,
+    before: pair.beforeCrop,
+    after: pair.afterCrop,
+    defect: pair.defect,
+  };
+}
+
+/**
+ * Mint a per-case A/B receipt: Atlas reflexionVerdict + crop paths (fail-closed).
+ * with clears → done; craft-only without → error. Crops are proof tied to the stamp.
+ */
+export function mintSkillAbCaseReceipt(c, withArm, withoutArm, crops) {
+  const withVerdict = assertAtlasReflexionVerdict(
+    resolveStopReflexionVerdict({
+      cleared: Boolean(withArm?.pass),
+      hostAccepted: Boolean(withArm?.pass),
+    }),
+  );
+  const withoutVerdict = assertAtlasReflexionVerdict(
+    resolveStopReflexionVerdict({
+      cleared: Boolean(withoutArm?.pass),
+      hostAccepted: false,
+    }),
+  );
+  const cropRefs =
+    crops?.required && (c.crops || crops.before)
+      ? {
+          before: c.crops?.before || crops.before,
+          after: c.crops?.after || crops.after,
+          defect: c.crops?.defect || crops.defect || null,
+          ok: Boolean(crops.ok),
+          dir: "verify/fixtures/denoise/receipts",
+        }
+      : null;
+  // Contract: cropped FAIL→PASS proof is bound to Atlas stamp on the with-arm.
+  const cropTiedToVerdict =
+    Boolean(cropRefs) &&
+    cropRefs.ok &&
+    withVerdict === "done" &&
+    withoutVerdict === "error" &&
+    Boolean(withArm?.pass) &&
+    !withoutArm?.pass;
+  return {
+    schema: "shine-skill-ab-receipt/v1",
+    id: c.id,
+    fixture: c.fixture,
+    crops: cropRefs,
+    with: {
+      pass: Boolean(withArm?.pass),
+      reflexionVerdict: withVerdict,
+      opsApplied: withArm?.opsApplied || [],
+      measureCleared: withArm?.measureCleared || [],
+    },
+    without: {
+      pass: Boolean(withoutArm?.pass),
+      reflexionVerdict: withoutVerdict,
+      craftOnly: Boolean(withoutArm?.craftOnly),
+      opsApplied: withoutArm?.opsApplied || [],
+    },
+    cropTiedToVerdict,
+    proof: "cropped FAIL→PASS receipts tied to Atlas reflexionVerdict — not twin full-pages",
+  };
+}
+
+function writeCaseReceipt(workDir, receipt) {
+  const path = join(workDir, `${receipt.id}-receipt.json`);
+  writeFileSync(path, JSON.stringify(receipt, null, 2) + "\n");
+  return path;
 }
 
 export function runSkillAbEval({ runMeasure = false, casesPath = CASES_PATH } = {}) {
@@ -283,14 +358,31 @@ export function runSkillAbEval({ runMeasure = false, casesPath = CASES_PATH } = 
     const withArm = runArm(c, "with", c.withGuidance, { runMeasure, workDir });
     const withoutArm = runArm(c, "without", c.withoutGuidance, { runMeasure, workDir });
     const crops = cropStatusForCase(c);
-    const delta = withArm.pass && !withoutArm.pass && crops.ok;
+    const receipt = mintSkillAbCaseReceipt(c, withArm, withoutArm, crops);
+    const receiptPath = writeCaseReceipt(workDir, receipt);
+    const reflexionOk =
+      isAtlasReflexionVerdict(receipt.with.reflexionVerdict) &&
+      isAtlasReflexionVerdict(receipt.without.reflexionVerdict) &&
+      (withArm.pass ? receipt.with.reflexionVerdict === "done" : true) &&
+      (!withoutArm.pass ? receipt.without.reflexionVerdict === "error" : true);
+    const cropsBound = !crops.required || receipt.cropTiedToVerdict;
+    const delta = withArm.pass && !withoutArm.pass && crops.ok && reflexionOk && cropsBound;
     rows.push({
       id: c.id,
       fixture: c.fixture,
       expectedOps: c.expectedOps,
-      with: withArm,
-      without: withoutArm,
+      with: { ...withArm, reflexionVerdict: receipt.with.reflexionVerdict },
+      without: { ...withoutArm, reflexionVerdict: receipt.without.reflexionVerdict },
       crops,
+      receipt: {
+        path: receiptPath,
+        reflexionVerdictWith: receipt.with.reflexionVerdict,
+        reflexionVerdictWithout: receipt.without.reflexionVerdict,
+        cropTiedToVerdict: receipt.cropTiedToVerdict,
+        crops: receipt.crops,
+      },
+      reflexionOk,
+      cropsBound,
       deltaOk: delta,
       pass: delta,
     });
@@ -302,6 +394,9 @@ export function runSkillAbEval({ runMeasure = false, casesPath = CASES_PATH } = 
   const failed = rows.filter((r) => !r.pass);
   const cropCases = rows.filter((r) => r.crops?.required);
   const cropsOk = cropCases.every((r) => r.crops.ok);
+  const reflexionOk = rows.every((r) => r.reflexionOk);
+  const cropsBoundOk = rows.every((r) => r.cropsBound);
+  const receiptsOk = reflexionOk && cropsBoundOk && cropsOk;
 
   return {
     version: 1,
@@ -319,14 +414,27 @@ export function runSkillAbEval({ runMeasure = false, casesPath = CASES_PATH } = 
     passed: deltas,
     failed: failed.length,
     cropsOk,
-    cropPairs: cropCases.map((r) => ({ id: r.id, ok: r.crops.ok, errors: r.crops.errors })),
-    // Salesforce DI bar: guidance arm wins every pinned case; baseline does not; crops distinct.
+    reflexionOk,
+    cropsBoundOk,
+    receiptsOk,
+    cropPairs: cropCases.map((r) => ({
+      id: r.id,
+      ok: r.crops.ok,
+      errors: r.crops.errors,
+      before: r.crops.before,
+      after: r.crops.after,
+      reflexionVerdictWith: r.receipt.reflexionVerdictWith,
+      cropTiedToVerdict: r.receipt.cropTiedToVerdict,
+    })),
+    // Salesforce DI bar: guidance arm wins every pinned case; baseline does not;
+    // cropped receipts exist and are tied to Atlas reflexionVerdict (with=done, without=error).
     meetsFloor:
       guidance.markersOk &&
       deltas === rows.length &&
       withoutWins === 0 &&
       withWins === rows.length &&
-      cropsOk,
+      cropsOk &&
+      receiptsOk,
     cases: rows,
   };
 }

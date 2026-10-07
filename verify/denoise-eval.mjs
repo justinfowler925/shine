@@ -55,6 +55,7 @@ const CASES = [
     ops: [{ op: "set-focal", attr: "data-region", value: "focal" }],
     mustClear: ["composition-slop"],
     synthesizeAfter: true,
+    cropPairId: "usul-focal",
   },
   {
     id: "sources-cite",

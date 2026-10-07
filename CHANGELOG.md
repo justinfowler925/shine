@@ -6,6 +6,16 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Skill A/B denoise deepen — more pinned pairs + crops↔reflexionVerdict.**
+  Pinned cases grow to 6 (adds Usul focal crop + stacked Sled CTA+KPI bloat).
+  Per-case `shine-skill-ab-receipt/v1` stamps Atlas `reflexionVerdict`
+  (with=`done`, without=`error`) and binds crop paths (`cropTiedToVerdict`).
+  Crop builders: `usul-focal-*` · `queue-sled-bloat-*` in
+  `verify/restructure/defect-crops.mjs`. Floor requires `receiptsOk`.
+  Doctor bites: `verify/skill-ab-eval.test.mjs` · `verify/defect-crops.test.mjs`.
+  Docs: `docs/skill-ab-eval.md` · `docs/denoise-golden-prove.md` ·
+  `skill/references/denoise.md` (+ cowork mirror).
+
 - **Atlas reflexion verdict on prove + denoise-loop stop.** Green
   `verify/prove.mjs` completion receipts and `denoise-loop` stop receipts stamp
   `reflexionVerdict` ∈ `done|partial|blocked|error` (cleared → `done`). Mint and
