@@ -3,6 +3,7 @@
  * Doctor bite — DDR audit trail (enterprise §5).
  * ddrId + Action/Observation event log + prove receipt hash link;
  * supersede don't rewrite history.
+ * Auto-append on packet accept/refuse + prove completion (decision path, not only manual).
  */
 import assert from "node:assert/strict";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -10,7 +11,8 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
-import { buildDdr, supersedeDdr } from "../core/ddr.mjs";
+import { buildDdr, refuseDdr, supersedeDdr } from "../core/ddr.mjs";
+import { createDesignPacket } from "../core/design-packet.mjs";
 import {
   AUDIT_SCHEMA,
   appendEvent,
@@ -20,6 +22,8 @@ import {
   linkProveReceiptAndSave,
   loadTrail,
   receiptHash,
+  recordDdrDecision,
+  recordProveCompletion,
   supersedeTrail,
   validateTrail,
 } from "../core/audit-trail.mjs";
@@ -206,8 +210,116 @@ try {
   assert.ok(afterLink.proveReceiptHash);
   assert.match(readFileSync(join(dir, `${nextDdr.ddrId}.json`), "utf8"), /receipt-linked/);
 
+  // ---- Decision-path auto-append (not only manual CLI) ----
+  const decisionDir = mkdtempSync(join(tmpdir(), "shine-audit-decision-"));
+  try {
+    const proposed = createDesignPacket({
+      job: "Decide Pursue/Review/Dismiss on the next notice",
+      lane: "saas",
+      mode: "denoise",
+      category: "queue",
+      project: SHINE,
+    });
+    assert.equal(proposed.ddr.status, "proposed");
+    const acceptPath = join(decisionDir, "accept-packet.json");
+    writeFileSync(acceptPath, JSON.stringify(proposed, null, 2) + "\n");
+    const acceptRun = spawnSync(
+      process.execPath,
+      [join(SHINE, "core/ddr.mjs"), "accept", acceptPath, "--audit-dir", decisionDir],
+      { encoding: "utf8" },
+    );
+    assert.equal(acceptRun.status, 0, acceptRun.stderr);
+    const acceptOut = JSON.parse(acceptRun.stdout);
+    assert.equal(acceptOut.status, "accepted");
+    assert.ok(acceptOut.auditSeq >= 2);
+    const acceptTrail = loadTrail(acceptOut.ddrId, { auditDir: decisionDir });
+    assert.ok(acceptTrail.events.some((e) => e.type === "mint-ddr"));
+    assert.ok(
+      acceptTrail.events.some(
+        (e) => e.kind === "action" && e.type === "accept-ddr" && e.payload.status === "accepted",
+      ),
+      "ddr.mjs accept must auto-append accept-ddr",
+    );
+
+    const proposed2 = createDesignPacket({
+      job: "Configure account profile fields",
+      lane: "saas",
+      mode: "denoise",
+      category: "settings",
+      project: SHINE,
+    });
+    const refusePath = join(decisionDir, "refuse-packet.json");
+    writeFileSync(refusePath, JSON.stringify(proposed2, null, 2) + "\n");
+    const refuseRun = spawnSync(
+      process.execPath,
+      [
+        join(SHINE, "core/ddr.mjs"),
+        "refuse",
+        refusePath,
+        "--reason",
+        "wrong category — not settings",
+        "--audit-dir",
+        decisionDir,
+      ],
+      { encoding: "utf8" },
+    );
+    assert.equal(refuseRun.status, 0, refuseRun.stderr);
+    const refuseOut = JSON.parse(refuseRun.stdout);
+    assert.equal(refuseOut.status, "refused");
+    const refusePacket = JSON.parse(readFileSync(refusePath, "utf8"));
+    assert.equal(refusePacket.ddr.status, "refused");
+    assert.equal(refusePacket.editing.allowed, false);
+    assert.match(refusePacket.ddr.refuseReason || "", /wrong category/);
+    const refuseTrail = loadTrail(refuseOut.ddrId, { auditDir: decisionDir });
+    assert.ok(
+      refuseTrail.events.some(
+        (e) => e.kind === "action" && e.type === "refuse-ddr" && e.payload.status === "refused",
+      ),
+      "ddr.mjs refuse must auto-append refuse-ddr",
+    );
+
+    // Pure refuseDdr + recordDdrDecision API (library path).
+    const refused = refuseDdr(proposed2.ddr, { reason: "duplicate" });
+    assert.equal(refused.status, "refused");
+    const apiTrail = recordDdrDecision(
+      refused.ddrId,
+      { decision: "refuse", reason: "duplicate", source: "test" },
+      { auditDir: decisionDir },
+    );
+    // Same ddrId already has refuse-ddr from CLI — another refuse append is ok (append-only).
+    assert.ok(apiTrail.events.filter((e) => e.type === "refuse-ddr").length >= 2);
+
+    // Prove completion auto-append (decision path helper used by prove.mjs).
+    const proveDdr = buildDdr({
+      job: "Decide Pursue/Review/Dismiss on the next notice",
+      lane: "saas",
+      category: "queue",
+      mode: "denoise",
+      primaryCite: "shadcn-queue",
+      status: "accepted",
+    });
+    const proveReceipt = {
+      version: 1,
+      kind: "completion",
+      verdict: "passed",
+      tool: "prove.mjs",
+      cite: "shadcn-queue",
+      ddrId: proveDdr.ddrId,
+      ddrLinked: true,
+      checks: { accessibility: { status: "passed" }, styling: { status: "passed" } },
+      at: Date.now(),
+    };
+    const proveTrail = recordProveCompletion(proveDdr.ddrId, proveReceipt, { auditDir: decisionDir });
+    assert.ok(proveTrail.proveReceiptHash);
+    assert.ok(proveTrail.events.some((e) => e.type === "prove" && e.kind === "action"));
+    assert.ok(proveTrail.events.some((e) => e.type === "receipt-linked" && e.kind === "observation"));
+    assert.equal(proveTrail.proveReceiptHash, receiptHash(proveReceipt));
+  } finally {
+    rmSync(decisionDir, { recursive: true, force: true });
+  }
+
   console.log(
-    "audit-trail PASS: ddrId Action/Observation log · prove receipt hash · supersede no rewrite",
+    "audit-trail PASS: ddrId Action/Observation log · prove receipt hash · supersede no rewrite · accept/refuse+prove auto-append",
   );
 } finally {
   rmSync(dir, { recursive: true, force: true });

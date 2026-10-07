@@ -25,6 +25,7 @@ import {checkCompetingCtaFlowBinding} from './cta-pressure.mjs';
 import {verifyReuse} from '../integrations/blocks.mjs';
 import {verifyCoverage} from '../integrations/coverage.mjs';
 import {assertDdrHasEditionCatalog,resolveProveConstitution} from '../core/constitution.mjs';
+import {recordProveCompletion} from '../core/audit-trail.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'),exec=promisify(execFile);
 const text=(value)=>String(value||"").trim();
 // Closed native dialogs are separate workflows. Hidden players in the active
@@ -132,14 +133,15 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
   }else if(constitution.constitutionIds.length){
    checks.constitutionCatalog={status:'passed',editionId:constitution.constitutionEdition||null,count:constitution.constitutionIds.length,optional:true};
   }
-  const status=Object.values(checks).every(c=>c.status==='passed')?'passed':Object.values(checks).some(c=>c.status==='failed')?'failed':'incomplete';
+  let status=Object.values(checks).every(c=>c.status==='passed')?'passed':Object.values(checks).some(c=>c.status==='failed')?'failed':'incomplete';
   const report={version:1,status,checks,evidence};
   if(status==='passed'){
    // Always mint the stop-sweep completion store on green — Operate cannot skip prove.
    // SaaS receipts stamp constitutionIds (catalog default when omitted).
    const localTarget=/^https?:/.test(target)?undefined:resolve(target);
+   let completionReceipt=null;
    try{
-    writeCompletionProveReceipt({
+    completionReceipt=writeCompletionProveReceipt({
      cite:citeId,
      target:localTarget,
      lane,
@@ -151,6 +153,19 @@ export async function prove({target,citeId,layoutPath,usabilityPath,diagnosisPat
      constitutionEdition:constitution.constitutionEdition||"",
     });
    }catch(error){evidence.completionReceiptError=error.message;}
+   // Decision-path audit: auto-append prove + receipt-linked hash when --ddr is set.
+   if(ddrId&&completionReceipt){
+    try{
+     const trail=recordProveCompletion(ddrId,completionReceipt);
+     checks.auditTrail={status:'passed',proveReceiptHash:trail.proveReceiptHash,events:trail.events.length};
+     report.proveReceiptHash=trail.proveReceiptHash;
+    }catch(error){
+     evidence.auditTrailError=error.message;
+     checks.auditTrail={status:'failed',reason:error.message};
+     status=Object.values(checks).every(c=>c.status==='passed')?'passed':Object.values(checks).some(c=>c.status==='failed')?'failed':'incomplete';
+     report.status=status;
+    }
+   }
    if(receiptPath){writeCompletionReceipt(receiptPath,report,binding);report.receipt=resolve(receiptPath);}
    if(ddrId)report.ddrId=ddrId;
    if(constitution.constitutionIds.length){

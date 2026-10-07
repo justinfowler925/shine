@@ -6,6 +6,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **DDR audit trail auto-append (decision path).** Packet `accept` /
+  `refuse` via `core/ddr.mjs` and green `verify/prove.mjs --ddr` auto-append
+  Action/Observation events through `recordDdrDecision` /
+  `recordProveCompletion` (not only manual `npm run audit`). New DDR status
+  `refused`; `refuse-ddr` action type. Doctor bite covers accept/refuse+prove
+  auto-append. Docs: `docs/ddr-audit-trail.md`.
+
 - **ClearSpeed Operate edition sibling map (enterprise §4).**
   `knowledge/editions/clearspeed-operate/siblings.json` maps Operate jobs to
   Nucleus / Sled Capture sibling surfaces for cite + kit selection
