@@ -202,6 +202,21 @@ Fixtures: `verify/fixtures/denoise/tsx/queue-kpi-chrome-first.tsx` ·
 `queue-worklist-first-ast.tsx`.  
 Doctor: `verify/worklist-first-ast-bite.mjs` / `npm run worklist-first:ast-bite`.
 
+### Denoise-loop e2e — measure→AST repair→Critic≠Actor→prove
+
+Fixture-queue doctor bite for the full denoise agent cycle (not twin screenshots):
+
+1. **Measure** — `queue-cta-before.html` fails named denoise defects (cta-pressure / dual / kpi).
+2. **Repair (AST)** — Actor applies `apply-tsx` ops on `queue-dual-cta-ast.tsx` (`tsxPath`);
+   DOM continuum keeps measure HTML in sync.
+3. **Critic≠Actor** — host cycle `measure→repair→critic`; worker self-review banned.
+4. **Prove** — `mintProve` stamps completion with Atlas `reflexionVerdict` + `constitutionIds`
+   linked to `ddrId`.
+5. **Crop** — FAIL→PASS pair `queue-cta-tsx` required (`cropPairId`); twins banned.
+
+Doctor: `verify/denoise-loop-e2e-bite.mjs` / `npm run denoise:loop-e2e`.  
+CLI: `npm run denoise:loop -- --html … --tsx … --prove --crop queue-cta-tsx`.
+
 ### Wrong-cite / rebind-cite TSX AST (N8 deepen) — refuse until rebound
 
 Settings/sources jobs stamped with a queue (or other wrong-category) cite in consumer

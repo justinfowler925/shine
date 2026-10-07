@@ -71,7 +71,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 2 static     vibe / preflight-slop / Card·Badge counts
 3 cite       shot + restructureHints[]
 4 diagnose   shine-diagnosis.json + shine-restructure.json   ← Critic turn
-5 apply      DOM/AST auto-safe ops (verify/restructure/*) — TSX `cta-budget` via TypeScript AST (maxFilled=1; variant default / {"default"} / missing); TSX `kpi-collapse` via TypeScript AST (maxVisible=3; className metric / {"metric"} / data-shine-kpi); TSX `collapse-peer-grids` via TypeScript AST (XOR peer→chip; className grid-wrap / {"grid-wrap"} / role={"grid"}); TSX `worklist-first` via TypeScript AST (records/worklist before KPI chrome + focal)     ← Actor turn
+5 apply      DOM/AST auto-safe ops (verify/restructure/*) — TSX `cta-budget` via TypeScript AST (maxFilled=1; variant default / {"default"} / missing); TSX `kpi-collapse` via TypeScript AST (maxVisible=3; className metric / {"metric"} / data-shine-kpi); TSX `collapse-peer-grids` via TypeScript AST (XOR peer→chip; className grid-wrap / {"grid-wrap"} / role={"grid"}); TSX `worklist-first` via TypeScript AST (records/worklist before KPI chrome + focal); TSX `rebind-cite` via TypeScript AST (wrong-cite → category truth; data-cite / dataCite string + {"…"}; refuse paint until rebound)     ← Actor turn
 6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
 7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
 8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done
@@ -165,6 +165,7 @@ Pinned crop pairs (HTML crops under `verify/fixtures/denoise/receipts/`):
 | `cta-pressure` (TSX AST) | `queue-cta-tsx-{before,after}-crop.html` |
 | `kpi-soup` | `queue-kpi-{before,after}-crop.html` |
 | wrong-cite | `sources-cite-{before,after}-crop.html` |
+| wrong-cite (TSX AST) | `sources-cite-tsx-{before,after}-crop.html` |
 | `dual-focal` / XOR | `queue-dual-grid-before-crop.html` → `queue-dual-grid-fold-crop.html` |
 | `dual-focal` (TSX AST) | `queue-dual-grid-tsx-{before,after}-crop.html` |
 | composition / worklist-first (TSX AST) | `queue-worklist-first-tsx-{before,after}-crop.html` |
@@ -180,9 +181,12 @@ Skill A/B (Salesforce DI-style, machine oracles only — **no preference data**)
 Builders: `verify/restructure/defect-crops.mjs` · bite `verify/defect-crops.test.mjs` ·  
 `verify/skill-ab-eval.test.mjs`.  
 Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
+E2E (measure→AST repair→Critic≠Actor→prove + FAIL→PASS crop):  
+`npm run denoise:loop-e2e` → `verify/denoise-loop-e2e-bite.mjs`  
+(`--tsx` / `tsxPath` Actor AST ops; `--prove` stamps `reflexionVerdict`+`constitutionIds`; `--crop queue-cta-tsx`).  
 XOR recipe: `npm run restructure:xor -- --html verify/fixtures/denoise/queue-dual-grid-before.html --out /tmp/xor.html`.  
-TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). `cta-budget` is TypeScript AST (maxFilled=1); `collapse-peer-grids` is TypeScript AST XOR on TSX (DOM stays plan-only); `worklist-first` is TypeScript AST (records/worklist before KPI chrome).  
-CTA AST bite: `npm run cta-pressure:ast-bite`. KPI soup AST bite: `npm run kpi-soup:ast-bite`. Dual-focal AST bite: `npm run dual-focal:ast-bite`. Worklist-first AST bite: `npm run worklist-first:ast-bite`. Kit: `kits.md` § CTA pressure TSX AST · KPI soup TSX AST · Dual-focal ban TSX AST · Worklist-first TSX AST · Dual-grid XOR (D10).
+TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). `cta-budget` is TypeScript AST (maxFilled=1); `collapse-peer-grids` is TypeScript AST XOR on TSX (DOM stays plan-only); `worklist-first` is TypeScript AST (records/worklist before KPI chrome); `rebind-cite` is TypeScript AST (wrong-cite → category truth; refuse paint until rebound).  
+CTA AST bite: `npm run cta-pressure:ast-bite`. KPI soup AST bite: `npm run kpi-soup:ast-bite`. Dual-focal AST bite: `npm run dual-focal:ast-bite`. Worklist-first AST bite: `npm run worklist-first:ast-bite`. Wrong-cite AST bite: `npm run wrong-cite:ast-bite`. Kit: `kits.md` § Denoise-loop e2e · CTA pressure TSX AST · KPI soup TSX AST · Dual-focal ban TSX AST · Worklist-first TSX AST · Wrong-cite / rebind-cite TSX AST · Dual-grid XOR (D10).
 
 ## Related
 

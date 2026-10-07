@@ -2352,9 +2352,12 @@ Skill A/B (Salesforce DI-style, machine oracles only — **no preference data**)
 `npm run skill:ab` → `verify/skill-ab-eval.mjs` on pinned `verify/fixtures/skill-ab/cases.json`  
 (with denoise guidance vs craft-only baseline; doctor requires with>without on every case).  
 Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
+E2E (measure→AST repair→Critic≠Actor→prove + FAIL→PASS crop):  
+`npm run denoise:loop-e2e` → `verify/denoise-loop-e2e-bite.mjs`  
+(`--tsx` / `tsxPath` Actor AST ops; `--prove` stamps `reflexionVerdict`+`constitutionIds`; `--crop queue-cta-tsx`).  
 XOR recipe: `npm run restructure:xor -- --html verify/fixtures/denoise/queue-dual-grid-before.html --out /tmp/xor.html`.  
 TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). `cta-budget` is TypeScript AST (maxFilled=1); `collapse-peer-grids` is TypeScript AST XOR on TSX (DOM stays plan-only); `worklist-first` is TypeScript AST (records/worklist before KPI chrome); `rebind-cite` is TypeScript AST (wrong-cite → category truth; refuse paint until rebound).  
-CTA AST bite: `npm run cta-pressure:ast-bite`. KPI soup AST bite: `npm run kpi-soup:ast-bite`. Dual-focal AST bite: `npm run dual-focal:ast-bite`. Worklist-first AST bite: `npm run worklist-first:ast-bite`. Wrong-cite AST bite: `npm run wrong-cite:ast-bite`. Kit: `kits.md` § CTA pressure TSX AST · KPI soup TSX AST · Dual-focal ban TSX AST · Worklist-first TSX AST · Wrong-cite / rebind-cite TSX AST · Dual-grid XOR (D10).
+CTA AST bite: `npm run cta-pressure:ast-bite`. KPI soup AST bite: `npm run kpi-soup:ast-bite`. Dual-focal AST bite: `npm run dual-focal:ast-bite`. Worklist-first AST bite: `npm run worklist-first:ast-bite`. Wrong-cite AST bite: `npm run wrong-cite:ast-bite`. Kit: `kits.md` § Denoise-loop e2e · CTA pressure TSX AST · KPI soup TSX AST · Dual-focal ban TSX AST · Worklist-first TSX AST · Wrong-cite / rebind-cite TSX AST · Dual-grid XOR (D10).
 
 ## Related
 
@@ -3308,7 +3311,22 @@ Fixtures: `verify/fixtures/denoise/tsx/queue-kpi-chrome-first.tsx` ·
 `queue-worklist-first-ast.tsx`.  
 Doctor: `verify/worklist-first-ast-bite.mjs` / `npm run worklist-first:ast-bite`.
 
-### Wrong-cite / rebind-cite TSX AST (N8 deepen) — refuse until rebound
+### Denoise-loop e2e — measure→AST repair→Critic≠Actor→prove
+
+Fixture-queue doctor bite for the full denoise agent cycle (not twin screenshots):
+
+1. **Measure** — `queue-cta-before.html` fails named denoise defects (cta-pressure / dual / kpi).
+2. **Repair (AST)** — Actor applies `apply-tsx` ops on `queue-dual-cta-ast.tsx` (`tsxPath`);
+   DOM continuum keeps measure HTML in sync.
+3. **Critic≠Actor** — host cycle `measure→repair→critic`; worker self-review banned.
+4. **Prove** — `mintProve` stamps completion with Atlas `reflexionVerdict` + `constitutionIds`
+   linked to `ddrId`.
+5. **Crop** — FAIL→PASS pair `queue-cta-tsx` required (`cropPairId`); twins banned.
+
+Doctor: `verify/denoise-loop-e2e-bite.mjs` / `npm run denoise:loop-e2e`.  
+CLI: `npm run denoise:loop -- --html … --tsx … --prove --crop queue-cta-tsx`.
+
+### Wrong-cite / rebind-cite TSX AST
 
 Settings/sources jobs stamped with a queue (or other wrong-category) cite in consumer
 TSX are rebound by **TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs`

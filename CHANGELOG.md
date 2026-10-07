@@ -6,6 +6,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise-loop e2e (measure→AST repair→Critic≠Actor→prove).** `runDenoiseLoop`
+  accepts `tsxPath` (Actor repair via `applyTsxRestructure`), `mintProve` (completion
+  receipt stamps `reflexionVerdict` + `constitutionIds`), and `cropPairId` (FAIL→PASS
+  crop required — twin full-page banned). Named denoise defect clearance
+  (cta/dual/kpi/…) is the loop bar when craft gates remain. Doctor bite:
+  `verify/denoise-loop-e2e-bite.mjs` / `npm run denoise:loop-e2e` on fixture queue
+  `queue-cta-before.html` + `queue-dual-cta-ast.tsx` + crop `queue-cta-tsx`.
+
 - **Wrong-cite / rebind-cite TSX AST deepen (recommend refuse path).** `apply-tsx.mjs`
   `rebind-cite` uses the TypeScript compiler AST (not regex) to rewrite wrong-category
   stamps — `data-cite="…"`, `data-cite={"…"}`, `dataCite="…"`, `dataCite={"…"}`.

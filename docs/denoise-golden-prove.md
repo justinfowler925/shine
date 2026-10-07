@@ -6,6 +6,7 @@
 
 ```sh
 npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html
+npm run denoise:loop-e2e
 npm run denoise:eval
 node verify/denoise-loop.test.mjs
 ```
@@ -15,10 +16,11 @@ node verify/denoise-loop.test.mjs
 1. Packet `--mode denoise --category queue --accept` → DDR  
 2. Preflight-slop `ai-slop-*`  
 3. Cite + `restructureHints[]` (N10)  
-4. `shine-restructure.json` → `apply-dom` (+ TSX dry-run for consumer sources)  
+4. `shine-restructure.json` → `apply-dom` (+ TSX AST Actor repair when `--tsx` / `tsxPath`)  
 5. Agent humanGate for dual-grid XOR (`npm run restructure:xor` / `xor-saved-view.mjs`) — peer title → filter chip + shared DataGrid; never silent delete in apply-tsx  
-6. Measure rounds (≤3) with Reflexion on fail  
-7. Prove receipt links `ddrId`; dual-grid crop shows **one** grid in fold (`receipts/queue-dual-grid-fold-crop.html`)
+6. Measure rounds (≤3) with Critic≠Actor host — named denoise defects must clear (cta/dual/kpi/…)  
+7. Prove receipt links `ddrId` + `constitutionIds` + `reflexionVerdict` (`--prove` / `mintProve`); FAIL→PASS crop required (`--crop queue-cta-tsx`) — twin full-page INVALID  
+8. E2E doctor: `npm run denoise:loop-e2e` (fixture queue HTML+TSX AST+crop)
 
 ## Fixtures
 
