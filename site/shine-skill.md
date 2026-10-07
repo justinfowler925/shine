@@ -2293,6 +2293,19 @@ act as Critic (or Host finalize) on that work — fail-closed.
 must call `hostFinalizeAfterClearance` / `completeAfterRepair` — `hostAccept` must not
 stay null on a cleared receipt (`assertHostFinalized`).
 
+### Structure lock (wireframe brief → denoise-loop)
+
+Once primary job + regions are locked (LOCKED `shine-wireframe/<slug>.brief.md`, or
+auto-lock from the emitted `shine-restructure.json`), **REPAINT that changes structure
+is refuse-closed** without a RESTRUCTURE packet:
+
+- Gate: `gateDenoiseStructureChange` / `assertRepaintPreservesStructure` in
+  `core/wireframe-brief.mjs`
+- Structural apply in the loop uses `phase=RESTRUCTURE` + the plan
+- Craft-only REPAINT (same primary/regions) stays allowed
+- Receipt: `structureLock: { locked, primaryAction, regions, repaintStructureRefuse }`
+- Optional: `--wireframe-brief path` on `denoise-loop.mjs`
+
 Max **3** measure rounds per surface. Each round clears a **named** defect.
 
 Impeccable `distill` / `quieter` and Snapline adapters are **opt-in after** cite locked + CTA/focal ops. They never override `data-cite`. See adapters in `verify/adapters/`.
@@ -5876,6 +5889,22 @@ node "$ROOT/core/wireframe-brief.mjs" check shine-wireframe/<slug>.brief.md --pa
 
 `ddr.wireframeBrief` on mode=`new` packets records `{ path, status, structureLocked }`.
 `assertStructureLocked` / `assertBuildMayPaint` / `assertNewSurfaceBrief` are fail-closed.
+
+### Denoise structure lock (REPAINT vs RESTRUCTURE)
+
+Once primary job + regions are LOCKED (wireframe brief **or** denoise-loop lock from
+`shine-restructure.json`), **REPAINT must not change structure**. Structural edits
+require phase=`RESTRUCTURE` + a valid `shine-restructure/v1` packet.
+
+| Intent | Structure changes? | Packet | Result |
+|---|---|---|---|
+| REPAINT | no | — | allow (craft) |
+| REPAINT | yes | missing | **refuse** |
+| RESTRUCTURE | yes | `shine-restructure/v1` | allow |
+| RESTRUCTURE | yes | missing/invalid | **refuse** |
+
+Receipt: `structureLock.locked` + `repaintStructureRefuse: true`. Doctor:
+`verify/wireframe-brief.test.mjs`.
 
 `DESIGN.md` names: lane, cite, voice, job, signature, palette (from pack), type pairing, layout ASCII, Salesforce host width if lex.
 

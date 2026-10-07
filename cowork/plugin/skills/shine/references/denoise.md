@@ -103,6 +103,19 @@ act as Critic (or Host finalize) on that work — fail-closed.
 must call `hostFinalizeAfterClearance` / `completeAfterRepair` — `hostAccept` must not
 stay null on a cleared receipt (`assertHostFinalized`).
 
+### Structure lock (wireframe brief → denoise-loop)
+
+Once primary job + regions are locked (LOCKED `shine-wireframe/<slug>.brief.md`, or
+auto-lock from the emitted `shine-restructure.json`), **REPAINT that changes structure
+is refuse-closed** without a RESTRUCTURE packet:
+
+- Gate: `gateDenoiseStructureChange` / `assertRepaintPreservesStructure` in
+  `core/wireframe-brief.mjs`
+- Structural apply in the loop uses `phase=RESTRUCTURE` + the plan
+- Craft-only REPAINT (same primary/regions) stays allowed
+- Receipt: `structureLock: { locked, primaryAction, regions, repaintStructureRefuse }`
+- Optional: `--wireframe-brief path` on `denoise-loop.mjs`
+
 Max **3** measure rounds per surface. Each round clears a **named** defect.
 
 Impeccable `distill` / `quieter` and Snapline adapters are **opt-in after** cite locked + CTA/focal ops. They never override `data-cite`. See adapters in `verify/adapters/`.

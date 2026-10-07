@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * Wireframe brief lock bites — structure locked until "unlock structure".
+ * Denoise: refuse REPAINT that changes structure without RESTRUCTURE packet.
  */
 import assert from "node:assert/strict";
 import { mkdtempSync, rmSync, writeFileSync, existsSync, readFileSync } from "node:fs";
@@ -10,20 +11,28 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import {
+  STRUCTURE_PHASE_REPAINT,
+  STRUCTURE_PHASE_RESTRUCTURE,
   UNLOCK_PHRASE,
   applyStructurePatch,
   assertBuildMayPaint,
   assertNewSurfaceBrief,
+  assertRepaintPreservesStructure,
   assertStructureLocked,
   briefPathForSlug,
+  createStructureLockFromPlan,
   formatBriefMarkdown,
+  gateDenoiseStructureChange,
   lockBrief,
   readBrief,
+  structureLockReceipt,
+  structureSnapshot,
   unlockStructure,
   wireframeBriefRef,
   writeBrief,
 } from "../core/wireframe-brief.mjs";
 import { createDesignPacket } from "../core/design-packet.mjs";
+import { buildRestructurePlan } from "./restructure/schema.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dir = mkdtempSync(join(tmpdir(), "shine-wf-brief-"));
@@ -151,9 +160,78 @@ try {
   const body = readFileSync(wireframeMd, "utf8");
   assert.match(body, /wireframe-brief\.mjs/);
   assert.match(body, /unlock structure/);
+  assert.match(body, /RESTRUCTURE|REPAINT/);
+
+  // Denoise structure lock: REPAINT cannot mutate primary/regions without packet.
+  const plan = buildRestructurePlan({
+    job: "Decide Pursue/Review/Dismiss on the next notice",
+    category: "queue",
+    citePrimary: "shadcn-queue",
+    ops: [{ op: "cta-budget", maxFilled: 1, preferLabels: ["Pursue"], demotePolicy: "outline" }],
+  });
+  const loopLock = createStructureLockFromPlan(plan, {
+    job: "Decide Pursue/Review/Dismiss on the next notice",
+    cite: "shadcn-queue",
+  });
+  assert.equal(loopLock.status, "LOCKED");
+  const snap = structureSnapshot(loopLock);
+  assert.match(snap.primaryAction, /Pursue|Decide/i);
+  assert.ok(snap.regions.length >= 1);
+
+  // Craft-only REPAINT (same structure) — allowed.
+  assertRepaintPreservesStructure({
+    brief: loopLock,
+    phase: STRUCTURE_PHASE_REPAINT,
+    proposed: snap,
+  });
+
+  // REPAINT that changes primary — refuse without RESTRUCTURE packet.
+  assert.throws(
+    () =>
+      assertRepaintPreservesStructure({
+        brief: loopLock,
+        phase: STRUCTURE_PHASE_REPAINT,
+        proposed: { ...snap, primaryAction: "Invent a new dashboard job" },
+      }),
+    /refuse REPAINT|RESTRUCTURE packet/,
+  );
+  assert.throws(
+    () =>
+      gateDenoiseStructureChange({
+        brief: readBrief(path),
+        phase: STRUCTURE_PHASE_REPAINT,
+        proposed: { "Primary action": "Totally different", Regions: "- other — invent" },
+      }),
+    /refuse REPAINT|RESTRUCTURE packet/,
+  );
+
+  // Same change as RESTRUCTURE + valid packet — allowed.
+  gateDenoiseStructureChange({
+    brief: loopLock,
+    phase: STRUCTURE_PHASE_RESTRUCTURE,
+    proposed: { ...snap, primaryAction: "Decide Pursue on the next notice" },
+    restructurePlan: plan,
+  });
+
+  // RESTRUCTURE without packet — refuse.
+  assert.throws(
+    () =>
+      gateDenoiseStructureChange({
+        brief: loopLock,
+        phase: STRUCTURE_PHASE_RESTRUCTURE,
+        proposed: { ...snap, regions: ["focal — invented"] },
+        restructurePlan: null,
+      }),
+    /refuse REPAINT|RESTRUCTURE packet/,
+  );
+
+  const receiptFrag = structureLockReceipt(loopLock, { source: "denoise-loop" });
+  assert.equal(receiptFrag.locked, true);
+  assert.equal(receiptFrag.repaintStructureRefuse, true);
+  assert.equal(receiptFrag.source, "denoise-loop");
 
   console.log(
-    "wireframe-brief PASS: lock · unlock phrase · structure refuse · packet mode=new · paint gate",
+    "wireframe-brief PASS: lock · unlock phrase · structure refuse · packet mode=new · paint gate · denoise REPAINT/RESTRUCTURE gate",
   );
 } finally {
   rmSync(dir, { recursive: true, force: true });

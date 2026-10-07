@@ -21,6 +21,14 @@ import {
   planRepairFromMeasure,
 } from "../core/critic-actor-host.mjs";
 import { autoAppendDenoiseLoop } from "../core/audit-trail.mjs";
+import {
+  STRUCTURE_PHASE_RESTRUCTURE,
+  createStructureLockFromPlan,
+  gateDenoiseStructureChange,
+  readBrief,
+  structureLockReceipt,
+  wireframeBriefRef,
+} from "../core/wireframe-brief.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { applyDomRestructure } from "./restructure/apply-dom.mjs";
 import { applyXorSavedView } from "./restructure/xor-saved-view.mjs";
@@ -69,6 +77,8 @@ export async function runDenoiseLoop({
   outDir = "",
   /** Pin audit root (tests); else SHINE_AUDIT_DIR opt-in. */
   auditDir = null,
+  /** Optional LOCKED shine-wireframe/<slug>.brief.md — structure gate. */
+  wireframeBrief = "",
 } = {}) {
   const out = outDir || join(ROOT, "verify/fixtures/denoise/.loop");
   mkdirSync(out, { recursive: true });
@@ -80,6 +90,7 @@ export async function runDenoiseLoop({
     category,
     project: ROOT,
     accept: true,
+    wireframeBrief: wireframeBrief || undefined,
   });
   const auditOpts = auditDir ? { auditDir } : {};
   /** @type {{ events: number, error: string|null }|null} */
@@ -141,6 +152,24 @@ export async function runDenoiseLoop({
       ],
     });
   writeFileSync(join(out, "shine-restructure.json"), JSON.stringify(plan, null, 2) + "\n");
+
+  // Structure lock: prefer LOCKED wireframe brief; else lock primary job/regions from plan.
+  let briefRef = null;
+  let structureLock = null;
+  if (wireframeBrief) {
+    const brief = readBrief(wireframeBrief);
+    briefRef = wireframeBriefRef(wireframeBrief, brief);
+    if (brief.status === "LOCKED") structureLock = brief;
+  }
+  if (!structureLock) {
+    structureLock = createStructureLockFromPlan(plan, { job, cite });
+  }
+  // RESTRUCTURE apply is allowed only with the shine-restructure/v1 packet.
+  gateDenoiseStructureChange({
+    brief: structureLock,
+    phase: STRUCTURE_PHASE_RESTRUCTURE,
+    restructurePlan: plan,
+  });
 
   // Round 1: apply DOM auto-safe ops
   const applied = applyDomRestructure(html, plan);
@@ -247,6 +276,12 @@ export async function runDenoiseLoop({
     }
 
     // Actor repair turn — one imperative nextStep; never accepts its own review.
+    // Structural repair stays phase=RESTRUCTURE + packet (REPAINT cannot mutate IA).
+    gateDenoiseStructureChange({
+      brief: structureLock,
+      phase: STRUCTURE_PHASE_RESTRUCTURE,
+      restructurePlan: plan,
+    });
     retriesUsed++;
     const again = applyDomRestructure(html, plan);
     html = again.html;
@@ -324,6 +359,10 @@ export async function runDenoiseLoop({
     preflight: pre.signals.map((s) => s.id),
     opsApplied: applied.applied,
     humanGateRequired: applied.humanGate,
+    structureLock: structureLockReceipt(structureLock, {
+      source: briefRef ? "wireframe-brief" : "denoise-loop",
+      wireframeBrief: briefRef,
+    }),
     criticActor: {
       criticAgentId: DEFAULT_CRITIC_ID,
       actorAgentId: DEFAULT_ACTOR_ID,
@@ -365,6 +404,7 @@ if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.me
     category: opt("--category") || "queue",
     cite: opt("--cite") || "shadcn-queue",
     outDir: opt("--out") || "",
+    wireframeBrief: opt("--wireframe-brief") || "",
   });
   process.stdout.write(JSON.stringify(receipt, null, 2) + "\n");
   process.exit(receipt.status === "passed" ? 0 : 1);

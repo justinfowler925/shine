@@ -6,6 +6,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Wireframe-brief structure lock in denoise-loop.** Once primary job/regions
+  are LOCKED (wireframe brief or auto-lock from `shine-restructure.json`),
+  REPAINT that changes structure is refuse-closed without a RESTRUCTURE packet
+  (`phase=RESTRUCTURE` + valid `shine-restructure/v1`). Helpers:
+  `assertRepaintPreservesStructure`, `gateDenoiseStructureChange`,
+  `createStructureLockFromPlan`. Receipt `structureLock`. Doctor bite:
+  `verify/wireframe-brief.test.mjs` (+ denoise-loop receipt). Docs:
+  `skill/references/wireframe.md` · `denoise.md` (+ site/cowork mirrors).
+
 - **Critic≠Actor measure→repair→critic in denoise-loop.** Host helpers
   `planRepairFromMeasure`, `completeAfterRepair`, `runPostRepairCriticRound`,
   `assertNoWorkerSelfReview` track the repair worker and fail-closed if that
