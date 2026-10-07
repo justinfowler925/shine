@@ -47,7 +47,7 @@ turns (beyond accept/refuse+prove) — not only manual `npm run audit`:
 | Loop turn | Wire | Events |
 |---|---|---|
 | Measure | after each `measure.mjs` round | `action:measure` + `observation:measure-result` |
-| Critic ≠ Actor | after `runCriticActorHostRound` | `action:critic` + `action:reflexion` + `observation:critic-verdict` |
+| Critic ≠ Actor | after `planRepairFromMeasure` / host round | `action:critic` + `action:reflexion` + `observation:critic-verdict` |
 
 Helpers: `recordMeasureTurn`, `recordCriticReflexionTurn`, `autoAppendDenoiseLoop`
 (`shineAuditDirEnabled` is the env gate). Tests may pass `auditDir` to
