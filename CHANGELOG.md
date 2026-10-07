@@ -6,6 +6,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Repertoire + episodic learn stub.** `core/learn.mjs` + seeded
+  `knowledge/repertoire/repertoire.json` store proven job→cite→kit + working
+  `restructureHints`, and linguistic episodes tied to `ddrId` + prove fail
+  category. `commitLearning` bumps store `version` only when `doctorBiteOk`
+  (doctor-gated). Refuses preference / RLAIF labels and lessons without a
+  machine fail. `npm run learn`; doctor bite `verify/learn.test.mjs`.
+
 - **Wireframe brief lock.** Machine lock for new surfaces at
   `shine-wireframe/<slug>.brief.md` (`core/wireframe-brief.mjs`): Status
   DRAFT→LOCKED→UNLOCKED; structure fields immutable while LOCKED until the user

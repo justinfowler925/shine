@@ -41,6 +41,7 @@
     "layers:test": "node verify/component-layers.test.mjs",
     "packet:test": "node verify/design-packet.test.mjs && node verify/denoise-packet.test.mjs",
     "reflexion": "node core/reflexion.mjs",
+    "learn": "node core/learn.mjs",
     "wireframe:brief": "node core/wireframe-brief.mjs",
     "critic-actor:host": "node core/critic-actor-host.mjs",
     "preflight:slop": "node verify/preflight-slop.mjs",
