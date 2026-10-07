@@ -87,6 +87,8 @@ Installable first-viewport recipe for Monday decide jobs (Sled Capture class). P
 over dashboard chrome when the job is triage / queue / inbox.
 
 1. **One work object in the fold** — `data-region="focal"` on a single DataGrid / worklist.
+   Consumer TSX: when KPI/dashboard chrome precedes the work object, `apply-tsx` AST
+   `worklist-first` reorders records/worklist first + stamps focal (see § Worklist-first TSX AST).
 2. **CTA budget = 1** — one filled job verb (e.g. Pursue); peers outline/ghost/segmented.
 3. **KPI encyclopedia off-path** — ≤3 summary chips; rest in `<details data-shine-kpi-rest>`.
 4. **No peer grids** — second ranking (e.g. “David’s 10”) is a saved-view / filter XOR, never
@@ -96,7 +98,7 @@ over dashboard chrome when the job is triage / queue / inbox.
    lead, chart atoms, magicui. Packet `recommendation.restructureHints` must clear before polish.
 6. **Golden fixture** — `verify/fixtures/denoise/queue-cta-{before,after}.html` +
    `queue-dual-grid-{before,after}.html` + `npm run denoise:eval`. Doctor bites dual-CTA,
-   dual-grid XOR, and card/KPI soup.
+   dual-grid XOR, worklist-first AST, and card/KPI soup.
 
 Kit recipe string (cite v2): `shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts`.
 
@@ -177,6 +179,28 @@ Peer worklists / DataGrids on one triage job in consumer TSX are collapsed by
 
 Fixtures: `verify/fixtures/denoise/tsx/queue-dual-grid{,-ast}.tsx` (+ `queue-dual-xor-after.tsx` shape).  
 Doctor: `verify/dual-focal-ast-bite.mjs` / `npm run dual-focal:ast-bite`.
+
+### Worklist-first TSX AST (N9 deepen) — records/worklist before KPI chrome
+
+KPI/dashboard chrome ahead of the Monday work object in consumer TSX is reordered by
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `worklist-first`.
+
+1. **Detect** — composition when a metrics / `data-sled-kpis` band precedes the
+   records/worklist among `main` / `data-shine-main` children.
+2. **Recommend** — typed `recommendation.worklistFirstAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Moves the primary worklist (queue/records/`grid-wrap`/`DataGrid`/`role=grid`) ahead of
+   KPI chrome; stamps `data-region="focal"`.  
+   Handles `className="metrics"` / `{"metrics"}`, `data-sled-kpis`,
+   `className="grid-wrap"` / `{"grid-wrap"}`, `role="grid"` / `{"grid"}`,
+   `data-shine-records`, and `data-product-pattern` queue/worklist/records.
+   Dynamic `.map` siblings stay plan-only.
+4. **Prove** — crop pair `queue-worklist-first-tsx`
+   (`queue-worklist-first-tsx-{before,after}-crop.html`). Twin full-page invalid.
+
+Fixtures: `verify/fixtures/denoise/tsx/queue-kpi-chrome-first.tsx` ·
+`queue-worklist-first-ast.tsx`.  
+Doctor: `verify/worklist-first-ast-bite.mjs` / `npm run worklist-first:ast-bite`.
 
 ### Dashboard
 

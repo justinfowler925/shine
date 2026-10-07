@@ -244,7 +244,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -315,6 +315,25 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    instruction:d.instruction||"Apply apply-tsx collapse-peer-grids (AST XOR) on consumer peer-grid TSX.",
   };
  }
+ // Denoise / queue|records jobs: bind worklist-first composition TSX AST FAIL→PASS fixture + crops.
+ if(recommendation.worklistFirstAst?.fixtureTsx){
+  const w=recommendation.worklistFirstAst;
+  packet.worklistFirstAst={
+   mode:w.mode||"tsx-ast",
+   op:w.op||"worklist-first",
+   attr:w.attr||"data-region",
+   value:w.value||"focal",
+   on:w.on||"primary-worklist",
+   fixtureTsx:join(ROOT,w.fixtureTsx),
+   fixtureTsxAst:join(ROOT,w.fixtureTsxAst||w.fixtureTsx),
+   cropBefore:join(ROOT,w.cropBefore),
+   cropAfter:join(ROOT,w.cropAfter),
+   cropPairId:w.cropPairId||"queue-worklist-first-tsx",
+   helper:join(ROOT,w.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:w.reference||"skill/references/kits.md",
+   instruction:w.instruction||"Apply apply-tsx worklist-first (AST) so records/worklist precedes KPI chrome.",
+  };
+ }
  // Denoise / queue jobs: bind D10 XOR dual-grid FAIL→PASS fixture + crop paths.
  if(recommendation.xorSavedView?.fixtureBefore){
   const x=recommendation.xorSavedView;
@@ -339,6 +358,9 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   Boolean(recommendation.xorSavedView?.fixtureBefore)||
   Boolean(recommendation.dualFocalAst?.fixtureTsx)||
   restructureHints.some((h)=>/collapse-peer-grids|xor-saved-view|dual-focal/i.test(String(h)));
+ const wantsWorklistFirst=
+  Boolean(recommendation.worklistFirstAst?.fixtureTsx)||
+  restructureHints.some((h)=>/worklist-first/i.test(String(h)));
  const learnedHits=lane==="saas"?siblingPrefsFor(kind,{edition:"clearspeed-operate",job,storePath:learnStorePath,store:learnStore}):[];
  const siblingResolved=lane==="saas"?resolveEditionSibling({category:kind,screen:recommendation?.primary?.screen||"",job,editionId:"clearspeed-operate",learnedPrefs:learnedHits.map((h)=>h.pref)}):null;
  const siblingLabel=productReferenceName||productReference||recommendation?.productSibling?.name||siblingResolved?.sibling?.name||null;
@@ -354,7 +376,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   briefRef=null; // assertNewSurfaceBrief may refuse when requireWireframeLock
  }
  const ddrOps=needsRestructure
-  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
+  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
   :[];
  packet.ddr=buildDdr({
   job,

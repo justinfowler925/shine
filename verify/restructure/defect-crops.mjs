@@ -210,6 +210,63 @@ export function buildKpiAstAfterCropHtml() {
 }
 
 /**
+ * TSX AST worklist-first FAIL crop — KPI chrome ahead of records/worklist
+ * (mirrors queue-worklist-first-ast.tsx) before apply-tsx.
+ */
+export function buildWorklistFirstAstBeforeCropHtml() {
+  return wrap({
+    title: "Worklist-first AST crop FAIL — KPI chrome first",
+    cropId: "worklist-first-tsx-before",
+    cite: "shadcn-queue",
+    caption:
+      "Crop FAIL: KPI chrome (className metrics / {\"metrics\"} / data-sled-kpis) ahead of records/worklist in TSX — composition; apply-tsx AST worklist-first.",
+    body: `  <h1>Queue · TSX composition</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-worklist-first-ast.tsx">Before apply-tsx worklist-first</p>
+  <section data-sled-kpis data-shine-tsx-ast="before" data-tsx-kpi-chrome="first">
+    <h2>Summary</h2>
+    <div class="metrics" aria-label="SLED Capture key figures" data-tsx-metrics="expr">
+      <div class="metric" data-kpi="Open queue"><span>Open queue</span><strong>214</strong></div>
+      <div class="metric" data-kpi="New"><span>New</span><strong>12 / 41</strong></div>
+      <div class="metric" data-kpi="High score"><span>High score</span><strong>33</strong></div>
+      <div class="metric" data-kpi="Due soon"><span>Due soon</span><strong>27</strong></div>
+    </div>
+  </section>
+  <div class="grid-wrap" data-product-pattern="paged-notice-queue" data-shine-records data-tsx-grid-wrap="expr">
+    <h2 data-grid-title="Queue">Queue</h2>
+    <table role="grid" data-tsx-role="expr"><thead><tr><th>Notice</th></tr></thead><tbody><tr><td>NV DPS</td></tr></tbody></table>
+  </div>`,
+  });
+}
+
+/**
+ * TSX AST worklist-first PASS crop — worklist focal first, KPI chrome after.
+ */
+export function buildWorklistFirstAstAfterCropHtml() {
+  return wrap({
+    title: "Worklist-first AST crop PASS — worklist focal",
+    cropId: "worklist-first-tsx-after",
+    cite: "shadcn-queue",
+    caption:
+      "Crop PASS: records/worklist first with data-region=focal; KPI chrome demoted below via TSX AST worklist-first.",
+    body: `  <h1>Queue · TSX composition</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-worklist-first-ast.tsx">After apply-tsx worklist-first</p>
+  <div class="grid-wrap" data-region="focal" data-product-pattern="paged-notice-queue" data-shine-records data-shine-tsx-ast="after" data-tsx-grid-wrap="expr">
+    <h2 data-grid-title="Queue">Queue</h2>
+    <table role="grid" data-tsx-role="expr"><thead><tr><th>Notice</th></tr></thead><tbody><tr><td>NV DPS</td></tr></tbody></table>
+  </div>
+  <section data-sled-kpis data-tsx-kpi-chrome="after">
+    <h2>Summary</h2>
+    <div class="metrics" aria-label="SLED Capture key figures" data-tsx-metrics="expr">
+      <div class="metric" data-kpi="Open queue"><span>Open queue</span><strong>214</strong></div>
+      <div class="metric" data-kpi="New"><span>New</span><strong>12 / 41</strong></div>
+      <div class="metric" data-kpi="High score"><span>High score</span><strong>33</strong></div>
+      <div class="metric" data-kpi="Due soon"><span>Due soon</span><strong>27</strong></div>
+    </div>
+  </section>`,
+  });
+}
+
+/**
  * TSX AST dual-focal FAIL crop — mirrors queue-dual-grid-ast.tsx
  * (className={"grid-wrap"}, role={"grid"}, data-grid-title={"…"}) before apply-tsx.
  */
@@ -548,6 +605,28 @@ export const DEFECT_CROP_PAIRS = [
     afterMust: [/data-shine-tsx-ast="after"/, /data-shine-xor-views/, /data-shine-xor-from-peer/, /data-region=["']focal["']/],
   },
   {
+    id: "queue-worklist-first-tsx",
+    defect: "composition-slop",
+    beforeCrop: "queue-worklist-first-tsx-before-crop.html",
+    afterCrop: "queue-worklist-first-tsx-after-crop.html",
+    buildBefore: buildWorklistFirstAstBeforeCropHtml,
+    buildAfter: buildWorklistFirstAstAfterCropHtml,
+    beforeMust: [
+      /data-shine-tsx-ast="before"/,
+      /data-tsx-kpi-chrome="first"/,
+      /data-sled-kpis/,
+      /data-shine-records/,
+      /role=["']grid["']/,
+    ],
+    afterMust: [
+      /data-shine-tsx-ast="after"/,
+      /data-region=["']focal["']/,
+      /data-shine-records/,
+      /data-sled-kpis/,
+    ],
+    beforeMustNot: [/data-region=["']focal["']/],
+  },
+  {
     id: "usul-focal",
     defect: "composition-slop",
     beforeCrop: "usul-focal-before-crop.html",
@@ -652,6 +731,21 @@ export function assertCropPairOk(pair, read) {
   if (pair.id === "usul-focal" && before && after) {
     if (/data-region=["']focal["']/.test(before)) errors.push(`${pair.id} before must not already be focal`);
     if (!/data-region=["']focal["']/.test(after)) errors.push(`${pair.id} after must stamp data-region=focal`);
+  }
+  // TSX AST worklist-first: KPI chrome ahead of worklist before; worklist focal first after
+  if (pair.id === "queue-worklist-first-tsx" && before && after) {
+    if (/data-region=["']focal["']/.test(before)) errors.push(`${pair.id} before must not already be focal`);
+    if (!/data-region=["']focal["']/.test(after)) errors.push(`${pair.id} after must stamp data-region=focal`);
+    const kpiIdxBefore = before.indexOf("data-sled-kpis");
+    const gridIdxBefore = before.indexOf("data-shine-records");
+    if (kpiIdxBefore < 0 || gridIdxBefore < 0 || kpiIdxBefore > gridIdxBefore) {
+      errors.push(`${pair.id} before must place KPI chrome ahead of records/worklist`);
+    }
+    const kpiIdxAfter = after.indexOf("data-sled-kpis");
+    const gridIdxAfter = after.indexOf('data-region="focal"');
+    if (kpiIdxAfter < 0 || gridIdxAfter < 0 || gridIdxAfter > kpiIdxAfter) {
+      errors.push(`${pair.id} after must place focal worklist ahead of KPI chrome`);
+    }
   }
   // TSX AST CTA after: exactly one filled primary in the decision cell
   if (pair.id === "queue-cta-tsx" && before && after) {

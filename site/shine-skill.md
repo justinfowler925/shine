@@ -2233,7 +2233,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 
 | Ambiguous signal | Decision | Op / gate |
 |---|---|---|
-| Dashboard chrome on a Monday triage job | Worklist, not dashboard. Cite `shadcn-queue` (or settings/record), never chart/dashboard page lead | `dashboard→worklist` · anti-dashboard |
+| Dashboard chrome on a Monday triage job | Worklist, not dashboard. Cite `shadcn-queue` (or settings/record), never chart/dashboard page lead. Consumer TSX: `apply-tsx` AST `worklist-first` (records/worklist before KPI chrome + `data-region=focal`); copy FAIL→PASS crops from `recommendation.worklistFirstAst.cropBefore/cropAfter` | `worklist-first` AST · `dashboard→worklist` · `queue-worklist-first-tsx-*` |
 | Records list→detail without `shine-tables.json` | Write `kind: worklist` contract (search, rowAction, loading/empty/filtered-empty); copy from `recommendation.tableQuality.fixture` | `verify/fixtures/records-worklist/shine-tables.json` |
 | Two DataGrids / two worklists same route | One grid. Peer title → filter chip + shared DataGrid (XOR). Consumer TSX: `apply-tsx` AST `collapse-peer-grids` (xor-saved-view); copy FAIL→PASS crops from `recommendation.dualFocalAst.cropBefore/cropAfter` (HTML XOR: `recommendation.xorSavedView`) | `collapse-peer-grids` AST · D10 XOR · `dual-focal` · `queue-dual-grid-tsx-*` |
 | ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost. Consumer TSX: `apply-tsx` AST `cta-budget` (maxFilled=1); copy FAIL→PASS crops from `recommendation.ctaPressureAst.cropBefore/cropAfter` | `cta-budget` · `cta-pressure` · `queue-cta-tsx-*` |
@@ -2261,7 +2261,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 2 static     vibe / preflight-slop / Card·Badge counts
 3 cite       shot + restructureHints[]
 4 diagnose   shine-diagnosis.json + shine-restructure.json   ← Critic turn
-5 apply      DOM/AST auto-safe ops (verify/restructure/*) — TSX `cta-budget` via TypeScript AST (maxFilled=1; variant default / {"default"} / missing); TSX `kpi-collapse` via TypeScript AST (maxVisible=3; className metric / {"metric"} / data-shine-kpi)     ← Actor turn
+5 apply      DOM/AST auto-safe ops (verify/restructure/*) — TSX `cta-budget` via TypeScript AST (maxFilled=1; variant default / {"default"} / missing); TSX `kpi-collapse` via TypeScript AST (maxVisible=3; className metric / {"metric"} / data-shine-kpi); TSX `collapse-peer-grids` via TypeScript AST (XOR peer→chip; className grid-wrap / {"grid-wrap"} / role={"grid"}); TSX `worklist-first` via TypeScript AST (records/worklist before KPI chrome + focal)     ← Actor turn
 6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
 7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
 8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done
@@ -2353,8 +2353,8 @@ Skill A/B (Salesforce DI-style, machine oracles only — **no preference data**)
 (with denoise guidance vs craft-only baseline; doctor requires with>without on every case).  
 Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
 XOR recipe: `npm run restructure:xor -- --html verify/fixtures/denoise/queue-dual-grid-before.html --out /tmp/xor.html`.  
-TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). `cta-budget` is TypeScript AST (maxFilled=1); `collapse-peer-grids` stays plan-only.  
-CTA AST bite: `npm run cta-pressure:ast-bite`. KPI soup AST bite: `npm run kpi-soup:ast-bite`. Dual-focal AST bite: `npm run dual-focal:ast-bite`. Kit: `kits.md` § CTA pressure TSX AST · KPI soup TSX AST · Dual-focal ban TSX AST · Dual-grid XOR (D10).
+TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). `cta-budget` is TypeScript AST (maxFilled=1); `collapse-peer-grids` is TypeScript AST XOR on TSX (DOM stays plan-only); `worklist-first` is TypeScript AST (records/worklist before KPI chrome).  
+CTA AST bite: `npm run cta-pressure:ast-bite`. KPI soup AST bite: `npm run kpi-soup:ast-bite`. Dual-focal AST bite: `npm run dual-focal:ast-bite`. Worklist-first AST bite: `npm run worklist-first:ast-bite`. Kit: `kits.md` § CTA pressure TSX AST · KPI soup TSX AST · Dual-focal ban TSX AST · Worklist-first TSX AST · Dual-grid XOR (D10).
 
 ## Related
 
@@ -3193,16 +3193,18 @@ Installable first-viewport recipe for Monday decide jobs (Sled Capture class). P
 over dashboard chrome when the job is triage / queue / inbox.
 
 1. **One work object in the fold** — `data-region="focal"` on a single DataGrid / worklist.
+   Consumer TSX: when KPI/dashboard chrome precedes the work object, `apply-tsx` AST
+   `worklist-first` reorders records/worklist first + stamps focal (see § Worklist-first TSX AST).
 2. **CTA budget = 1** — one filled job verb (e.g. Pursue); peers outline/ghost/segmented.
 3. **KPI encyclopedia off-path** — ≤3 summary chips; rest in `<details data-shine-kpi-rest>`.
 4. **No peer grids** — second ranking (e.g. “David’s 10”) is a saved-view / filter XOR, never
-   a second `role="grid"` peer. Detect: `dual-focal`; plan: `collapse-peer-grids` (plan-only
-   in AST/DOM runners — never silent delete). Agent close: § Dual-grid XOR below.
+   a second `role="grid"` peer. Detect: `dual-focal`; consumer TSX: `apply-tsx` AST
+   `collapse-peer-grids` (XOR); DOM stays plan-only. Agent close: § Dual-grid XOR / TSX AST below.
 5. **Cite** — `shadcn-queue` (or product sibling). Anti-cites: `shadcn-dashboard-01` as page
    lead, chart atoms, magicui. Packet `recommendation.restructureHints` must clear before polish.
 6. **Golden fixture** — `verify/fixtures/denoise/queue-cta-{before,after}.html` +
    `queue-dual-grid-{before,after}.html` + `npm run denoise:eval`. Doctor bites dual-CTA,
-   dual-grid XOR, and card/KPI soup.
+   dual-grid XOR, worklist-first AST, and card/KPI soup.
 
 Kit recipe string (cite v2): `shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts`.
 
@@ -3283,6 +3285,28 @@ Peer worklists / DataGrids on one triage job in consumer TSX are collapsed by
 
 Fixtures: `verify/fixtures/denoise/tsx/queue-dual-grid{,-ast}.tsx` (+ `queue-dual-xor-after.tsx` shape).  
 Doctor: `verify/dual-focal-ast-bite.mjs` / `npm run dual-focal:ast-bite`.
+
+### Worklist-first TSX AST (N9 deepen) — records/worklist before KPI chrome
+
+KPI/dashboard chrome ahead of the Monday work object in consumer TSX is reordered by
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `worklist-first`.
+
+1. **Detect** — composition when a metrics / `data-sled-kpis` band precedes the
+   records/worklist among `main` / `data-shine-main` children.
+2. **Recommend** — typed `recommendation.worklistFirstAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Moves the primary worklist (queue/records/`grid-wrap`/`DataGrid`/`role=grid`) ahead of
+   KPI chrome; stamps `data-region="focal"`.  
+   Handles `className="metrics"` / `{"metrics"}`, `data-sled-kpis`,
+   `className="grid-wrap"` / `{"grid-wrap"}`, `role="grid"` / `{"grid"}`,
+   `data-shine-records`, and `data-product-pattern` queue/worklist/records.
+   Dynamic `.map` siblings stay plan-only.
+4. **Prove** — crop pair `queue-worklist-first-tsx`
+   (`queue-worklist-first-tsx-{before,after}-crop.html`). Twin full-page invalid.
+
+Fixtures: `verify/fixtures/denoise/tsx/queue-kpi-chrome-first.tsx` ·
+`queue-worklist-first-ast.tsx`.  
+Doctor: `verify/worklist-first-ast-bite.mjs` / `npm run worklist-first:ast-bite`.
 
 ### Dashboard
 

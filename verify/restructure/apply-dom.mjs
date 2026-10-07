@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * N7 — Apply shine-restructure/v1 auto-safe ops to HTML fixtures (DOM substrate).
- * Ops: cta-budget, kpi-collapse, set-focal, rebind-cite.
+ * Ops: cta-budget, kpi-collapse, set-focal, worklist-first, rebind-cite.
  * collapse-peer-grids → plan markdown only (never silent delete).
  */
 
@@ -42,6 +42,12 @@ export function applyDomRestructure(html, plan) {
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
       applied.push("set-focal");
+    } else if (op.op === "worklist-first") {
+      const next = applyWorklistFirst(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("worklist-first");
+      }
     } else if (op.op === "rebind-cite") {
       out = applyRebindCite(out, op);
       applied.push("rebind-cite");
@@ -121,6 +127,35 @@ export function applyKpiCollapse(html, op = {}) {
     }
   }
   return html;
+}
+
+/**
+ * Worklist-first (DOM): move records/worklist ahead of KPI chrome in main, then stamp focal.
+ * Best-effort regex for HTML fixtures; consumer TSX uses apply-tsx AST worklistFirstTsx.
+ */
+export function applyWorklistFirst(html, op = {}) {
+  let out = String(html);
+  // Prefer swapping a KPI section that precedes the first grid-wrap / role=grid worklist.
+  const kpiRe =
+    /<(section|div)\b[^>]*(?:data-sled-kpis|\bclass=["'][^"']*\bmetrics\b)[^>]*>[\s\S]*?<\/\1>/i;
+  const workRe =
+    /<(div|section|table)\b[^>]*(?:class=["'][^"']*\bgrid-wrap\b|data-shine-records|data-product-pattern=["'][^"']*(?:queue|worklist|records)|role=["']grid["'])[^>]*>[\s\S]*?<\/\1>/i;
+  const kpiMatch = out.match(kpiRe);
+  const workMatch = out.match(workRe);
+  if (kpiMatch && workMatch && kpiMatch.index != null && workMatch.index != null) {
+    if (kpiMatch.index < workMatch.index) {
+      const kpi = kpiMatch[0];
+      const work = workMatch[0];
+      // Remove work first (later index), then KPI, then reinsert work + kpi at KPI's index.
+      out = out.slice(0, workMatch.index) + out.slice(workMatch.index + work.length);
+      const kpi2 = out.match(kpiRe);
+      if (kpi2 && kpi2.index != null) {
+        out = out.slice(0, kpi2.index) + out.slice(kpi2.index + kpi2[0].length);
+        out = out.slice(0, kpi2.index) + work + "\n" + kpi + out.slice(kpi2.index);
+      }
+    }
+  }
+  return applySetFocal(out, op);
 }
 
 /** Set data-region=focal on primary work object (grid wrap, grid table, card, or main). */
