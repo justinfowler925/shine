@@ -55,6 +55,19 @@ export const KPI_SOUP_AST_FIXTURES = Object.freeze({
   maxVisible: 3,
 });
 
+/** Repo-relative dual-focal ban TSX AST FAIL→PASS fixtures (XOR peer→chip). */
+export const DUAL_FOCAL_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-dual-grid.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-dual-grid-ast.tsx",
+  tsxAfter: "verify/fixtures/denoise/tsx/queue-dual-xor-after.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-dual-grid-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-dual-grid-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-dual-grid-tsx",
+  op: "collapse-peer-grids",
+  mode: "xor-saved-view",
+});
+
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
   catalog: [
@@ -284,6 +297,43 @@ export function ctaPressureAstForQueueJob(job, constraints = {}) {
 }
 
 /**
+ * Dual-focal ban TSX AST fixture binding for Operate queue / triage jobs.
+ * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
+ * apply-tsx collapse-peer-grids (XOR peer→chip) — not only the prose hint.
+ */
+export function dualFocalAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval"].includes(category) ||
+    ["queue", "approval"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|dual[- ]?grid|dual[- ]?focal|collapse[- ]?peer|xor[- ]?saved[- ]?view|peer grids?)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: DUAL_FOCAL_AST_FIXTURES.op,
+    xorMode: DUAL_FOCAL_AST_FIXTURES.mode,
+    keepTitleIncludes: ["Queue"],
+    foldTitleIncludes: ["David"],
+    fixtureTsx: DUAL_FOCAL_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: DUAL_FOCAL_AST_FIXTURES.tsxAstHard,
+    fixtureTsxAfter: DUAL_FOCAL_AST_FIXTURES.tsxAfter,
+    cropBefore: DUAL_FOCAL_AST_FIXTURES.cropBefore,
+    cropAfter: DUAL_FOCAL_AST_FIXTURES.cropAfter,
+    cropPairId: DUAL_FOCAL_AST_FIXTURES.cropPairId,
+    helper: DUAL_FOCAL_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Dual peer worklists in consumer TSX: apply verify/restructure/apply-tsx.mjs collapse-peer-grids (TypeScript AST, mode xor-saved-view; peer title → data-shine-xor-views chip + one shared DataGrid). Handles className=\"grid-wrap\", className={\"grid-wrap\"}, role=\"grid\" / role={\"grid\"}, and data-grid-title markers. Never silent-deletes without XOR chips; dynamic .map peers stay plan-only. Copy FAIL→PASS crop paths from recommendation.dualFocalAst.cropBefore/cropAfter; prove dual-focal clears with exactly one grid.",
+  };
+}
+
+/**
  * D10 XOR dual-grid fixture binding for Operate queue / triage jobs.
  * Denoise recommend must emit concrete before/after + FAIL→PASS crop paths —
  * not only the prose `collapse-peer-grids xor-saved-view` hint.
@@ -386,6 +436,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       intent: retrieval.brief?.operatePage || "",
     }),
     kpiSoupAst: kpiSoupAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
+    dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
       intent: retrieval.brief?.operatePage || "",
@@ -498,6 +553,9 @@ export function formatRecommendationSummary(rec) {
   const kpi = rec.kpiSoupAst?.fixtureTsx
     ? ` · kpiSoupAst ${rec.kpiSoupAst.mode}@${rec.kpiSoupAst.cropPairId}`
     : "";
+  const dual = rec.dualFocalAst?.fixtureTsx
+    ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
+    : "";
   const xor = rec.xorSavedView?.fixtureBefore
     ? ` · xorSavedView ${rec.xorSavedView.mode}@${rec.xorSavedView.cropPairId}`
     : "";
@@ -506,6 +564,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${dual}${xor}${ban}`
   );
 }

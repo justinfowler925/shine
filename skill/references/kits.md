@@ -90,8 +90,8 @@ over dashboard chrome when the job is triage / queue / inbox.
 2. **CTA budget = 1** — one filled job verb (e.g. Pursue); peers outline/ghost/segmented.
 3. **KPI encyclopedia off-path** — ≤3 summary chips; rest in `<details data-shine-kpi-rest>`.
 4. **No peer grids** — second ranking (e.g. “David’s 10”) is a saved-view / filter XOR, never
-   a second `role="grid"` peer. Detect: `dual-focal`; plan: `collapse-peer-grids` (plan-only
-   in AST/DOM runners — never silent delete). Agent close: § Dual-grid XOR below.
+   a second `role="grid"` peer. Detect: `dual-focal`; consumer TSX: `apply-tsx` AST
+   `collapse-peer-grids` (XOR); DOM stays plan-only. Agent close: § Dual-grid XOR / TSX AST below.
 5. **Cite** — `shadcn-queue` (or product sibling). Anti-cites: `shadcn-dashboard-01` as page
    lead, chart atoms, magicui. Packet `recommendation.restructureHints` must clear before polish.
 6. **Golden fixture** — `verify/fixtures/denoise/queue-cta-{before,after}.html` +
@@ -102,9 +102,9 @@ Kit recipe string (cite v2): `shadcn-queue / DataGrid recipe; TanStack state; ta
 
 ### Dual-grid XOR (D10) — agent-assisted close
 
-Close the dual-focal loop: **detect → plan → XOR recipe → prove**. AST/DOM auto paths stay
-plan-only for `collapse-peer-grids`. Agents apply this recipe explicitly — never silent
-dual-grid delete.
+Close the dual-focal loop: **detect → plan → XOR recipe → prove**. Consumer **TSX**
+`collapse-peer-grids` is TypeScript AST (peer title → XOR chip + shared DataGrid). DOM
+`apply-dom` stays plan-only — never silent dual-grid delete without XOR chips.
 
 1. **Detect** — `dual-focal` when ≥2 peer `.grid-wrap` / `[role=grid]` worklists share main.
 2. **Plan** — emit `collapse-peer-grids` with `mode: "xor-saved-view"`,
@@ -158,6 +158,25 @@ Equal metric tiles competing with the work object in consumer TSX are collapsed 
 
 Fixtures: `verify/fixtures/denoise/tsx/queue-kpi-soup{,-ast}.tsx`.  
 Doctor: `verify/kpi-soup-ast-bite.mjs` / `npm run kpi-soup:ast-bite`.
+
+### Dual-focal ban TSX AST (N8 deepen) — XOR peer→chip
+
+Peer worklists / DataGrids on one triage job in consumer TSX are collapsed by
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `collapse-peer-grids`.
+
+1. **Detect** — measure `dual-focal` when ≥2 peer `.grid-wrap` / `[role=grid]` worklists share main.
+2. **Recommend** — typed `recommendation.dualFocalAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Keeps the worklist matching `keepTitleIncludes` (e.g. Queue); folds the peer
+   (`foldTitleIncludes`, e.g. David) into a `data-shine-xor-views` chip on one
+   `data-shine-shared-grid` + `data-region="focal"`.  
+   Handles `className="grid-wrap"`, `className={"grid-wrap"}`, `role="grid"` /
+   `role={"grid"}`, and **`data-grid-title`** markers. Dynamic `.map` peers stay plan-only.
+   DOM `apply-dom` remains plan-only (use `xor-saved-view.mjs` for HTML).
+4. **Prove** — crop pair `queue-dual-grid-tsx` (`queue-dual-grid-tsx-{before,after}-crop.html`). Twin full-page invalid.
+
+Fixtures: `verify/fixtures/denoise/tsx/queue-dual-grid{,-ast}.tsx` (+ `queue-dual-xor-after.tsx` shape).  
+Doctor: `verify/dual-focal-ast-bite.mjs` / `npm run dual-focal:ast-bite`.
 
 ### Dashboard
 

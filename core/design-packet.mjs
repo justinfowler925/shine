@@ -244,7 +244,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -295,6 +295,26 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    instruction:k.instruction||"Apply apply-tsx kpi-collapse (AST, maxVisible=3) on consumer metric TSX.",
   };
  }
+ // Denoise / queue jobs: bind dual-focal ban TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.dualFocalAst?.fixtureTsx){
+  const d=recommendation.dualFocalAst;
+  packet.dualFocalAst={
+   mode:d.mode||"tsx-ast",
+   op:d.op||"collapse-peer-grids",
+   xorMode:d.xorMode||"xor-saved-view",
+   keepTitleIncludes:d.keepTitleIncludes||["Queue"],
+   foldTitleIncludes:d.foldTitleIncludes||["David"],
+   fixtureTsx:join(ROOT,d.fixtureTsx),
+   fixtureTsxAst:join(ROOT,d.fixtureTsxAst||d.fixtureTsx),
+   fixtureTsxAfter:join(ROOT,d.fixtureTsxAfter||"verify/fixtures/denoise/tsx/queue-dual-xor-after.tsx"),
+   cropBefore:join(ROOT,d.cropBefore),
+   cropAfter:join(ROOT,d.cropAfter),
+   cropPairId:d.cropPairId||"queue-dual-grid-tsx",
+   helper:join(ROOT,d.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:d.reference||"skill/references/denoise.md",
+   instruction:d.instruction||"Apply apply-tsx collapse-peer-grids (AST XOR) on consumer peer-grid TSX.",
+  };
+ }
  // Denoise / queue jobs: bind D10 XOR dual-grid FAIL→PASS fixture + crop paths.
  if(recommendation.xorSavedView?.fixtureBefore){
   const x=recommendation.xorSavedView;
@@ -317,7 +337,8 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  const needsRestructure=restructureHints.some((h)=>String(h).startsWith("restructure:"));
  const wantsXor=
   Boolean(recommendation.xorSavedView?.fixtureBefore)||
-  restructureHints.some((h)=>/collapse-peer-grids|xor-saved-view/i.test(String(h)));
+  Boolean(recommendation.dualFocalAst?.fixtureTsx)||
+  restructureHints.some((h)=>/collapse-peer-grids|xor-saved-view|dual-focal/i.test(String(h)));
  const learnedHits=lane==="saas"?siblingPrefsFor(kind,{edition:"clearspeed-operate",job,storePath:learnStorePath,store:learnStore}):[];
  const siblingResolved=lane==="saas"?resolveEditionSibling({category:kind,screen:recommendation?.primary?.screen||"",job,editionId:"clearspeed-operate",learnedPrefs:learnedHits.map((h)=>h.pref)}):null;
  const siblingLabel=productReferenceName||productReference||recommendation?.productSibling?.name||siblingResolved?.sibling?.name||null;

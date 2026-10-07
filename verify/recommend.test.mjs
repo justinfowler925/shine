@@ -89,6 +89,11 @@ assert.match(queueRec.kpiSoupAst.fixtureTsx, /queue-kpi-soup\.tsx$/);
 assert.match(queueRec.kpiSoupAst.cropAfter, /queue-kpi-tsx-after-crop\.html$/);
 assert.match(formatRecommendationSummary(queueRec), /kpiSoupAst/);
 assert.equal(queueRec.kpiSoupAst.maxVisible, 3);
+assert.ok(queueRec.dualFocalAst?.fixtureTsx, "queue job dualFocalAst.fixtureTsx");
+assert.match(queueRec.dualFocalAst.fixtureTsx, /queue-dual-grid\.tsx$/);
+assert.match(queueRec.dualFocalAst.cropAfter, /queue-dual-grid-tsx-after-crop\.html$/);
+assert.match(formatRecommendationSummary(queueRec), /dualFocalAst/);
+assert.equal(queueRec.dualFocalAst.op, "collapse-peer-grids");
 const denoiseQueue = createDesignPacket({
   job: "Queue triage dual worklist XOR saved-view",
   lane: "saas",
@@ -105,6 +110,8 @@ assert.equal(denoiseQueue.ctaPressureAst.maxFilled, 1);
 assert.match(denoiseQueue.kpiSoupAst.cropAfter, /queue-kpi-tsx-after-crop\.html$/);
 assert.ok((denoiseQueue.ddr.restructureOps || []).includes("kpi-collapse"));
 assert.equal(denoiseQueue.kpiSoupAst.maxVisible, 3);
+assert.match(denoiseQueue.dualFocalAst.cropAfter, /queue-dual-grid-tsx-after-crop\.html$/);
+assert.equal(denoiseQueue.dualFocalAst.xorMode, "xor-saved-view");
 
 // CLI smoke
 const cite = spawnSync(process.execPath, [join(SHINE, "corpus/cite.mjs"), "settings page", "--lane", "saas"], {
@@ -114,5 +121,5 @@ assert.equal(cite.status, 0, cite.stderr);
 assert.match(cite.stdout, /recommendation:/);
 
 console.log(
-  `recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI · xorSavedView · ctaPressureAst · kpiSoupAst`,
+  `recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI · xorSavedView · ctaPressureAst · kpiSoupAst · dualFocalAst`,
 );
