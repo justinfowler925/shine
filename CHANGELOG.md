@@ -6,6 +6,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Reflexion host cite-ban doctor wiring.** Critic≠Actor host
+  (`runCriticActorHostRound` / `planRepairFromMeasure`) and denoise-loop pass
+  `doctorBiteOk` + `observedCite` into reflexion when cite-honesty fires, so
+  production host rounds can commit cite bans (not only direct `runReflexion`
+  test calls). `observedCiteFromFailures` parses `page cite <id>` from measure
+  lines. Doctor bite: `verify/reflexion-cite-doctor-bite.mjs`.
+
 - **Cite-ban learn deepen (episodic + fail-close).** Wrong-cite prove fails
   persist an episodic lesson alongside `citeBans[]` / `editionAntiCites[]`.
   `enforceCiteBansOnRecommendation` demotes banned recommend primaries (or nulls

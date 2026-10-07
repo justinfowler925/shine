@@ -136,6 +136,13 @@ export async function runCriticActorHostRound({
   requireConstitutionCitation = true,
   /** When set, Critic must not equal the worker who last repaired (fail-closed). */
   lastRepairWorkerId = null,
+  /** Cite-ban learn: pass through to reflexion when cite-honesty fires. */
+  doctorBiteOk = false,
+  observedCite = "",
+  expectedCite = "",
+  category = "",
+  edition = "",
+  learnStorePath = undefined,
 } = {}) {
   const critic = createAgentIdentity({ role: "critic", agentId: criticAgentId });
   const actor = createAgentIdentity({ role: "actor", agentId: actorAgentId });
@@ -151,6 +158,8 @@ export async function runCriticActorHostRound({
     });
   }
 
+  // Pass-through doctorBiteOk + observedCite so cite-ban learn commits on host
+  // rounds (denoise-loop / finalize) — not only direct runReflexion test calls.
   const reflexion = await runCriticTurn({
     goal,
     failures,
@@ -165,6 +174,12 @@ export async function runCriticActorHostRound({
     criticAgentId: critic.agentId,
     actorAgentId: actor.agentId,
     requireConstitutionCitation,
+    doctorBiteOk,
+    observedCite,
+    expectedCite,
+    category,
+    edition,
+    learnStorePath,
   });
 
   const principals = {
