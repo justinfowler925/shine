@@ -113,12 +113,30 @@ export function acceptDdr(ddr) {
   };
 }
 
+/**
+ * Supersede don't edit: mark old DDR superseded and return the successor
+ * with a forward link. Callers should also append audit-trail events via
+ * `core/audit-trail.mjs` supersedeTrail.
+ * @returns {{ superseded: object, next: object }}
+ */
 export function supersedeDdr(oldDdr, nextDdr) {
-  return {
+  if (!oldDdr?.ddrId) throw new Error("cannot supersede without old ddrId");
+  if (!nextDdr?.ddrId) throw new Error("cannot supersede without next ddrId");
+  if (oldDdr.ddrId === nextDdr.ddrId) throw new Error("cannot supersede a DDR with itself");
+  if (oldDdr.status === "superseded") {
+    throw new Error(`DDR ${oldDdr.ddrId} already superseded`);
+  }
+  const superseded = {
+    ...oldDdr,
+    status: "superseded",
+    supersededBy: nextDdr.ddrId,
+  };
+  const next = {
     ...nextDdr,
     supersedes: oldDdr.ddrId,
     status: nextDdr.status || "proposed",
   };
+  return { superseded, next };
 }
 
 /** Attach ddrId onto a prove/completion receipt payload (non-mutating clone). */

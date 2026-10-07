@@ -6,6 +6,10 @@ Proven job→cite→kit repertoire, episodic prove-fail lessons, Operate cite ba
 and edition anti-cites live in `repertoire/repertoire.json` (enterprise learn —
 doctor-gated version bump; write bans only after real cite-related prove fails).
 
+DDR Action/Observation audit trails (enterprise §5) live under
+`SHINE_AUDIT_DIR` / `~/.cache/shine/audit/` via `core/audit-trail.mjs` — append-only
+events + prove receipt hash; supersede don’t rewrite. See `docs/ddr-audit-trail.md`.
+
 Retrieve with:
 
 ```sh
