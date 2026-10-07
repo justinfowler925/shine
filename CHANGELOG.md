@@ -6,6 +6,12 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Skill A/B eval (Salesforce DI-style).** `verify/skill-ab-eval.mjs` + pinned
+  `verify/fixtures/skill-ab/cases.json` score denoise guidance **with vs without**
+  on Sled-class fixtures (CTA, KPI, focal, cite, dual-grid). Machine oracles only —
+  no preference / RLAIF labels. `npm run skill:ab`; doctor bite
+  `verify/skill-ab-eval.test.mjs`. `applySetFocal` falls back to card/main for Usul soup.
+
 - **Critic ≠ Actor turns (S1).** `core/reflexion.mjs` separates diagnose/critic from
   Actor implement: distinct principals, Atlas verdicts `done|partial|blocked|error`,
   self-accept ban (critic and actor cannot accept the review — host only),

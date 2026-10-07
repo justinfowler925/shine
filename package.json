@@ -40,6 +40,7 @@
     "reflexion": "node core/reflexion.mjs",
     "preflight:slop": "node verify/preflight-slop.mjs",
     "denoise:eval": "node verify/denoise-eval.mjs",
+    "skill:ab": "node verify/skill-ab-eval.mjs",
     "denoise:loop": "node verify/denoise-loop.mjs",
     "restructure:dom": "node verify/restructure/apply-dom.mjs",
     "restructure:tsx": "node verify/restructure/apply-tsx.mjs",

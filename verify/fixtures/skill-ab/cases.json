@@ -1,0 +1,140 @@
+{
+  "$schema": "shine-skill-ab/v1",
+  "version": 1,
+  "bar": "with denoise guidance clears pinned defects; without does not — machine oracles only (no preference labels)",
+  "guidanceRef": "skill/references/denoise.md",
+  "cases": [
+    {
+      "id": "queue-cta",
+      "fixture": "verify/fixtures/denoise/queue-cta-before.html",
+      "cite": "shadcn-queue",
+      "category": "queue",
+      "job": "Decide Pursue/Review/Dismiss on the next notice",
+      "mustClear": ["cta-pressure"],
+      "expectedOps": ["cta-budget"],
+      "withGuidance": {
+        "primaryTaskCheck": { "ok": false, "note": "Primary job buried under dual filled CTAs" },
+        "competingCtaCheck": { "ok": false, "note": "Pursue and Assign both filled in main" },
+        "dualFocalCheck": { "ok": true, "note": "Single grid on this CTA fixture slice" },
+        "kpiSoupCheck": { "ok": true, "note": "KPI not the defect under test" },
+        "citeHonestyCheck": { "ok": true, "note": "Cite is shadcn-queue for triage" },
+        "restructureRequired": true
+      },
+      "withoutGuidance": {
+        "primaryTaskCheck": { "ok": true, "note": "Looks fine — polish craft instead" },
+        "competingCtaCheck": { "ok": true, "note": "Both CTAs feel important" },
+        "dualFocalCheck": { "ok": true, "note": "Skipped composition" },
+        "kpiSoupCheck": { "ok": true, "note": "Skipped composition" },
+        "citeHonestyCheck": { "ok": true, "note": "Skipped" },
+        "restructureRequired": false,
+        "craftOnly": true
+      }
+    },
+    {
+      "id": "queue-kpi",
+      "fixture": "verify/fixtures/denoise/queue-cta-before.html",
+      "cite": "shadcn-queue",
+      "category": "queue",
+      "job": "Decide Pursue on the next notice without drowning in metrics",
+      "mustClear": ["kpi-soup"],
+      "expectedOps": ["kpi-collapse"],
+      "withGuidance": {
+        "primaryTaskCheck": { "ok": false, "note": "Work object loses to metric strip" },
+        "competingCtaCheck": { "ok": true, "note": "CTA not the defect under test" },
+        "dualFocalCheck": { "ok": true, "note": "Single grid slice" },
+        "kpiSoupCheck": { "ok": false, "note": "Ten equal metric tiles compete with the work object" },
+        "citeHonestyCheck": { "ok": true, "note": "Cite honest" },
+        "restructureRequired": true
+      },
+      "withoutGuidance": {
+        "primaryTaskCheck": { "ok": true, "note": "Metrics look executive" },
+        "competingCtaCheck": { "ok": true, "note": "Skipped" },
+        "dualFocalCheck": { "ok": true, "note": "Skipped" },
+        "kpiSoupCheck": { "ok": true, "note": "KPI strip feels premium" },
+        "citeHonestyCheck": { "ok": true, "note": "Skipped" },
+        "restructureRequired": false,
+        "craftOnly": true
+      }
+    },
+    {
+      "id": "usul-focal",
+      "fixture": "verify/fixtures/denoise/usul-composition-before.html",
+      "cite": "shadcn-dashboard-01",
+      "category": "dashboard",
+      "job": "Find coverage gaps on Usul analytics",
+      "mustClear": ["composition-slop"],
+      "expectedOps": ["set-focal"],
+      "withGuidance": {
+        "primaryTaskCheck": { "ok": false, "note": "No focal region; equal Card soup" },
+        "competingCtaCheck": { "ok": true, "note": "CTA not under test" },
+        "dualFocalCheck": { "ok": true, "note": "Card soup not dual-grid" },
+        "kpiSoupCheck": { "ok": true, "note": "Not under test" },
+        "citeHonestyCheck": { "ok": true, "note": "Dashboard cite for analytics job" },
+        "restructureRequired": true,
+        "restructureOps": [{ "op": "set-focal", "attr": "data-region", "value": "focal", "on": "primary-worklist" }]
+      },
+      "withoutGuidance": {
+        "primaryTaskCheck": { "ok": true, "note": "Cards look balanced" },
+        "competingCtaCheck": { "ok": true, "note": "Skipped" },
+        "dualFocalCheck": { "ok": true, "note": "Skipped" },
+        "kpiSoupCheck": { "ok": true, "note": "Skipped" },
+        "citeHonestyCheck": { "ok": true, "note": "Skipped" },
+        "restructureRequired": false,
+        "craftOnly": true
+      }
+    },
+    {
+      "id": "sources-cite",
+      "fixture": "verify/fixtures/denoise/sources-cite-before.html",
+      "cite": "shadcn-settings",
+      "category": "settings",
+      "job": "Fix or pause a matching Sources recipe",
+      "mustClear": [],
+      "expectedOps": ["rebind-cite"],
+      "withGuidance": {
+        "primaryTaskCheck": { "ok": false, "note": "Settings job with queue cite" },
+        "competingCtaCheck": { "ok": true, "note": "CTA not under test" },
+        "dualFocalCheck": { "ok": true, "note": "Not under test" },
+        "kpiSoupCheck": { "ok": true, "note": "Not under test" },
+        "citeHonestyCheck": { "ok": false, "note": "data-cite is shadcn-queue on a settings job" },
+        "restructureRequired": true
+      },
+      "withoutGuidance": {
+        "primaryTaskCheck": { "ok": true, "note": "Queue cite is fine for lists" },
+        "competingCtaCheck": { "ok": true, "note": "Skipped" },
+        "dualFocalCheck": { "ok": true, "note": "Skipped" },
+        "kpiSoupCheck": { "ok": true, "note": "Skipped" },
+        "citeHonestyCheck": { "ok": true, "note": "Cite looks like a list" },
+        "restructureRequired": false,
+        "craftOnly": true
+      }
+    },
+    {
+      "id": "queue-dual-grid",
+      "fixture": "verify/fixtures/denoise/queue-dual-grid-before.html",
+      "cite": "shadcn-queue",
+      "category": "queue",
+      "job": "Decide Pursue on the next notice — one worklist",
+      "mustClear": ["dual-focal"],
+      "expectedOps": ["collapse-peer-grids"],
+      "xorRecipe": true,
+      "withGuidance": {
+        "primaryTaskCheck": { "ok": false, "note": "Two peer worklists compete for the fold" },
+        "competingCtaCheck": { "ok": true, "note": "CTA not under test" },
+        "dualFocalCheck": { "ok": false, "note": "David's 10 and Queue are peer grids" },
+        "kpiSoupCheck": { "ok": true, "note": "Not under test" },
+        "citeHonestyCheck": { "ok": true, "note": "Cite honest" },
+        "restructureRequired": true
+      },
+      "withoutGuidance": {
+        "primaryTaskCheck": { "ok": true, "note": "Two queues feel thorough" },
+        "competingCtaCheck": { "ok": true, "note": "Skipped" },
+        "dualFocalCheck": { "ok": true, "note": "Both grids are useful" },
+        "kpiSoupCheck": { "ok": true, "note": "Skipped" },
+        "citeHonestyCheck": { "ok": true, "note": "Skipped" },
+        "restructureRequired": false,
+        "craftOnly": true
+      }
+    }
+  ]
+}

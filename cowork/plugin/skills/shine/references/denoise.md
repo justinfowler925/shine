@@ -119,6 +119,9 @@ Every gate bite is **measure/prove FAIL→PASS** with a **cropped defect receipt
 Identical full-page “twin” screenshots are invalid proof.
 
 Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs` (dual-grid = detect → XOR after PASS).  
+Skill A/B (Salesforce DI-style, machine oracles only — **no preference data**):  
+`npm run skill:ab` → `verify/skill-ab-eval.mjs` on pinned `verify/fixtures/skill-ab/cases.json`  
+(with denoise guidance vs craft-only baseline; doctor requires with>without on every case).  
 Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
 XOR recipe: `npm run restructure:xor -- --html verify/fixtures/denoise/queue-dual-grid-before.html --out /tmp/xor.html`.  
 TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). AST stays plan-only for `collapse-peer-grids`.  

@@ -19,3 +19,4 @@ integrations/*.local.json
 
 # denoise-eval working copies
 verify/fixtures/denoise/.tmp-*.html
+verify/fixtures/skill-ab/.work/
