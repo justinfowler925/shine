@@ -36,6 +36,11 @@ try {
   assert.equal(receipt.criticActor?.workerSelfReviewBanned, true);
   assert.equal(receipt.criticActor?.cycle, "measure→repair→critic");
   assert.match(receipt.criticActor?.hostOrchestrator || "", /critic-actor-host/);
+  // Structure lock: primary job/regions locked; REPAINT cannot mutate without RESTRUCTURE packet.
+  assert.equal(receipt.structureLock?.locked, true);
+  assert.equal(receipt.structureLock?.repaintStructureRefuse, true);
+  assert.ok(receipt.structureLock?.primaryAction);
+  assert.ok(Array.isArray(receipt.structureLock?.regions));
   // When critic/actor rounds ran and measure cleared, host must have finalized.
   const criticRounds = (receipt.rounds || []).filter(
     (r) => r.turn === "critic" || r.turn === "actor" || r.reflexion,

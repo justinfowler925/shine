@@ -6,7 +6,11 @@
  * structure (regions, primary, template/kit, pattern) is immutable until the
  * user says `unlock structure`. Build may paint only against a LOCKED brief.
  *
- * Procedure docs: skill/references/wireframe.md
+ * Denoise-loop: once primary job/regions are locked, REPAINT that would change
+ * structure is refuse-closed unless applied as phase=RESTRUCTURE with a valid
+ * shine-restructure/v1 packet.
+ *
+ * Procedure docs: skill/references/wireframe.md · skill/references/denoise.md
  */
 
 import {
@@ -18,6 +22,7 @@ import {
 } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { validateRestructurePlan } from "../verify/restructure/schema.mjs";
 
 export const BRIEF_STATUSES = Object.freeze(["DRAFT", "LOCKED", "UNLOCKED"]);
 export const UNLOCK_PHRASE = "unlock structure";
@@ -29,6 +34,9 @@ export const STRUCTURE_FIELDS = Object.freeze([
   "Kit recipe",
   "States",
 ]);
+/** Denoise phases that may mutate locked structure — only with a RESTRUCTURE packet. */
+export const STRUCTURE_PHASE_RESTRUCTURE = "RESTRUCTURE";
+export const STRUCTURE_PHASE_REPAINT = "REPAINT";
 
 const REQUIRED_KEYS = Object.freeze([
   "Status",
@@ -306,6 +314,210 @@ export function applyStructurePatch(path, patch = {}) {
   }
   writeFileSync(resolve(path), raw.endsWith("\n") ? raw : raw + "\n");
   return readBrief(path);
+}
+
+/**
+ * Snapshot of locked structure fields (primary job + regions + cite skeleton).
+ * Used by denoise-loop to refuse REPAINT that mutates IA after lock.
+ */
+export function structureSnapshot(briefOrLock = {}) {
+  const fields = briefOrLock?.fields || {};
+  const primary =
+    fields["Primary action"] ||
+    briefOrLock.primaryAction ||
+    briefOrLock.job ||
+    "";
+  const regionsRaw =
+    fields.Regions !== undefined && fields.Regions !== null
+      ? fields.Regions
+      : briefOrLock.regions || "";
+  const regions = Array.isArray(regionsRaw)
+    ? regionsRaw.map((r) => String(r).replace(/^[-*]\s*/, "").trim()).filter(Boolean)
+    : String(regionsRaw)
+        .split(/\r?\n/)
+        .map((l) => l.replace(/^[-*]\s*/, "").trim())
+        .filter(Boolean);
+  return {
+    primaryAction: String(primary).trim(),
+    regions,
+    pattern: String(fields.Pattern || briefOrLock.pattern || "").trim(),
+    template: String(fields.Template || briefOrLock.template || "").trim(),
+    kitRecipe: String(fields["Kit recipe"] || briefOrLock.kitRecipe || "").trim(),
+  };
+}
+
+function normalizeStructureSnapshot(snap) {
+  const s =
+    snap?.fields || snap?.status
+      ? structureSnapshot(snap)
+      : snap?.primaryAction !== undefined || Array.isArray(snap?.regions)
+        ? {
+            primaryAction: snap.primaryAction || "",
+            regions: snap.regions || [],
+            pattern: snap.pattern || "",
+            template: snap.template || "",
+            kitRecipe: snap.kitRecipe || "",
+          }
+        : structureSnapshot(snap || {});
+  return {
+    primaryAction: String(s.primaryAction || "").trim().toLowerCase(),
+    regions: (s.regions || []).map((r) => String(r).trim().toLowerCase()).sort(),
+    pattern: String(s.pattern || "").trim().toLowerCase(),
+    template: String(s.template || "").trim().toLowerCase(),
+    kitRecipe: String(s.kitRecipe || "").trim().toLowerCase(),
+  };
+}
+
+export function structureSnapshotsEqual(a, b) {
+  return JSON.stringify(normalizeStructureSnapshot(a)) === JSON.stringify(normalizeStructureSnapshot(b));
+}
+
+/**
+ * In-memory structure lock from a shine-restructure/v1 plan (denoise-loop).
+ * Same gate surface as a LOCKED wireframe brief — primary job + regions.
+ */
+export function createStructureLockFromPlan(plan, { job = "", cite = "" } = {}) {
+  const primary = String(plan?.job || job || "").trim();
+  const regions = [];
+  const focal = plan?.regions?.focal;
+  if (focal) {
+    regions.push(
+      `focal — ${focal.role || "work"} — ${plan?.cite?.primary || cite || ""}`.trim(),
+    );
+  }
+  for (const d of plan?.regions?.demote || []) {
+    regions.push(`demote — ${d}`);
+  }
+  if (!regions.length) regions.push("focal — primary job");
+  return {
+    status: "LOCKED",
+    structureLocked: true,
+    source: "denoise-loop",
+    fields: {
+      Status: "LOCKED",
+      "Primary action": primary || "(unset)",
+      Regions: regions.map((r) => (String(r).startsWith("-") ? r : `- ${r}`)).join("\n"),
+      Pattern: String(plan?.category || "").trim(),
+      Template: String(plan?.cite?.primary || cite || "").trim(),
+      "Kit recipe": String(plan?.cite?.productPattern || "").trim(),
+      States: "empty / loading / error / filtered-empty",
+    },
+  };
+}
+
+function isLockedBrief(brief) {
+  if (!brief) return false;
+  if (brief.structureLocked === true) return true;
+  const status = brief.status || brief.fields?.Status;
+  try {
+    return normalizeBriefStatus(status || "DRAFT") === "LOCKED";
+  } catch {
+    return false;
+  }
+}
+
+function hasValidRestructurePacket(plan) {
+  if (!plan || typeof plan !== "object") return false;
+  return validateRestructurePlan(plan).ok === true;
+}
+
+/**
+ * Once primary job/regions are LOCKED, refuse REPAINT that changes structure
+ * unless the change is applied as phase=RESTRUCTURE with a valid
+ * shine-restructure/v1 packet.
+ *
+ * @param {object} opts
+ * @param {object} opts.brief LOCKED brief or createStructureLockFromPlan result
+ * @param {"REPAINT"|"RESTRUCTURE"} [opts.phase="REPAINT"]
+ * @param {object|null} [opts.proposed] structure snapshot or patch-like object
+ * @param {object|null} [opts.restructurePlan] shine-restructure/v1
+ */
+export function assertRepaintPreservesStructure({
+  brief,
+  phase = STRUCTURE_PHASE_REPAINT,
+  proposed = null,
+  restructurePlan = null,
+} = {}) {
+  if (!isLockedBrief(brief)) return true;
+
+  const locked = structureSnapshot(brief);
+  let next = locked;
+  if (proposed != null) {
+    if (proposed.primaryAction !== undefined || Array.isArray(proposed.regions) || proposed.fields) {
+      next = structureSnapshot(
+        proposed.fields
+          ? proposed
+          : {
+              fields: {
+                "Primary action": proposed.primaryAction ?? locked.primaryAction,
+                Regions: Array.isArray(proposed.regions)
+                  ? proposed.regions.map((r) => `- ${r}`).join("\n")
+                  : proposed.regions || locked.regions.join("\n"),
+                Pattern: proposed.pattern ?? locked.pattern,
+                Template: proposed.template ?? locked.template,
+                "Kit recipe": proposed.kitRecipe ?? locked.kitRecipe,
+              },
+            },
+      );
+    } else if (typeof proposed === "object") {
+      // Patch keyed by brief field names
+      const fields = { ...brief.fields };
+      for (const [k, v] of Object.entries(proposed)) {
+        if (STRUCTURE_FIELDS.includes(k) || k === "Primary action" || k === "Regions") {
+          fields[k] = v;
+        }
+      }
+      next = structureSnapshot({ fields, status: "LOCKED" });
+    }
+  }
+
+  const structureChanges = !structureSnapshotsEqual(locked, next);
+  if (!structureChanges) return true;
+
+  const phaseNorm = String(phase || STRUCTURE_PHASE_REPAINT).trim().toUpperCase();
+  const planOk = hasValidRestructurePacket(restructurePlan);
+  if (phaseNorm === STRUCTURE_PHASE_RESTRUCTURE && planOk) return true;
+
+  throw new Error(
+    `wireframe brief is LOCKED — refuse REPAINT that changes structure (primary/regions) without RESTRUCTURE packet. ` +
+      `Emit shine-restructure/v1 and apply as phase=${STRUCTURE_PHASE_RESTRUCTURE}, or user says "${UNLOCK_PHRASE}".`,
+  );
+}
+
+/**
+ * Denoise-loop gate: lock primary job/regions, then allow RESTRUCTURE apply
+ * or craft-only REPAINT. Structural REPAINT without packet → throw.
+ */
+export function gateDenoiseStructureChange({
+  brief,
+  phase = STRUCTURE_PHASE_REPAINT,
+  proposed = null,
+  restructurePlan = null,
+} = {}) {
+  return assertRepaintPreservesStructure({ brief, phase, proposed, restructurePlan });
+}
+
+/** Receipt fragment for denoise-loop / doctor. */
+export function structureLockReceipt(brief, { source = null, wireframeBrief = null } = {}) {
+  if (!isLockedBrief(brief)) {
+    return {
+      locked: false,
+      repaintStructureRefuse: false,
+      source: source || brief?.source || null,
+      wireframeBrief: wireframeBrief || null,
+    };
+  }
+  const snap = structureSnapshot(brief);
+  return {
+    locked: true,
+    primaryAction: snap.primaryAction,
+    regions: snap.regions,
+    pattern: snap.pattern,
+    template: snap.template,
+    repaintStructureRefuse: true,
+    source: source || brief?.source || (wireframeBrief ? "wireframe-brief" : "denoise-loop"),
+    wireframeBrief: wireframeBrief || null,
+  };
 }
 
 /**

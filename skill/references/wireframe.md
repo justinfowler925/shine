@@ -198,6 +198,31 @@ node "$ROOT/core/wireframe-brief.mjs" check shine-wireframe/<slug>.brief.md --pa
 `ddr.wireframeBrief` on mode=`new` packets records `{ path, status, structureLocked }`.
 `assertStructureLocked` / `assertBuildMayPaint` / `assertNewSurfaceBrief` are fail-closed.
 
+### Denoise structure lock (REPAINT vs RESTRUCTURE)
+
+Once primary job + regions are LOCKED (wireframe brief **or** denoise-loop lock from
+`shine-restructure.json`), **REPAINT must not change structure**. Structural edits
+require phase=`RESTRUCTURE` + a valid `shine-restructure/v1` packet:
+
+```sh
+# Gate used by verify/denoise-loop.mjs — refuse REPAINT that mutates primary/regions
+node -e '
+  import { gateDenoiseStructureChange, createStructureLockFromPlan } from "./core/wireframe-brief.mjs";
+  import { buildRestructurePlan } from "./verify/restructure/schema.mjs";
+  // …assertRepaintPreservesStructure / gateDenoiseStructureChange
+'
+```
+
+| Intent | Structure changes? | Packet | Result |
+|---|---|---|---|
+| REPAINT | no | — | allow (craft) |
+| REPAINT | yes | missing | **refuse** |
+| RESTRUCTURE | yes | `shine-restructure/v1` | allow |
+| RESTRUCTURE | yes | missing/invalid | **refuse** |
+
+Receipt: `structureLock.locked` + `repaintStructureRefuse: true`. Doctor:
+`verify/wireframe-brief.test.mjs`.
+
 `DESIGN.md` names: lane, cite, voice, job, signature, palette (from pack), type pairing, layout ASCII, Salesforce host width if lex.
 
 ### Build handoff rules
