@@ -19,7 +19,8 @@ DDR Action/Observation audit trails (enterprise §5) live under
 `SHINE_AUDIT_DIR` / `~/.cache/shine/audit/` via `core/audit-trail.mjs` — append-only
 events + prove receipt hash; supersede don’t rewrite. Packet `ddr.mjs accept|refuse`
 and green `prove.mjs --ddr` **auto-append** (decision path, not only manual CLI).
-See `docs/ddr-audit-trail.md`.
+When `SHINE_AUDIT_DIR` is set, `denoise-loop.mjs` also auto-appends
+measure/critic/reflexion turns. See `docs/ddr-audit-trail.md`.
 
 Retrieve with:
 

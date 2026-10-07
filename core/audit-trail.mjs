@@ -285,6 +285,151 @@ export function recordProveCompletion(ddrId, receipt, { auditDir = defaultAuditD
 }
 
 /**
+ * Opt-in gate for denoise-loop audit: only when SHINE_AUDIT_DIR is set.
+ * Accept/refuse+prove always append (default ~/.cache); loop turns stay opt-in
+ * so doctor/CI don't write home trails unless pinned.
+ * @returns {string|null}
+ */
+export function shineAuditDirEnabled() {
+  const d = text(process.env.SHINE_AUDIT_DIR);
+  return d || null;
+}
+
+/**
+ * Denoise-loop auto-append: one measure turn → action:measure + observation:measure-result.
+ */
+export function recordMeasureTurn(
+  ddrId,
+  { round = null, status = null, failures = [], source = "denoise-loop.mjs" } = {},
+  { auditDir = defaultAuditDir() } = {},
+) {
+  const failList = Array.isArray(failures)
+    ? failures.map((f) => text(f)).filter(Boolean).slice(0, 24)
+    : [];
+  const exitStatus = status == null ? null : Number(status);
+  appendAndSave(
+    ddrId,
+    {
+      kind: "action",
+      type: "measure",
+      payload: {
+        round: round == null ? null : Number(round),
+        status: exitStatus,
+        failureCount: failList.length,
+        source: text(source) || "denoise-loop.mjs",
+      },
+    },
+    { auditDir },
+  );
+  return appendAndSave(
+    ddrId,
+    {
+      kind: "observation",
+      type: "measure-result",
+      payload: {
+        round: round == null ? null : Number(round),
+        status: exitStatus === 0 ? "passed" : "failed",
+        exitStatus,
+        failures: failList,
+        source: text(source) || "denoise-loop.mjs",
+      },
+    },
+    { auditDir },
+  );
+}
+
+/**
+ * Denoise-loop auto-append: Critic≠Actor reflexion → action:critic + action:reflexion
+ * + observation:critic-verdict.
+ */
+export function recordCriticReflexionTurn(
+  ddrId,
+  {
+    verdict = null,
+    nextStep = null,
+    disposition = null,
+    criticAgentId = null,
+    actorAgentId = null,
+    source = "denoise-loop.mjs",
+  } = {},
+  { auditDir = defaultAuditDir() } = {},
+) {
+  const v = text(verdict) || null;
+  const step = nextStep ? text(nextStep) : null;
+  const disp = disposition ? text(disposition) : null;
+  const critic = criticAgentId ? text(criticAgentId) : null;
+  const actor = actorAgentId ? text(actorAgentId) : null;
+  const src = text(source) || "denoise-loop.mjs";
+  appendAndSave(
+    ddrId,
+    {
+      kind: "action",
+      type: "critic",
+      payload: {
+        verdict: v,
+        disposition: disp,
+        criticAgentId: critic,
+        actorAgentId: actor,
+        source: src,
+      },
+    },
+    { auditDir },
+  );
+  appendAndSave(
+    ddrId,
+    {
+      kind: "action",
+      type: "reflexion",
+      payload: {
+        verdict: v,
+        nextStep: step,
+        disposition: disp,
+        criticAgentId: critic,
+        actorAgentId: actor,
+        source: src,
+      },
+    },
+    { auditDir },
+  );
+  return appendAndSave(
+    ddrId,
+    {
+      kind: "observation",
+      type: "critic-verdict",
+      payload: {
+        verdict: v,
+        nextStep: step,
+        disposition: disp,
+        criticAgentId: critic,
+        actorAgentId: actor,
+        source: src,
+      },
+    },
+    { auditDir },
+  );
+}
+
+/**
+ * Opt-in denoise-loop wire: append measure|critic/reflexion when SHINE_AUDIT_DIR
+ * (or explicit auditDir) is set. No-op otherwise — not only manual `npm run audit`.
+ * @param {string} ddrId
+ * @param {{ type: "measure"|"critic-reflexion" } & Record<string, unknown>} event
+ * @returns {object|null} trail or null when disabled
+ */
+export function autoAppendDenoiseLoop(ddrId, event, { auditDir = null } = {}) {
+  const dir = text(auditDir) || shineAuditDirEnabled();
+  if (!dir) return null;
+  const type = text(event?.type);
+  if (type === "measure") {
+    return recordMeasureTurn(ddrId, event, { auditDir: dir });
+  }
+  if (type === "critic-reflexion") {
+    return recordCriticReflexionTurn(ddrId, event, { auditDir: dir });
+  }
+  throw new Error("autoAppendDenoiseLoop: type must be measure|critic-reflexion");
+}
+
+/**
  * Link a prove/completion receipt by content hash.
  * Appends observation `receipt-linked` and sets tip `proveReceiptHash`.
  * Prior events stay intact; tip may advance to a newer receipt hash.

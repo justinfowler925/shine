@@ -6,6 +6,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise-loop audit auto-append (measure/critic/reflexion).** When
+  `SHINE_AUDIT_DIR` is set, `verify/denoise-loop.mjs` appends
+  `action:measure` + `observation:measure-result` each measure round and
+  `action:critic` + `action:reflexion` + `observation:critic-verdict` after
+  Critic≠Actor host rounds — extending the trail beyond DDR accept/refuse+prove.
+  Helpers: `recordMeasureTurn`, `recordCriticReflexionTurn`,
+  `autoAppendDenoiseLoop`. Doctor bite: `verify/audit-trail.test.mjs`.
+  Docs: `docs/ddr-audit-trail.md`.
+
 - **Repertoire → sibling learn (edition prefer).** When cite/kit resolves via
   the ClearSpeed Operate edition sibling map, `commitSiblingLearnFromResolve`
   persists `siblingPrefs[]` + an episodic `edition-sibling` lesson (doctor-gated).

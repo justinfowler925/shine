@@ -27,7 +27,7 @@ node "$ROOT/core/design-packet.mjs" … --accept
 # or refuse: node "$ROOT/core/ddr.mjs" refuse shine-packet.json --reason "…"
 ```
 
-`editing.allowed` stays false while `ddr.status !== "accepted"`. Supersede; do not rewrite history. Green `prove.mjs --ddr` auto-links the completion receipt on the audit trail.
+`editing.allowed` stays false while `ddr.status !== "accepted"`. Supersede; do not rewrite history. Green `prove.mjs --ddr` auto-links the completion receipt on the audit trail. Set `SHINE_AUDIT_DIR` so `denoise-loop.mjs` also auto-appends measure/critic/reflexion Actions (not only accept/refuse+prove).
 
 ## Diagnose order (Operate — locked)
 

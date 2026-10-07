@@ -27,7 +27,7 @@ node "$ROOT/core/design-packet.mjs" … --accept
 # or refuse: node "$ROOT/core/ddr.mjs" refuse shine-packet.json --reason "…"
 ```
 
-`editing.allowed` stays false while `ddr.status !== "accepted"`. Supersede; do not rewrite history. Green `prove.mjs --ddr` auto-links the completion receipt on the audit trail.
+`editing.allowed` stays false while `ddr.status !== "accepted"`. Supersede; do not rewrite history. Green `prove.mjs --ddr` auto-links the completion receipt on the audit trail. Set `SHINE_AUDIT_DIR` so `denoise-loop.mjs` also auto-appends measure/critic/reflexion Actions (not only accept/refuse+prove).
 
 ## Diagnose order (Operate — locked)
 
@@ -131,10 +131,20 @@ See `docs/operate-constitution.md`.
 Every gate bite is **measure/prove FAIL→PASS** with a **cropped defect receipt**.  
 Identical full-page “twin” screenshots are invalid proof.
 
-Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs` (dual-grid = detect → XOR after PASS).  
+Pinned crop pairs (HTML crops under `verify/fixtures/denoise/receipts/`):
+
+| Defect | Before → after crop |
+|---|---|
+| `cta-pressure` | `queue-cta-{before,after}-crop.html` |
+| `kpi-soup` | `queue-kpi-{before,after}-crop.html` |
+| wrong-cite | `sources-cite-{before,after}-crop.html` |
+| `dual-focal` / XOR | `queue-dual-grid-before-crop.html` → `queue-dual-grid-fold-crop.html` |
+
+Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs` (dual-grid = detect → XOR after PASS; crop pairs required).  
 Skill A/B (Salesforce DI-style, machine oracles only — **no preference data**):  
 `npm run skill:ab` → `verify/skill-ab-eval.mjs` on pinned `verify/fixtures/skill-ab/cases.json`  
-(with denoise guidance vs craft-only baseline; doctor requires with>without on every case).  
+(with denoise guidance vs craft-only baseline; doctor requires with>without + crop pairs).  
+Builders: `verify/restructure/defect-crops.mjs` · bite `verify/defect-crops.test.mjs`.  
 Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
 XOR recipe: `npm run restructure:xor -- --html verify/fixtures/denoise/queue-dual-grid-before.html --out /tmp/xor.html`.  
 TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). AST stays plan-only for `collapse-peer-grids`.  
