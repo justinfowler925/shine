@@ -6,6 +6,10 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise + enterprise live DoD tracker.** `docs/shine-denoise-enterprise-dod.md`
+  records tip `b043a41` (#161) merge/deploy/CI/ClearSpeed host posture for
+  PRs #149–#161 (honest PARTIAL until tip Actions green + hosts tip-synced).
+
 - **Measure fail-closed on Operate anti-pattern cites.** When Operate slop
   defects fire (`dual-focal`, `kpi-soup`, `cta-pressure`, `cite-honesty`),
   `verify/measure.mjs` requires each failure line to cite the matching
