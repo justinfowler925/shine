@@ -4,6 +4,7 @@
  * ddrId + Action/Observation event log + prove receipt hash link;
  * supersede don't rewrite history.
  * Auto-append on packet accept/refuse + prove completion (decision path, not only manual).
+ * Denoise-loop measure/critic/reflexion auto-append when SHINE_AUDIT_DIR set.
  */
 import assert from "node:assert/strict";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -16,14 +17,18 @@ import { createDesignPacket } from "../core/design-packet.mjs";
 import {
   AUDIT_SCHEMA,
   appendEvent,
+  autoAppendDenoiseLoop,
   eventsForDdr,
   initTrail,
   linkProveReceipt,
   linkProveReceiptAndSave,
   loadTrail,
   receiptHash,
+  recordCriticReflexionTurn,
   recordDdrDecision,
+  recordMeasureTurn,
   recordProveCompletion,
+  shineAuditDirEnabled,
   supersedeTrail,
   validateTrail,
 } from "../core/audit-trail.mjs";
@@ -318,8 +323,122 @@ try {
     rmSync(decisionDir, { recursive: true, force: true });
   }
 
+  // ---- Denoise-loop measure/critic/reflexion auto-append (SHINE_AUDIT_DIR) ----
+  const loopDir = mkdtempSync(join(tmpdir(), "shine-audit-loop-"));
+  const prevAuditEnv = process.env.SHINE_AUDIT_DIR;
+  try {
+    delete process.env.SHINE_AUDIT_DIR;
+    assert.equal(shineAuditDirEnabled(), null);
+    const loopDdr = buildDdr({
+      job: "Decide Pursue/Review/Dismiss on the next notice",
+      lane: "saas",
+      category: "queue",
+      mode: "denoise",
+      primaryCite: "shadcn-queue",
+      status: "accepted",
+    });
+    // No-op when env unset and no explicit dir.
+    assert.equal(
+      autoAppendDenoiseLoop(loopDdr.ddrId, {
+        type: "measure",
+        round: 1,
+        status: 1,
+        failures: ["cta-pressure: 2 filled"],
+      }),
+      null,
+    );
+    assert.equal(loadTrail(loopDdr.ddrId, { auditDir: loopDir }), null);
+
+    // Library helpers (explicit auditDir — same events denoise-loop writes).
+    let loopTrail = recordMeasureTurn(
+      loopDdr.ddrId,
+      {
+        round: 1,
+        status: 1,
+        failures: ["cta-pressure: 2 filled in main", "dual-focal: peer grids"],
+        source: "audit-trail.test",
+      },
+      { auditDir: loopDir },
+    );
+    assert.ok(loopTrail.events.some((e) => e.kind === "action" && e.type === "measure"));
+    assert.ok(
+      loopTrail.events.some(
+        (e) =>
+          e.kind === "observation" &&
+          e.type === "measure-result" &&
+          e.payload.status === "failed" &&
+          e.payload.failures.length === 2,
+      ),
+    );
+    loopTrail = recordCriticReflexionTurn(
+      loopDdr.ddrId,
+      {
+        verdict: "partial",
+        nextStep: "Apply cta-budget maxFilled=1",
+        disposition: "actor-proceed",
+        criticAgentId: "critic.test",
+        actorAgentId: "actor.test",
+        source: "audit-trail.test",
+      },
+      { auditDir: loopDir },
+    );
+    assert.ok(loopTrail.events.some((e) => e.kind === "action" && e.type === "critic"));
+    assert.ok(loopTrail.events.some((e) => e.kind === "action" && e.type === "reflexion"));
+    assert.ok(
+      loopTrail.events.some(
+        (e) =>
+          e.kind === "observation" &&
+          e.type === "critic-verdict" &&
+          e.payload.verdict === "partial",
+      ),
+    );
+
+    // Env opt-in wire used by denoise-loop.mjs.
+    process.env.SHINE_AUDIT_DIR = loopDir;
+    assert.equal(shineAuditDirEnabled(), loopDir);
+    const envDdr = buildDdr({
+      job: "Configure account profile fields",
+      lane: "saas",
+      category: "settings",
+      mode: "denoise",
+      primaryCite: "shadcn-settings",
+      status: "accepted",
+    });
+    const envTrail = autoAppendDenoiseLoop(envDdr.ddrId, {
+      type: "measure",
+      round: 1,
+      status: 0,
+      failures: [],
+    });
+    assert.ok(envTrail);
+    assert.ok(envTrail.events.some((e) => e.type === "measure"));
+    assert.ok(
+      envTrail.events.some(
+        (e) => e.type === "measure-result" && e.payload.status === "passed",
+      ),
+    );
+    const criticTrail = autoAppendDenoiseLoop(envDdr.ddrId, {
+      type: "critic-reflexion",
+      verdict: "done",
+      disposition: "host-accepted",
+      criticAgentId: "critic.env",
+      actorAgentId: "actor.env",
+    });
+    assert.ok(criticTrail.events.some((e) => e.type === "critic"));
+    assert.ok(criticTrail.events.some((e) => e.type === "reflexion"));
+    assert.ok(criticTrail.events.some((e) => e.type === "critic-verdict"));
+    assert.throws(
+      () => autoAppendDenoiseLoop(envDdr.ddrId, { type: "nope" }),
+      /measure\|critic-reflexion/,
+    );
+  } finally {
+    if (prevAuditEnv === undefined) delete process.env.SHINE_AUDIT_DIR;
+    else process.env.SHINE_AUDIT_DIR = prevAuditEnv;
+    rmSync(loopDir, { recursive: true, force: true });
+  }
+
   console.log(
-    "audit-trail PASS: ddrId Action/Observation log · prove receipt hash · supersede no rewrite · accept/refuse+prove auto-append",
+    "audit-trail PASS: ddrId Action/Observation log · prove receipt hash · supersede no rewrite · accept/refuse+prove auto-append · measure/critic/reflexion loop",
   );
 } finally {
   rmSync(dir, { recursive: true, force: true });

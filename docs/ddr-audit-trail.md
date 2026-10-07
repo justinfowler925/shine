@@ -39,6 +39,20 @@ Audit events are **not** manual-only. The packet decision path wires
 Library helpers: `recordDdrDecision`, `recordProveCompletion`.  
 Pin a test/project root with `--audit-dir` (ddr CLI) or `SHINE_AUDIT_DIR`.
 
+## Denoise-loop auto-append (opt-in)
+
+When `SHINE_AUDIT_DIR` is set, `verify/denoise-loop.mjs` auto-appends loop
+turns (beyond accept/refuse+prove) — not only manual `npm run audit`:
+
+| Loop turn | Wire | Events |
+|---|---|---|
+| Measure | after each `measure.mjs` round | `action:measure` + `observation:measure-result` |
+| Critic ≠ Actor | after `runCriticActorHostRound` | `action:critic` + `action:reflexion` + `observation:critic-verdict` |
+
+Helpers: `recordMeasureTurn`, `recordCriticReflexionTurn`, `autoAppendDenoiseLoop`
+(`shineAuditDirEnabled` is the env gate). Tests may pass `auditDir` to
+`runDenoiseLoop` without mutating the env. Fail-closed when the opt-in is on.
+
 ## Run
 
 ```sh
@@ -50,10 +64,12 @@ node core/ddr.mjs refuse shine-packet.json --reason "wrong category"
 npm run audit -- link-receipt --ddr ddr_example_001 --receipt ~/.cache/shine/last-completion.json
 npm run audit -- supersede --from ddr_old --to ddr_new --reason "category clarified"
 npm run audit -- show --ddr ddr_example_001
+SHINE_AUDIT_DIR=/tmp/shine-audit node verify/denoise-loop.mjs --html verify/fixtures/denoise/queue-cta-before.html
 node verify/audit-trail.test.mjs
 ```
 
 Use `--dir <path>` / `--audit-dir <path>` in tests or to pin a project-local audit root.
+Set `SHINE_AUDIT_DIR` to enable denoise-loop measure/critic/reflexion appends.
 
 ## Rules
 

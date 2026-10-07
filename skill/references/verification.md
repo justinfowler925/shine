@@ -91,7 +91,7 @@ cite, antiPatterns, restructure vs repaint hints, kitRecipe, confidence
 
 **Denoise + DDR (N0):** `--mode denoise` loads `denoise.md`; refuses without `--category`.
 Packet emits `ddr` / `ddrId` + `constitutionIds`; denoise Actor implement requires
-`status: accepted` (`--accept` or `core/ddr.mjs accept`) or `refused` (`ddr.mjs refuse`). Prove receipts link `ddrId` + `constitutionIds` and auto-append the audit trail.
+`status: accepted` (`--accept` or `core/ddr.mjs accept`) or `refused` (`ddr.mjs refuse`). Prove receipts link `ddrId` + `constitutionIds` and auto-append the audit trail (`SHINE_AUDIT_DIR` also appends denoise-loop measure/critic/reflexion).
 No polish until `primaryTaskCheck` green.
 
 **Dual-focal + KPI soup (N6):** Operate queue/triage cites hard-fail ≥2 peer

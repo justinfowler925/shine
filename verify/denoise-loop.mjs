@@ -19,6 +19,7 @@ import {
   hostFinalizeAfterClearance,
   runCriticActorHostRound,
 } from "../core/critic-actor-host.mjs";
+import { autoAppendDenoiseLoop } from "../core/audit-trail.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { applyDomRestructure } from "./restructure/apply-dom.mjs";
 import { applyXorSavedView } from "./restructure/xor-saved-view.mjs";
@@ -65,6 +66,8 @@ export async function runDenoiseLoop({
   category = "queue",
   cite = "shadcn-queue",
   outDir = "",
+  /** Pin audit root (tests); else SHINE_AUDIT_DIR opt-in. */
+  auditDir = null,
 } = {}) {
   const out = outDir || join(ROOT, "verify/fixtures/denoise/.loop");
   mkdirSync(out, { recursive: true });
@@ -77,6 +80,21 @@ export async function runDenoiseLoop({
     project: ROOT,
     accept: true,
   });
+  const auditOpts = auditDir ? { auditDir } : {};
+  /** @type {{ events: number, error: string|null }|null} */
+  let auditTrail = null;
+  const appendAudit = (event) => {
+    // Opt-in: SHINE_AUDIT_DIR (or explicit auditDir). Fail-closed when enabled.
+    try {
+      const trail = autoAppendDenoiseLoop(packet.ddrId, event, auditOpts);
+      if (trail) {
+        auditTrail = { events: trail.events.length, error: null };
+      }
+    } catch (error) {
+      auditTrail = { events: auditTrail?.events || 0, error: error.message };
+      throw error;
+    }
+  };
 
   let html = readFileSync(resolve(htmlPath), "utf8");
   const rounds = [];
@@ -142,6 +160,13 @@ export async function runDenoiseLoop({
   writeFileSync(currentPath, html);
 
   let lastMeasure = measure(currentPath, cite);
+  appendAudit({
+    type: "measure",
+    round: 1,
+    status: lastMeasure.status,
+    failures: lastMeasure.failures,
+    source: "denoise-loop.mjs",
+  });
   rounds.push({
     round: 1,
     applied: applied.applied,
@@ -176,6 +201,15 @@ export async function runDenoiseLoop({
     reflexion = hostRound.reflexion;
     if (hostRound.hostAccept) hostAccept = hostRound.hostAccept;
     lastActorPlan = hostRound.actorPlan;
+    appendAudit({
+      type: "critic-reflexion",
+      verdict: reflexion.verdict,
+      nextStep: reflexion.nextStep,
+      disposition: hostRound.disposition,
+      criticAgentId: reflexion.criticAgentId,
+      actorAgentId: reflexion.actorAgentId,
+      source: "denoise-loop.mjs",
+    });
 
     if (hostRound.disposition !== "actor-proceed") {
       rounds.push({
@@ -205,6 +239,13 @@ export async function runDenoiseLoop({
     currentPath = join(out, `round-${round}.html`);
     writeFileSync(currentPath, html);
     lastMeasure = measure(currentPath, cite);
+    appendAudit({
+      type: "measure",
+      round,
+      status: lastMeasure.status,
+      failures: lastMeasure.failures,
+      source: "denoise-loop.mjs",
+    });
     rounds.push({
       round,
       turn: "actor",
@@ -260,6 +301,7 @@ export async function runDenoiseLoop({
     measureCleared: lastMeasure.status === 0,
     proof: "measure FAIL→PASS rounds — not twin screenshots",
     artifact: currentPath,
+    auditTrail,
   };
   // Fail-closed when critic/actor ran and measure cleared without host finalize.
   assertHostFinalized({
