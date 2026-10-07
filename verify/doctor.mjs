@@ -65,6 +65,7 @@ const has = (obj, pred) => JSON.stringify(obj ?? null).match(pred);
 {
   for (const [name,file,needle] of [
     ["integration readiness and edition integrity", "verify/integration-readiness.test.mjs", "edition integrity"],
+    ["ClearSpeed sync-tokens rewrite (S7)", "verify/sync-tokens.test.mjs", "sync-tokens emit/check"],
     ["benchmark output quality gates", "benchmark/quality.test.mjs", "clone structure"],
     ["functional originality gates", "verify/originality.test.mjs", "attribute stamp"],
   ]) {

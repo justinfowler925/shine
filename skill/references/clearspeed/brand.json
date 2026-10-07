@@ -1,7 +1,9 @@
 {
-  "//": "Clearspeed Shine edition brand palette — source of truth for the private edition overlay.",
+  "//": "Clearspeed Shine edition brand palette — Shine-owned machine seam for the private edition overlay.",
+  "//ssot": "Narrative/visual authority is Claude Design → clearspeed-brand plugin (https://claude.ai/design/p/555a765e-34c0-4b2c-acae-a9ba7e577005?via=share). This file mirrors that palette for Shine emit/edition.",
   "//accent": "Signal Orange #ED5925 (action/CTA). Hover #D24A1B. Never invent indigo placeholders here.",
-  "//build": "install-clearspeed-edition.mjs applies this via SHINE_BRAND_OVERRIDE into the edition tokens tree.",
+  "//build": "install-clearspeed-edition.mjs applies this via SHINE_BRAND_OVERRIDE into the edition tokens tree. Machine kit: node scripts/sync-tokens.mjs → brand-tokens.json.",
+  "//retired": "Do not use tokens/dist/clearspeed/office.json or tokens/dist/brand/office.json (#4338ca placeholder) as ClearSpeed brand input — old sync-tokens.mjs premise retired (S7).",
   "color": {
     "brand": {
       "canvas": "#ffffff",
