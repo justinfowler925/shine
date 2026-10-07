@@ -16,7 +16,7 @@ Extends Phase 0. Work items: `540fff5d-…` (roadmap) / `eba14d23-…` (this sli
 
 ## Non-claims
 
-- Human Phase 1 review (≥7/8 usable) not run
+- Human Phase 1 review (≥7/8 usable) not run — operator steps in [`HUMAN-REVIEW.md`](./HUMAN-REVIEW.md)
 - Authenticated production Nucleus adapter (needs Workspace SSO + checkout) still open — swap `baseUrl` + `credentials: "include"`; drop harness `arm-fail`
 - Held-out briefs remain sealed
 - Distribution / doctor-full not claimed
