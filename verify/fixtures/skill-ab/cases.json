@@ -1,7 +1,7 @@
 {
   "$schema": "shine-skill-ab/v1",
   "version": 1,
-  "bar": "with denoise guidance clears pinned defects; without does not — machine oracles only (no preference labels)",
+  "bar": "with denoise guidance clears pinned defects; without does not — machine oracles only (no preference labels); crop receipts tied to Atlas reflexionVerdict",
   "guidanceRef": "skill/references/denoise.md",
   "cropReceiptsDir": "verify/fixtures/denoise/receipts",
   "cases": [
@@ -74,11 +74,18 @@
     {
       "id": "usul-focal",
       "fixture": "verify/fixtures/denoise/usul-composition-before.html",
+      "afterFixture": "verify/fixtures/denoise/usul-focal-after.html",
       "cite": "shadcn-dashboard-01",
       "category": "dashboard",
       "job": "Find coverage gaps on Usul analytics",
       "mustClear": ["composition-slop"],
       "expectedOps": ["set-focal"],
+      "cropPairId": "usul-focal",
+      "crops": {
+        "before": "usul-focal-before-crop.html",
+        "after": "usul-focal-after-crop.html",
+        "defect": "composition-slop"
+      },
       "withGuidance": {
         "primaryTaskCheck": { "ok": false, "note": "No focal region; equal Card soup" },
         "competingCtaCheck": { "ok": true, "note": "CTA not under test" },
@@ -160,6 +167,39 @@
         "competingCtaCheck": { "ok": true, "note": "Skipped" },
         "dualFocalCheck": { "ok": true, "note": "Both grids are useful" },
         "kpiSoupCheck": { "ok": true, "note": "Skipped" },
+        "citeHonestyCheck": { "ok": true, "note": "Skipped" },
+        "restructureRequired": false,
+        "craftOnly": true
+      }
+    },
+    {
+      "id": "queue-sled-bloat",
+      "fixture": "verify/fixtures/denoise/queue-cta-before.html",
+      "afterFixture": "verify/fixtures/denoise/queue-cta-after.html",
+      "cite": "shadcn-queue",
+      "category": "queue",
+      "job": "Decide Pursue/Review/Dismiss without CTA pressure or KPI encyclopedia",
+      "mustClear": ["cta-pressure", "kpi-soup"],
+      "expectedOps": ["cta-budget", "kpi-collapse"],
+      "cropPairId": "queue-sled-bloat",
+      "crops": {
+        "before": "queue-sled-bloat-before-crop.html",
+        "after": "queue-sled-bloat-after-crop.html",
+        "defect": "cta-pressure+kpi-soup"
+      },
+      "withGuidance": {
+        "primaryTaskCheck": { "ok": false, "note": "Decide path buried under dual filled CTAs and KPI soup" },
+        "competingCtaCheck": { "ok": false, "note": "Pursue and Assign both filled" },
+        "dualFocalCheck": { "ok": true, "note": "Dual-grid not under test on this stacked slice" },
+        "kpiSoupCheck": { "ok": false, "note": "Ten equal metric tiles after the queue" },
+        "citeHonestyCheck": { "ok": true, "note": "Cite honest" },
+        "restructureRequired": true
+      },
+      "withoutGuidance": {
+        "primaryTaskCheck": { "ok": true, "note": "Dashboard DNA feels complete" },
+        "competingCtaCheck": { "ok": true, "note": "Both CTAs feel important" },
+        "dualFocalCheck": { "ok": true, "note": "Skipped" },
+        "kpiSoupCheck": { "ok": true, "note": "Metrics look executive" },
         "citeHonestyCheck": { "ok": true, "note": "Skipped" },
         "restructureRequired": false,
         "craftOnly": true

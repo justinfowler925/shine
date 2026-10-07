@@ -1,0 +1,53 @@
+<!doctype html>
+<!-- Denoise defect crop — twin full-page INVALID -->
+<html lang="en" data-cite="shadcn-queue" data-shine-crop="sled-bloat-before">
+<head><meta charset="utf-8"/><title>Sled-bloat crop FAIL — CTA + KPI</title>
+<style>
+body{margin:0;font:14px/1.4 system-ui;background:#fafafa;color:#18181b}
+.fold{max-width:720px;margin:24px auto;padding:16px;background:#fff;border:1px solid #e4e4e7;border-radius:8px}
+.btn{border:1px solid #e4e4e7;background:#fff;padding:6px 10px;border-radius:4px;font:inherit;font-size:12px;margin:0 4px 4px 0}
+.btn.filled{background:#18181b;color:#fff;border-color:#18181b;font-weight:600}
+.btn.filled-peer{background:#3f3f46;color:#fff;border-color:#3f3f46;font-weight:600}
+.btn.ghost{border-color:transparent;background:transparent}
+table{width:100%;border-collapse:collapse}th,td{border-bottom:1px solid #e4e4e7;padding:8px;text-align:left}
+.metrics{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}
+.metric{flex:1 1 9rem;padding:12px;border:1px solid #e4e4e7;border-radius:8px;min-height:72px}
+.metric span{display:block;font-size:12px;color:#71717a}.metric strong{font-size:20px}
+.cite{display:inline-block;border:1px solid #e4e4e7;border-radius:6px;padding:4px 8px;font:12px/1.2 ui-monospace,monospace;background:#f4f4f5}
+.cite.bad{border-color:#b91c1c;color:#b91c1c}.cite.ok{border-color:#15803d;color:#15803d}
+.grid-wrap{border:1px solid #e4e4e7;border-radius:8px;padding:12px;margin:0 0 12px}
+.kicker{color:#71717a;font-size:12px;margin:0 0 8px}
+caption-note,p[data-shine-crop-caption]{font-size:12px;color:#52525b;margin:12px 0 0}
+</style></head>
+<body>
+<main data-shine-main class="fold">
+  <h1>Queue · stacked defects</h1>
+  <table role="grid" data-shine-datagrid>
+    <thead><tr><th>Notice</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>NV DPS voice risk RFI</strong></td>
+        <td>
+          <button type="button" class="btn filled">Pursue</button>
+          <button type="button" class="btn">Review</button>
+          <button type="button" class="btn filled-peer">Assign lead</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="metrics" aria-label="SLED Capture key figures" data-sled-kpis>
+        <div class="metric" data-kpi="Open queue"><span>Open queue</span><strong>214</strong></div>
+        <div class="metric" data-kpi="New"><span>New</span><strong>12</strong></div>
+        <div class="metric" data-kpi="High score"><span>High score</span><strong>33</strong></div>
+        <div class="metric" data-kpi="Due soon"><span>Due soon</span><strong>27</strong></div>
+        <div class="metric" data-kpi="Decisions 7d"><span>Decisions 7d</span><strong>48</strong></div>
+        <div class="metric" data-kpi="Decisions 30d"><span>Decisions 30d</span><strong>161</strong></div>
+        <div class="metric" data-kpi="Median"><span>Median</span><strong>4 d</strong></div>
+        <div class="metric" data-kpi="Coverage"><span>Coverage</span><strong>31</strong></div>
+        <div class="metric" data-kpi="Usul"><span>Usul</span><strong>22</strong></div>
+        <div class="metric" data-kpi="Missed"><span>Missed</span><strong>9</strong></div>
+  </div>
+  <p data-shine-crop-caption>Crop FAIL: dual filled CTA + ten KPI tiles on decide path — cta-pressure + kpi-soup.</p>
+</main>
+</body>
+</html>

@@ -28,7 +28,8 @@ node verify/denoise-loop.test.mjs
 | `queue-kpi-{before,after}` | kpi-soup | `receipts/queue-kpi-{before,after}-crop.html` |
 | `queue-dual-grid-{before,after}` | dual-focal → XOR after PASS (D10) | `receipts/queue-dual-grid-before-crop.html` + `queue-dual-grid-fold-crop.html` |
 | `sources-cite-{before,after}` | wrong-cite / rebind-cite | `receipts/sources-cite-{before,after}-crop.html` |
-| `usul-*-{before,after}` | set-focal / composition | (composition bite; no crop pair yet) |
+| `usul-*-{before,after}` | set-focal / composition | `receipts/usul-focal-{before,after}-crop.html` |
+| skill-ab `queue-sled-bloat` | cta-pressure + kpi-soup | `receipts/queue-sled-bloat-{before,after}-crop.html` |
 
 Crop builders: `verify/restructure/defect-crops.mjs` · doctor bite `verify/defect-crops.test.mjs`.  
 Twin full-page before/after screenshots are **invalid** proof.
@@ -36,5 +37,6 @@ Twin full-page before/after screenshots are **invalid** proof.
 ## Proof artifacts
 
 `verify/fixtures/denoise/.loop/denoise-loop-receipt.json` (local) and CI via
-`verify/denoise-loop.test.mjs` — status + cleared defect IDs, not identical screenshots.
-Skill A/B pins the same crop pairs in `verify/fixtures/skill-ab/cases.json`.
+`verify/denoise-loop.test.mjs` — status + cleared defect IDs + `reflexionVerdict`, not identical screenshots.
+Skill A/B pins the same crop pairs in `verify/fixtures/skill-ab/cases.json` and binds them to
+Atlas `reflexionVerdict` on per-case receipts (`shine-skill-ab-receipt/v1`).
