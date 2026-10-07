@@ -33,6 +33,8 @@ try {
   assert.match(receipt.proof, /FAIL→PASS|measure/);
   assert.match(receipt.proof, /not twin/);
   assert.equal(receipt.criticActor?.selfAcceptBanned, true);
+  assert.equal(receipt.criticActor?.workerSelfReviewBanned, true);
+  assert.equal(receipt.criticActor?.cycle, "measure→repair→critic");
   assert.match(receipt.criticActor?.hostOrchestrator || "", /critic-actor-host/);
   // When critic/actor rounds ran and measure cleared, host must have finalized.
   const criticRounds = (receipt.rounds || []).filter(
@@ -42,6 +44,17 @@ try {
     assert.equal(receipt.criticActor?.hostAccept?.accepted, true, "host finalize after clearance");
     assert.notEqual(receipt.criticActor.hostAccept.acceptorId, receipt.criticActor.criticAgentId);
     assert.notEqual(receipt.criticActor.hostAccept.acceptorId, receipt.criticActor.actorAgentId);
+    // Repair worker (if any) must not have accepted / self-reviewed.
+    if (receipt.criticActor.lastRepairWorkerId) {
+      assert.notEqual(
+        receipt.criticActor.hostAccept.acceptorId,
+        receipt.criticActor.lastRepairWorkerId,
+      );
+      assert.notEqual(
+        receipt.criticActor.criticAgentId,
+        receipt.criticActor.lastRepairWorkerId,
+      );
+    }
   }
 
   // Golden: after apply + peer fold, measure should clear cta-pressure / dual-focal / kpi-soup

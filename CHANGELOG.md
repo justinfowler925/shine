@@ -6,6 +6,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Critic≠Actor measure→repair→critic in denoise-loop.** Host helpers
+  `planRepairFromMeasure`, `completeAfterRepair`, `runPostRepairCriticRound`,
+  `assertNoWorkerSelfReview` track the repair worker and fail-closed if that
+  worker self-reviews as Critic (or Host-finalizes). Denoise-loop wires the
+  cycle; receipt records `cycle: measure→repair→critic` +
+  `workerSelfReviewBanned`. Doctor bite: `verify/critic-actor-host.test.mjs`.
+  Docs: `skill/references/denoise.md` (+ site/cowork mirrors).
+
 - **Denoise-loop audit auto-append (measure/critic/reflexion).** When
   `SHINE_AUDIT_DIR` is set, `verify/denoise-loop.mjs` appends
   `action:measure` + `observation:measure-result` each measure round and

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Critic≠Actor host orchestrator bites — closes thin wiring after #137.
+ * Critic≠Actor host orchestrator bites — measure→repair→critic + self-review ban.
  */
 import assert from "node:assert/strict";
 import {
@@ -10,8 +10,13 @@ import {
   assertActorMayImplement,
   assertHostFinalized,
   assertHostMayAccept,
+  assertNoWorkerSelfReview,
+  completeAfterRepair,
   hostFinalizeAfterClearance,
+  planRepairFromMeasure,
+  repairWorkerId,
   runCriticActorHostRound,
+  runPostRepairCriticRound,
 } from "../core/critic-actor-host.mjs";
 import { acceptVerdict, canAcceptVerdict } from "../core/reflexion.mjs";
 
@@ -104,6 +109,88 @@ const selfAccept = acceptVerdict({
 });
 assert.equal(selfAccept.accepted, false);
 
+// --- measure→repair→critic + worker self-review fail-closed ---
+
+assertNoWorkerSelfReview({
+  workerAgentId: DEFAULT_ACTOR_ID,
+  criticAgentId: DEFAULT_CRITIC_ID,
+});
+assert.throws(
+  () =>
+    assertNoWorkerSelfReview({
+      workerAgentId: "twin-worker",
+      criticAgentId: "twin-worker",
+    }),
+  /worker self-review banned/,
+);
+
+const planned = await planRepairFromMeasure({
+  goal: "Decide Pursue on the next notice",
+  failures: ["cta-pressure: 2 filled in main"],
+  ddrId: "ddr_mrc_plan",
+  constitutionIds: ["cta-pressure"],
+});
+assert.equal(planned.phase, "measure-repair-plan");
+assert.equal(planned.disposition, "actor-proceed");
+const workerId = repairWorkerId(planned.actorPlan);
+assert.equal(workerId, DEFAULT_ACTOR_ID);
+
+const afterRepair = completeAfterRepair({
+  actorPlan: planned.actorPlan,
+  reflexion: planned.reflexion,
+  measureStatus: 0,
+  hostAgentId: DEFAULT_HOST_ID,
+});
+assert.equal(afterRepair.phase, "repair-complete");
+assert.equal(afterRepair.workerAgentId, DEFAULT_ACTOR_ID);
+assert.equal(afterRepair.hostAccept.accepted, true);
+assert.equal(afterRepair.measureCleared, true);
+
+assert.throws(
+  () =>
+    completeAfterRepair({
+      actorPlan: planned.actorPlan,
+      reflexion: planned.reflexion,
+      measureStatus: 0,
+      hostAgentId: DEFAULT_ACTOR_ID,
+    }),
+  /repair worker cannot host-finalize|self-review/,
+);
+
+// Post-repair critic must ≠ worker who repaired.
+const post = await runPostRepairCriticRound({
+  workerAgentId: DEFAULT_ACTOR_ID,
+  goal: "still failing",
+  failures: ["kpi-soup: 4 equal metrics"],
+  ddrId: "ddr_mrc_post",
+  constitutionIds: ["kpi-soup-off-path"],
+});
+assert.equal(post.phase, "post-repair-critic");
+assert.equal(post.workerAgentId, DEFAULT_ACTOR_ID);
+assert.notEqual(post.reflexion.criticAgentId, post.workerAgentId);
+assert.equal(post.disposition, "actor-proceed");
+
+await assert.rejects(
+  () =>
+    runPostRepairCriticRound({
+      workerAgentId: DEFAULT_CRITIC_ID,
+      failures: ["cta-pressure: x"],
+      criticAgentId: DEFAULT_CRITIC_ID,
+    }),
+  /worker self-review banned/,
+);
+
+// planRepairFromMeasure refuses when lastRepairWorkerId === criticAgentId
+await assert.rejects(
+  () =>
+    planRepairFromMeasure({
+      failures: ["cta-pressure: x"],
+      lastRepairWorkerId: DEFAULT_CRITIC_ID,
+      criticAgentId: DEFAULT_CRITIC_ID,
+    }),
+  /worker self-review banned/,
+);
+
 console.log(
-  "critic-actor-host PASS: host round · actor gate · finalize after clearance · self-accept ban",
+  "critic-actor-host PASS: host round · actor gate · finalize · measure→repair→critic · worker self-review ban",
 );

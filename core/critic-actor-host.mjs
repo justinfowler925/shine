@@ -1,15 +1,21 @@
 #!/usr/bin/env node
 /**
- * Critic ≠ Actor host wiring — strengthens S1 after #137.
+ * Critic ≠ Actor host wiring — strengthens S1 after #137 / #141.
  *
  * Thin spots this closes:
  *   1. Protocol was inlined only in denoise-loop (easy to bypass).
  *   2. Host accepted only when critic said `done` mid-fail; after Actor cleared
  *      measure on a `partial` nextStep, hostAccept stayed null (no finalize).
  *   3. No shared fail-closed gate that Actor may proceed only via planActorPass.
+ *   4. measure→repair→critic must keep Critic distinct from the repair worker
+ *      (fail-closed if worker self-reviews).
  *
  * Host (third principal) is the only acceptor. Critic diagnoses; Actor executes
  * one partial nextStep; Host finalizes `done` or post-clearance.
+ *
+ * Denoise cycle (host-orchestrated):
+ *   measure (fail) → Critic diagnose → Actor repair → measure →
+ *   Critic post-repair (≠ worker) → Host accept / Actor next / humanGate
  */
 
 import { realpathSync } from "node:fs";
@@ -27,6 +33,38 @@ import {
 } from "./reflexion.mjs";
 
 export { DEFAULT_ACTOR_ID, DEFAULT_CRITIC_ID, DEFAULT_HOST_ID };
+
+/**
+ * Fail-closed: the worker who just repaired cannot criticize their own work
+ * (studio-agents self-review ban). Distinct from self-accept — this gates the
+ * Critic principal after a repair turn.
+ */
+export function assertNoWorkerSelfReview({ workerAgentId, criticAgentId } = {}) {
+  const worker = String(workerAgentId || "").trim();
+  const critic = String(criticAgentId || "").trim();
+  if (!worker) {
+    throw new Error("Critic≠Actor host: workerAgentId required for self-review gate");
+  }
+  if (!critic) {
+    throw new Error("Critic≠Actor host: criticAgentId required for self-review gate");
+  }
+  if (worker === critic) {
+    throw new Error(
+      "Critic≠Actor host: worker self-review banned — criticAgentId collides with last repair worker",
+    );
+  }
+  return true;
+}
+
+/** Agent id that performed (or will perform) the Actor repair turn. */
+export function repairWorkerId(actorPlan, { fallback = DEFAULT_ACTOR_ID } = {}) {
+  const id = actorPlan?.turn?.agentId || actorPlan?.agentId || fallback;
+  const trimmed = String(id || "").trim();
+  if (!trimmed) {
+    throw new Error("Critic≠Actor host: repair worker agentId missing");
+  }
+  return trimmed;
+}
 
 /**
  * Fail-closed: Actor implement requires a critic `partial` planned by planActorPass.
@@ -96,6 +134,8 @@ export async function runCriticActorHostRound({
   hostAgentId = DEFAULT_HOST_ID,
   retriesUsed = 0,
   requireConstitutionCitation = true,
+  /** When set, Critic must not equal the worker who last repaired (fail-closed). */
+  lastRepairWorkerId = null,
 } = {}) {
   const critic = createAgentIdentity({ role: "critic", agentId: criticAgentId });
   const actor = createAgentIdentity({ role: "actor", agentId: actorAgentId });
@@ -103,6 +143,12 @@ export async function runCriticActorHostRound({
   const host = String(hostAgentId || "").trim() || DEFAULT_HOST_ID;
   if (host === critic.agentId || host === actor.agentId) {
     throw new Error("Critic≠Actor host: host must be a third distinct principal");
+  }
+  if (lastRepairWorkerId) {
+    assertNoWorkerSelfReview({
+      workerAgentId: lastRepairWorkerId,
+      criticAgentId: critic.agentId,
+    });
   }
 
   const reflexion = await runCriticTurn({
@@ -133,6 +179,13 @@ export async function runCriticActorHostRound({
   }
   if (canAcceptVerdict({ reflexion, acceptorId: actor.agentId }).ok) {
     throw new Error("Critic≠Actor invariant broken: actor canAccept returned ok");
+  }
+  // Belt: reflexion critic must still ≠ last repair worker.
+  if (lastRepairWorkerId) {
+    assertNoWorkerSelfReview({
+      workerAgentId: lastRepairWorkerId,
+      criticAgentId: reflexion.criticAgentId,
+    });
   }
 
   if (reflexion.verdict === "done") {
@@ -181,6 +234,88 @@ export async function runCriticActorHostRound({
     hostAccept: null,
     actorPlan,
     principals,
+  };
+}
+
+/**
+ * Plan Actor repair from a failed measure (Critic diagnose → Actor plan).
+ * Fail-closed when Critic would equal `lastRepairWorkerId`.
+ * Caller applies `actorPlan.nextStep`, re-measures, then `completeAfterRepair`.
+ */
+export async function planRepairFromMeasure(options = {}) {
+  const round = await runCriticActorHostRound(options);
+  return {
+    ...round,
+    phase: "measure-repair-plan",
+    lastRepairWorkerId: options.lastRepairWorkerId || null,
+  };
+}
+
+/**
+ * After Actor repair + remeasure: record worker, Host finalize if cleared.
+ * Fail-closed if the repair worker tries to act as Host acceptor.
+ */
+export function completeAfterRepair({
+  actorPlan,
+  reflexion,
+  measureStatus = 1,
+  hostAgentId = DEFAULT_HOST_ID,
+  note = "Measure cleared after Actor repair — host finalizes",
+} = {}) {
+  assertActorMayImplement(actorPlan);
+  const workerAgentId = repairWorkerId(actorPlan);
+  const host = String(hostAgentId || "").trim() || DEFAULT_HOST_ID;
+  if (host === workerAgentId) {
+    throw new Error(
+      "Critic≠Actor host: repair worker cannot host-finalize (self-review banned)",
+    );
+  }
+  if (reflexion?.criticAgentId) {
+    assertNoWorkerSelfReview({
+      workerAgentId,
+      criticAgentId: reflexion.criticAgentId,
+    });
+  }
+  let hostAccept = null;
+  if (measureStatus === 0 && reflexion) {
+    hostAccept = hostFinalizeAfterClearance({
+      reflexion,
+      hostAgentId: host,
+      measureStatus,
+      note,
+    });
+  }
+  return {
+    phase: "repair-complete",
+    workerAgentId,
+    hostAccept,
+    measureCleared: measureStatus === 0,
+  };
+}
+
+/**
+ * Post-repair Critic round (measure→repair→critic). Critic must ≠ repair worker.
+ * Use when measure is still red after Actor repair and another critique is needed.
+ */
+export async function runPostRepairCriticRound({
+  workerAgentId,
+  ...hostRoundOpts
+} = {}) {
+  const worker = String(workerAgentId || "").trim();
+  if (!worker) {
+    throw new Error("Critic≠Actor host: workerAgentId required for post-repair critic");
+  }
+  const criticAgentId = hostRoundOpts.criticAgentId || DEFAULT_CRITIC_ID;
+  assertNoWorkerSelfReview({ workerAgentId: worker, criticAgentId });
+  const round = await runCriticActorHostRound({
+    ...hostRoundOpts,
+    criticAgentId,
+    lastRepairWorkerId: worker,
+  });
+  return {
+    ...round,
+    phase: "post-repair-critic",
+    workerAgentId: worker,
   };
 }
 

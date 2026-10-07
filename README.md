@@ -332,7 +332,7 @@ See [`tokens/README.md`](./tokens/README.md) § Private brand lanes.
 | --- | --- |
 | [`README.md`](./README.md) § Install & deploy | Codex + Cursor wiring; VS Code not supported |
 | [`skill/references/wireframe.md`](./skill/references/wireframe.md) | Discovery → gray-box → locked brief (`core/wireframe-brief.mjs`) |
-| [`core/critic-actor-host.mjs`](./core/critic-actor-host.mjs) | Critic≠Actor host round + finalize-after-clearance |
+| [`core/critic-actor-host.mjs`](./core/critic-actor-host.mjs) | Critic≠Actor host: measure→repair→critic + worker self-review ban |
 | [`skill/references/`](./skill/references/) | Contracts, taste, kits, techniques, dashboards, … |
 | [`agents/shine-ux.md`](./agents/shine-ux.md) | Thin executor subagent |
 | [`research/director-plan.md`](./research/director-plan.md) | Director loop: job → diagnose → retrieve → DNA → prove |

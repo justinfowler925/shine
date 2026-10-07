@@ -14,10 +14,11 @@ import {
   DEFAULT_ACTOR_ID,
   DEFAULT_CRITIC_ID,
   DEFAULT_HOST_ID,
-  assertActorMayImplement,
   assertHostFinalized,
+  assertNoWorkerSelfReview,
+  completeAfterRepair,
   hostFinalizeAfterClearance,
-  runCriticActorHostRound,
+  planRepairFromMeasure,
 } from "../core/critic-actor-host.mjs";
 import { autoAppendDenoiseLoop } from "../core/audit-trail.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
@@ -178,13 +179,16 @@ export async function runDenoiseLoop({
   let reflexion = null;
   let hostAccept = null;
   let lastActorPlan = null;
+  /** Worker who last repaired — next Critic must be distinct (fail-closed). */
+  let lastRepairWorkerId = null;
   let criticRan = false;
   let round = 1;
   let retriesUsed = 0;
   while (lastMeasure.status !== 0 && round < MAX_ROUNDS) {
     round++;
-    // Host-orchestrated Critic≠Actor round (not inline accept/plan).
-    const hostRound = await runCriticActorHostRound({
+    // measure→repair→critic host cycle: Critic diagnose (≠ last repair worker)
+    // → Actor plan → (repair below) → measure; next iteration is post-repair Critic.
+    const hostRound = await planRepairFromMeasure({
       goal: job,
       failures: lastMeasure.failures,
       tried: applied.applied,
@@ -196,9 +200,16 @@ export async function runDenoiseLoop({
       hostAgentId: DEFAULT_HOST_ID,
       retriesUsed,
       requireConstitutionCitation: true,
+      lastRepairWorkerId,
     });
     criticRan = true;
     reflexion = hostRound.reflexion;
+    if (lastRepairWorkerId) {
+      assertNoWorkerSelfReview({
+        workerAgentId: lastRepairWorkerId,
+        criticAgentId: reflexion.criticAgentId,
+      });
+    }
     if (hostRound.hostAccept) hostAccept = hostRound.hostAccept;
     lastActorPlan = hostRound.actorPlan;
     appendAudit({
@@ -206,8 +217,10 @@ export async function runDenoiseLoop({
       verdict: reflexion.verdict,
       nextStep: reflexion.nextStep,
       disposition: hostRound.disposition,
+      phase: lastRepairWorkerId ? "post-repair-critic" : hostRound.phase,
       criticAgentId: reflexion.criticAgentId,
       actorAgentId: reflexion.actorAgentId,
+      lastRepairWorkerId,
       source: "denoise-loop.mjs",
     });
 
@@ -215,6 +228,7 @@ export async function runDenoiseLoop({
       rounds.push({
         round,
         turn: "critic",
+        phase: lastRepairWorkerId ? "post-repair-critic" : hostRound.phase,
         disposition: hostRound.disposition,
         reflexion: {
           verdict: reflexion.verdict,
@@ -225,14 +239,14 @@ export async function runDenoiseLoop({
         },
         actor: hostRound.actorPlan,
         hostAccept,
+        lastRepairWorkerId,
         measureStatus: lastMeasure.status,
         failures: lastMeasure.failures,
       });
       break;
     }
 
-    // Actor implement turn — one imperative next step; never accepts its own review.
-    assertActorMayImplement(hostRound.actorPlan);
+    // Actor repair turn — one imperative nextStep; never accepts its own review.
     retriesUsed++;
     const again = applyDomRestructure(html, plan);
     html = again.html;
@@ -246,9 +260,23 @@ export async function runDenoiseLoop({
       failures: lastMeasure.failures,
       source: "denoise-loop.mjs",
     });
+
+    const completed = completeAfterRepair({
+      actorPlan: hostRound.actorPlan,
+      reflexion,
+      measureStatus: lastMeasure.status,
+      hostAgentId: DEFAULT_HOST_ID,
+      note: hostRound.actorPlan?.nextStep
+        ? `Measure cleared after Actor repair: ${hostRound.actorPlan.nextStep}`
+        : "Measure cleared after Actor repair — host finalizes",
+    });
+    lastRepairWorkerId = completed.workerAgentId;
+    if (completed.hostAccept?.accepted) hostAccept = completed.hostAccept;
+
     rounds.push({
       round,
       turn: "actor",
+      phase: completed.phase,
       disposition: hostRound.disposition,
       reflexion: {
         verdict: reflexion.verdict,
@@ -258,6 +286,8 @@ export async function runDenoiseLoop({
         selfAcceptBanned: true,
       },
       actor: hostRound.actorPlan,
+      repairWorkerId: lastRepairWorkerId,
+      hostAccept: completed.hostAccept,
       measureStatus: lastMeasure.status,
       failures: lastMeasure.failures,
     });
@@ -265,6 +295,12 @@ export async function runDenoiseLoop({
 
   // Thin-spot fix: when Actor cleared measure after a partial, Host must finalize.
   if (criticRan && lastMeasure.status === 0 && !hostAccept?.accepted && reflexion) {
+    if (lastRepairWorkerId) {
+      assertNoWorkerSelfReview({
+        workerAgentId: lastRepairWorkerId,
+        criticAgentId: reflexion.criticAgentId || DEFAULT_CRITIC_ID,
+      });
+    }
     hostAccept = hostFinalizeAfterClearance({
       reflexion,
       hostAgentId: DEFAULT_HOST_ID,
@@ -293,6 +329,9 @@ export async function runDenoiseLoop({
       actorAgentId: DEFAULT_ACTOR_ID,
       hostAgentId: DEFAULT_HOST_ID,
       selfAcceptBanned: true,
+      workerSelfReviewBanned: true,
+      lastRepairWorkerId,
+      cycle: "measure→repair→critic",
       hostOrchestrator: "core/critic-actor-host.mjs",
       hostAccept,
     },

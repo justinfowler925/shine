@@ -82,7 +82,11 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 
 Diagnose/critic and implement are **separate turns** with distinct principals.
 Host orchestration lives in `core/critic-actor-host.mjs` (do not inline accept/plan
-in callers — denoise-loop uses `runCriticActorHostRound`).
+in callers — denoise-loop uses `planRepairFromMeasure` / `completeAfterRepair`).
+
+**Cycle:** `measure → repair (Actor) → critic (≠ worker)`. After a repair, the next
+Critic turn fail-closes if `criticAgentId === lastRepairWorkerId`
+(`assertNoWorkerSelfReview`).
 
 | Role | Identity (default) | May |
 |---|---|---|
@@ -92,9 +96,12 @@ in callers — denoise-loop uses `runCriticActorHostRound`).
 
 **Self-accept ban:** Critic cannot accept its own verdict; Actor/worker cannot accept the critic verdict on its own work. Unknown verdict → `partial`.
 
+**Worker self-review ban:** the agent id that performed the last Actor repair cannot
+act as Critic (or Host finalize) on that work — fail-closed.
+
 **Host finalize:** when measure goes green after a Critic→Actor `partial` pass, Host
-must call `hostFinalizeAfterClearance` — `hostAccept` must not stay null on a cleared
-receipt (`assertHostFinalized`).
+must call `hostFinalizeAfterClearance` / `completeAfterRepair` — `hostAccept` must not
+stay null on a cleared receipt (`assertHostFinalized`).
 
 Max **3** measure rounds per surface. Each round clears a **named** defect.
 
