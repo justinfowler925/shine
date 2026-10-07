@@ -3540,72 +3540,6 @@
       ]
     },
     {
-      "id": "shadcn-cockpit-ops",
-      "screen": "dashboard",
-      "kit": "shadcn-registry",
-      "title": "shadcn ops cockpit (checkable KPIs, focal at-risk table)",
-      "preview": "",
-      "license": "MIT",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "dashboard",
-        "cockpit",
-        "kpi",
-        "kpis",
-        "ops",
-        "console",
-        "dense"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "dense"
-      },
-      "reference": {
-        "required": [
-          "navigation",
-          "summary",
-          "table"
-        ],
-        "captureExpect": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]"
-      },
-      "note": "S3 authored dense ops cockpit blueprint",
-      "scope": "page"
-    },
-    {
-      "id": "shadcn-cockpit-revenue",
-      "screen": "dashboard",
-      "kit": "shadcn-registry",
-      "title": "shadcn revenue cockpit (checkable ARR KPIs, segment focal)",
-      "preview": "",
-      "license": "MIT",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "dashboard",
-        "cockpit",
-        "kpi",
-        "kpis",
-        "revenue",
-        "pipeline",
-        "dense"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "dense"
-      },
-      "reference": {
-        "required": [
-          "navigation",
-          "summary",
-          "table"
-        ],
-        "captureExpect": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]"
-      },
-      "note": "S3 authored dense revenue cockpit blueprint",
-      "scope": "page"
-    },
-    {
       "id": "shadcn-dashboard-01",
       "screen": "dashboard",
       "kit": "shadcn-registry",
@@ -3661,6 +3595,72 @@
         "family": "untitled",
         "density": "comfortable"
       }
+    },
+    {
+      "id": "shadcn-cockpit-ops",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "shadcn ops cockpit (checkable KPIs, focal at-risk table)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "dashboard",
+        "cockpit",
+        "kpi",
+        "kpis",
+        "ops",
+        "console",
+        "dense"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "dense"
+      },
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "table"
+        ],
+        "captureExpect": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]"
+      },
+      "note": "S3 authored dense ops cockpit blueprint",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-cockpit-revenue",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "shadcn revenue cockpit (checkable ARR KPIs, segment focal)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "dashboard",
+        "cockpit",
+        "kpi",
+        "kpis",
+        "revenue",
+        "pipeline",
+        "dense"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "dense"
+      },
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "table"
+        ],
+        "captureExpect": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]"
+      },
+      "note": "S3 authored dense revenue cockpit blueprint",
+      "scope": "page"
     },
     {
       "id": "tailadmin-dashboard",

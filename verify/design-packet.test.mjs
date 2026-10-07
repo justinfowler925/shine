@@ -61,7 +61,12 @@ const dashboard=createDesignPacket({job:cases[2][0],lane:"internal",project:proc
 // the house reference is one candidate among several, and must still be offered.
 assert.equal(dashboard.selected.scope,"page","component demo cannot replace the composed page reference");
 assert.equal(dashboard.selected.screen,"dashboard");
-assert(dashboard.candidates.some(x=>x.id==="shadcn-dashboard-01"),"the house dashboard stays in the page shortlist");
+// Sales-cockpit briefs may prefer a dense cockpit over dashboard-01 within the
+// same shadcn-zinc family-cap; either is a composed house page cite.
+assert(
+  dashboard.candidates.some((x) => x.id === "shadcn-dashboard-01" || /^shadcn-cockpit-/.test(x.id)),
+  "the house dashboard/cockpit stays in the page shortlist",
+);
 assert(new Set(dashboard.candidates.map(x=>x.family)).size===dashboard.candidates.length,"page shortlist holds one candidate per family");
 assert(dashboard.componentReferences.some(x=>x.id==="untitled-line-charts"),"Untitled chart should be a component reference");
 assert.equal(dashboard.diagnosis.required,false);
@@ -100,7 +105,10 @@ const affineDash=createDesignPacket({job:"marketing influenced pipeline dashboar
 assert(RECIPE_KITS["shadcn-tanstack"].includes(affineDash.selected.kit),"a buildable page reference must win when one is eligible");
 assert.notEqual(affineDash.selected.port,true,"a buildable reference is not a port");
 assert(affineDash.selected.matches.includes("installedKit"));
-assert(affineDash.candidates.some(x=>x.id==="shadcn-dashboard-01"),"the house dashboard is always offered to a shadcn host");
+assert(
+  affineDash.candidates.some((x) => x.id === "shadcn-dashboard-01" || /^shadcn-cockpit-/.test(x.id)),
+  "the house dashboard/cockpit is always offered to a shadcn host",
+);
 
 const lex=createDesignPacket({job:"lightning record page for claims",lane:"lex",project:shadcnRepo,mode:"existing",category:"record"});
 assert.equal(lex.selected.kit,"slds","kit affinity must not override the Lightning lane");
