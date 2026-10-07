@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-cockpit-ops",
+  "source": "corpus/blueprints/shadcn-cockpit-ops/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 54407,
+  "provenance": "Authored blueprint, S3 Operate corpus depth",
+  "capture": {
+    "status": 200,
+    "title": "Ops cockpit",
+    "headings": "Operate\nOps cockpit",
+    "expectedSelector": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]",
+    "expectedCount": 4,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-cockpit-ops/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-cockpit-ops/reference.html",
+    "capturedAt": "2026-10-07T01:04:33.403Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "93529f0e9c94786ae864a85838490149eb49c00fc5dfdff2293bfb65400ea424",
+    "shotSha256": "4872b659fddf546738eeb5d7509b90df209f8a0cca69710090277d7a124232ff"
+  }
+}

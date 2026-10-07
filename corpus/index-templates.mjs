@@ -688,6 +688,12 @@ for (const t of [
   // its own actions and disclosure. The Nucleus Company Tools audit (docs/audits) showed
   // the packet had no home for this shape and forced a table comparison onto five cards.
   { id: "shadcn-catalog", screen: "catalog", title: "shadcn card catalog (search, filters, count, one card per record with actions and disclosure)", jobs: SCREEN_JOBS.catalog, required: ["form"], captureExpect: '[data-region="catalog-cards"] article', note: "corpus/blueprints/shadcn-catalog.md is the region map; reference.html renders it at rest for capture" },
+  { id: "shadcn-catalog-integrations", screen: "catalog", title: "shadcn integrations catalog (connectors, scopes, connect actions)", jobs: ["catalog", "cards", "library", "integrations", "connectors", "plugins", "directory"], required: ["form"], captureExpect: '[data-region="catalog-cards"] article', note: "S3 authored Operate integrations catalog blueprint" },
+  { id: "shadcn-catalog-templates", screen: "catalog", title: "shadcn template gallery (peer cards, screen filters, use-when)", jobs: ["catalog", "cards", "library", "templates", "gallery", "showcase", "directory"], required: ["form"], captureExpect: '[data-region="catalog-cards"] article', note: "S3 authored Operate template gallery catalog blueprint" },
+  { id: "shadcn-chat", screen: "chat", title: "shadcn assistant chat (thread, composer, provenance)", jobs: ["chat", "assistant", "conversation", "thread"], required: ["form"], captureExpect: '[data-region="chat-composer"] #send', note: "S3 authored Operate chat blueprint (shadcn-native)" },
+  { id: "shadcn-chat-sidecar", screen: "chat", title: "shadcn assistant sidecar (artefact + advise panel)", jobs: ["chat", "assistant", "sidecar", "conversation", "copilot"], required: ["form", "navigation"], captureExpect: '[data-region="chat-sidecar"] #send', note: "S3 authored Operate sidecar chat blueprint" },
+  { id: "shadcn-cockpit-ops", screen: "dashboard", title: "shadcn ops cockpit (checkable KPIs, focal at-risk table)", jobs: ["dashboard", "cockpit", "kpi", "kpis", "ops", "console", "dense"], required: ["navigation", "summary", "table"], captureExpect: '[data-region="cockpit-kpis"] [data-shine-kpi]', density: "dense", note: "S3 authored dense ops cockpit blueprint" },
+  { id: "shadcn-cockpit-revenue", screen: "dashboard", title: "shadcn revenue cockpit (checkable ARR KPIs, segment focal)", jobs: ["dashboard", "cockpit", "kpi", "kpis", "revenue", "pipeline", "dense"], required: ["navigation", "summary", "table"], captureExpect: '[data-region="cockpit-kpis"] [data-shine-kpi]', density: "dense", note: "S3 authored dense revenue cockpit blueprint" },
   { id: "shadcn-settings-notifications", screen: "settings", title: "shadcn notification settings (digest, Slack, severity)", jobs: ["settings", "notifications", "preferences", "alerts"], required: ["form", "navigation"], captureExpect: '[data-region="settings-notifications"] #save', note: "P2 authored Operate notifications settings blueprint" },
   { id: "shadcn-settings-billing", screen: "settings", title: "shadcn billing settings (plan, seats, invoice email)", jobs: ["settings", "billing", "plan", "seats"], required: ["form", "navigation"], captureExpect: '[data-region="settings-billing"] #save', note: "P2 authored Operate billing settings blueprint" },
   { id: "shadcn-settings-members", screen: "settings", title: "shadcn member settings (default role, SSO policy)", jobs: ["settings", "members", "roles", "access"], required: ["form", "navigation"], captureExpect: '[data-region="settings-members"] #save', note: "P2 authored Operate member policy settings blueprint" },
@@ -697,10 +703,11 @@ for (const t of [
 ]) {
   // Blueprints live in Shine, not the acquired corpus, so exists() is wrong here.
   const authored = existsSync(join(SHINE, "corpus/blueprints", t.id));
+  const baseDna = KIT_FAMILY["shadcn-registry"];
   push({
     id: t.id, screen: t.screen, kit: "shadcn-registry", title: t.title,
     preview: "", license: "MIT", kind: "blueprint", startFrom: t.startFrom ?? 1, jobs: t.jobs,
-    dna: KIT_FAMILY["shadcn-registry"],
+    dna: t.density ? { ...baseDna, density: t.density } : baseDna,
     ...((t.required || t.captureExpect) ? { reference: { ...(t.required ? { required: t.required } : {}), ...(t.captureExpect ? { captureExpect: t.captureExpect } : {}) } } : {}),
     note: t.note ?? (authored
       ? `corpus/blueprints/${t.id}.md is the region map; corpus/blueprints/${t.id}/ is authored shadcn source to copy`

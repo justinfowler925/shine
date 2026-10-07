@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-05",
+  "generated": "2026-10-07",
   "corpus": "/home/ubuntu/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
@@ -1254,6 +1254,68 @@
         "captureExpect": "[data-region=\"catalog-cards\"] article"
       },
       "note": "corpus/blueprints/shadcn-catalog.md is the region map; reference.html renders it at rest for capture",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-catalog-integrations",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "shadcn integrations catalog (connectors, scopes, connect actions)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "cards",
+        "library",
+        "integrations",
+        "connectors",
+        "plugins",
+        "directory"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form"
+        ],
+        "captureExpect": "[data-region=\"catalog-cards\"] article"
+      },
+      "note": "S3 authored Operate integrations catalog blueprint",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-catalog-templates",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "shadcn template gallery (peer cards, screen filters, use-when)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "cards",
+        "library",
+        "templates",
+        "gallery",
+        "showcase",
+        "directory"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form"
+        ],
+        "captureExpect": "[data-region=\"catalog-cards\"] article"
+      },
+      "note": "S3 authored Operate template gallery catalog blueprint",
       "scope": "page"
     },
     {
@@ -3352,6 +3414,64 @@
       }
     },
     {
+      "id": "shadcn-chat",
+      "screen": "chat",
+      "kit": "shadcn-registry",
+      "title": "shadcn assistant chat (thread, composer, provenance)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "chat",
+        "assistant",
+        "conversation",
+        "thread"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form"
+        ],
+        "captureExpect": "[data-region=\"chat-composer\"] #send"
+      },
+      "note": "S3 authored Operate chat blueprint (shadcn-native)",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-chat-sidecar",
+      "screen": "chat",
+      "kit": "shadcn-registry",
+      "title": "shadcn assistant sidecar (artefact + advise panel)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "chat",
+        "assistant",
+        "sidecar",
+        "conversation",
+        "copilot"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form",
+          "navigation"
+        ],
+        "captureExpect": "[data-region=\"chat-sidecar\"] #send"
+      },
+      "note": "S3 authored Operate sidecar chat blueprint",
+      "scope": "page"
+    },
+    {
       "id": "spectrum-ai-chat",
       "screen": "chat",
       "kit": "react-spectrum",
@@ -3418,6 +3538,72 @@
         "palette",
         "cmdk"
       ]
+    },
+    {
+      "id": "shadcn-cockpit-ops",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "shadcn ops cockpit (checkable KPIs, focal at-risk table)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "dashboard",
+        "cockpit",
+        "kpi",
+        "kpis",
+        "ops",
+        "console",
+        "dense"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "dense"
+      },
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "table"
+        ],
+        "captureExpect": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]"
+      },
+      "note": "S3 authored dense ops cockpit blueprint",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-cockpit-revenue",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "shadcn revenue cockpit (checkable ARR KPIs, segment focal)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "dashboard",
+        "cockpit",
+        "kpi",
+        "kpis",
+        "revenue",
+        "pipeline",
+        "dense"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "dense"
+      },
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "table"
+        ],
+        "captureExpect": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]"
+      },
+      "note": "S3 authored dense revenue cockpit blueprint",
+      "scope": "page"
     },
     {
       "id": "shadcn-dashboard-01",

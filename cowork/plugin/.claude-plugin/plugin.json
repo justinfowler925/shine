@@ -1,1 +1,5 @@
-{"description": "Shine design guidance; install the repository for executable proof.", "name": "shine", "version": "4.0.8"}
+{
+  "description": "Shine design guidance; install the repository for executable proof.",
+  "name": "shine",
+  "version": "4.0.9"
+}
