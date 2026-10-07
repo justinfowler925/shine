@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
  * N8 — TSX AST safe ops for consumer checkouts.
- * Auto-safe: rebind-cite, set-focal, cta-budget demote (variant="default" → "outline").
+ * Auto-safe: rebind-cite, set-focal, cta-budget demote (maxFilled=1 via TS compiler AST).
  * collapse-peer-grids → plan markdown only (never auto-deletes grids).
  *
  * Uses TypeScript compiler API (devDependency). Dry-run by default; --write to apply.
  */
 
-import { existsSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { readFileSync, realpathSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import ts from "typescript";
 import { AUTO_SAFE_DOM_OPS, PLAN_ONLY_OPS, validateRestructurePlan } from "./schema.mjs";
@@ -17,7 +17,7 @@ import { formatPeerGridPlan } from "./apply-dom.mjs";
 /**
  * @param {string} source
  * @param {object} plan
- * @returns {{ source: string, applied: string[], plans: string[], changed: boolean }}
+ * @returns {{ source: string, applied: string[], plans: string[], changed: boolean, humanGate: boolean }}
  */
 export function applyTsxRestructure(source, plan) {
   const v = validateRestructurePlan(plan);
@@ -26,7 +26,6 @@ export function applyTsxRestructure(source, plan) {
   let text = String(source);
   const applied = [];
   const plans = [];
-  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
 
   for (const op of plan.ops || []) {
     if (PLAN_ONLY_OPS.includes(op.op)) {
@@ -61,9 +60,6 @@ export function applyTsxRestructure(source, plan) {
       );
     }
   }
-
-  // Touch sf so unused import lint stays quiet in some hosts
-  void sf.fileName;
 
   return {
     source: text,
@@ -105,28 +101,166 @@ export function setFocalTsx(source, op = {}) {
 }
 
 /**
- * Demote non-preferred Button variant="default" → "outline".
- * Keeps first preferred label (children text) as default up to maxFilled.
+ * Count filled Button primaries in TSX (variant default / missing variant).
+ * Uses the same AST rules as ctaBudgetTsx.
+ * @param {string} source
+ * @returns {{ filled: number, labels: string[] }}
+ */
+export function countFilledButtonsTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const labels = [];
+  visitButtons(sf, (opening, node) => {
+    if (!isFilledButtonOpening(opening, sf)) return;
+    labels.push(labelFromJsx(node, sf));
+  });
+  return { filled: labels.length, labels };
+}
+
+/**
+ * Demote non-preferred filled Button primaries via TypeScript AST (maxFilled=1).
+ * Handles:
+ * - variant="default" / 'default'
+ * - variant={"default"} / {'default'}
+ * - missing variant (shadcn default = filled)
+ * - multiline attrs + nested text children
+ * Keeps preferred labels (children text) as filled up to maxFilled; demotes peers
+ * to outline (or demotePolicy). Never invents handlers/permissions.
  */
 export function ctaBudgetTsx(source, op = {}) {
-  const prefer = (op.preferLabels || ["Pursue"]).map((s) => s.toLowerCase());
+  const prefer = (op.preferLabels || ["Pursue"]).map((s) => String(s).toLowerCase());
   const maxFilled = op.maxFilled ?? 1;
+  const demoteTo = op.demotePolicy === "ghost" ? "ghost" : "outline";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
   let kept = 0;
-  // Match <Button ... variant="default" ...>Label</Button>
-  return source.replace(
-    /<Button\b([^>]*?)>([\s\S]*?)<\/Button>/g,
-    (full, attrs, children) => {
-      if (!/variant=["']default["']/.test(attrs)) return full;
-      const label = String(children).replace(/<[^>]+>/g, "").trim().toLowerCase();
-      const preferred = prefer.some((p) => label.includes(p));
-      if (preferred && kept < maxFilled) {
-        kept++;
-        return full;
+
+  visitButtons(sf, (opening, node) => {
+    if (!isFilledButtonOpening(opening, sf)) return;
+    const label = labelFromJsx(node, sf);
+    const preferred = prefer.some((p) => label.includes(p));
+    if (preferred && kept < maxFilled) {
+      kept += 1;
+      return;
+    }
+    const variantAttr = findJsxAttr(opening, "variant", sf);
+    if (variantAttr) {
+      edits.push({
+        start: variantAttr.getStart(sf),
+        end: variantAttr.getEnd(),
+        replacement: `variant="${demoteTo}"`,
+      });
+    } else {
+      // Insert after tag name: <Button → <Button variant="outline"
+      const insertAt = opening.tagName.getEnd();
+      edits.push({
+        start: insertAt,
+        end: insertAt,
+        replacement: ` variant="${demoteTo}"`,
+      });
+    }
+  });
+
+  if (!edits.length) return text;
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) {
+    out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  }
+  return out;
+}
+
+/**
+ * @param {ts.Node} root
+ * @param {(opening: ts.JsxOpeningLikeElement, node: ts.JsxElement | ts.JsxSelfClosingElement) => void} fn
+ */
+function visitButtons(root, fn) {
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && jsxTagName(node.openingElement) === "Button") {
+      fn(node.openingElement, node);
+    } else if (ts.isJsxSelfClosingElement(node) && jsxTagName(node) === "Button") {
+      fn(node, node);
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(root);
+}
+
+/** @param {ts.JsxOpeningLikeElement} opening */
+function jsxTagName(opening) {
+  return opening.tagName.getText();
+}
+
+/**
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {string} name
+ * @param {ts.SourceFile} sf
+ */
+function findJsxAttr(opening, name, sf) {
+  for (const prop of opening.attributes.properties) {
+    if (!ts.isJsxAttribute(prop)) continue;
+    if (prop.name.getText(sf) === name) return prop;
+  }
+  return null;
+}
+
+/**
+ * Filled primary = variant default (string / {"default"}) OR missing variant
+ * (shadcn Button default). Dynamic variant expressions are left alone (unsafe).
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isFilledButtonOpening(opening, sf) {
+  const attr = findJsxAttr(opening, "variant", sf);
+  if (!attr) return true;
+  if (!attr.initializer) return true;
+  if (ts.isStringLiteral(attr.initializer)) {
+    return attr.initializer.text === "default";
+  }
+  if (ts.isJsxExpression(attr.initializer)) {
+    const expr = attr.initializer.expression;
+    if (!expr) return false;
+    if (ts.isStringLiteral(expr)) return expr.text === "default";
+    if (ts.isNoSubstitutionTemplateLiteral(expr)) return expr.text === "default";
+    return false;
+  }
+  return false;
+}
+
+/**
+ * @param {ts.JsxElement | ts.JsxSelfClosingElement} node
+ * @param {ts.SourceFile} sf
+ */
+function labelFromJsx(node, sf) {
+  if (ts.isJsxSelfClosingElement(node)) {
+    const aria = findJsxAttr(node, "aria-label", sf);
+    if (aria?.initializer && ts.isStringLiteral(aria.initializer)) {
+      return aria.initializer.text.trim().toLowerCase();
+    }
+    return "";
+  }
+  let text = "";
+  const walk = (n) => {
+    if (ts.isJsxText(n)) {
+      text += n.text;
+      return;
+    }
+    if (ts.isJsxExpression(n) && n.expression) {
+      if (ts.isStringLiteral(n.expression) || ts.isNoSubstitutionTemplateLiteral(n.expression)) {
+        text += n.expression.text;
       }
-      const nextAttrs = attrs.replace(/variant=["']default["']/, 'variant="outline"');
-      return `<Button${nextAttrs}>${children}</Button>`;
-    },
-  );
+      return;
+    }
+    if (ts.isJsxElement(n)) {
+      for (const c of n.children) walk(c);
+      return;
+    }
+    if (ts.isJsxSelfClosingElement(n)) return;
+  };
+  for (const c of node.children) walk(c);
+  return text.replace(/\s+/g, " ").trim().toLowerCase();
 }
 
 function escapeRe(s) {

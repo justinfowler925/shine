@@ -31,6 +31,18 @@ export const DUAL_GRID_XOR_FIXTURES = Object.freeze({
   cropPairId: "queue-dual-grid",
 });
 
+/** Repo-relative CTA pressure TSX AST FAIL→PASS fixtures (maxFilled=1). */
+export const CTA_PRESSURE_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-dual-cta.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-dual-cta-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-cta-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-cta-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-cta-tsx",
+  op: "cta-budget",
+  maxFilled: 1,
+});
+
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
   catalog: [
@@ -189,6 +201,42 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
 }
 
 /**
+ * CTA pressure TSX AST fixture binding for Operate queue / triage jobs.
+ * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
+ * apply-tsx cta-budget (maxFilled=1) — not only the prose restructure hint.
+ */
+export function ctaPressureAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval"].includes(category) ||
+    ["queue", "approval"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|cta[- ]?budget|cta[- ]?pressure|filled primar|competing cta)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: CTA_PRESSURE_AST_FIXTURES.op,
+    maxFilled: CTA_PRESSURE_AST_FIXTURES.maxFilled,
+    preferLabels: ["Pursue"],
+    demotePolicy: "outline",
+    fixtureTsx: CTA_PRESSURE_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: CTA_PRESSURE_AST_FIXTURES.tsxAstHard,
+    cropBefore: CTA_PRESSURE_AST_FIXTURES.cropBefore,
+    cropAfter: CTA_PRESSURE_AST_FIXTURES.cropAfter,
+    cropPairId: CTA_PRESSURE_AST_FIXTURES.cropPairId,
+    helper: CTA_PRESSURE_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Competing filled Button primaries in consumer TSX: apply verify/restructure/apply-tsx.mjs cta-budget (TypeScript AST, maxFilled=1; prefer job verb; demote peers to outline). Handles variant=\"default\", variant={\"default\"}, and missing variant. Copy FAIL→PASS crop paths from recommendation.ctaPressureAst.cropBefore/cropAfter; prove cta-pressure clears with exactly one filled primary.",
+  };
+}
+
+/**
  * D10 XOR dual-grid fixture binding for Operate queue / triage jobs.
  * Denoise recommend must emit concrete before/after + FAIL→PASS crop paths —
  * not only the prose `collapse-peer-grids xor-saved-view` hint.
@@ -285,6 +333,11 @@ export function recommendPattern(templates, job, constraints = {}) {
     brief: retrieval.brief,
     productSibling: null,
     tableQuality: tableQualityForRecordsJob(job, { category: constraints.category, screen }),
+    ctaPressureAst: ctaPressureAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     xorSavedView: xorSavedViewForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -387,6 +440,9 @@ export function formatRecommendationSummary(rec) {
   const table = rec.tableQuality?.fixture
     ? ` · tableQuality ${rec.tableQuality.kind}@${rec.tableQuality.fixture}`
     : "";
+  const cta = rec.ctaPressureAst?.fixtureTsx
+    ? ` · ctaPressureAst ${rec.ctaPressureAst.mode}@${rec.ctaPressureAst.cropPairId}`
+    : "";
   const xor = rec.xorSavedView?.fixtureBefore
     ? ` · xorSavedView ${rec.xorSavedView.mode}@${rec.xorSavedView.cropPairId}`
     : "";
@@ -395,6 +451,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${xor}${ban}`
   );
 }

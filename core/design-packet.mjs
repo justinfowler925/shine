@@ -244,7 +244,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), xorSavedView.fixture*/crop* (D10 dual-grid XOR FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -256,6 +256,25 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
     ?join(ROOT,recommendation.tableQuality.pilotCompanion)
     :packet.tableQuality.pilotCompanion,
    instruction:recommendation.tableQuality.instruction||packet.tableQuality.instruction,
+  };
+ }
+ // Denoise / queue jobs: bind CTA pressure TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.ctaPressureAst?.fixtureTsx){
+  const c=recommendation.ctaPressureAst;
+  packet.ctaPressureAst={
+   mode:c.mode||"tsx-ast",
+   op:c.op||"cta-budget",
+   maxFilled:c.maxFilled??1,
+   preferLabels:c.preferLabels||["Pursue"],
+   demotePolicy:c.demotePolicy||"outline",
+   fixtureTsx:join(ROOT,c.fixtureTsx),
+   fixtureTsxAst:join(ROOT,c.fixtureTsxAst||c.fixtureTsx),
+   cropBefore:join(ROOT,c.cropBefore),
+   cropAfter:join(ROOT,c.cropAfter),
+   cropPairId:c.cropPairId||"queue-cta-tsx",
+   helper:join(ROOT,c.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:c.reference||"skill/references/denoise.md",
+   instruction:c.instruction||"Apply apply-tsx cta-budget (AST, maxFilled=1) on consumer Button TSX.",
   };
  }
  // Denoise / queue jobs: bind D10 XOR dual-grid FAIL→PASS fixture + crop paths.

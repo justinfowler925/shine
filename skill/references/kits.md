@@ -127,6 +127,21 @@ Denoise recommend emits typed `recommendation.xorSavedView` (fixture + crop path
 queue/triage jobs — copy those paths; denoise packets bind `packet.xorSavedView` and DDR
 `restructureOps` includes `collapse-peer-grids`. Doctor: `verify/xor-saved-view-recommend-bite.mjs`.
 
+### CTA pressure TSX AST (N8 deepen) — maxFilled=1
+
+Competing filled `Button` primaries in consumer TSX are demoted by **TypeScript AST**
+(not regex): `verify/restructure/apply-tsx.mjs` `cta-budget`.
+
+1. **Detect** — measure `cta-pressure` when ≥2 filled primaries in main.
+2. **Recommend** — typed `recommendation.ctaPressureAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Keeps preferred job verb (e.g. Pursue) up to `maxFilled=1`; demotes peers to `outline`.  
+   Handles `variant="default"`, `variant={"default"}`, and **missing variant** (shadcn default).
+4. **Prove** — crop pair `queue-cta-tsx` (`queue-cta-tsx-{before,after}-crop.html`). Twin full-page invalid.
+
+Fixtures: `verify/fixtures/denoise/tsx/queue-dual-cta{,-ast}.tsx`.  
+Doctor: `verify/cta-pressure-ast-bite.mjs` / `npm run cta-pressure:ast-bite`.
+
 ### Dashboard
 
 1. Structure from `patterns.md` / `dashboards.md` — context bar, KPI row, **one focal
