@@ -14,10 +14,11 @@ import {
   DEFAULT_ACTOR_ID,
   DEFAULT_CRITIC_ID,
   DEFAULT_HOST_ID,
-  acceptVerdict,
-  planActorPass,
-  runCriticTurn,
-} from "../core/reflexion.mjs";
+  assertActorMayImplement,
+  assertHostFinalized,
+  hostFinalizeAfterClearance,
+  runCriticActorHostRound,
+} from "../core/critic-actor-host.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { applyDomRestructure } from "./restructure/apply-dom.mjs";
 import { applyXorSavedView } from "./restructure/xor-saved-view.mjs";
@@ -151,12 +152,14 @@ export async function runDenoiseLoop({
 
   let reflexion = null;
   let hostAccept = null;
+  let lastActorPlan = null;
+  let criticRan = false;
   let round = 1;
   let retriesUsed = 0;
   while (lastMeasure.status !== 0 && round < MAX_ROUNDS) {
     round++;
-    // Critic turn (diagnose only) — distinct principal from Actor.
-    reflexion = await runCriticTurn({
+    // Host-orchestrated Critic≠Actor round (not inline accept/plan).
+    const hostRound = await runCriticActorHostRound({
       goal: job,
       failures: lastMeasure.failures,
       tried: applied.applied,
@@ -164,19 +167,19 @@ export async function runDenoiseLoop({
       constitutionIds: packet.ddr.constitutionIds,
       criticAgentId: DEFAULT_CRITIC_ID,
       actorAgentId: DEFAULT_ACTOR_ID,
-    });
-    // Self-accept ban: neither critic nor actor may accept; host finalizes done.
-    if (reflexion.verdict === "done") {
-      hostAccept = acceptVerdict({ reflexion, acceptorId: DEFAULT_HOST_ID });
-    }
-    const actorPlan = planActorPass(reflexion, {
-      actorAgentId: DEFAULT_ACTOR_ID,
+      hostAgentId: DEFAULT_HOST_ID,
       retriesUsed,
     });
-    if (!actorPlan.proceed) {
+    criticRan = true;
+    reflexion = hostRound.reflexion;
+    if (hostRound.hostAccept) hostAccept = hostRound.hostAccept;
+    lastActorPlan = hostRound.actorPlan;
+
+    if (hostRound.disposition !== "actor-proceed") {
       rounds.push({
         round,
         turn: "critic",
+        disposition: hostRound.disposition,
         reflexion: {
           verdict: reflexion.verdict,
           nextStep: reflexion.nextStep,
@@ -184,14 +187,16 @@ export async function runDenoiseLoop({
           actorAgentId: reflexion.actorAgentId,
           selfAcceptBanned: true,
         },
-        actor: actorPlan,
+        actor: hostRound.actorPlan,
         hostAccept,
         measureStatus: lastMeasure.status,
         failures: lastMeasure.failures,
       });
       break;
     }
+
     // Actor implement turn — one imperative next step; never accepts its own review.
+    assertActorMayImplement(hostRound.actorPlan);
     retriesUsed++;
     const again = applyDomRestructure(html, plan);
     html = again.html;
@@ -201,6 +206,7 @@ export async function runDenoiseLoop({
     rounds.push({
       round,
       turn: "actor",
+      disposition: hostRound.disposition,
       reflexion: {
         verdict: reflexion.verdict,
         nextStep: reflexion.nextStep,
@@ -208,9 +214,21 @@ export async function runDenoiseLoop({
         actorAgentId: reflexion.actorAgentId,
         selfAcceptBanned: true,
       },
-      actor: actorPlan,
+      actor: hostRound.actorPlan,
       measureStatus: lastMeasure.status,
       failures: lastMeasure.failures,
+    });
+  }
+
+  // Thin-spot fix: when Actor cleared measure after a partial, Host must finalize.
+  if (criticRan && lastMeasure.status === 0 && !hostAccept?.accepted && reflexion) {
+    hostAccept = hostFinalizeAfterClearance({
+      reflexion,
+      hostAgentId: DEFAULT_HOST_ID,
+      measureStatus: lastMeasure.status,
+      note: lastActorPlan?.nextStep
+        ? `Measure cleared after Actor nextStep: ${lastActorPlan.nextStep}`
+        : "Measure cleared after Actor pass — host finalizes",
     });
   }
 
@@ -230,13 +248,22 @@ export async function runDenoiseLoop({
       actorAgentId: DEFAULT_ACTOR_ID,
       hostAgentId: DEFAULT_HOST_ID,
       selfAcceptBanned: true,
+      hostOrchestrator: "core/critic-actor-host.mjs",
       hostAccept,
     },
     rounds,
     status: lastMeasure.status === 0 ? "passed" : "failed",
+    measureCleared: lastMeasure.status === 0,
     proof: "measure FAIL→PASS rounds — not twin screenshots",
     artifact: currentPath,
   };
+  // Fail-closed when critic/actor ran and measure cleared without host finalize.
+  assertHostFinalized({
+    ...receipt.criticActor,
+    rounds: receipt.rounds,
+    status: receipt.status,
+    measureCleared: receipt.measureCleared,
+  });
   writeFileSync(join(out, "denoise-loop-receipt.json"), JSON.stringify(receipt, null, 2) + "\n");
   return receipt;
 }

@@ -154,7 +154,10 @@ Do **not** require craft measure PASS on the gray-box.
 
 ## Locked brief
 
-Write `shine-wireframe/<slug>.brief.md` **and** `DESIGN.md` on lock (`direction.md`):
+Write `shine-wireframe/<slug>.brief.md` **and** `DESIGN.md` on lock (`direction.md`).
+**Machine lock** (enterprise plan §3): `node core/wireframe-brief.mjs` owns Status.
+Structure fields are immutable while `Status: LOCKED` until the user says
+`unlock structure`.
 
 ```markdown
 # Wireframe brief: <name>
@@ -177,15 +180,34 @@ DESIGN.md: shine-wireframe/<slug>.DESIGN.md
 Unlock: only if user says "unlock structure"
 ```
 
+```sh
+# Draft → lock (refuses incomplete briefs)
+node "$ROOT/core/wireframe-brief.mjs" write --slug <slug> --title "…" --primary "Pursue" …
+node "$ROOT/core/wireframe-brief.mjs" lock shine-wireframe/<slug>.brief.md
+
+# Packet for new surface binds the brief; Build refuses unlock/DRAFT
+node "$ROOT/core/design-packet.mjs" --mode new --job "…" --slug <slug> --require-wireframe-lock
+
+# Structure change — user must say the phrase
+node "$ROOT/core/wireframe-brief.mjs" unlock shine-wireframe/<slug>.brief.md --phrase "unlock structure"
+# …edit regions/primary/kit… then re-lock before paint
+node "$ROOT/core/wireframe-brief.mjs" lock shine-wireframe/<slug>.brief.md
+node "$ROOT/core/wireframe-brief.mjs" check shine-wireframe/<slug>.brief.md --paint
+```
+
+`ddr.wireframeBrief` on mode=`new` packets records `{ path, status, structureLocked }`.
+`assertStructureLocked` / `assertBuildMayPaint` / `assertNewSurfaceBrief` are fail-closed.
+
 `DESIGN.md` names: lane, cite, voice, job, signature, palette (from pack), type pairing, layout ASCII, Salesforce host width if lex.
 
 ### Build handoff rules
 
-1. Read the brief before any paint.
-2. Honour regions, primary, and kit recipe.
+1. Read the brief before any paint (`wireframe-brief.mjs check --paint`).
+2. Honour regions, primary, and kit recipe — do not invent competing IA while LOCKED.
 3. Upgrade placeholders to contract MUST states.
 4. Remeasure with `measure.mjs` after paint.
 5. If the brief is missing or `Status` is not `LOCKED`, do not invent IA — return to Wireframe.
+6. Unlock only when the user says `unlock structure`; re-lock before paint.
 
 ---
 

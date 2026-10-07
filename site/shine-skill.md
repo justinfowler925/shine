@@ -14,7 +14,7 @@ SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
 node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit|denoise> --project "$PWD"
 ```
-Packet `--mode` is `existing` \| `new` \| `audit` \| `denoise` (denoise also loads `references/denoise.md`). Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP). Every packet emits a Design Decision Record (`packet.ddr` / `ddrId`, `constitutionIds`, `status`); denoise starts `proposed` — refuse Actor implement until `--accept` (or `node core/ddr.mjs accept`); prove receipts link `ddrId`.
+Packet `--mode` is `existing` \| `new` \| `audit` \| `denoise` (denoise also loads `references/denoise.md`). Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP). Every packet emits a Design Decision Record (`packet.ddr` / `ddrId`, `constitutionIds`, `status`); denoise starts `proposed` — refuse Actor implement until `--accept` (or `node core/ddr.mjs accept`); prove receipts link `ddrId`. New surfaces: lock `shine-wireframe/<slug>.brief.md` via `core/wireframe-brief.mjs` (structure immutable until user says `unlock structure`); packet `--mode new --require-wireframe-lock`. Critic≠Actor host: `core/critic-actor-host.mjs`.
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed dashboard. Denoise **always** requires `--category`. For bloated Operate cleanup: locked order primary job → competing CTA → empty/error triad → composition → craft; **no polish until `primaryTaskCheck` is green**; refuse paint while `restructureHints` still require restructure. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories. For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
@@ -431,6 +431,8 @@ won:
 # Anti-Patterns
 
 Hard bans and common failures. Hitting these is an audit fail (Critical/Major for incomplete components; Minor/Major for visual slop depending on severity).
+
+**Machine-readable library (S2):** Nucleus-weighted Operate bloat tells live as JSON next to principles — `knowledge/anti-patterns/*.json`. Retrieve with `node knowledge/retrieve.mjs --anti "queue triage CTA"`. Measure/composition-slop failure lines cite `anti-pattern:<id>`. Prose below remains the human audit checklist.
 
 ## Incomplete components (functional)
 
@@ -2231,7 +2233,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 | Ambiguous signal | Decision | Op / gate |
 |---|---|---|
 | Dashboard chrome on a Monday triage job | Worklist, not dashboard. Cite `shadcn-queue` (or settings/record), never chart/dashboard page lead | `dashboard→worklist` · anti-dashboard |
-| Two DataGrids / two worklists same route | One grid. Peer → saved view / filter / XOR | `collapse-peer-grids` · `dual-focal` |
+| Two DataGrids / two worklists same route | One grid. Peer title → filter chip + shared DataGrid (XOR) | `collapse-peer-grids` plan → D10 XOR recipe · `dual-focal` |
 | ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost | `cta-budget` · `cta-pressure` |
 | ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details>` | `kpi-collapse` · `kpi-soup` |
 | Settings job with queue cite | Rebind cite to category truth | `rebind-cite` |
@@ -2256,13 +2258,32 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 1 packet     --mode denoise --category <…> --job "…"  → accept DDR
 2 static     vibe / preflight-slop / Card·Badge counts
 3 cite       shot + restructureHints[]
-4 diagnose   shine-diagnosis.json + shine-restructure.json
-5 apply      DOM/AST auto-safe ops (verify/restructure/*)
-6 agent      humanGate ops (dual-grid XOR, god-split) — never silent grid delete
-7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID)
-8 usability  primary-job flow + prove.mjs completion (links ddrId)
-9 stop-sweep Operate cannot finish on compare alone
+4 diagnose   shine-diagnosis.json + shine-restructure.json   ← Critic turn
+5 apply      DOM/AST auto-safe ops (verify/restructure/*)     ← Actor turn
+6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
+7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
+8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done
+9 usability  primary-job flow + prove.mjs completion (links ddrId)
+10 stop-sweep Operate cannot finish on compare alone
 ```
+
+### Critic ≠ Actor (S1)
+
+Diagnose/critic and implement are **separate turns** with distinct principals.
+Host orchestration lives in `core/critic-actor-host.mjs` (do not inline accept/plan
+in callers — denoise-loop uses `runCriticActorHostRound`).
+
+| Role | Identity (default) | May |
+|---|---|---|
+| **Critic** | `shine-critic` | One call, no tools, ≤400 tokens; emit Atlas verdict `done\|partial\|blocked\|error` |
+| **Actor** | `shine-actor` | Execute one `partial` nextStep via `planActorPass`; never accepts the review |
+| **Host** | `shine-host` | Accepts `done`; finalizes after Actor clears measure (`hostFinalizeAfterClearance`); third principal only |
+
+**Self-accept ban:** Critic cannot accept its own verdict; Actor/worker cannot accept the critic verdict on its own work. Unknown verdict → `partial`.
+
+**Host finalize:** when measure goes green after a Critic→Actor `partial` pass, Host
+must call `hostFinalizeAfterClearance` — `hostAccept` must not stay null on a cleared
+receipt (`assertHostFinalized`).
 
 Max **3** measure rounds per surface. Each round clears a **named** defect.
 
@@ -2272,7 +2293,7 @@ Impeccable `distill` / `quieter` and Snapline adapters are **opt-in after** cite
 node "$ROOT/verify/preflight-slop.mjs" <artifact.html>          # N2 vibe signals
 node "$ROOT/verify/adapters/snapline.mjs" stop.json             # N3 opt-in
 node "$ROOT/verify/adapters/impeccable.mjs" --mode distill --structure-green --cite <id>
-node "$ROOT/core/reflexion.mjs" --fail "cta-pressure: …" --ddr <ddrId>   # on measure/prove fail
+node "$ROOT/core/reflexion.mjs" --fail "cta-pressure: …" --ddr <ddrId>   # Critic turn
 ```
 
 ## Constitution IDs (critic must cite)
@@ -2294,9 +2315,11 @@ Packet `ddr.constitutionIds` for Operate denoise defaults:
 Every gate bite is **measure/prove FAIL→PASS** with a **cropped defect receipt**.  
 Identical full-page “twin” screenshots are invalid proof.
 
-Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs`.  
+Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs` (dual-grid = detect → XOR after PASS).  
 Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
-TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`).
+XOR recipe: `npm run restructure:xor -- --html verify/fixtures/denoise/queue-dual-grid-before.html --out /tmp/xor.html`.  
+TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). AST stays plan-only for `collapse-peer-grids`.  
+Kit: `kits.md` § Dual-grid XOR (D10).
 
 ## Related
 
@@ -3138,13 +3161,39 @@ over dashboard chrome when the job is triage / queue / inbox.
 2. **CTA budget = 1** — one filled job verb (e.g. Pursue); peers outline/ghost/segmented.
 3. **KPI encyclopedia off-path** — ≤3 summary chips; rest in `<details data-shine-kpi-rest>`.
 4. **No peer grids** — second ranking (e.g. “David’s 10”) is a saved-view / filter XOR, never
-   a second `role="grid"` peer. Detect: `dual-focal`; plan: `collapse-peer-grids`.
+   a second `role="grid"` peer. Detect: `dual-focal`; plan: `collapse-peer-grids` (plan-only
+   in AST/DOM runners — never silent delete). Agent close: § Dual-grid XOR below.
 5. **Cite** — `shadcn-queue` (or product sibling). Anti-cites: `shadcn-dashboard-01` as page
    lead, chart atoms, magicui. Packet `recommendation.restructureHints` must clear before polish.
 6. **Golden fixture** — `verify/fixtures/denoise/queue-cta-{before,after}.html` +
-   `npm run denoise:eval`. Doctor bites dual-CTA and card/KPI soup.
+   `queue-dual-grid-{before,after}.html` + `npm run denoise:eval`. Doctor bites dual-CTA,
+   dual-grid XOR, and card/KPI soup.
 
 Kit recipe string (cite v2): `shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts`.
+
+### Dual-grid XOR (D10) — agent-assisted close
+
+Close the dual-focal loop: **detect → plan → XOR recipe → prove**. AST/DOM auto paths stay
+plan-only for `collapse-peer-grids`. Agents apply this recipe explicitly — never silent
+dual-grid delete.
+
+1. **Detect** — `dual-focal` when ≥2 peer `.grid-wrap` / `[role=grid]` worklists share main.
+2. **Plan** — emit `collapse-peer-grids` with `mode: "xor-saved-view"`,
+   `keepTitleIncludes` (e.g. `["Queue"]`), `foldTitleIncludes` (e.g. `["David"]`).
+3. **Peer title → filter chip** — fold the peer’s `data-grid-title` into a
+   `data-shine-xor-views` chip (`aria-pressed` XOR). Default pressed = kept worklist;
+   peer chip pressed = filtered view. Do **not** leave a second `role="grid"`.
+4. **Shared DataGrid state** — one table / `DataGrid` (`data-shine-shared-grid`) owns rows.
+   Chip toggles the same row model (TanStack `columnFilters` / URL via `saved-views` block /
+   product filter state). Reuse `blocks/saved-views.tsx` + `blocks/filter-bar.tsx` patterns;
+   do not fork a second grid component.
+5. **Focal** — `data-region="focal"` on the remaining wrap.
+6. **Apply helper** — `node verify/restructure/xor-saved-view.mjs --html <file> --keep Queue --fold David`
+   (also used by `denoise:eval` / `denoise:loop`). HumanGate stays true on the plan.
+7. **Prove** — measure `dual-focal` FAIL→PASS; crop the fold so one grid is visible
+   (`verify/fixtures/denoise/receipts/queue-dual-grid-fold-crop.html`). Twin full-page shots invalid.
+
+Fixtures: `verify/fixtures/denoise/queue-dual-grid-{before,after}.html`.
 
 ### Dashboard
 
@@ -5157,9 +5206,9 @@ No polish until `primaryTaskCheck` green.
 worklists/grids (`verify/dual-focal.mjs`) and ≥4 equal metric tiles
 (`verify/kpi-soup.mjs`). Dashboard equal-card floor stays in `kpi.mjs`.
 
-**Restructure + denoise-eval (N7/D10):** `shine-restructure/v1` plans apply via
+**Restructure + denoise-eval (N7):** `shine-restructure/v1` plans apply via
 `verify/restructure/apply-dom.mjs`. `npm run denoise:eval` scores fixture pairs.
-Dual-grid: detect → agent XOR (`xor-saved-view.mjs`) → after PASS; AST/DOM stay plan-only (no silent delete).
+Dual-grid: detect → agent XOR recipe (`xor-saved-view.mjs`) → measure PASS; AST/DOM stay plan-only (no silent delete).
 
 **Settings/forms corpus (P2):** cite floors require ≥6 settings pages and ≥6 form+record
 pages; form/settings/record cites hard-fail `aria-invalid` without an accessible message
@@ -5762,7 +5811,10 @@ Do **not** require craft measure PASS on the gray-box.
 
 ## Locked brief
 
-Write `shine-wireframe/<slug>.brief.md` **and** `DESIGN.md` on lock (`direction.md`):
+Write `shine-wireframe/<slug>.brief.md` **and** `DESIGN.md` on lock (`direction.md`).
+**Machine lock** (enterprise plan §3): `node core/wireframe-brief.mjs` owns Status.
+Structure fields are immutable while `Status: LOCKED` until the user says
+`unlock structure`.
 
 ```markdown
 # Wireframe brief: <name>
@@ -5785,15 +5837,34 @@ DESIGN.md: shine-wireframe/<slug>.DESIGN.md
 Unlock: only if user says "unlock structure"
 ```
 
+```sh
+# Draft → lock (refuses incomplete briefs)
+node "$ROOT/core/wireframe-brief.mjs" write --slug <slug> --title "…" --primary "Pursue" …
+node "$ROOT/core/wireframe-brief.mjs" lock shine-wireframe/<slug>.brief.md
+
+# Packet for new surface binds the brief; Build refuses unlock/DRAFT
+node "$ROOT/core/design-packet.mjs" --mode new --job "…" --slug <slug> --require-wireframe-lock
+
+# Structure change — user must say the phrase
+node "$ROOT/core/wireframe-brief.mjs" unlock shine-wireframe/<slug>.brief.md --phrase "unlock structure"
+# …edit regions/primary/kit… then re-lock before paint
+node "$ROOT/core/wireframe-brief.mjs" lock shine-wireframe/<slug>.brief.md
+node "$ROOT/core/wireframe-brief.mjs" check shine-wireframe/<slug>.brief.md --paint
+```
+
+`ddr.wireframeBrief` on mode=`new` packets records `{ path, status, structureLocked }`.
+`assertStructureLocked` / `assertBuildMayPaint` / `assertNewSurfaceBrief` are fail-closed.
+
 `DESIGN.md` names: lane, cite, voice, job, signature, palette (from pack), type pairing, layout ASCII, Salesforce host width if lex.
 
 ### Build handoff rules
 
-1. Read the brief before any paint.
-2. Honour regions, primary, and kit recipe.
+1. Read the brief before any paint (`wireframe-brief.mjs check --paint`).
+2. Honour regions, primary, and kit recipe — do not invent competing IA while LOCKED.
 3. Upgrade placeholders to contract MUST states.
 4. Remeasure with `measure.mjs` after paint.
 5. If the brief is missing or `Status` is not `LOCKED`, do not invent IA — return to Wireframe.
+6. Unlock only when the user says `unlock structure`; re-lock before paint.
 
 ---
 

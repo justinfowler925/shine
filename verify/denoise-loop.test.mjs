@@ -32,6 +32,17 @@ try {
   assert.ok(existsSync(join(out, "shine-restructure.json")));
   assert.match(receipt.proof, /FAIL→PASS|measure/);
   assert.match(receipt.proof, /not twin/);
+  assert.equal(receipt.criticActor?.selfAcceptBanned, true);
+  assert.match(receipt.criticActor?.hostOrchestrator || "", /critic-actor-host/);
+  // When critic/actor rounds ran and measure cleared, host must have finalized.
+  const criticRounds = (receipt.rounds || []).filter(
+    (r) => r.turn === "critic" || r.turn === "actor" || r.reflexion,
+  );
+  if (criticRounds.length && receipt.status === "passed") {
+    assert.equal(receipt.criticActor?.hostAccept?.accepted, true, "host finalize after clearance");
+    assert.notEqual(receipt.criticActor.hostAccept.acceptorId, receipt.criticActor.criticAgentId);
+    assert.notEqual(receipt.criticActor.hostAccept.acceptorId, receipt.criticActor.actorAgentId);
+  }
 
   // Golden: after apply + peer fold, measure should clear cta-pressure / dual-focal / kpi-soup
   // (may still fail other craft gates — status passed means measure exit 0).

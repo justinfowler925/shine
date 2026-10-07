@@ -78,15 +78,21 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 
 ### Critic ≠ Actor (S1)
 
-Diagnose/critic and implement are **separate turns** with distinct principals:
+Diagnose/critic and implement are **separate turns** with distinct principals.
+Host orchestration lives in `core/critic-actor-host.mjs` (do not inline accept/plan
+in callers — denoise-loop uses `runCriticActorHostRound`).
 
 | Role | Identity (default) | May |
 |---|---|---|
 | **Critic** | `shine-critic` | One call, no tools, ≤400 tokens; emit Atlas verdict `done\|partial\|blocked\|error` |
-| **Actor** | `shine-actor` | Execute one `partial` nextStep; never accepts the review |
-| **Host** | `shine-host` | Accepts `done` / finalizes; third principal only |
+| **Actor** | `shine-actor` | Execute one `partial` nextStep via `planActorPass`; never accepts the review |
+| **Host** | `shine-host` | Accepts `done`; finalizes after Actor clears measure (`hostFinalizeAfterClearance`); third principal only |
 
 **Self-accept ban:** Critic cannot accept its own verdict; Actor/worker cannot accept the critic verdict on its own work. Unknown verdict → `partial`.
+
+**Host finalize:** when measure goes green after a Critic→Actor `partial` pass, Host
+must call `hostFinalizeAfterClearance` — `hostAccept` must not stay null on a cleared
+receipt (`assertHostFinalized`).
 
 Max **3** measure rounds per surface. Each round clears a **named** defect.
 
