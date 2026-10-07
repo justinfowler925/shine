@@ -46,5 +46,44 @@
       "nextStep": "Apply cta-budget maxFilled=1; demote Assign to outline.",
       "at": "2026-10-07T00:00:00.000Z"
     }
+  ],
+  "citeBans": [
+    {
+      "id": "seed-queue-dashboard-demotion",
+      "kind": "operate-demotion",
+      "citeId": "shadcn-dashboard-01",
+      "category": "queue",
+      "reason": "Sled triage proved cite-honesty fail with dashboard silhouette on a decide-Pursue job.",
+      "failCategory": "cite-honesty",
+      "ddrId": "ddr_seed_sled_queue_cta",
+      "observedCite": "shadcn-dashboard-01",
+      "expectedCite": "shadcn-queue",
+      "at": "2026-10-07T00:00:00.000Z"
+    },
+    {
+      "id": "seed-settings-queue-demotion",
+      "kind": "operate-demotion",
+      "citeId": "shadcn-queue",
+      "category": "settings",
+      "reason": "Sources settings job failed cite-honesty with queue cite — rebind to shadcn-settings.",
+      "failCategory": "cite-honesty",
+      "ddrId": "ddr_seed_sled_sources",
+      "observedCite": "shadcn-queue",
+      "expectedCite": "shadcn-settings",
+      "at": "2026-10-07T00:00:00.000Z"
+    }
+  ],
+  "editionAntiCites": [
+    {
+      "id": "seed-clearspeed-magicui",
+      "edition": "clearspeed",
+      "citeId": "magicui-*",
+      "category": "queue",
+      "reason": "Edition clearspeed anti-cite after prove fail: marketing Magic UI family illegal on Operate triage.",
+      "failCategory": "cite-honesty",
+      "ddrId": "ddr_seed_sled_queue_cta",
+      "observedCite": "magicui-*",
+      "at": "2026-10-07T00:00:00.000Z"
+    }
   ]
 }

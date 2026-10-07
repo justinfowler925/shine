@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * Doctor bite — repertoire / episodic learn stub.
+ * Doctor bite — repertoire / episodic / cite-ban learn.
  * Proven job→cite→kit + restructureHints; episodes require ddrId + prove fail.
+ * Cite bans + edition anti-cites write only after real cite-related prove fails.
  * Version bump is doctor-gated. No preference / RLAIF.
  */
 import assert from "node:assert/strict";
@@ -10,14 +11,21 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  CITE_FAIL_CATEGORIES,
   DEFAULT_STORE,
   PREFERENCE_KEYS,
   REPERTOIRE_SCHEMA,
+  citeBansFor,
+  commitCiteBansFromProveFail,
   commitLearning,
+  editionAntiCitesFor,
   emptyStore,
   episodesForDdr,
+  inferCiteBansFromProveFail,
   loadRepertoire,
   matchRepertoire,
+  validateCiteBan,
+  validateEditionAntiCite,
   validateEpisode,
   validateRepertoireEntry,
   validateStore,
@@ -32,6 +40,8 @@ assert.equal(seeded.version, 1);
 assert.match(seeded.bar, /no preference/i);
 assert.ok(seeded.entries.length >= 2, "seeded repertoire entries");
 assert.ok(seeded.episodes.length >= 1, "seeded episodic lesson");
+assert.ok(seeded.citeBans.length >= 2, "seeded operate demotions");
+assert.ok(seeded.editionAntiCites.length >= 1, "seeded edition anti-cites");
 assert.equal(validateStore(seeded).length, 0);
 
 for (const e of seeded.entries) {
@@ -41,6 +51,15 @@ for (const e of seeded.entries) {
 for (const ep of seeded.episodes) {
   assert.equal(validateEpisode(ep).length, 0, ep.id);
   assert.ok(ep.ddrId.startsWith("ddr_"));
+}
+for (const ban of seeded.citeBans) {
+  assert.equal(validateCiteBan(ban).length, 0, ban.id);
+  assert.ok(ban.ddrId.startsWith("ddr_"));
+  assert.ok(CITE_FAIL_CATEGORIES.includes(ban.failCategory));
+}
+for (const ban of seeded.editionAntiCites) {
+  assert.equal(validateEditionAntiCite(ban).length, 0, ban.id);
+  assert.equal(ban.edition, "clearspeed");
 }
 
 // Match stub finds the Sled queue recipe.
@@ -53,6 +72,12 @@ assert.ok(hits[0].entry.kitRecipe.length >= 8);
 
 assert.equal(episodesForDdr("ddr_seed_sled_queue_cta").length, 1);
 assert.equal(episodesForDdr("ddr_missing").length, 0);
+
+const queueBans = citeBansFor("queue");
+assert.ok(queueBans.some((b) => b.citeId === "shadcn-dashboard-01"));
+assert.ok(citeBansFor("settings").some((b) => b.citeId === "shadcn-queue"));
+const editionBans = editionAntiCitesFor("clearspeed", { category: "queue" });
+assert.ok(editionBans.some((b) => b.citeId === "magicui-*"));
 
 // Refuse commit without doctor gate.
 const dir = mkdtempSync(join(tmpdir(), "shine-learn-"));
@@ -165,13 +190,112 @@ assert.equal(reloaded.entries.length, 1);
 assert.equal(reloaded.episodes.length, 1);
 assert.match(readFileSync(storePath, "utf8"), /shine-repertoire\/v1/);
 
+// Infer + hook: refuse without doctor; skip non-cite fails; write on cite-honesty.
+assert.throws(
+  () =>
+    commitCiteBansFromProveFail({
+      storePath,
+      doctorBiteOk: false,
+      ddrId: "ddr_test_cite_ban_001",
+      failures: ["cite-honesty: dashboard on queue"],
+      observedCite: "shadcn-dashboard-01",
+      expectedCite: "shadcn-queue",
+      category: "queue",
+      edition: "clearspeed",
+    }),
+  /doctorBiteOk/,
+);
+
+const skipped = commitCiteBansFromProveFail({
+  storePath,
+  doctorBiteOk: true,
+  ddrId: "ddr_test_cite_ban_001",
+  failures: ["cta-pressure: 2 filled in main"],
+  observedCite: "shadcn-dashboard-01",
+  category: "queue",
+});
+assert.equal(skipped.skipped, true);
+assert.match(skipped.reason, /not cite-related/);
+
+const noDdr = inferCiteBansFromProveFail({
+  ddrId: "",
+  failures: ["cite-honesty"],
+  observedCite: "shadcn-dashboard-01",
+  category: "queue",
+});
+assert.match(noDdr.refused, /ddrId/);
+
+const banned = commitCiteBansFromProveFail({
+  storePath,
+  doctorBiteOk: true,
+  at: "2026-10-07T16:05:00.000Z",
+  ddrId: "ddr_test_cite_ban_001",
+  failures: ["cite-honesty: page cite must match category"],
+  observedCite: "shadcn-dashboard-01",
+  expectedCite: "shadcn-queue",
+  category: "queue",
+  edition: "clearspeed",
+  reason: "Dashboard silhouette failed prove on triage job",
+});
+assert.equal(banned.skipped, false);
+assert.equal(banned.bumped, true);
+assert.equal(banned.previousVersion, 2);
+assert.equal(banned.version, 3);
+assert.equal(banned.citeBan.kind, "operate-demotion");
+assert.equal(banned.citeBan.citeId, "shadcn-dashboard-01");
+assert.equal(banned.citeBan.ddrId, "ddr_test_cite_ban_001");
+assert.equal(banned.editionAntiCite.edition, "clearspeed");
+assert.equal(banned.editionAntiCite.citeId, "shadcn-dashboard-01");
+
+assert.throws(
+  () =>
+    commitLearning({
+      storePath,
+      doctorBiteOk: true,
+      citeBan: {
+        citeId: "shadcn-dashboard-01",
+        category: "queue",
+        reason: "Looks good enough without machine fail",
+        failCategory: "cta-pressure",
+        ddrId: "ddr_test_cite_ban_002",
+        rlaif: true,
+      },
+    }),
+  /preference|rlaif|cite-related/i,
+);
+
+// Refuse cite ban with non-cite fail category (no RLAIF theater).
+assert.throws(
+  () =>
+    commitLearning({
+      storePath,
+      doctorBiteOk: true,
+      citeBan: {
+        citeId: "shadcn-dashboard-01",
+        category: "queue",
+        reason: "Demote dashboard on triage",
+        failCategory: "cta-pressure",
+        ddrId: "ddr_test_cite_ban_002",
+      },
+    }),
+  /cite-related/,
+);
+
+const afterBan = loadRepertoire(storePath);
+assert.ok(afterBan.citeBans.some((b) => b.ddrId === "ddr_test_cite_ban_001"));
+assert.ok(afterBan.editionAntiCites.some((b) => b.edition === "clearspeed"));
+
 // Doctor wiring: learn bite registered next to skill A/B.
 const doctorSrc = readFileSync(join(SHINE, "verify/doctor.mjs"), "utf8");
 assert.match(doctorSrc, /verify\/learn\.test\.mjs/);
-assert.match(doctorSrc, /repertoire|episodic learn/i);
+assert.match(doctorSrc, /repertoire|episodic learn|cite-ban/i);
+
+// Reflexion hook import surface (prove-fail → learn).
+const reflexionSrc = readFileSync(join(SHINE, "core/reflexion.mjs"), "utf8");
+assert.match(reflexionSrc, /commitCiteBansFromProveFail/);
 
 rmSync(dir, { recursive: true, force: true });
 
 console.log(
-  "learn PASS: repertoire job→cite→kit+hints · episodic ddrId · doctor-gated bump · no preference/RLAIF",
+  "learn PASS: repertoire job→cite→kit+hints · episodic ddrId · cite-ban/edition anti-cite after prove fail · doctor-gated bump · no preference/RLAIF",
 );

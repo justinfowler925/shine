@@ -6,6 +6,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Cite-ban / edition anti-cite learn hooks.** Extends `core/learn.mjs` +
+  `knowledge/repertoire/repertoire.json` with `citeBans[]` (Operate demotions)
+  and `editionAntiCites[]`. `commitCiteBansFromProveFail` / `inferCiteBansFromProveFail`
+  write only after real cite-related prove fails tied to `ddrId`, doctor-gated,
+  no preference/RLAIF. Reflexion attaches/commits when `doctorBiteOk` + observed
+  cite are passed; recommend surfaces learned `anti-cite:` strings. Doctor bite
+  `verify/learn.test.mjs`.
+
 - **Repertoire + episodic learn stub.** `core/learn.mjs` + seeded
   `knowledge/repertoire/repertoire.json` store proven job→cite→kit + working
   `restructureHints`, and linguistic episodes tied to `ddrId` + prove fail
