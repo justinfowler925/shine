@@ -13,6 +13,8 @@ import {
   kpiCollapseTsx,
   rebindCiteTsx,
   setFocalTsx,
+  compositionOrderTsx,
+  worklistFirstTsx,
 } from "./restructure/apply-tsx.mjs";
 import { buildRestructurePlan } from "./restructure/schema.mjs";
 
@@ -140,6 +142,26 @@ assert.ok(dualResult.applied.includes("collapse-peer-grids"));
 assert.equal(countPeerGridsTsx(dualResult.source).grids, 1);
 assert.equal(dualResult.plans.length, 0, "literal peer grids should AST-apply, not plan-only");
 
+
+const kpiChromeFirst = readFileSync(join(FIX, "queue-kpi-chrome-first.tsx"), "utf8");
+const worklistHard = readFileSync(join(FIX, "queue-worklist-first-ast.tsx"), "utf8");
+assert.equal(compositionOrderTsx(kpiChromeFirst).kpiBeforeWorklist, true);
+const wlAfter = worklistFirstTsx(kpiChromeFirst, {});
+assert.equal(compositionOrderTsx(wlAfter).kpiBeforeWorklist, false);
+assert.match(wlAfter, /data-region="focal"/);
+assert.equal(compositionOrderTsx(worklistHard).kpiBeforeWorklist, true);
+const wlHardAfter = worklistFirstTsx(worklistHard, {});
+assert.equal(compositionOrderTsx(wlHardAfter).kpiBeforeWorklist, false);
+assert.match(wlHardAfter, /className=\{\s*["']grid-wrap["']\s*\}/);
+assert.match(wlHardAfter, /data-region="focal"/);
+const wlPlan = buildRestructurePlan({
+  job: "Worklist before KPI",
+  category: "queue",
+  ops: [{ op: "worklist-first" }],
+});
+const wlResult = applyTsxRestructure(worklistHard, wlPlan);
+assert.ok(wlResult.applied.includes("worklist-first"));
+
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · collapse-peer-grids AST · set-focal · rebind-cite · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · collapse-peer-grids AST · worklist-first AST · set-focal · rebind-cite · single-grid plan-only",
 );

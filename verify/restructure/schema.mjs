@@ -8,6 +8,7 @@ export const AUTO_SAFE_DOM_OPS = Object.freeze([
   "cta-budget",
   "kpi-collapse",
   "set-focal",
+  "worklist-first",
   "rebind-cite",
 ]);
 
@@ -76,6 +77,7 @@ export function buildRestructurePlan({
       : [
           { op: "cta-budget", scope: "main", maxFilled: 1, preferLabels: ["Pursue"], demotePolicy: "outline" },
           { op: "kpi-collapse", maxVisible: 3, rest: "details", selector: ".metrics .metric, [data-shine-kpi]" },
+          { op: "worklist-first", attr: "data-region", value: "focal", on: "primary-worklist" },
           { op: "set-focal", attr: "data-region", value: "focal", on: "primary-worklist" },
         ],
     acceptance: {

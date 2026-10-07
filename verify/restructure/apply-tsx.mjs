@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * N8 — TSX AST safe ops for consumer checkouts.
- * Auto-safe: rebind-cite, set-focal, cta-budget demote (maxFilled=1 via TS compiler AST),
+ * Auto-safe: rebind-cite, set-focal, worklist-first (records/worklist before KPI chrome via TS compiler AST),
+ * cta-budget demote (maxFilled=1 via TS compiler AST),
  * kpi-collapse (maxVisible=3 → <details data-shine-kpi-rest> via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
@@ -60,6 +61,19 @@ export function applyTsxRestructure(source, plan) {
       if (next !== text) {
         text = next;
         applied.push("set-focal");
+      }
+    } else if (op.op === "worklist-first") {
+      const next = worklistFirstTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("worklist-first");
+      } else {
+        const census = compositionOrderTsx(text);
+        if (census.kpiBeforeWorklist || census.dynamic) {
+          plans.push(
+            "## worklist-first (TSX)\n\nReorder records/worklist ahead of KPI chrome manually if siblings are dynamic (`.map`, spread).\nStamp `data-region=\"focal\"` on the primary worklist.\n",
+          );
+        }
       }
     } else if (op.op === "cta-budget") {
       const next = ctaBudgetTsx(text, op);
@@ -122,6 +136,263 @@ export function setFocalTsx(source, op = {}) {
     }
   }
   return source;
+}
+
+/**
+ * Composition census: whether KPI chrome appears before the records/worklist
+ * among main's direct children (same AST rules as worklistFirstTsx).
+ * @param {string} source
+ * @returns {{ kpiBeforeWorklist: boolean, worklistCount: number, kpiCount: number, dynamic: boolean, alreadyOrdered: boolean }}
+ */
+export function compositionOrderTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const host = findCompositionHost(sf);
+  if (!host) {
+    return { kpiBeforeWorklist: false, worklistCount: 0, kpiCount: 0, dynamic: false, alreadyOrdered: true };
+  }
+  const { worklists, kpis, dynamic } = collectCompositionSiblings(host, sf);
+  if (!worklists.length || !kpis.length) {
+    return {
+      kpiBeforeWorklist: false,
+      worklistCount: worklists.length,
+      kpiCount: kpis.length,
+      dynamic,
+      alreadyOrdered: true,
+    };
+  }
+  const firstWork = Math.min(...worklists.map((n) => n.getStart(sf)));
+  const firstKpi = Math.min(...kpis.map((n) => n.getStart(sf)));
+  const kpiBeforeWorklist = firstKpi < firstWork;
+  return {
+    kpiBeforeWorklist,
+    worklistCount: worklists.length,
+    kpiCount: kpis.length,
+    dynamic,
+    alreadyOrdered: !kpiBeforeWorklist,
+  };
+}
+
+/**
+ * Worklist-first composition via TypeScript AST: move records/worklist ahead of
+ * KPI chrome among main's direct children, then stamp data-region=focal.
+ * Handles:
+ * - KPI: className="metrics" / {"metrics"}, data-sled-kpis, aria-label ~ key figures
+ * - Worklist: className="grid-wrap" / {"grid-wrap"}, DataGrid, role="grid" / {"grid"},
+ *   data-product-pattern queue/worklist/records, data-shine-records
+ * Dynamic .map / spread sibling bands stay untouched (caller emits plan note).
+ */
+export function worklistFirstTsx(source, op = {}) {
+  const attr = op.attr || "data-region";
+  const value = op.value || "focal";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const host = findCompositionHost(sf);
+  if (!host || !ts.isJsxElement(host)) return text;
+
+  const { worklists, kpis, dynamic } = collectCompositionSiblings(host, sf);
+  if (dynamic || !worklists.length) return text;
+
+  const primary = pickPrimaryWorklist(worklists, sf);
+  if (!primary) return text;
+
+  let out = text;
+  const needsReorder =
+    kpis.length > 0 && Math.min(...kpis.map((n) => n.getStart(sf))) < primary.getStart(sf);
+
+  if (needsReorder) {
+    // Rebuild host children: non-KPI/non-worklist lead-ins, then worklists, then KPIs, then trail.
+    const children = [...host.children];
+    /** @type {ts.Node[]} */
+    const lead = [];
+    /** @type {ts.Node[]} */
+    const workBand = [];
+    /** @type {ts.Node[]} */
+    const kpiBand = [];
+    /** @type {ts.Node[]} */
+    const trail = [];
+    let seenWorkOrKpi = false;
+    for (const c of children) {
+      if (ts.isJsxText(c) && !c.text.trim()) {
+        // whitespace — attach with whichever band follows; skip for rebuild
+        continue;
+      }
+      const isWork = worklists.includes(c);
+      const isKpi = kpis.includes(c);
+      if (isWork) {
+        seenWorkOrKpi = true;
+        workBand.push(c);
+      } else if (isKpi) {
+        seenWorkOrKpi = true;
+        kpiBand.push(c);
+      } else if (!seenWorkOrKpi) {
+        lead.push(c);
+      } else {
+        trail.push(c);
+      }
+    }
+    const indent = indentBefore(text, host.openingElement.getEnd()) || "      ";
+    const childIndent = indent.endsWith("  ") ? indent : `${indent}  `;
+    const render = (nodes) =>
+      nodes
+        .map((n) => text.slice(n.getStart(sf), n.getEnd()))
+        .join(`\n${childIndent}`);
+    const parts = [];
+    if (lead.length) parts.push(render(lead));
+    if (workBand.length) parts.push(render(workBand));
+    if (kpiBand.length) parts.push(render(kpiBand));
+    if (trail.length) parts.push(render(trail));
+    const openEnd = host.openingElement.getEnd();
+    const closeStart = host.closingElement.getStart(sf);
+    const closeSrc = text.slice(closeStart, host.closingElement.getEnd());
+    const openSrc = text.slice(host.getStart(sf), openEnd);
+    const inner = parts.length ? `\n${childIndent}${parts.join(`\n${childIndent}`)}\n${indent}` : "\n";
+    out = text.slice(0, host.getStart(sf)) + `${openSrc}${inner}${closeSrc}` + text.slice(host.getEnd());
+  }
+
+  // Re-parse after reorder so focal stamp targets the moved primary.
+  const sf2 = ts.createSourceFile("surface.tsx", out, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const host2 = findCompositionHost(sf2);
+  if (!host2 || !ts.isJsxElement(host2)) return out;
+  const { worklists: wl2 } = collectCompositionSiblings(host2, sf2);
+  const primary2 = pickPrimaryWorklist(wl2, sf2);
+  if (!primary2) return out;
+  if (findJsxAttr(primary2.openingElement, attr, sf2)) {
+    const existing = attrStringValue(findJsxAttr(primary2.openingElement, attr, sf2), sf2);
+    if (existing === value) return out;
+  }
+  const openSrc = out.slice(primary2.openingElement.getStart(sf2), primary2.openingElement.getEnd());
+  const nextOpen = ensureJsxOpenAttrs(openSrc, { [attr]: value });
+  if (nextOpen === openSrc) return out;
+  return (
+    out.slice(0, primary2.openingElement.getStart(sf2)) +
+    nextOpen +
+    out.slice(primary2.openingElement.getEnd())
+  );
+}
+
+/**
+ * Prefer data-shine-main / main host; else outermost return JSX element.
+ * @param {ts.SourceFile} sf
+ * @returns {ts.JsxElement | null}
+ */
+function findCompositionHost(sf) {
+  /** @type {ts.JsxElement | null} */
+  let main = null;
+  /** @type {ts.JsxElement | null} */
+  let fallback = null;
+  const walk = (node) => {
+    if (main) return;
+    if (ts.isJsxElement(node)) {
+      const opening = node.openingElement;
+      const tag = jsxTagName(opening);
+      if (findJsxAttr(opening, "data-shine-main", sf) || tag === "main") {
+        main = node;
+        return;
+      }
+      if (!fallback) fallback = node;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return main || fallback;
+}
+
+/**
+ * Direct children of host that are KPI chrome vs records/worklist wraps.
+ * @param {ts.JsxElement} host
+ * @param {ts.SourceFile} sf
+ */
+function collectCompositionSiblings(host, sf) {
+  /** @type {ts.JsxElement[]} */
+  const worklists = [];
+  /** @type {ts.JsxElement[]} */
+  const kpis = [];
+  let dynamic = false;
+  for (const c of host.children) {
+    if (ts.isJsxText(c)) continue;
+    if (ts.isJsxExpression(c) && c.expression) {
+      const t = c.expression.getText();
+      if (/\.map\s*\(|\.\.\./.test(t)) dynamic = true;
+      continue;
+    }
+    if (!ts.isJsxElement(c) && !ts.isJsxSelfClosingElement(c)) continue;
+    if (ts.isJsxSelfClosingElement(c)) {
+      if (isWorklistOpening(c, sf) || jsxTagName(c) === "DataGrid") {
+        // Promote self-closing DataGrid to "worklist" via a synthetic wrapper check —
+        // treat as worklist by wrapping identity; we only reorder JsxElements.
+        // Self-closing worklists still count for census via a fake push skip —
+        // stamp path needs JsxElement; skip reorder for bare self-closing.
+      }
+      continue;
+    }
+    const opening = c.openingElement;
+    if (isKpiChromeElement(c, sf)) kpis.push(c);
+    else if (isWorklistElement(c, sf)) worklists.push(c);
+    else if (jsxTagName(opening) === "DataGrid") worklists.push(c);
+  }
+  return { worklists, kpis, dynamic };
+}
+
+/** @param {ts.JsxElement[]} worklists @param {ts.SourceFile} sf */
+function pickPrimaryWorklist(worklists, sf) {
+  if (!worklists.length) return null;
+  const scored = worklists.map((w) => {
+    let score = 0;
+    const opening = w.openingElement;
+    const pattern = attrStringValue(findJsxAttr(opening, "data-product-pattern", sf), sf) || "";
+    if (/queue|worklist|inbox|triage|records/i.test(pattern)) score += 3;
+    if (findJsxAttr(opening, "data-shine-records", sf)) score += 3;
+    if (classNameHasWord(opening, "grid-wrap", sf) || classNameHasWord(opening, "worklist", sf)) score += 2;
+    if (findJsxAttr(opening, "data-region", sf)) score += 1;
+    const title = titleFromGridWrap(w, sf);
+    if (/queue|records|worklist|inbox/i.test(title)) score += 2;
+    return { w, score };
+  });
+  scored.sort((a, b) => b.score - a.score);
+  return scored[0].w;
+}
+
+/**
+ * KPI chrome band: metrics container, data-sled-kpis section, or hosts a metrics band.
+ * @param {ts.JsxElement} node
+ * @param {ts.SourceFile} sf
+ */
+function isKpiChromeElement(node, sf) {
+  const opening = node.openingElement;
+  if (isMetricsContainerOpening(opening, sf)) return true;
+  if (findJsxAttr(opening, "data-sled-kpis", sf)) return true;
+  // Section/div that immediately hosts a metrics container (Usul / dashboard chrome).
+  for (const c of node.children) {
+    if (ts.isJsxElement(c) && isMetricsContainerOpening(c.openingElement, sf)) return true;
+  }
+  return false;
+}
+
+/**
+ * Records/worklist wrap among composition siblings.
+ * @param {ts.JsxElement} node
+ * @param {ts.SourceFile} sf
+ */
+function isWorklistElement(node, sf) {
+  return isWorklistOpening(node.openingElement, sf) || hostsSingleGridWorklist(node, sf) || isPeerGridWrap(node, sf);
+}
+
+/**
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isWorklistOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-records", sf)) return true;
+  if (findJsxAttr(opening, "data-shine-worklist", sf)) return true;
+  if (classNameHasWord(opening, "grid-wrap", sf)) return true;
+  if (classNameHasWord(opening, "worklist", sf)) return true;
+  const pattern = attrStringValue(findJsxAttr(opening, "data-product-pattern", sf), sf);
+  if (pattern && /queue|worklist|inbox|triage|records/i.test(pattern)) return true;
+  const tag = jsxTagName(opening);
+  if (tag === "DataGrid") return true;
+  const role = attrStringValue(findJsxAttr(opening, "role", sf), sf);
+  if (role === "grid" && (tag === "table" || tag === "div" || tag === "section")) return true;
+  return false;
 }
 
 /**

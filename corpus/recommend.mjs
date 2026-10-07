@@ -68,6 +68,17 @@ export const DUAL_FOCAL_AST_FIXTURES = Object.freeze({
   mode: "xor-saved-view",
 });
 
+/** Repo-relative worklist-first composition TSX AST FAIL→PASS fixtures (KPI chrome → after worklist). */
+export const WORKLIST_FIRST_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-kpi-chrome-first.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-worklist-first-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-worklist-first-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-worklist-first-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-worklist-first-tsx",
+  op: "worklist-first",
+});
+
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
   catalog: [
@@ -184,6 +195,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: cta-budget maxFilled=1 (prefer job verb; demote peer filled)");
     hints.push("restructure: collapse-peer-grids xor-saved-view when dual worklists share the route");
     hints.push("restructure: kpi-collapse maxVisible=3 when ≥4 equal metrics compete with the work object");
+    hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
   if (/settings|sources|recipes|preferences/i.test(job) && screen === "queue") {
@@ -293,6 +305,44 @@ export function ctaPressureAstForQueueJob(job, constraints = {}) {
     reference: "skill/references/denoise.md",
     instruction:
       "Competing filled Button primaries in consumer TSX: apply verify/restructure/apply-tsx.mjs cta-budget (TypeScript AST, maxFilled=1; prefer job verb; demote peers to outline). Handles variant=\"default\", variant={\"default\"}, and missing variant. Copy FAIL→PASS crop paths from recommendation.ctaPressureAst.cropBefore/cropAfter; prove cta-pressure clears with exactly one filled primary.",
+  };
+}
+
+/**
+ * Worklist-first composition TSX AST fixture binding for Operate queue / records jobs.
+ * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
+ * apply-tsx worklist-first (records/worklist before KPI chrome) — not only prose.
+ */
+export function worklistFirstAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "record", "records"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "record"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|records?|kpi[- ]?chrome|worklist[- ]?first|composition[- ]?slop|dashboard chrome)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: WORKLIST_FIRST_AST_FIXTURES.op,
+    attr: "data-region",
+    value: "focal",
+    on: "primary-worklist",
+    fixtureTsx: WORKLIST_FIRST_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: WORKLIST_FIRST_AST_FIXTURES.tsxAstHard,
+    cropBefore: WORKLIST_FIRST_AST_FIXTURES.cropBefore,
+    cropAfter: WORKLIST_FIRST_AST_FIXTURES.cropAfter,
+    cropPairId: WORKLIST_FIRST_AST_FIXTURES.cropPairId,
+    helper: WORKLIST_FIRST_AST_FIXTURES.helper,
+    reference: "skill/references/kits.md#worklist-first-operate-triage--n9",
+    instruction:
+      "KPI/dashboard chrome ahead of the Monday work object in consumer TSX: apply verify/restructure/apply-tsx.mjs worklist-first (TypeScript AST; reorder records/worklist before KPI chrome; stamp data-region=\"focal\"). Handles className=\"metrics\" / {\"metrics\"}, data-sled-kpis, className=\"grid-wrap\" / {\"grid-wrap\"}, role=\"grid\" / {\"grid\"}, data-shine-records, and data-product-pattern queue/worklist/records. Dynamic .map siblings stay plan-only. Copy FAIL→PASS crop paths from recommendation.worklistFirstAst.cropBefore/cropAfter; prove composition with worklist focal first.",
   };
 }
 
@@ -445,6 +495,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    worklistFirstAst: worklistFirstAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     xorSavedView: xorSavedViewForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -556,6 +611,9 @@ export function formatRecommendationSummary(rec) {
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
+  const worklist = rec.worklistFirstAst?.fixtureTsx
+    ? ` · worklistFirstAst ${rec.worklistFirstAst.mode}@${rec.worklistFirstAst.cropPairId}`
+    : "";
   const xor = rec.xorSavedView?.fixtureBefore
     ? ` · xorSavedView ${rec.xorSavedView.mode}@${rec.xorSavedView.cropPairId}`
     : "";
@@ -564,6 +622,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${dual}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${dual}${worklist}${xor}${ban}`
   );
 }

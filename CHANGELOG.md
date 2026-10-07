@@ -6,6 +6,16 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Worklist-first composition TSX AST deepen.** `apply-tsx.mjs` `worklist-first`
+  uses the TypeScript compiler AST (not regex) to move records/worklist ahead of
+  KPI chrome among `main` / `data-shine-main` children and stamp `data-region="focal"` —
+  `className="metrics"` / `{"metrics"}`, `data-sled-kpis`, `className="grid-wrap"` /
+  `{"grid-wrap"}`, `role="grid"` / `{"grid"}`, `data-shine-records`, and
+  `data-product-pattern` queue/worklist/records. Dynamic `.map` siblings stay plan-only.
+  Denoise recommend emits typed `recommendation.worklistFirstAst` (TSX fixtures +
+  FAIL→PASS crops); packets bind `packet.worklistFirstAst`. Crop pair
+  `queue-worklist-first-tsx`. Doctor bite: `verify/worklist-first-ast-bite.mjs`.
+
 - **Dual-focal ban TSX AST deepen (XOR peer→chip).** `apply-tsx.mjs` `collapse-peer-grids`
   uses the TypeScript compiler AST (not regex) to fold a peer worklist into a
   `data-shine-xor-views` filter chip on one shared DataGrid — `className="grid-wrap"`,
