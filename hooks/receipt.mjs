@@ -10,6 +10,7 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, realpathSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { homedir } from "node:os";
+import { assertAtlasReflexionVerdict, isAtlasReflexionVerdict } from "../core/reflexion.mjs";
 
 const VERSION = 3;
 const COMPLETION_VERSION = 1;
@@ -184,6 +185,7 @@ function checksComplete(checks) {
 /**
  * Aggregate completion receipt from a green `verify/prove.mjs` run.
  * Distinct from compare's writeProveReceipt — Operate stop-sweep requires this.
+ * Atlas `reflexionVerdict` (done|partial|blocked|error) is fail-closed — required.
  */
 export function writeCompletionProveReceipt({
   cite,
@@ -196,9 +198,11 @@ export function writeCompletionProveReceipt({
   ddrId = "",
   constitutionIds = null,
   constitutionEdition = "",
+  reflexionVerdict = "",
 }) {
   if (!cite) throw new Error("completion prove receipt requires cite");
   if (!checksComplete(checks)) throw new Error("cannot mint completion prove receipt without all checks passed");
+  const atlas = assertAtlasReflexionVerdict(reflexionVerdict);
   const ids = Array.isArray(constitutionIds)
     ? constitutionIds.map((id) => String(id || "").trim()).filter(Boolean)
     : [];
@@ -206,6 +210,7 @@ export function writeCompletionProveReceipt({
     version: COMPLETION_VERSION,
     kind: "completion",
     verdict: "passed",
+    reflexionVerdict: atlas,
     tool,
     cite,
     lane: lane || "",
@@ -257,12 +262,22 @@ export function readCompletionProveReceipt() {
   }
 }
 
-function completionFaults(rec, label, now, { requireConstitution = false } = {}) {
+function completionFaults(
+  rec,
+  label,
+  now,
+  { requireConstitution = false, requireReflexionVerdict = false } = {},
+) {
   if (rec.kind !== "completion" || rec.verdict !== "passed" || rec.tool !== "prove.mjs")
     return [`${label}: proof is not a prove.mjs completion PASS`];
   if (!checksComplete(rec.checks)) return [`${label}: prove.mjs receipt has incomplete checks`];
   if (typeof rec.at !== "number" || rec.at > now + 60_000 || now - rec.at > MAX_AGE_MS)
     return [`${label}: prove.mjs completion is stale or future-dated`];
+  if (requireReflexionVerdict && !isAtlasReflexionVerdict(rec.reflexionVerdict)) {
+    return [
+      `${label}: prove.mjs completion omits reflexionVerdict — Atlas stamp must be done|partial|blocked|error`,
+    ];
+  }
   if (requireConstitution) {
     const ids = Array.isArray(rec.constitutionIds)
       ? rec.constitutionIds.map((id) => String(id || "").trim()).filter(Boolean)
@@ -313,9 +328,9 @@ export function operateProveGaps(claims, { now = Date.now(), screenForCite = () 
       continue;
     }
 
-    // Operate SaaS pages require constitutionIds on the completion receipt
-    // (ClearSpeed catalog stamped by prove.mjs).
-    const constitutionOpts = { requireConstitution: true };
+    // Operate SaaS pages require constitutionIds + Atlas reflexionVerdict
+    // (ClearSpeed catalog + done|partial|blocked|error stamped by prove.mjs).
+    const constitutionOpts = { requireConstitution: true, requireReflexionVerdict: true };
 
     if (claim.artifact && claim.artifactSha256) {
       const rec = receipts.find((r) => r.artifact === claim.artifact && r.cite === claim.cite);

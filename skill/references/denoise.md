@@ -74,7 +74,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
 7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
 8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done
-9 usability  primary-job flow + prove.mjs completion (links ddrId + constitutionIds)
+9 usability  primary-job flow + prove.mjs completion (links ddrId + constitutionIds + reflexionVerdict)
 10 stop-sweep Operate cannot finish on compare alone
 ```
 
@@ -102,6 +102,11 @@ act as Critic (or Host finalize) on that work — fail-closed.
 **Host finalize:** when measure goes green after a Critic→Actor `partial` pass, Host
 must call `hostFinalizeAfterClearance` / `completeAfterRepair` — `hostAccept` must not
 stay null on a cleared receipt (`assertHostFinalized`).
+
+**Atlas stop stamp:** green `prove.mjs` completions and `denoise-loop` stop receipts
+must carry `reflexionVerdict` ∈ `done|partial|blocked|error` (cleared → `done`).
+Operate stop-sweep + mint **fail-closed** if missing. Helpers:
+`resolveStopReflexionVerdict` / `assertAtlasReflexionVerdict` in `core/reflexion.mjs`.
 
 ### Structure lock (wireframe brief → denoise-loop)
 

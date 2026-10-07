@@ -56,6 +56,46 @@ export function normalizeVerdict(raw) {
   return "partial";
 }
 
+/** True when raw is exactly one Atlas verdict (case-insensitive). */
+export function isAtlasReflexionVerdict(raw) {
+  const v = String(raw ?? "")
+    .trim()
+    .toLowerCase();
+  return VERDICTS.includes(v);
+}
+
+/**
+ * Fail-closed Atlas stamp — missing/unknown throws (unlike normalizeVerdict → partial).
+ * Use when minting prove completion receipts or denoise-loop stop receipts.
+ */
+export function assertAtlasReflexionVerdict(raw) {
+  const v = String(raw ?? "")
+    .trim()
+    .toLowerCase();
+  if (!VERDICTS.includes(v)) {
+    const shown = raw == null || raw === "" ? "missing" : JSON.stringify(raw);
+    throw new Error(`reflexionVerdict must be done|partial|blocked|error (got ${shown})`);
+  }
+  return v;
+}
+
+/**
+ * Map prove / denoise-loop stop state → Atlas stamp for the receipt.
+ * Cleared measure/prove (or host-accepted done) → `done`; else last critic verdict;
+ * absent critic after a failed stop → `error`.
+ */
+export function resolveStopReflexionVerdict({
+  cleared = false,
+  reflexion = null,
+  hostAccepted = false,
+} = {}) {
+  if (cleared || hostAccepted) return "done";
+  if (isAtlasReflexionVerdict(reflexion?.verdict)) {
+    return normalizeVerdict(reflexion.verdict);
+  }
+  return "error";
+}
+
 /**
  * @param {{ role: "critic"|"actor", agentId: string }} identity
  */

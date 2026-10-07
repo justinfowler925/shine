@@ -89,6 +89,8 @@ const mintCompletion = (
     screen = "settings",
     constitutionIds = OPERATE_CONSTITUTION_IDS,
     constitutionEdition = "clearspeed-operate",
+    reflexionVerdict = "done",
+    stripReflexionVerdict = false,
   } = {},
 ) => {
   const rec = writeCompletionProveReceipt({
@@ -99,12 +101,16 @@ const mintCompletion = (
     checks: allChecks,
     constitutionIds,
     constitutionEdition,
+    reflexionVerdict,
   });
-  if (at !== rec.at) {
+  if (at !== rec.at || stripReflexionVerdict) {
     const store = JSON.parse(readFileSync(completionReceipt, "utf8"));
-    store.receipts = store.receipts.map((r) =>
-      r.artifact === rec.artifact && r.cite === rec.cite ? { ...r, at } : r,
-    );
+    store.receipts = store.receipts.map((r) => {
+      if (!(r.artifact === rec.artifact && r.cite === rec.cite)) return r;
+      const next = { ...r, at };
+      if (stripReflexionVerdict) delete next.reflexionVerdict;
+      return next;
+    });
     writeFileSync(completionReceipt, JSON.stringify(store));
   }
   return rec;
@@ -160,6 +166,28 @@ try {
     "Operate completion without constitutionIds must gap",
   );
   mintCompletion(OPERATE_CITE, settingsPage);
+
+  // Atlas reflexionVerdict stamp is fail-closed on Operate completions.
+  assert.throws(
+    () => mintCompletion(OPERATE_CITE, settingsPage, { reflexionVerdict: "" }),
+    /reflexionVerdict must be done\|partial\|blocked\|error/,
+  );
+  assert.throws(
+    () => mintCompletion(OPERATE_CITE, settingsPage, { reflexionVerdict: "passed" }),
+    /reflexionVerdict must be done\|partial\|blocked\|error/,
+  );
+  mintCompletion(OPERATE_CITE, settingsPage, { stripReflexionVerdict: true });
+  assert.match(
+    operateProveGaps([artifactClaim(settingsPage, OPERATE_CITE)], { screenForCite }).join("\n"),
+    /omits reflexionVerdict/,
+    "Operate completion without reflexionVerdict must gap",
+  );
+  mintCompletion(OPERATE_CITE, settingsPage);
+  assert.equal(
+    JSON.parse(readFileSync(completionReceipt, "utf8")).receipts.find((r) => r.cite === OPERATE_CITE)
+      ?.reflexionVerdict,
+    "done",
+  );
 
   mintCompletion(OPERATE_CITE, settingsPage, { at: Date.now() - 21 * 60 * 1000 });
   assert.match(

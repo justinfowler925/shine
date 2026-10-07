@@ -222,11 +222,13 @@ try {
     ddrId: packet.ddrId,
     constitutionIds: proveResolved.constitutionIds,
     constitutionEdition: proveResolved.constitutionEdition,
+    reflexionVerdict: "done",
   });
   assert.equal(stamped.ddrLinked, true);
   assert.equal(stamped.constitutionLinked, true);
   assert.deepEqual(stamped.constitutionIds, proveResolved.constitutionIds);
   assert.equal(stamped.constitutionEdition, "clearspeed-operate");
+  assert.equal(stamped.reflexionVerdict, "done");
 } finally {
   delete process.env.SHINE_COMPLETION_RECEIPT;
   rmSync(receiptDir, { recursive: true, force: true });
