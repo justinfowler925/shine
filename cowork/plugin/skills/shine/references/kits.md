@@ -202,6 +202,25 @@ Fixtures: `verify/fixtures/denoise/tsx/queue-kpi-chrome-first.tsx` ·
 `queue-worklist-first-ast.tsx`.  
 Doctor: `verify/worklist-first-ast-bite.mjs` / `npm run worklist-first:ast-bite`.
 
+### Wrong-cite / rebind-cite TSX AST (N8 deepen) — refuse until rebound
+
+Settings/sources jobs stamped with a queue (or other wrong-category) cite in consumer
+TSX are rebound by **TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs`
+`rebind-cite`. Recommend **refuses paint** until the stamp matches category truth
+(`refusePaintUntilRebound`); learned cite-ban fail-close also binds this fixture.
+
+1. **Detect** — measure `cite-honesty` / wrong-cite when `data-cite` disagrees with job category.
+2. **Recommend** — typed `recommendation.wrongCiteAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Rewrites `from` → `to` (default `shadcn-queue` → `shadcn-settings`).  
+   Handles `data-cite="…"`, `data-cite={"…"}`, `dataCite="…"`, and `dataCite={"…"}`.
+   Dynamic cite expressions stay untouched.
+4. **Prove** — crop pair `sources-cite-tsx` (`sources-cite-tsx-{before,after}-crop.html`).
+   Twin full-page invalid. Packet refuse path keeps `editing.allowed=false` until rebound.
+
+Fixtures: `verify/fixtures/denoise/tsx/settings-wrong-cite{,-ast}.tsx`.  
+Doctor: `verify/wrong-cite-ast-bite.mjs` / `npm run wrong-cite:ast-bite`.
+
 ### Dashboard
 
 1. Structure from `patterns.md` / `dashboards.md` — context bar, KPI row, **one focal

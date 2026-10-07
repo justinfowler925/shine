@@ -79,6 +79,19 @@ export const WORKLIST_FIRST_AST_FIXTURES = Object.freeze({
   op: "worklist-first",
 });
 
+/** Repo-relative wrong-cite / rebind-cite TSX AST FAIL→PASS fixtures (queue stamp → settings). */
+export const WRONG_CITE_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/settings-wrong-cite.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/settings-wrong-cite-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/sources-cite-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/sources-cite-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "sources-cite-tsx",
+  op: "rebind-cite",
+  from: "shadcn-queue",
+  to: "shadcn-settings",
+});
+
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
   catalog: [
@@ -309,6 +322,45 @@ export function ctaPressureAstForQueueJob(job, constraints = {}) {
 }
 
 /**
+ * Wrong-cite / rebind-cite TSX AST fixture binding for Operate settings / sources / form jobs.
+ * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
+ * apply-tsx rebind-cite (category honesty) — and refuse paint while the stamp is wrong.
+ * Also attaches when cite-ban fail-close refuses a banned primary (recommend refuse path).
+ */
+export function wrongCiteAstForSettingsJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const forceRefuse = Boolean(constraints.citeBanRefuse || constraints.forceWrongCiteAst);
+  const settingsJob =
+    forceRefuse ||
+    ["settings", "form", "sources", "preferences"].includes(category) ||
+    ["settings", "form"].includes(screen) ||
+    intent === "settings" ||
+    /\b(settings|sources|recipes|preferences|account|rebind[- ]?cite|wrong[- ]?cite|cite[- ]?honesty|category[- ]?honesty)\b/i.test(
+      text,
+    );
+  if (!settingsJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: WRONG_CITE_AST_FIXTURES.op,
+    from: WRONG_CITE_AST_FIXTURES.from,
+    to: WRONG_CITE_AST_FIXTURES.to,
+    refusePaintUntilRebound: true,
+    fixtureTsx: WRONG_CITE_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: WRONG_CITE_AST_FIXTURES.tsxAstHard,
+    cropBefore: WRONG_CITE_AST_FIXTURES.cropBefore,
+    cropAfter: WRONG_CITE_AST_FIXTURES.cropAfter,
+    cropPairId: WRONG_CITE_AST_FIXTURES.cropPairId,
+    helper: WRONG_CITE_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Wrong category stamp on a settings/sources job in consumer TSX: refuse paint until rebound. Apply verify/restructure/apply-tsx.mjs rebind-cite (TypeScript AST; from shadcn-queue → to shadcn-settings). Handles data-cite=\"…\", data-cite={\"…\"}, dataCite=\"…\", and dataCite={\"…\"}. Copy FAIL→PASS crop paths from recommendation.wrongCiteAst.cropBefore/cropAfter; prove cite-honesty clears with category-truth stamp. Learned cite-ban fail-close also binds this fixture on refuse.",
+  };
+}
+
+/**
  * Worklist-first composition TSX AST fixture binding for Operate queue / records jobs.
  * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
  * apply-tsx worklist-first (records/worklist before KPI chrome) — not only prose.
@@ -500,6 +552,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    wrongCiteAst: wrongCiteAstForSettingsJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     xorSavedView: xorSavedViewForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -516,18 +573,30 @@ export function recommendPattern(templates, job, constraints = {}) {
     ...learnOpts,
   });
   rec = enforced.recommendation;
-  if (enforced.citeBanFailClosed && rec.primary) {
-    rec.kitRecipe =
-      KIT_RECIPE_BY_SCREEN[rec.primary.screen] || rec.kitRecipe || KIT_RECIPE_BY_SCREEN.default;
-    rec.restructureHints = restructureHints(
-      retrieval,
-      {
-        id: rec.primary.id,
-        screen: rec.primary.screen,
-        score: rec.primary.score,
-      },
-      job,
-    );
+  if (enforced.citeBanFailClosed) {
+    // Recommend refuse path: bind wrong-cite AST fixtures even when primary is null
+    // (no non-banned alt) so Actor has the rebind-cite FAIL→PASS crop recipe.
+    if (!rec.wrongCiteAst) {
+      rec.wrongCiteAst = wrongCiteAstForSettingsJob(job, {
+        category: constraints.category || banCategory,
+        screen: rec.primary?.screen || screen,
+        intent: retrieval.brief?.operatePage || "",
+        citeBanRefuse: true,
+      });
+    }
+    if (rec.primary) {
+      rec.kitRecipe =
+        KIT_RECIPE_BY_SCREEN[rec.primary.screen] || rec.kitRecipe || KIT_RECIPE_BY_SCREEN.default;
+      rec.restructureHints = restructureHints(
+        retrieval,
+        {
+          id: rec.primary.id,
+          screen: rec.primary.screen,
+          score: rec.primary.score,
+        },
+        job,
+      );
+    }
     if (!rec.restructureHints.some((h) => /rebind-cite/i.test(String(h)))) {
       rec.restructureHints = ["restructure:rebind-cite", ...rec.restructureHints];
     }
@@ -590,9 +659,15 @@ export function recommendPattern(templates, job, constraints = {}) {
 }
 
 export function formatRecommendationSummary(rec) {
+  const wrongCite = rec?.wrongCiteAst?.fixtureTsx
+    ? ` · wrongCiteAst ${rec.wrongCiteAst.mode}@${rec.wrongCiteAst.cropPairId}`
+    : "";
   if (!rec?.primary) {
     if (rec?.citeBanFailClosed?.failClosed) {
-      return `recommendation: none — cite-ban fail-closed (${rec.citeBanFailClosed.bannedCite})`;
+      return (
+        `recommendation: none — cite-ban fail-closed (${rec.citeBanFailClosed.bannedCite})` +
+        wrongCite
+      );
     }
     return "recommendation: none — catalog gap";
   }
@@ -622,6 +697,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${dual}${worklist}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${dual}${worklist}${wrongCite}${xor}${ban}`
   );
 }

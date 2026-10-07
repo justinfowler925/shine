@@ -93,7 +93,8 @@
     "cta-pressure:ast-bite": "node verify/cta-pressure-ast-bite.mjs",
     "kpi-soup:ast-bite": "node verify/kpi-soup-ast-bite.mjs",
     "dual-focal:ast-bite": "node verify/dual-focal-ast-bite.mjs",
-    "worklist-first:ast-bite": "node verify/worklist-first-ast-bite.mjs"
+    "worklist-first:ast-bite": "node verify/worklist-first-ast-bite.mjs",
+    "wrong-cite:ast-bite": "node verify/wrong-cite-ast-bite.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",

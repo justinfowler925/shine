@@ -6,6 +6,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Wrong-cite / rebind-cite TSX AST deepen (recommend refuse path).** `apply-tsx.mjs`
+  `rebind-cite` uses the TypeScript compiler AST (not regex) to rewrite wrong-category
+  stamps — `data-cite="…"`, `data-cite={"…"}`, `dataCite="…"`, `dataCite={"…"}`.
+  Denoise recommend emits typed `recommendation.wrongCiteAst` (TSX fixtures + FAIL→PASS
+  crops; `refusePaintUntilRebound`); packets bind `packet.wrongCiteAst`. Cite-ban
+  fail-close refuse path keeps the fixture and points Actor at AST rebind + crops.
+  Crop pair `sources-cite-tsx`. Doctor bite: `verify/wrong-cite-ast-bite.mjs`.
+
 - **Worklist-first composition TSX AST deepen.** `apply-tsx.mjs` `worklist-first`
   uses the TypeScript compiler AST (not regex) to move records/worklist ahead of
   KPI chrome among `main` / `data-shine-main` children and stamp `data-region="focal"` —

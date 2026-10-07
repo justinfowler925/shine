@@ -2238,7 +2238,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 | Two DataGrids / two worklists same route | One grid. Peer title → filter chip + shared DataGrid (XOR). Consumer TSX: `apply-tsx` AST `collapse-peer-grids` (xor-saved-view); copy FAIL→PASS crops from `recommendation.dualFocalAst.cropBefore/cropAfter` (HTML XOR: `recommendation.xorSavedView`) | `collapse-peer-grids` AST · D10 XOR · `dual-focal` · `queue-dual-grid-tsx-*` |
 | ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost. Consumer TSX: `apply-tsx` AST `cta-budget` (maxFilled=1); copy FAIL→PASS crops from `recommendation.ctaPressureAst.cropBefore/cropAfter` | `cta-budget` · `cta-pressure` · `queue-cta-tsx-*` |
 | ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details data-shine-kpi-rest>`. Consumer TSX: `apply-tsx` AST `kpi-collapse` (maxVisible=3); copy FAIL→PASS crops from `recommendation.kpiSoupAst.cropBefore/cropAfter` | `kpi-collapse` · `kpi-soup` · `queue-kpi-tsx-*` |
-| Settings job with queue cite | Rebind cite to category truth | `rebind-cite` |
+| Settings job with queue cite | Rebind cite to category truth. Consumer TSX: `apply-tsx` AST `rebind-cite` (`data-cite` / `dataCite` string + `{"…"}`); refuse paint until rebound; copy FAIL→PASS crops from `recommendation.wrongCiteAst.cropBefore/cropAfter` | `rebind-cite` AST · `wrong-cite` · `sources-cite-tsx-*` |
 | Equal Card roots, no focal | One `data-region="focal"` | `set-focal` · `composition-slop` |
 | Can’t name category in one sentence | **Stop.** Refuse until `--category` | packet gate |
 | Craft ranked above usability | Out of order. Restructure before repaint | `restructureRequired` |
@@ -2261,7 +2261,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 2 static     vibe / preflight-slop / Card·Badge counts
 3 cite       shot + restructureHints[]
 4 diagnose   shine-diagnosis.json + shine-restructure.json   ← Critic turn
-5 apply      DOM/AST auto-safe ops (verify/restructure/*) — TSX `cta-budget` via TypeScript AST (maxFilled=1; variant default / {"default"} / missing); TSX `kpi-collapse` via TypeScript AST (maxVisible=3; className metric / {"metric"} / data-shine-kpi); TSX `collapse-peer-grids` via TypeScript AST (XOR peer→chip; className grid-wrap / {"grid-wrap"} / role={"grid"}); TSX `worklist-first` via TypeScript AST (records/worklist before KPI chrome + focal)     ← Actor turn
+5 apply      DOM/AST auto-safe ops (verify/restructure/*) — TSX `cta-budget` via TypeScript AST (maxFilled=1; variant default / {"default"} / missing); TSX `kpi-collapse` via TypeScript AST (maxVisible=3; className metric / {"metric"} / data-shine-kpi); TSX `collapse-peer-grids` via TypeScript AST (XOR peer→chip; className grid-wrap / {"grid-wrap"} / role={"grid"}); TSX `worklist-first` via TypeScript AST (records/worklist before KPI chrome + focal); TSX `rebind-cite` via TypeScript AST (wrong-cite → category truth; data-cite / dataCite string + {"…"}; refuse paint until rebound)     ← Actor turn
 6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
 7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
 8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done
@@ -2353,8 +2353,8 @@ Skill A/B (Salesforce DI-style, machine oracles only — **no preference data**)
 (with denoise guidance vs craft-only baseline; doctor requires with>without on every case).  
 Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
 XOR recipe: `npm run restructure:xor -- --html verify/fixtures/denoise/queue-dual-grid-before.html --out /tmp/xor.html`.  
-TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). `cta-budget` is TypeScript AST (maxFilled=1); `collapse-peer-grids` is TypeScript AST XOR on TSX (DOM stays plan-only); `worklist-first` is TypeScript AST (records/worklist before KPI chrome).  
-CTA AST bite: `npm run cta-pressure:ast-bite`. KPI soup AST bite: `npm run kpi-soup:ast-bite`. Dual-focal AST bite: `npm run dual-focal:ast-bite`. Worklist-first AST bite: `npm run worklist-first:ast-bite`. Kit: `kits.md` § CTA pressure TSX AST · KPI soup TSX AST · Dual-focal ban TSX AST · Worklist-first TSX AST · Dual-grid XOR (D10).
+TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). `cta-budget` is TypeScript AST (maxFilled=1); `collapse-peer-grids` is TypeScript AST XOR on TSX (DOM stays plan-only); `worklist-first` is TypeScript AST (records/worklist before KPI chrome); `rebind-cite` is TypeScript AST (wrong-cite → category truth; refuse paint until rebound).  
+CTA AST bite: `npm run cta-pressure:ast-bite`. KPI soup AST bite: `npm run kpi-soup:ast-bite`. Dual-focal AST bite: `npm run dual-focal:ast-bite`. Worklist-first AST bite: `npm run worklist-first:ast-bite`. Wrong-cite AST bite: `npm run wrong-cite:ast-bite`. Kit: `kits.md` § CTA pressure TSX AST · KPI soup TSX AST · Dual-focal ban TSX AST · Worklist-first TSX AST · Wrong-cite / rebind-cite TSX AST · Dual-grid XOR (D10).
 
 ## Related
 
@@ -3307,6 +3307,25 @@ KPI/dashboard chrome ahead of the Monday work object in consumer TSX is reordere
 Fixtures: `verify/fixtures/denoise/tsx/queue-kpi-chrome-first.tsx` ·
 `queue-worklist-first-ast.tsx`.  
 Doctor: `verify/worklist-first-ast-bite.mjs` / `npm run worklist-first:ast-bite`.
+
+### Wrong-cite / rebind-cite TSX AST (N8 deepen) — refuse until rebound
+
+Settings/sources jobs stamped with a queue (or other wrong-category) cite in consumer
+TSX are rebound by **TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs`
+`rebind-cite`. Recommend **refuses paint** until the stamp matches category truth
+(`refusePaintUntilRebound`); learned cite-ban fail-close also binds this fixture.
+
+1. **Detect** — measure `cite-honesty` / wrong-cite when `data-cite` disagrees with job category.
+2. **Recommend** — typed `recommendation.wrongCiteAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Rewrites `from` → `to` (default `shadcn-queue` → `shadcn-settings`).  
+   Handles `data-cite="…"`, `data-cite={"…"}`, `dataCite="…"`, and `dataCite={"…"}`.
+   Dynamic cite expressions stay untouched.
+4. **Prove** — crop pair `sources-cite-tsx` (`sources-cite-tsx-{before,after}-crop.html`).
+   Twin full-page invalid. Packet refuse path keeps `editing.allowed=false` until rebound.
+
+Fixtures: `verify/fixtures/denoise/tsx/settings-wrong-cite{,-ast}.tsx`.  
+Doctor: `verify/wrong-cite-ast-bite.mjs` / `npm run wrong-cite:ast-bite`.
 
 ### Dashboard
 

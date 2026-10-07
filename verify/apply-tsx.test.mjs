@@ -12,6 +12,7 @@ import {
   ctaBudgetTsx,
   kpiCollapseTsx,
   rebindCiteTsx,
+  collectCiteAttrsTsx,
   setFocalTsx,
   compositionOrderTsx,
   worklistFirstTsx,
@@ -22,6 +23,7 @@ const FIX = join(dirname(fileURLToPath(import.meta.url)), "fixtures/denoise/tsx"
 const dual = readFileSync(join(FIX, "queue-dual-cta.tsx"), "utf8");
 const hard = readFileSync(join(FIX, "queue-dual-cta-ast.tsx"), "utf8");
 const settings = readFileSync(join(FIX, "settings-wrong-cite.tsx"), "utf8");
+const settingsHard = readFileSync(join(FIX, "settings-wrong-cite-ast.tsx"), "utf8");
 const kpiSoup = readFileSync(join(FIX, "queue-kpi-soup.tsx"), "utf8");
 const kpiHard = readFileSync(join(FIX, "queue-kpi-soup-ast.tsx"), "utf8");
 const dualGrid = readFileSync(join(FIX, "queue-dual-grid.tsx"), "utf8");
@@ -85,6 +87,22 @@ const settingsPlan = buildRestructurePlan({
 });
 const settingsResult = applyTsxRestructure(settings, settingsPlan);
 assert.ok(settingsResult.applied.includes("rebind-cite"));
+assert.ok(collectCiteAttrsTsx(settingsResult.source).cites.includes("shadcn-settings"));
+// Wrong-cite AST harden: data-cite={"…"} + dataCite=
+assert.ok(collectCiteAttrsTsx(settingsHard).cites.includes("shadcn-queue"));
+const settingsHardAfter = rebindCiteTsx(settingsHard, {
+  from: "shadcn-queue",
+  to: "shadcn-settings",
+});
+assert.ok(collectCiteAttrsTsx(settingsHardAfter).cites.every((c) => c === "shadcn-settings"));
+assert.match(settingsHardAfter, /data-cite=\{\s*["']shadcn-settings["']\s*\}/);
+assert.match(settingsHardAfter, /dataCite=["']shadcn-settings["']/);
+const settingsHardPlan = buildRestructurePlan({
+  job: "Rebind wrong cite AST",
+  category: "settings",
+  ops: [{ op: "rebind-cite", from: "shadcn-queue", to: "shadcn-settings" }],
+});
+assert.ok(applyTsxRestructure(settingsHard, settingsHardPlan).applied.includes("rebind-cite"));
 
 // KPI soup AST: literal + expression className / data-shine-kpi
 const beforeKpi = countMetricTilesTsx(kpiSoup);
@@ -163,5 +181,5 @@ const wlResult = applyTsxRestructure(worklistHard, wlPlan);
 assert.ok(wlResult.applied.includes("worklist-first"));
 
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · collapse-peer-grids AST · worklist-first AST · set-focal · rebind-cite · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal · single-grid plan-only",
 );
