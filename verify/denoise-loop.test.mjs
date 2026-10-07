@@ -36,6 +36,15 @@ try {
   assert.equal(receipt.criticActor?.workerSelfReviewBanned, true);
   assert.equal(receipt.criticActor?.cycle, "measure→repair→critic");
   assert.match(receipt.criticActor?.hostOrchestrator || "", /critic-actor-host/);
+  assert.equal(receipt.repairSubstrate || "dom", "dom");
+  assert.ok(Array.isArray(receipt.opsAppliedAst));
+  assert.equal(receipt.opsAppliedAst.length, 0);
+  assert.equal(typeof receipt.namedDenoiseCleared, "boolean");
+  if (receipt.status === "passed") {
+    assert.equal(receipt.namedDenoiseCleared, true);
+    assert.equal(receipt.reflexionVerdict, "done");
+    assert.ok(Array.isArray(receipt.constitutionIds) && receipt.constitutionIds.length >= 1);
+  }
   // Structure lock: primary job/regions locked; REPAINT cannot mutate without RESTRUCTURE packet.
   assert.equal(receipt.structureLock?.locked, true);
   assert.equal(receipt.structureLock?.repaintStructureRefuse, true);
