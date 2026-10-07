@@ -22,6 +22,11 @@ import { mkdirSync, writeFileSync, realpathSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
+import {
+  commitCiteBansFromProveFail,
+  inferCiteBansFromProveFail,
+  isCiteFailCategory,
+} from "./learn.mjs";
 
 export const VERDICTS = Object.freeze(["done", "partial", "blocked", "error"]);
 export const TURN_ROLES = Object.freeze(["critic", "actor"]);
@@ -309,6 +314,7 @@ export async function runCriticTurn(options = {}) {
     agentId: options.actorAgentId || DEFAULT_ACTOR_ID,
   });
   assertDistinctPrincipals(critic, actor);
+  // Pass-through includes doctorBiteOk + cite evidence for learn hooks.
   const result = await runReflexion({
     ...options,
     criticAgentId: critic.agentId,
@@ -370,6 +376,13 @@ export async function runReflexion({
   ddrId = "",
   callCritic = null,
   storeLesson = true,
+  /** When true, cite-related prove fails also doctor-gate commit cite bans / edition anti-cites. */
+  doctorBiteOk = false,
+  observedCite = "",
+  expectedCite = "",
+  category = "",
+  edition = "",
+  learnStorePath = undefined,
   criticAgentId = DEFAULT_CRITIC_ID,
   actorAgentId = DEFAULT_ACTOR_ID,
 } = {}) {
@@ -472,6 +485,39 @@ export async function runReflexion({
       result.lessonPath = persistLesson({ ddrId, failures, result, goal });
     } catch (error) {
       result.lessonStoreError = error.message;
+    }
+  }
+
+  // Cite-ban / edition anti-cite learn hooks — only after real prove fail + ddrId.
+  // Persist to repertoire when doctorBiteOk (doctor-gated); never preference/RLAIF.
+  if (ddrId && failures.length && failures.some((f) => isCiteFailCategory(f))) {
+    const inferred = inferCiteBansFromProveFail({
+      ddrId,
+      failures,
+      observedCite,
+      expectedCite,
+      category,
+      edition,
+      reason: result.lesson || result.recommendation || "",
+    });
+    result.inferredCiteBan = inferred.citeBan;
+    result.inferredEditionAntiCite = inferred.editionAntiCite;
+    if (doctorBiteOk && observedCite && !inferred.refused) {
+      try {
+        result.citeBanLearn = commitCiteBansFromProveFail({
+          storePath: learnStorePath,
+          doctorBiteOk: true,
+          ddrId,
+          failures,
+          observedCite,
+          expectedCite,
+          category,
+          edition,
+          reason: result.lesson || result.recommendation || "",
+        });
+      } catch (error) {
+        result.citeBanLearnError = error.message;
+      }
     }
   }
 

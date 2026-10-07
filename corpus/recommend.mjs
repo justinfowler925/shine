@@ -5,6 +5,7 @@
 
 import { retrieveDirections, operatePageIntent } from "./art-direction.mjs";
 import { antiPatternBansForScreen } from "../knowledge/retrieve.mjs";
+import { citeBansFor, editionAntiCitesFor } from "../core/learn.mjs";
 
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
@@ -164,9 +165,19 @@ export function recommendPattern(templates, job, constraints = {}) {
     .filter((e) => e.template?.screen === "charts")
     .slice(0, 3)
     .map((e) => `anti-cite: ${e.template.id} (${(e.reasons || []).join("; ") || "excluded"})`);
+  // Learned Operate demotions + edition anti-cites (doctor-gated prove-fail commits).
+  const learnedBans = citeBansFor(screen).map(
+    (b) => `anti-cite: ${b.citeId} (operate-demotion; ${b.failCategory}; ${b.ddrId})`,
+  );
+  const edition = String(constraints.edition || "").trim().toLowerCase();
+  const learnedEdition = edition
+    ? editionAntiCitesFor(edition, { category: screen }).map(
+        (b) => `anti-cite: ${b.citeId} (edition:${b.edition}; ${b.failCategory}; ${b.ddrId})`,
+      )
+    : [];
   return {
     primary,
-    antiPatterns: [...antiPatterns, ...antiCites].slice(0, 8),
+    antiPatterns: [...antiPatterns, ...antiCites, ...learnedBans, ...learnedEdition].slice(0, 10),
     restructureHints: restructureHints(retrieval, primary, job),
     kitRecipe: KIT_RECIPE_BY_SCREEN[screen] || KIT_RECIPE_BY_SCREEN.default,
     confidence: confidenceFor(retrieval, primary),
