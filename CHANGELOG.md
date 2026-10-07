@@ -6,6 +6,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **D10 XOR dual-grid recommend deepen.** Denoise recommend emits typed
+  `recommendation.xorSavedView` (before/after fixtures + FAIL→PASS crops) for
+  queue/triage jobs; denoise packets bind `packet.xorSavedView` and DDR
+  `restructureOps` includes `collapse-peer-grids`. Crop pair `queue-dual-grid`
+  is self-contained via `buildAfter` → `buildXorFoldCropHtml`. Doctor bite:
+  `verify/xor-saved-view-recommend-bite.mjs`.
+
 - **ClearSpeed edition `brandAccent` fail-closed.** Shared
   `core/clearspeed-brand-accent.mjs` (`#ED5925`) wires sync-tokens kit
   `brandAccent`, install manifest write, and `verify/edition.mjs` /

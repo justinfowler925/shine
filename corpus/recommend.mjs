@@ -20,6 +20,16 @@ import {
 /** Repo-relative shine-tables.json fixture for Operate records/worklist jobs. */
 export const RECORDS_WORKLIST_TABLE_FIXTURE = "verify/fixtures/records-worklist/shine-tables.json";
 
+/** Repo-relative D10 dual-grid XOR FAIL→PASS fixtures (queue peer worklists). */
+export const DUAL_GRID_XOR_FIXTURES = Object.freeze({
+  before: "verify/fixtures/denoise/queue-dual-grid-before.html",
+  after: "verify/fixtures/denoise/queue-dual-grid-after.html",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-dual-grid-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-dual-grid-fold-crop.html",
+  helper: "verify/restructure/xor-saved-view.mjs",
+  cropPairId: "queue-dual-grid",
+});
+
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
   catalog: [
@@ -178,6 +188,41 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
 }
 
 /**
+ * D10 XOR dual-grid fixture binding for Operate queue / triage jobs.
+ * Denoise recommend must emit concrete before/after + FAIL→PASS crop paths —
+ * not only the prose `collapse-peer-grids xor-saved-view` hint.
+ */
+export function xorSavedViewForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid"].includes(category) ||
+    ["queue"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|dual[- ]?grid|dual[- ]?focal|xor[- ]?saved[- ]?view|peer grids?)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "xor-saved-view",
+    op: "collapse-peer-grids",
+    keepTitleIncludes: ["Queue"],
+    foldTitleIncludes: ["David"],
+    fixtureBefore: DUAL_GRID_XOR_FIXTURES.before,
+    fixtureAfter: DUAL_GRID_XOR_FIXTURES.after,
+    cropBefore: DUAL_GRID_XOR_FIXTURES.cropBefore,
+    cropAfter: DUAL_GRID_XOR_FIXTURES.cropAfter,
+    cropPairId: DUAL_GRID_XOR_FIXTURES.cropPairId,
+    helper: DUAL_GRID_XOR_FIXTURES.helper,
+    reference: "skill/references/kits.md#dual-grid-xor-d10--agent-assisted-close",
+    instruction:
+      "Dual peer worklists on one route: plan collapse-peer-grids (mode xor-saved-view), then apply verify/restructure/xor-saved-view.mjs (humanGate — never silent delete in apply-dom/tsx). Copy FAIL→PASS crop paths from recommendation.xorSavedView.cropBefore/cropAfter; prove dual-focal clears with one shared DataGrid + filter chip.",
+  };
+}
+
+/**
  * @param {object[]} templates
  * @param {string} job
  * @param {object} [constraints]
@@ -230,6 +275,11 @@ export function recommendPattern(templates, job, constraints = {}) {
     brief: retrieval.brief,
     productSibling: null,
     tableQuality: tableQualityForRecordsJob(job, { category: constraints.category, screen }),
+    xorSavedView: xorSavedViewForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
   };
   // Enterprise §4 — edition sibling map: product sibling first → kit → cite.
   // Opt-in via edition=clearspeed|clearspeed-operate (design-packet saas passes this).
@@ -296,8 +346,11 @@ export function formatRecommendationSummary(rec) {
   const table = rec.tableQuality?.fixture
     ? ` · tableQuality ${rec.tableQuality.kind}@${rec.tableQuality.fixture}`
     : "";
+  const xor = rec.xorSavedView?.fixtureBefore
+    ? ` · xorSavedView ${rec.xorSavedView.mode}@${rec.xorSavedView.cropPairId}`
+    : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}`
+    `${rec.kitRecipe}${table}${xor}`
   );
 }
