@@ -209,6 +209,53 @@ export function buildKpiAstAfterCropHtml() {
   });
 }
 
+/**
+ * TSX AST dual-focal FAIL crop — mirrors queue-dual-grid-ast.tsx
+ * (className={"grid-wrap"}, role={"grid"}, data-grid-title={"…"}) before apply-tsx.
+ */
+export function buildDualFocalAstBeforeCropHtml() {
+  return wrap({
+    title: "Dual-focal AST crop FAIL — peer grids",
+    cropId: "dual-focal-tsx-before",
+    cite: "shadcn-queue",
+    caption:
+      "Crop FAIL: David's 10 and Queue are peer worklists in TSX (className grid-wrap / {\"grid-wrap\"} / role={\"grid\"}) — dual-focal; apply-tsx AST collapse-peer-grids.",
+    body: `  <h1>Queue · TSX peer worklists</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-dual-grid-ast.tsx">Before apply-tsx collapse-peer-grids (xor-saved-view)</p>
+  <div class="grid-wrap" data-product-pattern="paged-notice-queue" data-shine-tsx-ast="before" data-tsx-grid-wrap="expr">
+    <h2 data-grid-title="David's 10 today">David's 10 today</h2>
+    <table role="grid" data-tsx-role="expr"><thead><tr><th>Notice</th></tr></thead><tbody><tr><td>NV DPS</td></tr></tbody></table>
+  </div>
+  <div class="grid-wrap" data-product-pattern="paged-notice-queue" data-tsx-grid-wrap="expr">
+    <h2 data-grid-title="Queue">Queue</h2>
+    <table role="grid" data-tsx-role="expr"><thead><tr><th>Notice</th></tr></thead><tbody><tr><td>CO DOC</td></tr></tbody></table>
+  </div>`,
+  });
+}
+
+/**
+ * TSX AST dual-focal PASS crop — after apply-tsx keeps one shared grid + XOR chip.
+ */
+export function buildDualFocalAstAfterCropHtml() {
+  return wrap({
+    title: "Dual-focal AST crop PASS — XOR chip",
+    cropId: "dual-focal-tsx-after",
+    cite: "shadcn-queue",
+    caption:
+      "Crop PASS: single shared DataGrid; David's 10 today is an XOR filter chip via TSX AST collapse-peer-grids.",
+    body: `  <h1>Queue · TSX XOR worklist</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-dual-grid-ast.tsx">After apply-tsx collapse-peer-grids (xor-saved-view)</p>
+  <div class="grid-wrap" data-region="focal" data-shine-shared-grid data-product-pattern="paged-notice-queue" data-shine-tsx-ast="after">
+    <h2 data-grid-title="Queue">Queue</h2>
+    <div class="scope" data-shine-xor-views role="group" aria-label="Worklist views">
+      <button type="button" aria-pressed="true">Queue</button>
+      <button type="button" aria-pressed="false" data-shine-xor-from-peer="David's 10 today">David's 10 today</button>
+    </div>
+    <table role="grid" data-tsx-role="expr"><thead><tr><th>Notice</th></tr></thead><tbody><tr><td>CO DOC</td></tr></tbody></table>
+  </div>`,
+  });
+}
+
 /** KPI soup: ten equal metric tiles on a triage job. */
 export function buildKpiBeforeCropHtml() {
   const tiles = [
@@ -491,6 +538,16 @@ export const DEFECT_CROP_PAIRS = [
     afterMust: [/data-shine-xor-views|data-shine-xor-from-peer/, /role=["']grid["']/],
   },
   {
+    id: "queue-dual-grid-tsx",
+    defect: "dual-focal",
+    beforeCrop: "queue-dual-grid-tsx-before-crop.html",
+    afterCrop: "queue-dual-grid-tsx-after-crop.html",
+    buildBefore: buildDualFocalAstBeforeCropHtml,
+    buildAfter: buildDualFocalAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /role=["']grid["']/, /David/, /Queue/, /data-tsx-grid-wrap/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-xor-views/, /data-shine-xor-from-peer/, /data-region=["']focal["']/],
+  },
+  {
     id: "usul-focal",
     defect: "composition-slop",
     beforeCrop: "usul-focal-before-crop.html",
@@ -570,9 +627,14 @@ export function assertCropPairOk(pair, read) {
     if (before && re.test(before)) errors.push(`${pair.id} before still has ${re}`);
   }
   // Dual-grid after must keep exactly one grid
-  if (pair.id === "queue-dual-grid" && after) {
+  if ((pair.id === "queue-dual-grid" || pair.id === "queue-dual-grid-tsx") && after) {
     const grids = (after.match(/role=["']grid["']/gi) || []).length;
     if (grids !== 1) errors.push(`${pair.id} after must have exactly 1 grid, got ${grids}`);
+  }
+  // TSX AST dual-focal before: ≥2 peer grids
+  if (pair.id === "queue-dual-grid-tsx" && before) {
+    const beforeGrids = (before.match(/role=["']grid["']/gi) || []).length;
+    if (beforeGrids < 2) errors.push(`${pair.id} before needs ≥2 grids, got ${beforeGrids}`);
   }
   // KPI before should show many tiles; after collapses
   if ((pair.id === "queue-kpi" || pair.id === "queue-kpi-tsx" || pair.id === "queue-sled-bloat") && before && after) {

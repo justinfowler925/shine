@@ -2,8 +2,10 @@
 /**
  * N8 — TSX AST safe ops for consumer checkouts.
  * Auto-safe: rebind-cite, set-focal, cta-budget demote (maxFilled=1 via TS compiler AST),
- * kpi-collapse (maxVisible=3 → <details data-shine-kpi-rest> via TS compiler AST).
- * collapse-peer-grids → plan markdown only (never auto-deletes grids).
+ * kpi-collapse (maxVisible=3 → <details data-shine-kpi-rest> via TS compiler AST),
+ * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
+ * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
+ * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
  *
  * Uses TypeScript compiler API (devDependency). Dry-run by default; --write to apply.
  */
@@ -29,6 +31,18 @@ export function applyTsxRestructure(source, plan) {
   const plans = [];
 
   for (const op of plan.ops || []) {
+    // Dual-focal ban: TSX AST XOR recipe when ≥2 literal peer wraps; else plan markdown.
+    // DOM apply-dom stays plan-only — this path never silent-deletes without XOR chips.
+    if (op.op === "collapse-peer-grids") {
+      const next = collapsePeerGridsTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("collapse-peer-grids");
+      } else {
+        plans.push(formatPeerGridPlan(op, plan));
+      }
+      continue;
+    }
     if (PLAN_ONLY_OPS.includes(op.op)) {
       plans.push(formatPeerGridPlan(op, plan));
       continue;
@@ -252,6 +266,286 @@ export function kpiCollapseTsx(source, op = {}) {
     out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
   }
   return out;
+}
+
+/**
+ * Count peer worklist/grid wraps in TSX (same AST rules as collapsePeerGridsTsx).
+ * @param {string} source
+ * @returns {{ grids: number, titles: string[], dynamic: boolean, alreadyXor: boolean }}
+ */
+export function countPeerGridsTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const wraps = collectPeerGridWraps(sf);
+  const titles = wraps.map((w) => titleFromGridWrap(w, sf));
+  let dynamic = false;
+  let alreadyXor = false;
+  for (const w of wraps) {
+    if (wrapHasDynamicChildren(w)) dynamic = true;
+    if (wrapHasXorViews(w, sf)) alreadyXor = true;
+  }
+  return { grids: wraps.length, titles, dynamic, alreadyXor };
+}
+
+/**
+ * Dual-focal ban via TypeScript AST: fold peer worklist into XOR filter chip
+ * on the kept shared DataGrid (mode xor-saved-view).
+ * Handles:
+ * - className="grid-wrap" / className={"grid-wrap"}
+ * - role="grid" / role={"grid"} / <DataGrid>
+ * - data-grid-title="…" / data-grid-title={"…"}
+ * Never silent-deletes without injecting data-shine-xor-views chips.
+ * Dynamic .map / spread peer bands stay untouched (caller emits plan note).
+ */
+export function collapsePeerGridsTsx(source, op = {}) {
+  const keepNeedles = (op.keepTitleIncludes || ["Queue"]).map(String);
+  const foldNeedles = (op.foldTitleIncludes || ["David"]).map(String);
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const wraps = collectPeerGridWraps(sf);
+  if (wraps.length < 2) return text;
+  if (wraps.some((w) => wrapHasDynamicChildren(w))) return text;
+  // Already XOR-collapsed to one shared grid — nothing to do.
+  if (wraps.length === 1 && wraps.some((w) => wrapHasXorViews(w, sf))) return text;
+
+  let keepIdx = wraps.findIndex((w) => titleMatchesNeedles(titleFromGridWrap(w, sf), keepNeedles));
+  let foldIdx = wraps.findIndex((w) => titleMatchesNeedles(titleFromGridWrap(w, sf), foldNeedles));
+  if (keepIdx < 0) keepIdx = wraps.length - 1;
+  if (foldIdx < 0) foldIdx = keepIdx === 0 ? 1 : 0;
+  if (keepIdx === foldIdx) foldIdx = keepIdx === 0 ? 1 : 0;
+
+  const keep = wraps[keepIdx];
+  const fold = wraps[foldIdx];
+  const keepTitle = titleFromGridWrap(keep, sf) || keepNeedles[0] || "Queue";
+  const foldTitle = titleFromGridWrap(fold, sf) || foldNeedles[0] || "Peer view";
+
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+
+  // 1) Remove fold wrap entirely (peer → chip; not a second grid).
+  edits.push({ start: fold.getStart(sf), end: fold.getEnd(), replacement: "" });
+
+  // 2) Patch keep wrap: focal + shared-grid attrs + XOR chip strip.
+  if (!wrapHasXorViews(keep, sf)) {
+    const keepOpen = keep.openingElement;
+    let openSrc = text.slice(keepOpen.getStart(sf), keepOpen.getEnd());
+    openSrc = ensureJsxOpenAttrs(openSrc, {
+      "data-region": "focal",
+      "data-shine-shared-grid": true,
+    });
+
+    const keepInnerStart = keepOpen.getEnd();
+    const keepCloseStart = keep.closingElement.getStart(sf);
+    const inner = text.slice(keepInnerStart, keepCloseStart);
+    const indent = indentBefore(text, keep.getStart(sf)) + "  ";
+    const chipStrip = [
+      `<div className="scope" data-shine-xor-views role="group" aria-label="Worklist views">`,
+      `  <button type="button" aria-pressed={true}>`,
+      `    ${escapeJsxText(keepTitle)}`,
+      `  </button>`,
+      `  <button type="button" aria-pressed={false} data-shine-xor-from-peer="${escapeAttr(foldTitle)}">`,
+      `    ${escapeJsxText(foldTitle)}`,
+      `  </button>`,
+      `</div>`,
+    ]
+      .map((line, i) => (i === 0 ? `${indent}${line}` : `${indent}${line}`))
+      .join("\n");
+
+    let nextInner = inner;
+    if (/data-shine-xor-views/.test(nextInner)) {
+      /* already */
+    } else if (/<h[1-3]\b/i.test(nextInner)) {
+      nextInner = nextInner.replace(/(<\/h[1-3]>)/i, `$1\n${chipStrip}`);
+    } else {
+      nextInner = `\n${chipStrip}${nextInner}`;
+    }
+
+    const keepCloseSrc = text.slice(keepCloseStart, keep.closingElement.getEnd());
+    edits.push({
+      start: keep.getStart(sf),
+      end: keep.getEnd(),
+      replacement: `${openSrc}${nextInner}${keepCloseSrc}`,
+    });
+  }
+
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) {
+    out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  }
+  // Collapse leftover blank lines from fold removal.
+  out = out.replace(/\n{3,}/g, "\n\n");
+  return out;
+}
+
+/**
+ * @param {ts.SourceFile} sf
+ * @returns {ts.JsxElement[]}
+ */
+function collectPeerGridWraps(sf) {
+  /** @type {ts.JsxElement[]} */
+  const wraps = [];
+  const walk = (node, insideWrap) => {
+    if (ts.isJsxElement(node)) {
+      const isWrap = isPeerGridWrap(node, sf);
+      if (isWrap && !insideWrap) {
+        wraps.push(node);
+        return;
+      }
+      for (const c of node.children) walk(c, insideWrap || isWrap);
+      return;
+    }
+    if (ts.isJsxFragment(node)) {
+      for (const c of node.children) walk(c, insideWrap);
+      return;
+    }
+    ts.forEachChild(node, (c) => walk(c, insideWrap));
+  };
+  walk(sf, false);
+  return wraps;
+}
+
+/**
+ * Peer worklist wrap: className grid-wrap, queue product-pattern host of one
+ * DataGrid/role=grid, or a bare DataGrid / role=grid worklist element.
+ * Prefer the outer host so fold removes the whole peer panel (not an empty shell).
+ * @param {ts.JsxElement} node
+ * @param {ts.SourceFile} sf
+ */
+function isPeerGridWrap(node, sf) {
+  const opening = node.openingElement;
+  if (classNameHasWord(opening, "grid-wrap", sf)) return true;
+  if (findJsxAttr(opening, "data-shine-shared-grid", sf)) return true;
+  if (hostsSingleGridWorklist(node, sf)) return true;
+  // Bare DataGrid / role=grid when not already hosted by a wrap parent.
+  const tag = jsxTagName(opening);
+  if (tag === "DataGrid") return true;
+  const role = attrStringValue(findJsxAttr(opening, "role", sf), sf);
+  if (role === "grid" && (tag === "table" || tag === "div" || tag === "section")) return true;
+  return false;
+}
+
+/**
+ * Queue/worklist host with exactly one DataGrid or role=grid child (Buttons live inside the grid).
+ * @param {ts.JsxElement} node
+ * @param {ts.SourceFile} sf
+ */
+function hostsSingleGridWorklist(node, sf) {
+  const opening = node.openingElement;
+  const pattern = attrStringValue(findJsxAttr(opening, "data-product-pattern", sf), sf);
+  const queueish =
+    (pattern && /queue|worklist|inbox|triage/i.test(pattern)) ||
+    classNameHasWord(opening, "worklist", sf);
+  if (!queueish) return false;
+  let gridChildren = 0;
+  for (const c of node.children) {
+    if (ts.isJsxText(c)) {
+      if (c.text.trim()) return false;
+      continue;
+    }
+    if (ts.isJsxExpression(c) && c.expression) return false;
+    if (ts.isJsxElement(c) || ts.isJsxSelfClosingElement(c)) {
+      const op = ts.isJsxElement(c) ? c.openingElement : c;
+      const tag = jsxTagName(op);
+      const role = attrStringValue(findJsxAttr(op, "role", sf), sf);
+      if (tag === "DataGrid" || role === "grid") gridChildren += 1;
+      else return false;
+    }
+  }
+  return gridChildren === 1;
+}
+
+/** @param {ts.JsxElement} wrap @param {ts.SourceFile} sf */
+function titleFromGridWrap(wrap, sf) {
+  const onWrap = attrStringValue(findJsxAttr(wrap.openingElement, "data-grid-title", sf), sf);
+  if (onWrap) return onWrap.trim();
+  let found = "";
+  const walk = (node) => {
+    if (found) return;
+    if (ts.isJsxElement(node)) {
+      const opening = node.openingElement;
+      const titled = attrStringValue(findJsxAttr(opening, "data-grid-title", sf), sf);
+      if (titled) {
+        found = titled.trim();
+        return;
+      }
+      const tag = jsxTagName(opening);
+      if (/^h[1-3]$/i.test(tag)) {
+        found = labelFromJsx(node, sf);
+        return;
+      }
+      for (const c of node.children) walk(c);
+    }
+  };
+  for (const c of wrap.children) walk(c);
+  return found;
+}
+
+/** @param {ts.JsxElement} wrap @param {ts.SourceFile} sf */
+function wrapHasXorViews(wrap, sf) {
+  if (findJsxAttr(wrap.openingElement, "data-shine-xor-views", sf)) return true;
+  let hit = false;
+  const walk = (node) => {
+    if (hit) return;
+    if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const opening = ts.isJsxElement(node) ? node.openingElement : node;
+      if (findJsxAttr(opening, "data-shine-xor-views", sf)) {
+        hit = true;
+        return;
+      }
+      if (ts.isJsxElement(node)) for (const c of node.children) walk(c);
+    }
+  };
+  for (const c of wrap.children) walk(c);
+  return hit;
+}
+
+/** @param {ts.JsxElement} wrap */
+function wrapHasDynamicChildren(wrap) {
+  let unsafe = false;
+  const walk = (node) => {
+    if (unsafe) return;
+    if (ts.isJsxExpression(node) && node.expression) {
+      const t = node.expression.getText();
+      if (/\.map\s*\(|\.\.\./.test(t)) unsafe = true;
+      return;
+    }
+    if (ts.isJsxElement(node)) {
+      for (const c of node.children) walk(c);
+    }
+  };
+  for (const c of wrap.children) walk(c);
+  return unsafe;
+}
+
+/** @param {string} title @param {string[]} needles */
+function titleMatchesNeedles(title, needles) {
+  const t = String(title || "").toLowerCase();
+  return needles.some((n) => t.includes(String(n).toLowerCase()));
+}
+
+/**
+ * Ensure static attrs on an opening tag source string.
+ * Boolean attrs (value === true) emit bare name; strings emit name="value".
+ * @param {string} openSrc
+ * @param {Record<string, string|boolean>} attrs
+ */
+function ensureJsxOpenAttrs(openSrc, attrs) {
+  let out = openSrc;
+  for (const [name, value] of Object.entries(attrs)) {
+    if (new RegExp(`\\b${escapeRe(name)}(\\s|=|/|>)`).test(out)) continue;
+    const insertion =
+      value === true ? ` ${name}` : ` ${name}="${String(value).replace(/"/g, "&quot;")}"`;
+    out = out.replace(/\s*\/?>$/, (m) => `${insertion}${m}`);
+  }
+  return out;
+}
+
+function escapeAttr(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+}
+
+function escapeJsxText(s) {
+  return String(s).replace(/\{/g, "&#123;").replace(/\}/g, "&#125;");
 }
 
 /**

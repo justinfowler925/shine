@@ -6,6 +6,16 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Dual-focal ban TSX AST deepen (XOR peer→chip).** `apply-tsx.mjs` `collapse-peer-grids`
+  uses the TypeScript compiler AST (not regex) to fold a peer worklist into a
+  `data-shine-xor-views` filter chip on one shared DataGrid — `className="grid-wrap"`,
+  `className={"grid-wrap"}`, `role="grid"` / `role={"grid"}`, and `data-grid-title`
+  markers. Never silent-deletes without XOR chips; dynamic `.map` peers stay plan-only.
+  DOM `apply-dom` remains plan-only. Denoise recommend emits typed
+  `recommendation.dualFocalAst` (TSX fixtures + FAIL→PASS crops); packets bind
+  `packet.dualFocalAst`. Crop pair `queue-dual-grid-tsx`. Doctor bite:
+  `verify/dual-focal-ast-bite.mjs`.
+
 - **KPI soup TSX AST deepen (maxVisible=3).** `apply-tsx.mjs` `kpi-collapse` uses the
   TypeScript compiler AST (not regex) to park excess metric JSX in
   `<details data-shine-kpi-rest>` — `className="metric"`, `className={"metric"}`, and
