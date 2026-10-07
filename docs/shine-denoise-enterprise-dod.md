@@ -1,14 +1,14 @@
 # Denoise + enterprise — Definition of Done (live)
 
 **Audience:** Justin  
-**Verified:** 2026-10-07T21:17Z  
-**Verdict: PARTIAL** — tip `0413a50` (#178) is **merged + skill-deployed** (live `release.json` matches). Tip Actions (`doctor-*` / `benchmark-smoke`) are **queued**, not green. Local tip `skill-listing --check` is **current** (cleared by #177 after #173–#175 drift; #178 kept listing current). ClearSpeed hosts trail tip (laptop `@f674a66`, Studio S8 last **15/15** `@6f28cff`). Nucleus attests `b8d7db7` (trails tip; advanced from `6d14dc2`). Hosted `ubuntu-latest` still billing-locked; CI is Free self-hosted Mac.
+**Verified:** 2026-10-07T21:29Z  
+**Verdict: PARTIAL** — tip `f582627` (#180) is **merged + skill-deployed** (live `release.json` matches). Tip Actions (`doctor-*` / `benchmark-smoke`) are **queued**, not green. Local tip `skill-listing --check` is **current** (#177/#178/#180 kept listing current after AST band). ClearSpeed hosts trail tip (laptop `@f674a66`, Studio S8 last **15/15** `@6f28cff`). Nucleus attests `d94e610` (trails tip; advanced from `b8d7db7`). Hosted `ubuntu-latest` still billing-locked; CI is Free self-hosted Mac.
 
-**Tip under test / `main` HEAD:** `0413a5047ddabbf0995791bca3054106666e3534` (#178 worklist-first composition TSX AST).  
-**Denoise product tip:** `0413a5047ddabbf0995791bca3054106666e3534` (#178).  
+**Tip under test / `main` HEAD:** `f582627c787cbd2373404ea7f786d632e609e6f7` (#180 wrong-cite rebind-cite TSX AST).  
+**Denoise product tip:** `f582627c787cbd2373404ea7f786d632e609e6f7` (#180).  
 **Last `shine-benchmark` SUCCESS on `main`:** `a6b045a…` (#164) — https://github.com/justinfowler925/shine/actions/runs/37675830335  
 **Last tip `shine` doctor FAILURE on `main`:** `9401e15…` (#165) listing stale — https://github.com/justinfowler925/shine/actions/runs/37678308266  
-**Do not treat `91b09eb` / `46a999d` / `f49e459` / `b8d7db7` / `25571dc` / `fa3178c` / `46c349f` / `0d62e6f` / `7ef8af5` / `f674a66` / `8805c1d` / `9401e15` / `a6b045a` as tip** — superseded by #178.
+**Do not treat `0413a50` / `d94e610` / `91b09eb` / `46a999d` / `f49e459` / `b8d7db7` / `25571dc` / `fa3178c` / `46c349f` / `0d62e6f` / `7ef8af5` / `f674a66` / `8805c1d` / `9401e15` / `a6b045a` as tip** — superseded by #180.
 
 Plans (Project store): `shine-denoise-build-plan.md` · `shine-enterprise-agent-plan.md`  
 Related in-repo DoD: [`distribution-dod.md`](./distribution-dod.md) (15/15 destinations) · [`phase0/DOD.md`](./phase0/DOD.md)
@@ -19,12 +19,12 @@ Related in-repo DoD: [`distribution-dod.md`](./distribution-dod.md) (15/15 desti
 
 | Track | Merged | CI green | Local tests | Deployed | Prove / hosts | Gaps |
 |---|---|---|---|---|---|---|
-| Shine #149–#178 denoise + deepen @ tip | **YES** | **NO** (tip runs queued) | PR-local AST bites (#173–#175/#178); listing **current** (#177/#178) | **YES** (live `release.json` = tip) | Laptop ClearSpeed `@f674a66` (trails); Studio S8 `@6f28cff` | Tip Actions + host tip sync + S8 + Nucleus |
+| Shine #149–#180 denoise + deepen @ tip | **YES** | **NO** (tip runs queued) | PR-local AST bites (#173–#175/#178/#180); listing **current** (#177/#178/#180) | **YES** (live `release.json` = tip) | Laptop ClearSpeed `@f674a66` (trails); Studio S8 `@6f28cff` | Tip Actions + host tip sync + S8 + Nucleus |
 | Shine N0–N11 + DDR + Reflexion + #132–#148 base | **YES** | last full green tip `368acb0` / listing-refresh benchmark `a6b045a` | historical YES | historical YES | — | superseded tip |
-| Nucleus Company Tools attestation | n/a | n/a | n/a | **trails** (`sourceRevision` `b8d7db7`) | refresh after Studio/Nucleus bump | trails tip |
+| Nucleus Company Tools attestation | n/a | n/a | n/a | **trails** (`sourceRevision` `d94e610`) | refresh after Studio/Nucleus bump | trails tip |
 | Distribution 15/15 | last receipt `@6f28cff` | — | — | Studio verify pending tip | — | not re-proven @ tip |
 
-**Bottom line:** #149–#178 is **merged + Vercel-deployed** at `0413a50`. Listing is **current**. It is **not** CI-green on tip yet; ClearSpeed / S8 / Nucleus attestation are **not** tip-synced.
+**Bottom line:** #149–#180 is **merged + Vercel-deployed** at `f582627`. Listing is **current**. It is **not** CI-green on tip yet; ClearSpeed / S8 / Nucleus attestation are **not** tip-synced.
 
 ---
 
@@ -40,22 +40,24 @@ Large queue of `shine` + `shine-benchmark` runs from #149+ merges. Product-tip p
 
 | Workflow | Tip SHA | Status | URL |
 |---|---|---|---|
-| `shine` (`doctor-default` / `doctor-full`) | `0413a50` | **queued** | https://github.com/justinfowler925/shine/actions/runs/37688212814 |
-| `shine-benchmark` | `0413a50` | **queued** | https://github.com/justinfowler925/shine/actions/runs/37688212732 |
-| `shine` | `46a999d` (#177) | **queued** | https://github.com/justinfowler925/shine/actions/runs/37686893812 |
-| `shine-benchmark` | `46a999d` (#177) | **queued** | https://github.com/justinfowler925/shine/actions/runs/37686893823 |
+| `shine` (`doctor-default` / `doctor-full`) | `f582627` | **queued** | https://github.com/justinfowler925/shine/actions/runs/37689478832 |
+| `shine-benchmark` | `f582627` | **queued** | https://github.com/justinfowler925/shine/actions/runs/37689478714 |
+| `shine` | `0413a50` (#178) | **queued** | https://github.com/justinfowler925/shine/actions/runs/37688212814 |
+| `shine-benchmark` | `0413a50` (#178) | **queued** | https://github.com/justinfowler925/shine/actions/runs/37688212732 |
+| `shine` | `d94e610` (#179) | **queued** | https://github.com/justinfowler925/shine/actions/runs/37688549099 |
+| `shine-benchmark` | `d94e610` (#179) | **queued** | https://github.com/justinfowler925/shine/actions/runs/37688549207 |
 
-Superseded / cancelled on tip move (not tip green): `91b09eb` / `f49e459` tip Actions **cancelled**. Mid-queue signal (not tip): #173 PR `doctor-full` **PASS** (~9m) — https://github.com/justinfowler925/shine/actions/runs/37684446867
+Superseded / cancelled on tip move (not tip green): older tip Actions still backlog-queued or cancelled. Mid-queue signal (not tip): #173 PR `doctor-full` **PASS** (~9m) — https://github.com/justinfowler925/shine/actions/runs/37684446867
 
 ### Tip content gate
 
-On clean tip checkout (2026-10-07T21:17Z @ `0413a50`):
+On clean tip checkout (2026-10-07T21:29Z @ `f582627`):
 
 ```text
-skill-listing: current — 38 files, 5825 lines; public SKILL.md matches canonical
+skill-listing: current — 38 files, 5845 lines; public SKILL.md matches canonical
 ```
 
-#177 cleared post-#173–#175 drift; #178 refreshed listing again with worklist-first skill-doc edits. Content gate is green locally at tip.
+#177 cleared post-#173–#175 drift; #178/#180 refreshed listing with worklist-first + wrong-cite AST skill-doc edits. Content gate is green locally at tip.
 
 ### Hosted `ubuntu-latest`
 
@@ -63,7 +65,7 @@ Still billing-locked on Free (`justinfowler925`). Optional; not required for DoD
 
 ---
 
-## 2. Shine PRs #149–#178 — merge SHAs + check posture
+## 2. Shine PRs #149–#180 — merge SHAs + check posture
 
 All **MERGED**. Merge commit = tip ancestry chain.
 
@@ -98,7 +100,9 @@ All **MERGED**. Merge commit = tip ancestry chain.
 | [#175](https://github.com/justinfowler925/shine/pull/175) | Dual-focal ban TSX AST `collapse-peer-grids` (XOR) | `91b09eb…` | admin-merged; tip Actions cancelled on tip move; Vercel SUCCESS |
 | [#176](https://github.com/justinfowler925/shine/pull/176) | DoD tip-pointer @ `91b09eb` | `f49e459…` | cancelled / superseded on tip move |
 | [#177](https://github.com/justinfowler925/shine/pull/177) | Skill-listing refresh (post-#173–#175) | `46a999d…` | admin-merged; tip Actions queued |
-| [#178](https://github.com/justinfowler925/shine/pull/178) | Worklist-first composition TSX AST (KPI chrome after worklist) | `0413a50…` **tip** | admin-merged; tip Actions queued; Vercel SUCCESS |
+| [#178](https://github.com/justinfowler925/shine/pull/178) | Worklist-first composition TSX AST (KPI chrome after worklist) | `0413a50…` | admin-merged; tip Actions queued; Vercel SUCCESS |
+| [#179](https://github.com/justinfowler925/shine/pull/179) | DoD tip-pointer @ `0413a50` | `d94e610…` | admin-merged; tip Actions queued; Vercel SUCCESS |
+| [#180](https://github.com/justinfowler925/shine/pull/180) | Wrong-cite rebind-cite TSX AST + recommend refuse path | `f582627…` **tip** | admin-merged; tip Actions queued; Vercel SUCCESS |
 
 Admin-merged through queue is the live pattern for recent denoise deepen PRs; do not read empty/pending rollups as green.
 
@@ -106,9 +110,9 @@ Admin-merged through queue is the live pattern for recent denoise deepen PRs; do
 
 ## 3. Shine `main` tip — surface present
 
-**HEAD:** `0413a5047ddabbf0995791bca3054106666e3534` (#178)
+**HEAD:** `f582627c787cbd2373404ea7f786d632e609e6f7` (#180)
 
-Includes #149–#178: denoise deepen (fixtures, constitutionIds, sibling map/learn, DDR + denoise-loop audit append, Critic≠Actor host, wireframe-brief lock, `reflexionVerdict`, skill A/B deepen, Operate slop anti-patterns, measure anti-pattern cite fail-closed), enterprise DoD docs (#162/#163/#168/#172/#176), skill-listing refresh (#164/#169/#177), records/worklist table-quality (#165), ClearSpeed `brandAccent` fail-closed (#166), D10 XOR dual-grid recommend deepen (#167), cite-ban learn deepen (#170), host doctorBiteOk + observedCite wire (#171), CTA pressure AST (#173), KPI soup AST (#174), dual-focal ban AST XOR (#175), worklist-first composition AST (#178) on top of earlier N0–N11 / DDR / Reflexion / CI-unblock stack.
+Includes #149–#180: denoise deepen (fixtures, constitutionIds, sibling map/learn, DDR + denoise-loop audit append, Critic≠Actor host, wireframe-brief lock, `reflexionVerdict`, skill A/B deepen, Operate slop anti-patterns, measure anti-pattern cite fail-closed), enterprise DoD docs (#162/#163/#168/#172/#176/#179), skill-listing refresh (#164/#169/#177), records/worklist table-quality (#165), ClearSpeed `brandAccent` fail-closed (#166), D10 XOR dual-grid recommend deepen (#167), cite-ban learn deepen (#170), host doctorBiteOk + observedCite wire (#171), CTA pressure AST (#173), KPI soup AST (#174), dual-focal ban AST XOR (#175), worklist-first composition AST (#178), wrong-cite rebind-cite AST (#180) on top of earlier N0–N11 / DDR / Reflexion / CI-unblock stack.
 
 ---
 
@@ -119,15 +123,15 @@ Live [`https://shine-blond.vercel.app/release.json`](https://shine-blond.vercel.
 ```json
 {
   "sourceRepository": "justinfowler925/shine",
-  "sourceRevision": "0413a5047ddabbf0995791bca3054106666e3534",
+  "sourceRevision": "f582627c787cbd2373404ea7f786d632e609e6f7",
   "skillSha256": "f62455043524a65f0f1fc92a7a95302aefe4324639e94ea7f65ff342299abcbe"
 }
 ```
 
 | Signal | Value |
 |---|---|
-| `main` tip | `0413a50…` |
-| Live `sourceRevision` | `0413a50…` (**match**) |
+| `main` tip | `f582627…` |
+| Live `sourceRevision` | `f582627…` (**match**) |
 
 ---
 
@@ -135,36 +139,36 @@ Live [`https://shine-blond.vercel.app/release.json`](https://shine-blond.vercel.
 
 | Host | Tip installed | Package / proof | Status |
 |---|---|---|---|
-| **JFMacM5** (`JFowler3`) | `f674a66…` (#167) | `shine-clearspeed-f674a66-774d84b147ed` · `brandAccent #ED5925` · `verifySkillDeployment` PASS `kind: edition` | **trails tip** `0413a50` — bump pending |
+| **JFMacM5** (`JFowler3`) | `f674a66…` (#167) | `shine-clearspeed-f674a66-774d84b147ed` · `brandAccent #ED5925` · `verifySkillDeployment` PASS `kind: edition` | **trails tip** `f582627` — bump pending |
 | **Mac Studio** (`jf-studio` / `jfstudio`) | last S8 **15/15** `@6f28cff` (#148); peer bumps mid-flight | Studio proofs through older tips; tip bump **pending** | **trails tip** |
-| Nucleus `/api/company-tools/shine/release` | attests `b8d7db7…` (#174) | https://nucleus-clearspeed.vercel.app/api/company-tools/shine/release | **trails tip** |
+| Nucleus `/api/company-tools/shine/release` | attests `d94e610…` (#179) | https://nucleus-clearspeed.vercel.app/api/company-tools/shine/release | **trails tip** |
 
-Hosted distribution DoD ([`distribution-dod.md`](./distribution-dod.md)) is **not** re-closed at `0413a50`.
+Hosted distribution DoD ([`distribution-dod.md`](./distribution-dod.md)) is **not** re-closed at `f582627`.
 
 ---
 
 ## 6. Gaps (blunt)
 
-1. **Tip Actions not green** — `shine` / `shine-benchmark` @ `0413a50` still **queued** on `justin-macbook-shine` (online + busy; long backlog).
-2. **ClearSpeed laptop** @ `f674a66`, not `0413a50`.
-3. **Studio S8 / Nucleus attestation / portfolio** not tip-synced; Nucleus attests `b8d7db7`; last full Studio 15/15 `@6f28cff`.
+1. **Tip Actions not green** — `shine` / `shine-benchmark` @ `f582627` still **queued** on `justin-macbook-shine` (online + busy; long backlog).
+2. **ClearSpeed laptop** @ `f674a66`, not `f582627`.
+3. **Studio S8 / Nucleus attestation / portfolio** not tip-synced; Nucleus attests `d94e610`; last full Studio 15/15 `@6f28cff`.
 4. **Hosted `ubuntu-latest` billing lock** — optional; Free self-hosted remains the path.
 5. Prior #150–#165 PR/tip doctor reds — mostly listing drift / queue; do not claim PR-time green for the whole band.
-6. Listing drift after #173–#175 is **cleared** (#177/#178) — not a tip gap anymore.
+6. Listing drift after #173–#175 is **cleared** (#177/#178/#180) — not a tip gap anymore.
 
 ---
 
-## 7. What would close DoD for tip `0413a50`
+## 7. What would close DoD for tip `f582627`
 
 | Gate | Status |
 |---|---|
-| Merged #149–#178 on tip | **YES** |
+| Merged #149–#180 on tip | **YES** |
 | Live skill deploy = tip | **YES** |
-| Tip skill-listing current | **YES** (#177/#178) |
+| Tip skill-listing current | **YES** (#177/#178/#180) |
 | Tip `doctor-default` + `doctor-full` SUCCESS | **NO** (queued) |
 | Tip `benchmark-smoke` SUCCESS | **NO** (queued) |
 | ClearSpeed JFMacM5 + Studio @ tip | **NO** (laptop `@f674a66`) |
 | Distribution verify 15/15 @ tip | **NO** |
-| Nucleus company-tools `sourceRevision` = tip | **NO** (`b8d7db7`) |
+| Nucleus company-tools `sourceRevision` = tip | **NO** (`d94e610`) |
 
-Answer to “CI'd, merged, deployed, tested, verified, DoD?” for tip `0413a50`: **merged + deployed + listing current; not yet CI-green or host/S8 tip-closed.**
+Answer to “CI'd, merged, deployed, tested, verified, DoD?” for tip `f582627`: **merged + deployed + listing current; not yet CI-green or host/S8 tip-closed.**
