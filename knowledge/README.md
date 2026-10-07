@@ -10,8 +10,10 @@ ClearSpeed Operate **edition sibling map** lives in
 `editions/clearspeed-operate/siblings.json` (enterprise §4) — Nucleus / Sled
 Capture surfaces for cite + kit selection (`core/edition-siblings.mjs`).
 Proven job→cite→kit repertoire, episodic prove-fail lessons, Operate cite bans,
-and edition anti-cites live in `repertoire/repertoire.json` (enterprise learn —
-doctor-gated version bump; write bans only after real cite-related prove fails).
+edition anti-cites, and **sibling prefs** (prefer proven edition-sibling → cite/kit
+on the next packet) live in `repertoire/repertoire.json` (enterprise learn —
+doctor-gated version bump; write bans only after real cite-related prove fails;
+write sibling prefs when cite/kit resolves via edition siblings).
 
 DDR Action/Observation audit trails (enterprise §5) live under
 `SHINE_AUDIT_DIR` / `~/.cache/shine/audit/` via `core/audit-trail.mjs` — append-only
@@ -28,6 +30,8 @@ node core/constitution.mjs
 node core/edition-siblings.mjs resolve --category queue --job "Decide Pursue/Review/Dismiss on the next notice"
 node core/learn.mjs match --job "Decide Pursue/Review/Dismiss on the next notice" --category queue
 node core/learn.mjs bans --category queue --edition clearspeed
+node core/learn.mjs sibling-prefs --category queue --edition clearspeed-operate \
+  --job "Decide Pursue/Review/Dismiss on the next notice"
 ```
 
 Principle kinds: `accessibility-requirement` | `strong-default` | `product-convention` | `experimental-hypothesis`.
@@ -36,5 +40,5 @@ Anti-pattern kinds: `operate-bloat` | `craft-slop` | `interaction-fail`.
 
 Do not inject the entire corpus into every task — retrieval is bounded and task-keyed.
 Promote lessons only after review; retain counterexamples.
-Commit repertoire/episodes/cite bans only with `doctorBiteOk` — never preference / RLAIF labels.
+Commit repertoire/episodes/cite bans/sibling prefs only with `doctorBiteOk` — never preference / RLAIF labels.
 Measure cites machine-detectable ids via `anti-pattern:<id>` (see `verify/composition-slop.mjs`).

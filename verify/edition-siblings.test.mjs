@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 /**
  * Enterprise §4 — ClearSpeed Operate edition sibling map (cite + kit selection).
+ * Also proves repertoire→sibling learn: resolve → persist → next packet prefer.
  */
 import assert from "node:assert/strict";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { createDesignPacket } from "../core/design-packet.mjs";
 import {
   applySiblingToRecommendation,
@@ -13,11 +18,14 @@ import {
   resolveEditionSibling,
   validateEditionSiblingMap,
 } from "../core/edition-siblings.mjs";
+import {
+  commitSiblingLearnFromResolve,
+  emptyStore,
+  siblingPrefsFor,
+} from "../core/learn.mjs";
 import { recommendPattern } from "../corpus/recommend.mjs";
 import catalog from "../corpus/templates.json" with { type: "json" };
 import { verifyEditionSiblingMap } from "./edition.mjs";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const templates = catalog.templates;
@@ -161,6 +169,90 @@ const bite = verifyEditionSiblingMap();
 assert.equal(bite.status, "passed", bite.reason);
 assert.ok(bite.siblings >= 8);
 
+// Repertoire→sibling learn: cite/kit resolve → episodic+siblingPref → next prefer
+const learnDir = mkdtempSync(join(tmpdir(), "shine-sibling-learn-"));
+const learnStorePath = join(learnDir, "repertoire.json");
+writeFileSync(learnStorePath, JSON.stringify(emptyStore(), null, 2) + "\n");
+
+const firstPacket = createDesignPacket({
+  job: "Decide Pursue/Review/Dismiss on the next notice",
+  lane: "saas",
+  mode: "denoise",
+  category: "queue",
+  project: ROOT,
+  accept: true,
+  doctorBiteOk: true,
+  learnStorePath,
+});
+assert.ok(firstPacket.editionSibling?.id === "sled-capture-queue");
+assert.equal(firstPacket.siblingLearn?.skipped, false);
+assert.equal(firstPacket.siblingLearn?.siblingPref?.siblingId, "sled-capture-queue");
+assert.equal(firstPacket.siblingLearn?.episode?.failCategory, "edition-sibling");
+
+const prefs = siblingPrefsFor("queue", {
+  edition: "clearspeed-operate",
+  job: "Decide Pursue/Review/Dismiss on the next notice",
+  storePath: learnStorePath,
+});
+assert.ok(prefs.length >= 1);
+
+const nextRec = recommendPattern(
+  templates,
+  "Decide Pursue/Review/Dismiss on the next notice",
+  {
+    lane: "saas",
+    edition: "clearspeed-operate",
+    category: "queue",
+    limit: 6,
+    learnStorePath,
+  },
+);
+assert.equal(nextRec.productSibling?.id, "sled-capture-queue");
+assert.ok(nextRec.learnedSiblingPrefer?.siblingId === "sled-capture-queue");
+assert.match(String(nextRec.learnedSiblingPrefer?.reason || ""), /repertoire sibling prefer/);
+
+// Ambiguous queue-ish job: learned Signals prefer beats Capture Queue default.
+const signalsResolved = resolveEditionSibling({
+  category: "queue",
+  job: "Scan Scout research signals feed",
+  editionId: "clearspeed-operate",
+});
+assert.equal(signalsResolved.sibling?.id, "sled-capture-signals");
+commitSiblingLearnFromResolve({
+  storePath: learnStorePath,
+  doctorBiteOk: true,
+  ddrId: "ddr_test_signals_prefer_001",
+  edition: "clearspeed-operate",
+  category: "queue",
+  job: "work queue triage inbox signals",
+  resolved: {
+    sibling: { id: "sled-capture-signals", name: "Sled Capture Signals" },
+    preferredCite: "shadcn-queue",
+    kitRecipe: "read-only feed grid; no dual filled Decide",
+    reason: "matched sled-capture-signals (test)",
+  },
+});
+const signalsPrefs = siblingPrefsFor("queue", {
+  edition: "clearspeed-operate",
+  job: "work queue triage inbox signals",
+  storePath: learnStorePath,
+}).filter((h) => h.pref.siblingId === "sled-capture-signals");
+assert.ok(signalsPrefs.length >= 1);
+const preferredSignals = resolveEditionSibling({
+  category: "queue",
+  job: "work queue triage inbox",
+  editionId: "clearspeed-operate",
+  learnedPrefs: signalsPrefs.map((h) => h.pref),
+});
+assert.equal(
+  preferredSignals.sibling?.id,
+  "sled-capture-signals",
+  "learned sibling prefer must beat Capture Queue default",
+);
+assert.match(preferredSignals.reason, /repertoire sibling prefer/);
+
+rmSync(learnDir, { recursive: true, force: true });
+
 console.log(
-  "edition-siblings PASS: clearspeed-operate map · Capture/Company Tools resolve · cite+kit · recommend · packet DDR · edition bite",
+  "edition-siblings PASS: clearspeed-operate map · Capture/Company Tools resolve · cite+kit · recommend · packet DDR · sibling learn prefer · edition bite",
 );

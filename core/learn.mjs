@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 /**
- * Repertoire + episodic + cite-ban learn (enterprise-agent plan §4 "commit learning").
+ * Repertoire + episodic + cite-ban + sibling-prefer learn
+ * (enterprise-agent plan §4 "commit learning").
  *
  * Stores:
  *   - Repertoire — proven job→cite→kit + working restructureHints
  *   - Episodes — linguistic lessons tied to ddrId + prove fail category
  *   - Cite bans — Operate demotions after real prove fails (tied to ddrId)
  *   - Edition anti-cites — ClearSpeed (etc.) edition bans after prove fails
+ *   - Sibling prefs — proven edition-sibling → cite/kit mappings (next packet prefer)
  *
  * Merge gate: doctor-gated version bump. Refuse commit unless doctorBiteOk.
  * Never store preference / RLAIF labels or "looks good" without a machine fail.
@@ -14,12 +16,15 @@
  * Usage:
  *   node core/learn.mjs match --job "Decide Pursue…" [--category queue]
  *   node core/learn.mjs bans --category queue [--edition clearspeed]
+ *   node core/learn.mjs sibling-prefs --category queue [--edition clearspeed-operate]
  *   node core/learn.mjs commit --job … --cite … --kit … --hints … \
  *     --ddr ddr_… --fail-category cta-pressure --lesson "…" --doctor-ok
  *   node core/learn.mjs commit-cite-ban --ddr ddr_… --fail-category cite-honesty \
  *     --ban-cite shadcn-dashboard-01 --category queue --doctor-ok
  *   node core/learn.mjs commit-edition-anti --ddr ddr_… --edition clearspeed \
  *     --ban-cite magicui-* --fail-category cite-honesty --doctor-ok
+ *   node core/learn.mjs commit-sibling --ddr ddr_… --sibling sled-capture-queue \
+ *     --cite shadcn-queue --kit "…" --category queue --edition clearspeed-operate --doctor-ok
  */
 
 import { createHash } from "node:crypto";
@@ -32,6 +37,7 @@ import {
 } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { normalizeSiblingCategory } from "./edition-siblings.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 export const REPERTOIRE_SCHEMA = "shine-repertoire/v1";
@@ -59,6 +65,9 @@ export const PREFERENCE_KEYS = Object.freeze([
   "criticGptLabel",
 ]);
 
+/** Episode / sibling-pref fail category for edition-sibling resolve lessons. */
+export const SIBLING_LEARN_FAIL_CATEGORY = "edition-sibling";
+
 export function emptyStore() {
   return {
     $schema: REPERTOIRE_SCHEMA,
@@ -68,15 +77,17 @@ export function emptyStore() {
     episodes: [],
     citeBans: [],
     editionAntiCites: [],
+    siblingPrefs: [],
   };
 }
 
 export function loadRepertoire(storePath = DEFAULT_STORE) {
   if (!existsSync(storePath)) return emptyStore();
   const raw = JSON.parse(readFileSync(storePath, "utf8"));
-  // Additive fields for pre-cite-ban seeds.
+  // Additive fields for pre-cite-ban / pre-sibling-pref seeds.
   if (!Array.isArray(raw.citeBans)) raw.citeBans = [];
   if (!Array.isArray(raw.editionAntiCites)) raw.editionAntiCites = [];
+  if (!Array.isArray(raw.siblingPrefs)) raw.siblingPrefs = [];
   const errors = validateStore(raw);
   if (errors.length) throw new Error(`repertoire invalid: ${errors.join("; ")}`);
   return raw;
@@ -95,6 +106,9 @@ export function validateStore(store) {
   if (store?.editionAntiCites != null && !Array.isArray(store.editionAntiCites)) {
     errors.push("editionAntiCites must be an array");
   }
+  if (store?.siblingPrefs != null && !Array.isArray(store.siblingPrefs)) {
+    errors.push("siblingPrefs must be an array");
+  }
   for (const [i, e] of (store?.entries || []).entries()) {
     for (const err of validateRepertoireEntry(e)) errors.push(`entries[${i}]: ${err}`);
   }
@@ -108,6 +122,9 @@ export function validateStore(store) {
     for (const err of validateEditionAntiCite(e)) {
       errors.push(`editionAntiCites[${i}]: ${err}`);
     }
+  }
+  for (const [i, e] of (store?.siblingPrefs || []).entries()) {
+    for (const err of validateSiblingPref(e)) errors.push(`siblingPrefs[${i}]: ${err}`);
   }
   return errors;
 }
@@ -223,6 +240,32 @@ export function validateEditionAntiCite(ban) {
   return errors;
 }
 
+/**
+ * Proven edition-sibling → cite/kit mapping (machine resolve evidence + ddrId).
+ * Written when cite/kit resolves via edition siblings; next packet prefer.
+ */
+export function validateSiblingPref(pref) {
+  const errors = [];
+  if (text(pref?.id).length < 4) errors.push("id missing");
+  if (text(pref?.edition).length < 3) {
+    errors.push("edition missing (e.g. clearspeed-operate)");
+  }
+  if (text(pref?.category).length < 2) errors.push("category missing");
+  if (text(pref?.siblingId).length < 3) errors.push("siblingId missing");
+  if (!looksLikeCiteId(pref?.preferredCite)) {
+    errors.push("preferredCite must look like a cite id");
+  }
+  if (text(pref?.kitRecipe).length < 8) errors.push("kitRecipe missing");
+  if (text(pref?.ddrId).length < 8 || !String(pref.ddrId).startsWith("ddr_")) {
+    errors.push("ddrId required (tied to real sibling resolve / packet)");
+  }
+  if (text(pref?.reason).length < 8) errors.push("reason missing");
+  for (const key of PREFERENCE_KEYS) {
+    if (pref?.[key] != null) errors.push(`refuse preference field ${key}`);
+  }
+  return errors;
+}
+
 export function isCiteFailCategory(failCategory) {
   const f = text(failCategory).toLowerCase();
   if (!f) return false;
@@ -257,6 +300,13 @@ function editionAntiCiteId({ edition, citeId, ddrId, failCategory, category = ""
     .slice(0, 12);
 }
 
+function siblingPrefId({ edition, category, siblingId, preferredCite, ddrId }) {
+  return createHash("sha256")
+    .update(["sibling-pref", edition, category, siblingId, preferredCite, ddrId].join("\0"))
+    .digest("hex")
+    .slice(0, 12);
+}
+
 function refusePreferenceKeys(obj, label) {
   for (const key of PREFERENCE_KEYS) {
     if (obj?.[key] != null) {
@@ -267,7 +317,7 @@ function refusePreferenceKeys(obj, label) {
 
 /**
  * Fail-closed commit. Version bumps only when doctorBiteOk and payload validates.
- * @returns {{ store, bumped, version, entry?, episode?, citeBan?, editionAntiCite?, path }}
+ * @returns {{ store, bumped, version, entry?, episode?, citeBan?, editionAntiCite?, siblingPref?, path }}
  */
 export function commitLearning(opts = {}) {
   const {
@@ -277,6 +327,7 @@ export function commitLearning(opts = {}) {
     episode = null,
     citeBan = null,
     editionAntiCite = null,
+    siblingPref = null,
     doctorBiteOk = false,
     at = null,
   } = opts;
@@ -285,9 +336,9 @@ export function commitLearning(opts = {}) {
       "refuse learn commit — doctorBiteOk required (doctor-gated version bump)",
     );
   }
-  if (!entry && !episode && !citeBan && !editionAntiCite) {
+  if (!entry && !episode && !citeBan && !editionAntiCite && !siblingPref) {
     throw new Error(
-      "refuse learn commit — provide repertoire entry, episode, citeBan, and/or editionAntiCite",
+      "refuse learn commit — provide repertoire entry, episode, citeBan, editionAntiCite, and/or siblingPref",
     );
   }
 
@@ -296,11 +347,13 @@ export function commitLearning(opts = {}) {
   const current = store ? structuredClone(store) : loadRepertoire(storePath);
   if (!Array.isArray(current.citeBans)) current.citeBans = [];
   if (!Array.isArray(current.editionAntiCites)) current.editionAntiCites = [];
+  if (!Array.isArray(current.siblingPrefs)) current.siblingPrefs = [];
   const stamp = at || new Date().toISOString();
   let wroteEntry = null;
   let wroteEpisode = null;
   let wroteCiteBan = null;
   let wroteEditionAnti = null;
+  let wroteSiblingPref = null;
 
   if (entry) {
     refusePreferenceKeys(entry, "entry");
@@ -386,6 +439,31 @@ export function commitLearning(opts = {}) {
     wroteEditionAnti = normalized;
   }
 
+  if (siblingPref) {
+    refusePreferenceKeys(siblingPref, "siblingPref");
+    const normalized = {
+      id: siblingPref.id || siblingPrefId(siblingPref),
+      edition: text(siblingPref.edition).toLowerCase(),
+      category:
+        normalizeSiblingCategory(siblingPref.category) ||
+        text(siblingPref.category).toLowerCase(),
+      siblingId: text(siblingPref.siblingId),
+      preferredCite: text(siblingPref.preferredCite),
+      kitRecipe: text(siblingPref.kitRecipe),
+      job: text(siblingPref.job) || null,
+      ddrId: text(siblingPref.ddrId),
+      reason: text(siblingPref.reason),
+      resolveReason: text(siblingPref.resolveReason) || null,
+      at: stamp,
+    };
+    const errors = validateSiblingPref(normalized);
+    if (errors.length) throw new Error(`refuse sibling pref: ${errors.join("; ")}`);
+    const idx = current.siblingPrefs.findIndex((e) => e.id === normalized.id);
+    if (idx >= 0) current.siblingPrefs[idx] = normalized;
+    else current.siblingPrefs.push(normalized);
+    wroteSiblingPref = normalized;
+  }
+
   const prevVersion = current.version;
   current.version = prevVersion + 1;
   current.bar = current.bar || "machine prove/measure only — no preference / RLAIF";
@@ -406,6 +484,7 @@ export function commitLearning(opts = {}) {
     episode: wroteEpisode,
     citeBan: wroteCiteBan,
     editionAntiCite: wroteEditionAnti,
+    siblingPref: wroteSiblingPref,
     path: storePath,
   };
 }
@@ -533,6 +612,164 @@ export function inferCiteBansFromProveFail({
 }
 
 /**
+ * Proven sibling prefs for a category (+ optional edition / job match).
+ * Used by edition-siblings resolve to boost proven mappings on the next packet.
+ */
+export function siblingPrefsFor(
+  category,
+  { edition = "", job = "", storePath = DEFAULT_STORE, store = null } = {},
+) {
+  const cat = normalizeSiblingCategory(category) || text(category).toLowerCase();
+  const ed = text(edition).toLowerCase();
+  const jobL = text(job).toLowerCase();
+  const current = store || loadRepertoire(storePath);
+  const scored = (current.siblingPrefs || [])
+    .map((pref) => {
+      let score = 0;
+      const prefCat =
+        normalizeSiblingCategory(pref.category) || text(pref.category).toLowerCase();
+      if (cat && prefCat === cat) score += 4;
+      if (ed) {
+        const pe = text(pref.edition).toLowerCase();
+        if (pe === ed) score += 3;
+        else if (
+          (pe === "clearspeed" && ed === "clearspeed-operate") ||
+          (pe === "clearspeed-operate" && ed === "clearspeed")
+        ) {
+          score += 2;
+        } else return { pref, score: 0 };
+      }
+      if (jobL && pref.job) {
+        const pj = text(pref.job).toLowerCase();
+        if (pj === jobL) score += 5;
+        else if (pj.includes(jobL) || jobL.includes(pj.slice(0, 24))) score += 2;
+        for (const token of jobL.split(/\W+/).filter((t) => t.length > 4)) {
+          if (pj.includes(token)) score += 0.5;
+        }
+      }
+      return { pref, score };
+    })
+    .filter((r) => r.score > 0)
+    .sort((a, b) => b.score - a.score);
+  return scored;
+}
+
+/**
+ * Infer sibling-pref + episodic lesson from a successful edition-sibling cite/kit resolve.
+ * Returns refused when sibling/cite/kit/ddr evidence is incomplete.
+ */
+export function inferSiblingLearnFromResolve({
+  ddrId = "",
+  edition = "",
+  category = "",
+  job = "",
+  siblingId = "",
+  preferredCite = "",
+  kitRecipe = "",
+  reason = "",
+  resolveReason = "",
+} = {}) {
+  const id = text(ddrId);
+  if (!id.startsWith("ddr_")) {
+    return { siblingPref: null, episode: null, refused: "ddrId required" };
+  }
+  const sib = text(siblingId);
+  const cite = text(preferredCite);
+  const kit = text(kitRecipe);
+  if (!sib) {
+    return { siblingPref: null, episode: null, refused: "siblingId required (resolved sibling)" };
+  }
+  if (!looksLikeCiteId(cite)) {
+    return { siblingPref: null, episode: null, refused: "preferredCite required" };
+  }
+  if (kit.length < 8) {
+    return { siblingPref: null, episode: null, refused: "kitRecipe required" };
+  }
+  const ed = text(edition).toLowerCase() || "clearspeed-operate";
+  const cat =
+    normalizeSiblingCategory(category) || text(category).toLowerCase() || "queue";
+  const why =
+    text(reason) ||
+    `Cite/kit resolved via edition sibling ${sib} → ${cite}; prefer on next packet`;
+  const siblingPref = {
+    edition: ed,
+    category: cat,
+    siblingId: sib,
+    preferredCite: cite,
+    kitRecipe: kit,
+    job: text(job) || null,
+    ddrId: id,
+    reason: why,
+    resolveReason: text(resolveReason) || null,
+  };
+  const episode = {
+    ddrId: id,
+    failCategory: SIBLING_LEARN_FAIL_CATEGORY,
+    lesson: why,
+    verdict: "done",
+    nextStep: `Prefer sibling ${sib} (cite ${cite}) on next ${cat} packet`,
+  };
+  return { siblingPref, episode, refused: null };
+}
+
+/**
+ * Learn hook: persist sibling prefer + episodic lesson after cite/kit resolves
+ * via edition siblings. Doctor-gated. Next resolve/recommend boosts the mapping.
+ */
+export function commitSiblingLearnFromResolve(opts = {}) {
+  const {
+    storePath = DEFAULT_STORE,
+    store = null,
+    doctorBiteOk = false,
+    at = null,
+    resolved = null,
+    ...inferOpts
+  } = opts;
+
+  if (!doctorBiteOk) {
+    throw new Error(
+      "refuse sibling learn — doctorBiteOk required (doctor-gated version bump)",
+    );
+  }
+  refusePreferenceKeys(opts, "sibling-learn hook");
+
+  const fromResolved = resolved?.sibling
+    ? {
+        siblingId: resolved.sibling.id || resolved.siblingId,
+        preferredCite: resolved.preferredCite,
+        kitRecipe: resolved.kitRecipe,
+        resolveReason: resolved.reason,
+      }
+    : {};
+
+  const inferred = inferSiblingLearnFromResolve({ ...fromResolved, ...inferOpts });
+  if (inferred.refused || !inferred.siblingPref) {
+    return {
+      skipped: true,
+      reason: inferred.refused || "nothing to prefer",
+      siblingPref: null,
+      episode: null,
+      bumped: false,
+    };
+  }
+
+  const result = commitLearning({
+    storePath,
+    store,
+    doctorBiteOk: true,
+    at,
+    siblingPref: inferred.siblingPref,
+    episode: inferred.episode,
+  });
+
+  return {
+    skipped: false,
+    reason: null,
+    ...result,
+  };
+}
+
+/**
  * Learn hook: write cite-ban / edition anti-cite after a real prove fail.
  * Doctor-gated. No-op (returns skipped) when fail is not cite-related.
  */
@@ -611,6 +848,34 @@ if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.me
       ) + "\n",
     );
     process.exit(0);
+  }
+
+  if (cmd === "sibling-prefs") {
+    const hits = siblingPrefsFor(opt("--category") || args[1] || "", {
+      edition: opt("--edition") || "clearspeed-operate",
+      job: opt("--job") || "",
+      storePath: opt("--store") || DEFAULT_STORE,
+    });
+    process.stdout.write(JSON.stringify({ hits }, null, 2) + "\n");
+    process.exit(0);
+  }
+
+  if (cmd === "commit-sibling") {
+    const result = commitSiblingLearnFromResolve({
+      storePath: opt("--store") || DEFAULT_STORE,
+      doctorBiteOk: flags.has("--doctor-ok"),
+      ddrId: opt("--ddr"),
+      edition: opt("--edition") || "clearspeed-operate",
+      category: opt("--category") || "queue",
+      job: opt("--job") || "",
+      siblingId: opt("--sibling"),
+      preferredCite: opt("--cite") || opt("--ban-cite") || "",
+      kitRecipe: opt("--kit") || "",
+      reason: opt("--reason") || "",
+      resolveReason: opt("--resolve-reason") || "",
+    });
+    process.stdout.write(JSON.stringify(result, null, 2) + "\n");
+    process.exit(result.skipped && result.reason ? 1 : 0);
   }
 
   if (cmd === "commit-cite-ban" || cmd === "commit-edition-anti" || cmd === "commit-prove-fail") {
@@ -694,7 +959,7 @@ if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.me
   }
 
   process.stderr.write(
-    "Usage: learn.mjs match|bans|commit|commit-cite-ban|commit-edition-anti|commit-prove-fail [flags]\n",
+    "Usage: learn.mjs match|bans|sibling-prefs|commit|commit-sibling|commit-cite-ban|commit-edition-anti|commit-prove-fail [flags]\n",
   );
   process.exit(2);
 }

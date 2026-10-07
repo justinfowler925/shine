@@ -45,6 +45,15 @@
       "verdict": "partial",
       "nextStep": "Apply cta-budget maxFilled=1; demote Assign to outline.",
       "at": "2026-10-07T00:00:00.000Z"
+    },
+    {
+      "id": "seed-sibling-prefer-queue",
+      "ddrId": "ddr_seed_sled_queue_cta",
+      "failCategory": "edition-sibling",
+      "lesson": "Cite/kit resolved via edition sibling sled-capture-queue → shadcn-queue; prefer on next packet",
+      "verdict": "done",
+      "nextStep": "Prefer sibling sled-capture-queue (cite shadcn-queue) on next queue packet",
+      "at": "2026-10-07T00:00:00.000Z"
     }
   ],
   "citeBans": [
@@ -83,6 +92,21 @@
       "failCategory": "cite-honesty",
       "ddrId": "ddr_seed_sled_queue_cta",
       "observedCite": "magicui-*",
+      "at": "2026-10-07T00:00:00.000Z"
+    }
+  ],
+  "siblingPrefs": [
+    {
+      "id": "seed-queue-capture-sibling",
+      "edition": "clearspeed-operate",
+      "category": "queue",
+      "siblingId": "sled-capture-queue",
+      "preferredCite": "shadcn-queue",
+      "kitRecipe": "shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts; worklist-first (N9)",
+      "job": "Decide Pursue/Review/Dismiss on the next notice",
+      "ddrId": "ddr_seed_sled_queue_cta",
+      "reason": "Cite/kit resolved via edition sibling sled-capture-queue → shadcn-queue; prefer on next packet",
+      "resolveReason": "matched sled-capture-queue (seed)",
       "at": "2026-10-07T00:00:00.000Z"
     }
   ]

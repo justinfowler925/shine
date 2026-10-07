@@ -100,4 +100,6 @@ Machine map: `knowledge/editions/clearspeed-operate/siblings.json` (enterprise �
 Resolve with `node core/edition-siblings.mjs resolve --category queue --job "…"`.
 SaaS packets attach `editionSibling` + `ddr.productSibling`; recommend with
 `edition=clearspeed-operate` prefers sibling kit / cite over catalog fashion.
-See `docs/edition-siblings.md`.
+When cite/kit resolves via the map, repertoire `siblingPrefs` (doctor-gated learn)
+boost that sibling on the next packet — `npm run learn -- sibling-prefs`.
+See `docs/edition-siblings.md` · `docs/repertoire-learn.md`.
