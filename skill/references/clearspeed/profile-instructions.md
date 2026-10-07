@@ -56,10 +56,17 @@ diff gate — not a second TW DS linter.
 |---|---|
 | `before.html` | Seeded bloat: dual filled CTAs + equal KPI cards + filler empty copy |
 | `after.html` | Expert pass: one primary, catalog focal, reversible search, real empty copy |
+| `shine-usability.json` | Operable search → install |
 | `README.md` | Scripted audit → diagnosis → prove path |
 
-Run `node verify/nucleus-golden.test.mjs` for fail→pass measure bites (logs, not twin
+Run `node verify/nucleus-golden.test.mjs` for fail→pass measure + usability bites (logs, not twin
 full-page screenshots).
+
+### Real-surface substitute (SLED Capture, no SSO)
+
+When Nucleus checkout/SSO is unavailable, use `verify/fixtures/sled-capture-prove/`
+(distilled from the Project sled dump). Run `node verify/sled-capture-prove.test.mjs`.
+Do not invent Workspace auth bypasses.
 
 ## Diagnosis order (hard)
 

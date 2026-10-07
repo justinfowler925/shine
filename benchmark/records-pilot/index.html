@@ -48,7 +48,8 @@
 <body>
   <main>
     <h1>Records inspect → edit → persist</h1>
-    <p class="lede">Phase 2 pilot fixture. Uses an in-memory adapter with intentional save failure/retry. Not a product skin.</p>
+    <p class="lede">Phase 2 pilot fixture. Memory or Nucleus-shaped HTTP adapter with intentional save failure/retry. Not a product skin.</p>
+    <p class="lede" id="adapter-label">adapter: memory</p>
     <div class="layout">
       <section aria-labelledby="list-heading">
         <h2 id="list-heading">Records</h2>
@@ -86,11 +87,23 @@
   <script type="module">
     import { createRecordsStore } from "./store.mjs";
     import { createRoleStore } from "./store-role.mjs";
+    import { createNucleusShapedStore } from "./adapters/nucleus-shaped.mjs";
 
     const params = new URLSearchParams(location.search);
     const role = params.get("role") === "viewer" ? "viewer" : "editor";
-    const store = createRoleStore({ role, inner: createRecordsStore() });
+    const adapter = params.get("adapter") === "nucleus-shaped" ? "nucleus-shaped" : "memory";
+    const apiBase = params.get("api") || "";
+
+    let store;
+    if (adapter === "nucleus-shaped") {
+      if (!apiBase) throw new Error("nucleus-shaped adapter requires ?api=http://… base URL");
+      store = createNucleusShapedStore({ baseUrl: apiBase, role });
+    } else {
+      store = createRoleStore({ role, inner: createRecordsStore() });
+    }
     document.documentElement.dataset.role = role;
+    document.documentElement.dataset.adapter = adapter;
+    document.getElementById("adapter-label").textContent = `adapter: ${adapter}`;
 
     const rowsEl = document.getElementById("rows");
     const editor = document.getElementById("editor");
@@ -118,15 +131,15 @@
       if (!allowed) setStatus(store.forbiddenReason(), "danger");
     }
 
-    function filteredRows() {
+    async function filteredRows() {
       const q = filter.trim().toLowerCase();
-      const rows = store.list();
+      const rows = await store.list();
       if (!q) return rows;
       return rows.filter((row) => `${row.title} ${row.owner} ${row.status}`.toLowerCase().includes(q));
     }
 
-    function renderList() {
-      const rows = filteredRows();
+    async function renderList() {
+      const rows = await filteredRows();
       rowsEl.innerHTML = "";
       filterEmpty.hidden = rows.length > 0;
       for (const row of rows) {
@@ -135,11 +148,11 @@
         tr.dataset.id = row.id;
         tr.setAttribute("aria-selected", row.id === selectedId ? "true" : "false");
         tr.innerHTML = `<td>${escapeHtml(row.title)}</td><td>${escapeHtml(row.owner)}</td><td>${escapeHtml(row.status)}</td>`;
-        tr.addEventListener("click", () => select(row.id));
+        tr.addEventListener("click", () => { void select(row.id); });
         tr.addEventListener("keydown", (event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
-            select(row.id);
+            void select(row.id);
           }
         });
         rowsEl.appendChild(tr);
@@ -152,11 +165,11 @@
       })[ch]);
     }
 
-    function select(id) {
+    async function select(id) {
       selectedId = id;
       draft = null;
       draftFlag.hidden = true;
-      const row = store.get(id);
+      const row = await store.get(id);
       empty.hidden = true;
       editor.hidden = false;
       document.getElementById("record-id").value = row.id;
@@ -165,7 +178,7 @@
       document.getElementById("notes").value = row.notes || "";
       setStatus(store.canSave() ? `Editing ${row.title}` : store.forbiddenReason(), store.canSave() ? "" : "danger");
       applyRoleChrome();
-      renderList();
+      await renderList();
     }
 
     editor.addEventListener("submit", async (event) => {
@@ -182,7 +195,7 @@
         draft = null;
         draftFlag.hidden = true;
         setStatus("Saved.", "ok");
-        renderList();
+        await renderList();
       } catch (error) {
         const forbidden = error.code === "FORBIDDEN";
         draftFlag.hidden = forbidden;
@@ -194,8 +207,8 @@
       }
     });
 
-    failBtn.addEventListener("click", () => {
-      store.armSaveFailure();
+    failBtn.addEventListener("click", async () => {
+      await store.armSaveFailure();
       setStatus("Next save will fail once.", "danger");
     });
 
@@ -210,7 +223,7 @@
     });
 
     applyRoleChrome();
-    renderList();
+    await renderList();
   </script>
 </body>
 </html>

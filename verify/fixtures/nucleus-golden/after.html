@@ -58,9 +58,9 @@
           <button type="button" id="install">Install package</button>
         </div>
       </div>
-      <div class="filters">
+      <form id="catalog-filters" class="filters" role="search" onsubmit="return false">
         <input id="q" type="search" placeholder="Search packages" aria-label="Search packages" />
-      </div>
+      </form>
       <section aria-label="Tool catalog" id="catalog">
         <h2 style="margin:0 0 12px;font-size:16px">Package catalog</h2>
         <ul class="catalog">
@@ -103,6 +103,7 @@
       if (term) { status.hidden = false; status.textContent = `${shown} match${shown === 1 ? "" : "es"}`; } else { status.hidden = true; status.textContent = ""; }
     }
     q.addEventListener("input", filter);
+    q.addEventListener("change", filter);
     document.getElementById("clear").onclick = () => {
       q.value = "";
       filter();

@@ -48,7 +48,7 @@
     "case:test": "node verify/case.test.mjs && node verify/case-flow.test.mjs",
     "knowledge:test": "node verify/knowledge.test.mjs",
     "judgment:test": "node verify/judgment-eval.test.mjs && node verify/human-review.test.mjs",
-    "records-pilot:test": "node verify/records-pilot-store.test.mjs && node verify/records-pilot-role.test.mjs && node verify/records-pilot-browser.mjs",
+    "records-pilot:test": "node verify/records-pilot-store.test.mjs && node verify/records-pilot-role.test.mjs && node verify/records-pilot-browser.mjs && node verify/records-pilot-nucleus-adapter.test.mjs && node verify/records-pilot-nucleus-browser.mjs",
     "catalog:test": "node verify/catalog.test.mjs",
     "cite:test": "node verify/art-direction.test.mjs && node verify/cite-operate.test.mjs",
     "lint:test": "node verify/design-lint-scope.test.mjs",

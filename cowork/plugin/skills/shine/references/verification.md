@@ -79,8 +79,11 @@ or prove reports `competingCtaProof: failed`. Doctor bite:
 
 
 
-**Nucleus golden-path prove (P6):** `verify/fixtures/nucleus-golden/receipts/` holds fail→pass
-measure logs and distinct defect crops. Run `node verify/nucleus-golden.test.mjs`.
+**Nucleus golden-path prove (P6/S4):** `verify/fixtures/nucleus-golden/receipts/` holds fail→pass
+measure logs, operable usability (`shine-usability.json`), and distinct defect crops.
+Run `node verify/nucleus-golden.test.mjs`. When Nucleus checkout/SSO is absent, run
+`node verify/sled-capture-prove.test.mjs` (SLED Capture–shaped real surface from the
+sled dump — no auth bypass).
 
 **Pattern recommender (P5):** read `packet.recommendation` before editing — primary page
 cite, antiPatterns, restructure vs repaint hints, kitRecipe, confidence

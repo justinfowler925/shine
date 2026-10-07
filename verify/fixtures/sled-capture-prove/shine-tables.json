@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "grids": [
+    {
+      "selector": "#notices",
+      "kind": "static",
+      "reason": "Read-only notice summary for SLED Capture triage; pursue is the page primary outside the table, not in-row editors."
+    }
+  ]
+}

@@ -6,6 +6,17 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **SLED Capture real-surface prove (S4).** When Nucleus checkout/SSO is absent,
+  `verify/fixtures/sled-capture-prove/` (from Project sled dump) fail→pass measure
+  with distinct CTA/KPI crops plus operable search→pursue usability. Nucleus golden
+  also gains operable `shine-usability.json` (search→install). Doctor bites:
+  `verify/sled-capture-prove.test.mjs`, strengthened `verify/nucleus-golden.test.mjs`.
+
+- **Records pilot → Nucleus-shaped consumer (S6).** Adapter contract + HTTP client
+  (`benchmark/records-pilot/adapters/`), local `/api/operate/records` harness, and
+  browser E2E list/edit/fail/retry without inventing SSO bypasses.
+  `docs/records-pilot-nucleus-adapter.md`.
+
 - **Denoise skill mode + DDR (N0).** `--mode denoise` loads `skill/references/denoise.md`,
   refuses without `--category`, and emits a Design Decision Record (`ddrId`,
   `constitutionIds`, `status` proposed→accepted). Actor implement is fail-closed until

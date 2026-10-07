@@ -1,0 +1,13 @@
+
+{
+  "status": 0,
+  "cite": "shadcn-catalog",
+  "objects": 7,
+  "flows": [
+    {
+      "id": "search-and-install",
+      "userJob": "Filter to Shine and open the install primary",
+      "steps": 4
+    }
+  ]
+}

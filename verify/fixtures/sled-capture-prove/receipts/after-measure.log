@@ -1,0 +1,15 @@
+
+  note: 2 off-scale spacing value(s), 10px×18, 14px×6 — em-derived is fine, ad-hoc is not
+mode=light  bodyBg=rgb(250, 250, 250)  bodyColor=rgb(24, 24, 27)
+tokens: {"--background":null,"--foreground":null,"--primary":null,"--border":null,"--ring":null,"--radius":null,"--shine-color-bg":null,"--shine-color-fg":null,"--shine-color-primary":null,"--shine-color-border":null,"--shine-color-ring":null}
+fontSizes: 14px×54  16px×3  20px×1
+axe: 0 violations, 1 incomplete
+contrast: 26 text elements measured, worst 7.41:1
+theme: light rgb(250, 250, 250) / other rgb(250, 250, 250) — single mode, declared color-scheme:light
+
+composition notes (judgement, not blocking):
+  • 5 controls in 4 visual treatments; 1 filled (primary-looking). Largest group: 2× rgba(0, 0, 0, 0) [Research signa, Usul & coverag]
+  • density: content~38% chrome~18% of viewport (app-shell probe)
+  • accent colour also used as non-interactive state on "Nucleus", "SLED Capture", "PM Tracker", "214", "27", "6" — one token, two meanings: every use is a legal token and the vocabulary still collapsed
+
+MEASURE PASS (partial evidence) — text ≥ threshold, spacing on scale, axe clean, no void regions, type steps distinct, hierarchy ok, theme accounted for

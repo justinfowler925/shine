@@ -1,4 +1,4 @@
-# Nucleus golden-path prove (P6)
+# Nucleus golden-path prove (P6 / S4 strengthen)
 
 **Fixture:** `verify/fixtures/nucleus-golden/`  
 **Receipts:** `verify/fixtures/nucleus-golden/receipts/`  
@@ -10,7 +10,14 @@
 |---|---|---|
 | `before.html` | measure **FAIL** | `receipts/before-measure.log` — `cta-pressure` dual filled primaries; `composition-slop` card soup + “Welcome to your dashboard”; KPI equal-card floor |
 | `after.html` | measure **PASS** | `receipts/after-measure.log` — single Install primary; focal install list; honest empty copy |
+| Operable job | usability **PASS** | `receipts/after-usability.log` + `shine-usability.json` — search → install |
 | Defect crops | distinct | `before-cta-crop.png` / `before-cards-crop.png` vs `after-cta-crop.png` |
+
+## Real Nucleus / SLED surface
+
+When checkout + SSO are unavailable, run the SLED Capture–shaped prove:
+`docs/sled-capture-prove.md` (`verify/sled-capture-prove.test.mjs`). Prefer live
+`/revops/sled` on Justin’s machine when SSO is present — never invent an auth bypass.
 
 ## What now hard-fails that didn’t before this expert track
 

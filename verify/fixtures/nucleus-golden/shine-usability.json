@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "cite": "shadcn-catalog",
+  "objects": [
+    {
+      "id": "nav",
+      "selector": "nav[aria-label=\"Operate\"]",
+      "referenceRole": "navigation",
+      "purpose": "Stay in Nucleus Operate while installing Company Tools packages"
+    },
+    {
+      "id": "filters",
+      "selector": "#catalog-filters",
+      "referenceRole": "form",
+      "purpose": "Filter the package catalog before choosing Install"
+    },
+    {
+      "id": "search",
+      "selector": "#q",
+      "referenceRole": "search",
+      "purpose": "Narrow the package catalog by name"
+    },
+    {
+      "id": "catalog",
+      "selector": "#catalog",
+      "referenceRole": "list",
+      "purpose": "Scan packages the workspace already owns"
+    },
+    {
+      "id": "install",
+      "selector": "#install",
+      "referenceRole": "command",
+      "purpose": "Open install as the single filled primary"
+    },
+    {
+      "id": "clear",
+      "selector": "#clear",
+      "referenceRole": "command",
+      "purpose": "Clear filters to restore the catalog"
+    },
+    {
+      "id": "status",
+      "selector": "#status",
+      "referenceRole": "state",
+      "purpose": "Observe filter matches and install confirmation",
+      "appearsIn": "search-and-install"
+    }
+  ],
+  "flows": [
+    {
+      "id": "search-and-install",
+      "userJob": "Filter to Shine and open the install primary",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "#q",
+          "value": "shine"
+        },
+        {
+          "action": "text",
+          "selector": "#status",
+          "value": "1 match"
+        },
+        {
+          "action": "click",
+          "selector": "#install"
+        },
+        {
+          "action": "text",
+          "selector": "#status",
+          "value": "Install dialog opened"
+        }
+      ]
+    }
+  ]
+}
