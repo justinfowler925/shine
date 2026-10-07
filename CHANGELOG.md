@@ -20,6 +20,12 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   Denoise loop uses the host module (no inline accept/plan). Doctor bite:
   `verify/critic-actor-host.test.mjs`.
 
+- **Skill A/B eval (Salesforce DI-style).** `verify/skill-ab-eval.mjs` + pinned
+  `verify/fixtures/skill-ab/cases.json` score denoise guidance **with vs without**
+  on Sled-class fixtures (CTA, KPI, focal, cite, dual-grid). Machine oracles only —
+  no preference / RLAIF labels. `npm run skill:ab`; doctor bite
+  `verify/skill-ab-eval.test.mjs`. `applySetFocal` falls back to card/main for Usul soup.
+
 - **Critic ≠ Actor turns (S1).** `core/reflexion.mjs` separates diagnose/critic from
   Actor implement: distinct principals, Atlas verdicts `done|partial|blocked|error`,
   self-accept ban (critic and actor cannot accept the review — host only),
@@ -54,6 +60,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   (`benchmark/records-pilot/adapters/`), local `/api/operate/records` harness, and
   browser E2E list/edit/fail/retry without inventing SSO bypasses.
   `docs/records-pilot-nucleus-adapter.md`.
+
+- **Records pilot E2E deepen (S6).** Full pilot-task state matrix over the
+  Nucleus-shaped adapter: loading, empty (`--seed empty`), filtered-empty,
+  validation (400), stale-write (409 + reload/retry), list refresh after PATCH,
+  fresh GET persistence proof. Doctor bite
+  `verify/records-pilot-nucleus-bite.mjs` fail-closes FORBIDDEN / SAVE_FAILED /
+  VALIDATION / STALE_WRITE and asserts doctor wiring.
 
 - **Denoise skill mode + DDR (N0).** `--mode denoise` loads `skill/references/denoise.md`,
   refuses without `--category`, and emits a Design Decision Record (`ddrId`,

@@ -55,9 +55,11 @@ installing that base (or use the offline `.tgz`). Receipt for the offline bundle
 
 ## Brand palette
 
-The Clearspeed edition **owns** the brand accent. Profile source of truth:
-
-`skill/references/clearspeed/brand.json` → Signal Orange `#ED5925` (hover `#D24A1B`).
+**Authority:** Claude Design → `clearspeed-brand` plugin (narrative/visual). Shine’s
+ClearSpeed **machine** seam is `skill/references/clearspeed/brand.json` → Signal Orange
+`#ED5925` (hover `#D24A1B`). Emit the writer kit with `node scripts/sync-tokens.mjs`
+(`brand-tokens.json`). See `docs/clearspeed-brand-tokens.md` (S7 — old plugin
+`sync-tokens.mjs` dead-path generator is retired).
 
 `install-clearspeed-edition.mjs` materializes `edition/tokens` (not a base symlink) and
 runs `scripts/apply-clearspeed-brand.mjs` so the edition tree carries Clearspeed orange

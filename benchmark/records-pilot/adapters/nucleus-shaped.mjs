@@ -2,24 +2,31 @@
  * Nucleus-shaped HTTP records adapter.
  *
  * Talks to a local (or product) JSON API that mirrors Operate record list/edit:
- *   GET    {base}/api/operate/records
+ *   GET    {base}/api/operate/records[?q=]
  *   GET    {base}/api/operate/records/:id
  *   PATCH  {base}/api/operate/records/:id
- *   POST   {base}/api/operate/records/:id/arm-fail   (harness only)
+ *   POST   {base}/api/operate/records/_harness/arm-fail   (local prove only)
  *
  * Role is advisory for the local harness (`X-Shine-Role`). Real Nucleus uses the
- * Workspace session — Shine never invents SSO bypasses.
+ * Workspace session — Shine never invents SSO bypasses. Pass `credentials: "include"`
+ * when attaching to a same-origin product origin so the browser session rides along.
  */
 import { assertRecordRow } from "./contract.mjs";
 
 /**
- * @param {{ baseUrl: string, role?: "editor"|"viewer", fetchImpl?: typeof fetch }} opts
+ * @param {{
+ *   baseUrl: string,
+ *   role?: "editor"|"viewer",
+ *   fetchImpl?: typeof fetch,
+ *   credentials?: RequestCredentials,
+ * }} opts
  * @returns {import("./contract.mjs").RecordsAdapter}
  */
 export function createNucleusShapedStore({
   baseUrl,
   role = "editor",
   fetchImpl = globalThis.fetch.bind(globalThis),
+  credentials = "omit",
 } = {}) {
   if (!baseUrl) throw new Error("nucleus-shaped adapter requires baseUrl");
   const root = String(baseUrl).replace(/\/$/, "");
@@ -27,6 +34,7 @@ export function createNucleusShapedStore({
 
   async function request(path, init = {}) {
     const res = await fetchImpl(`${root}${path}`, {
+      credentials,
       ...init,
       headers: {
         accept: "application/json",
@@ -44,8 +52,21 @@ export function createNucleusShapedStore({
     }
     if (!res.ok) {
       const err = new Error(body?.error || `HTTP ${res.status}`);
-      err.code = body?.code || (res.status === 403 ? "FORBIDDEN" : res.status === 503 ? "SAVE_FAILED" : "HTTP_ERROR");
+      err.code =
+        body?.code ||
+        (res.status === 403
+          ? "FORBIDDEN"
+          : res.status === 409
+            ? "STALE_WRITE"
+            : res.status === 400
+              ? "VALIDATION"
+              : res.status === 503
+                ? "SAVE_FAILED"
+                : res.status === 404
+                  ? "NOT_FOUND"
+                  : "HTTP_ERROR");
       err.status = res.status;
+      if (body?.current) err.current = body.current;
       throw err;
     }
     return body;
@@ -60,8 +81,12 @@ export function createNucleusShapedStore({
     forbiddenReason() {
       return role === "viewer" ? "Your role is viewer; saving is forbidden." : "";
     },
-    async list() {
-      const body = await request("/api/operate/records");
+    async list(opts = {}) {
+      const q = opts.q != null ? String(opts.q).trim() : "";
+      const path = q
+        ? `/api/operate/records?q=${encodeURIComponent(q)}`
+        : "/api/operate/records";
+      const body = await request(path);
       if (!Array.isArray(body?.rows)) throw new Error("nucleus-shaped list: rows required");
       for (const row of body.rows) assertRecordRow(row);
       return body.rows;
@@ -77,9 +102,18 @@ export function createNucleusShapedStore({
         err.code = "FORBIDDEN";
         throw err;
       }
+      const payload = {
+        ...patch,
+        ...(opts.forceFail ? { fail: true } : {}),
+        ...(opts.expectedRevision != null ? { revision: opts.expectedRevision } : {}),
+      };
       const body = await request(`/api/operate/records/${encodeURIComponent(id)}`, {
         method: "PATCH",
-        body: JSON.stringify({ ...patch, ...(opts.forceFail ? { fail: true } : {}) }),
+        body: JSON.stringify(payload),
+        headers:
+          opts.expectedRevision != null
+            ? { "if-match": String(opts.expectedRevision) }
+            : {},
       });
       assertRecordRow(body);
       return body;

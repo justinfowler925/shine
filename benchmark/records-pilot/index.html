@@ -34,6 +34,7 @@
     }
     button { cursor: pointer; background: var(--action); color: #fff; border-color: var(--action); }
     button.secondary { background: #fff; color: var(--ink); border-color: var(--line); }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
     button:focus-visible, input:focus-visible, textarea:focus-visible, tr:focus-visible {
       outline: 2px solid var(--focus); outline-offset: 2px;
     }
@@ -43,18 +44,21 @@
     .status[data-tone="danger"] { color: var(--danger); }
     .status[data-tone="ok"] { color: var(--ok); }
     .draft { font-size: 0.85rem; color: var(--muted); }
+    .field-error { color: var(--danger); font-size: 0.85rem; margin: 0.25rem 0 0; }
   </style>
 </head>
 <body>
   <main>
     <h1>Records inspect → edit → persist</h1>
-    <p class="lede">Phase 2 pilot fixture. Memory or Nucleus-shaped HTTP adapter with intentional save failure/retry. Not a product skin.</p>
+    <p class="lede">Phase 2 pilot fixture. Memory or Nucleus-shaped HTTP adapter with intentional save failure/retry, validation, and stale-write recovery. Not a product skin.</p>
     <p class="lede" id="adapter-label">adapter: memory</p>
     <div class="layout">
       <section aria-labelledby="list-heading">
         <h2 id="list-heading">Records</h2>
         <label for="filter">Filter</label>
         <input id="filter" type="search" placeholder="Filter by title or owner" autocomplete="off" />
+        <p class="status" id="list-loading" hidden>Loading records…</p>
+        <p class="status" id="list-empty" hidden>No records yet.</p>
         <p class="status" id="filter-empty" hidden>No matching records. <button type="button" class="secondary" id="clear-filter">Clear filter</button></p>
         <table>
           <thead>
@@ -68,16 +72,20 @@
         <p id="empty" class="status">Select a record to edit.</p>
         <form id="editor" hidden>
           <input type="hidden" id="record-id" />
+          <input type="hidden" id="record-revision" />
           <label for="title">Title</label>
           <input id="title" name="title" required />
+          <p class="field-error" id="title-error" hidden></p>
           <label for="owner">Owner</label>
           <input id="owner" name="owner" required />
+          <p class="field-error" id="owner-error" hidden></p>
           <label for="notes">Notes</label>
           <textarea id="notes" name="notes" rows="4"></textarea>
           <p class="draft" id="draft-flag" hidden>Unsaved draft retained after a failed save.</p>
           <div class="row">
             <button type="submit">Save</button>
             <button type="button" class="secondary" id="fail-next">Arm next save failure</button>
+            <button type="button" class="secondary" id="reload-row" hidden>Reload record</button>
           </div>
         </form>
         <p class="status" id="status" role="status" aria-live="polite"></p>
@@ -93,11 +101,21 @@
     const role = params.get("role") === "viewer" ? "viewer" : "editor";
     const adapter = params.get("adapter") === "nucleus-shaped" ? "nucleus-shaped" : "memory";
     const apiBase = params.get("api") || "";
+    const delayMs = Number(params.get("delayMs") || 0);
 
     let store;
     if (adapter === "nucleus-shaped") {
       if (!apiBase) throw new Error("nucleus-shaped adapter requires ?api=http://… base URL");
-      store = createNucleusShapedStore({ baseUrl: apiBase, role });
+      const inner = createNucleusShapedStore({ baseUrl: apiBase, role });
+      store = delayMs > 0
+        ? {
+            ...inner,
+            async list(opts) {
+              await new Promise((r) => setTimeout(r, delayMs));
+              return inner.list(opts);
+            },
+          }
+        : inner;
     } else {
       store = createRoleStore({ role, inner: createRecordsStore() });
     }
@@ -112,15 +130,28 @@
     const draftFlag = document.getElementById("draft-flag");
     const filterInput = document.getElementById("filter");
     const filterEmpty = document.getElementById("filter-empty");
+    const listLoading = document.getElementById("list-loading");
+    const listEmpty = document.getElementById("list-empty");
+    const titleError = document.getElementById("title-error");
+    const ownerError = document.getElementById("owner-error");
+    const reloadBtn = document.getElementById("reload-row");
     const saveBtn = editor.querySelector('button[type="submit"]');
     const failBtn = document.getElementById("fail-next");
     let selectedId = null;
     let draft = null;
     let filter = "";
+    let loadedOnce = false;
 
     function setStatus(message, tone = "") {
       status.textContent = message;
       status.dataset.tone = tone;
+    }
+
+    function clearFieldErrors() {
+      titleError.hidden = true;
+      titleError.textContent = "";
+      ownerError.hidden = true;
+      ownerError.textContent = "";
     }
 
     function applyRoleChrome() {
@@ -132,30 +163,52 @@
     }
 
     async function filteredRows() {
-      const q = filter.trim().toLowerCase();
+      const q = filter.trim();
+      if (adapter === "nucleus-shaped" && typeof store.list === "function") {
+        return store.list(q ? { q } : {});
+      }
       const rows = await store.list();
       if (!q) return rows;
-      return rows.filter((row) => `${row.title} ${row.owner} ${row.status}`.toLowerCase().includes(q));
+      const needle = q.toLowerCase();
+      return rows.filter((row) => `${row.title} ${row.owner} ${row.status}`.toLowerCase().includes(needle));
     }
 
     async function renderList() {
-      const rows = await filteredRows();
-      rowsEl.innerHTML = "";
-      filterEmpty.hidden = rows.length > 0;
-      for (const row of rows) {
-        const tr = document.createElement("tr");
-        tr.tabIndex = 0;
-        tr.dataset.id = row.id;
-        tr.setAttribute("aria-selected", row.id === selectedId ? "true" : "false");
-        tr.innerHTML = `<td>${escapeHtml(row.title)}</td><td>${escapeHtml(row.owner)}</td><td>${escapeHtml(row.status)}</td>`;
-        tr.addEventListener("click", () => { void select(row.id); });
-        tr.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            void select(row.id);
-          }
-        });
-        rowsEl.appendChild(tr);
+      listLoading.hidden = loadedOnce;
+      filterEmpty.hidden = true;
+      listEmpty.hidden = true;
+      try {
+        const rows = await filteredRows();
+        loadedOnce = true;
+        listLoading.hidden = true;
+        rowsEl.innerHTML = "";
+        const hasFilter = Boolean(filter.trim());
+        if (rows.length === 0 && !hasFilter) {
+          listEmpty.hidden = false;
+          return;
+        }
+        if (rows.length === 0 && hasFilter) {
+          filterEmpty.hidden = false;
+          return;
+        }
+        for (const row of rows) {
+          const tr = document.createElement("tr");
+          tr.tabIndex = 0;
+          tr.dataset.id = row.id;
+          tr.setAttribute("aria-selected", row.id === selectedId ? "true" : "false");
+          tr.innerHTML = `<td>${escapeHtml(row.title)}</td><td>${escapeHtml(row.owner)}</td><td>${escapeHtml(row.status)}</td>`;
+          tr.addEventListener("click", () => { void select(row.id); });
+          tr.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              void select(row.id);
+            }
+          });
+          rowsEl.appendChild(tr);
+        }
+      } catch (error) {
+        listLoading.hidden = true;
+        setStatus(error.message || "Failed to load records", "danger");
       }
     }
 
@@ -169,10 +222,13 @@
       selectedId = id;
       draft = null;
       draftFlag.hidden = true;
+      reloadBtn.hidden = true;
+      clearFieldErrors();
       const row = await store.get(id);
       empty.hidden = true;
       editor.hidden = false;
       document.getElementById("record-id").value = row.id;
+      document.getElementById("record-revision").value = String(row.revision ?? 1);
       document.getElementById("title").value = row.title;
       document.getElementById("owner").value = row.owner;
       document.getElementById("notes").value = row.notes || "";
@@ -183,7 +239,9 @@
 
     editor.addEventListener("submit", async (event) => {
       event.preventDefault();
+      clearFieldErrors();
       const id = document.getElementById("record-id").value;
+      const revision = Number(document.getElementById("record-revision").value || 1);
       const patch = {
         title: document.getElementById("title").value.trim(),
         owner: document.getElementById("owner").value.trim(),
@@ -191,13 +249,38 @@
       };
       draft = { id, ...patch };
       try {
-        await store.save(id, patch);
+        const saved = await store.save(id, patch, { expectedRevision: revision });
         draft = null;
         draftFlag.hidden = true;
+        reloadBtn.hidden = true;
+        document.getElementById("record-revision").value = String(saved.revision ?? revision + 1);
         setStatus("Saved.", "ok");
         await renderList();
       } catch (error) {
-        const forbidden = error.code === "FORBIDDEN";
+        const code = error.code || "";
+        if (code === "VALIDATION") {
+          const msg = error.message || "Invalid fields";
+          if (!patch.title) {
+            titleError.textContent = "Title is required.";
+            titleError.hidden = false;
+          }
+          if (!patch.owner) {
+            ownerError.textContent = "Owner is required.";
+            ownerError.hidden = false;
+          }
+          setStatus(msg, "danger");
+          return;
+        }
+        if (code === "STALE_WRITE") {
+          draftFlag.hidden = false;
+          reloadBtn.hidden = false;
+          document.getElementById("title").value = draft.title;
+          document.getElementById("owner").value = draft.owner;
+          document.getElementById("notes").value = draft.notes;
+          setStatus(`${error.message}. Draft retained — reload then retry.`, "danger");
+          return;
+        }
+        const forbidden = code === "FORBIDDEN";
         draftFlag.hidden = forbidden;
         document.getElementById("title").value = draft.title;
         document.getElementById("owner").value = draft.owner;
@@ -210,6 +293,19 @@
     failBtn.addEventListener("click", async () => {
       await store.armSaveFailure();
       setStatus("Next save will fail once.", "danger");
+    });
+
+    reloadBtn.addEventListener("click", async () => {
+      if (!selectedId) return;
+      const kept = draft ? { ...draft } : null;
+      await select(selectedId);
+      if (kept) {
+        document.getElementById("title").value = kept.title;
+        document.getElementById("owner").value = kept.owner;
+        document.getElementById("notes").value = kept.notes;
+        draftFlag.hidden = false;
+        setStatus("Record reloaded. Draft reapplied — save to persist.", "");
+      }
     });
 
     filterInput.addEventListener("input", () => {
