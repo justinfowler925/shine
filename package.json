@@ -85,7 +85,9 @@
     "showcase:test": "node verify/showcase-browser.mjs",
     "showcase:capture": "node verify/capture-showcase.mjs",
     "integration:test": "node verify/integration-readiness.test.mjs",
-    "untitled:browser": "node verify/untitled-browser.mjs"
+    "untitled:browser": "node verify/untitled-browser.mjs",
+    "constitution": "node core/constitution.mjs",
+    "constitution:test": "node verify/constitution.test.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",

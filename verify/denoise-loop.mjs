@@ -165,10 +165,12 @@ export async function runDenoiseLoop({
       tried: applied.applied,
       ddrId: packet.ddrId,
       constitutionIds: packet.ddr.constitutionIds,
+      constitutionPrinciples: packet.ddr.constitution,
       criticAgentId: DEFAULT_CRITIC_ID,
       actorAgentId: DEFAULT_ACTOR_ID,
       hostAgentId: DEFAULT_HOST_ID,
       retriesUsed,
+      requireConstitutionCitation: true,
     });
     criticRan = true;
     reflexion = hostRound.reflexion;
@@ -239,6 +241,8 @@ export async function runDenoiseLoop({
     cite,
     ddrId: packet.ddrId,
     constitutionIds: packet.ddr.constitutionIds,
+    constitutionEdition: packet.ddr.constitutionEdition || null,
+    constitution: packet.ddr.constitution || [],
     restructureHints: packet.recommendation?.restructureHints || [],
     preflight: pre.signals.map((s) => s.id),
     opsApplied: applied.applied,

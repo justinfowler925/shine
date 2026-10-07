@@ -14,7 +14,7 @@ import {loadTemplates} from "../corpus/catalog.mjs";
 import {retrievePrinciples} from "../knowledge/retrieve.mjs";
 import {recommend} from "../benchmark/judgment-eval.mjs";
 import {isOperateProveScreen} from "../hooks/receipt.mjs";
-import {buildDdr, OPERATE_DENOISE_CONSTITUTION} from "./ddr.mjs";
+import {buildDdr} from "./ddr.mjs";
 import {assertNewSurfaceBrief, readBrief, wireframeBriefRef} from "./wireframe-brief.mjs";
 
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),"..");
@@ -197,7 +197,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   antiCites:(recommendation.antiPatterns||[]).slice(0,6),
   restructureVsRepaint:needsRestructure?"restructure":"repaint",
   restructureOps:needsRestructure?["cta-budget","set-focal","kpi-collapse","rebind-cite"].filter(Boolean):[],
-  constitutionIds:lane==="saas"||mode==="denoise"?[...OPERATE_DENOISE_CONSTITUTION]:["prove-mandatory"],
+  // constitutionIds omitted → buildDdr resolves numbered ClearSpeed Operate edition
   openRisks:packet.gaps.slice(0,4),
   status:statusWanted,
   ctaBudget:lane==="saas"||mode==="denoise"?1:null,

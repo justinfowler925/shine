@@ -9,19 +9,18 @@ import { createHash, randomUUID } from "node:crypto";
 import { existsSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  DEFAULT_OPERATE_CONSTITUTION_ID,
+  operateConstitutionIds,
+  resolveOperateConstitution,
+} from "./constitution.mjs";
 
 export const DDR_STATUSES = Object.freeze(["proposed", "accepted", "superseded"]);
 
 /** Default Operate denoise constitution — critic must cite these IDs. */
-export const OPERATE_DENOISE_CONSTITUTION = Object.freeze([
-  "cta-pressure",
-  "dual-focal-ban",
-  "kpi-soup-off-path",
-  "primary-task-3s",
-  "cite-honesty",
-  "prove-mandatory",
-  "restructure-before-repaint",
-]);
+export const OPERATE_DENOISE_CONSTITUTION = Object.freeze(operateConstitutionIds());
+
+export { DEFAULT_OPERATE_CONSTITUTION_ID };
 
 export function mintDdrId({ job = "", lane = "", category = "", mode = "" } = {}) {
   const stamp = randomUUID().slice(0, 8);
@@ -47,6 +46,7 @@ export function buildDdr({
   restructureVsRepaint = "repaint",
   restructureOps = [],
   constitutionIds = null,
+  constitutionEdition = DEFAULT_OPERATE_CONSTITUTION_ID,
   openRisks = [],
   status = "proposed",
   ctaBudget = null,
@@ -58,9 +58,12 @@ export function buildDdr({
   if (!DDR_STATUSES.includes(status)) {
     throw new Error(`ddr status must be ${DDR_STATUSES.join("|")}; got ${status}`);
   }
-  const ids =
-    constitutionIds ||
-    (lane === "saas" || mode === "denoise" ? [...OPERATE_DENOISE_CONSTITUTION] : ["prove-mandatory"]);
+  const resolved = resolveOperateConstitution({
+    lane,
+    mode,
+    constitutionIds,
+    editionId: constitutionEdition || DEFAULT_OPERATE_CONSTITUTION_ID,
+  });
   return {
     ddrId: mintDdrId({ job, lane, category, mode }),
     status,
@@ -72,7 +75,10 @@ export function buildDdr({
     antiCites: [...antiCites],
     restructureVsRepaint,
     restructureOps: [...restructureOps],
-    constitutionIds: ids,
+    constitutionIds: resolved.constitutionIds,
+    /** Numbered edition principles — critic cites by id or n. */
+    constitution: resolved.principles,
+    constitutionEdition: resolved.editionId,
     openRisks: openRisks.length
       ? openRisks
       : ["Confirm product sibling still owns conventions before inventing chrome."],
@@ -84,7 +90,7 @@ export function buildDdr({
     acceptedAt: status === "accepted" ? new Date().toISOString() : null,
     instruction:
       status === "accepted"
-        ? "DDR accepted — Actor may implement. Prove receipt must link ddrId. Supersede to change decisions."
+        ? "DDR accepted — Actor may implement. Prove receipt must link ddrId. Critic must cite constitutionIds. Supersede to change decisions."
         : "DDR proposed — refuse Actor implement until status=accepted (--accept or ddr.mjs accept).",
   };
 }

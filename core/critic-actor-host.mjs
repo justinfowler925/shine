@@ -86,6 +86,7 @@ export async function runCriticActorHostRound({
   tried = [],
   messages = [],
   constitutionIds = [],
+  constitutionPrinciples = null,
   antiPatternIds = [],
   ddrId = "",
   callCritic = null,
@@ -94,6 +95,7 @@ export async function runCriticActorHostRound({
   actorAgentId = DEFAULT_ACTOR_ID,
   hostAgentId = DEFAULT_HOST_ID,
   retriesUsed = 0,
+  requireConstitutionCitation = true,
 } = {}) {
   const critic = createAgentIdentity({ role: "critic", agentId: criticAgentId });
   const actor = createAgentIdentity({ role: "actor", agentId: actorAgentId });
@@ -109,12 +111,14 @@ export async function runCriticActorHostRound({
     tried,
     messages,
     constitutionIds,
+    constitutionPrinciples,
     antiPatternIds,
     ddrId,
     callCritic,
     storeLesson,
     criticAgentId: critic.agentId,
     actorAgentId: actor.agentId,
+    requireConstitutionCitation,
   });
 
   const principals = {

@@ -68,6 +68,13 @@ When Nucleus checkout/SSO is unavailable, use `verify/fixtures/sled-capture-prov
 (distilled from the Project sled dump). Run `node verify/sled-capture-prove.test.mjs`.
 Do not invent Workspace auth bypasses.
 
+## Operate constitution (numbered — critic must cite)
+
+SaaS / denoise packets emit `ddr.constitutionIds` from
+`knowledge/constitutions/clearspeed-operate.json` (n=1…7: `cta-pressure` …
+`restructure-before-repaint`). Critic partial/blocked turns must cite ≥1 id or
+number — see `docs/operate-constitution.md`.
+
 ## Diagnosis order (hard)
 
 1. Primary job reachable in ~3s (`primaryTaskCheck`)

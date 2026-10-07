@@ -107,17 +107,22 @@ node "$ROOT/core/reflexion.mjs" --fail "cta-pressure: …" --ddr <ddrId>   # Cri
 
 ## Constitution IDs (critic must cite)
 
-Packet `ddr.constitutionIds` for Operate denoise defaults:
+Packet `ddr.constitutionIds` + numbered `ddr.constitution[]` from the ClearSpeed
+Operate edition catalog (`knowledge/constitutions/clearspeed-operate.json`).
+Critic **must** cite ≥1 principle (by `id` or number `n`) on every `partial` /
+`blocked` turn — fail-closed in `core/reflexion.mjs`.
 
-| ID | Rule |
-|---|---|
-| `cta-pressure` | Exactly one filled primary in main |
-| `dual-focal-ban` | No peer worklists/grids for the same job |
-| `kpi-soup-off-path` | KPI encyclopedia off the decide path |
-| `primary-task-3s` | Stranger starts the job in ~3s |
-| `cite-honesty` | Page cite matches category (no queue-on-settings lie) |
-| `prove-mandatory` | Fresh prove.mjs receipt; compare alone insufficient |
-| `restructure-before-repaint` | No polish while structure red |
+| # | ID | Rule |
+|---|---|---|
+| 1 | `cta-pressure` | Exactly one filled primary in main |
+| 2 | `dual-focal-ban` | No peer worklists/grids for the same job |
+| 3 | `kpi-soup-off-path` | KPI encyclopedia off the decide path |
+| 4 | `primary-task-3s` | Stranger starts the job in ~3s |
+| 5 | `cite-honesty` | Page cite matches category (no queue-on-settings lie) |
+| 6 | `prove-mandatory` | Fresh prove.mjs receipt; compare alone insufficient |
+| 7 | `restructure-before-repaint` | No polish while structure red |
+
+See `docs/operate-constitution.md`.
 
 ## Proof bar
 

@@ -27,6 +27,11 @@ import {
   inferCiteBansFromProveFail,
   isCiteFailCategory,
 } from "./learn.mjs";
+import {
+  enforceCriticConstitutionCitation,
+  formatNumberedConstitution,
+  resolveOperateConstitution,
+} from "./constitution.mjs";
 
 export const VERDICTS = Object.freeze(["done", "partial", "blocked", "error"]);
 export const TURN_ROLES = Object.freeze(["critic", "actor"]);
@@ -148,6 +153,7 @@ export function buildCriticPrompt({
   tried = [],
   transcript = "",
   constitutionIds = [],
+  constitutionPrinciples = null,
   ddrId = "",
   antiPatternIds = [],
 } = {}) {
@@ -156,7 +162,14 @@ export function buildCriticPrompt({
     .map((f, i) => `${i + 1}. ${f}`)
     .join("\n");
   const triedList = (tried.length ? tried : ["none recorded"]).slice(0, 6).join("; ");
-  const constitution = (constitutionIds || []).slice(0, 8).join(", ") || "prove-mandatory";
+  const principles =
+    constitutionPrinciples ||
+    resolveOperateConstitution({
+      lane: "saas",
+      mode: "denoise",
+      constitutionIds: constitutionIds?.length ? constitutionIds : null,
+    }).principles;
+  const numbered = formatNumberedConstitution(principles.slice(0, 12));
   const anti = (antiPatternIds || []).slice(0, 8).join(", ") || "(none)";
   return [
     "You are the Shine design critic. One call. No tools. ≤400 tokens.",
@@ -166,7 +179,8 @@ export function buildCriticPrompt({
     "partial → one imperative next step for ONE more Actor pass (do not restart analysis).",
     "blocked → one clarifying question only.",
     "error → critic failure; turn still finalizes.",
-    `Constitution IDs to cite when relevant: ${constitution}`,
+    "MUST cite ≥1 numbered constitution principle (id or n) on every partial/blocked turn — fail-closed.",
+    `Edition constitution (numbered; cite from this list):\n${numbered}`,
     `Anti-pattern IDs (knowledge/anti-patterns): ${anti}`,
     ddrId ? `DDR: ${ddrId}` : "DDR: (none)",
     `Goal: ${goal || "(unset)"}`,
@@ -372,6 +386,7 @@ export async function runReflexion({
   tried = [],
   messages = [],
   constitutionIds = [],
+  constitutionPrinciples = null,
   antiPatternIds = [],
   ddrId = "",
   callCritic = null,
@@ -385,9 +400,20 @@ export async function runReflexion({
   learnStorePath = undefined,
   criticAgentId = DEFAULT_CRITIC_ID,
   actorAgentId = DEFAULT_ACTOR_ID,
+  /** Fail-closed: partial/blocked must cite packet constitutionIds (default true). */
+  requireConstitutionCitation = true,
 } = {}) {
   const critic = createAgentIdentity({ role: "critic", agentId: criticAgentId });
   const actor = createAgentIdentity({ role: "actor", agentId: actorAgentId });
+  const resolvedConstitution = resolveOperateConstitution({
+    lane: "saas",
+    mode: "denoise",
+    constitutionIds: constitutionIds?.length ? constitutionIds : null,
+  });
+  const principles = constitutionPrinciples || resolvedConstitution.principles;
+  const requiredIds = constitutionIds?.length
+    ? [...constitutionIds]
+    : resolvedConstitution.constitutionIds;
   try {
     assertDistinctPrincipals(critic, actor);
   } catch (error) {
@@ -413,7 +439,8 @@ export async function runReflexion({
     failures,
     tried,
     transcript,
-    constitutionIds,
+    constitutionIds: requiredIds,
+    constitutionPrinciples: principles,
     antiPatternIds,
     ddrId,
   });
@@ -454,7 +481,7 @@ export async function runReflexion({
         };
       }
     } else {
-      result = heuristicCritic({ failures, goal, constitutionIds });
+      result = heuristicCritic({ failures, goal, constitutionIds: requiredIds });
     }
   } catch (error) {
     result = {
@@ -469,12 +496,20 @@ export async function runReflexion({
   }
 
   result.verdict = normalizeVerdict(result.verdict);
+  if (requireConstitutionCitation && result.verdict !== "error") {
+    result = enforceCriticConstitutionCitation(result, {
+      constitutionIds: requiredIds,
+      principles,
+    });
+    result.verdict = normalizeVerdict(result.verdict);
+  }
   result.ddrId = ddrId || null;
   result.retryBudget = MAX_REFLEXION_RETRIES;
   result.promptChars = prompt.length;
   result.criticAgentId = critic.agentId;
   result.actorAgentId = actor.agentId;
   result.selfAcceptBanned = true;
+  result.constitutionEdition = resolvedConstitution.editionId;
   // Convenience: prove neither principal can accept.
   result.acceptByCritic = canAcceptVerdict({ reflexion: result, acceptorId: critic.agentId });
   result.acceptByActor = canAcceptVerdict({ reflexion: result, acceptorId: actor.agentId });

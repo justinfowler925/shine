@@ -6,6 +6,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **ClearSpeed Operate numbered constitution (enterprise §3).**
+  `knowledge/constitutions/clearspeed-operate.json` + `core/constitution.mjs`
+  bind numbered edition principles onto every SaaS/denoise DDR
+  (`ddr.constitutionIds`, `ddr.constitution[]`, `ddr.constitutionEdition`).
+  Critic prompts show the numbered list; `partial`/`blocked` turns fail-closed
+  unless they cite ≥1 principle id or number. Wired through reflexion,
+  critic-actor-host, and denoise-loop. Doctor bite
+  `verify/constitution.test.mjs`. Docs: `docs/operate-constitution.md`.
+
 - **DDR audit trail (enterprise §5).** `core/audit-trail.mjs` stores an
   append-only Action/Observation event log keyed by immutable `ddrId`, links
   prove completion receipts by content hash (`proveReceiptHash`), and supersedes
