@@ -6,6 +6,7 @@
 
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { buildXorFoldCropHtml } from "./xor-saved-view.mjs";
 
 const SHELL = `body{margin:0;font:14px/1.4 system-ui;background:#fafafa;color:#18181b}
 .fold{max-width:720px;margin:24px auto;padding:16px;background:#fff;border:1px solid #e4e4e7;border-radius:8px}
@@ -344,7 +345,10 @@ export const DEFECT_CROP_PAIRS = [
     beforeCrop: "queue-dual-grid-before-crop.html",
     afterCrop: "queue-dual-grid-fold-crop.html",
     buildBefore: buildDualGridBeforeCropHtml,
-    buildAfter: null, // owned by xor-saved-view.buildXorFoldCropHtml
+    // Self-contained FAIL→PASS: default fold crop from XOR helper.
+    // Callers may still override via ensureDefectCropReceipts({ xorAfterHtml }) for titled eval crops.
+    buildAfter: () =>
+      buildXorFoldCropHtml({ keptTitle: "Queue", chipLabel: "David's 10 today" }),
     beforeMust: [/role=["']grid["']/, /David/, /Queue/],
     afterMust: [/data-shine-xor-views|data-shine-xor-from-peer/, /role=["']grid["']/],
   },
@@ -374,6 +378,8 @@ export const DEFECT_CROP_PAIRS = [
 
 /**
  * Write all pinned crop HTML receipts into receiptsDir.
+ * `xorAfterHtml` overrides the queue-dual-grid after crop when callers have
+ * titled fold crops from applyXorSavedView (denoise-eval / skill-ab).
  * @returns {{ written: string[], pairs: typeof DEFECT_CROP_PAIRS }}
  */
 export function ensureDefectCropReceipts(receiptsDir, { xorAfterHtml } = {}) {
@@ -385,14 +391,16 @@ export function ensureDefectCropReceipts(receiptsDir, { xorAfterHtml } = {}) {
       writeFileSync(path, pair.buildBefore());
       written.push(pair.beforeCrop);
     }
-    if (pair.buildAfter) {
+    if (!pair.afterCrop) continue;
+    let afterHtml = null;
+    if (xorAfterHtml && pair.id === "queue-dual-grid") {
+      afterHtml = xorAfterHtml;
+    } else if (pair.buildAfter) {
+      afterHtml = pair.buildAfter();
+    }
+    if (afterHtml) {
       const path = join(receiptsDir, pair.afterCrop);
-      writeFileSync(path, pair.buildAfter());
-      written.push(pair.afterCrop);
-    } else if (xorAfterHtml && pair.afterCrop) {
-      // Caller supplies XOR fold crop via buildXorFoldCropHtml
-      const path = join(receiptsDir, pair.afterCrop);
-      writeFileSync(path, xorAfterHtml);
+      writeFileSync(path, afterHtml);
       written.push(pair.afterCrop);
     }
   }

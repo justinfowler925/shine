@@ -47,9 +47,8 @@ for (const id of ["queue-cta", "queue-kpi", "sources-cite", "queue-dual-grid", "
   );
 }
 
-ensureDefectCropReceipts(RECEIPTS, {
-  xorAfterHtml: buildXorFoldCropHtml({ keptTitle: "Queue", chipLabel: "David's 10 today" }),
-});
+// Dual-grid after is self-contained via buildAfter → buildXorFoldCropHtml (no override required).
+ensureDefectCropReceipts(RECEIPTS);
 
 const read = (name) => {
   const path = join(RECEIPTS, name);

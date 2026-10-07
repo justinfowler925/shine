@@ -178,7 +178,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  const recommendation=recommendPattern(catalog,`${job} ${categories[kind].fallback}`,{lane,limit:6,framework,licenseMode:"source",installedKits:RECIPE_KITS[recipeKey]||[],category:kind,edition:lane==="saas"?"clearspeed-operate":"",learnStorePath,learnStore});
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns, restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns, restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), xorSavedView.fixture*/crop* (D10 dual-grid XOR FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -192,8 +192,29 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    instruction:recommendation.tableQuality.instruction||packet.tableQuality.instruction,
   };
  }
+ // Denoise / queue jobs: bind D10 XOR dual-grid FAIL→PASS fixture + crop paths.
+ if(recommendation.xorSavedView?.fixtureBefore){
+  const x=recommendation.xorSavedView;
+  packet.xorSavedView={
+   mode:x.mode||"xor-saved-view",
+   op:x.op||"collapse-peer-grids",
+   keepTitleIncludes:x.keepTitleIncludes||["Queue"],
+   foldTitleIncludes:x.foldTitleIncludes||["David"],
+   fixtureBefore:join(ROOT,x.fixtureBefore),
+   fixtureAfter:join(ROOT,x.fixtureAfter),
+   cropBefore:join(ROOT,x.cropBefore),
+   cropAfter:join(ROOT,x.cropAfter),
+   cropPairId:x.cropPairId||"queue-dual-grid",
+   helper:join(ROOT,x.helper||"verify/restructure/xor-saved-view.mjs"),
+   reference:x.reference||"skill/references/kits.md",
+   instruction:x.instruction||"Apply xor-saved-view after collapse-peer-grids plan (humanGate).",
+  };
+ }
  const restructureHints=recommendation.restructureHints||[];
  const needsRestructure=restructureHints.some((h)=>String(h).startsWith("restructure:"));
+ const wantsXor=
+  Boolean(recommendation.xorSavedView?.fixtureBefore)||
+  restructureHints.some((h)=>/collapse-peer-grids|xor-saved-view/i.test(String(h)));
  const learnedHits=lane==="saas"?siblingPrefsFor(kind,{edition:"clearspeed-operate",job,storePath:learnStorePath,store:learnStore}):[];
  const siblingResolved=lane==="saas"?resolveEditionSibling({category:kind,screen:recommendation?.primary?.screen||"",job,editionId:"clearspeed-operate",learnedPrefs:learnedHits.map((h)=>h.pref)}):null;
  const siblingLabel=productReferenceName||productReference||recommendation?.productSibling?.name||siblingResolved?.sibling?.name||null;
@@ -208,6 +229,9 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  }else if(mode==="new"){
   briefRef=null; // assertNewSurfaceBrief may refuse when requireWireframeLock
  }
+ const ddrOps=needsRestructure
+  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
+  :[];
  packet.ddr=buildDdr({
   job,
   lane,
@@ -216,7 +240,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   primaryCite:selected.id,
   antiCites:(recommendation.antiPatterns||[]).slice(0,6),
   restructureVsRepaint:needsRestructure?"restructure":"repaint",
-  restructureOps:needsRestructure?["cta-budget","set-focal","kpi-collapse","rebind-cite"].filter(Boolean):[],
+  restructureOps:ddrOps,
   // constitutionIds omitted → buildDdr resolves numbered ClearSpeed Operate edition
   openRisks:packet.gaps.slice(0,4),
   status:statusWanted,

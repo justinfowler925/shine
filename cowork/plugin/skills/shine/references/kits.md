@@ -123,6 +123,9 @@ dual-grid delete.
    (`verify/fixtures/denoise/receipts/queue-dual-grid-fold-crop.html`). Twin full-page shots invalid.
 
 Fixtures: `verify/fixtures/denoise/queue-dual-grid-{before,after}.html`.
+Denoise recommend emits typed `recommendation.xorSavedView` (fixture + crop paths) for
+queue/triage jobs — copy those paths; denoise packets bind `packet.xorSavedView` and DDR
+`restructureOps` includes `collapse-peer-grids`. Doctor: `verify/xor-saved-view-recommend-bite.mjs`.
 
 ### Dashboard
 

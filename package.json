@@ -88,7 +88,8 @@
     "integration:test": "node verify/integration-readiness.test.mjs",
     "untitled:browser": "node verify/untitled-browser.mjs",
     "constitution": "node core/constitution.mjs",
-    "constitution:test": "node verify/constitution.test.mjs"
+    "constitution:test": "node verify/constitution.test.mjs",
+    "xor-saved-view:recommend-bite": "node verify/xor-saved-view-recommend-bite.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",

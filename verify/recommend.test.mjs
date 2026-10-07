@@ -70,6 +70,27 @@ const denoiseRecords = createDesignPacket({
 });
 assert.match(denoiseRecords.tableQuality.example, /records-worklist\/shine-tables\.json$/);
 
+// Queue / triage jobs bind D10 XOR dual-grid FAIL→PASS fixtures into recommend + denoise packet
+const queueRec = recommendPattern(templates, "work queue triage inbox", {
+  lane: "saas",
+  category: "queue",
+  limit: 6,
+});
+assert.ok(queueRec.xorSavedView?.fixtureBefore, "queue job xorSavedView.fixtureBefore");
+assert.match(queueRec.xorSavedView.fixtureBefore, /queue-dual-grid-before\.html$/);
+assert.match(queueRec.xorSavedView.cropAfter, /queue-dual-grid-fold-crop\.html$/);
+assert.match(formatRecommendationSummary(queueRec), /xorSavedView/);
+const denoiseQueue = createDesignPacket({
+  job: "Queue triage dual worklist XOR saved-view",
+  lane: "saas",
+  mode: "denoise",
+  category: "queue",
+  project: SHINE,
+  accept: true,
+});
+assert.match(denoiseQueue.xorSavedView.cropAfter, /queue-dual-grid-fold-crop\.html$/);
+assert.ok((denoiseQueue.ddr.restructureOps || []).includes("collapse-peer-grids"));
+
 // CLI smoke
 const cite = spawnSync(process.execPath, [join(SHINE, "corpus/cite.mjs"), "settings page", "--lane", "saas"], {
   encoding: "utf8",
@@ -77,4 +98,4 @@ const cite = spawnSync(process.execPath, [join(SHINE, "corpus/cite.mjs"), "setti
 assert.equal(cite.status, 0, cite.stderr);
 assert.match(cite.stdout, /recommendation:/);
 
-console.log(`recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI`);
+console.log(`recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI · xorSavedView`);
