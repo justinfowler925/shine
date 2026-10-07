@@ -45,9 +45,14 @@ assert.ok(applied.applied.includes("set-focal"));
 assert.ok(applied.plans.length >= 1);
 assert.equal(applied.humanGate, true);
 
-// Fast scorecard without full browser measure (ops + preflight)
+// Fast scorecard without full browser measure (ops + preflight + cropped receipts)
 const score = runDenoiseEval({ runMeasure: false });
 assert.ok(score.passed >= 4, JSON.stringify(score, null, 2));
 assert.equal(score.failed, 0, JSON.stringify(score.cases.filter((c) => !c.pass), null, 2));
+assert.equal(score.cropPairsOk, true, JSON.stringify(score.cases.map((c) => c.cropPair), null, 2));
+for (const id of ["queue-cta", "queue-kpi", "sources-cite", "queue-dual-grid"]) {
+  const row = score.cases.find((c) => c.id === id);
+  assert.ok(row?.cropPair?.ok, `${id} crop pair: ${JSON.stringify(row?.cropPair)}`);
+}
 
-console.log(`restructure PASS: schema · DOM ops · denoise-eval ${score.passed}/${score.total}`);
+console.log(`restructure PASS: schema · DOM ops · denoise-eval ${score.passed}/${score.total} · crop pairs`);

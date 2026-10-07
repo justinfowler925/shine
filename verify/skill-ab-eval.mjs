@@ -23,12 +23,18 @@ import {
   seedDiagnosis,
 } from "../core/diagnosis.mjs";
 import { applyDomRestructure } from "./restructure/apply-dom.mjs";
-import { applyXorSavedView } from "./restructure/xor-saved-view.mjs";
+import { applyXorSavedView, buildXorFoldCropHtml } from "./restructure/xor-saved-view.mjs";
+import {
+  DEFECT_CROP_PAIRS,
+  assertCropPairOk,
+  ensureDefectCropReceipts,
+} from "./restructure/defect-crops.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CASES_PATH = join(ROOT, "verify/fixtures/skill-ab/cases.json");
 const GUIDANCE = join(ROOT, "skill/references/denoise.md");
+const RECEIPTS = join(ROOT, "verify/fixtures/denoise/receipts");
 
 function guidanceFingerprint() {
   const body = readFileSync(GUIDANCE, "utf8");
@@ -242,23 +248,49 @@ function runArm(c, armName, armChecks, { runMeasure, workDir }) {
   };
 }
 
+function ensureCrops() {
+  mkdirSync(RECEIPTS, { recursive: true });
+  ensureDefectCropReceipts(RECEIPTS, {
+    xorAfterHtml: buildXorFoldCropHtml({
+      keptTitle: "Queue",
+      chipLabel: "David's 10 today",
+    }),
+  });
+}
+
+function cropStatusForCase(c) {
+  if (!c.cropPairId && !c.crops) return { required: false, ok: true, errors: [] };
+  const pair =
+    DEFECT_CROP_PAIRS.find((p) => p.id === c.cropPairId) ||
+    DEFECT_CROP_PAIRS.find((p) => p.beforeCrop === c.crops?.before);
+  if (!pair) return { required: true, ok: false, errors: [`missing crop pair for ${c.id}`] };
+  const read = (name) => {
+    const path = join(RECEIPTS, name);
+    return existsSync(path) ? readFileSync(path, "utf8") : "";
+  };
+  return { required: true, ...assertCropPairOk(pair, read) };
+}
+
 export function runSkillAbEval({ runMeasure = false, casesPath = CASES_PATH } = {}) {
   const manifest = JSON.parse(readFileSync(casesPath, "utf8"));
   const guidance = guidanceFingerprint();
   const workDir = join(ROOT, "verify/fixtures/skill-ab/.work");
   mkdirSync(workDir, { recursive: true });
+  ensureCrops();
 
   const rows = [];
   for (const c of manifest.cases) {
     const withArm = runArm(c, "with", c.withGuidance, { runMeasure, workDir });
     const withoutArm = runArm(c, "without", c.withoutGuidance, { runMeasure, workDir });
-    const delta = withArm.pass && !withoutArm.pass;
+    const crops = cropStatusForCase(c);
+    const delta = withArm.pass && !withoutArm.pass && crops.ok;
     rows.push({
       id: c.id,
       fixture: c.fixture,
       expectedOps: c.expectedOps,
       with: withArm,
       without: withoutArm,
+      crops,
       deltaOk: delta,
       pass: delta,
     });
@@ -268,6 +300,8 @@ export function runSkillAbEval({ runMeasure = false, casesPath = CASES_PATH } = 
   const withoutWins = rows.filter((r) => r.without.pass).length;
   const deltas = rows.filter((r) => r.deltaOk).length;
   const failed = rows.filter((r) => !r.pass);
+  const cropCases = rows.filter((r) => r.crops?.required);
+  const cropsOk = cropCases.every((r) => r.crops.ok);
 
   return {
     version: 1,
@@ -284,8 +318,15 @@ export function runSkillAbEval({ runMeasure = false, casesPath = CASES_PATH } = 
     deltas,
     passed: deltas,
     failed: failed.length,
-    // Salesforce DI bar: guidance arm wins every pinned case; baseline does not.
-    meetsFloor: guidance.markersOk && deltas === rows.length && withoutWins === 0 && withWins === rows.length,
+    cropsOk,
+    cropPairs: cropCases.map((r) => ({ id: r.id, ok: r.crops.ok, errors: r.crops.errors })),
+    // Salesforce DI bar: guidance arm wins every pinned case; baseline does not; crops distinct.
+    meetsFloor:
+      guidance.markersOk &&
+      deltas === rows.length &&
+      withoutWins === 0 &&
+      withWins === rows.length &&
+      cropsOk,
     cases: rows,
   };
 }

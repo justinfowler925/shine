@@ -3,15 +3,23 @@
   "version": 1,
   "bar": "with denoise guidance clears pinned defects; without does not — machine oracles only (no preference labels)",
   "guidanceRef": "skill/references/denoise.md",
+  "cropReceiptsDir": "verify/fixtures/denoise/receipts",
   "cases": [
     {
       "id": "queue-cta",
       "fixture": "verify/fixtures/denoise/queue-cta-before.html",
+      "afterFixture": "verify/fixtures/denoise/queue-cta-after.html",
       "cite": "shadcn-queue",
       "category": "queue",
       "job": "Decide Pursue/Review/Dismiss on the next notice",
       "mustClear": ["cta-pressure"],
       "expectedOps": ["cta-budget"],
+      "cropPairId": "queue-cta",
+      "crops": {
+        "before": "queue-cta-before-crop.html",
+        "after": "queue-cta-after-crop.html",
+        "defect": "cta-pressure"
+      },
       "withGuidance": {
         "primaryTaskCheck": { "ok": false, "note": "Primary job buried under dual filled CTAs" },
         "competingCtaCheck": { "ok": false, "note": "Pursue and Assign both filled in main" },
@@ -32,12 +40,19 @@
     },
     {
       "id": "queue-kpi",
-      "fixture": "verify/fixtures/denoise/queue-cta-before.html",
+      "fixture": "verify/fixtures/denoise/queue-kpi-before.html",
+      "afterFixture": "verify/fixtures/denoise/queue-kpi-after.html",
       "cite": "shadcn-queue",
       "category": "queue",
       "job": "Decide Pursue on the next notice without drowning in metrics",
       "mustClear": ["kpi-soup"],
       "expectedOps": ["kpi-collapse"],
+      "cropPairId": "queue-kpi",
+      "crops": {
+        "before": "queue-kpi-before-crop.html",
+        "after": "queue-kpi-after-crop.html",
+        "defect": "kpi-soup"
+      },
       "withGuidance": {
         "primaryTaskCheck": { "ok": false, "note": "Work object loses to metric strip" },
         "competingCtaCheck": { "ok": true, "note": "CTA not the defect under test" },
@@ -86,11 +101,18 @@
     {
       "id": "sources-cite",
       "fixture": "verify/fixtures/denoise/sources-cite-before.html",
+      "afterFixture": "verify/fixtures/denoise/sources-cite-after.html",
       "cite": "shadcn-settings",
       "category": "settings",
       "job": "Fix or pause a matching Sources recipe",
       "mustClear": [],
       "expectedOps": ["rebind-cite"],
+      "cropPairId": "sources-cite",
+      "crops": {
+        "before": "sources-cite-before-crop.html",
+        "after": "sources-cite-after-crop.html",
+        "defect": "wrong-cite"
+      },
       "withGuidance": {
         "primaryTaskCheck": { "ok": false, "note": "Settings job with queue cite" },
         "competingCtaCheck": { "ok": true, "note": "CTA not under test" },
@@ -112,12 +134,19 @@
     {
       "id": "queue-dual-grid",
       "fixture": "verify/fixtures/denoise/queue-dual-grid-before.html",
+      "afterFixture": "verify/fixtures/denoise/queue-dual-grid-after.html",
       "cite": "shadcn-queue",
       "category": "queue",
       "job": "Decide Pursue on the next notice — one worklist",
       "mustClear": ["dual-focal"],
       "expectedOps": ["collapse-peer-grids"],
       "xorRecipe": true,
+      "cropPairId": "queue-dual-grid",
+      "crops": {
+        "before": "queue-dual-grid-before-crop.html",
+        "after": "queue-dual-grid-fold-crop.html",
+        "defect": "dual-focal"
+      },
       "withGuidance": {
         "primaryTaskCheck": { "ok": false, "note": "Two peer worklists compete for the fold" },
         "competingCtaCheck": { "ok": true, "note": "CTA not under test" },

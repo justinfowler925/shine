@@ -23,13 +23,15 @@ node verify/skill-ab-eval.test.mjs
 
 `verify/fixtures/skill-ab/cases.json` → Sled-class fixtures under `verify/fixtures/denoise/`:
 
-| Case | Defect / op |
-|---|---|
-| `queue-cta` | `cta-pressure` / `cta-budget` |
-| `queue-kpi` | `kpi-soup` / `kpi-collapse` |
-| `usul-focal` | composition / `set-focal` |
-| `sources-cite` | cite honesty / `rebind-cite` |
-| `queue-dual-grid` | `dual-focal` / XOR |
+| Case | Defect / op | Cropped FAIL→PASS |
+|---|---|---|
+| `queue-cta` | `cta-pressure` / `cta-budget` | `queue-cta-{before,after}-crop.html` |
+| `queue-kpi` | `kpi-soup` / `kpi-collapse` | `queue-kpi-{before,after}-crop.html` (dedicated `queue-kpi-before.html`) |
+| `usul-focal` | composition / `set-focal` | — |
+| `sources-cite` | wrong-cite / `rebind-cite` | `sources-cite-{before,after}-crop.html` |
+| `queue-dual-grid` | `dual-focal` / XOR | `queue-dual-grid-before-crop.html` + fold crop |
+
+Crops live in `verify/fixtures/denoise/receipts/` (builders in `verify/restructure/defect-crops.mjs`).
 
 ## Floor
 
@@ -38,8 +40,9 @@ node verify/skill-ab-eval.test.mjs
 1. `denoise.md` still carries the decision-table markers  
 2. **with** wins every case  
 3. **without** wins zero cases  
+4. Cropped receipts for CTA / KPI / wrong-cite / dual-grid exist, match markers, and are not twin full-pages  
 
-Doctor bite: `verify/skill-ab-eval.test.mjs`.
+Doctor bites: `verify/skill-ab-eval.test.mjs` · `verify/defect-crops.test.mjs`.
 
 ## Non-goals (v1)
 
