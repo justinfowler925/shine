@@ -89,6 +89,19 @@ sled dump — no auth bypass).
 cite, antiPatterns, restructure vs repaint hints, kitRecipe, confidence
 (`corpus/recommend.mjs`).
 
+**Denoise + DDR (N0):** `--mode denoise` loads `denoise.md`; refuses without `--category`.
+Packet emits `ddr` / `ddrId` + `constitutionIds`; denoise Actor implement requires
+`status: accepted` (`--accept` or `core/ddr.mjs accept`). Prove receipts link `ddrId`.
+No polish until `primaryTaskCheck` green.
+
+**Dual-focal + KPI soup (N6):** Operate queue/triage cites hard-fail ≥2 peer
+worklists/grids (`verify/dual-focal.mjs`) and ≥4 equal metric tiles
+(`verify/kpi-soup.mjs`). Dashboard equal-card floor stays in `kpi.mjs`.
+
+**Restructure + denoise-eval (N7):** `shine-restructure/v1` plans apply via
+`verify/restructure/apply-dom.mjs`. `npm run denoise:eval` scores fixture pairs.
+Dual-grid remains detect+plan (no silent delete).
+
 **Settings/forms corpus (P2):** cite floors require ≥6 settings pages and ≥6 form+record
 pages; form/settings/record cites hard-fail `aria-invalid` without an accessible message
 (`verify/form-heuristics.mjs`).

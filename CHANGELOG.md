@@ -18,6 +18,18 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   composition-slop failures cite `anti-pattern:<id>`; recommend prefers library bans.
   Doctor bite via `verify/knowledge.test.mjs`.
 
+- **Dual-grid XOR recipe (D10).** Agent-assisted close for `collapse-peer-grids`:
+  peer title → filter chip + shared DataGrid state (`verify/restructure/xor-saved-view.mjs`).
+  AST/DOM runners stay plan-only (no silent delete). Fixtures
+  `queue-dual-grid-{before,after}.html` + fold crop receipt; `denoise:eval` bar is
+  detect→XOR after PASS. Kit in `kits.md` § Dual-grid XOR; `npm run restructure:xor`.
+
+- **Operate corpus depth (S3).** +2 catalog (`shadcn-catalog-integrations`,
+  `shadcn-catalog-templates`), +2 chat (`shadcn-chat`, `shadcn-chat-sidecar`),
+  +2 dense cockpits (`shadcn-cockpit-ops`, `shadcn-cockpit-revenue`). Cite floors:
+  catalog ≥3, chat ≥3, dense dashboard ≥5, dense cockpit jobs ≥2. Operate page
+  intent now covers catalog/chat + integrations/assistant synonyms.
+
 - **SLED Capture real-surface prove (S4).** When Nucleus checkout/SSO is absent,
   `verify/fixtures/sled-capture-prove/` (from Project sled dump) fail→pass measure
   with distinct CTA/KPI crops plus operable search→pursue usability. Nucleus golden

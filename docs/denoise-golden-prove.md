@@ -16,15 +16,16 @@ node verify/denoise-loop.test.mjs
 2. Preflight-slop `ai-slop-*`  
 3. Cite + `restructureHints[]` (N10)  
 4. `shine-restructure.json` → `apply-dom` (+ TSX dry-run for consumer sources)  
-5. Agent humanGate for dual-grid XOR  
+5. Agent humanGate for dual-grid XOR (`npm run restructure:xor` / `xor-saved-view.mjs`) — peer title → filter chip + shared DataGrid; never silent delete in apply-tsx  
 6. Measure rounds (≤3) with Reflexion on fail  
-7. Prove receipt links `ddrId`
+7. Prove receipt links `ddrId`; dual-grid crop shows **one** grid in fold (`receipts/queue-dual-grid-fold-crop.html`)
 
 ## Fixtures
 
 | Pair | Defects |
 |---|---|
 | `queue-cta-{before,after}` | cta-pressure |
+| `queue-dual-grid-{before,after}` | dual-focal → XOR after PASS (D10) |
 | `queue-cta-before` → loop apply | dual-focal, kpi-soup |
 | `sources-cite-{before,after}` | rebind-cite |
 | `usul-*-{before,after}` | set-focal / composition |

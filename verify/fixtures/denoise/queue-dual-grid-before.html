@@ -1,0 +1,146 @@
+<!doctype html>
+<!-- shine-lint: off color,type,spacing — D10 dual-grid before (peer David + Queue); SledCapture-shaped -->
+<html lang="en" data-cite="shadcn-queue" data-shine-probe="app-shell">
+<head>
+<meta charset="utf-8"/>
+<title>SLED Capture — Queue</title>
+<style>
+:root{color-scheme:light;--bg:#f4f4f5;--fg:#18181b;--muted:#71717a;--line:#e4e4e7;--card:#fff;--fill:#18181b;--fill2:#3f3f46}
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+.shell{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+aside{background:var(--card);border-right:1px solid var(--line);padding:16px}
+aside a{display:block;padding:8px 10px;color:inherit;text-decoration:none;border-radius:6px}
+aside a[aria-current]{background:var(--bg);font-weight:600}
+main{padding:20px 24px;min-width:0}
+.tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:var(--card);padding:8px 12px;border-radius:6px;font:inherit}
+.tabs button[aria-selected=true]{font-weight:600;background:#e4e4e7}
+.scope{display:flex;gap:8px;margin-bottom:16px}
+.scope button{border:1px solid var(--line);background:var(--card);padding:6px 10px;border-radius:999px;font:inherit;font-size:12px}
+.scope button[aria-pressed=true]{background:var(--fill);color:#fafafa}
+.grid-wrap{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:16px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.toolbar select,.toolbar input{padding:6px 8px;border:1px solid var(--line);border-radius:6px;font:inherit}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:11px;color:var(--muted);margin:0 4px 4px 0}
+.btn{border:1px solid var(--line);background:var(--card);padding:6px 10px;border-radius:6px;font:inherit;font-size:12px;margin:0 4px 4px 0}
+.btn.filled{background:var(--fill);color:#fafafa;border-color:var(--fill);font-weight:600}
+.btn.filled-peer{background:var(--fill2);color:#fafafa;border-color:var(--fill2);font-weight:600}
+.metrics{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0}
+.metric{flex:1 1 9rem;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--card);min-height:88px}
+.metric span{display:block;font-size:12px;color:var(--muted)}.metric strong{font-size:22px}
+.insights{display:grid;gap:16px;margin-top:20px}
+.card{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:14px;min-height:120px}
+.card h3{margin:0 0 8px;font-size:15px}
+.kicker{color:var(--muted);font-size:12px;margin:0 0 8px}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+  <strong>Nucleus</strong>
+  <nav aria-label="Operate">
+    <a href="#q" aria-current="page">SLED Capture</a>
+    <a href="#q">PM Tracker</a>
+  </nav>
+</aside>
+<main id="q" data-shine-main>
+  <div class="tabs" role="tablist" aria-label="SLED Capture sections">
+    <button type="button" role="tab" aria-selected="true">Queue</button>
+    <button type="button" role="tab" aria-selected="false">Research signals</button>
+    <button type="button" role="tab" aria-selected="false">Usul & coverage</button>
+    <button type="button" role="tab" aria-selected="false">Goals</button>
+    <button type="button" role="tab" aria-selected="false">Sources & recipes</button>
+  </div>
+  <div class="scope" aria-label="Buyer jurisdiction">
+    <button type="button" aria-pressed="true">All</button>
+    <button type="button" aria-pressed="false">Federal</button>
+    <button type="button" aria-pressed="false">State / local</button>
+  </div>
+
+  <div class="grid-wrap" data-product-pattern="paged-notice-queue" data-cite="shadcn-queue">
+    <h2 data-grid-title>David's 10 today</h2>
+    <p class="kicker">Ranked · 3 handled today · 7 unreviewed</p>
+    <table role="grid">
+      <thead><tr><th>Notice</th><th>Class · priority</th><th>Due</th><th>Decision</th></tr></thead>
+      <tbody>
+        <tr data-notice-key="n1">
+          <td><strong data-notice-title>NV DPS voice risk RFI</strong><br/><span class="badge">Near miss</span><span class="badge">Unfinished quote</span><span class="badge">Second look</span></td>
+          <td>Qualified · Priority 82</td>
+          <td>Oct 12</td>
+          <td>
+            <button type="button" class="btn filled">Pursue</button>
+            <button type="button" class="btn">Review</button>
+            <button type="button" class="btn">Dismiss</button>
+            <button type="button" class="btn filled-peer">Assign lead</button>
+          </td>
+        </tr>
+        <tr><td><strong>OH Medicaid identity services</strong></td><td>Discovery · 61</td><td>Oct 20</td>
+          <td><button type="button" class="btn">Pursue</button><button type="button" class="btn">Review</button><button type="button" class="btn">Dismiss</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-wrap" data-product-pattern="paged-notice-queue">
+    <h2 data-grid-title>Queue</h2>
+    <p class="kicker">Published queue · intel Oct 5 · 48 of 791 notices · 12 decided</p>
+    <div class="toolbar">
+      <input aria-label="Search" placeholder="Search title, description, agency"/>
+      <select aria-label="Show"><option>Open</option></select>
+      <select aria-label="State"><option>All states</option></select>
+      <select aria-label="Fit class"><option>All classes</option></select>
+      <select aria-label="Due within"><option>Any due</option></select>
+      <button type="button" class="btn">More filters</button>
+      <button type="button" class="btn filled">Needs a second look (6)</button>
+      <button type="button" class="btn">Expand all</button>
+    </div>
+    <table role="grid">
+      <thead><tr><th>Notice</th><th>Class · priority</th><th>Due</th><th>Decision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>CO DOC screening SOW</strong><br/><span class="badge">High score</span><span class="badge">Due soon</span><span class="badge">No brief</span></td>
+          <td>Discovery · 74</td><td>Oct 9</td>
+          <td><button type="button" class="btn">Pursue</button><button type="button" class="btn">Review</button><button type="button" class="btn">Dismiss</button></td></tr>
+        <tr><td><strong>IL BidBuy verification RFP</strong></td><td>Supporting · 55</td><td>—</td>
+          <td><button type="button" class="btn">Pursue</button><button type="button" class="btn">Review</button><button type="button" class="btn">Dismiss</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insights">
+    <section class="card" aria-label="Needs attention">
+      <h3>Needs attention</h3>
+      <p class="kicker">4 nudges · Open card · Mark for review · Pursue</p>
+      <button type="button" class="btn">Open card</button>
+      <button type="button" class="btn">Mark for review</button>
+      <button type="button" class="btn filled">Pursue</button>
+    </section>
+    <section class="card" aria-label="Active in Usul">
+      <h3>Active in Usul</h3>
+      <p class="kicker">Matched pipeline rows competing with the queue focal</p>
+    </section>
+    <section aria-labelledby="kpi-h" data-sled-kpis>
+      <h2 id="kpi-h">Summary</h2>
+      <p class="kicker">10 equal metric tiles after the queue — dashboard DNA on a triage job</p>
+      <div class="metrics" aria-label="SLED Capture key figures">
+        <div class="metric" data-kpi="Open queue"><span>Open queue</span><strong>214</strong><span>18 states</span></div>
+        <div class="metric" data-kpi="New"><span>New</span><strong>12 / 41</strong><span>24h / 7d</span></div>
+        <div class="metric" data-kpi="High score"><span>High score (≥70)</span><strong>33</strong><span>19 undecided</span></div>
+        <div class="metric" data-kpi="Due soon"><span>Due in 14 days</span><strong>27</strong><span>no decision</span></div>
+        <div class="metric" data-kpi="Decisions 7"><span>Decisions, 7 days</span><strong>48</strong><span>pursue · review · dismiss</span></div>
+        <div class="metric" data-kpi="Decisions 30"><span>Decisions, 30 days</span><strong>161</strong><span>same outcomes</span></div>
+        <div class="metric" data-kpi="Median"><span>Median time to decision</span><strong>4 d</strong><span>over 90 decisions</span></div>
+        <div class="metric" data-kpi="Coverage"><span>Coverage</span><strong>31 / 50</strong><span>states producing</span></div>
+        <div class="metric" data-kpi="Usul"><span>Active in Usul</span><strong>22</strong><span>14 matched</span></div>
+        <div class="metric" data-kpi="Missed"><span>Missed</span><strong>9</strong><span>$1.2M valued</span></div>
+      </div>
+    </section>
+    <section class="card" aria-label="Missed awards">
+      <h3>Missed awards &amp; recompetes</h3>
+      <p class="kicker">Another equal card after ten KPIs</p>
+    </section>
+  </div>
+</main>
+</div>
+</body>
+</html>

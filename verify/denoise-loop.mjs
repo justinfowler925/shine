@@ -20,6 +20,7 @@ import {
 } from "../core/reflexion.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { applyDomRestructure } from "./restructure/apply-dom.mjs";
+import { applyXorSavedView } from "./restructure/xor-saved-view.mjs";
 import { buildRestructurePlan } from "./restructure/schema.mjs";
 import { emitRestructureFromDiagnosis, seedDiagnosis } from "../core/diagnosis.mjs";
 
@@ -124,13 +125,17 @@ export async function runDenoiseLoop({
   // Round 1: apply DOM auto-safe ops
   const applied = applyDomRestructure(html, plan);
   html = applied.html;
-  // For dual-grid plan-only: drop the first peer grid-wrap titled David* so measure can green
-  // (agent-assisted XOR stand-in for golden prove — never silent in apply-tsx).
-  if (applied.plans.length && /David/.test(html) && /grid-wrap/.test(html)) {
-    html = html.replace(
-      /<div\b[^>]*class=["'][^"']*\bgrid-wrap\b[^"']*["'][^>]*>[\s\S]*?David[\s\S]*?<\/table>\s*<\/div>/i,
-      "<!-- peer grid folded to saved-view (golden loop agent step) -->",
-    );
+  // D10 agent humanGate: XOR recipe (peer title → filter chip + shared DataGrid).
+  // Never silent in apply-tsx / apply-dom auto paths — explicit agent step only.
+  if (applied.plans.length && /grid-wrap/.test(html)) {
+    const xorOp =
+      (plan.ops || []).find((o) => o.op === "collapse-peer-grids") || {
+        mode: "xor-saved-view",
+        keepTitleIncludes: ["Queue"],
+        foldTitleIncludes: ["David"],
+      };
+    const xor = applyXorSavedView(html, xorOp);
+    if (xor.applied) html = xor.html;
   }
   currentPath = join(out, "round-1-applied.html");
   writeFileSync(currentPath, html);

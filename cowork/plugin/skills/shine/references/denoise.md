@@ -42,7 +42,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 | Ambiguous signal | Decision | Op / gate |
 |---|---|---|
 | Dashboard chrome on a Monday triage job | Worklist, not dashboard. Cite `shadcn-queue` (or settings/record), never chart/dashboard page lead | `dashboard→worklist` · anti-dashboard |
-| Two DataGrids / two worklists same route | One grid. Peer → saved view / filter / XOR | `collapse-peer-grids` · `dual-focal` |
+| Two DataGrids / two worklists same route | One grid. Peer title → filter chip + shared DataGrid (XOR) | `collapse-peer-grids` plan → D10 XOR recipe · `dual-focal` |
 | ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost | `cta-budget` · `cta-pressure` |
 | ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details>` | `kpi-collapse` · `kpi-soup` |
 | Settings job with queue cite | Rebind cite to category truth | `rebind-cite` |
@@ -69,8 +69,8 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 3 cite       shot + restructureHints[]
 4 diagnose   shine-diagnosis.json + shine-restructure.json   ← Critic turn
 5 apply      DOM/AST auto-safe ops (verify/restructure/*)     ← Actor turn
-6 agent      humanGate ops (dual-grid XOR, god-split) — never silent grid delete
-7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID)
+6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
+7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
 8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done
 9 usability  primary-job flow + prove.mjs completion (links ddrId)
 10 stop-sweep Operate cannot finish on compare alone
@@ -118,9 +118,11 @@ Packet `ddr.constitutionIds` for Operate denoise defaults:
 Every gate bite is **measure/prove FAIL→PASS** with a **cropped defect receipt**.  
 Identical full-page “twin” screenshots are invalid proof.
 
-Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs`.  
+Harness: `npm run denoise:eval` → `verify/denoise-eval.mjs` (dual-grid = detect → XOR after PASS).  
 Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
-TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`).
+XOR recipe: `npm run restructure:xor -- --html verify/fixtures/denoise/queue-dual-grid-before.html --out /tmp/xor.html`.  
+TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). AST stays plan-only for `collapse-peer-grids`.  
+Kit: `kits.md` § Dual-grid XOR (D10).
 
 ## Related
 

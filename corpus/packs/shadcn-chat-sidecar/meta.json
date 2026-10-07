@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-chat-sidecar",
+  "source": "corpus/blueprints/shadcn-chat-sidecar/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 52478,
+  "provenance": "Authored blueprint, S3 Operate corpus depth",
+  "capture": {
+    "status": 200,
+    "title": "Assistant sidecar",
+    "headings": "Invite teammate\nInvite form\nAssistant",
+    "expectedSelector": "[data-region=\"chat-sidecar\"] #send",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-chat-sidecar/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-chat-sidecar/reference.html",
+    "capturedAt": "2026-10-07T01:04:33.293Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "c9d7752c1d0f8129f0f8eeb2eb04e1173ad74bccd534a531b47259db75c2d84b",
+    "shotSha256": "93a74adaeffa5dbdf922149d4d9bb53cae69a19d47cc02b771f0e741e6bf309c"
+  }
+}

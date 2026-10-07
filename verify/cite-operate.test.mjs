@@ -14,6 +14,8 @@ const OPERATE_JOBS = [
   { query: "dashboard", screen: "dashboard" },
   { query: "dashboard analytics", screen: "dashboard" },
   { query: "dense dashboard", screen: "dashboard" },
+  { query: "ops cockpit", screen: "dashboard" },
+  { query: "revenue cockpit", screen: "dashboard" },
   { query: "settings page", screen: "settings" },
   { query: "account settings", screen: "settings" },
   { query: "notification settings", screen: "settings" },
@@ -22,6 +24,11 @@ const OPERATE_JOBS = [
   { query: "invite teammate form", screen: "form" },
   { query: "queue", screen: "queue" },
   { query: "record", screen: "record" },
+  { query: "catalog", screen: "catalog" },
+  { query: "integrations catalog", screen: "catalog" },
+  { query: "template gallery", screen: "catalog" },
+  { query: "chat", screen: "chat" },
+  { query: "assistant sidecar", screen: "chat" },
 ];
 
 for (const { query, screen } of OPERATE_JOBS) {
@@ -61,8 +68,25 @@ assert.ok(
 const pages = templates.filter((t) => (t.scope || "page") === "page" && t.selectable !== false);
 const count = (screen, pred = () => true) => pages.filter((t) => t.screen === screen && pred(t)).length;
 assert.ok(count("settings") >= 6, `settings page rows ≥6 (P2 harvest), got ${count("settings")}`);
-assert.ok(count("dashboard", (t) => t.dna?.density === "dense") >= 3, `dense dashboard page rows ≥3, got ${count("dashboard", (t) => t.dna?.density === "dense")}`);
+assert.ok(count("dashboard", (t) => t.dna?.density === "dense") >= 5, `dense dashboard/cockpit page rows ≥5 (S3), got ${count("dashboard", (t) => t.dna?.density === "dense")}`);
 assert.ok(count("form") + count("record") >= 6, `form+record pages ≥6 (P2 harvest), got form=${count("form")} record=${count("record")}`);
+assert.ok(count("catalog") >= 3, `catalog page rows ≥3 (S3 harvest), got ${count("catalog")}`);
+assert.ok(count("chat") >= 3, `chat page rows ≥3 (S3 harvest), got ${count("chat")}`);
+assert.ok(
+  pages.filter((t) => t.screen === "dashboard" && (t.jobs || []).includes("cockpit") && t.dna?.density === "dense").length >= 2,
+  "dense cockpit job rows ≥2 (S3 harvest)",
+);
+
+const catalogCite = retrieveDirections(templates, "integrations catalog", { lane: "saas", limit: 6 });
+assert.equal(catalogCite.selected[0].template.screen, "catalog", `integrations catalog primary must be catalog, got ${catalogCite.selected[0].template.id}`);
+const chatCite = retrieveDirections(templates, "assistant sidecar", { lane: "saas", limit: 6 });
+assert.equal(chatCite.selected[0].template.screen, "chat", `assistant sidecar primary must be chat, got ${chatCite.selected[0].template.id}`);
+const cockpitCite = retrieveDirections(templates, "ops cockpit", { lane: "saas", limit: 6 });
+assert.equal(cockpitCite.selected[0].template.screen, "dashboard");
+assert.ok(
+  cockpitCite.selected[0].template.dna?.density === "dense" || cockpitCite.selected[0].axes.density === "dense",
+  `ops cockpit primary should be dense, got ${cockpitCite.selected[0].template.id}`,
+);
 
 // Chart-led briefs without a page screen still retrieve chart atoms.
 const chartsOnly = retrieveDirections(templates, "charts", { lane: "saas" });

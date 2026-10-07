@@ -18,6 +18,7 @@ assert.ok(existsSync(denoiseMd), "skill/references/denoise.md must exist");
 const denoiseBody = readFileSync(denoiseMd, "utf8");
 assert.match(denoiseBody, /CTA budget|cta-budget/i);
 assert.match(denoiseBody, /dual-focal|collapse-peer-grids/i);
+assert.match(denoiseBody, /xor-saved-view|XOR recipe|shared DataGrid/i);
 assert.match(denoiseBody, /kpi-collapse|KPI soup/i);
 assert.match(denoiseBody, /primaryTaskCheck/);
 assert.match(denoiseBody, /No polish|no polish/i);

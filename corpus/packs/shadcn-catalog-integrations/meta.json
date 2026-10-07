@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-catalog-integrations",
+  "source": "corpus/blueprints/shadcn-catalog-integrations/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 120169,
+  "provenance": "Authored blueprint, S3 Operate corpus depth",
+  "capture": {
+    "status": 200,
+    "title": "Integrations catalog",
+    "headings": "Connected apps\nSalesforce\nSlack\nGoogle Drive",
+    "expectedSelector": "[data-region=\"catalog-cards\"] article",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-catalog-integrations/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-catalog-integrations/reference.html",
+    "capturedAt": "2026-10-07T01:04:32.903Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "b9303c4768516151a2b2f1b27c5ad347c9d0ac0e3474b4b6160b113f4a54940c",
+    "shotSha256": "c5c079ebea3b9c438e5c48111e628c9767512b6ab56c3fe21144412ac0fad740"
+  }
+}

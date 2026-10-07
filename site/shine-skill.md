@@ -4809,6 +4809,8 @@ Reasons are listed under the table.
 | carousel | `untitled-carousel` | untitled-ui-react | source | live | carousel, gallery, slides, slideshow |
 | carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
 | catalog | `shadcn-catalog` | shadcn-registry | blueprint | live | catalog, cards, library, packages, directory, gallery, showcase, tools |
+| catalog | `shadcn-catalog-integrations` | shadcn-registry | blueprint | live | catalog, cards, library, integrations, connectors, plugins, directory |
+| catalog | `shadcn-catalog-templates` | shadcn-registry | blueprint | live | catalog, cards, library, templates, gallery, showcase, directory |
 | charts | `shadcn-chart-area-axes` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-default` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-gradient` | shadcn-registry | source | live | charts, chart, area, analytics |
@@ -4886,9 +4888,13 @@ Reasons are listed under the table.
 | charts | `untitled-progress-circles` | untitled-ui-react | source | live | charts, chart, progress, completion, kpi, dataviz |
 | charts | `untitled-radar-charts` | untitled-ui-react | source | live | charts, chart, radar, profile, comparison, dataviz |
 | charts | `windmill-charts` | windmill-react | source | live | charts, chart, analytics, dataviz |
+| chat | `shadcn-chat` | shadcn-registry | blueprint | live | chat, assistant, conversation, thread |
+| chat | `shadcn-chat-sidecar` | shadcn-registry | blueprint | live | chat, assistant, sidecar, conversation, copilot |
 | chat | `spectrum-ai-chat` | react-spectrum | source | live | chat, assistant |
 | checkout | `shadcn-checkout` | shadcn-registry | blueprint | live | checkout, payment |
 | command-palette | `shadcn-command` | shadcn-registry | source | live | command-palette, palette, cmdk |
+| dashboard | `shadcn-cockpit-ops` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, ops, console, dense |
+| dashboard | `shadcn-cockpit-revenue` | shadcn-registry | blueprint | live | dashboard, cockpit, kpi, kpis, revenue, pipeline, dense |
 | dashboard | `shadcn-dashboard-01` | shadcn-registry | source | live | crud, dashboard, list, records |
 | dashboard | `untitled-line-charts` | untitled-ui-react | source | live | dashboard, analytics, charts, dataviz |
 | dashboard | `tailadmin-dashboard` | tailadmin-react | source | live | dashboard, analytics, kpi, ecommerce, metrics |
@@ -4988,7 +4994,7 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-224 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+230 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
@@ -5151,9 +5157,9 @@ No polish until `primaryTaskCheck` green.
 worklists/grids (`verify/dual-focal.mjs`) and ≥4 equal metric tiles
 (`verify/kpi-soup.mjs`). Dashboard equal-card floor stays in `kpi.mjs`.
 
-**Restructure + denoise-eval (N7):** `shine-restructure/v1` plans apply via
+**Restructure + denoise-eval (N7/D10):** `shine-restructure/v1` plans apply via
 `verify/restructure/apply-dom.mjs`. `npm run denoise:eval` scores fixture pairs.
-Dual-grid remains detect+plan (no silent delete).
+Dual-grid: detect → agent XOR (`xor-saved-view.mjs`) → after PASS; AST/DOM stay plan-only (no silent delete).
 
 **Settings/forms corpus (P2):** cite floors require ≥6 settings pages and ≥6 form+record
 pages; form/settings/record cites hard-fail `aria-invalid` without an accessible message

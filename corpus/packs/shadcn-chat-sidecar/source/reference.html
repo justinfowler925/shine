@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-chat-sidecar" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width"/><title>Assistant sidecar</title>
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{margin:0;font:14px/1.5 ui-sans-serif,system-ui,sans-serif;color:#18181b;background:#fafafa;height:100vh;display:grid;grid-template-columns:1fr 360px}
+.canvas{display:flex;flex-direction:column;min-width:0;border-right:1px solid #e4e4e7;background:#fff}
+.canvas header{padding:16px 24px;border-bottom:1px solid #e4e4e7}
+.canvas header h1{margin:0;font-size:18px;font-weight:600}
+.canvas header p{margin:4px 0 0;color:#71717a;font-size:13px}
+.artefact{padding:24px;overflow:auto}
+.artefact .block{border:1px solid #e4e4e7;border-radius:10px;padding:20px;max-width:720px}
+.artefact h2{margin:0 0 8px;font-size:16px}
+.artefact label{display:grid;gap:6px;margin:0 0 12px;font-size:13px;font-weight:600}
+.artefact input,.artefact textarea{font:inherit;padding:10px 12px;border:1px solid #e4e4e7;border-radius:8px}
+.artefact .actions{display:flex;gap:8px}
+.artefact button{font:inherit;font-weight:600;height:40px;padding:0 14px;border-radius:8px;border:0;background:#18181b;color:#fff;cursor:pointer}
+.artefact button.ghost{background:#fff;color:#18181b;border:1px solid #e4e4e7}
+.sidecar{display:grid;grid-template-rows:auto 1fr auto;background:#fff;min-height:0}
+.sidecar header{padding:14px 16px;border-bottom:1px solid #e4e4e7;display:flex;justify-content:space-between;align-items:center}
+.sidecar header h2{margin:0;font-size:14px;font-weight:600}
+.sidecar .status{font-size:12px;color:#71717a}
+.thread{overflow:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.msg{padding:10px 12px;border-radius:10px;border:1px solid #e4e4e7;background:#fafafa;font-size:13px}
+.msg[data-role=user]{background:#18181b;color:#fafafa;border-color:#18181b}
+.msg .meta{font-size:11px;opacity:.7;margin-bottom:4px}
+.composer{padding:12px 16px;border-top:1px solid #e4e4e7}
+.composer label{display:block;font-size:12px;font-weight:600;margin-bottom:6px}
+.composer textarea{width:100%;font:inherit;min-height:64px;padding:10px;border:1px solid #e4e4e7;border-radius:8px;resize:vertical}
+.composer button{margin-top:8px;width:100%;height:40px;border:0;border-radius:8px;background:#18181b;color:#fff;font:inherit;font-weight:600;cursor:pointer}
+</style></head>
+<body>
+<section class="canvas" data-region="chat-artefact" aria-label="Page under edit">
+<header>
+<h1>Invite teammate</h1>
+<p>Human keeps authorship. Assistant advises in the sidecar — no silent writes.</p>
+</header>
+<div class="artefact">
+<div class="block">
+<h2>Invite form</h2>
+<label>Email<input type="email" value="alex@example.com"/></label>
+<label>Role<select style="font:inherit;padding:10px 12px;border:1px solid #e4e4e7;border-radius:8px"><option>Operator</option><option selected>Viewer</option></select></label>
+<label>Message<textarea rows="3">Join the Operate workspace to review Company Tools.</textarea></label>
+<div class="actions"><button type="button">Send invite</button><button type="button" class="ghost">Cancel</button></div>
+</div>
+</div>
+</section>
+<aside class="sidecar" data-region="chat-sidecar" aria-label="Assistant sidecar">
+<header>
+<h2>Assistant</h2>
+<p class="status" role="status">Ready</p>
+</header>
+<div class="thread" data-region="chat-thread">
+<div class="msg" data-role="user"><div class="meta">You</div>Is Viewer the right default role?</div>
+<div class="msg" data-role="assistant" data-region="chat-assistant"><div class="meta">Assistant</div>For Company Tools installs, start Viewer and promote after the first package audit. Operator can change billing.</div>
+</div>
+<div class="composer" data-region="chat-composer">
+<form aria-label="Ask the sidecar">
+<label for="ask">Advise on this page</label>
+<textarea id="ask" placeholder="Ask about copy, roles, or validation…"></textarea>
+<button type="submit" id="send">Ask</button>
+</form>
+</div>
+</aside>
+<script>document.querySelector("form").onsubmit=(e)=>{e.preventDefault();const t=document.getElementById("ask");if(!t.value.trim())return;const thread=document.querySelector(".thread");const el=document.createElement("div");el.className="msg";el.dataset.role="user";el.innerHTML=`<div class="meta">You</div>${t.value.replace(/</g,"&lt;")}`;thread.appendChild(el);t.value="";document.querySelector(".status").textContent="Drafting…"}</script>
+</body></html>

@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-chat",
+  "source": "corpus/blueprints/shadcn-chat/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 45221,
+  "provenance": "Authored blueprint, S3 Operate corpus depth",
+  "capture": {
+    "status": 200,
+    "title": "Assistant chat",
+    "headings": "Operate assistant",
+    "expectedSelector": "[data-region=\"chat-composer\"] #send",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-chat/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-chat/reference.html",
+    "capturedAt": "2026-10-07T01:04:33.189Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "51691cc357ec73b3dbd3ab1df8365dc7d5ae7323af603512682d3ae8242a6a94",
+    "shotSha256": "b50db8f3d354cd68771e44203e3ec36cc354ea8cda41e6834887c4dba873828c"
+  }
+}
