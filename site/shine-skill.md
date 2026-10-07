@@ -14,7 +14,7 @@ SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
 node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit|denoise> --project "$PWD"
 ```
-Packet `--mode` is `existing` \| `new` \| `audit` \| `denoise` (denoise also loads `references/denoise.md`). Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP). Every packet emits a Design Decision Record (`packet.ddr` / `ddrId`, `constitutionIds`, `status`); denoise starts `proposed` — refuse Actor implement until `--accept` (or `node core/ddr.mjs accept`); prove receipts link `ddrId`. New surfaces: lock `shine-wireframe/<slug>.brief.md` via `core/wireframe-brief.mjs` (structure immutable until user says `unlock structure`); packet `--mode new --require-wireframe-lock`. Critic≠Actor host: `core/critic-actor-host.mjs`.
+Packet `--mode` is `existing` \| `new` \| `audit` \| `denoise` (denoise also loads `references/denoise.md`). Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP). Every packet emits a Design Decision Record (`packet.ddr` / `ddrId`, `constitutionIds`, `status`); denoise starts `proposed` — refuse Actor implement until `--accept` (or `node core/ddr.mjs accept`); prove receipts link `ddrId` + `constitutionIds`. New surfaces: lock `shine-wireframe/<slug>.brief.md` via `core/wireframe-brief.mjs` (structure immutable until user says `unlock structure`); packet `--mode new --require-wireframe-lock`. Critic≠Actor host: `core/critic-actor-host.mjs`.
 If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed dashboard. Denoise **always** requires `--category`. For bloated Operate cleanup: locked order primary job → competing CTA → empty/error triad → composition → craft; **no polish until `primaryTaskCheck` is green**; refuse paint while `restructureHints` still require restructure. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories. For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
@@ -2263,7 +2263,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
 7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
 8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done
-9 usability  primary-job flow + prove.mjs completion (links ddrId)
+9 usability  primary-job flow + prove.mjs completion (links ddrId + constitutionIds)
 10 stop-sweep Operate cannot finish on compare alone
 ```
 
@@ -5213,7 +5213,7 @@ cite, antiPatterns, restructure vs repaint hints, kitRecipe, confidence
 
 **Denoise + DDR (N0):** `--mode denoise` loads `denoise.md`; refuses without `--category`.
 Packet emits `ddr` / `ddrId` + `constitutionIds`; denoise Actor implement requires
-`status: accepted` (`--accept` or `core/ddr.mjs accept`). Prove receipts link `ddrId`.
+`status: accepted` (`--accept` or `core/ddr.mjs accept`). Prove receipts link `ddrId` + `constitutionIds`.
 No polish until `primaryTaskCheck` green.
 
 **Dual-focal + KPI soup (N6):** Operate queue/triage cites hard-fail ≥2 peer

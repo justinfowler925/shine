@@ -2,7 +2,23 @@ import {existsSync,readFileSync,readdirSync,realpathSync,lstatSync} from 'node:f
 import {join,dirname,relative} from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {
+ assertDdrHasEditionCatalog,
+ DEFAULT_OPERATE_CONSTITUTION_ID,
+} from '../core/constitution.mjs';
 export function profileDigest(path){const files=[];const walk=dir=>{for(const e of readdirSync(dir,{withFileTypes:true})){if(e.isSymbolicLink())throw Error('Profile symlinks are not allowed');const p=join(dir,e.name);if(e.isDirectory())walk(p);else if(e.isFile())files.push(p);}};walk(path);const h=createHash('sha256');for(const p of files.sort())h.update(relative(path,p).replaceAll('\\','/')).update(readFileSync(p));return h.digest('hex');}
+/**
+ * Edition verify bite: ClearSpeed Operate DDR must carry the full catalog ids.
+ * Fails closed when constitutionIds is missing or omits any clearspeed-operate principle.
+ */
+export function verifyOperateDdrConstitution(ddr,{editionId=DEFAULT_OPERATE_CONSTITUTION_ID}={}){
+ try{
+  const result=assertDdrHasEditionCatalog(ddr,{editionId});
+  return {status:'passed',editionId:result.editionId,constitutionIds:result.constitutionIds,ddrId:ddr?.ddrId||null};
+ }catch(error){
+  return {status:'failed',reason:error.message,editionId,ddrId:ddr?.ddrId||null};
+ }
+}
 export function editionSkill(base,profile){return readFileSync(join(base,'skill/SKILL.md'),'utf8').replace('# Shine\n','# Shine\n'+readFileSync(join(profile,'profile-instructions.md'),'utf8')).replace(/Use for UI,\s+UX,[\s\S]*?visual polish\./,m=>m+' Includes the Clearspeed application profile for Nucleus and Clearspeed work.');}
 function walkTextFiles(dir,out=[]){for(const e of readdirSync(dir,{withFileTypes:true})){if(e.name==='node_modules'||e.name==='.git')continue;const p=join(dir,e.name);if(e.isSymbolicLink())continue;if(e.isDirectory())walkTextFiles(p,out);else if(e.isFile())out.push(p);}return out;}
 function assertClearspeedBrand(edition,profile){

@@ -194,9 +194,14 @@ export function writeCompletionProveReceipt({
   binding = null,
   tool = "prove.mjs",
   ddrId = "",
+  constitutionIds = null,
+  constitutionEdition = "",
 }) {
   if (!cite) throw new Error("completion prove receipt requires cite");
   if (!checksComplete(checks)) throw new Error("cannot mint completion prove receipt without all checks passed");
+  const ids = Array.isArray(constitutionIds)
+    ? constitutionIds.map((id) => String(id || "").trim()).filter(Boolean)
+    : [];
   const receipt = {
     version: COMPLETION_VERSION,
     kind: "completion",
@@ -209,6 +214,13 @@ export function writeCompletionProveReceipt({
     binding: binding || null,
     at: Date.now(),
     ...(ddrId ? { ddrId, ddrLinked: true } : {}),
+    ...(ids.length
+      ? {
+          constitutionIds: ids,
+          constitutionEdition: constitutionEdition || "",
+          constitutionLinked: true,
+        }
+      : {}),
   };
   if (target && existsSync(target) && RENDERABLE_ARTIFACT.test(target)) {
     const claim = artifactClaim(target, cite);
@@ -245,12 +257,22 @@ export function readCompletionProveReceipt() {
   }
 }
 
-function completionFaults(rec, label, now) {
+function completionFaults(rec, label, now, { requireConstitution = false } = {}) {
   if (rec.kind !== "completion" || rec.verdict !== "passed" || rec.tool !== "prove.mjs")
     return [`${label}: proof is not a prove.mjs completion PASS`];
   if (!checksComplete(rec.checks)) return [`${label}: prove.mjs receipt has incomplete checks`];
   if (typeof rec.at !== "number" || rec.at > now + 60_000 || now - rec.at > MAX_AGE_MS)
     return [`${label}: prove.mjs completion is stale or future-dated`];
+  if (requireConstitution) {
+    const ids = Array.isArray(rec.constitutionIds)
+      ? rec.constitutionIds.map((id) => String(id || "").trim()).filter(Boolean)
+      : [];
+    if (!ids.length) {
+      return [
+        `${label}: prove.mjs completion omits constitutionIds — Operate receipt must stamp ClearSpeed catalog ids`,
+      ];
+    }
+  }
   return [];
 }
 
@@ -291,6 +313,10 @@ export function operateProveGaps(claims, { now = Date.now(), screenForCite = () 
       continue;
     }
 
+    // Operate SaaS pages require constitutionIds on the completion receipt
+    // (ClearSpeed catalog stamped by prove.mjs).
+    const constitutionOpts = { requireConstitution: true };
+
     if (claim.artifact && claim.artifactSha256) {
       const rec = receipts.find((r) => r.artifact === claim.artifact && r.cite === claim.cite);
       if (!rec) {
@@ -299,7 +325,7 @@ export function operateProveGaps(claims, { now = Date.now(), screenForCite = () 
         );
         continue;
       }
-      const faults = completionFaults(rec, label, now);
+      const faults = completionFaults(rec, label, now, constitutionOpts);
       if (faults.length) {
         gaps.push(...faults);
         continue;
@@ -320,8 +346,8 @@ export function operateProveGaps(claims, { now = Date.now(), screenForCite = () 
       );
       continue;
     }
-    if (candidates.some((rec) => !completionFaults(rec, label, now).length)) continue;
-    gaps.push(...completionFaults(candidates[0], label, now));
+    if (candidates.some((rec) => !completionFaults(rec, label, now, constitutionOpts).length)) continue;
+    gaps.push(...completionFaults(candidates[0], label, now, constitutionOpts));
   }
   return gaps;
 }

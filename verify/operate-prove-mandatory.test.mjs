@@ -15,7 +15,10 @@ import {
   writeCompletionProveReceipt,
   writeProveReceipt,
 } from "../hooks/receipt.mjs";
+import { operateConstitutionIds } from "../core/constitution.mjs";
 import { OPERATE_USABILITY_SCREENS } from "./usability.mjs";
+
+const OPERATE_CONSTITUTION_IDS = operateConstitutionIds();
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = join(here, "..");
@@ -78,13 +81,24 @@ const mintCompare = (cite, artifact) => {
   });
 };
 
-const mintCompletion = (cite, artifact, { at = Date.now(), screen = "settings" } = {}) => {
+const mintCompletion = (
+  cite,
+  artifact,
+  {
+    at = Date.now(),
+    screen = "settings",
+    constitutionIds = OPERATE_CONSTITUTION_IDS,
+    constitutionEdition = "clearspeed-operate",
+  } = {},
+) => {
   const rec = writeCompletionProveReceipt({
     cite,
     target: artifact,
     lane: "saas",
     screen,
     checks: allChecks,
+    constitutionIds,
+    constitutionEdition,
   });
   if (at !== rec.at) {
     const store = JSON.parse(readFileSync(completionReceipt, "utf8"));
@@ -93,6 +107,7 @@ const mintCompletion = (cite, artifact, { at = Date.now(), screen = "settings" }
     );
     writeFileSync(completionReceipt, JSON.stringify(store));
   }
+  return rec;
 };
 
 try {
@@ -136,6 +151,15 @@ try {
     [],
     "fresh completion clears Operate gap",
   );
+
+  // Constitution stamp is part of the Operate prove recipe.
+  mintCompletion(OPERATE_CITE, settingsPage, { constitutionIds: [] });
+  assert.match(
+    operateProveGaps([artifactClaim(settingsPage, OPERATE_CITE)], { screenForCite }).join("\n"),
+    /omits constitutionIds/,
+    "Operate completion without constitutionIds must gap",
+  );
+  mintCompletion(OPERATE_CITE, settingsPage);
 
   mintCompletion(OPERATE_CITE, settingsPage, { at: Date.now() - 21 * 60 * 1000 });
   assert.match(

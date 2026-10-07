@@ -6,6 +6,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate prove constitution receipts + edition catalog bite.**
+  `verify/prove.mjs` stamps `constitutionIds` / `constitutionEdition` onto
+  completion receipts (saas defaults to the full ClearSpeed Operate catalog).
+  Operate stop-sweep gaps when a completion omits the ids. Edition verify
+  `verifyOperateDdrConstitution` fails closed if a DDR omits any catalog id.
+  Doctor: `verify/constitution.test.mjs` · `verify/operate-prove-mandatory.test.mjs`.
+
 - **ClearSpeed Operate numbered constitution (enterprise §3).**
   `knowledge/constitutions/clearspeed-operate.json` + `core/constitution.mjs`
   bind numbered edition principles onto every SaaS/denoise DDR

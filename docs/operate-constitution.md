@@ -41,6 +41,25 @@ Anti-pattern library rows (`knowledge/anti-patterns/*.json`) point back via
 Host wiring: `core/critic-actor-host.mjs` + `verify/denoise-loop.mjs` pass
 `packet.ddr.constitution`.
 
+## Prove receipts
+
+`verify/prove.mjs` stamps `constitutionIds` + `constitutionEdition` onto the
+completion receipt (`hooks/receipt.mjs`) alongside `ddrId`. SaaS / denoise
+defaults to the full ClearSpeed Operate catalog when `--constitution-ids` is
+omitted. Operate stop-sweep gaps if a completion receipt omits the ids.
+
+```sh
+node verify/prove.mjs <artifact> --cite shadcn-queue --lane saas --ddr <ddrId>
+# optional override:
+#   --constitution-ids cta-pressure,dual-focal-ban,…
+#   --constitution-edition clearspeed-operate
+```
+
+## Edition verify bite
+
+`verify/edition.mjs` → `verifyOperateDdrConstitution(ddr)` fails closed when a
+DDR omits any catalog id (empty or partial). Doctor: `verify/constitution.test.mjs`.
+
 ```sh
 node core/constitution.mjs
 node verify/constitution.test.mjs

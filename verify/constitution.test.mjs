@@ -7,6 +7,7 @@ import { createDesignPacket } from "../core/design-packet.mjs";
 import { OPERATE_DENOISE_CONSTITUTION, buildDdr } from "../core/ddr.mjs";
 import {
   assertCriticCitesConstitution,
+  assertDdrHasEditionCatalog,
   enforceCriticConstitutionCitation,
   extractConstitutionCitations,
   formatNumberedConstitution,
@@ -14,10 +15,15 @@ import {
   loadConstitution,
   operateConstitutionIds,
   resolveOperateConstitution,
+  resolveProveConstitution,
   validateConstitution,
 } from "../core/constitution.mjs";
 import { buildCriticPrompt, heuristicCritic, runReflexion } from "../core/reflexion.mjs";
-import { dirname, resolve } from "node:path";
+import { writeCompletionProveReceipt } from "../hooks/receipt.mjs";
+import { verifyOperateDdrConstitution } from "./edition.mjs";
+import { mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -157,6 +163,75 @@ const llmNumberCite = await runReflexion({
 assert.equal(llmNumberCite.verdict, "partial");
 assert.ok(llmNumberCite.constitutionCited.includes("cta-pressure"));
 
+// Edition verify bite: DDR must carry the full clearspeed-operate catalog.
+assertDdrHasEditionCatalog(packet.ddr);
+const editionOk = verifyOperateDdrConstitution(packet.ddr);
+assert.equal(editionOk.status, "passed");
+assert.equal(editionOk.constitutionIds.length, packet.ddr.constitutionIds.length);
+
+const omitEmpty = verifyOperateDdrConstitution({
+  ddrId: "ddr_omit_empty",
+  constitutionIds: [],
+  constitutionEdition: "clearspeed-operate",
+});
+assert.equal(omitEmpty.status, "failed");
+assert.match(omitEmpty.reason, /omits constitutionIds/);
+
+const omitPartial = verifyOperateDdrConstitution({
+  ddrId: "ddr_omit_partial",
+  constitutionIds: ["cta-pressure", "dual-focal-ban"],
+  constitutionEdition: "clearspeed-operate",
+});
+assert.equal(omitPartial.status, "failed");
+assert.match(omitPartial.reason, /omits catalog constitutionIds/);
+assert.match(omitPartial.reason, /prove-mandatory/);
+
+assert.throws(
+  () =>
+    assertDdrHasEditionCatalog({
+      ddrId: "ddr_no_ids",
+      constitutionEdition: "clearspeed-operate",
+    }),
+  /omits constitutionIds/,
+);
+
+// Prove receipt wiring: saas defaults to full catalog; stamps completion store.
+const proveResolved = resolveProveConstitution({ lane: "saas" });
+assert.equal(proveResolved.constitutionEdition, "clearspeed-operate");
+assert.deepEqual(proveResolved.constitutionIds, operateConstitutionIds());
+
+const provePartial = resolveProveConstitution({
+  lane: "saas",
+  constitutionIds: "cta-pressure,dual-focal-ban",
+});
+assert.deepEqual(provePartial.constitutionIds, ["cta-pressure", "dual-focal-ban"]);
+
+const receiptDir = mkdtempSync(join(tmpdir(), "shine-constitution-receipt-"));
+process.env.SHINE_COMPLETION_RECEIPT = join(receiptDir, "completion.json");
+try {
+  const checks = Object.fromEntries(
+    ["accessibility", "styling", "layout", "interactions", "referenceValidity", "visualComparison", "buildBinding"].map(
+      (k) => [k, { status: "passed" }],
+    ),
+  );
+  const stamped = writeCompletionProveReceipt({
+    cite: "shadcn-queue",
+    lane: "saas",
+    screen: "queue",
+    checks,
+    ddrId: packet.ddrId,
+    constitutionIds: proveResolved.constitutionIds,
+    constitutionEdition: proveResolved.constitutionEdition,
+  });
+  assert.equal(stamped.ddrLinked, true);
+  assert.equal(stamped.constitutionLinked, true);
+  assert.deepEqual(stamped.constitutionIds, proveResolved.constitutionIds);
+  assert.equal(stamped.constitutionEdition, "clearspeed-operate");
+} finally {
+  delete process.env.SHINE_COMPLETION_RECEIPT;
+  rmSync(receiptDir, { recursive: true, force: true });
+}
+
 console.log(
-  "constitution PASS: numbered clearspeed-operate · DDR constitution[] · critic must cite (id|n)",
+  "constitution PASS: numbered clearspeed-operate · DDR constitution[] · critic must cite (id|n) · prove receipt + edition catalog bite",
 );

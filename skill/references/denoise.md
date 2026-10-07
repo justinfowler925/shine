@@ -72,7 +72,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
 7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
 8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done
-9 usability  primary-job flow + prove.mjs completion (links ddrId)
+9 usability  primary-job flow + prove.mjs completion (links ddrId + constitutionIds)
 10 stop-sweep Operate cannot finish on compare alone
 ```
 

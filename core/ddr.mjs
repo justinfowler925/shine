@@ -146,9 +146,25 @@ export function supersedeDdr(oldDdr, nextDdr) {
 }
 
 /** Attach ddrId onto a prove/completion receipt payload (non-mutating clone). */
-export function linkReceiptToDdr(receipt, ddrId) {
+export function linkReceiptToDdr(receipt, ddrId, { constitutionIds = null, constitutionEdition = "" } = {}) {
   if (!ddrId) return receipt;
-  return { ...receipt, ddrId, ddrLinked: true };
+  const ids = Array.isArray(constitutionIds)
+    ? constitutionIds.map((id) => String(id || "").trim()).filter(Boolean)
+    : Array.isArray(receipt?.constitutionIds)
+      ? receipt.constitutionIds
+      : [];
+  return {
+    ...receipt,
+    ddrId,
+    ddrLinked: true,
+    ...(ids.length
+      ? {
+          constitutionIds: ids,
+          constitutionEdition: constitutionEdition || receipt?.constitutionEdition || "",
+          constitutionLinked: true,
+        }
+      : {}),
+  };
 }
 
 if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
