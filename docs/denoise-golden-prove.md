@@ -22,15 +22,19 @@ node verify/denoise-loop.test.mjs
 
 ## Fixtures
 
-| Pair | Defects |
-|---|---|
-| `queue-cta-{before,after}` | cta-pressure |
-| `queue-dual-grid-{before,after}` | dual-focal → XOR after PASS (D10) |
-| `queue-cta-before` → loop apply | dual-focal, kpi-soup |
-| `sources-cite-{before,after}` | rebind-cite |
-| `usul-*-{before,after}` | set-focal / composition |
+| Pair | Defects | Cropped receipts |
+|---|---|---|
+| `queue-cta-{before,after}` | cta-pressure | `receipts/queue-cta-{before,after}-crop.html` |
+| `queue-kpi-{before,after}` | kpi-soup | `receipts/queue-kpi-{before,after}-crop.html` |
+| `queue-dual-grid-{before,after}` | dual-focal → XOR after PASS (D10) | `receipts/queue-dual-grid-before-crop.html` + `queue-dual-grid-fold-crop.html` |
+| `sources-cite-{before,after}` | wrong-cite / rebind-cite | `receipts/sources-cite-{before,after}-crop.html` |
+| `usul-*-{before,after}` | set-focal / composition | (composition bite; no crop pair yet) |
+
+Crop builders: `verify/restructure/defect-crops.mjs` · doctor bite `verify/defect-crops.test.mjs`.  
+Twin full-page before/after screenshots are **invalid** proof.
 
 ## Proof artifacts
 
 `verify/fixtures/denoise/.loop/denoise-loop-receipt.json` (local) and CI via
 `verify/denoise-loop.test.mjs` — status + cleared defect IDs, not identical screenshots.
+Skill A/B pins the same crop pairs in `verify/fixtures/skill-ab/cases.json`.

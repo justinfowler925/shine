@@ -13,6 +13,11 @@ import { spawnSync } from "node:child_process";
 import { applyDomRestructure } from "./restructure/apply-dom.mjs";
 import { buildRestructurePlan, validateRestructurePlan } from "./restructure/schema.mjs";
 import { applyXorSavedView, buildXorFoldCropHtml } from "./restructure/xor-saved-view.mjs";
+import {
+  DEFECT_CROP_PAIRS,
+  assertCropPairOk,
+  ensureDefectCropReceipts,
+} from "./restructure/defect-crops.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -28,16 +33,19 @@ const CASES = [
     ops: [{ op: "cta-budget", scope: "main", maxFilled: 1, preferLabels: ["Pursue"], demotePolicy: "outline" }],
     mustClear: ["cta-pressure"],
     applyClears: ["ai-slop-cta-mania"],
+    cropPairId: "queue-cta",
   },
   {
     id: "queue-kpi",
-    before: "queue-cta-before.html",
+    before: "queue-kpi-before.html",
     after: "queue-kpi-after.html",
     cite: "shadcn-queue",
     ops: [{ op: "kpi-collapse", maxVisible: 3, rest: "details" }],
     mustClear: ["kpi-soup"],
     applyClears: ["ai-slop-kpi-strip"],
     synthesizeAfter: true,
+    refreshAfter: true,
+    cropPairId: "queue-kpi",
   },
   {
     id: "usul-focal",
@@ -56,6 +64,7 @@ const CASES = [
     ops: [{ op: "rebind-cite", from: "shadcn-queue", to: "shadcn-settings", whenCategory: "settings" }],
     mustClear: [],
     synthesizeAfter: true,
+    cropPairId: "sources-cite",
   },
   {
     id: "queue-dual-grid",
@@ -73,6 +82,7 @@ const CASES = [
     mustClear: ["dual-focal"],
     /** Agent-assisted XOR close (D10) — not plan-only detect, not silent AST delete */
     xorRecipe: true,
+    cropPairId: "queue-dual-grid",
   },
 ];
 
@@ -106,11 +116,11 @@ function measureFailures(file, cite) {
 function ensureSynthesizedAfter(c) {
   if (!c.synthesizeAfter || !c.after) return;
   const afterPath = join(FIX, c.after);
-  if (existsSync(afterPath)) return;
+  if (existsSync(afterPath) && !c.refreshAfter) return;
   const beforeHtml = readFileSync(join(FIX, c.before), "utf8");
   const plan = buildRestructurePlan({
     job: c.id,
-    category: "queue",
+    category: c.id.includes("sources") ? "settings" : "queue",
     citePrimary: c.cite,
     ops: c.ops,
     measureMustClear: c.mustClear,
@@ -130,19 +140,40 @@ function ensureXorAfter(c) {
     writeFileSync(afterPath, xor.html);
   }
   mkdirSync(RECEIPTS, { recursive: true });
+  const xorCropHtml = buildXorFoldCropHtml({
+    keptTitle: xor.keptTitle || "Queue",
+    chipLabel: xor.chipLabel || "Peer view",
+  });
   const cropPath = join(RECEIPTS, "queue-dual-grid-fold-crop.html");
-  writeFileSync(
-    cropPath,
-    buildXorFoldCropHtml({
-      keptTitle: xor.keptTitle || "Queue",
-      chipLabel: xor.chipLabel || "Peer view",
-    }),
-  );
+  writeFileSync(cropPath, xorCropHtml);
+  ensureDefectCropReceipts(RECEIPTS, { xorAfterHtml: xorCropHtml });
   return { xor, cropPath, afterPath };
+}
+
+function ensureAllCropReceipts() {
+  mkdirSync(RECEIPTS, { recursive: true });
+  const xorCropHtml = buildXorFoldCropHtml({
+    keptTitle: "Queue",
+    chipLabel: "David's 10 today",
+  });
+  ensureDefectCropReceipts(RECEIPTS, { xorAfterHtml: xorCropHtml });
+}
+
+function cropPairStatus(cropPairId) {
+  if (!cropPairId) return { required: false, ok: true, errors: [] };
+  const pair = DEFECT_CROP_PAIRS.find((p) => p.id === cropPairId);
+  if (!pair) return { required: true, ok: false, errors: [`unknown cropPairId ${cropPairId}`] };
+  const read = (name) => {
+    const path = join(RECEIPTS, name);
+    return existsSync(path) ? readFileSync(path, "utf8") : "";
+  };
+  const result = assertCropPairOk(pair, read);
+  return { required: true, ...result, beforeCrop: pair.beforeCrop, afterCrop: pair.afterCrop };
 }
 
 export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
   mkdirSync(FIX, { recursive: true });
+  ensureAllCropReceipts();
   const scorecard = [];
 
   for (const c of cases) {
@@ -217,13 +248,17 @@ export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
       if (was && !now) cleared.push(id);
     }
 
+    const crops = cropPairStatus(c.cropPairId);
     const foldCropOk =
       !c.xorRecipe ||
-      (existsSync(join(RECEIPTS, "queue-dual-grid-fold-crop.html")) &&
+      (crops.ok &&
+        existsSync(join(RECEIPTS, "queue-dual-grid-fold-crop.html")) &&
         /role=["']grid["']/.test(readFileSync(join(RECEIPTS, "queue-dual-grid-fold-crop.html"), "utf8")) &&
         /data-shine-xor-views|data-shine-xor-from-peer/.test(
           readFileSync(join(RECEIPTS, "queue-dual-grid-fold-crop.html"), "utf8"),
         ));
+
+    const cropOk = !c.cropPairId || crops.ok;
 
     const row = {
       id: c.id,
@@ -237,8 +272,12 @@ export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
       beforeMeasureStatus: beforeMeasure.status,
       afterMeasureStatus: afterMeasure.status,
       foldCropOk: c.xorRecipe ? foldCropOk : undefined,
+      cropPair: c.cropPairId
+        ? { id: c.cropPairId, ok: crops.ok, before: crops.beforeCrop, after: crops.afterCrop, errors: crops.errors }
+        : undefined,
       pass:
         validation.ok &&
+        cropOk &&
         (c.xorRecipe
           ? appliedResult.plans.length >= 1 &&
             xorApplied &&
@@ -257,12 +296,14 @@ export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
   }
 
   const passed = scorecard.filter((r) => r.pass).length;
+  const cropPairsOk = DEFECT_CROP_PAIRS.every((p) => cropPairStatus(p.id).ok);
   return {
     version: 1,
     total: scorecard.length,
     passed,
     failed: scorecard.length - passed,
-    bar: "DOM auto-ops 100%; dual-grid detect→XOR after PASS",
+    bar: "DOM auto-ops 100%; dual-grid detect→XOR after PASS; cropped FAIL→PASS receipts",
+    cropPairsOk,
     cases: scorecard,
   };
 }
