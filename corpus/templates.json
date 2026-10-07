@@ -1288,6 +1288,37 @@
       "scope": "page"
     },
     {
+      "id": "shadcn-catalog-skills",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "shadcn skills catalog (hosts, install actions, use-when)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "cards",
+        "library",
+        "skills",
+        "agents",
+        "packages",
+        "directory"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form"
+        ],
+        "captureExpect": "[data-region=\"catalog-cards\"] article"
+      },
+      "note": "S3 deepen authored skills catalog blueprint",
+      "scope": "page"
+    },
+    {
       "id": "shadcn-catalog-templates",
       "screen": "catalog",
       "kit": "shadcn-registry",
@@ -1316,6 +1347,37 @@
         "captureExpect": "[data-region=\"catalog-cards\"] article"
       },
       "note": "S3 authored Operate template gallery catalog blueprint",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-catalog-tools",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "shadcn company tools catalog (packages, attestation, install)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "cards",
+        "library",
+        "tools",
+        "packages",
+        "company-tools",
+        "directory"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form"
+        ],
+        "captureExpect": "[data-region=\"catalog-cards\"] article"
+      },
+      "note": "S3 deepen authored Company Tools catalog blueprint",
       "scope": "page"
     },
     {
@@ -3442,6 +3504,36 @@
       "scope": "page"
     },
     {
+      "id": "shadcn-chat-inbox",
+      "screen": "chat",
+      "kit": "shadcn-registry",
+      "title": "shadcn chat inbox (thread rail + active conversation)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "chat",
+        "assistant",
+        "inbox",
+        "threads",
+        "conversation"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form",
+          "navigation"
+        ],
+        "captureExpect": "[data-region=\"chat-composer\"] #send"
+      },
+      "note": "S3 deepen authored multi-thread chat inbox blueprint",
+      "scope": "page"
+    },
+    {
       "id": "shadcn-chat-sidecar",
       "screen": "chat",
       "kit": "shadcn-registry",
@@ -3469,6 +3561,36 @@
         "captureExpect": "[data-region=\"chat-sidecar\"] #send"
       },
       "note": "S3 authored Operate sidecar chat blueprint",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-chat-support",
+      "screen": "chat",
+      "kit": "shadcn-registry",
+      "title": "shadcn support triage chat (ticket context, provenance)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "chat",
+        "assistant",
+        "support",
+        "triage",
+        "ticket",
+        "conversation"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "form"
+        ],
+        "captureExpect": "[data-region=\"chat-composer\"] #send"
+      },
+      "note": "S3 deepen authored support/triage chat blueprint",
       "scope": "page"
     },
     {
@@ -3595,6 +3717,73 @@
         "family": "untitled",
         "density": "comfortable"
       }
+    },
+    {
+      "id": "shadcn-cockpit-adoption",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "shadcn adoption cockpit (workspace KPIs, lagging hosts)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "dashboard",
+        "cockpit",
+        "kpi",
+        "kpis",
+        "adoption",
+        "workspaces",
+        "dense"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "dense"
+      },
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "table"
+        ],
+        "captureExpect": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]"
+      },
+      "note": "S3 deepen authored dense adoption cockpit blueprint",
+      "scope": "page"
+    },
+    {
+      "id": "shadcn-cockpit-compliance",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "shadcn compliance cockpit (findings KPIs, open controls)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "dashboard",
+        "cockpit",
+        "kpi",
+        "kpis",
+        "compliance",
+        "risk",
+        "findings",
+        "dense"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "dense"
+      },
+      "reference": {
+        "required": [
+          "navigation",
+          "summary",
+          "table"
+        ],
+        "captureExpect": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]"
+      },
+      "note": "S3 deepen authored dense compliance cockpit blueprint",
+      "scope": "page"
     },
     {
       "id": "shadcn-cockpit-ops",

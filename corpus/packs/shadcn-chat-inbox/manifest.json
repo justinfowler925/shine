@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "shadcn-chat-inbox",
+  "screen": "chat",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "reference.html",
+      "sha256": "78b066a0c8835d13ce6b7aa15979e0ee7d8358ca94083294d4de45c35e0fb4a5"
+    }
+  ]
+}

@@ -73,29 +73,34 @@ export const OPERATE_PAGE_SCREENS = Object.freeze(["dashboard", "settings", "for
 
 /**
  * Soft Operate briefs (dashboard / settings / form / queue / record / catalog / chat)
- * must not retrieve `screen:charts` atoms as the primary page cite. Chart-led wording
- * without a page screen (`charts`, `analytics` alone) keeps chart atoms.
+ * must not retrieve `screen:charts` atoms as the primary page cite. Explicit chart
+ * wording (`chart` / `charts` / `dataviz`) keeps chart atoms; soft `analytics` /
+ * `metrics` alone resolve to a composed dashboard page (chart gravity demotion).
  */
 export function operatePageIntent(brief) {
   const tokens = brief?.tokens || [];
-  const chartLed = hasAny(tokens, ["charts", "chart"]);
+  const chartExplicit = hasAny(tokens, ["charts", "chart", "dataviz"]);
   for (const screen of OPERATE_PAGE_SCREENS) {
     if (tokens.includes(screen)) {
       return { screen: screen === "crud" ? "queue" : screen, chartExplicit: false };
     }
   }
-  if (hasAny(tokens, ["cockpit", "kpi", "kpis"])) return { screen: "dashboard", chartExplicit: false };
+  if (hasAny(tokens, ["cockpit", "kpi", "kpis", "adoption", "compliance"])) return { screen: "dashboard", chartExplicit: false };
   if (hasAny(tokens, ["preferences", "configuration"])) return { screen: "settings", chartExplicit: false };
   if (hasAny(tokens, ["wizard", "checkout", "intake"])) return { screen: "form", chartExplicit: false };
-  if (hasAny(tokens, ["datagrid", "worklist", "inbox", "triage"])) return { screen: "queue", chartExplicit: false };
-  if (hasAny(tokens, ["integrations", "connectors", "packages", "gallery", "directory", "showcase"])) {
-    return { screen: "catalog", chartExplicit: false };
-  }
-  if (hasAny(tokens, ["assistant", "sidecar", "conversation", "copilot"])) {
+  // "inbox" alone is chat-inbox when paired with chat synonyms; bare inbox/triage
+  // still map to queue (worklist). Chat synonyms checked before queue inbox.
+  if (hasAny(tokens, ["assistant", "sidecar", "conversation", "copilot", "support"])) {
     return { screen: "chat", chartExplicit: false };
   }
+  if (hasAny(tokens, ["datagrid", "worklist", "inbox", "triage"])) return { screen: "queue", chartExplicit: false };
+  if (hasAny(tokens, ["integrations", "connectors", "packages", "gallery", "directory", "showcase", "skills", "tools", "company-tools"])) {
+    return { screen: "catalog", chartExplicit: false };
+  }
   if (tokens.includes("profile") && !hasAny(tokens, ["marketing"])) return { screen: "record", chartExplicit: false };
-  if (chartLed || hasAny(tokens, ["analytics", "dataviz"])) return { screen: null, chartExplicit: true };
+  // Soft analytics/metrics → composed dashboard, not chart atoms.
+  if (hasAny(tokens, ["analytics", "metrics"])) return { screen: "dashboard", chartExplicit: false };
+  if (chartExplicit) return { screen: null, chartExplicit: true };
   return { screen: null, chartExplicit: false };
 }
 
@@ -127,15 +132,16 @@ const baseScore = (template, brief, intent = { screen: null, chartExplicit: fals
   }
   if (brief.lane === "lex") score += template.kit === "slds" ? 80 : -20;
   // Operate page bias: demote chart atoms and component demos, prefer composed
-  // pages. Deltas stay modest so charts remain eligible as secondary region refs.
+  // pages. Chart atoms stay eligible as secondary region refs only (−70 keeps
+  // them below page primaries even when job tokens overlap "metrics"/"kpi").
   // Skip on the Lightning lane — the SLDS ± score is what keeps non-LEX pages
   // below the eligibility floor; an Operate boost must not re-admit them.
   if (brief.lane !== "lex" && intent.screen && !intent.chartExplicit) {
-    if (template.screen === "charts") score -= 45;
+    if (template.screen === "charts") score -= 70;
     else if (isComposedOperatePage(template)) {
-      score += operateScreenMatch(template, intent.screen) ? 50 : 15;
+      score += operateScreenMatch(template, intent.screen) ? 55 : 20;
     } else {
-      score -= 25;
+      score -= 30;
     }
   }
   return score;

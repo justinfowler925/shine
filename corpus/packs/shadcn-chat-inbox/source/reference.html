@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-chat-inbox" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width"/><title>Chat inbox</title>
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{margin:0;font:14px/1.5 ui-sans-serif,system-ui,sans-serif;color:#18181b;background:#fff;height:100vh;display:grid;grid-template-columns:280px 1fr}
+.inbox{border-right:1px solid #e4e4e7;display:grid;grid-template-rows:auto 1fr;min-height:0;background:#fafafa}
+.inbox header{padding:14px 16px;border-bottom:1px solid #e4e4e7;background:#fff}
+.inbox header h1{margin:0;font-size:15px;font-weight:600}
+.inbox header p{margin:4px 0 0;font-size:12px;color:#71717a}
+.threads{overflow:auto;padding:8px}
+.thread-item{display:block;width:100%;text-align:left;border:0;background:transparent;padding:12px;border-radius:8px;cursor:pointer;font:inherit;color:inherit}
+.thread-item[aria-current=true]{background:#fff;box-shadow:0 0 0 1px #e4e4e7}
+.thread-item .who{font-weight:600;font-size:13px}
+.thread-item .preview{font-size:12px;color:#71717a;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.thread-item .when{font-size:11px;color:#a1a1aa;margin-top:4px}
+.pane{display:grid;grid-template-rows:56px 1fr auto;min-width:0}
+.pane>header{display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid #e4e4e7}
+.pane>header h2{margin:0;font-size:15px;font-weight:600}
+.status{font-size:12px;color:#71717a}
+main{overflow:auto;padding:24px 20px}
+.msgs{display:flex;flex-direction:column;gap:14px;max-width:720px}
+.msg{max-width:85%;padding:12px 14px;border-radius:12px;border:1px solid #e4e4e7;background:#fafafa}
+.msg[data-role=user]{align-self:flex-end;background:#18181b;color:#fafafa;border-color:#18181b}
+.msg .meta{font-size:11px;color:#71717a;margin-bottom:6px}
+.msg[data-role=user] .meta{color:#a1a1aa}
+.msg p{margin:0}
+.composer{border-top:1px solid #e4e4e7;padding:16px 20px}
+.composer form{max-width:720px;display:grid;gap:8px}
+label{font-weight:600;font-size:13px}
+textarea{font:inherit;min-height:64px;padding:12px;border:1px solid #e4e4e7;border-radius:10px;resize:vertical}
+button#send{justify-self:end;font:inherit;font-weight:600;height:40px;padding:0 16px;border:0;border-radius:8px;background:#18181b;color:#fff;cursor:pointer}
+</style></head>
+<body>
+<aside class="inbox" data-region="chat-inbox" aria-label="Conversation inbox">
+<header>
+<h1>Inbox</h1>
+<p>3 open · 1 needs reply</p>
+</header>
+<div class="threads" role="list">
+<button type="button" class="thread-item" role="listitem" aria-current="true">
+<div class="who">OPS-1842 · attestation</div>
+<div class="preview">Tip hash mismatch on shine.zip</div>
+<div class="when">18m ago</div>
+</button>
+<button type="button" class="thread-item" role="listitem">
+<div class="who">Adoption digests</div>
+<div class="preview">Weekly board lag for Studio host</div>
+<div class="when">2h ago</div>
+</button>
+<button type="button" class="thread-item" role="listitem">
+<div class="who">Company Tools install</div>
+<div class="preview">Where is the Cursor skill path?</div>
+<div class="when">Yesterday</div>
+</button>
+</div>
+</aside>
+<section class="pane" data-region="chat-active" aria-label="Active conversation">
+<header data-region="chat-header">
+<h2>OPS-1842 · attestation</h2>
+<p class="status" role="status">Needs reply · High</p>
+</header>
+<main data-region="chat-thread">
+<div class="msgs">
+<div class="msg" data-role="user"><div class="meta">Alex · 18m ago</div><p>Install Shine fails — attestation hash mismatch on tip edition.</p></div>
+<div class="msg" data-role="assistant" data-region="chat-assistant">
+<div class="meta">Assistant · 16m ago</div>
+<p>Workspace tip is behind main @ 58157e59. Re-prepare distribute and reinstall.</p>
+</div>
+</div>
+</main>
+<div class="composer" data-region="chat-composer">
+<form aria-label="Send a message">
+<label for="prompt">Message</label>
+<textarea id="prompt" name="prompt" placeholder="Reply in this thread…"></textarea>
+<button type="submit" id="send">Send</button>
+</form>
+</div>
+</section>
+<script>document.querySelector("form").onsubmit=(e)=>{e.preventDefault();const t=document.getElementById("prompt");if(!t.value.trim())return;const msgs=document.querySelector(".msgs");const el=document.createElement("div");el.className="msg";el.dataset.role="user";el.innerHTML=`<div class="meta">You · just now</div><p>${t.value.replace(/</g,"&lt;")}</p>`;msgs.appendChild(el);t.value=""}</script>
+</body></html>

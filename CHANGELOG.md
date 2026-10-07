@@ -20,6 +20,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   Denoise loop uses the host module (no inline accept/plan). Doctor bite:
   `verify/critic-actor-host.test.mjs`.
 
+- **Operate corpus deepen (S3+).** +2 catalog (`shadcn-catalog-skills`,
+  `shadcn-catalog-tools`), +2 chat (`shadcn-chat-support`, `shadcn-chat-inbox`),
+  +2 dense cockpits (`shadcn-cockpit-adoption`, `shadcn-cockpit-compliance`).
+  Cite floors: catalog ≥5, chat ≥5, dense dashboard ≥7, dense cockpit jobs ≥4.
+  Soft `analytics`/`metrics` prefer composed dashboard; chart demotion −70;
+  explicit `chart`/`charts`/`dataviz` keep chart atoms.
+
 - **Skill A/B eval (Salesforce DI-style).** `verify/skill-ab-eval.mjs` + pinned
   `verify/fixtures/skill-ab/cases.json` score denoise guidance **with vs without**
   on Sled-class fixtures (CTA, KPI, focal, cite, dual-grid). Machine oracles only —

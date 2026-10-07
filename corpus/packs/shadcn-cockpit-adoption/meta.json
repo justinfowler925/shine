@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-cockpit-adoption",
+  "source": "corpus/blueprints/shadcn-cockpit-adoption/reference.html",
+  "harvested": "2026-10-07",
+  "bytes": 57180,
+  "provenance": "Authored blueprint, S3 Operate corpus deepen",
+  "capture": {
+    "status": 200,
+    "title": "Adoption cockpit",
+    "headings": "Operate\nAdoption cockpit",
+    "expectedSelector": "[data-region=\"cockpit-kpis\"] [data-shine-kpi]",
+    "expectedCount": 4,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-cockpit-adoption/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-cockpit-adoption/reference.html",
+    "capturedAt": "2026-10-07T14:29:37.599Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "e38d026a50cae88a6417607c5c848917257db1cdec53c0a8c7531cc07eb4d495",
+    "shotSha256": "c804e3023f6f5d8c20083674dc4957f6e61427af106f6791ace97d14b1886b17"
+  }
+}

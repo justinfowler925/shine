@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-catalog-tools" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width"/><title>Company Tools catalog</title>
+<style>
+html{color-scheme:light}*{box-sizing:border-box}
+body{font:14px/1.5 ui-sans-serif,system-ui,sans-serif;margin:0;color:#18181b;background:#fff}
+main{max-width:1100px;margin:auto;padding:32px 24px}
+h1{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:4px 0 0}
+h2{font-size:18px;font-weight:600;margin:0}
+h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#71717a;font-weight:600;margin:0 0 6px}
+p{margin:0}.muted{color:#71717a}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#71717a}
+.counts{display:flex;gap:16px;margin-top:8px;color:#71717a}.counts strong{color:#18181b;font-variant-numeric:tabular-nums}
+.bar{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin-top:24px;padding-top:24px;border-top:1px solid #e4e4e7}
+.search{flex:1;min-width:280px}label{display:block;font-weight:500;margin-bottom:6px}
+input[type=search]{font:inherit;width:100%;height:40px;border:1px solid #e4e4e7;border-radius:6px;padding:0 12px;background:#fff}
+.filters{display:inline-flex;gap:4px;background:#f4f4f5;padding:4px;border-radius:8px}
+.filters button{font:inherit;font-weight:500;min-width:72px;height:40px;padding:0 12px;border:0;border-radius:6px;background:transparent;color:#71717a;cursor:pointer}
+.filters button[aria-pressed=true]{background:#fff;color:#18181b;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+button,.button{font:inherit;font-weight:500;height:40px;padding:0 14px;border-radius:6px;border:1px solid transparent;background:#18181b;color:#fff;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.outline{background:#fff;color:#18181b;border-color:#e4e4e7}.count{margin-top:12px;color:#71717a}
+.cards{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
+article{border:1px solid #e4e4e7;border-radius:8px;padding:24px}
+.meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.badges{display:flex;gap:6px}.badge{display:inline-flex;align-items:center;height:22px;padding:0 8px;border:1px solid #e4e4e7;border-radius:6px;font-size:12px;font-weight:500}
+article h2{margin-top:12px}article>p.summary{margin-top:6px;max-width:72ch}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.cols>div{border-left:2px solid #e4e4e7;padding-left:12px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+details{margin-top:16px;border-top:1px solid #e4e4e7;padding-top:12px}summary{cursor:pointer;font-weight:500}
+</style></head>
+<body>
+<main>
+<header data-region="catalog-header">
+<p class="eyebrow">Company Tools</p>
+<h1>Internal packages</h1>
+<p class="muted">Approved tools for Nucleus workspaces. Cards carry when to use and what attestation requires.</p>
+<div class="counts"><span><strong>5</strong> packages</span><span><strong>3</strong> owners</span></div>
+</header>
+<form class="bar" role="search" aria-label="Filter packages" data-region="catalog-filters">
+<div class="search"><label for="q">Search packages</label><input id="q" type="search" name="q" placeholder="Name, owner, or job"></div>
+<div class="filters" role="group" aria-label="Status">
+<button type="button" aria-pressed="true">All</button>
+<button type="button" aria-pressed="false">Final</button>
+<button type="button" aria-pressed="false">Preview</button>
+<button type="button" aria-pressed="false">Retired</button>
+</div>
+<button type="reset" class="outline">Clear filters</button>
+</form>
+<p class="count" role="status" data-region="catalog-count">5 packages</p>
+<ul class="cards" data-region="catalog-cards">
+<li><article aria-labelledby="card-shine-pkg">
+<div class="meta"><div class="badges"><span class="badge">Final</span><span class="badge">Design</span></div><span class="muted">RevOps · tip attested</span></div>
+<h2 id="card-shine-pkg">shine.zip</h2>
+<p class="summary muted">Company Tools package for Operate cite, measure, and prove on Nucleus hosts.</p>
+<div class="cols"><div><h3>Use it when</h3><p>A workspace needs Shine without cloning the public repo.</p></div><div><h3>Before installing</h3><p>Attestation hash matches releases/shine.json tip.</p></div></div>
+<div class="actions"><button type="button">Install package</button><a class="button outline" href="#shine">Open receipt</a></div>
+<details><summary>Attestation</summary><p>SHA from Atlas Vercel distribute; rotate with tip edition.</p></details>
+</article></li>
+<li><article aria-labelledby="card-unfog-pkg">
+<div class="meta"><div class="badges"><span class="badge">Final</span><span class="badge">Copy</span></div><span class="muted">RevOps · tip attested</span></div>
+<h2 id="card-unfog-pkg">unfog.zip</h2>
+<p class="summary muted">Copy clarity package for Operate empty states and titles.</p>
+<div class="cols"><div><h3>Use it when</h3><p>Diagnosis names filler empty or belief-free headlines.</p></div><div><h3>Before installing</h3><p>Copy contract in repo; no marketing overlay.</p></div></div>
+<div class="actions"><button type="button">Install package</button><a class="button outline" href="#unfog">Open receipt</a></div>
+<details><summary>Attestation</summary><p>Final only on tip SHA match.</p></details>
+</article></li>
+<li><article aria-labelledby="card-sled-pkg">
+<div class="meta"><div class="badges"><span class="badge">Preview</span><span class="badge">Capture</span></div><span class="muted">Platform · Claude</span></div>
+<h2 id="card-sled-pkg">sled-agent.zip</h2>
+<p class="summary muted">Capture dumps for prove when auth’d Nucleus crawl is out of scope.</p>
+<div class="cols"><div><h3>Use it when</h3><p>S4 prove needs a real surface without SSO.</p></div><div><h3>Before installing</h3><p>Preview — Claude host only; dump path approved.</p></div></div>
+<div class="actions"><button type="button">Install package</button><a class="button outline" href="#sled">Open receipt</a></div>
+<details><summary>Attestation</summary><p>Preview status — no Final rotate yet.</p></details>
+</article></li>
+</ul>
+</main>
+</body></html>
