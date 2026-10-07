@@ -6,6 +6,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **CTA pressure TSX AST deepen (maxFilled=1).** `apply-tsx.mjs` `cta-budget` uses the
+  TypeScript compiler AST (not regex) to demote competing filled `Button` primaries —
+  `variant="default"`, `variant={"default"}`, and missing variant. Denoise recommend emits
+  typed `recommendation.ctaPressureAst` (TSX fixtures + FAIL→PASS crops); packets bind
+  `packet.ctaPressureAst`. Crop pair `queue-cta-tsx`. Doctor bite:
+  `verify/cta-pressure-ast-bite.mjs`.
+
 - **Reflexion host cite-ban doctor wiring.** Critic≠Actor host
   (`runCriticActorHostRound` / `planRepairFromMeasure`) and denoise-loop pass
   `doctorBiteOk` + `observedCite` into reflexion when cite-honesty fires, so

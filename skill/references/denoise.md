@@ -46,7 +46,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 | Dashboard chrome on a Monday triage job | Worklist, not dashboard. Cite `shadcn-queue` (or settings/record), never chart/dashboard page lead | `dashboard→worklist` · anti-dashboard |
 | Records list→detail without `shine-tables.json` | Write `kind: worklist` contract (search, rowAction, loading/empty/filtered-empty); copy from `recommendation.tableQuality.fixture` | `verify/fixtures/records-worklist/shine-tables.json` |
 | Two DataGrids / two worklists same route | One grid. Peer title → filter chip + shared DataGrid (XOR); copy FAIL→PASS crops from `recommendation.xorSavedView.cropBefore/cropAfter` | `collapse-peer-grids` plan → D10 XOR recipe · `dual-focal` · `queue-dual-grid-*` fixtures |
-| ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost | `cta-budget` · `cta-pressure` |
+| ≥2 filled primaries in main | CTA budget = 1. Prefer job verb; peers outline/ghost. Consumer TSX: `apply-tsx` AST `cta-budget` (maxFilled=1); copy FAIL→PASS crops from `recommendation.ctaPressureAst.cropBefore/cropAfter` | `cta-budget` · `cta-pressure` · `queue-cta-tsx-*` |
 | ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details>` | `kpi-collapse` · `kpi-soup` |
 | Settings job with queue cite | Rebind cite to category truth | `rebind-cite` |
 | Equal Card roots, no focal | One `data-region="focal"` | `set-focal` · `composition-slop` |
@@ -71,7 +71,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 2 static     vibe / preflight-slop / Card·Badge counts
 3 cite       shot + restructureHints[]
 4 diagnose   shine-diagnosis.json + shine-restructure.json   ← Critic turn
-5 apply      DOM/AST auto-safe ops (verify/restructure/*)     ← Actor turn
+5 apply      DOM/AST auto-safe ops (verify/restructure/*) — TSX `cta-budget` via TypeScript AST (maxFilled=1; variant default / {"default"} / missing)     ← Actor turn
 6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
 7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
 8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done
@@ -162,6 +162,7 @@ Pinned crop pairs (HTML crops under `verify/fixtures/denoise/receipts/`):
 | Defect | Before → after crop |
 |---|---|
 | `cta-pressure` | `queue-cta-{before,after}-crop.html` |
+| `cta-pressure` (TSX AST) | `queue-cta-tsx-{before,after}-crop.html` |
 | `kpi-soup` | `queue-kpi-{before,after}-crop.html` |
 | wrong-cite | `sources-cite-{before,after}-crop.html` |
 | `dual-focal` / XOR | `queue-dual-grid-before-crop.html` → `queue-dual-grid-fold-crop.html` |
@@ -178,8 +179,8 @@ Builders: `verify/restructure/defect-crops.mjs` · bite `verify/defect-crops.tes
 `verify/skill-ab-eval.test.mjs`.  
 Full loop: `npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html`.  
 XOR recipe: `npm run restructure:xor -- --html verify/fixtures/denoise/queue-dual-grid-before.html --out /tmp/xor.html`.  
-TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). AST stays plan-only for `collapse-peer-grids`.  
-Kit: `kits.md` § Dual-grid XOR (D10).
+TSX (consumer): `npm run restructure:tsx -- --tsx <file> --plan shine-restructure.json` (dry-run; add `--write`). `cta-budget` is TypeScript AST (maxFilled=1); `collapse-peer-grids` stays plan-only.  
+CTA AST bite: `npm run cta-pressure:ast-bite`. Kit: `kits.md` § CTA pressure TSX AST · Dual-grid XOR (D10).
 
 ## Related
 

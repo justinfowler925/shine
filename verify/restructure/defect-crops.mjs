@@ -92,6 +92,65 @@ export function buildCtaAfterCropHtml() {
   });
 }
 
+/**
+ * TSX AST CTA pressure FAIL crop — mirrors queue-dual-cta-ast.tsx
+ * (variant={"default"}, nested span, missing variant) before apply-tsx.
+ */
+export function buildCtaAstBeforeCropHtml() {
+  return wrap({
+    title: "CTA AST crop FAIL — dual/triple filled",
+    cropId: "cta-pressure-tsx-before",
+    cite: "shadcn-queue",
+    caption:
+      "Crop FAIL: Pursue + Assign lead + Open queue all filled in TSX (variant default / missing) — cta-pressure; apply-tsx AST cta-budget.",
+    body: `  <h1>Queue · TSX decision cell</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-dual-cta-ast.tsx">Before apply-tsx cta-budget (maxFilled=1)</p>
+  <table role="grid" data-shine-datagrid data-shine-tsx-ast="before">
+    <thead><tr><th>Notice</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>NV DPS voice risk RFI</strong></td>
+        <td>
+          <button type="button" class="btn filled" data-tsx-variant="default-expr">Pursue</button>
+          <button type="button" class="btn filled-peer" data-tsx-variant="default">Assign lead</button>
+          <button type="button" class="btn filled-peer" data-tsx-variant="missing">Open queue</button>
+          <button type="button" class="btn">Review</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>`,
+  });
+}
+
+/**
+ * TSX AST CTA pressure PASS crop — after apply-tsx keeps Pursue only.
+ */
+export function buildCtaAstAfterCropHtml() {
+  return wrap({
+    title: "CTA AST crop PASS — one filled",
+    cropId: "cta-pressure-tsx-after",
+    cite: "shadcn-queue",
+    caption:
+      "Crop PASS: single filled Pursue; Assign lead + Open queue demoted via TSX AST cta-budget maxFilled=1.",
+    body: `  <h1>Queue · TSX decision cell</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-dual-cta-ast.tsx">After apply-tsx cta-budget (maxFilled=1)</p>
+  <table role="grid" data-shine-datagrid data-region="focal" data-shine-tsx-ast="after">
+    <thead><tr><th>Notice</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>NV DPS voice risk RFI</strong></td>
+        <td>
+          <button type="button" class="btn filled" data-tsx-variant="default-expr">Pursue</button>
+          <button type="button" class="btn outline" data-tsx-variant="outline">Assign lead</button>
+          <button type="button" class="btn outline" data-tsx-variant="outline">Open queue</button>
+          <button type="button" class="btn">Review</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>`,
+  });
+}
+
 /** KPI soup: ten equal metric tiles on a triage job. */
 export function buildKpiBeforeCropHtml() {
   const tiles = [
@@ -319,6 +378,17 @@ export const DEFECT_CROP_PAIRS = [
     afterMustNot: [/class="btn filled-peer"/],
   },
   {
+    id: "queue-cta-tsx",
+    defect: "cta-pressure",
+    beforeCrop: "queue-cta-tsx-before-crop.html",
+    afterCrop: "queue-cta-tsx-after-crop.html",
+    buildBefore: buildCtaAstBeforeCropHtml,
+    buildAfter: buildCtaAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /filled-peer/, /Assign lead/, /Open queue/],
+    afterMust: [/data-shine-tsx-ast="after"/, /btn filled"[^>]*>Pursue/, /outline/i],
+    afterMustNot: [/class="btn filled-peer"/],
+  },
+  {
     id: "queue-kpi",
     defect: "kpi-soup",
     beforeCrop: "queue-kpi-before-crop.html",
@@ -446,6 +516,13 @@ export function assertCropPairOk(pair, read) {
   if (pair.id === "usul-focal" && before && after) {
     if (/data-region=["']focal["']/.test(before)) errors.push(`${pair.id} before must not already be focal`);
     if (!/data-region=["']focal["']/.test(after)) errors.push(`${pair.id} after must stamp data-region=focal`);
+  }
+  // TSX AST CTA after: exactly one filled primary in the decision cell
+  if (pair.id === "queue-cta-tsx" && before && after) {
+    const beforeFilled = (before.match(/class="btn filled/g) || []).length;
+    const afterFilled = (after.match(/class="btn filled"/g) || []).length;
+    if (beforeFilled < 2) errors.push(`${pair.id} before needs ≥2 filled, got ${beforeFilled}`);
+    if (afterFilled !== 1) errors.push(`${pair.id} after must have exactly 1 filled, got ${afterFilled}`);
   }
   return { ok: errors.length === 0, errors };
 }

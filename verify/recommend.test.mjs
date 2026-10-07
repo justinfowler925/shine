@@ -80,6 +80,10 @@ assert.ok(queueRec.xorSavedView?.fixtureBefore, "queue job xorSavedView.fixtureB
 assert.match(queueRec.xorSavedView.fixtureBefore, /queue-dual-grid-before\.html$/);
 assert.match(queueRec.xorSavedView.cropAfter, /queue-dual-grid-fold-crop\.html$/);
 assert.match(formatRecommendationSummary(queueRec), /xorSavedView/);
+assert.ok(queueRec.ctaPressureAst?.fixtureTsx, "queue job ctaPressureAst.fixtureTsx");
+assert.match(queueRec.ctaPressureAst.fixtureTsx, /queue-dual-cta\.tsx$/);
+assert.match(queueRec.ctaPressureAst.cropAfter, /queue-cta-tsx-after-crop\.html$/);
+assert.match(formatRecommendationSummary(queueRec), /ctaPressureAst/);
 const denoiseQueue = createDesignPacket({
   job: "Queue triage dual worklist XOR saved-view",
   lane: "saas",
@@ -90,6 +94,9 @@ const denoiseQueue = createDesignPacket({
 });
 assert.match(denoiseQueue.xorSavedView.cropAfter, /queue-dual-grid-fold-crop\.html$/);
 assert.ok((denoiseQueue.ddr.restructureOps || []).includes("collapse-peer-grids"));
+assert.match(denoiseQueue.ctaPressureAst.cropAfter, /queue-cta-tsx-after-crop\.html$/);
+assert.ok((denoiseQueue.ddr.restructureOps || []).includes("cta-budget"));
+assert.equal(denoiseQueue.ctaPressureAst.maxFilled, 1);
 
 // CLI smoke
 const cite = spawnSync(process.execPath, [join(SHINE, "corpus/cite.mjs"), "settings page", "--lane", "saas"], {
@@ -98,4 +105,6 @@ const cite = spawnSync(process.execPath, [join(SHINE, "corpus/cite.mjs"), "setti
 assert.equal(cite.status, 0, cite.stderr);
 assert.match(cite.stdout, /recommendation:/);
 
-console.log(`recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI · xorSavedView`);
+console.log(
+  `recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI · xorSavedView · ctaPressureAst`,
+);
