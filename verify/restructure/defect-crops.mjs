@@ -470,6 +470,57 @@ export function buildDualGridBeforeCropHtml() {
   });
 }
 
+/**
+ * TSX AST set-focal FAIL crop — equal Card soup / worklist without data-region=focal
+ * (mirrors usul-no-focal-ast.tsx) before apply-tsx.
+ */
+export function buildSetFocalAstBeforeCropHtml() {
+  return wrap({
+    title: "set-focal AST crop FAIL — no focal",
+    cropId: "set-focal-tsx-before",
+    cite: "shadcn-dashboard-01",
+    caption:
+      "Crop FAIL: equal Card / worklist panels in TSX (className card / {\"card\"} / role={\"grid\"}) with no data-region=focal — composition-slop; apply-tsx AST set-focal.",
+    body: `  <h1>Usul · TSX composition</h1>
+  <p class="kicker" data-shine-tsx-fixture="usul-no-focal-ast.tsx">Before apply-tsx set-focal</p>
+  <section class="card" data-shine-tsx-ast="before" data-tsx-card="pipeline">
+    <h2>Usul pipeline</h2>
+    <div class="grid-wrap" data-shine-records data-tsx-grid-wrap="expr">
+      <table role="grid" data-tsx-role="expr"><thead><tr><th>Record</th></tr></thead>
+        <tbody><tr><td>NV DPS</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+  <section class="card" data-tsx-card="week"><h2>By week</h2><p>Equal panel</p></section>
+  <section class="card" data-tsx-card="coverage"><h2>Coverage lift</h2><p>Equal panel</p></section>`,
+  });
+}
+
+/**
+ * TSX AST set-focal PASS crop — primary worklist stamped data-region=focal.
+ */
+export function buildSetFocalAstAfterCropHtml() {
+  return wrap({
+    title: "set-focal AST crop PASS — focal set",
+    cropId: "set-focal-tsx-after",
+    cite: "shadcn-dashboard-01",
+    caption:
+      "Crop PASS: primary worklist stamped data-region=focal via TSX AST set-focal; peer cards demoted.",
+    body: `  <h1>Usul · TSX composition</h1>
+  <p class="kicker" data-shine-tsx-fixture="usul-no-focal-ast.tsx">After apply-tsx set-focal</p>
+  <section class="card" data-tsx-card="pipeline">
+    <h2>Usul pipeline</h2>
+    <div class="grid-wrap" data-region="focal" data-shine-records data-shine-tsx-ast="after" data-tsx-grid-wrap="expr">
+      <table role="grid" data-tsx-role="expr"><thead><tr><th>Record</th></tr></thead>
+        <tbody><tr><td>NV DPS</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+  <section class="card" data-tsx-card="week"><h2>By week</h2><p>Demoted peer</p></section>
+  <section class="card" data-tsx-card="coverage"><h2>Coverage lift</h2><p>Demoted peer</p></section>`,
+  });
+}
+
 /** Usul composition: equal card soup, no focal region. */
 export function buildUsulFocalBeforeCropHtml() {
   return wrap({
@@ -704,6 +755,28 @@ export const DEFECT_CROP_PAIRS = [
     beforeMustNot: [/data-region=["']focal["']/],
   },
   {
+    id: "usul-focal-tsx",
+    defect: "composition-slop",
+    beforeCrop: "usul-focal-tsx-before-crop.html",
+    afterCrop: "usul-focal-tsx-after-crop.html",
+    buildBefore: buildSetFocalAstBeforeCropHtml,
+    buildAfter: buildSetFocalAstAfterCropHtml,
+    beforeMust: [
+      /data-shine-tsx-ast="before"/,
+      /data-tsx-card="pipeline"/,
+      /class="[^"]*\bcard\b/,
+      /Usul pipeline/,
+      /data-shine-records/,
+    ],
+    afterMust: [
+      /data-shine-tsx-ast="after"/,
+      /data-region=["']focal["']/,
+      /data-shine-records/,
+      /Usul pipeline/,
+    ],
+    beforeMustNot: [/data-region=["']focal["']/],
+  },
+  {
     id: "queue-sled-bloat",
     defect: "cta-pressure+kpi-soup",
     beforeCrop: "queue-sled-bloat-before-crop.html",
@@ -794,7 +867,7 @@ export function assertCropPairOk(pair, read) {
     if (visibleTiles > 3) errors.push(`${pair.id} after visible tiles must be ≤3, got ${visibleTiles}`);
   }
   // Usul after must stamp focal; before must not
-  if (pair.id === "usul-focal" && before && after) {
+  if ((pair.id === "usul-focal" || pair.id === "usul-focal-tsx") && before && after) {
     if (/data-region=["']focal["']/.test(before)) errors.push(`${pair.id} before must not already be focal`);
     if (!/data-region=["']focal["']/.test(after)) errors.push(`${pair.id} after must stamp data-region=focal`);
   }

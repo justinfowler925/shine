@@ -14,6 +14,7 @@ import {
   rebindCiteTsx,
   collectCiteAttrsTsx,
   setFocalTsx,
+  countEqualCardsWithoutFocalTsx,
   compositionOrderTsx,
   worklistFirstTsx,
 } from "./restructure/apply-tsx.mjs";
@@ -48,6 +49,18 @@ assert.match(rebound, /data-cite="shadcn-settings"/);
 
 const focal = setFocalTsx(dual, {});
 assert.match(focal, /data-region="focal"/);
+const usul = readFileSync(join(FIX, "usul-no-focal.tsx"), "utf8");
+const usulHard = readFileSync(join(FIX, "usul-no-focal-ast.tsx"), "utf8");
+assert.equal(countEqualCardsWithoutFocalTsx(usul).hasFocal, false);
+assert.equal(countEqualCardsWithoutFocalTsx(usulHard).hasFocal, false);
+const usulAfter = setFocalTsx(usul, {});
+assert.equal(countEqualCardsWithoutFocalTsx(usulAfter).hasFocal, true);
+assert.match(usulAfter, /data-region="focal"/);
+const usulHardAfter = setFocalTsx(usulHard, {});
+assert.equal(countEqualCardsWithoutFocalTsx(usulHardAfter).hasFocal, true);
+assert.match(usulHardAfter, /data-region="focal"/);
+assert.match(usulHardAfter, /className=\{\s*["']grid-wrap["']\s*\}/);
+assert.match(usulHardAfter, /data-shine-records/);
 
 const plan = buildRestructurePlan({
   job: "Decide Pursue",
@@ -181,5 +194,5 @@ const wlResult = applyTsxRestructure(worklistHard, wlPlan);
 assert.ok(wlResult.applied.includes("worklist-first"));
 
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );

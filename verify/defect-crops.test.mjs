@@ -26,6 +26,8 @@ import {
   buildDualGridBeforeCropHtml,
   buildUsulFocalBeforeCropHtml,
   buildUsulFocalAfterCropHtml,
+  buildSetFocalAstBeforeCropHtml,
+  buildSetFocalAstAfterCropHtml,
   buildSledBloatBeforeCropHtml,
   buildSledBloatAfterCropHtml,
 } from "./restructure/defect-crops.mjs";
@@ -50,9 +52,14 @@ assert.notEqual(
   "dual-grid crops must not be twins",
 );
 assert.notEqual(buildUsulFocalBeforeCropHtml(), buildUsulFocalAfterCropHtml(), "usul crops must not be twins");
+assert.notEqual(
+  buildSetFocalAstBeforeCropHtml(),
+  buildSetFocalAstAfterCropHtml(),
+  "set-focal AST crops must not be twins",
+);
 assert.notEqual(buildSledBloatBeforeCropHtml(), buildSledBloatAfterCropHtml(), "sled-bloat crops must not be twins");
 
-assert.ok(DEFECT_CROP_PAIRS.length >= 10, "at least 10 pinned crop pairs");
+assert.ok(DEFECT_CROP_PAIRS.length >= 11, "at least 11 pinned crop pairs");
 for (const id of [
   "queue-cta",
   "queue-cta-tsx",
@@ -63,6 +70,7 @@ for (const id of [
   "queue-dual-grid",
   "queue-worklist-first-tsx",
   "usul-focal",
+  "usul-focal-tsx",
   "queue-sled-bloat",
 ]) {
   assert.ok(
@@ -94,5 +102,5 @@ assert.match(read("usul-focal-after-crop.html"), /data-region="focal"/);
 assert.match(read("queue-sled-bloat-after-crop.html"), /data-shine-kpi-rest/);
 
 console.log(
-  `defect-crops PASS: ${DEFECT_CROP_PAIRS.length} FAIL→PASS pairs (CTA · CTA-TSX-AST · KPI · KPI-TSX-AST · wrong-cite · wrong-cite-TSX-AST · dual-grid XOR · dual-grid-TSX-AST · worklist-first-TSX-AST · Usul focal · Sled bloat)`,
+  `defect-crops PASS: ${DEFECT_CROP_PAIRS.length} FAIL→PASS pairs (CTA · CTA-TSX-AST · KPI · KPI-TSX-AST · wrong-cite · wrong-cite-TSX-AST · dual-grid XOR · dual-grid-TSX-AST · worklist-first-TSX-AST · Usul focal · Usul-focal-TSX-AST · Sled bloat)`,
 );

@@ -248,7 +248,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -336,6 +336,25 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    helper:join(ROOT,w.helper||"verify/restructure/apply-tsx.mjs"),
    reference:w.reference||"skill/references/kits.md",
    instruction:w.instruction||"Apply apply-tsx worklist-first (AST) so records/worklist precedes KPI chrome.",
+  };
+ }
+ // Denoise / composition jobs: bind set-focal TSX AST FAIL→PASS fixture + crops (NO-FOCAL / Usul).
+ if(recommendation.setFocalAst?.fixtureTsx){
+  const s=recommendation.setFocalAst;
+  packet.setFocalAst={
+   mode:s.mode||"tsx-ast",
+   op:s.op||"set-focal",
+   attr:s.attr||"data-region",
+   value:s.value||"focal",
+   on:s.on||"primary-work-object",
+   fixtureTsx:join(ROOT,s.fixtureTsx),
+   fixtureTsxAst:join(ROOT,s.fixtureTsxAst||s.fixtureTsx),
+   cropBefore:join(ROOT,s.cropBefore),
+   cropAfter:join(ROOT,s.cropAfter),
+   cropPairId:s.cropPairId||"usul-focal-tsx",
+   helper:join(ROOT,s.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:s.reference||"skill/references/denoise.md",
+   instruction:s.instruction||"Apply apply-tsx set-focal (AST) to stamp data-region=focal on the primary work object.",
   };
  }
  // Denoise / settings|sources jobs: bind wrong-cite TSX AST FAIL→PASS fixture + crops (refuse until rebound).
