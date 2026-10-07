@@ -21,6 +21,8 @@ import {
   buildKpiAstAfterCropHtml,
   buildWrongCiteBeforeCropHtml,
   buildWrongCiteAfterCropHtml,
+  buildWrongCiteAstBeforeCropHtml,
+  buildWrongCiteAstAfterCropHtml,
   buildDualGridBeforeCropHtml,
   buildUsulFocalBeforeCropHtml,
   buildUsulFocalAfterCropHtml,
@@ -38,6 +40,11 @@ assert.notEqual(buildKpiBeforeCropHtml(), buildKpiAfterCropHtml(), "KPI crops mu
 assert.notEqual(buildKpiAstBeforeCropHtml(), buildKpiAstAfterCropHtml(), "KPI AST crops must not be twins");
 assert.notEqual(buildWrongCiteBeforeCropHtml(), buildWrongCiteAfterCropHtml(), "cite crops must not be twins");
 assert.notEqual(
+  buildWrongCiteAstBeforeCropHtml(),
+  buildWrongCiteAstAfterCropHtml(),
+  "wrong-cite AST crops must not be twins",
+);
+assert.notEqual(
   buildDualGridBeforeCropHtml(),
   buildXorFoldCropHtml({ keptTitle: "Queue", chipLabel: "David's 10 today" }),
   "dual-grid crops must not be twins",
@@ -45,13 +52,14 @@ assert.notEqual(
 assert.notEqual(buildUsulFocalBeforeCropHtml(), buildUsulFocalAfterCropHtml(), "usul crops must not be twins");
 assert.notEqual(buildSledBloatBeforeCropHtml(), buildSledBloatAfterCropHtml(), "sled-bloat crops must not be twins");
 
-assert.ok(DEFECT_CROP_PAIRS.length >= 9, "at least 9 pinned crop pairs");
+assert.ok(DEFECT_CROP_PAIRS.length >= 10, "at least 10 pinned crop pairs");
 for (const id of [
   "queue-cta",
   "queue-cta-tsx",
   "queue-kpi",
   "queue-kpi-tsx",
   "sources-cite",
+  "sources-cite-tsx",
   "queue-dual-grid",
   "queue-worklist-first-tsx",
   "usul-focal",
@@ -86,5 +94,5 @@ assert.match(read("usul-focal-after-crop.html"), /data-region="focal"/);
 assert.match(read("queue-sled-bloat-after-crop.html"), /data-shine-kpi-rest/);
 
 console.log(
-  `defect-crops PASS: ${DEFECT_CROP_PAIRS.length} FAIL→PASS pairs (CTA · CTA-TSX-AST · KPI · KPI-TSX-AST · wrong-cite · dual-grid XOR · dual-grid-TSX-AST · worklist-first-TSX-AST · Usul focal · Sled bloat)`,
+  `defect-crops PASS: ${DEFECT_CROP_PAIRS.length} FAIL→PASS pairs (CTA · CTA-TSX-AST · KPI · KPI-TSX-AST · wrong-cite · wrong-cite-TSX-AST · dual-grid XOR · dual-grid-TSX-AST · worklist-first-TSX-AST · Usul focal · Sled bloat)`,
 );

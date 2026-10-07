@@ -402,6 +402,51 @@ export function buildWrongCiteAfterCropHtml() {
   });
 }
 
+/**
+ * TSX AST wrong-cite FAIL crop — mirrors settings-wrong-cite-ast.tsx
+ * (data-cite={"shadcn-queue"} / dataCite=…) before apply-tsx rebind-cite.
+ */
+export function buildWrongCiteAstBeforeCropHtml() {
+  return wrap({
+    title: "Wrong-cite AST crop FAIL — queue on settings",
+    cropId: "wrong-cite-tsx-before",
+    cite: "shadcn-queue",
+    caption:
+      "Crop FAIL: Sources/settings job stamped data-cite={\"shadcn-queue\"} / dataCite in TSX — cite-honesty; apply-tsx AST rebind-cite.",
+    body: `  <h1>Sources &amp; recipes · TSX</h1>
+  <p class="kicker" data-shine-tsx-fixture="settings-wrong-cite-ast.tsx">Before apply-tsx rebind-cite</p>
+  <p><span class="cite bad" data-cite-chip data-shine-tsx-ast="before" data-tsx-cite="expr">data-cite={"shadcn-queue"}</span></p>
+  <p data-tsx-datacite="string"><span class="cite bad" data-cite-chip>dataCite="shadcn-queue"</span></p>
+  <section class="grid-wrap" data-tsx-grid-wrap="expr">
+    <h2>Source directory</h2>
+    <p>Collection results and recipe packs — not a notice queue.</p>
+    <button type="button" class="btn filled">Add source</button>
+  </section>`,
+  });
+}
+
+/**
+ * TSX AST wrong-cite PASS crop — after apply-tsx rebind-cite to shadcn-settings.
+ */
+export function buildWrongCiteAstAfterCropHtml() {
+  return wrap({
+    title: "Wrong-cite AST crop PASS — settings",
+    cropId: "wrong-cite-tsx-after",
+    cite: "shadcn-settings",
+    caption:
+      "Crop PASS: data-cite={\"shadcn-settings\"} matches Sources job via TSX AST rebind-cite; recommend refuse paint until rebound.",
+    body: `  <h1>Sources &amp; recipes · TSX</h1>
+  <p class="kicker" data-shine-tsx-fixture="settings-wrong-cite-ast.tsx">After apply-tsx rebind-cite</p>
+  <p><span class="cite ok" data-cite-chip data-shine-tsx-ast="after" data-tsx-cite="expr">data-cite={"shadcn-settings"}</span></p>
+  <p data-tsx-datacite="string"><span class="cite ok" data-cite-chip>dataCite="shadcn-settings"</span></p>
+  <section class="grid-wrap" data-tsx-grid-wrap="expr">
+    <h2>Source directory</h2>
+    <p>Collection results and recipe packs.</p>
+    <button type="button" class="btn filled">Add source</button>
+  </section>`,
+  });
+}
+
 /** Dual-grid before: two peer worklists in the fold. */
 export function buildDualGridBeforeCropHtml() {
   return wrap({
@@ -580,6 +625,27 @@ export const DEFECT_CROP_PAIRS = [
     beforeMust: [/shadcn-queue/, /Sources/],
     afterMust: [/shadcn-settings/, /Sources/],
     afterMustNot: [/data-cite="shadcn-queue"/],
+  },
+  {
+    id: "sources-cite-tsx",
+    defect: "wrong-cite",
+    beforeCrop: "sources-cite-tsx-before-crop.html",
+    afterCrop: "sources-cite-tsx-after-crop.html",
+    buildBefore: buildWrongCiteAstBeforeCropHtml,
+    buildAfter: buildWrongCiteAstAfterCropHtml,
+    beforeMust: [
+      /data-shine-tsx-ast="before"/,
+      /shadcn-queue/,
+      /Sources/,
+      /data-tsx-cite="expr"/,
+    ],
+    afterMust: [
+      /data-shine-tsx-ast="after"/,
+      /shadcn-settings/,
+      /Sources/,
+      /data-tsx-cite="expr"/,
+    ],
+    afterMustNot: [/shadcn-queue/],
   },
   {
     id: "queue-dual-grid",

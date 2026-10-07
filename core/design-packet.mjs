@@ -235,16 +235,20 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
     failClosed:true,
    };
    packet.gaps=[...packet.gaps,citeBanFailClosed.reason];
+   const refuseAst=recommendation.wrongCiteAst;
+   const refuseCrop=refuseAst?.cropPairId
+    ?` Copy FAIL→PASS crops from recommendation.wrongCiteAst (${refuseAst.cropPairId}); apply-tsx AST rebind-cite.`
+    :"";
    packet.editing={
     allowed:false,
-    instruction:`Refuse paint: learned cite-ban fail-closed on ${selected.id} (${ban.failCategory}; ${ban.ddrId}). Rebind cite (restructure:rebind-cite) before Actor implement.`,
+    instruction:`Refuse paint: learned cite-ban fail-closed on ${selected.id} (${ban.failCategory}; ${ban.ddrId}). Rebind cite (restructure:rebind-cite / apply-tsx AST) before Actor implement.${refuseCrop}`,
    };
   }
  }
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -334,6 +338,25 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    instruction:w.instruction||"Apply apply-tsx worklist-first (AST) so records/worklist precedes KPI chrome.",
   };
  }
+ // Denoise / settings|sources jobs: bind wrong-cite TSX AST FAIL→PASS fixture + crops (refuse until rebound).
+ if(recommendation.wrongCiteAst?.fixtureTsx){
+  const c=recommendation.wrongCiteAst;
+  packet.wrongCiteAst={
+   mode:c.mode||"tsx-ast",
+   op:c.op||"rebind-cite",
+   from:c.from||"shadcn-queue",
+   to:c.to||"shadcn-settings",
+   refusePaintUntilRebound:c.refusePaintUntilRebound!==false,
+   fixtureTsx:join(ROOT,c.fixtureTsx),
+   fixtureTsxAst:join(ROOT,c.fixtureTsxAst||c.fixtureTsx),
+   cropBefore:join(ROOT,c.cropBefore),
+   cropAfter:join(ROOT,c.cropAfter),
+   cropPairId:c.cropPairId||"sources-cite-tsx",
+   helper:join(ROOT,c.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:c.reference||"skill/references/denoise.md",
+   instruction:c.instruction||"Refuse paint until rebound; apply apply-tsx rebind-cite (AST) on consumer data-cite TSX.",
+  };
+ }
  // Denoise / queue jobs: bind D10 XOR dual-grid FAIL→PASS fixture + crop paths.
  if(recommendation.xorSavedView?.fixtureBefore){
   const x=recommendation.xorSavedView;
@@ -361,6 +384,11 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  const wantsWorklistFirst=
   Boolean(recommendation.worklistFirstAst?.fixtureTsx)||
   restructureHints.some((h)=>/worklist-first/i.test(String(h)));
+ // Refuse / rebind path only — do not treat fixture bind alone as needsRestructure
+ // (settings packets always carry wrongCiteAst FAIL→PASS crops for the Actor).
+ const wantsWrongCite=
+  Boolean(citeBanFailClosed?.failClosed)||
+  restructureHints.some((h)=>/rebind-cite|wrong-cite|cite-honesty/i.test(String(h)));
  const learnedHits=lane==="saas"?siblingPrefsFor(kind,{edition:"clearspeed-operate",job,storePath:learnStorePath,store:learnStore}):[];
  const siblingResolved=lane==="saas"?resolveEditionSibling({category:kind,screen:recommendation?.primary?.screen||"",job,editionId:"clearspeed-operate",learnedPrefs:learnedHits.map((h)=>h.pref)}):null;
  const siblingLabel=productReferenceName||productReference||recommendation?.productSibling?.name||siblingResolved?.sibling?.name||null;
@@ -377,7 +405,9 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  }
  const ddrOps=needsRestructure
   ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
-  :[];
+  :wantsWrongCite
+   ?["rebind-cite"]
+   :[];
  packet.ddr=buildDdr({
   job,
   lane,
@@ -385,7 +415,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   mode,
   primaryCite:selected.id,
   antiCites:(recommendation.antiPatterns||[]).slice(0,6),
-  restructureVsRepaint:needsRestructure?"restructure":"repaint",
+  restructureVsRepaint:(needsRestructure||wantsWrongCite)?"restructure":"repaint",
   restructureOps:ddrOps,
   // constitutionIds omitted → buildDdr resolves numbered ClearSpeed Operate edition
   openRisks:packet.gaps.slice(0,4),

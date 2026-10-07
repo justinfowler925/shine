@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * N8 — TSX AST safe ops for consumer checkouts.
- * Auto-safe: rebind-cite, set-focal, worklist-first (records/worklist before KPI chrome via TS compiler AST),
+ * Auto-safe: rebind-cite (wrong-cite → category truth via TS compiler AST),
+ * set-focal, worklist-first (records/worklist before KPI chrome via TS compiler AST),
  * cta-budget demote (maxFilled=1 via TS compiler AST),
  * kpi-collapse (maxVisible=3 → <details data-shine-kpi-rest> via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
@@ -108,16 +109,98 @@ export function applyTsxRestructure(source, plan) {
   };
 }
 
+/**
+ * Wrong-cite census: static data-cite / dataCite values on JSX (string or {"…"}).
+ * Dynamic expressions count as dynamic (caller leaves them alone).
+ * @param {string} source
+ * @returns {{ cites: string[], dynamic: boolean }}
+ */
+export function collectCiteAttrsTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const cites = [];
+  let dynamic = false;
+  const walk = (node) => {
+    if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const opening = ts.isJsxElement(node) ? node.openingElement : node;
+      for (const name of ["data-cite", "dataCite"]) {
+        const attr = findJsxAttr(opening, name, sf);
+        if (!attr) continue;
+        const val = attrStringValue(attr, sf);
+        if (val == null) {
+          if (attr.initializer && ts.isJsxExpression(attr.initializer) && attr.initializer.expression) {
+            dynamic = true;
+          }
+          continue;
+        }
+        if (val) cites.push(val);
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { cites, dynamic };
+}
+
+/**
+ * Rebind data-cite / dataCite via TypeScript AST (not regex).
+ * Handles data-cite="…", data-cite={"…"}, dataCite="…", dataCite={"…"}.
+ * When `from` is set, only matching static values rewrite; otherwise first static cite.
+ * Dynamic cite expressions are left alone (unsafe).
+ * @param {string} source
+ * @param {{ from?: string, to?: string }} op
+ */
 export function rebindCiteTsx(source, op = {}) {
-  const from = op.from;
-  const to = op.to;
+  const from = op.from ? String(op.from) : "";
+  const to = op.to ? String(op.to) : "";
   if (!to) return source;
-  if (from) {
-    return source
-      .replace(new RegExp(`data-cite=["']${escapeRe(from)}["']`, "g"), `data-cite="${to}"`)
-      .replace(new RegExp(`dataCite=["']${escapeRe(from)}["']`, "g"), `dataCite="${to}"`);
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, next: string }[]} */
+  const edits = [];
+  let reboundFirst = false;
+
+  const walk = (node) => {
+    if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const opening = ts.isJsxElement(node) ? node.openingElement : node;
+      for (const name of ["data-cite", "dataCite"]) {
+        const attr = findJsxAttr(opening, name, sf);
+        if (!attr?.initializer) continue;
+        const val = attrStringValue(attr, sf);
+        if (val == null) continue; // dynamic — leave alone
+        const match = from ? val === from : !reboundFirst;
+        if (!match) continue;
+        if (!from) reboundFirst = true;
+        // Rewrite initializer only; preserve string vs {"…"} form.
+        if (ts.isStringLiteral(attr.initializer)) {
+          edits.push({
+            start: attr.initializer.getStart(sf),
+            end: attr.initializer.getEnd(),
+            next: `"${to}"`,
+          });
+        } else if (ts.isJsxExpression(attr.initializer) && attr.initializer.expression) {
+          const expr = attr.initializer.expression;
+          if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
+            const quote = text[expr.getStart(sf)] === "'" ? "'" : '"';
+            edits.push({
+              start: expr.getStart(sf),
+              end: expr.getEnd(),
+              next: `${quote}${to}${quote}`,
+            });
+          }
+        }
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+
+  if (!edits.length) return source;
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) {
+    out = out.slice(0, e.start) + e.next + out.slice(e.end);
   }
-  return source.replace(/(data-cite|dataCite)=["'][^"']+["']/, `$1="${to}"`);
+  return out;
 }
 
 export function setFocalTsx(source, op = {}) {
