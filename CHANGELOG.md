@@ -28,8 +28,9 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   `verify/records-pilot-table-quality-bite.mjs`.
 
 - **Denoise + enterprise live DoD tracker.** `docs/shine-denoise-enterprise-dod.md`
-  records tip `e8eaea1` (#162) / denoise `b043a41` (#161) merge/deploy/CI/ClearSpeed
-  host posture for PRs #149–#161 (honest PARTIAL until tip Actions green + hosts tip-synced).
+  records tip `f674a66` (#167) merge/deploy/CI/ClearSpeed host posture for PRs
+  #149–#167 (honest PARTIAL until tip Actions green + hosts tip-synced; listing
+  re-stale after #165–#167).
 
 - **Measure fail-closed on Operate anti-pattern cites.** When Operate slop
   defects fire (`dual-focal`, `kpi-soup`, `cta-pressure`, `cite-honesty`),
