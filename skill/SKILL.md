@@ -3,36 +3,14 @@ name: shine
 description: >-
   Design, build, denoise, or audit interfaces using real template structure, the consumer's installed
   component system, complete interaction contracts, and browser proof. Default for "redesign this
-  Operate surface" / ClearSpeed Operate queues: cite → measure → denoise-loop → prove (edition
-  clearspeed-operate + sibling cites). Also UI, UX, dashboards, tables, forms, landing pages,
-  charts, email, Lightning, decks, PDFs, or visual polish.
+  Operate surface" / ClearSpeed Operate: cite → measure → denoise-loop → prove (clearspeed-operate).
 ---
 # Shine
 Build the interface directly in the current Codex task. Do not delegate to a second design agent. Shine's deterministic tools choose and verify; you supply brief-specific design judgment.
-
 ## Redesign this Operate surface (default)
-
-When the user says **redesign / denoise / unfuck / cleanup** for a ClearSpeed Operate queue (Nucleus / Sled Capture), do **not** open an audit pack or craft-only polish pass. Path: **cite → measure → denoise-loop → prove**. Edition `clearspeed-operate`; sibling cites before catalog fashion (`docs/edition-siblings.md`).
-
-```sh
-SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}/.cursor/skills/shine")
-ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
-# 1 Cite — product sibling → preferred cite
-node "$ROOT/core/edition-siblings.mjs" resolve --category queue --job "<Monday job>"
-# 2 Measure — name defects (cta-pressure, dual-focal, kpi-soup, …)
-node "$ROOT/verify/measure.mjs" <artifact.html> --cite <preferredCite> --lane saas
-# 3–4 Denoise-loop + prove (≤3 Critic≠Actor rounds; FAIL→PASS crop)
-node "$ROOT/verify/denoise-loop.mjs" \
-  --html <artifact.html> [--tsx <file.tsx>] \
-  --cite <preferredCite> --edition clearspeed-operate \
-  --category queue --job "<Monday job>" \
-  --out /tmp/shine-operate-denoise --prove
-```
-
-Stop on `status=passed` · `namedDenoiseCleared` · `reflexionVerdict=done` · cropped FAIL→PASS (twin full-page invalid). Detail: `references/denoise.md` · `../docs/operate-redesign.md`.
-
+ClearSpeed Operate queue redesign/denoise/unfuck: **cite → measure → denoise-loop → prove** (edition `clearspeed-operate`; sibling map `docs/edition-siblings.md`). No audit pack. Sibling resolve → measure → `verify/denoise-loop.mjs --edition clearspeed-operate … --prove`. See `references/denoise.md` · `../docs/operate-redesign.md`.
 ## Start with one bounded packet
-For net-new, audit-only, or non-Operate work, resolve this installed tree, then create the packet before planning or editing:
+Resolve this installed tree, then create the packet before planning or editing:
 ```sh
 SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}/.cursor/skills/shine")
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
@@ -49,7 +27,6 @@ A review request (audit, review, assess, "what's wrong", "don't change anything"
 ## Product precedent outranks the catalog
 For an existing product, inventory shipped sibling surfaces before accepting the external reference. Find the closest page presenting the same information object or supporting the same user job. If one exists, rerun the packet with `--product-reference <page-or-url> --product-reference-name <name>`.
 The sibling owns product conventions; the catalog may fill a gap but must not replace working card anatomy, toolbar behavior, expansion, actions, states, terminology, or responsive behavior. Name the sibling and every justified divergence in the diagnosis.
-ClearSpeed Operate: use the edition sibling map (`knowledge/editions/clearspeed-operate/siblings.json` · `docs/edition-siblings.md`) for Nucleus / Sled Capture cite + kit selection before catalog fashion.
 Reuse or extract its component and CSS vocabulary; never create a parallel component for the same object. Mark shared shells with stable `data-product-pattern` values and run the packet's product-compare command.
 Every visible icon needs a distinct semantic job: state, action, object type, or direction. If nearby text already supplies all meaning, remove it; decoration is not semantics.
 ## Build
