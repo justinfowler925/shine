@@ -23,9 +23,10 @@ export const AUTO_SAFE_DOM_OPS = Object.freeze([
   "set-focal",
   "worklist-first",
   "rebind-cite",
+  "collapse-peer-grids",
 ]);
 
-export const PLAN_ONLY_OPS = Object.freeze(["collapse-peer-grids", "god-split"]);
+export const PLAN_ONLY_OPS = Object.freeze(["god-split"]);
 
 export const ALL_OPS = Object.freeze([...AUTO_SAFE_DOM_OPS, ...PLAN_ONLY_OPS]);
 

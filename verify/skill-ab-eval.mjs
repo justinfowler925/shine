@@ -135,7 +135,8 @@ function runArm(c, armName, armChecks, { runMeasure, workDir }) {
     workingHtml = result.html;
     applied = result.applied;
     plans = result.plans;
-    if (c.xorRecipe) {
+    xorApplied = applied.includes("collapse-peer-grids");
+    if (c.xorRecipe && !xorApplied) {
       const xorOp = plan.ops.find((o) => o.op === "collapse-peer-grids") || {
         op: "collapse-peer-grids",
         mode: "xor-saved-view",

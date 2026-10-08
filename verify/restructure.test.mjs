@@ -55,8 +55,10 @@ const applied = applyDomRestructure(before, plan);
 assert.ok(applied.applied.includes("cta-budget"));
 assert.ok(applied.applied.includes("kpi-collapse"));
 assert.ok(applied.applied.includes("set-focal"));
-assert.ok(applied.plans.length >= 1);
-assert.equal(applied.humanGate, true);
+assert.ok(applied.applied.includes("collapse-peer-grids"), "DOM XOR auto-applies on dual grid-wraps");
+assert.match(applied.html, /data-shine-xor-views/);
+assert.equal(applied.plans.length, 0);
+assert.equal(applied.humanGate, false);
 
 // Fast scorecard without full browser measure (ops + preflight + cropped receipts)
 const score = runDenoiseEval({ runMeasure: false });

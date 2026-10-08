@@ -15,6 +15,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: dual-focal collapse-peer-grids DOM XOR.** Measure already
+  fail-closed ≥2 peer worklists (`dual-focal`); TSX AST already XOR-applied, but
+  DOM `apply-dom` stayed plan-only / humanGate. `collapse-peer-grids` is now
+  auto-safe on DOM via `xor-saved-view` (peer→chip + shared DataGrid; never
+  silent delete without chips). `god-split` remains the only plan-only op.
+  Doctor: `verify/collapse-peer-grids-dom.test.mjs` · updated
+  `xor-saved-view.test.mjs` / `denoise-eval`. Does not expand Operate-slop
+  library (saturated at 14); leaves empty-insight-shell (#191) alone.
+
 - **Denoise deepen: copy blank-cta via name-controls.** Measure already fail-closed
   nameless non-icon buttons/links (`copy: blank-cta`; icons stay incomplete-
   primitives). `name-controls` now stamps `aria-label` + `data-shine-blank-cta`
