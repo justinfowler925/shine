@@ -456,14 +456,37 @@ export function applyLinkFieldErrors(html, op = {}) {
 }
 
 /**
- * Complete incomplete primitives: name icon-only controls, label placeholder-only
+ * Resolve aria-label for a blank control from id/class/type hints.
+ */
+function resolveBlankControlLabel(attrs, op = {}) {
+  const id = (attrs.match(/\bid=["']([^"']+)["']/i) || [])[1] || "";
+  const cls = (attrs.match(/\bclass(?:Name)?=["']([^"']+)["']/i) || [])[1] || "";
+  const type = ((attrs.match(/\btype=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+  const href = (attrs.match(/\bhref=["']([^"']+)["']/i) || [])[1] || "";
+  const hay = `${id} ${cls} ${href}`;
+  if (/more|menu|kebab|overflow/i.test(hay)) return "More actions";
+  if (/filter|search/i.test(hay)) return "Filter";
+  if (/settings|gear|cog/i.test(hay)) return "Settings";
+  if (type === "submit" || /\bsubmit\b/i.test(hay)) return "Submit";
+  if (/\bsave\b/i.test(hay)) return "Save";
+  if (/\bpursue\b/i.test(hay)) return "Pursue";
+  if (/\bcontinue\b/i.test(hay)) return "Continue";
+  if (/\bnext\b/i.test(hay)) return "Next";
+  if (/\bclose\b|dismiss/i.test(hay)) return "Close";
+  if (/\bprimary\b|\bcta\b/i.test(hay)) return op.blankCtaLabel || op.ctaLabel || "Continue";
+  return op.blankCtaLabel || op.ctaLabel || op.iconLabel || "Continue";
+}
+
+/**
+ * Complete incomplete primitives: name icon-only / blank CTAs, label placeholder-only
  * fields, and stamp confirm markers on destructive verbs.
+ * Also clears copy: blank-cta (nameless non-icon buttons/links).
  */
 export function applyNameControls(html, op = {}) {
   const defaultIconLabel = op.iconLabel || "More actions";
   let out = String(html);
 
-  // Icon-only buttons (contain svg/img/i, no text, no aria-label/title).
+  // Icon-only OR blank (non-icon) buttons/links with no accessible name.
   out = out.replace(
     /<(button|a)\b([^>]*)>([\s\S]*?)<\/\1>/gi,
     (full, tag, attrs, body) => {
@@ -473,20 +496,22 @@ export function applyNameControls(html, op = {}) {
         .replace(/\s+/g, " ")
         .trim();
       if (text) return full;
-      if (!/<(svg|img|i)\b|\bclass=["'][^"']*\bicon\b|\bdata-icon\b|\blucide\b/i.test(body + attrs)) {
-        return full;
-      }
+      const hasIcon = /<(svg|img|i)\b|\bclass=["'][^"']*\bicon\b|\bdata-icon\b|\blucide\b/i.test(
+        body + attrs,
+      );
       const id = (attrs.match(/\bid=["']([^"']+)["']/i) || [])[1] || "";
-      const label =
-        /more|menu|kebab|overflow/i.test(id) || /more|menu|kebab|overflow/i.test(attrs)
+      const label = hasIcon
+        ? /more|menu|kebab|overflow/i.test(id) || /more|menu|kebab|overflow/i.test(attrs)
           ? "More actions"
           : /filter|search/i.test(id)
             ? "Filter"
             : /settings|gear|cog/i.test(id)
               ? "Settings"
-              : defaultIconLabel;
+              : defaultIconLabel
+        : resolveBlankControlLabel(attrs, op);
       let nextAttrs = attrs;
       if (!/\bdata-shine-named\b/.test(nextAttrs)) nextAttrs += ` data-shine-named`;
+      if (!hasIcon && !/\bdata-shine-blank-cta\b/.test(nextAttrs)) nextAttrs += ` data-shine-blank-cta`;
       nextAttrs += ` aria-label="${label}"`;
       return `<${tag}${nextAttrs}>${body}</${tag}>`;
     },

@@ -232,6 +232,17 @@ export const EMPTY_INSTRUCTIONAL_AST_FIXTURES = Object.freeze({
   op: "rewrite-filler-empty",
 });
 
+/** Repo-relative blank-cta TSX AST FAIL→PASS fixtures (name-controls deepen). */
+export const BLANK_CTA_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-blank-cta.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-blank-cta-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-blank-cta-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-blank-cta-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-blank-cta-tsx",
+  op: "name-controls",
+});
+
 /** Repo-relative marketing-dna-operate TSX AST FAIL→PASS fixtures (strip-marketing-dna). */
 export const MARKETING_DNA_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-marketing-dna.tsx",
@@ -723,6 +734,37 @@ export function emptyInstructionalAstForQueueJob(job, constraints = {}) {
     reference: "skill/references/denoise.md",
     instruction:
       "Blank/stub empty-state copy (copy: empty-instructional): apply verify/restructure/apply-tsx.mjs rewrite-filler-empty (TypeScript AST; fill blank data-shine-empty / stub No data|N/A|TBD; stamp data-shine-empty-rewritten). Copy FAIL→PASS crop paths from recommendation.emptyInstructionalAst.cropBefore/cropAfter; prove empty-instructional clears.",
+  };
+}
+
+/**
+ * Blank-CTA TSX AST fixture binding (name-controls deepen).
+ */
+export function blankCtaAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const operateJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog", "dashboard", "settings", "form"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "catalog", "dashboard", "settings", "form"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|blank[- ]?cta|nameless|name[- ]?controls)\b/i.test(text);
+  if (!operateJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: BLANK_CTA_AST_FIXTURES.op,
+    fixtureTsx: BLANK_CTA_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: BLANK_CTA_AST_FIXTURES.tsxAstHard,
+    cropBefore: BLANK_CTA_AST_FIXTURES.cropBefore,
+    cropAfter: BLANK_CTA_AST_FIXTURES.cropAfter,
+    cropPairId: BLANK_CTA_AST_FIXTURES.cropPairId,
+    helper: BLANK_CTA_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Blank CTAs with no visible/accessible name (copy: blank-cta): apply verify/restructure/apply-tsx.mjs name-controls (TypeScript AST; aria-label + data-shine-blank-cta on nameless non-icon buttons/links). Copy FAIL→PASS crop paths from recommendation.blankCtaAst.cropBefore/cropAfter; prove blank-cta clears.",
   };
 }
 
@@ -1314,6 +1356,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    blankCtaAst: blankCtaAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     cardSoupAst: cardSoupAstForCatalogJob(job, {
       category: constraints.category,
       screen,
@@ -1514,6 +1561,9 @@ export function formatRecommendationSummary(rec) {
   const emptyInstructionalAst = rec.emptyInstructionalAst?.fixtureTsx
     ? ` · emptyInstructionalAst ${rec.emptyInstructionalAst.mode}@${rec.emptyInstructionalAst.cropPairId}`
     : "";
+  const blankCtaAst = rec.blankCtaAst?.fixtureTsx
+    ? ` · blankCtaAst ${rec.blankCtaAst.mode}@${rec.blankCtaAst.cropPairId}`
+    : "";
   const cardSoupAst = rec.cardSoupAst?.fixtureTsx
     ? ` · cardSoupAst ${rec.cardSoupAst.mode}@${rec.cardSoupAst.cropPairId}`
     : "";
@@ -1549,6 +1599,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${stampPageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${emptyInstructionalAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${linkFieldErrorsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${stampPageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${emptyInstructionalAst}${blankCtaAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${linkFieldErrorsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

@@ -313,6 +313,17 @@ Measure already fail-closes blank/stub empty-state regions (`copy: empty-instruc
 
 Doctor: `verify/empty-instructional-ast-bite.mjs` / `npm run empty-instructional:ast-bite`.
 
+### Blank-CTA TSX AST — name-controls deepen
+
+Measure already fail-closes nameless non-icon buttons/links (`copy: blank-cta`; icon-only stays incomplete-primitives). Denoise deepens the existing `name-controls` op (no new Operate-slop id).
+
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `name-controls`.
+
+- Stamps `aria-label` + `data-shine-named` + `data-shine-blank-cta` on blank CTAs from id/class/type hints
+- Recommend binds `blankCtaAst` FAIL→PASS crops (`queue-blank-cta-tsx-*`)
+
+Doctor: `verify/blank-cta-ast-bite.mjs` / `npm run blank-cta:ast-bite`.
+
 ### Missing page-title TSX AST — stamp-page-title
 
 Measure already fail-closes missing `document.title` + visible `h1` (`copy: missing-page-title` / `empty-h1`). Denoise now auto-repairs them before `title-singular` demotes peers.
@@ -327,7 +338,7 @@ Doctor: `verify/stamp-page-title-ast-bite.mjs` / `npm run stamp-page-title:ast-b
 
 ### Incomplete-primitives TSX AST — name-controls
 
-Measure already fail-closes icon-only unnamed controls, placeholder-only fields, and confirm-less destructive verbs. Denoise now auto-repairs them.
+Measure already fail-closes icon-only unnamed controls, placeholder-only fields, and confirm-less destructive verbs. Denoise now auto-repairs them (blank CTAs use the same op via `blankCtaAst`).
 
 **TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `name-controls`.
 

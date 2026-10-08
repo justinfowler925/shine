@@ -166,6 +166,9 @@ export function deriveRestructureOps(diagnosis={}){
   if(!ops.some((o)=>o.op==="rewrite-filler-empty")){
    ops.push({op:"rewrite-filler-empty"});
   }
+  if(!ops.some((o)=>o.op==="name-controls")){
+   ops.push({op:"name-controls"});
+  }
  }
  if(diagnosis.chromePressureCheck?.ok===false){
   ops.push({op:"chrome-budget",maxFilledChrome:0,demotePolicy:"ghost",scope:"chrome"});

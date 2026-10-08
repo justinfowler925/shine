@@ -136,6 +136,9 @@ export function formatCopyHeuristicFailures(result, { gate = false } = {}) {
     if (f.kind === "empty-instructional") {
       return `copy: ${f.kind} (${f.sel}) — ${f.detail} — apply rewrite-filler-empty (job instructional empty copy)`;
     }
+    if (f.kind === "blank-cta") {
+      return `copy: ${f.kind} (${f.sel}) — ${f.detail} — apply name-controls (aria-label on blank CTAs)`;
+    }
     return `copy: ${f.kind} (${f.sel}) — ${f.detail}`;
   });
 }

@@ -16,7 +16,7 @@
  * split-empty-triad (empty≡error / missing filtered-empty → distinct triad via TS compiler AST),
  * stamp-chart-units (decorative chart → data-unit + baseline via TS compiler AST),
  * bind-product-owner (parallel worklist → reuse-bound owner + demote parallel via TS compiler AST),
- * name-controls (incomplete primitives → aria-label / confirm stamps via TS compiler AST),
+ * name-controls (incomplete primitives + blank CTAs → aria-label / confirm stamps via TS compiler AST),
  * link-field-errors (aria-invalid → aria-describedby + role=alert via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
@@ -262,9 +262,10 @@ export function applyTsxRestructure(source, plan) {
         applied.push("name-controls");
       } else {
         const census = countIncompletePrimitivesTsx(text);
-        if (census.hits > 0) {
+        const blank = countBlankCtaTsx(text);
+        if (census.hits > 0 || blank.hits > 0) {
           plans.push(
-            "## name-controls (TSX)\n\nStamp aria-label on icon-only / unlabeled controls; data-confirm on destructive verbs.\n",
+            "## name-controls (TSX)\n\nStamp aria-label on icon-only / blank CTAs / unlabeled controls; data-confirm on destructive verbs.\n",
           );
         }
       }
@@ -2811,6 +2812,29 @@ function openingHasAccessibleName(opening, sf) {
 }
 
 /**
+ * Count blank (non-icon) CTAs in TSX with no accessible name — copy: blank-cta.
+ */
+export function countBlankCtaTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let blank = 0;
+  const walk = (node) => {
+    if (ts.isJsxElement(node)) {
+      const opening = node.openingElement;
+      const tag = jsxTagName(opening);
+      if (tag === "button" || tag === "Button" || tag === "a") {
+        const text = jsxOwnText(node, sf);
+        if (!text && !jsxHasIconChild(node, sf) && !openingHasAccessibleName(opening, sf)) {
+          blank += 1;
+        }
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { hits: blank, blank };
+}
+
+/**
  * Count incomplete primitives in TSX (icon-only unnamed, unlabeled inputs, destructive).
  */
 export function countIncompletePrimitivesTsx(source) {
@@ -2883,23 +2907,42 @@ export function nameControlsTsx(source, op = {}) {
 
       if ((tag === "button" || tag === "Button" || tag === "a") && ts.isJsxElement(node)) {
         const own = jsxOwnText(node, sf);
-        if (!own && jsxHasIconChild(node, sf) && !openingHasAccessibleName(opening, sf)) {
+        if (!own && !openingHasAccessibleName(opening, sf)) {
           const id = attrStringValue(findJsxAttr(opening, "id", sf), sf) || "";
           const cls = attrStringValue(findJsxAttr(opening, "className", sf), sf) ||
             attrStringValue(findJsxAttr(opening, "class", sf), sf) ||
             "";
-          const label =
-            /more|menu|kebab|overflow/i.test(id + cls)
+          const type = (attrStringValue(findJsxAttr(opening, "type", sf), sf) || "").toLowerCase();
+          const href = attrStringValue(findJsxAttr(opening, "href", sf), sf) || "";
+          const hay = `${id} ${cls} ${href}`;
+          const hasIcon = jsxHasIconChild(node, sf);
+          const label = hasIcon
+            ? /more|menu|kebab|overflow/i.test(hay)
               ? "More actions"
-              : /filter|search/i.test(id + cls)
+              : /filter|search/i.test(hay)
                 ? "Filter"
-                : /settings|gear|cog/i.test(id + cls)
+                : /settings|gear|cog/i.test(hay)
                   ? "Settings"
-                  : defaultIconLabel;
-          stampOpening(opening, [
+                  : defaultIconLabel
+            : type === "submit" || /\bsubmit\b/i.test(hay)
+              ? "Submit"
+              : /\bsave\b/i.test(hay)
+                ? "Save"
+                : /\bpursue\b/i.test(hay)
+                  ? "Pursue"
+                  : /\bcontinue\b/i.test(hay)
+                    ? "Continue"
+                    : /\bnext\b/i.test(hay)
+                      ? "Next"
+                      : /\bclose\b|dismiss/i.test(hay)
+                        ? "Close"
+                        : op.blankCtaLabel || op.ctaLabel || "Continue";
+          const stamps = [
             ["aria-label", label],
             ["data-shine-named", true],
-          ]);
+          ];
+          if (!hasIcon) stamps.push(["data-shine-blank-cta", true]);
+          stampOpening(opening, stamps);
         } else if (own && destructiveRe.test(own)) {
           const popup = attrStringValue(findJsxAttr(opening, "aria-haspopup", sf), sf) || "";
           if (
