@@ -789,8 +789,36 @@ const FILLER_EMPTY_DOM_RES = [
   /^click here to get started\.?$/i,
 ];
 
+/** Stub phrases from copy: empty-instructional (beyond filler-empty library phrases). */
+const EMPTY_INSTRUCTIONAL_DOM_RES = [
+  /^no data\.?$/i,
+  /^n\/a$/i,
+  /^na$/i,
+  /^none$/i,
+  /^empty$/i,
+  /^tbd$/i,
+  /^todo$/i,
+  /^placeholder$/i,
+  /^—+$/,
+  /^-+$/,
+  /^\.+$/,
+  /^\u2026$/,
+];
+
+function isEmptyStateHostAttrs(attrs) {
+  return (
+    /\bdata-shine-empty\b/i.test(attrs) ||
+    /\bdata-empty-state\b/i.test(attrs) ||
+    /\bdata-empty\b/i.test(attrs) ||
+    /\bclass=["'][^"']*\bempty-state\b/i.test(attrs) ||
+    /\bclass=["'][^"']*\bEmptyState\b/i.test(attrs) ||
+    /\brole=["']status["']/i.test(attrs)
+  );
+}
+
 /**
- * Replace filler empty-state copy with job-specific instructional text.
+ * Replace filler / stub / blank empty-state copy with job-specific instructional text.
+ * Clears filler-empty and copy: empty-instructional.
  */
 export function applyRewriteFillerEmpty(html, op = {}) {
   const replacement =
@@ -803,9 +831,19 @@ export function applyRewriteFillerEmpty(html, op = {}) {
   out = out.replace(tagRe, (full, tag, attrs, inner) => {
     if (/data-shine-empty-rewritten/.test(attrs)) return full;
     const text = inner.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
-    if (!text || text.length > 80) return full;
-    if (!FILLER_EMPTY_DOM_RES.some((re) => re.test(text))) return full;
-    const nextAttrs = `${attrs} data-shine-empty-rewritten`.replace(/\s+/g, " ");
+    if (text.length > 80) return full;
+    const host = isEmptyStateHostAttrs(attrs);
+    // Non-host: classic filler phrases only. Host: blank + instructional stubs + filler.
+    const shouldRewrite = host
+      ? !text ||
+        FILLER_EMPTY_DOM_RES.some((re) => re.test(text)) ||
+        EMPTY_INSTRUCTIONAL_DOM_RES.some((re) => re.test(text))
+      : Boolean(text && FILLER_EMPTY_DOM_RES.some((re) => re.test(text)));
+    if (!shouldRewrite) return full;
+    let nextAttrs = attrs;
+    if (!/\bdata-shine-empty-rewritten\b/.test(nextAttrs)) {
+      nextAttrs = `${nextAttrs} data-shine-empty-rewritten`.replace(/\s+/g, " ");
+    }
     return `<${tag}${nextAttrs}>${replacement}</${tag}>`;
   });
   return out;

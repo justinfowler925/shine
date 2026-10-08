@@ -396,6 +396,54 @@ export function buildNameControlsAstAfterCropHtml() {
   });
 }
 
+/** Empty-instructional DOM FAIL crop. */
+export function buildEmptyInstructionalBeforeCropHtml() {
+  return wrap({
+    title: "Empty-instructional crop FAIL",
+    cropId: "empty-instructional-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: blank + stub empty-state copy — empty-instructional.",
+    body: `  <div class="empty" data-shine-empty></div>
+  <p class="empty-state" data-empty-state>No data</p>`,
+  });
+}
+
+/** Empty-instructional DOM PASS crop. */
+export function buildEmptyInstructionalAfterCropHtml() {
+  return wrap({
+    title: "Empty-instructional crop PASS",
+    cropId: "empty-instructional-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: instructional empty copy — rewrite-filler-empty.",
+    body: `  <div class="empty" data-shine-empty data-shine-empty-rewritten>No notices match this view. Clear filters or widen the date range.</div>
+  <p class="empty-state" data-empty-state data-shine-empty-rewritten>No notices match this view. Clear filters or widen the date range.</p>`,
+  });
+}
+
+/** Empty-instructional TSX AST FAIL crop. */
+export function buildEmptyInstructionalAstBeforeCropHtml() {
+  return wrap({
+    title: "Empty-instructional AST crop FAIL",
+    cropId: "empty-instructional-tsx-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: blank/stub empty-state in TSX — apply-tsx rewrite-filler-empty.",
+    body: `  <div class="empty" data-shine-empty data-shine-tsx-ast="before"></div>
+  <p class="empty-state" data-empty-state>No data</p>`,
+  });
+}
+
+/** Empty-instructional TSX AST PASS crop. */
+export function buildEmptyInstructionalAstAfterCropHtml() {
+  return wrap({
+    title: "Empty-instructional AST crop PASS",
+    cropId: "empty-instructional-tsx-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: instructional copy via TSX AST rewrite-filler-empty.",
+    body: `  <div class="empty" data-shine-empty data-shine-empty-rewritten data-shine-tsx-ast="after">No notices match this view. Clear filters or widen the date range.</div>
+  <p class="empty-state" data-empty-state data-shine-empty-rewritten>No notices match this view. Clear filters or widen the date range.</p>`,
+  });
+}
+
 /** Missing page-title DOM FAIL crop. */
 export function buildStampPageTitleBeforeCropHtml() {
   return wrap({
@@ -1808,6 +1856,27 @@ export const DEFECT_CROP_PAIRS = [
   },
 
   {
+    id: "queue-empty-instructional",
+    defect: "empty-instructional",
+    beforeCrop: "queue-empty-instructional-before-crop.html",
+    afterCrop: "queue-empty-instructional-after-crop.html",
+    buildBefore: buildEmptyInstructionalBeforeCropHtml,
+    buildAfter: buildEmptyInstructionalAfterCropHtml,
+    beforeMust: [/data-shine-empty/, /No data/],
+    beforeMustNot: [/data-shine-empty-rewritten/],
+    afterMust: [/data-shine-empty-rewritten/, /No notices match this view/],
+  },
+  {
+    id: "queue-empty-instructional-tsx",
+    defect: "empty-instructional",
+    beforeCrop: "queue-empty-instructional-tsx-before-crop.html",
+    afterCrop: "queue-empty-instructional-tsx-after-crop.html",
+    buildBefore: buildEmptyInstructionalAstBeforeCropHtml,
+    buildAfter: buildEmptyInstructionalAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /No data/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-empty-rewritten/, /No notices match this view/],
+  },
+  {
     id: "queue-missing-page-title",
     defect: "missing-page-title",
     beforeCrop: "queue-missing-page-title-before-crop.html",
@@ -2077,6 +2146,16 @@ export function assertCropPairOk(pair, read) {
     }
     if (!/aria-label=["']More actions["']/.test(after) || !/data-confirm/.test(after)) {
       errors.push(`${pair.id} after needs aria-label + data-confirm`);
+    }
+  }
+
+  // Empty-instructional: before blank/stub; after rewritten
+  if ((pair.id === "queue-empty-instructional" || pair.id === "queue-empty-instructional-tsx") && before && after) {
+    if (/data-shine-empty-rewritten/.test(before)) {
+      errors.push(`${pair.id} before must not already rewrite empty copy`);
+    }
+    if (!/data-shine-empty-rewritten/.test(after) || !/No notices match this view/.test(after)) {
+      errors.push(`${pair.id} after needs rewritten instructional empty copy`);
     }
   }
 
