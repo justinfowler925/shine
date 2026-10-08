@@ -15,6 +15,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate slop: filler-empty-copy / rewrite-filler-empty.** Belief-free empty
+  phrases (Welcome to your dashboard, Coming soon, …) fail-closed as
+  `filler-empty` (`anti-pattern:filler-empty-copy`). Auto-safe
+  `rewrite-filler-empty` replaces filler with job instructional copy on DOM +
+  TypeScript AST. Recommend emits `fillerEmptyAst`; denoise-loop names
+  `filler-empty`. Doctor bites: `verify/filler-empty.test.mjs` ·
+  `verify/rewrite-filler-empty-ast-bite.mjs`.
+
 - **Operate slop: marketing-dna-operate / strip-marketing-dna.** Glow, purple/indigo
   gradients, and display/serif marketing type on Operate chrome now fail-closed as
   `marketing-dna` (`anti-pattern:marketing-dna-operate`). Auto-safe

@@ -11,6 +11,7 @@ import {
   formatCompositionSlopFailures,
 } from "./composition-slop.mjs";
 import { formatMarketingDnaFailures } from "./marketing-dna.mjs";
+import { formatFillerEmptyFailures } from "./filler-empty.mjs";
 
 const SHINE = join(dirname(fileURLToPath(import.meta.url)), "..");
 const FIX = join(SHINE, "verify/fixtures/composition-slop");
@@ -48,8 +49,8 @@ try {
   const filler = await page.evaluate(evaluateCompositionSlop);
   assert.ok(filler.fillerHits.length, JSON.stringify(filler));
   assert.ok(
-    formatCompositionSlopFailures(filler, { gate: true }).some(
-      (f) => /anti-pattern:filler-empty-copy/.test(f) && /filler empty/.test(f),
+    formatFillerEmptyFailures(filler, { gate: true }).some(
+      (f) => /anti-pattern:filler-empty-copy/.test(f) && /filler-empty:/.test(f),
     ),
   );
 
@@ -79,6 +80,6 @@ assert.match(`${dnaRun.stderr}\n${dnaRun.stdout}`, /marketing-dna:.*marketing DN
 
 const fillerRun = run(join(FIX, "filler-empty.html"), "shadcn-dashboard-01");
 assert.notEqual(fillerRun.status, 0);
-assert.match(`${fillerRun.stderr}\n${fillerRun.stdout}`, /composition-slop:.*filler empty/);
+assert.match(`${fillerRun.stderr}\n${fillerRun.stdout}`, /filler-empty:.*filler empty/);
 
 console.log("composition-slop PASS: card soup · marketing DNA · filler empty · clean passes");

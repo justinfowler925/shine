@@ -217,6 +217,55 @@ export function buildChromeAstAfterCropHtml() {
 
 
 
+
+/** Filler-empty DOM FAIL crop. */
+export function buildFillerEmptyBeforeCropHtml() {
+  return wrap({
+    title: "Filler empty crop FAIL",
+    cropId: "filler-empty-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: Welcome to your dashboard filler — filler-empty.",
+    body: `  <div class="empty" data-empty data-shine-empty>Welcome to your dashboard</div>
+  <p data-empty-state>Nothing here yet</p>`,
+  });
+}
+
+/** Filler-empty DOM PASS crop. */
+export function buildFillerEmptyAfterCropHtml() {
+  return wrap({
+    title: "Filler empty crop PASS",
+    cropId: "filler-empty-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: job instructional empty copy — rewrite-filler-empty.",
+    body: `  <div class="empty" data-empty data-shine-empty data-shine-empty-rewritten>No notices match this view. Clear filters or widen the date range.</div>
+  <p data-empty-state data-shine-empty-rewritten>No notices match this view. Clear filters or widen the date range.</p>`,
+  });
+}
+
+/** Filler-empty TSX AST FAIL crop. */
+export function buildFillerEmptyAstBeforeCropHtml() {
+  return wrap({
+    title: "Filler empty AST crop FAIL",
+    cropId: "filler-empty-tsx-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: filler empty phrases in TSX — filler-empty; apply-tsx rewrite-filler-empty.",
+    body: `  <div class="empty" data-empty data-shine-empty data-shine-tsx-ast="before">Welcome to your dashboard</div>
+  <p data-empty-state>Coming soon</p>`,
+  });
+}
+
+/** Filler-empty TSX AST PASS crop. */
+export function buildFillerEmptyAstAfterCropHtml() {
+  return wrap({
+    title: "Filler empty AST crop PASS",
+    cropId: "filler-empty-tsx-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: rewritten empty copy via TSX AST rewrite-filler-empty.",
+    body: `  <div class="empty" data-empty data-shine-empty data-shine-empty-rewritten data-shine-tsx-ast="after">No notices match this view. Clear filters or widen the date range.</div>
+  <p data-empty-state data-shine-empty-rewritten>No notices match this view. Clear filters or widen the date range.</p>`,
+  });
+}
+
 /** Marketing-DNA DOM FAIL crop. */
 export function buildMarketingDnaBeforeCropHtml() {
   return wrap({
@@ -1215,6 +1264,28 @@ export const DEFECT_CROP_PAIRS = [
     afterMust: [/data-shine-tsx-ast="after"/, /data-shine-marketing-stripped/],
     afterMustNot: [/from-purple|font-display|animate-pulse-glow|tracking-tighter/],
   },
+{
+    id: "queue-filler-empty",
+    defect: "filler-empty",
+    beforeCrop: "queue-filler-empty-before-crop.html",
+    afterCrop: "queue-filler-empty-after-crop.html",
+    buildBefore: buildFillerEmptyBeforeCropHtml,
+    buildAfter: buildFillerEmptyAfterCropHtml,
+    beforeMust: [/Welcome to your dashboard|Nothing here yet/],
+    afterMust: [/data-shine-empty-rewritten/, /No notices match this view/],
+    afterMustNot: [/Welcome to your dashboard|Nothing here yet|Coming soon/],
+  },
+  {
+    id: "queue-filler-empty-tsx",
+    defect: "filler-empty",
+    beforeCrop: "queue-filler-empty-tsx-before-crop.html",
+    afterCrop: "queue-filler-empty-tsx-after-crop.html",
+    buildBefore: buildFillerEmptyAstBeforeCropHtml,
+    buildAfter: buildFillerEmptyAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /Welcome to your dashboard|Coming soon/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-empty-rewritten/, /No notices match this view/],
+    afterMustNot: [/Welcome to your dashboard|Coming soon/],
+  },
 ];
 
 /**
@@ -1374,6 +1445,17 @@ export function assertCropPairOk(pair, read) {
       errors.push(`${pair.id} after still has marketing DNA tokens`);
     }
     if (!/data-shine-marketing-stripped/.test(after)) errors.push(`${pair.id} after needs stripped marker`);
+  }
+
+  // Filler-empty: before has filler phrases; after rewritten
+  if ((pair.id === "queue-filler-empty" || pair.id === "queue-filler-empty-tsx") && before && after) {
+    if (!/(Welcome to your dashboard|Nothing here yet|Coming soon)/.test(before)) {
+      errors.push(`${pair.id} before needs filler phrases`);
+    }
+    if (/(Welcome to your dashboard|Nothing here yet|Coming soon)/.test(after)) {
+      errors.push(`${pair.id} after still has filler phrases`);
+    }
+    if (!/data-shine-empty-rewritten/.test(after)) errors.push(`${pair.id} after needs rewritten marker`);
   }
   return { ok: errors.length === 0, errors };
 }

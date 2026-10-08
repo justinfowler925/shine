@@ -270,6 +270,14 @@ const dnaPlan = buildRestructurePlan({
 });
 assert.ok(applyTsxRestructure(dnaHard, dnaPlan).applied.includes("strip-marketing-dna"));
 
+const fillerHard = readFileSync(join(FIX, "queue-filler-empty-ast.tsx"), "utf8");
+const fillerPlan = buildRestructurePlan({
+  job: "Rewrite filler",
+  category: "queue",
+  ops: [{ op: "rewrite-filler-empty" }],
+});
+assert.ok(applyTsxRestructure(fillerHard, fillerPlan).applied.includes("rewrite-filler-empty"));
+
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );
