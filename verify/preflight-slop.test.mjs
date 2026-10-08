@@ -52,9 +52,15 @@ assert.ok(!after.failures.some((f) => /cta-mania/.test(f)), JSON.stringify(after
 
 const carnival = scanPreflightSlop(
   readFileSync(join(SHINE, "verify/fixtures/composition-slop/card-soup.html"), "utf8"),
-  { gate: true },
+  { gate: true, screen: "catalog" },
 );
-assert.ok(carnival.signals.some((s) => s.id === "ai-slop-card-carnival"));
+assert.ok(carnival.signals.some((s) => s.id === "ai-slop-card-carnival" && s.severity === "fail"));
+assert.ok(carnival.failures.some((f) => /ai-slop-card-carnival/.test(f)));
+assert.equal(
+  carnival.signals.find((s) => s.id === "ai-slop-card-carnival").count,
+  4,
+  "host count must not double-count slot+class+article",
+);
 
 const filler = scanPreflightSlop(
   readFileSync(join(SHINE, "verify/fixtures/composition-slop/filler-empty.html"), "utf8"),
@@ -116,10 +122,18 @@ assert.ok(
   nestedFail.failures.some((f) => /ai-slop-nested-cards/.test(f)),
   `catalog nested-cards should hard-fail: ${JSON.stringify(nestedFail)}`,
 );
+assert.ok(
+  nestedFail.failures.some((f) => /ai-slop-card-carnival/.test(f)),
+  `catalog card-carnival should hard-fail: ${JSON.stringify(nestedFail)}`,
+);
 const nestedPass = scanPreflightSlop(readFileSync(nestedAfter, "utf8"), { gate: true, screen: "catalog" });
 assert.ok(
   !nestedPass.failures.some((f) => /ai-slop-nested-cards/.test(f)),
   `collapsed Card stack should clear nested-cards: ${JSON.stringify(nestedPass)}`,
+);
+assert.ok(
+  !nestedPass.failures.some((f) => /ai-slop-card-carnival/.test(f)),
+  `collapsed Card stack should clear card-carnival: ${JSON.stringify(nestedPass)}`,
 );
 
 console.log("preflight-slop PASS: cta-mania · card-carnival · badge-spam · metric-grid · nested-cards FAIL→PASS · filler · Snapline/Impeccable adapters");
