@@ -396,6 +396,54 @@ export function buildNameControlsAstAfterCropHtml() {
   });
 }
 
+/** Blank-CTA DOM FAIL crop. */
+export function buildBlankCtaBeforeCropHtml() {
+  return wrap({
+    title: "Blank-CTA crop FAIL",
+    cropId: "blank-cta-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: nameless non-icon buttons/links — blank-cta.",
+    body: `  <button type="button" class="primary cta" id="pursue"></button>
+  <a class="btn next" href="/queue/next" id="next"></a>`,
+  });
+}
+
+/** Blank-CTA DOM PASS crop. */
+export function buildBlankCtaAfterCropHtml() {
+  return wrap({
+    title: "Blank-CTA crop PASS",
+    cropId: "blank-cta-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: aria-label on blank CTAs — name-controls.",
+    body: `  <button type="button" class="primary cta" id="pursue" data-shine-named data-shine-blank-cta aria-label="Pursue"></button>
+  <a class="btn next" href="/queue/next" id="next" data-shine-named data-shine-blank-cta aria-label="Next"></a>`,
+  });
+}
+
+/** Blank-CTA TSX AST FAIL crop. */
+export function buildBlankCtaAstBeforeCropHtml() {
+  return wrap({
+    title: "Blank-CTA AST crop FAIL",
+    cropId: "blank-cta-tsx-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: blank CTAs in TSX — apply-tsx name-controls.",
+    body: `  <button type="button" class="primary cta" id="pursue" data-shine-tsx-ast="before"></button>
+  <a class="btn next" href="/queue/next" id="next"></a>`,
+  });
+}
+
+/** Blank-CTA TSX AST PASS crop. */
+export function buildBlankCtaAstAfterCropHtml() {
+  return wrap({
+    title: "Blank-CTA AST crop PASS",
+    cropId: "blank-cta-tsx-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: named blank CTAs via TSX AST name-controls.",
+    body: `  <button type="button" class="primary cta" id="pursue" data-shine-named data-shine-blank-cta aria-label="Pursue" data-shine-tsx-ast="after"></button>
+  <a class="btn next" href="/queue/next" id="next" data-shine-named data-shine-blank-cta aria-label="Next"></a>`,
+  });
+}
+
 /** Empty-instructional DOM FAIL crop. */
 export function buildEmptyInstructionalBeforeCropHtml() {
   return wrap({
@@ -1877,6 +1925,28 @@ export const DEFECT_CROP_PAIRS = [
     afterMust: [/data-shine-tsx-ast="after"/, /data-shine-empty-rewritten/, /No notices match this view/],
   },
   {
+    id: "queue-blank-cta",
+    defect: "blank-cta",
+    beforeCrop: "queue-blank-cta-before-crop.html",
+    afterCrop: "queue-blank-cta-after-crop.html",
+    buildBefore: buildBlankCtaBeforeCropHtml,
+    buildAfter: buildBlankCtaAfterCropHtml,
+    beforeMust: [/id=["']pursue["']/, /id=["']next["']/],
+    beforeMustNot: [/data-shine-blank-cta/, /aria-label=/],
+    afterMust: [/data-shine-blank-cta/, /aria-label=["']Pursue["']/, /aria-label=["']Next["']/],
+  },
+  {
+    id: "queue-blank-cta-tsx",
+    defect: "blank-cta",
+    beforeCrop: "queue-blank-cta-tsx-before-crop.html",
+    afterCrop: "queue-blank-cta-tsx-after-crop.html",
+    buildBefore: buildBlankCtaAstBeforeCropHtml,
+    buildAfter: buildBlankCtaAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /id=["']pursue["']/],
+    beforeMustNot: [/data-shine-blank-cta/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-blank-cta/, /aria-label=["']Pursue["']/],
+  },
+  {
     id: "queue-missing-page-title",
     defect: "missing-page-title",
     beforeCrop: "queue-missing-page-title-before-crop.html",
@@ -2156,6 +2226,16 @@ export function assertCropPairOk(pair, read) {
     }
     if (!/data-shine-empty-rewritten/.test(after) || !/No notices match this view/.test(after)) {
       errors.push(`${pair.id} after needs rewritten instructional empty copy`);
+    }
+  }
+
+  // Blank-CTA: before nameless; after aria-label + data-shine-blank-cta
+  if ((pair.id === "queue-blank-cta" || pair.id === "queue-blank-cta-tsx") && before && after) {
+    if (/data-shine-blank-cta/.test(before) || /aria-label=["']Pursue["']/.test(before)) {
+      errors.push(`${pair.id} before must not already name blank CTAs`);
+    }
+    if (!/data-shine-blank-cta/.test(after) || !/aria-label=["']Pursue["']/.test(after)) {
+      errors.push(`${pair.id} after needs blank-cta aria-label stamps`);
     }
   }
 

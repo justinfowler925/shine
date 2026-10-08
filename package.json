@@ -112,7 +112,8 @@
     "name-controls:ast-bite": "node verify/name-controls-ast-bite.mjs",
     "link-field-errors:ast-bite": "node verify/link-field-errors-ast-bite.mjs",
     "stamp-page-title:ast-bite": "node verify/stamp-page-title-ast-bite.mjs",
-    "empty-instructional:ast-bite": "node verify/empty-instructional-ast-bite.mjs"
+    "empty-instructional:ast-bite": "node verify/empty-instructional-ast-bite.mjs",
+    "blank-cta:ast-bite": "node verify/blank-cta-ast-bite.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",

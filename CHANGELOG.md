@@ -15,6 +15,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: copy blank-cta via name-controls.** Measure already fail-closed
+  nameless non-icon buttons/links (`copy: blank-cta`; icons stay incomplete-
+  primitives). `name-controls` now stamps `aria-label` + `data-shine-blank-cta`
+  on those hosts on DOM + TypeScript AST. Recommend emits `blankCtaAst`;
+  denoise-loop names `blank-cta`. Doctor bites: `verify/blank-cta.test.mjs` ·
+  `verify/blank-cta-ast-bite.mjs`. Does not expand Operate-slop library
+  (saturated at 14); leaves empty-insight-shell (#191) alone.
+
 - **Denoise deepen: copy empty-instructional via rewrite-filler-empty.** Measure
   already fail-closed blank/stub empty-state regions (`copy: empty-instructional`
   — empty `data-shine-empty`, "No data", "N/A", "TBD"). `rewrite-filler-empty`
