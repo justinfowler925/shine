@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- shine-lint: off color,type,spacing — pinned empty-triad before -->
+<html lang="en" data-cite="shadcn-queue" data-shine-probe="app-shell">
+<head>
+<meta charset="utf-8"/>
+<title>Queue · empty triad FAIL</title>
+<style>
+:root{color-scheme:light}body{margin:0;font:14px/1.5 system-ui;background:#fafafa;color:#18181b}
+main{padding:24px}.filter-pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.pill{border:1px solid #e4e4e7;background:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-size:12px}
+.pill[aria-pressed="true"]{background:#18181b;color:#fff;border-color:#18181b}
+.empty{border:1px dashed #d4d4d8;border-radius:12px;padding:32px;text-align:center;color:#71717a}
+</style>
+</head>
+<body>
+<main data-shine-main>
+  <h1>Queue</h1>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters">
+    <button type="button" class="pill" data-shine-filter-pill aria-pressed="true" data-filter-active="true">Status: Open</button>
+    <button type="button" class="pill" data-shine-filter-pill aria-pressed="true" data-filter-active="true">Owner: Me</button>
+  </div>
+  <div class="empty" data-empty data-shine-empty role="alert">No data</div>
+</main>
+</body>
+</html>

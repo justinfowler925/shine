@@ -15,6 +15,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate slop: empty-filtered-error-conflated / split-empty-triad.** Empty ≡
+  filtered-empty ≡ error conflated (same-node alert, shared copy, or active
+  filters without filtered-empty) fail-closed as `empty-triad`
+  (`anti-pattern:empty-filtered-error-conflated`). Auto-safe `split-empty-triad`
+  stamps `data-filtered-empty`, clear-filters recovery, and a distinct error
+  sibling on DOM + TypeScript AST. Recommend emits `emptyTriadAst`; denoise-loop
+  names `empty-triad`. Doctor bites: `verify/empty-triad.test.mjs` ·
+  `verify/split-empty-triad-ast-bite.mjs`.
+
 - **Operate slop: card-soup / collapse-card-soup.** ≥4 equal-weight Card roots
   without a focal fail-closed as `card-soup` (`anti-pattern:card-soup`). Auto-safe
   `collapse-card-soup` stamps `data-region=focal` on one Card and parks peers in

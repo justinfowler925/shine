@@ -144,6 +144,17 @@ export const CARD_SOUP_AST_FIXTURES = Object.freeze({
   maxVisible: 1,
 });
 
+/** Repo-relative empty-triad TSX AST FAIL→PASS fixtures (split-empty-triad). */
+export const EMPTY_TRIAD_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-empty-triad.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-empty-triad-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-empty-triad-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-empty-triad-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-empty-triad-tsx",
+  op: "split-empty-triad",
+});
+
 /** Repo-relative filler-empty-copy TSX AST FAIL→PASS fixtures (rewrite-filler-empty). */
 export const FILLER_EMPTY_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-filler-empty.tsx",
@@ -314,6 +325,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: strip-marketing-dna — remove glow/gradient/display-serif from Operate chrome");
     hints.push("restructure: rewrite-filler-empty — replace filler empty phrases with job copy");
     hints.push("restructure: collapse-card-soup maxVisible=1 — stamp focal; park peer Cards in details");
+    hints.push("restructure: split-empty-triad — distinct empty / filtered-empty / error treatments");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
@@ -368,6 +380,39 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
 
 
 
+
+/**
+ * Empty-triad TSX AST fixture binding for Operate queue / filter jobs.
+ */
+export function emptyTriadAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog", "app-shell", "dashboard"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "catalog", "app-shell", "dashboard"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|empty[- ]?triad|filtered[- ]?empty|split[- ]?empty|empty[- ]?filtered)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: EMPTY_TRIAD_AST_FIXTURES.op,
+    fixtureTsx: EMPTY_TRIAD_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: EMPTY_TRIAD_AST_FIXTURES.tsxAstHard,
+    cropBefore: EMPTY_TRIAD_AST_FIXTURES.cropBefore,
+    cropAfter: EMPTY_TRIAD_AST_FIXTURES.cropAfter,
+    cropPairId: EMPTY_TRIAD_AST_FIXTURES.cropPairId,
+    helper: EMPTY_TRIAD_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Empty≡filtered-empty≡error conflated: apply verify/restructure/apply-tsx.mjs split-empty-triad (TypeScript AST; stamp data-filtered-empty; distinct error sibling; clear-filters recovery). Copy FAIL→PASS crop paths from recommendation.emptyTriadAst.cropBefore/cropAfter; prove empty-triad clears.",
+  };
+}
 
 /**
  * Card-soup TSX AST fixture binding for Operate catalog / composition jobs.
@@ -985,6 +1030,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    emptyTriadAst: emptyTriadAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -1152,6 +1202,9 @@ export function formatRecommendationSummary(rec) {
   const cardSoupAst = rec.cardSoupAst?.fixtureTsx
     ? ` · cardSoupAst ${rec.cardSoupAst.mode}@${rec.cardSoupAst.cropPairId}`
     : "";
+  const emptyTriadAst = rec.emptyTriadAst?.fixtureTsx
+    ? ` · emptyTriadAst ${rec.emptyTriadAst.mode}@${rec.emptyTriadAst.cropPairId}`
+    : "";
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
@@ -1169,6 +1222,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

@@ -105,6 +105,11 @@ import {
   evaluateCardSoup,
   formatCardSoupFailures,
 } from "./card-soup.mjs";
+import {
+  emptyTriadGateApplies,
+  evaluateEmptyTriad,
+  formatEmptyTriadFailures,
+} from "./empty-triad.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { enforceOperateAntiPatternCites } from "../knowledge/retrieve.mjs";
 
@@ -439,6 +444,7 @@ const filterReversible = await page.evaluate(evaluateFilterReversible);
 const marketingDna = await page.evaluate(evaluateMarketingDna);
 const fillerEmpty = await page.evaluate(evaluateFillerEmpty);
 const cardSoup = await page.evaluate(evaluateCardSoup);
+const emptyTriad = await page.evaluate(evaluateEmptyTriad);
 const formHeuristics = await page.evaluate(evaluateFormHeuristics);
 const copyHeuristics = await page.evaluate(evaluateCopyHeuristics);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
@@ -1030,6 +1036,16 @@ if (compose.filledCount > 2) {
     citeId: dfCiteId,
   });
   for (const f of formatCardSoupFailures(cardSoup, { gate: cardSoupApplies })) {
+    failures.push(f);
+  }
+  const emptyTriadApplies = emptyTriadGateApplies({
+    lane: laneWant,
+    citeScreen: dfCiteRow?.screen || "",
+    citeJobs: dfCiteRow?.jobs || [],
+    isWireframe,
+    citeId: dfCiteId,
+  });
+  for (const f of formatEmptyTriadFailures(emptyTriad, { gate: emptyTriadApplies })) {
     failures.push(f);
   }
 }

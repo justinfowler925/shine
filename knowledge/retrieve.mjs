@@ -37,6 +37,7 @@ export const OPERATE_SLOP_ANTI_PATTERN_IDS = Object.freeze([
   "marketing-dna-operate",
   "filler-empty-copy",
   "card-soup",
+  "empty-filtered-error-conflated",
 ]);
 
 export function validatePrinciple(value) {

@@ -13,6 +13,7 @@
  * strip-marketing-dna (glow/gradient/display-serif className tokens via TS compiler AST),
  * rewrite-filler-empty (filler empty phrases → job copy via TS compiler AST),
  * collapse-card-soup (equal Cards → focal + details data-shine-card-rest via TS compiler AST),
+ * split-empty-triad (empty≡error / missing filtered-empty → distinct triad via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -194,6 +195,19 @@ export function applyTsxRestructure(source, plan) {
         if (census.dynamic || census.cards > (op.maxVisible ?? 1)) {
           plans.push(
             "## collapse-card-soup (TSX)\n\nStamp data-region=focal on one Card; park peers in <details data-shine-card-rest>.\n",
+          );
+        }
+      }
+    } else if (op.op === "split-empty-triad") {
+      const next = splitEmptyTriadTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("split-empty-triad");
+      } else {
+        const census = countEmptyTriadTsx(text);
+        if (census.hits > 0) {
+          plans.push(
+            "## split-empty-triad (TSX)\n\nStamp data-filtered-empty; drop alert/error from empty; distinct error sibling.\n",
           );
         }
       }
@@ -2215,6 +2229,144 @@ export function titleSingularTsx(source, _op = {}) {
   edits.sort((a, b) => b.start - a.start);
   let out = text;
   for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  return out;
+}
+
+function isEmptyTriadOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-empty", sf)) return true;
+  if (findJsxAttr(opening, "data-shine-empty", sf)) return true;
+  if (findJsxAttr(opening, "data-empty-state", sf)) return true;
+  const state = attrStringValue(findJsxAttr(opening, "data-state", sf), sf);
+  return state === "empty";
+}
+
+function openingHasErrorMarker(opening, sf) {
+  if (findJsxAttr(opening, "data-error", sf)) return true;
+  const state = attrStringValue(findJsxAttr(opening, "data-state", sf), sf);
+  if (state === "error") return true;
+  const role = attrStringValue(findJsxAttr(opening, "role", sf), sf);
+  return role === "alert";
+}
+
+function sourceHasActiveFilters(source) {
+  return (
+    /aria-pressed=\{?["']true["']\}?/.test(source) ||
+    /data-filter-active=["']true["']/.test(source) ||
+    /data-shine-filter-active/.test(source)
+  );
+}
+
+/**
+ * Count conflated empty/error nodes in TSX.
+ */
+export function countEmptyTriadTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let hits = 0;
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isEmptyTriadOpening(node.openingElement, sf)) {
+      if (openingHasErrorMarker(node.openingElement, sf)) hits += 1;
+      else if (!findJsxAttr(node.openingElement, "data-filtered-empty", sf) && sourceHasActiveFilters(source)) {
+        hits += 1;
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { hits };
+}
+
+/**
+ * Split empty≡error / missing filtered-empty via AST.
+ */
+export function splitEmptyTriadTsx(source, op = {}) {
+  const filteredCopy =
+    op.filteredCopy ||
+    op.copy ||
+    "No notices match these filters. Clear filters or widen the date range.";
+  const errorCopy = op.errorCopy || "Couldn't load notices. Retry.";
+  const clearLabel = op.clearAllLabel || "Clear filters";
+  const text = String(source);
+  const hasFilters = sourceHasActiveFilters(text);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  let needErrorSibling = false;
+  let lastEmptyEnd = -1;
+
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isEmptyTriadOpening(node.openingElement, sf)) {
+      if (findJsxAttr(node.openingElement, "data-shine-triad-split", sf)) return;
+      const opening = node.openingElement;
+      const conflated = openingHasErrorMarker(opening, sf);
+      const missingFiltered = hasFilters && !findJsxAttr(opening, "data-filtered-empty", sf);
+      if (!conflated && !missingFiltered) return;
+
+      let openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+      openSrc = openSrc
+        .replace(/\s*role=\{?["']alert["']\}?/g, "")
+        .replace(/\s*data-error(?:=\{?["'][^"']*["']\}?)?/g, "")
+        .replace(/\s*data-state=\{?["']error["']\}?/g, "");
+      if (hasFilters && !/data-filtered-empty/.test(openSrc)) {
+        openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` data-filtered-empty${m}`);
+      }
+      if (!/data-shine-triad-split/.test(openSrc)) {
+        openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` data-shine-triad-split${m}`);
+      }
+
+      const close = node.closingElement;
+      const innerStart = opening.getEnd();
+      const innerEnd = close.getStart(sf);
+      let inner = text.slice(innerStart, innerEnd);
+      const plain = inner.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+      const generic = !plain || /^(no data|nothing here|no results|empty)$/i.test(plain);
+      if (generic && hasFilters) {
+        const indent = indentBefore(text, node.getStart(sf)) + "  ";
+        inner =
+          `\n${indent}${filteredCopy}\n${indent}` +
+          `<button type="button" data-shine-filter-clear-all aria-label="${clearLabel}">${clearLabel}</button>\n${indent.slice(0, -2)}`;
+      }
+
+      let replacement = openSrc + inner + text.slice(close.getStart(sf), close.getEnd());
+      if (conflated) {
+        const indent = indentBefore(text, node.getStart(sf));
+        replacement +=
+          `\n${indent}<div data-error role="alert" data-shine-triad-split hidden>${errorCopy}</div>`;
+        needErrorSibling = true;
+        lastEmptyEnd = node.getEnd();
+      }
+      edits.push({ start: node.getStart(sf), end: node.getEnd(), replacement });
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+
+  if (!edits.length) return text;
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+
+  // Deduplicate error siblings if multiple empties were conflated.
+  if (needErrorSibling) {
+    const errRe = /<div data-error role="alert" data-shine-triad-split hidden>[^<]*<\/div>\n?/g;
+    const matches = out.match(errRe) || [];
+    if (matches.length > 1) {
+      let seen = 0;
+      out = out.replace(errRe, (m) => {
+        seen += 1;
+        return seen === 1 ? m : "";
+      });
+    }
+  }
+  void lastEmptyEnd;
+
+  if (hasFilters && !/data-shine-filter-clear-all/.test(out)) {
+    out = out.replace(
+      /(data-shine-filter-stack[^>]*>)/,
+      `$1\n        <button type="button" data-shine-filter-clear-all aria-label="${clearLabel}">${clearLabel}</button>`,
+    );
+  }
+
   return out;
 }
 

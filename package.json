@@ -105,7 +105,8 @@
     "filter-clearable:ast-bite": "node verify/filter-clearable-ast-bite.mjs",
     "strip-marketing-dna:ast-bite": "node verify/strip-marketing-dna-ast-bite.mjs",
     "rewrite-filler-empty:ast-bite": "node verify/rewrite-filler-empty-ast-bite.mjs",
-    "collapse-card-soup:ast-bite": "node verify/collapse-card-soup-ast-bite.mjs"
+    "collapse-card-soup:ast-bite": "node verify/collapse-card-soup-ast-bite.mjs",
+    "split-empty-triad:ast-bite": "node verify/split-empty-triad-ast-bite.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",

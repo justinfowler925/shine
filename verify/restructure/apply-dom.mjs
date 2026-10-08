@@ -82,6 +82,12 @@ export function applyDomRestructure(html, plan) {
         out = next;
         applied.push("collapse-card-soup");
       }
+    } else if (op.op === "split-empty-triad") {
+      const next = applySplitEmptyTriad(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("split-empty-triad");
+      }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
       applied.push("set-focal");
@@ -318,6 +324,92 @@ export function applyCollapseCardSoup(html, op = {}) {
     stamped,
     `${stamped}\n<details data-shine-card-rest><summary>${summary}</summary>\n${demoted}\n</details>`,
   );
+  return out;
+}
+
+/**
+ * Split conflated empty / filtered-empty / error into distinct treatments.
+ * - Active filters + empty → stamp data-filtered-empty, instructional copy, Clear filters
+ * - Same-node empty+error/alert → drop error markers from empty; append distinct error sibling
+ */
+export function applySplitEmptyTriad(html, op = {}) {
+  const filteredCopy =
+    op.filteredCopy ||
+    op.copy ||
+    "No notices match these filters. Clear filters or widen the date range.";
+  const errorCopy = op.errorCopy || "Couldn't load notices. Retry.";
+  const clearLabel = op.clearAllLabel || "Clear filters";
+  let out = String(html);
+  if (/data-shine-triad-split/.test(out) && /data-filtered-empty/.test(out)) return out;
+
+  const hasActiveFilters =
+    /aria-pressed=["']true["']/.test(out) ||
+    /data-filter-active=["']true["']/.test(out) ||
+    /data-shine-filter-active/.test(out);
+
+  const emptyTagRe =
+    /<(div|p|section|aside|td)\b([^>]*\b(?:data-empty|data-shine-empty|data-empty-state|data-state=["']empty["'])[^>]*)>([\s\S]*?)<\/\1>/gi;
+
+  let touched = false;
+  out = out.replace(emptyTagRe, (full, tag, attrs, inner) => {
+    let nextAttrs = attrs;
+    let nextInner = inner;
+    const conflated =
+      /\brole=["']alert["']/.test(attrs) ||
+      /\bdata-error\b/.test(attrs) ||
+      /\bdata-state=["']error["']/.test(attrs);
+
+    if (conflated) {
+      nextAttrs = nextAttrs
+        .replace(/\s*role=["']alert["']/gi, "")
+        .replace(/\s*data-error(?:=["'][^"']*["'])?/gi, "")
+        .replace(/\s*data-state=["']error["']/gi, "");
+      touched = true;
+    }
+
+    if (hasActiveFilters && !/\bdata-filtered-empty\b/.test(nextAttrs)) {
+      nextAttrs = `${nextAttrs} data-filtered-empty`;
+      touched = true;
+    }
+
+    if (!/\bdata-shine-triad-split\b/.test(nextAttrs)) {
+      nextAttrs = `${nextAttrs} data-shine-triad-split`;
+      touched = true;
+    }
+
+    const text = inner.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+    const generic =
+      !text ||
+      /^(no data|nothing here|no results|empty|n\/a|—|-)$/i.test(text) ||
+      conflated;
+    if (generic && hasActiveFilters) {
+      const hasClear = /clear filters|data-shine-filter-clear-all/i.test(inner);
+      nextInner =
+        `${filteredCopy}` +
+        (hasClear
+          ? ""
+          : ` <button type="button" data-shine-filter-clear-all aria-label="${clearLabel}">${clearLabel}</button>`);
+      touched = true;
+    }
+
+    return `<${tag}${nextAttrs}>${nextInner}</${tag}>`;
+  });
+
+  if (touched && !/<[^>]*\bdata-error\b[^>]*>/.test(out) && !/role=["']alert["']/.test(out)) {
+    // Append a distinct hidden error treatment so empty ≠ error.
+    out = out.replace(
+      /<\/main>/i,
+      `  <div data-error role="alert" data-shine-triad-split hidden>${errorCopy}</div>\n</main>`,
+    );
+  }
+
+  if (hasActiveFilters && !/data-shine-filter-clear-all/.test(out)) {
+    out = out.replace(
+      /(data-shine-filter-stack[^>]*>)/i,
+      `$1\n    <button type="button" data-shine-filter-clear-all aria-label="${clearLabel}">${clearLabel}</button>`,
+    );
+  }
+
   return out;
 }
 

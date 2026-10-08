@@ -259,6 +259,19 @@ Operate surfaces must not ship ≥4 equal-weight Card roots without a focal.
 
 Doctor: `verify/collapse-card-soup-ast-bite.mjs` / `npm run collapse-card-soup:ast-bite`.
 
+### Empty-triad TSX AST — split-empty-triad
+
+Operate queues must not conflate empty, filtered-empty, and error.
+
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `split-empty-triad`.
+
+- Stamps `data-filtered-empty` + `data-shine-triad-split` when filters are active
+- Drops `role=alert` / `data-error` from empty nodes; appends distinct error sibling
+- Adds Clear filters recovery; recommend binds `emptyTriadAst` FAIL→PASS crops (`queue-empty-triad-tsx-*`)
+
+Doctor: `verify/split-empty-triad-ast-bite.mjs` / `npm run split-empty-triad:ast-bite`.
+
+
 
 
 ### Dual-focal ban TSX AST (N8 deepen) — XOR peer→chip
