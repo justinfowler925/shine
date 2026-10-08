@@ -1,12 +1,14 @@
 ---
 name: shine
 description: >-
-  Design, build, or audit interfaces using real template structure, the consumer's installed
-  component system, complete interaction contracts, and browser proof. Use for UI, UX,
-  dashboards, tables, forms, landing pages, charts, email, Lightning, decks, PDFs, or visual polish.
+  Design, build, denoise, or audit interfaces using real template structure, the consumer's installed
+  component system, complete interaction contracts, and browser proof. Default for "redesign this
+  Operate surface" / ClearSpeed Operate: cite → measure → denoise-loop → prove (clearspeed-operate).
 ---
 # Shine
 Build the interface directly in the current Codex task. Do not delegate to a second design agent. Shine's deterministic tools choose and verify; you supply brief-specific design judgment.
+## Redesign this Operate surface (default)
+ClearSpeed Operate queue redesign/denoise/unfuck: **cite → measure → denoise-loop → prove** (edition `clearspeed-operate`; sibling map `docs/edition-siblings.md`). No audit pack. Sibling resolve → measure → `verify/denoise-loop.mjs --edition clearspeed-operate … --prove`. See `references/denoise.md` · `../docs/operate-redesign.md`.
 ## Start with one bounded packet
 Resolve this installed tree, then create the packet before planning or editing:
 ```sh
@@ -15,7 +17,7 @@ ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
 node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit|denoise> --project "$PWD"
 ```
 Packet `--mode` is `existing` \| `new` \| `audit` \| `denoise` (denoise also loads `references/denoise.md`). Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP). Every packet emits a Design Decision Record (`packet.ddr` / `ddrId`, `constitutionIds`, `status`); denoise starts `proposed` — refuse Actor implement until `--accept` (or `node core/ddr.mjs accept|refuse`); prove receipts link `ddrId` + `constitutionIds` + Atlas `reflexionVerdict` (`done|partial|blocked|error`) and auto-append the audit trail (`SHINE_AUDIT_DIR` also appends denoise-loop measure/critic/reflexion). New surfaces: lock `shine-wireframe/<slug>.brief.md` via `core/wireframe-brief.mjs` (structure immutable until user says `unlock structure`); packet `--mode new --require-wireframe-lock`. Denoise-loop locks primary job/regions and refuses REPAINT that changes structure without a RESTRUCTURE packet (`shine-restructure/v1`). Critic≠Actor host: `core/critic-actor-host.mjs`.
-If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed dashboard. Denoise **always** requires `--category`. For bloated Operate cleanup: locked order primary job → competing CTA → empty/error triad → composition → craft; **no polish until `primaryTaskCheck` is green**; refuse paint while `restructureHints` still require restructure. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
+If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed dashboard. Denoise **always** requires `--category`. For bloated Operate cleanup prefer the denoise-loop path above; locked order primary job → competing CTA → empty/error triad → composition → craft; **no polish until `primaryTaskCheck` is green**; refuse paint while `restructureHints` still require restructure. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories. For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
 constraint. The signature must express this product's job, never generic design decoration.
@@ -25,7 +27,6 @@ A review request (audit, review, assess, "what's wrong", "don't change anything"
 ## Product precedent outranks the catalog
 For an existing product, inventory shipped sibling surfaces before accepting the external reference. Find the closest page presenting the same information object or supporting the same user job. If one exists, rerun the packet with `--product-reference <page-or-url> --product-reference-name <name>`.
 The sibling owns product conventions; the catalog may fill a gap but must not replace working card anatomy, toolbar behavior, expansion, actions, states, terminology, or responsive behavior. Name the sibling and every justified divergence in the diagnosis.
-ClearSpeed Operate: use the edition sibling map (`knowledge/editions/clearspeed-operate/siblings.json` · `docs/edition-siblings.md`) for Nucleus / Sled Capture cite + kit selection before catalog fashion.
 Reuse or extract its component and CSS vocabulary; never create a parallel component for the same object. Mark shared shells with stable `data-product-pattern` values and run the packet's product-compare command.
 Every visible icon needs a distinct semantic job: state, action, object type, or direction. If nearby text already supplies all meaning, remove it; decoration is not semantics.
 ## Build
