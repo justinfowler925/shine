@@ -6,14 +6,28 @@
   "domains": ["craft", "composition"],
   "lanes": ["saas", "internal"],
   "screens": ["queue", "settings", "form", "record", "catalog", "dashboard", "app-shell", "approval"],
-  "tags": ["marketing", "glow", "gradient", "serif", "composition-slop", "nucleus"],
+  "tags": ["marketing", "glow", "gradient", "serif", "composition-slop", "operate-slop", "nucleus"],
+  "aliases": ["marketing-dna", "glow-on-operate", "purple-gradient-operate", "display-serif-operate"],
   "cues": "Glow utilities, purple/indigo gradients, or display/serif marketing type on saas Operate",
   "ban": "Operate chrome cannot ship marketing DNA (glow, gradient clusters, display serif).",
-  "remediation": "Strip glow/gradient/display-serif clusters; keep Clearspeed product tokens.",
-  "detector": "composition-slop",
-  "measureFailurePrefix": "composition-slop",
+  "remediation": "Apply strip-marketing-dna; remove glow/gradient/display-serif clusters; keep product tokens; re-measure marketing-dna.",
+  "examples": [
+    "Queue shell: hero with bg-gradient-to-r from-violet-600 to-indigo-600 + font-serif tracking-tighter",
+    "Settings: box-shadow 0 0 40px purple glow on Save chrome"
+  ],
+  "restructureOps": ["strip-marketing-dna"],
+  "detector": "marketing-dna",
+  "measureFailurePrefix": "marketing-dna",
   "constitutionIds": ["cite-honesty"],
   "severity": "major",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-marketing-dna-before.html",
+    "after": "verify/fixtures/denoise/queue-marketing-dna-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-marketing-dna-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-marketing-dna-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-marketing-dna"],
+  "cropPairId": "queue-marketing-dna",
   "source": "skill/references/anti-patterns.md",
-  "validatedBy": "verify/composition-slop.test.mjs"
+  "validatedBy": "verify/marketing-dna.test.mjs"
 }

@@ -262,6 +262,14 @@ const filterPlan = buildRestructurePlan({
 });
 assert.ok(applyTsxRestructure(filterHard, filterPlan).applied.includes("filter-clearable"));
 
+const dnaHard = readFileSync(join(FIX, "queue-marketing-dna-ast.tsx"), "utf8");
+const dnaPlan = buildRestructurePlan({
+  job: "Strip DNA",
+  category: "queue",
+  ops: [{ op: "strip-marketing-dna" }],
+});
+assert.ok(applyTsxRestructure(dnaHard, dnaPlan).applied.includes("strip-marketing-dna"));
+
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );

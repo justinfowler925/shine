@@ -248,7 +248,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), filterReversibleAst.fixtureTsx/crop* (TSX AST filter-clearable FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), filterReversibleAst.fixtureTsx/crop* (TSX AST filter-clearable FAIL→PASS), marketingDnaAst.fixtureTsx/crop* (TSX AST strip-marketing-dna FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -354,6 +354,23 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   };
  }
 
+
+ // Denoise / queue jobs: bind marketing-dna-operate TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.marketingDnaAst?.fixtureTsx){
+  const m=recommendation.marketingDnaAst;
+  packet.marketingDnaAst={
+   mode:m.mode||"tsx-ast",
+   op:m.op||"strip-marketing-dna",
+   fixtureTsx:join(ROOT,m.fixtureTsx),
+   fixtureTsxAst:join(ROOT,m.fixtureTsxAst||m.fixtureTsx),
+   cropBefore:join(ROOT,m.cropBefore),
+   cropAfter:join(ROOT,m.cropAfter),
+   cropPairId:m.cropPairId||"queue-marketing-dna-tsx",
+   helper:join(ROOT,m.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:m.reference||"skill/references/denoise.md",
+   instruction:m.instruction||"Apply apply-tsx strip-marketing-dna (AST) on Operate chrome TSX.",
+  };
+ }
  // Denoise / queue jobs: bind irreversible-filters TSX AST FAIL→PASS fixture + crop paths.
  if(recommendation.filterReversibleAst?.fixtureTsx){
   const f=recommendation.filterReversibleAst;
@@ -507,8 +524,11 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  const wantsFilter=
   Boolean(recommendation.filterReversibleAst?.fixtureTsx)||
   restructureHints.some((h)=>/filter-clearable|filter-reversible|irreversible[- ]?filters/i.test(String(h)));
+ const wantsMarketingDna=
+  Boolean(recommendation.marketingDnaAst?.fixtureTsx)||
+  restructureHints.some((h)=>/strip-marketing-dna|marketing[- ]?dna|glow|gradient[- ]?operate/i.test(String(h)));
  const ddrOps=needsRestructure
-  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsPill?["pill-collapse"]:[]),...(wantsTitle?["title-singular"]:[]),...(wantsChrome?["chrome-budget"]:[]),...(wantsFilter?["filter-clearable"]:[]),...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
+  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsPill?["pill-collapse"]:[]),...(wantsTitle?["title-singular"]:[]),...(wantsChrome?["chrome-budget"]:[]),...(wantsFilter?["filter-clearable"]:[]),...(wantsMarketingDna?["strip-marketing-dna"]:[]),...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
   :wantsWrongCite
    ?["rebind-cite"]
    :[];

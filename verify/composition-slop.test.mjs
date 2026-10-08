@@ -10,6 +10,7 @@ import {
   evaluateCompositionSlop,
   formatCompositionSlopFailures,
 } from "./composition-slop.mjs";
+import { formatMarketingDnaFailures } from "./marketing-dna.mjs";
 
 const SHINE = join(dirname(fileURLToPath(import.meta.url)), "..");
 const FIX = join(SHINE, "verify/fixtures/composition-slop");
@@ -38,8 +39,8 @@ try {
   const dna = await page.evaluate(evaluateCompositionSlop);
   assert.ok(dna.marketingHits.length, JSON.stringify(dna));
   assert.ok(
-    formatCompositionSlopFailures(dna, { gate: true }).some(
-      (f) => /anti-pattern:marketing-dna-operate/.test(f) && /marketing DNA/.test(f),
+    formatMarketingDnaFailures(dna, { gate: true }).some(
+      (f) => /anti-pattern:marketing-dna-operate/.test(f) && /marketing-dna:/.test(f),
     ),
   );
 
@@ -74,7 +75,7 @@ assert.match(`${soupRun.stderr}\n${soupRun.stdout}`, /composition-slop:.*Card ro
 
 const dnaRun = run(join(FIX, "marketing-dna.html"), "shadcn-settings");
 assert.notEqual(dnaRun.status, 0);
-assert.match(`${dnaRun.stderr}\n${dnaRun.stdout}`, /composition-slop:.*marketing DNA/);
+assert.match(`${dnaRun.stderr}\n${dnaRun.stdout}`, /marketing-dna:.*marketing DNA/);
 
 const fillerRun = run(join(FIX, "filler-empty.html"), "shadcn-dashboard-01");
 assert.notEqual(fillerRun.status, 0);

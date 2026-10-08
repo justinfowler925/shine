@@ -6,6 +6,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate slop: marketing-dna-operate / strip-marketing-dna.** Glow, purple/indigo
+  gradients, and display/serif marketing type on Operate chrome now fail-closed as
+  `marketing-dna` (`anti-pattern:marketing-dna-operate`). Auto-safe
+  `strip-marketing-dna` scrubs illegal class/style tokens on DOM + TypeScript AST.
+  Recommend emits `marketingDnaAst`; denoise-loop names `marketing-dna`. Doctor
+  bites: `verify/marketing-dna.test.mjs` · `verify/strip-marketing-dna-ast-bite.mjs`.
+
 - **Operate slop: irreversible-filters / filter-clearable.** Active filter chips
   without dismiss/clear now fail-closed as `filter-reversible`
   (`anti-pattern:irreversible-filters`). Auto-safe `filter-clearable` stamps

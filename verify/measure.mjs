@@ -90,6 +90,11 @@ import {
   evaluateFilterReversible,
   formatFilterReversibleFailures,
 } from "./filter-reversible.mjs";
+import {
+  marketingDnaGateApplies,
+  evaluateMarketingDna,
+  formatMarketingDnaFailures,
+} from "./marketing-dna.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { enforceOperateAntiPatternCites } from "../knowledge/retrieve.mjs";
 
@@ -421,6 +426,7 @@ const pillFilter = await page.evaluate(evaluatePillFilter);
 const pageTitleSlop = await page.evaluate(evaluatePageTitle);
 const chromePressure = await page.evaluate(evaluateChromePressure);
 const filterReversible = await page.evaluate(evaluateFilterReversible);
+const marketingDna = await page.evaluate(evaluateMarketingDna);
 const formHeuristics = await page.evaluate(evaluateFormHeuristics);
 const copyHeuristics = await page.evaluate(evaluateCopyHeuristics);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
@@ -982,6 +988,16 @@ if (compose.filledCount > 2) {
     citeId: dfCiteId,
   });
   for (const f of formatFilterReversibleFailures(filterReversible, { gate: filterApplies })) {
+    failures.push(f);
+  }
+  const marketingApplies = marketingDnaGateApplies({
+    lane: laneWant,
+    citeScreen: dfCiteRow?.screen || "",
+    citeJobs: dfCiteRow?.jobs || [],
+    isWireframe,
+    citeId: dfCiteId,
+  });
+  for (const f of formatMarketingDnaFailures(marketingDna, { gate: marketingApplies })) {
     failures.push(f);
   }
 }
