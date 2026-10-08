@@ -17,6 +17,10 @@ import {
   countEqualCardsWithoutFocalTsx,
   compositionOrderTsx,
   worklistFirstTsx,
+  pillCollapseTsx,
+  countFilterPillsTsx,
+  titleSingularTsx,
+  countPageTitlesTsx,
 } from "./restructure/apply-tsx.mjs";
 import { buildRestructurePlan } from "./restructure/schema.mjs";
 
@@ -193,6 +197,42 @@ const wlPlan = buildRestructurePlan({
 const wlResult = applyTsxRestructure(worklistHard, wlPlan);
 assert.ok(wlResult.applied.includes("worklist-first"));
 
+// Pill-filter AST
+const pillSoup = readFileSync(join(FIX, "queue-pill-stack.tsx"), "utf8");
+const pillHard = readFileSync(join(FIX, "queue-pill-stack-ast.tsx"), "utf8");
+assert.ok(countFilterPillsTsx(pillSoup).pills >= 6);
+const pillAfter = pillCollapseTsx(pillSoup, { maxVisible: 3 });
+assert.equal(countFilterPillsTsx(pillAfter).pills, 3);
+assert.match(pillAfter, /data-shine-pill-rest/);
+assert.ok(countFilterPillsTsx(pillHard).pills >= 6);
+const pillHardAfter = pillCollapseTsx(pillHard, { maxVisible: 3 });
+assert.equal(countFilterPillsTsx(pillHardAfter).pills, 3);
+assert.match(pillHardAfter, /className=\{\s*["']filter-pills["']\s*\}/);
+const pillPlan = buildRestructurePlan({
+  job: "Collapse pill stack",
+  category: "queue",
+  ops: [{ op: "pill-collapse", maxVisible: 3 }],
+});
+assert.ok(applyTsxRestructure(pillHard, pillPlan).applied.includes("pill-collapse"));
+
+// Competing page-titles AST
+const titleSoup = readFileSync(join(FIX, "queue-competing-titles.tsx"), "utf8");
+const titleHard = readFileSync(join(FIX, "queue-competing-titles-ast.tsx"), "utf8");
+assert.ok(countPageTitlesTsx(titleSoup).titles >= 3);
+const titleAfter = titleSingularTsx(titleSoup, {});
+assert.equal(countPageTitlesTsx(titleAfter).titles, 1);
+assert.match(titleAfter, /data-shine-title-demoted/);
+assert.ok(countPageTitlesTsx(titleHard).titles >= 3);
+const titleHardAfter = titleSingularTsx(titleHard, {});
+assert.equal(countPageTitlesTsx(titleHardAfter).titles, 1);
+assert.match(titleHardAfter, /data-shine-title-demoted/);
+const titlePlan = buildRestructurePlan({
+  job: "Singularize titles",
+  category: "queue",
+  ops: [{ op: "title-singular" }],
+});
+assert.ok(applyTsxRestructure(titleHard, titlePlan).applied.includes("title-singular"));
+
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );

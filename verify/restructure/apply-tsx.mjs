@@ -6,6 +6,8 @@
  * worklist-first (records/worklist before KPI chrome via TS compiler AST),
  * cta-budget demote (maxFilled=1 via TS compiler AST),
  * kpi-collapse (maxVisible=3 → <details data-shine-kpi-rest> via TS compiler AST),
+ * pill-collapse (maxVisible=3 → <details data-shine-pill-rest> via TS compiler AST),
+ * title-singular (one page title; demote peers to kicker via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -95,6 +97,33 @@ export function applyTsxRestructure(source, plan) {
         if (census.dynamic || census.tiles > maxVisible) {
           plans.push(
             "## kpi-collapse (TSX)\n\nWrap excess metric JSX in `<details data-shine-kpi-rest>` manually if metrics are dynamic (`.map`, spread).\nDOM apply-dom.mjs remains preferred for HTML fixtures.\n",
+          );
+        }
+      }
+    } else if (op.op === "pill-collapse") {
+      const next = pillCollapseTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("pill-collapse");
+      } else {
+        const census = countFilterPillsTsx(text);
+        const maxVisible = op.maxVisible ?? 3;
+        if (census.dynamic || census.pills > maxVisible) {
+          plans.push(
+            "## pill-collapse (TSX)\n\nWrap excess filter-pill JSX in `<details data-shine-pill-rest>` manually if pills are dynamic (`.map`, spread).\n",
+          );
+        }
+      }
+    } else if (op.op === "title-singular") {
+      const next = titleSingularTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("title-singular");
+      } else {
+        const census = countPageTitlesTsx(text);
+        if (census.dynamic || census.titles > 1) {
+          plans.push(
+            "## title-singular (TSX)\n\nKeep one page title; demote peer h1 / data-page-title / page-title to `<p className=\"kicker\" data-shine-title-demoted>`.\n",
           );
         }
       }
@@ -1288,6 +1317,208 @@ function labelFromJsx(node, sf) {
 
 function escapeRe(s) {
   return String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * True when className (string / {"…"}) contains a whole-word token.
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {string} token
+ * @param {ts.SourceFile} sf
+ */
+function classNameHasToken(opening, token, sf) {
+  const attr = findJsxAttr(opening, "className", sf);
+  if (!attr?.initializer) return false;
+  const re = new RegExp(`(?:^|\\s)${escapeRe(token)}(?:\\s|$)`);
+  if (ts.isStringLiteral(attr.initializer)) return re.test(attr.initializer.text);
+  if (ts.isJsxExpression(attr.initializer) && attr.initializer.expression) {
+    const expr = attr.initializer.expression;
+    if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
+      return re.test(expr.text);
+    }
+  }
+  return false;
+}
+
+/**
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isFilterStackOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-filter-stack", sf)) return true;
+  return classNameHasToken(opening, "filter-pills", sf) || classNameHasToken(opening, "pill-stack", sf);
+}
+
+/**
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isFilterPillOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-filter-pill", sf)) return true;
+  if (findJsxAttr(opening, "data-shine-pill", sf)) return true;
+  if (classNameHasToken(opening, "pill", sf)) return true;
+  if (classNameHasToken(opening, "chip", sf)) return true;
+  const tag = jsxTagName(opening);
+  return tag === "Badge" && classNameHasToken(opening, "rounded-full", sf);
+}
+
+/**
+ * @param {ts.JsxElement} container
+ * @param {ts.SourceFile} sf
+ */
+function filterPillsInContainer(container, sf) {
+  /** @type {ts.JsxElement[]} */
+  const pills = [];
+  let unsafe = false;
+  let alreadyCollapsed = false;
+  for (const child of container.children) {
+    if (ts.isJsxExpression(child) && child.expression) {
+      const t = child.expression.getText(sf);
+      if (/\.map\s*\(|\.\.\./.test(t)) unsafe = true;
+      continue;
+    }
+    if (!ts.isJsxElement(child)) continue;
+    const open = child.openingElement;
+    if (jsxTagName(open) === "details" && findJsxAttr(open, "data-shine-pill-rest", sf)) {
+      alreadyCollapsed = true;
+      continue;
+    }
+    if (isFilterPillOpening(open, sf)) pills.push(child);
+  }
+  return { pills, unsafe, alreadyCollapsed };
+}
+
+/**
+ * Count literal filter pills in TSX (same AST rules as pillCollapseTsx).
+ * @param {string} source
+ * @returns {{ pills: number, labels: string[], containers: number, dynamic: boolean }}
+ */
+export function countFilterPillsTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const labels = [];
+  let containers = 0;
+  let dynamic = false;
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isFilterStackOpening(node.openingElement, sf)) {
+      containers += 1;
+      const { pills, unsafe } = filterPillsInContainer(node, sf);
+      if (unsafe) dynamic = true;
+      for (const p of pills) labels.push(labelFromJsx(p, sf));
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { pills: labels.length, labels, containers, dynamic };
+}
+
+/**
+ * Collapse excess literal filter-pill JSX via TypeScript AST (maxVisible=3).
+ * Parks the rest in `<details data-shine-pill-rest>`.
+ */
+export function pillCollapseTsx(source, op = {}) {
+  const maxVisible = op.maxVisible ?? 3;
+  const restSummary = op.summary || "More filters";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isFilterStackOpening(node.openingElement, sf)) {
+      const { pills, unsafe, alreadyCollapsed } = filterPillsInContainer(node, sf);
+      if (unsafe || alreadyCollapsed) return;
+      if (pills.length <= maxVisible) return;
+      const visible = pills.slice(0, maxVisible);
+      const rest = pills.slice(maxVisible);
+      const rangeStart = visible[0].getStart(sf);
+      const rangeEnd = rest[rest.length - 1].getEnd();
+      const indent = indentBefore(text, rangeStart);
+      const innerIndent = indent + "  ";
+      const visibleSrc = visible.map((t) => text.slice(t.getStart(sf), t.getEnd())).join(`\n${indent}`);
+      const restSrc = rest.map((t) => text.slice(t.getStart(sf), t.getEnd())).join(`\n${innerIndent}`);
+      const replacement =
+        `${visibleSrc}\n${indent}` +
+        `<details data-shine-pill-rest>\n${innerIndent}<summary>${restSummary}</summary>\n${innerIndent}` +
+        `${restSrc}\n${indent}</details>`;
+      edits.push({ start: rangeStart, end: rangeEnd, replacement });
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  if (!edits.length) return text;
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  return out;
+}
+
+/**
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isPageTitleOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-title-demoted", sf)) return false;
+  const tag = jsxTagName(opening);
+  if (tag === "h1") return true;
+  if (findJsxAttr(opening, "data-page-title", sf)) return true;
+  if (findJsxAttr(opening, "data-shine-page-title", sf)) return true;
+  return classNameHasToken(opening, "page-title", sf);
+}
+
+/**
+ * Count competing page titles in TSX.
+ * @param {string} source
+ * @returns {{ titles: number, texts: string[], dynamic: boolean }}
+ */
+export function countPageTitlesTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const texts = [];
+  let dynamic = false;
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isPageTitleOpening(node.openingElement, sf)) {
+      // Skip titles nested inside another title node
+      texts.push(labelFromJsx(node, sf) || "(title)");
+      return;
+    }
+    if (ts.isJsxExpression(node) && node.expression) {
+      const t = node.expression.getText(sf);
+      if (/\.map\s*\(|\.\.\./.test(t) && /title|h1/i.test(t)) dynamic = true;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { titles: texts.length, texts, dynamic };
+}
+
+/**
+ * Keep first page title; demote peers to `<p className="kicker" data-shine-title-demoted>`.
+ */
+export function titleSingularTsx(source, _op = {}) {
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {ts.JsxElement[]} */
+  const titles = [];
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isPageTitleOpening(node.openingElement, sf)) {
+      titles.push(node);
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  if (titles.length < 2) return text;
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  for (const peer of titles.slice(1)) {
+    const label = labelFromJsx(peer, sf) || "Untitled";
+    const indent = indentBefore(text, peer.getStart(sf));
+    const replacement = `<p className="kicker" data-shine-title-demoted>${escapeJsxText(label)}</p>`;
+    edits.push({ start: peer.getStart(sf), end: peer.getEnd(), replacement: indent ? replacement : replacement });
+  }
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  return out;
 }
 
 if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {

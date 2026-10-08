@@ -24,6 +24,8 @@ import {
 import { formatCtaPressureFailures } from "./cta-pressure.mjs";
 import { formatDualFocalFailures } from "./dual-focal.mjs";
 import { formatKpiSoupFailures } from "./kpi-soup.mjs";
+import { formatPillFilterFailures } from "./pill-filter.mjs";
+import { formatPageTitleFailures } from "./page-title.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -64,6 +66,20 @@ const expected = {
     alias: "wrong-cite",
     restructureOps: ["rebind-cite"],
     cropPairId: "sources-cite",
+  },
+  "pill-filter-stack": {
+    detector: "pill-filter",
+    measureFailurePrefix: "pill-filter",
+    alias: "pill-filter",
+    restructureOps: ["pill-collapse"],
+    cropPairId: "queue-pill",
+  },
+  "competing-page-titles": {
+    detector: "page-title",
+    measureFailurePrefix: "page-title",
+    alias: "page-title",
+    restructureOps: ["title-singular"],
+    cropPairId: "queue-titles",
   },
 };
 
@@ -112,6 +128,18 @@ const citeHits = retrieveAntiPatterns("wrong cite settings Sources with queue ca
 });
 assert.ok(citeHits.some((h) => h.id === "wrong-cite-category"), JSON.stringify(citeHits.map((h) => h.id)));
 
+const pillHits = retrieveAntiPatterns("pill filter chip stack above fold crowding queue triage", {
+  screen: "queue",
+  antiPatterns: corpus,
+});
+assert.ok(pillHits.some((h) => h.id === "pill-filter-stack"), JSON.stringify(pillHits.map((h) => h.id)));
+
+const titleHits = retrieveAntiPatterns("competing page titles dual h1 title stack on queue", {
+  screen: "queue",
+  antiPatterns: corpus,
+});
+assert.ok(titleHits.some((h) => h.id === "competing-page-titles"), JSON.stringify(titleHits.map((h) => h.id)));
+
 // Measure formatters cite anti-pattern:<id>
 const dualFails = formatDualFocalFailures(
   { peerGridCount: 2, titles: ["David's 10", "Queue"] },
@@ -139,6 +167,21 @@ const wrongFails = formatWrongCiteFailures({
 assert.ok(
   wrongFails.some((f) => /cite-honesty:/.test(f) && /anti-pattern:wrong-cite-category/.test(f)),
   wrongFails.join("\n"),
+);
+
+const pillFails = formatPillFilterFailures({ pillCount: 7, labels: ["Status"] }, { gate: true });
+assert.ok(
+  pillFails.some((f) => /pill-filter:/.test(f) && /anti-pattern:pill-filter-stack/.test(f)),
+  pillFails.join("\n"),
+);
+
+const titleFails = formatPageTitleFailures(
+  { titleCount: 3, texts: ["Queue", "Triage", "Worklist"] },
+  { gate: true },
+);
+assert.ok(
+  titleFails.some((f) => /page-title:/.test(f) && /anti-pattern:competing-page-titles/.test(f)),
+  titleFails.join("\n"),
 );
 
 assert.equal(formatAntiPatternCite("kpi-soup"), "anti-pattern:kpi-soup");

@@ -151,6 +151,144 @@ export function buildCtaAstAfterCropHtml() {
   });
 }
 
+/** Pill-filter DOM FAIL crop — ≥5 above-fold pills. */
+export function buildPillBeforeCropHtml() {
+  return wrap({
+    title: "Pill crop FAIL — filter stack",
+    cropId: "pill-filter-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: seven above-fold filter pills crowding the decide path — pill-filter.",
+    body: `  <h1>Queue · filters</h1>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters">
+    <button type="button" class="pill" data-shine-filter-pill>Status</button>
+    <button type="button" class="pill" data-shine-filter-pill>Owner</button>
+    <button type="button" class="pill" data-shine-filter-pill>Score</button>
+    <button type="button" class="pill" data-shine-filter-pill>Source</button>
+    <button type="button" class="pill" data-shine-filter-pill>Region</button>
+    <button type="button" class="pill" data-shine-filter-pill>Due</button>
+    <button type="button" class="pill" data-shine-filter-pill>Tag</button>
+  </div>`,
+  });
+}
+
+/** Pill-filter DOM PASS crop — ≤3 visible + details. */
+export function buildPillAfterCropHtml() {
+  return wrap({
+    title: "Pill crop PASS — collapsed",
+    cropId: "pill-filter-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: three visible filter pills; remainder in details — pill-collapse.",
+    body: `  <h1>Queue · filters</h1>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters">
+    <button type="button" class="pill" data-shine-filter-pill>Status</button>
+    <button type="button" class="pill" data-shine-filter-pill>Owner</button>
+    <button type="button" class="pill" data-shine-filter-pill>Score</button>
+    <details data-shine-pill-rest><summary>More filters</summary>
+      <button type="button" class="pill" data-shine-filter-pill>Source</button>
+      <button type="button" class="pill" data-shine-filter-pill>Tag</button>
+    </details>
+  </div>`,
+  });
+}
+
+/** Pill-filter TSX AST FAIL crop. */
+export function buildPillAstBeforeCropHtml() {
+  return wrap({
+    title: "Pill AST crop FAIL — seven pills",
+    cropId: "pill-filter-tsx-before",
+    cite: "shadcn-queue",
+    caption:
+      "Crop FAIL: seven filter pills in TSX (className pill / {\"pill\"} / Badge) — pill-filter; apply-tsx AST pill-collapse.",
+    body: `  <h1>Queue · TSX pill stack</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-pill-stack-ast.tsx">Before apply-tsx pill-collapse (maxVisible=3)</p>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters" data-shine-tsx-ast="before">
+    <button type="button" class="pill" data-shine-filter-pill data-tsx-pill="pill">Status</button>
+    <button type="button" class="pill" data-shine-filter-pill data-tsx-pill="pill-expr">Owner</button>
+    <button type="button" class="pill" data-shine-filter-pill data-tsx-pill="badge">Score</button>
+    <button type="button" class="pill" data-shine-filter-pill>Source</button>
+    <button type="button" class="pill" data-shine-filter-pill>Region</button>
+    <button type="button" class="pill" data-shine-filter-pill>Due</button>
+    <button type="button" class="pill" data-shine-filter-pill>Tag</button>
+  </div>`,
+  });
+}
+
+/** Pill-filter TSX AST PASS crop. */
+export function buildPillAstAfterCropHtml() {
+  return wrap({
+    title: "Pill AST crop PASS — collapsed",
+    cropId: "pill-filter-tsx-after",
+    cite: "shadcn-queue",
+    caption:
+      "Crop PASS: three visible filter pills; remainder in details via TSX AST pill-collapse maxVisible=3.",
+    body: `  <h1>Queue · TSX collapsed</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-pill-stack-ast.tsx">After apply-tsx pill-collapse (maxVisible=3)</p>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters" data-shine-tsx-ast="after">
+    <button type="button" class="pill" data-shine-filter-pill data-tsx-pill="pill">Status</button>
+    <button type="button" class="pill" data-shine-filter-pill data-tsx-pill="pill-expr">Owner</button>
+    <button type="button" class="pill" data-shine-filter-pill data-tsx-pill="badge">Score</button>
+    <details data-shine-pill-rest><summary>More filters</summary>
+      <button type="button" class="pill" data-shine-filter-pill>Source</button>
+      <button type="button" class="pill" data-shine-filter-pill>Tag</button>
+    </details>
+  </div>`,
+  });
+}
+
+/** Competing page-titles DOM FAIL crop. */
+export function buildTitlesBeforeCropHtml() {
+  return wrap({
+    title: "Title crop FAIL — competing titles",
+    cropId: "page-title-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: three competing page titles in main — page-title.",
+    body: `  <h1>Queue</h1>
+  <h1 data-page-title>Triage inbox</h1>
+  <div class="page-title" data-shine-page-title>Notice worklist</div>`,
+  });
+}
+
+/** Competing page-titles DOM PASS crop. */
+export function buildTitlesAfterCropHtml() {
+  return wrap({
+    title: "Title crop PASS — singular",
+    cropId: "page-title-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: one page title; peers demoted to kicker — title-singular.",
+    body: `  <h1>Queue</h1>
+  <p class="kicker" data-shine-title-demoted>Triage inbox</p>
+  <p class="kicker" data-shine-title-demoted>Notice worklist</p>`,
+  });
+}
+
+/** Competing page-titles TSX AST FAIL crop. */
+export function buildTitlesAstBeforeCropHtml() {
+  return wrap({
+    title: "Title AST crop FAIL — three titles",
+    cropId: "page-title-tsx-before",
+    cite: "shadcn-queue",
+    caption:
+      "Crop FAIL: three competing titles in TSX (h1 / data-page-title / page-title) — page-title; apply-tsx AST title-singular.",
+    body: `  <h1 data-shine-tsx-ast="before">Queue</h1>
+  <h1 data-page-title data-tsx-title="page-title">Triage inbox</h1>
+  <div class="page-title" data-shine-page-title data-tsx-title="page-title-expr">Notice worklist</div>`,
+  });
+}
+
+/** Competing page-titles TSX AST PASS crop. */
+export function buildTitlesAstAfterCropHtml() {
+  return wrap({
+    title: "Title AST crop PASS — singular",
+    cropId: "page-title-tsx-after",
+    cite: "shadcn-queue",
+    caption:
+      "Crop PASS: one page title; peers demoted via TSX AST title-singular.",
+    body: `  <h1 data-shine-tsx-ast="after">Queue</h1>
+  <p class="kicker" data-shine-title-demoted>Triage inbox</p>
+  <p class="kicker" data-shine-title-demoted>Notice worklist</p>`,
+  });
+}
+
 /**
  * TSX AST KPI soup FAIL crop — mirrors queue-kpi-soup-ast.tsx
  * (className={"metrics"}, className={"metric"}, data-shine-kpi) before apply-tsx.
@@ -787,6 +925,46 @@ export const DEFECT_CROP_PAIRS = [
     afterMust: [/btn filled">Pursue/, /ghost|outline/i, /data-shine-kpi-rest/, /More metrics/],
     afterMustNot: [/class="btn filled-peer"/],
   },
+  {
+    id: "queue-pill",
+    defect: "pill-filter",
+    beforeCrop: "queue-pill-before-crop.html",
+    afterCrop: "queue-pill-after-crop.html",
+    buildBefore: buildPillBeforeCropHtml,
+    buildAfter: buildPillAfterCropHtml,
+    beforeMust: [/data-shine-filter-stack/, /data-shine-filter-pill/],
+    afterMust: [/data-shine-pill-rest/, /More filters/],
+  },
+  {
+    id: "queue-pill-tsx",
+    defect: "pill-filter",
+    beforeCrop: "queue-pill-tsx-before-crop.html",
+    afterCrop: "queue-pill-tsx-after-crop.html",
+    buildBefore: buildPillAstBeforeCropHtml,
+    buildAfter: buildPillAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /data-shine-filter-stack/, /data-shine-filter-pill/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-pill-rest/, /More filters/],
+  },
+  {
+    id: "queue-titles",
+    defect: "page-title",
+    beforeCrop: "queue-titles-before-crop.html",
+    afterCrop: "queue-titles-after-crop.html",
+    buildBefore: buildTitlesBeforeCropHtml,
+    buildAfter: buildTitlesAfterCropHtml,
+    beforeMust: [/<h1/, /data-page-title/, /page-title/],
+    afterMust: [/data-shine-title-demoted/, /<h1>Queue<\/h1>/],
+  },
+  {
+    id: "queue-titles-tsx",
+    defect: "page-title",
+    beforeCrop: "queue-titles-tsx-before-crop.html",
+    afterCrop: "queue-titles-tsx-after-crop.html",
+    buildBefore: buildTitlesAstBeforeCropHtml,
+    buildAfter: buildTitlesAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /data-page-title/, /page-title/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-title-demoted/],
+  },
 ];
 
 /**
@@ -892,6 +1070,27 @@ export function assertCropPairOk(pair, read) {
     const afterFilled = (after.match(/class="btn filled"/g) || []).length;
     if (beforeFilled < 2) errors.push(`${pair.id} before needs ≥2 filled, got ${beforeFilled}`);
     if (afterFilled !== 1) errors.push(`${pair.id} after must have exactly 1 filled, got ${afterFilled}`);
+  }
+  // Pill-filter before ≥5 pills; after ≤3 visible outside details
+  if ((pair.id === "queue-pill" || pair.id === "queue-pill-tsx") && before && after) {
+    const beforePills = (before.match(/data-shine-filter-pill/g) || []).length;
+    if (beforePills < 5) errors.push(`${pair.id} before needs ≥5 pills, got ${beforePills}`);
+    if (!/data-shine-pill-rest/.test(after)) errors.push(`${pair.id} after needs pill-rest details`);
+    const afterVisible = after.replace(/<details[\s\S]*?<\/details>/gi, "");
+    const visiblePills = (afterVisible.match(/data-shine-filter-pill/g) || []).length;
+    if (visiblePills > 3) errors.push(`${pair.id} after visible pills must be ≤3, got ${visiblePills}`);
+  }
+  // Competing titles: before ≥2 titles; after demoted peers
+  if ((pair.id === "queue-titles" || pair.id === "queue-titles-tsx") && before && after) {
+    const beforeTitles =
+      (before.match(/<h1\b/gi) || []).length +
+      (before.match(/data-page-title/g) || []).length +
+      (before.match(/class="[^"]*\bpage-title\b/g) || []).length;
+    if (beforeTitles < 2) errors.push(`${pair.id} before needs ≥2 title markers, got ${beforeTitles}`);
+    if (!/data-shine-title-demoted/.test(after)) errors.push(`${pair.id} after needs demoted titles`);
+    if ((after.match(/<h1\b/gi) || []).length !== 1) {
+      errors.push(`${pair.id} after must keep exactly one h1`);
+    }
   }
   return { ok: errors.length === 0, errors };
 }

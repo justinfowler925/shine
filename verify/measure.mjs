@@ -70,6 +70,16 @@ import {
   evaluateKpiSoup,
   formatKpiSoupFailures,
 } from "./kpi-soup.mjs";
+import {
+  pillFilterGateApplies,
+  evaluatePillFilter,
+  formatPillFilterFailures,
+} from "./pill-filter.mjs";
+import {
+  pageTitleGateApplies,
+  evaluatePageTitle,
+  formatPageTitleFailures,
+} from "./page-title.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { enforceOperateAntiPatternCites } from "../knowledge/retrieve.mjs";
 
@@ -397,6 +407,8 @@ const ctaPressure = await page.evaluate(evaluateMainCtaPressure);
 const compositionSlop = await page.evaluate(evaluateCompositionSlop);
 const dualFocal = await page.evaluate(evaluateDualFocal);
 const kpiSoup = await page.evaluate(evaluateKpiSoup);
+const pillFilter = await page.evaluate(evaluatePillFilter);
+const pageTitleSlop = await page.evaluate(evaluatePageTitle);
 const formHeuristics = await page.evaluate(evaluateFormHeuristics);
 const copyHeuristics = await page.evaluate(evaluateCopyHeuristics);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
@@ -918,6 +930,26 @@ if (compose.filledCount > 2) {
     citeId: dfCiteId,
   });
   for (const f of formatKpiSoupFailures(kpiSoup, { gate: soupApplies })) {
+    failures.push(f);
+  }
+  const pillApplies = pillFilterGateApplies({
+    lane: laneWant,
+    citeScreen: dfCiteRow?.screen || "",
+    citeJobs: dfCiteRow?.jobs || [],
+    isWireframe,
+    citeId: dfCiteId,
+  });
+  for (const f of formatPillFilterFailures(pillFilter, { gate: pillApplies })) {
+    failures.push(f);
+  }
+  const titleApplies = pageTitleGateApplies({
+    lane: laneWant,
+    citeScreen: dfCiteRow?.screen || "",
+    citeJobs: dfCiteRow?.jobs || [],
+    isWireframe,
+    citeId: dfCiteId,
+  });
+  for (const f of formatPageTitleFailures(pageTitleSlop, { gate: titleApplies })) {
     failures.push(f);
   }
 }

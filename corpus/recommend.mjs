@@ -105,6 +105,29 @@ export const SET_FOCAL_AST_FIXTURES = Object.freeze({
   value: "focal",
 });
 
+/** Repo-relative pill-filter-stack TSX AST FAIL→PASS fixtures (maxVisible=3). */
+export const PILL_FILTER_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-pill-stack.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-pill-stack-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-pill-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-pill-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-pill-tsx",
+  op: "pill-collapse",
+  maxVisible: 3,
+});
+
+/** Repo-relative competing-page-titles TSX AST FAIL→PASS fixtures (title-singular). */
+export const PAGE_TITLE_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-competing-titles.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-competing-titles-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-titles-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-titles-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-titles-tsx",
+  op: "title-singular",
+});
+
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
   catalog: [
@@ -221,6 +244,8 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: cta-budget maxFilled=1 (prefer job verb; demote peer filled)");
     hints.push("restructure: collapse-peer-grids xor-saved-view when dual worklists share the route");
     hints.push("restructure: kpi-collapse maxVisible=3 when ≥4 equal metrics compete with the work object");
+    hints.push("restructure: pill-collapse maxVisible=3 when ≥5 above-fold filter pills crowd the decide path");
+    hints.push("restructure: title-singular — one page title; demote peer h1 / page-title to kicker");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
@@ -266,6 +291,78 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
     instruction: fullGrid
       ? "Full DataGrid: write shine-tables.json with kind=records (shared source + required cases). Worklist fixture is the Operate list→detail starter."
       : "Operate list→detail: write shine-tables.json with kind=worklist (search, rowAction, loading, empty, filteredEmpty). Copy from recommendation.tableQuality.fixture; full kind=records stays on the product DataGrid owner.",
+  };
+}
+
+/**
+ * Pill-filter-stack TSX AST fixture binding for Operate queue / triage jobs.
+ * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
+ * apply-tsx pill-collapse (maxVisible=3).
+ */
+export function pillFilterAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog"].includes(category) ||
+    ["queue", "approval", "catalog"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|pill[- ]?filter|pill[- ]?collapse|filter[- ]?stack|chip spam)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: PILL_FILTER_AST_FIXTURES.op,
+    maxVisible: PILL_FILTER_AST_FIXTURES.maxVisible,
+    rest: "details",
+    fixtureTsx: PILL_FILTER_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: PILL_FILTER_AST_FIXTURES.tsxAstHard,
+    cropBefore: PILL_FILTER_AST_FIXTURES.cropBefore,
+    cropAfter: PILL_FILTER_AST_FIXTURES.cropAfter,
+    cropPairId: PILL_FILTER_AST_FIXTURES.cropPairId,
+    helper: PILL_FILTER_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Above-fold pill/chip filter encyclopedia in consumer TSX: apply verify/restructure/apply-tsx.mjs pill-collapse (TypeScript AST, maxVisible=3; park rest in <details data-shine-pill-rest>). Handles className=\"pill\", className={\"pill\"}, data-shine-filter-pill, and Badge pills. Copy FAIL→PASS crop paths from recommendation.pillFilterAst.cropBefore/cropAfter; prove pill-filter clears with ≤3 visible chips.",
+  };
+}
+
+/**
+ * Competing page-titles TSX AST fixture binding for Operate jobs.
+ * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
+ * apply-tsx title-singular.
+ */
+export function pageTitleAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const operateJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "settings", "form", "catalog"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "settings", "form", "catalog"].includes(screen) ||
+    intent === "queue" ||
+    intent === "settings" ||
+    /\b(queue|triage|inbox|settings|title[- ]?singular|competing[- ]?title|page[- ]?title|dual[- ]?h1)\b/i.test(
+      text,
+    );
+  if (!operateJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: PAGE_TITLE_AST_FIXTURES.op,
+    demote: "kicker",
+    fixtureTsx: PAGE_TITLE_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: PAGE_TITLE_AST_FIXTURES.tsxAstHard,
+    cropBefore: PAGE_TITLE_AST_FIXTURES.cropBefore,
+    cropAfter: PAGE_TITLE_AST_FIXTURES.cropAfter,
+    cropPairId: PAGE_TITLE_AST_FIXTURES.cropPairId,
+    helper: PAGE_TITLE_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Competing page titles in consumer TSX: apply verify/restructure/apply-tsx.mjs title-singular (TypeScript AST; keep one h1 / data-page-title; demote peers to <p className=\"kicker\" data-shine-title-demoted>). Handles h1, data-page-title={\"…\"}, and className={\"page-title\"}. Copy FAIL→PASS crop paths from recommendation.pageTitleAst.cropBefore/cropAfter; prove page-title clears with exactly one title.",
   };
 }
 
@@ -601,6 +698,16 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    pillFilterAst: pillFilterAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
+    pageTitleAst: pageTitleAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -747,6 +854,12 @@ export function formatRecommendationSummary(rec) {
   const kpi = rec.kpiSoupAst?.fixtureTsx
     ? ` · kpiSoupAst ${rec.kpiSoupAst.mode}@${rec.kpiSoupAst.cropPairId}`
     : "";
+  const pill = rec.pillFilterAst?.fixtureTsx
+    ? ` · pillFilterAst ${rec.pillFilterAst.mode}@${rec.pillFilterAst.cropPairId}`
+    : "";
+  const pageTitle = rec.pageTitleAst?.fixtureTsx
+    ? ` · pageTitleAst ${rec.pageTitleAst.mode}@${rec.pageTitleAst.cropPairId}`
+    : "";
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
@@ -764,6 +877,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

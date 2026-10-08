@@ -60,7 +60,7 @@ const MAX_ROUNDS = 3;
 
 /** Named denoise defects the golden loop must clear (craft gates may remain). */
 const NAMED_DENOISE_RE =
-  /\b(cta-pressure|dual-focal|kpi-soup|composition-slop|cite-honesty|wrong-cite|rebind-cite|category-honesty)\b/;
+  /\b(cta-pressure|dual-focal|kpi-soup|pill-filter|page-title|composition-slop|cite-honesty|wrong-cite|rebind-cite|category-honesty)\b/;
 
 export function namedDenoiseFailures(failures = []) {
   return [...new Set((failures || []).map(String).filter((f) => NAMED_DENOISE_RE.test(f)))];
@@ -92,7 +92,7 @@ function measure(file, cite) {
     }
   }
   for (const m of text.matchAll(
-    /\b(cta-pressure|dual-focal|kpi-soup|composition-slop|cite-honesty|wrong-cite|rebind-cite|category-honesty)[^\n]*/g,
+    /\b(cta-pressure|dual-focal|kpi-soup|pill-filter|page-title|composition-slop|cite-honesty|wrong-cite|rebind-cite|category-honesty)[^\n]*/g,
   )) {
     failures.push(m[0]);
   }
@@ -211,6 +211,8 @@ export async function runDenoiseLoop({
       ops: [
         { op: "cta-budget", maxFilled: 1, preferLabels: ["Pursue", "Save"], demotePolicy: "outline" },
         { op: "kpi-collapse", maxVisible: 3, rest: "details" },
+        { op: "pill-collapse", maxVisible: 3, rest: "details" },
+        { op: "title-singular", demote: "kicker" },
         { op: "set-focal", attr: "data-region", value: "focal" },
         { op: "collapse-peer-grids", mode: "xor-saved-view", keepTitleIncludes: ["Queue"], foldTitleIncludes: ["David"] },
       ],

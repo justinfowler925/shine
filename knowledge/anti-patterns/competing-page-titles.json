@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "id": "competing-page-titles",
+  "title": "Multiple competing page titles in main",
+  "kind": "operate-bloat",
+  "domains": ["composition", "visual-hierarchy"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "settings", "catalog", "dashboard", "app-shell", "record", "form"],
+  "tags": ["title", "heading", "hierarchy", "operate-slop", "nucleus"],
+  "aliases": ["page-title", "title-stack", "dual-h1", "competing-titles"],
+  "cues": "Two or more peer page titles in main — h1 + data-page-title + .page-title all competing for the same job name",
+  "ban": "Operate main allows exactly one page title; peers must demote to kicker/eyebrow.",
+  "remediation": "Apply title-singular; keep the primary h1 / data-page-title; demote peers to <p class=kicker data-shine-title-demoted>; re-measure page-title.",
+  "examples": [
+    "Queue route: <h1>Queue</h1> beside <h1 data-page-title>Triage inbox</h1> and a .page-title banner",
+    "Settings Sources: three peer titles restating the same screen job"
+  ],
+  "restructureOps": ["title-singular"],
+  "detector": "page-title",
+  "measureFailurePrefix": "page-title",
+  "constitutionIds": ["primary-task-3s"],
+  "severity": "major",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-titles-before.html",
+    "after": "verify/fixtures/denoise/queue-titles-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-titles-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-titles-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-titles"],
+  "cropPairId": "queue-titles",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/page-title.test.mjs"
+}

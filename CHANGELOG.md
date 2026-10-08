@@ -6,6 +6,19 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate slop: pill-filter-stack + competing-page-titles.** Expand the gated
+  Operate anti-pattern set beyond the dual-focal / KPI / CTA / wrong-cite quartet.
+  New JSON rows `knowledge/anti-patterns/{pill-filter-stack,competing-page-titles}.json`
+  with fixtures, aliases, and restructureOps. Measure detectors
+  `verify/pill-filter.mjs` (≥5 above-fold pills) and `verify/page-title.mjs`
+  (≥2 competing titles) cite `anti-pattern:<id>` and fail-close via
+  `enforceOperateAntiPatternCites`. Auto-safe ops `pill-collapse` (maxVisible=3 →
+  `<details data-shine-pill-rest>`) and `title-singular` (demote peer titles to
+  kicker) on DOM + TypeScript AST (`apply-dom` / `apply-tsx`). Denoise recommend
+  emits `pillFilterAst` / `pageTitleAst`; packets bind crops; denoise-loop named
+  defects include `pill-filter` + `page-title`. Doctor bites:
+  `verify/pill-filter{,-ast-bite}.mjs`, `verify/page-title{,-ast-bite}.mjs`.
+
 - **Skill-listing CI + pre-commit content gate.** Doctor already ran
   `site/scripts/skill-listing.mjs --check`; AST / skill-doc PRs still landed
   STALE when Mac doctor was queued and merges used `--admin`. Tighten:

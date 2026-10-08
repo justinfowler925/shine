@@ -24,12 +24,14 @@ export const antiPatternKinds = new Set([
   "interaction-fail",
 ]);
 
-/** Nucleus Operate slop quartet — dual-focal, KPI soup, CTA pressure, wrong cite. */
+/** Nucleus Operate slop set — dual-focal, KPI soup, CTA pressure, wrong cite, pill filters, competing titles. */
 export const OPERATE_SLOP_ANTI_PATTERN_IDS = Object.freeze([
   "dual-focal-grids",
   "kpi-soup",
   "competing-filled-ctas",
   "wrong-cite-category",
+  "pill-filter-stack",
+  "competing-page-titles",
 ]);
 
 export function validatePrinciple(value) {
