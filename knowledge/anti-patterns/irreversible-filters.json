@@ -5,15 +5,29 @@
   "kind": "operate-bloat",
   "domains": ["interaction"],
   "lanes": ["saas", "internal"],
-  "screens": ["queue", "catalog", "dashboard"],
-  "tags": ["filter", "chips", "url-state", "nucleus"],
-  "cues": "Active filters with no clear/remove affordance or URL reflection",
-  "ban": "Every applied filter must be dismissible and reflected in shareable state.",
-  "remediation": "Expose clear-all / per-chip remove; keep filters in the URL or named view.",
-  "detector": null,
-  "measureFailurePrefix": null,
+  "screens": ["queue", "catalog", "dashboard", "app-shell", "approval", "record"],
+  "tags": ["filter", "chips", "url-state", "operate-slop", "nucleus"],
+  "aliases": ["filter-reversible", "filter-irreversible", "stuck-filters", "no-clear-filters", "filter-clearable"],
+  "cues": "Active filters with no clear/remove affordance — pressed chips that cannot be dismissed",
+  "ban": "Every applied filter must be dismissible; expose clear-all and/or per-chip remove.",
+  "remediation": "Apply filter-clearable; stamp data-shine-filter-dismiss on active chips and data-shine-filter-clear-all on the stack; re-measure filter-reversible.",
+  "examples": [
+    "SLED Capture queue: Status=Open chip aria-pressed without × or Clear filters",
+    "Nucleus catalog: three active filter pills with no dismiss control"
+  ],
+  "restructureOps": ["filter-clearable"],
+  "detector": "filter-reversible",
+  "measureFailurePrefix": "filter-reversible",
   "constitutionIds": ["primary-task-3s"],
   "severity": "major",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-filters-before.html",
+    "after": "verify/fixtures/denoise/queue-filters-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-filters-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-filters-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-filters"],
+  "cropPairId": "queue-filters",
   "source": "skill/references/anti-patterns.md",
-  "validatedBy": "agent review + usability flows"
+  "validatedBy": "verify/filter-reversible.test.mjs"
 }

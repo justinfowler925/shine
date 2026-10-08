@@ -2,7 +2,7 @@
 /**
  * N7 — Apply shine-restructure/v1 auto-safe ops to HTML fixtures (DOM substrate).
  * Ops: cta-budget, kpi-collapse, pill-collapse, title-singular, chrome-budget,
- * set-focal, worklist-first, rebind-cite.
+ * filter-clearable, set-focal, worklist-first, rebind-cite.
  * collapse-peer-grids → plan markdown only (never silent delete).
  */
 
@@ -57,6 +57,12 @@ export function applyDomRestructure(html, plan) {
       if (next !== out) {
         out = next;
         applied.push("chrome-budget");
+      }
+    } else if (op.op === "filter-clearable") {
+      const next = applyFilterClearable(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("filter-clearable");
       }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
@@ -208,6 +214,67 @@ export function applyChromeBudget(html, op = {}) {
     return next;
   });
   return out;
+}
+
+
+/**
+ * Make active filter chips reversible: stamp per-chip dismiss + clear-all.
+ * Prefers [data-shine-filter-stack] / .filter-pills containers.
+ */
+export function applyFilterClearable(html, op = {}) {
+  const perChip = op.perChip !== false;
+  const clearAll = op.clearAll !== false;
+  const clearLabel = op.clearAllLabel || "Clear filters";
+  const openRe =
+    /<div\b[^>]*(?:data-shine-filter-stack|class=["'][^"']*\bfilter-pills\b[^"']*["'])[^>]*>/i;
+  const openMatch = openRe.exec(html);
+  if (!openMatch) return html;
+  const start = openMatch.index;
+  const open = openMatch[0];
+  let i = start + open.length;
+  let depth = 1;
+  while (i < html.length && depth > 0) {
+    const nextOpen = html.indexOf("<div", i);
+    const nextClose = html.indexOf("</div>", i);
+    if (nextClose < 0) return html;
+    if (nextOpen >= 0 && nextOpen < nextClose) {
+      depth++;
+      i = nextOpen + 4;
+    } else {
+      depth--;
+      if (depth === 0) {
+        let body = html.slice(start + open.length, nextClose);
+        const close = "</div>";
+        let changed = false;
+        if (perChip) {
+          const chipRe =
+            /<(button|span|a|div)\b([^>]*(?:aria-pressed=["']true["']|data-filter-active=["']true["']|data-shine-filter-active)[^>]*)>([\s\S]*?)<\/\1>/gi;
+          body = body.replace(chipRe, (full, tag, attrs, inner) => {
+            if (/data-shine-filter-dismiss/.test(full)) return full;
+            if (/aria-label=["'][^"']*(?:clear|remove|dismiss)[^"']*["']/i.test(full)) return full;
+            changed = true;
+            const dismiss =
+              `<span data-shine-filter-dismiss aria-label="Clear filter">×</span>`;
+            return `<${tag}${attrs}>${inner}${dismiss}</${tag}>`;
+          });
+        }
+        if (
+          clearAll &&
+          !/data-shine-filter-clear-all/.test(body) &&
+          !/clear all filters|aria-label=["']clear filters["']/i.test(body)
+        ) {
+          body =
+            body.trimEnd() +
+            `\n    <button type="button" data-shine-filter-clear-all aria-label="Clear all filters">${clearLabel}</button>\n  `;
+          changed = true;
+        }
+        if (!changed) return html;
+        return html.slice(0, start) + open + body + close + html.slice(nextClose + close.length);
+      }
+      i = nextClose + 6;
+    }
+  }
+  return html;
 }
 
 /**

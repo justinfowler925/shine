@@ -101,7 +101,8 @@
     "set-focal:ast-bite": "node verify/set-focal-ast-bite.mjs",
     "pill-filter:ast-bite": "node verify/pill-filter-ast-bite.mjs",
     "page-title:ast-bite": "node verify/page-title-ast-bite.mjs",
-    "chrome-budget:ast-bite": "node verify/chrome-budget-ast-bite.mjs"
+    "chrome-budget:ast-bite": "node verify/chrome-budget-ast-bite.mjs",
+    "filter-clearable:ast-bite": "node verify/filter-clearable-ast-bite.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",
