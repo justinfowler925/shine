@@ -15,6 +15,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate slop: card-soup / collapse-card-soup.** ≥4 equal-weight Card roots
+  without a focal fail-closed as `card-soup` (`anti-pattern:card-soup`). Auto-safe
+  `collapse-card-soup` stamps `data-region=focal` on one Card and parks peers in
+  `<details data-shine-card-rest>` on DOM + TypeScript AST. Recommend emits
+  `cardSoupAst`; denoise-loop names `card-soup`. Doctor bites:
+  `verify/card-soup.test.mjs` · `verify/collapse-card-soup-ast-bite.mjs`.
+
 - **Operate slop: filler-empty-copy / rewrite-filler-empty.** Belief-free empty
   phrases (Welcome to your dashboard, Coming soon, …) fail-closed as
   `filler-empty` (`anti-pattern:filler-empty-copy`). Auto-safe

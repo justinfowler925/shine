@@ -131,6 +131,19 @@ export const PAGE_TITLE_AST_FIXTURES = Object.freeze({
 
 
 
+
+/** Repo-relative card-soup TSX AST FAIL→PASS fixtures (collapse-card-soup). */
+export const CARD_SOUP_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/catalog-card-soup.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/catalog-card-soup-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/catalog-card-soup-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/catalog-card-soup-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "catalog-card-soup-tsx",
+  op: "collapse-card-soup",
+  maxVisible: 1,
+});
+
 /** Repo-relative filler-empty-copy TSX AST FAIL→PASS fixtures (rewrite-filler-empty). */
 export const FILLER_EMPTY_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-filler-empty.tsx",
@@ -300,13 +313,17 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: filter-clearable — dismiss/clear-all on active filter chips");
     hints.push("restructure: strip-marketing-dna — remove glow/gradient/display-serif from Operate chrome");
     hints.push("restructure: rewrite-filler-empty — replace filler empty phrases with job copy");
+    hints.push("restructure: collapse-card-soup maxVisible=1 — stamp focal; park peer Cards in details");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
   if (
-    /usul|card soup|equal cards?|composition[- ]?slop|no[- ]?focal|set[- ]?focal|focal region/i.test(job) &&
+    /usul|card soup|equal cards?|composition[- ]?slop|no[- ]?focal|set[- ]?focal|focal region|collapse[- ]?card|catalog/i.test(
+      job,
+    ) &&
     !(triageJob || screen === "queue" || intent === "queue")
   ) {
+    hints.push("restructure: collapse-card-soup maxVisible=1 — stamp focal; park peer Cards in details");
     hints.push("restructure: set-focal data-region=focal on the primary work object");
   }
   if (/settings|sources|recipes|preferences/i.test(job) && screen === "queue") {
@@ -350,6 +367,41 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
 
 
 
+
+
+/**
+ * Card-soup TSX AST fixture binding for Operate catalog / composition jobs.
+ */
+export function cardSoupAstForCatalogJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const catalogJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog", "app-shell", "dashboard"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "catalog", "app-shell", "dashboard"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|catalog|card[- ]?soup|collapse[- ]?card|equal cards?|no[- ]?focal)\b/i.test(
+      text,
+    );
+  if (!catalogJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: CARD_SOUP_AST_FIXTURES.op,
+    maxVisible: CARD_SOUP_AST_FIXTURES.maxVisible,
+    fixtureTsx: CARD_SOUP_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: CARD_SOUP_AST_FIXTURES.tsxAstHard,
+    cropBefore: CARD_SOUP_AST_FIXTURES.cropBefore,
+    cropAfter: CARD_SOUP_AST_FIXTURES.cropAfter,
+    cropPairId: CARD_SOUP_AST_FIXTURES.cropPairId,
+    helper: CARD_SOUP_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Equal-weight Card soup without a focal: apply verify/restructure/apply-tsx.mjs collapse-card-soup (TypeScript AST; stamp data-region=focal on one Card; park peers in <details data-shine-card-rest>). Copy FAIL→PASS crop paths from recommendation.cardSoupAst.cropBefore/cropAfter; prove card-soup clears.",
+  };
+}
 
 /**
  * Filler-empty TSX AST fixture binding for Operate queue jobs.
@@ -928,6 +980,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    cardSoupAst: cardSoupAstForCatalogJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -1092,6 +1149,9 @@ export function formatRecommendationSummary(rec) {
   const fillerAst = rec.fillerEmptyAst?.fixtureTsx
     ? ` · fillerEmptyAst ${rec.fillerEmptyAst.mode}@${rec.fillerEmptyAst.cropPairId}`
     : "";
+  const cardSoupAst = rec.cardSoupAst?.fixtureTsx
+    ? ` · cardSoupAst ${rec.cardSoupAst.mode}@${rec.cardSoupAst.cropPairId}`
+    : "";
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
@@ -1109,6 +1169,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

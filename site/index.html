@@ -66,7 +66,7 @@
     foundations.md             193
     imagegen.md                 60
     interaction.md              43
-    kits.md                    400
+    kits.md                    408
     layout.md                   29
     motion.md                  223
     patterns.md                213
@@ -84,35 +84,7 @@
     voice.md                   119
     voices.md                   46
     wireframe.md               252
-                            <strong>6,003</strong></pre>    diagnose.md                202
-    direction.md                52
-    ecosystem.md               151
-    foundations.md             193
-    imagegen.md                 60
-    interaction.md              43
-    kits.md                    400
-    layout.md                   29
-    motion.md                  223
-    patterns.md                213
-    performance.md             121
-    polish.md                   96
-    reusable-blocks.md          60
-    salesforce.md              238
-    table-quality.md           103
-    table-summary.md            87
-    taste.md                   224
-    techniques.md               90
-    templates.md               261
-    usability.md                43
-    verification.md            366
-    voice.md                   119
-    voices.md                   46
-    wireframe.md               252
-<pre>skill/                         lines
-  <strong>SKILL.md</strong>                 0
-  references/
-                               <strong>0</strong></pre>const root=document.documentElement,theme=document.getElementById('theme'),proof=document.getElementById('rebuild'),show=document.getElementById('show-proof');proof.hidden=false;
-theme.setAttribute('data-theme-toggle','');show.setAttribute('data-primary','');show.classList.remove('secondary');show.classList.add('primary');document.querySelector('.hero').setAttribute('data-region','hero');document.querySelector('.director').setAttribute('data-media','product-proof');document.querySelectorAll('.button.primary').forEach(button=>button.setAttribute('data-primary',''));document.querySelector('.proof-band').insertAdjacentHTML('afterbegin','<h2 class="sr-only">Measured release facts</h2>');
+                            <strong>6,011</strong></pre>theme.setAttribute('data-theme-toggle','');show.setAttribute('data-primary','');show.classList.remove('secondary');show.classList.add('primary');document.querySelector('.hero').setAttribute('data-region','hero');document.querySelector('.director').setAttribute('data-media','product-proof');document.querySelectorAll('.button.primary').forEach(button=>button.setAttribute('data-primary',''));document.querySelector('.proof-band').insertAdjacentHTML('afterbegin','<h2 class="sr-only">Measured release facts</h2>');
 theme.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';document.querySelector('meta[name=theme-color]').content=getComputedStyle(root).getPropertyValue('--bg').trim()});
 show.addEventListener('click',()=>{proof.hidden=false;proof.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});show.textContent='Rebuild revealed'});
 </script>

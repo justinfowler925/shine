@@ -6,14 +6,28 @@
   "domains": ["composition"],
   "lanes": ["saas", "internal"],
   "screens": ["queue", "catalog", "settings", "dashboard", "record", "approval"],
-  "tags": ["card", "focal", "composition-slop", "nucleus"],
+  "tags": ["card", "focal", "composition-slop", "operate-slop", "nucleus"],
+  "aliases": ["card-soup", "card-soup-slop", "equal-cards", "no-focal-cards", "collapse-card-soup"],
   "cues": "Equal Card roots in main with no data-region=focal or worklist",
   "ban": "Do not ship ≥4 equal-weight Card roots without a focal work object on Operate.",
-  "remediation": "Mark one focal via data-region=focal or collapse peers into a worklist/table.",
-  "detector": "composition-slop",
-  "measureFailurePrefix": "composition-slop",
+  "remediation": "Apply collapse-card-soup; stamp data-region=focal on one primary card/worklist; park peers in details data-shine-card-rest; re-measure card-soup.",
+  "examples": [
+    "Catalog Tools: four equal Card tiles with no focal worklist",
+    "Usul pipeline: equal Card soup and no data-region=focal"
+  ],
+  "restructureOps": ["collapse-card-soup"],
+  "detector": "card-soup",
+  "measureFailurePrefix": "card-soup",
   "constitutionIds": ["primary-task-3s"],
   "severity": "major",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/catalog-card-soup-before.html",
+    "after": "verify/fixtures/denoise/catalog-card-soup-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/catalog-card-soup-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/catalog-card-soup-after-crop.html"
+  },
+  "skillAbCaseIds": ["catalog-card-soup"],
+  "cropPairId": "catalog-card-soup",
   "source": "skill/references/anti-patterns.md",
-  "validatedBy": "verify/composition-slop.test.mjs"
+  "validatedBy": "verify/card-soup.test.mjs"
 }
