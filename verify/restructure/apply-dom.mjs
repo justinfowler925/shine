@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * N7 — Apply shine-restructure/v1 auto-safe ops to HTML fixtures (DOM substrate).
- * Ops: cta-budget, kpi-collapse, set-focal, worklist-first, rebind-cite.
+ * Ops: cta-budget, kpi-collapse, pill-collapse, title-singular, chrome-budget,
+ * set-focal, worklist-first, rebind-cite.
  * collapse-peer-grids → plan markdown only (never silent delete).
  */
 
@@ -39,6 +40,24 @@ export function applyDomRestructure(html, plan) {
     } else if (op.op === "kpi-collapse") {
       out = applyKpiCollapse(out, op);
       applied.push("kpi-collapse");
+    } else if (op.op === "pill-collapse") {
+      const next = applyPillCollapse(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("pill-collapse");
+      }
+    } else if (op.op === "title-singular") {
+      const next = applyTitleSingular(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("title-singular");
+      }
+    } else if (op.op === "chrome-budget") {
+      const next = applyChromeBudget(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("chrome-budget");
+      }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
       applied.push("set-focal");
@@ -165,6 +184,126 @@ export function scrubDiagnosticKpiKickers(html) {
 }
 
 /** Keep first maxVisible metrics; wrap the rest in <details>. */
+/**
+ * Demote filled primaries inside header/nav/aside chrome to ghost/outline.
+ * Leaves main-region job verbs alone (cta-budget owns main).
+ */
+export function applyChromeBudget(html, op = {}) {
+  const demote = op.demotePolicy || "ghost";
+  const chromeRe =
+    /<(header|nav|aside)\b[^>]*>[\s\S]*?<\/\1>|<div\b[^>]*(?:data-shine-chrome|data-region=["']chrome["']|data-slot=["']sidebar["'])[^>]*>[\s\S]*?<\/div>/gi;
+  let out = String(html);
+  out = out.replace(chromeRe, (block) => {
+    let next = block;
+    next = next.replace(/\bclass=(["'])([^"']*)\1/gi, (m, q, cls) => {
+      let tokens = cls.trim().split(/\s+/).filter(Boolean);
+      if (!tokens.includes("filled") && !tokens.includes("filled-peer")) return m;
+      tokens = tokens.filter((t) => t !== "filled" && t !== "filled-peer");
+      if (!tokens.includes(demote)) tokens.push(demote);
+      return `class=${q}${tokens.join(" ")}${q}`;
+    });
+    next = next.replace(/\sdata-shine-chrome-filled(?:=["'][^"']*["'])?/gi, "");
+    // variant="default" inside chrome → outline/ghost for TSX-in-HTML fixtures
+    next = next.replace(/\bvariant=(["'])default\1/gi, `variant=$1${demote === "ghost" ? "outline" : demote}$1`);
+    return next;
+  });
+  return out;
+}
+
+/**
+ * Collapse excess above-fold filter pills into <details data-shine-pill-rest>.
+ * Prefers [data-shine-filter-stack] / .filter-pills containers.
+ */
+export function applyPillCollapse(html, op = {}) {
+  const maxVisible = op.maxVisible ?? 3;
+  const summary = op.summary || "More filters";
+  const openRe =
+    /<div\b[^>]*(?:data-shine-filter-stack|class=["'][^"']*\bfilter-pills\b[^"']*["'])[^>]*>/i;
+  const openMatch = openRe.exec(html);
+  if (!openMatch) return html;
+  const start = openMatch.index;
+  const open = openMatch[0];
+  let i = start + open.length;
+  let depth = 1;
+  while (i < html.length && depth > 0) {
+    const nextOpen = html.indexOf("<div", i);
+    const nextClose = html.indexOf("</div>", i);
+    if (nextClose < 0) return html;
+    if (nextOpen >= 0 && nextOpen < nextClose) {
+      depth++;
+      i = nextOpen + 4;
+    } else {
+      depth--;
+      if (depth === 0) {
+        const body = html.slice(start + open.length, nextClose);
+        const close = "</div>";
+        // Skip pills already inside details rest.
+        const bodySansRest = body.replace(/<details\b[^>]*data-shine-pill-rest[\s\S]*?<\/details>/gi, "");
+        const re =
+          /<(?:button|span|a|div)\b[^>]*(?:data-shine-filter-pill|data-shine-pill|class=["'][^"']*\bpill\b)[^>]*>[\s\S]*?<\/(?:button|span|a|div)>/gi;
+        const pills = bodySansRest.match(re) || [];
+        if (pills.length <= maxVisible) return html;
+        const visible = pills.slice(0, maxVisible).join("\n");
+        const rest = pills.slice(maxVisible).join("\n");
+        const wrapped =
+          `${open}\n${visible}\n` +
+          `<details data-shine-pill-rest><summary>${summary}</summary>\n${rest}\n</details>\n${close}`;
+        return html.slice(0, start) + wrapped + html.slice(nextClose + close.length);
+      }
+      i = nextClose + 6;
+    }
+  }
+  return html;
+}
+
+/**
+ * Keep one page title; demote peer h1 / data-page-title / .page-title to kicker.
+ */
+export function applyTitleSingular(html, op = {}) {
+  let out = String(html);
+  const mainRe = /<(main|div)\b[^>]*(?:data-shine-main|role=["']main["'])[^>]*>[\s\S]*?<\/\1>/i;
+  const mainMatch = out.match(mainRe);
+  const scope = mainMatch ? mainMatch[0] : out;
+  const titleRe =
+    /<(h1|div|p|span|header)\b([^>]*\b(?:data-page-title|data-shine-page-title|class=["'][^"']*\bpage-title\b)[^>]*)>([\s\S]*?)<\/\1>/gi;
+  const h1Re = /<h1\b([^>]*)>([\s\S]*?)<\/h1>/gi;
+  /** @type {{ full: string, text: string, index: number }[]} */
+  const found = [];
+  let m;
+  const scan = String(scope);
+  while ((m = h1Re.exec(scan))) {
+    if (/data-shine-title-demoted/.test(m[0])) continue;
+    found.push({ full: m[0], text: m[2].replace(/<[^>]+>/g, "").trim(), index: m.index });
+  }
+  h1Re.lastIndex = 0;
+  while ((m = titleRe.exec(scan))) {
+    if (/data-shine-title-demoted/.test(m[0])) continue;
+    // Avoid double-counting h1 already captured.
+    if (/^<h1\b/i.test(m[0]) && found.some((f) => f.full === m[0])) continue;
+    found.push({ full: m[0], text: m[3].replace(/<[^>]+>/g, "").trim(), index: m.index });
+  }
+  found.sort((a, b) => a.index - b.index);
+  // Deduplicate identical full matches
+  const uniq = [];
+  for (const f of found) {
+    if (!uniq.some((u) => u.full === f.full && u.index === f.index)) uniq.push(f);
+  }
+  if (uniq.length < 2) return html;
+  // Keep first; demote the rest.
+  let nextScope = scope;
+  for (const peer of uniq.slice(1)) {
+    const text = peer.text || "Untitled";
+    const demoted = `<p class="kicker" data-shine-title-demoted>${text}</p>`;
+    nextScope = nextScope.replace(peer.full, demoted);
+  }
+  if (mainMatch) {
+    out = out.replace(mainMatch[0], nextScope);
+  } else {
+    out = nextScope;
+  }
+  return out;
+}
+
 export function applyKpiCollapse(html, op = {}) {
   const maxVisible = op.maxVisible ?? 3;
   const openRe = /<div\b[^>]*class=["'][^"']*\bmetrics\b[^"']*["'][^>]*>/i;

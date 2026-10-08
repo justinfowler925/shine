@@ -98,7 +98,10 @@
     "dual-focal:ast-bite": "node verify/dual-focal-ast-bite.mjs",
     "worklist-first:ast-bite": "node verify/worklist-first-ast-bite.mjs",
     "wrong-cite:ast-bite": "node verify/wrong-cite-ast-bite.mjs",
-    "set-focal:ast-bite": "node verify/set-focal-ast-bite.mjs"
+    "set-focal:ast-bite": "node verify/set-focal-ast-bite.mjs",
+    "pill-filter:ast-bite": "node verify/pill-filter-ast-bite.mjs",
+    "page-title:ast-bite": "node verify/page-title-ast-bite.mjs",
+    "chrome-budget:ast-bite": "node verify/chrome-budget-ast-bite.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",

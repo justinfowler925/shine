@@ -248,7 +248,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -297,6 +297,60 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    helper:join(ROOT,k.helper||"verify/restructure/apply-tsx.mjs"),
    reference:k.reference||"skill/references/denoise.md",
    instruction:k.instruction||"Apply apply-tsx kpi-collapse (AST, maxVisible=3) on consumer metric TSX.",
+  };
+ }
+ // Denoise / queue jobs: bind pill-filter-stack TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.pillFilterAst?.fixtureTsx){
+  const p=recommendation.pillFilterAst;
+  packet.pillFilterAst={
+   mode:p.mode||"tsx-ast",
+   op:p.op||"pill-collapse",
+   maxVisible:p.maxVisible??3,
+   rest:p.rest||"details",
+   fixtureTsx:join(ROOT,p.fixtureTsx),
+   fixtureTsxAst:join(ROOT,p.fixtureTsxAst||p.fixtureTsx),
+   cropBefore:join(ROOT,p.cropBefore),
+   cropAfter:join(ROOT,p.cropAfter),
+   cropPairId:p.cropPairId||"queue-pill-tsx",
+   helper:join(ROOT,p.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:p.reference||"skill/references/denoise.md",
+   instruction:p.instruction||"Apply apply-tsx pill-collapse (AST, maxVisible=3) on consumer filter-pill TSX.",
+  };
+ }
+ // Denoise / Operate jobs: bind competing-page-titles TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.pageTitleAst?.fixtureTsx){
+  const t=recommendation.pageTitleAst;
+  packet.pageTitleAst={
+   mode:t.mode||"tsx-ast",
+   op:t.op||"title-singular",
+   demote:t.demote||"kicker",
+   fixtureTsx:join(ROOT,t.fixtureTsx),
+   fixtureTsxAst:join(ROOT,t.fixtureTsxAst||t.fixtureTsx),
+   cropBefore:join(ROOT,t.cropBefore),
+   cropAfter:join(ROOT,t.cropAfter),
+   cropPairId:t.cropPairId||"queue-titles-tsx",
+   helper:join(ROOT,t.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:t.reference||"skill/references/denoise.md",
+   instruction:t.instruction||"Apply apply-tsx title-singular (AST) on competing page-title TSX.",
+  };
+ }
+ // Denoise / queue jobs: bind dual-chrome-actions TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.chromePressureAst?.fixtureTsx){
+  const c=recommendation.chromePressureAst;
+  packet.chromePressureAst={
+   mode:c.mode||"tsx-ast",
+   op:c.op||"chrome-budget",
+   maxFilledChrome:c.maxFilledChrome??0,
+   demotePolicy:c.demotePolicy||"outline",
+   scope:c.scope||"chrome",
+   fixtureTsx:join(ROOT,c.fixtureTsx),
+   fixtureTsxAst:join(ROOT,c.fixtureTsxAst||c.fixtureTsx),
+   cropBefore:join(ROOT,c.cropBefore),
+   cropAfter:join(ROOT,c.cropAfter),
+   cropPairId:c.cropPairId||"queue-chrome-tsx",
+   helper:join(ROOT,c.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:c.reference||"skill/references/denoise.md",
+   instruction:c.instruction||"Apply apply-tsx chrome-budget (AST, maxFilledChrome=0) on chrome Button TSX.",
   };
  }
  // Denoise / queue jobs: bind dual-focal ban TSX AST FAIL→PASS fixture + crop paths.
@@ -422,8 +476,17 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  }else if(mode==="new"){
   briefRef=null; // assertNewSurfaceBrief may refuse when requireWireframeLock
  }
+ const wantsPill=
+  Boolean(recommendation.pillFilterAst?.fixtureTsx)||
+  restructureHints.some((h)=>/pill-collapse|pill-filter|filter-stack/i.test(String(h)));
+ const wantsTitle=
+  Boolean(recommendation.pageTitleAst?.fixtureTsx)||
+  restructureHints.some((h)=>/title-singular|page-title|competing[- ]?title/i.test(String(h)));
+ const wantsChrome=
+  Boolean(recommendation.chromePressureAst?.fixtureTsx)||
+  restructureHints.some((h)=>/chrome-budget|chrome-pressure|nav-chrome|dual-chrome/i.test(String(h)));
  const ddrOps=needsRestructure
-  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
+  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsPill?["pill-collapse"]:[]),...(wantsTitle?["title-singular"]:[]),...(wantsChrome?["chrome-budget"]:[]),...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
   :wantsWrongCite
    ?["rebind-cite"]
    :[];

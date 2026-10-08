@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "id": "pill-filter-stack",
+  "title": "Pill / chip filter stack crowding the above-fold decide path",
+  "kind": "operate-bloat",
+  "domains": ["composition", "interaction"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "catalog", "dashboard", "app-shell", "record", "approval"],
+  "tags": ["pill", "filter", "chip", "chrome", "operate-slop", "nucleus"],
+  "aliases": ["pill-filter", "chip-spam", "filter-stack", "pill-cluster"],
+  "cues": "≥5 equal filter pills/chips in an above-fold toolbar — rounded-full Badge rows crowding the worklist before a single decide",
+  "ban": "Operate above-fold chrome may not ship a pill encyclopedia; keep ≤3 visible filter chips and park the rest.",
+  "remediation": "Apply pill-collapse maxVisible=3; park excess in <details data-shine-pill-rest>; re-measure pill-filter.",
+  "examples": [
+    "SLED Capture queue: Status / Owner / Score / Source / Region / Due / Tag pills stacked above the triage grid",
+    "Nucleus inbox: eight rounded-full Badge filters before any notice row"
+  ],
+  "restructureOps": ["pill-collapse"],
+  "detector": "pill-filter",
+  "measureFailurePrefix": "pill-filter",
+  "constitutionIds": ["primary-task-3s"],
+  "severity": "major",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-pill-before.html",
+    "after": "verify/fixtures/denoise/queue-pill-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-pill-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-pill-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-pill"],
+  "cropPairId": "queue-pill",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/pill-filter.test.mjs"
+}

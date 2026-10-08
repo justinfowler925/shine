@@ -161,6 +161,56 @@ Equal metric tiles competing with the work object in consumer TSX are collapsed 
 Fixtures: `verify/fixtures/denoise/tsx/queue-kpi-soup{,-ast}.tsx`.  
 Doctor: `verify/kpi-soup-ast-bite.mjs` / `npm run kpi-soup:ast-bite`.
 
+### Pill-filter-stack TSX AST — maxVisible=3
+
+Above-fold pill/chip filter encyclopedias in consumer TSX are collapsed by
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `pill-collapse`.
+
+1. **Detect** — measure `pill-filter` when ≥5 above-fold filter pills on queue/catalog cites.
+2. **Recommend** — typed `recommendation.pillFilterAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Keeps first `maxVisible=3` pills; wraps the rest in
+   `<details data-shine-pill-rest><summary>More filters</summary>…</details>`.  
+   Handles `className="pill"`, `className={"pill"}`, **`data-shine-filter-pill` /
+   `data-shine-pill`**, and Badge pills. Dynamic `.map` bands stay plan-only.
+4. **Prove** — crop pair `queue-pill-tsx` (`queue-pill-tsx-{before,after}-crop.html`). Twin full-page invalid.
+
+Fixtures: `verify/fixtures/denoise/tsx/queue-pill-stack{,-ast}.tsx`.  
+Doctor: `verify/pill-filter-ast-bite.mjs` / `npm run pill-filter:ast-bite`.
+
+### Competing page-titles TSX AST — title-singular
+
+Multiple peer page titles in consumer TSX are singularized by
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `title-singular`.
+
+1. **Detect** — measure `page-title` when ≥2 competing titles (`h1` / `data-page-title` / `.page-title`) in main.
+2. **Recommend** — typed `recommendation.pageTitleAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Keeps the first page title; demotes peers to
+   `<p className="kicker" data-shine-title-demoted>…</p>`.  
+   Handles `h1`, `data-page-title={"…"}`, and `className={"page-title"}`.
+4. **Prove** — crop pair `queue-titles-tsx` (`queue-titles-tsx-{before,after}-crop.html`). Twin full-page invalid.
+
+Fixtures: `verify/fixtures/denoise/tsx/queue-competing-titles{,-ast}.tsx`.  
+Doctor: `verify/page-title-ast-bite.mjs` / `npm run page-title:ast-bite`.
+
+### Dual-chrome-actions TSX AST — chrome-budget maxFilledChrome=0
+
+Filled Export/New/Save peers in header/nav/aside chrome are demoted by
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `chrome-budget`.
+Main-region CTA budget stays in `cta-budget` (chrome is excluded from that detector).
+
+1. **Detect** — measure `chrome-pressure` when ≥1 filled primary lives in chrome hosts.
+2. **Recommend** — typed `recommendation.chromePressureAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Demotes filled `Button` inside `header` / `nav` / `aside` / `data-shine-chrome` /
+   `data-slot="sidebar"` to `outline`. Leaves the main job verb filled.  
+   Handles `variant="default"`, `variant={"default"}`, and missing variant in chrome.
+4. **Prove** — crop pair `queue-chrome-tsx` (`queue-chrome-tsx-{before,after}-crop.html`). Twin full-page invalid.
+
+Fixtures: `verify/fixtures/denoise/tsx/queue-chrome-actions{,-ast}.tsx`.  
+Doctor: `verify/chrome-budget-ast-bite.mjs` / `npm run chrome-budget:ast-bite`.
+
 ### Dual-focal ban TSX AST (N8 deepen) — XOR peer→chip
 
 Peer worklists / DataGrids on one triage job in consumer TSX are collapsed by

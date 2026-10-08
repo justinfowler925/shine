@@ -1,0 +1,37 @@
+<!doctype html>
+<!-- shine-lint: off color,type,spacing — pinned dual-chrome-actions before (filled chrome peers) -->
+<html lang="en" data-cite="shadcn-queue" data-shine-probe="app-shell">
+<head>
+<meta charset="utf-8"/>
+<title>Queue · chrome pressure FAIL</title>
+<style>
+:root{color-scheme:light}body{margin:0;font:14px/1.5 system-ui;background:#fafafa;color:#18181b}
+header{display:flex;gap:8px;padding:12px 24px;border-bottom:1px solid #e4e4e7;background:#fff}
+main{padding:24px}
+.btn{border:1px solid #e4e4e7;background:#fff;padding:6px 12px;border-radius:6px;font:inherit;font-size:13px}
+.btn.filled{background:#18181b;color:#fff;border-color:#18181b;font-weight:600}
+.btn.filled-peer{background:#3f3f46;color:#fff;border-color:#3f3f46;font-weight:600}
+.btn.ghost{border-color:transparent;background:transparent}
+table{width:100%;border-collapse:collapse}th,td{border-bottom:1px solid #e4e4e7;padding:8px;text-align:left}
+</style>
+</head>
+<body>
+<header data-shine-chrome data-region="chrome" role="banner">
+  <strong>Capture</strong>
+  <button type="button" class="btn filled" data-shine-chrome-filled="true">Export</button>
+  <button type="button" class="btn filled-peer" data-shine-chrome-filled="true">New</button>
+</header>
+<main data-shine-main>
+  <h1>Queue</h1>
+  <table role="grid" data-shine-datagrid data-region="focal">
+    <thead><tr><th>Notice</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>NV DPS voice risk RFI</td>
+        <td><button type="button" class="btn filled">Pursue</button></td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>

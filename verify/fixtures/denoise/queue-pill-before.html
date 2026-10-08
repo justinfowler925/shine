@@ -1,0 +1,32 @@
+<!doctype html>
+<!-- shine-lint: off color,type,spacing — pinned pill-filter-stack before (≥5 above-fold pills) -->
+<html lang="en" data-cite="shadcn-queue" data-shine-probe="app-shell">
+<head>
+<meta charset="utf-8"/>
+<title>Queue · pill filter stack FAIL</title>
+<style>
+:root{color-scheme:light}body{margin:0;font:14px/1.5 system-ui;background:#fafafa;color:#18181b}
+main{padding:24px}.filter-pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.pill{border:1px solid #e4e4e7;background:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-size:12px}
+table{width:100%;border-collapse:collapse}th,td{border-bottom:1px solid #e4e4e7;padding:8px;text-align:left}
+</style>
+</head>
+<body>
+<main data-shine-main>
+  <h1>Queue</h1>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters">
+    <button type="button" class="pill" data-shine-filter-pill data-filter="status">Status</button>
+    <button type="button" class="pill" data-shine-filter-pill data-filter="owner">Owner</button>
+    <button type="button" class="pill" data-shine-filter-pill data-filter="score">Score</button>
+    <button type="button" class="pill" data-shine-filter-pill data-filter="source">Source</button>
+    <button type="button" class="pill" data-shine-filter-pill data-filter="region">Region</button>
+    <button type="button" class="pill" data-shine-filter-pill data-filter="due">Due</button>
+    <button type="button" class="pill" data-shine-filter-pill data-filter="tag">Tag</button>
+  </div>
+  <table role="grid" data-shine-datagrid data-region="focal">
+    <thead><tr><th>Notice</th><th>Decision</th></tr></thead>
+    <tbody><tr><td>NV DPS voice risk RFI</td><td><button type="button">Pursue</button></td></tr></tbody>
+  </table>
+</main>
+</body>
+</html>

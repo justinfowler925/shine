@@ -5,15 +5,29 @@
   "kind": "operate-bloat",
   "domains": ["interaction", "composition"],
   "lanes": ["saas", "internal"],
-  "screens": ["queue", "settings", "catalog", "app-shell"],
-  "tags": ["chrome", "cta", "toolbar", "nucleus"],
-  "cues": "Header/sidebar Export/New/Save peers that equal the main job verb weight",
-  "ban": "Chrome actions must not compete at filled-primary weight with the Monday job.",
-  "remediation": "Demote chrome peers; keep one filled job verb in main; outline the rest.",
-  "detector": "cta-pressure",
-  "measureFailurePrefix": "cta-pressure",
+  "screens": ["queue", "settings", "catalog", "app-shell", "approval", "record"],
+  "tags": ["chrome", "cta", "toolbar", "nav", "operate-slop", "nucleus"],
+  "aliases": ["nav-chrome", "chrome-noise", "chrome-pressure", "dual-chrome"],
+  "cues": "Header/sidebar/nav Export/New/Save peers painted filled-primary — competing with the Monday job verb in main",
+  "ban": "Chrome actions must not compete at filled-primary weight with the Monday job; chrome stays outline/ghost.",
+  "remediation": "Apply chrome-budget (maxFilledChrome=0); demote header/nav/aside filled peers to outline/ghost; keep one filled job verb in main; re-measure chrome-pressure.",
+  "examples": [
+    "SLED Capture shell: header Export + New both filled while Pursue is the job verb in main",
+    "Nucleus queue: sidebar Save + Assign filled at peer weight with the triage primary"
+  ],
+  "restructureOps": ["chrome-budget"],
+  "detector": "chrome-pressure",
+  "measureFailurePrefix": "chrome-pressure",
   "constitutionIds": ["cta-pressure"],
   "severity": "major",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-chrome-before.html",
+    "after": "verify/fixtures/denoise/queue-chrome-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-chrome-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-chrome-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-chrome"],
+  "cropPairId": "queue-chrome",
   "source": "skill/references/anti-patterns.md",
-  "validatedBy": "verify/cta-pressure.test.mjs"
+  "validatedBy": "verify/chrome-pressure.test.mjs"
 }

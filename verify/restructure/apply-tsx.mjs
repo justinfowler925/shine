@@ -6,6 +6,9 @@
  * worklist-first (records/worklist before KPI chrome via TS compiler AST),
  * cta-budget demote (maxFilled=1 via TS compiler AST),
  * kpi-collapse (maxVisible=3 → <details data-shine-kpi-rest> via TS compiler AST),
+ * pill-collapse (maxVisible=3 → <details data-shine-pill-rest> via TS compiler AST),
+ * title-singular (one page title; demote peers to kicker via TS compiler AST),
+ * chrome-budget (maxFilledChrome=0 → demote header/nav filled Buttons via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -95,6 +98,46 @@ export function applyTsxRestructure(source, plan) {
         if (census.dynamic || census.tiles > maxVisible) {
           plans.push(
             "## kpi-collapse (TSX)\n\nWrap excess metric JSX in `<details data-shine-kpi-rest>` manually if metrics are dynamic (`.map`, spread).\nDOM apply-dom.mjs remains preferred for HTML fixtures.\n",
+          );
+        }
+      }
+    } else if (op.op === "pill-collapse") {
+      const next = pillCollapseTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("pill-collapse");
+      } else {
+        const census = countFilterPillsTsx(text);
+        const maxVisible = op.maxVisible ?? 3;
+        if (census.dynamic || census.pills > maxVisible) {
+          plans.push(
+            "## pill-collapse (TSX)\n\nWrap excess filter-pill JSX in `<details data-shine-pill-rest>` manually if pills are dynamic (`.map`, spread).\n",
+          );
+        }
+      }
+    } else if (op.op === "title-singular") {
+      const next = titleSingularTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("title-singular");
+      } else {
+        const census = countPageTitlesTsx(text);
+        if (census.dynamic || census.titles > 1) {
+          plans.push(
+            "## title-singular (TSX)\n\nKeep one page title; demote peer h1 / data-page-title / page-title to `<p className=\"kicker\" data-shine-title-demoted>`.\n",
+          );
+        }
+      }
+    } else if (op.op === "chrome-budget") {
+      const next = chromeBudgetTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("chrome-budget");
+      } else {
+        const census = countChromeFilledButtonsTsx(text);
+        if (census.dynamic || census.filled > 0) {
+          plans.push(
+            "## chrome-budget (TSX)\n\nDemote filled Button primaries inside header/nav/aside chrome to outline/ghost; keep the job verb filled in main.\n",
           );
         }
       }
@@ -1288,6 +1331,331 @@ function labelFromJsx(node, sf) {
 
 function escapeRe(s) {
   return String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * True when className (string / {"…"}) contains a whole-word token.
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {string} token
+ * @param {ts.SourceFile} sf
+ */
+function classNameHasToken(opening, token, sf) {
+  const attr = findJsxAttr(opening, "className", sf);
+  if (!attr?.initializer) return false;
+  const re = new RegExp(`(?:^|\\s)${escapeRe(token)}(?:\\s|$)`);
+  if (ts.isStringLiteral(attr.initializer)) return re.test(attr.initializer.text);
+  if (ts.isJsxExpression(attr.initializer) && attr.initializer.expression) {
+    const expr = attr.initializer.expression;
+    if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
+      return re.test(expr.text);
+    }
+  }
+  return false;
+}
+
+/**
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isFilterStackOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-filter-stack", sf)) return true;
+  return classNameHasToken(opening, "filter-pills", sf) || classNameHasToken(opening, "pill-stack", sf);
+}
+
+/**
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isFilterPillOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-filter-pill", sf)) return true;
+  if (findJsxAttr(opening, "data-shine-pill", sf)) return true;
+  if (classNameHasToken(opening, "pill", sf)) return true;
+  if (classNameHasToken(opening, "chip", sf)) return true;
+  const tag = jsxTagName(opening);
+  return tag === "Badge" && classNameHasToken(opening, "rounded-full", sf);
+}
+
+/**
+ * @param {ts.JsxElement} container
+ * @param {ts.SourceFile} sf
+ */
+function filterPillsInContainer(container, sf) {
+  /** @type {ts.JsxElement[]} */
+  const pills = [];
+  let unsafe = false;
+  let alreadyCollapsed = false;
+  for (const child of container.children) {
+    if (ts.isJsxExpression(child) && child.expression) {
+      const t = child.expression.getText(sf);
+      if (/\.map\s*\(|\.\.\./.test(t)) unsafe = true;
+      continue;
+    }
+    if (!ts.isJsxElement(child)) continue;
+    const open = child.openingElement;
+    if (jsxTagName(open) === "details" && findJsxAttr(open, "data-shine-pill-rest", sf)) {
+      alreadyCollapsed = true;
+      continue;
+    }
+    if (isFilterPillOpening(open, sf)) pills.push(child);
+  }
+  return { pills, unsafe, alreadyCollapsed };
+}
+
+/**
+ * Count literal filter pills in TSX (same AST rules as pillCollapseTsx).
+ * @param {string} source
+ * @returns {{ pills: number, labels: string[], containers: number, dynamic: boolean }}
+ */
+export function countFilterPillsTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const labels = [];
+  let containers = 0;
+  let dynamic = false;
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isFilterStackOpening(node.openingElement, sf)) {
+      containers += 1;
+      const { pills, unsafe } = filterPillsInContainer(node, sf);
+      if (unsafe) dynamic = true;
+      for (const p of pills) labels.push(labelFromJsx(p, sf));
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { pills: labels.length, labels, containers, dynamic };
+}
+
+/**
+ * Collapse excess literal filter-pill JSX via TypeScript AST (maxVisible=3).
+ * Parks the rest in `<details data-shine-pill-rest>`.
+ */
+export function pillCollapseTsx(source, op = {}) {
+  const maxVisible = op.maxVisible ?? 3;
+  const restSummary = op.summary || "More filters";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isFilterStackOpening(node.openingElement, sf)) {
+      const { pills, unsafe, alreadyCollapsed } = filterPillsInContainer(node, sf);
+      if (unsafe || alreadyCollapsed) return;
+      if (pills.length <= maxVisible) return;
+      const visible = pills.slice(0, maxVisible);
+      const rest = pills.slice(maxVisible);
+      const rangeStart = visible[0].getStart(sf);
+      const rangeEnd = rest[rest.length - 1].getEnd();
+      const indent = indentBefore(text, rangeStart);
+      const innerIndent = indent + "  ";
+      const visibleSrc = visible.map((t) => text.slice(t.getStart(sf), t.getEnd())).join(`\n${indent}`);
+      const restSrc = rest.map((t) => text.slice(t.getStart(sf), t.getEnd())).join(`\n${innerIndent}`);
+      const replacement =
+        `${visibleSrc}\n${indent}` +
+        `<details data-shine-pill-rest>\n${innerIndent}<summary>${restSummary}</summary>\n${innerIndent}` +
+        `${restSrc}\n${indent}</details>`;
+      edits.push({ start: rangeStart, end: rangeEnd, replacement });
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  if (!edits.length) return text;
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  return out;
+}
+
+/**
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isPageTitleOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-title-demoted", sf)) return false;
+  const tag = jsxTagName(opening);
+  if (tag === "h1") return true;
+  if (findJsxAttr(opening, "data-page-title", sf)) return true;
+  if (findJsxAttr(opening, "data-shine-page-title", sf)) return true;
+  return classNameHasToken(opening, "page-title", sf);
+}
+
+/**
+ * Count competing page titles in TSX.
+ * @param {string} source
+ * @returns {{ titles: number, texts: string[], dynamic: boolean }}
+ */
+export function countPageTitlesTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const texts = [];
+  let dynamic = false;
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isPageTitleOpening(node.openingElement, sf)) {
+      // Skip titles nested inside another title node
+      texts.push(labelFromJsx(node, sf) || "(title)");
+      return;
+    }
+    if (ts.isJsxExpression(node) && node.expression) {
+      const t = node.expression.getText(sf);
+      if (/\.map\s*\(|\.\.\./.test(t) && /title|h1/i.test(t)) dynamic = true;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { titles: texts.length, texts, dynamic };
+}
+
+/**
+ * True when a JSX opening is a chrome host (header/nav/aside/sidebar markers).
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isChromeHostOpening(opening, sf) {
+  const tag = jsxTagName(opening);
+  if (["header", "nav", "aside", "Header", "Nav", "Aside", "Sidebar"].includes(tag)) return true;
+  if (findJsxAttr(opening, "data-shine-chrome", sf)) return true;
+  if (findJsxAttr(opening, "data-region", sf)) {
+    const v = attrStringValue(findJsxAttr(opening, "data-region", sf), sf);
+    if (v === "chrome") return true;
+  }
+  if (findJsxAttr(opening, "data-slot", sf)) {
+    const v = attrStringValue(findJsxAttr(opening, "data-slot", sf), sf);
+    if (v === "sidebar") return true;
+  }
+  if (findJsxAttr(opening, "role", sf)) {
+    const v = attrStringValue(findJsxAttr(opening, "role", sf), sf);
+    if (v === "banner" || v === "navigation") return true;
+  }
+  return false;
+}
+
+/**
+ * Walk ancestors: is this node inside a chrome host?
+ * @param {ts.Node} node
+ * @param {ts.SourceFile} sf
+ */
+function isInsideChromeHost(node, sf) {
+  let cur = node.parent;
+  while (cur) {
+    if (ts.isJsxElement(cur) && isChromeHostOpening(cur.openingElement, sf)) return true;
+    cur = cur.parent;
+  }
+  return false;
+}
+
+/**
+ * Count filled Buttons inside chrome hosts.
+ * @param {string} source
+ * @returns {{ filled: number, labels: string[], dynamic: boolean }}
+ */
+export function countChromeFilledButtonsTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const labels = [];
+  let dynamic = false;
+  visitButtons(sf, (opening, node) => {
+    if (!isInsideChromeHost(node, sf)) return;
+    const variant = findJsxAttr(opening, "variant", sf);
+    if (variant?.initializer && ts.isJsxExpression(variant.initializer) && variant.initializer.expression) {
+      const expr = variant.initializer.expression;
+      if (!ts.isStringLiteral(expr) && !ts.isNoSubstitutionTemplateLiteral(expr)) {
+        dynamic = true;
+        return;
+      }
+    }
+    if (isFilledButtonOpening(opening, sf)) labels.push(labelFromJsx(node, sf));
+  });
+  return { filled: labels.length, labels, dynamic };
+}
+
+/**
+ * Demote filled Button primaries inside chrome hosts to outline (or ghost).
+ * Leaves main-region Buttons alone.
+ */
+export function chromeBudgetTsx(source, op = {}) {
+  const demote = op.demotePolicy === "ghost" ? "outline" : op.demotePolicy || "outline";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  visitButtons(sf, (opening, node) => {
+    if (!isInsideChromeHost(node, sf)) return;
+    if (!isFilledButtonOpening(opening, sf)) return;
+    const variant = findJsxAttr(opening, "variant", sf);
+    if (variant?.initializer) {
+      if (ts.isStringLiteral(variant.initializer)) {
+        edits.push({
+          start: variant.initializer.getStart(sf),
+          end: variant.initializer.getEnd(),
+          replacement: `"${demote}"`,
+        });
+      } else if (ts.isJsxExpression(variant.initializer) && variant.initializer.expression) {
+        const expr = variant.initializer.expression;
+        if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
+          edits.push({
+            start: expr.getStart(sf),
+            end: expr.getEnd(),
+            replacement: `"${demote}"`,
+          });
+        }
+      }
+    } else {
+      // Missing variant → insert outline
+      const openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+      const nextOpen = openSrc.replace(/\s*\/?>$/, (m) => ` variant="${demote}"${m}`);
+      edits.push({ start: opening.getStart(sf), end: opening.getEnd(), replacement: nextOpen });
+    }
+    // Drop chrome-filled marker
+    const filledAttr = findJsxAttr(opening, "data-shine-chrome-filled", sf);
+    if (filledAttr) {
+      edits.push({ start: filledAttr.getStart(sf), end: filledAttr.getEnd(), replacement: "" });
+    }
+  });
+  if (!edits.length) return text;
+  return applyChromeBudgetEditsClean(text, edits);
+}
+
+/**
+ * @param {string} text
+ * @param {{ start: number, end: number, replacement: string }[]} edits
+ */
+function applyChromeBudgetEditsClean(text, edits) {
+  const sorted = [...edits].sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of sorted) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  // Clean doubled spaces from attr removal only on affected lines lightly
+  out = out.replace(/[^\S\n]{2,}/g, " ");
+  out = out.replace(/\s+>/g, ">");
+  return out;
+}
+
+/**
+ * Keep first page title; demote peers to `<p className="kicker" data-shine-title-demoted>`.
+ */
+export function titleSingularTsx(source, _op = {}) {
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {ts.JsxElement[]} */
+  const titles = [];
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isPageTitleOpening(node.openingElement, sf)) {
+      titles.push(node);
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  if (titles.length < 2) return text;
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  for (const peer of titles.slice(1)) {
+    const label = labelFromJsx(peer, sf) || "Untitled";
+    const indent = indentBefore(text, peer.getStart(sf));
+    const replacement = `<p className="kicker" data-shine-title-demoted>${escapeJsxText(label)}</p>`;
+    edits.push({ start: peer.getStart(sf), end: peer.getEnd(), replacement: indent ? replacement : replacement });
+  }
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  return out;
 }
 
 if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
