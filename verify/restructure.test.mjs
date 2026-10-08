@@ -25,8 +25,21 @@ assert.equal(plan.$schema, RESTRUCTURE_SCHEMA);
 assert.equal(validateRestructurePlan(plan).ok, true);
 
 const cta = applyCtaBudget(before, { maxFilled: 1, preferLabels: ["Pursue"] });
-assert.ok(!/filled-peer/.test(cta));
+// Peer fill may remain as a CSS rule; button classes must not keep filled-peer.
+assert.ok(!/<button\b[^>]*class=["'][^"']*\bfilled-peer\b/.test(cta));
 assert.ok(/class="btn filled">Pursue/.test(cta) || /class="btn filled"/.test(cta));
+assert.match(cta, /\.btn\.ghost\{[^}]*background:\s*transparent/);
+
+// Promote when XOR/peer-fold left zero filled preferred primaries.
+const zeroPrimary = `
+<main>
+  <button type="button" class="btn outline">Pursue</button>
+  <button type="button" class="btn outline">Review</button>
+  <button type="button" class="btn outline">Dismiss</button>
+</main>`;
+const promoted = applyCtaBudget(zeroPrimary, { maxFilled: 1, preferLabels: ["Pursue"] });
+assert.match(promoted, /class="btn filled">Pursue/);
+assert.equal((promoted.match(/\bfilled\b/g) || []).length, 1);
 
 const kpi = applyKpiCollapse(before, { maxVisible: 3 });
 assert.match(kpi, /data-shine-kpi-rest/);

@@ -248,7 +248,25 @@ export async function runDenoiseLoop({
         foldTitleIncludes: ["David"],
       };
     const xor = applyXorSavedView(html, xorOp);
-    if (xor.applied) html = xor.html;
+    if (xor.applied) {
+      html = xor.html;
+      // XOR can remove the filled primary that cta-budget kept on the peer grid.
+      // Re-budget so a preferred label is promoted on the surviving worklist.
+      const ctaOp =
+        (plan.ops || []).find((o) => o.op === "cta-budget") || {
+          maxFilled: 1,
+          preferLabels: ["Pursue", "Save"],
+          demotePolicy: "outline",
+        };
+      const rebudget = applyDomRestructure(html, {
+        ...plan,
+        ops: [{ ...ctaOp, op: "cta-budget" }],
+      });
+      html = rebudget.html;
+      if (rebudget.applied.includes("cta-budget") && !applied.applied.includes("cta-budget")) {
+        applied.applied.push("cta-budget");
+      }
+    }
   }
   /** @type {null | ((source: string, plan: object) => { source: string, applied: string[] })} */
   let applyTsxRestructure = null;

@@ -659,10 +659,41 @@ export function ctaBudgetTsx(source, op = {}) {
     }
   });
 
-  if (!edits.length) return text;
+  // Apply demotions first, then promote if XOR/peer-fold left zero filled primaries.
   edits.sort((a, b) => b.start - a.start);
   let out = text;
   for (const e of edits) {
+    out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  }
+  if (kept >= maxFilled) return out;
+
+  const sf2 = ts.createSourceFile("surface.tsx", out, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const promote = [];
+  visitButtons(sf2, (opening, node) => {
+    if (kept >= maxFilled) return;
+    if (isFilledButtonOpening(opening, sf2)) return;
+    const label = labelFromJsx(node, sf2);
+    if (!prefer.some((p) => label.includes(p))) return;
+    const variantAttr = findJsxAttr(opening, "variant", sf2);
+    if (variantAttr) {
+      promote.push({
+        start: variantAttr.getStart(sf2),
+        end: variantAttr.getEnd(),
+        replacement: `variant="default"`,
+      });
+    } else {
+      const insertAt = opening.tagName.getEnd();
+      promote.push({
+        start: insertAt,
+        end: insertAt,
+        replacement: ` variant="default"`,
+      });
+    }
+    kept += 1;
+  });
+  promote.sort((a, b) => b.start - a.start);
+  for (const e of promote) {
     out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
   }
   return out;

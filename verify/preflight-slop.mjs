@@ -78,7 +78,15 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
     });
   }
 
-  const metrics = (src.match(/\bclass=["'][^"']*\bmetric\b|\bdata-shine-kpi\b|\bkpi\b/gi) || []).length;
+  // Parked metrics inside kpi-collapse <details> are not on the decide path.
+  const srcVisible = src.replace(
+    /<details\b[^>]*data-shine-kpi-rest[^>]*>[\s\S]*?<\/details>/gi,
+    "",
+  );
+  // Count tiles — not bare "kpi" substrings in data-kpi= / data-shine-kpi-rest.
+  const metrics = (
+    srcVisible.match(/\bclass=["'][^"']*\bmetric\b[^"']*["']|\bdata-shine-kpi=(["'])[^"']*\1/gi) || []
+  ).length;
   if (metrics >= 4) {
     const operateQueue = /queue|datagrid|app-shell/i.test(screen) || /data-cite=["'][^"']*queue/i.test(src);
     signals.push({
@@ -89,7 +97,7 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
     });
   }
 
-  if (/metrics[\s\S]{0,200}metric[\s\S]{0,200}metric[\s\S]{0,200}metric/i.test(src)) {
+  if (/metrics[\s\S]{0,200}metric[\s\S]{0,200}metric[\s\S]{0,200}metric/i.test(srcVisible)) {
     signals.push({
       id: "ai-slop-metric-grid",
       severity: "note",

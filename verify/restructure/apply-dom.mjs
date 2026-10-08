@@ -57,37 +57,111 @@ export function applyDomRestructure(html, plan) {
   return { html: out, applied, plans, skipped, humanGate: plans.length > 0 || plan.humanGate };
 }
 
-/** Demote non-preferred filled buttons to outline (class swap). */
+/**
+ * Demote non-preferred filled buttons to a non-primary treatment.
+ * HTML fixtures often paint `.btn.outline` / `.btn.filled-peer` as a second dark
+ * fill — that still fails cta-pressure. DOM demote therefore strips fill weight
+ * to `ghost` (transparent), matching expert after fixtures.
+ * Never rewrite CSS selectors globally (filled-peer→ghost in a <style> block
+ * turns the dark peer rule into `.btn.ghost{fill2}` and re-poisons demotions).
+ * TSX/shadcn outline stays in apply-tsx.
+ */
 export function applyCtaBudget(html, op = {}) {
   const prefer = (op.preferLabels || ["Pursue"]).map((s) => s.toLowerCase());
   const maxFilled = op.maxFilled ?? 1;
+  const demoteToken = "ghost";
   let kept = 0;
-  // filled-peer → outline first
-  let out = html.replace(/\bfilled-peer\b/g, "outline");
+  let out = String(html);
   // Scope / filter chips with aria-pressed paint as filled — clear pressed so
   // measure CTA census does not treat them as competing primaries.
   out = out.replace(/\saria-pressed=["']true["']/gi, ' aria-pressed="false"');
-  // Per-button: keep preferred labels as filled up to maxFilled; demote others
+
+  const demoteClass = (cls) =>
+    cls
+      .replace(/\bfilled-peer\b/g, demoteToken)
+      .replace(/\bfilled\b/g, demoteToken)
+      .replace(/\boutline\b/g, demoteToken)
+      .replace(/\s+/g, " ")
+      .trim();
+
+  const classTokens = (cls) => String(cls).trim().split(/\s+/).filter(Boolean);
+  const hasToken = (cls, token) => classTokens(cls).includes(token);
+
+  // Per-button: keep preferred labels as filled up to maxFilled; demote others.
+  // Only mutate button class attributes — never <style> text.
+  // Note: `\bfilled\b` matches inside `filled-peer` — always use token splits.
   out = out.replace(
     /<button\b([^>]*?)class=(["'])([^"']*)\2([^>]*)>([\s\S]*?)<\/button>/gi,
     (full, pre, q, cls, post, label) => {
-      if (!/\bfilled\b/.test(cls)) return full;
       const text = String(label).replace(/<[^>]+>/g, "").trim().toLowerCase();
       const preferred = prefer.some((p) => text.includes(p));
-      if (preferred && kept < maxFilled) {
+      const isFilledWeight =
+        hasToken(cls, "filled") || hasToken(cls, "filled-peer") || hasToken(cls, "outline");
+      if (!isFilledWeight) return full;
+      if (preferred && hasToken(cls, "filled") && !hasToken(cls, "filled-peer") && kept < maxFilled) {
         kept++;
-        return full;
+        const nextCls = classTokens(cls)
+          .filter((t) => t !== "filled-peer" && t !== "outline")
+          .join(" ");
+        return `<button${pre}class=${q}${nextCls}${q}${post}>${label}</button>`;
       }
-      const nextCls = cls
-        .replace(/\bfilled\b/g, "outline")
-        .replace(/\s+/g, " ")
-        .trim();
-      return `<button${pre}class=${q}${nextCls}${q}${post}>${label}</button>`;
+      return `<button${pre}class=${q}${demoteClass(cls)}${q}${post}>${label}</button>`;
     },
   );
-  // Also demote id-based filled style blocks used in P1 fixtures (button#export).
-  // Prefer keeping #save / labels matching prefer via class path above.
+  // After XOR/peer-fold the kept filled primary may have been removed. Promote
+  // preferred labels up to maxFilled so the surface never ends at zero primaries.
+  if (kept < maxFilled) {
+    out = out.replace(
+      /<button\b([^>]*?)class=(["'])([^"']*)\2([^>]*)>([\s\S]*?)<\/button>/gi,
+      (full, pre, q, cls, post, label) => {
+        if (kept >= maxFilled) return full;
+        if (/\bfilled\b/.test(cls)) return full;
+        const text = String(label).replace(/<[^>]+>/g, "").trim().toLowerCase();
+        if (!prefer.some((p) => text.includes(p))) return full;
+        const inXorChip = /\bxor-chip\b/.test(cls) || /data-shine-xor-chip/.test(full);
+        if (inXorChip) return full;
+        let nextCls = cls
+          .replace(/\b(outline|ghost|filled-peer)\b/g, "")
+          .replace(/\s+/g, " ")
+          .trim();
+        if (!/\bfilled\b/.test(nextCls)) nextCls = `${nextCls} filled`.trim();
+        kept++;
+        return `<button${pre}class=${q}${nextCls}${q}${post}>${label}</button>`;
+      },
+    );
+  }
+  // Always install a transparent ghost rule last so demoted peers cannot inherit
+  // a dark .btn.outline / corrupted peer paint.
+  if (/\bghost\b/.test(out) && /<style[\s>]/i.test(out)) {
+    out = out.replace(
+      /\.btn\.ghost\s*\{[^}]*\}/gi,
+      ".btn.ghost{border-color:transparent;background:transparent;color:inherit;font-weight:400}",
+    );
+    if (!/\.btn\.ghost\s*\{/.test(out)) {
+      out = out.replace(
+        /(<\/style>)/i,
+        ".btn.ghost{border-color:transparent;background:transparent;color:inherit;font-weight:400}\n$1",
+      );
+    }
+  }
   return out;
+}
+
+/** Remove authored defect-narration kickers left beside KPI strips after collapse. */
+export function scrubDiagnosticKpiKickers(html) {
+  return String(html).replace(
+    /<p\b([^>]*class=["'][^"']*\bkicker\b[^"']*["'][^>]*)>([\s\S]*?)<\/p>/gi,
+    (full, attrs, body) => {
+      const text = String(body).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+      if (
+        /equal metric tiles|dashboard DNA|KPI soup|ten KPIs|10 equal/i.test(text) ||
+        /competing with the queue focal|Another equal card/i.test(text)
+      ) {
+        return "";
+      }
+      return full;
+    },
+  );
 }
 
 /** Keep first maxVisible metrics; wrap the rest in <details>. */
@@ -121,7 +195,10 @@ export function applyKpiCollapse(html, op = {}) {
         const wrapped =
           `${open}\n${visible}\n` +
           `<details data-shine-kpi-rest><summary>More metrics</summary>\n${rest}\n</details>\n${close}`;
-        return html.slice(0, start) + wrapped + html.slice(nextClose + close.length);
+        let next = html.slice(0, start) + wrapped + html.slice(nextClose + close.length);
+        // Drop diagnosis kickers that describe the defect ("10 equal metric tiles…").
+        next = scrubDiagnosticKpiKickers(next);
+        return next;
       }
       i = nextClose + 6;
     }
