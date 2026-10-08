@@ -4,6 +4,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ## Unreleased
 
+### Changed
+
+- **Operate redesign is the obvious skill path.** Skill / agent / Clearspeed profile
+  lead with cite → measure → denoise-loop → prove for “redesign this Operate
+  surface” (edition `clearspeed-operate` + sibling cites). `denoise-loop.mjs` is
+  the default agent runner, not a buried verify script. Docs:
+  `docs/operate-redesign.md`. Refresh listing after skill edits:
+  `npm run skill-listing -- --write`.
+
 ### Added
 
 - **Skill-listing CI + pre-commit content gate.** Doctor already ran

@@ -17,7 +17,23 @@ separate design system.
 
 1. Open the Nucleus checkout (or use the golden fixture when checkout is absent).
 2. Load this Clearspeed edition profile with the Shine skill.
-3. Run a bounded packet against the surface:
+3. **Redesign / denoise an Operate queue** (default): cite → measure → denoise-loop → prove.
+   Edition `clearspeed-operate`; sibling cites before catalog. Do not open an audit pack.
+
+```sh
+node core/edition-siblings.mjs resolve \
+  --category queue --job "Decide Pursue/Review/Dismiss on the next notice"
+node verify/measure.mjs <artifact.html> --cite shadcn-queue --lane saas
+node verify/denoise-loop.mjs \
+  --html <artifact.html> [--tsx src/components/revops/SledCapture.tsx] \
+  --cite shadcn-queue --edition clearspeed-operate \
+  --category queue --job "Decide Pursue/Review/Dismiss on the next notice" \
+  --out /tmp/shine-operate-denoise --prove
+```
+
+   See `docs/operate-redesign.md` · `skill/references/denoise.md`.
+
+4. **Net-new / audit-only / non-queue** — bounded packet:
 
 ```sh
 node core/design-packet.mjs \
@@ -27,10 +43,10 @@ node core/design-packet.mjs \
   --project /path/to/nucleus
 ```
 
-4. Prefer `--product-reference` when Nucleus already owns the object (DataGrid,
+5. Prefer `--product-reference` when Nucleus already owns the object (DataGrid,
    RecordDialog, Admin Adoption KPI+collapsed table). Sibling inventory wins over
    catalog fashion.
-5. Contracts live next to the surface (`shine-usability.json`, `shine-layout.json`,
+6. Contracts live next to the surface (`shine-usability.json`, `shine-layout.json`,
    `shine-tables.json`, diagnosis). Operate completion requires fresh `prove.mjs`
    (mandatory prove) — compare alone does not clear stop-sweep.
 

@@ -1,21 +1,45 @@
 ---
 name: shine
 description: >-
-  Design, build, or audit interfaces using real template structure, the consumer's installed
-  component system, complete interaction contracts, and browser proof. Use for UI, UX,
-  dashboards, tables, forms, landing pages, charts, email, Lightning, decks, PDFs, or visual polish.
+  Design, build, denoise, or audit interfaces using real template structure, the consumer's installed
+  component system, complete interaction contracts, and browser proof. Default for "redesign this
+  Operate surface" / ClearSpeed Operate queues: cite → measure → denoise-loop → prove (edition
+  clearspeed-operate + sibling cites). Also UI, UX, dashboards, tables, forms, landing pages,
+  charts, email, Lightning, decks, PDFs, or visual polish.
 ---
 # Shine
 Build the interface directly in the current Codex task. Do not delegate to a second design agent. Shine's deterministic tools choose and verify; you supply brief-specific design judgment.
+
+## Redesign this Operate surface (default)
+
+When the user says **redesign / denoise / unfuck / cleanup** for a ClearSpeed Operate queue (Nucleus / Sled Capture), do **not** open an audit pack or craft-only polish pass. Path: **cite → measure → denoise-loop → prove**. Edition `clearspeed-operate`; sibling cites before catalog fashion (`docs/edition-siblings.md`).
+
+```sh
+SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}/.cursor/skills/shine")
+ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
+# 1 Cite — product sibling → preferred cite
+node "$ROOT/core/edition-siblings.mjs" resolve --category queue --job "<Monday job>"
+# 2 Measure — name defects (cta-pressure, dual-focal, kpi-soup, …)
+node "$ROOT/verify/measure.mjs" <artifact.html> --cite <preferredCite> --lane saas
+# 3–4 Denoise-loop + prove (≤3 Critic≠Actor rounds; FAIL→PASS crop)
+node "$ROOT/verify/denoise-loop.mjs" \
+  --html <artifact.html> [--tsx <file.tsx>] \
+  --cite <preferredCite> --edition clearspeed-operate \
+  --category queue --job "<Monday job>" \
+  --out /tmp/shine-operate-denoise --prove
+```
+
+Stop on `status=passed` · `namedDenoiseCleared` · `reflexionVerdict=done` · cropped FAIL→PASS (twin full-page invalid). Detail: `references/denoise.md` · `../docs/operate-redesign.md`.
+
 ## Start with one bounded packet
-Resolve this installed tree, then create the packet before planning or editing:
+For net-new, audit-only, or non-Operate work, resolve this installed tree, then create the packet before planning or editing:
 ```sh
 SKILL=$(realpath "${HOME}/.agents/skills/shine" 2>/dev/null || realpath "${HOME}/.cursor/skills/shine")
 ROOT=${SHINE_ROOT:-$(dirname "$SKILL")}
 node "$ROOT/core/design-packet.mjs" --job "<plain-language job>" --lane <internal|saas|lex|marketing> --mode <existing|new|audit|denoise> --project "$PWD"
 ```
 Packet `--mode` is `existing` \| `new` \| `audit` \| `denoise` (denoise also loads `references/denoise.md`). Procedure phases (Wireframe / Build / Polish / Audit / Copy / Adoption) only choose references — mode map in `references/polish.md`. Copy/adoption use diagnosis check fields + prove `copyAdoption` presence (not NLP). Every packet emits a Design Decision Record (`packet.ddr` / `ddrId`, `constitutionIds`, `status`); denoise starts `proposed` — refuse Actor implement until `--accept` (or `node core/ddr.mjs accept|refuse`); prove receipts link `ddrId` + `constitutionIds` + Atlas `reflexionVerdict` (`done|partial|blocked|error`) and auto-append the audit trail (`SHINE_AUDIT_DIR` also appends denoise-loop measure/critic/reflexion). New surfaces: lock `shine-wireframe/<slug>.brief.md` via `core/wireframe-brief.mjs` (structure immutable until user says `unlock structure`); packet `--mode new --require-wireframe-lock`. Denoise-loop locks primary job/regions and refuses REPAINT that changes structure without a RESTRUCTURE packet (`shine-restructure/v1`). Critic≠Actor host: `core/critic-actor-host.mjs`.
-If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed dashboard. Denoise **always** requires `--category`. For bloated Operate cleanup: locked order primary job → competing CTA → empty/error triad → composition → craft; **no polish until `primaryTaskCheck` is green**; refuse paint while `restructureHints` still require restructure. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
+If the packet refuses an ambiguous job, supply the real interface category with `--category`; never accept a guessed dashboard. Denoise **always** requires `--category`. For bloated Operate cleanup prefer the denoise-loop path above; locked order primary job → competing CTA → empty/error triad → composition → craft; **no polish until `primaryTaskCheck` is green**; refuse paint while `restructureHints` still require restructure. Read `packet.recommendation` (primary cite, anti-patterns, restructure vs repaint, kit recipe) before editing. Read the selected page screenshot and source, then its separate component references and matched Untitled UI source excerpts. A component demo supplies a component, never the page structure. Do not reopen their files or load the full reference library. The packet owns the region graph, controls, states, integration, provenance and proof commands.
 For new media/editorial surfaces, build from the selected source in the installed components; the spec renderer does not support these categories. For other new standalone surfaces, put brief-specific design judgment in a small `design.json` using
 `core/design-spec.mjs`, then run `node "$ROOT/core/render-spec.mjs" design.json index.html`. Every spec names a composition archetype, image strategy, signature moment, and anti-repetition
 constraint. The signature must express this product's job, never generic design decoration.
