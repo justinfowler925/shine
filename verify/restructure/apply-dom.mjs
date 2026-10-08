@@ -2,14 +2,16 @@
 /**
  * N7 — Apply shine-restructure/v1 auto-safe ops to HTML fixtures (DOM substrate).
  * Ops: cta-budget, kpi-collapse, pill-collapse, stamp-page-title, title-singular, chrome-budget,
- * filter-clearable, strip-marketing-dna, set-focal, worklist-first, rebind-cite.
- * collapse-peer-grids → plan markdown only (never silent delete).
+ * filter-clearable, strip-marketing-dna, set-focal, worklist-first, rebind-cite,
+ * collapse-peer-grids (XOR peer→chip via xor-saved-view — never silent delete without chips).
+ * god-split stays plan-only.
  */
 
 import { existsSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { AUTO_SAFE_DOM_OPS, PLAN_ONLY_OPS, sortRestructureOps, validateRestructurePlan } from "./schema.mjs";
+import { applyXorSavedView } from "./xor-saved-view.mjs";
 
 /**
  * @param {string} html
@@ -27,6 +29,17 @@ export function applyDomRestructure(html, plan) {
   const orderedOps = sortRestructureOps(plan.ops || []);
 
   for (const op of orderedOps) {
+    // Dual-focal: DOM XOR recipe when ≥2 peer grid-wraps; else plan markdown.
+    if (op.op === "collapse-peer-grids") {
+      const xor = applyXorSavedView(out, op);
+      if (xor.applied) {
+        out = xor.html;
+        applied.push("collapse-peer-grids");
+      } else {
+        plans.push(formatPeerGridPlan(op, plan));
+      }
+      continue;
+    }
     if (PLAN_ONLY_OPS.includes(op.op)) {
       plans.push(formatPeerGridPlan(op, plan));
       continue;
@@ -1285,15 +1298,16 @@ export function formatPeerGridPlan(op = {}, plan = {}) {
   const keep = (op.keepTitleIncludes || ["Queue"]).join("|");
   const fold = (op.foldTitleIncludes || ["David"]).join("|");
   return [
-    "## collapse-peer-grids (plan only — no silent delete)",
+    "## collapse-peer-grids (plan — fewer than 2 peer wraps or dynamic peers)",
     "",
     `- Job: ${plan.job || "(unset)"}`,
     `- Keep worklist whose title matches: ${keep}`,
     `- Fold peer whose title matches: ${fold} → saved-view / filter chip / XOR`,
     `- Mode: ${op.mode || "xor-saved-view"}`,
-    `- Agent close (D10): run \`node verify/restructure/xor-saved-view.mjs --html <file> --keep ${keep} --fold ${fold}\``,
+    `- Auto-safe when ≥2 literal \`.grid-wrap\` peers: apply-dom calls xor-saved-view (peer→chip)`,
+    `- Manual close: \`node verify/restructure/xor-saved-view.mjs --html <file> --keep ${keep} --fold ${fold}\``,
     `- Recipe: peer title → filter chip + shared DataGrid state (kits.md § Dual-grid XOR)`,
-    `- After agent applies: one [role=grid] in the fold; re-run measure dual-focal FAIL→PASS`,
+    `- Prove: one [role=grid] in the fold; measure dual-focal FAIL→PASS`,
     `- Crop proof: verify/fixtures/denoise/receipts/queue-dual-grid-fold-crop.html`,
     "",
   ].join("\n");

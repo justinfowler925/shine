@@ -92,8 +92,8 @@ over dashboard chrome when the job is triage / queue / inbox.
 2. **CTA budget = 1** — one filled job verb (e.g. Pursue); peers outline/ghost/segmented.
 3. **KPI encyclopedia off-path** — ≤3 summary chips; rest in `<details data-shine-kpi-rest>`.
 4. **No peer grids** — second ranking (e.g. “David’s 10”) is a saved-view / filter XOR, never
-   a second `role="grid"` peer. Detect: `dual-focal`; consumer TSX: `apply-tsx` AST
-   `collapse-peer-grids` (XOR); DOM stays plan-only. Agent close: § Dual-grid XOR / TSX AST below.
+   a second `role="grid"` peer. Detect: `dual-focal`; auto-repair: DOM + TSX AST
+   `collapse-peer-grids` (XOR peer→chip). See § Dual-grid XOR / TSX AST below.
 5. **Cite** — `shadcn-queue` (or product sibling). Anti-cites: `shadcn-dashboard-01` as page
    lead, chart atoms, magicui. Packet `recommendation.restructureHints` must clear before polish.
 6. **Golden fixture** — `verify/fixtures/denoise/queue-cta-{before,after}.html` +
@@ -102,11 +102,12 @@ over dashboard chrome when the job is triage / queue / inbox.
 
 Kit recipe string (cite v2): `shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts`.
 
-### Dual-grid XOR (D10) — agent-assisted close
+### Dual-grid XOR (D10) — DOM + TSX auto-safe close
 
-Close the dual-focal loop: **detect → plan → XOR recipe → prove**. Consumer **TSX**
-`collapse-peer-grids` is TypeScript AST (peer title → XOR chip + shared DataGrid). DOM
-`apply-dom` stays plan-only — never silent dual-grid delete without XOR chips.
+Close the dual-focal loop: **detect → collapse-peer-grids XOR → prove**. Consumer **TSX**
+`collapse-peer-grids` is TypeScript AST; **DOM** `apply-dom` calls `xor-saved-view`
+(peer title → XOR chip + shared DataGrid). Never silent-deletes without chips; fewer than
+2 peer wraps stays plan markdown. `god-split` remains the only plan-only humanGate op.
 
 1. **Detect** — `dual-focal` when ≥2 peer `.grid-wrap` / `[role=grid]` worklists share main.
 2. **Plan** — emit `collapse-peer-grids` with `mode: "xor-saved-view"`,
@@ -119,10 +120,12 @@ Close the dual-focal loop: **detect → plan → XOR recipe → prove**. Consume
    product filter state). Reuse `blocks/saved-views.tsx` + `blocks/filter-bar.tsx` patterns;
    do not fork a second grid component.
 5. **Focal** — `data-region="focal"` on the remaining wrap.
-6. **Apply helper** — `node verify/restructure/xor-saved-view.mjs --html <file> --keep Queue --fold David`
-   (also used by `denoise:eval` / `denoise:loop`). HumanGate stays true on the plan.
+6. **Apply** — `apply-dom` / `apply-tsx` auto-apply when ≥2 literal peers; CLI
+   `node verify/restructure/xor-saved-view.mjs --html <file> --keep Queue --fold David`
+   still available. Denoise-loop re-budgets CTA after XOR.
 7. **Prove** — measure `dual-focal` FAIL→PASS; crop the fold so one grid is visible
    (`verify/fixtures/denoise/receipts/queue-dual-grid-fold-crop.html`). Twin full-page shots invalid.
+   Doctor: `verify/collapse-peer-grids-dom.test.mjs`.
 
 Fixtures: `verify/fixtures/denoise/queue-dual-grid-{before,after}.html`.
 Denoise recommend emits typed `recommendation.xorSavedView` (fixture + crop paths) for
@@ -373,7 +376,7 @@ Peer worklists / DataGrids on one triage job in consumer TSX are collapsed by
    `data-shine-shared-grid` + `data-region="focal"`.  
    Handles `className="grid-wrap"`, `className={"grid-wrap"}`, `role="grid"` /
    `role={"grid"}`, and **`data-grid-title`** markers. Dynamic `.map` peers stay plan-only.
-   DOM `apply-dom` remains plan-only (use `xor-saved-view.mjs` for HTML).
+   DOM `apply-dom` auto-applies the same XOR via `xor-saved-view`.
 4. **Prove** — crop pair `queue-dual-grid-tsx` (`queue-dual-grid-tsx-{before,after}-crop.html`). Twin full-page invalid.
 
 Fixtures: `verify/fixtures/denoise/tsx/queue-dual-grid{,-ast}.tsx` (+ `queue-dual-xor-after.tsx` shape).  

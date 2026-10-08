@@ -40,7 +40,6 @@ import {
 import { writeCompletionProveReceipt } from "../hooks/receipt.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { applyDomRestructure } from "./restructure/apply-dom.mjs";
-import { applyXorSavedView } from "./restructure/xor-saved-view.mjs";
 import {
   DEFECT_CROP_PAIRS,
   assertCropPairOk,
@@ -250,36 +249,24 @@ export async function runDenoiseLoop({
   });
 
   // Round 1: apply auto-safe ops — DOM for measure continuum; AST when tsxPath set.
+  // collapse-peer-grids auto-applies XOR via apply-dom (xor-saved-view).
   const applied = applyDomRestructure(html, plan);
   html = applied.html;
-  // D10 agent humanGate: XOR recipe (peer title → filter chip + shared DataGrid).
-  // Never silent in apply-tsx / apply-dom auto paths — explicit agent step only.
-  if (applied.plans.length && /grid-wrap/.test(html)) {
-    const xorOp =
-      (plan.ops || []).find((o) => o.op === "collapse-peer-grids") || {
-        mode: "xor-saved-view",
-        keepTitleIncludes: ["Queue"],
-        foldTitleIncludes: ["David"],
+  // Re-budget after XOR: folding a peer can remove the filled primary cta-budget kept.
+  if (applied.applied.includes("collapse-peer-grids")) {
+    const ctaOp =
+      (plan.ops || []).find((o) => o.op === "cta-budget") || {
+        maxFilled: 1,
+        preferLabels: ["Pursue", "Save"],
+        demotePolicy: "outline",
       };
-    const xor = applyXorSavedView(html, xorOp);
-    if (xor.applied) {
-      html = xor.html;
-      // XOR can remove the filled primary that cta-budget kept on the peer grid.
-      // Re-budget so a preferred label is promoted on the surviving worklist.
-      const ctaOp =
-        (plan.ops || []).find((o) => o.op === "cta-budget") || {
-          maxFilled: 1,
-          preferLabels: ["Pursue", "Save"],
-          demotePolicy: "outline",
-        };
-      const rebudget = applyDomRestructure(html, {
-        ...plan,
-        ops: [{ ...ctaOp, op: "cta-budget" }],
-      });
-      html = rebudget.html;
-      if (rebudget.applied.includes("cta-budget") && !applied.applied.includes("cta-budget")) {
-        applied.applied.push("cta-budget");
-      }
+    const rebudget = applyDomRestructure(html, {
+      ...plan,
+      ops: [{ ...ctaOp, op: "cta-budget" }],
+    });
+    html = rebudget.html;
+    if (rebudget.applied.includes("cta-budget") && !applied.applied.includes("cta-budget")) {
+      applied.applied.push("cta-budget");
     }
   }
   /** @type {null | ((source: string, plan: object) => { source: string, applied: string[] })} */

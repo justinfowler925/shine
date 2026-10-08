@@ -48,7 +48,7 @@ export function applyTsxRestructure(source, plan) {
 
   for (const op of orderedOps) {
     // Dual-focal ban: TSX AST XOR recipe when ≥2 literal peer wraps; else plan markdown.
-    // DOM apply-dom stays plan-only — this path never silent-deletes without XOR chips.
+    // DOM apply-dom also auto-applies XOR via xor-saved-view (never silent-delete without chips).
     if (op.op === "collapse-peer-grids") {
       const next = collapsePeerGridsTsx(text, op);
       if (next !== text) {

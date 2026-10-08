@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 /**
- * D10 — Dual-grid XOR recipe (agent-assisted close).
+ * D10 — Dual-grid XOR recipe (peer title → filter chip + shared DataGrid).
  *
- * Explicit humanGate step — NOT wired into apply-dom / apply-tsx auto paths.
- * Those runners still emit plan-only markdown for collapse-peer-grids and never
- * silently delete peer grids. Agents (or denoise-eval / denoise-loop) call this
- * recipe after the plan is accepted.
+ * Auto-safe on DOM via apply-dom `collapse-peer-grids` and on TSX via apply-tsx AST.
+ * Never silent-deletes without injecting data-shine-xor-views chips. When fewer than
+ * 2 peer wraps (or peers are dynamic on TSX), runners emit plan markdown instead.
  *
- * Recipe: peer title → filter chip + one shared DataGrid (XOR saved-view).
+ * Also callable directly: denoise-eval / denoise-loop / CLI.
  */
 
 import { readFileSync, realpathSync, writeFileSync } from "node:fs";

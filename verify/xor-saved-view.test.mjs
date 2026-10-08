@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * D10 — Dual-grid XOR recipe: peer title → filter chip + shared DataGrid.
- * apply-dom / apply-tsx stay plan-only; this helper is the agent-assisted close.
+ * apply-dom auto-applies collapse-peer-grids via this helper; apply-tsx has AST XOR.
  */
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
@@ -34,10 +34,14 @@ const plan = buildRestructurePlan({
   ],
 });
 const dom = applyDomRestructure(before, plan);
-assert.equal(dom.applied.includes("collapse-peer-grids"), false, "DOM must not auto-delete grids");
-assert.ok(dom.plans.length >= 1);
-assert.match(dom.plans[0], /xor-saved-view\.mjs/);
-assert.ok(dom.humanGate);
+assert.ok(dom.applied.includes("collapse-peer-grids"), "DOM auto-applies XOR collapse-peer-grids");
+assert.equal(dom.plans.length, 0, "no plan markdown when XOR applied");
+assert.equal(dom.humanGate, false);
+assert.match(dom.html, /data-shine-xor-views/);
+assert.match(dom.html, /data-shine-xor-from-peer/);
+assert.match(dom.html, /data-shine-shared-grid/);
+assert.match(dom.html, /data-region="focal"/);
+assert.equal((dom.html.match(/role=["']grid["']/gi) || []).length, 1);
 
 const xor = applyXorSavedView(before, plan.ops[0]);
 assert.equal(xor.applied, true);
@@ -77,4 +81,4 @@ assert.equal(dual.foldCropOk, true);
 assert.ok(dual.measureCleared.some((x) => /dual-focal/.test(x)));
 assert.ok(score.bar.includes("XOR"));
 
-console.log("xor-saved-view PASS: peer→chip · shared grid · plan-only DOM · eval detect→XOR");
+console.log("xor-saved-view PASS: peer→chip · shared grid · DOM auto XOR · eval detect→XOR");

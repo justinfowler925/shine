@@ -187,15 +187,17 @@ export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
       citePrimary: c.cite,
       ops: c.ops,
       measureMustClear: c.mustClear,
-      humanGate: !!(c.planOnly || c.xorRecipe),
+      humanGate: !!c.planOnly,
     });
     const validation = validateRestructurePlan(plan);
     const beforeHtml = readFileSync(beforePath, "utf8");
     const appliedResult = applyDomRestructure(beforeHtml, plan);
     const preBefore = scanPreflightSlop(beforeHtml, { gate: true, screen: "queue" });
     let workingHtml = appliedResult.html;
-    let xorApplied = false;
-    if (c.xorRecipe) {
+    // DOM apply-dom now auto-applies collapse-peer-grids via xor-saved-view.
+    // Keep a follow-up XOR call for idempotence / structural meta when needed.
+    let xorApplied = appliedResult.applied.includes("collapse-peer-grids");
+    if (c.xorRecipe && !xorApplied) {
       const xorOp = c.ops.find((o) => o.op === "collapse-peer-grids") || {};
       const xor = applyXorSavedView(workingHtml, xorOp);
       workingHtml = xor.html;
@@ -267,7 +269,7 @@ export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
       opsApplied: appliedResult.applied,
       plans: appliedResult.plans.length,
       xorApplied: c.xorRecipe ? xorApplied : undefined,
-      humanGateRequired: !!appliedResult.humanGate || !!c.planOnly || !!c.xorRecipe,
+      humanGateRequired: !!appliedResult.humanGate || !!c.planOnly,
       measureCleared: cleared,
       validationOk: validation.ok,
       beforeMeasureStatus: beforeMeasure.status,
@@ -280,12 +282,10 @@ export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
         validation.ok &&
         cropOk &&
         (c.xorRecipe
-          ? appliedResult.plans.length >= 1 &&
-            xorApplied &&
+          ? xorApplied &&
             foldCropOk &&
             cleared.some((x) => x.includes("dual-focal")) &&
-            // AST path must remain plan-only — XOR is a separate agent step
-            !appliedResult.applied.includes("collapse-peer-grids")
+            appliedResult.applied.includes("collapse-peer-grids")
           : c.planOnly
             ? appliedResult.plans.length >= 1
             : appliedResult.applied.length >= 1 &&
@@ -303,7 +303,7 @@ export function runDenoiseEval({ cases = CASES, runMeasure = true } = {}) {
     total: scorecard.length,
     passed,
     failed: scorecard.length - passed,
-    bar: "DOM auto-ops 100%; dual-grid detect→XOR after PASS; cropped FAIL→PASS receipts",
+    bar: "DOM auto-ops 100%; dual-grid detect→DOM XOR PASS; cropped FAIL→PASS receipts",
     cropPairsOk,
     cases: scorecard,
   };
