@@ -11,6 +11,7 @@
  * chrome-budget (maxFilledChrome=0 → demote header/nav filled Buttons via TS compiler AST),
  * filter-clearable (active chips → data-shine-filter-dismiss + clear-all via TS compiler AST),
  * strip-marketing-dna (glow/gradient/display-serif className tokens via TS compiler AST),
+ * rewrite-filler-empty (filler empty phrases → job copy via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -166,6 +167,19 @@ export function applyTsxRestructure(source, plan) {
         if (census.dynamic || census.hits > 0) {
           plans.push(
             "## strip-marketing-dna (TSX)\n\nRemove glow/gradient/display-serif className tokens from Operate chrome JSX.\n",
+          );
+        }
+      }
+    } else if (op.op === "rewrite-filler-empty") {
+      const next = rewriteFillerEmptyTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("rewrite-filler-empty");
+      } else {
+        const census = countFillerEmptyTsx(text);
+        if (census.dynamic || census.hits > 0) {
+          plans.push(
+            "## rewrite-filler-empty (TSX)\n\nReplace filler empty-state phrases with job-specific instructional copy.\n",
           );
         }
       }
@@ -1656,6 +1670,121 @@ function applyChromeBudgetEditsClean(text, edits) {
 }
 
 
+
+const FILLER_EMPTY_TSX_RES = [
+  /^welcome to your dashboard\.?$/i,
+  /^welcome to .+!$/,
+  /^get started with your (new )?dashboard\.?$/i,
+  /^this is where .+ will (appear|show|live)\.?$/i,
+  /^no data to display\.?$/i,
+  /^nothing here yet\.?$/i,
+  /^coming soon\.?$/i,
+  /^lorem ipsum\b/i,
+  /^your (amazing )?content (goes|here)/i,
+  /^start building something (amazing|great)\.?$/i,
+  /^drop your content here\.?$/i,
+  /^placeholder text\.?$/i,
+  /^todo:\s*add .+/i,
+  /^click here to get started\.?$/i,
+];
+
+function isFillerEmptyText(text) {
+  const t = String(text || "").replace(/\s+/g, " ").trim();
+  if (!t || t.length > 80) return false;
+  return FILLER_EMPTY_TSX_RES.some((re) => re.test(t));
+}
+
+/**
+ * Count filler empty phrases in TSX text / {"…"} children.
+ */
+export function countFillerEmptyTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let hits = 0;
+  const samples = [];
+  const walk = (node) => {
+    if (ts.isJsxText(node)) {
+      const text = node.getText(sf).replace(/\s+/g, " ").trim();
+      if (isFillerEmptyText(text)) {
+        hits += 1;
+        samples.push(text.slice(0, 40));
+      }
+    } else if (ts.isJsxExpression(node) && node.expression) {
+      const expr = node.expression;
+      if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
+        if (isFillerEmptyText(expr.text)) {
+          hits += 1;
+          samples.push(expr.text.slice(0, 40));
+        }
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { hits, samples: samples.slice(0, 6), dynamic: false };
+}
+
+/**
+ * Rewrite filler empty phrases to job-specific copy; stamp data-shine-empty-rewritten.
+ */
+export function rewriteFillerEmptyTsx(source, op = {}) {
+  const replacement =
+    op.copy ||
+    op.replacement ||
+    "No notices match this view. Clear filters or widen the date range.";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+
+  const stampHost = (host) => {
+    if (!host || !ts.isJsxElement(host)) return;
+    const opening = host.openingElement;
+    if (findJsxAttr(opening, "data-shine-empty-rewritten", sf)) return;
+    const openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+    const nextOpen = openSrc.replace(/\s*\/?>$/, (m) => ` data-shine-empty-rewritten${m}`);
+    edits.push({ start: opening.getStart(sf), end: opening.getEnd(), replacement: nextOpen });
+  };
+
+  const walk = (node) => {
+    if (ts.isJsxText(node)) {
+      const raw = node.getText(sf);
+      const trimmed = raw.replace(/\s+/g, " ").trim();
+      if (isFillerEmptyText(trimmed)) {
+        edits.push({ start: node.getStart(sf), end: node.getEnd(), replacement: replacement });
+        let cur = node.parent;
+        while (cur && !ts.isJsxElement(cur)) cur = cur.parent;
+        stampHost(cur);
+      }
+    } else if (ts.isJsxExpression(node) && node.expression) {
+      const expr = node.expression;
+      if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
+        if (isFillerEmptyText(expr.text)) {
+          edits.push({
+            start: expr.getStart(sf),
+            end: expr.getEnd(),
+            replacement: `"${replacement.replace(/"/g, '\\"')}"`,
+          });
+          let cur = node.parent;
+          while (cur && !ts.isJsxElement(cur)) cur = cur.parent;
+          stampHost(cur);
+        }
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  if (!edits.length) return text;
+  const sorted = [...edits].sort((a, b) => b.start - a.start || b.end - a.end);
+  const seen = new Set();
+  let out = text;
+  for (const e of sorted) {
+    const key = `${e.start}:${e.end}:${e.replacement}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  }
+  return out;
+}
 
 const MARKETING_TSX_TOKENS = Object.freeze([
   /^bg-gradient-to-[trbl]{1,2}$/i,

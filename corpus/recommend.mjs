@@ -130,6 +130,18 @@ export const PAGE_TITLE_AST_FIXTURES = Object.freeze({
 
 
 
+
+/** Repo-relative filler-empty-copy TSX AST FAIL→PASS fixtures (rewrite-filler-empty). */
+export const FILLER_EMPTY_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-filler-empty.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-filler-empty-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-filler-empty-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-filler-empty-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-filler-empty-tsx",
+  op: "rewrite-filler-empty",
+});
+
 /** Repo-relative marketing-dna-operate TSX AST FAIL→PASS fixtures (strip-marketing-dna). */
 export const MARKETING_DNA_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-marketing-dna.tsx",
@@ -287,6 +299,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: chrome-budget maxFilledChrome=0 — demote filled header/nav/aside peers to outline/ghost");
     hints.push("restructure: filter-clearable — dismiss/clear-all on active filter chips");
     hints.push("restructure: strip-marketing-dna — remove glow/gradient/display-serif from Operate chrome");
+    hints.push("restructure: rewrite-filler-empty — replace filler empty phrases with job copy");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
@@ -336,6 +349,40 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
 }
 
 
+
+
+/**
+ * Filler-empty TSX AST fixture binding for Operate queue jobs.
+ */
+export function fillerEmptyAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog", "app-shell"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "catalog", "app-shell"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|filler[- ]?empty|rewrite[- ]?filler|welcome to your dashboard|coming soon)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: FILLER_EMPTY_AST_FIXTURES.op,
+    fixtureTsx: FILLER_EMPTY_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: FILLER_EMPTY_AST_FIXTURES.tsxAstHard,
+    cropBefore: FILLER_EMPTY_AST_FIXTURES.cropBefore,
+    cropAfter: FILLER_EMPTY_AST_FIXTURES.cropAfter,
+    cropPairId: FILLER_EMPTY_AST_FIXTURES.cropPairId,
+    helper: FILLER_EMPTY_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Filler empty-state copy on Operate: apply verify/restructure/apply-tsx.mjs rewrite-filler-empty (TypeScript AST; replace Welcome/Coming soon/etc with job instructional copy; stamp data-shine-empty-rewritten). Copy FAIL→PASS crop paths from recommendation.fillerEmptyAst.cropBefore/cropAfter; prove filler-empty clears.",
+  };
+}
 
 /**
  * Marketing-DNA TSX AST fixture binding for Operate queue / shell jobs.
@@ -876,6 +923,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    fillerEmptyAst: fillerEmptyAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -1037,6 +1089,9 @@ export function formatRecommendationSummary(rec) {
   const mktDna = rec.marketingDnaAst?.fixtureTsx
     ? ` · marketingDnaAst ${rec.marketingDnaAst.mode}@${rec.marketingDnaAst.cropPairId}`
     : "";
+  const fillerAst = rec.fillerEmptyAst?.fixtureTsx
+    ? ` · fillerEmptyAst ${rec.fillerEmptyAst.mode}@${rec.fillerEmptyAst.cropPairId}`
+    : "";
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
@@ -1054,6 +1109,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

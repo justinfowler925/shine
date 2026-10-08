@@ -205,13 +205,7 @@ export function formatCompositionSlopFailures(slop, { gate = false } = {}) {
     );
   }
   // Marketing DNA failures emit via verify/marketing-dna.mjs (prefix marketing-dna).
-  if (slop.fillerHits?.length) {
-    const sample = slop.fillerHits.map((h) => `"${h.text}"`).join("; ");
-    failures.push(
-      `composition-slop: filler empty-state copy ${sample} — anti-pattern:${ANTI_PATTERN_IDS.fillerEmpty}; ` +
-        `replace with job-specific instructional copy (knowledge/anti-patterns/filler-empty-copy.json; expert P3)`,
-    );
-  }
+  // Filler empty failures emit via verify/filler-empty.mjs (prefix filler-empty).
   return failures;
 }
 

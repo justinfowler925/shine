@@ -35,6 +35,7 @@ export const OPERATE_SLOP_ANTI_PATTERN_IDS = Object.freeze([
   "dual-chrome-actions",
   "irreversible-filters",
   "marketing-dna-operate",
+  "filler-empty-copy",
 ]);
 
 export function validatePrinciple(value) {

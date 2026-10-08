@@ -29,6 +29,7 @@ import { formatPageTitleFailures } from "./page-title.mjs";
 import { formatChromePressureFailures } from "./chrome-pressure.mjs";
 import { formatFilterReversibleFailures } from "./filter-reversible.mjs";
 import { formatMarketingDnaFailures } from "./marketing-dna.mjs";
+import { formatFillerEmptyFailures } from "./filler-empty.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -104,6 +105,13 @@ const expected = {
     alias: "marketing-dna",
     restructureOps: ["strip-marketing-dna"],
     cropPairId: "queue-marketing-dna",
+  },
+  "filler-empty-copy": {
+    detector: "filler-empty",
+    measureFailurePrefix: "filler-empty",
+    alias: "filler-empty",
+    restructureOps: ["rewrite-filler-empty"],
+    cropPairId: "queue-filler-empty",
   },
 };
 
@@ -182,6 +190,12 @@ const dnaHits = retrieveAntiPatterns("marketing DNA glow purple gradient display
 });
 assert.ok(dnaHits.some((h) => h.id === "marketing-dna-operate"), JSON.stringify(dnaHits.map((h) => h.id)));
 
+const fillerHits = retrieveAntiPatterns("filler empty welcome dashboard coming soon nothing here yet", {
+  screen: "queue",
+  antiPatterns: corpus,
+});
+assert.ok(fillerHits.some((h) => h.id === "filler-empty-copy"), JSON.stringify(fillerHits.map((h) => h.id)));
+
 // Measure formatters cite anti-pattern:<id>
 const dualFails = formatDualFocalFailures(
   { peerGridCount: 2, titles: ["David's 10", "Queue"] },
@@ -251,6 +265,15 @@ const dnaFails = formatMarketingDnaFailures(
 assert.ok(
   dnaFails.some((f) => /marketing-dna:/.test(f) && /anti-pattern:marketing-dna-operate/.test(f)),
   dnaFails.join("\n"),
+);
+
+const fillerFails = formatFillerEmptyFailures(
+  { fillerHits: [{ text: "Welcome to your dashboard" }] },
+  { gate: true },
+);
+assert.ok(
+  fillerFails.some((f) => /filler-empty:/.test(f) && /anti-pattern:filler-empty-copy/.test(f)),
+  fillerFails.join("\n"),
 );
 
 assert.equal(formatAntiPatternCite("kpi-soup"), "anti-pattern:kpi-soup");
