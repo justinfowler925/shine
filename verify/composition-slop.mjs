@@ -204,13 +204,7 @@ export function formatCompositionSlopFailures(slop, { gate = false } = {}) {
         `(knowledge/anti-patterns/card-soup.json; expert P3)`,
     );
   }
-  if (slop.marketingHits?.length) {
-    failures.push(
-      `composition-slop: marketing DNA on saas Operate surface (${slop.marketingHits.join(", ")}) — ` +
-        `anti-pattern:${ANTI_PATTERN_IDS.marketingDna}; Operate chrome cannot ship glow/gradient/display-serif ` +
-        `(knowledge/anti-patterns/marketing-dna-operate.json; expert P3)`,
-    );
-  }
+  // Marketing DNA failures emit via verify/marketing-dna.mjs (prefix marketing-dna).
   if (slop.fillerHits?.length) {
     const sample = slop.fillerHits.map((h) => `"${h.text}"`).join("; ");
     failures.push(

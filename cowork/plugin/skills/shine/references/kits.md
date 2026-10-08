@@ -223,6 +223,20 @@ Active Operate filter chips must be reversible.
 
 Doctor: `verify/filter-clearable-ast-bite.mjs` / `npm run filter-clearable:ast-bite`.
 
+### Marketing-DNA TSX AST — strip-marketing-dna
+
+Operate chrome must not ship marketing glow/gradient/display-serif DNA.
+
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `strip-marketing-dna`.
+
+- Scrubs `bg-gradient-to-*`, `from-/to-(violet|purple|indigo)-*`, glow utilities, `font-display`/`font-serif`, `tracking-tighter`
+- Stamps `data-shine-marketing-stripped` when `data-shine-marketing-dna` was present
+- Recommend binds `marketingDnaAst` FAIL→PASS crops (`queue-marketing-dna-tsx-*`)
+
+Doctor: `verify/strip-marketing-dna-ast-bite.mjs` / `npm run strip-marketing-dna:ast-bite`.
+
+
+
 
 
 ### Dual-focal ban TSX AST (N8 deepen) — XOR peer→chip

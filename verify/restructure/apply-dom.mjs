@@ -2,7 +2,7 @@
 /**
  * N7 — Apply shine-restructure/v1 auto-safe ops to HTML fixtures (DOM substrate).
  * Ops: cta-budget, kpi-collapse, pill-collapse, title-singular, chrome-budget,
- * filter-clearable, set-focal, worklist-first, rebind-cite.
+ * filter-clearable, strip-marketing-dna, set-focal, worklist-first, rebind-cite.
  * collapse-peer-grids → plan markdown only (never silent delete).
  */
 
@@ -63,6 +63,12 @@ export function applyDomRestructure(html, plan) {
       if (next !== out) {
         out = next;
         applied.push("filter-clearable");
+      }
+    } else if (op.op === "strip-marketing-dna") {
+      const next = applyStripMarketingDna(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("strip-marketing-dna");
       }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
@@ -216,6 +222,63 @@ export function applyChromeBudget(html, op = {}) {
   return out;
 }
 
+
+
+/** Class / style tokens illegal on Operate chrome. */
+const MARKETING_CLASS_TOKEN_RE =
+  /^(bg-gradient-to-[trbl]{1,2}|from-(?:violet|purple|fuchsia|indigo)-\d{2,3}|to-(?:violet|purple|fuchsia|indigo)-\d{2,3}|drop-shadow-glow|animate-pulse-glow|shadow-\[0_0_[^\]]+\]|font-(?:display|serif)|tracking-tighter)$/i;
+
+/**
+ * Strip marketing DNA (glow / purple-indigo gradients / display-serif) from HTML.
+ */
+export function applyStripMarketingDna(html, _op = {}) {
+  let out = String(html);
+  // class="…"
+  out = out.replace(/\bclass=(["'])([^"']*)\1/gi, (m, q, cls) => {
+    const next = cls
+      .split(/\s+/)
+      .filter(Boolean)
+      .filter((tok) => !MARKETING_CLASS_TOKEN_RE.test(tok))
+      .join(" ");
+    if (next === cls.trim()) return m;
+    if (!next) return `class=${q}${q}`;
+    return `class=${q}${next}${q}`;
+  });
+  // style tags — neutralize purple/indigo gradients + glow shadows
+  out = out.replace(/<style\b[^>]*>([\s\S]*?)<\/style>/gi, (full, body) => {
+    let b = body;
+    b = b.replace(
+      /background\s*:\s*linear-gradient\([^;)]*(?:violet|purple|indigo|#7[Cc]3|#6366)[^;)]*\)/gi,
+      "background:#fff",
+    );
+    b = b.replace(
+      /box-shadow\s*:\s*[^;]*(?:0\s+0\s+\d+px|purple|#7[Cc]3[Aa][Ee][Dd]|#6366[Ff]1)[^;]*/gi,
+      "box-shadow:none",
+    );
+    b = b.replace(/font-family\s*:\s*Georgia\s*,\s*serif/gi, "font-family:system-ui,sans-serif");
+    b = b.replace(/letter-spacing\s*:\s*-0\.0\d+em/gi, "letter-spacing:normal");
+    b = b.replace(/color\s*:\s*#fff\b/gi, "color:#18181b");
+    return full.replace(body, b);
+  });
+  // inline styles
+  out = out.replace(/\bstyle=(["'])([^"']*)\1/gi, (m, q, style) => {
+    let s = style;
+    s = s.replace(
+      /background(?:-image)?\s*:\s*linear-gradient\([^;)]*(?:violet|purple|indigo|#7[Cc]3|#6366)[^;)]*\)\s*;?/gi,
+      "background:#fff;",
+    );
+    s = s.replace(
+      /box-shadow\s*:\s*[^;]*(?:0\s+0\s+\d+px|purple|#7[Cc]3|#6366)[^;]*;?/gi,
+      "box-shadow:none;",
+    );
+    if (s === style) return m;
+    return `style=${q}${s}${q}`;
+  });
+  // marker attrs
+  out = out.replace(/\sdata-shine-marketing-dna(?:=["'][^"']*["'])?/gi, ' data-shine-marketing-stripped');
+  // demote font-serif on class already handled; also strip Georgia from h1 if left in markup
+  return out;
+}
 
 /**
  * Make active filter chips reversible: stamp per-chip dismiss + clear-all.

@@ -216,6 +216,59 @@ export function buildChromeAstAfterCropHtml() {
 }
 
 
+
+/** Marketing-DNA DOM FAIL crop. */
+export function buildMarketingDnaBeforeCropHtml() {
+  return wrap({
+    title: "Marketing DNA crop FAIL",
+    cropId: "marketing-dna-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: glow + purple gradient + font-serif on Operate — marketing-dna.",
+    body: `  <div class="hero bg-gradient-to-r from-violet-600 to-indigo-600 drop-shadow-glow" data-shine-marketing-dna>
+    <h1 class="font-serif tracking-tighter">Queue</h1>
+  </div>`,
+  });
+}
+
+/** Marketing-DNA DOM PASS crop. */
+export function buildMarketingDnaAfterCropHtml() {
+  return wrap({
+    title: "Marketing DNA crop PASS",
+    cropId: "marketing-dna-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: marketing DNA stripped — strip-marketing-dna.",
+    body: `  <div class="hero" data-shine-marketing-stripped>
+    <h1>Queue</h1>
+  </div>`,
+  });
+}
+
+/** Marketing-DNA TSX AST FAIL crop. */
+export function buildMarketingDnaAstBeforeCropHtml() {
+  return wrap({
+    title: "Marketing DNA AST crop FAIL",
+    cropId: "marketing-dna-tsx-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: gradient/glow/font-display in TSX — marketing-dna; apply-tsx strip-marketing-dna.",
+    body: `  <div class="hero bg-gradient-to-br from-purple-500 to-indigo-700 animate-pulse-glow" data-shine-marketing-dna data-shine-tsx-ast="before">
+    <h1 class="font-display tracking-tighter">Queue</h1>
+  </div>`,
+  });
+}
+
+/** Marketing-DNA TSX AST PASS crop. */
+export function buildMarketingDnaAstAfterCropHtml() {
+  return wrap({
+    title: "Marketing DNA AST crop PASS",
+    cropId: "marketing-dna-tsx-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: illegal className tokens scrubbed via TSX AST strip-marketing-dna.",
+    body: `  <div class="hero" data-shine-marketing-stripped data-shine-tsx-ast="after">
+    <h1>Queue</h1>
+  </div>`,
+  });
+}
+
 /** Irreversible-filters DOM FAIL crop — active chips, no dismiss. */
 export function buildFiltersBeforeCropHtml() {
   return wrap({
@@ -1140,6 +1193,28 @@ export const DEFECT_CROP_PAIRS = [
     beforeMustNot: [/data-shine-filter-dismiss/],
     afterMust: [/data-shine-tsx-ast="after"/, /data-shine-filter-dismiss/, /data-shine-filter-clear-all/],
   },
+{
+    id: "queue-marketing-dna",
+    defect: "marketing-dna",
+    beforeCrop: "queue-marketing-dna-before-crop.html",
+    afterCrop: "queue-marketing-dna-after-crop.html",
+    buildBefore: buildMarketingDnaBeforeCropHtml,
+    buildAfter: buildMarketingDnaAfterCropHtml,
+    beforeMust: [/from-violet|bg-gradient|font-serif|drop-shadow-glow/],
+    afterMust: [/data-shine-marketing-stripped/, /Queue/],
+    afterMustNot: [/from-violet|bg-gradient-to|font-serif|drop-shadow-glow|tracking-tighter/],
+  },
+  {
+    id: "queue-marketing-dna-tsx",
+    defect: "marketing-dna",
+    beforeCrop: "queue-marketing-dna-tsx-before-crop.html",
+    afterCrop: "queue-marketing-dna-tsx-after-crop.html",
+    buildBefore: buildMarketingDnaAstBeforeCropHtml,
+    buildAfter: buildMarketingDnaAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /from-purple|font-display|animate-pulse-glow/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-marketing-stripped/],
+    afterMustNot: [/from-purple|font-display|animate-pulse-glow|tracking-tighter/],
+  },
 ];
 
 /**
@@ -1288,6 +1363,17 @@ export function assertCropPairOk(pair, read) {
     }
     if (!/data-shine-filter-dismiss/.test(after)) errors.push(`${pair.id} after needs dismiss stamps`);
     if (!/data-shine-filter-clear-all/.test(after)) errors.push(`${pair.id} after needs clear-all`);
+  }
+
+  // Marketing-DNA: before has glow/gradient; after stripped
+  if ((pair.id === "queue-marketing-dna" || pair.id === "queue-marketing-dna-tsx") && before && after) {
+    if (!/(bg-gradient|from-(violet|purple)|font-(serif|display)|drop-shadow-glow|animate-pulse-glow)/.test(before)) {
+      errors.push(`${pair.id} before needs marketing DNA markers`);
+    }
+    if (/(bg-gradient-to|from-(violet|purple)|font-(serif|display)|drop-shadow-glow|animate-pulse-glow|tracking-tighter)/.test(after)) {
+      errors.push(`${pair.id} after still has marketing DNA tokens`);
+    }
+    if (!/data-shine-marketing-stripped/.test(after)) errors.push(`${pair.id} after needs stripped marker`);
   }
   return { ok: errors.length === 0, errors };
 }
