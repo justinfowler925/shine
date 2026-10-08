@@ -15,6 +15,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: preflight ai-slop-metric-grid → kpi-collapse.** Preflight
+  emitted metric-grid as a soft **note**, and the cluster regex false-positived on
+  `.metrics`/`.metric` CSS after `kpi-collapse` parked tiles. Detector now strips
+  `<style>` + `data-shine-kpi-rest`, requires a metrics container with ≥4 visible
+  hosts, and hard-fails on Operate queue. Denoise-loop `kpiSoupCheck` also seeds
+  from the signal. Doctor: `verify/metric-grid-preflight-bite.mjs`. Does not
+  expand Operate-slop library (saturated at 14); leaves empty-insight-shell (#191)
+  alone.
+
 - **Denoise deepen: preflight ai-slop-badge-spam → pill-collapse.** Preflight
   emitted badge/chip spam as a soft **note**; after pill-collapse badge/chip
   hosts (#206) the signal can hard-fail on Operate queue (≥5 visible hosts) and
