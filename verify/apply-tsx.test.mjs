@@ -21,6 +21,8 @@ import {
   countFilterPillsTsx,
   titleSingularTsx,
   countPageTitlesTsx,
+  chromeBudgetTsx,
+  countChromeFilledButtonsTsx,
 } from "./restructure/apply-tsx.mjs";
 import { buildRestructurePlan } from "./restructure/schema.mjs";
 
@@ -233,6 +235,25 @@ const titlePlan = buildRestructurePlan({
 });
 assert.ok(applyTsxRestructure(titleHard, titlePlan).applied.includes("title-singular"));
 
+// Chrome-budget AST
+const chromeSoup = readFileSync(join(FIX, "queue-chrome-actions.tsx"), "utf8");
+const chromeHard = readFileSync(join(FIX, "queue-chrome-actions-ast.tsx"), "utf8");
+assert.ok(countChromeFilledButtonsTsx(chromeSoup).filled >= 2);
+const chromeAfter = chromeBudgetTsx(chromeSoup, { demotePolicy: "outline" });
+assert.equal(countChromeFilledButtonsTsx(chromeAfter).filled, 0);
+assert.match(chromeAfter, /variant="outline"/);
+assert.match(chromeAfter, />Pursue</);
+assert.ok(countChromeFilledButtonsTsx(chromeHard).filled >= 3);
+const chromeHardAfter = chromeBudgetTsx(chromeHard, { demotePolicy: "outline" });
+assert.equal(countChromeFilledButtonsTsx(chromeHardAfter).filled, 0);
+assert.match(chromeHardAfter, /variant=\{\s*["']outline["']\s*\}/);
+const chromePlan = buildRestructurePlan({
+  job: "Demote chrome",
+  category: "queue",
+  ops: [{ op: "chrome-budget", maxFilledChrome: 0 }],
+});
+assert.ok(applyTsxRestructure(chromeHard, chromePlan).applied.includes("chrome-budget"));
+
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );

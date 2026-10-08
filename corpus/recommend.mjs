@@ -128,6 +128,18 @@ export const PAGE_TITLE_AST_FIXTURES = Object.freeze({
   op: "title-singular",
 });
 
+/** Repo-relative dual-chrome-actions TSX AST FAIL→PASS fixtures (chrome-budget). */
+export const CHROME_PRESSURE_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-chrome-actions.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-chrome-actions-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-chrome-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-chrome-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-chrome-tsx",
+  op: "chrome-budget",
+  maxFilledChrome: 0,
+});
+
 /** Fallback prose when the JSON library is unavailable (tests may stub). */
 const ANTI_BY_SCREEN_FALLBACK = {
   catalog: [
@@ -246,6 +258,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: kpi-collapse maxVisible=3 when ≥4 equal metrics compete with the work object");
     hints.push("restructure: pill-collapse maxVisible=3 when ≥5 above-fold filter pills crowd the decide path");
     hints.push("restructure: title-singular — one page title; demote peer h1 / page-title to kicker");
+    hints.push("restructure: chrome-budget maxFilledChrome=0 — demote filled header/nav/aside peers to outline/ghost");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
@@ -291,6 +304,44 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
     instruction: fullGrid
       ? "Full DataGrid: write shine-tables.json with kind=records (shared source + required cases). Worklist fixture is the Operate list→detail starter."
       : "Operate list→detail: write shine-tables.json with kind=worklist (search, rowAction, loading, empty, filteredEmpty). Copy from recommendation.tableQuality.fixture; full kind=records stays on the product DataGrid owner.",
+  };
+}
+
+/**
+ * Dual-chrome-actions TSX AST fixture binding for Operate queue / shell jobs.
+ * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
+ * apply-tsx chrome-budget (maxFilledChrome=0).
+ */
+export function chromePressureAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog", "app-shell"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "catalog", "app-shell"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|chrome[- ]?budget|chrome[- ]?pressure|nav[- ]?chrome|dual[- ]?chrome)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: CHROME_PRESSURE_AST_FIXTURES.op,
+    maxFilledChrome: CHROME_PRESSURE_AST_FIXTURES.maxFilledChrome,
+    demotePolicy: "outline",
+    scope: "chrome",
+    fixtureTsx: CHROME_PRESSURE_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: CHROME_PRESSURE_AST_FIXTURES.tsxAstHard,
+    cropBefore: CHROME_PRESSURE_AST_FIXTURES.cropBefore,
+    cropAfter: CHROME_PRESSURE_AST_FIXTURES.cropAfter,
+    cropPairId: CHROME_PRESSURE_AST_FIXTURES.cropPairId,
+    helper: CHROME_PRESSURE_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Filled Export/New/Save peers in header/nav/aside chrome: apply verify/restructure/apply-tsx.mjs chrome-budget (TypeScript AST, maxFilledChrome=0; demote chrome Buttons to outline). Leaves the main job verb filled. Handles variant=\"default\", variant={\"default\"}, and missing variant inside chrome hosts. Copy FAIL→PASS crop paths from recommendation.chromePressureAst.cropBefore/cropAfter; prove chrome-pressure clears with 0 filled chrome treatments.",
   };
 }
 
@@ -708,6 +759,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    chromePressureAst: chromePressureAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -860,6 +916,9 @@ export function formatRecommendationSummary(rec) {
   const pageTitle = rec.pageTitleAst?.fixtureTsx
     ? ` · pageTitleAst ${rec.pageTitleAst.mode}@${rec.pageTitleAst.cropPairId}`
     : "";
+  const chrome = rec.chromePressureAst?.fixtureTsx
+    ? ` · chromePressureAst ${rec.chromePressureAst.mode}@${rec.chromePressureAst.cropPairId}`
+    : "";
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
@@ -877,6 +936,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

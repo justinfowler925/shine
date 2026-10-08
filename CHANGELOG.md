@@ -6,6 +6,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate slop: dual-chrome-actions / chrome-budget.** Nav chrome noise — filled
+  Export/New/Save in header/nav/aside now fail-closed as `chrome-pressure`
+  (`anti-pattern:dual-chrome-actions`). Auto-safe `chrome-budget`
+  (maxFilledChrome=0) demotes chrome Buttons on DOM + TypeScript AST; main job
+  verb stays filled. Recommend emits `chromePressureAst`; denoise-loop names
+  `chrome-pressure`. Doctor bites: `verify/chrome-pressure.test.mjs` ·
+  `verify/chrome-budget-ast-bite.mjs`.
+
 - **Operate slop: pill-filter-stack + competing-page-titles.** Expand the gated
   Operate anti-pattern set beyond the dual-focal / KPI / CTA / wrong-cite quartet.
   New JSON rows `knowledge/anti-patterns/{pill-filter-stack,competing-page-titles}.json`

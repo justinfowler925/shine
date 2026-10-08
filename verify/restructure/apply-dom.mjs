@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
  * N7 — Apply shine-restructure/v1 auto-safe ops to HTML fixtures (DOM substrate).
- * Ops: cta-budget, kpi-collapse, pill-collapse, title-singular, set-focal,
- * worklist-first, rebind-cite.
+ * Ops: cta-budget, kpi-collapse, pill-collapse, title-singular, chrome-budget,
+ * set-focal, worklist-first, rebind-cite.
  * collapse-peer-grids → plan markdown only (never silent delete).
  */
 
@@ -51,6 +51,12 @@ export function applyDomRestructure(html, plan) {
       if (next !== out) {
         out = next;
         applied.push("title-singular");
+      }
+    } else if (op.op === "chrome-budget") {
+      const next = applyChromeBudget(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("chrome-budget");
       }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
@@ -178,6 +184,32 @@ export function scrubDiagnosticKpiKickers(html) {
 }
 
 /** Keep first maxVisible metrics; wrap the rest in <details>. */
+/**
+ * Demote filled primaries inside header/nav/aside chrome to ghost/outline.
+ * Leaves main-region job verbs alone (cta-budget owns main).
+ */
+export function applyChromeBudget(html, op = {}) {
+  const demote = op.demotePolicy || "ghost";
+  const chromeRe =
+    /<(header|nav|aside)\b[^>]*>[\s\S]*?<\/\1>|<div\b[^>]*(?:data-shine-chrome|data-region=["']chrome["']|data-slot=["']sidebar["'])[^>]*>[\s\S]*?<\/div>/gi;
+  let out = String(html);
+  out = out.replace(chromeRe, (block) => {
+    let next = block;
+    next = next.replace(/\bclass=(["'])([^"']*)\1/gi, (m, q, cls) => {
+      let tokens = cls.trim().split(/\s+/).filter(Boolean);
+      if (!tokens.includes("filled") && !tokens.includes("filled-peer")) return m;
+      tokens = tokens.filter((t) => t !== "filled" && t !== "filled-peer");
+      if (!tokens.includes(demote)) tokens.push(demote);
+      return `class=${q}${tokens.join(" ")}${q}`;
+    });
+    next = next.replace(/\sdata-shine-chrome-filled(?:=["'][^"']*["'])?/gi, "");
+    // variant="default" inside chrome → outline/ghost for TSX-in-HTML fixtures
+    next = next.replace(/\bvariant=(["'])default\1/gi, `variant=$1${demote === "ghost" ? "outline" : demote}$1`);
+    return next;
+  });
+  return out;
+}
+
 /**
  * Collapse excess above-fold filter pills into <details data-shine-pill-rest>.
  * Prefers [data-shine-filter-stack] / .filter-pills containers.

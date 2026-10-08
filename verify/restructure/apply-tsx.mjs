@@ -8,6 +8,7 @@
  * kpi-collapse (maxVisible=3 → <details data-shine-kpi-rest> via TS compiler AST),
  * pill-collapse (maxVisible=3 → <details data-shine-pill-rest> via TS compiler AST),
  * title-singular (one page title; demote peers to kicker via TS compiler AST),
+ * chrome-budget (maxFilledChrome=0 → demote header/nav filled Buttons via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -124,6 +125,19 @@ export function applyTsxRestructure(source, plan) {
         if (census.dynamic || census.titles > 1) {
           plans.push(
             "## title-singular (TSX)\n\nKeep one page title; demote peer h1 / data-page-title / page-title to `<p className=\"kicker\" data-shine-title-demoted>`.\n",
+          );
+        }
+      }
+    } else if (op.op === "chrome-budget") {
+      const next = chromeBudgetTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("chrome-budget");
+      } else {
+        const census = countChromeFilledButtonsTsx(text);
+        if (census.dynamic || census.filled > 0) {
+          plans.push(
+            "## chrome-budget (TSX)\n\nDemote filled Button primaries inside header/nav/aside chrome to outline/ghost; keep the job verb filled in main.\n",
           );
         }
       }
@@ -1488,6 +1502,129 @@ export function countPageTitlesTsx(source) {
   };
   walk(sf);
   return { titles: texts.length, texts, dynamic };
+}
+
+/**
+ * True when a JSX opening is a chrome host (header/nav/aside/sidebar markers).
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isChromeHostOpening(opening, sf) {
+  const tag = jsxTagName(opening);
+  if (["header", "nav", "aside", "Header", "Nav", "Aside", "Sidebar"].includes(tag)) return true;
+  if (findJsxAttr(opening, "data-shine-chrome", sf)) return true;
+  if (findJsxAttr(opening, "data-region", sf)) {
+    const v = attrStringValue(findJsxAttr(opening, "data-region", sf), sf);
+    if (v === "chrome") return true;
+  }
+  if (findJsxAttr(opening, "data-slot", sf)) {
+    const v = attrStringValue(findJsxAttr(opening, "data-slot", sf), sf);
+    if (v === "sidebar") return true;
+  }
+  if (findJsxAttr(opening, "role", sf)) {
+    const v = attrStringValue(findJsxAttr(opening, "role", sf), sf);
+    if (v === "banner" || v === "navigation") return true;
+  }
+  return false;
+}
+
+/**
+ * Walk ancestors: is this node inside a chrome host?
+ * @param {ts.Node} node
+ * @param {ts.SourceFile} sf
+ */
+function isInsideChromeHost(node, sf) {
+  let cur = node.parent;
+  while (cur) {
+    if (ts.isJsxElement(cur) && isChromeHostOpening(cur.openingElement, sf)) return true;
+    cur = cur.parent;
+  }
+  return false;
+}
+
+/**
+ * Count filled Buttons inside chrome hosts.
+ * @param {string} source
+ * @returns {{ filled: number, labels: string[], dynamic: boolean }}
+ */
+export function countChromeFilledButtonsTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const labels = [];
+  let dynamic = false;
+  visitButtons(sf, (opening, node) => {
+    if (!isInsideChromeHost(node, sf)) return;
+    const variant = findJsxAttr(opening, "variant", sf);
+    if (variant?.initializer && ts.isJsxExpression(variant.initializer) && variant.initializer.expression) {
+      const expr = variant.initializer.expression;
+      if (!ts.isStringLiteral(expr) && !ts.isNoSubstitutionTemplateLiteral(expr)) {
+        dynamic = true;
+        return;
+      }
+    }
+    if (isFilledButtonOpening(opening, sf)) labels.push(labelFromJsx(node, sf));
+  });
+  return { filled: labels.length, labels, dynamic };
+}
+
+/**
+ * Demote filled Button primaries inside chrome hosts to outline (or ghost).
+ * Leaves main-region Buttons alone.
+ */
+export function chromeBudgetTsx(source, op = {}) {
+  const demote = op.demotePolicy === "ghost" ? "outline" : op.demotePolicy || "outline";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  visitButtons(sf, (opening, node) => {
+    if (!isInsideChromeHost(node, sf)) return;
+    if (!isFilledButtonOpening(opening, sf)) return;
+    const variant = findJsxAttr(opening, "variant", sf);
+    if (variant?.initializer) {
+      if (ts.isStringLiteral(variant.initializer)) {
+        edits.push({
+          start: variant.initializer.getStart(sf),
+          end: variant.initializer.getEnd(),
+          replacement: `"${demote}"`,
+        });
+      } else if (ts.isJsxExpression(variant.initializer) && variant.initializer.expression) {
+        const expr = variant.initializer.expression;
+        if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
+          edits.push({
+            start: expr.getStart(sf),
+            end: expr.getEnd(),
+            replacement: `"${demote}"`,
+          });
+        }
+      }
+    } else {
+      // Missing variant → insert outline
+      const openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+      const nextOpen = openSrc.replace(/\s*\/?>$/, (m) => ` variant="${demote}"${m}`);
+      edits.push({ start: opening.getStart(sf), end: opening.getEnd(), replacement: nextOpen });
+    }
+    // Drop chrome-filled marker
+    const filledAttr = findJsxAttr(opening, "data-shine-chrome-filled", sf);
+    if (filledAttr) {
+      edits.push({ start: filledAttr.getStart(sf), end: filledAttr.getEnd(), replacement: "" });
+    }
+  });
+  if (!edits.length) return text;
+  return applyChromeBudgetEditsClean(text, edits);
+}
+
+/**
+ * @param {string} text
+ * @param {{ start: number, end: number, replacement: string }[]} edits
+ */
+function applyChromeBudgetEditsClean(text, edits) {
+  const sorted = [...edits].sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of sorted) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  // Clean doubled spaces from attr removal only on affected lines lightly
+  out = out.replace(/[^\S\n]{2,}/g, " ");
+  out = out.replace(/\s+>/g, ">");
+  return out;
 }
 
 /**

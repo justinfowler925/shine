@@ -194,6 +194,23 @@ Multiple peer page titles in consumer TSX are singularized by
 Fixtures: `verify/fixtures/denoise/tsx/queue-competing-titles{,-ast}.tsx`.  
 Doctor: `verify/page-title-ast-bite.mjs` / `npm run page-title:ast-bite`.
 
+### Dual-chrome-actions TSX AST — chrome-budget maxFilledChrome=0
+
+Filled Export/New/Save peers in header/nav/aside chrome are demoted by
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `chrome-budget`.
+Main-region CTA budget stays in `cta-budget` (chrome is excluded from that detector).
+
+1. **Detect** — measure `chrome-pressure` when ≥1 filled primary lives in chrome hosts.
+2. **Recommend** — typed `recommendation.chromePressureAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `npm run restructure:tsx -- --tsx <file> --plan <plan.json> [--write]`  
+   Demotes filled `Button` inside `header` / `nav` / `aside` / `data-shine-chrome` /
+   `data-slot="sidebar"` to `outline`. Leaves the main job verb filled.  
+   Handles `variant="default"`, `variant={"default"}`, and missing variant in chrome.
+4. **Prove** — crop pair `queue-chrome-tsx` (`queue-chrome-tsx-{before,after}-crop.html`). Twin full-page invalid.
+
+Fixtures: `verify/fixtures/denoise/tsx/queue-chrome-actions{,-ast}.tsx`.  
+Doctor: `verify/chrome-budget-ast-bite.mjs` / `npm run chrome-budget:ast-bite`.
+
 ### Dual-focal ban TSX AST (N8 deepen) — XOR peer→chip
 
 Peer worklists / DataGrids on one triage job in consumer TSX are collapsed by

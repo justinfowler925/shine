@@ -23,7 +23,7 @@ const text=(value)=>String(value||"").trim();
 export const saasPageCategories=new Set(["datagrid","dashboard","form","record","lex"]);
 export const saasProductUxCheckKeys=["primaryTaskCheck","emptyErrorTriadCheck","competingCtaCheck"];
 /** Denoise / Operate composition checks — presence gated like product-UX (N7). */
-export const saasRestructureCheckKeys=["dualFocalCheck","kpiSoupCheck","citeHonestyCheck","pillFilterCheck","pageTitleCheck"];
+export const saasRestructureCheckKeys=["dualFocalCheck","kpiSoupCheck","citeHonestyCheck","pillFilterCheck","pageTitleCheck","chromePressureCheck"];
 
 // Copy checks: persuasive + instructional surfaces under lane=saas (Operate pages
 // plus marketing/catalog). Presence only — belief honesty stays agent (copy.md).
@@ -161,6 +161,9 @@ export function deriveRestructureOps(diagnosis={}){
  if(diagnosis.pageTitleCheck?.ok===false){
   ops.push({op:"title-singular",on:"primary-title",demote:"kicker"});
  }
+ if(diagnosis.chromePressureCheck?.ok===false){
+  ops.push({op:"chrome-budget",maxFilledChrome:0,demotePolicy:"ghost",scope:"chrome"});
+ }
  if(diagnosis.citeHonestyCheck?.ok===false||(/settings|sources|recipes/i.test(job)&&/queue|datagrid/i.test(category))){
   ops.push({op:"rebind-cite",from:"shadcn-queue",to:"shadcn-settings",whenCategory:"settings"});
  }
@@ -226,7 +229,7 @@ export function emitRestructureFromDiagnosis(diagnosis,{citePrimary="",antiCites
      {op:"cta-budget",scope:"main",maxFilled:1,preferLabels:["Pursue"],demotePolicy:"outline"},
      {op:"set-focal",attr:"data-region",value:"focal",on:"primary-worklist"},
     ],
-  measureMustClear:["cta-pressure","dual-focal","kpi-soup","pill-filter","page-title","composition-slop"],
+  measureMustClear:["cta-pressure","dual-focal","kpi-soup","pill-filter","page-title","chrome-pressure","composition-slop"],
   humanGate:ops.some((o)=>o.op==="collapse-peer-grids"),
  });
  plan.restructureRequired=restructureRequired;

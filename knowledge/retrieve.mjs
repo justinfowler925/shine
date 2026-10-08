@@ -32,6 +32,7 @@ export const OPERATE_SLOP_ANTI_PATTERN_IDS = Object.freeze([
   "wrong-cite-category",
   "pill-filter-stack",
   "competing-page-titles",
+  "dual-chrome-actions",
 ]);
 
 export function validatePrinciple(value) {
