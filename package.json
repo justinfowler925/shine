@@ -101,6 +101,7 @@
     "set-focal:ast-bite": "node verify/set-focal-ast-bite.mjs",
     "pill-filter:ast-bite": "node verify/pill-filter-ast-bite.mjs",
     "pill-badge:ast-bite": "node verify/pill-badge-ast-bite.mjs",
+    "badge-spam:preflight-bite": "node verify/badge-spam-preflight-bite.mjs",
     "page-title:ast-bite": "node verify/page-title-ast-bite.mjs",
     "chrome-budget:ast-bite": "node verify/chrome-budget-ast-bite.mjs",
     "filter-clearable:ast-bite": "node verify/filter-clearable-ast-bite.mjs",

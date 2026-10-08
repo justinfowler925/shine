@@ -156,7 +156,7 @@ export function deriveRestructureOps(diagnosis={}){
   ops.push({op:"kpi-collapse",maxVisible:3,rest:"details",selector:".metrics .metric, [data-shine-kpi]"});
  }
  if(diagnosis.pillFilterCheck?.ok===false){
-  ops.push({op:"pill-collapse",maxVisible:3,rest:"details",selector:"[data-shine-filter-stack] .pill, [data-shine-filter-pill]"});
+  ops.push({op:"pill-collapse",maxVisible:3,rest:"details",selector:"[data-shine-filter-stack] .pill, [data-shine-filter-pill], [data-slot=badge], .chip"});
  }
  if(diagnosis.pageTitleCheck?.ok===false){
   ops.push({op:"title-singular",on:"primary-title",demote:"kicker"});
@@ -266,7 +266,8 @@ export function emitRestructureFromDiagnosis(diagnosis,{citePrimary="",antiCites
      {op:"set-focal",attr:"data-region",value:"focal",on:"primary-worklist"},
     ],
   measureMustClear:["cta-pressure","dual-focal","kpi-soup","pill-filter","page-title","chrome-pressure","composition-slop"],
-  humanGate:ops.some((o)=>o.op==="collapse-peer-grids"),
+  // collapse-peer-grids is auto-safe on DOM+TSX (xor-saved-view); only PLAN_ONLY ops gate humans.
+  humanGate:ops.some((o)=>o.op==="god-split"),
  });
  plan.restructureRequired=restructureRequired;
  plan.fromDiagnosis={

@@ -15,6 +15,17 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: preflight ai-slop-badge-spam → pill-collapse.** Preflight
+  emitted badge/chip spam as a soft **note**; after pill-collapse badge/chip
+  hosts (#206) the signal can hard-fail on Operate queue (≥5 visible hosts) and
+  clear when excess is parked in `<details data-shine-pill-rest>`. Count is
+  host-based (not title text) and ignores collapsed rest. Denoise-loop seeds
+  `pillFilterCheck` from the signal; diagnosis pill-collapse selector includes
+  `[data-slot=badge]` / `.chip`. Also clears stale `humanGate` on auto-safe
+  `collapse-peer-grids` (only `god-split` gates humans). Doctor:
+  `verify/badge-spam-preflight-bite.mjs`. Does not expand Operate-slop library
+  (saturated at 14); leaves empty-insight-shell (#191) alone.
+
 - **Denoise deepen: pill-filter badge/chip via pill-collapse.** Measure already
   fail-closed ≥5 above-fold filter pills (`pill-filter`), but repair only matched
   classic `.pill` / `data-shine-filter-pill` hosts — `data-slot="badge"`, `.chip`,

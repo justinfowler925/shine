@@ -195,6 +195,10 @@ export async function runDenoiseLoop({
     ok: !pre.signals.some((s) => s.id === "ai-slop-kpi-strip"),
     note: "From preflight-slop kpi-strip signal",
   };
+  diagnosis.pillFilterCheck = {
+    ok: !pre.signals.some((s) => s.id === "ai-slop-badge-spam"),
+    note: "From preflight-slop badge-spam signal → pill-collapse",
+  };
   diagnosis.citeHonestyCheck = { ok: true, note: `Cite ${cite}` };
   diagnosis.restructureRequired = true;
   writeFileSync(join(out, "shine-diagnosis.json"), JSON.stringify(diagnosis, null, 2) + "\n");
