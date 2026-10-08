@@ -199,6 +199,10 @@ export async function runDenoiseLoop({
     ok: !pre.signals.some((s) => s.id === "ai-slop-badge-spam"),
     note: "From preflight-slop badge-spam signal → pill-collapse",
   };
+  diagnosis.cardSoupCheck = {
+    ok: !pre.signals.some((s) => s.id === "ai-slop-nested-cards" || s.id === "ai-slop-card-carnival"),
+    note: "From preflight-slop nested-cards / card-carnival signal → collapse-card-soup",
+  };
   diagnosis.citeHonestyCheck = { ok: true, note: `Cite ${cite}` };
   diagnosis.restructureRequired = true;
   writeFileSync(join(out, "shine-diagnosis.json"), JSON.stringify(diagnosis, null, 2) + "\n");
