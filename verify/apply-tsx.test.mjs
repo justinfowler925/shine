@@ -23,6 +23,8 @@ import {
   countPageTitlesTsx,
   chromeBudgetTsx,
   countChromeFilledButtonsTsx,
+  collapseEmptyShellsTsx,
+  countEmptyInsightShellsTsx,
 } from "./restructure/apply-tsx.mjs";
 import { buildRestructurePlan } from "./restructure/schema.mjs";
 
@@ -326,6 +328,29 @@ const linkPlan = buildRestructurePlan({
 });
 assert.ok(applyTsxRestructure(linkHard, linkPlan).applied.includes("link-field-errors"));
 
+
+// Empty insight shells AST: blank peer cards under focal → remove
+const emptyShells = readFileSync(join(FIX, "queue-empty-shells.tsx"), "utf8");
+const emptyHard = readFileSync(join(FIX, "queue-empty-shells-ast.tsx"), "utf8");
+const beforeEmpty = countEmptyInsightShellsTsx(emptyShells);
+assert.ok(beforeEmpty.hasFocal && beforeEmpty.emptyShells >= 2, JSON.stringify(beforeEmpty));
+const emptyAfter = collapseEmptyShellsTsx(emptyShells, { mode: "remove" });
+assert.equal(countEmptyInsightShellsTsx(emptyAfter).emptyShells, 0);
+assert.match(emptyAfter, /Needs attention/);
+assert.doesNotMatch(emptyAfter, /Active in Usul/);
+const beforeEmptyHard = countEmptyInsightShellsTsx(emptyHard);
+assert.ok(beforeEmptyHard.emptyShells >= 2, JSON.stringify(beforeEmptyHard));
+const emptyHardAfter = collapseEmptyShellsTsx(emptyHard, { mode: "remove" });
+assert.equal(countEmptyInsightShellsTsx(emptyHardAfter).emptyShells, 0);
+assert.match(emptyHardAfter, /className=\{\s*["']grid-wrap["']\s*\}/);
+assert.doesNotMatch(emptyHardAfter, /Missed awards/);
+const emptyPlan = buildRestructurePlan({
+  job: "Collapse empty insight shells",
+  category: "queue",
+  ops: [{ op: "collapse-empty-shells", mode: "remove" }],
+});
+assert.ok(applyTsxRestructure(emptyHard, emptyPlan).applied.includes("collapse-empty-shells"));
+
 const stampTitleHard = readFileSync(join(FIX, "queue-missing-page-title-ast.tsx"), "utf8");
 const stampTitlePlan = buildRestructurePlan({
   job: "Stamp page title",
@@ -335,5 +360,5 @@ const stampTitlePlan = buildRestructurePlan({
 assert.ok(applyTsxRestructure(stampTitleHard, stampTitlePlan).applied.includes("stamp-page-title"));
 
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · stamp-page-title AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-card-soup AST · split-empty-triad AST · stamp-chart-units AST · bind-product-owner AST · name-controls AST · link-field-errors AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · stamp-page-title AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-card-soup AST · split-empty-triad AST · stamp-chart-units AST · bind-product-owner AST · name-controls AST · link-field-errors AST · collapse-empty-shells AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );

@@ -15,6 +15,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate slop: empty-insight-shells / collapse-empty-shells.** Blank peer/insight
+  Card shells under a green queue focal (Active in Usul / Missed awards title+kicker
+  only) fail-closed as `empty-insight-shells`. Auto-safe `collapse-empty-shells`
+  removes them (or parks deferred prose in `<details data-shine-deferred-shell>`)
+  on DOM + TypeScript AST. Recommend emits `emptyInsightShellAst`; denoise-loop
+  names `empty-insight-shells`. Doctor bites: `verify/empty-insight-shells.test.mjs` ·
+  `verify/empty-insight-shells-ast-bite.mjs`.
+
 - **Denoise deepen: preflight ai-slop-metric-grid → kpi-collapse.** Preflight
   emitted metric-grid as a soft **note**, and the cluster regex false-positived on
   `.metrics`/`.metric` CSS after `kpi-collapse` parked tiles. Detector now strips
@@ -32,8 +40,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   `pillFilterCheck` from the signal; diagnosis pill-collapse selector includes
   `[data-slot=badge]` / `.chip`. Also clears stale `humanGate` on auto-safe
   `collapse-peer-grids` (only `god-split` gates humans). Doctor:
-  `verify/badge-spam-preflight-bite.mjs`. Does not expand Operate-slop library
-  (saturated at 14); leaves empty-insight-shell (#191) alone.
+  `verify/badge-spam-preflight-bite.mjs`. Operate-slop library now includes empty-insight-shells (#191).
 
 - **Denoise deepen: pill-filter badge/chip via pill-collapse.** Measure already
   fail-closed ≥5 above-fold filter pills (`pill-filter`), but repair only matched
@@ -58,8 +65,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   primitives). `name-controls` now stamps `aria-label` + `data-shine-blank-cta`
   on those hosts on DOM + TypeScript AST. Recommend emits `blankCtaAst`;
   denoise-loop names `blank-cta`. Doctor bites: `verify/blank-cta.test.mjs` ·
-  `verify/blank-cta-ast-bite.mjs`. Does not expand Operate-slop library
-  (saturated at 14); leaves empty-insight-shell (#191) alone.
+  `verify/blank-cta-ast-bite.mjs`. Operate-slop library now includes empty-insight-shells (#191).
 
 - **Denoise deepen: copy empty-instructional via rewrite-filler-empty.** Measure
   already fail-closed blank/stub empty-state regions (`copy: empty-instructional`
@@ -67,8 +73,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   now rewrites those hosts on DOM + TypeScript AST (self-closing hosts expand).
   Recommend emits `emptyInstructionalAst`; denoise-loop names `empty-instructional`.
   Doctor bites: `verify/empty-instructional.test.mjs` ·
-  `verify/empty-instructional-ast-bite.mjs`. Does not expand Operate-slop library
-  (saturated at 14); leaves empty-insight-shell (#191) alone.
+  `verify/empty-instructional-ast-bite.mjs`. Operate-slop library now includes empty-insight-shells (#191).
 
 - **Denoise deepen: copy missing-page-title / stamp-page-title.** Measure already
   fail-closed missing `document.title` + visible `h1` (`copy: missing-page-title`
@@ -76,8 +81,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   data-page-title>` on DOM + TypeScript AST (ordered before `title-singular` in
   `DENOISE_OP_ORDER`). Recommend emits `stampPageTitleAst`; denoise-loop names
   `missing-page-title` / `empty-h1`. Doctor bites: `verify/stamp-page-title.test.mjs`
-  · `verify/stamp-page-title-ast-bite.mjs`. Does not expand Operate-slop library
-  (saturated at 14); leaves empty-insight-shell (#191) alone.
+  · `verify/stamp-page-title-ast-bite.mjs`. Operate-slop library now includes empty-insight-shells (#191).
 
 - **Denoise deepen: form-heuristic / link-field-errors + DENOISE_OP_ORDER.**
   Measure already fail-closed `aria-invalid` without an accessible message
@@ -87,8 +91,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   `DENOISE_OP_ORDER` / `sortRestructureOps` hardens apply-dom, apply-tsx, and
   `buildRestructurePlan` so new ops compose cleanly regardless of diagnosis
   emit order. Doctor bites: `verify/link-field-errors.test.mjs` ·
-  `verify/link-field-errors-ast-bite.mjs`. Does not expand Operate-slop library
-  (saturated at 14); leaves empty-insight-shell (#191) alone.
+  `verify/link-field-errors-ast-bite.mjs`. Operate-slop library now includes empty-insight-shells (#191).
 
 - **Denoise deepen: incomplete-primitives / name-controls.** Measure already
   fail-closed icon-only unnamed, unlabeled fields, and confirm-less destructive
@@ -96,8 +99,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   `aria-label` / `data-shine-named` and `data-confirm` + `aria-haspopup=dialog`
   on DOM + TypeScript AST. Recommend emits `nameControlsAst`; denoise-loop names
   `incomplete-primitive`. Doctor bites: `verify/name-controls.test.mjs` ·
-  `verify/name-controls-ast-bite.mjs`. Does not expand Operate-slop library
-  (saturated at 14); leaves empty-insight-shell (#191) alone.
+  `verify/name-controls-ast-bite.mjs`. Operate-slop library now includes empty-insight-shells (#191).
 
 - **Operate slop: parallel-owned-component / bind-product-owner.** Homemade
   worklists/tables beside a Nucleus (or product) owner fail-closed as

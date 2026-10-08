@@ -23,7 +23,7 @@ const text=(value)=>String(value||"").trim();
 export const saasPageCategories=new Set(["datagrid","dashboard","form","record","lex"]);
 export const saasProductUxCheckKeys=["primaryTaskCheck","emptyErrorTriadCheck","competingCtaCheck"];
 /** Denoise / Operate composition checks — presence gated like product-UX (N7). */
-export const saasRestructureCheckKeys=["dualFocalCheck","kpiSoupCheck","citeHonestyCheck","pillFilterCheck","pageTitleCheck","copyHeuristicCheck","chromePressureCheck","filterReversibleCheck","marketingDnaCheck","fillerEmptyCheck","cardSoupCheck","emptyTriadCheck","decorativeChartCheck","parallelOwnedCheck","incompletePrimitivesCheck","formHeuristicCheck"];
+export const saasRestructureCheckKeys=["dualFocalCheck","kpiSoupCheck","citeHonestyCheck","pillFilterCheck","pageTitleCheck","copyHeuristicCheck","chromePressureCheck","filterReversibleCheck","marketingDnaCheck","fillerEmptyCheck","cardSoupCheck","emptyTriadCheck","decorativeChartCheck","parallelOwnedCheck","incompletePrimitivesCheck","formHeuristicCheck","emptyInsightShellCheck"];
 
 // Copy checks: persuasive + instructional surfaces under lane=saas (Operate pages
 // plus marketing/catalog). Presence only — belief honesty stays agent (copy.md).
@@ -200,6 +200,9 @@ export function deriveRestructureOps(diagnosis={}){
  if(diagnosis.formHeuristicCheck?.ok===false){
   ops.push({op:"link-field-errors"});
  }
+ if(diagnosis.emptyInsightShellCheck?.ok===false){
+  ops.push({op:"collapse-empty-shells",mode:"remove"});
+ }
  if(diagnosis.citeHonestyCheck?.ok===false||(/settings|sources|recipes/i.test(job)&&/queue|datagrid/i.test(category))){
   ops.push({op:"rebind-cite",from:"shadcn-queue",to:"shadcn-settings",whenCategory:"settings"});
  }
@@ -265,7 +268,7 @@ export function emitRestructureFromDiagnosis(diagnosis,{citePrimary="",antiCites
      {op:"cta-budget",scope:"main",maxFilled:1,preferLabels:["Pursue"],demotePolicy:"outline"},
      {op:"set-focal",attr:"data-region",value:"focal",on:"primary-worklist"},
     ],
-  measureMustClear:["cta-pressure","dual-focal","kpi-soup","pill-filter","page-title","chrome-pressure","composition-slop"],
+  measureMustClear:["cta-pressure","dual-focal","kpi-soup","pill-filter","page-title","chrome-pressure","composition-slop","empty-insight-shells"],
   // collapse-peer-grids is auto-safe on DOM+TSX (xor-saved-view); only PLAN_ONLY ops gate humans.
   humanGate:ops.some((o)=>o.op==="god-split"),
  });
@@ -283,7 +286,7 @@ export function emitRestructureFromDiagnosis(diagnosis,{citePrimary="",antiCites
 export function seedDiagnosis({job,category,lane=""}){
  const base={version:1,job,category,primaryTask:"",before:{artifact:"",screenshot:""},
   verdict:"defects",
-  guidance:"Keep only defects you can evidence from the before screenshot or measure output. One real defect is a valid pass. If nothing is wrong, set verdict to no-change, list all five buckets in checked, and write verdictEvidence; do not invent defects or inflate severity to satisfy a count. For lane=saas Operate page categories, fill primaryTaskCheck, emptyErrorTriadCheck, competingCtaCheck, dualFocalCheck, kpiSoupCheck, citeHonestyCheck, and the copy/adoption check fields (presence is machine-gated; honesty of the note is yours). Set restructureRequired + restructureOps when structure is red. Emit shine-restructure.json via: node core/diagnosis.mjs emit-restructure --file shine-diagnosis.json. Bind critical/major usability and adoption defects to flow:<id> assertions when a usability flow exists. Denoise: no polish while restructureRequired and primaryTaskCheck is red.",
+  guidance:"Keep only defects you can evidence from the before screenshot or measure output. One real defect is a valid pass. If nothing is wrong, set verdict to no-change, list all five buckets in checked, and write verdictEvidence; do not invent defects or inflate severity to satisfy a count. For lane=saas Operate page categories, fill primaryTaskCheck, emptyErrorTriadCheck, competingCtaCheck, dualFocalCheck, kpiSoupCheck, citeHonestyCheck, emptyInsightShellCheck, and the copy/adoption check fields (presence is machine-gated; honesty of the note is yours). Set restructureRequired + restructureOps when structure is red. Emit shine-restructure.json via: node core/diagnosis.mjs emit-restructure --file shine-diagnosis.json. Bind critical/major usability and adoption defects to flow:<id> assertions when a usability flow exists. Denoise: no polish while restructureRequired and primaryTaskCheck is red.",
   checked:[],
   verdictEvidence:"",
   restructureRequired:false,

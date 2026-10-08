@@ -132,6 +132,12 @@ export function applyDomRestructure(html, plan) {
         out = next;
         applied.push("link-field-errors");
       }
+    } else if (op.op === "collapse-empty-shells") {
+      const next = applyCollapseEmptyShells(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("collapse-empty-shells");
+      }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
       applied.push("set-focal");
@@ -495,6 +501,72 @@ function resolveBlankControlLabel(attrs, op = {}) {
  * fields, and stamp confirm markers on destructive verbs.
  * Also clears copy: blank-cta (nameless non-icon buttons/links).
  */
+/**
+ * Collapse empty peer/insight Card shells (title+kicker-only) under a queue focal.
+ * Default mode=remove; mode/rest=details → <details data-shine-deferred-shell>.
+ */
+export function applyCollapseEmptyShells(html, op = {}) {
+  // Default remove title+kicker-only shells; mode/rest "details" → deferred disclosure.
+  const useDetails = op.mode === "details" || op.rest === "details";
+  let out = String(html);
+
+  // Walk card sections/divs/articles with class card or data-shine-insight.
+  // Require data-shine-insight as a full attribute (not data-shine-insight-band).
+  const cardRe =
+    /<(section|div|article)\b([^>]*?(?:class=["'][^"']*\bcard\b[^"']*["']|data-shine-insight(?:\s|=|>|$)|data-shine-card(?:\s|=|>|$)|data-slot=["']card["'])[^>]*)>([\s\S]*?)<\/\1>/gi;
+
+  out = out.replace(cardRe, (full, tag, attrs, body) => {
+    if (/\bdata-region=["']focal["']/.test(attrs) || /\bdata-region=["']focal["']/.test(body)) {
+      return full;
+    }
+    if (/data-shine-deferred-shell/.test(attrs) || /data-shine-deferred-shell/.test(body)) {
+      return full;
+    }
+    // Substantive content — keep.
+    if (
+      /<(table|ul|ol|button|input|select|textarea|canvas|img|video)\b/i.test(body) ||
+      /role=["'](?:grid|list)["']/i.test(body) ||
+      /\bclass=["'][^"']*\bmetric\b/i.test(body) ||
+      /data-shine-kpi|data-kpi=|data-shine-records|data-chart/i.test(body) ||
+      /<a\b[^>]*href=/i.test(body)
+    ) {
+      return full;
+    }
+    // Must have a heading to count as an insight shell (avoid nuking random wrappers).
+    if (!/<h[1-6]\b/i.test(body) && !/role=["']heading["']/i.test(body)) return full;
+
+    // Strip headings + kickers; leftover prose longer than a diagnostic line → defer, not delete.
+    const stripped = String(body)
+      .replace(/<h[1-6]\b[^>]*>[\s\S]*?<\/h[1-6]>/gi, "")
+      .replace(/<p\b[^>]*class=["'][^"']*\bkicker\b[^"']*["'][^>]*>[\s\S]*?<\/p>/gi, "")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (stripped.length > 120) return full;
+
+    if (useDetails && stripped.length > 0) {
+      const titleMatch =
+        attrs.match(/aria-label=["']([^"']+)["']/i) ||
+        body.match(/<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/i);
+      const summary = titleMatch
+        ? String(titleMatch[1]).replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim()
+        : "More insight";
+      return (
+        `<details data-shine-deferred-shell>` +
+        `<summary>${summary}</summary>` +
+        `<${tag}${attrs}>${body}</${tag}>` +
+        `</details>`
+      );
+    }
+    // remove
+    return "";
+  });
+
+  // Drop diagnosis kickers that described the empty shells.
+  out = scrubDiagnosticKpiKickers(out);
+  return out;
+}
+
 export function applyNameControls(html, op = {}) {
   const defaultIconLabel = op.iconLabel || "More actions";
   let out = String(html);

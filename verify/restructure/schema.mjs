@@ -20,6 +20,7 @@ export const AUTO_SAFE_DOM_OPS = Object.freeze([
   "bind-product-owner",
   "name-controls",
   "link-field-errors",
+  "collapse-empty-shells",
   "set-focal",
   "worklist-first",
   "rebind-cite",
@@ -51,6 +52,7 @@ export const DENOISE_OP_ORDER = Object.freeze([
   "bind-product-owner",
   "name-controls",
   "link-field-errors",
+  "collapse-empty-shells",
   "strip-marketing-dna",
   "rewrite-filler-empty",
   "worklist-first",
@@ -152,13 +154,14 @@ export function buildRestructurePlan({
           { op: "bind-product-owner" },
           { op: "name-controls" },
           { op: "link-field-errors" },
+          { op: "collapse-empty-shells", mode: "remove" },
           { op: "worklist-first", attr: "data-region", value: "focal", on: "primary-worklist" },
           { op: "set-focal", attr: "data-region", value: "focal", on: "primary-worklist" },
         ],
     acceptance: {
       measureMustClear: measureMustClear.length
         ? measureMustClear
-        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "missing-page-title", "empty-instructional", "chrome-pressure", "filter-reversible", "marketing-dna", "filler-empty", "card-soup", "empty-triad", "decorative-chart", "parallel-owned", "incomplete-primitive", "form-heuristic", "composition-slop"],
+        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "missing-page-title", "empty-instructional", "chrome-pressure", "filter-reversible", "marketing-dna", "filler-empty", "card-soup", "empty-triad", "decorative-chart", "parallel-owned", "incomplete-primitive", "form-heuristic", "composition-slop", "empty-insight-shells"],
       usabilityFlow: usabilityFlow || "flow:decide-notice",
       proveRequired: true,
     },

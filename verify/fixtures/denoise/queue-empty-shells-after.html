@@ -1,0 +1,70 @@
+<!doctype html>
+<!-- Denoise empty-insight-shells PASS — empty peer shells removed; real content kept -->
+<html lang="en" data-cite="shadcn-queue" data-shine-probe="app-shell">
+<head>
+<meta charset="utf-8"/>
+<title>SLED Capture — insight shells collapsed</title>
+<style>
+body{margin:0;font:14px/1.45 system-ui,sans-serif;background:#fafafa;color:#18181b}
+.shell{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+aside{padding:16px;border-right:1px solid #e4e4e7;background:#fff}
+main{padding:20px 24px}
+.grid-wrap{border:1px solid #e4e4e7;border-radius:8px;background:#fff;padding:12px;margin:0 0 16px}
+table{width:100%;border-collapse:collapse}th,td{border-bottom:1px solid #e4e4e7;padding:8px;text-align:left}
+.btn{border:1px solid #e4e4e7;background:#fff;padding:6px 10px;border-radius:4px;font:inherit;margin:0 4px 4px 0}
+.btn.filled{background:#18181b;color:#fff;border-color:#18181b;font-weight:600}
+.metrics{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}
+.metric{flex:1 1 9rem;padding:12px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;min-height:72px}
+.metric span{display:block;font-size:12px;color:#71717a}.metric strong{font-size:20px}
+.insights{display:grid;gap:16px;margin-top:20px;grid-template-columns:1fr}
+.card{border:1px solid #e4e4e7;border-radius:10px;background:#fff;padding:14px;min-height:120px}
+.kicker{color:#71717a;font-size:12px;margin:0 0 8px}
+h1,h2,h3{margin:0 0 8px;font-size:16px}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside aria-label="Nav"><strong>SLED Capture</strong><p class="kicker">Queue</p></aside>
+<main data-shine-main aria-label="Capture queue">
+  <h1>Queue</h1>
+  <p class="kicker">Empty Active in Usul / Missed awards shells removed; Needs attention kept</p>
+  <div class="grid-wrap" data-region="focal" data-product-pattern="paged-notice-queue" data-shine-records>
+    <h2 data-grid-title="Queue">Queue</h2>
+    <table role="grid" aria-label="Published queue">
+      <thead><tr><th>Notice</th><th>Decision</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>NV DPS voice risk RFI</strong></td>
+          <td>
+            <button type="button" class="btn filled">Pursue</button>
+            <button type="button" class="btn">Review</button>
+            <button type="button" class="btn">Dismiss</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <section data-sled-kpis>
+    <h2>Summary</h2>
+    <div class="metrics" aria-label="SLED Capture key figures">
+      <div class="metric" data-kpi="Open queue"><span>Open queue</span><strong>214</strong><span>18 states</span></div>
+      <div class="metric" data-kpi="New"><span>New</span><strong>12 / 41</strong><span>24h / 7d</span></div>
+      <div class="metric" data-kpi="High score"><span>High score (≥70)</span><strong>33</strong><span>19 undecided</span></div>
+      <details data-shine-kpi-rest><summary>More metrics</summary>
+        <div class="metric" data-kpi="Usul"><span>Active in Usul</span><strong>22</strong><span>14 matched</span></div>
+        <div class="metric" data-kpi="Missed"><span>Missed</span><strong>9</strong><span>$1.2M valued</span></div>
+      </details>
+    </div>
+  </section>
+  <div class="insights" data-shine-insight-band>
+    <section class="card" aria-label="Needs attention">
+      <h3>Needs attention</h3>
+      <p class="kicker">4 nudges on the decide path</p>
+      <button type="button" class="btn">Open card</button>
+      <button type="button" class="btn">Mark for review</button>
+    </section>
+  </div>
+</main>
+</div>
+</body>
+</html>

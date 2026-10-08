@@ -1010,6 +1010,68 @@ export function buildPillBadgeAstAfterCropHtml() {
   });
 }
 
+
+/**
+ * TSX AST empty-insight-shells FAIL crop — blank Active in Usul / Missed awards
+ * peer cards under a green queue focal (mirrors queue-empty-shells-ast.tsx).
+ */
+export function buildEmptyInsightShellAstBeforeCropHtml() {
+  return wrap({
+    title: "Empty-shell AST crop FAIL — blank insight cards",
+    cropId: "empty-insight-shells-tsx-before",
+    cite: "shadcn-queue",
+    caption:
+      "Crop FAIL: blank Active in Usul / Missed awards Card shells (className card / {\"card\"} / data-shine-insight) under a queue focal — empty-insight-shells; apply-tsx AST collapse-empty-shells.",
+    body: `  <h1>Queue · TSX empty insight shells</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-empty-shells-ast.tsx">Before apply-tsx collapse-empty-shells</p>
+  <div class="grid-wrap" data-region="focal" data-shine-records data-shine-tsx-ast="before">
+    <h2 data-grid-title="Queue">Queue</h2>
+    <table role="grid"><thead><tr><th>Notice</th></tr></thead><tbody><tr><td>NV DPS</td></tr></tbody></table>
+  </div>
+  <div class="insights" data-shine-insight-band>
+    <section class="card" aria-label="Needs attention">
+      <h3>Needs attention</h3>
+      <p class="kicker">4 nudges</p>
+      <button type="button" class="btn">Open card</button>
+    </section>
+    <section class="card" aria-label="Active in Usul" data-shine-insight data-tsx-shell="expr">
+      <h3>Active in Usul</h3>
+      <p class="kicker">Matched pipeline rows competing with the queue focal</p>
+    </section>
+    <section class="card" aria-label="Missed awards" data-shine-insight data-tsx-shell="literal">
+      <h3>Missed awards &amp; recompetes</h3>
+      <p class="kicker">Another equal card after ten KPIs</p>
+    </section>
+  </div>`,
+  });
+}
+
+/**
+ * TSX AST empty-insight-shells PASS crop — empty shells removed; Needs attention kept.
+ */
+export function buildEmptyInsightShellAstAfterCropHtml() {
+  return wrap({
+    title: "Empty-shell AST crop PASS — shells removed",
+    cropId: "empty-insight-shells-tsx-after",
+    cite: "shadcn-queue",
+    caption:
+      "Crop PASS: blank peer/insight shells removed via TSX AST collapse-empty-shells; Needs attention (real actions) kept.",
+    body: `  <h1>Queue · TSX insight shells collapsed</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-empty-shells-ast.tsx">After apply-tsx collapse-empty-shells</p>
+  <div class="grid-wrap" data-region="focal" data-shine-records data-shine-tsx-ast="after">
+    <h2 data-grid-title="Queue">Queue</h2>
+    <table role="grid"><thead><tr><th>Notice</th></tr></thead><tbody><tr><td>NV DPS</td></tr></tbody></table>
+  </div>
+  <div class="insights" data-shine-insight-band>
+    <section class="card" aria-label="Needs attention">
+      <h3>Needs attention</h3>
+      <p class="kicker">4 nudges</p>
+      <button type="button" class="btn">Open card</button>
+    </section>
+  </div>`,
+  });
+}
+
 /** Pill-filter TSX AST FAIL crop. */
 export function buildPillAstBeforeCropHtml() {
   return wrap({
@@ -1785,6 +1847,27 @@ export const DEFECT_CROP_PAIRS = [
     beforeMust: [/data-shine-tsx-ast="before"/, /data-slot=["']badge["']/],
     beforeMustNot: [/data-shine-pill-rest/],
     afterMust: [/data-shine-tsx-ast="after"/, /data-shine-pill-rest/, /More filters/],
+  },
+  {
+    id: "queue-empty-shells-tsx",
+    defect: "empty-insight-shells",
+    beforeCrop: "queue-empty-shells-tsx-before-crop.html",
+    afterCrop: "queue-empty-shells-tsx-after-crop.html",
+    buildBefore: buildEmptyInsightShellAstBeforeCropHtml,
+    buildAfter: buildEmptyInsightShellAstAfterCropHtml,
+    beforeMust: [
+      /data-shine-tsx-ast="before"/,
+      /Active in Usul/,
+      /Missed awards/,
+      /data-shine-insight/,
+      /data-region=["']focal["']/,
+    ],
+    afterMust: [/data-shine-tsx-ast="after"/, /Needs attention/, /data-region=["']focal["']/],
+    afterMustNot: [
+      /aria-label=["']Active in Usul["']/,
+      /aria-label=["']Missed awards["']/,
+      /data-shine-insight[\s=]/,
+    ],
   },
   {
     id: "queue-titles",

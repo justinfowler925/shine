@@ -255,6 +255,18 @@ export const BLANK_CTA_AST_FIXTURES = Object.freeze({
   op: "name-controls",
 });
 
+export const EMPTY_INSIGHT_SHELL_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-empty-shells.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-empty-shells-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-empty-shells-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-empty-shells-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-empty-shells-tsx",
+  op: "collapse-empty-shells",
+  mode: "remove",
+});
+
+
 /** Repo-relative marketing-dna-operate TSX AST FAIL→PASS fixtures (strip-marketing-dna). */
 export const MARKETING_DNA_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-marketing-dna.tsx",
@@ -420,6 +432,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: bind-product-owner — stamp data-shine-reuse-bound; demote parallel worklists");
     hints.push("restructure: name-controls — aria-label icon-only/unlabeled; data-confirm on destructive");
     hints.push("restructure: link-field-errors — aria-describedby + role=alert on aria-invalid fields");
+    hints.push("restructure: collapse-empty-shells — remove blank peer/insight Card shells under the queue focal");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
@@ -434,6 +447,15 @@ function restructureHints(retrieval, primary, job) {
       hints.push("restructure: name-controls — aria-label icon-only/unlabeled; data-confirm on destructive");
     }
   }
+  // Empty-shell language always names collapse-empty-shells — even when retrieve
+  // mis-binds an empty-state / catalog cite instead of shadcn-queue.
+  if (
+    /empty[- ]?shell|insight shells?|active in usul|missed awards|collapse[- ]?empty|blank peer/i.test(job) &&
+    !hints.some((h) => /collapse-empty-shells/i.test(h))
+  ) {
+    hints.push("restructure: collapse-empty-shells — remove blank peer/insight Card shells under the queue focal");
+  }
+
   if (
     /usul|card soup|equal cards?|composition[- ]?slop|no[- ]?focal|set[- ]?focal|focal region|collapse[- ]?card|catalog/i.test(
       job,
@@ -777,6 +799,40 @@ export function blankCtaAstForQueueJob(job, constraints = {}) {
     reference: "skill/references/denoise.md",
     instruction:
       "Blank CTAs with no visible/accessible name (copy: blank-cta): apply verify/restructure/apply-tsx.mjs name-controls (TypeScript AST; aria-label + data-shine-blank-cta on nameless non-icon buttons/links). Copy FAIL→PASS crop paths from recommendation.blankCtaAst.cropBefore/cropAfter; prove blank-cta clears.",
+  };
+}
+
+/**
+ * Empty peer/insight shells TSX AST fixture binding for Operate queue jobs.
+ * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
+ * apply-tsx collapse-empty-shells — blank Active in Usul / Missed awards cards.
+ */
+export function emptyInsightShellAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "dashboard"].includes(category) ||
+    ["queue", "approval", "dashboard"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|insight|empty[- ]?shell|active in usul|missed awards|collapse[- ]?empty)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: EMPTY_INSIGHT_SHELL_AST_FIXTURES.op,
+    collapseMode: EMPTY_INSIGHT_SHELL_AST_FIXTURES.mode,
+    fixtureTsx: EMPTY_INSIGHT_SHELL_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: EMPTY_INSIGHT_SHELL_AST_FIXTURES.tsxAstHard,
+    cropBefore: EMPTY_INSIGHT_SHELL_AST_FIXTURES.cropBefore,
+    cropAfter: EMPTY_INSIGHT_SHELL_AST_FIXTURES.cropAfter,
+    cropPairId: EMPTY_INSIGHT_SHELL_AST_FIXTURES.cropPairId,
+    helper: EMPTY_INSIGHT_SHELL_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Empty peer/insight Card shells under a queue focal in consumer TSX: apply verify/restructure/apply-tsx.mjs collapse-empty-shells (TypeScript AST; remove title+kicker-only non-focal shells, or mode=details → <details data-shine-deferred-shell>). Handles className=\"card\", className={\"card\"}, data-shine-insight / data-shine-card. Never removes the focal worklist or cards with table/list/metrics/actions. Copy FAIL→PASS crop paths from recommendation.emptyInsightShellAst.cropBefore/cropAfter; prove empty-insight-shells clears.",
   };
 }
 
@@ -1411,6 +1467,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    emptyInsightShellAst: emptyInsightShellAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     cardSoupAst: cardSoupAstForCatalogJob(job, {
       category: constraints.category,
       screen,
@@ -1617,6 +1678,9 @@ export function formatRecommendationSummary(rec) {
   const blankCtaAst = rec.blankCtaAst?.fixtureTsx
     ? ` · blankCtaAst ${rec.blankCtaAst.mode}@${rec.blankCtaAst.cropPairId}`
     : "";
+  const emptyShell = rec.emptyInsightShellAst?.fixtureTsx
+    ? ` · emptyInsightShellAst ${rec.emptyInsightShellAst.mode}@${rec.emptyInsightShellAst.cropPairId}`
+    : "";
   const cardSoupAst = rec.cardSoupAst?.fixtureTsx
     ? ` · cardSoupAst ${rec.cardSoupAst.mode}@${rec.cardSoupAst.cropPairId}`
     : "";
@@ -1652,6 +1716,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pillBadge}${pageTitle}${stampPageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${emptyInstructionalAst}${blankCtaAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${linkFieldErrorsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pillBadge}${pageTitle}${stampPageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${emptyInstructionalAst}${blankCtaAst}${emptyShell}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${linkFieldErrorsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }
