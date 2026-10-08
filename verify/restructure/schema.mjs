@@ -17,6 +17,7 @@ export const AUTO_SAFE_DOM_OPS = Object.freeze([
   "split-empty-triad",
   "stamp-chart-units",
   "bind-product-owner",
+  "name-controls",
   "set-focal",
   "worklist-first",
   "rebind-cite",
@@ -97,13 +98,14 @@ export function buildRestructurePlan({
           { op: "split-empty-triad" },
           { op: "stamp-chart-units" },
           { op: "bind-product-owner" },
+          { op: "name-controls" },
           { op: "worklist-first", attr: "data-region", value: "focal", on: "primary-worklist" },
           { op: "set-focal", attr: "data-region", value: "focal", on: "primary-worklist" },
         ],
     acceptance: {
       measureMustClear: measureMustClear.length
         ? measureMustClear
-        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "chrome-pressure", "filter-reversible", "marketing-dna", "filler-empty", "card-soup", "empty-triad", "decorative-chart", "parallel-owned", "composition-slop"],
+        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "chrome-pressure", "filter-reversible", "marketing-dna", "filler-empty", "card-soup", "empty-triad", "decorative-chart", "parallel-owned", "incomplete-primitive", "composition-slop"],
       usabilityFlow: usabilityFlow || "flow:decide-notice",
       proveRequired: true,
     },

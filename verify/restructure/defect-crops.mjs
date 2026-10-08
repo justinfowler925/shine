@@ -344,6 +344,58 @@ export function buildParallelOwnedAstAfterCropHtml() {
   });
 }
 
+/** Name-controls DOM FAIL crop. */
+export function buildNameControlsBeforeCropHtml() {
+  return wrap({
+    title: "Name-controls crop FAIL",
+    cropId: "name-controls-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: icon-only + unlabeled + confirm-less Delete — incomplete-primitive.",
+    body: `  <button type="button" class="icon" id="more"><svg width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="1.5"/></svg></button>
+  <input id="email" type="email" placeholder="Filter by email" />
+  <button type="button" class="danger" id="delete">Delete notice</button>`,
+  });
+}
+
+/** Name-controls DOM PASS crop. */
+export function buildNameControlsAfterCropHtml() {
+  return wrap({
+    title: "Name-controls crop PASS",
+    cropId: "name-controls-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: aria-label + confirm stamps — name-controls.",
+    body: `  <button type="button" class="icon" id="more" aria-label="More actions" data-shine-named><svg width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="1.5"/></svg></button>
+  <input id="email" type="email" placeholder="Filter by email" aria-label="Filter by email" data-shine-named />
+  <button type="button" class="danger" id="delete" aria-haspopup="dialog" data-confirm data-shine-confirm>Delete notice</button>`,
+  });
+}
+
+/** Name-controls TSX AST FAIL crop. */
+export function buildNameControlsAstBeforeCropHtml() {
+  return wrap({
+    title: "Name-controls AST crop FAIL",
+    cropId: "name-controls-tsx-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: incomplete primitives in TSX — apply-tsx name-controls.",
+    body: `  <button type="button" class="icon" id="more" data-shine-tsx-ast="before"><svg width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="1.5"/></svg></button>
+  <input id="email" type="email" placeholder="Filter by email" />
+  <button type="button" class="danger" id="delete">Delete notice</button>`,
+  });
+}
+
+/** Name-controls TSX AST PASS crop. */
+export function buildNameControlsAstAfterCropHtml() {
+  return wrap({
+    title: "Name-controls AST crop PASS",
+    cropId: "name-controls-tsx-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: names + confirm via TSX AST name-controls.",
+    body: `  <button type="button" class="icon" id="more" aria-label="More actions" data-shine-named data-shine-tsx-ast="after"><svg width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="1.5"/></svg></button>
+  <input id="email" type="email" placeholder="Filter by email" aria-label="Filter by email" data-shine-named />
+  <button type="button" class="danger" id="delete" aria-haspopup="dialog" data-confirm data-shine-confirm>Delete notice</button>`,
+  });
+}
+
 /** Empty-triad DOM FAIL crop. */
 export function buildEmptyTriadBeforeCropHtml() {
   return wrap({
@@ -1630,6 +1682,28 @@ export const DEFECT_CROP_PAIRS = [
     beforeMust: [/data-shine-tsx-ast="before"/, /homemade-grid/],
     afterMust: [/data-shine-tsx-ast="after"/, /data-shine-reuse-bound/, /data-shine-parallel-rest/],
   },
+
+  {
+    id: "queue-name-controls",
+    defect: "incomplete-primitive",
+    beforeCrop: "queue-name-controls-before-crop.html",
+    afterCrop: "queue-name-controls-after-crop.html",
+    buildBefore: buildNameControlsBeforeCropHtml,
+    buildAfter: buildNameControlsAfterCropHtml,
+    beforeMust: [/class=["']icon["']/, /placeholder=["']Filter by email["']/, /Delete notice/],
+    beforeMustNot: [/aria-label=["']More actions["']/, /data-confirm/],
+    afterMust: [/aria-label=["']More actions["']/, /aria-label=["']Filter by email["']/, /data-confirm/],
+  },
+  {
+    id: "queue-name-controls-tsx",
+    defect: "incomplete-primitive",
+    beforeCrop: "queue-name-controls-tsx-before-crop.html",
+    afterCrop: "queue-name-controls-tsx-after-crop.html",
+    buildBefore: buildNameControlsAstBeforeCropHtml,
+    buildAfter: buildNameControlsAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /Delete notice/],
+    afterMust: [/data-shine-tsx-ast="after"/, /aria-label=["']More actions["']/, /data-confirm/],
+  },
 ];
 
 
@@ -1845,6 +1919,19 @@ export function assertCropPairOk(pair, read) {
     }
     if (!/data-shine-reuse-bound/.test(after) || !/data-shine-parallel-rest/.test(after)) {
       errors.push(`${pair.id} after needs reuse-bound + parallel-rest`);
+    }
+  }
+
+  // Name-controls: before incomplete; after named + confirmed
+  if ((pair.id === "queue-name-controls" || pair.id === "queue-name-controls-tsx") && before && after) {
+    if (!/class=["']icon["']/.test(before) || !/Delete notice/.test(before)) {
+      errors.push(`${pair.id} before needs icon + destructive`);
+    }
+    if (/aria-label=["']More actions["']/.test(before) || /data-confirm/.test(before)) {
+      errors.push(`${pair.id} before must not already be named/confirmed`);
+    }
+    if (!/aria-label=["']More actions["']/.test(after) || !/data-confirm/.test(after)) {
+      errors.push(`${pair.id} after needs aria-label + data-confirm`);
     }
   }
   return { ok: errors.length === 0, errors };

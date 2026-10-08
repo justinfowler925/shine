@@ -166,6 +166,17 @@ export const PARALLEL_OWNED_AST_FIXTURES = Object.freeze({
   op: "bind-product-owner",
 });
 
+/** Repo-relative incomplete-primitives TSX AST FAIL→PASS fixtures (name-controls). */
+export const NAME_CONTROLS_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-name-controls.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-name-controls-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-name-controls-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-name-controls-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-name-controls-tsx",
+  op: "name-controls",
+});
+
 /** Repo-relative empty-triad TSX AST FAIL→PASS fixtures (split-empty-triad). */
 export const EMPTY_TRIAD_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-empty-triad.tsx",
@@ -350,6 +361,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: split-empty-triad — distinct empty / filtered-empty / error treatments");
     hints.push("restructure: stamp-chart-units — data-unit + data-baseline on Operate charts");
     hints.push("restructure: bind-product-owner — stamp data-shine-reuse-bound; demote parallel worklists");
+    hints.push("restructure: name-controls — aria-label icon-only/unlabeled; data-confirm on destructive");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
@@ -404,6 +416,43 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
 
 
 
+
+/**
+ * Incomplete-primitives TSX AST fixture binding (name-controls).
+ */
+export function nameControlsAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const operateJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog", "app-shell", "dashboard", "record", "form", "settings"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "catalog", "app-shell", "dashboard", "record", "settings", "form"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|name[- ]?controls|icon[- ]?only|unlabeled|accessible[- ]?name|incomplete[- ]?primitive|confirm[- ]?less|destructive)\b/i.test(
+      text,
+    );
+  if (!operateJob) return null;
+  // Pure marketing / voice jobs stay unbound.
+  if (/marketing|hero|landing/i.test(category + screen) && !/queue|triage|settings|form|record/i.test(text)) {
+    return null;
+  }
+  return {
+    mode: "tsx-ast",
+    op: NAME_CONTROLS_AST_FIXTURES.op,
+    fixtureTsx: NAME_CONTROLS_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: NAME_CONTROLS_AST_FIXTURES.tsxAstHard,
+    cropBefore: NAME_CONTROLS_AST_FIXTURES.cropBefore,
+    cropAfter: NAME_CONTROLS_AST_FIXTURES.cropAfter,
+    cropPairId: NAME_CONTROLS_AST_FIXTURES.cropPairId,
+    helper: NAME_CONTROLS_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Incomplete primitives: apply verify/restructure/apply-tsx.mjs name-controls (TypeScript AST; aria-label on icon-only/unlabeled; data-confirm + aria-haspopup=dialog on destructive). Copy FAIL→PASS crop paths from recommendation.nameControlsAst.cropBefore/cropAfter; prove incomplete-primitive clears.",
+  };
+}
 
 /**
  * Parallel-owned TSX AST fixture binding for Operate queue / reuse jobs.
@@ -1135,6 +1184,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    nameControlsAst: nameControlsAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -1311,6 +1365,9 @@ export function formatRecommendationSummary(rec) {
   const parallelOwnedAst = rec.parallelOwnedAst?.fixtureTsx
     ? ` · parallelOwnedAst ${rec.parallelOwnedAst.mode}@${rec.parallelOwnedAst.cropPairId}`
     : "";
+  const nameControlsAst = rec.nameControlsAst?.fixtureTsx
+    ? ` · nameControlsAst ${rec.nameControlsAst.mode}@${rec.nameControlsAst.cropPairId}`
+    : "";
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
@@ -1328,6 +1385,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

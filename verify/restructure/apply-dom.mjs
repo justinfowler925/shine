@@ -100,6 +100,12 @@ export function applyDomRestructure(html, plan) {
         out = next;
         applied.push("bind-product-owner");
       }
+    } else if (op.op === "name-controls") {
+      const next = applyNameControls(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("name-controls");
+      }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
       applied.push("set-focal");
@@ -336,6 +342,85 @@ export function applyCollapseCardSoup(html, op = {}) {
     stamped,
     `${stamped}\n<details data-shine-card-rest><summary>${summary}</summary>\n${demoted}\n</details>`,
   );
+  return out;
+}
+
+/**
+ * Complete incomplete primitives: name icon-only controls, label placeholder-only
+ * fields, and stamp confirm markers on destructive verbs.
+ */
+export function applyNameControls(html, op = {}) {
+  const defaultIconLabel = op.iconLabel || "More actions";
+  let out = String(html);
+
+  // Icon-only buttons (contain svg/img/i, no text, no aria-label/title).
+  out = out.replace(
+    /<(button|a)\b([^>]*)>([\s\S]*?)<\/\1>/gi,
+    (full, tag, attrs, body) => {
+      if (/\baria-label\b|\baria-labelledby\b|\btitle\b/.test(attrs)) return full;
+      const text = String(body)
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (text) return full;
+      if (!/<(svg|img|i)\b|\bclass=["'][^"']*\bicon\b|\bdata-icon\b|\blucide\b/i.test(body + attrs)) {
+        return full;
+      }
+      const id = (attrs.match(/\bid=["']([^"']+)["']/i) || [])[1] || "";
+      const label =
+        /more|menu|kebab|overflow/i.test(id) || /more|menu|kebab|overflow/i.test(attrs)
+          ? "More actions"
+          : /filter|search/i.test(id)
+            ? "Filter"
+            : /settings|gear|cog/i.test(id)
+              ? "Settings"
+              : defaultIconLabel;
+      let nextAttrs = attrs;
+      if (!/\bdata-shine-named\b/.test(nextAttrs)) nextAttrs += ` data-shine-named`;
+      nextAttrs += ` aria-label="${label}"`;
+      return `<${tag}${nextAttrs}>${body}</${tag}>`;
+    },
+  );
+
+  // Unlabeled inputs/select/textarea with placeholder → aria-label from placeholder.
+  out = out.replace(/<(input|select|textarea)\b([^>]*)>/gi, (full, tag, attrs) => {
+    // Strip trailing slash from attrs when authors wrote <input ... />
+    let cleanAttrs = attrs.replace(/\s*\/\s*$/, "");
+    if (/\baria-label\b|\baria-labelledby\b/.test(cleanAttrs)) return full;
+    if (/\bid=["']([^"']+)["']/i.test(cleanAttrs)) {
+      const id = cleanAttrs.match(/\bid=["']([^"']+)["']/i)[1];
+      // Skip if an explicit label[for] exists in the document.
+      if (new RegExp(`<label\\b[^>]*\\bfor=["']${id}["']`, "i").test(out)) return full;
+    }
+    const type = ((cleanAttrs.match(/\btype=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+    if (tag.toLowerCase() === "input" && /^(hidden|submit|button|image|reset)$/.test(type)) return full;
+    const ph = (cleanAttrs.match(/\bplaceholder=["']([^"']+)["']/i) || [])[1];
+    if (!ph) return full;
+    if (!/\bdata-shine-named\b/.test(cleanAttrs)) cleanAttrs += ` data-shine-named`;
+    cleanAttrs += ` aria-label="${ph}"`;
+    if (tag.toLowerCase() === "input") {
+      return /\/\s*>$/.test(full) || full.includes("/>") ? `<input${cleanAttrs} />` : `<input${cleanAttrs}>`;
+    }
+    return `<${tag}${cleanAttrs}>`;
+  });
+
+  // Destructive verbs without confirm → stamp data-confirm + aria-haspopup=dialog.
+  const destructiveRe = /\b(delete|destroy|purge|wipe|erase|remove|revoke|unlink)\b/i;
+  out = out.replace(/<(button|a)\b([^>]*)>([\s\S]*?)<\/\1>/gi, (full, tag, attrs, body) => {
+    if (/\bdata-confirm\b|\bdata-shine-confirm\b|\baria-haspopup=["']dialog["']/i.test(attrs)) return full;
+    if (/<(dialog|[^>]*data-confirm-dialog)/i.test(full)) return full;
+    const text = String(body)
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (!text || !destructiveRe.test(text)) return full;
+    let next = attrs;
+    if (!/\baria-haspopup\b/i.test(next)) next += ` aria-haspopup="dialog"`;
+    if (!/\bdata-confirm\b/.test(next)) next += ` data-confirm`;
+    if (!/\bdata-shine-confirm\b/.test(next)) next += ` data-shine-confirm`;
+    return `<${tag}${next}>${body}</${tag}>`;
+  });
+
   return out;
 }
 
