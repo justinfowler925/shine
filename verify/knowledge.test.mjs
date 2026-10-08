@@ -40,6 +40,7 @@ const required = [
   "decorative-chart-no-units",
   "empty-filtered-error-conflated",
   "parallel-owned-component",
+  "empty-insight-shells",
   "wrong-cite-category",
   "pill-filter-stack",
   "competing-page-titles",

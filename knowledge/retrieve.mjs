@@ -40,6 +40,7 @@ export const OPERATE_SLOP_ANTI_PATTERN_IDS = Object.freeze([
   "empty-filtered-error-conflated",
   "decorative-chart-no-units",
   "parallel-owned-component",
+  "empty-insight-shells",
 ]);
 
 export function validatePrinciple(value) {

@@ -282,6 +282,20 @@ export function applyTsxRestructure(source, plan) {
           );
         }
       }
+    } else if (op.op === "collapse-empty-shells") {
+      const next = collapseEmptyShellsTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("collapse-empty-shells");
+      } else {
+        const census = countEmptyInsightShellsTsx(text);
+        plans.push(
+          "## collapse-empty-shells (TSX)\n\n" +
+            (census.dynamic
+              ? "Dynamic .map / spread Card children — remove empty insight shells by hand or park in <details data-shine-deferred-shell>.\n"
+              : "Remove title+kicker-only non-focal Card shells under the queue focal (or mode=details → deferred disclosure).\n"),
+        );
+      }
     }
   }
 
@@ -3182,3 +3196,228 @@ if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.me
   );
   if (result.plans.length) process.stdout.write(result.plans.join("\n"));
 }
+
+/**
+ * Count empty peer/insight Card shells in TSX (same AST rules as collapseEmptyShellsTsx).
+ * @param {string} source
+ * @returns {{ emptyShells: number, titles: string[], cards: number, hasFocal: boolean, dynamic: boolean }}
+ */
+export function countEmptyInsightShellsTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const shells = collectEmptyInsightShells(sf);
+  return {
+    emptyShells: shells.shells.length,
+    titles: shells.shells.map((s) => s.title),
+    cards: shells.cards,
+    hasFocal: shells.hasFocal,
+    dynamic: shells.dynamic,
+  };
+}
+
+/**
+ * Collapse empty peer/insight Card shells via TypeScript AST.
+ * Default mode=remove (delete title+kicker-only non-focal shells).
+ * mode/rest=details → wrap in `<details data-shine-deferred-shell>`.
+ * Handles className="card" / className={"card"} / data-shine-insight / data-shine-card.
+ * Never touches data-region=focal hosts or cards with table/list/grid/metrics/actions.
+ * Dynamic .map / spread children → untouched (caller emits plan note).
+ */
+
+export function collapseEmptyShellsTsx(source, op = {}) {
+  const useDetails = op.mode === "details" || op.rest === "details";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const { shells, dynamic } = collectEmptyInsightShells(sf);
+  if (dynamic || !shells.length) return text;
+
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  for (const shell of shells) {
+    const start = shell.node.getStart(sf);
+    const end = shell.node.getEnd();
+    if (useDetails) {
+      const indent = indentBefore(text, start);
+      const inner = text.slice(start, end);
+      const summary = escapeJsxText(shell.title || "More insight");
+      const replacement =
+        `<details data-shine-deferred-shell>\n${indent}  <summary>${summary}</summary>\n${indent}  ${inner}\n${indent}</details>`;
+      edits.push({ start, end, replacement });
+    } else {
+      edits.push({ start, end, replacement: "" });
+    }
+  }
+  if (!edits.length) return text;
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) {
+    out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  }
+  // Clean leftover blank lines from removals.
+  return out.replace(/\n[ \t]*\n[ \t]*\n/g, "\n\n");
+}
+
+/**
+ * @param {ts.SourceFile} sf
+ * @returns {{ shells: Array<{ node: ts.JsxElement, title: string }>, cards: number, hasFocal: boolean, dynamic: boolean }}
+ */
+function collectEmptyInsightShells(sf) {
+  /** @type {Array<{ node: ts.JsxElement, title: string }>} */
+  const shells = [];
+  let cards = 0;
+  let hasFocal = false;
+  let dynamic = false;
+
+  const walk = (node) => {
+    if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const opening = ts.isJsxElement(node) ? node.openingElement : node;
+      if (findJsxAttr(opening, "data-region", sf)) {
+        const val = attrStringValue(findJsxAttr(opening, "data-region", sf), sf);
+        if (val === "focal") hasFocal = true;
+      }
+      if (
+        findJsxAttr(opening, "data-shine-shared-grid", sf) ||
+        findJsxAttr(opening, "data-shine-records", sf) ||
+        findJsxAttr(opening, "data-shine-worklist", sf)
+      ) {
+        hasFocal = true;
+      }
+      const role = attrStringValue(findJsxAttr(opening, "role", sf), sf);
+      if (role === "grid") hasFocal = true;
+      if (classNameHasWord(opening, "grid-wrap", sf)) hasFocal = true;
+
+      if (ts.isJsxElement(node) && isInsightCardOpening(opening, sf)) {
+        cards += 1;
+        const census = insightShellCensus(node, sf);
+        if (census.dynamic) dynamic = true;
+        else if (census.empty) {
+          shells.push({ node, title: census.title });
+        }
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { shells, cards, hasFocal, dynamic };
+}
+
+/**
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isInsightCardOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-insight", sf)) return true;
+  if (findJsxAttr(opening, "data-shine-card", sf)) return true;
+  const slot = attrStringValue(findJsxAttr(opening, "data-slot", sf), sf);
+  if (slot === "card") return true;
+  return classNameHasWord(opening, "card", sf);
+}
+
+/**
+ * @param {ts.JsxElement} node
+ * @param {ts.SourceFile} sf
+ * @returns {{ empty: boolean, dynamic: boolean, title: string }}
+ */
+function insightShellCensus(node, sf) {
+  const opening = node.openingElement;
+  if (attrStringValue(findJsxAttr(opening, "data-region", sf), sf) === "focal") {
+    return { empty: false, dynamic: false, title: "" };
+  }
+  if (findJsxAttr(opening, "data-shine-deferred-shell", sf)) {
+    return { empty: false, dynamic: false, title: "" };
+  }
+
+  let dynamic = false;
+  let hasHeading = false;
+  let hasSubstantive = false;
+  let restText = "";
+  let title =
+    attrStringValue(findJsxAttr(opening, "aria-label", sf), sf) ||
+    attrStringValue(findJsxAttr(opening, "ariaLabel", sf), sf) ||
+    "";
+
+  const substantiveTags = new Set([
+    "table",
+    "ul",
+    "ol",
+    "button",
+    "Button",
+    "input",
+    "select",
+    "textarea",
+    "canvas",
+    "img",
+    "video",
+    "a",
+    "DataGrid",
+  ]);
+
+  const walk = (n) => {
+    if (ts.isJsxExpression(n) && n.expression) {
+      dynamic = true;
+      return;
+    }
+    if (ts.isJsxText(n)) {
+      const t = n.text.replace(/\s+/g, " ").trim();
+      if (t) restText += `${t} `;
+      return;
+    }
+    if (ts.isJsxSelfClosingElement(n) || ts.isJsxElement(n)) {
+      const open = ts.isJsxElement(n) ? n.openingElement : n;
+      const tag = jsxTagName(open);
+      if (/^h[1-6]$/i.test(tag) || tag === "Heading") {
+        hasHeading = true;
+        if (!title) title = labelFromJsx(n, sf);
+        return; // don't count heading text as rest
+      }
+      if (classNameHasWord(open, "kicker", sf) || findJsxAttr(open, "data-shine-kicker", sf)) {
+        return; // kicker ignored for emptiness
+      }
+      if (substantiveTags.has(tag)) {
+        hasSubstantive = true;
+        return;
+      }
+      if (
+        findJsxAttr(open, "data-shine-kpi", sf) ||
+        findJsxAttr(open, "data-kpi", sf) ||
+        findJsxAttr(open, "data-shine-records", sf) ||
+        classNameHasWord(open, "metric", sf) ||
+        attrStringValue(findJsxAttr(open, "role", sf), sf) === "grid" ||
+        attrStringValue(findJsxAttr(open, "role", sf), sf) === "list"
+      ) {
+        hasSubstantive = true;
+        return;
+      }
+      if (tag === "details" && findJsxAttr(open, "data-shine-deferred-shell", sf)) {
+        hasSubstantive = true;
+        return;
+      }
+      if (ts.isJsxElement(n)) {
+        for (const c of n.children) walk(c);
+      }
+      return;
+    }
+  };
+  for (const c of node.children) walk(c);
+
+  restText = restText.replace(/\s+/g, " ").trim();
+  const empty = hasHeading && !hasSubstantive && !dynamic && restText.length <= 120;
+  return { empty, dynamic, title: title || "(untitled)" };
+}
+
+/**
+ * Count peer worklist/grid wraps in TSX (same AST rules as collapsePeerGridsTsx).
+ * @param {string} source
+ * @returns {{ grids: number, titles: string[], dynamic: boolean, alreadyXor: boolean }}
+ */
+
+/**
+ * Count parallel (unowned) worklists beside product owners in TSX.
+ */
+
+/**
+ * Count parallel (unowned) worklists beside product owners in TSX.
+ */
+
+/**
+ * Count parallel (unowned) worklists beside product owners in TSX.
+ */

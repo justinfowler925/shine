@@ -539,3 +539,20 @@ Mapped to: shine toolbar + destructive behind menu (contracts Table SHOULD)
 | Account record | `shadcn-record-account` |
 
 Form MUST: associated labels; `aria-invalid="true"` needs an accessible message (`verify/form-heuristics.mjs`).
+
+### Empty-insight-shells TSX AST — collapse-empty-shells
+
+Blank peer/insight Card shells (title+kicker only) under a green
+queue focal are collapsed by **TypeScript AST** (not regex):
+`verify/restructure/apply-tsx.mjs` `collapse-empty-shells` (DOM: `apply-dom.mjs`).
+
+1. **Detect** — measure `empty-insight-shells` when ≥1 empty non-focal Card shell
+   remains beside a worklist/`data-region=focal` (anti-pattern `empty-insight-shells`).
+2. **Recommend** — typed `recommendation.emptyInsightShellAst` (TSX fixtures + FAIL→PASS crops).
+3. **Apply** — `collapse-empty-shells` mode=`remove` (or `details` → `<details data-shine-deferred-shell>`).
+4. **Prove** — crop pair `queue-empty-shells-tsx`; measure clears `empty-insight-shells`.
+
+Fixtures: `verify/fixtures/denoise/tsx/queue-empty-shells{,-ast}.tsx` ·
+HTML `queue-empty-shells-{before,after}.html`.  
+Doctor: `verify/empty-insight-shells-ast-bite.mjs` / `npm run empty-insight-shells:ast-bite`.
+

@@ -34,6 +34,7 @@ import { formatCardSoupFailures } from "./card-soup.mjs";
 import { formatEmptyTriadFailures } from "./empty-triad.mjs";
 import { formatDecorativeChartFailures } from "./decorative-chart.mjs";
 import { formatParallelOwnedFailures } from "./parallel-owned.mjs";
+import { formatEmptyInsightShellFailures } from "./empty-insight-shells.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -145,6 +146,13 @@ const expected = {
     restructureOps: ["bind-product-owner"],
     cropPairId: "queue-parallel-owned",
   },
+  "empty-insight-shells": {
+    detector: "empty-insight-shells",
+    measureFailurePrefix: "empty-insight-shells",
+    alias: "empty-shells",
+    restructureOps: ["collapse-empty-shells"],
+    cropPairId: "queue-empty-shells-tsx",
+  },
 };
 
 for (const id of OPERATE_SLOP_ANTI_PATTERN_IDS) {
@@ -251,6 +259,16 @@ const parallelHits = retrieveAntiPatterns("parallel owned bind-product-owner nuc
   antiPatterns: corpus,
 });
 assert.ok(parallelHits.some((h) => h.id === "parallel-owned-component"), JSON.stringify(parallelHits.map((h) => h.id)));
+
+const emptyHits = retrieveAntiPatterns("empty Active in Usul Missed awards insight shells under queue focal", {
+  screen: "queue",
+  antiPatterns: corpus,
+});
+assert.ok(
+  emptyHits.some((h) => h.id === "empty-insight-shells"),
+  JSON.stringify(emptyHits.map((h) => h.id)),
+);
+
 
 // Measure formatters cite anti-pattern:<id>
 const dualFails = formatDualFocalFailures(
@@ -372,6 +390,16 @@ const parallelFails = formatParallelOwnedFailures(
 assert.ok(
   parallelFails.some((f) => /parallel-owned:/.test(f) && /anti-pattern:parallel-owned-component/.test(f)),
   parallelFails.join("\n"),
+);
+
+
+const emptyFails = formatEmptyInsightShellFailures(
+  { hasFocal: true, emptyShellCount: 2, titles: ["Active in Usul", "Missed awards"] },
+  { gate: true },
+);
+assert.ok(
+  emptyFails.some((f) => /empty-insight-shells:/.test(f) && /anti-pattern:empty-insight-shells/.test(f)),
+  emptyFails.join("\n"),
 );
 
 assert.equal(formatAntiPatternCite("kpi-soup"), "anti-pattern:kpi-soup");

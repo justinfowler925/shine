@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "id": "empty-insight-shells",
+  "title": "Empty peer / insight shells under a queue focal",
+  "kind": "operate-bloat",
+  "domains": ["composition", "information-architecture"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "dashboard", "weekly-board", "app-shell"],
+  "tags": ["empty-shell", "insight", "composition-slop", "operate-slop", "nucleus"],
+  "aliases": ["empty-insight", "empty-shells", "insight-shells", "peer-shells"],
+  "cues": "Blank insight cards under a green queue focal — e.g. Active in Usul or Missed awards with only a title + kicker and no list, table, metrics, or action",
+  "ban": "Do not leave empty peer/insight Card shells beside a queue focal after dual-focal / KPI / CTA structure clears — they read as AI slop.",
+  "remediation": "Emit collapse-empty-shells; remove title+kicker-only non-focal shells, or park deferred insight prose in <details data-shine-deferred-shell>; re-measure empty-insight-shells.",
+  "examples": [
+    "SLED Capture queue: Active in Usul card with only a heading + diagnostic kicker after XOR fold",
+    "Missed awards & recompetes peer card with no rows, metrics, or next action under the Queue focal"
+  ],
+  "restructureOps": ["collapse-empty-shells"],
+  "detector": "empty-insight-shells",
+  "measureFailurePrefix": "empty-insight-shells",
+  "constitutionIds": ["primary-task-3s"],
+  "severity": "major",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-empty-shells-before.html",
+    "after": "verify/fixtures/denoise/queue-empty-shells-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-empty-shells-tsx-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-empty-shells-tsx-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-empty-shells"],
+  "cropPairId": "queue-empty-shells-tsx",
+  "source": "skill/references/anti-patterns.md",
+  "validatedBy": "verify/empty-insight-shells.test.mjs"
+}

@@ -164,6 +164,11 @@ assert.match(queueRec.nameControlsAst.fixtureTsx, /queue-name-controls\.tsx$/);
 assert.match(queueRec.nameControlsAst.cropAfter, /queue-name-controls-tsx-after-crop\.html$/);
 assert.match(formatRecommendationSummary(queueRec), /nameControlsAst/);
 assert.equal(queueRec.nameControlsAst.op, "name-controls");
+assert.ok(queueRec.emptyInsightShellAst?.fixtureTsx, "queue job emptyInsightShellAst.fixtureTsx");
+assert.match(queueRec.emptyInsightShellAst.fixtureTsx, /queue-empty-shells\.tsx$/);
+assert.match(queueRec.emptyInsightShellAst.cropAfter, /queue-empty-shells-tsx-after-crop\.html$/);
+assert.match(formatRecommendationSummary(queueRec), /emptyInsightShellAst/);
+assert.equal(queueRec.emptyInsightShellAst.op, "collapse-empty-shells");
 assert.equal(queueRec.linkFieldErrorsAst, null, "queue job must not bind linkFieldErrorsAst");
 assert.ok(queueRec.dualFocalAst?.fixtureTsx, "queue job dualFocalAst.fixtureTsx");
 assert.match(queueRec.dualFocalAst.fixtureTsx, /queue-dual-grid\.tsx$/);
@@ -262,6 +267,9 @@ assert.ok((denoiseQueue.ddr.restructureOps || []).includes("bind-product-owner")
 assert.match(denoiseQueue.nameControlsAst.cropAfter, /queue-name-controls-tsx-after-crop\.html$/);
 assert.equal(denoiseQueue.nameControlsAst.op, "name-controls");
 assert.ok((denoiseQueue.ddr.restructureOps || []).includes("name-controls"));
+assert.match(denoiseQueue.emptyInsightShellAst.cropAfter, /queue-empty-shells-tsx-after-crop\.html$/);
+assert.equal(denoiseQueue.emptyInsightShellAst.op, "collapse-empty-shells");
+assert.ok((denoiseQueue.ddr.restructureOps || []).includes("collapse-empty-shells"));
 assert.equal(denoiseQueue.linkFieldErrorsAst, undefined, "queue packet must not bind linkFieldErrorsAst");
 const denoiseForm = createDesignPacket({
   job: "Invite form aria-invalid link-field-errors",
@@ -294,6 +302,7 @@ assert.match(denoiseSettings.wrongCiteAst.cropAfter, /sources-cite-tsx-after-cro
 assert.equal(denoiseSettings.wrongCiteAst.op, "rebind-cite");
 assert.equal(denoiseSettings.wrongCiteAst.refusePaintUntilRebound, true);
 assert.equal(denoiseSettings.setFocalAst, undefined, "settings packet must not bind setFocalAst");
+assert.equal(denoiseSettings.emptyInsightShellAst, undefined, "settings packet must not bind emptyInsightShellAst");
 
 // CLI smoke
 const cite = spawnSync(process.execPath, [join(SHINE, "corpus/cite.mjs"), "settings page", "--lane", "saas"], {

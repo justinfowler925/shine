@@ -30,6 +30,8 @@ import {
   buildSetFocalAstAfterCropHtml,
   buildSledBloatBeforeCropHtml,
   buildSledBloatAfterCropHtml,
+  buildEmptyInsightShellAstBeforeCropHtml,
+  buildEmptyInsightShellAstAfterCropHtml,
 } from "./restructure/defect-crops.mjs";
 import { buildXorFoldCropHtml } from "./restructure/xor-saved-view.mjs";
 
@@ -58,6 +60,11 @@ assert.notEqual(
   "set-focal AST crops must not be twins",
 );
 assert.notEqual(buildSledBloatBeforeCropHtml(), buildSledBloatAfterCropHtml(), "sled-bloat crops must not be twins");
+assert.notEqual(
+  buildEmptyInsightShellAstBeforeCropHtml(),
+  buildEmptyInsightShellAstAfterCropHtml(),
+  "empty-insight-shells AST crops must not be twins",
+);
 
 assert.ok(DEFECT_CROP_PAIRS.length >= 11, "at least 11 pinned crop pairs");
 for (const id of [
@@ -72,6 +79,7 @@ for (const id of [
   "usul-focal",
   "usul-focal-tsx",
   "queue-sled-bloat",
+  "queue-empty-shells-tsx",
 ]) {
   assert.ok(
     DEFECT_CROP_PAIRS.some((p) => p.id === id),
@@ -102,5 +110,5 @@ assert.match(read("usul-focal-after-crop.html"), /data-region="focal"/);
 assert.match(read("queue-sled-bloat-after-crop.html"), /data-shine-kpi-rest/);
 
 console.log(
-  `defect-crops PASS: ${DEFECT_CROP_PAIRS.length} FAIL→PASS pairs (CTA · CTA-TSX-AST · KPI · KPI-TSX-AST · wrong-cite · wrong-cite-TSX-AST · dual-grid XOR · dual-grid-TSX-AST · worklist-first-TSX-AST · Usul focal · Usul-focal-TSX-AST · Sled bloat)`,
+  `defect-crops PASS: ${DEFECT_CROP_PAIRS.length} FAIL→PASS pairs (CTA · CTA-TSX-AST · KPI · KPI-TSX-AST · wrong-cite · wrong-cite-TSX-AST · dual-grid XOR · dual-grid-TSX-AST · worklist-first-TSX-AST · Usul focal · Usul-focal-TSX-AST · empty-insight-shells-TSX-AST · Sled bloat)`,
 );

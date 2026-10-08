@@ -39,6 +39,7 @@ const diagnosis = {
   competingCtaCheck: { ok: false, note: "Pursue and Assign lead both filled in main" },
   dualFocalCheck: { ok: false, note: "David's 10 and Queue are peer worklists" },
   kpiSoupCheck: { ok: false, note: "Ten equal metric tiles compete with the work object" },
+  emptyInsightShellCheck: { ok: false, note: "Active in Usul / Missed awards blank insight shells" },
   citeHonestyCheck: { ok: true, note: "Cite is shadcn-queue for triage" },
   copyHeadlineCheck: { ok: true, note: "Title names Capture queue" },
   copyBeliefCheck: { ok: true, note: "Beliefs mapped or N/A for Operate" },
@@ -53,6 +54,7 @@ const ops = deriveRestructureOps(diagnosis);
 assert.ok(ops.some((o) => o.op === "cta-budget"));
 assert.ok(ops.some((o) => o.op === "collapse-peer-grids"));
 assert.ok(ops.some((o) => o.op === "kpi-collapse"));
+assert.ok(ops.some((o) => o.op === "collapse-empty-shells"));
 assert.ok(ops.some((o) => o.op === "set-focal"));
 
 const plan = emitRestructureFromDiagnosis(diagnosis, { citePrimary: "shadcn-queue" });
@@ -67,6 +69,7 @@ assertDenoisePaintAllowed({
   competingCtaCheck: { ok: true, note: "One filled Pursue" },
   dualFocalCheck: { ok: true, note: "One focal grid" },
   kpiSoupCheck: { ok: true, note: "KPI collapsed" },
+  emptyInsightShellCheck: { ok: true, note: "Empty insight shells removed" },
   restructureOps: [],
 });
 
