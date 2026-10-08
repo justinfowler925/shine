@@ -41,6 +41,8 @@ const required = [
   "empty-filtered-error-conflated",
   "parallel-owned-component",
   "wrong-cite-category",
+  "pill-filter-stack",
+  "competing-page-titles",
 ];
 for (const id of required) {
   assert.ok(getAntiPattern(id), `missing anti-pattern ${id}`);

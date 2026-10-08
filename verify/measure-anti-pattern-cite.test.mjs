@@ -20,6 +20,8 @@ import {
 import { formatCtaPressureFailures } from "./cta-pressure.mjs";
 import { formatDualFocalFailures } from "./dual-focal.mjs";
 import { formatKpiSoupFailures } from "./kpi-soup.mjs";
+import { formatPillFilterFailures } from "./pill-filter.mjs";
+import { formatPageTitleFailures } from "./page-title.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const corpus = loadAntiPatterns(join(SHINE, "knowledge/anti-patterns"));
@@ -31,6 +33,8 @@ assert.equal(prefixMap.get("dual-focal"), "dual-focal-grids");
 assert.equal(prefixMap.get("kpi-soup"), "kpi-soup");
 assert.equal(prefixMap.get("cta-pressure"), "competing-filled-ctas");
 assert.equal(prefixMap.get("cite-honesty"), "wrong-cite-category");
+assert.equal(prefixMap.get("pill-filter"), "pill-filter-stack");
+assert.equal(prefixMap.get("page-title"), "competing-page-titles");
 
 // Green path: formatter cites → no meta-failures
 const dualOk = formatDualFocalFailures(
@@ -47,7 +51,9 @@ const citeOk = formatWrongCiteFailures({
   category: "settings",
   note: "data-cite=shadcn-queue on a Sources/settings job",
 });
-const green = [...dualOk, ...kpiOk, ...ctaOk, ...citeOk];
+const pillOk = formatPillFilterFailures({ pillCount: 7 }, { gate: true });
+const titleOk = formatPageTitleFailures({ titleCount: 3, texts: ["A", "B", "C"] }, { gate: true });
+const green = [...dualOk, ...kpiOk, ...ctaOk, ...citeOk, ...pillOk, ...titleOk];
 assert.equal(enforceOperateAntiPatternCites(green, { antiPatterns: corpus }).length, 0);
 for (const line of green) {
   const cites = extractAntiPatternCites(line);
@@ -60,9 +66,11 @@ const bare = [
   "kpi-soup: 8 equal metric tiles in main — collapse to ≤3 chips",
   "cta-pressure: 2 competing filled treatments in main — one filled primary",
   "cite-honesty: page cite shadcn-queue does not match category settings",
+  "pill-filter: 7 above-fold filter pills/chips in main — collapse to ≤3",
+  "page-title: 3 competing page titles in main — keep one title",
 ];
 const bareExtras = enforceOperateAntiPatternCites(bare, { antiPatterns: corpus });
-assert.equal(bareExtras.length, 4, bareExtras.join("\n"));
+assert.equal(bareExtras.length, 6, bareExtras.join("\n"));
 for (const line of bareExtras) {
   assert.match(line, /^anti-pattern-cite:/);
   assert.match(line, /fail-closed/);
@@ -71,6 +79,8 @@ assert.ok(bareExtras.some((f) => /anti-pattern:dual-focal-grids/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:kpi-soup/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:competing-filled-ctas/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:wrong-cite-category/.test(f)));
+assert.ok(bareExtras.some((f) => /anti-pattern:pill-filter-stack/.test(f)));
+assert.ok(bareExtras.some((f) => /anti-pattern:competing-page-titles/.test(f)));
 
 // Bite: wrong catalog id on a matching prefix
 const wrongId = [
