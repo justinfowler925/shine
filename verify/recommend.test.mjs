@@ -134,6 +134,11 @@ assert.match(queueRec.decorativeChartAst.fixtureTsx, /queue-decorative-chart\.ts
 assert.match(queueRec.decorativeChartAst.cropAfter, /queue-decorative-chart-tsx-after-crop\.html$/);
 assert.match(formatRecommendationSummary(queueRec), /decorativeChartAst/);
 assert.equal(queueRec.decorativeChartAst.op, "stamp-chart-units");
+assert.ok(queueRec.parallelOwnedAst?.fixtureTsx, "queue job parallelOwnedAst.fixtureTsx");
+assert.match(queueRec.parallelOwnedAst.fixtureTsx, /queue-parallel-owned\.tsx$/);
+assert.match(queueRec.parallelOwnedAst.cropAfter, /queue-parallel-owned-tsx-after-crop\.html$/);
+assert.match(formatRecommendationSummary(queueRec), /parallelOwnedAst/);
+assert.equal(queueRec.parallelOwnedAst.op, "bind-product-owner");
 assert.ok(queueRec.dualFocalAst?.fixtureTsx, "queue job dualFocalAst.fixtureTsx");
 assert.match(queueRec.dualFocalAst.fixtureTsx, /queue-dual-grid\.tsx$/);
 assert.match(queueRec.dualFocalAst.cropAfter, /queue-dual-grid-tsx-after-crop\.html$/);
@@ -204,6 +209,9 @@ assert.ok((denoiseQueue.ddr.restructureOps || []).includes("split-empty-triad"))
 assert.match(denoiseQueue.decorativeChartAst.cropAfter, /queue-decorative-chart-tsx-after-crop\.html$/);
 assert.equal(denoiseQueue.decorativeChartAst.op, "stamp-chart-units");
 assert.ok((denoiseQueue.ddr.restructureOps || []).includes("stamp-chart-units"));
+assert.match(denoiseQueue.parallelOwnedAst.cropAfter, /queue-parallel-owned-tsx-after-crop\.html$/);
+assert.equal(denoiseQueue.parallelOwnedAst.op, "bind-product-owner");
+assert.ok((denoiseQueue.ddr.restructureOps || []).includes("bind-product-owner"));
 assert.match(denoiseQueue.dualFocalAst.cropAfter, /queue-dual-grid-tsx-after-crop\.html$/);
 assert.equal(denoiseQueue.dualFocalAst.xorMode, "xor-saved-view");
 assert.match(denoiseQueue.worklistFirstAst.cropAfter, /queue-worklist-first-tsx-after-crop\.html$/);

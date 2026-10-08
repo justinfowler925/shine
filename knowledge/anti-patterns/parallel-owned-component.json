@@ -6,14 +6,34 @@
   "domains": ["adoption", "reuse"],
   "lanes": ["saas", "internal"],
   "screens": ["queue", "record", "catalog", "settings", "form"],
-  "tags": ["sibling", "reuse", "datagrid", "nucleus"],
+  "tags": ["sibling", "reuse", "datagrid", "nucleus", "operate-slop"],
+  "aliases": [
+    "parallel-owned",
+    "parallel-component",
+    "bind-product-owner",
+    "product-owners-before-catalog",
+    "competing-implementation"
+  ],
   "cues": "New DataGrid/dialog/filter invented beside an existing Nucleus owner",
   "ban": "Product owners win before catalog fashion; never create a parallel for the same object.",
-  "remediation": "Inventory siblings with --product-reference; bind shine-reuse.json; delete the parallel.",
-  "detector": null,
-  "measureFailurePrefix": null,
+  "remediation": "Inventory siblings with --product-reference; apply bind-product-owner; stamp data-shine-reuse-bound on the owner; demote the parallel into details data-shine-parallel-rest; re-measure parallel-owned.",
+  "examples": [
+    "Queue triage: Nucleus DataGrid owner plus a homemade <table> for the same notices",
+    "Catalog: data-product-pattern=worklist owner beside an unmarked parallel role=grid"
+  ],
+  "restructureOps": ["bind-product-owner"],
+  "detector": "parallel-owned",
+  "measureFailurePrefix": "parallel-owned",
   "constitutionIds": ["cite-honesty"],
   "severity": "critical",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-parallel-owned-before.html",
+    "after": "verify/fixtures/denoise/queue-parallel-owned-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-parallel-owned-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-parallel-owned-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-parallel-owned"],
+  "cropPairId": "queue-parallel-owned",
   "source": "skill/references/anti-patterns.md",
-  "validatedBy": "verify/recommend.test.mjs"
+  "validatedBy": "verify/parallel-owned.test.mjs"
 }

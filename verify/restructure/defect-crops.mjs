@@ -274,6 +274,76 @@ export function buildDecorativeChartAstAfterCropHtml() {
   });
 }
 
+/** Parallel-owned DOM FAIL crop. */
+export function buildParallelOwnedBeforeCropHtml() {
+  return wrap({
+    title: "Parallel-owned crop FAIL",
+    cropId: "parallel-owned-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: Nucleus DataGrid owner + homemade table — parallel-owned.",
+    body: `  <div role="grid" data-shine-owner="nucleus-datagrid" data-product-pattern="worklist" data-region="focal" aria-label="Notices">
+    <div role="row"><div role="gridcell">Acme renewal</div></div>
+  </div>
+  <table class="homemade-grid" aria-label="Alternate notices table">
+    <tbody><tr><td>Acme renewal</td></tr></tbody>
+  </table>`,
+  });
+}
+
+/** Parallel-owned DOM PASS crop. */
+export function buildParallelOwnedAfterCropHtml() {
+  return wrap({
+    title: "Parallel-owned crop PASS",
+    cropId: "parallel-owned-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: reuse-bound owner; parallel demoted — bind-product-owner.",
+    body: `  <div role="grid" data-shine-owner="nucleus-datagrid" data-product-pattern="worklist" data-region="focal" data-shine-reuse-bound aria-label="Notices">
+    <div role="row"><div role="gridcell">Acme renewal</div></div>
+  </div>
+  <details data-shine-parallel-rest>
+    <summary>Use Nucleus DataGrid (product owner)</summary>
+    <table class="homemade-grid" data-shine-parallel-demoted aria-label="Alternate notices table">
+      <tbody><tr><td>Acme renewal</td></tr></tbody>
+    </table>
+  </details>`,
+  });
+}
+
+/** Parallel-owned TSX AST FAIL crop. */
+export function buildParallelOwnedAstBeforeCropHtml() {
+  return wrap({
+    title: "Parallel-owned AST crop FAIL",
+    cropId: "parallel-owned-tsx-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: parallel table in TSX — parallel-owned; apply-tsx bind-product-owner.",
+    body: `  <div role="grid" data-shine-owner="nucleus-datagrid" data-product-pattern="worklist" data-region="focal" data-shine-tsx-ast="before" aria-label="Notices">
+    <div role="row"><div role="gridcell">Acme renewal</div></div>
+  </div>
+  <table class="homemade-grid" aria-label="Alternate notices table">
+    <tbody><tr><td>Acme renewal</td></tr></tbody>
+  </table>`,
+  });
+}
+
+/** Parallel-owned TSX AST PASS crop. */
+export function buildParallelOwnedAstAfterCropHtml() {
+  return wrap({
+    title: "Parallel-owned AST crop PASS",
+    cropId: "parallel-owned-tsx-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: reuse-bound via TSX AST bind-product-owner.",
+    body: `  <div role="grid" data-shine-owner="nucleus-datagrid" data-product-pattern="worklist" data-region="focal" data-shine-reuse-bound data-shine-tsx-ast="after" aria-label="Notices">
+    <div role="row"><div role="gridcell">Acme renewal</div></div>
+  </div>
+  <details data-shine-parallel-rest>
+    <summary>Use Nucleus DataGrid (product owner)</summary>
+    <table class="homemade-grid" data-shine-parallel-demoted aria-label="Alternate notices table">
+      <tbody><tr><td>Acme renewal</td></tr></tbody>
+    </table>
+  </details>`,
+  });
+}
+
 /** Empty-triad DOM FAIL crop. */
 export function buildEmptyTriadBeforeCropHtml() {
   return wrap({
@@ -1538,6 +1608,28 @@ export const DEFECT_CROP_PAIRS = [
     beforeMust: [/data-shine-tsx-ast="before"/, /Activity chart/],
     afterMust: [/data-shine-tsx-ast="after"/, /data-unit=["']count["']/, /data-shine-chart-stamped/],
   },
+
+  {
+    id: "queue-parallel-owned",
+    defect: "parallel-owned",
+    beforeCrop: "queue-parallel-owned-before-crop.html",
+    afterCrop: "queue-parallel-owned-after-crop.html",
+    buildBefore: buildParallelOwnedBeforeCropHtml,
+    buildAfter: buildParallelOwnedAfterCropHtml,
+    beforeMust: [/data-shine-owner/, /homemade-grid/],
+    beforeMustNot: [/data-shine-reuse-bound/, /data-shine-parallel-rest/],
+    afterMust: [/data-shine-reuse-bound/, /data-shine-parallel-rest/, /data-shine-parallel-demoted/],
+  },
+  {
+    id: "queue-parallel-owned-tsx",
+    defect: "parallel-owned",
+    beforeCrop: "queue-parallel-owned-tsx-before-crop.html",
+    afterCrop: "queue-parallel-owned-tsx-after-crop.html",
+    buildBefore: buildParallelOwnedAstBeforeCropHtml,
+    buildAfter: buildParallelOwnedAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /homemade-grid/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-reuse-bound/, /data-shine-parallel-rest/],
+  },
 ];
 
 
@@ -1740,6 +1832,19 @@ export function assertCropPairOk(pair, read) {
     }
     if (!/data-unit/.test(after) || !/data-shine-chart-stamped/.test(after)) {
       errors.push(`${pair.id} after needs unit stamps`);
+    }
+  }
+
+  // Parallel-owned: before has owner + parallel; after reuse-bound + demoted
+  if ((pair.id === "queue-parallel-owned" || pair.id === "queue-parallel-owned-tsx") && before && after) {
+    if (!/data-shine-owner/.test(before) || !/homemade-grid|<table/.test(before)) {
+      errors.push(`${pair.id} before needs owner + parallel table`);
+    }
+    if (/data-shine-reuse-bound/.test(before) || /data-shine-parallel-rest/.test(before)) {
+      errors.push(`${pair.id} before must not already be bound`);
+    }
+    if (!/data-shine-reuse-bound/.test(after) || !/data-shine-parallel-rest/.test(after)) {
+      errors.push(`${pair.id} after needs reuse-bound + parallel-rest`);
     }
   }
   return { ok: errors.length === 0, errors };

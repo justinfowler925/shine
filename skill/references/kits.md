@@ -287,6 +287,19 @@ Doctor: `verify/stamp-chart-units-ast-bite.mjs` / `npm run stamp-chart-units:ast
 
 
 
+
+### Parallel-owned TSX AST — bind-product-owner
+
+Product owners win before catalog fashion. Homemade tables/grids beside a Nucleus owner are banned.
+
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `bind-product-owner`.
+
+- Stamps `data-shine-reuse-bound` (+ owner/pattern when missing) on product-owned worklists
+- Demotes parallel `<table>` / `role=grid` into `<details data-shine-parallel-rest>`
+- Recommend binds `parallelOwnedAst` FAIL→PASS crops (`queue-parallel-owned-tsx-*`)
+
+Doctor: `verify/bind-product-owner-ast-bite.mjs` / `npm run bind-product-owner:ast-bite`.
+
 ### Dual-focal ban TSX AST (N8 deepen) — XOR peer→chip
 
 Peer worklists / DataGrids on one triage job in consumer TSX are collapsed by

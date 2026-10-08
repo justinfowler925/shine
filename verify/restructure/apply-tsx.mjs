@@ -15,6 +15,7 @@
  * collapse-card-soup (equal Cards → focal + details data-shine-card-rest via TS compiler AST),
  * split-empty-triad (empty≡error / missing filtered-empty → distinct triad via TS compiler AST),
  * stamp-chart-units (decorative chart → data-unit + baseline via TS compiler AST),
+ * bind-product-owner (parallel worklist → reuse-bound owner + demote parallel via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -222,6 +223,19 @@ export function applyTsxRestructure(source, plan) {
         if (census.hits > 0) {
           plans.push(
             "## stamp-chart-units (TSX)\n\nStamp data-unit + data-baseline + data-shine-chart-stamped on chart JSX.\n",
+          );
+        }
+      }
+    } else if (op.op === "bind-product-owner") {
+      const next = bindProductOwnerTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("bind-product-owner");
+      } else {
+        const census = countParallelOwnedTsx(text);
+        if (census.hits > 0) {
+          plans.push(
+            "## bind-product-owner (TSX)\n\nStamp data-shine-reuse-bound on product owners; demote parallel worklists into details.\n",
           );
         }
       }
@@ -2418,6 +2432,107 @@ export function countDecorativeChartTsx(source) {
   };
   walk(sf);
   return { hits };
+}
+
+function isOwnedWorklistOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-owner", sf)) return true;
+  if (findJsxAttr(opening, "data-shine-reuse-bound", sf)) return true;
+  if (findJsxAttr(opening, "data-shine-owner-id", sf)) return true;
+  const pattern = attrStringValue(findJsxAttr(opening, "data-product-pattern", sf), sf) || "";
+  return /worklist|datagrid|record-table|card-list|action-flow/i.test(pattern);
+}
+
+function isParallelWorklistOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-parallel-demoted", sf)) return false;
+  if (findJsxAttr(opening, "data-shine-parallel-rest", sf)) return false;
+  const tag = jsxTagName(opening);
+  if (tag === "table" || tag === "Table") return true;
+  if (tag === "DataGrid") return true;
+  const role = attrStringValue(findJsxAttr(opening, "role", sf), sf);
+  if (role === "grid") return true;
+  if (findJsxAttr(opening, "data-shine-grid", sf)) return true;
+  const slot = attrStringValue(findJsxAttr(opening, "data-slot", sf), sf);
+  if (slot === "table") return true;
+  return false;
+}
+
+/**
+ * Count parallel (unowned) worklists beside product owners in TSX.
+ */
+export function countParallelOwnedTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let owners = 0;
+  let parallels = 0;
+  const walk = (node) => {
+    if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const opening = ts.isJsxSelfClosingElement(node) ? node : node.openingElement;
+      if (isOwnedWorklistOpening(opening, sf)) owners += 1;
+      else if (isParallelWorklistOpening(opening, sf)) parallels += 1;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  const hits = owners > 0 && parallels > 0 ? parallels : 0;
+  return { hits, owners, parallels };
+}
+
+/**
+ * Stamp data-shine-reuse-bound on owners; demote parallel worklists via AST.
+ */
+export function bindProductOwnerTsx(source, op = {}) {
+  const ownerId = op.ownerId || op.owner || "nucleus-datagrid";
+  const pattern = op.productPattern || op.pattern || "worklist";
+  const summary = op.summary || `Use ${ownerId.replace(/-/g, " ")} (product owner)`;
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+
+  const walk = (node) => {
+    if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const opening = ts.isJsxSelfClosingElement(node) ? node : node.openingElement;
+      if (isOwnedWorklistOpening(opening, sf)) {
+        if (!findJsxAttr(opening, "data-shine-reuse-bound", sf)) {
+          let openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+          if (!/data-shine-owner/.test(openSrc)) {
+            openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` data-shine-owner="${ownerId}"${m}`);
+          }
+          if (!/data-product-pattern/.test(openSrc)) {
+            openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` data-product-pattern="${pattern}"${m}`);
+          }
+          openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` data-shine-reuse-bound${m}`);
+          edits.push({ start: opening.getStart(sf), end: opening.getEnd(), replacement: openSrc });
+        }
+      } else if (isParallelWorklistOpening(opening, sf)) {
+        // Skip if already inside a demoted details (parent check via text slice).
+        const before = text.slice(Math.max(0, node.getStart(sf) - 60), node.getStart(sf));
+        if (/data-shine-parallel-rest/.test(before)) return;
+        const full = text.slice(node.getStart(sf), node.getEnd());
+        if (/data-shine-parallel-demoted/.test(full)) return;
+        let openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+        if (!/data-shine-parallel-demoted/.test(openSrc)) {
+          openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` data-shine-parallel-demoted${m}`);
+        }
+        const body = text.slice(opening.getEnd(), node.getEnd());
+        // body includes children + closing; for self-closing, body is empty after open.
+        const inner = ts.isJsxSelfClosingElement(node)
+          ? openSrc
+          : openSrc + body;
+        const wrapped =
+          `<details data-shine-parallel-rest>\n        <summary>${summary}</summary>\n        ${inner}\n      </details>`;
+        edits.push({ start: node.getStart(sf), end: node.getEnd(), replacement: wrapped });
+        return; // don't descend into wrapped parallel
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+
+  if (!edits.length) return text;
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  return out;
 }
 
 /**

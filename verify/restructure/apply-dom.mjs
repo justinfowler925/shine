@@ -94,6 +94,12 @@ export function applyDomRestructure(html, plan) {
         out = next;
         applied.push("stamp-chart-units");
       }
+    } else if (op.op === "bind-product-owner") {
+      const next = applyBindProductOwner(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("bind-product-owner");
+      }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
       applied.push("set-focal");
@@ -330,6 +336,109 @@ export function applyCollapseCardSoup(html, op = {}) {
     stamped,
     `${stamped}\n<details data-shine-card-rest><summary>${summary}</summary>\n${demoted}\n</details>`,
   );
+  return out;
+}
+
+/**
+ * Bind product owner + demote parallel worklists.
+ * Stamps data-shine-reuse-bound on owned surfaces; parks unmarked table/grid
+ * parallels in <details data-shine-parallel-rest>.
+ */
+export function applyBindProductOwner(html, op = {}) {
+  const ownerId = op.ownerId || op.owner || "nucleus-datagrid";
+  const pattern = op.productPattern || op.pattern || "worklist";
+  const summary = op.summary || `Use ${ownerId.replace(/-/g, " ")} (product owner)`;
+  let out = String(html);
+  if (/data-shine-parallel-rest/.test(out) && /data-shine-reuse-bound/.test(out)) {
+    // Still stamp any unbound owners.
+  }
+
+  const worklistRe =
+    /<(table|div|section)\b([^>]*\b(?:role=["']grid["']|data-shine-grid|data-slot=["']table["']|data-shine-owner|data-product-pattern)[^>]*)>([\s\S]*?)<\/\1>/gi;
+
+  /** @type {{ full: string, tag: string, attrs: string, body: string, owned: boolean, index: number }[]} */
+  const found = [];
+  let m;
+  const src = out;
+  worklistRe.lastIndex = 0;
+  while ((m = worklistRe.exec(src)) !== null) {
+    const attrs = m[2] || "";
+    if (/data-shine-parallel-rest|data-shine-parallel-demoted/.test(attrs)) continue;
+    // Skip nested matches already inside a captured outer — crude: skip if inside previous span
+    const index = m.index;
+    if (found.some((f) => index > f.index && index < f.index + f.full.length)) continue;
+    const owned =
+      /\bdata-shine-owner\b/.test(attrs) ||
+      /\bdata-shine-reuse-bound\b/.test(attrs) ||
+      /\bdata-shine-owner-id\b/.test(attrs) ||
+      (/\bdata-product-pattern\b/.test(attrs) &&
+        /worklist|datagrid|record-table|card-list|action-flow/i.test(attrs));
+    found.push({ full: m[0], tag: m[1], attrs, body: m[3], owned, index });
+  }
+
+  // Also catch bare <table> without role/owner attrs.
+  const tableRe = /<table\b([^>]*)>([\s\S]*?)<\/table>/gi;
+  while ((m = tableRe.exec(src)) !== null) {
+    const attrs = m[1] || "";
+    const full = m[0];
+    const index = m.index;
+    if (found.some((f) => f.full === full || (index >= f.index && index < f.index + f.full.length))) {
+      continue;
+    }
+    if (/data-shine-parallel-rest|data-shine-parallel-demoted/.test(attrs + full)) continue;
+    const owned =
+      /\bdata-shine-owner\b/.test(attrs) ||
+      /\bdata-shine-reuse-bound\b/.test(attrs) ||
+      /\bdata-product-pattern\b/.test(attrs);
+    found.push({ full, tag: "table", attrs, body: m[2], owned, index });
+  }
+
+  found.sort((a, b) => a.index - b.index);
+  if (!found.length) return out;
+
+  const owners = found.filter((f) => f.owned);
+  const parallels = found.filter((f) => !f.owned);
+  if (!parallels.length && owners.every((o) => /\bdata-shine-reuse-bound\b/.test(o.attrs))) {
+    return out;
+  }
+
+  // Stamp owners.
+  for (const o of owners) {
+    if (/\bdata-shine-reuse-bound\b/.test(o.attrs)) continue;
+    let attrs = o.attrs;
+    if (!/\bdata-shine-owner\b/.test(attrs)) attrs += ` data-shine-owner="${ownerId}"`;
+    if (!/\bdata-product-pattern\b/.test(attrs)) attrs += ` data-product-pattern="${pattern}"`;
+    attrs += ` data-shine-reuse-bound`;
+    const next = `<${o.tag}${attrs}>${o.body}</${o.tag}>`;
+    out = out.replace(o.full, next);
+    o.full = next;
+    o.attrs = attrs;
+  }
+
+  // Demote parallels (outermost first so indices stay valid via string replace of unique full).
+  for (const p of parallels) {
+    if (/data-shine-parallel-rest/.test(out) && out.includes(`data-shine-parallel-demoted`) && /data-shine-parallel-rest[\s\S]*$/.test(p.full)) {
+      continue;
+    }
+    // Skip if already wrapped.
+    const wrappedProbe = out.indexOf(p.full);
+    if (wrappedProbe < 0) continue;
+    const before = out.slice(Math.max(0, wrappedProbe - 80), wrappedProbe);
+    if (/data-shine-parallel-rest/.test(before)) continue;
+
+    let attrs = p.attrs;
+    if (!/\bdata-shine-parallel-demoted\b/.test(attrs)) attrs += ` data-shine-parallel-demoted`;
+    const inner = `<${p.tag}${attrs}>${p.body}</${p.tag}>`;
+    const wrapped =
+      `<details data-shine-parallel-rest>\n    <summary>${summary}</summary>\n    ${inner}\n  </details>`;
+    out = out.replace(p.full, wrapped);
+  }
+
+  // If we had parallels but no owner, stamp first worklist-like as owner when expected.
+  if (!owners.length && /data-owner-expected|data-shine-product-reference/.test(out) && parallels.length) {
+    // First parallel already demoted; leave as demoted — owner expected marker alone is enough for measure after demote.
+  }
+
   return out;
 }
 

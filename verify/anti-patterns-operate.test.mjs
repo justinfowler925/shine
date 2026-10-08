@@ -33,6 +33,7 @@ import { formatFillerEmptyFailures } from "./filler-empty.mjs";
 import { formatCardSoupFailures } from "./card-soup.mjs";
 import { formatEmptyTriadFailures } from "./empty-triad.mjs";
 import { formatDecorativeChartFailures } from "./decorative-chart.mjs";
+import { formatParallelOwnedFailures } from "./parallel-owned.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -137,6 +138,13 @@ const expected = {
     restructureOps: ["stamp-chart-units"],
     cropPairId: "queue-decorative-chart",
   },
+  "parallel-owned-component": {
+    detector: "parallel-owned",
+    measureFailurePrefix: "parallel-owned",
+    alias: "parallel-owned",
+    restructureOps: ["bind-product-owner"],
+    cropPairId: "queue-parallel-owned",
+  },
 };
 
 for (const id of OPERATE_SLOP_ANTI_PATTERN_IDS) {
@@ -237,6 +245,12 @@ const decorativeHits = retrieveAntiPatterns("decorative chart no units stamp-cha
   antiPatterns: corpus,
 });
 assert.ok(decorativeHits.some((h) => h.id === "decorative-chart-no-units"), JSON.stringify(decorativeHits.map((h) => h.id)));
+
+const parallelHits = retrieveAntiPatterns("parallel owned bind-product-owner nucleus datagrid competing implementation", {
+  screen: "queue",
+  antiPatterns: corpus,
+});
+assert.ok(parallelHits.some((h) => h.id === "parallel-owned-component"), JSON.stringify(parallelHits.map((h) => h.id)));
 
 // Measure formatters cite anti-pattern:<id>
 const dualFails = formatDualFocalFailures(
@@ -343,6 +357,21 @@ const decorativeFails = formatDecorativeChartFailures(
 assert.ok(
   decorativeFails.some((f) => /decorative-chart:/.test(f) && /anti-pattern:decorative-chart-no-units/.test(f)),
   decorativeFails.join("\n"),
+);
+
+const parallelFails = formatParallelOwnedFailures(
+  {
+    parallelCount: 1,
+    ownerCount: 1,
+    ownerExpected: true,
+    parallelSamples: ["table"],
+    ownerSamples: ["nucleus-datagrid"],
+  },
+  { gate: true },
+);
+assert.ok(
+  parallelFails.some((f) => /parallel-owned:/.test(f) && /anti-pattern:parallel-owned-component/.test(f)),
+  parallelFails.join("\n"),
 );
 
 assert.equal(formatAntiPatternCite("kpi-soup"), "anti-pattern:kpi-soup");

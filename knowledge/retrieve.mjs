@@ -39,6 +39,7 @@ export const OPERATE_SLOP_ANTI_PATTERN_IDS = Object.freeze([
   "card-soup",
   "empty-filtered-error-conflated",
   "decorative-chart-no-units",
+  "parallel-owned-component",
 ]);
 
 export function validatePrinciple(value) {
