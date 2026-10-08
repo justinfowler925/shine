@@ -129,7 +129,10 @@ export function evaluateCopyHeuristics() {
 
 export function formatCopyHeuristicFailures(result, { gate = false } = {}) {
   if (!gate || !result?.findings?.length) return [];
-  return result.findings.map(
-    (f) => `copy: ${f.kind} (${f.sel}) — ${f.detail}`,
-  );
+  return result.findings.map((f) => {
+    if (f.kind === "missing-page-title" || f.kind === "empty-h1") {
+      return `copy: ${f.kind} (${f.sel}) — ${f.detail} — apply stamp-page-title (document.title + visible h1)`;
+    }
+    return `copy: ${f.kind} (${f.sel}) — ${f.detail}`;
+  });
 }

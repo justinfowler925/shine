@@ -8,6 +8,7 @@ export const AUTO_SAFE_DOM_OPS = Object.freeze([
   "cta-budget",
   "kpi-collapse",
   "pill-collapse",
+  "stamp-page-title",
   "title-singular",
   "chrome-budget",
   "filter-clearable",
@@ -38,6 +39,7 @@ export const DENOISE_OP_ORDER = Object.freeze([
   "rebind-cite",
   "cta-budget",
   "chrome-budget",
+  "stamp-page-title",
   "title-singular",
   "pill-collapse",
   "filter-clearable",
@@ -137,6 +139,7 @@ export function buildRestructurePlan({
           { op: "cta-budget", scope: "main", maxFilled: 1, preferLabels: ["Pursue"], demotePolicy: "outline" },
           { op: "kpi-collapse", maxVisible: 3, rest: "details", selector: ".metrics .metric, [data-shine-kpi]" },
           { op: "pill-collapse", maxVisible: 3, rest: "details", selector: "[data-shine-filter-stack] .pill, [data-shine-filter-pill]" },
+          { op: "stamp-page-title" },
           { op: "title-singular", on: "primary-title", demote: "kicker" },
           { op: "chrome-budget", maxFilledChrome: 0, demotePolicy: "ghost", scope: "chrome" },
           { op: "filter-clearable", perChip: true, clearAll: true },
@@ -154,7 +157,7 @@ export function buildRestructurePlan({
     acceptance: {
       measureMustClear: measureMustClear.length
         ? measureMustClear
-        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "chrome-pressure", "filter-reversible", "marketing-dna", "filler-empty", "card-soup", "empty-triad", "decorative-chart", "parallel-owned", "incomplete-primitive", "form-heuristic", "composition-slop"],
+        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "missing-page-title", "chrome-pressure", "filter-reversible", "marketing-dna", "filler-empty", "card-soup", "empty-triad", "decorative-chart", "parallel-owned", "incomplete-primitive", "form-heuristic", "composition-slop"],
       usabilityFlow: usabilityFlow || "flow:decide-notice",
       proveRequired: true,
     },

@@ -23,7 +23,7 @@ const text=(value)=>String(value||"").trim();
 export const saasPageCategories=new Set(["datagrid","dashboard","form","record","lex"]);
 export const saasProductUxCheckKeys=["primaryTaskCheck","emptyErrorTriadCheck","competingCtaCheck"];
 /** Denoise / Operate composition checks — presence gated like product-UX (N7). */
-export const saasRestructureCheckKeys=["dualFocalCheck","kpiSoupCheck","citeHonestyCheck","pillFilterCheck","pageTitleCheck","chromePressureCheck","filterReversibleCheck","marketingDnaCheck","fillerEmptyCheck","cardSoupCheck","emptyTriadCheck","decorativeChartCheck","parallelOwnedCheck","incompletePrimitivesCheck","formHeuristicCheck"];
+export const saasRestructureCheckKeys=["dualFocalCheck","kpiSoupCheck","citeHonestyCheck","pillFilterCheck","pageTitleCheck","copyHeuristicCheck","chromePressureCheck","filterReversibleCheck","marketingDnaCheck","fillerEmptyCheck","cardSoupCheck","emptyTriadCheck","decorativeChartCheck","parallelOwnedCheck","incompletePrimitivesCheck","formHeuristicCheck"];
 
 // Copy checks: persuasive + instructional surfaces under lane=saas (Operate pages
 // plus marketing/catalog). Presence only — belief honesty stays agent (copy.md).
@@ -160,6 +160,9 @@ export function deriveRestructureOps(diagnosis={}){
  }
  if(diagnosis.pageTitleCheck?.ok===false){
   ops.push({op:"title-singular",on:"primary-title",demote:"kicker"});
+ }
+ if(diagnosis.copyHeuristicCheck?.ok===false){
+  ops.push({op:"stamp-page-title"});
  }
  if(diagnosis.chromePressureCheck?.ok===false){
   ops.push({op:"chrome-budget",maxFilledChrome:0,demotePolicy:"ghost",scope:"chrome"});

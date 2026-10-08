@@ -128,6 +128,17 @@ export const PAGE_TITLE_AST_FIXTURES = Object.freeze({
   op: "title-singular",
 });
 
+/** Repo-relative missing-page-title TSX AST FAIL→PASS fixtures (stamp-page-title). */
+export const STAMP_PAGE_TITLE_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-missing-page-title.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-missing-page-title-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-missing-page-title-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-missing-page-title-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-missing-page-title-tsx",
+  op: "stamp-page-title",
+});
+
 
 
 
@@ -363,6 +374,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: collapse-peer-grids xor-saved-view when dual worklists share the route");
     hints.push("restructure: kpi-collapse maxVisible=3 when ≥4 equal metrics compete with the work object");
     hints.push("restructure: pill-collapse maxVisible=3 when ≥5 above-fold filter pills crowd the decide path");
+    hints.push("restructure: stamp-page-title — document.title + visible h1 when missing/empty");
     hints.push("restructure: title-singular — one page title; demote peer h1 / page-title to kicker");
     hints.push("restructure: chrome-budget maxFilledChrome=0 — demote filled header/nav/aside peers to outline/ghost");
     hints.push("restructure: filter-clearable — dismiss/clear-all on active filter chips");
@@ -818,6 +830,40 @@ export function pillFilterAstForQueueJob(job, constraints = {}) {
 }
 
 /**
+ * Missing page-title TSX AST fixture binding (stamp-page-title).
+ */
+export function stampPageTitleAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const operateJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "settings", "form", "catalog", "dashboard"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "settings", "form", "catalog", "dashboard"].includes(screen) ||
+    intent === "queue" ||
+    intent === "settings" ||
+    /\b(queue|triage|inbox|settings|dashboard|missing[- ]?page[- ]?title|empty[- ]?h1|stamp[- ]?page[- ]?title|copy[- ]?heuristic|no[- ]?title)\b/i.test(
+      text,
+    );
+  if (!operateJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: STAMP_PAGE_TITLE_AST_FIXTURES.op,
+    fixtureTsx: STAMP_PAGE_TITLE_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: STAMP_PAGE_TITLE_AST_FIXTURES.tsxAstHard,
+    cropBefore: STAMP_PAGE_TITLE_AST_FIXTURES.cropBefore,
+    cropAfter: STAMP_PAGE_TITLE_AST_FIXTURES.cropAfter,
+    cropPairId: STAMP_PAGE_TITLE_AST_FIXTURES.cropPairId,
+    helper: STAMP_PAGE_TITLE_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Missing document.title / visible h1: apply verify/restructure/apply-tsx.mjs stamp-page-title (TypeScript AST; stamp h1 data-page-title). Copy FAIL→PASS crop paths from recommendation.stampPageTitleAst.cropBefore/cropAfter; prove copy: missing-page-title / empty-h1 clears.",
+  };
+}
+
+/**
  * Competing page-titles TSX AST fixture binding for Operate jobs.
  * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
  * apply-tsx title-singular.
@@ -1196,6 +1242,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    stampPageTitleAst: stampPageTitleAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     chromePressureAst: chromePressureAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -1398,6 +1449,9 @@ export function formatRecommendationSummary(rec) {
   const pageTitle = rec.pageTitleAst?.fixtureTsx
     ? ` · pageTitleAst ${rec.pageTitleAst.mode}@${rec.pageTitleAst.cropPairId}`
     : "";
+  const stampPageTitle = rec.stampPageTitleAst?.fixtureTsx
+    ? ` · stampPageTitleAst ${rec.stampPageTitleAst.mode}@${rec.stampPageTitleAst.cropPairId}`
+    : "";
   const chrome = rec.chromePressureAst?.fixtureTsx
     ? ` · chromePressureAst ${rec.chromePressureAst.mode}@${rec.chromePressureAst.cropPairId}`
     : "";
@@ -1445,6 +1499,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${linkFieldErrorsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${stampPageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${linkFieldErrorsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }
