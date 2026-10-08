@@ -32,6 +32,7 @@ import { formatMarketingDnaFailures } from "./marketing-dna.mjs";
 import { formatFillerEmptyFailures } from "./filler-empty.mjs";
 import { formatCardSoupFailures } from "./card-soup.mjs";
 import { formatEmptyTriadFailures } from "./empty-triad.mjs";
+import { formatDecorativeChartFailures } from "./decorative-chart.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -129,6 +130,13 @@ const expected = {
     restructureOps: ["split-empty-triad"],
     cropPairId: "queue-empty-triad",
   },
+  "decorative-chart-no-units": {
+    detector: "decorative-chart",
+    measureFailurePrefix: "decorative-chart",
+    alias: "decorative-chart",
+    restructureOps: ["stamp-chart-units"],
+    cropPairId: "queue-decorative-chart",
+  },
 };
 
 for (const id of OPERATE_SLOP_ANTI_PATTERN_IDS) {
@@ -223,6 +231,12 @@ const emptyTriadHits = retrieveAntiPatterns("empty filtered error conflated tria
   antiPatterns: corpus,
 });
 assert.ok(emptyTriadHits.some((h) => h.id === "empty-filtered-error-conflated"), JSON.stringify(emptyTriadHits.map((h) => h.id)));
+
+const decorativeHits = retrieveAntiPatterns("decorative chart no units stamp-chart-units activity svg queue", {
+  screen: "queue",
+  antiPatterns: corpus,
+});
+assert.ok(decorativeHits.some((h) => h.id === "decorative-chart-no-units"), JSON.stringify(decorativeHits.map((h) => h.id)));
 
 // Measure formatters cite anti-pattern:<id>
 const dualFails = formatDualFocalFailures(
@@ -320,6 +334,15 @@ const emptyTriadFails = formatEmptyTriadFailures(
 assert.ok(
   emptyTriadFails.some((f) => /empty-triad:/.test(f) && /anti-pattern:empty-filtered-error-conflated/.test(f)),
   emptyTriadFails.join("\n"),
+);
+
+const decorativeFails = formatDecorativeChartFailures(
+  { unmarkedCount: 1, unmarkedSamples: ["svg"] },
+  { gate: true },
+);
+assert.ok(
+  decorativeFails.some((f) => /decorative-chart:/.test(f) && /anti-pattern:decorative-chart-no-units/.test(f)),
+  decorativeFails.join("\n"),
 );
 
 assert.equal(formatAntiPatternCite("kpi-soup"), "anti-pattern:kpi-soup");

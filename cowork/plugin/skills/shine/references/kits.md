@@ -271,6 +271,19 @@ Operate queues must not conflate empty, filtered-empty, and error.
 
 Doctor: `verify/split-empty-triad-ast-bite.mjs` / `npm run split-empty-triad:ast-bite`.
 
+### Decorative-chart TSX AST — stamp-chart-units
+
+Operate charts must declare units and a baseline, not ship decorative sparks.
+
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `stamp-chart-units`.
+
+- Stamps `data-shine-chart`, `data-unit`, `data-baseline`, `data-shine-chart-stamped`
+- Rewrites aria-label to include units; adds `data-shine-chart-legend`
+- Recommend binds `decorativeChartAst` FAIL→PASS crops (`queue-decorative-chart-tsx-*`)
+
+Doctor: `verify/stamp-chart-units-ast-bite.mjs` / `npm run stamp-chart-units:ast-bite`.
+
+
 
 
 

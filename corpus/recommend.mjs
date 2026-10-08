@@ -144,6 +144,17 @@ export const CARD_SOUP_AST_FIXTURES = Object.freeze({
   maxVisible: 1,
 });
 
+/** Repo-relative decorative-chart TSX AST FAIL→PASS fixtures (stamp-chart-units). */
+export const DECORATIVE_CHART_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-decorative-chart.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-decorative-chart-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-decorative-chart-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-decorative-chart-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-decorative-chart-tsx",
+  op: "stamp-chart-units",
+});
+
 /** Repo-relative empty-triad TSX AST FAIL→PASS fixtures (split-empty-triad). */
 export const EMPTY_TRIAD_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-empty-triad.tsx",
@@ -326,6 +337,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: rewrite-filler-empty — replace filler empty phrases with job copy");
     hints.push("restructure: collapse-card-soup maxVisible=1 — stamp focal; park peer Cards in details");
     hints.push("restructure: split-empty-triad — distinct empty / filtered-empty / error treatments");
+    hints.push("restructure: stamp-chart-units — data-unit + data-baseline on Operate charts");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
@@ -380,6 +392,39 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
 
 
 
+
+/**
+ * Decorative-chart TSX AST fixture binding for Operate queue / dashboard jobs.
+ */
+export function decorativeChartAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog", "app-shell", "dashboard"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "catalog", "app-shell", "dashboard"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|dashboard|decorative[- ]?chart|stamp[- ]?chart|chart[- ]?units|no[- ]?units)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: DECORATIVE_CHART_AST_FIXTURES.op,
+    fixtureTsx: DECORATIVE_CHART_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: DECORATIVE_CHART_AST_FIXTURES.tsxAstHard,
+    cropBefore: DECORATIVE_CHART_AST_FIXTURES.cropBefore,
+    cropAfter: DECORATIVE_CHART_AST_FIXTURES.cropAfter,
+    cropPairId: DECORATIVE_CHART_AST_FIXTURES.cropPairId,
+    helper: DECORATIVE_CHART_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Decorative chart without units: apply verify/restructure/apply-tsx.mjs stamp-chart-units (TypeScript AST; data-unit + data-baseline + data-shine-chart-stamped). Copy FAIL→PASS crop paths from recommendation.decorativeChartAst.cropBefore/cropAfter; prove decorative-chart clears.",
+  };
+}
 
 /**
  * Empty-triad TSX AST fixture binding for Operate queue / filter jobs.
@@ -1035,6 +1080,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    decorativeChartAst: decorativeChartAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -1205,6 +1255,9 @@ export function formatRecommendationSummary(rec) {
   const emptyTriadAst = rec.emptyTriadAst?.fixtureTsx
     ? ` · emptyTriadAst ${rec.emptyTriadAst.mode}@${rec.emptyTriadAst.cropPairId}`
     : "";
+  const decorativeChartAst = rec.decorativeChartAst?.fixtureTsx
+    ? ` · decorativeChartAst ${rec.decorativeChartAst.mode}@${rec.decorativeChartAst.cropPairId}`
+    : "";
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
@@ -1222,6 +1275,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

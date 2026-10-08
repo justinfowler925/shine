@@ -28,6 +28,7 @@ import { formatMarketingDnaFailures } from "./marketing-dna.mjs";
 import { formatFillerEmptyFailures } from "./filler-empty.mjs";
 import { formatCardSoupFailures } from "./card-soup.mjs";
 import { formatEmptyTriadFailures } from "./empty-triad.mjs";
+import { formatDecorativeChartFailures } from "./decorative-chart.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const corpus = loadAntiPatterns(join(SHINE, "knowledge/anti-patterns"));
@@ -47,6 +48,7 @@ assert.equal(prefixMap.get("marketing-dna"), "marketing-dna-operate");
 assert.equal(prefixMap.get("filler-empty"), "filler-empty-copy");
 assert.equal(prefixMap.get("card-soup"), "card-soup");
 assert.equal(prefixMap.get("empty-triad"), "empty-filtered-error-conflated");
+assert.equal(prefixMap.get("decorative-chart"), "decorative-chart-no-units");
 
 // Green path: formatter cites → no meta-failures
 const dualOk = formatDualFocalFailures(
@@ -89,7 +91,11 @@ const emptyTriadOk = formatEmptyTriadFailures(
   { sameNodeConflatedCount: 1, missingFilteredEmpty: true },
   { gate: true },
 );
-const green = [...dualOk, ...kpiOk, ...ctaOk, ...citeOk, ...pillOk, ...titleOk, ...chromeOk, ...filterOk, ...dnaOk, ...fillerOk, ...cardSoupOk, ...emptyTriadOk];
+const decorativeOk = formatDecorativeChartFailures(
+  { unmarkedCount: 1, unmarkedSamples: ["svg"] },
+  { gate: true },
+);
+const green = [...dualOk, ...kpiOk, ...ctaOk, ...citeOk, ...pillOk, ...titleOk, ...chromeOk, ...filterOk, ...dnaOk, ...fillerOk, ...cardSoupOk, ...emptyTriadOk, ...decorativeOk];
 assert.equal(enforceOperateAntiPatternCites(green, { antiPatterns: corpus }).length, 0);
 for (const line of green) {
   const cites = extractAntiPatternCites(line);
@@ -110,9 +116,10 @@ const bare = [
   "filler-empty: filler empty-state copy \"Welcome to your dashboard\"",
   "card-soup: 4 equal-weight Card roots in main with no focal region",
   "empty-triad: active filters with empty state but no filtered-empty treatment",
+  "decorative-chart: 1 chart(s) lack units/baseline [svg]",
 ];
 const bareExtras = enforceOperateAntiPatternCites(bare, { antiPatterns: corpus });
-assert.equal(bareExtras.length, 12, bareExtras.join("\n"));
+assert.equal(bareExtras.length, 13, bareExtras.join("\n"));
 for (const line of bareExtras) {
   assert.match(line, /^anti-pattern-cite:/);
   assert.match(line, /fail-closed/);
@@ -129,6 +136,7 @@ assert.ok(bareExtras.some((f) => /anti-pattern:marketing-dna-operate/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:filler-empty-copy/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:card-soup/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:empty-filtered-error-conflated/.test(f)));
+assert.ok(bareExtras.some((f) => /anti-pattern:decorative-chart-no-units/.test(f)));
 
 // Bite: wrong catalog id on a matching prefix
 const wrongId = [

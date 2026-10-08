@@ -219,6 +219,61 @@ export function buildChromeAstAfterCropHtml() {
 
 
 
+
+/** Decorative-chart DOM FAIL crop. */
+export function buildDecorativeChartBeforeCropHtml() {
+  return wrap({
+    title: "Decorative chart crop FAIL",
+    cropId: "decorative-chart-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: Activity chart SVG with no units — decorative-chart.",
+    body: `  <svg class="chart" data-chart viewBox="0 0 320 120" role="img" aria-label="Activity chart">
+    <polyline fill="none" stroke="#18181b" stroke-width="3" points="0,90 80,40 160,70 240,20 320,45"/>
+  </svg>`,
+  });
+}
+
+/** Decorative-chart DOM PASS crop. */
+export function buildDecorativeChartAfterCropHtml() {
+  return wrap({
+    title: "Decorative chart crop PASS",
+    cropId: "decorative-chart-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: units + baseline stamped — stamp-chart-units.",
+    body: `  <svg class="chart" data-chart data-shine-chart data-unit="count" data-baseline="prior period" data-shine-chart-stamped viewBox="0 0 320 120" role="img" aria-label="Open notices (count vs prior period)">
+    <polyline fill="none" stroke="#18181b" stroke-width="3" points="0,90 80,40 160,70 240,20 320,45"/>
+  </svg>
+  <p data-shine-chart-legend>Unit: count · Baseline: prior period</p>`,
+  });
+}
+
+/** Decorative-chart TSX AST FAIL crop. */
+export function buildDecorativeChartAstBeforeCropHtml() {
+  return wrap({
+    title: "Decorative chart AST crop FAIL",
+    cropId: "decorative-chart-tsx-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: chart SVG in TSX without units — decorative-chart; apply-tsx stamp-chart-units.",
+    body: `  <svg class="chart" data-chart data-shine-tsx-ast="before" viewBox="0 0 320 120" role="img" aria-label="Activity chart">
+    <polyline fill="none" stroke="#18181b" stroke-width="3" points="0,90 80,40 160,70 240,20 320,45"/>
+  </svg>`,
+  });
+}
+
+/** Decorative-chart TSX AST PASS crop. */
+export function buildDecorativeChartAstAfterCropHtml() {
+  return wrap({
+    title: "Decorative chart AST crop PASS",
+    cropId: "decorative-chart-tsx-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: units via TSX AST stamp-chart-units.",
+    body: `  <svg class="chart" data-chart data-shine-chart data-unit="count" data-baseline="prior period" data-shine-chart-stamped data-shine-tsx-ast="after" viewBox="0 0 320 120" role="img" aria-label="Open notices (count vs prior period)">
+    <polyline fill="none" stroke="#18181b" stroke-width="3" points="0,90 80,40 160,70 240,20 320,45"/>
+  </svg>
+  <p data-shine-chart-legend>Unit: count · Baseline: prior period</p>`,
+  });
+}
+
 /** Empty-triad DOM FAIL crop. */
 export function buildEmptyTriadBeforeCropHtml() {
   return wrap({
@@ -1461,6 +1516,28 @@ export const DEFECT_CROP_PAIRS = [
     beforeMust: [/data-shine-tsx-ast="before"/, /No data/, /role=["']alert["']/],
     afterMust: [/data-shine-tsx-ast="after"/, /data-filtered-empty/, /data-shine-triad-split/],
   },
+
+  {
+    id: "queue-decorative-chart",
+    defect: "decorative-chart",
+    beforeCrop: "queue-decorative-chart-before-crop.html",
+    afterCrop: "queue-decorative-chart-after-crop.html",
+    buildBefore: buildDecorativeChartBeforeCropHtml,
+    buildAfter: buildDecorativeChartAfterCropHtml,
+    beforeMust: [/data-chart/, /Activity chart/],
+    beforeMustNot: [/data-unit/, /data-shine-chart-stamped/],
+    afterMust: [/data-unit=["']count["']/, /data-shine-chart-stamped/, /data-shine-chart-legend/],
+  },
+  {
+    id: "queue-decorative-chart-tsx",
+    defect: "decorative-chart",
+    beforeCrop: "queue-decorative-chart-tsx-before-crop.html",
+    afterCrop: "queue-decorative-chart-tsx-after-crop.html",
+    buildBefore: buildDecorativeChartAstBeforeCropHtml,
+    buildAfter: buildDecorativeChartAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /Activity chart/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-unit=["']count["']/, /data-shine-chart-stamped/],
+  },
 ];
 
 
@@ -1654,6 +1731,18 @@ export function assertCropPairOk(pair, read) {
       errors.push(`${pair.id} after needs filtered-empty or triad-split`);
     }
   }
+
+  // Decorative-chart: before lacks units; after stamped
+  if ((pair.id === "queue-decorative-chart" || pair.id === "queue-decorative-chart-tsx") && before && after) {
+    if (!/data-chart|Activity chart/.test(before)) errors.push(`${pair.id} before needs chart`);
+    if (/data-unit/.test(before) || /data-shine-chart-stamped/.test(before)) {
+      errors.push(`${pair.id} before must not already be stamped`);
+    }
+    if (!/data-unit/.test(after) || !/data-shine-chart-stamped/.test(after)) {
+      errors.push(`${pair.id} after needs unit stamps`);
+    }
+  }
   return { ok: errors.length === 0, errors };
 }
+
 

@@ -110,6 +110,11 @@ import {
   evaluateEmptyTriad,
   formatEmptyTriadFailures,
 } from "./empty-triad.mjs";
+import {
+  decorativeChartGateApplies,
+  evaluateDecorativeChart,
+  formatDecorativeChartFailures,
+} from "./decorative-chart.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { enforceOperateAntiPatternCites } from "../knowledge/retrieve.mjs";
 
@@ -445,7 +450,8 @@ const marketingDna = await page.evaluate(evaluateMarketingDna);
 const fillerEmpty = await page.evaluate(evaluateFillerEmpty);
 const cardSoup = await page.evaluate(evaluateCardSoup);
 const emptyTriad = await page.evaluate(evaluateEmptyTriad);
-const formHeuristics = await page.evaluate(evaluateFormHeuristics);
+const decorativeChart = await page.evaluate(evaluateDecorativeChart);
+const formHeuristics = await page.evaluate(evaluateFormHeuristics)
 const copyHeuristics = await page.evaluate(evaluateCopyHeuristics);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
 const compose = await page.evaluate(() => {
@@ -1046,6 +1052,16 @@ if (compose.filledCount > 2) {
     citeId: dfCiteId,
   });
   for (const f of formatEmptyTriadFailures(emptyTriad, { gate: emptyTriadApplies })) {
+    failures.push(f);
+  }
+  const decorativeChartApplies = decorativeChartGateApplies({
+    lane: laneWant,
+    citeScreen: dfCiteRow?.screen || "",
+    citeJobs: dfCiteRow?.jobs || [],
+    isWireframe,
+    citeId: dfCiteId,
+  });
+  for (const f of formatDecorativeChartFailures(decorativeChart, { gate: decorativeChartApplies })) {
     failures.push(f);
   }
 }
