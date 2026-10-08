@@ -29,6 +29,7 @@ import { formatFillerEmptyFailures } from "./filler-empty.mjs";
 import { formatCardSoupFailures } from "./card-soup.mjs";
 import { formatEmptyTriadFailures } from "./empty-triad.mjs";
 import { formatDecorativeChartFailures } from "./decorative-chart.mjs";
+import { formatParallelOwnedFailures } from "./parallel-owned.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const corpus = loadAntiPatterns(join(SHINE, "knowledge/anti-patterns"));
@@ -49,6 +50,7 @@ assert.equal(prefixMap.get("filler-empty"), "filler-empty-copy");
 assert.equal(prefixMap.get("card-soup"), "card-soup");
 assert.equal(prefixMap.get("empty-triad"), "empty-filtered-error-conflated");
 assert.equal(prefixMap.get("decorative-chart"), "decorative-chart-no-units");
+assert.equal(prefixMap.get("parallel-owned"), "parallel-owned-component");
 
 // Green path: formatter cites → no meta-failures
 const dualOk = formatDualFocalFailures(
@@ -95,7 +97,17 @@ const decorativeOk = formatDecorativeChartFailures(
   { unmarkedCount: 1, unmarkedSamples: ["svg"] },
   { gate: true },
 );
-const green = [...dualOk, ...kpiOk, ...ctaOk, ...citeOk, ...pillOk, ...titleOk, ...chromeOk, ...filterOk, ...dnaOk, ...fillerOk, ...cardSoupOk, ...emptyTriadOk, ...decorativeOk];
+const parallelOk = formatParallelOwnedFailures(
+  {
+    parallelCount: 1,
+    ownerCount: 1,
+    ownerExpected: true,
+    parallelSamples: ["table"],
+    ownerSamples: ["nucleus-datagrid"],
+  },
+  { gate: true },
+);
+const green = [...dualOk, ...kpiOk, ...ctaOk, ...citeOk, ...pillOk, ...titleOk, ...chromeOk, ...filterOk, ...dnaOk, ...fillerOk, ...cardSoupOk, ...emptyTriadOk, ...decorativeOk, ...parallelOk];
 assert.equal(enforceOperateAntiPatternCites(green, { antiPatterns: corpus }).length, 0);
 for (const line of green) {
   const cites = extractAntiPatternCites(line);
@@ -117,9 +129,10 @@ const bare = [
   "card-soup: 4 equal-weight Card roots in main with no focal region",
   "empty-triad: active filters with empty state but no filtered-empty treatment",
   "decorative-chart: 1 chart(s) lack units/baseline [svg]",
+  "parallel-owned: 1 parallel worklist(s) beside product owner [nucleus-datagrid]",
 ];
 const bareExtras = enforceOperateAntiPatternCites(bare, { antiPatterns: corpus });
-assert.equal(bareExtras.length, 13, bareExtras.join("\n"));
+assert.equal(bareExtras.length, 14, bareExtras.join("\n"));
 for (const line of bareExtras) {
   assert.match(line, /^anti-pattern-cite:/);
   assert.match(line, /fail-closed/);
@@ -137,6 +150,7 @@ assert.ok(bareExtras.some((f) => /anti-pattern:filler-empty-copy/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:card-soup/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:empty-filtered-error-conflated/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:decorative-chart-no-units/.test(f)));
+assert.ok(bareExtras.some((f) => /anti-pattern:parallel-owned-component/.test(f)));
 
 // Bite: wrong catalog id on a matching prefix
 const wrongId = [

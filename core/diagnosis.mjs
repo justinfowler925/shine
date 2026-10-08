@@ -23,7 +23,7 @@ const text=(value)=>String(value||"").trim();
 export const saasPageCategories=new Set(["datagrid","dashboard","form","record","lex"]);
 export const saasProductUxCheckKeys=["primaryTaskCheck","emptyErrorTriadCheck","competingCtaCheck"];
 /** Denoise / Operate composition checks — presence gated like product-UX (N7). */
-export const saasRestructureCheckKeys=["dualFocalCheck","kpiSoupCheck","citeHonestyCheck","pillFilterCheck","pageTitleCheck","chromePressureCheck","filterReversibleCheck","marketingDnaCheck","fillerEmptyCheck","cardSoupCheck","emptyTriadCheck","decorativeChartCheck"];
+export const saasRestructureCheckKeys=["dualFocalCheck","kpiSoupCheck","citeHonestyCheck","pillFilterCheck","pageTitleCheck","chromePressureCheck","filterReversibleCheck","marketingDnaCheck","fillerEmptyCheck","cardSoupCheck","emptyTriadCheck","decorativeChartCheck","parallelOwnedCheck"];
 
 // Copy checks: persuasive + instructional surfaces under lane=saas (Operate pages
 // plus marketing/catalog). Presence only — belief honesty stays agent (copy.md).
@@ -181,6 +181,9 @@ export function deriveRestructureOps(diagnosis={}){
  }
  if(diagnosis.decorativeChartCheck?.ok===false){
   ops.push({op:"stamp-chart-units"});
+ }
+ if(diagnosis.parallelOwnedCheck?.ok===false){
+  ops.push({op:"bind-product-owner"});
  }
  if(diagnosis.citeHonestyCheck?.ok===false||(/settings|sources|recipes/i.test(job)&&/queue|datagrid/i.test(category))){
   ops.push({op:"rebind-cite",from:"shadcn-queue",to:"shadcn-settings",whenCategory:"settings"});

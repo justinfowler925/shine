@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- shine-lint: off color,type,spacing — pinned parallel-owned before -->
+<html lang="en" data-cite="shadcn-queue" data-shine-probe="app-shell">
+<head>
+<meta charset="utf-8"/>
+<title>Queue · parallel-owned FAIL</title>
+<style>
+:root{color-scheme:light}body{margin:0;font:14px/1.5 system-ui;background:#fafafa;color:#18181b}
+main{padding:24px}
+[role=grid],table{width:100%;max-width:640px;border-collapse:collapse;background:#fff;border:1px solid #e4e4e7;border-radius:8px;margin:12px 0}
+[role=row],tr{display:table-row}
+[role=columnheader],[role=gridcell],th,td{padding:8px 12px;border-bottom:1px solid #e4e4e7;text-align:left}
+.owner{display:table;width:100%;max-width:640px}
+.owner [role=row]{display:table-row}
+.owner [role=columnheader],.owner [role=gridcell]{display:table-cell}
+button{background:#18181b;color:#fff;border:0;padding:8px 14px;border-radius:8px;font:inherit;margin-top:16px}
+.kicker{color:#71717a;font-size:12px}
+</style>
+</head>
+<body>
+<main data-shine-main data-owner-expected="nucleus-datagrid">
+  <h1>Queue</h1>
+  <p class="kicker">Nucleus DataGrid owns this worklist — do not invent a parallel table.</p>
+  <div class="owner" role="grid" data-shine-owner="nucleus-datagrid" data-product-pattern="worklist" data-region="focal" aria-label="Notices">
+    <div role="row">
+      <div role="columnheader">Notice</div>
+      <div role="columnheader">Status</div>
+    </div>
+    <div role="row">
+      <div role="gridcell">Acme renewal</div>
+      <div role="gridcell">Open</div>
+    </div>
+  </div>
+  <table class="homemade-grid" aria-label="Alternate notices table">
+    <thead><tr><th>Notice</th><th>Status</th></tr></thead>
+    <tbody><tr><td>Acme renewal</td><td>Open</td></tr></tbody>
+  </table>
+  <button type="button">Pursue</button>
+</main>
+</body>
+</html>

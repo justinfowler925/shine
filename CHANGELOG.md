@@ -15,6 +15,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate slop: parallel-owned-component / bind-product-owner.** Homemade
+  worklists/tables beside a Nucleus (or product) owner fail-closed as
+  `parallel-owned` (`anti-pattern:parallel-owned-component`). Auto-safe
+  `bind-product-owner` stamps `data-shine-reuse-bound` on the owner and demotes
+  parallels into `<details data-shine-parallel-rest>` on DOM + TypeScript AST.
+  Recommend emits `parallelOwnedAst`; denoise-loop names `parallel-owned`.
+  Doctor bites: `verify/parallel-owned.test.mjs` ·
+  `verify/bind-product-owner-ast-bite.mjs`.
+
 - **Operate slop: decorative-chart-no-units / stamp-chart-units.** Charts/SVGs
   lacking unit/baseline markers fail-closed as `decorative-chart`
   (`anti-pattern:decorative-chart-no-units`). Auto-safe `stamp-chart-units`

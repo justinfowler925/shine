@@ -155,6 +155,17 @@ export const DECORATIVE_CHART_AST_FIXTURES = Object.freeze({
   op: "stamp-chart-units",
 });
 
+/** Repo-relative parallel-owned TSX AST FAIL→PASS fixtures (bind-product-owner). */
+export const PARALLEL_OWNED_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-parallel-owned.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-parallel-owned-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-parallel-owned-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-parallel-owned-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-parallel-owned-tsx",
+  op: "bind-product-owner",
+});
+
 /** Repo-relative empty-triad TSX AST FAIL→PASS fixtures (split-empty-triad). */
 export const EMPTY_TRIAD_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-empty-triad.tsx",
@@ -338,6 +349,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: collapse-card-soup maxVisible=1 — stamp focal; park peer Cards in details");
     hints.push("restructure: split-empty-triad — distinct empty / filtered-empty / error treatments");
     hints.push("restructure: stamp-chart-units — data-unit + data-baseline on Operate charts");
+    hints.push("restructure: bind-product-owner — stamp data-shine-reuse-bound; demote parallel worklists");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
@@ -392,6 +404,39 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
 
 
 
+
+/**
+ * Parallel-owned TSX AST fixture binding for Operate queue / reuse jobs.
+ */
+export function parallelOwnedAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog", "app-shell", "dashboard", "record"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "catalog", "app-shell", "dashboard", "record"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|datagrid|parallel[- ]?owned|bind[- ]?product|product[- ]?owner|shine-reuse|competing[- ]?implementation|nucleus[- ]?datagrid)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: PARALLEL_OWNED_AST_FIXTURES.op,
+    fixtureTsx: PARALLEL_OWNED_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: PARALLEL_OWNED_AST_FIXTURES.tsxAstHard,
+    cropBefore: PARALLEL_OWNED_AST_FIXTURES.cropBefore,
+    cropAfter: PARALLEL_OWNED_AST_FIXTURES.cropAfter,
+    cropPairId: PARALLEL_OWNED_AST_FIXTURES.cropPairId,
+    helper: PARALLEL_OWNED_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Parallel component beside product owner: apply verify/restructure/apply-tsx.mjs bind-product-owner (TypeScript AST; data-shine-reuse-bound on owner; demote parallel into details data-shine-parallel-rest). Copy FAIL→PASS crop paths from recommendation.parallelOwnedAst.cropBefore/cropAfter; prove parallel-owned clears.",
+  };
+}
 
 /**
  * Decorative-chart TSX AST fixture binding for Operate queue / dashboard jobs.
@@ -1085,6 +1130,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    parallelOwnedAst: parallelOwnedAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -1258,6 +1308,9 @@ export function formatRecommendationSummary(rec) {
   const decorativeChartAst = rec.decorativeChartAst?.fixtureTsx
     ? ` · decorativeChartAst ${rec.decorativeChartAst.mode}@${rec.decorativeChartAst.cropPairId}`
     : "";
+  const parallelOwnedAst = rec.parallelOwnedAst?.fixtureTsx
+    ? ` · parallelOwnedAst ${rec.parallelOwnedAst.mode}@${rec.parallelOwnedAst.cropPairId}`
+    : "";
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
@@ -1275,6 +1328,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

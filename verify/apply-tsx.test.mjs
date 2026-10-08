@@ -302,6 +302,14 @@ const decorativePlan = buildRestructurePlan({
 });
 assert.ok(applyTsxRestructure(decorativeHard, decorativePlan).applied.includes("stamp-chart-units"));
 
+const parallelHard = readFileSync(join(FIX, "queue-parallel-owned-ast.tsx"), "utf8");
+const parallelPlan = buildRestructurePlan({
+  job: "Bind product owner",
+  category: "queue",
+  ops: [{ op: "bind-product-owner" }],
+});
+assert.ok(applyTsxRestructure(parallelHard, parallelPlan).applied.includes("bind-product-owner"));
+
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-card-soup AST · split-empty-triad AST · stamp-chart-units AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-card-soup AST · split-empty-triad AST · stamp-chart-units AST · bind-product-owner AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );
