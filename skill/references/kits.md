@@ -212,6 +212,14 @@ excluded). Denoise-loop seeds `kpiSoupCheck` → `kpi-collapse`.
 
 Doctor: `verify/metric-grid-preflight-bite.mjs` / `npm run metric-grid:preflight-bite`.
 
+### Preflight card-carnival → collapse-card-soup
+
+Preflight `ai-slop-card-carnival` counts ≥4 visible card hosts after `<style>` +
+`<details data-shine-card-rest>` exclusion (host markers only). `collapse-card-soup`
+FAIL→PASS. Completes the #209 nested-cards preflight promote.
+
+Doctor: `verify/card-carnival-preflight-bite.mjs` / `npm run card-carnival:preflight-bite`.
+
 ### Competing page-titles TSX AST — title-singular
 
 Multiple peer page titles in consumer TSX are singularized by

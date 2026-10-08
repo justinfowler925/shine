@@ -15,6 +15,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: preflight ai-slop-card-carnival clears via collapse-card-soup.**
+  Nested-cards promote (#209) excluded `data-shine-card-rest` for nested detect, but
+  `ai-slop-card-carnival` still counted parked peers on raw markup (and bare
+  `<article>` / CSS `.card`). Carnival now uses host-based count on style +
+  card-rest-stripped HTML so `collapse-card-soup` FAIL→PASS. Doctor:
+  `verify/card-carnival-preflight-bite.mjs`. Does not expand Operate-slop library.
+
 - **Denoise deepen: preflight ai-slop-nested-cards → collapse-card-soup.** Preflight
   emitted nested/equal card containers as a soft **note**, and parked peers in
   `<details data-shine-card-rest>` still tripped the detector after repair.
