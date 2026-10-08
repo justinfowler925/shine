@@ -2249,6 +2249,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 - Dual peer worklists / grids (`dual-focal`)  
 - KPI soup on queue/triage (≥4 equal metrics ahead of work object)  
 - Card soup without focal  
+- Nested/equal Card carnival; preflight `ai-slop-nested-cards` / `ai-slop-card-carnival` → `collapse-card-soup`  
 - Wrong cite (settings job + queue cite)  
 - Filler copy (“Welcome to your dashboard”, …)  
 - Marketing DNA on Operate chrome  
