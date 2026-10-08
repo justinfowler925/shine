@@ -930,6 +930,86 @@ export function buildPillAfterCropHtml() {
   });
 }
 
+/** Pill-filter badge/chip DOM FAIL crop. */
+export function buildPillBadgeBeforeCropHtml() {
+  return wrap({
+    title: "Pill badge crop FAIL — chip stack",
+    cropId: "pill-badge-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: seven above-fold badge/chip filters — pill-filter (badge deepen).",
+    body: `  <h1>Queue · badge filters</h1>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters">
+    <span class="chip" data-slot="badge">Status</span>
+    <span class="chip" data-slot="badge">Owner</span>
+    <span class="chip" data-slot="badge">Score</span>
+    <span class="chip" data-slot="badge">Source</span>
+    <span class="chip" data-slot="badge">Region</span>
+    <span class="chip" data-slot="badge">Due</span>
+    <span class="chip" data-slot="badge">Tag</span>
+  </div>`,
+  });
+}
+
+/** Pill-filter badge/chip DOM PASS crop. */
+export function buildPillBadgeAfterCropHtml() {
+  return wrap({
+    title: "Pill badge crop PASS — collapsed",
+    cropId: "pill-badge-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: three visible badge/chips; remainder in details — pill-collapse.",
+    body: `  <h1>Queue · badge filters</h1>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters">
+    <span class="chip" data-slot="badge">Status</span>
+    <span class="chip" data-slot="badge">Owner</span>
+    <span class="chip" data-slot="badge">Score</span>
+    <details data-shine-pill-rest><summary>More filters</summary>
+      <span class="chip" data-slot="badge">Source</span>
+      <span class="chip" data-slot="badge">Tag</span>
+    </details>
+  </div>`,
+  });
+}
+
+/** Pill-filter badge/chip TSX AST FAIL crop. */
+export function buildPillBadgeAstBeforeCropHtml() {
+  return wrap({
+    title: "Pill badge AST crop FAIL",
+    cropId: "pill-badge-tsx-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: badge/chip filter stack in TSX — apply-tsx pill-collapse deepen.",
+    body: `  <h1>Queue · TSX badge stack</h1>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters" data-shine-tsx-ast="before">
+    <span class="chip" data-slot="badge">Status</span>
+    <span class="chip" data-slot="badge">Owner</span>
+    <span class="chip" data-slot="badge">Score</span>
+    <span class="chip" data-slot="badge">Source</span>
+    <span class="chip" data-slot="badge">Region</span>
+    <span class="chip" data-slot="badge">Due</span>
+    <span class="chip" data-slot="badge">Tag</span>
+  </div>`,
+  });
+}
+
+/** Pill-filter badge/chip TSX AST PASS crop. */
+export function buildPillBadgeAstAfterCropHtml() {
+  return wrap({
+    title: "Pill badge AST crop PASS",
+    cropId: "pill-badge-tsx-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: badge/chip collapse via TSX AST pill-collapse maxVisible=3.",
+    body: `  <h1>Queue · TSX badge collapsed</h1>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters" data-shine-tsx-ast="after">
+    <span class="chip" data-slot="badge">Status</span>
+    <span class="chip" data-slot="badge">Owner</span>
+    <span class="chip" data-slot="badge">Score</span>
+    <details data-shine-pill-rest><summary>More filters</summary>
+      <span class="chip" data-slot="badge">Source</span>
+      <span class="chip" data-slot="badge">Tag</span>
+    </details>
+  </div>`,
+  });
+}
+
 /** Pill-filter TSX AST FAIL crop. */
 export function buildPillAstBeforeCropHtml() {
   return wrap({
@@ -1685,6 +1765,28 @@ export const DEFECT_CROP_PAIRS = [
     afterMust: [/data-shine-tsx-ast="after"/, /data-shine-pill-rest/, /More filters/],
   },
   {
+    id: "queue-pill-badge",
+    defect: "pill-filter",
+    beforeCrop: "queue-pill-badge-before-crop.html",
+    afterCrop: "queue-pill-badge-after-crop.html",
+    buildBefore: buildPillBadgeBeforeCropHtml,
+    buildAfter: buildPillBadgeAfterCropHtml,
+    beforeMust: [/data-shine-filter-stack/, /data-slot=["']badge["']/],
+    beforeMustNot: [/data-shine-pill-rest/],
+    afterMust: [/data-shine-pill-rest/, /data-slot=["']badge["']/, /More filters/],
+  },
+  {
+    id: "queue-pill-badge-tsx",
+    defect: "pill-filter",
+    beforeCrop: "queue-pill-badge-tsx-before-crop.html",
+    afterCrop: "queue-pill-badge-tsx-after-crop.html",
+    buildBefore: buildPillBadgeAstBeforeCropHtml,
+    buildAfter: buildPillBadgeAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /data-slot=["']badge["']/],
+    beforeMustNot: [/data-shine-pill-rest/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-pill-rest/, /More filters/],
+  },
+  {
     id: "queue-titles",
     defect: "page-title",
     beforeCrop: "queue-titles-before-crop.html",
@@ -2103,6 +2205,16 @@ export function assertCropPairOk(pair, read) {
     const afterVisible = after.replace(/<details[\s\S]*?<\/details>/gi, "");
     const visiblePills = (afterVisible.match(/data-shine-filter-pill/g) || []).length;
     if (visiblePills > 3) errors.push(`${pair.id} after visible pills must be ≤3, got ${visiblePills}`);
+  }
+  // Pill-filter badge/chip deepen: before ≥5 badges; after ≤3 visible outside details
+  if ((pair.id === "queue-pill-badge" || pair.id === "queue-pill-badge-tsx") && before && after) {
+    const beforeBadges = (before.match(/data-slot=["']badge["']/g) || []).length;
+    if (beforeBadges < 5) errors.push(`${pair.id} before needs ≥5 badges, got ${beforeBadges}`);
+    if (/data-shine-pill-rest/.test(before)) errors.push(`${pair.id} before must not already collapse`);
+    if (!/data-shine-pill-rest/.test(after)) errors.push(`${pair.id} after needs pill-rest details`);
+    const afterVisible = after.replace(/<details[\s\S]*?<\/details>/gi, "");
+    const visibleBadges = (afterVisible.match(/data-slot=["']badge["']/g) || []).length;
+    if (visibleBadges > 3) errors.push(`${pair.id} after visible badges must be ≤3, got ${visibleBadges}`);
   }
   // Chrome-pressure: before filled chrome; after demoted (main Pursue may stay filled)
   if ((pair.id === "queue-chrome" || pair.id === "queue-chrome-tsx") && before && after) {

@@ -1006,12 +1006,13 @@ export function applyFilterClearable(html, op = {}) {
 /**
  * Collapse excess above-fold filter pills into <details data-shine-pill-rest>.
  * Prefers [data-shine-filter-stack] / .filter-pills containers.
+ * Matches measure pill-filter hosts: .pill, .chip, data-shine-*-pill, data-slot=badge.
  */
 export function applyPillCollapse(html, op = {}) {
   const maxVisible = op.maxVisible ?? 3;
   const summary = op.summary || "More filters";
   const openRe =
-    /<div\b[^>]*(?:data-shine-filter-stack|class=["'][^"']*\bfilter-pills\b[^"']*["'])[^>]*>/i;
+    /<div\b[^>]*(?:data-shine-filter-stack|class=["'][^"']*\bfilter-pills\b[^"']*["']|class=["'][^"']*\bpill-stack\b[^"']*["'])[^>]*>/i;
   const openMatch = openRe.exec(html);
   if (!openMatch) return html;
   const start = openMatch.index;
@@ -1033,7 +1034,7 @@ export function applyPillCollapse(html, op = {}) {
         // Skip pills already inside details rest.
         const bodySansRest = body.replace(/<details\b[^>]*data-shine-pill-rest[\s\S]*?<\/details>/gi, "");
         const re =
-          /<(?:button|span|a|div)\b[^>]*(?:data-shine-filter-pill|data-shine-pill|class=["'][^"']*\bpill\b)[^>]*>[\s\S]*?<\/(?:button|span|a|div)>/gi;
+          /<(?:button|span|a|div)\b[^>]*(?:data-shine-filter-pill|data-shine-pill|data-slot=["']badge["']|class=["'][^"']*\b(?:pill|chip)\b)[^>]*>[\s\S]*?<\/(?:button|span|a|div)>/gi;
         const pills = bodySansRest.match(re) || [];
         if (pills.length <= maxVisible) return html;
         const visible = pills.slice(0, maxVisible).join("\n");
