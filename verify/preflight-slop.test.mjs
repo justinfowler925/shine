@@ -109,4 +109,17 @@ assert.ok(
   `collapsed KPI stack should clear metric-grid: ${JSON.stringify(metricPass)}`,
 );
 
-console.log("preflight-slop PASS: cta-mania · card-carnival · badge-spam · metric-grid FAIL→PASS · filler · Snapline/Impeccable adapters");
+const nestedBefore = join(SHINE, "verify/fixtures/denoise/catalog-card-soup-before.html");
+const nestedAfter = join(SHINE, "verify/fixtures/denoise/catalog-card-soup-after.html");
+const nestedFail = scanPreflightSlop(readFileSync(nestedBefore, "utf8"), { gate: true, screen: "catalog" });
+assert.ok(
+  nestedFail.failures.some((f) => /ai-slop-nested-cards/.test(f)),
+  `catalog nested-cards should hard-fail: ${JSON.stringify(nestedFail)}`,
+);
+const nestedPass = scanPreflightSlop(readFileSync(nestedAfter, "utf8"), { gate: true, screen: "catalog" });
+assert.ok(
+  !nestedPass.failures.some((f) => /ai-slop-nested-cards/.test(f)),
+  `collapsed Card stack should clear nested-cards: ${JSON.stringify(nestedPass)}`,
+);
+
+console.log("preflight-slop PASS: cta-mania · card-carnival · badge-spam · metric-grid · nested-cards FAIL→PASS · filler · Snapline/Impeccable adapters");

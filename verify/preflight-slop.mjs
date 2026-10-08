@@ -68,12 +68,12 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
     });
   }
 
-  // Parked metrics / filter pills inside collapse <details> are not on the decide path.
-  // Strip <style> so .metrics/.metric CSS rules cannot false-positive cluster detect.
+  // Parked metrics / filter pills / card peers inside collapse <details> are not on the decide path.
+  // Strip <style> so .metrics/.metric/.card CSS rules cannot false-positive cluster detect.
   const srcVisible = src
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "")
     .replace(
-      /<details\b[^>]*(?:data-shine-kpi-rest|data-shine-pill-rest)[^>]*>[\s\S]*?<\/details>/gi,
+      /<details\b[^>]*(?:data-shine-kpi-rest|data-shine-pill-rest|data-shine-card-rest)[^>]*>[\s\S]*?<\/details>/gi,
       "",
     );
 
@@ -134,11 +134,21 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
     });
   }
 
-  if (/<(?:div|section|article)[^>]*card[\s\S]{0,400}<(?:div|section|article)[^>]*card/i.test(src)) {
+  // Nested / equal Card carnival: ≥2 card-like roots within a short window, after
+  // style + data-shine-card-rest exclusion. collapse-card-soup stamps focal and parks
+  // peers so Operate catalog/queue FAIL→PASS with the existing auto-safe op.
+  // Host markers only — not data-shine-card-stack / -primary / -demoted / -rest.
+  const cardHost =
+    String.raw`<(?:div|section|article)[^>]*(?:data-slot=["']card["']|data-shine-card(?:=["']|[\s>/])|\bclass=["'][^"']*\bcard\b)`;
+  if (new RegExp(`${cardHost}[\\s\\S]{0,400}${cardHost}`, "i").test(srcVisible)) {
+    const operateSurface =
+      /queue|datagrid|app-shell|catalog/i.test(screen) ||
+      /data-cite=["'][^"']*(?:queue|catalog)/i.test(src) ||
+      /data-shine-probe=["']app-shell["']/i.test(src);
     signals.push({
       id: "ai-slop-nested-cards",
-      severity: "note",
-      message: "nested card-like containers detected",
+      severity: operateSurface ? "fail" : "note",
+      message: "nested / equal card-like containers detected — collapse-card-soup",
     });
   }
 

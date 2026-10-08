@@ -103,6 +103,7 @@
     "pill-badge:ast-bite": "node verify/pill-badge-ast-bite.mjs",
     "badge-spam:preflight-bite": "node verify/badge-spam-preflight-bite.mjs",
     "metric-grid:preflight-bite": "node verify/metric-grid-preflight-bite.mjs",
+    "nested-cards:preflight-bite": "node verify/nested-cards-preflight-bite.mjs",
     "page-title:ast-bite": "node verify/page-title-ast-bite.mjs",
     "chrome-budget:ast-bite": "node verify/chrome-budget-ast-bite.mjs",
     "filter-clearable:ast-bite": "node verify/filter-clearable-ast-bite.mjs",

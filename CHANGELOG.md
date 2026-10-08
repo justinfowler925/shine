@@ -15,6 +15,16 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: preflight ai-slop-nested-cards → collapse-card-soup.** Preflight
+  emitted nested/equal card containers as a soft **note**, and parked peers in
+  `<details data-shine-card-rest>` still tripped the detector after repair.
+  Detector now strips `<style>` + `data-shine-card-rest`, matches host card
+  markers (`data-slot=card` / `data-shine-card` / `.card`), and hard-fails on
+  Operate catalog/queue/app-shell. Denoise-loop seeds `cardSoupCheck` from
+  nested-cards / card-carnival → `collapse-card-soup`. Doctor:
+  `verify/nested-cards-preflight-bite.mjs`. Does not expand Operate-slop library
+  (empty-insight-shells already landed in #191).
+
 - **Operate slop: empty-insight-shells / collapse-empty-shells.** Blank peer/insight
   Card shells under a green queue focal (Active in Usul / Missed awards title+kicker
   only) fail-closed as `empty-insight-shells`. Auto-safe `collapse-empty-shells`
@@ -28,9 +38,7 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   `.metrics`/`.metric` CSS after `kpi-collapse` parked tiles. Detector now strips
   `<style>` + `data-shine-kpi-rest`, requires a metrics container with ≥4 visible
   hosts, and hard-fails on Operate queue. Denoise-loop `kpiSoupCheck` also seeds
-  from the signal. Doctor: `verify/metric-grid-preflight-bite.mjs`. Does not
-  expand Operate-slop library (saturated at 14); leaves empty-insight-shell (#191)
-  alone.
+  from the signal. Doctor: `verify/metric-grid-preflight-bite.mjs`.
 
 - **Denoise deepen: preflight ai-slop-badge-spam → pill-collapse.** Preflight
   emitted badge/chip spam as a soft **note**; after pill-collapse badge/chip
