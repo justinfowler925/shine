@@ -1913,10 +1913,42 @@ const FILLER_EMPTY_TSX_RES = [
   /^click here to get started\.?$/i,
 ];
 
+const EMPTY_INSTRUCTIONAL_TSX_RES = [
+  /^no data\.?$/i,
+  /^n\/a$/i,
+  /^na$/i,
+  /^none$/i,
+  /^empty$/i,
+  /^tbd$/i,
+  /^todo$/i,
+  /^placeholder$/i,
+  /^—+$/,
+  /^-+$/,
+  /^\.+$/,
+  /^\u2026$/,
+];
+
 function isFillerEmptyText(text) {
   const t = String(text || "").replace(/\s+/g, " ").trim();
   if (!t || t.length > 80) return false;
   return FILLER_EMPTY_TSX_RES.some((re) => re.test(t));
+}
+
+function isEmptyInstructionalStubText(text) {
+  const t = String(text || "").replace(/\s+/g, " ").trim();
+  if (!t || t.length > 80) return false;
+  return (
+    FILLER_EMPTY_TSX_RES.some((re) => re.test(t)) || EMPTY_INSTRUCTIONAL_TSX_RES.some((re) => re.test(t))
+  );
+}
+
+function isEmptyStateHostOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-empty", sf)) return true;
+  if (findJsxAttr(opening, "data-empty-state", sf)) return true;
+  if (findJsxAttr(opening, "data-empty", sf)) return true;
+  if (attrStringValue(findJsxAttr(opening, "role", sf), sf) === "status") return true;
+  const cls = attrStringValue(findJsxAttr(opening, "className", sf), sf) || "";
+  return /\bempty-state\b|\bEmptyState\b/i.test(cls);
 }
 
 /**
@@ -1949,7 +1981,33 @@ export function countFillerEmptyTsx(source) {
 }
 
 /**
- * Rewrite filler empty phrases to job-specific copy; stamp data-shine-empty-rewritten.
+ * Count copy: empty-instructional hosts (blank or stub empty-state regions) in TSX.
+ */
+export function countEmptyInstructionalTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let hits = 0;
+  const walk = (node) => {
+    if (ts.isJsxSelfClosingElement(node) && isEmptyStateHostOpening(node, sf)) {
+      if (!findJsxAttr(node, "data-shine-empty-rewritten", sf)) hits += 1;
+      return;
+    }
+    if (ts.isJsxElement(node) && isEmptyStateHostOpening(node.openingElement, sf)) {
+      if (findJsxAttr(node.openingElement, "data-shine-empty-rewritten", sf)) {
+        return;
+      }
+      const label = labelFromJsx(node, sf) || "";
+      const text = String(label).replace(/\s+/g, " ").trim();
+      if (!text || text === "(title)" || isEmptyInstructionalStubText(text)) hits += 1;
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { hits };
+}
+
+/**
+ * Rewrite filler empty phrases + empty-instructional stubs/blanks; stamp data-shine-empty-rewritten.
  */
 export function rewriteFillerEmptyTsx(source, op = {}) {
   const replacement =
@@ -1962,7 +2020,15 @@ export function rewriteFillerEmptyTsx(source, op = {}) {
   const edits = [];
 
   const stampHost = (host) => {
-    if (!host || !ts.isJsxElement(host)) return;
+    if (!host) return;
+    if (ts.isJsxSelfClosingElement(host)) {
+      if (findJsxAttr(host, "data-shine-empty-rewritten", sf)) return;
+      const openSrc = text.slice(host.getStart(sf), host.getEnd());
+      const nextOpen = openSrc.replace(/\s*\/>$/, " data-shine-empty-rewritten />");
+      edits.push({ start: host.getStart(sf), end: host.getEnd(), replacement: nextOpen });
+      return;
+    }
+    if (!ts.isJsxElement(host)) return;
     const opening = host.openingElement;
     if (findJsxAttr(opening, "data-shine-empty-rewritten", sf)) return;
     const openSrc = text.slice(opening.getStart(sf), opening.getEnd());
@@ -1971,26 +2037,56 @@ export function rewriteFillerEmptyTsx(source, op = {}) {
   };
 
   const walk = (node) => {
+    // Self-closing empty-state hosts → expand with instructional copy.
+    if (ts.isJsxSelfClosingElement(node) && isEmptyStateHostOpening(node, sf)) {
+      if (findJsxAttr(node, "data-shine-empty-rewritten", sf)) return;
+      const tag = jsxTagName(node);
+      const openSrc = text.slice(node.getStart(sf), node.getEnd()).replace(/\s*\/>$/, " data-shine-empty-rewritten>");
+      edits.push({
+        start: node.getStart(sf),
+        end: node.getEnd(),
+        replacement: `${openSrc}${escapeJsxText(replacement)}</${tag}>`,
+      });
+      return;
+    }
+    // Blank empty-state hosts (no text children) — inject instructional copy.
+    if (ts.isJsxElement(node) && isEmptyStateHostOpening(node.openingElement, sf)) {
+      if (findJsxAttr(node.openingElement, "data-shine-empty-rewritten", sf)) return;
+      const label = (labelFromJsx(node, sf) || "").replace(/\s+/g, " ").trim();
+      if (!label || label === "(title)") {
+        const openEnd = node.openingElement.getEnd();
+        const closeStart = node.closingElement.getStart(sf);
+        edits.push({
+          start: openEnd,
+          end: closeStart,
+          replacement: escapeJsxText(replacement),
+        });
+        stampHost(node);
+        return;
+      }
+    }
     if (ts.isJsxText(node)) {
       const raw = node.getText(sf);
       const trimmed = raw.replace(/\s+/g, " ").trim();
-      if (isFillerEmptyText(trimmed)) {
+      let cur = node.parent;
+      while (cur && !ts.isJsxElement(cur)) cur = cur.parent;
+      const host = cur && ts.isJsxElement(cur) && isEmptyStateHostOpening(cur.openingElement, sf);
+      if (isFillerEmptyText(trimmed) || (host && isEmptyInstructionalStubText(trimmed))) {
         edits.push({ start: node.getStart(sf), end: node.getEnd(), replacement: replacement });
-        let cur = node.parent;
-        while (cur && !ts.isJsxElement(cur)) cur = cur.parent;
         stampHost(cur);
       }
     } else if (ts.isJsxExpression(node) && node.expression) {
       const expr = node.expression;
       if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
-        if (isFillerEmptyText(expr.text)) {
+        let cur = node.parent;
+        while (cur && !ts.isJsxElement(cur)) cur = cur.parent;
+        const host = cur && ts.isJsxElement(cur) && isEmptyStateHostOpening(cur.openingElement, sf);
+        if (isFillerEmptyText(expr.text) || (host && isEmptyInstructionalStubText(expr.text))) {
           edits.push({
             start: expr.getStart(sf),
             end: expr.getEnd(),
             replacement: `"${replacement.replace(/"/g, '\\"')}"`,
           });
-          let cur = node.parent;
-          while (cur && !ts.isJsxElement(cur)) cur = cur.parent;
           stampHost(cur);
         }
       }

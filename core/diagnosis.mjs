@@ -163,6 +163,9 @@ export function deriveRestructureOps(diagnosis={}){
  }
  if(diagnosis.copyHeuristicCheck?.ok===false){
   ops.push({op:"stamp-page-title"});
+  if(!ops.some((o)=>o.op==="rewrite-filler-empty")){
+   ops.push({op:"rewrite-filler-empty"});
+  }
  }
  if(diagnosis.chromePressureCheck?.ok===false){
   ops.push({op:"chrome-budget",maxFilledChrome:0,demotePolicy:"ghost",scope:"chrome"});

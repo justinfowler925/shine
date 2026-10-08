@@ -15,6 +15,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: copy empty-instructional via rewrite-filler-empty.** Measure
+  already fail-closed blank/stub empty-state regions (`copy: empty-instructional`
+  — empty `data-shine-empty`, "No data", "N/A", "TBD"). `rewrite-filler-empty`
+  now rewrites those hosts on DOM + TypeScript AST (self-closing hosts expand).
+  Recommend emits `emptyInstructionalAst`; denoise-loop names `empty-instructional`.
+  Doctor bites: `verify/empty-instructional.test.mjs` ·
+  `verify/empty-instructional-ast-bite.mjs`. Does not expand Operate-slop library
+  (saturated at 14); leaves empty-insight-shell (#191) alone.
+
 - **Denoise deepen: copy missing-page-title / stamp-page-title.** Measure already
   fail-closed missing `document.title` + visible `h1` (`copy: missing-page-title`
   / `empty-h1`). Auto-safe `stamp-page-title` now stamps `<title>` + `<h1

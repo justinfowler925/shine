@@ -221,6 +221,17 @@ export const FILLER_EMPTY_AST_FIXTURES = Object.freeze({
   op: "rewrite-filler-empty",
 });
 
+/** Repo-relative empty-instructional TSX AST FAIL→PASS fixtures (rewrite-filler-empty deepen). */
+export const EMPTY_INSTRUCTIONAL_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-empty-instructional.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-empty-instructional-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-empty-instructional-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-empty-instructional-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-empty-instructional-tsx",
+  op: "rewrite-filler-empty",
+});
+
 /** Repo-relative marketing-dna-operate TSX AST FAIL→PASS fixtures (strip-marketing-dna). */
 export const MARKETING_DNA_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-marketing-dna.tsx",
@@ -379,7 +390,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: chrome-budget maxFilledChrome=0 — demote filled header/nav/aside peers to outline/ghost");
     hints.push("restructure: filter-clearable — dismiss/clear-all on active filter chips");
     hints.push("restructure: strip-marketing-dna — remove glow/gradient/display-serif from Operate chrome");
-    hints.push("restructure: rewrite-filler-empty — replace filler empty phrases with job copy");
+    hints.push("restructure: rewrite-filler-empty — replace filler / blank / stub empty-state copy with job copy");
     hints.push("restructure: collapse-card-soup maxVisible=1 — stamp focal; park peer Cards in details");
     hints.push("restructure: split-empty-triad — distinct empty / filtered-empty / error treatments");
     hints.push("restructure: stamp-chart-units — data-unit + data-baseline on Operate charts");
@@ -681,6 +692,37 @@ export function fillerEmptyAstForQueueJob(job, constraints = {}) {
     reference: "skill/references/denoise.md",
     instruction:
       "Filler empty-state copy on Operate: apply verify/restructure/apply-tsx.mjs rewrite-filler-empty (TypeScript AST; replace Welcome/Coming soon/etc with job instructional copy; stamp data-shine-empty-rewritten). Copy FAIL→PASS crop paths from recommendation.fillerEmptyAst.cropBefore/cropAfter; prove filler-empty clears.",
+  };
+}
+
+/**
+ * Empty-instructional TSX AST fixture binding (rewrite-filler-empty deepen).
+ */
+export function emptyInstructionalAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const operateJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog", "dashboard", "settings", "form"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "catalog", "dashboard", "settings", "form"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|empty[- ]?instructional|no data|rewrite[- ]?filler|blank[- ]?empty)\b/i.test(text);
+  if (!operateJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: EMPTY_INSTRUCTIONAL_AST_FIXTURES.op,
+    fixtureTsx: EMPTY_INSTRUCTIONAL_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: EMPTY_INSTRUCTIONAL_AST_FIXTURES.tsxAstHard,
+    cropBefore: EMPTY_INSTRUCTIONAL_AST_FIXTURES.cropBefore,
+    cropAfter: EMPTY_INSTRUCTIONAL_AST_FIXTURES.cropAfter,
+    cropPairId: EMPTY_INSTRUCTIONAL_AST_FIXTURES.cropPairId,
+    helper: EMPTY_INSTRUCTIONAL_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Blank/stub empty-state copy (copy: empty-instructional): apply verify/restructure/apply-tsx.mjs rewrite-filler-empty (TypeScript AST; fill blank data-shine-empty / stub No data|N/A|TBD; stamp data-shine-empty-rewritten). Copy FAIL→PASS crop paths from recommendation.emptyInstructionalAst.cropBefore/cropAfter; prove empty-instructional clears.",
   };
 }
 
@@ -1267,6 +1309,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    emptyInstructionalAst: emptyInstructionalAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     cardSoupAst: cardSoupAstForCatalogJob(job, {
       category: constraints.category,
       screen,
@@ -1464,6 +1511,9 @@ export function formatRecommendationSummary(rec) {
   const fillerAst = rec.fillerEmptyAst?.fixtureTsx
     ? ` · fillerEmptyAst ${rec.fillerEmptyAst.mode}@${rec.fillerEmptyAst.cropPairId}`
     : "";
+  const emptyInstructionalAst = rec.emptyInstructionalAst?.fixtureTsx
+    ? ` · emptyInstructionalAst ${rec.emptyInstructionalAst.mode}@${rec.emptyInstructionalAst.cropPairId}`
+    : "";
   const cardSoupAst = rec.cardSoupAst?.fixtureTsx
     ? ` · cardSoupAst ${rec.cardSoupAst.mode}@${rec.cardSoupAst.cropPairId}`
     : "";
@@ -1499,6 +1549,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${stampPageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${linkFieldErrorsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${stampPageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${emptyInstructionalAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${linkFieldErrorsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

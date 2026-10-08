@@ -301,6 +301,18 @@ Product owners win before catalog fashion. Homemade tables/grids beside a Nucleu
 Doctor: `verify/bind-product-owner-ast-bite.mjs` / `npm run bind-product-owner:ast-bite`.
 
 
+### Empty-instructional TSX AST — rewrite-filler-empty deepen
+
+Measure already fail-closes blank/stub empty-state regions (`copy: empty-instructional`). Denoise deepens the existing `rewrite-filler-empty` op (no new Operate-slop id).
+
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `rewrite-filler-empty`.
+
+- Fills blank `data-shine-empty` / `data-empty-state` / `role=status` hosts (including self-closing)
+- Rewrites stub copy (`No data`, `N/A`, `TBD`, …) to Monday-job instructional text
+- Recommend binds `emptyInstructionalAst` FAIL→PASS crops (`queue-empty-instructional-tsx-*`)
+
+Doctor: `verify/empty-instructional-ast-bite.mjs` / `npm run empty-instructional:ast-bite`.
+
 ### Missing page-title TSX AST — stamp-page-title
 
 Measure already fail-closes missing `document.title` + visible `h1` (`copy: missing-page-title` / `empty-h1`). Denoise now auto-repairs them before `title-singular` demotes peers.

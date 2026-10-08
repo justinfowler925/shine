@@ -248,7 +248,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), stampPageTitleAst.fixtureTsx/crop* (TSX AST stamp-page-title FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), filterReversibleAst.fixtureTsx/crop* (TSX AST filter-clearable FAIL→PASS), marketingDnaAst.fixtureTsx/crop* (TSX AST strip-marketing-dna FAIL→PASS), fillerEmptyAst.fixtureTsx/crop* (TSX AST rewrite-filler-empty FAIL→PASS), cardSoupAst.fixtureTsx/crop* (TSX AST collapse-card-soup FAIL→PASS), emptyTriadAst.fixtureTsx/crop* (TSX AST split-empty-triad FAIL→PASS), decorativeChartAst.fixtureTsx/crop* (TSX AST stamp-chart-units FAIL→PASS), parallelOwnedAst.fixtureTsx/crop* (TSX AST bind-product-owner FAIL→PASS), nameControlsAst.fixtureTsx/crop* (TSX AST name-controls FAIL→PASS), linkFieldErrorsAst.fixtureTsx/crop* (TSX AST link-field-errors FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), stampPageTitleAst.fixtureTsx/crop* (TSX AST stamp-page-title FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), filterReversibleAst.fixtureTsx/crop* (TSX AST filter-clearable FAIL→PASS), marketingDnaAst.fixtureTsx/crop* (TSX AST strip-marketing-dna FAIL→PASS), fillerEmptyAst.fixtureTsx/crop* (TSX AST rewrite-filler-empty FAIL→PASS), emptyInstructionalAst.fixtureTsx/crop* (TSX AST rewrite-filler-empty empty-instructional FAIL→PASS), cardSoupAst.fixtureTsx/crop* (TSX AST collapse-card-soup FAIL→PASS), emptyTriadAst.fixtureTsx/crop* (TSX AST split-empty-triad FAIL→PASS), decorativeChartAst.fixtureTsx/crop* (TSX AST stamp-chart-units FAIL→PASS), parallelOwnedAst.fixtureTsx/crop* (TSX AST bind-product-owner FAIL→PASS), nameControlsAst.fixtureTsx/crop* (TSX AST name-controls FAIL→PASS), linkFieldErrorsAst.fixtureTsx/crop* (TSX AST link-field-errors FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -486,6 +486,22 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    instruction:f.instruction||"Apply apply-tsx rewrite-filler-empty (AST) on filler empty-state TSX.",
   };
  }
+ // Denoise / Operate jobs: bind empty-instructional TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.emptyInstructionalAst?.fixtureTsx){
+  const e=recommendation.emptyInstructionalAst;
+  packet.emptyInstructionalAst={
+   mode:e.mode||"tsx-ast",
+   op:e.op||"rewrite-filler-empty",
+   fixtureTsx:join(ROOT,e.fixtureTsx),
+   fixtureTsxAst:join(ROOT,e.fixtureTsxAst||e.fixtureTsx),
+   cropBefore:join(ROOT,e.cropBefore),
+   cropAfter:join(ROOT,e.cropAfter),
+   cropPairId:e.cropPairId||"queue-empty-instructional-tsx",
+   helper:join(ROOT,e.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:e.reference||"skill/references/denoise.md",
+   instruction:e.instruction||"Apply apply-tsx rewrite-filler-empty (AST) on blank/stub empty-state TSX.",
+  };
+ }
  // Denoise / queue jobs: bind marketing-dna-operate TSX AST FAIL→PASS fixture + crop paths.
  if(recommendation.marketingDnaAst?.fixtureTsx){
   const m=recommendation.marketingDnaAst;
@@ -663,7 +679,8 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   restructureHints.some((h)=>/strip-marketing-dna|marketing[- ]?dna|glow|gradient[- ]?operate/i.test(String(h)));
  const wantsFillerEmpty=
   Boolean(recommendation.fillerEmptyAst?.fixtureTsx)||
-  restructureHints.some((h)=>/rewrite-filler-empty|filler[- ]?empty/i.test(String(h)));
+  Boolean(recommendation.emptyInstructionalAst?.fixtureTsx)||
+  restructureHints.some((h)=>/rewrite-filler-empty|filler[- ]?empty|empty[- ]?instructional/i.test(String(h)));
  const wantsCardSoup=
   Boolean(recommendation.cardSoupAst?.fixtureTsx)||
   restructureHints.some((h)=>/collapse-card-soup|card[- ]?soup|equal cards?/i.test(String(h)));

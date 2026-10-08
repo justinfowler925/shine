@@ -133,6 +133,9 @@ export function formatCopyHeuristicFailures(result, { gate = false } = {}) {
     if (f.kind === "missing-page-title" || f.kind === "empty-h1") {
       return `copy: ${f.kind} (${f.sel}) — ${f.detail} — apply stamp-page-title (document.title + visible h1)`;
     }
+    if (f.kind === "empty-instructional") {
+      return `copy: ${f.kind} (${f.sel}) — ${f.detail} — apply rewrite-filler-empty (job instructional empty copy)`;
+    }
     return `copy: ${f.kind} (${f.sel}) — ${f.detail}`;
   });
 }
