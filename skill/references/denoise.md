@@ -93,7 +93,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 - Dual filled primaries in main  
 - Dual peer worklists / grids (`dual-focal`)  
 - KPI soup on queue/triage (≥4 equal metrics ahead of work object)  
-- Pill/chip filter stacks above the fold (`pill-filter`, ≥5 chips)  
+- Pill/chip filter stacks above the fold (`pill-filter`, ≥5 chips); preflight `ai-slop-badge-spam` hard-fails Operate queue → `pill-collapse`  
 - Competing page titles in main (`page-title`, ≥2)  
 - Filled chrome actions in header/nav/aside (`chrome-pressure`)  
 - Card soup without focal (`card-soup`)  

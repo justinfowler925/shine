@@ -139,7 +139,7 @@ export function buildRestructurePlan({
       : [
           { op: "cta-budget", scope: "main", maxFilled: 1, preferLabels: ["Pursue"], demotePolicy: "outline" },
           { op: "kpi-collapse", maxVisible: 3, rest: "details", selector: ".metrics .metric, [data-shine-kpi]" },
-          { op: "pill-collapse", maxVisible: 3, rest: "details", selector: "[data-shine-filter-stack] .pill, [data-shine-filter-pill]" },
+          { op: "pill-collapse", maxVisible: 3, rest: "details", selector: "[data-shine-filter-stack] .pill, [data-shine-filter-pill], [data-slot=badge], .chip" },
           { op: "stamp-page-title" },
           { op: "title-singular", on: "primary-title", demote: "kicker" },
           { op: "chrome-budget", maxFilledChrome: 0, demotePolicy: "ghost", scope: "chrome" },

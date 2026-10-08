@@ -81,4 +81,18 @@ const cli = spawnSync(
 );
 assert.notEqual(cli.status, 0);
 
-console.log("preflight-slop PASS: cta-mania · card-carnival · filler · Snapline/Impeccable adapters");
+
+const badgeBefore = join(SHINE, "verify/fixtures/denoise/queue-pill-badge-before.html");
+const badgeAfter = join(SHINE, "verify/fixtures/denoise/queue-pill-badge-after.html");
+const badgeFail = scanPreflightSlop(readFileSync(badgeBefore, "utf8"), { gate: true, screen: "queue" });
+assert.ok(
+  badgeFail.failures.some((f) => /ai-slop-badge-spam/.test(f)),
+  `queue badge-spam should hard-fail: ${JSON.stringify(badgeFail)}`,
+);
+const badgePass = scanPreflightSlop(readFileSync(badgeAfter, "utf8"), { gate: true, screen: "queue" });
+assert.ok(
+  !badgePass.failures.some((f) => /ai-slop-badge-spam/.test(f)),
+  `collapsed badge stack should clear: ${JSON.stringify(badgePass)}`,
+);
+
+console.log("preflight-slop PASS: cta-mania · card-carnival · badge-spam FAIL→PASS · filler · Snapline/Impeccable adapters");

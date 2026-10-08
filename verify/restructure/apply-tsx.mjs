@@ -19,8 +19,8 @@
  * name-controls (incomplete primitives + blank CTAs → aria-label / confirm stamps via TS compiler AST),
  * link-field-errors (aria-invalid → aria-describedby + role=alert via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
- * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
- * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
+ * DOM apply-dom + TSX AST both apply collapse-peer-grids XOR (never silent delete without chips).
+ * Dynamic/mapped peers stay plan-only.
  *
  * Uses TypeScript compiler API (devDependency). Dry-run by default; --write to apply.
  */

@@ -196,6 +196,14 @@ Denoise deepens the existing `pill-collapse` op (no new Operate-slop id).
 
 Doctor: `verify/pill-badge.test.mjs` · `verify/pill-badge-ast-bite.mjs` / `npm run pill-badge:ast-bite`.
 
+### Preflight badge-spam → pill-collapse
+
+Preflight `ai-slop-badge-spam` hard-fails on Operate queue when ≥5 visible badge/chip
+hosts remain on the decide path (parked `<details data-shine-pill-rest>` excluded).
+Denoise-loop seeds `pillFilterCheck` → `pill-collapse`. Non-Operate stays note-only at ≥8.
+
+Doctor: `verify/badge-spam-preflight-bite.mjs` / `npm run badge-spam:preflight-bite`.
+
 ### Competing page-titles TSX AST — title-singular
 
 Multiple peer page titles in consumer TSX are singularized by

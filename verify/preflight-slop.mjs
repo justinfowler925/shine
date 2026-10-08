@@ -68,21 +68,32 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
     });
   }
 
-  const badges = (src.match(/\bbadge\b|\bdata-slot=["']badge["']/gi) || []).length;
-  if (badges >= 8) {
-    signals.push({
-      id: "ai-slop-badge-spam",
-      severity: "note",
-      message: `badge/chip spam count=${badges}`,
-      count: badges,
-    });
-  }
-
-  // Parked metrics inside kpi-collapse <details> are not on the decide path.
+  // Parked metrics / filter pills inside collapse <details> are not on the decide path.
   const srcVisible = src.replace(
-    /<details\b[^>]*data-shine-kpi-rest[^>]*>[\s\S]*?<\/details>/gi,
+    /<details\b[^>]*(?:data-shine-kpi-rest|data-shine-pill-rest)[^>]*>[\s\S]*?<\/details>/gi,
     "",
   );
+
+  // Badge/chip hosts only (not the word "badge" in titles/comments). Aligns with
+  // pill-filter measure hosts; pill-collapse parks excess in data-shine-pill-rest.
+  const badges = (
+    srcVisible.match(
+      /<(?:button|span|a|div)\b[^>]*(?:data-slot=["']badge["']|class=["'][^"']*\b(?:badge|chip)\b)[^>]*>/gi,
+    ) || []
+  ).length;
+  if (badges >= 5) {
+    const operateQueue =
+      /queue|datagrid|app-shell/i.test(screen) || /data-cite=["'][^"']*queue/i.test(src);
+    // Operate queue: hard-fail ≥5 (pill-filter twin). Elsewhere: note only at ≥8 spam.
+    if (operateQueue || badges >= 8) {
+      signals.push({
+        id: "ai-slop-badge-spam",
+        severity: operateQueue ? "fail" : "note",
+        message: `badge/chip spam count=${badges}`,
+        count: badges,
+      });
+    }
+  }
   // Count tiles — not bare "kpi" substrings in data-kpi= / data-shine-kpi-rest.
   const metrics = (
     srcVisible.match(/\bclass=["'][^"']*\bmetric\b[^"']*["']|\bdata-shine-kpi=(["'])[^"']*\1/gi) || []
