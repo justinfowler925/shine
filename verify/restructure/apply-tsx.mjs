@@ -16,6 +16,7 @@
  * split-empty-triad (empty≡error / missing filtered-empty → distinct triad via TS compiler AST),
  * stamp-chart-units (decorative chart → data-unit + baseline via TS compiler AST),
  * bind-product-owner (parallel worklist → reuse-bound owner + demote parallel via TS compiler AST),
+ * name-controls (incomplete primitives → aria-label / confirm stamps via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -236,6 +237,19 @@ export function applyTsxRestructure(source, plan) {
         if (census.hits > 0) {
           plans.push(
             "## bind-product-owner (TSX)\n\nStamp data-shine-reuse-bound on product owners; demote parallel worklists into details.\n",
+          );
+        }
+      }
+    } else if (op.op === "name-controls") {
+      const next = nameControlsTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("name-controls");
+      } else {
+        const census = countIncompletePrimitivesTsx(text);
+        if (census.hits > 0) {
+          plans.push(
+            "## name-controls (TSX)\n\nStamp aria-label on icon-only / unlabeled controls; data-confirm on destructive verbs.\n",
           );
         }
       }
@@ -2432,6 +2446,174 @@ export function countDecorativeChartTsx(source) {
   };
   walk(sf);
   return { hits };
+}
+
+function jsxOwnText(node, sf) {
+  if (!ts.isJsxElement(node)) return "";
+  const parts = [];
+  for (const child of node.children) {
+    if (ts.isJsxText(child)) {
+      const t = child.getText(sf).replace(/\s+/g, " ").trim();
+      if (t) parts.push(t);
+    }
+  }
+  return parts.join(" ").trim();
+}
+
+function jsxHasIconChild(node, sf) {
+  if (!ts.isJsxElement(node)) return false;
+  let found = false;
+  const walk = (n) => {
+    if (found) return;
+    if (ts.isJsxElement(n) || ts.isJsxSelfClosingElement(n)) {
+      const opening = ts.isJsxElement(n) ? n.openingElement : n;
+      const tag = jsxTagName(opening);
+      if (tag === "svg" || tag === "img" || tag === "i" || /Icon$/.test(tag)) {
+        found = true;
+        return;
+      }
+    }
+    ts.forEachChild(n, walk);
+  };
+  for (const child of node.children) walk(child);
+  return found;
+}
+
+function openingHasAccessibleName(opening, sf) {
+  if (findJsxAttr(opening, "aria-label", sf)) return true;
+  if (findJsxAttr(opening, "aria-labelledby", sf)) return true;
+  if (findJsxAttr(opening, "title", sf)) return true;
+  return false;
+}
+
+/**
+ * Count incomplete primitives in TSX (icon-only unnamed, unlabeled inputs, destructive).
+ */
+export function countIncompletePrimitivesTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let iconOnly = 0;
+  let unlabeled = 0;
+  let destructive = 0;
+  const destructiveRe = /\b(delete|destroy|purge|wipe|erase|remove|revoke|unlink)\b/i;
+  const walk = (node) => {
+    if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const opening = ts.isJsxSelfClosingElement(node) ? node : node.openingElement;
+      const tag = jsxTagName(opening);
+      if ((tag === "button" || tag === "Button" || tag === "a") && ts.isJsxElement(node)) {
+        const text = jsxOwnText(node, sf);
+        if (!text && jsxHasIconChild(node, sf) && !openingHasAccessibleName(opening, sf)) iconOnly += 1;
+        if (text && destructiveRe.test(text)) {
+          if (
+            !findJsxAttr(opening, "data-confirm", sf) &&
+            !findJsxAttr(opening, "data-shine-confirm", sf)
+          ) {
+            const popup = attrStringValue(findJsxAttr(opening, "aria-haspopup", sf), sf) || "";
+            if (popup !== "dialog") destructive += 1;
+          }
+        }
+      }
+      if (tag === "input" || tag === "Input" || tag === "select" || tag === "textarea") {
+        if (!openingHasAccessibleName(opening, sf)) {
+          const ph = attrStringValue(findJsxAttr(opening, "placeholder", sf), sf);
+          const type = (attrStringValue(findJsxAttr(opening, "type", sf), sf) || "").toLowerCase();
+          if (ph && !/^(hidden|submit|button|image|reset)$/.test(type)) unlabeled += 1;
+        }
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { hits: iconOnly + unlabeled + destructive, iconOnly, unlabeled, destructive };
+}
+
+/**
+ * Stamp accessible names + confirm markers on incomplete primitive JSX via AST.
+ */
+export function nameControlsTsx(source, op = {}) {
+  const defaultIconLabel = op.iconLabel || "More actions";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  const destructiveRe = /\b(delete|destroy|purge|wipe|erase|remove|revoke|unlink)\b/i;
+
+  const stampOpening = (opening, attrs) => {
+    let openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+    for (const [name, value] of attrs) {
+      if (new RegExp(`\\b${name}\\b`).test(openSrc)) continue;
+      if (value === true) {
+        openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` ${name}${m}`);
+      } else {
+        openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` ${name}="${value}"${m}`);
+      }
+    }
+    if (openSrc !== text.slice(opening.getStart(sf), opening.getEnd())) {
+      edits.push({ start: opening.getStart(sf), end: opening.getEnd(), replacement: openSrc });
+    }
+  };
+
+  const walk = (node) => {
+    if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const opening = ts.isJsxSelfClosingElement(node) ? node : node.openingElement;
+      const tag = jsxTagName(opening);
+
+      if ((tag === "button" || tag === "Button" || tag === "a") && ts.isJsxElement(node)) {
+        const own = jsxOwnText(node, sf);
+        if (!own && jsxHasIconChild(node, sf) && !openingHasAccessibleName(opening, sf)) {
+          const id = attrStringValue(findJsxAttr(opening, "id", sf), sf) || "";
+          const cls = attrStringValue(findJsxAttr(opening, "className", sf), sf) ||
+            attrStringValue(findJsxAttr(opening, "class", sf), sf) ||
+            "";
+          const label =
+            /more|menu|kebab|overflow/i.test(id + cls)
+              ? "More actions"
+              : /filter|search/i.test(id + cls)
+                ? "Filter"
+                : /settings|gear|cog/i.test(id + cls)
+                  ? "Settings"
+                  : defaultIconLabel;
+          stampOpening(opening, [
+            ["aria-label", label],
+            ["data-shine-named", true],
+          ]);
+        } else if (own && destructiveRe.test(own)) {
+          const popup = attrStringValue(findJsxAttr(opening, "aria-haspopup", sf), sf) || "";
+          if (
+            !findJsxAttr(opening, "data-confirm", sf) &&
+            !findJsxAttr(opening, "data-shine-confirm", sf) &&
+            popup !== "dialog"
+          ) {
+            stampOpening(opening, [
+              ["aria-haspopup", "dialog"],
+              ["data-confirm", true],
+              ["data-shine-confirm", true],
+            ]);
+          }
+        }
+      }
+
+      if (tag === "input" || tag === "Input" || tag === "select" || tag === "textarea") {
+        if (!openingHasAccessibleName(opening, sf)) {
+          const ph = attrStringValue(findJsxAttr(opening, "placeholder", sf), sf);
+          const type = (attrStringValue(findJsxAttr(opening, "type", sf), sf) || "").toLowerCase();
+          if (ph && !/^(hidden|submit|button|image|reset)$/.test(type)) {
+            stampOpening(opening, [
+              ["aria-label", ph],
+              ["data-shine-named", true],
+            ]);
+          }
+        }
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+
+  if (!edits.length) return text;
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  return out;
 }
 
 function isOwnedWorklistOpening(opening, sf) {

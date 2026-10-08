@@ -134,5 +134,5 @@ Brand-specific visual bans (a logo gradient applied to chrome, the accent used a
 
 ## Machine detectors (P3)
 
-`verify/card-soup.mjs` / `verify/marketing-dna.mjs` / `verify/filler-empty.mjs` hard-fail equal Card soup without a focal, marketing DNA utility clusters on saas Operate, and known filler empty-state phrases (split from composition-slop prefixes). Hover-only / toast-only remain agent.
+`verify/card-soup.mjs` / `verify/marketing-dna.mjs` / `verify/filler-empty.mjs` hard-fail equal Card soup without a focal, marketing DNA utility clusters on saas Operate, and known filler empty-state phrases (split from composition-slop prefixes). `verify/incomplete-primitives.mjs` hard-fails icon-only unnamed, unlabeled fields, and confirm-less destructive; denoise auto-repairs via `name-controls` (DOM + TSX AST). Hover-only / toast-only remain agent.
 

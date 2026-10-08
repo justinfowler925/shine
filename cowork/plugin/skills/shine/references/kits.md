@@ -300,6 +300,19 @@ Product owners win before catalog fashion. Homemade tables/grids beside a Nucleu
 
 Doctor: `verify/bind-product-owner-ast-bite.mjs` / `npm run bind-product-owner:ast-bite`.
 
+
+### Incomplete-primitives TSX AST — name-controls
+
+Measure already fail-closes icon-only unnamed controls, placeholder-only fields, and confirm-less destructive verbs. Denoise now auto-repairs them.
+
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `name-controls`.
+
+- Stamps `aria-label` + `data-shine-named` on icon-only buttons and placeholder-only inputs
+- Stamps `aria-haspopup=dialog` + `data-confirm` + `data-shine-confirm` on destructive verbs
+- Recommend binds `nameControlsAst` FAIL→PASS crops (`queue-name-controls-tsx-*`)
+
+Doctor: `verify/name-controls-ast-bite.mjs` / `npm run name-controls:ast-bite`.
+
 ### Dual-focal ban TSX AST (N8 deepen) — XOR peer→chip
 
 Peer worklists / DataGrids on one triage job in consumer TSX are collapsed by

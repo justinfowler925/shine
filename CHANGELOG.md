@@ -15,6 +15,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: incomplete-primitives / name-controls.** Measure already
+  fail-closed icon-only unnamed, unlabeled fields, and confirm-less destructive
+  controls (`incomplete-primitive:`). Auto-safe `name-controls` now stamps
+  `aria-label` / `data-shine-named` and `data-confirm` + `aria-haspopup=dialog`
+  on DOM + TypeScript AST. Recommend emits `nameControlsAst`; denoise-loop names
+  `incomplete-primitive`. Doctor bites: `verify/name-controls.test.mjs` ·
+  `verify/name-controls-ast-bite.mjs`. Does not expand Operate-slop library
+  (saturated at 14); leaves empty-insight-shell (#191) alone.
+
 - **Operate slop: parallel-owned-component / bind-product-owner.** Homemade
   worklists/tables beside a Nucleus (or product) owner fail-closed as
   `parallel-owned` (`anti-pattern:parallel-owned-component`). Auto-safe
