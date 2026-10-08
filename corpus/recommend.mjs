@@ -129,6 +129,18 @@ export const PAGE_TITLE_AST_FIXTURES = Object.freeze({
 });
 
 
+
+/** Repo-relative marketing-dna-operate TSX AST FAIL→PASS fixtures (strip-marketing-dna). */
+export const MARKETING_DNA_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-marketing-dna.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-marketing-dna-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-marketing-dna-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-marketing-dna-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-marketing-dna-tsx",
+  op: "strip-marketing-dna",
+});
+
 /** Repo-relative irreversible-filters TSX AST FAIL→PASS fixtures (filter-clearable). */
 export const FILTER_REVERSIBLE_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-irreversible-filters.tsx",
@@ -274,6 +286,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: title-singular — one page title; demote peer h1 / page-title to kicker");
     hints.push("restructure: chrome-budget maxFilledChrome=0 — demote filled header/nav/aside peers to outline/ghost");
     hints.push("restructure: filter-clearable — dismiss/clear-all on active filter chips");
+    hints.push("restructure: strip-marketing-dna — remove glow/gradient/display-serif from Operate chrome");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
@@ -322,6 +335,42 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
   };
 }
 
+
+
+/**
+ * Marketing-DNA TSX AST fixture binding for Operate queue / shell jobs.
+ */
+export function marketingDnaAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  // Match chromePressureAst / filterReversibleAst — queue-shaped Operate jobs only.
+  // Settings/form cites may still fail marketing-dna in measure; AST fixture binds on triage.
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog", "app-shell"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "catalog", "app-shell"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|marketing[- ]?dna|strip[- ]?marketing|glow|gradient[- ]?operate)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: MARKETING_DNA_AST_FIXTURES.op,
+    fixtureTsx: MARKETING_DNA_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: MARKETING_DNA_AST_FIXTURES.tsxAstHard,
+    cropBefore: MARKETING_DNA_AST_FIXTURES.cropBefore,
+    cropAfter: MARKETING_DNA_AST_FIXTURES.cropAfter,
+    cropPairId: MARKETING_DNA_AST_FIXTURES.cropPairId,
+    helper: MARKETING_DNA_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Glow / purple-indigo gradients / display-serif on Operate chrome: apply verify/restructure/apply-tsx.mjs strip-marketing-dna (TypeScript AST; scrub illegal className tokens). Copy FAIL→PASS crop paths from recommendation.marketingDnaAst.cropBefore/cropAfter; prove marketing-dna clears.",
+  };
+}
 
 /**
  * Irreversible-filters TSX AST fixture binding for Operate queue / catalog jobs.
@@ -822,6 +871,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    marketingDnaAst: marketingDnaAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -980,6 +1034,9 @@ export function formatRecommendationSummary(rec) {
   const filterRev = rec.filterReversibleAst?.fixtureTsx
     ? ` · filterReversibleAst ${rec.filterReversibleAst.mode}@${rec.filterReversibleAst.cropPairId}`
     : "";
+  const mktDna = rec.marketingDnaAst?.fixtureTsx
+    ? ` · marketingDnaAst ${rec.marketingDnaAst.mode}@${rec.marketingDnaAst.cropPairId}`
+    : "";
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
@@ -997,6 +1054,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

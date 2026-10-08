@@ -28,6 +28,7 @@ import { formatPillFilterFailures } from "./pill-filter.mjs";
 import { formatPageTitleFailures } from "./page-title.mjs";
 import { formatChromePressureFailures } from "./chrome-pressure.mjs";
 import { formatFilterReversibleFailures } from "./filter-reversible.mjs";
+import { formatMarketingDnaFailures } from "./marketing-dna.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -96,6 +97,13 @@ const expected = {
     alias: "filter-reversible",
     restructureOps: ["filter-clearable"],
     cropPairId: "queue-filters",
+  },
+  "marketing-dna-operate": {
+    detector: "marketing-dna",
+    measureFailurePrefix: "marketing-dna",
+    alias: "marketing-dna",
+    restructureOps: ["strip-marketing-dna"],
+    cropPairId: "queue-marketing-dna",
   },
 };
 
@@ -168,6 +176,12 @@ const filterHits = retrieveAntiPatterns("irreversible filters stuck chips no cle
 });
 assert.ok(filterHits.some((h) => h.id === "irreversible-filters"), JSON.stringify(filterHits.map((h) => h.id)));
 
+const dnaHits = retrieveAntiPatterns("marketing DNA glow purple gradient display serif on queue operate", {
+  screen: "queue",
+  antiPatterns: corpus,
+});
+assert.ok(dnaHits.some((h) => h.id === "marketing-dna-operate"), JSON.stringify(dnaHits.map((h) => h.id)));
+
 // Measure formatters cite anti-pattern:<id>
 const dualFails = formatDualFocalFailures(
   { peerGridCount: 2, titles: ["David's 10", "Queue"] },
@@ -228,6 +242,15 @@ const filterFails = formatFilterReversibleFailures(
 assert.ok(
   filterFails.some((f) => /filter-reversible:/.test(f) && /anti-pattern:irreversible-filters/.test(f)),
   filterFails.join("\n"),
+);
+
+const dnaFails = formatMarketingDnaFailures(
+  { marketingHits: ["glow utility", "marketing gradient cluster"] },
+  { gate: true },
+);
+assert.ok(
+  dnaFails.some((f) => /marketing-dna:/.test(f) && /anti-pattern:marketing-dna-operate/.test(f)),
+  dnaFails.join("\n"),
 );
 
 assert.equal(formatAntiPatternCite("kpi-soup"), "anti-pattern:kpi-soup");

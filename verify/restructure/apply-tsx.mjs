@@ -10,6 +10,7 @@
  * title-singular (one page title; demote peers to kicker via TS compiler AST),
  * chrome-budget (maxFilledChrome=0 → demote header/nav filled Buttons via TS compiler AST),
  * filter-clearable (active chips → data-shine-filter-dismiss + clear-all via TS compiler AST),
+ * strip-marketing-dna (glow/gradient/display-serif className tokens via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -152,6 +153,19 @@ export function applyTsxRestructure(source, plan) {
         if (census.dynamic || census.irreversible > 0) {
           plans.push(
             "## filter-clearable (TSX)\n\nStamp data-shine-filter-dismiss on active filter chips and add data-shine-filter-clear-all when dismiss affordances are missing.\n",
+          );
+        }
+      }
+    } else if (op.op === "strip-marketing-dna") {
+      const next = stripMarketingDnaTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("strip-marketing-dna");
+      } else {
+        const census = countMarketingDnaTsx(text);
+        if (census.dynamic || census.hits > 0) {
+          plans.push(
+            "## strip-marketing-dna (TSX)\n\nRemove glow/gradient/display-serif className tokens from Operate chrome JSX.\n",
           );
         }
       }
@@ -1641,6 +1655,102 @@ function applyChromeBudgetEditsClean(text, edits) {
   return out;
 }
 
+
+
+const MARKETING_TSX_TOKENS = Object.freeze([
+  /^bg-gradient-to-[trbl]{1,2}$/i,
+  /^from-(?:violet|purple|fuchsia|indigo)-\d{2,3}$/i,
+  /^to-(?:violet|purple|fuchsia|indigo)-\d{2,3}$/i,
+  /^drop-shadow-glow$/i,
+  /^animate-pulse-glow$/i,
+  /^shadow-\[0_0_.+\]$/i,
+  /^font-(?:display|serif)$/i,
+  /^tracking-tighter$/i,
+]);
+
+function isMarketingClassToken(tok) {
+  return MARKETING_TSX_TOKENS.some((re) => re.test(tok));
+}
+
+function scrubMarketingClassText(cls) {
+  const parts = String(cls || "").split(/\s+/).filter(Boolean);
+  const kept = parts.filter((t) => !isMarketingClassToken(t));
+  return { next: kept.join(" "), removed: parts.length - kept.length };
+}
+
+/**
+ * Count marketing DNA className tokens in TSX.
+ * @param {string} source
+ */
+export function countMarketingDnaTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let hits = 0;
+  let dynamic = false;
+  const samples = [];
+  const walk = (node) => {
+    if (ts.isJsxAttribute(node) && (node.name.getText(sf) === "className" || node.name.getText(sf) === "class")) {
+      const v = attrStringValue(node, sf);
+      if (v == null) {
+        if (node.initializer && ts.isJsxExpression(node.initializer)) dynamic = true;
+      } else {
+        for (const tok of v.split(/\s+/).filter(Boolean)) {
+          if (isMarketingClassToken(tok)) {
+            hits += 1;
+            samples.push(tok);
+          }
+        }
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { hits, samples: samples.slice(0, 8), dynamic };
+}
+
+/**
+ * Strip marketing DNA tokens from className / class string attrs in TSX.
+ */
+export function stripMarketingDnaTsx(source, _op = {}) {
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  const walk = (node) => {
+    if (ts.isJsxAttribute(node) && (node.name.getText(sf) === "className" || node.name.getText(sf) === "class")) {
+      const init = node.initializer;
+      if (!init) return;
+      if (ts.isStringLiteral(init)) {
+        const { next, removed } = scrubMarketingClassText(init.text);
+        if (removed) {
+          edits.push({ start: init.getStart(sf), end: init.getEnd(), replacement: `"${next}"` });
+        }
+      } else if (ts.isJsxExpression(init) && init.expression) {
+        const expr = init.expression;
+        if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
+          const { next, removed } = scrubMarketingClassText(expr.text);
+          if (removed) {
+            edits.push({ start: expr.getStart(sf), end: expr.getEnd(), replacement: `"${next}"` });
+          }
+        }
+      }
+    }
+    // data-shine-marketing-dna → stripped marker
+    if (ts.isJsxAttribute(node) && node.name.getText(sf) === "data-shine-marketing-dna") {
+      edits.push({
+        start: node.getStart(sf),
+        end: node.getEnd(),
+        replacement: "data-shine-marketing-stripped",
+      });
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  if (!edits.length) return text;
+  const sorted = [...edits].sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of sorted) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  return out;
+}
 
 /**
  * Active filter chip opening?

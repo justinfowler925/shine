@@ -3,7 +3,7 @@
 Small, source-backed principle records live in `principles/*.json`.
 Nucleus-weighted anti-patterns live in `anti-patterns/*.json` (S2).
 Operate slop set (dual-focal, KPI soup, CTA pressure, wrong cite, pill-filter-stack,
-competing-page-titles, dual-chrome-actions, irreversible-filters) is tagged `operate-slop` with fixtures +
+competing-page-titles, dual-chrome-actions, irreversible-filters, marketing-dna-operate) is tagged `operate-slop` with fixtures +
 aliases; measure formatters cite `anti-pattern:<id>`.
 `verify/measure.mjs` fail-closes via `enforceOperateAntiPatternCites` when an
 Operate defect fires without the matching catalog cite.
