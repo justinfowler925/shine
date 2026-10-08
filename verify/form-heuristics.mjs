@@ -80,6 +80,6 @@ export function formatFormHeuristicFailures(result, { gate = false } = {}) {
   if (!gate || !result?.findings?.length) return [];
   return result.findings.map(
     (f) =>
-      `form: ${f.sel} ${f.detail} — label association and invalid+message are MUST for form/settings/record (contracts.md; expert P2)`,
+      `form-heuristic: ${f.sel} ${f.detail} — apply link-field-errors (aria-describedby + role=alert); Form MUST for form/settings/record (contracts.md; expert P2)`,
   );
 }

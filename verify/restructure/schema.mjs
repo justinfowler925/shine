@@ -18,6 +18,7 @@ export const AUTO_SAFE_DOM_OPS = Object.freeze([
   "stamp-chart-units",
   "bind-product-owner",
   "name-controls",
+  "link-field-errors",
   "set-focal",
   "worklist-first",
   "rebind-cite",
@@ -26,6 +27,53 @@ export const AUTO_SAFE_DOM_OPS = Object.freeze([
 export const PLAN_ONLY_OPS = Object.freeze(["collapse-peer-grids", "god-split"]);
 
 export const ALL_OPS = Object.freeze([...AUTO_SAFE_DOM_OPS, ...PLAN_ONLY_OPS]);
+
+/**
+ * Canonical denoise apply order — category/chrome first, composition next,
+ * a11y naming/errors after structure, focal last, humanGate peers trailing.
+ * apply-dom / apply-tsx / denoise-loop sort plan.ops through this list so new
+ * ops compose cleanly regardless of diagnosis emit order.
+ */
+export const DENOISE_OP_ORDER = Object.freeze([
+  "rebind-cite",
+  "cta-budget",
+  "chrome-budget",
+  "title-singular",
+  "pill-collapse",
+  "filter-clearable",
+  "kpi-collapse",
+  "collapse-card-soup",
+  "split-empty-triad",
+  "stamp-chart-units",
+  "bind-product-owner",
+  "name-controls",
+  "link-field-errors",
+  "strip-marketing-dna",
+  "rewrite-filler-empty",
+  "worklist-first",
+  "set-focal",
+  "collapse-peer-grids",
+  "god-split",
+]);
+
+/**
+ * Stable-sort restructure ops into DENOISE_OP_ORDER (unknown ops keep relative order at end).
+ * @param {Array<{ op: string }>} ops
+ * @returns {Array<{ op: string }>}
+ */
+export function sortRestructureOps(ops) {
+  const list = Array.isArray(ops) ? [...ops] : [];
+  const rank = new Map(DENOISE_OP_ORDER.map((name, i) => [name, i]));
+  return list
+    .map((op, index) => ({ op, index }))
+    .sort((a, b) => {
+      const ra = rank.has(a.op?.op) ? rank.get(a.op.op) : 10_000;
+      const rb = rank.has(b.op?.op) ? rank.get(b.op.op) : 10_000;
+      if (ra !== rb) return ra - rb;
+      return a.index - b.index;
+    })
+    .map((row) => row.op);
+}
 
 /**
  * @param {object} plan
@@ -99,19 +147,21 @@ export function buildRestructurePlan({
           { op: "stamp-chart-units" },
           { op: "bind-product-owner" },
           { op: "name-controls" },
+          { op: "link-field-errors" },
           { op: "worklist-first", attr: "data-region", value: "focal", on: "primary-worklist" },
           { op: "set-focal", attr: "data-region", value: "focal", on: "primary-worklist" },
         ],
     acceptance: {
       measureMustClear: measureMustClear.length
         ? measureMustClear
-        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "chrome-pressure", "filter-reversible", "marketing-dna", "filler-empty", "card-soup", "empty-triad", "decorative-chart", "parallel-owned", "incomplete-primitive", "composition-slop"],
+        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "chrome-pressure", "filter-reversible", "marketing-dna", "filler-empty", "card-soup", "empty-triad", "decorative-chart", "parallel-owned", "incomplete-primitive", "form-heuristic", "composition-slop"],
       usabilityFlow: usabilityFlow || "flow:decide-notice",
       proveRequired: true,
     },
     confidence,
     humanGate: humanGate || ops.some((o) => PLAN_ONLY_OPS.includes(o.op)),
   };
+  plan.ops = sortRestructureOps(plan.ops);
   const v = validateRestructurePlan(plan);
   if (!v.ok) throw new Error(`invalid restructure plan: ${v.errors.join("; ")}`);
   return plan;

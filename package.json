@@ -109,7 +109,8 @@
     "split-empty-triad:ast-bite": "node verify/split-empty-triad-ast-bite.mjs",
     "stamp-chart-units:ast-bite": "node verify/stamp-chart-units-ast-bite.mjs",
     "bind-product-owner:ast-bite": "node verify/bind-product-owner-ast-bite.mjs",
-    "name-controls:ast-bite": "node verify/name-controls-ast-bite.mjs"
+    "name-controls:ast-bite": "node verify/name-controls-ast-bite.mjs",
+    "link-field-errors:ast-bite": "node verify/link-field-errors-ast-bite.mjs"
   },
   "devDependencies": {
     "@cursor/sdk": "^1.0.30",

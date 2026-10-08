@@ -396,6 +396,58 @@ export function buildNameControlsAstAfterCropHtml() {
   });
 }
 
+/** Link-field-errors DOM FAIL crop. */
+export function buildLinkFieldErrorsBeforeCropHtml() {
+  return wrap({
+    title: "Link-field-errors crop FAIL",
+    cropId: "link-field-errors-before",
+    cite: "shadcn-form-invite",
+    caption: "Crop FAIL: aria-invalid without accessible message — form-heuristic.",
+    body: `  <label>Work email<input id="email" aria-invalid="true" value="nope" /></label>
+  <label>Display name<input id="name" aria-invalid="true" value="" /></label>`,
+  });
+}
+
+/** Link-field-errors DOM PASS crop. */
+export function buildLinkFieldErrorsAfterCropHtml() {
+  return wrap({
+    title: "Link-field-errors crop PASS",
+    cropId: "link-field-errors-after",
+    cite: "shadcn-form-invite",
+    caption: "Crop PASS: aria-describedby + role=alert — link-field-errors.",
+    body: `  <label>Work email<input id="email" aria-invalid="true" value="nope" aria-describedby="email-error" data-shine-field-error-linked /></label>
+  <p id="email-error" class="error" role="alert" data-shine-field-error>Enter a valid value.</p>
+  <label>Display name<input id="name" aria-invalid="true" value="" aria-describedby="name-error" data-shine-field-error-linked /></label>
+  <p id="name-error" class="error" role="alert" data-shine-field-error>Enter a valid value.</p>`,
+  });
+}
+
+/** Link-field-errors TSX AST FAIL crop. */
+export function buildLinkFieldErrorsAstBeforeCropHtml() {
+  return wrap({
+    title: "Link-field-errors AST crop FAIL",
+    cropId: "link-field-errors-tsx-before",
+    cite: "shadcn-form-invite",
+    caption: "Crop FAIL: aria-invalid without message in TSX — apply-tsx link-field-errors.",
+    body: `  <label data-shine-tsx-ast="before">Work email<input id="email" aria-invalid="true" value="nope" /></label>
+  <label>Display name<input id="name" aria-invalid="true" value="" /></label>`,
+  });
+}
+
+/** Link-field-errors TSX AST PASS crop. */
+export function buildLinkFieldErrorsAstAfterCropHtml() {
+  return wrap({
+    title: "Link-field-errors AST crop PASS",
+    cropId: "link-field-errors-tsx-after",
+    cite: "shadcn-form-invite",
+    caption: "Crop PASS: describedby + alert via TSX AST link-field-errors.",
+    body: `  <label data-shine-tsx-ast="after">Work email<input id="email" aria-invalid="true" value="nope" aria-describedby="email-error" data-shine-field-error-linked /></label>
+  <p id="email-error" class="error" role="alert" data-shine-field-error>Enter a valid value.</p>
+  <label>Display name<input id="name" aria-invalid="true" value="" aria-describedby="name-error" data-shine-field-error-linked /></label>
+  <p id="name-error" class="error" role="alert" data-shine-field-error>Enter a valid value.</p>`,
+  });
+}
+
 /** Empty-triad DOM FAIL crop. */
 export function buildEmptyTriadBeforeCropHtml() {
   return wrap({
@@ -1704,6 +1756,28 @@ export const DEFECT_CROP_PAIRS = [
     beforeMust: [/data-shine-tsx-ast="before"/, /Delete notice/],
     afterMust: [/data-shine-tsx-ast="after"/, /aria-label=["']More actions["']/, /data-confirm/],
   },
+
+  {
+    id: "form-link-field-errors",
+    defect: "form-heuristic",
+    beforeCrop: "form-link-field-errors-before-crop.html",
+    afterCrop: "form-link-field-errors-after-crop.html",
+    buildBefore: buildLinkFieldErrorsBeforeCropHtml,
+    buildAfter: buildLinkFieldErrorsAfterCropHtml,
+    beforeMust: [/aria-invalid=["']true["']/, /id=["']email["']/],
+    beforeMustNot: [/aria-describedby=["']email-error["']/, /data-shine-field-error-linked/],
+    afterMust: [/aria-describedby=["']email-error["']/, /role=["']alert["']/, /data-shine-field-error/],
+  },
+  {
+    id: "form-link-field-errors-tsx",
+    defect: "form-heuristic",
+    beforeCrop: "form-link-field-errors-tsx-before-crop.html",
+    afterCrop: "form-link-field-errors-tsx-after-crop.html",
+    buildBefore: buildLinkFieldErrorsAstBeforeCropHtml,
+    buildAfter: buildLinkFieldErrorsAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /aria-invalid=["']true["']/],
+    afterMust: [/data-shine-tsx-ast="after"/, /aria-describedby=["']email-error["']/, /role=["']alert["']/],
+  },
 ];
 
 
@@ -1932,6 +2006,19 @@ export function assertCropPairOk(pair, read) {
     }
     if (!/aria-label=["']More actions["']/.test(after) || !/data-confirm/.test(after)) {
       errors.push(`${pair.id} after needs aria-label + data-confirm`);
+    }
+  }
+
+  // Link-field-errors: before aria-invalid bare; after describedby + alert
+  if ((pair.id === "form-link-field-errors" || pair.id === "form-link-field-errors-tsx") && before && after) {
+    if (!/aria-invalid=["']true["']/.test(before)) {
+      errors.push(`${pair.id} before needs aria-invalid`);
+    }
+    if (/aria-describedby=["']email-error["']/.test(before) || /data-shine-field-error-linked/.test(before)) {
+      errors.push(`${pair.id} before must not already link field errors`);
+    }
+    if (!/aria-describedby=["']email-error["']/.test(after) || !/role=["']alert["']/.test(after)) {
+      errors.push(`${pair.id} after needs aria-describedby + role=alert`);
     }
   }
   return { ok: errors.length === 0, errors };

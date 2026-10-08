@@ -177,6 +177,17 @@ export const NAME_CONTROLS_AST_FIXTURES = Object.freeze({
   op: "name-controls",
 });
 
+/** Repo-relative form-heuristic TSX AST FAIL→PASS fixtures (link-field-errors). */
+export const LINK_FIELD_ERRORS_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/form-link-field-errors.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/form-link-field-errors-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/form-link-field-errors-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/form-link-field-errors-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "form-link-field-errors-tsx",
+  op: "link-field-errors",
+});
+
 /** Repo-relative empty-triad TSX AST FAIL→PASS fixtures (split-empty-triad). */
 export const EMPTY_TRIAD_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-empty-triad.tsx",
@@ -362,8 +373,20 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: stamp-chart-units — data-unit + data-baseline on Operate charts");
     hints.push("restructure: bind-product-owner — stamp data-shine-reuse-bound; demote parallel worklists");
     hints.push("restructure: name-controls — aria-label icon-only/unlabeled; data-confirm on destructive");
+    hints.push("restructure: link-field-errors — aria-describedby + role=alert on aria-invalid fields");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
+  }
+  if (
+    /settings|sources|recipes|preferences|invite|form|checkout|auth|wizard/i.test(job) ||
+    ["form", "settings", "record", "wizard", "checkout", "auth"].includes(screen)
+  ) {
+    if (!hints.some((h) => /link-field-errors/i.test(h))) {
+      hints.push("restructure: link-field-errors — aria-describedby + role=alert on aria-invalid fields");
+    }
+    if (!hints.some((h) => /name-controls/i.test(h))) {
+      hints.push("restructure: name-controls — aria-label icon-only/unlabeled; data-confirm on destructive");
+    }
   }
   if (
     /usul|card soup|equal cards?|composition[- ]?slop|no[- ]?focal|set[- ]?focal|focal region|collapse[- ]?card|catalog/i.test(
@@ -416,6 +439,35 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
 
 
 
+
+/**
+ * Form-heuristic TSX AST fixture binding (link-field-errors).
+ */
+export function linkFieldErrorsAstForFormJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const formJob =
+    ["form", "settings", "record", "wizard", "checkout", "auth"].includes(category) ||
+    ["form", "settings", "record", "wizard", "checkout", "auth"].includes(screen) ||
+    intent === "form" ||
+    /\b(form|settings|invite|aria[- ]?invalid|link[- ]?field|field[- ]?error|form[- ]?heuristic)\b/i.test(text);
+  if (!formJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: LINK_FIELD_ERRORS_AST_FIXTURES.op,
+    fixtureTsx: LINK_FIELD_ERRORS_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: LINK_FIELD_ERRORS_AST_FIXTURES.tsxAstHard,
+    cropBefore: LINK_FIELD_ERRORS_AST_FIXTURES.cropBefore,
+    cropAfter: LINK_FIELD_ERRORS_AST_FIXTURES.cropAfter,
+    cropPairId: LINK_FIELD_ERRORS_AST_FIXTURES.cropPairId,
+    helper: LINK_FIELD_ERRORS_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "aria-invalid without message: apply verify/restructure/apply-tsx.mjs link-field-errors (TypeScript AST; aria-describedby + role=alert sibling). Copy FAIL→PASS crop paths from recommendation.linkFieldErrorsAst.cropBefore/cropAfter; prove form-heuristic clears.",
+  };
+}
 
 /**
  * Incomplete-primitives TSX AST fixture binding (name-controls).
@@ -1189,6 +1241,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    linkFieldErrorsAst: linkFieldErrorsAstForFormJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -1368,6 +1425,9 @@ export function formatRecommendationSummary(rec) {
   const nameControlsAst = rec.nameControlsAst?.fixtureTsx
     ? ` · nameControlsAst ${rec.nameControlsAst.mode}@${rec.nameControlsAst.cropPairId}`
     : "";
+  const linkFieldErrorsAst = rec.linkFieldErrorsAst?.fixtureTsx
+    ? ` · linkFieldErrorsAst ${rec.linkFieldErrorsAst.mode}@${rec.linkFieldErrorsAst.cropPairId}`
+    : "";
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
@@ -1385,6 +1445,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${linkFieldErrorsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

@@ -41,9 +41,9 @@ function run(file) {
 }
 const badRun = run(join(FIX, "invalid-no-message.html"));
 assert.notEqual(badRun.status, 0);
-assert.match(`${badRun.stderr}\n${badRun.stdout}`, /form:.*aria-invalid/);
+assert.match(`${badRun.stderr}\n${badRun.stdout}`, /form-heuristic:.*aria-invalid/);
 
 const goodRun = run(join(FIX, "invalid-with-message.html"));
-assert.doesNotMatch(`${goodRun.stderr}\n${goodRun.stdout}`, /form:.*aria-invalid/);
+assert.doesNotMatch(`${goodRun.stderr}\n${goodRun.stdout}`, /form-heuristic:.*aria-invalid/);
 
 console.log("form-heuristics PASS: invalid without message fails · with message passes");

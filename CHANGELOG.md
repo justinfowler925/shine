@@ -15,6 +15,17 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: form-heuristic / link-field-errors + DENOISE_OP_ORDER.**
+  Measure already fail-closed `aria-invalid` without an accessible message
+  (`form-heuristic:`). Auto-safe `link-field-errors` now stamps
+  `aria-describedby` + sibling `role=alert` on DOM + TypeScript AST. Recommend
+  emits `linkFieldErrorsAst`; denoise-loop names `form-heuristic`. Canonical
+  `DENOISE_OP_ORDER` / `sortRestructureOps` hardens apply-dom, apply-tsx, and
+  `buildRestructurePlan` so new ops compose cleanly regardless of diagnosis
+  emit order. Doctor bites: `verify/link-field-errors.test.mjs` ·
+  `verify/link-field-errors-ast-bite.mjs`. Does not expand Operate-slop library
+  (saturated at 14); leaves empty-insight-shell (#191) alone.
+
 - **Denoise deepen: incomplete-primitives / name-controls.** Measure already
   fail-closed icon-only unnamed, unlabeled fields, and confirm-less destructive
   controls (`incomplete-primitive:`). Auto-safe `name-controls` now stamps

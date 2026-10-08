@@ -17,6 +17,7 @@
  * stamp-chart-units (decorative chart → data-unit + baseline via TS compiler AST),
  * bind-product-owner (parallel worklist → reuse-bound owner + demote parallel via TS compiler AST),
  * name-controls (incomplete primitives → aria-label / confirm stamps via TS compiler AST),
+ * link-field-errors (aria-invalid → aria-describedby + role=alert via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -28,7 +29,7 @@ import { readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import ts from "typescript";
-import { AUTO_SAFE_DOM_OPS, PLAN_ONLY_OPS, validateRestructurePlan } from "./schema.mjs";
+import { AUTO_SAFE_DOM_OPS, PLAN_ONLY_OPS, sortRestructureOps, validateRestructurePlan } from "./schema.mjs";
 import { formatPeerGridPlan } from "./apply-dom.mjs";
 
 /**
@@ -43,8 +44,9 @@ export function applyTsxRestructure(source, plan) {
   let text = String(source);
   const applied = [];
   const plans = [];
+  const orderedOps = sortRestructureOps(plan.ops || []);
 
-  for (const op of plan.ops || []) {
+  for (const op of orderedOps) {
     // Dual-focal ban: TSX AST XOR recipe when ≥2 literal peer wraps; else plan markdown.
     // DOM apply-dom stays plan-only — this path never silent-deletes without XOR chips.
     if (op.op === "collapse-peer-grids") {
@@ -250,6 +252,19 @@ export function applyTsxRestructure(source, plan) {
         if (census.hits > 0) {
           plans.push(
             "## name-controls (TSX)\n\nStamp aria-label on icon-only / unlabeled controls; data-confirm on destructive verbs.\n",
+          );
+        }
+      }
+    } else if (op.op === "link-field-errors") {
+      const next = linkFieldErrorsTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("link-field-errors");
+      } else {
+        const census = countFormHeuristicTsx(text);
+        if (census.hits > 0) {
+          plans.push(
+            "## link-field-errors (TSX)\n\nStamp aria-describedby + role=alert error sibling on aria-invalid fields.\n",
           );
         }
       }
@@ -2446,6 +2461,119 @@ export function countDecorativeChartTsx(source) {
   };
   walk(sf);
   return { hits };
+}
+
+/**
+ * Count aria-invalid fields lacking linked error messages in TSX.
+ */
+export function countFormHeuristicTsx(source) {
+  const src = String(source);
+  const sf = ts.createSourceFile("surface.tsx", src, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let hits = 0;
+  const walk = (node) => {
+    if (ts.isJsxSelfClosingElement(node) || ts.isJsxElement(node)) {
+      const opening = ts.isJsxSelfClosingElement(node) ? node : node.openingElement;
+      const tag = jsxTagName(opening);
+      if (tag === "input" || tag === "Input" || tag === "select" || tag === "textarea" || tag === "Textarea") {
+        const invalid = attrStringValue(findJsxAttr(opening, "aria-invalid", sf), sf);
+        if (invalid === "true") {
+          const described = attrStringValue(findJsxAttr(opening, "aria-describedby", sf), sf) || "";
+          const linked =
+            described &&
+            (new RegExp(`id=["']${described.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["']`).test(src) ||
+              new RegExp(`id=\\{["']${described.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["']\\}`).test(src));
+          if (!linked) hits += 1;
+        }
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { hits };
+}
+
+/**
+ * Stamp aria-describedby + role=alert error siblings on aria-invalid fields via AST.
+ */
+export function linkFieldErrorsTsx(source, op = {}) {
+  const defaultMessage = op.message || op.errorMessage || "Enter a valid value.";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  let seq = 0;
+
+  const walk = (node) => {
+    if (ts.isJsxSelfClosingElement(node) || ts.isJsxElement(node)) {
+      const opening = ts.isJsxSelfClosingElement(node) ? node : node.openingElement;
+      const tag = jsxTagName(opening);
+      if (tag === "input" || tag === "Input" || tag === "select" || tag === "textarea" || tag === "Textarea") {
+        const invalid = attrStringValue(findJsxAttr(opening, "aria-invalid", sf), sf);
+        if (invalid !== "true") {
+          ts.forEachChild(node, walk);
+          return;
+        }
+        const described = attrStringValue(findJsxAttr(opening, "aria-describedby", sf), sf) || "";
+        const fieldId =
+          attrStringValue(findJsxAttr(opening, "id", sf), sf) || `shine-field-${++seq}`;
+        const errId = described || `${fieldId}-error`;
+        const hasErrorNode =
+          new RegExp(`id=["']${errId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["']`).test(text) ||
+          new RegExp(`id=\\{["']${errId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["']\\}`).test(text);
+        if (described && hasErrorNode) {
+          ts.forEachChild(node, walk);
+          return;
+        }
+
+        let openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+        if (!/\bid=/.test(openSrc)) {
+          openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` id="${fieldId}"${m}`);
+        }
+        if (/\baria-describedby=/.test(openSrc)) {
+          openSrc = openSrc.replace(
+            /\baria-describedby=(?:\{)?(["'])([^"']*)\1(?:\})?/,
+            `aria-describedby="${errId}"`,
+          );
+        } else {
+          openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` aria-describedby="${errId}"${m}`);
+        }
+        if (!/data-shine-field-error-linked/.test(openSrc)) {
+          openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` data-shine-field-error-linked${m}`);
+        }
+
+        const errNode = `<p id="${errId}" className="error" role="alert" data-shine-field-error>${defaultMessage}</p>`;
+        if (ts.isJsxSelfClosingElement(node)) {
+          edits.push({
+            start: node.getStart(sf),
+            end: node.getEnd(),
+            replacement: `${openSrc}\n      ${errNode}`,
+          });
+        } else {
+          edits.push({
+            start: opening.getStart(sf),
+            end: opening.getEnd(),
+            replacement: openSrc,
+          });
+          if (!hasErrorNode) {
+            edits.push({
+              start: node.getEnd(),
+              end: node.getEnd(),
+              replacement: `\n      ${errNode}`,
+            });
+          }
+        }
+        return;
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+
+  if (!edits.length) return text;
+  edits.sort((a, b) => b.start - a.start || b.end - a.end);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  return out;
 }
 
 function jsxOwnText(node, sf) {
