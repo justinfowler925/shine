@@ -2,10 +2,15 @@
 
 **Bar:** measure/prove **FAIL→PASS** with named defect clearance — not twin full-page screenshots.
 
+Agent-facing Operate redesign (cite → measure → denoise-loop → prove, edition
+`clearspeed-operate`): [`operate-redesign.md`](./operate-redesign.md) · skill
+`SKILL.md` § Redesign this Operate surface.
+
 ## Run
 
 ```sh
-npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html
+npm run denoise:loop -- --html verify/fixtures/denoise/queue-cta-before.html \
+  --edition clearspeed-operate --cite shadcn-queue --category queue --prove
 npm run denoise:loop-e2e
 npm run denoise:eval
 node verify/denoise-loop.test.mjs

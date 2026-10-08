@@ -1,11 +1,32 @@
 # Denoise — cleanup mode (N0)
 
-One cleanup path for bloated Operate surfaces: **triage → structure decisions → restructure → prove**.  
+One cleanup path for bloated Operate surfaces: **cite → measure → denoise-loop → prove**.  
 No craft polish until `primaryTaskCheck` is green. Prove is mandatory for Operate cites.
 
-Load this file when the packet has `--mode denoise`, the user says “denoise”, or a Sled-class cleanup is requested.
+Load this file when the user says **redesign this Operate surface**, “denoise”, Sled-class cleanup, or the packet has `--mode denoise`. Do **not** treat `verify/denoise-loop.mjs` as a secret test harness — it is the default agent runner.
 
-## Start
+## Default agent path (Operate queues)
+
+Edition `clearspeed-operate`. Resolve sibling cite first (`core/edition-siblings.mjs` / `docs/edition-siblings.md`), then:
+
+```sh
+# Cite → measure → denoise-loop → prove
+node "$ROOT/core/edition-siblings.mjs" resolve \
+  --category queue --job "<Monday job in one sentence>"
+node "$ROOT/verify/measure.mjs" <artifact.html> --cite <preferredCite> --lane saas
+node "$ROOT/verify/denoise-loop.mjs" \
+  --html <artifact.html> [--tsx <file.tsx>] \
+  --cite <preferredCite> \
+  --edition clearspeed-operate \
+  --category queue \
+  --job "<Monday job in one sentence>" \
+  --out /tmp/shine-operate-denoise \
+  --prove
+```
+
+The loop hosts packet → static → diagnose → apply (cta-budget / kpi-collapse / collapse-peer-grids / set-focal / rebind-cite) → measure ≤3 → Critic≠Actor → prove. Stop on named denoise cleared + `reflexionVerdict=done` + FAIL→PASS crop. One-pager: `docs/operate-redesign.md`.
+
+## Packet-only start (when not using the loop CLI)
 
 ```sh
 node "$ROOT/core/design-packet.mjs" \

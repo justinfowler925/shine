@@ -63,6 +63,7 @@ node verify/edition-siblings.test.mjs
 
 ## Related
 
+- Operate redesign path (cite → measure → denoise-loop → prove): `docs/operate-redesign.md`
 - Enterprise plan §4 — Edition profile (constitution IDs, tokens, **sibling map**)
 - `docs/operate-constitution.md` (enterprise §3)
 - `skill/references/clearspeed/profile-instructions.md`
