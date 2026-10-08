@@ -104,6 +104,11 @@ assert.match(queueRec.chromePressureAst.fixtureTsx, /queue-chrome-actions\.tsx$/
 assert.match(queueRec.chromePressureAst.cropAfter, /queue-chrome-tsx-after-crop\.html$/);
 assert.match(formatRecommendationSummary(queueRec), /chromePressureAst/);
 assert.equal(queueRec.chromePressureAst.maxFilledChrome, 0);
+assert.ok(queueRec.filterReversibleAst?.fixtureTsx, "queue job filterReversibleAst.fixtureTsx");
+assert.match(queueRec.filterReversibleAst.fixtureTsx, /queue-irreversible-filters\.tsx$/);
+assert.match(queueRec.filterReversibleAst.cropAfter, /queue-filters-tsx-after-crop\.html$/);
+assert.match(formatRecommendationSummary(queueRec), /filterReversibleAst/);
+assert.equal(queueRec.filterReversibleAst.op, "filter-clearable");
 assert.ok(queueRec.dualFocalAst?.fixtureTsx, "queue job dualFocalAst.fixtureTsx");
 assert.match(queueRec.dualFocalAst.fixtureTsx, /queue-dual-grid\.tsx$/);
 assert.match(queueRec.dualFocalAst.cropAfter, /queue-dual-grid-tsx-after-crop\.html$/);
@@ -156,6 +161,9 @@ assert.equal(denoiseQueue.pageTitleAst.op, "title-singular");
 assert.match(denoiseQueue.chromePressureAst.cropAfter, /queue-chrome-tsx-after-crop\.html$/);
 assert.ok((denoiseQueue.ddr.restructureOps || []).includes("chrome-budget"));
 assert.equal(denoiseQueue.chromePressureAst.maxFilledChrome, 0);
+assert.match(denoiseQueue.filterReversibleAst.cropAfter, /queue-filters-tsx-after-crop\.html$/);
+assert.equal(denoiseQueue.filterReversibleAst.op, "filter-clearable");
+assert.ok((denoiseQueue.ddr.restructureOps || []).includes("filter-clearable"));
 assert.match(denoiseQueue.dualFocalAst.cropAfter, /queue-dual-grid-tsx-after-crop\.html$/);
 assert.equal(denoiseQueue.dualFocalAst.xorMode, "xor-saved-view");
 assert.match(denoiseQueue.worklistFirstAst.cropAfter, /queue-worklist-first-tsx-after-crop\.html$/);
@@ -185,5 +193,5 @@ assert.equal(cite.status, 0, cite.stderr);
 assert.match(cite.stdout, /recommendation:/);
 
 console.log(
-  `recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI · xorSavedView · ctaPressureAst · kpiSoupAst · pillFilterAst · pageTitleAst · chromePressureAst · dualFocalAst · worklistFirstAst · setFocalAst · wrongCiteAst`,
+  `recommend PASS: ${JOBS.length} Operate jobs · packet recommendation · cite CLI · xorSavedView · ctaPressureAst · kpiSoupAst · pillFilterAst · pageTitleAst · chromePressureAst · filterReversibleAst · dualFocalAst · worklistFirstAst · setFocalAst · wrongCiteAst`,
 );

@@ -33,6 +33,7 @@ export const OPERATE_SLOP_ANTI_PATTERN_IDS = Object.freeze([
   "pill-filter-stack",
   "competing-page-titles",
   "dual-chrome-actions",
+  "irreversible-filters",
 ]);
 
 export function validatePrinciple(value) {

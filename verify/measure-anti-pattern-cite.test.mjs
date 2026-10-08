@@ -23,6 +23,7 @@ import { formatKpiSoupFailures } from "./kpi-soup.mjs";
 import { formatPillFilterFailures } from "./pill-filter.mjs";
 import { formatPageTitleFailures } from "./page-title.mjs";
 import { formatChromePressureFailures } from "./chrome-pressure.mjs";
+import { formatFilterReversibleFailures } from "./filter-reversible.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const corpus = loadAntiPatterns(join(SHINE, "knowledge/anti-patterns"));
@@ -37,6 +38,7 @@ assert.equal(prefixMap.get("cite-honesty"), "wrong-cite-category");
 assert.equal(prefixMap.get("pill-filter"), "pill-filter-stack");
 assert.equal(prefixMap.get("page-title"), "competing-page-titles");
 assert.equal(prefixMap.get("chrome-pressure"), "dual-chrome-actions");
+assert.equal(prefixMap.get("filter-reversible"), "irreversible-filters");
 
 // Green path: formatter cites → no meta-failures
 const dualOk = formatDualFocalFailures(
@@ -59,7 +61,11 @@ const chromeOk = formatChromePressureFailures(
   { chromeFilledCount: 2, chromeFilledSamples: ["Export", "New"] },
   { gate: true },
 );
-const green = [...dualOk, ...kpiOk, ...ctaOk, ...citeOk, ...pillOk, ...titleOk, ...chromeOk];
+const filterOk = formatFilterReversibleFailures(
+  { irreversibleCount: 2, irreversibleSamples: ["Status: Open", "Owner: Me"] },
+  { gate: true },
+);
+const green = [...dualOk, ...kpiOk, ...ctaOk, ...citeOk, ...pillOk, ...titleOk, ...chromeOk, ...filterOk];
 assert.equal(enforceOperateAntiPatternCites(green, { antiPatterns: corpus }).length, 0);
 for (const line of green) {
   const cites = extractAntiPatternCites(line);
@@ -75,9 +81,10 @@ const bare = [
   "pill-filter: 7 above-fold filter pills/chips in main — collapse to ≤3",
   "page-title: 3 competing page titles in main — keep one title",
   "chrome-pressure: 2 filled primary treatment(s) in header/nav/aside chrome",
+  "filter-reversible: 2 active filter(s) lack dismiss/clear — apply filter-clearable",
 ];
 const bareExtras = enforceOperateAntiPatternCites(bare, { antiPatterns: corpus });
-assert.equal(bareExtras.length, 7, bareExtras.join("\n"));
+assert.equal(bareExtras.length, 8, bareExtras.join("\n"));
 for (const line of bareExtras) {
   assert.match(line, /^anti-pattern-cite:/);
   assert.match(line, /fail-closed/);
@@ -89,6 +96,7 @@ assert.ok(bareExtras.some((f) => /anti-pattern:wrong-cite-category/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:pill-filter-stack/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:competing-page-titles/.test(f)));
 assert.ok(bareExtras.some((f) => /anti-pattern:dual-chrome-actions/.test(f)));
+assert.ok(bareExtras.some((f) => /anti-pattern:irreversible-filters/.test(f)));
 
 // Bite: wrong catalog id on a matching prefix
 const wrongId = [

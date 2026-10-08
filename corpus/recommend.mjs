@@ -128,6 +128,20 @@ export const PAGE_TITLE_AST_FIXTURES = Object.freeze({
   op: "title-singular",
 });
 
+
+/** Repo-relative irreversible-filters TSX AST FAIL→PASS fixtures (filter-clearable). */
+export const FILTER_REVERSIBLE_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-irreversible-filters.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-irreversible-filters-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-filters-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-filters-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-filters-tsx",
+  op: "filter-clearable",
+  perChip: true,
+  clearAll: true,
+});
+
 /** Repo-relative dual-chrome-actions TSX AST FAIL→PASS fixtures (chrome-budget). */
 export const CHROME_PRESSURE_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-chrome-actions.tsx",
@@ -259,6 +273,7 @@ function restructureHints(retrieval, primary, job) {
     hints.push("restructure: pill-collapse maxVisible=3 when ≥5 above-fold filter pills crowd the decide path");
     hints.push("restructure: title-singular — one page title; demote peer h1 / page-title to kicker");
     hints.push("restructure: chrome-budget maxFilledChrome=0 — demote filled header/nav/aside peers to outline/ghost");
+    hints.push("restructure: filter-clearable — dismiss/clear-all on active filter chips");
     hints.push("restructure: worklist-first — records/worklist before KPI chrome; stamp data-region=focal");
     hints.push("restructure: set-focal data-region=focal on the primary worklist");
   }
@@ -304,6 +319,44 @@ export function tableQualityForRecordsJob(job, constraints = {}) {
     instruction: fullGrid
       ? "Full DataGrid: write shine-tables.json with kind=records (shared source + required cases). Worklist fixture is the Operate list→detail starter."
       : "Operate list→detail: write shine-tables.json with kind=worklist (search, rowAction, loading, empty, filteredEmpty). Copy from recommendation.tableQuality.fixture; full kind=records stays on the product DataGrid owner.",
+  };
+}
+
+
+/**
+ * Irreversible-filters TSX AST fixture binding for Operate queue / catalog jobs.
+ * Denoise recommend must emit concrete TSX + FAIL→PASS crop paths for
+ * apply-tsx filter-clearable.
+ */
+export function filterReversibleAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog", "app-shell"].includes(
+      category,
+    ) ||
+    ["queue", "approval", "catalog", "app-shell"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pursue|worklist|filter[- ]?clearable|filter[- ]?reversible|irreversible[- ]?filters|clear[- ]?filters)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: FILTER_REVERSIBLE_AST_FIXTURES.op,
+    perChip: FILTER_REVERSIBLE_AST_FIXTURES.perChip,
+    clearAll: FILTER_REVERSIBLE_AST_FIXTURES.clearAll,
+    fixtureTsx: FILTER_REVERSIBLE_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: FILTER_REVERSIBLE_AST_FIXTURES.tsxAstHard,
+    cropBefore: FILTER_REVERSIBLE_AST_FIXTURES.cropBefore,
+    cropAfter: FILTER_REVERSIBLE_AST_FIXTURES.cropAfter,
+    cropPairId: FILTER_REVERSIBLE_AST_FIXTURES.cropPairId,
+    helper: FILTER_REVERSIBLE_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Active filter chips without dismiss/clear: apply verify/restructure/apply-tsx.mjs filter-clearable (TypeScript AST; stamp data-shine-filter-dismiss on active chips and data-shine-filter-clear-all on the stack). Handles aria-pressed={true}, data-filter-active, and Badge pills. Copy FAIL→PASS crop paths from recommendation.filterReversibleAst.cropBefore/cropAfter; prove filter-reversible clears.",
   };
 }
 
@@ -764,6 +817,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    filterReversibleAst: filterReversibleAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     dualFocalAst: dualFocalAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -919,6 +977,9 @@ export function formatRecommendationSummary(rec) {
   const chrome = rec.chromePressureAst?.fixtureTsx
     ? ` · chromePressureAst ${rec.chromePressureAst.mode}@${rec.chromePressureAst.cropPairId}`
     : "";
+  const filterRev = rec.filterReversibleAst?.fixtureTsx
+    ? ` · filterReversibleAst ${rec.filterReversibleAst.mode}@${rec.filterReversibleAst.cropPairId}`
+    : "";
   const dual = rec.dualFocalAst?.fixtureTsx
     ? ` · dualFocalAst ${rec.dualFocalAst.mode}@${rec.dualFocalAst.cropPairId}`
     : "";
@@ -936,6 +997,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${chrome}${filterRev}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

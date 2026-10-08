@@ -9,6 +9,7 @@
  * pill-collapse (maxVisible=3 → <details data-shine-pill-rest> via TS compiler AST),
  * title-singular (one page title; demote peers to kicker via TS compiler AST),
  * chrome-budget (maxFilledChrome=0 → demote header/nav filled Buttons via TS compiler AST),
+ * filter-clearable (active chips → data-shine-filter-dismiss + clear-all via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -138,6 +139,19 @@ export function applyTsxRestructure(source, plan) {
         if (census.dynamic || census.filled > 0) {
           plans.push(
             "## chrome-budget (TSX)\n\nDemote filled Button primaries inside header/nav/aside chrome to outline/ghost; keep the job verb filled in main.\n",
+          );
+        }
+      }
+    } else if (op.op === "filter-clearable") {
+      const next = filterClearableTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("filter-clearable");
+      } else {
+        const census = countIrreversibleFiltersTsx(text);
+        if (census.dynamic || census.irreversible > 0) {
+          plans.push(
+            "## filter-clearable (TSX)\n\nStamp data-shine-filter-dismiss on active filter chips and add data-shine-filter-clear-all when dismiss affordances are missing.\n",
           );
         }
       }
@@ -1624,6 +1638,172 @@ function applyChromeBudgetEditsClean(text, edits) {
   // Clean doubled spaces from attr removal only on affected lines lightly
   out = out.replace(/[^\S\n]{2,}/g, " ");
   out = out.replace(/\s+>/g, ">");
+  return out;
+}
+
+
+/**
+ * Active filter chip opening?
+ * @param {ts.JsxOpeningLikeElement} opening
+ * @param {ts.SourceFile} sf
+ */
+function isActiveFilterOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-filter-active", sf)) return true;
+  const pressed = findJsxAttr(opening, "aria-pressed", sf);
+  if (pressed) {
+    const v = attrStringValue(pressed, sf);
+    if (v === "true") return true;
+    if (pressed.initializer && ts.isJsxExpression(pressed.initializer)) {
+      const expr = pressed.initializer.expression;
+      if (expr && expr.kind === ts.SyntaxKind.TrueKeyword) return true;
+    }
+  }
+  const active = findJsxAttr(opening, "data-filter-active", sf);
+  if (active) {
+    const v = attrStringValue(active, sf);
+    if (v === "true" || v === "") return true;
+  }
+  return false;
+}
+
+/**
+ * Node subtree already has dismiss marker / clear control.
+ * @param {ts.Node} node
+ * @param {ts.SourceFile} sf
+ */
+function hasFilterDismissInTree(node, sf) {
+  let found = false;
+  const walk = (n) => {
+    if (found) return;
+    if (ts.isJsxElement(n) || ts.isJsxSelfClosingElement(n)) {
+      const opening = ts.isJsxElement(n) ? n.openingElement : n;
+      if (findJsxAttr(opening, "data-shine-filter-dismiss", sf)) {
+        found = true;
+        return;
+      }
+      const label = attrStringValue(findJsxAttr(opening, "aria-label", sf), sf) || "";
+      if (/clear|remove|dismiss|reset/i.test(label)) {
+        found = true;
+        return;
+      }
+    }
+    ts.forEachChild(n, walk);
+  };
+  walk(node);
+  return found;
+}
+
+/**
+ * Count active filter chips lacking dismiss / clear-all in TSX.
+ * @param {string} source
+ */
+export function countIrreversibleFiltersTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let active = 0;
+  let irreversible = 0;
+  let hasClearAll = false;
+  let dynamic = false;
+  const samples = [];
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isFilterStackOpening(node.openingElement, sf)) {
+      // clear-all in stack?
+      const stackWalk = (n) => {
+        if (ts.isJsxElement(n) || ts.isJsxSelfClosingElement(n)) {
+          const opening = ts.isJsxElement(n) ? n.openingElement : n;
+          if (findJsxAttr(opening, "data-shine-filter-clear-all", sf)) hasClearAll = true;
+          const label = attrStringValue(findJsxAttr(opening, "aria-label", sf), sf) || "";
+          if (/^(clear all filters|clear filters|reset filters)$/i.test(label.trim())) hasClearAll = true;
+        }
+        ts.forEachChild(n, stackWalk);
+      };
+      stackWalk(node);
+      const chipWalk = (n) => {
+        if (ts.isJsxElement(n) && isActiveFilterOpening(n.openingElement, sf)) {
+          active += 1;
+          if (!hasFilterDismissInTree(n, sf)) {
+            irreversible += 1;
+            samples.push(labelFromJsx(n, sf).slice(0, 40) || "unnamed");
+          }
+        } else if (ts.isJsxSelfClosingElement(n) && isActiveFilterOpening(n, sf)) {
+          active += 1;
+          irreversible += 1;
+          samples.push("self-closing");
+        }
+        // don't descend into nested stacks for chips — still fine
+        ts.forEachChild(n, chipWalk);
+      };
+      for (const child of node.children) chipWalk(child);
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  if (hasClearAll) irreversible = 0;
+  return { active, irreversible, samples, hasClearAll, dynamic };
+}
+
+/**
+ * Stamp dismiss on active filter chips + append clear-all on filter stacks.
+ */
+export function filterClearableTsx(source, op = {}) {
+  const perChip = op.perChip !== false;
+  const clearAll = op.clearAll !== false;
+  const clearLabel = op.clearAllLabel || "Clear filters";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isFilterStackOpening(node.openingElement, sf)) {
+      let stackHasClear = false;
+      const scanClear = (n) => {
+        if (ts.isJsxElement(n) || ts.isJsxSelfClosingElement(n)) {
+          const opening = ts.isJsxElement(n) ? n.openingElement : n;
+          if (findJsxAttr(opening, "data-shine-filter-clear-all", sf)) stackHasClear = true;
+          const label = attrStringValue(findJsxAttr(opening, "aria-label", sf), sf) || "";
+          if (/^(clear all filters|clear filters|reset filters)$/i.test(label.trim())) stackHasClear = true;
+        }
+        ts.forEachChild(n, scanClear);
+      };
+      scanClear(node);
+
+      if (perChip) {
+        const chipWalk = (n) => {
+          if (ts.isJsxElement(n) && isActiveFilterOpening(n.openingElement, sf)) {
+            if (!hasFilterDismissInTree(n, sf)) {
+              const close = n.closingElement;
+              const indent = indentBefore(text, close.getStart(sf));
+              const dismiss =
+                `\n${indent}  <span data-shine-filter-dismiss aria-label="Clear filter">×</span>`;
+              edits.push({
+                start: close.getStart(sf),
+                end: close.getStart(sf),
+                replacement: dismiss + "\n" + indent,
+              });
+            }
+          }
+          ts.forEachChild(n, chipWalk);
+        };
+        for (const child of node.children) chipWalk(child);
+      }
+
+      if (clearAll && !stackHasClear) {
+        const close = node.closingElement;
+        const indent = indentBefore(text, close.getStart(sf));
+        const btn =
+          `\n${indent}  <button type="button" data-shine-filter-clear-all aria-label="Clear all filters">${clearLabel}</button>\n${indent}`;
+        edits.push({ start: close.getStart(sf), end: close.getStart(sf), replacement: btn });
+      }
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  if (!edits.length) return text;
+  const sorted = [...edits].sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of sorted) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
   return out;
 }
 

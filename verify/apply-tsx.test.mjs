@@ -254,6 +254,14 @@ const chromePlan = buildRestructurePlan({
 });
 assert.ok(applyTsxRestructure(chromeHard, chromePlan).applied.includes("chrome-budget"));
 
+const filterHard = readFileSync(join(FIX, "queue-irreversible-filters-ast.tsx"), "utf8");
+const filterPlan = buildRestructurePlan({
+  job: "Clear filters",
+  category: "queue",
+  ops: [{ op: "filter-clearable", perChip: true, clearAll: true }],
+});
+assert.ok(applyTsxRestructure(filterHard, filterPlan).applied.includes("filter-clearable"));
+
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );
