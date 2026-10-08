@@ -218,6 +218,76 @@ export function buildChromeAstAfterCropHtml() {
 
 
 
+/** Card-soup DOM FAIL crop. */
+export function buildCardSoupBeforeCropHtml() {
+  return wrap({
+    title: "Card soup crop FAIL",
+    cropId: "card-soup-before",
+    cite: "shadcn-catalog",
+    caption: "Crop FAIL: four equal Card roots, no focal — card-soup.",
+    body: `  <section class="cards" data-shine-card-stack>
+    <article class="card" data-slot="card" data-shine-card><h2>Capture</h2></article>
+    <article class="card" data-slot="card" data-shine-card><h2>Sources</h2></article>
+    <article class="card" data-slot="card" data-shine-card><h2>Recipes</h2></article>
+    <article class="card" data-slot="card" data-shine-card><h2>Reports</h2></article>
+  </section>`,
+  });
+}
+
+/** Card-soup DOM PASS crop. */
+export function buildCardSoupAfterCropHtml() {
+  return wrap({
+    title: "Card soup crop PASS",
+    cropId: "card-soup-after",
+    cite: "shadcn-catalog",
+    caption: "Crop PASS: focal Card + peers in details — collapse-card-soup.",
+    body: `  <section class="cards" data-shine-card-stack>
+    <article class="card" data-slot="card" data-shine-card data-region="focal" data-shine-card-primary><h2>Capture</h2></article>
+    <details data-shine-card-rest><summary>More tools</summary>
+      <article class="card" data-slot="card" data-shine-card data-shine-card-demoted><h2>Sources</h2></article>
+      <article class="card" data-slot="card" data-shine-card data-shine-card-demoted><h2>Recipes</h2></article>
+      <article class="card" data-slot="card" data-shine-card data-shine-card-demoted><h2>Reports</h2></article>
+    </details>
+  </section>`,
+  });
+}
+
+/** Card-soup TSX AST FAIL crop. */
+export function buildCardSoupAstBeforeCropHtml() {
+  return wrap({
+    title: "Card soup AST crop FAIL",
+    cropId: "card-soup-tsx-before",
+    cite: "shadcn-catalog",
+    caption: "Crop FAIL: equal Card soup in TSX — card-soup; apply-tsx collapse-card-soup.",
+    body: `  <section class="cards" data-shine-card-stack data-shine-tsx-ast="before">
+    <article class="card" data-slot="card" data-shine-card><h2>Capture</h2></article>
+    <article class="card" data-slot="card" data-shine-card><h2>Sources</h2></article>
+    <article class="card" data-slot="card" data-shine-card><h2>Recipes</h2></article>
+    <article class="card" data-slot="card" data-shine-card><h2>Reports</h2></article>
+    <article class="card" data-slot="card" data-shine-card><h2>Alerts</h2></article>
+  </section>`,
+  });
+}
+
+/** Card-soup TSX AST PASS crop. */
+export function buildCardSoupAstAfterCropHtml() {
+  return wrap({
+    title: "Card soup AST crop PASS",
+    cropId: "card-soup-tsx-after",
+    cite: "shadcn-catalog",
+    caption: "Crop PASS: focal + details via TSX AST collapse-card-soup.",
+    body: `  <section class="cards" data-shine-card-stack data-shine-tsx-ast="after">
+    <article class="card" data-slot="card" data-shine-card data-region="focal" data-shine-card-primary><h2>Capture</h2></article>
+    <details data-shine-card-rest><summary>More tools</summary>
+      <article class="card" data-slot="card" data-shine-card data-shine-card-demoted><h2>Sources</h2></article>
+      <article class="card" data-slot="card" data-shine-card data-shine-card-demoted><h2>Recipes</h2></article>
+      <article class="card" data-slot="card" data-shine-card data-shine-card-demoted><h2>Reports</h2></article>
+      <article class="card" data-slot="card" data-shine-card data-shine-card-demoted><h2>Alerts</h2></article>
+    </details>
+  </section>`,
+  });
+}
+
 /** Filler-empty DOM FAIL crop. */
 export function buildFillerEmptyBeforeCropHtml() {
   return wrap({
@@ -1286,6 +1356,28 @@ export const DEFECT_CROP_PAIRS = [
     afterMust: [/data-shine-tsx-ast="after"/, /data-shine-empty-rewritten/, /No notices match this view/],
     afterMustNot: [/Welcome to your dashboard|Coming soon/],
   },
+  {
+    id: "catalog-card-soup",
+    defect: "card-soup",
+    beforeCrop: "catalog-card-soup-before-crop.html",
+    afterCrop: "catalog-card-soup-after-crop.html",
+    buildBefore: buildCardSoupBeforeCropHtml,
+    buildAfter: buildCardSoupAfterCropHtml,
+    beforeMust: [/data-shine-card/, /Capture/, /Reports/],
+    beforeMustNot: [/data-region=["']focal["']/, /data-shine-card-rest/],
+    afterMust: [/data-region=["']focal["']/, /data-shine-card-rest/, /data-shine-card-demoted/],
+  },
+  {
+    id: "catalog-card-soup-tsx",
+    defect: "card-soup",
+    beforeCrop: "catalog-card-soup-tsx-before-crop.html",
+    afterCrop: "catalog-card-soup-tsx-after-crop.html",
+    buildBefore: buildCardSoupAstBeforeCropHtml,
+    buildAfter: buildCardSoupAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /data-shine-card/, /Alerts/],
+    beforeMustNot: [/data-region=["']focal["']/, /data-shine-card-rest/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-region=["']focal["']/, /data-shine-card-rest/],
+  },
 ];
 
 /**
@@ -1456,6 +1548,16 @@ export function assertCropPairOk(pair, read) {
       errors.push(`${pair.id} after still has filler phrases`);
     }
     if (!/data-shine-empty-rewritten/.test(after)) errors.push(`${pair.id} after needs rewritten marker`);
+  }
+
+  // Card-soup: before equal cards; after focal + rest
+  if ((pair.id === "catalog-card-soup" || pair.id === "catalog-card-soup-tsx") && before && after) {
+    if (!/data-shine-card/.test(before)) errors.push(`${pair.id} before needs Card roots`);
+    if (/data-region=["']focal["']/.test(before) || /data-shine-card-rest/.test(before)) {
+      errors.push(`${pair.id} before must not already be collapsed`);
+    }
+    if (!/data-region=["']focal["']/.test(after)) errors.push(`${pair.id} after needs focal`);
+    if (!/data-shine-card-rest/.test(after)) errors.push(`${pair.id} after needs card-rest details`);
   }
   return { ok: errors.length === 0, errors };
 }

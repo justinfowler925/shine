@@ -197,13 +197,7 @@ export function evaluateCompositionSlop() {
 export function formatCompositionSlopFailures(slop, { gate = false } = {}) {
   if (!gate || !slop) return [];
   const failures = [];
-  if (slop.equalCardCount >= CARD_SOUP_MIN && !slop.hasFocal) {
-    failures.push(
-      `composition-slop: ${slop.equalCardCount} equal-weight Card roots in main with no focal region — ` +
-        `anti-pattern:${ANTI_PATTERN_IDS.cardSoup}; collapse peers or add a table/chart/queue focal ` +
-        `(knowledge/anti-patterns/card-soup.json; expert P3)`,
-    );
-  }
+  // Card-soup failures emit via verify/card-soup.mjs (prefix card-soup).
   // Marketing DNA failures emit via verify/marketing-dna.mjs (prefix marketing-dna).
   // Filler empty failures emit via verify/filler-empty.mjs (prefix filler-empty).
   return failures;

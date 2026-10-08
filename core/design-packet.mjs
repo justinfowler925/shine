@@ -248,7 +248,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), filterReversibleAst.fixtureTsx/crop* (TSX AST filter-clearable FAIL→PASS), marketingDnaAst.fixtureTsx/crop* (TSX AST strip-marketing-dna FAIL→PASS), fillerEmptyAst.fixtureTsx/crop* (TSX AST rewrite-filler-empty FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), filterReversibleAst.fixtureTsx/crop* (TSX AST filter-clearable FAIL→PASS), marketingDnaAst.fixtureTsx/crop* (TSX AST strip-marketing-dna FAIL→PASS), fillerEmptyAst.fixtureTsx/crop* (TSX AST rewrite-filler-empty FAIL→PASS), cardSoupAst.fixtureTsx/crop* (TSX AST collapse-card-soup FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -356,6 +356,24 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
 
 
 
+
+ // Denoise / catalog jobs: bind card-soup TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.cardSoupAst?.fixtureTsx){
+  const c=recommendation.cardSoupAst;
+  packet.cardSoupAst={
+   mode:c.mode||"tsx-ast",
+   op:c.op||"collapse-card-soup",
+   maxVisible:c.maxVisible??1,
+   fixtureTsx:join(ROOT,c.fixtureTsx),
+   fixtureTsxAst:join(ROOT,c.fixtureTsxAst||c.fixtureTsx),
+   cropBefore:join(ROOT,c.cropBefore),
+   cropAfter:join(ROOT,c.cropAfter),
+   cropPairId:c.cropPairId||"catalog-card-soup-tsx",
+   helper:join(ROOT,c.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:c.reference||"skill/references/denoise.md",
+   instruction:c.instruction||"Apply apply-tsx collapse-card-soup (AST) on equal Card soup TSX.",
+  };
+ }
  // Denoise / queue jobs: bind filler-empty-copy TSX AST FAIL→PASS fixture + crop paths.
  if(recommendation.fillerEmptyAst?.fixtureTsx){
   const f=recommendation.fillerEmptyAst;
@@ -547,8 +565,11 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  const wantsFillerEmpty=
   Boolean(recommendation.fillerEmptyAst?.fixtureTsx)||
   restructureHints.some((h)=>/rewrite-filler-empty|filler[- ]?empty/i.test(String(h)));
+ const wantsCardSoup=
+  Boolean(recommendation.cardSoupAst?.fixtureTsx)||
+  restructureHints.some((h)=>/collapse-card-soup|card[- ]?soup|equal cards?/i.test(String(h)));
  const ddrOps=needsRestructure
-  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsPill?["pill-collapse"]:[]),...(wantsTitle?["title-singular"]:[]),...(wantsChrome?["chrome-budget"]:[]),...(wantsFilter?["filter-clearable"]:[]),...(wantsMarketingDna?["strip-marketing-dna"]:[]),...(wantsFillerEmpty?["rewrite-filler-empty"]:[]),...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
+  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsPill?["pill-collapse"]:[]),...(wantsTitle?["title-singular"]:[]),...(wantsChrome?["chrome-budget"]:[]),...(wantsFilter?["filter-clearable"]:[]),...(wantsMarketingDna?["strip-marketing-dna"]:[]),...(wantsFillerEmpty?["rewrite-filler-empty"]:[]),...(wantsCardSoup?["collapse-card-soup"]:[]),...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
   :wantsWrongCite
    ?["rebind-cite"]
    :[];

@@ -12,6 +12,7 @@
  * filter-clearable (active chips → data-shine-filter-dismiss + clear-all via TS compiler AST),
  * strip-marketing-dna (glow/gradient/display-serif className tokens via TS compiler AST),
  * rewrite-filler-empty (filler empty phrases → job copy via TS compiler AST),
+ * collapse-card-soup (equal Cards → focal + details data-shine-card-rest via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -180,6 +181,19 @@ export function applyTsxRestructure(source, plan) {
         if (census.dynamic || census.hits > 0) {
           plans.push(
             "## rewrite-filler-empty (TSX)\n\nReplace filler empty-state phrases with job-specific instructional copy.\n",
+          );
+        }
+      }
+    } else if (op.op === "collapse-card-soup") {
+      const next = collapseCardSoupTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("collapse-card-soup");
+      } else {
+        const census = countCardSoupTsx(text);
+        if (census.dynamic || census.cards > (op.maxVisible ?? 1)) {
+          plans.push(
+            "## collapse-card-soup (TSX)\n\nStamp data-region=focal on one Card; park peers in <details data-shine-card-rest>.\n",
           );
         }
       }
@@ -1670,6 +1684,133 @@ function applyChromeBudgetEditsClean(text, edits) {
 }
 
 
+
+
+function isCardSoupStackOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-card-stack", sf)) return true;
+  return classNameHasToken(opening, "cards", sf);
+}
+
+function isCardSoupOpening(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-card", sf)) return true;
+  if (findJsxAttr(opening, "data-slot", sf)) {
+    const v = attrStringValue(findJsxAttr(opening, "data-slot", sf), sf);
+    if (v === "card") return true;
+  }
+  const tag = jsxTagName(opening);
+  if (tag === "Card") return true;
+  return classNameHasToken(opening, "card", sf);
+}
+
+function cardsInStack(container, sf) {
+  /** @type {ts.JsxElement[]} */
+  const cards = [];
+  let unsafe = false;
+  let already = false;
+  for (const child of container.children) {
+    if (ts.isJsxExpression(child) && child.expression) {
+      const t = child.expression.getText(sf);
+      if (/\.map\s*\(|\.\.\./.test(t)) unsafe = true;
+      continue;
+    }
+    if (!ts.isJsxElement(child)) continue;
+    const open = child.openingElement;
+    if (jsxTagName(open) === "details" && findJsxAttr(open, "data-shine-card-rest", sf)) {
+      already = true;
+      continue;
+    }
+    if (isCardSoupOpening(open, sf)) cards.push(child);
+  }
+  return { cards, unsafe, already };
+}
+
+/**
+ * Count literal Card soup tiles in TSX stacks.
+ */
+export function countCardSoupTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let cards = 0;
+  let dynamic = false;
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isCardSoupStackOpening(node.openingElement, sf)) {
+      const c = cardsInStack(node, sf);
+      if (c.unsafe) dynamic = true;
+      cards += c.cards.length;
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { cards, dynamic };
+}
+
+/**
+ * Collapse equal Card soup via AST: focal on first, peers in details.
+ */
+export function collapseCardSoupTsx(source, op = {}) {
+  const maxVisible = op.maxVisible ?? 1;
+  const restSummary = op.summary || "More tools";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  const walk = (node) => {
+    if (ts.isJsxElement(node) && isCardSoupStackOpening(node.openingElement, sf)) {
+      const { cards, unsafe, already } = cardsInStack(node, sf);
+      if (unsafe || already) return;
+      if (cards.length <= maxVisible) {
+        // still stamp focal on first
+        if (cards.length) {
+          const primary = cards[0];
+          const opening = primary.openingElement;
+          if (!findJsxAttr(opening, "data-region", sf)) {
+            const openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+            const nextOpen = openSrc.replace(/\s*\/?>$/, (m) => ` data-region="focal" data-shine-card-primary${m}`);
+            edits.push({ start: opening.getStart(sf), end: opening.getEnd(), replacement: nextOpen });
+          }
+        }
+        return;
+      }
+      const visible = cards.slice(0, maxVisible);
+      const rest = cards.slice(maxVisible);
+      // Stamp focal on first visible via rewriting its opening in the slice
+      const primary = visible[0];
+      let primarySrc = text.slice(primary.getStart(sf), primary.getEnd());
+      if (!/data-region=["']focal["']/.test(primarySrc)) {
+        primarySrc = primarySrc.replace(
+          /^(<[A-Za-z][\w.]*)/,
+          `$1 data-region="focal" data-shine-card-primary`,
+        );
+      }
+      const restSrc = rest.map((c) => {
+        let src = text.slice(c.getStart(sf), c.getEnd());
+        if (!/data-shine-card-demoted/.test(src)) {
+          src = src.replace(/^(<[A-Za-z][\w.]*)/, `$1 data-shine-card-demoted`);
+        }
+        return src;
+      });
+      const rangeStart = visible[0].getStart(sf);
+      const rangeEnd = rest[rest.length - 1].getEnd();
+      const indent = indentBefore(text, rangeStart);
+      const innerIndent = indent + "  ";
+      const visibleRest = visible.slice(1).map((c) => text.slice(c.getStart(sf), c.getEnd()));
+      const visibleSrc = [primarySrc, ...visibleRest].join(`\n${indent}`);
+      const replacement =
+        `${visibleSrc}\n${indent}` +
+        `<details data-shine-card-rest>\n${innerIndent}<summary>${restSummary}</summary>\n${innerIndent}` +
+        `${restSrc.join(`\n${innerIndent}`)}\n${indent}</details>`;
+      edits.push({ start: rangeStart, end: rangeEnd, replacement });
+      return;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  if (!edits.length) return text;
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  return out;
+}
 
 const FILLER_EMPTY_TSX_RES = [
   /^welcome to your dashboard\.?$/i,

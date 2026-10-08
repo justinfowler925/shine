@@ -30,6 +30,7 @@ import { formatChromePressureFailures } from "./chrome-pressure.mjs";
 import { formatFilterReversibleFailures } from "./filter-reversible.mjs";
 import { formatMarketingDnaFailures } from "./marketing-dna.mjs";
 import { formatFillerEmptyFailures } from "./filler-empty.mjs";
+import { formatCardSoupFailures } from "./card-soup.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -112,6 +113,13 @@ const expected = {
     alias: "filler-empty",
     restructureOps: ["rewrite-filler-empty"],
     cropPairId: "queue-filler-empty",
+  },
+  "card-soup": {
+    detector: "card-soup",
+    measureFailurePrefix: "card-soup",
+    alias: "card-soup",
+    restructureOps: ["collapse-card-soup"],
+    cropPairId: "catalog-card-soup",
   },
 };
 
@@ -196,6 +204,12 @@ const fillerHits = retrieveAntiPatterns("filler empty welcome dashboard coming s
 });
 assert.ok(fillerHits.some((h) => h.id === "filler-empty-copy"), JSON.stringify(fillerHits.map((h) => h.id)));
 
+const cardSoupHits = retrieveAntiPatterns("equal Card soup no focal collapse-card-soup catalog tools", {
+  screen: "catalog",
+  antiPatterns: corpus,
+});
+assert.ok(cardSoupHits.some((h) => h.id === "card-soup"), JSON.stringify(cardSoupHits.map((h) => h.id)));
+
 // Measure formatters cite anti-pattern:<id>
 const dualFails = formatDualFocalFailures(
   { peerGridCount: 2, titles: ["David's 10", "Queue"] },
@@ -274,6 +288,15 @@ const fillerFails = formatFillerEmptyFailures(
 assert.ok(
   fillerFails.some((f) => /filler-empty:/.test(f) && /anti-pattern:filler-empty-copy/.test(f)),
   fillerFails.join("\n"),
+);
+
+const cardSoupFails = formatCardSoupFailures(
+  { equalCardCount: 4, hasFocal: false },
+  { gate: true },
+);
+assert.ok(
+  cardSoupFails.some((f) => /card-soup:/.test(f) && /anti-pattern:card-soup/.test(f)),
+  cardSoupFails.join("\n"),
 );
 
 assert.equal(formatAntiPatternCite("kpi-soup"), "anti-pattern:kpi-soup");

@@ -247,9 +247,17 @@ Operate empty states must not ship belief-free filler.
 
 Doctor: `verify/rewrite-filler-empty-ast-bite.mjs` / `npm run rewrite-filler-empty:ast-bite`.
 
+### Card-soup TSX AST — collapse-card-soup
 
+Operate surfaces must not ship ≥4 equal-weight Card roots without a focal.
 
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `collapse-card-soup`.
 
+- Stamps `data-region=focal` + `data-shine-card-primary` on one Card
+- Parks peers in `<details data-shine-card-rest>` with `data-shine-card-demoted`
+- Recommend binds `cardSoupAst` FAIL→PASS crops (`catalog-card-soup-tsx-*`)
+
+Doctor: `verify/collapse-card-soup-ast-bite.mjs` / `npm run collapse-card-soup:ast-bite`.
 
 
 
