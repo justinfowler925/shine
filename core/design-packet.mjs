@@ -248,7 +248,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), filterReversibleAst.fixtureTsx/crop* (TSX AST filter-clearable FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -351,6 +351,25 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    helper:join(ROOT,c.helper||"verify/restructure/apply-tsx.mjs"),
    reference:c.reference||"skill/references/denoise.md",
    instruction:c.instruction||"Apply apply-tsx chrome-budget (AST, maxFilledChrome=0) on chrome Button TSX.",
+  };
+ }
+
+ // Denoise / queue jobs: bind irreversible-filters TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.filterReversibleAst?.fixtureTsx){
+  const f=recommendation.filterReversibleAst;
+  packet.filterReversibleAst={
+   mode:f.mode||"tsx-ast",
+   op:f.op||"filter-clearable",
+   perChip:f.perChip!==false,
+   clearAll:f.clearAll!==false,
+   fixtureTsx:join(ROOT,f.fixtureTsx),
+   fixtureTsxAst:join(ROOT,f.fixtureTsxAst||f.fixtureTsx),
+   cropBefore:join(ROOT,f.cropBefore),
+   cropAfter:join(ROOT,f.cropAfter),
+   cropPairId:f.cropPairId||"queue-filters-tsx",
+   helper:join(ROOT,f.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:f.reference||"skill/references/denoise.md",
+   instruction:f.instruction||"Apply apply-tsx filter-clearable (AST) on irreversible filter chip TSX.",
   };
  }
  // Denoise / queue jobs: bind dual-focal ban TSX AST FAIL→PASS fixture + crop paths.
@@ -485,8 +504,11 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  const wantsChrome=
   Boolean(recommendation.chromePressureAst?.fixtureTsx)||
   restructureHints.some((h)=>/chrome-budget|chrome-pressure|nav-chrome|dual-chrome/i.test(String(h)));
+ const wantsFilter=
+  Boolean(recommendation.filterReversibleAst?.fixtureTsx)||
+  restructureHints.some((h)=>/filter-clearable|filter-reversible|irreversible[- ]?filters/i.test(String(h)));
  const ddrOps=needsRestructure
-  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsPill?["pill-collapse"]:[]),...(wantsTitle?["title-singular"]:[]),...(wantsChrome?["chrome-budget"]:[]),...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
+  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsPill?["pill-collapse"]:[]),...(wantsTitle?["title-singular"]:[]),...(wantsChrome?["chrome-budget"]:[]),...(wantsFilter?["filter-clearable"]:[]),...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
   :wantsWrongCite
    ?["rebind-cite"]
    :[];

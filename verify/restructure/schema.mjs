@@ -10,6 +10,7 @@ export const AUTO_SAFE_DOM_OPS = Object.freeze([
   "pill-collapse",
   "title-singular",
   "chrome-budget",
+  "filter-clearable",
   "set-focal",
   "worklist-first",
   "rebind-cite",
@@ -83,13 +84,14 @@ export function buildRestructurePlan({
           { op: "pill-collapse", maxVisible: 3, rest: "details", selector: "[data-shine-filter-stack] .pill, [data-shine-filter-pill]" },
           { op: "title-singular", on: "primary-title", demote: "kicker" },
           { op: "chrome-budget", maxFilledChrome: 0, demotePolicy: "ghost", scope: "chrome" },
+          { op: "filter-clearable", perChip: true, clearAll: true },
           { op: "worklist-first", attr: "data-region", value: "focal", on: "primary-worklist" },
           { op: "set-focal", attr: "data-region", value: "focal", on: "primary-worklist" },
         ],
     acceptance: {
       measureMustClear: measureMustClear.length
         ? measureMustClear
-        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "chrome-pressure", "composition-slop"],
+        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "chrome-pressure", "filter-reversible", "composition-slop"],
       usabilityFlow: usabilityFlow || "flow:decide-notice",
       proveRequired: true,
     },

@@ -215,6 +215,73 @@ export function buildChromeAstAfterCropHtml() {
   });
 }
 
+
+/** Irreversible-filters DOM FAIL crop — active chips, no dismiss. */
+export function buildFiltersBeforeCropHtml() {
+  return wrap({
+    title: "Filters crop FAIL — irreversible",
+    cropId: "filter-reversible-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: active filter chips with no dismiss/clear — filter-reversible.",
+    body: `  <h1>Queue · filters</h1>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters">
+    <button type="button" class="pill" data-shine-filter-pill aria-pressed="true" data-filter-active="true">Status: Open</button>
+    <button type="button" class="pill" data-shine-filter-pill aria-pressed="true" data-filter-active="true">Owner: Me</button>
+  </div>`,
+  });
+}
+
+/** Irreversible-filters DOM PASS crop — dismiss + clear-all. */
+export function buildFiltersAfterCropHtml() {
+  return wrap({
+    title: "Filters crop PASS — clearable",
+    cropId: "filter-reversible-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: per-chip dismiss + clear-all — filter-clearable.",
+    body: `  <h1>Queue · filters</h1>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters">
+    <button type="button" class="pill" data-shine-filter-pill aria-pressed="true" data-filter-active="true">Status: Open <span data-shine-filter-dismiss aria-label="Clear filter">×</span></button>
+    <button type="button" class="pill" data-shine-filter-pill aria-pressed="true" data-filter-active="true">Owner: Me <span data-shine-filter-dismiss aria-label="Clear filter">×</span></button>
+    <button type="button" data-shine-filter-clear-all aria-label="Clear all filters">Clear filters</button>
+  </div>`,
+  });
+}
+
+/** Irreversible-filters TSX AST FAIL crop. */
+export function buildFiltersAstBeforeCropHtml() {
+  return wrap({
+    title: "Filters AST crop FAIL — irreversible",
+    cropId: "filter-reversible-tsx-before",
+    cite: "shadcn-queue",
+    caption:
+      "Crop FAIL: active filter chips in TSX without dismiss — filter-reversible; apply-tsx AST filter-clearable.",
+    body: `  <h1>Queue · TSX filters</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-irreversible-filters-ast.tsx">Before apply-tsx filter-clearable</p>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters" data-shine-tsx-ast="before">
+    <button type="button" class="pill" data-shine-filter-pill aria-pressed="true" data-filter-active="true">Status: Open</button>
+    <button type="button" class="pill" data-shine-filter-pill aria-pressed="true" data-filter-active="true">Owner: Me</button>
+  </div>`,
+  });
+}
+
+/** Irreversible-filters TSX AST PASS crop. */
+export function buildFiltersAstAfterCropHtml() {
+  return wrap({
+    title: "Filters AST crop PASS — clearable",
+    cropId: "filter-reversible-tsx-after",
+    cite: "shadcn-queue",
+    caption:
+      "Crop PASS: dismiss + clear-all via TSX AST filter-clearable.",
+    body: `  <h1>Queue · TSX filters</h1>
+  <p class="kicker" data-shine-tsx-fixture="queue-irreversible-filters-ast.tsx">After apply-tsx filter-clearable</p>
+  <div class="filter-pills" data-shine-filter-stack aria-label="Filters" data-shine-tsx-ast="after">
+    <button type="button" class="pill" data-shine-filter-pill aria-pressed="true" data-filter-active="true">Status: Open <span data-shine-filter-dismiss aria-label="Clear filter">×</span></button>
+    <button type="button" class="pill" data-shine-filter-pill aria-pressed="true" data-filter-active="true">Owner: Me <span data-shine-filter-dismiss aria-label="Clear filter">×</span></button>
+    <button type="button" data-shine-filter-clear-all aria-label="Clear all filters">Clear filters</button>
+  </div>`,
+  });
+}
+
 /** Pill-filter DOM FAIL crop — ≥5 above-fold pills. */
 export function buildPillBeforeCropHtml() {
   return wrap({
@@ -1051,6 +1118,28 @@ export const DEFECT_CROP_PAIRS = [
     afterMust: [/data-shine-tsx-ast="after"/, /ghost|outline/i, /Pursue/],
     afterMustNot: [/data-shine-chrome-filled/],
   },
+{
+    id: "queue-filters",
+    defect: "filter-reversible",
+    beforeCrop: "queue-filters-before-crop.html",
+    afterCrop: "queue-filters-after-crop.html",
+    buildBefore: buildFiltersBeforeCropHtml,
+    buildAfter: buildFiltersAfterCropHtml,
+    beforeMust: [/data-shine-filter-stack/, /aria-pressed=["']true["']/, /Status: Open/],
+    beforeMustNot: [/data-shine-filter-dismiss/, /data-shine-filter-clear-all/],
+    afterMust: [/data-shine-filter-dismiss/, /data-shine-filter-clear-all/, /Clear filters/],
+  },
+  {
+    id: "queue-filters-tsx",
+    defect: "filter-reversible",
+    beforeCrop: "queue-filters-tsx-before-crop.html",
+    afterCrop: "queue-filters-tsx-after-crop.html",
+    buildBefore: buildFiltersAstBeforeCropHtml,
+    buildAfter: buildFiltersAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /aria-pressed=["']true["']/],
+    beforeMustNot: [/data-shine-filter-dismiss/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-filter-dismiss/, /data-shine-filter-clear-all/],
+  },
 ];
 
 /**
@@ -1190,6 +1279,15 @@ export function assertCropPairOk(pair, read) {
     if ((after.match(/<h1\b/gi) || []).length !== 1) {
       errors.push(`${pair.id} after must keep exactly one h1`);
     }
+  }
+
+  // Irreversible-filters: before lacks dismiss; after has dismiss + clear-all
+  if ((pair.id === "queue-filters" || pair.id === "queue-filters-tsx") && before && after) {
+    if (/data-shine-filter-dismiss/.test(before) || /data-shine-filter-clear-all/.test(before)) {
+      errors.push(`${pair.id} before must not already be clearable`);
+    }
+    if (!/data-shine-filter-dismiss/.test(after)) errors.push(`${pair.id} after needs dismiss stamps`);
+    if (!/data-shine-filter-clear-all/.test(after)) errors.push(`${pair.id} after needs clear-all`);
   }
   return { ok: errors.length === 0, errors };
 }

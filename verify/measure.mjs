@@ -85,6 +85,11 @@ import {
   evaluateChromePressure,
   formatChromePressureFailures,
 } from "./chrome-pressure.mjs";
+import {
+  filterReversibleGateApplies,
+  evaluateFilterReversible,
+  formatFilterReversibleFailures,
+} from "./filter-reversible.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { enforceOperateAntiPatternCites } from "../knowledge/retrieve.mjs";
 
@@ -415,6 +420,7 @@ const kpiSoup = await page.evaluate(evaluateKpiSoup);
 const pillFilter = await page.evaluate(evaluatePillFilter);
 const pageTitleSlop = await page.evaluate(evaluatePageTitle);
 const chromePressure = await page.evaluate(evaluateChromePressure);
+const filterReversible = await page.evaluate(evaluateFilterReversible);
 const formHeuristics = await page.evaluate(evaluateFormHeuristics);
 const copyHeuristics = await page.evaluate(evaluateCopyHeuristics);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
@@ -966,6 +972,16 @@ if (compose.filledCount > 2) {
     citeId: dfCiteId,
   });
   for (const f of formatChromePressureFailures(chromePressure, { gate: chromeApplies })) {
+    failures.push(f);
+  }
+  const filterApplies = filterReversibleGateApplies({
+    lane: laneWant,
+    citeScreen: dfCiteRow?.screen || "",
+    citeJobs: dfCiteRow?.jobs || [],
+    isWireframe,
+    citeId: dfCiteId,
+  });
+  for (const f of formatFilterReversibleFailures(filterReversible, { gate: filterApplies })) {
     failures.push(f);
   }
 }

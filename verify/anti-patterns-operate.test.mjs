@@ -27,6 +27,7 @@ import { formatKpiSoupFailures } from "./kpi-soup.mjs";
 import { formatPillFilterFailures } from "./pill-filter.mjs";
 import { formatPageTitleFailures } from "./page-title.mjs";
 import { formatChromePressureFailures } from "./chrome-pressure.mjs";
+import { formatFilterReversibleFailures } from "./filter-reversible.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -88,6 +89,13 @@ const expected = {
     alias: "chrome-pressure",
     restructureOps: ["chrome-budget"],
     cropPairId: "queue-chrome",
+  },
+  "irreversible-filters": {
+    detector: "filter-reversible",
+    measureFailurePrefix: "filter-reversible",
+    alias: "filter-reversible",
+    restructureOps: ["filter-clearable"],
+    cropPairId: "queue-filters",
   },
 };
 
@@ -154,6 +162,12 @@ const chromeHits = retrieveAntiPatterns("nav chrome Export New filled header com
 });
 assert.ok(chromeHits.some((h) => h.id === "dual-chrome-actions"), JSON.stringify(chromeHits.map((h) => h.id)));
 
+const filterHits = retrieveAntiPatterns("irreversible filters stuck chips no clear dismiss queue", {
+  screen: "queue",
+  antiPatterns: corpus,
+});
+assert.ok(filterHits.some((h) => h.id === "irreversible-filters"), JSON.stringify(filterHits.map((h) => h.id)));
+
 // Measure formatters cite anti-pattern:<id>
 const dualFails = formatDualFocalFailures(
   { peerGridCount: 2, titles: ["David's 10", "Queue"] },
@@ -205,6 +219,15 @@ const chromeFails = formatChromePressureFailures(
 assert.ok(
   chromeFails.some((f) => /chrome-pressure:/.test(f) && /anti-pattern:dual-chrome-actions/.test(f)),
   chromeFails.join("\n"),
+);
+
+const filterFails = formatFilterReversibleFailures(
+  { irreversibleCount: 2, irreversibleSamples: ["Status: Open", "Owner: Me"] },
+  { gate: true },
+);
+assert.ok(
+  filterFails.some((f) => /filter-reversible:/.test(f) && /anti-pattern:irreversible-filters/.test(f)),
+  filterFails.join("\n"),
 );
 
 assert.equal(formatAntiPatternCite("kpi-soup"), "anti-pattern:kpi-soup");

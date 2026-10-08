@@ -211,6 +211,20 @@ Main-region CTA budget stays in `cta-budget` (chrome is excluded from that detec
 Fixtures: `verify/fixtures/denoise/tsx/queue-chrome-actions{,-ast}.tsx`.  
 Doctor: `verify/chrome-budget-ast-bite.mjs` / `npm run chrome-budget:ast-bite`.
 
+### Irreversible-filters TSX AST — filter-clearable
+
+Active Operate filter chips must be reversible.
+
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `filter-clearable`.
+
+- Stamps `data-shine-filter-dismiss` on `aria-pressed={true}` / `data-filter-active` chips
+- Appends `data-shine-filter-clear-all` Clear filters control on the stack
+- Recommend binds `filterReversibleAst` FAIL→PASS crops (`queue-filters-tsx-*`)
+
+Doctor: `verify/filter-clearable-ast-bite.mjs` / `npm run filter-clearable:ast-bite`.
+
+
+
 ### Dual-focal ban TSX AST (N8 deepen) — XOR peer→chip
 
 Peer worklists / DataGrids on one triage job in consumer TSX are collapsed by

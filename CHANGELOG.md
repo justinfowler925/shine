@@ -15,6 +15,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate slop: irreversible-filters / filter-clearable.** Active filter chips
+  without dismiss/clear now fail-closed as `filter-reversible`
+  (`anti-pattern:irreversible-filters`). Auto-safe `filter-clearable` stamps
+  `data-shine-filter-dismiss` + `data-shine-filter-clear-all` on DOM + TypeScript
+  AST. Recommend emits `filterReversibleAst`; denoise-loop names
+  `filter-reversible`. Doctor bites: `verify/filter-reversible.test.mjs` ·
+  `verify/filter-clearable-ast-bite.mjs`.
+
 - **Operate slop: dual-chrome-actions / chrome-budget.** Nav chrome noise — filled
   Export/New/Save in header/nav/aside now fail-closed as `chrome-pressure`
   (`anti-pattern:dual-chrome-actions`). Auto-safe `chrome-budget`

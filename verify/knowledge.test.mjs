@@ -44,6 +44,7 @@ const required = [
   "pill-filter-stack",
   "competing-page-titles",
   "dual-chrome-actions",
+  "irreversible-filters",
 ];
 for (const id of required) {
   assert.ok(getAntiPattern(id), `missing anti-pattern ${id}`);
