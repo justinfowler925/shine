@@ -1512,8 +1512,11 @@ function isFilterPillOpening(opening, sf) {
   if (findJsxAttr(opening, "data-shine-pill", sf)) return true;
   if (classNameHasToken(opening, "pill", sf)) return true;
   if (classNameHasToken(opening, "chip", sf)) return true;
+  const slot = attrStringValue(findJsxAttr(opening, "data-slot", sf), sf);
+  if (slot === "badge") return true;
   const tag = jsxTagName(opening);
-  return tag === "Badge" && classNameHasToken(opening, "rounded-full", sf);
+  // Badge / chip hosts — match measure pill-filter (data-slot=badge / .chip / Badge).
+  return tag === "Badge" || tag === "Chip";
 }
 
 /**

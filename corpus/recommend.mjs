@@ -117,6 +117,18 @@ export const PILL_FILTER_AST_FIXTURES = Object.freeze({
   maxVisible: 3,
 });
 
+/** Repo-relative pill-filter badge/chip TSX AST FAIL→PASS fixtures (pill-collapse deepen). */
+export const PILL_BADGE_AST_FIXTURES = Object.freeze({
+  tsxBefore: "verify/fixtures/denoise/tsx/queue-pill-badge.tsx",
+  tsxAstHard: "verify/fixtures/denoise/tsx/queue-pill-badge-ast.tsx",
+  cropBefore: "verify/fixtures/denoise/receipts/queue-pill-badge-tsx-before-crop.html",
+  cropAfter: "verify/fixtures/denoise/receipts/queue-pill-badge-tsx-after-crop.html",
+  helper: "verify/restructure/apply-tsx.mjs",
+  cropPairId: "queue-pill-badge-tsx",
+  op: "pill-collapse",
+  maxVisible: 3,
+});
+
 /** Repo-relative competing-page-titles TSX AST FAIL→PASS fixtures (title-singular). */
 export const PAGE_TITLE_AST_FIXTURES = Object.freeze({
   tsxBefore: "verify/fixtures/denoise/tsx/queue-competing-titles.tsx",
@@ -914,6 +926,39 @@ export function pillFilterAstForQueueJob(job, constraints = {}) {
 }
 
 /**
+ * Pill-filter badge/chip TSX AST fixture binding (pill-collapse deepen).
+ */
+export function pillBadgeAstForQueueJob(job, constraints = {}) {
+  const category = String(constraints.category || "").toLowerCase();
+  const screen = String(constraints.screen || "").toLowerCase();
+  const intent = String(constraints.intent || "").toLowerCase();
+  const text = String(job || "");
+  const queueJob =
+    ["queue", "triage", "inbox", "worklist", "datagrid", "approval", "catalog"].includes(category) ||
+    ["queue", "approval", "catalog"].includes(screen) ||
+    intent === "queue" ||
+    /\b(queue|triage|inbox|pill[- ]?badge|badge[- ]?spam|chip[- ]?filter|data-slot|pill[- ]?collapse)\b/i.test(
+      text,
+    );
+  if (!queueJob) return null;
+  return {
+    mode: "tsx-ast",
+    op: PILL_BADGE_AST_FIXTURES.op,
+    maxVisible: PILL_BADGE_AST_FIXTURES.maxVisible,
+    rest: "details",
+    fixtureTsx: PILL_BADGE_AST_FIXTURES.tsxBefore,
+    fixtureTsxAst: PILL_BADGE_AST_FIXTURES.tsxAstHard,
+    cropBefore: PILL_BADGE_AST_FIXTURES.cropBefore,
+    cropAfter: PILL_BADGE_AST_FIXTURES.cropAfter,
+    cropPairId: PILL_BADGE_AST_FIXTURES.cropPairId,
+    helper: PILL_BADGE_AST_FIXTURES.helper,
+    reference: "skill/references/denoise.md",
+    instruction:
+      "Above-fold badge/chip filter stack (pill-filter deepen): apply verify/restructure/apply-tsx.mjs pill-collapse (TypeScript AST, maxVisible=3; park rest in <details data-shine-pill-rest>). Handles data-slot=\"badge\", className chip, Badge, and Chip hosts that classic .pill selectors missed. Copy FAIL→PASS crop paths from recommendation.pillBadgeAst.cropBefore/cropAfter; prove pill-filter clears with ≤3 visible chips.",
+  };
+}
+
+/**
  * Missing page-title TSX AST fixture binding (stamp-page-title).
  */
 export function stampPageTitleAstForQueueJob(job, constraints = {}) {
@@ -1321,6 +1366,11 @@ export function recommendPattern(templates, job, constraints = {}) {
       screen,
       intent: retrieval.brief?.operatePage || "",
     }),
+    pillBadgeAst: pillBadgeAstForQueueJob(job, {
+      category: constraints.category,
+      screen,
+      intent: retrieval.brief?.operatePage || "",
+    }),
     pageTitleAst: pageTitleAstForQueueJob(job, {
       category: constraints.category,
       screen,
@@ -1540,6 +1590,9 @@ export function formatRecommendationSummary(rec) {
   const pill = rec.pillFilterAst?.fixtureTsx
     ? ` · pillFilterAst ${rec.pillFilterAst.mode}@${rec.pillFilterAst.cropPairId}`
     : "";
+  const pillBadge = rec.pillBadgeAst?.fixtureTsx
+    ? ` · pillBadgeAst ${rec.pillBadgeAst.mode}@${rec.pillBadgeAst.cropPairId}`
+    : "";
   const pageTitle = rec.pageTitleAst?.fixtureTsx
     ? ` · pageTitleAst ${rec.pageTitleAst.mode}@${rec.pageTitleAst.cropPairId}`
     : "";
@@ -1599,6 +1652,6 @@ export function formatRecommendationSummary(rec) {
     : "";
   return (
     `recommendation: ${rec.primary.id} (${rec.primary.screen}, ${action}, confidence ${rec.confidence}) — ` +
-    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pageTitle}${stampPageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${emptyInstructionalAst}${blankCtaAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${linkFieldErrorsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
+    `${rec.kitRecipe}${table}${cta}${kpi}${pill}${pillBadge}${pageTitle}${stampPageTitle}${chrome}${filterRev}${mktDna}${fillerAst}${emptyInstructionalAst}${blankCtaAst}${cardSoupAst}${emptyTriadAst}${decorativeChartAst}${parallelOwnedAst}${nameControlsAst}${linkFieldErrorsAst}${dual}${worklist}${setFocal}${wrongCite}${xor}${ban}`
   );
 }

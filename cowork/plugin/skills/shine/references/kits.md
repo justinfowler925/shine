@@ -175,11 +175,26 @@ Above-fold pill/chip filter encyclopedias in consumer TSX are collapsed by
    Keeps first `maxVisible=3` pills; wraps the rest in
    `<details data-shine-pill-rest><summary>More filters</summary>…</details>`.  
    Handles `className="pill"`, `className={"pill"}`, **`data-shine-filter-pill` /
-   `data-shine-pill`**, and Badge pills. Dynamic `.map` bands stay plan-only.
+   `data-shine-pill`**, `className chip`, **`data-slot="badge"`**, and Badge/Chip hosts.
+   Dynamic `.map` bands stay plan-only.
 4. **Prove** — crop pair `queue-pill-tsx` (`queue-pill-tsx-{before,after}-crop.html`). Twin full-page invalid.
 
 Fixtures: `verify/fixtures/denoise/tsx/queue-pill-stack{,-ast}.tsx`.  
 Doctor: `verify/pill-filter-ast-bite.mjs` / `npm run pill-filter:ast-bite`.
+
+### Pill-filter badge/chip — pill-collapse deepen
+
+Measure already fail-closes ≥5 above-fold filter pills (`pill-filter`), but classic
+`.pill` selectors missed `data-slot="badge"`, `.chip`, and Badge/Chip hosts.
+Denoise deepens the existing `pill-collapse` op (no new Operate-slop id).
+
+**DOM + TypeScript AST**: `verify/restructure/apply-dom.mjs` / `apply-tsx.mjs` `pill-collapse`.
+
+- Collapses badge/chip stacks to ≤3 visible; parks rest in `<details data-shine-pill-rest>`
+- Recommend binds `pillBadgeAst` FAIL→PASS crops (`queue-pill-badge-tsx-*`)
+- HTML crop pair `queue-pill-badge` for DOM prove
+
+Doctor: `verify/pill-badge.test.mjs` · `verify/pill-badge-ast-bite.mjs` / `npm run pill-badge:ast-bite`.
 
 ### Competing page-titles TSX AST — title-singular
 

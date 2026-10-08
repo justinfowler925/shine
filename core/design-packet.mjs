@@ -248,7 +248,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), stampPageTitleAst.fixtureTsx/crop* (TSX AST stamp-page-title FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), filterReversibleAst.fixtureTsx/crop* (TSX AST filter-clearable FAIL→PASS), marketingDnaAst.fixtureTsx/crop* (TSX AST strip-marketing-dna FAIL→PASS), fillerEmptyAst.fixtureTsx/crop* (TSX AST rewrite-filler-empty FAIL→PASS), emptyInstructionalAst.fixtureTsx/crop* (TSX AST rewrite-filler-empty empty-instructional FAIL→PASS), blankCtaAst.fixtureTsx/crop* (TSX AST name-controls blank-cta FAIL→PASS), cardSoupAst.fixtureTsx/crop* (TSX AST collapse-card-soup FAIL→PASS), emptyTriadAst.fixtureTsx/crop* (TSX AST split-empty-triad FAIL→PASS), decorativeChartAst.fixtureTsx/crop* (TSX AST stamp-chart-units FAIL→PASS), parallelOwnedAst.fixtureTsx/crop* (TSX AST bind-product-owner FAIL→PASS), nameControlsAst.fixtureTsx/crop* (TSX AST name-controls FAIL→PASS), linkFieldErrorsAst.fixtureTsx/crop* (TSX AST link-field-errors FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pillBadgeAst.fixtureTsx/crop* (TSX AST pill-collapse badge/chip deepen FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), stampPageTitleAst.fixtureTsx/crop* (TSX AST stamp-page-title FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), filterReversibleAst.fixtureTsx/crop* (TSX AST filter-clearable FAIL→PASS), marketingDnaAst.fixtureTsx/crop* (TSX AST strip-marketing-dna FAIL→PASS), fillerEmptyAst.fixtureTsx/crop* (TSX AST rewrite-filler-empty FAIL→PASS), emptyInstructionalAst.fixtureTsx/crop* (TSX AST rewrite-filler-empty empty-instructional FAIL→PASS), blankCtaAst.fixtureTsx/crop* (TSX AST name-controls blank-cta FAIL→PASS), cardSoupAst.fixtureTsx/crop* (TSX AST collapse-card-soup FAIL→PASS), emptyTriadAst.fixtureTsx/crop* (TSX AST split-empty-triad FAIL→PASS), decorativeChartAst.fixtureTsx/crop* (TSX AST stamp-chart-units FAIL→PASS), parallelOwnedAst.fixtureTsx/crop* (TSX AST bind-product-owner FAIL→PASS), nameControlsAst.fixtureTsx/crop* (TSX AST name-controls FAIL→PASS), linkFieldErrorsAst.fixtureTsx/crop* (TSX AST link-field-errors FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -315,6 +315,24 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    helper:join(ROOT,p.helper||"verify/restructure/apply-tsx.mjs"),
    reference:p.reference||"skill/references/denoise.md",
    instruction:p.instruction||"Apply apply-tsx pill-collapse (AST, maxVisible=3) on consumer filter-pill TSX.",
+  };
+ }
+ // Denoise / queue jobs: bind pill-filter badge/chip deepen TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.pillBadgeAst?.fixtureTsx){
+  const b=recommendation.pillBadgeAst;
+  packet.pillBadgeAst={
+   mode:b.mode||"tsx-ast",
+   op:b.op||"pill-collapse",
+   maxVisible:b.maxVisible??3,
+   rest:b.rest||"details",
+   fixtureTsx:join(ROOT,b.fixtureTsx),
+   fixtureTsxAst:join(ROOT,b.fixtureTsxAst||b.fixtureTsx),
+   cropBefore:join(ROOT,b.cropBefore),
+   cropAfter:join(ROOT,b.cropAfter),
+   cropPairId:b.cropPairId||"queue-pill-badge-tsx",
+   helper:join(ROOT,b.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:b.reference||"skill/references/denoise.md",
+   instruction:b.instruction||"Apply apply-tsx pill-collapse (AST, maxVisible=3) on badge/chip filter TSX.",
   };
  }
  // Denoise / Operate jobs: bind competing-page-titles TSX AST FAIL→PASS fixture + crop paths.
@@ -677,7 +695,8 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  }
  const wantsPill=
   Boolean(recommendation.pillFilterAst?.fixtureTsx)||
-  restructureHints.some((h)=>/pill-collapse|pill-filter|filter-stack/i.test(String(h)));
+  Boolean(recommendation.pillBadgeAst?.fixtureTsx)||
+  restructureHints.some((h)=>/pill-collapse|pill-filter|filter-stack|pill[- ]?badge|badge[- ]?spam|chip[- ]?filter/i.test(String(h)));
  const wantsTitle=
   Boolean(recommendation.pageTitleAst?.fixtureTsx)||
   restructureHints.some((h)=>/title-singular|page-title|competing[- ]?title/i.test(String(h)));

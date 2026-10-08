@@ -15,6 +15,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: pill-filter badge/chip via pill-collapse.** Measure already
+  fail-closed ≥5 above-fold filter pills (`pill-filter`), but repair only matched
+  classic `.pill` / `data-shine-filter-pill` hosts — `data-slot="badge"`, `.chip`,
+  and Badge/Chip stacks stayed unrepaired. `pill-collapse` now collapses those
+  hosts on DOM + TypeScript AST (maxVisible=3 → `<details data-shine-pill-rest>`).
+  Recommend emits `pillBadgeAst`; crop pairs `queue-pill-badge` / `queue-pill-badge-tsx`.
+  Doctor: `verify/pill-badge.test.mjs` · `verify/pill-badge-ast-bite.mjs`. Does not
+  expand Operate-slop library (saturated at 14); leaves empty-insight-shell (#191) alone.
+
 - **Denoise deepen: dual-focal collapse-peer-grids DOM XOR.** Measure already
   fail-closed ≥2 peer worklists (`dual-focal`); TSX AST already XOR-applied, but
   DOM `apply-dom` stayed plan-only / humanGate. `collapse-peer-grids` is now
