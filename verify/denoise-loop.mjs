@@ -192,8 +192,8 @@ export async function runDenoiseLoop({
   };
   diagnosis.dualFocalCheck = { ok: false, note: "Assume peer grids until measure clears dual-focal" };
   diagnosis.kpiSoupCheck = {
-    ok: !pre.signals.some((s) => s.id === "ai-slop-kpi-strip"),
-    note: "From preflight-slop kpi-strip signal",
+    ok: !pre.signals.some((s) => s.id === "ai-slop-kpi-strip" || s.id === "ai-slop-metric-grid"),
+    note: "From preflight-slop kpi-strip / metric-grid signal → kpi-collapse",
   };
   diagnosis.pillFilterCheck = {
     ok: !pre.signals.some((s) => s.id === "ai-slop-badge-spam"),

@@ -95,4 +95,18 @@ assert.ok(
   `collapsed badge stack should clear: ${JSON.stringify(badgePass)}`,
 );
 
-console.log("preflight-slop PASS: cta-mania · card-carnival · badge-spam FAIL→PASS · filler · Snapline/Impeccable adapters");
+
+const kpiBefore = join(SHINE, "verify/fixtures/denoise/queue-kpi-before.html");
+const kpiAfter = join(SHINE, "verify/fixtures/denoise/queue-kpi-after.html");
+const metricFail = scanPreflightSlop(readFileSync(kpiBefore, "utf8"), { gate: true, screen: "queue" });
+assert.ok(
+  metricFail.failures.some((f) => /ai-slop-metric-grid/.test(f)),
+  `queue metric-grid should hard-fail: ${JSON.stringify(metricFail)}`,
+);
+const metricPass = scanPreflightSlop(readFileSync(kpiAfter, "utf8"), { gate: true, screen: "queue" });
+assert.ok(
+  !metricPass.failures.some((f) => /ai-slop-metric-grid/.test(f)),
+  `collapsed KPI stack should clear metric-grid: ${JSON.stringify(metricPass)}`,
+);
+
+console.log("preflight-slop PASS: cta-mania · card-carnival · badge-spam · metric-grid FAIL→PASS · filler · Snapline/Impeccable adapters");

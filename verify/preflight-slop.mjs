@@ -69,10 +69,13 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
   }
 
   // Parked metrics / filter pills inside collapse <details> are not on the decide path.
-  const srcVisible = src.replace(
-    /<details\b[^>]*(?:data-shine-kpi-rest|data-shine-pill-rest)[^>]*>[\s\S]*?<\/details>/gi,
-    "",
-  );
+  // Strip <style> so .metrics/.metric CSS rules cannot false-positive cluster detect.
+  const srcVisible = src
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(
+      /<details\b[^>]*(?:data-shine-kpi-rest|data-shine-pill-rest)[^>]*>[\s\S]*?<\/details>/gi,
+      "",
+    );
 
   // Badge/chip hosts only (not the word "badge" in titles/comments). Aligns with
   // pill-filter measure hosts; pill-collapse parks excess in data-shine-pill-rest.
@@ -108,11 +111,26 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
     });
   }
 
-  if (/metrics[\s\S]{0,200}metric[\s\S]{0,200}metric[\s\S]{0,200}metric/i.test(srcVisible)) {
+  // Metric-grid: markup cluster — metrics/kpi-strip container with ≥4 visible hosts.
+  // CSS-only .metrics/.metric rules are stripped above; kpi-collapse parks excess in
+  // data-shine-kpi-rest so Operate queue FAIL→PASS with the existing auto-safe op.
+  const metricHosts = (
+    srcVisible.match(
+      /<(?:div|section|article|li|span)\b[^>]*(?:class=["'][^"']*\bmetric\b[^"']*["']|data-shine-kpi=)[^>]*>/gi,
+    ) || []
+  ).length;
+  const hasMetricsContainer =
+    /<(?:div|section|ul)\b[^>]*(?:class=["'][^"']*\bmetrics\b|data-shine-kpi-strip|data-shine-metrics)[^>]*>/i.test(
+      srcVisible,
+    );
+  if (hasMetricsContainer && metricHosts >= 4) {
+    const operateQueue =
+      /queue|datagrid|app-shell/i.test(screen) || /data-cite=["'][^"']*queue/i.test(src);
     signals.push({
       id: "ai-slop-metric-grid",
-      severity: "note",
-      message: "metric-grid cluster pattern (no-slop-ui ban family)",
+      severity: operateQueue ? "fail" : "note",
+      message: `metric-grid cluster (≥4 hosts in metrics container, count=${metricHosts})`,
+      count: metricHosts,
     });
   }
 

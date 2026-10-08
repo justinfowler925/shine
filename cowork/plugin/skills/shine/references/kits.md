@@ -204,6 +204,14 @@ Denoise-loop seeds `pillFilterCheck` → `pill-collapse`. Non-Operate stays note
 
 Doctor: `verify/badge-spam-preflight-bite.mjs` / `npm run badge-spam:preflight-bite`.
 
+### Preflight metric-grid → kpi-collapse
+
+Preflight `ai-slop-metric-grid` hard-fails on Operate queue when a metrics container
+still holds ≥4 visible metric hosts (CSS rules and `<details data-shine-kpi-rest>`
+excluded). Denoise-loop seeds `kpiSoupCheck` → `kpi-collapse`.
+
+Doctor: `verify/metric-grid-preflight-bite.mjs` / `npm run metric-grid:preflight-bite`.
+
 ### Competing page-titles TSX AST — title-singular
 
 Multiple peer page titles in consumer TSX are singularized by
