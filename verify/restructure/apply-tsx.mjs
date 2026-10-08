@@ -14,6 +14,7 @@
  * rewrite-filler-empty (filler empty phrases → job copy via TS compiler AST),
  * collapse-card-soup (equal Cards → focal + details data-shine-card-rest via TS compiler AST),
  * split-empty-triad (empty≡error / missing filtered-empty → distinct triad via TS compiler AST),
+ * stamp-chart-units (decorative chart → data-unit + baseline via TS compiler AST),
  * collapse-peer-grids (dual-focal ban → XOR chip + shared DataGrid via TS compiler AST).
  * DOM apply-dom still plan-only for collapse-peer-grids (never silent delete).
  * TSX AST applies the XOR recipe (peer title → filter chip); dynamic/mapped peers stay plan-only.
@@ -208,6 +209,19 @@ export function applyTsxRestructure(source, plan) {
         if (census.hits > 0) {
           plans.push(
             "## split-empty-triad (TSX)\n\nStamp data-filtered-empty; drop alert/error from empty; distinct error sibling.\n",
+          );
+        }
+      }
+    } else if (op.op === "stamp-chart-units") {
+      const next = stampChartUnitsTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("stamp-chart-units");
+      } else {
+        const census = countDecorativeChartTsx(text);
+        if (census.hits > 0) {
+          plans.push(
+            "## stamp-chart-units (TSX)\n\nStamp data-unit + data-baseline + data-shine-chart-stamped on chart JSX.\n",
           );
         }
       }
@@ -2365,6 +2379,109 @@ export function splitEmptyTriadTsx(source, op = {}) {
       /(data-shine-filter-stack[^>]*>)/,
       `$1\n        <button type="button" data-shine-filter-clear-all aria-label="${clearLabel}">${clearLabel}</button>`,
     );
+  }
+
+  return out;
+}
+
+function isChartJsxOpening(opening, sf) {
+  const tag = jsxTagName(opening);
+  if (tag === "svg" || tag === "canvas" || tag === "Chart" || /Chart$/.test(tag)) {
+    if (findJsxAttr(opening, "data-chart", sf) || findJsxAttr(opening, "data-shine-chart", sf)) return true;
+    if (classNameHasToken(opening, "chart", sf)) return true;
+    const label = attrStringValue(findJsxAttr(opening, "aria-label", sf), sf) || "";
+    if (/chart/i.test(label)) return true;
+    if (tag === "svg" || tag === "canvas") return true;
+  }
+  return false;
+}
+
+function chartOpeningHasUnits(opening, sf) {
+  if (findJsxAttr(opening, "data-shine-chart-stamped", sf)) return true;
+  if (findJsxAttr(opening, "data-unit", sf) || findJsxAttr(opening, "data-units", sf)) return true;
+  const label = attrStringValue(findJsxAttr(opening, "aria-label", sf), sf) || "";
+  return /\b(unit|units|count|%|percent|usd|\$|baseline|vs prior)\b/i.test(label);
+}
+
+/**
+ * Count decorative charts lacking units in TSX.
+ */
+export function countDecorativeChartTsx(source) {
+  const sf = ts.createSourceFile("surface.tsx", String(source), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let hits = 0;
+  const walk = (node) => {
+    if ((ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node))) {
+      const opening = ts.isJsxSelfClosingElement(node) ? node : node.openingElement;
+      if (isChartJsxOpening(opening, sf) && !chartOpeningHasUnits(opening, sf)) hits += 1;
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+  return { hits };
+}
+
+/**
+ * Stamp data-unit + baseline on chart JSX via AST.
+ */
+export function stampChartUnitsTsx(source, op = {}) {
+  const unit = op.unit || op.dataUnit || "count";
+  const baseline = op.baseline || op.dataBaseline || "prior period";
+  const label = op.ariaLabel || `Open notices (${unit} vs ${baseline})`;
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  let needLegend = false;
+
+  const stampOpening = (opening) => {
+    if (!isChartJsxOpening(opening, sf) || chartOpeningHasUnits(opening, sf)) return;
+    let openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+    if (!/data-shine-chart(?!-)/.test(openSrc)) {
+      openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` data-shine-chart${m}`);
+    }
+    openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` data-unit="${unit}" data-baseline="${baseline}" data-shine-chart-stamped${m}`);
+    if (/\baria-label=/.test(openSrc)) {
+      openSrc = openSrc.replace(/\baria-label=(?:\{)?(["'])([\s\S]*?)\1(?:\})?/, `aria-label="${label}"`);
+    } else {
+      openSrc = openSrc.replace(/\s*\/?>$/, (m) => ` aria-label="${label}"${m}`);
+    }
+    edits.push({ start: opening.getStart(sf), end: opening.getEnd(), replacement: openSrc });
+    needLegend = true;
+  };
+
+  const walk = (node) => {
+    if (ts.isJsxSelfClosingElement(node)) {
+      stampOpening(node);
+      return;
+    }
+    if (ts.isJsxElement(node)) {
+      stampOpening(node.openingElement);
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+
+  if (!edits.length) return text;
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+
+  if (needLegend && !/data-shine-chart-legend/.test(out)) {
+    // Insert legend after the first full </svg> or self-closing stamped <canvas />.
+    let at = -1;
+    const svgEnd = out.indexOf("</svg>");
+    if (svgEnd >= 0) at = svgEnd + "</svg>".length;
+    else {
+      const canvasRe = /<canvas\b[^>]*data-shine-chart-stamped[^>]*\/>/;
+      const m = out.match(canvasRe);
+      if (m) at = out.indexOf(m[0]) + m[0].length;
+    }
+    if (at > 0) {
+      out =
+        out.slice(0, at) +
+        `\n      <p data-shine-chart-legend>Unit: ${unit} · Baseline: ${baseline}</p>` +
+        out.slice(at);
+    }
   }
 
   return out;

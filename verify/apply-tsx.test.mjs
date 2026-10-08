@@ -294,6 +294,14 @@ const emptyTriadPlan = buildRestructurePlan({
 });
 assert.ok(applyTsxRestructure(emptyTriadHard, emptyTriadPlan).applied.includes("split-empty-triad"));
 
+const decorativeHard = readFileSync(join(FIX, "queue-decorative-chart-ast.tsx"), "utf8");
+const decorativePlan = buildRestructurePlan({
+  job: "Stamp chart units",
+  category: "queue",
+  ops: [{ op: "stamp-chart-units" }],
+});
+assert.ok(applyTsxRestructure(decorativeHard, decorativePlan).applied.includes("stamp-chart-units"));
+
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-card-soup AST · split-empty-triad AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-card-soup AST · split-empty-triad AST · stamp-chart-units AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );

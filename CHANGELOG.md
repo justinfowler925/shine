@@ -15,6 +15,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Operate slop: decorative-chart-no-units / stamp-chart-units.** Charts/SVGs
+  lacking unit/baseline markers fail-closed as `decorative-chart`
+  (`anti-pattern:decorative-chart-no-units`). Auto-safe `stamp-chart-units`
+  stamps `data-unit` + `data-baseline` + `data-shine-chart-stamped` on DOM +
+  TypeScript AST. Recommend emits `decorativeChartAst`; denoise-loop names
+  `decorative-chart`. Doctor bites: `verify/decorative-chart.test.mjs` ·
+  `verify/stamp-chart-units-ast-bite.mjs`.
+
 - **Operate slop: empty-filtered-error-conflated / split-empty-triad.** Empty ≡
   filtered-empty ≡ error conflated (same-node alert, shared copy, or active
   filters without filtered-empty) fail-closed as `empty-triad`

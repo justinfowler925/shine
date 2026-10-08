@@ -5,15 +5,29 @@
   "kind": "operate-bloat",
   "domains": ["dataviz", "cite"],
   "lanes": ["saas", "internal"],
-  "screens": ["queue", "dashboard", "catalog"],
-  "tags": ["chart", "cite", "kpi", "nucleus"],
+  "screens": ["queue", "dashboard", "catalog", "approval", "record"],
+  "tags": ["chart", "cite", "kpi", "nucleus", "operate-slop"],
+  "aliases": ["decorative-chart", "chart-no-units", "stamp-chart-units", "naked-chart"],
   "cues": "Chart atom forced as page cite, or KPI/chart with no units/comparison on a triage job",
   "ban": "Do not lead Operate triage with a chart atom; charts need units and a real decide job.",
-  "remediation": "Demote chart page cites; pick a composed page cite; stamp data-shine-kpi with units.",
-  "detector": "cite-operate",
-  "measureFailurePrefix": null,
+  "remediation": "Apply stamp-chart-units; stamp data-unit + data-baseline + data-shine-chart-stamped; keep a composed page cite; re-measure decorative-chart.",
+  "examples": [
+    "Queue triage with a bare Activity chart SVG and no unit/baseline markers",
+    "Dashboard sparkline canvas lacking data-unit / accessible units copy"
+  ],
+  "restructureOps": ["stamp-chart-units"],
+  "detector": "decorative-chart",
+  "measureFailurePrefix": "decorative-chart",
   "constitutionIds": ["cite-honesty", "kpi-soup-off-path"],
   "severity": "major",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-decorative-chart-before.html",
+    "after": "verify/fixtures/denoise/queue-decorative-chart-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-decorative-chart-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-decorative-chart-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-decorative-chart"],
+  "cropPairId": "queue-decorative-chart",
   "source": "skill/references/anti-patterns.md",
-  "validatedBy": "verify/cite-operate.test.mjs"
+  "validatedBy": "verify/decorative-chart.test.mjs"
 }

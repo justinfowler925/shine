@@ -38,6 +38,7 @@ export const OPERATE_SLOP_ANTI_PATTERN_IDS = Object.freeze([
   "filler-empty-copy",
   "card-soup",
   "empty-filtered-error-conflated",
+  "decorative-chart-no-units",
 ]);
 
 export function validatePrinciple(value) {

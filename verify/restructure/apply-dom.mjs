@@ -88,6 +88,12 @@ export function applyDomRestructure(html, plan) {
         out = next;
         applied.push("split-empty-triad");
       }
+    } else if (op.op === "stamp-chart-units") {
+      const next = applyStampChartUnits(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("stamp-chart-units");
+      }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
       applied.push("set-focal");
@@ -324,6 +330,55 @@ export function applyCollapseCardSoup(html, op = {}) {
     stamped,
     `${stamped}\n<details data-shine-card-rest><summary>${summary}</summary>\n${demoted}\n</details>`,
   );
+  return out;
+}
+
+/**
+ * Stamp units/baseline on decorative charts lacking data-unit markers.
+ */
+export function applyStampChartUnits(html, op = {}) {
+  const unit = op.unit || op.dataUnit || "count";
+  const baseline = op.baseline || op.dataBaseline || "prior period";
+  const label = op.ariaLabel || `Open notices (${unit} vs ${baseline})`;
+  let out = String(html);
+  const chartRe =
+    /<(svg|canvas)\b([^>]*\b(?:data-chart|class=["'][^"']*\bchart\b|aria-label=["'][^"']*chart[^"']*["'])[^>]*)(\/?)>/gi;
+
+  let touched = false;
+  out = out.replace(chartRe, (full, tag, attrs, selfClose) => {
+    if (/\bdata-shine-chart-stamped\b/.test(attrs) || /\bdata-unit\b/.test(attrs)) return full;
+    let next = attrs;
+    if (!/\bdata-shine-chart\b/.test(next)) next += ` data-shine-chart`;
+    next += ` data-unit="${unit}" data-baseline="${baseline}" data-shine-chart-stamped`;
+    if (/\baria-label=/.test(next)) {
+      next = next.replace(/\baria-label=(["'])([\s\S]*?)\1/i, `aria-label=$1${label}$1`);
+    } else {
+      next += ` aria-label="${label}"`;
+    }
+    touched = true;
+    const close = selfClose || tag.toLowerCase() === "canvas" ? (selfClose || "") : "";
+    // Preserve original self-closing style for canvas; svg usually has children.
+    if (full.endsWith("/>") || tag.toLowerCase() === "canvas" && /\/\s*>$/.test(full)) {
+      return `<${tag}${next} />`;
+    }
+    return `<${tag}${next}>`;
+  });
+
+  // Bare large SVG with role=img chart-ish labels already handled; also stamp plain data-chart hosts.
+  const hostRe = /<(div|section|figure)\b([^>]*\bdata-chart\b[^>]*)>/gi;
+  out = out.replace(hostRe, (full, tag, attrs) => {
+    if (/\bdata-shine-chart-stamped\b/.test(attrs) || /\bdata-unit\b/.test(attrs)) return full;
+    touched = true;
+    return `<${tag}${attrs} data-shine-chart data-unit="${unit}" data-baseline="${baseline}" data-shine-chart-stamped aria-label="${label}">`;
+  });
+
+  if (touched && !/data-shine-chart-legend/.test(out)) {
+    out = out.replace(
+      /(<\/svg>|<\/canvas>|<canvas\b[^>]*\/>)/i,
+      `$1\n  <p data-shine-chart-legend>Unit: ${unit} · Baseline: ${baseline}</p>`,
+    );
+  }
+
   return out;
 }
 
