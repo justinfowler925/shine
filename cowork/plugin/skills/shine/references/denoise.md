@@ -50,6 +50,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 | ≥4 equal KPI tiles vs work object | Collapse to ≤3 chips; rest `<details data-shine-kpi-rest>`. Consumer TSX: `apply-tsx` AST `kpi-collapse` (maxVisible=3); copy FAIL→PASS crops from `recommendation.kpiSoupAst.cropBefore/cropAfter` | `kpi-collapse` · `kpi-soup` · `queue-kpi-tsx-*` |
 | ≥5 above-fold filter pills/chips | Collapse to ≤3 visible; rest `<details data-shine-pill-rest>`. Consumer TSX: `apply-tsx` AST `pill-collapse` (maxVisible=3); copy FAIL→PASS crops from `recommendation.pillFilterAst.cropBefore/cropAfter` | `pill-collapse` · `pill-filter` · `queue-pill-tsx-*` |
 | ≥2 competing page titles in main | Keep one title; demote peers to kicker. Consumer TSX: `apply-tsx` AST `title-singular`; copy FAIL→PASS crops from `recommendation.pageTitleAst.cropBefore/cropAfter` | `title-singular` · `page-title` · `queue-titles-tsx-*` |
+| Filled Export/New/Save in header/nav chrome | Demote chrome to outline/ghost (`chrome-budget` maxFilledChrome=0); keep job verb filled in main. Consumer TSX: `apply-tsx` AST `chrome-budget`; copy FAIL→PASS crops from `recommendation.chromePressureAst.cropBefore/cropAfter` | `chrome-budget` · `chrome-pressure` · `queue-chrome-tsx-*` |
 | Settings job with queue cite | Rebind cite to category truth. Consumer TSX: `apply-tsx` AST `rebind-cite` (`data-cite` / `dataCite` string + `{"…"}`); refuse paint until rebound; copy FAIL→PASS crops from `recommendation.wrongCiteAst.cropBefore/cropAfter` | `rebind-cite` AST · `wrong-cite` · `sources-cite-tsx-*` |
 | Equal Card roots, no focal | One `data-region="focal"`. Consumer TSX: `apply-tsx` AST `set-focal`; copy FAIL→PASS crops from `recommendation.setFocalAst.cropBefore/cropAfter` | `set-focal` AST · `composition-slop` · `usul-focal-tsx-*` |
 | Can’t name category in one sentence | **Stop.** Refuse until `--category` | packet gate |
@@ -60,6 +61,9 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 - Dual filled primaries in main  
 - Dual peer worklists / grids (`dual-focal`)  
 - KPI soup on queue/triage (≥4 equal metrics ahead of work object)  
+- Pill/chip filter stacks above the fold (`pill-filter`, ≥5 chips)  
+- Competing page titles in main (`page-title`, ≥2)  
+- Filled chrome actions in header/nav/aside (`chrome-pressure`)  
 - Card soup without focal  
 - Wrong cite (settings job + queue cite)  
 - Filler copy (“Welcome to your dashboard”, …)  
@@ -73,7 +77,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 2 static     vibe / preflight-slop / Card·Badge counts
 3 cite       shot + restructureHints[]
 4 diagnose   shine-diagnosis.json + shine-restructure.json   ← Critic turn
-5 apply      DOM/AST auto-safe ops (verify/restructure/*) — TSX `cta-budget` via TypeScript AST (maxFilled=1; variant default / {"default"} / missing); TSX `kpi-collapse` via TypeScript AST (maxVisible=3; className metric / {"metric"} / data-shine-kpi); TSX `collapse-peer-grids` via TypeScript AST (XOR peer→chip; className grid-wrap / {"grid-wrap"} / role={"grid"}); TSX `worklist-first` via TypeScript AST (records/worklist before KPI chrome + focal); TSX `rebind-cite` via TypeScript AST (wrong-cite → category truth; data-cite / dataCite string + {"…"}; refuse paint until rebound)     ← Actor turn
+5 apply      DOM/AST auto-safe ops (verify/restructure/*) — TSX `cta-budget` via TypeScript AST (maxFilled=1; variant default / {"default"} / missing); TSX `kpi-collapse` via TypeScript AST (maxVisible=3; className metric / {"metric"} / data-shine-kpi); TSX `pill-collapse` via TypeScript AST (maxVisible=3; className pill / {"pill"} / data-shine-filter-pill / Badge); TSX `title-singular` via TypeScript AST (one h1 / data-page-title; demote peers to kicker); TSX `chrome-budget` via TypeScript AST (maxFilledChrome=0; demote header/nav/aside filled Buttons); TSX `collapse-peer-grids` via TypeScript AST (XOR peer→chip; className grid-wrap / {"grid-wrap"} / role={"grid"}); TSX `worklist-first` via TypeScript AST (records/worklist before KPI chrome + focal); TSX `rebind-cite` via TypeScript AST (wrong-cite → category truth; data-cite / dataCite string + {"…"}; refuse paint until rebound)     ← Actor turn
 6 agent      humanGate ops — dual-grid XOR via `xor-saved-view.mjs` (peer→chip + shared grid); god-split checklist. Never silent grid delete in apply-tsx/apply-dom
 7 measure    FAIL→PASS on named defects; crop the defect (twin full-page INVALID). Dual-grid crop: one [role=grid] in fold
 8 critic     reflexion on fail (diagnose only) → Actor nextStep OR host accept done

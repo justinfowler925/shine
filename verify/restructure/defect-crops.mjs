@@ -151,6 +151,70 @@ export function buildCtaAstAfterCropHtml() {
   });
 }
 
+/** Dual-chrome DOM FAIL crop — filled Export/New in header. */
+export function buildChromeBeforeCropHtml() {
+  return wrap({
+    title: "Chrome crop FAIL — filled peers",
+    cropId: "chrome-pressure-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: Export and New filled in header chrome — chrome-pressure.",
+    body: `  <header data-shine-chrome data-region="chrome" role="banner">
+    <button type="button" class="btn filled" data-shine-chrome-filled="true">Export</button>
+    <button type="button" class="btn filled-peer" data-shine-chrome-filled="true">New</button>
+  </header>
+  <p class="kicker">Main keeps Pursue filled — chrome must demote.</p>
+  <button type="button" class="btn filled">Pursue</button>`,
+  });
+}
+
+/** Dual-chrome DOM PASS crop — chrome demoted to ghost. */
+export function buildChromeAfterCropHtml() {
+  return wrap({
+    title: "Chrome crop PASS — demoted",
+    cropId: "chrome-pressure-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: chrome Export/New demoted to ghost — chrome-budget.",
+    body: `  <header data-shine-chrome data-region="chrome" role="banner">
+    <button type="button" class="btn ghost">Export</button>
+    <button type="button" class="btn ghost">New</button>
+  </header>
+  <p class="kicker">Main keeps Pursue filled.</p>
+  <button type="button" class="btn filled">Pursue</button>`,
+  });
+}
+
+/** Dual-chrome TSX AST FAIL crop. */
+export function buildChromeAstBeforeCropHtml() {
+  return wrap({
+    title: "Chrome AST crop FAIL — filled chrome Buttons",
+    cropId: "chrome-pressure-tsx-before",
+    cite: "shadcn-queue",
+    caption:
+      "Crop FAIL: filled chrome Buttons (variant default / {\"default\"}) — chrome-pressure; apply-tsx AST chrome-budget.",
+    body: `  <header data-shine-chrome data-region="chrome" role="banner" data-shine-tsx-ast="before">
+    <button type="button" class="btn filled" data-shine-chrome-filled="true" data-tsx-chrome="default">Export</button>
+    <button type="button" class="btn filled" data-shine-chrome-filled="true" data-tsx-chrome="default-expr">New</button>
+  </header>
+  <button type="button" class="btn filled">Pursue</button>`,
+  });
+}
+
+/** Dual-chrome TSX AST PASS crop. */
+export function buildChromeAstAfterCropHtml() {
+  return wrap({
+    title: "Chrome AST crop PASS — demoted",
+    cropId: "chrome-pressure-tsx-after",
+    cite: "shadcn-queue",
+    caption:
+      "Crop PASS: chrome Buttons demoted to outline via TSX AST chrome-budget maxFilledChrome=0.",
+    body: `  <header data-shine-chrome data-region="chrome" role="banner" data-shine-tsx-ast="after">
+    <button type="button" class="btn ghost" data-tsx-chrome="outline">Export</button>
+    <button type="button" class="btn ghost" data-tsx-chrome="outline-expr">New</button>
+  </header>
+  <button type="button" class="btn filled">Pursue</button>`,
+  });
+}
+
 /** Pill-filter DOM FAIL crop — ≥5 above-fold pills. */
 export function buildPillBeforeCropHtml() {
   return wrap({
@@ -965,6 +1029,28 @@ export const DEFECT_CROP_PAIRS = [
     beforeMust: [/data-shine-tsx-ast="before"/, /data-page-title/, /page-title/],
     afterMust: [/data-shine-tsx-ast="after"/, /data-shine-title-demoted/],
   },
+  {
+    id: "queue-chrome",
+    defect: "chrome-pressure",
+    beforeCrop: "queue-chrome-before-crop.html",
+    afterCrop: "queue-chrome-after-crop.html",
+    buildBefore: buildChromeBeforeCropHtml,
+    buildAfter: buildChromeAfterCropHtml,
+    beforeMust: [/data-shine-chrome/, /filled/, /Export/],
+    afterMust: [/ghost/, /Export/, /Pursue/],
+    afterMustNot: [/data-shine-chrome-filled/],
+  },
+  {
+    id: "queue-chrome-tsx",
+    defect: "chrome-pressure",
+    beforeCrop: "queue-chrome-tsx-before-crop.html",
+    afterCrop: "queue-chrome-tsx-after-crop.html",
+    buildBefore: buildChromeAstBeforeCropHtml,
+    buildAfter: buildChromeAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /data-shine-chrome/, /filled/],
+    afterMust: [/data-shine-tsx-ast="after"/, /ghost|outline/i, /Pursue/],
+    afterMustNot: [/data-shine-chrome-filled/],
+  },
 ];
 
 /**
@@ -1079,6 +1165,19 @@ export function assertCropPairOk(pair, read) {
     const afterVisible = after.replace(/<details[\s\S]*?<\/details>/gi, "");
     const visiblePills = (afterVisible.match(/data-shine-filter-pill/g) || []).length;
     if (visiblePills > 3) errors.push(`${pair.id} after visible pills must be ≤3, got ${visiblePills}`);
+  }
+  // Chrome-pressure: before filled chrome; after demoted (main Pursue may stay filled)
+  if ((pair.id === "queue-chrome" || pair.id === "queue-chrome-tsx") && before && after) {
+    if (!/data-shine-chrome/.test(before)) errors.push(`${pair.id} before needs chrome host`);
+    const beforeFilled = (before.match(/class="btn filled/g) || []).length;
+    if (beforeFilled < 2) errors.push(`${pair.id} before needs ≥2 filled chrome, got ${beforeFilled}`);
+    if (/data-shine-chrome-filled/.test(after)) errors.push(`${pair.id} after still has chrome-filled markers`);
+    if (!/ghost|outline/i.test(after)) errors.push(`${pair.id} after needs ghost/outline demotions`);
+    // Chrome host block after must not keep filled classes
+    const chromeBlock = after.match(/<header[\s\S]*?<\/header>/i)?.[0] || "";
+    if (/class="btn filled/.test(chromeBlock)) {
+      errors.push(`${pair.id} after chrome host still has filled buttons`);
+    }
   }
   // Competing titles: before ≥2 titles; after demoted peers
   if ((pair.id === "queue-titles" || pair.id === "queue-titles-tsx") && before && after) {

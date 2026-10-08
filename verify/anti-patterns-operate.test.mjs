@@ -26,6 +26,7 @@ import { formatDualFocalFailures } from "./dual-focal.mjs";
 import { formatKpiSoupFailures } from "./kpi-soup.mjs";
 import { formatPillFilterFailures } from "./pill-filter.mjs";
 import { formatPageTitleFailures } from "./page-title.mjs";
+import { formatChromePressureFailures } from "./chrome-pressure.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -80,6 +81,13 @@ const expected = {
     alias: "page-title",
     restructureOps: ["title-singular"],
     cropPairId: "queue-titles",
+  },
+  "dual-chrome-actions": {
+    detector: "chrome-pressure",
+    measureFailurePrefix: "chrome-pressure",
+    alias: "chrome-pressure",
+    restructureOps: ["chrome-budget"],
+    cropPairId: "queue-chrome",
   },
 };
 
@@ -140,6 +148,12 @@ const titleHits = retrieveAntiPatterns("competing page titles dual h1 title stac
 });
 assert.ok(titleHits.some((h) => h.id === "competing-page-titles"), JSON.stringify(titleHits.map((h) => h.id)));
 
+const chromeHits = retrieveAntiPatterns("nav chrome Export New filled header competing with Pursue", {
+  screen: "queue",
+  antiPatterns: corpus,
+});
+assert.ok(chromeHits.some((h) => h.id === "dual-chrome-actions"), JSON.stringify(chromeHits.map((h) => h.id)));
+
 // Measure formatters cite anti-pattern:<id>
 const dualFails = formatDualFocalFailures(
   { peerGridCount: 2, titles: ["David's 10", "Queue"] },
@@ -182,6 +196,15 @@ const titleFails = formatPageTitleFailures(
 assert.ok(
   titleFails.some((f) => /page-title:/.test(f) && /anti-pattern:competing-page-titles/.test(f)),
   titleFails.join("\n"),
+);
+
+const chromeFails = formatChromePressureFailures(
+  { chromeFilledCount: 2, chromeFilledSamples: ["Export", "New"] },
+  { gate: true },
+);
+assert.ok(
+  chromeFails.some((f) => /chrome-pressure:/.test(f) && /anti-pattern:dual-chrome-actions/.test(f)),
+  chromeFails.join("\n"),
 );
 
 assert.equal(formatAntiPatternCite("kpi-soup"), "anti-pattern:kpi-soup");
