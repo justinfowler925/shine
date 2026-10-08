@@ -5,15 +5,29 @@
   "kind": "operate-bloat",
   "domains": ["interaction", "completeness"],
   "lanes": ["saas", "internal"],
-  "screens": ["queue", "catalog", "settings", "record", "form"],
-  "tags": ["empty", "filtered", "error", "triad", "nucleus"],
+  "screens": ["queue", "catalog", "settings", "record", "form", "dashboard", "approval"],
+  "tags": ["empty", "filtered", "error", "triad", "nucleus", "operate-slop"],
+  "aliases": ["empty-triad", "empty-filtered", "conflated-empty", "split-empty-triad"],
   "cues": "One blank state used for no rows, active filters, and load/submit failures",
   "ban": "Empty, filtered-empty, and error must be distinct instructional states.",
-  "remediation": "Fill emptyErrorTriadCheck with three distinct treatments; bind to usability flows.",
-  "detector": "diagnosis",
-  "measureFailurePrefix": null,
+  "remediation": "Apply split-empty-triad; stamp data-filtered-empty when filters are active; keep error/alert copy distinct from empty; re-measure empty-triad.",
+  "examples": [
+    "Queue with active Status filter showing a single No data alert used as empty and error",
+    "Catalog list where empty and role=alert share identical copy"
+  ],
+  "restructureOps": ["split-empty-triad"],
+  "detector": "empty-triad",
+  "measureFailurePrefix": "empty-triad",
   "constitutionIds": ["primary-task-3s"],
   "severity": "major",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-empty-triad-before.html",
+    "after": "verify/fixtures/denoise/queue-empty-triad-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-empty-triad-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-empty-triad-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-empty-triad"],
+  "cropPairId": "queue-empty-triad",
   "source": "skill/references/anti-patterns.md",
-  "validatedBy": "verify/diagnosis.test.mjs"
+  "validatedBy": "verify/empty-triad.test.mjs"
 }

@@ -218,6 +218,67 @@ export function buildChromeAstAfterCropHtml() {
 
 
 
+
+/** Empty-triad DOM FAIL crop. */
+export function buildEmptyTriadBeforeCropHtml() {
+  return wrap({
+    title: "Empty triad crop FAIL",
+    cropId: "empty-triad-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: active filters + empty alert No data — empty-triad.",
+    body: `  <div class="filter-pills" data-shine-filter-stack>
+    <button type="button" class="pill" aria-pressed="true" data-filter-active="true">Status: Open</button>
+  </div>
+  <div class="empty" data-empty data-shine-empty role="alert">No data</div>`,
+  });
+}
+
+/** Empty-triad DOM PASS crop. */
+export function buildEmptyTriadAfterCropHtml() {
+  return wrap({
+    title: "Empty triad crop PASS",
+    cropId: "empty-triad-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: filtered-empty + clear + distinct error — split-empty-triad.",
+    body: `  <div class="filter-pills" data-shine-filter-stack>
+    <button type="button" class="pill" aria-pressed="true" data-filter-active="true">Status: Open</button>
+    <button type="button" data-shine-filter-clear-all aria-label="Clear filters">Clear filters</button>
+  </div>
+  <div class="empty" data-empty data-shine-empty data-filtered-empty data-shine-triad-split>No notices match these filters. Clear filters or widen the date range.</div>
+  <div data-error role="alert" data-shine-triad-split hidden>Couldn't load notices. Retry.</div>`,
+  });
+}
+
+/** Empty-triad TSX AST FAIL crop. */
+export function buildEmptyTriadAstBeforeCropHtml() {
+  return wrap({
+    title: "Empty triad AST crop FAIL",
+    cropId: "empty-triad-tsx-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: conflated empty/alert in TSX — empty-triad; apply-tsx split-empty-triad.",
+    body: `  <div class="filter-pills" data-shine-filter-stack data-shine-tsx-ast="before">
+    <button type="button" class="pill" aria-pressed="true">Status: Open</button>
+  </div>
+  <div class="empty" data-empty data-shine-empty role="alert">No data</div>`,
+  });
+}
+
+/** Empty-triad TSX AST PASS crop. */
+export function buildEmptyTriadAstAfterCropHtml() {
+  return wrap({
+    title: "Empty triad AST crop PASS",
+    cropId: "empty-triad-tsx-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: triad split via TSX AST split-empty-triad.",
+    body: `  <div class="filter-pills" data-shine-filter-stack data-shine-tsx-ast="after">
+    <button type="button" class="pill" aria-pressed="true">Status: Open</button>
+    <button type="button" data-shine-filter-clear-all aria-label="Clear filters">Clear filters</button>
+  </div>
+  <div class="empty" data-empty data-shine-empty data-filtered-empty data-shine-triad-split>No notices match these filters. Clear filters or widen the date range.</div>
+  <div data-error role="alert" data-shine-triad-split hidden>Couldn't load notices. Retry.</div>`,
+  });
+}
+
 /** Card-soup DOM FAIL crop. */
 export function buildCardSoupBeforeCropHtml() {
   return wrap({
@@ -1378,7 +1439,30 @@ export const DEFECT_CROP_PAIRS = [
     beforeMustNot: [/data-region=["']focal["']/, /data-shine-card-rest/],
     afterMust: [/data-shine-tsx-ast="after"/, /data-region=["']focal["']/, /data-shine-card-rest/],
   },
+  {
+    id: "queue-empty-triad",
+    defect: "empty-triad",
+    beforeCrop: "queue-empty-triad-before-crop.html",
+    afterCrop: "queue-empty-triad-after-crop.html",
+    buildBefore: buildEmptyTriadBeforeCropHtml,
+    buildAfter: buildEmptyTriadAfterCropHtml,
+    beforeMust: [/No data/, /aria-pressed=["']true["']/, /role=["']alert["']/],
+    beforeMustNot: [/data-filtered-empty/, /data-shine-triad-split/],
+    afterMust: [/data-filtered-empty/, /data-shine-triad-split/, /data-error/, /Clear filters/],
+    afterMustNot: [/data-empty[^>]*role=["']alert["']/],
+  },
+  {
+    id: "queue-empty-triad-tsx",
+    defect: "empty-triad",
+    beforeCrop: "queue-empty-triad-tsx-before-crop.html",
+    afterCrop: "queue-empty-triad-tsx-after-crop.html",
+    buildBefore: buildEmptyTriadAstBeforeCropHtml,
+    buildAfter: buildEmptyTriadAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /No data/, /role=["']alert["']/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-filtered-empty/, /data-shine-triad-split/],
+  },
 ];
+
 
 /**
  * Write all pinned crop HTML receipts into receiptsDir.
@@ -1559,5 +1643,17 @@ export function assertCropPairOk(pair, read) {
     if (!/data-region=["']focal["']/.test(after)) errors.push(`${pair.id} after needs focal`);
     if (!/data-shine-card-rest/.test(after)) errors.push(`${pair.id} after needs card-rest details`);
   }
+
+  // Empty-triad: before conflated; after filtered-empty + distinct error
+  if ((pair.id === "queue-empty-triad" || pair.id === "queue-empty-triad-tsx") && before && after) {
+    if (!/No data|role=["']alert["']/.test(before)) errors.push(`${pair.id} before needs conflated empty/alert`);
+    if (/data-empty[^>]*role=["']alert["']/.test(after) && !/data-shine-triad-split/.test(after)) {
+      errors.push(`${pair.id} after still conflates empty+alert without split`);
+    }
+    if (!/data-filtered-empty/.test(after) && !/data-shine-triad-split/.test(after)) {
+      errors.push(`${pair.id} after needs filtered-empty or triad-split`);
+    }
+  }
   return { ok: errors.length === 0, errors };
 }
+

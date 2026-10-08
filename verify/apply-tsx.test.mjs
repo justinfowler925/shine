@@ -286,6 +286,14 @@ const cardSoupPlan = buildRestructurePlan({
 });
 assert.ok(applyTsxRestructure(cardSoupHard, cardSoupPlan).applied.includes("collapse-card-soup"));
 
+const emptyTriadHard = readFileSync(join(FIX, "queue-empty-triad-ast.tsx"), "utf8");
+const emptyTriadPlan = buildRestructurePlan({
+  job: "Split triad",
+  category: "queue",
+  ops: [{ op: "split-empty-triad" }],
+});
+assert.ok(applyTsxRestructure(emptyTriadHard, emptyTriadPlan).applied.includes("split-empty-triad"));
+
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-card-soup AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-card-soup AST · split-empty-triad AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );

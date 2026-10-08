@@ -31,6 +31,7 @@ import { formatFilterReversibleFailures } from "./filter-reversible.mjs";
 import { formatMarketingDnaFailures } from "./marketing-dna.mjs";
 import { formatFillerEmptyFailures } from "./filler-empty.mjs";
 import { formatCardSoupFailures } from "./card-soup.mjs";
+import { formatEmptyTriadFailures } from "./empty-triad.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -121,6 +122,13 @@ const expected = {
     restructureOps: ["collapse-card-soup"],
     cropPairId: "catalog-card-soup",
   },
+  "empty-filtered-error-conflated": {
+    detector: "empty-triad",
+    measureFailurePrefix: "empty-triad",
+    alias: "empty-triad",
+    restructureOps: ["split-empty-triad"],
+    cropPairId: "queue-empty-triad",
+  },
 };
 
 for (const id of OPERATE_SLOP_ANTI_PATTERN_IDS) {
@@ -210,6 +218,12 @@ const cardSoupHits = retrieveAntiPatterns("equal Card soup no focal collapse-car
 });
 assert.ok(cardSoupHits.some((h) => h.id === "card-soup"), JSON.stringify(cardSoupHits.map((h) => h.id)));
 
+const emptyTriadHits = retrieveAntiPatterns("empty filtered error conflated triad no data alert queue", {
+  screen: "queue",
+  antiPatterns: corpus,
+});
+assert.ok(emptyTriadHits.some((h) => h.id === "empty-filtered-error-conflated"), JSON.stringify(emptyTriadHits.map((h) => h.id)));
+
 // Measure formatters cite anti-pattern:<id>
 const dualFails = formatDualFocalFailures(
   { peerGridCount: 2, titles: ["David's 10", "Queue"] },
@@ -297,6 +311,15 @@ const cardSoupFails = formatCardSoupFailures(
 assert.ok(
   cardSoupFails.some((f) => /card-soup:/.test(f) && /anti-pattern:card-soup/.test(f)),
   cardSoupFails.join("\n"),
+);
+
+const emptyTriadFails = formatEmptyTriadFailures(
+  { sameNodeConflatedCount: 1, sharedCopyCount: 0, missingFilteredEmpty: true },
+  { gate: true },
+);
+assert.ok(
+  emptyTriadFails.some((f) => /empty-triad:/.test(f) && /anti-pattern:empty-filtered-error-conflated/.test(f)),
+  emptyTriadFails.join("\n"),
 );
 
 assert.equal(formatAntiPatternCite("kpi-soup"), "anti-pattern:kpi-soup");
