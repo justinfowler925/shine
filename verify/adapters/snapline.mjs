@@ -32,7 +32,15 @@ export function adaptSnaplineStop(stopJson) {
     const line = `snapline:${id}: ${msg}`;
     notes.push(line);
     if (/cta|button|primary|hierarchy/i.test(`${id} ${msg}`)) preflightHints.push("ai-slop-cta-mania");
-    if (/card|soup|grid/i.test(`${id} ${msg}`)) preflightHints.push("ai-slop-card-carnival");
+    if (/card|soup|nested/i.test(`${id} ${msg}`)) {
+      preflightHints.push("ai-slop-card-carnival");
+      preflightHints.push("ai-slop-nested-cards");
+    }
+    if (/badge|chip|pill/i.test(`${id} ${msg}`)) preflightHints.push("ai-slop-badge-spam");
+    if (/metric|kpi|grid/i.test(`${id} ${msg}`)) {
+      preflightHints.push("ai-slop-metric-grid");
+      preflightHints.push("ai-slop-kpi-strip");
+    }
     if (/copy|filler|lorem|empty/i.test(`${id} ${msg}`)) preflightHints.push("ai-slop-filler-copy");
   }
   return {

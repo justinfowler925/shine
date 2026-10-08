@@ -73,6 +73,15 @@ const snap = adaptSnaplineStop({
 });
 assert.ok(snap.citeSafe);
 assert.ok(snap.preflightHints.includes("ai-slop-cta-mania"));
+const snapCards = adaptSnaplineStop({
+  findings: [{ id: "card-soup", message: "Nested card grid carnival" }],
+});
+assert.ok(snapCards.preflightHints.includes("ai-slop-card-carnival"));
+assert.ok(snapCards.preflightHints.includes("ai-slop-nested-cards"));
+const snapBadge = adaptSnaplineStop({
+  findings: [{ id: "badge-spam", message: "Too many pill chips" }],
+});
+assert.ok(snapBadge.preflightHints.includes("ai-slop-badge-spam"));
 
 const blocked = adaptImpeccable("distill", { cite: "shadcn-queue", structureGreen: false });
 assert.equal(blocked.allowed, false);
