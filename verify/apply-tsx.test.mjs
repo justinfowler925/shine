@@ -278,6 +278,14 @@ const fillerPlan = buildRestructurePlan({
 });
 assert.ok(applyTsxRestructure(fillerHard, fillerPlan).applied.includes("rewrite-filler-empty"));
 
+const cardSoupHard = readFileSync(join(FIX, "catalog-card-soup-ast.tsx"), "utf8");
+const cardSoupPlan = buildRestructurePlan({
+  job: "Collapse cards",
+  category: "catalog",
+  ops: [{ op: "collapse-card-soup", maxVisible: 1 }],
+});
+assert.ok(applyTsxRestructure(cardSoupHard, cardSoupPlan).applied.includes("collapse-card-soup"));
+
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-card-soup AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );

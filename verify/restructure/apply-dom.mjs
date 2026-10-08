@@ -76,6 +76,12 @@ export function applyDomRestructure(html, plan) {
         out = next;
         applied.push("rewrite-filler-empty");
       }
+    } else if (op.op === "collapse-card-soup") {
+      const next = applyCollapseCardSoup(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("collapse-card-soup");
+      }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
       applied.push("set-focal");
@@ -229,6 +235,91 @@ export function applyChromeBudget(html, op = {}) {
 }
 
 
+
+/**
+ * Collapse equal Card soup: keep maxVisible cards, stamp focal on the first,
+ * park the rest in <details data-shine-card-rest>.
+ */
+export function applyCollapseCardSoup(html, op = {}) {
+  const maxVisible = op.maxVisible ?? 1;
+  const summary = op.summary || "More tools";
+  const cardRe =
+    /<(article|div|section)\b[^>]*(?:data-slot=["']card["']|data-shine-card|class=["'][^"']*\bcard\b)[^>]*>[\s\S]*?<\/\1>/gi;
+  const stackRe =
+    /<(section|div)\b[^>]*(?:data-shine-card-stack|class=["'][^"']*\bcards\b[^"']*["'])[^>]*>/i;
+  const stackMatch = stackRe.exec(html);
+  if (stackMatch) {
+    const start = stackMatch.index;
+    const open = stackMatch[0];
+    const tag = stackMatch[1];
+    let i = start + open.length;
+    let depth = 1;
+    const openTag = `<${tag}`;
+    const closeTag = `</${tag}>`;
+    while (i < html.length && depth > 0) {
+      const nextOpen = html.indexOf(openTag, i);
+      const nextClose = html.indexOf(closeTag, i);
+      if (nextClose < 0) break;
+      if (nextOpen >= 0 && nextOpen < nextClose) {
+        depth++;
+        i = nextOpen + openTag.length;
+      } else {
+        depth--;
+        if (depth === 0) {
+          let body = html.slice(start + open.length, nextClose);
+          if (/data-shine-card-rest/.test(body)) return html;
+          const cards = body.match(cardRe) || [];
+          cardRe.lastIndex = 0;
+          if (cards.length <= maxVisible) {
+            if (cards.length && !/data-region=["']focal["']/.test(cards[0])) {
+              const stamped = cards[0].replace(
+                /^(<(?:article|div|section)\b)/i,
+                `$1 data-region="focal" data-shine-card-primary`,
+              );
+              body = body.replace(cards[0], stamped);
+              return html.slice(0, start) + open + body + closeTag + html.slice(nextClose + closeTag.length);
+            }
+            return html;
+          }
+          const visible = cards.slice(0, maxVisible).map((c, idx) => {
+            if (idx === 0 && !/data-region=["']focal["']/.test(c)) {
+              return c.replace(/^(<(?:article|div|section)\b)/i, `$1 data-region="focal" data-shine-card-primary`);
+            }
+            return c;
+          });
+          const rest = cards.slice(maxVisible).map((c) =>
+            /data-shine-card-demoted/.test(c)
+              ? c
+              : c.replace(/^(<(?:article|div|section)\b)/i, `$1 data-shine-card-demoted`),
+          );
+          const wrapped =
+            `${open}\n${visible.join("\n")}\n` +
+            `<details data-shine-card-rest><summary>${summary}</summary>\n${rest.join("\n")}\n</details>\n${closeTag}`;
+          return html.slice(0, start) + wrapped + html.slice(nextClose + closeTag.length);
+        }
+        i = nextClose + closeTag.length;
+      }
+    }
+  }
+  const cards = html.match(cardRe) || [];
+  if (cards.length <= maxVisible) return html;
+  let out = html;
+  const rest = cards.slice(maxVisible);
+  for (const c of rest) out = out.replace(c, "");
+  const first = cards[0];
+  const stamped = /data-region=["']focal["']/.test(first)
+    ? first
+    : first.replace(/^(<(?:article|div|section)\b)/i, `$1 data-region="focal" data-shine-card-primary`);
+  out = out.replace(first, stamped);
+  const demoted = rest
+    .map((c) => c.replace(/^(<(?:article|div|section)\b)/i, `$1 data-shine-card-demoted`))
+    .join("\n");
+  out = out.replace(
+    stamped,
+    `${stamped}\n<details data-shine-card-rest><summary>${summary}</summary>\n${demoted}\n</details>`,
+  );
+  return out;
+}
 
 const FILLER_EMPTY_DOM_RES = [
   /^welcome to your dashboard\.?$/i,

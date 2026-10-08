@@ -12,6 +12,7 @@ import {
 } from "./composition-slop.mjs";
 import { formatMarketingDnaFailures } from "./marketing-dna.mjs";
 import { formatFillerEmptyFailures } from "./filler-empty.mjs";
+import { formatCardSoupFailures } from "./card-soup.mjs";
 
 const SHINE = join(dirname(fileURLToPath(import.meta.url)), "..");
 const FIX = join(SHINE, "verify/fixtures/composition-slop");
@@ -31,8 +32,8 @@ try {
   assert.ok(soup.equalCardCount >= 4, JSON.stringify(soup));
   assert.equal(soup.hasFocal, false);
   assert.ok(
-    formatCompositionSlopFailures(soup, { gate: true }).some(
-      (f) => /anti-pattern:card-soup/.test(f) && /equal-weight Card/.test(f),
+    formatCardSoupFailures(soup, { gate: true }).some(
+      (f) => /anti-pattern:card-soup/.test(f) && /card-soup:/.test(f),
     ),
   );
 
@@ -72,7 +73,7 @@ function run(file, cite) {
 
 const soupRun = run(join(FIX, "card-soup.html"), "shadcn-catalog");
 assert.notEqual(soupRun.status, 0);
-assert.match(`${soupRun.stderr}\n${soupRun.stdout}`, /composition-slop:.*Card roots|equal-weight Card/);
+assert.match(`${soupRun.stderr}\n${soupRun.stdout}`, /card-soup:.*equal-weight Card|card-soup:.*Card roots/);
 
 const dnaRun = run(join(FIX, "marketing-dna.html"), "shadcn-settings");
 assert.notEqual(dnaRun.status, 0);

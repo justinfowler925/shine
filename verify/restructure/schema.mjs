@@ -13,6 +13,7 @@ export const AUTO_SAFE_DOM_OPS = Object.freeze([
   "filter-clearable",
   "strip-marketing-dna",
   "rewrite-filler-empty",
+  "collapse-card-soup",
   "set-focal",
   "worklist-first",
   "rebind-cite",
@@ -89,13 +90,14 @@ export function buildRestructurePlan({
           { op: "filter-clearable", perChip: true, clearAll: true },
           { op: "strip-marketing-dna" },
           { op: "rewrite-filler-empty" },
+          { op: "collapse-card-soup", maxVisible: 1 },
           { op: "worklist-first", attr: "data-region", value: "focal", on: "primary-worklist" },
           { op: "set-focal", attr: "data-region", value: "focal", on: "primary-worklist" },
         ],
     acceptance: {
       measureMustClear: measureMustClear.length
         ? measureMustClear
-        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "chrome-pressure", "filter-reversible", "marketing-dna", "filler-empty", "composition-slop"],
+        : ["cta-pressure", "dual-focal", "kpi-soup", "pill-filter", "page-title", "chrome-pressure", "filter-reversible", "marketing-dna", "filler-empty", "card-soup", "composition-slop"],
       usabilityFlow: usabilityFlow || "flow:decide-notice",
       proveRequired: true,
     },

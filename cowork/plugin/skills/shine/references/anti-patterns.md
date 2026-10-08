@@ -2,7 +2,7 @@
 
 Hard bans and common failures. Hitting these is an audit fail (Critical/Major for incomplete components; Minor/Major for visual slop depending on severity).
 
-**Machine-readable library (S2):** Nucleus-weighted Operate bloat tells live as JSON next to principles — `knowledge/anti-patterns/*.json`. Retrieve with `node knowledge/retrieve.mjs --anti "queue triage CTA"`. Measure/composition-slop failure lines cite `anti-pattern:<id>`. **Operate slop set** (dual-focal-grids, kpi-soup, competing-filled-ctas, wrong-cite-category, pill-filter-stack, competing-page-titles, dual-chrome-actions, irreversible-filters, marketing-dna-operate, filler-empty-copy) carries fixtures + aliases + restructureOps; doctor bite `verify/anti-patterns-operate.test.mjs` loads `knowledge/anti-patterns/*.json`. `verify/measure.mjs` **fail-closes** when those defects fire without the matching catalog cite (`enforceOperateAntiPatternCites`; doctor bite `verify/measure-anti-pattern-cite.test.mjs`). Prose below remains the human audit checklist.
+**Machine-readable library (S2):** Nucleus-weighted Operate bloat tells live as JSON next to principles — `knowledge/anti-patterns/*.json`. Retrieve with `node knowledge/retrieve.mjs --anti "queue triage CTA"`. Measure/composition-slop failure lines cite `anti-pattern:<id>`. **Operate slop set** (dual-focal-grids, kpi-soup, competing-filled-ctas, wrong-cite-category, pill-filter-stack, competing-page-titles, dual-chrome-actions, irreversible-filters, marketing-dna-operate, filler-empty-copy, card-soup) carries fixtures + aliases + restructureOps; doctor bite `verify/anti-patterns-operate.test.mjs` loads `knowledge/anti-patterns/*.json`. `verify/measure.mjs` **fail-closes** when those defects fire without the matching catalog cite (`enforceOperateAntiPatternCites`; doctor bite `verify/measure-anti-pattern-cite.test.mjs`). Prose below remains the human audit checklist.
 
 ## Incomplete components (functional)
 
@@ -134,5 +134,5 @@ Brand-specific visual bans (a logo gradient applied to chrome, the accent used a
 
 ## Machine detectors (P3)
 
-`verify/composition-slop.mjs` hard-fails a DOM-safe subset: equal Card soup without a focal, marketing DNA utility clusters on saas Operate, and known filler empty-state phrases. Hover-only / toast-only remain agent.
+`verify/card-soup.mjs` / `verify/marketing-dna.mjs` / `verify/filler-empty.mjs` hard-fail equal Card soup without a focal, marketing DNA utility clusters on saas Operate, and known filler empty-state phrases (split from composition-slop prefixes). Hover-only / toast-only remain agent.
 
