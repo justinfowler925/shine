@@ -15,6 +15,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: preflight ai-slop-cta-mania clears via cta-budget.** Mania
+  hard-failed after `cta-budget` demoted markup peers because `\bfilled-peer\b`
+  still matched leftover `.btn.filled-peer` CSS selectors. Detector now reads
+  filled / filled-peer from style-stripped markup class attrs only (authored
+  `button#id { background }` rules still count). Doctor:
+  `verify/cta-mania-preflight-bite.mjs`. Outside saturated card/kpi/badge/nested
+  preflight path (#207–#210); does not expand Operate-slop library.
+
 - **Docs: site kill-list nested-cards/card-carnival.** Mirror skill denoise kill list on `site/shine-skill.md`.
 
 - **Docs/adapters: preflight card-carnival + nested-cards kill-list.** Denoise kill list

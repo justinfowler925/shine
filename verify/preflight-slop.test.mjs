@@ -7,6 +7,7 @@ import { spawnSync } from "node:child_process";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { adaptSnaplineStop } from "./adapters/snapline.mjs";
 import { adaptImpeccable } from "./adapters/impeccable.mjs";
+import { applyCtaBudget } from "./restructure/apply-dom.mjs";
 
 const SHINE = join(dirname(fileURLToPath(import.meta.url)), "..");
 const sled = join(SHINE, ".."); // unused; fixtures live in verify + store copy
@@ -145,4 +146,20 @@ assert.ok(
   `collapsed Card stack should clear card-carnival: ${JSON.stringify(nestedPass)}`,
 );
 
-console.log("preflight-slop PASS: cta-mania · card-carnival · badge-spam · metric-grid · nested-cards FAIL→PASS · filler · Snapline/Impeccable adapters");
+
+const ctaBefore = join(SHINE, "verify/fixtures/denoise/queue-cta-before.html");
+const ctaAfter = join(SHINE, "verify/fixtures/denoise/queue-cta-after.html");
+const ctaFail = scanPreflightSlop(readFileSync(ctaBefore, "utf8"), { gate: true, screen: "queue" });
+assert.ok(ctaFail.failures.some((f) => /ai-slop-cta-mania/.test(f)), JSON.stringify(ctaFail));
+const ctaPinned = scanPreflightSlop(readFileSync(ctaAfter, "utf8"), { gate: true, screen: "queue" });
+assert.ok(!ctaPinned.failures.some((f) => /ai-slop-cta-mania/.test(f)), JSON.stringify(ctaPinned));
+const ctaApplied = scanPreflightSlop(
+  applyCtaBudget(readFileSync(ctaBefore, "utf8"), { maxFilled: 1, preferLabels: ["Pursue"] }),
+  { gate: true, screen: "queue" },
+);
+assert.ok(
+  !ctaApplied.failures.some((f) => /ai-slop-cta-mania/.test(f)),
+  `cta-budget should clear mania despite CSS .filled-peer: ${JSON.stringify(ctaApplied)}`,
+);
+
+console.log("preflight-slop PASS: cta-mania FAIL→PASS · card-carnival · badge-spam · metric-grid · nested-cards · filler · Snapline/Impeccable adapters");

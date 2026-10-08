@@ -37,14 +37,25 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
   const src = String(html || "");
   const signals = [];
 
+  // Parked metrics / filter pills / card peers inside collapse <details> are not on the decide path.
+  // Strip <style> so .metrics/.metric/.card / .filled-peer CSS rules cannot false-positive.
+  const srcNoStyle = src.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "");
+  const srcVisible = srcNoStyle.replace(
+    /<details\b[^>]*(?:data-shine-kpi-rest|data-shine-pill-rest|data-shine-card-rest)[^>]*>[\s\S]*?<\/details>/gi,
+    "",
+  );
+
   // Distinct filled *treatments* (not per-row Pursue repeats). Peer class or
   // second opaque style-block button = mania; row-repeated .filled alone is OK.
-  const hasFilled = /\bclass=["'][^"']*\bfilled\b/.test(src);
-  const hasFilledPeer = /\bfilled-peer\b/.test(src);
-  const variantDefault = (src.match(/variant=["']default["']/gi) || []).length;
+  // Markup class attrs only for filled / filled-peer — leftover .btn.filled-peer
+  // CSS selectors after cta-budget demote must not keep mania fail-closed.
+  const hasFilled = /\bclass=["'][^"']*\bfilled\b/.test(srcNoStyle);
+  const hasFilledPeer = /\bclass=["'][^"']*\bfilled-peer\b/.test(srcNoStyle);
+  const variantDefault = (srcNoStyle.match(/variant=["']default["']/gi) || []).length;
+  // Intentional: authored button#id { background:#… } rules still count (full src).
   const styleFilled = (src.match(/button#[\w-]+\s*\{[^}]*background:\s*#[0-9a-f]{3,8}[^}]*\}/gi) || []).length;
   // Buttons in toolbars / action rows outside <td> with filled class
-  const outsideTable = src.replace(/<t[dh][\s\S]*?<\/t[dh]>/gi, " ");
+  const outsideTable = srcNoStyle.replace(/<t[dh][\s\S]*?<\/t[dh]>/gi, " ");
   const toolbarFilled = (outsideTable.match(/class=["'][^"']*\bfilled\b[^"']*["']/gi) || []).length;
   const ctaKinds =
     (hasFilled ? 1 : 0) + (hasFilledPeer ? 1 : 0) + (variantDefault >= 2 ? 1 : 0) + (styleFilled >= 2 ? 1 : 0);
@@ -57,15 +68,6 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
       count: ctaCount,
     });
   }
-
-  // Parked metrics / filter pills / card peers inside collapse <details> are not on the decide path.
-  // Strip <style> so .metrics/.metric/.card CSS rules cannot false-positive cluster detect.
-  const srcVisible = src
-    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "")
-    .replace(
-      /<details\b[^>]*(?:data-shine-kpi-rest|data-shine-pill-rest|data-shine-card-rest)[^>]*>[\s\S]*?<\/details>/gi,
-      "",
-    );
 
   const operateSurface =
     /queue|datagrid|app-shell|catalog/i.test(screen) ||
