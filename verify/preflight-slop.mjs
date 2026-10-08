@@ -58,16 +58,6 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
     });
   }
 
-  const cards = (src.match(/\bdata-slot=["']card["']|\bclass=["'][^"']*\bcard\b|\b<article\b/gi) || []).length;
-  if (cards >= 4) {
-    signals.push({
-      id: "ai-slop-card-carnival",
-      severity: "fail",
-      message: `≥4 card-like roots in markup (count=${cards}) — card carnival`,
-      count: cards,
-    });
-  }
-
   // Parked metrics / filter pills / card peers inside collapse <details> are not on the decide path.
   // Strip <style> so .metrics/.metric/.card CSS rules cannot false-positive cluster detect.
   const srcVisible = src
@@ -76,6 +66,27 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
       /<details\b[^>]*(?:data-shine-kpi-rest|data-shine-pill-rest|data-shine-card-rest)[^>]*>[\s\S]*?<\/details>/gi,
       "",
     );
+
+  const operateSurface =
+    /queue|datagrid|app-shell|catalog/i.test(screen) ||
+    /data-cite=["'][^"']*(?:queue|catalog)/i.test(src) ||
+    /data-shine-probe=["']app-shell["']/i.test(src);
+
+  // Card carnival: host roots only (not data-shine-card-stack / -primary / -demoted).
+  // collapse-card-soup parks peers in data-shine-card-rest → FAIL→PASS on Operate.
+  const cardHosts = (
+    srcVisible.match(
+      /<(?:div|section|article)\b[^>]*(?:data-slot=["']card["']|data-shine-card(?:=["']|[\s>/])|\bclass=["'][^"']*\bcard\b)[^>]*>/gi,
+    ) || []
+  ).length;
+  if (cardHosts >= 4) {
+    signals.push({
+      id: "ai-slop-card-carnival",
+      severity: operateSurface ? "fail" : "note",
+      message: `≥4 card-like roots in markup (count=${cardHosts}) — card carnival`,
+      count: cardHosts,
+    });
+  }
 
   // Badge/chip hosts only (not the word "badge" in titles/comments). Aligns with
   // pill-filter measure hosts; pill-collapse parks excess in data-shine-pill-rest.
@@ -141,10 +152,6 @@ export function scanPreflightSlop(html, { gate = true, screen = "" } = {}) {
   const cardHost =
     String.raw`<(?:div|section|article)[^>]*(?:data-slot=["']card["']|data-shine-card(?:=["']|[\s>/])|\bclass=["'][^"']*\bcard\b)`;
   if (new RegExp(`${cardHost}[\\s\\S]{0,400}${cardHost}`, "i").test(srcVisible)) {
-    const operateSurface =
-      /queue|datagrid|app-shell|catalog/i.test(screen) ||
-      /data-cite=["'][^"']*(?:queue|catalog)/i.test(src) ||
-      /data-shine-probe=["']app-shell["']/i.test(src);
     signals.push({
       id: "ai-slop-nested-cards",
       severity: operateSurface ? "fail" : "note",
