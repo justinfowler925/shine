@@ -235,6 +235,20 @@ Operate chrome must not ship marketing glow/gradient/display-serif DNA.
 
 Doctor: `verify/strip-marketing-dna-ast-bite.mjs` / `npm run strip-marketing-dna:ast-bite`.
 
+### Filler-empty TSX AST — rewrite-filler-empty
+
+Operate empty states must not ship belief-free filler.
+
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `rewrite-filler-empty`.
+
+- Replaces Welcome/Coming soon/Nothing here yet/etc with job instructional copy
+- Stamps `data-shine-empty-rewritten`
+- Recommend binds `fillerEmptyAst` FAIL→PASS crops (`queue-filler-empty-tsx-*`)
+
+Doctor: `verify/rewrite-filler-empty-ast-bite.mjs` / `npm run rewrite-filler-empty:ast-bite`.
+
+
+
 
 
 

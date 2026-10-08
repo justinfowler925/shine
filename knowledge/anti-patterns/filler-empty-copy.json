@@ -6,14 +6,28 @@
   "domains": ["copy", "composition"],
   "lanes": ["saas", "internal"],
   "screens": ["queue", "settings", "form", "record", "catalog", "dashboard"],
-  "tags": ["filler", "empty", "copy", "composition-slop", "nucleus"],
+  "tags": ["filler", "empty", "copy", "composition-slop", "operate-slop", "nucleus"],
+  "aliases": ["filler-empty", "welcome-dashboard", "coming-soon-empty", "lorem-empty"],
   "cues": "Welcome to your dashboard, Coming soon, Lorem ipsum, or other belief-free empty phrases",
   "ban": "Filler empty phrases fail closed on Operate; empty states must be job-specific.",
-  "remediation": "Rewrite empty/filtered/error copy for the Monday job; re-run composition-slop.",
-  "detector": "composition-slop",
-  "measureFailurePrefix": "composition-slop",
+  "remediation": "Apply rewrite-filler-empty; replace filler with Monday-job instructional copy; stamp data-shine-empty-rewritten; re-measure filler-empty.",
+  "examples": [
+    "Queue empty region: Welcome to your dashboard",
+    "Catalog: Coming soon / Nothing here yet with no next action"
+  ],
+  "restructureOps": ["rewrite-filler-empty"],
+  "detector": "filler-empty",
+  "measureFailurePrefix": "filler-empty",
   "constitutionIds": ["cite-honesty"],
   "severity": "major",
+  "fixtures": {
+    "before": "verify/fixtures/denoise/queue-filler-empty-before.html",
+    "after": "verify/fixtures/denoise/queue-filler-empty-after.html",
+    "cropBefore": "verify/fixtures/denoise/receipts/queue-filler-empty-before-crop.html",
+    "cropAfter": "verify/fixtures/denoise/receipts/queue-filler-empty-after-crop.html"
+  },
+  "skillAbCaseIds": ["queue-filler-empty"],
+  "cropPairId": "queue-filler-empty",
   "source": "skill/references/anti-patterns.md",
-  "validatedBy": "verify/composition-slop.test.mjs"
+  "validatedBy": "verify/filler-empty.test.mjs"
 }

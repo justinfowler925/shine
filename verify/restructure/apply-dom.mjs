@@ -70,6 +70,12 @@ export function applyDomRestructure(html, plan) {
         out = next;
         applied.push("strip-marketing-dna");
       }
+    } else if (op.op === "rewrite-filler-empty") {
+      const next = applyRewriteFillerEmpty(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("rewrite-filler-empty");
+      }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
       applied.push("set-focal");
@@ -223,6 +229,45 @@ export function applyChromeBudget(html, op = {}) {
 }
 
 
+
+const FILLER_EMPTY_DOM_RES = [
+  /^welcome to your dashboard\.?$/i,
+  /^welcome to .+!$/,
+  /^get started with your (new )?dashboard\.?$/i,
+  /^this is where .+ will (appear|show|live)\.?$/i,
+  /^no data to display\.?$/i,
+  /^nothing here yet\.?$/i,
+  /^coming soon\.?$/i,
+  /^lorem ipsum\b/i,
+  /^your (amazing )?content (goes|here)/i,
+  /^start building something (amazing|great)\.?$/i,
+  /^drop your content here\.?$/i,
+  /^placeholder text\.?$/i,
+  /^todo:\s*add .+/i,
+  /^click here to get started\.?$/i,
+];
+
+/**
+ * Replace filler empty-state copy with job-specific instructional text.
+ */
+export function applyRewriteFillerEmpty(html, op = {}) {
+  const replacement =
+    op.copy ||
+    op.replacement ||
+    "No notices match this view. Clear filters or widen the date range.";
+  let out = String(html);
+  const tagRe =
+    /<(div|p|span|section|aside|li|td|h2|h3)\b([^>]*)>([\s\S]*?)<\/\1>/gi;
+  out = out.replace(tagRe, (full, tag, attrs, inner) => {
+    if (/data-shine-empty-rewritten/.test(attrs)) return full;
+    const text = inner.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+    if (!text || text.length > 80) return full;
+    if (!FILLER_EMPTY_DOM_RES.some((re) => re.test(text))) return full;
+    const nextAttrs = `${attrs} data-shine-empty-rewritten`.replace(/\s+/g, " ");
+    return `<${tag}${nextAttrs}>${replacement}</${tag}>`;
+  });
+  return out;
+}
 
 /** Class / style tokens illegal on Operate chrome. */
 const MARKETING_CLASS_TOKEN_RE =
