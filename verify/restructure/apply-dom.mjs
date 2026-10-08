@@ -9,7 +9,7 @@
 import { existsSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { AUTO_SAFE_DOM_OPS, PLAN_ONLY_OPS, validateRestructurePlan } from "./schema.mjs";
+import { AUTO_SAFE_DOM_OPS, PLAN_ONLY_OPS, sortRestructureOps, validateRestructurePlan } from "./schema.mjs";
 
 /**
  * @param {string} html
@@ -24,8 +24,9 @@ export function applyDomRestructure(html, plan) {
   const applied = [];
   const plans = [];
   const skipped = [];
+  const orderedOps = sortRestructureOps(plan.ops || []);
 
-  for (const op of plan.ops || []) {
+  for (const op of orderedOps) {
     if (PLAN_ONLY_OPS.includes(op.op)) {
       plans.push(formatPeerGridPlan(op, plan));
       continue;
@@ -105,6 +106,12 @@ export function applyDomRestructure(html, plan) {
       if (next !== out) {
         out = next;
         applied.push("name-controls");
+      }
+    } else if (op.op === "link-field-errors") {
+      const next = applyLinkFieldErrors(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("link-field-errors");
       }
     } else if (op.op === "set-focal") {
       out = applySetFocal(out, op);
@@ -342,6 +349,103 @@ export function applyCollapseCardSoup(html, op = {}) {
     stamped,
     `${stamped}\n<details data-shine-card-rest><summary>${summary}</summary>\n${demoted}\n</details>`,
   );
+  return out;
+}
+
+/**
+ * Link aria-invalid fields to an accessible error message (form-heuristic deepen).
+ * Stamps aria-describedby + sibling role=alert when missing.
+ */
+export function applyLinkFieldErrors(html, op = {}) {
+  const defaultMessage = op.message || op.errorMessage || "Enter a valid value.";
+  let out = String(html);
+  let seq = 0;
+
+  const fieldRe = /<(input|select|textarea)\b([^>]*)>/gi;
+  /** @type {{ full: string, tag: string, attrs: string, index: number }[]} */
+  const fields = [];
+  let m;
+  while ((m = fieldRe.exec(out)) !== null) {
+    const attrs = m[2] || "";
+    if (!/\baria-invalid=["']true["']/i.test(attrs)) continue;
+    fields.push({ full: m[0], tag: m[1], attrs, index: m.index });
+  }
+
+  // Process from end so indices stay valid when inserting after the field.
+  for (const field of fields.reverse()) {
+    const describedby = (field.attrs.match(/\baria-describedby=["']([^"']+)["']/i) || [])[1] || "";
+    const ids = describedby.split(/\s+/).filter(Boolean);
+    const hasLinkedMessage = ids.some((id) => {
+      const re = new RegExp(
+        `<[^>]+\\bid=["']${id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["'][^>]*>([\\s\\S]*?)<\\/`,
+        "i",
+      );
+      const hit = out.match(re);
+      const text = (hit?.[1] || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+      return text.length >= 3;
+    });
+    if (hasLinkedMessage) continue;
+
+    const fieldId =
+      (field.attrs.match(/\bid=["']([^"']+)["']/i) || [])[1] ||
+      `shine-field-${++seq}`;
+    const errId = `${fieldId}-error`;
+    if (new RegExp(`\\bid=["']${errId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["']`, "i").test(out)) {
+      // Error node exists but wasn't linked — just stamp describedby.
+      let attrs = field.attrs.replace(/\s*\/\s*$/, "");
+      if (/\baria-describedby=/.test(attrs)) {
+        attrs = attrs.replace(/\baria-describedby=(["'])([^"']*)\1/i, (_, q, cur) => {
+          const parts = cur.split(/\s+/).filter(Boolean);
+          if (!parts.includes(errId)) parts.push(errId);
+          return `aria-describedby=${q}${parts.join(" ")}${q}`;
+        });
+      } else {
+        attrs += ` aria-describedby="${errId}"`;
+      }
+      if (!/\bdata-shine-field-error-linked\b/.test(attrs)) attrs += ` data-shine-field-error-linked`;
+      const selfClose = /\/\s*>$/.test(field.full) || field.tag.toLowerCase() === "input";
+      const nextField =
+        field.tag.toLowerCase() === "input"
+          ? selfClose
+            ? `<input${attrs} />`
+            : `<input${attrs}>`
+          : `<${field.tag}${attrs}>`;
+      out = out.slice(0, field.index) + nextField + out.slice(field.index + field.full.length);
+      continue;
+    }
+
+    let attrs = field.attrs.replace(/\s*\/\s*$/, "");
+    if (/\baria-describedby=/.test(attrs)) {
+      attrs = attrs.replace(/\baria-describedby=(["'])([^"']*)\1/i, (_, q, cur) => {
+        const parts = cur.split(/\s+/).filter(Boolean);
+        if (!parts.includes(errId)) parts.push(errId);
+        return `aria-describedby=${q}${parts.join(" ")}${q}`;
+      });
+    } else {
+      attrs += ` aria-describedby="${errId}"`;
+    }
+    if (!/\bid=/.test(attrs)) attrs = ` id="${fieldId}"${attrs}`;
+    if (!/\bdata-shine-field-error-linked\b/.test(attrs)) attrs += ` data-shine-field-error-linked`;
+
+    const nextField =
+      field.tag.toLowerCase() === "input" ? `<input${attrs} />` : `<${field.tag}${attrs}>`;
+    const errNode = `<p id="${errId}" class="error" role="alert" data-shine-field-error>${defaultMessage}</p>`;
+
+    // Insert error after the field; if field is inside <label>...</label>, place after </label>.
+    const afterField = field.index + field.full.length;
+    const sliceAfter = out.slice(afterField, afterField + 200);
+    const labelClose = sliceAfter.match(/^([\s\S]*?)<\/label>/i);
+    let insertAt = afterField;
+    if (labelClose) insertAt = afterField + labelClose[0].length;
+
+    out =
+      out.slice(0, field.index) +
+      nextField +
+      out.slice(afterField, insertAt) +
+      `\n${errNode}\n` +
+      out.slice(insertAt);
+  }
+
   return out;
 }
 

@@ -144,6 +144,7 @@ assert.match(queueRec.nameControlsAst.fixtureTsx, /queue-name-controls\.tsx$/);
 assert.match(queueRec.nameControlsAst.cropAfter, /queue-name-controls-tsx-after-crop\.html$/);
 assert.match(formatRecommendationSummary(queueRec), /nameControlsAst/);
 assert.equal(queueRec.nameControlsAst.op, "name-controls");
+assert.equal(queueRec.linkFieldErrorsAst, null, "queue job must not bind linkFieldErrorsAst");
 assert.ok(queueRec.dualFocalAst?.fixtureTsx, "queue job dualFocalAst.fixtureTsx");
 assert.match(queueRec.dualFocalAst.fixtureTsx, /queue-dual-grid\.tsx$/);
 assert.match(queueRec.dualFocalAst.cropAfter, /queue-dual-grid-tsx-after-crop\.html$/);
@@ -171,6 +172,18 @@ assert.match(settingsRec.wrongCiteAst.cropAfter, /sources-cite-tsx-after-crop\.h
 assert.match(formatRecommendationSummary(settingsRec), /wrongCiteAst/);
 assert.equal(settingsRec.wrongCiteAst.op, "rebind-cite");
 assert.equal(settingsRec.wrongCiteAst.refusePaintUntilRebound, true);
+assert.ok(settingsRec.linkFieldErrorsAst?.fixtureTsx, "settings job linkFieldErrorsAst.fixtureTsx");
+assert.match(settingsRec.linkFieldErrorsAst.fixtureTsx, /form-link-field-errors\.tsx$/);
+assert.match(settingsRec.linkFieldErrorsAst.cropAfter, /form-link-field-errors-tsx-after-crop\.html$/);
+assert.match(formatRecommendationSummary(settingsRec), /linkFieldErrorsAst/);
+assert.equal(settingsRec.linkFieldErrorsAst.op, "link-field-errors");
+const formRec = recommendPattern(catalog.templates, "invite form aria-invalid field errors", {
+  lane: "saas",
+  category: "form",
+  limit: 6,
+});
+assert.ok(formRec.linkFieldErrorsAst?.fixtureTsx, "form job linkFieldErrorsAst.fixtureTsx");
+assert.equal(formRec.linkFieldErrorsAst.op, "link-field-errors");
 const denoiseQueue = createDesignPacket({
   job: "Queue triage dual worklist XOR saved-view",
   lane: "saas",
@@ -220,6 +233,18 @@ assert.ok((denoiseQueue.ddr.restructureOps || []).includes("bind-product-owner")
 assert.match(denoiseQueue.nameControlsAst.cropAfter, /queue-name-controls-tsx-after-crop\.html$/);
 assert.equal(denoiseQueue.nameControlsAst.op, "name-controls");
 assert.ok((denoiseQueue.ddr.restructureOps || []).includes("name-controls"));
+assert.equal(denoiseQueue.linkFieldErrorsAst, undefined, "queue packet must not bind linkFieldErrorsAst");
+const denoiseForm = createDesignPacket({
+  job: "Invite form aria-invalid link-field-errors",
+  lane: "saas",
+  mode: "denoise",
+  category: "form",
+  project: SHINE,
+  accept: true,
+});
+assert.match(denoiseForm.linkFieldErrorsAst.cropAfter, /form-link-field-errors-tsx-after-crop\.html$/);
+assert.equal(denoiseForm.linkFieldErrorsAst.op, "link-field-errors");
+assert.ok((denoiseForm.ddr.restructureOps || []).includes("link-field-errors"));
 assert.match(denoiseQueue.dualFocalAst.cropAfter, /queue-dual-grid-tsx-after-crop\.html$/);
 assert.equal(denoiseQueue.dualFocalAst.xorMode, "xor-saved-view");
 assert.match(denoiseQueue.worklistFirstAst.cropAfter, /queue-worklist-first-tsx-after-crop\.html$/);

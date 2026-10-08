@@ -313,6 +313,18 @@ Measure already fail-closes icon-only unnamed controls, placeholder-only fields,
 
 Doctor: `verify/name-controls-ast-bite.mjs` / `npm run name-controls:ast-bite`.
 
+### Form-heuristic TSX AST — link-field-errors
+
+Measure already fail-closes `aria-invalid="true"` without an accessible error message. Denoise now auto-repairs them, and `DENOISE_OP_ORDER` sorts plan ops so naming/errors land after structure.
+
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `link-field-errors`.
+
+- Stamps `aria-describedby` + `data-shine-field-error-linked` on invalid fields
+- Inserts sibling `<p role="alert" data-shine-field-error>` when missing
+- Recommend binds `linkFieldErrorsAst` FAIL→PASS crops (`form-link-field-errors-tsx-*`)
+
+Doctor: `verify/link-field-errors-ast-bite.mjs` / `npm run link-field-errors:ast-bite`.
+
 ### Dual-focal ban TSX AST (N8 deepen) — XOR peer→chip
 
 Peer worklists / DataGrids on one triage job in consumer TSX are collapsed by
