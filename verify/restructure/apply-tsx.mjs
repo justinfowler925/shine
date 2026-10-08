@@ -7,7 +7,7 @@
  * cta-budget demote (maxFilled=1 via TS compiler AST),
  * kpi-collapse (maxVisible=3 → <details data-shine-kpi-rest> via TS compiler AST),
  * pill-collapse (maxVisible=3 → <details data-shine-pill-rest> via TS compiler AST),
- * title-singular (one page title; demote peers to kicker via TS compiler AST),
+ * stamp-page-title (missing title/h1), title-singular (one page title; demote peers to kicker via TS compiler AST),
  * chrome-budget (maxFilledChrome=0 → demote header/nav filled Buttons via TS compiler AST),
  * filter-clearable (active chips → data-shine-filter-dismiss + clear-all via TS compiler AST),
  * strip-marketing-dna (glow/gradient/display-serif className tokens via TS compiler AST),
@@ -122,6 +122,19 @@ export function applyTsxRestructure(source, plan) {
         if (census.dynamic || census.pills > maxVisible) {
           plans.push(
             "## pill-collapse (TSX)\n\nWrap excess filter-pill JSX in `<details data-shine-pill-rest>` manually if pills are dynamic (`.map`, spread).\n",
+          );
+        }
+      }
+    } else if (op.op === "stamp-page-title") {
+      const next = stampPageTitleTsx(text, op);
+      if (next !== text) {
+        text = next;
+        applied.push("stamp-page-title");
+      } else {
+        const census = countMissingPageTitleTsx(text);
+        if (census.hits > 0) {
+          plans.push(
+            "## stamp-page-title (TSX)\n\nStamp a visible h1 (data-page-title) when the surface has no named page title.\n",
           );
         }
       }
@@ -2255,6 +2268,93 @@ export function filterClearableTsx(source, op = {}) {
   const sorted = [...edits].sort((a, b) => b.start - a.start);
   let out = text;
   for (const e of sorted) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
+  return out;
+}
+
+/**
+ * Count missing/empty page-title anchors in TSX (no named h1 / data-page-title).
+ */
+export function countMissingPageTitleTsx(source) {
+  const census = countPageTitlesTsx(source);
+  const named = (census.texts || []).filter((t) => t && t !== "(title)" && String(t).trim());
+  // titles counted include empty h1 text as "(title)" via labelFromJsx fallback — treat as missing when no real text.
+  const hasReal = (census.texts || []).some((t) => {
+    const s = String(t || "").trim();
+    return s && s !== "(title)";
+  });
+  return { hits: hasReal ? 0 : 1, titles: census.titles, named: named.length };
+}
+
+/**
+ * Stamp a visible h1 page title when none exists (or fill an empty h1).
+ */
+export function stampPageTitleTsx(source, op = {}) {
+  const titleText = String(op.title || op.label || op.pageTitle || op.job || "Operate")
+    .split(/[:.·—–|]/)[0]
+    .trim()
+    .slice(0, 72) || "Operate";
+  const text = String(source);
+  const sf = ts.createSourceFile("surface.tsx", text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  /** @type {ts.JsxElement[]} */
+  const titles = [];
+  /** @type {ts.JsxElement | null} */
+  let mainEl = null;
+  const walk = (node) => {
+    if (ts.isJsxElement(node)) {
+      const opening = node.openingElement;
+      if (isPageTitleOpening(opening, sf) || jsxTagName(opening) === "h1") {
+        titles.push(node);
+        return;
+      }
+      const tag = jsxTagName(opening);
+      if (
+        !mainEl &&
+        (tag === "main" ||
+          findJsxAttr(opening, "data-shine-main", sf) ||
+          attrStringValue(findJsxAttr(opening, "role", sf), sf) === "main")
+      ) {
+        mainEl = node;
+      }
+    }
+    ts.forEachChild(node, walk);
+  };
+  walk(sf);
+
+  const named = titles.filter((n) => {
+    const label = labelFromJsx(n, sf);
+    return label && label.trim();
+  });
+  if (named.length) return text;
+
+  /** @type {{ start: number, end: number, replacement: string }[]} */
+  const edits = [];
+  const empty = titles.find((n) => !(labelFromJsx(n, sf) || "").trim());
+  if (empty) {
+    const opening = empty.openingElement;
+    let openSrc = text.slice(opening.getStart(sf), opening.getEnd());
+    if (!/data-shine-page-title-stamped/.test(openSrc)) {
+      openSrc = openSrc.replace(/\s*>$/, " data-shine-page-title-stamped>");
+    }
+    if (!/data-page-title/.test(openSrc)) {
+      openSrc = openSrc.replace(/\s*>$/, " data-page-title>");
+    }
+    edits.push({
+      start: empty.getStart(sf),
+      end: empty.getEnd(),
+      replacement: `${openSrc}${escapeJsxText(titleText)}</h1>`,
+    });
+  } else if (mainEl) {
+    const openEnd = mainEl.openingElement.getEnd();
+    const indent = "\n      ";
+    const h1 = `${indent}<h1 data-page-title data-shine-page-title-stamped>${escapeJsxText(titleText)}</h1>`;
+    edits.push({ start: openEnd, end: openEnd, replacement: h1 });
+  } else {
+    return text;
+  }
+
+  edits.sort((a, b) => b.start - a.start || b.end - a.end);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.replacement + out.slice(e.end);
   return out;
 }
 

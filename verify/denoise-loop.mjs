@@ -60,7 +60,7 @@ const MAX_ROUNDS = 3;
 
 /** Named denoise defects the golden loop must clear (craft gates may remain). */
 const NAMED_DENOISE_RE =
-  /\b(cta-pressure|dual-focal|kpi-soup|pill-filter|page-title|chrome-pressure|filter-reversible|marketing-dna|filler-empty|card-soup|empty-triad|decorative-chart|parallel-owned|incomplete-primitive|form-heuristic|composition-slop|cite-honesty|wrong-cite|rebind-cite|category-honesty)\b/;
+  /\b(cta-pressure|dual-focal|kpi-soup|pill-filter|page-title|missing-page-title|empty-h1|chrome-pressure|filter-reversible|marketing-dna|filler-empty|card-soup|empty-triad|decorative-chart|parallel-owned|incomplete-primitive|form-heuristic|composition-slop|cite-honesty|wrong-cite|rebind-cite|category-honesty)\b/;
 
 export function namedDenoiseFailures(failures = []) {
   return [...new Set((failures || []).map(String).filter((f) => NAMED_DENOISE_RE.test(f)))];
@@ -92,7 +92,7 @@ function measure(file, cite) {
     }
   }
   for (const m of text.matchAll(
-    /\b(cta-pressure|dual-focal|kpi-soup|pill-filter|page-title|chrome-pressure|filter-reversible|marketing-dna|filler-empty|card-soup|empty-triad|decorative-chart|parallel-owned|incomplete-primitive|form-heuristic|composition-slop|cite-honesty|wrong-cite|rebind-cite|category-honesty)[^\n]*/g,
+    /\b(cta-pressure|dual-focal|kpi-soup|pill-filter|page-title|missing-page-title|empty-h1|chrome-pressure|filter-reversible|marketing-dna|filler-empty|card-soup|empty-triad|decorative-chart|parallel-owned|incomplete-primitive|form-heuristic|composition-slop|cite-honesty|wrong-cite|rebind-cite|category-honesty)[^\n]*/g,
   )) {
     failures.push(m[0]);
   }
@@ -212,6 +212,7 @@ export async function runDenoiseLoop({
         { op: "cta-budget", maxFilled: 1, preferLabels: ["Pursue", "Save"], demotePolicy: "outline" },
         { op: "kpi-collapse", maxVisible: 3, rest: "details" },
         { op: "pill-collapse", maxVisible: 3, rest: "details" },
+        { op: "stamp-page-title" },
         { op: "title-singular", demote: "kicker" },
         { op: "chrome-budget", maxFilledChrome: 0, demotePolicy: "ghost", scope: "chrome" },
         { op: "filter-clearable", perChip: true, clearAll: true },

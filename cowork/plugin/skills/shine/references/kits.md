@@ -301,6 +301,18 @@ Product owners win before catalog fashion. Homemade tables/grids beside a Nucleu
 Doctor: `verify/bind-product-owner-ast-bite.mjs` / `npm run bind-product-owner:ast-bite`.
 
 
+### Missing page-title TSX AST — stamp-page-title
+
+Measure already fail-closes missing `document.title` + visible `h1` (`copy: missing-page-title` / `empty-h1`). Denoise now auto-repairs them before `title-singular` demotes peers.
+
+**TypeScript AST** (not regex): `verify/restructure/apply-tsx.mjs` `stamp-page-title`.
+
+- Stamps `<h1 data-page-title data-shine-page-title-stamped>` when no named title exists
+- Fills empty `h1` text; DOM path also stamps `<title>`
+- Recommend binds `stampPageTitleAst` FAIL→PASS crops (`queue-missing-page-title-tsx-*`)
+
+Doctor: `verify/stamp-page-title-ast-bite.mjs` / `npm run stamp-page-title:ast-bite`.
+
 ### Incomplete-primitives TSX AST — name-controls
 
 Measure already fail-closes icon-only unnamed controls, placeholder-only fields, and confirm-less destructive verbs. Denoise now auto-repairs them.

@@ -248,7 +248,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  packet.citeBanFailClosed=citeBanFailClosed;
  packet.recommendation=recommendation;
  packet.recommendationSummary=formatRecommendationSummary(recommendation);
- packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), filterReversibleAst.fixtureTsx/crop* (TSX AST filter-clearable FAIL→PASS), marketingDnaAst.fixtureTsx/crop* (TSX AST strip-marketing-dna FAIL→PASS), fillerEmptyAst.fixtureTsx/crop* (TSX AST rewrite-filler-empty FAIL→PASS), cardSoupAst.fixtureTsx/crop* (TSX AST collapse-card-soup FAIL→PASS), emptyTriadAst.fixtureTsx/crop* (TSX AST split-empty-triad FAIL→PASS), decorativeChartAst.fixtureTsx/crop* (TSX AST stamp-chart-units FAIL→PASS), parallelOwnedAst.fixtureTsx/crop* (TSX AST bind-product-owner FAIL→PASS), nameControlsAst.fixtureTsx/crop* (TSX AST name-controls FAIL→PASS), linkFieldErrorsAst.fixtureTsx/crop* (TSX AST link-field-errors FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
+ packet.recommendation.instruction="Read packet.recommendation before editing: productSibling (edition map), primary cite, antiPatterns (learned cite-bans fail-closed), restructureHints (restructure vs repaint), kitRecipe, confidence, tableQuality.fixture (records/worklist shine-tables.json), ctaPressureAst.fixtureTsx/crop* (TSX AST cta-budget maxFilled=1 FAIL→PASS), kpiSoupAst.fixtureTsx/crop* (TSX AST kpi-collapse maxVisible=3 FAIL→PASS), pillFilterAst.fixtureTsx/crop* (TSX AST pill-collapse maxVisible=3 FAIL→PASS), pageTitleAst.fixtureTsx/crop* (TSX AST title-singular FAIL→PASS), stampPageTitleAst.fixtureTsx/crop* (TSX AST stamp-page-title FAIL→PASS), chromePressureAst.fixtureTsx/crop* (TSX AST chrome-budget maxFilledChrome=0 FAIL→PASS), filterReversibleAst.fixtureTsx/crop* (TSX AST filter-clearable FAIL→PASS), marketingDnaAst.fixtureTsx/crop* (TSX AST strip-marketing-dna FAIL→PASS), fillerEmptyAst.fixtureTsx/crop* (TSX AST rewrite-filler-empty FAIL→PASS), cardSoupAst.fixtureTsx/crop* (TSX AST collapse-card-soup FAIL→PASS), emptyTriadAst.fixtureTsx/crop* (TSX AST split-empty-triad FAIL→PASS), decorativeChartAst.fixtureTsx/crop* (TSX AST stamp-chart-units FAIL→PASS), parallelOwnedAst.fixtureTsx/crop* (TSX AST bind-product-owner FAIL→PASS), nameControlsAst.fixtureTsx/crop* (TSX AST name-controls FAIL→PASS), linkFieldErrorsAst.fixtureTsx/crop* (TSX AST link-field-errors FAIL→PASS), dualFocalAst.fixtureTsx/crop* (TSX AST collapse-peer-grids XOR FAIL→PASS), worklistFirstAst.fixtureTsx/crop* (TSX AST worklist-first composition FAIL→PASS), setFocalAst.fixtureTsx/crop* (TSX AST set-focal NO-FOCAL FAIL→PASS), wrongCiteAst.fixtureTsx/crop* (TSX AST rebind-cite refuse-until-rebound FAIL→PASS), xorSavedView.fixture*/crop* (D10 dual-grid XOR HTML FAIL→PASS).";
  // Denoise / records jobs: bind the concrete worklist fixture path into packet.tableQuality.
  if(recommendation.tableQuality?.fixture){
   packet.tableQuality={
@@ -332,6 +332,22 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
    helper:join(ROOT,t.helper||"verify/restructure/apply-tsx.mjs"),
    reference:t.reference||"skill/references/denoise.md",
    instruction:t.instruction||"Apply apply-tsx title-singular (AST) on competing page-title TSX.",
+  };
+ }
+ // Denoise / Operate jobs: bind missing-page-title TSX AST FAIL→PASS fixture + crop paths.
+ if(recommendation.stampPageTitleAst?.fixtureTsx){
+  const s=recommendation.stampPageTitleAst;
+  packet.stampPageTitleAst={
+   mode:s.mode||"tsx-ast",
+   op:s.op||"stamp-page-title",
+   fixtureTsx:join(ROOT,s.fixtureTsx),
+   fixtureTsxAst:join(ROOT,s.fixtureTsxAst||s.fixtureTsx),
+   cropBefore:join(ROOT,s.cropBefore),
+   cropAfter:join(ROOT,s.cropAfter),
+   cropPairId:s.cropPairId||"queue-missing-page-title-tsx",
+   helper:join(ROOT,s.helper||"verify/restructure/apply-tsx.mjs"),
+   reference:s.reference||"skill/references/denoise.md",
+   instruction:s.instruction||"Apply apply-tsx stamp-page-title (AST) when document.title / h1 are missing.",
   };
  }
  // Denoise / queue jobs: bind dual-chrome-actions TSX AST FAIL→PASS fixture + crop paths.
@@ -633,6 +649,9 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
  const wantsTitle=
   Boolean(recommendation.pageTitleAst?.fixtureTsx)||
   restructureHints.some((h)=>/title-singular|page-title|competing[- ]?title/i.test(String(h)));
+ const wantsStampPageTitle=
+  Boolean(recommendation.stampPageTitleAst?.fixtureTsx)||
+  restructureHints.some((h)=>/stamp-page-title|missing[- ]?page[- ]?title|empty[- ]?h1|copy[- ]?heuristic/i.test(String(h)));
  const wantsChrome=
   Boolean(recommendation.chromePressureAst?.fixtureTsx)||
   restructureHints.some((h)=>/chrome-budget|chrome-pressure|nav-chrome|dual-chrome/i.test(String(h)));
@@ -664,7 +683,7 @@ export function createDesignPacket({job,lane="saas",project=process.cwd(),framew
   Boolean(recommendation.linkFieldErrorsAst?.fixtureTsx)||
   restructureHints.some((h)=>/link-field-errors|form[- ]?heuristic|aria[- ]?invalid|field[- ]?error/i.test(String(h)));
  const ddrOps=needsRestructure
-  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsPill?["pill-collapse"]:[]),...(wantsTitle?["title-singular"]:[]),...(wantsChrome?["chrome-budget"]:[]),...(wantsFilter?["filter-clearable"]:[]),...(wantsMarketingDna?["strip-marketing-dna"]:[]),...(wantsFillerEmpty?["rewrite-filler-empty"]:[]),...(wantsCardSoup?["collapse-card-soup"]:[]),...(wantsEmptyTriad?["split-empty-triad"]:[]),...(wantsDecorativeChart?["stamp-chart-units"]:[]),...(wantsParallelOwned?["bind-product-owner"]:[]),...(wantsNameControls?["name-controls"]:[]),...(wantsLinkFieldErrors?["link-field-errors"]:[]),...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
+  ?["cta-budget","set-focal","kpi-collapse","rebind-cite",...(wantsPill?["pill-collapse"]:[]),...(wantsStampPageTitle?["stamp-page-title"]:[]),...(wantsTitle?["title-singular"]:[]),...(wantsChrome?["chrome-budget"]:[]),...(wantsFilter?["filter-clearable"]:[]),...(wantsMarketingDna?["strip-marketing-dna"]:[]),...(wantsFillerEmpty?["rewrite-filler-empty"]:[]),...(wantsCardSoup?["collapse-card-soup"]:[]),...(wantsEmptyTriad?["split-empty-triad"]:[]),...(wantsDecorativeChart?["stamp-chart-units"]:[]),...(wantsParallelOwned?["bind-product-owner"]:[]),...(wantsNameControls?["name-controls"]:[]),...(wantsLinkFieldErrors?["link-field-errors"]:[]),...(wantsWorklistFirst?["worklist-first"]:[]),...(wantsXor?["collapse-peer-grids"]:[])].filter(Boolean)
   :wantsWrongCite
    ?["rebind-cite"]
    :[];

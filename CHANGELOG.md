@@ -15,6 +15,15 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Denoise deepen: copy missing-page-title / stamp-page-title.** Measure already
+  fail-closed missing `document.title` + visible `h1` (`copy: missing-page-title`
+  / `empty-h1`). Auto-safe `stamp-page-title` now stamps `<title>` + `<h1
+  data-page-title>` on DOM + TypeScript AST (ordered before `title-singular` in
+  `DENOISE_OP_ORDER`). Recommend emits `stampPageTitleAst`; denoise-loop names
+  `missing-page-title` / `empty-h1`. Doctor bites: `verify/stamp-page-title.test.mjs`
+  · `verify/stamp-page-title-ast-bite.mjs`. Does not expand Operate-slop library
+  (saturated at 14); leaves empty-insight-shell (#191) alone.
+
 - **Denoise deepen: form-heuristic / link-field-errors + DENOISE_OP_ORDER.**
   Measure already fail-closed `aria-invalid` without an accessible message
   (`form-heuristic:`). Auto-safe `link-field-errors` now stamps

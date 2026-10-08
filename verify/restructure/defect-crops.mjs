@@ -396,6 +396,56 @@ export function buildNameControlsAstAfterCropHtml() {
   });
 }
 
+/** Missing page-title DOM FAIL crop. */
+export function buildStampPageTitleBeforeCropHtml() {
+  return wrap({
+    title: "Stamp-page-title crop FAIL",
+    cropId: "missing-page-title-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: no document.title and no visible h1 — missing-page-title.",
+    body: `  <p>Triage notices waiting for a Pursue decision.</p>
+  <button type="button" class="btn filled">Pursue</button>`,
+  });
+}
+
+/** Missing page-title DOM PASS crop. */
+export function buildStampPageTitleAfterCropHtml() {
+  return wrap({
+    title: "Stamp-page-title crop PASS",
+    cropId: "missing-page-title-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: document title + h1 stamped — stamp-page-title.",
+    body: `  <h1 data-page-title data-shine-page-title-stamped>Queue</h1>
+  <p>Triage notices waiting for a Pursue decision.</p>
+  <button type="button" class="btn filled">Pursue</button>`,
+  });
+}
+
+/** Missing page-title TSX AST FAIL crop. */
+export function buildStampPageTitleAstBeforeCropHtml() {
+  return wrap({
+    title: "Stamp-page-title AST crop FAIL",
+    cropId: "missing-page-title-tsx-before",
+    cite: "shadcn-queue",
+    caption: "Crop FAIL: no named h1 in TSX — apply-tsx stamp-page-title.",
+    body: `  <p data-shine-tsx-ast="before">Triage notices waiting for a Pursue decision.</p>
+  <button type="button" class="btn filled">Pursue</button>`,
+  });
+}
+
+/** Missing page-title TSX AST PASS crop. */
+export function buildStampPageTitleAstAfterCropHtml() {
+  return wrap({
+    title: "Stamp-page-title AST crop PASS",
+    cropId: "missing-page-title-tsx-after",
+    cite: "shadcn-queue",
+    caption: "Crop PASS: h1 stamped via TSX AST stamp-page-title.",
+    body: `  <h1 data-page-title data-shine-page-title-stamped data-shine-tsx-ast="after">Queue</h1>
+  <p>Triage notices waiting for a Pursue decision.</p>
+  <button type="button" class="btn filled">Pursue</button>`,
+  });
+}
+
 /** Link-field-errors DOM FAIL crop. */
 export function buildLinkFieldErrorsBeforeCropHtml() {
   return wrap({
@@ -1758,6 +1808,27 @@ export const DEFECT_CROP_PAIRS = [
   },
 
   {
+    id: "queue-missing-page-title",
+    defect: "missing-page-title",
+    beforeCrop: "queue-missing-page-title-before-crop.html",
+    afterCrop: "queue-missing-page-title-after-crop.html",
+    buildBefore: buildStampPageTitleBeforeCropHtml,
+    buildAfter: buildStampPageTitleAfterCropHtml,
+    beforeMust: [/Pursue/, /Triage notices/],
+    beforeMustNot: [/<h1\b/i, /data-shine-page-title-stamped/],
+    afterMust: [/<h1\b[^>]*data-shine-page-title-stamped/i, /data-page-title/],
+  },
+  {
+    id: "queue-missing-page-title-tsx",
+    defect: "missing-page-title",
+    beforeCrop: "queue-missing-page-title-tsx-before-crop.html",
+    afterCrop: "queue-missing-page-title-tsx-after-crop.html",
+    buildBefore: buildStampPageTitleAstBeforeCropHtml,
+    buildAfter: buildStampPageTitleAstAfterCropHtml,
+    beforeMust: [/data-shine-tsx-ast="before"/, /Pursue/],
+    afterMust: [/data-shine-tsx-ast="after"/, /data-shine-page-title-stamped/, /<h1\b/i],
+  },
+  {
     id: "form-link-field-errors",
     defect: "form-heuristic",
     beforeCrop: "form-link-field-errors-before-crop.html",
@@ -2006,6 +2077,16 @@ export function assertCropPairOk(pair, read) {
     }
     if (!/aria-label=["']More actions["']/.test(after) || !/data-confirm/.test(after)) {
       errors.push(`${pair.id} after needs aria-label + data-confirm`);
+    }
+  }
+
+  // Stamp-page-title: before no h1; after stamped h1
+  if ((pair.id === "queue-missing-page-title" || pair.id === "queue-missing-page-title-tsx") && before && after) {
+    if (/<h1\b/i.test(before) && /data-shine-page-title-stamped/.test(before)) {
+      errors.push(`${pair.id} before must not already stamp page title`);
+    }
+    if (!/<h1\b/i.test(after) || !/data-shine-page-title-stamped/.test(after)) {
+      errors.push(`${pair.id} after needs stamped h1`);
     }
   }
 

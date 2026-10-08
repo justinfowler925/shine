@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * N7 — Apply shine-restructure/v1 auto-safe ops to HTML fixtures (DOM substrate).
- * Ops: cta-budget, kpi-collapse, pill-collapse, title-singular, chrome-budget,
+ * Ops: cta-budget, kpi-collapse, pill-collapse, stamp-page-title, title-singular, chrome-budget,
  * filter-clearable, strip-marketing-dna, set-focal, worklist-first, rebind-cite.
  * collapse-peer-grids → plan markdown only (never silent delete).
  */
@@ -46,6 +46,12 @@ export function applyDomRestructure(html, plan) {
       if (next !== out) {
         out = next;
         applied.push("pill-collapse");
+      }
+    } else if (op.op === "stamp-page-title") {
+      const next = applyStampPageTitle(out, op);
+      if (next !== out) {
+        out = next;
+        applied.push("stamp-page-title");
       }
     } else if (op.op === "title-singular") {
       const next = applyTitleSingular(out, op);
@@ -970,6 +976,89 @@ export function applyPillCollapse(html, op = {}) {
 /**
  * Keep one page title; demote peer h1 / data-page-title / .page-title to kicker.
  */
+/**
+ * Stamp a first-screen page title when document.title and/or visible h1 are missing/empty.
+ * Clears copy: missing-page-title / empty-h1. Runs before title-singular in DENOISE_OP_ORDER.
+ */
+export function applyStampPageTitle(html, op = {}) {
+  const titleText = resolveStampPageTitle(op);
+  let out = String(html);
+
+  const titleMatch = out.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i);
+  const docTitle = (titleMatch?.[1] || "").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+
+  const h1Re = /<h1\b([^>]*)>([\s\S]*?)<\/h1>/gi;
+  /** @type {{ full: string, attrs: string, inner: string, text: string, index: number }[]} */
+  const h1s = [];
+  let m;
+  while ((m = h1Re.exec(out)) !== null) {
+    if (/data-shine-title-demoted/.test(m[0])) continue;
+    const text = m[2].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+    h1s.push({ full: m[0], attrs: m[1] || "", inner: m[2], text, index: m.index });
+  }
+
+  const hasNamedH1 = h1s.some((h) => h.text.length > 0);
+  const emptyH1 = h1s.find((h) => !h.text);
+  let changed = false;
+
+  if (!docTitle) {
+    if (titleMatch) {
+      out = out.replace(titleMatch[0], `<title>${titleText}</title>`);
+    } else if (/<head\b[^>]*>/i.test(out)) {
+      out = out.replace(/<head\b[^>]*>/i, (open) => `${open}\n<title>${titleText}</title>`);
+    } else if (/<html\b[^>]*>/i.test(out)) {
+      out = out.replace(
+        /<html\b[^>]*>/i,
+        (open) => `${open}\n<head><title>${titleText}</title></head>`,
+      );
+    } else {
+      out = `<!doctype html><html lang="en"><head><title>${titleText}</title></head>\n${out}`;
+    }
+    changed = true;
+  }
+
+  if (!hasNamedH1) {
+    if (emptyH1) {
+      let attrs = emptyH1.attrs;
+      if (!/\bdata-shine-page-title-stamped\b/.test(attrs)) attrs += ` data-shine-page-title-stamped`;
+      if (!/\bdata-page-title\b/.test(attrs)) attrs += ` data-page-title`;
+      const next = `<h1${attrs}>${titleText}</h1>`;
+      out = out.slice(0, emptyH1.index) + next + out.slice(emptyH1.index + emptyH1.full.length);
+      changed = true;
+    } else {
+      const mainOpen = out.match(/<(main|div)\b([^>]*(?:data-shine-main|role=["']main["']|data-region=["']form-app["'])[^>]*)>/i);
+      if (mainOpen) {
+        const insert = `${mainOpen[0]}\n  <h1 data-page-title data-shine-page-title-stamped>${titleText}</h1>`;
+        out = out.replace(mainOpen[0], insert);
+        changed = true;
+      } else if (/<body\b[^>]*>/i.test(out)) {
+        out = out.replace(
+          /<body\b[^>]*>/i,
+          (open) => `${open}\n  <h1 data-page-title data-shine-page-title-stamped>${titleText}</h1>`,
+        );
+        changed = true;
+      }
+    }
+  }
+
+  return changed ? out : html;
+}
+
+function resolveStampPageTitle(op = {}) {
+  const explicit = String(op.title || op.label || op.pageTitle || "").trim();
+  if (explicit) return explicit.slice(0, 72);
+  const job = String(op.job || "").trim();
+  if (job) {
+    const cut = job.split(/[:.·—–|]/)[0].trim();
+    return (cut || job).slice(0, 72);
+  }
+  const category = String(op.category || "").trim();
+  if (category) {
+    return category.charAt(0).toUpperCase() + category.slice(1);
+  }
+  return "Operate";
+}
+
 export function applyTitleSingular(html, op = {}) {
   let out = String(html);
   const mainRe = /<(main|div)\b[^>]*(?:data-shine-main|role=["']main["'])[^>]*>[\s\S]*?<\/\1>/i;

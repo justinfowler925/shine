@@ -326,6 +326,14 @@ const linkPlan = buildRestructurePlan({
 });
 assert.ok(applyTsxRestructure(linkHard, linkPlan).applied.includes("link-field-errors"));
 
+const stampTitleHard = readFileSync(join(FIX, "queue-missing-page-title-ast.tsx"), "utf8");
+const stampTitlePlan = buildRestructurePlan({
+  job: "Stamp page title",
+  category: "queue",
+  ops: [{ op: "stamp-page-title", title: "Queue" }],
+});
+assert.ok(applyTsxRestructure(stampTitleHard, stampTitlePlan).applied.includes("stamp-page-title"));
+
 console.log(
-  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-card-soup AST · split-empty-triad AST · stamp-chart-units AST · bind-product-owner AST · name-controls AST · link-field-errors AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
+  "apply-tsx PASS: cta-budget AST · kpi-collapse AST · pill-collapse AST · stamp-page-title AST · title-singular AST · chrome-budget AST · filter-clearable AST · strip-marketing-dna AST · rewrite-filler-empty AST · collapse-card-soup AST · split-empty-triad AST · stamp-chart-units AST · bind-product-owner AST · name-controls AST · link-field-errors AST · collapse-peer-grids AST · worklist-first AST · rebind-cite AST · set-focal AST · single-grid plan-only",
 );
