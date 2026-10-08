@@ -15,6 +15,10 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Added
 
+- **Docs/adapters: preflight card-carnival + nested-cards kill-list.** Denoise kill list
+  and anti-patterns call out Operate `ai-slop-nested-cards` / `ai-slop-card-carnival` →
+  `collapse-card-soup` (#209/#210). Snapline adapter maps badge/metric/nested hints.
+
 - **Denoise deepen: preflight ai-slop-card-carnival FAIL→PASS.** Card-carnival
   hard-failed but never cleared after `collapse-card-soup` — it double-counted
   slot/class/article markers and ignored parked peers in

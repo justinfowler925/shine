@@ -96,6 +96,7 @@ Craft-only Operate packets fail presence checks. If usability/completeness is hi
 - KPI soup on queue/triage (≥4 equal metrics ahead of work object)  
 - Pill/chip filter stacks above the fold (`pill-filter`, ≥5 chips); preflight `ai-slop-badge-spam` hard-fails Operate queue → `pill-collapse`  
 - KPI metric-grid clusters above the fold; preflight `ai-slop-metric-grid` hard-fails Operate queue → `kpi-collapse`  
+- Nested/equal Card carnival above the fold; preflight `ai-slop-nested-cards` / `ai-slop-card-carnival` hard-fail Operate catalog/queue → `collapse-card-soup`  
 - Competing page titles in main (`page-title`, ≥2)  
 - Filled chrome actions in header/nav/aside (`chrome-pressure`)  
 - Card soup without focal (`card-soup`)  
