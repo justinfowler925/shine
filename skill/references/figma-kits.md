@@ -41,14 +41,18 @@ TailGrids `DUN5Dvd…`, Myna `4SbNh8…`, Bootstrap `p8B6SU…`, Material 3 `f4T
 
 ## Job → cite (do not freestyle)
 
-| Job | Cite | Example |
+**Clearspeed Operate gold:** Flowbite / TailAdmin / Untitled — see
+`knowledge/editions/clearspeed-operate/gold-standard.json`. Cite with
+`--edition clearspeed-operate`. HeroUI/M3 secondary only.
+
+| Job | Cite (Clearspeed TW gold) | Example |
 |---|---|---|
-| Decide / worklist | `shadcn-operate-decide` | `figma-kit-silhouettes/worklist.html` |
-| Generic triage grid | `shadcn-queue` | same worklist, drop Decision column |
-| Form create/edit | `shadcn-form` | `figma-kit-silhouettes/form-stack.html` |
-| Settings | `shadcn-settings` | form-stack + section nav |
-| App shell | `shadcn-sidebar-07` | `figma-kit-silhouettes/app-shell.html` |
-| Admin dashboard (non-Operate) | `flowbite-dashboard` | Flowbite pack — not decide path |
+| Decide / worklist | `tailadmin-tables` | pack shot + operate worklist-first rules |
+| Generic triage grid | `untitled-table` / `flowbite-users` | same table density |
+| Form create/edit | `tailadmin-form-elements` | `figma-kit-silhouettes/form-stack.html` |
+| Settings | `flowbite-settings` | section nav + Form MUST |
+| App shell | `untitled-sidebar-navigation` | `figma-kit-silhouettes/app-shell.html` |
+| Admin dashboard | `flowbite-dashboard` | TW gold — not HeroUI landfill |
 | Overlay | kits.md Dialog recipe | SDS Dialog max-width 600 |
 
 ## Primitive completeness (from SDS + UI Prep)
@@ -116,14 +120,18 @@ Closest subscribed stand-in for Tailwind/HeroUI library primitives: **Simple Des
 
 ## Job → cite (do not freestyle)
 
-| Job | Cite | Example |
+**Clearspeed Operate gold:** Flowbite / TailAdmin / Untitled — see
+`knowledge/editions/clearspeed-operate/gold-standard.json`. Cite with
+`--edition clearspeed-operate`. HeroUI/M3 secondary only.
+
+| Job | Cite (Clearspeed TW gold) | Example |
 |---|---|---|
-| Decide / worklist | `shadcn-operate-decide` | `figma-kit-silhouettes/worklist.html` |
-| Generic triage grid | `shadcn-queue` | same worklist, drop Decision column |
-| Form create/edit | `shadcn-form` | `figma-kit-silhouettes/form-stack.html` |
-| Settings | `shadcn-settings` | form-stack + section nav |
-| App shell | `shadcn-sidebar-07` | `figma-kit-silhouettes/app-shell.html` |
-| Admin dashboard (non-Operate) | `flowbite-dashboard` | Flowbite pack — not decide path |
+| Decide / worklist | `tailadmin-tables` | pack shot + operate worklist-first rules |
+| Generic triage grid | `untitled-table` / `flowbite-users` | same table density |
+| Form create/edit | `tailadmin-form-elements` | `figma-kit-silhouettes/form-stack.html` |
+| Settings | `flowbite-settings` | section nav + Form MUST |
+| App shell | `untitled-sidebar-navigation` | `figma-kit-silhouettes/app-shell.html` |
+| Admin dashboard | `flowbite-dashboard` | TW gold — not HeroUI landfill |
 | Overlay | kits.md Dialog recipe | SDS Dialog max-width 600 |
 
 ## Primitive completeness (from SDS + UI Prep)

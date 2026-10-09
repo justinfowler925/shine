@@ -3,6 +3,12 @@
 Private overlay that keeps the skill name **Shine** and injects the Clearspeed /
 Nucleus application profile. Validated by `verify/edition.mjs`.
 
+**Cite gold standard:** Flowbite / TailAdmin / Untitled (Tailwind SaaS density) —
+`knowledge/editions/clearspeed-operate/gold-standard.json`. Agents must run
+`node corpus/cite.mjs --edition clearspeed-operate "<job>"` and paint with
+`skill/references/clearspeed/` brand tokens (Signal Orange `#ED5925`). HeroUI/M3
+are secondary; TailGrids Figma harvest is silhouette evidence only.
+
 ## Layout
 
 ```text

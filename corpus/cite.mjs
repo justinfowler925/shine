@@ -4,20 +4,25 @@
 //   node corpus/cite.mjs dashboard
 //   node corpus/cite.mjs "settings page"
 //   node corpus/cite.mjs queue
+//   node corpus/cite.mjs --edition clearspeed-operate "Decide Pursue/Review/Dismiss"
 //   node corpus/cite.mjs --list
 //
 // Output per match: the pack screenshot (read it first — pixels are the design),
 // readable source files vendored in the pack (registry JSON is extracted if the
 // pack is missing), the kit token sheet, and the preview URL.
 
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
 import { collectCorpusSource, packSourceFiles } from "./pack-files.mjs";
-import { retrieveDirections } from "./art-direction.mjs";
+import { normalizeBrief, operatePageIntent, retrieveDirections } from "./art-direction.mjs";
 import { recommendPattern, formatRecommendationSummary } from "./recommend.mjs";
 import { loadCatalog } from "./catalog.mjs";
+import {
+  editionUsesSiblingMap,
+  resolveEditionSibling,
+} from "../core/edition-siblings.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CORPUS = resolve(process.env.DESIGN_CORPUS || join(homedir(), "design-corpus"));
@@ -34,7 +39,7 @@ const templates = catalog.templates ?? [];
 
 const argv = process.argv.slice(2);
 const value = (name) => argv.includes(name) ? argv[argv.indexOf(name) + 1] : "";
-const valued = new Set(["--lane","--audience","--density","--shape","--brand","--interaction","--tone","--type","--image","--framework","--license","--history"]);
+const valued = new Set(["--lane","--audience","--density","--shape","--brand","--interaction","--tone","--type","--image","--framework","--license","--history","--edition","--category"]);
 const arg = argv.filter((item, index) => !item.startsWith("-") && !valued.has(argv[index - 1])).join(" ").trim();
 if (process.argv.includes("--list")) {
   process.stdout.write("screen\tid\tkind\tjobs\n");
@@ -42,14 +47,53 @@ if (process.argv.includes("--list")) {
   process.exit(0);
 }
 if (!arg) {
-  die(1, `usage: node corpus/cite.mjs <job, in plain words>\n       node corpus/cite.mjs --list`);
+  die(1, `usage: node corpus/cite.mjs <job, in plain words>\n       node corpus/cite.mjs --edition clearspeed-operate <job>\n       node corpus/cite.mjs --list`);
 }
 
-const retrieval = retrieveDirections(templates, arg, {
-  lane:value("--lane"), audience:value("--audience"), density:value("--density"), informationShape:value("--shape"),
-  brand:value("--brand"), interaction:value("--interaction"), tone:value("--tone"), type:value("--type"), image:value("--image"),
-  framework:value("--framework"), licenseMode:value("--license") || "source", history:value("--history")
-});
+const edition = value("--edition") || process.env.SHINE_EDITION || "";
+const editionId = edition === "clearspeed" ? "clearspeed-operate" : edition;
+const clearspeed = editionUsesSiblingMap(edition);
+const lane = value("--lane") || (clearspeed ? "saas" : "");
+const briefSeed = normalizeBrief(arg, { lane: lane || undefined, brand: value("--brand") || undefined });
+const intent = operatePageIntent(briefSeed);
+const category = value("--category") || intent.screen || "";
+let preferredCite = "";
+let siblingNote = "";
+if (clearspeed) {
+  const resolved = resolveEditionSibling({
+    category,
+    screen: intent.screen || "",
+    job: arg,
+    editionId: editionId || "clearspeed-operate",
+  });
+  if (resolved.preferredCite) {
+    preferredCite = resolved.preferredCite;
+    siblingNote = resolved.sibling
+      ? `Edition sibling: ${resolved.sibling.id} → preferredCite ${preferredCite} (TW gold)`
+      : `Edition preferredCite: ${preferredCite} (TW gold)`;
+  }
+}
+
+const citeConstraints = {
+  lane: lane || undefined,
+  audience: value("--audience"),
+  density: value("--density"),
+  informationShape: value("--shape"),
+  brand: value("--brand"),
+  interaction: value("--interaction"),
+  tone: value("--tone"),
+  type: value("--type"),
+  image: value("--image"),
+  framework: value("--framework"),
+  licenseMode: value("--license") || "source",
+  history: value("--history"),
+  edition: editionId || undefined,
+  preferredCite: preferredCite || undefined,
+  twGold: clearspeed || undefined,
+  category: category || undefined,
+};
+
+const retrieval = retrieveDirections(templates, arg, citeConstraints);
 if (!retrieval.selected.length) {
   const jobs = [...new Set(templates.flatMap((t) => t.jobs ?? []))].sort().join(", ");
   die(
@@ -90,14 +134,11 @@ const family = row.dna?.family || "shine";
 const voiceCss = join(SHINE, "tokens/voices", `${family}.css`);
 
 const primary = retrieval.selected[0];
-const recommendation = recommendPattern(templates, arg, {
-  lane:value("--lane"), audience:value("--audience"), density:value("--density"), informationShape:value("--shape"),
-  brand:value("--brand"), interaction:value("--interaction"), tone:value("--tone"), type:value("--type"), image:value("--image"),
-  framework:value("--framework"), licenseMode:value("--license") || "source", history:value("--history")
-});
+const recommendation = recommendPattern(templates, arg, citeConstraints);
 
 const out = [];
 out.push(`Brief axes: ${["job","lane","audience","density","informationShape","brand","interaction","tone","type","image","framework"].map((axis) => `${axis}=${retrieval.brief[axis]}`).join(" · ")}`);
+if (siblingNote) out.push(siblingNote);
 if (retrieval.brief.demandedSlop.length) out.push(`Demanded style (brief-explicit only): ${retrieval.brief.demandedSlop.join(", ")}`);
 out.push(`Template: ${row.id} — ${row.title || ""}`);
 out.push(formatRecommendationSummary(recommendation));
@@ -162,6 +203,9 @@ if (explained.length) {
 }
 if (retrieval.gaps.length) { out.push(``); out.push(`Catalog gaps: ${retrieval.gaps.join("; ")}`); }
 out.push(``);
+if (clearspeed) {
+  out.push(`Clearspeed: paint with skill/references/clearspeed brand tokens (Signal Orange #ED5925). TW gold = Flowbite/TailAdmin/Untitled.`);
+}
 out.push(`Copy the regions from the source; paint with the voice sheet / kit tokens (or house/brand lane). references/voices.md.`);
 out.push(`Integration: node ${join(SHINE, "integrations/resolve.mjs")} --project <consumer-root> --kit ${family === "shadcn-zinc" ? "shadcn-tanstack" : "native"}`);
 out.push(`Scaffold: node ${join(SHINE, "integrations/scaffold.mjs")} --project <consumer-root> --out <destination>`);

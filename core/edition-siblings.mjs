@@ -13,9 +13,33 @@ import { fileURLToPath } from "node:url";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const EDITIONS_DIR = join(ROOT, "knowledge/editions");
 export const DEFAULT_OPERATE_SIBLING_EDITION = "clearspeed-operate";
+const GOLD_STANDARD_PATH = join(
+  EDITIONS_DIR,
+  DEFAULT_OPERATE_SIBLING_EDITION,
+  "gold-standard.json",
+);
 
 const text = (value) => String(value || "").trim();
 const lower = (value) => text(value).toLowerCase();
+
+/** Clearspeed Tailwind gold-standard kit ids / DNA families (Flowbite·TailAdmin·Untitled). */
+export function loadClearspeedTwGoldStandard(editionId = DEFAULT_OPERATE_SIBLING_EDITION) {
+  const path = join(EDITIONS_DIR, editionId, "gold-standard.json");
+  if (!existsSync(path)) {
+    if (editionId !== DEFAULT_OPERATE_SIBLING_EDITION && existsSync(GOLD_STANDARD_PATH)) {
+      return JSON.parse(readFileSync(GOLD_STANDARD_PATH, "utf8"));
+    }
+    return null;
+  }
+  return JSON.parse(readFileSync(path, "utf8"));
+}
+
+export function isClearspeedTwGoldKit(kitOrFamily = "", gold = null) {
+  const g = gold || loadClearspeedTwGoldStandard();
+  if (!g) return false;
+  const key = lower(kitOrFamily);
+  return (g.kits || []).includes(key) || (g.families || []).includes(key);
+}
 
 /** Normalize packet / denoise category aliases onto map categories. */
 export function normalizeSiblingCategory(category = "") {
@@ -215,7 +239,8 @@ export function resolveEditionSibling({
 
 /**
  * Apply sibling map onto a cite-v2 recommendation (product sibling first).
- * Promotes preferredCite when it already appears in the shortlist.
+ * Forces preferredCite as primary when the catalog row is selectable — Clearspeed
+ * TW gold must win even if retrieveDirections shortlisted a house blueprint first.
  */
 export function applySiblingToRecommendation(rec, resolved, { templates = [] } = {}) {
   if (!rec || !resolved?.sibling) return rec;
@@ -235,17 +260,24 @@ export function applySiblingToRecommendation(rec, resolved, { templates = [] } =
   if (preferred) {
     const short = out.shortlist || [];
     const hit = short.find((row) => row.id === preferred);
-    if (hit && out.primary?.id !== preferred) {
+    const tmpl = templates.find((t) => t.id === preferred && t.selectable !== false);
+    if (out.primary?.id !== preferred && (hit || tmpl)) {
       out.primary = {
         ...(out.primary || {}),
         id: preferred,
-        screen: hit.screen || out.primary?.screen,
-        scope: hit.scope || "page",
-        title: out.primary?.title,
-        kit: out.primary?.kit,
-        score: hit.score ?? out.primary?.score,
-        matches: [...(out.primary?.matches || []), "edition-sibling"],
+        screen: hit?.screen || tmpl?.screen || out.primary?.screen,
+        scope: hit?.scope || tmpl?.scope || "page",
+        title: tmpl?.title || out.primary?.title,
+        kit: tmpl?.kit || out.primary?.kit,
+        score: hit?.score ?? out.primary?.score ?? 0,
+        matches: [...new Set([...(out.primary?.matches || []), "edition-sibling", "tw-gold"])],
       };
+      if (!hit && tmpl) {
+        out.shortlist = [
+          { id: preferred, screen: tmpl.screen, scope: tmpl.scope || "page", score: out.primary.score },
+          ...short.filter((row) => row.id !== preferred),
+        ];
+      }
       out.restructureHints = [
         `restructure: edition sibling ${resolved.sibling.id} prefers cite ${preferred}`,
         ...(out.restructureHints || []),

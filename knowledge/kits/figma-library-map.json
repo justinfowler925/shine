@@ -393,10 +393,11 @@
   "silhouetteMap": [
     {
       "job": "decide / worklist / queue",
-      "preferCite": "shadcn-operate-decide",
+      "preferCite": "tailadmin-tables",
       "also": [
-        "shadcn-queue",
-        "untitled-table"
+        "untitled-table",
+        "flowbite-users",
+        "shadcn-operate-decide"
       ],
       "figmaSources": [
         "UI Prep Data Tables",
@@ -418,9 +419,10 @@
     },
     {
       "job": "form / create-edit",
-      "preferCite": "shadcn-form",
+      "preferCite": "tailadmin-form-elements",
       "also": [
-        "shadcn-settings"
+        "flowbite-settings",
+        "shadcn-form"
       ],
       "figmaSources": [
         "Simple Design System Input/Select/Textarea/Checkbox/Radio/Switch",
@@ -440,10 +442,11 @@
     },
     {
       "job": "app shell / nav",
-      "preferCite": "shadcn-sidebar-07",
+      "preferCite": "untitled-sidebar-navigation",
       "also": [
         "flowbite-sidebar-layout",
-        "flowbite-stacked"
+        "flowbite-stacked",
+        "shadcn-sidebar-07"
       ],
       "figmaSources": [
         "Simple Design System Sidebar + Navigation Pill/Button",
@@ -462,9 +465,10 @@
     },
     {
       "job": "settings",
-      "preferCite": "shadcn-settings",
+      "preferCite": "flowbite-settings",
       "also": [
-        "flowbite-settings"
+        "tailadmin-form-elements",
+        "shadcn-settings"
       ],
       "figmaSources": [
         "Simple Design System form fields + Tabs",

@@ -1,4 +1,9 @@
 import {referenceHealth} from './reference-health.mjs';
+import {
+  editionUsesSiblingMap,
+  isClearspeedTwGoldKit,
+  loadClearspeedTwGoldStandard,
+} from "../core/edition-siblings.mjs";
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -93,10 +98,14 @@ export function operatePageIntent(brief) {
   if (hasAny(tokens, ["assistant", "sidecar", "conversation", "copilot", "support"])) {
     return { screen: "chat", chartExplicit: false };
   }
-  if (hasAny(tokens, ["datagrid", "worklist", "inbox", "triage"])) return { screen: "queue", chartExplicit: false };
+  if (hasAny(tokens, ["datagrid", "worklist", "inbox", "triage", "pursue", "decide", "decide-queue", "sled", "notice", "signals"])) {
+    return { screen: "queue", chartExplicit: false };
+  }
   if (hasAny(tokens, ["integrations", "connectors", "packages", "gallery", "directory", "showcase", "skills", "tools", "company-tools"])) {
     return { screen: "catalog", chartExplicit: false };
   }
+  if (hasAny(tokens, ["sources", "recipes", "matching"])) return { screen: "settings", chartExplicit: false };
+  if (hasAny(tokens, ["usul", "coverage", "aging", "attainment", "goals"])) return { screen: "dashboard", chartExplicit: false };
   if (tokens.includes("profile") && !hasAny(tokens, ["marketing"])) return { screen: "record", chartExplicit: false };
   // Soft analytics/metrics → composed dashboard, not chart atoms.
   if (hasAny(tokens, ["analytics", "metrics"])) return { screen: "dashboard", chartExplicit: false };
@@ -224,6 +233,65 @@ export function retrieveDirections(templates, text, constraints = {}) {
       )),
       ...ranked.filter((candidate) => !pagePrimary(candidate)),
     ];
+  }
+  // Clearspeed TW gold tier — Flowbite / TailAdmin / Untitled are the primary
+  // silhouette for Operate jobs (not HeroUI/M3 atom landfill, not thin TailGrids).
+  const edition = String(constraints.edition || "").trim().toLowerCase();
+  const twGold = constraints.twGold === true || editionUsesSiblingMap(edition);
+  if (twGold && ranked.length) {
+    const gold = loadClearspeedTwGoldStandard(
+      edition === "clearspeed" ? "clearspeed-operate" : edition || "clearspeed-operate",
+    );
+    const isGold = (candidate) => {
+      const kit = candidate.template.kit || "";
+      const family = candidate.template.dna?.family || "";
+      return isClearspeedTwGoldKit(kit, gold) || isClearspeedTwGoldKit(family, gold);
+    };
+    ranked = [
+      ...ranked.filter(isGold).map((candidate) => (
+        candidate.matches.includes("tw-gold")
+          ? candidate
+          : { ...candidate, matches: [...candidate.matches, "tw-gold"] }
+      )),
+      ...ranked.filter((candidate) => !isGold(candidate)),
+    ];
+  }
+  // Edition sibling preferredCite — force into ranked even when natural-language
+  // score was <40 (empty ranked). Clearspeed Operate jobs must still hit TW gold.
+  const preferredCite = String(constraints.preferredCite || "").trim();
+  if (preferredCite) {
+    const prefIdx = ranked.findIndex((c) => c.template.id === preferredCite);
+    if (prefIdx > 0) {
+      const [pref] = ranked.splice(prefIdx, 1);
+      ranked.unshift({
+        ...pref,
+        matches: [...new Set([...(pref.matches || []), "edition-sibling", "tw-gold"])],
+      });
+    } else if (prefIdx < 0) {
+      const prefElig = eligible.find((c) => c.template.id === preferredCite);
+      const makeForced = (tmpl, scoreBase = 0) => {
+        const health = referenceHealth(join(ROOT, ".."), tmpl.id);
+        if (tmpl.selectable === false || health.status === "failed") return null;
+        return {
+          template: tmpl,
+          axes: candidateAxes(tmpl, brief),
+          score: Math.max(scoreBase + 80, 120),
+          matches: ["edition-sibling", "tw-gold"],
+          history: history[preferredCite] || 0,
+        };
+      };
+      let pref = prefElig
+        ? {
+            ...prefElig,
+            matches: [...new Set([...(prefElig.matches || []), "edition-sibling", "tw-gold"])],
+          }
+        : null;
+      if (!pref) {
+        const tmpl = templates.find((t) => t.id === preferredCite && t.selectable !== false);
+        if (tmpl) pref = makeForced(tmpl, baseScore(tmpl, brief, intent));
+      }
+      if (pref) ranked.unshift(pref);
+    }
   }
   const limit = Number.isInteger(constraints.limit) && constraints.limit > 0 ? constraints.limit : 3;
   const selected = [];

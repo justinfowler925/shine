@@ -49,43 +49,43 @@ const cases = [
     job: "Decide Pursue/Review/Dismiss on the next notice",
     category: "queue",
     id: "sled-capture-queue",
-    cite: "shadcn-operate-decide",
+    cite: "tailadmin-tables",
   },
   {
     job: "Fix or pause a matching recipe on Sources",
     category: "settings",
     id: "sled-capture-sources",
-    cite: "shadcn-settings",
+    cite: "flowbite-settings",
   },
   {
     job: "Find Usul coverage gaps Nucleus-only aging",
     category: "dashboard",
     id: "sled-capture-usul",
-    cite: "shadcn-dashboard-01",
+    cite: "flowbite-dashboard",
   },
   {
     job: "Scan Scout research signals feed",
     category: "queue",
     id: "sled-capture-signals",
-    cite: "shadcn-queue",
+    cite: "untitled-table",
   },
   {
     job: "Notice detail Story + Decide then Pursue panel hand-off",
     category: "record",
     id: "sled-capture-record",
-    cite: "shadcn-record",
+    cite: "tailadmin-profile",
   },
   {
     job: "Company Tools catalog: find and install a package",
     category: "catalog",
     id: "nucleus-company-tools",
-    cite: "shadcn-catalog",
+    cite: "flowbite-products",
   },
   {
     job: "Admin Adoption KPI strip with collapsed table",
     category: "dashboard",
     id: "nucleus-admin-adoption",
-    cite: "shadcn-dashboard-01",
+    cite: "flowbite-dashboard",
   },
 ];
 
@@ -126,7 +126,8 @@ const rec = recommendPattern(templates, "Decide Pursue/Review/Dismiss on the nex
   limit: 6,
 });
 assert.ok(rec.productSibling?.id === "sled-capture-queue", "recommend productSibling");
-assert.match(rec.kitRecipe, /worklist-first|DataGrid|shadcn-operate-decide|shadcn-queue/i);
+assert.match(rec.kitRecipe, /worklist-first|DataGrid|tailadmin-tables|TW gold/i);
+assert.equal(rec.primary?.id, "tailadmin-tables", "Clearspeed recommend primary is TW gold");
 assert.ok(
   (rec.antiPatterns || []).some((a) => /edition-sibling:sled-capture-queue/.test(a)),
   "edition sibling anti-cites",
@@ -139,7 +140,6 @@ const applied = applySiblingToRecommendation(
     restructureHints: [],
     kitRecipe: "default",
     shortlist: [
-      { id: "shadcn-operate-decide", screen: "queue", scope: "page", score: 8 },
       { id: "shadcn-dashboard-01", screen: "dashboard", scope: "page", score: 9 },
     ],
   },
@@ -149,7 +149,7 @@ const applied = applySiblingToRecommendation(
   }),
   { templates },
 );
-assert.equal(applied.primary.id, "shadcn-operate-decide", "promote preferred cite from shortlist");
+assert.equal(applied.primary.id, "tailadmin-tables", "force preferred TW gold cite even when absent from shortlist");
 assert.match(applied.restructureHints[0], /edition sibling/);
 
 // Packet / DDR bind productSibling from map when --product-reference omitted

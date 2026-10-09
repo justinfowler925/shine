@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "id": "clearspeed-tw-gold",
+  "editionId": "clearspeed-operate",
+  "winner": "flowbite-tailadmin-untitled",
+  "label": "Flowbite / TailAdmin / Untitled (Tailwind SaaS density)",
+  "kits": ["flowbite-admin", "tailadmin-react", "untitled-ui-react"],
+  "families": ["flowbite", "tailadmin", "untitled"],
+  "brandTokens": "skill/references/clearspeed/",
+  "brandAccent": "#ED5925",
+  "secondary": ["heroui", "figma-heroui", "shadcn-registry"],
+  "notWinner": {
+    "figma-tailgrids": {
+      "packs": 4,
+      "why": "Thin Figma harvest (cover/layout/atoms/table-stack); selectable:false silhouette evidence only — not Operate page coverage"
+    },
+    "figma-myna": {
+      "packs": 1,
+      "why": "Single components gallery; no SaaS page matrix"
+    },
+    "figma-bootstrap": {
+      "packs": 3,
+      "why": "Foreign Bootstrap chrome; retired; not Tailwind density"
+    },
+    "figma-m3": {
+      "packs": 38,
+      "why": "Material chrome; retired for Clearspeed Operate; structure-only when native Android"
+    },
+    "figma-heroui": {
+      "packs": 46,
+      "why": "Large atom board; marketing/component landfill — secondary only, not Operate gold"
+    }
+  },
+  "counts": {
+    "flowbite": 15,
+    "tailadmin": 17,
+    "untitled": 19,
+    "totalSelectable": 51
+  },
+  "pageCoverage": [
+    "auth",
+    "app-shell",
+    "dashboard",
+    "queue",
+    "settings",
+    "form",
+    "record",
+    "calendar",
+    "empty",
+    "pricing"
+  ],
+  "citeUsability": "All gold packs pass corpus/reference-health.mjs (HTTP capture + semantic selector). cite.mjs --edition clearspeed-operate promotes sibling preferredCite from this family.",
+  "why": "Most complete real Tailwind UI density for Clearspeed Operate/SaaS — composed admin pages with shots, not Figma atom landfill. Prefer this family over HeroUI/M3 for Operate jobs. Paint with Clearspeed brand tokens (Signal Orange #ED5925)."
+}
