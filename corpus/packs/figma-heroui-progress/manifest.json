@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-heroui-progress",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-progress.md",
+      "sha256": "588405e3487f53469e73ba8744f135d66967fcc6b789bcc037fa645522deaf5a"
+    }
+  ]
+}

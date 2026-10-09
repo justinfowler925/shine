@@ -784,6 +784,36 @@ push({
 // corpus/catalog.mjs. Each kit is a directory under ~/design-corpus/owned/<kit>/
 // with a manifest.json declaring `templates`; see corpus/owned/README.md.
 const ownedRows = [];
+
+// Structure only — house paint stays shadcn/Tailwind. See knowledge/kits/figma-library-map.json.
+for (const t of [
+  { id: "figma-tailgrids-cover", screen: "marketing", title: "Tailwind TailGrids cover (Figma Copy)", jobs: ["marketing", "landing", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=102-227" },
+  { id: "figma-tailgrids-layout", screen: "catalog", title: "Tailwind TailGrids layout grid (Figma Copy)", jobs: ["catalog", "layout", "grid", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3598" },
+  { id: "figma-tailgrids-atoms", screen: "catalog", title: "Tailwind TailGrids atom/molecule board (Figma Copy)", jobs: ["catalog", "atoms", "components", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15453" },
+  { id: "figma-tailgrids-table-stack", screen: "queue", title: "Tailwind TailGrids table stack list (Figma Copy)", jobs: ["queue", "table", "records", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-23249", scope: "component" },
+  { id: "figma-myna-components", screen: "catalog", title: "Myna UI Tailwind/shadcn component gallery (Figma Copy)", jobs: ["catalog", "components", "tailwind-figma", "myna", "shadcn"], preview: "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=605-1271" },
+  { id: "figma-bootstrap-buttons", screen: "catalog", title: "Bootstrap 5 button strip (Figma community duplicate)", jobs: ["catalog", "buttons", "bootstrap-figma"], preview: "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3787-1014" },
+  { id: "figma-bootstrap-forms", screen: "form", title: "Bootstrap 5 forms page (Figma community duplicate)", jobs: ["form", "fields", "bootstrap-figma"], preview: "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-350" },
+  { id: "figma-bootstrap-components", screen: "catalog", title: "Bootstrap 5 components gallery (Figma community duplicate)", jobs: ["catalog", "components", "bootstrap-figma"], preview: "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1152" },
+  { id: "figma-m3-cover", screen: "marketing", title: "Material 3 Design Kit cover (team library file)", jobs: ["marketing", "material-figma", "mui", "material3"], preview: "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50538-14622" },
+  { id: "figma-heroui-cover", screen: "marketing", title: "HeroUI Figma Kit cover (Justin Copy)", jobs: ["marketing", "landing", "heroui-figma", "cover"], preview: "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261157" },
+  { id: "figma-heroui-radio", screen: "catalog", title: "HeroUI Radio variant board (Figma Kit)", jobs: ["catalog", "radio", "form", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=3-23", scope: "component" },
+  { id: "figma-heroui-badge", screen: "catalog", title: "HeroUI Badge variant board (Figma Kit)", jobs: ["catalog", "badge", "status", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=696-52331", scope: "component" },
+  { id: "figma-heroui-avatar-group", screen: "catalog", title: "HeroUI Avatar Group board (Figma Kit)", jobs: ["catalog", "avatar", "people", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=2545-33395", scope: "component" },
+  { id: "figma-heroui-calendar", screen: "catalog", title: "HeroUI Calendar board (Figma Kit)", jobs: ["catalog", "calendar", "date", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=4208-222", scope: "component" },
+  { id: "figma-heroui-progress", screen: "catalog", title: "HeroUI Progress board (Figma Kit)", jobs: ["catalog", "progress", "loading", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=1573-1538", scope: "component" },
+  { id: "figma-heroui-theme", screen: "catalog", title: "HeroUI Theme color sets (Figma Kit)", jobs: ["catalog", "theme", "tokens", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-1194" },
+]) {
+  push({
+    id: t.id, screen: t.screen, kit: "shadcn-registry", title: t.title,
+    preview: t.preview || "", license: "n/a", kind: "blueprint",
+    startFrom: 1, jobs: t.jobs, dna: KIT_FAMILY["shadcn-registry"],
+    note: "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+    scope: t.scope || "page",
+    selectable: false,
+  });
+}
+
 const ownedDir = OWNED_DIR;
 const ownedManifests = [];
 if (existsSync(join(ownedDir, "manifest.json"))) ownedManifests.push(join(ownedDir, "manifest.json"));

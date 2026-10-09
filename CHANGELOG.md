@@ -10,11 +10,14 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   `knowledge/kits/figma-library-map.json` + `skill/references/figma-kits.md`.
   Un-retired `heroui-next-app`; indexed ~82 HeroUI atoms + next-app pages and
   missing Flowbite/TailAdmin/Windmill/Untitled pages via `corpus/index-kit-walk.mjs`.
-  Catalog ~237→353 rows. Cite retrieves `heroui-button`, `flowbite-sign-up`,
-  Tailwind dashboards. Doctor: `verify/kit-walk-cite.test.mjs`,
-  `verify/figma-kit-map.test.mjs`. Anti-pattern `kit-silhouette-bypass`.
-  Silhouette examples under `corpus/blueprints/figma-kit-silhouettes/`.
-  HeroUI Figma prefer fileKey `GAn1SrbKJYiKqz9SmHHCRm`.
+  Catalog ~237→353 (kit-walk) → **369** (+16 `figma-*` packs). Cite retrieves
+  `heroui-button`, `flowbite-sign-up`, Tailwind dashboards. Doctor:
+  `verify/kit-walk-cite.test.mjs`, `verify/figma-kit-map.test.mjs`. Anti-pattern
+  `kit-silhouette-bypass`. Silhouette examples under
+  `corpus/blueprints/figma-kit-silhouettes/`. HeroUI prefer
+  `GAn1SrbKJYiKqz9SmHHCRm`; deep atom boards on alt `DC4g36xyt4DobtbEa11JFL`
+  (`figma-heroui-*`). Sibling TailGrids/Myna/Bootstrap/M3 keys folded
+  (`DUN5Dvd…`, `4SbNh8…`, `p8B6SU…`, `f4TUS9…`) with `figma-harvest-packs.json`.
 
 ### Changed
 

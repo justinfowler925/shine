@@ -171,25 +171,37 @@
         "shadcn-form",
         "shadcn-queue"
       ],
-      "note": "Retired as foreign runtime for build (docs/no-foreign-runtimes.md). Steal navbar/form/overlay silhouette only; paint with house kit.",
+      "note": "Design copies found. Prefer-copy GAn1Srb\u2026 is Welcome+Icons (cover/marketing). Deep atom boards live on alt DC4g36\u2026 (hidden canvases: Radio, Badge, Avatar Group, Calendar, Progress, Theme, Figma Components). Steal navbar/form/overlay silhouette only; paint with house kit. See figma-heroui-* packs.",
       "designFiles": [
         {
           "prefer": true,
           "name": "HeroUI Figma Kit (Community) (Copy)",
           "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
-          "url": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm"
+          "url": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+          "role": "cover_welcome_icons"
         },
         {
           "prefer": false,
           "name": "HeroUI Figma Kit (Community)",
           "fileKey": "DC4g36xyt4DobtbEa11JFL",
-          "url": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL"
+          "url": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL",
+          "role": "deep_atom_boards"
         }
-      ]
+      ],
+      "harvestPacks": [
+        "figma-heroui-cover",
+        "figma-heroui-radio",
+        "figma-heroui-badge",
+        "figma-heroui-avatar-group",
+        "figma-heroui-calendar",
+        "figma-heroui-progress",
+        "figma-heroui-theme"
+      ],
+      "deepHarvestFileKey": "DC4g36xyt4DobtbEa11JFL"
     },
     {
       "name": "original Tailwind",
-      "status": "not_subscribed_as_library",
+      "status": "design_copies_found",
       "communityRefs": [
         "https://www.figma.com/community/file/1519320333100677969/tailwind-css-v4-figma-ui-kit",
         "https://www.figma.com/community/file/1274269619515529174/tailwind-css-ui-design-system-free"
@@ -207,11 +219,38 @@
         "untitled-table"
       ],
       "figmaStandIn": "Simple Design System",
-      "note": "No Tailwind UI kit published on the Clearspeed plan. SDS + Flowbite/Tailadmin packs carry the utility-first admin silhouette."
+      "note": "Chrome-history Justin Design copies found 2026-10-09. Prefer TailGrids Copy. SDS remains subscribed stand-in for library primitives. Steal structure; house paint shadcn/Tailwind.",
+      "designFiles": [
+        {
+          "prefer": true,
+          "name": "Tailwind UI Components for Figma | TailGrids (Community) (Copy)",
+          "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+          "url": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9"
+        },
+        {
+          "prefer": false,
+          "name": "Myna UI - TailwindCSS & shadcn/ui & Radix Premium UI Kit (Community) (Copy)",
+          "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+          "url": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO"
+        },
+        {
+          "prefer": false,
+          "name": "shadcn/ui components with variables & Tailwind classes (Community) (Copy) (Copy)",
+          "fileKey": "Ozw4MOEnTe5wgv11t25E5T",
+          "url": "https://www.figma.com/design/Ozw4MOEnTe5wgv11t25E5T"
+        }
+      ],
+      "harvestPacks": [
+        "figma-tailgrids-cover",
+        "figma-tailgrids-layout",
+        "figma-tailgrids-atoms",
+        "figma-tailgrids-table-stack",
+        "figma-myna-components"
+      ]
     },
     {
       "name": "Bootstrap",
-      "status": "not_subscribed_as_library",
+      "status": "design_copies_found",
       "communityRefs": [
         "https://www.figma.com/community/file/1044316192441037087/bootstrap-5-design-system-ui-kit",
         "https://www.figma.com/community/file/1024992794016228272/bootstrap-5"
@@ -225,11 +264,25 @@
         "flowbite-stacked",
         "shadcn-sidebar-07"
       ],
-      "note": "No Bootstrap library on plan. Prefer Flowbite stacked/sidebar silhouettes; never invent card-grid admin landfill."
+      "note": "Chrome-history Design fileKey p8B6SUiQDqKFAybsVtfQp9. Prefer Flowbite stacked/sidebar for build cites; never install Bootstrap CSS into Clearspeed consumers.",
+      "designFiles": [
+        {
+          "prefer": true,
+          "name": "Bootstrap 5 UI Kit (Community)",
+          "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+          "url": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9",
+          "note": "community duplicate in Justin history; MCP lists Thumbnail page only but node screenshots work"
+        }
+      ],
+      "harvestPacks": [
+        "figma-bootstrap-buttons",
+        "figma-bootstrap-forms",
+        "figma-bootstrap-components"
+      ]
     },
     {
       "name": "Minor UI",
-      "status": "not_found",
+      "status": "not_found_chrome_history",
       "communityRefs": [
         "https://www.figma.com/community/file/1520749847339774468/minimals-ui-components",
         "https://www.figma.com/community/file/1503752093673029506/minikit-mini-product-ui-kit"
@@ -239,7 +292,7 @@
         "shadcn-form",
         "shadcn-sidebar-07"
       ],
-      "note": "No library named Minor UI on plan. Closest community names: Minimals UI / MiniKIT. Confirm with Justin if a private duplicate exists in drafts."
+      "note": "Still no Design fileKey in Chrome history or plan libraries. Closest community: Minimals UI / MiniKIT. Confirm private draft with Justin. Cite shadcn-form / shadcn-sidebar-07 meanwhile."
     }
   ],
   "silhouetteMap": [
@@ -400,5 +453,69 @@
       "url": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL",
       "name": "HeroUI Figma Kit (Community)"
     }
-  ]
+  ],
+  "materialDesignFiles": [
+    {
+      "prefer": true,
+      "name": "Material 3 Design Kit (Community)",
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "url": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon",
+      "libraryKey": "lk-0ed47b4a992d98ca20e5243564e1a9f7b3b321b9a4bc3e769c9c349832e23b6d5bc2c529b6cde7b13fcd97f5d697f3942d52e20202fee51b63f30a890b387cd4"
+    }
+  ],
+  "muiCorpusProxy": [
+    "mui-material"
+  ],
+  "tailwindMuiBootstrapHarvest": {
+    "branch": "cursor_cloud/figma-kits-tailwind-mui-08ed",
+    "agent": "bc-d6d6f8a2-917d-5300-b149-19d1677d08ed",
+    "inventoriedAt": "2026-10-09",
+    "packs": [
+      "figma-tailgrids-cover",
+      "figma-bootstrap-buttons",
+      "figma-bootstrap-components",
+      "figma-m3-cover",
+      "figma-tailgrids-layout",
+      "figma-tailgrids-table-stack",
+      "figma-bootstrap-forms",
+      "figma-myna-components",
+      "figma-tailgrids-atoms"
+    ],
+    "tip": "545fb40",
+    "foldedInto": "cursor_cloud/figma-kits-import-6c30"
+  },
+  "heroUiDeepHarvest": {
+    "fileKey": "DC4g36xyt4DobtbEa11JFL",
+    "canvasesFound": [
+      {
+        "node": "3:23",
+        "name": "Radio"
+      },
+      {
+        "node": "696:52331",
+        "name": "Badge"
+      },
+      {
+        "node": "2545:33395",
+        "name": "Avatar Group"
+      },
+      {
+        "node": "4208:222",
+        "name": "Calendar"
+      },
+      {
+        "node": "1573:1538",
+        "name": "Progress"
+      },
+      {
+        "node": "5:1194",
+        "name": "Theme"
+      },
+      {
+        "node": "5:3550",
+        "name": "Figma Components"
+      }
+    ],
+    "note": "get_metadata without nodeId only lists Welcome+Icons; Chrome history node-ids reveal additional canvases."
+  }
 }

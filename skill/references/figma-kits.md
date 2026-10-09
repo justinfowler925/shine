@@ -27,8 +27,15 @@ SSOT inventory + library keys: `knowledge/kits/figma-library-map.json`.
 | iOS 18 | `lk-df32…` | Native only — not Operate |
 
 Named by Justin but **not** published as team libraries: HeroUI, original Tailwind,
-Bootstrap, Minor UI. Proxies live in the kit map (`corpusProxy` + community refs).
-Closest subscribed stand-in for Tailwind/HeroUI gallery density: **Simple Design System**.
+Bootstrap, Minor UI. Design fileKeys + harvest packs live in the kit map
+(`designFiles`, `figma-harvest-packs.json`, `corpusProxy`). Closest subscribed
+stand-in for Tailwind/HeroUI gallery density: **Simple Design System**.
+
+HeroUI deep harvest uses alt file `DC4g36xyt4DobtbEa11JFL` (Chrome node-ids for
+Radio/Badge/Avatar/Calendar/Progress/Theme) — page list alone only shows
+Welcome/Icons. Prefer-copy `GAn1SrbKJYiKqz9SmHHCRm` carries Cover.
+Tailwind/Bootstrap/M3 Justin copies: TailGrids `DUN5Dvd…`, Myna `4SbNh8…`,
+Bootstrap `p8B6SU…`, Material 3 `f4TUS9…`.
 
 ## Job → cite (do not freestyle)
 

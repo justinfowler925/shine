@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-tailgrids-cover",
+  "screen": "marketing",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-tailgrids-cover.md",
+      "sha256": "4ccf1920d640fcdcbb22453bf62e02936e4b5b6581129c469a2083f7c994f14b"
+    }
+  ]
+}

@@ -1995,6 +1995,260 @@
       }
     },
     {
+      "id": "figma-bootstrap-buttons",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 button strip (Figma community duplicate)",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3787-1014",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "buttons",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-bootstrap-components",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 components gallery (Figma community duplicate)",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1152",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "components",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-heroui-avatar-group",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Avatar Group board (Figma Kit)",
+      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=2545-33395",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "avatar",
+        "people",
+        "heroui-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "component",
+      "selectable": false
+    },
+    {
+      "id": "figma-heroui-badge",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Badge variant board (Figma Kit)",
+      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=696-52331",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "badge",
+        "status",
+        "heroui-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "component",
+      "selectable": false
+    },
+    {
+      "id": "figma-heroui-calendar",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Calendar board (Figma Kit)",
+      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=4208-222",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "calendar",
+        "date",
+        "heroui-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "component",
+      "selectable": false
+    },
+    {
+      "id": "figma-heroui-progress",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Progress board (Figma Kit)",
+      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=1573-1538",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "progress",
+        "loading",
+        "heroui-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "component",
+      "selectable": false
+    },
+    {
+      "id": "figma-heroui-radio",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Radio variant board (Figma Kit)",
+      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=3-23",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "radio",
+        "form",
+        "heroui-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "component",
+      "selectable": false
+    },
+    {
+      "id": "figma-heroui-theme",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Theme color sets (Figma Kit)",
+      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-1194",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "theme",
+        "tokens",
+        "heroui-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-myna-components",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Tailwind/shadcn component gallery (Figma Copy)",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=605-1271",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "components",
+        "tailwind-figma",
+        "myna",
+        "shadcn"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-tailgrids-atoms",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Tailwind TailGrids atom/molecule board (Figma Copy)",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15453",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "atoms",
+        "components",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-tailgrids-layout",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Tailwind TailGrids layout grid (Figma Copy)",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3598",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "layout",
+        "grid",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
       "id": "shadcn-catalog",
       "screen": "catalog",
       "kit": "shadcn-registry",
@@ -5261,6 +5515,28 @@
       }
     },
     {
+      "id": "figma-bootstrap-forms",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 forms page (Figma community duplicate)",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-350",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "form",
+        "fields",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
       "id": "shadcn-form",
       "screen": "form",
       "kit": "shadcn-registry",
@@ -6942,6 +7218,75 @@
       "scope": "page"
     },
     {
+      "id": "figma-heroui-cover",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma Kit cover (Justin Copy)",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261157",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "landing",
+        "heroui-figma",
+        "cover"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-cover",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Design Kit cover (team library file)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50538-14622",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-tailgrids-cover",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Tailwind TailGrids cover (Figma Copy)",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=102-227",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "marketing",
+        "landing",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
       "id": "shadcn-marketing",
       "screen": "marketing",
       "kit": "shadcn-registry",
@@ -8535,6 +8880,30 @@
         "family": "heroui",
         "density": "comfortable"
       }
+    },
+    {
+      "id": "figma-tailgrids-table-stack",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "Tailwind TailGrids table stack list (Figma Copy)",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-23249",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "queue",
+        "table",
+        "records",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "component",
+      "selectable": false
     },
     {
       "id": "shadcn-operate-decide",

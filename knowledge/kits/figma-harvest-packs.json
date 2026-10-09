@@ -1,0 +1,253 @@
+{
+  "version": 1,
+  "harvestedAt": "2026-10-09",
+  "packs": [
+    {
+      "id": "figma-tailgrids-cover",
+      "screen": "marketing",
+      "jobs": [
+        "marketing",
+        "landing",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "title": "Tailwind TailGrids cover (Figma Copy)",
+      "cite": "shadcn-marketing",
+      "file": "DUN5DvdK5XnoJyi9N52gu9",
+      "node": "102:227",
+      "kit": "tailgrids"
+    },
+    {
+      "id": "figma-tailgrids-layout",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "layout",
+        "grid",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "title": "Tailwind TailGrids layout grid (Figma Copy)",
+      "cite": "shadcn-sidebar-07",
+      "file": "DUN5DvdK5XnoJyi9N52gu9",
+      "node": "310:3598",
+      "kit": "tailgrids"
+    },
+    {
+      "id": "figma-tailgrids-atoms",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "atoms",
+        "components",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "title": "Tailwind TailGrids atom/molecule board (Figma Copy)",
+      "cite": "shadcn-form",
+      "file": "DUN5DvdK5XnoJyi9N52gu9",
+      "node": "310:15453",
+      "kit": "tailgrids"
+    },
+    {
+      "id": "figma-tailgrids-table-stack",
+      "screen": "queue",
+      "jobs": [
+        "queue",
+        "table",
+        "records",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "title": "Tailwind TailGrids table stack list (Figma Copy)",
+      "cite": "shadcn-operate-decide",
+      "file": "DUN5DvdK5XnoJyi9N52gu9",
+      "node": "310:23249",
+      "kit": "tailgrids",
+      "scope": "component"
+    },
+    {
+      "id": "figma-myna-components",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "components",
+        "tailwind-figma",
+        "myna",
+        "shadcn"
+      ],
+      "title": "Myna UI Tailwind/shadcn component gallery (Figma Copy)",
+      "cite": "shadcn-form",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "605:1271",
+      "kit": "myna"
+    },
+    {
+      "id": "figma-bootstrap-buttons",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "buttons",
+        "bootstrap-figma"
+      ],
+      "title": "Bootstrap 5 button strip (Figma community duplicate)",
+      "cite": "shadcn-form",
+      "file": "p8B6SUiQDqKFAybsVtfQp9",
+      "node": "3787:1014",
+      "kit": "bootstrap"
+    },
+    {
+      "id": "figma-bootstrap-forms",
+      "screen": "form",
+      "jobs": [
+        "form",
+        "fields",
+        "bootstrap-figma"
+      ],
+      "title": "Bootstrap 5 forms page (Figma community duplicate)",
+      "cite": "shadcn-form",
+      "file": "p8B6SUiQDqKFAybsVtfQp9",
+      "node": "1101:350",
+      "kit": "bootstrap"
+    },
+    {
+      "id": "figma-bootstrap-components",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "components",
+        "bootstrap-figma"
+      ],
+      "title": "Bootstrap 5 components gallery (Figma community duplicate)",
+      "cite": "flowbite-stacked",
+      "file": "p8B6SUiQDqKFAybsVtfQp9",
+      "node": "3888:1152",
+      "kit": "bootstrap"
+    },
+    {
+      "id": "figma-m3-cover",
+      "screen": "marketing",
+      "jobs": [
+        "marketing",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "title": "Material 3 Design Kit cover (team library file)",
+      "cite": "shadcn-sidebar-07",
+      "file": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "node": "50538:14622",
+      "kit": "material3"
+    },
+    {
+      "id": "figma-heroui-cover",
+      "screen": "marketing",
+      "jobs": [
+        "marketing",
+        "landing",
+        "heroui-figma",
+        "cover"
+      ],
+      "title": "HeroUI Figma Kit cover (Justin Copy)",
+      "cite": "shadcn-marketing",
+      "file": "GAn1SrbKJYiKqz9SmHHCRm",
+      "node": "4281:261157",
+      "kit": "heroui"
+    },
+    {
+      "id": "figma-heroui-radio",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "radio",
+        "form",
+        "heroui-figma"
+      ],
+      "title": "HeroUI Radio variant board (Figma Kit)",
+      "cite": "shadcn-form",
+      "file": "DC4g36xyt4DobtbEa11JFL",
+      "node": "3:23",
+      "kit": "heroui",
+      "scope": "component"
+    },
+    {
+      "id": "figma-heroui-badge",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "badge",
+        "status",
+        "heroui-figma"
+      ],
+      "title": "HeroUI Badge variant board (Figma Kit)",
+      "cite": "shadcn-form",
+      "file": "DC4g36xyt4DobtbEa11JFL",
+      "node": "696:52331",
+      "kit": "heroui",
+      "scope": "component"
+    },
+    {
+      "id": "figma-heroui-avatar-group",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "avatar",
+        "people",
+        "heroui-figma"
+      ],
+      "title": "HeroUI Avatar Group board (Figma Kit)",
+      "cite": "shadcn-form",
+      "file": "DC4g36xyt4DobtbEa11JFL",
+      "node": "2545:33395",
+      "kit": "heroui",
+      "scope": "component"
+    },
+    {
+      "id": "figma-heroui-calendar",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "calendar",
+        "date",
+        "heroui-figma"
+      ],
+      "title": "HeroUI Calendar board (Figma Kit)",
+      "cite": "shadcn-form",
+      "file": "DC4g36xyt4DobtbEa11JFL",
+      "node": "4208:222",
+      "kit": "heroui",
+      "scope": "component"
+    },
+    {
+      "id": "figma-heroui-progress",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "progress",
+        "loading",
+        "heroui-figma"
+      ],
+      "title": "HeroUI Progress board (Figma Kit)",
+      "cite": "shadcn-form",
+      "file": "DC4g36xyt4DobtbEa11JFL",
+      "node": "1573:1538",
+      "kit": "heroui",
+      "scope": "component"
+    },
+    {
+      "id": "figma-heroui-theme",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "theme",
+        "tokens",
+        "heroui-figma"
+      ],
+      "title": "HeroUI Theme color sets (Figma Kit)",
+      "cite": "shadcn-form",
+      "file": "DC4g36xyt4DobtbEa11JFL",
+      "node": "5:1194",
+      "kit": "heroui"
+    }
+  ]
+}
