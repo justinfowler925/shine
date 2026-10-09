@@ -1,4 +1,4 @@
-# Material 3 Design Kit cover (team library file)
+# Material 3 Design Kit cover (MUI / Material UI target) (team library file)
 
 Regions. Host: React/Tailwind application shell (house kit). Density: comfortable.
 Paint: `tokens/voices/shadcn-zinc.css`. Structure source: Figma `f4TUS9BWk2rSH8Dqrp5Mon` node `50538:14622`.

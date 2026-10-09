@@ -27,12 +27,14 @@ SSOT inventory + library keys: `knowledge/kits/figma-library-map.json`.
 | iOS 18 | `lk-df32…` | Native only — not Operate |
 
 Named by Justin but **not** published as team libraries: HeroUI, original Tailwind,
-Bootstrap, Minor UI. Design *file copies* (Chrome history) are in
-`knowledge/kits/figma-library-map.json` — prefer TailGrids `DUN5DvdK5XnoJyi9N52gu9`,
-Bootstrap `p8B6SUiQDqKFAybsVtfQp9`, Material 3 `f4TUS9BWk2rSH8Dqrp5Mon`. Harvest packs
-`figma-tailgrids-*`, `figma-myna-components`, `figma-bootstrap-*`, `figma-m3-cover`,
-`figma-mobile-ds-*` (Minor-slot stand-in via Mobile DS `O1Wf1YgB6E1NVrkd2eaWNL`)
-are silhouette evidence (`selectable:false`). Proxies: `corpusProxy` + community refs.
+Bootstrap. **Material UI / MUI** target is Material 3 Design Kit Design file
+`f4TUS9BWk2rSH8Dqrp5Mon` plus subscribed Material 3 libraryKeys (and on-disk
+`mui-material` structure proxy — unpinned, never install `@mui/material`).
+Cancelled misnomer: “Minor UI” (meant MUI). Design *file copies* (Chrome history)
+are in `knowledge/kits/figma-library-map.json` — prefer TailGrids
+`DUN5DvdK5XnoJyi9N52gu9`, Bootstrap `p8B6SUiQDqKFAybsVtfQp9`, Material 3
+`f4TUS9BWk2rSH8Dqrp5Mon`. Harvest packs `figma-tailgrids-*`, `figma-myna-components`,
+`figma-bootstrap-*`, `figma-m3-*` are silhouette evidence (`selectable:false`).
 Closest subscribed stand-in for Tailwind/HeroUI library primitives: **Simple Design System**.
 
 ## Job → cite (do not freestyle)

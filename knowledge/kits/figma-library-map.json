@@ -10,7 +10,7 @@
   },
   "inventoryFileKey": "Wnmb79QQ1EjdSG17tIbSyX",
   "inventoryFileUrl": "https://www.figma.com/design/Wnmb79QQ1EjdSG17tIbSyX",
-  "note": "get_libraries on a fresh Design file in Justin's Clearspeed plan. FigJam cannot list libraries. Named kits HeroUI / original Tailwind / Bootstrap / Minor UI were not published as team libraries \u2014 map them via community refs + Studio design-corpus proxies. Structure only; house paint stays shadcn/Tailwind.",
+  "note": "get_libraries on a fresh Design file in Justin's Clearspeed plan. FigJam cannot list libraries. Named kits HeroUI / original Tailwind / Bootstrap were not published as team libraries \u2014 map via Design file copies + Studio design-corpus proxies. Material/MUI target is Material 3 Design Kit fileKey f4TUS9BWk2rSH8Dqrp5Mon + Material libraryKeys; mui-material is on-disk structure proxy only (unpinned). Structure only; house paint stays shadcn/Tailwind. Cancelled misnomer: 'Minor UI' (meant MUI).",
   "librariesSubscribed": [
     {
       "name": "Clearspeed Design System",
@@ -269,31 +269,75 @@
       ]
     },
     {
-      "name": "Minor UI",
-      "status": "stand_in_mobile_ds_chrome",
-      "communityRefs": [
-        "https://www.figma.com/community/file/1520749847339774468/minimals-ui-components",
-        "https://www.figma.com/community/file/1503752093673029506/minikit-mini-product-ui-kit"
-      ],
+      "name": "Material UI / MUI / Material 3",
+      "status": "harvested_design_file",
       "designFiles": [
         {
           "prefer": true,
-          "fileKey": "O1Wf1YgB6E1NVrkd2eaWNL",
-          "url": "https://www.figma.com/design/O1Wf1YgB6E1NVrkd2eaWNL",
-          "note": "Mobile Design System \u2014 AI-ready (Community). Chrome history Design access; interim Minor-slot stand-in until Minimals/MiniKIT Justin Copy exists"
+          "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+          "url": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon",
+          "note": "Material 3 Design Kit \u2014 pages Getting Started / Styles / Components (32 boards). use_figma root.children; MCP get_metadata alone under-lists."
         }
       ],
-      "harvestPacks": [
-        "figma-mobile-ds-atoms",
-        "figma-mobile-ds-molecules",
-        "figma-mobile-ds-organisms"
+      "libraryKeys": [
+        "lk-0ed47b4a992d98ca20e5243564e1a9f7b3b321b9a4bc3e769c9c349832e23b6d5bc2c529b6cde7b13fcd97f5d697f3942d52e20202fee51b63f30a890b387cd4",
+        "lk-5a31d104cabc6a74d4edf6425e7bc6575e9c0f18cda7efb746193aef4d915b077d115c985e6cf49d36d97d455a17d5127a2cbbfbc618b8a70a38669dccb61462"
       ],
-      "corpusProxy": [],
+      "harvestPacks": [
+        "figma-m3-cover",
+        "figma-m3-buttons",
+        "figma-m3-text-fields",
+        "figma-m3-dialogs",
+        "figma-m3-navigation-bars",
+        "figma-m3-checkboxes",
+        "figma-m3-switch",
+        "figma-m3-lists",
+        "figma-m3-tabs",
+        "figma-m3-cards",
+        "figma-m3-chips",
+        "figma-m3-menu",
+        "figma-m3-navigation-drawer",
+        "figma-m3-navigation-rails",
+        "figma-m3-top-app-bars",
+        "figma-m3-fabs",
+        "figma-m3-icon-buttons",
+        "figma-m3-badges",
+        "figma-m3-snackbars",
+        "figma-m3-progress",
+        "figma-m3-radio",
+        "figma-m3-sliders",
+        "figma-m3-side-sheets",
+        "figma-m3-segmented-buttons",
+        "figma-m3-search",
+        "figma-m3-dividers",
+        "figma-m3-date-picker",
+        "figma-m3-time-picker",
+        "figma-m3-bottom-sheets",
+        "figma-m3-bottom-app-bars",
+        "figma-m3-tooltips",
+        "figma-m3-carousel",
+        "figma-m3-toc",
+        "figma-m3-typography",
+        "figma-m3-color",
+        "figma-m3-layout",
+        "figma-m3-elements",
+        "figma-m3-elevation"
+      ],
+      "corpusProxy": [
+        "mui-material"
+      ],
       "shineCite": [
         "shadcn-form",
-        "shadcn-sidebar-07"
+        "shadcn-sidebar-07",
+        "shadcn-operate-decide"
       ],
-      "note": "Exact 'Minor UI' Design fileKey still absent from Chrome/Safari/bookmarks/Drive/Slack. Minimals/MiniKIT community IDs never visited. Packed Mobile DS atoms/molecules/organisms as Chrome-found stand-in. Myna (4SbNh8z\u2026) is a separate Tailwind kit already harvested \u2014 do not equate to Minor."
+      "note": "Justin meant MUI/Material UI (never 'Minor UI'). Classic MUI-for-Figma preview 9YlB2B0UBLiuHuHFiKykWd is no MCP access \u2014 use Material 3 Design file + libs + on-disk mui-material structure proxy. Do not install @mui/material in consumers.",
+      "cancelledMisnomer": "Minor UI / Minimals / MiniKIT / Mobile DS stand-in \u2014 cancelled 2026-10-09"
+    },
+    {
+      "name": "Minor UI",
+      "status": "cancelled_misnomer",
+      "note": "CANCELLED 2026-10-09 \u2014 Justin meant MUI / Material UI. Stop Minimals/MiniKIT/Mobile DS hunts. See Material UI / MUI / Material 3 entry."
     }
   ],
   "silhouetteMap": [
@@ -472,28 +516,104 @@
     "agent": "bc-d6d6f8a2-917d-5300-b149-19d1677d08ed",
     "inventoriedAt": "2026-10-09",
     "packs": [
-      "figma-bootstrap-buttons",
-      "figma-bootstrap-components",
-      "figma-bootstrap-forms",
-      "figma-m3-cover",
-      "figma-mobile-ds-atoms",
-      "figma-mobile-ds-molecules",
-      "figma-mobile-ds-organisms",
-      "figma-myna-components",
-      "figma-tailgrids-atoms",
       "figma-tailgrids-cover",
       "figma-tailgrids-layout",
-      "figma-tailgrids-table-stack"
+      "figma-tailgrids-atoms",
+      "figma-tailgrids-table-stack",
+      "figma-myna-components",
+      "figma-bootstrap-buttons",
+      "figma-bootstrap-forms",
+      "figma-bootstrap-components",
+      "figma-m3-cover",
+      "figma-m3-buttons",
+      "figma-m3-text-fields",
+      "figma-m3-dialogs",
+      "figma-m3-navigation-bars",
+      "figma-m3-checkboxes",
+      "figma-m3-switch",
+      "figma-m3-lists",
+      "figma-m3-tabs",
+      "figma-m3-cards",
+      "figma-m3-chips",
+      "figma-m3-menu",
+      "figma-m3-navigation-drawer",
+      "figma-m3-navigation-rails",
+      "figma-m3-top-app-bars",
+      "figma-m3-fabs",
+      "figma-m3-icon-buttons",
+      "figma-m3-badges",
+      "figma-m3-snackbars",
+      "figma-m3-progress",
+      "figma-m3-radio",
+      "figma-m3-sliders",
+      "figma-m3-side-sheets",
+      "figma-m3-segmented-buttons",
+      "figma-m3-search",
+      "figma-m3-dividers",
+      "figma-m3-date-picker",
+      "figma-m3-time-picker",
+      "figma-m3-bottom-sheets",
+      "figma-m3-bottom-app-bars",
+      "figma-m3-tooltips",
+      "figma-m3-carousel",
+      "figma-m3-toc",
+      "figma-m3-typography",
+      "figma-m3-color",
+      "figma-m3-layout",
+      "figma-m3-elements",
+      "figma-m3-elevation"
     ],
-    "minorSlot": {
-      "exactMinorUiFileKey": null,
-      "standInFileKey": "O1Wf1YgB6E1NVrkd2eaWNL",
-      "standInName": "Mobile Design System \u2014 AI-ready (Community)",
+    "materialUi": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "pages": [
+        "Getting Started",
+        "Styles",
+        "Components"
+      ],
+      "componentBoards": 32,
+      "styleBoards": 5,
       "packs": [
-        "figma-mobile-ds-atoms",
-        "figma-mobile-ds-molecules",
-        "figma-mobile-ds-organisms"
-      ]
+        "figma-m3-cover",
+        "figma-m3-buttons",
+        "figma-m3-text-fields",
+        "figma-m3-dialogs",
+        "figma-m3-navigation-bars",
+        "figma-m3-checkboxes",
+        "figma-m3-switch",
+        "figma-m3-lists",
+        "figma-m3-tabs",
+        "figma-m3-cards",
+        "figma-m3-chips",
+        "figma-m3-menu",
+        "figma-m3-navigation-drawer",
+        "figma-m3-navigation-rails",
+        "figma-m3-top-app-bars",
+        "figma-m3-fabs",
+        "figma-m3-icon-buttons",
+        "figma-m3-badges",
+        "figma-m3-snackbars",
+        "figma-m3-progress",
+        "figma-m3-radio",
+        "figma-m3-sliders",
+        "figma-m3-side-sheets",
+        "figma-m3-segmented-buttons",
+        "figma-m3-search",
+        "figma-m3-dividers",
+        "figma-m3-date-picker",
+        "figma-m3-time-picker",
+        "figma-m3-bottom-sheets",
+        "figma-m3-bottom-app-bars",
+        "figma-m3-tooltips",
+        "figma-m3-carousel",
+        "figma-m3-toc",
+        "figma-m3-typography",
+        "figma-m3-color",
+        "figma-m3-layout",
+        "figma-m3-elements",
+        "figma-m3-elevation"
+      ],
+      "corpusProxy": "mui-material",
+      "note": "Full Material 3 board harvest; mui-material remains unpinned structure proxy"
     }
   }
 }

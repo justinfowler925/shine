@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-m3-icon-buttons",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-m3-icon-buttons.md",
+      "sha256": "4caf7191f40e10410ec6b9713a08be9608333ae557558aee3be897079849db7f"
+    }
+  ]
+}

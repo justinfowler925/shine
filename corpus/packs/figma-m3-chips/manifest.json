@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-m3-chips",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-m3-chips.md",
+      "sha256": "5255dce846a396356f1c1ca4e78e8456d485a11200abc0e0c000c23409db7240"
+    }
+  ]
+}

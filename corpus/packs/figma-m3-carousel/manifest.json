@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-m3-carousel",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-m3-carousel.md",
+      "sha256": "beb585aeee61cfa9e8042e0bd68ba421e185bce18bc6e38ad1ede31a4e62638f"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-m3-radio",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-m3-radio.md",
+      "sha256": "3e71c237945ba18ace0b58687a45d6a82e936985ce8a784a1d6ba8389f444307"
+    }
+  ]
+}

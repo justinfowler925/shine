@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-m3-navigation-bars",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-m3-navigation-bars.md",
+      "sha256": "748f04a1cb8c15ef7df4a85d370f3b1bd9a35a6c147952025a92fa92d9be2af0"
+    }
+  ]
+}

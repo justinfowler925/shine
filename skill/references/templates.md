@@ -61,9 +61,42 @@ Reasons are listed under the table.
 | carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
 | catalog | `figma-bootstrap-buttons` | shadcn-registry | blueprint | **retired** | catalog, buttons, bootstrap-figma |
 | catalog | `figma-bootstrap-components` | shadcn-registry | blueprint | **retired** | catalog, components, bootstrap-figma |
-| catalog | `figma-mobile-ds-atoms` | shadcn-registry | blueprint | **retired** | catalog, atoms, mobile-figma, minor-slot |
-| catalog | `figma-mobile-ds-molecules` | shadcn-registry | blueprint | **retired** | catalog, molecules, mobile-figma, minor-slot |
-| catalog | `figma-mobile-ds-organisms` | shadcn-registry | blueprint | **retired** | catalog, organisms, mobile-figma, minor-slot |
+| catalog | `figma-m3-badges` | shadcn-registry | blueprint | **retired** | catalog, badge, material-figma, mui, material3 |
+| catalog | `figma-m3-bottom-app-bars` | shadcn-registry | blueprint | **retired** | catalog, app-bar, navigation, material-figma, mui, material3 |
+| catalog | `figma-m3-bottom-sheets` | shadcn-registry | blueprint | **retired** | catalog, sheet, overlay, material-figma, mui, material3 |
+| catalog | `figma-m3-buttons` | shadcn-registry | blueprint | **retired** | catalog, buttons, material-figma, mui, material3 |
+| catalog | `figma-m3-cards` | shadcn-registry | blueprint | **retired** | catalog, cards, material-figma, mui, material3 |
+| catalog | `figma-m3-carousel` | shadcn-registry | blueprint | **retired** | catalog, carousel, material-figma, mui, material3 |
+| catalog | `figma-m3-checkboxes` | shadcn-registry | blueprint | **retired** | catalog, checkbox, material-figma, mui, material3 |
+| catalog | `figma-m3-chips` | shadcn-registry | blueprint | **retired** | catalog, chips, material-figma, mui, material3 |
+| catalog | `figma-m3-color` | shadcn-registry | blueprint | **retired** | catalog, color, styles, material-figma, mui, material3 |
+| catalog | `figma-m3-date-picker` | shadcn-registry | blueprint | **retired** | catalog, date, picker, material-figma, mui, material3 |
+| catalog | `figma-m3-dialogs` | shadcn-registry | blueprint | **retired** | catalog, dialog, overlay, material-figma, mui, material3 |
+| catalog | `figma-m3-dividers` | shadcn-registry | blueprint | **retired** | catalog, divider, material-figma, mui, material3 |
+| catalog | `figma-m3-elements` | shadcn-registry | blueprint | **retired** | catalog, elements, styles, material-figma, mui, material3 |
+| catalog | `figma-m3-elevation` | shadcn-registry | blueprint | **retired** | catalog, elevation, styles, material-figma, mui, material3 |
+| catalog | `figma-m3-fabs` | shadcn-registry | blueprint | **retired** | catalog, fab, buttons, material-figma, mui, material3 |
+| catalog | `figma-m3-icon-buttons` | shadcn-registry | blueprint | **retired** | catalog, icon-button, buttons, material-figma, mui, material3 |
+| catalog | `figma-m3-layout` | shadcn-registry | blueprint | **retired** | catalog, layout, styles, material-figma, mui, material3 |
+| catalog | `figma-m3-lists` | shadcn-registry | blueprint | **retired** | catalog, list, records, material-figma, mui, material3 |
+| catalog | `figma-m3-menu` | shadcn-registry | blueprint | **retired** | catalog, menu, overlay, material-figma, mui, material3 |
+| catalog | `figma-m3-navigation-bars` | shadcn-registry | blueprint | **retired** | catalog, navigation, material-figma, mui, material3 |
+| catalog | `figma-m3-navigation-drawer` | shadcn-registry | blueprint | **retired** | catalog, navigation, drawer, material-figma, mui, material3 |
+| catalog | `figma-m3-navigation-rails` | shadcn-registry | blueprint | **retired** | catalog, navigation, rail, material-figma, mui, material3 |
+| catalog | `figma-m3-progress` | shadcn-registry | blueprint | **retired** | catalog, progress, material-figma, mui, material3 |
+| catalog | `figma-m3-radio` | shadcn-registry | blueprint | **retired** | catalog, radio, material-figma, mui, material3 |
+| catalog | `figma-m3-search` | shadcn-registry | blueprint | **retired** | catalog, search, material-figma, mui, material3 |
+| catalog | `figma-m3-segmented-buttons` | shadcn-registry | blueprint | **retired** | catalog, segmented, buttons, material-figma, mui, material3 |
+| catalog | `figma-m3-side-sheets` | shadcn-registry | blueprint | **retired** | catalog, sheet, drawer, material-figma, mui, material3 |
+| catalog | `figma-m3-sliders` | shadcn-registry | blueprint | **retired** | catalog, slider, material-figma, mui, material3 |
+| catalog | `figma-m3-snackbars` | shadcn-registry | blueprint | **retired** | catalog, snackbar, feedback, material-figma, mui, material3 |
+| catalog | `figma-m3-switch` | shadcn-registry | blueprint | **retired** | catalog, switch, material-figma, mui, material3 |
+| catalog | `figma-m3-tabs` | shadcn-registry | blueprint | **retired** | catalog, tabs, material-figma, mui, material3 |
+| catalog | `figma-m3-time-picker` | shadcn-registry | blueprint | **retired** | catalog, time, picker, material-figma, mui, material3 |
+| catalog | `figma-m3-toc` | shadcn-registry | blueprint | **retired** | catalog, navigation, toc, material-figma, mui, material3 |
+| catalog | `figma-m3-tooltips` | shadcn-registry | blueprint | **retired** | catalog, tooltip, material-figma, mui, material3 |
+| catalog | `figma-m3-top-app-bars` | shadcn-registry | blueprint | **retired** | catalog, app-bar, navigation, material-figma, mui, material3 |
+| catalog | `figma-m3-typography` | shadcn-registry | blueprint | **retired** | catalog, typography, styles, material-figma, mui, material3 |
 | catalog | `figma-myna-components` | shadcn-registry | blueprint | **retired** | catalog, components, tailwind-figma, myna, shadcn |
 | catalog | `figma-tailgrids-atoms` | shadcn-registry | blueprint | **retired** | catalog, atoms, components, tailwind-figma, tailgrids |
 | catalog | `figma-tailgrids-layout` | shadcn-registry | blueprint | **retired** | catalog, layout, grid, tailwind-figma, tailgrids |
@@ -171,6 +204,7 @@ Reasons are listed under the table.
 | dashboard | `query-haze` | haze | query-only | live | dashboard |
 | empty | `shadcn-empty-icon` | shadcn-registry | source | live | empty, ai-generate |
 | form | `figma-bootstrap-forms` | shadcn-registry | blueprint | **retired** | form, fields, bootstrap-figma |
+| form | `figma-m3-text-fields` | shadcn-registry | blueprint | **retired** | form, fields, material-figma, mui, material3 |
 | form | `shadcn-form` | shadcn-registry | blueprint | live | form, form-app, input, fields, create, edit |
 | form | `shadcn-form-invite` | shadcn-registry | blueprint | live | form, form-app, invite, invite-teammate |
 | form | `untitled-date-picker` | untitled-ui-react | source | live | form, input, date, date-range, calendar, picker |
@@ -263,7 +297,7 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-248 rows, 15 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+282 rows, 49 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
@@ -271,14 +305,48 @@ Reasons are listed under the table.
 - `heroui-next-app` — shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)
 - `figma-bootstrap-buttons` — undefined
 - `figma-bootstrap-components` — undefined
-- `figma-mobile-ds-atoms` — undefined
-- `figma-mobile-ds-molecules` — undefined
-- `figma-mobile-ds-organisms` — undefined
+- `figma-m3-badges` — undefined
+- `figma-m3-bottom-app-bars` — undefined
+- `figma-m3-bottom-sheets` — undefined
+- `figma-m3-buttons` — undefined
+- `figma-m3-cards` — undefined
+- `figma-m3-carousel` — undefined
+- `figma-m3-checkboxes` — undefined
+- `figma-m3-chips` — undefined
+- `figma-m3-color` — undefined
+- `figma-m3-date-picker` — undefined
+- `figma-m3-dialogs` — undefined
+- `figma-m3-dividers` — undefined
+- `figma-m3-elements` — undefined
+- `figma-m3-elevation` — undefined
+- `figma-m3-fabs` — undefined
+- `figma-m3-icon-buttons` — undefined
+- `figma-m3-layout` — undefined
+- `figma-m3-lists` — undefined
+- `figma-m3-menu` — undefined
+- `figma-m3-navigation-bars` — undefined
+- `figma-m3-navigation-drawer` — undefined
+- `figma-m3-navigation-rails` — undefined
+- `figma-m3-progress` — undefined
+- `figma-m3-radio` — undefined
+- `figma-m3-search` — undefined
+- `figma-m3-segmented-buttons` — undefined
+- `figma-m3-side-sheets` — undefined
+- `figma-m3-sliders` — undefined
+- `figma-m3-snackbars` — undefined
+- `figma-m3-switch` — undefined
+- `figma-m3-tabs` — undefined
+- `figma-m3-time-picker` — undefined
+- `figma-m3-toc` — undefined
+- `figma-m3-tooltips` — undefined
+- `figma-m3-top-app-bars` — undefined
+- `figma-m3-typography` — undefined
 - `figma-myna-components` — undefined
 - `figma-tailgrids-atoms` — undefined
 - `figma-tailgrids-layout` — undefined
 - `tremor-charts` — shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it
 - `figma-bootstrap-forms` — undefined
+- `figma-m3-text-fields` — undefined
 - `figma-m3-cover` — undefined
 - `figma-tailgrids-cover` — undefined
 - `figma-tailgrids-table-stack` — undefined
