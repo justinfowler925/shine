@@ -189,12 +189,14 @@
         }
       ],
       "harvestPacks": [
-        "figma-heroui-cover",
-        "figma-heroui-radio",
-        "figma-heroui-badge",
         "figma-heroui-avatar-group",
+        "figma-heroui-badge",
         "figma-heroui-calendar",
+        "figma-heroui-card",
+        "figma-heroui-components",
+        "figma-heroui-cover",
         "figma-heroui-progress",
+        "figma-heroui-radio",
         "figma-heroui-theme"
       ],
       "deepHarvestFileKey": "DC4g36xyt4DobtbEa11JFL"

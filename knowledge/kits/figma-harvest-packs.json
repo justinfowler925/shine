@@ -248,6 +248,36 @@
       "file": "DC4g36xyt4DobtbEa11JFL",
       "node": "5:1194",
       "kit": "heroui"
+    },
+    {
+      "id": "figma-heroui-components",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "docs",
+        "heroui-figma",
+        "components"
+      ],
+      "title": "HeroUI Figma Components docs canvas",
+      "cite": "shadcn-form",
+      "file": "DC4g36xyt4DobtbEa11JFL",
+      "node": "5:3550",
+      "kit": "heroui"
+    },
+    {
+      "id": "figma-heroui-card",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "card",
+        "heroui-figma"
+      ],
+      "title": "HeroUI Card component (Cover board)",
+      "cite": "shadcn-form",
+      "file": "GAn1SrbKJYiKqz9SmHHCRm",
+      "node": "4281:261282",
+      "kit": "heroui",
+      "scope": "component"
     }
   ]
 }

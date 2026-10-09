@@ -802,7 +802,9 @@ for (const t of [
   { id: "figma-heroui-avatar-group", screen: "catalog", title: "HeroUI Avatar Group board (Figma Kit)", jobs: ["catalog", "avatar", "people", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=2545-33395", scope: "component" },
   { id: "figma-heroui-calendar", screen: "catalog", title: "HeroUI Calendar board (Figma Kit)", jobs: ["catalog", "calendar", "date", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=4208-222", scope: "component" },
   { id: "figma-heroui-progress", screen: "catalog", title: "HeroUI Progress board (Figma Kit)", jobs: ["catalog", "progress", "loading", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=1573-1538", scope: "component" },
-  { id: "figma-heroui-theme", screen: "catalog", title: "HeroUI Theme color sets (Figma Kit)", jobs: ["catalog", "theme", "tokens", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-1194" },
+    { id: "figma-heroui-components", screen: "catalog", title: "HeroUI Figma Components docs canvas", jobs: ["catalog", "docs", "heroui-figma", "components"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-3550" },
+  { id: "figma-heroui-card", screen: "catalog", title: "HeroUI Card component (Cover board)", jobs: ["catalog", "card", "heroui-figma"], preview: "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261282", scope: "component" },
+{ id: "figma-heroui-theme", screen: "catalog", title: "HeroUI Theme color sets (Figma Kit)", jobs: ["catalog", "theme", "tokens", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-1194" },
 ]) {
   push({
     id: t.id, screen: t.screen, kit: "shadcn-registry", title: t.title,

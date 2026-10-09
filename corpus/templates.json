@@ -2108,6 +2108,51 @@
       "selectable": false
     },
     {
+      "id": "figma-heroui-card",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Card component (Cover board)",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261282",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "card",
+        "heroui-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "component",
+      "selectable": false
+    },
+    {
+      "id": "figma-heroui-components",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma Components docs canvas",
+      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-3550",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "docs",
+        "heroui-figma",
+        "components"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
       "id": "figma-heroui-progress",
       "screen": "catalog",
       "kit": "shadcn-registry",

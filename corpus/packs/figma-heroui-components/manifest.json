@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-heroui-components",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-components.md",
+      "sha256": "22e424730ffce0506595a3ee4fc70da218f3feca3bd6874d4b0981eaf844265c"
+    }
+  ]
+}

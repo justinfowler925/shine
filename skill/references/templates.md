@@ -97,6 +97,8 @@ Reasons are listed under the table.
 | catalog | `figma-heroui-avatar-group` | shadcn-registry | blueprint | **retired** | catalog, avatar, people, heroui-figma |
 | catalog | `figma-heroui-badge` | shadcn-registry | blueprint | **retired** | catalog, badge, status, heroui-figma |
 | catalog | `figma-heroui-calendar` | shadcn-registry | blueprint | **retired** | catalog, calendar, date, heroui-figma |
+| catalog | `figma-heroui-card` | shadcn-registry | blueprint | **retired** | catalog, card, heroui-figma |
+| catalog | `figma-heroui-components` | shadcn-registry | blueprint | **retired** | catalog, docs, heroui-figma, components |
 | catalog | `figma-heroui-progress` | shadcn-registry | blueprint | **retired** | catalog, progress, loading, heroui-figma |
 | catalog | `figma-heroui-radio` | shadcn-registry | blueprint | **retired** | catalog, radio, form, heroui-figma |
 | catalog | `figma-heroui-theme` | shadcn-registry | blueprint | **retired** | catalog, theme, tokens, heroui-figma |
@@ -384,7 +386,7 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-369 rows, 18 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+371 rows, 20 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
@@ -394,6 +396,8 @@ Reasons are listed under the table.
 - `figma-heroui-avatar-group` — undefined
 - `figma-heroui-badge` — undefined
 - `figma-heroui-calendar` — undefined
+- `figma-heroui-card` — undefined
+- `figma-heroui-components` — undefined
 - `figma-heroui-progress` — undefined
 - `figma-heroui-radio` — undefined
 - `figma-heroui-theme` — undefined
