@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-heroui-calendar",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-calendar.md",
+      "sha256": "70a53bdc869c2e0c19cb959fe21f0bb1707b8058b412ac0a67e93a6cdb31353e"
+    }
+  ]
+}

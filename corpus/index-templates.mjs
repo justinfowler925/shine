@@ -22,6 +22,11 @@ import { existsSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync 
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
+import {
+  buildHeroUiAtomRows,
+  buildHeroUiPageRows,
+  missingTailwindPages,
+} from "./index-kit-walk.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CORPUS = resolve(process.env.DESIGN_CORPUS || join(homedir(), "design-corpus"));
@@ -146,9 +151,11 @@ const exists = (rel) => existsSync(join(CORPUS, rel));
 // kits earned the hard lane because a retired row is a row an agent can still read
 // and imitate.
 const HOUSE_KIT = "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against";
+// 2026-10-09 Justin override: HeroUI is a walking design kit again — cite must
+// retrieve HeroUI screens. Clearspeed Operate still prefers house shadcn via
+// installedKits / edition siblings; kit affinity ports foreign structure.
 const RETIRED = {
   "mantine-appshell": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
-  "heroui-next-app": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
   "tremor-charts": "shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it",
 };
 
@@ -613,6 +620,32 @@ for (const t of TAILWIND_PAGES) {
   });
 }
 
+// ---- Kit-walk: missing Tailwind pages + full HeroUI atom/page catalog --------
+// Justin 2026-10-09: absorb HeroUI + Tailwind kits so Wireframe→Build cites
+// proven silhouettes instead of accordion landfill. Inventories live in the
+// Shine Project store (heroui-kit-inventory.md / tailwind-kit-inventory.md).
+for (const t of missingTailwindPages()) {
+  if (!exists(t.path)) continue;
+  const sources = companionSources(t.path);
+  push({
+    id: t.id, screen: t.screen, kit: t.kit, title: t.title, path: t.path, preview: t.preview,
+    ...(sources.length ? { sources } : {}),
+    license: "MIT", kind: "source", startFrom: t.rank, jobs: t.jobs,
+    scope: t.screen === "form" && /gallery|UiElements|Buttons|Cards|Modals|alerts|badges/.test(t.path + t.title)
+      ? "component"
+      : "page",
+  });
+}
+const kitWalkCtx = { exists, corpus: CORPUS };
+for (const t of [...buildHeroUiAtomRows(kitWalkCtx), ...buildHeroUiPageRows(kitWalkCtx)]) {
+  if (!exists(t.path)) continue;
+  push({
+    id: t.id, screen: t.screen, kit: t.kit, title: t.title, path: t.path, preview: t.preview,
+    license: t.license, kind: t.kind, startFrom: t.startFrom, jobs: t.jobs, scope: t.scope,
+    ...(t.note ? { note: t.note } : {}),
+  });
+}
+
 // ---- LEX blueprints ----------------------------------------------------------
 // No public renderable source exists for Lightning surfaces, so these rows carry
 // no corpus path. Structure and org-measured facts live in references/salesforce.md;
@@ -751,6 +784,38 @@ push({
 // corpus/catalog.mjs. Each kit is a directory under ~/design-corpus/owned/<kit>/
 // with a manifest.json declaring `templates`; see corpus/owned/README.md.
 const ownedRows = [];
+
+// Structure only — house paint stays shadcn/Tailwind. See knowledge/kits/figma-library-map.json.
+for (const t of [
+  { id: "figma-tailgrids-cover", screen: "marketing", title: "Tailwind TailGrids cover (Figma Copy)", jobs: ["marketing", "landing", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=102-227" },
+  { id: "figma-tailgrids-layout", screen: "catalog", title: "Tailwind TailGrids layout grid (Figma Copy)", jobs: ["catalog", "layout", "grid", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3598" },
+  { id: "figma-tailgrids-atoms", screen: "catalog", title: "Tailwind TailGrids atom/molecule board (Figma Copy)", jobs: ["catalog", "atoms", "components", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15453" },
+  { id: "figma-tailgrids-table-stack", screen: "queue", title: "Tailwind TailGrids table stack list (Figma Copy)", jobs: ["queue", "table", "records", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-23249", scope: "component" },
+  { id: "figma-myna-components", screen: "catalog", title: "Myna UI Tailwind/shadcn component gallery (Figma Copy)", jobs: ["catalog", "components", "tailwind-figma", "myna", "shadcn"], preview: "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=605-1271" },
+  { id: "figma-bootstrap-buttons", screen: "catalog", title: "Bootstrap 5 button strip (Figma community duplicate)", jobs: ["catalog", "buttons", "bootstrap-figma"], preview: "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3787-1014" },
+  { id: "figma-bootstrap-forms", screen: "form", title: "Bootstrap 5 forms page (Figma community duplicate)", jobs: ["form", "fields", "bootstrap-figma"], preview: "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-350" },
+  { id: "figma-bootstrap-components", screen: "catalog", title: "Bootstrap 5 components gallery (Figma community duplicate)", jobs: ["catalog", "components", "bootstrap-figma"], preview: "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1152" },
+  { id: "figma-m3-cover", screen: "marketing", title: "Material 3 Design Kit cover (team library file)", jobs: ["marketing", "material-figma", "mui", "material3"], preview: "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50538-14622" },
+  { id: "figma-heroui-cover", screen: "marketing", title: "HeroUI Figma Kit cover (Justin Copy)", jobs: ["marketing", "landing", "heroui-figma", "cover"], preview: "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261157" },
+  { id: "figma-heroui-radio", screen: "catalog", title: "HeroUI Radio variant board (Figma Kit)", jobs: ["catalog", "radio", "form", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=3-23", scope: "component" },
+  { id: "figma-heroui-badge", screen: "catalog", title: "HeroUI Badge variant board (Figma Kit)", jobs: ["catalog", "badge", "status", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=696-52331", scope: "component" },
+  { id: "figma-heroui-avatar-group", screen: "catalog", title: "HeroUI Avatar Group board (Figma Kit)", jobs: ["catalog", "avatar", "people", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=2545-33395", scope: "component" },
+  { id: "figma-heroui-calendar", screen: "catalog", title: "HeroUI Calendar board (Figma Kit)", jobs: ["catalog", "calendar", "date", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=4208-222", scope: "component" },
+  { id: "figma-heroui-progress", screen: "catalog", title: "HeroUI Progress board (Figma Kit)", jobs: ["catalog", "progress", "loading", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=1573-1538", scope: "component" },
+    { id: "figma-heroui-components", screen: "catalog", title: "HeroUI Figma Components docs canvas", jobs: ["catalog", "docs", "heroui-figma", "components"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-3550" },
+  { id: "figma-heroui-card", screen: "catalog", title: "HeroUI Card component (Cover board)", jobs: ["catalog", "card", "heroui-figma"], preview: "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261282", scope: "component" },
+{ id: "figma-heroui-theme", screen: "catalog", title: "HeroUI Theme color sets (Figma Kit)", jobs: ["catalog", "theme", "tokens", "heroui-figma"], preview: "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-1194" },
+]) {
+  push({
+    id: t.id, screen: t.screen, kit: "shadcn-registry", title: t.title,
+    preview: t.preview || "", license: "n/a", kind: "blueprint",
+    startFrom: 1, jobs: t.jobs, dna: KIT_FAMILY["shadcn-registry"],
+    note: "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+    scope: t.scope || "page",
+    selectable: false,
+  });
+}
+
 const ownedDir = OWNED_DIR;
 const ownedManifests = [];
 if (existsSync(join(ownedDir, "manifest.json"))) ownedManifests.push(join(ownedDir, "manifest.json"));

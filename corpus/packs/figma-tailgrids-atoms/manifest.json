@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-tailgrids-atoms",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-tailgrids-atoms.md",
+      "sha256": "6d283788ea27033915e050bc98664b2d51b0852667de65f2d19d60a150e16cc8"
+    }
+  ]
+}

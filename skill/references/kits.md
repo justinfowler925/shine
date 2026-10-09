@@ -12,6 +12,17 @@ code. It detects React/Next/Vite/LEX/native, the package manager, and installed 
 it refuses a second design system and verifies every recipe API against the pinned pack.
 `integrations/scaffold.mjs` writes the verified adapter plus its provenance receipt.
 
+## Figma kits → silhouettes (absorb)
+
+Justin’s Figma libraries + Studio design-corpus are the walking design kit.
+Open `references/figma-kits.md` and `knowledge/kits/figma-library-map.json`
+before Wireframe→Build. Prefer kit-walk cites (`heroui-*`, `flowbite-*`,
+`tailadmin-*`, `untitled-*`) for matching jobs — never accordion landfill.
+Clearspeed Operate still prefers house shadcn via edition siblings / installedKits;
+foreign kits are structure to port.
+
+HeroUI prefer Figma file: `GAn1SrbKJYiKqz9SmHHCRm`.
+
 ## Decision table
 
 | Need | Primary kit | Also | Avoid |
