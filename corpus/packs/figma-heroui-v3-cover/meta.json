@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-v3-cover",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=5011-2637",
+  "harvested": "2026-10-09",
+  "bytes": 137497,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Welcome",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=5011-2637",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=5011-2637",
+    "capturedAt": "2026-10-09T02:41:22.020088Z",
+    "shotSha256": "4d3e2dbdab279205a14fe2d266d61225e80bb45d44332fe4b121063e71ab4f7e",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "0:1",
+      "nodeId": "5011:2637",
+      "page": "Welcome",
+      "kind": "cover"
+    }
+  }
+}

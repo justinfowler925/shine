@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-theme-radius",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-theme-radius",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-theme-radius.md",
+      "sha256": "9e1e3d738c17c867361161026966250219168ec744f0b210c4c26f548c7f2241"
+    }
+  ]
+}

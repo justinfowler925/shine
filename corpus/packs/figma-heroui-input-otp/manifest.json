@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-input-otp",
+  "screen": "form",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-input-otp",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-input-otp.md",
+      "sha256": "dbb5d5bcdf53be0389021156f844a7e7a8f9eac88b276ed3a75e34b31a22cd22"
+    }
+  ]
+}

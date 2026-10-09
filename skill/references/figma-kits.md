@@ -33,11 +33,11 @@ Minimals/MiniKIT. Design fileKeys + harvest packs live in the kit map
 (`designFiles`, `figma-harvest-packs.json`, `corpusProxy`). Closest subscribed
 stand-in for Tailwind/HeroUI gallery density: **Simple Design System**.
 
-HeroUI deep harvest uses alt file `DC4g36xyt4DobtbEa11JFL` (Chrome node-ids for
-Radio/Badge/Avatar/Calendar/Progress/Theme) — page list alone only shows
-Welcome/Icons. Prefer-copy `GAn1SrbKJYiKqz9SmHHCRm` carries Cover.
-Tailwind/Bootstrap/M3 Justin copies: TailGrids `DUN5Dvd…`, Myna `4SbNh8…`,
-Bootstrap `p8B6SU…`, Material 3 `f4TUS9…`.
+HeroUI prefer-copy `GAn1SrbKJYiKqz9SmHHCRm` is the full 38-page kit (use_figma
+`figma.root.children`; MCP get_metadata without nodeId falsely shows Welcome+Icons).
+All component/Theme/Brand/Icons Example frames land as `figma-heroui-*` packs.
+Alt `DC4g36…` is an optional duplicate. Tailwind/Bootstrap/M3 Justin copies:
+TailGrids `DUN5Dvd…`, Myna `4SbNh8…`, Bootstrap `p8B6SU…`, Material 3 `f4TUS9…`.
 
 ## Job → cite (do not freestyle)
 

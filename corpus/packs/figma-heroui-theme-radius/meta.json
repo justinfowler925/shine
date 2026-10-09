@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-theme-radius",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-17641",
+  "harvested": "2026-10-09",
+  "bytes": 12930,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Theme",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-17641",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-17641",
+    "capturedAt": "2026-10-09T02:44:37.020424Z",
+    "shotSha256": "9c076a69d7410fc6796ba0bd3cc4e40b88a7124b1fd0278e349e6aeeb804c5ff",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "5:1194",
+      "nodeId": "482:17641",
+      "page": "Theme",
+      "kind": "tokens"
+    }
+  }
+}

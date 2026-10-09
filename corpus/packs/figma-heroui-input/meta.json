@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-input",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2746-458",
+  "harvested": "2026-10-09",
+  "bytes": 118445,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Input",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2746-458",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2746-458",
+    "capturedAt": "2026-10-09T02:41:28.015341Z",
+    "shotSha256": "2c6b6ac3959e1a324fd8b17e4d275ac343acee6cfeb2e4fef391708ccfa34169",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "3:34",
+      "nodeId": "2746:458",
+      "page": "Input",
+      "kind": "component"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-carousel",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3576-2133",
+  "harvested": "2026-10-09",
+  "bytes": 336990,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Carousel",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3576-2133",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3576-2133",
+    "capturedAt": "2026-10-09T02:41:26.062665Z",
+    "shotSha256": "3282d9b614b2ddcd9cc3e1b0d51f0d9db6a0ec983bc69ec9e485a57154b2ea5b",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "3568:423",
+      "nodeId": "3576:2133",
+      "page": "Carousel",
+      "kind": "component"
+    }
+  }
+}

@@ -16,7 +16,9 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   `kit-silhouette-bypass`. Silhouette examples under
   `corpus/blueprints/figma-kit-silhouettes/`. HeroUI prefer
   `GAn1SrbKJYiKqz9SmHHCRm`; deep atom boards on alt `DC4g36xyt4DobtbEa11JFL`
-  (`figma-heroui-*`).   Sibling TailGrids/Myna/Bootstrap/M3 keys folded
+  (`figma-heroui-*`, **46+ packs** covering every prefer-copy page). Prefer
+  `GAn1Srb…` is complete (38 pages; 2 empty dividers) — not Welcome+Icons only.
+  Sibling TailGrids/Myna/Bootstrap/M3 keys folded
   (`DUN5Dvd…`, `4SbNh8…`, `p8B6SU…`, `f4TUS9…`) with `figma-harvest-packs.json`.
   Justin’s “Minor UI” was a mishear for **MUI / Material** — map no longer
   tracks Minimals/MiniKIT as an open gap; finish Material 3 deep harvest.

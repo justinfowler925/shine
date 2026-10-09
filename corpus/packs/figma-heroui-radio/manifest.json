@@ -1,9 +1,9 @@
 {
   "version": 1,
   "id": "figma-heroui-radio",
-  "screen": "catalog",
+  "screen": "form",
   "kind": "blueprint",
-  "license": "n/a",
+  "license": "MIT",
   "upstream": {
     "name": "shadcn-registry",
     "mode": "json",
@@ -11,12 +11,13 @@
     "branch": "main",
     "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
   },
+  "corpusPath": "packs/figma-heroui-radio",
   "entrypoints": [],
   "structuralSignature": null,
   "files": [
     {
       "path": "figma-heroui-radio.md",
-      "sha256": "29ffdbadb673315aeb5ee236bb8a36bb8582ce694d605f16e1acc5ed1296dd1b"
+      "sha256": "866e391d9c4990e37c0a3196fbfe7234de5ad42d891fb4ca5c3577fcc77b2d05"
     }
   ]
 }

@@ -1,18 +1,20 @@
-# HeroUI Calendar board (Figma Kit)
+# HeroUI Figma · Calendar
 
 Regions. Host: React/Tailwind application shell (house kit). Density: comfortable.
-Paint: `tokens/voices/shadcn-zinc.css`. Structure source: Figma `DC4g36xyt4DobtbEa11JFL` node `4208:222`.
+Paint: `tokens/voices/shadcn-zinc.css`. Structure source: Figma `GAn1SrbKJYiKqz9SmHHCRm` node `4492:2681`.
 Shot: `corpus/packs/figma-heroui-calendar/shot.png`. Prefer cite `shadcn-form` when building — this pack is silhouette evidence, not a foreign runtime.
 
-Figma: https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=4208-222
-Discovery: Chrome history Justin Design copy / hidden component canvases on alt kit file (2026-10-09).
-Deep harvest note: prefer-copy `GAn1SrbKJYiKqz9SmHHCRm` is Welcome+Icons (cover-heavy). Full atom boards live on alt `DC4g36xyt4DobtbEa11JFL` (Radio/Badge/Avatar/Calendar/Progress/Theme + more).
+Figma: https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/HeroUI-Figma-Kit--Community---Community---Copy-?node-id=4492-2681
+Discovery: prefer-copy `GAn1SrbKJYiKqz9SmHHCRm` full 38-page tree via `use_figma` `figma.root.children` (2026-10-09).
+Note: MCP `get_metadata` without nodeId only lists Welcome+Icons — incomplete. Divider pages `Components` / `Misc` are empty section markers.
 
 1. **Kit provenance** — name the Figma file and node before citing. Do not invent atoms the board does not show.
-2. **Composition job** — one page job; do not turn the gallery into a dashboard of leftovers.
+2. **Composition job** — one page/component job; do not turn the gallery into a dashboard of leftovers.
 3. **Primary action** — one filled primary in the fold when the screen is interactive.
 4. **House paint** — steal regions from this shot; implement with shadcn/Tailwind. Never install HeroUI runtime into Clearspeed consumers.
 5. **States** — when the board shows hover/active/disabled/invalid, carry those states into the house component; do not ship half-widgets.
+6. **Pair with kit-walk** — source atoms live as `heroui-*` catalog rows; this Figma pack is the visual silhouette evidence.
+7. **Catalog hint** — structure also indexed as `heroui-calendar` from the HeroUI React package.
 
 ## Contracts
 
@@ -27,6 +29,7 @@ Deep harvest note: prefer-copy `GAn1SrbKJYiKqz9SmHHCRm` is Welcome+Icons (cover-
 - Expand Nucleus SLED under this import.
 - Freestyle a page when the silhouette map already names a cite.
 - Ask Justin for a URL when Chrome history + this file already carry the Design fileKey.
+- Treat Welcome+Icons-only harvest as complete — prefer-copy holds every component page.
 
 ## Checklist (agent)
 
@@ -39,7 +42,7 @@ Deep harvest note: prefer-copy `GAn1SrbKJYiKqz9SmHHCRm` is Welcome+Icons (cover-
 
 ## Regions recap
 
-- One focal composition from the Figma frame.
+- Focal composition from Figma page `Calendar` (component).
 - One primary when interactive.
 - States visible in the kit become first-class in the house component.
 - Paint from shadcn-zinc unless the host is Lightning (then SLDS).
@@ -48,5 +51,3 @@ Deep harvest note: prefer-copy `GAn1SrbKJYiKqz9SmHHCRm` is Welcome+Icons (cover-
 
 - No shot in the pack: say there is no shot.
 - MCP access denied on a community preview key: stop; use Justin Copy fileKeys only.
-- A second filled primary is a defect.
-- HeroUI chrome installed as a Clearspeed consumer runtime is a defect.

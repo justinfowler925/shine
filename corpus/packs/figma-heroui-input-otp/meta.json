@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-input-otp",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3377-7557",
+  "harvested": "2026-10-09",
+  "bytes": 113920,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Input OTP",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3377-7557",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3377-7557",
+    "capturedAt": "2026-10-09T02:44:36.217169Z",
+    "shotSha256": "5ed42df726222616e8d0471234747fa90efa23e17f38f67a8c1f8e344e1e9a2f",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "3369:214",
+      "nodeId": "3377:7557",
+      "page": "Input OTP",
+      "kind": "component"
+    }
+  }
+}

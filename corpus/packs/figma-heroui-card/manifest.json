@@ -3,7 +3,7 @@
   "id": "figma-heroui-card",
   "screen": "catalog",
   "kind": "blueprint",
-  "license": "n/a",
+  "license": "MIT",
   "upstream": {
     "name": "shadcn-registry",
     "mode": "json",
@@ -11,12 +11,13 @@
     "branch": "main",
     "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
   },
+  "corpusPath": "packs/figma-heroui-card",
   "entrypoints": [],
   "structuralSignature": null,
   "files": [
     {
       "path": "figma-heroui-card.md",
-      "sha256": "21d3230f65d4dce136d90d2d6583a25c69c20959285f7e23885416eaf632cfa5"
+      "sha256": "3b0767826ce37155be9b2fe9a6292d781ba568ed61fafa5d67ae0fc8216fe5f3"
     }
   ]
 }

@@ -140,144 +140,510 @@
       "kit": "material3"
     },
     {
-      "id": "figma-heroui-cover",
-      "screen": "marketing",
-      "jobs": [
-        "marketing",
-        "landing",
-        "heroui-figma",
-        "cover"
-      ],
-      "title": "HeroUI Figma Kit cover (Justin Copy)",
-      "cite": "shadcn-marketing",
-      "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "4281:261157",
-      "kit": "heroui"
+      "id": "figma-heroui-accordion",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2583:5983",
+      "page": "Accordion",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-accordion/shot.png",
+      "bytes": 165176,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2583-5983"
     },
     {
-      "id": "figma-heroui-radio",
-      "screen": "catalog",
-      "jobs": [
-        "catalog",
-        "radio",
-        "form",
-        "heroui-figma"
-      ],
-      "title": "HeroUI Radio variant board (Figma Kit)",
-      "cite": "shadcn-form",
-      "file": "DC4g36xyt4DobtbEa11JFL",
-      "node": "3:23",
+      "id": "figma-heroui-alert",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "3128:340",
+      "page": "Alert",
+      "kind": "component",
       "kit": "heroui",
-      "scope": "component"
+      "shot": "corpus/packs/figma-heroui-alert/shot.png",
+      "bytes": 124988,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3128-340"
     },
     {
-      "id": "figma-heroui-badge",
-      "screen": "catalog",
-      "jobs": [
-        "catalog",
-        "badge",
-        "status",
-        "heroui-figma"
-      ],
-      "title": "HeroUI Badge variant board (Figma Kit)",
-      "cite": "shadcn-form",
-      "file": "DC4g36xyt4DobtbEa11JFL",
-      "node": "696:52331",
+      "id": "figma-heroui-avatar",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2550:2249",
+      "page": "Avatar",
+      "kind": "component",
       "kit": "heroui",
-      "scope": "component"
+      "shot": "corpus/packs/figma-heroui-avatar/shot.png",
+      "bytes": 114778,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2550-2249"
     },
     {
       "id": "figma-heroui-avatar-group",
-      "screen": "catalog",
-      "jobs": [
-        "catalog",
-        "avatar",
-        "people",
-        "heroui-figma"
-      ],
-      "title": "HeroUI Avatar Group board (Figma Kit)",
-      "cite": "shadcn-form",
-      "file": "DC4g36xyt4DobtbEa11JFL",
-      "node": "2545:33395",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2545:33553",
+      "page": "Avatar Group",
+      "kind": "component",
       "kit": "heroui",
-      "scope": "component"
+      "shot": "corpus/packs/figma-heroui-avatar-group/shot.png",
+      "bytes": 124542,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-33553"
+    },
+    {
+      "id": "figma-heroui-badge",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2278:445",
+      "page": "Badge",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-badge/shot.png",
+      "bytes": 127766,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2278-445"
+    },
+    {
+      "id": "figma-heroui-brand",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "1004:252",
+      "page": "Brand",
+      "kind": "brand",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-brand/shot.png",
+      "bytes": 9435,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1004-252"
+    },
+    {
+      "id": "figma-heroui-button",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2210:37799",
+      "page": "Button",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-button/shot.png",
+      "bytes": 114839,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2210-37799"
+    },
+    {
+      "id": "figma-heroui-button-atoms",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "486:54087",
+      "page": "Button",
+      "kind": "atoms",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-button-atoms/shot.png",
+      "bytes": 280163,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=486-54087"
+    },
+    {
+      "id": "figma-heroui-button-group",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2250:37403",
+      "page": "ButtonGroup",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-button-group/shot.png",
+      "bytes": 115733,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2250-37403"
     },
     {
       "id": "figma-heroui-calendar",
-      "screen": "catalog",
-      "jobs": [
-        "catalog",
-        "calendar",
-        "date",
-        "heroui-figma"
-      ],
-      "title": "HeroUI Calendar board (Figma Kit)",
-      "cite": "shadcn-form",
-      "file": "DC4g36xyt4DobtbEa11JFL",
-      "node": "4208:222",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "4492:2681",
+      "page": "Calendar",
+      "kind": "component",
       "kit": "heroui",
-      "scope": "component"
-    },
-    {
-      "id": "figma-heroui-progress",
-      "screen": "catalog",
-      "jobs": [
-        "catalog",
-        "progress",
-        "loading",
-        "heroui-figma"
-      ],
-      "title": "HeroUI Progress board (Figma Kit)",
-      "cite": "shadcn-form",
-      "file": "DC4g36xyt4DobtbEa11JFL",
-      "node": "1573:1538",
-      "kit": "heroui",
-      "scope": "component"
-    },
-    {
-      "id": "figma-heroui-theme",
-      "screen": "catalog",
-      "jobs": [
-        "catalog",
-        "theme",
-        "tokens",
-        "heroui-figma"
-      ],
-      "title": "HeroUI Theme color sets (Figma Kit)",
-      "cite": "shadcn-form",
-      "file": "DC4g36xyt4DobtbEa11JFL",
-      "node": "5:1194",
-      "kit": "heroui"
-    },
-    {
-      "id": "figma-heroui-components",
-      "screen": "catalog",
-      "jobs": [
-        "catalog",
-        "docs",
-        "heroui-figma",
-        "components"
-      ],
-      "title": "HeroUI Figma Components docs canvas",
-      "cite": "shadcn-form",
-      "file": "DC4g36xyt4DobtbEa11JFL",
-      "node": "5:3550",
-      "kit": "heroui"
+      "shot": "corpus/packs/figma-heroui-calendar/shot.png",
+      "bytes": 231166,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=4492-2681"
     },
     {
       "id": "figma-heroui-card",
-      "screen": "catalog",
-      "jobs": [
-        "catalog",
-        "card",
-        "heroui-figma"
-      ],
-      "title": "HeroUI Card component (Cover board)",
-      "cite": "shadcn-form",
-      "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "4281:261282",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "3350:1558",
+      "page": "Card",
+      "kind": "component",
       "kit": "heroui",
-      "scope": "component"
+      "shot": "corpus/packs/figma-heroui-card/shot.png",
+      "bytes": 356436,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3350-1558"
+    },
+    {
+      "id": "figma-heroui-carousel",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "3576:2133",
+      "page": "Carousel",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-carousel/shot.png",
+      "bytes": 336990,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3576-2133"
+    },
+    {
+      "id": "figma-heroui-checkbox",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2433:38083",
+      "page": "Checkbox",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-checkbox/shot.png",
+      "bytes": 113773,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2433-38083"
+    },
+    {
+      "id": "figma-heroui-checkbox-group",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2433:41562",
+      "page": "Checkbox Group",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-checkbox-group/shot.png",
+      "bytes": 131769,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2433-41562"
+    },
+    {
+      "id": "figma-heroui-chip",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2291:38171",
+      "page": "Chip",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-chip/shot.png",
+      "bytes": 113907,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2291-38171"
+    },
+    {
+      "id": "figma-heroui-code",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "1542:28623",
+      "page": "Code",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-code/shot.png",
+      "bytes": 116890,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1542-28623"
+    },
+    {
+      "id": "figma-heroui-components",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "",
+      "page": "",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-components/shot.png",
+      "bytes": 62997,
+      "source": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-3550"
+    },
+    {
+      "id": "figma-heroui-cover",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "",
+      "page": "",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-cover/shot.png",
+      "bytes": 515404,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261157"
+    },
+    {
+      "id": "figma-heroui-divider",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2584:41429",
+      "page": "Divider",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-divider/shot.png",
+      "bytes": 125484,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2584-41429"
+    },
+    {
+      "id": "figma-heroui-figma-components",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2245:10892",
+      "page": "Figma Components",
+      "kind": "atoms",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-figma-components/shot.png",
+      "bytes": 33070,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2245-10892"
+    },
+    {
+      "id": "figma-heroui-icons-essential",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "10:1851",
+      "page": "Icons",
+      "kind": "icons",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-icons-essential/shot.png",
+      "bytes": 71398,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=10-1851"
+    },
+    {
+      "id": "figma-heroui-input",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2746:458",
+      "page": "Input",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-input/shot.png",
+      "bytes": 118445,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2746-458"
+    },
+    {
+      "id": "figma-heroui-input-otp",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "3377:7557",
+      "page": "Input OTP",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-input-otp/shot.png",
+      "bytes": 113920,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3377-7557"
+    },
+    {
+      "id": "figma-heroui-kbd",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2545:31287",
+      "page": "Kbd",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-kbd/shot.png",
+      "bytes": 113992,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31287"
+    },
+    {
+      "id": "figma-heroui-link",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2545:31578",
+      "page": "Link",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-link/shot.png",
+      "bytes": 118577,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31578"
+    },
+    {
+      "id": "figma-heroui-number-input",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "3638:79039",
+      "page": "Number Input",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-number-input/shot.png",
+      "bytes": 129798,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3638-79039"
+    },
+    {
+      "id": "figma-heroui-progress",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2162:16624",
+      "page": "Progress",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-progress/shot.png",
+      "bytes": 113436,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2162-16624"
+    },
+    {
+      "id": "figma-heroui-radio",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "1552:24473",
+      "page": "Radio",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-radio/shot.png",
+      "bytes": 135771,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1552-24473"
+    },
+    {
+      "id": "figma-heroui-select",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2943:31581",
+      "page": "Select",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-select/shot.png",
+      "bytes": 139305,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2943-31581"
+    },
+    {
+      "id": "figma-heroui-slider",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2123:26021",
+      "page": "Slider",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-slider/shot.png",
+      "bytes": 114616,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2123-26021"
+    },
+    {
+      "id": "figma-heroui-spinner",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2411:8713",
+      "page": "Spinner",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-spinner/shot.png",
+      "bytes": 112862,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2411-8713"
+    },
+    {
+      "id": "figma-heroui-switch",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "1786:271",
+      "page": "Switch",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-switch/shot.png",
+      "bytes": 114587,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1786-271"
+    },
+    {
+      "id": "figma-heroui-table",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2611:619",
+      "page": "Table",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-table/shot.png",
+      "bytes": 170601,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2611-619"
+    },
+    {
+      "id": "figma-heroui-tabs",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "1975:50564",
+      "page": "Tabs",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-tabs/shot.png",
+      "bytes": 121365,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1975-50564"
+    },
+    {
+      "id": "figma-heroui-theme",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "",
+      "page": "",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-theme/shot.png",
+      "bytes": 41356,
+      "source": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-1194"
+    },
+    {
+      "id": "figma-heroui-theme-dark",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "276:20189",
+      "page": "Theme",
+      "kind": "tokens",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-theme-dark/shot.png",
+      "bytes": 278583,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=276-20189"
+    },
+    {
+      "id": "figma-heroui-theme-light",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "276:20046",
+      "page": "Theme",
+      "kind": "tokens",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-theme-light/shot.png",
+      "bytes": 236548,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=276-20046"
+    },
+    {
+      "id": "figma-heroui-theme-radius",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "482:17641",
+      "page": "Theme",
+      "kind": "tokens",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-theme-radius/shot.png",
+      "bytes": 12930,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-17641"
+    },
+    {
+      "id": "figma-heroui-theme-shadow",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "482:20449",
+      "page": "Theme",
+      "kind": "tokens",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-theme-shadow/shot.png",
+      "bytes": 291800,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-20449"
+    },
+    {
+      "id": "figma-heroui-theme-spacing",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "482:18637",
+      "page": "Theme",
+      "kind": "tokens",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-theme-spacing/shot.png",
+      "bytes": 53570,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-18637"
+    },
+    {
+      "id": "figma-heroui-theme-typography",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "482:17745",
+      "page": "Theme",
+      "kind": "tokens",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-theme-typography/shot.png",
+      "bytes": 17668,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-17745"
+    },
+    {
+      "id": "figma-heroui-toast",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "3592:7896",
+      "page": "Toast",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-toast/shot.png",
+      "bytes": 148571,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3592-7896"
+    },
+    {
+      "id": "figma-heroui-tooltip",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "1552:24236",
+      "page": "Tooltip",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-tooltip/shot.png",
+      "bytes": 124395,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1552-24236"
+    },
+    {
+      "id": "figma-heroui-user",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "2545:33202",
+      "page": "User",
+      "kind": "component",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-user/shot.png",
+      "bytes": 119687,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-33202"
+    },
+    {
+      "id": "figma-heroui-v3-cover",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "5011:2637",
+      "page": "Welcome",
+      "kind": "cover",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-v3-cover/shot.png",
+      "bytes": 137497,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=5011-2637"
+    },
+    {
+      "id": "figma-heroui-welcome",
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "4281:261157",
+      "page": "Welcome",
+      "kind": "cover",
+      "kit": "heroui",
+      "shot": "corpus/packs/figma-heroui-welcome/shot.png",
+      "bytes": 777480,
+      "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=4281-261157"
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-checkbox",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2433-38083",
+  "harvested": "2026-10-09",
+  "bytes": 113773,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Checkbox",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2433-38083",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2433-38083",
+    "capturedAt": "2026-10-09T02:41:26.409724Z",
+    "shotSha256": "fe31880bb438362122dbfbed8021bcf0c45c67c74050e77fe4a0ce38e5856277",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "636:299",
+      "nodeId": "2433:38083",
+      "page": "Checkbox",
+      "kind": "component"
+    }
+  }
+}

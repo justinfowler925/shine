@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-checkbox",
+  "screen": "form",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-checkbox",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-checkbox.md",
+      "sha256": "5228146f6008cd93d5fed8e6ea2c05ce4392def5d2ce116bcbdb53d0948cd1c6"
+    }
+  ]
+}

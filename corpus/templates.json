@@ -621,6 +621,81 @@
       "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
     },
     {
+      "id": "figma-heroui-accordion",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Accordion",
+      "path": "packs/figma-heroui-accordion",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2583-5983",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "accordion",
+        "accordion",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-link",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Link",
+      "path": "packs/figma-heroui-link",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2545-31578",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "link",
+        "link",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-tabs",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Tabs",
+      "path": "packs/figma-heroui-tabs",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1975-50564",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "tabs",
+        "tabs",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "heroui-next-app",
       "screen": "app-shell",
       "kit": "heroui",
@@ -890,6 +965,106 @@
       "scope": "component",
       "dna": {
         "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-alert",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Alert",
+      "path": "packs/figma-heroui-alert",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3128-340",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "alert",
+        "alert",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-progress",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Progress",
+      "path": "packs/figma-heroui-progress",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2162-16624",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "progress",
+        "progress",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-spinner",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Spinner",
+      "path": "packs/figma-heroui-spinner",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2411-8713",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "spinner",
+        "spinner",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-toast",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Toast",
+      "path": "packs/figma-heroui-toast",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3592-7896",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "toast",
+        "toast",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
         "density": "comfortable"
       }
     },
@@ -2039,189 +2214,6 @@
       "selectable": false
     },
     {
-      "id": "figma-heroui-avatar-group",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "HeroUI Avatar Group board (Figma Kit)",
-      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=2545-33395",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "avatar",
-        "people",
-        "heroui-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
-      "id": "figma-heroui-badge",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "HeroUI Badge variant board (Figma Kit)",
-      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=696-52331",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "badge",
-        "status",
-        "heroui-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
-      "id": "figma-heroui-calendar",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "HeroUI Calendar board (Figma Kit)",
-      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=4208-222",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "calendar",
-        "date",
-        "heroui-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
-      "id": "figma-heroui-card",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "HeroUI Card component (Cover board)",
-      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261282",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "card",
-        "heroui-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
-      "id": "figma-heroui-components",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "HeroUI Figma Components docs canvas",
-      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-3550",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "docs",
-        "heroui-figma",
-        "components"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-heroui-progress",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "HeroUI Progress board (Figma Kit)",
-      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=1573-1538",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "progress",
-        "loading",
-        "heroui-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
-      "id": "figma-heroui-radio",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "HeroUI Radio variant board (Figma Kit)",
-      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=3-23",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "radio",
-        "form",
-        "heroui-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
-      "id": "figma-heroui-theme",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "HeroUI Theme color sets (Figma Kit)",
-      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-1194",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "theme",
-        "tokens",
-        "heroui-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
       "id": "figma-myna-components",
       "screen": "catalog",
       "kit": "shadcn-registry",
@@ -2448,6 +2440,456 @@
       },
       "note": "S3 deepen authored Company Tools catalog blueprint",
       "scope": "page"
+    },
+    {
+      "id": "figma-heroui-brand",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Brand",
+      "path": "packs/figma-heroui-brand",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1004-252",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "brand",
+        "brand",
+        "brand"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-button-atoms",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Button (atoms)",
+      "path": "packs/figma-heroui-button-atoms",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=486-54087",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "button-atoms",
+        "button",
+        "atoms"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-figma-components",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Figma Components (atoms)",
+      "path": "packs/figma-heroui-figma-components",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2245-10892",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "figma-components",
+        "figma-components",
+        "atoms"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-icons-essential",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Icons",
+      "path": "packs/figma-heroui-icons-essential",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=10-1851",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "icons-essential",
+        "icons",
+        "icons"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-dark",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Theme (tokens)",
+      "path": "packs/figma-heroui-theme-dark",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=276-20189",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-dark",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-light",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Theme (tokens)",
+      "path": "packs/figma-heroui-theme-light",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=276-20046",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-light",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-radius",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Theme (tokens)",
+      "path": "packs/figma-heroui-theme-radius",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=482-17641",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-radius",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-shadow",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Theme (tokens)",
+      "path": "packs/figma-heroui-theme-shadow",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=482-20449",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-shadow",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-spacing",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Theme (tokens)",
+      "path": "packs/figma-heroui-theme-spacing",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=482-18637",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-spacing",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-typography",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Theme (tokens)",
+      "path": "packs/figma-heroui-theme-typography",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=482-17745",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-typography",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-avatar",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Avatar",
+      "path": "packs/figma-heroui-avatar",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2550-2249",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "avatar",
+        "avatar",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-avatar-group",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Avatar Group",
+      "path": "packs/figma-heroui-avatar-group",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2545-33553",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "avatar-group",
+        "avatar-group",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-badge",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Badge",
+      "path": "packs/figma-heroui-badge",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2278-445",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "badge",
+        "badge",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-card",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Card",
+      "path": "packs/figma-heroui-card",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3350-1558",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "card",
+        "card",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-carousel",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Carousel",
+      "path": "packs/figma-heroui-carousel",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3576-2133",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "carousel",
+        "carousel",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-chip",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Chip",
+      "path": "packs/figma-heroui-chip",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2291-38171",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "chip",
+        "chip",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · theme",
+      "path": "packs/figma-heroui-theme",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme",
+        "theme",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-user",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · User",
+      "path": "packs/figma-heroui-user",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2545-33202",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "user",
+        "user",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
     },
     {
       "id": "windmill-cards",
@@ -5797,6 +6239,431 @@
       }
     },
     {
+      "id": "figma-heroui-button",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Button",
+      "path": "packs/figma-heroui-button",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2210-37799",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "button",
+        "button",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-button-group",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · ButtonGroup",
+      "path": "packs/figma-heroui-button-group",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2250-37403",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "button-group",
+        "buttongroup",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-calendar",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Calendar",
+      "path": "packs/figma-heroui-calendar",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4492-2681",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "calendar",
+        "calendar",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-checkbox",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Checkbox",
+      "path": "packs/figma-heroui-checkbox",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2433-38083",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "checkbox",
+        "checkbox",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-checkbox-group",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Checkbox Group",
+      "path": "packs/figma-heroui-checkbox-group",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2433-41562",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "checkbox-group",
+        "checkbox-group",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-code",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Code",
+      "path": "packs/figma-heroui-code",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1542-28623",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "code",
+        "code",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-components",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · components",
+      "path": "packs/figma-heroui-components",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "components",
+        "components",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-divider",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Divider",
+      "path": "packs/figma-heroui-divider",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2584-41429",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "divider",
+        "divider",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-input",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Input",
+      "path": "packs/figma-heroui-input",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2746-458",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "input",
+        "input",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-input-otp",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Input OTP",
+      "path": "packs/figma-heroui-input-otp",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3377-7557",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "input-otp",
+        "input-otp",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-kbd",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Kbd",
+      "path": "packs/figma-heroui-kbd",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2545-31287",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "kbd",
+        "kbd",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-number-input",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Number Input",
+      "path": "packs/figma-heroui-number-input",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3638-79039",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "number-input",
+        "number-input",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-radio",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Radio",
+      "path": "packs/figma-heroui-radio",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1552-24473",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "radio",
+        "radio",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-select",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Select",
+      "path": "packs/figma-heroui-select",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2943-31581",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "select",
+        "select",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-slider",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Slider",
+      "path": "packs/figma-heroui-slider",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2123-26021",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "slider",
+        "slider",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-switch",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Switch",
+      "path": "packs/figma-heroui-switch",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1786-271",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "switch",
+        "switch",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-tooltip",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Tooltip",
+      "path": "packs/figma-heroui-tooltip",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1552-24236",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "tooltip",
+        "tooltip",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "tailadmin-alerts",
       "screen": "form",
       "kit": "tailadmin-react",
@@ -7263,29 +8130,6 @@
       "scope": "page"
     },
     {
-      "id": "figma-heroui-cover",
-      "screen": "marketing",
-      "kit": "shadcn-registry",
-      "title": "HeroUI Figma Kit cover (Justin Copy)",
-      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261157",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "marketing",
-        "landing",
-        "heroui-figma",
-        "cover"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
       "id": "figma-m3-cover",
       "screen": "marketing",
       "kit": "shadcn-registry",
@@ -7356,6 +8200,56 @@
       "scope": "page"
     },
     {
+      "id": "figma-heroui-v3-cover",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Welcome",
+      "path": "packs/figma-heroui-v3-cover",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=5011-2637",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "v3-cover",
+        "welcome",
+        "cover"
+      ],
+      "scope": "page",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-welcome",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Welcome",
+      "path": "packs/figma-heroui-welcome",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261157",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "welcome",
+        "welcome",
+        "cover"
+      ],
+      "scope": "page",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "heroui-home",
       "screen": "marketing",
       "kit": "heroui",
@@ -7397,6 +8291,31 @@
       "note": "Kit-walk page — HeroUI next-app route",
       "dna": {
         "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-cover",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · cover",
+      "path": "packs/figma-heroui-cover",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "cover",
+        "cover",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
         "density": "comfortable"
       }
     },
@@ -9142,6 +10061,31 @@
       "dna": {
         "family": "flowbite",
         "density": "dense"
+      }
+    },
+    {
+      "id": "figma-heroui-table",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma · Table",
+      "path": "packs/figma-heroui-table",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2611-619",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "table",
+        "table",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
       }
     },
     {

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-switch",
+  "screen": "form",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-switch",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-switch.md",
+      "sha256": "86efb0e7e104d9a21eb97f7485718e036d9f9a66cea7e98460149ab405120662"
+    }
+  ]
+}

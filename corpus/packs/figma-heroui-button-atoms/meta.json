@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-button-atoms",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=486-54087",
+  "harvested": "2026-10-09",
+  "bytes": 280163,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Button",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=486-54087",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=486-54087",
+    "capturedAt": "2026-10-09T02:45:22.815877Z",
+    "shotSha256": "4af47f3f2cfa33453a2060a8164047a3f56066df81e174a86cb76ab50fde109d",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "3:14",
+      "nodeId": "486:54087",
+      "page": "Button",
+      "kind": "atoms"
+    }
+  }
+}

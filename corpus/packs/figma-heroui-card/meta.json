@@ -1,12 +1,21 @@
 {
   "id": "figma-heroui-card",
-  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261282",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3350-1558",
   "harvested": "2026-10-09",
-  "bytes": 77167,
-  "scope": "component",
-  "kit": "heroui",
-  "title": "HeroUI Card component (Cover board)",
-  "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
-  "nodeId": "4281:261282",
-  "discovery": "deep-harvest"
+  "bytes": 356436,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Card",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3350-1558",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3350-1558",
+    "capturedAt": "2026-10-09T02:41:25.739779Z",
+    "shotSha256": "bde907f5e342ee05958b94f246801569bda62a43a101df6b6c744724f5153b38",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "3333:1640",
+      "nodeId": "3350:1558",
+      "page": "Card",
+      "kind": "component"
+    }
+  }
 }
