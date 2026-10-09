@@ -1,0 +1,18 @@
+{
+  "id": "figma-bootstrap-input-group",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "input-group",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-input-group.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

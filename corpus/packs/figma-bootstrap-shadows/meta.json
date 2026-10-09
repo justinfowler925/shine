@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-shadows",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-2186",
+  "harvested": "2026-10-09",
+  "bytes": 42952,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Shadows",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "3890:2186",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Shadows",
+    "headings": "Shadows",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Shadows",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-2186",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-2186",
+    "capturedAt": "2026-10-09T13:47:30.451Z",
+    "shotSha256": "9b934e0208af12b12cbc61d4c90a5cc648d6e1528f88960f846095e78f567d6d",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "3890:2186",
+      "page": "Foundations",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

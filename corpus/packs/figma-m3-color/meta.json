@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Color Guidance",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "49823:12142",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Color Guidance",
+    "headings": "Material 3 \u2014 Color Guidance",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Color Guidance",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49823-12142",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49823-12142",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "697b5e71499b4a81396a14d7fd4247805eeae3a0a5bd90538b45c2311ff976bd",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "49823:12142"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

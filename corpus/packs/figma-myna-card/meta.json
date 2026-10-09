@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-card",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2778-1195",
+  "harvested": "2026-10-09",
+  "bytes": 37654,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Card",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2778:1195",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Card",
+    "headings": "Card",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Card",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2778-1195",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2778-1195",
+    "capturedAt": "2026-10-09T13:47:48.919Z",
+    "shotSha256": "75ae18fc4ddcf10be05bb5373c162573f83263581ba0dbef2b4a2fbf68170e19",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2778:1195",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

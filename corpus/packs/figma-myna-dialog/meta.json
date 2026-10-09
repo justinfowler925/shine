@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-dialog",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2730-1719",
+  "harvested": "2026-10-09",
+  "bytes": 60714,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Dialog",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2730:1719",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Dialog",
+    "headings": "Dialog",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Dialog",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2730-1719",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2730-1719",
+    "capturedAt": "2026-10-09T13:48:28.539Z",
+    "shotSha256": "2c757c09fa3d360bfb71e9cff1d43b3b6d5771846446902eff1b6f57a96d6a7a",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2730:1719",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

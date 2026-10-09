@@ -8,5 +8,23 @@
   "title": "Bootstrap 5 components gallery",
   "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
   "nodeId": "3888:1152",
-  "discovery": "chrome-history-justin-copy"
+  "discovery": "chrome-history-justin-copy",
+  "capture": {
+    "status": 200,
+    "title": "Bootstrap 5 components gallery",
+    "headings": "Bootstrap 5 components gallery",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Bootstrap 5 components gallery",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1152",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1152",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "281e95f22dc4fe6456574006b881fd0f638fb3e988565829d2840411c8a9c48e",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "3888:1152"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

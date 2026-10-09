@@ -5,10 +5,15 @@
   "bytes": 112862,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Spinner",
+    "title": "Spinner",
+    "headings": "Spinner",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Spinner",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2411-8713",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2411-8713",
-    "capturedAt": "2026-10-09T02:43:12.523819Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "05a98b51c5286072bf3a1f81e2fc56fcaf166062361d453fc1a660bb2f3e1de9",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2411:8713",
       "page": "Spinner",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

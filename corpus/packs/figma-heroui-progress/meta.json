@@ -5,10 +5,15 @@
   "bytes": 113436,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Progress",
+    "title": "Progress",
+    "headings": "Progress",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Progress",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2162-16624",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2162-16624",
-    "capturedAt": "2026-10-09T02:43:11.289349Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "1f5d3ff7b939d64e0a6a2b8eb2a79c7736f9df2991b6edf468132dfdcbc8ed58",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2162:16624",
       "page": "Progress",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

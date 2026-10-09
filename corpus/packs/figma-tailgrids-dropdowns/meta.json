@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-dropdowns",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11612",
+  "harvested": "2026-10-09",
+  "bytes": 36026,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Dropdown",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:11612",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Dropdown",
+    "headings": "Dropdown",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Dropdown",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11612",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11612",
+    "capturedAt": "2026-10-09T13:44:32.496Z",
+    "shotSha256": "dbb5e644ee094533afc1738890a15630cb7e07de3fa3d2a47bbe168fe68a89db",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:11612",
+      "page": "-- Dropdowns",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

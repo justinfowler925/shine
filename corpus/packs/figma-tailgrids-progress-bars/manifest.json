@@ -1,0 +1,20 @@
+{
+  "id": "figma-tailgrids-progress-bars",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "progress-bars",
+    "progress-bars",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-progress-bars.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Typography",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "49848:6285",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Typography",
+    "headings": "Material 3 \u2014 Typography",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Typography",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49848-6285",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49848-6285",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "90e3bee039b50746e7f09448e6aaeef5dc15fa49c9c7505db4eabf1dbf1aebf9",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "49848:6285"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Switch",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "51223:4949",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Switch",
+    "headings": "Material 3 \u2014 Switch",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Switch",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51223-4949",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51223-4949",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "59e5275940bbc46ffeda03bbb0def97bce7bafb9cf5404c1108b089ec3c47ffa",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "51223:4949"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

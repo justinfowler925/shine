@@ -1,0 +1,18 @@
+{
+  "id": "figma-bootstrap-tables",
+  "kind": "blueprint",
+  "screen": "queue",
+  "jobs": [
+    "queue",
+    "table",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-tables.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

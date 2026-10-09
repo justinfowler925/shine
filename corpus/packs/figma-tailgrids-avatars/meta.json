@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-avatars",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9876",
+  "harvested": "2026-10-09",
+  "bytes": 274343,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Avatar",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:9876",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Avatar",
+    "headings": "Avatar",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Avatar",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9876",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9876",
+    "capturedAt": "2026-10-09T13:43:57.594Z",
+    "shotSha256": "65ae1e7ce8a8ddcb7db9b4e7cec79aa70eda5408862d2fb40afd7ea0dc6c4ac3",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:9876",
+      "page": "-- Avatars",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

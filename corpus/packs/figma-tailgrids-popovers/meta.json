@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-popovers",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21901",
+  "harvested": "2026-10-09",
+  "bytes": 17814,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Popovers",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:21901",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Popovers",
+    "headings": "Popovers",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Popovers",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21901",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21901",
+    "capturedAt": "2026-10-09T13:49:03.415Z",
+    "shotSha256": "b44a9c3e5aaced490f0f8724bb81ded6017399a6f59137cad6b16d2023b9ae91",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:21901",
+      "page": "-- Popovers",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

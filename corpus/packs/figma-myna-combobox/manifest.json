@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-combobox",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "combobox",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-combobox.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

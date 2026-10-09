@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-select-box",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22054",
+  "harvested": "2026-10-09",
+  "bytes": 39690,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Select Box",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:22054",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Select Box",
+    "headings": "Select Box",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Select Box",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22054",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22054",
+    "capturedAt": "2026-10-09T13:49:14.362Z",
+    "shotSha256": "94f6e64af8f4b2ec6fb6dd5ddc0038e880d499dc01fadca7884d433537318028",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:22054",
+      "page": "-- Select Box",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-contacts",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14964",
+  "harvested": "2026-10-09",
+  "bytes": 84066,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Contacts",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:14964",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Contacts",
+    "headings": "Contacts",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Contacts",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14964",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14964",
+    "capturedAt": "2026-10-09T13:45:09.399Z",
+    "shotSha256": "2415f471d02803f9175045acf4371871e917d5dbf0884620de61302cb5ea9a79",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:14964",
+      "page": "-- Contacts",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

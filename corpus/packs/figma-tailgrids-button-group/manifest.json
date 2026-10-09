@@ -1,0 +1,19 @@
+{
+  "id": "figma-tailgrids-button-group",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "button-group",
+    "tailwind-figma",
+    "tailgrids"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-button-group.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

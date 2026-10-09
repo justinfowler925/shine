@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-faq",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22214",
+  "harvested": "2026-10-09",
+  "bytes": 476301,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "FAQ",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:22214",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "FAQ",
+    "headings": "FAQ",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "FAQ",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22214",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22214",
+    "capturedAt": "2026-10-09T13:50:08.501Z",
+    "shotSha256": "d737f16a763d62ed08db78b561c823857c23da6e8ab38dcee96fd3aaedebd604",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:22214",
+      "page": "-- FAQ",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

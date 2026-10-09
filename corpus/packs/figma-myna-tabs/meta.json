@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-tabs",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2737-489",
+  "harvested": "2026-10-09",
+  "bytes": 15171,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Tabs",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2737:489",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Tabs",
+    "headings": "Tabs",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Tabs",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2737-489",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2737-489",
+    "capturedAt": "2026-10-09T13:50:37.916Z",
+    "shotSha256": "f7fbd3da6f6e9a12fa415ffe2a1892eff7fbd61e8eb06235cf3840d6dc0f5aeb",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2737:489",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

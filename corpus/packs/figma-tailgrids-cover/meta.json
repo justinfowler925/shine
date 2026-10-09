@@ -8,5 +8,23 @@
   "title": "Tailwind TailGrids cover",
   "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
   "nodeId": "102:227",
-  "discovery": "chrome-history-justin-copy"
+  "discovery": "chrome-history-justin-copy",
+  "capture": {
+    "status": 200,
+    "title": "Tailwind TailGrids cover",
+    "headings": "Tailwind TailGrids cover",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Tailwind TailGrids cover",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=102-227",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=102-227",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "ce5ecd6ea4982d449c7ba22b6a07fed093b3915ac3b066ec7867dd4a2042fc39",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "102:227"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

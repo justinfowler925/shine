@@ -1,0 +1,20 @@
+{
+  "id": "figma-tailgrids-list",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "list",
+    "list",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-list.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Segmented buttons",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "53923:36611",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Segmented buttons",
+    "headings": "Material 3 \u2014 Segmented buttons",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Segmented buttons",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-36611",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-36611",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "d467c33c266bcff4579920eaca211251a2d96833a487f30a39091da3fb339578",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "53923:36611"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

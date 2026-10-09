@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Tooltips",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "54061:33867",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Tooltips",
+    "headings": "Material 3 \u2014 Tooltips",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Tooltips",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-33867",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-33867",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "5b096f745adccc0dbebca0531e866249b6da876dfb7a4ac8b8889fc405f470a7",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "54061:33867"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

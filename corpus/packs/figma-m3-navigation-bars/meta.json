@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Navigation bars",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "50721:10370",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Navigation bars",
+    "headings": "Material 3 \u2014 Navigation bars",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Navigation bars",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-10370",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-10370",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "4854e24d1e39c22f33823cbcf3713e897088278d6c62ffe9042d8919ee22dfb3",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "50721:10370"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

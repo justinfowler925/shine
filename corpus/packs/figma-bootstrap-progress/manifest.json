@@ -1,0 +1,18 @@
+{
+  "id": "figma-bootstrap-progress",
+  "kind": "blueprint",
+  "screen": "async-state",
+  "jobs": [
+    "async-state",
+    "progress",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-progress.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

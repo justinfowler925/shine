@@ -575,6 +575,365 @@
       }
     },
     {
+      "id": "figma-bootstrap-accordion",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-accordion",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1922-0",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "app-shell",
+        "accordion",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-breadcrumb",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-breadcrumb",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=81-222",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "app-shell",
+        "breadcrumb",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-links",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-links",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=62-18",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "app-shell",
+        "link",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-navbar",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-navbar",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4202-1715",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "app-shell",
+        "navbar",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-navs",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Components",
+      "path": "packs/figma-bootstrap-navs",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4089-1552",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "app-shell",
+        "navs",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-tabs",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-tabs",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=95-242",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "app-shell",
+        "tabs",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-accordion",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-accordion",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2672-1548",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "app-shell",
+        "accordion",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-breadcrumb",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-breadcrumb",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1696",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "app-shell",
+        "breadcrumb",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-menubar",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-menubar",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2759-2424",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "app-shell",
+        "menubar",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-tabs",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-tabs",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2737-489",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "app-shell",
+        "tabs",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-breadcrumbs",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Breadcrumbs",
+      "path": "packs/figma-tailgrids-breadcrumbs",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11266",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "breadcrumbs",
+        "breadcrumbs",
+        "app-shell"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-horizontal-menus",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Horizontal Menus",
+      "path": "packs/figma-tailgrids-horizontal-menus",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21210",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "horizontal-menus",
+        "horizontal-menus",
+        "app-shell"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-navbars",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Navbars",
+      "path": "packs/figma-tailgrids-navbars",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15397",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "navbars",
+        "navbars",
+        "app-shell"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-tabs",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Tabs",
+      "path": "packs/figma-tailgrids-tabs",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14203",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "tabs",
+        "tabs",
+        "app-shell"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-vertical-navbars",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Vertical Navbars",
+      "path": "packs/figma-tailgrids-vertical-navbars",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22132",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "vertical-navbars",
+        "vertical-navbars",
+        "app-shell"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
       "id": "heroui-docs",
       "screen": "app-shell",
       "kit": "heroui",
@@ -967,6 +1326,194 @@
         "family": "untitled",
         "density": "comfortable"
       }
+    },
+    {
+      "id": "figma-bootstrap-alert",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Components",
+      "path": "packs/figma-bootstrap-alert",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3901-1062",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "async-state",
+        "alert",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-progress",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-progress",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=100-59",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "async-state",
+        "progress",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-spinners",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-spinners",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1427-37",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "async-state",
+        "spinner",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-toasts",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-toasts",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=105-322",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "async-state",
+        "toast",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-alert",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-alert",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1556",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "async-state",
+        "alert",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-progress",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-progress",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2160",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "async-state",
+        "progress",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-skeleton",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-skeleton",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2824-2174",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "async-state",
+        "skeleton",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-sonner",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-sonner",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2806-824",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "async-state",
+        "toast",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
     },
     {
       "id": "figma-heroui-alert",
@@ -1607,6 +2154,31 @@
       }
     },
     {
+      "id": "figma-tailgrids-sign-in-sign-up",
+      "screen": "auth",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Sign In / Sign Up",
+      "path": "packs/figma-tailgrids-sign-in-sign-up",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15688",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "sign-in-sign-up",
+        "sign-in-sign-up",
+        "auth"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "page",
+      "selectable": true
+    },
+    {
       "id": "windmill-create-account",
       "screen": "auth",
       "kit": "windmill-react",
@@ -2170,1123 +2742,6 @@
       }
     },
     {
-      "id": "figma-bootstrap-buttons",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Bootstrap 5 button strip (Figma community duplicate)",
-      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3787-1014",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "buttons",
-        "bootstrap-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-bootstrap-buttons",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Bootstrap 5 button strip (Figma community duplicate)",
-      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3787-1014",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "buttons",
-        "bootstrap-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-bootstrap-components",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Bootstrap 5 components gallery (Figma community duplicate)",
-      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1152",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "components",
-        "bootstrap-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-bootstrap-components",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Bootstrap 5 components gallery (Figma community duplicate)",
-      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1152",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "components",
-        "bootstrap-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-badges",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Badges (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51592-4755",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "badge",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-bottom-app-bars",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Bottom app bars (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51159-4655",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "app-bar",
-        "navigation",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-bottom-sheets",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Bottom sheets (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51827-5847",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "sheet",
-        "overlay",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-buttons",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Buttons (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27456",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "buttons",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-cards",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Cards (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52346-27569",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "cards",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-carousel",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Carousel (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53912-27472",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "carousel",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-checkboxes",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Checkboxes (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51745-4798",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "checkbox",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-chips",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Chips (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27884",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "chips",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-color",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Color Guidance (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49823-12142",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "color",
-        "styles",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-date-picker",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Date picker (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51954-18122",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "date",
-        "picker",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-dialogs",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Dialogs (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50723-10916",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "dialog",
-        "overlay",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-dividers",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Dividers (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51816-5846",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "divider",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-elements",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Elements (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11328",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "elements",
-        "styles",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-elevation",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Elevation (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11342",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "elevation",
-        "styles",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-fabs",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 FABs (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9243",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "fab",
-        "buttons",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-icon-buttons",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Icon buttons (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51525-4722",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "icon-button",
-        "buttons",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-layout",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Layout (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52732-23854",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "layout",
-        "styles",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-lists",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Lists (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51964-62981",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "list",
-        "records",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-menu",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Menu (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-36958",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "menu",
-        "overlay",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-navigation-bars",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Navigation bars (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-10370",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "navigation",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-navigation-drawer",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Navigation drawer (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51593-5083",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "navigation",
-        "drawer",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-navigation-rails",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Navigation rails (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-9303",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "navigation",
-        "rail",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-progress",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Progress indicators (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52872-24830",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "progress",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-radio",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Radio buttons (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51739-4595",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "radio",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-search",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Search (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52977-33807",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "search",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-segmented-buttons",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Segmented buttons (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-36611",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "segmented",
-        "buttons",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-side-sheets",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Side sheets (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53198-27843",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "sheet",
-        "drawer",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-sliders",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Sliders (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51937-8018",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "slider",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-snackbars",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Snackbars (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53977-33571",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "snackbar",
-        "feedback",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-switch",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Switch (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51223-4949",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "switch",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-tabs",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Tabs (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51754-4956",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "tabs",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-time-picker",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Time picker (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52949-27911",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "time",
-        "picker",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-toc",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Table of contents (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53379-35512",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "navigation",
-        "toc",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-tooltips",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Tooltips (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-33867",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "tooltip",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-top-app-bars",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Top app bars (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9053",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "app-bar",
-        "navigation",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-typography",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Typography (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49848-6285",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "typography",
-        "styles",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-myna-components",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Myna UI Tailwind/shadcn component gallery (Figma Copy)",
-      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=605-1271",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "components",
-        "tailwind-figma",
-        "myna",
-        "shadcn"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-myna-components",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Myna UI Tailwind/shadcn component gallery (Figma Copy)",
-      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=605-1271",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "components",
-        "tailwind-figma",
-        "myna",
-        "shadcn"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-tailgrids-atoms",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Tailwind TailGrids atom/molecule board (Figma Copy)",
-      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15453",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "atoms",
-        "components",
-        "tailwind-figma",
-        "tailgrids"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-tailgrids-atoms",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Tailwind TailGrids atom/molecule board (Figma Copy)",
-      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15453",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "atoms",
-        "components",
-        "tailwind-figma",
-        "tailgrids"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-tailgrids-layout",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Tailwind TailGrids layout grid (Figma Copy)",
-      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3598",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "layout",
-        "grid",
-        "tailwind-figma",
-        "tailgrids"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-tailgrids-layout",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Tailwind TailGrids layout grid (Figma Copy)",
-      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3598",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "layout",
-        "grid",
-        "tailwind-figma",
-        "tailgrids"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
       "id": "shadcn-catalog",
       "screen": "catalog",
       "kit": "shadcn-registry",
@@ -3693,6 +3148,2881 @@
       }
     },
     {
+      "id": "figma-bootstrap-badges",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Components",
+      "path": "packs/figma-bootstrap-badges",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3800-967",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "badge",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-borders",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-borders",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=121-155",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "borders",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-buttons",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap 5 button strip",
+      "path": "packs/figma-bootstrap-buttons",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3787-1014",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "bootstrap-figma",
+        "bootstrap",
+        "buttons",
+        "bootstrap-5-button-strip"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-card",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-card",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=53-108",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "card",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-changelog",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-changelog",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-351",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "changelog",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-color",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Foundations",
+      "path": "packs/figma-bootstrap-color",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1432",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "color",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-components",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap 5 components gallery",
+      "path": "packs/figma-bootstrap-components",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1152",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "bootstrap-figma",
+        "bootstrap",
+        "components",
+        "bootstrap-5-components-gallery"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-docs-elements",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Foundations",
+      "path": "packs/figma-bootstrap-docs-elements",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-2299",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "docs",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-fonts",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Foundations",
+      "path": "packs/figma-bootstrap-fonts",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1751",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "fonts",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-foundations",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Foundations",
+      "path": "packs/figma-bootstrap-foundations",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1155",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "foundations",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-icons",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-icons",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1835-1344",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "icons",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-list-group",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-list-group",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4005-2017",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "list",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-lists-group",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Components",
+      "path": "packs/figma-bootstrap-lists-group",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4005-1760",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "list",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-radius",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Components",
+      "path": "packs/figma-bootstrap-radius",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4434-893",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "radius",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-shadows",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Foundations",
+      "path": "packs/figma-bootstrap-shadows",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-2186",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "shadows",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-spacer",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Foundations",
+      "path": "packs/figma-bootstrap-spacer",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1413",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "spacer",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-typography",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Foundations",
+      "path": "packs/figma-bootstrap-typography",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1631",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "typography",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-badges",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Badges",
+      "path": "packs/figma-m3-badges",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51592-4755",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "badges",
+        "material-3-—-badges"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-bottom-app-bars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Bottom app bars",
+      "path": "packs/figma-m3-bottom-app-bars",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51159-4655",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "bottom-app-bars",
+        "material-3-—-bottom-app-bars"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-bottom-sheets",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Bottom sheets",
+      "path": "packs/figma-m3-bottom-sheets",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51827-5847",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "bottom-sheets",
+        "material-3-—-bottom-sheets"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-buttons",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Buttons",
+      "path": "packs/figma-m3-buttons",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27456",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "buttons",
+        "material-3-—-buttons"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-cards",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Cards",
+      "path": "packs/figma-m3-cards",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52346-27569",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "cards",
+        "material-3-—-cards"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-carousel",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Carousel",
+      "path": "packs/figma-m3-carousel",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53912-27472",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "carousel",
+        "material-3-—-carousel"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-checkboxes",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Checkboxes",
+      "path": "packs/figma-m3-checkboxes",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51745-4798",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "checkboxes",
+        "material-3-—-checkboxes"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-chips",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Chips",
+      "path": "packs/figma-m3-chips",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27884",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "chips",
+        "material-3-—-chips"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-color",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Color Guidance",
+      "path": "packs/figma-m3-color",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49823-12142",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "color",
+        "material-3-—-color-guidance"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-date-picker",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Date picker",
+      "path": "packs/figma-m3-date-picker",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51954-18122",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "date-picker",
+        "material-3-—-date-picker"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-dialogs",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Dialogs",
+      "path": "packs/figma-m3-dialogs",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50723-10916",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "dialogs",
+        "material-3-—-dialogs"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-dividers",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Dividers",
+      "path": "packs/figma-m3-dividers",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51816-5846",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "dividers",
+        "material-3-—-dividers"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-elements",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Elements",
+      "path": "packs/figma-m3-elements",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11328",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "elements",
+        "material-3-—-elements"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-elevation",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Elevation",
+      "path": "packs/figma-m3-elevation",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11342",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "elevation",
+        "material-3-—-elevation"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-fabs",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — FABs",
+      "path": "packs/figma-m3-fabs",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9243",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "fabs",
+        "material-3-—-fabs"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-icon-buttons",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Icon buttons",
+      "path": "packs/figma-m3-icon-buttons",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51525-4722",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "icon-buttons",
+        "material-3-—-icon-buttons"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-layout",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Layout",
+      "path": "packs/figma-m3-layout",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52732-23854",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "layout",
+        "material-3-—-layout"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-lists",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Lists",
+      "path": "packs/figma-m3-lists",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51964-62981",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "lists",
+        "material-3-—-lists"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-menu",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Menu",
+      "path": "packs/figma-m3-menu",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-36958",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "menu",
+        "material-3-—-menu"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-navigation-bars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Navigation bars",
+      "path": "packs/figma-m3-navigation-bars",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-10370",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "navigation-bars",
+        "material-3-—-navigation-bars"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-navigation-drawer",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Navigation drawer",
+      "path": "packs/figma-m3-navigation-drawer",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51593-5083",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "navigation-drawer",
+        "material-3-—-navigation-drawer"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-navigation-rails",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Navigation rails",
+      "path": "packs/figma-m3-navigation-rails",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-9303",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "navigation-rails",
+        "material-3-—-navigation-rails"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-progress",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Progress indicators",
+      "path": "packs/figma-m3-progress",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52872-24830",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "progress",
+        "material-3-—-progress-indicators"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-radio",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Radio buttons",
+      "path": "packs/figma-m3-radio",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51739-4595",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "radio",
+        "material-3-—-radio-buttons"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-search",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Search",
+      "path": "packs/figma-m3-search",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52977-33807",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "search",
+        "material-3-—-search"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-segmented-buttons",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Segmented buttons",
+      "path": "packs/figma-m3-segmented-buttons",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-36611",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "segmented-buttons",
+        "material-3-—-segmented-buttons"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-side-sheets",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Side sheets",
+      "path": "packs/figma-m3-side-sheets",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53198-27843",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "side-sheets",
+        "material-3-—-side-sheets"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-sliders",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Sliders",
+      "path": "packs/figma-m3-sliders",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51937-8018",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "sliders",
+        "material-3-—-sliders"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-snackbars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Snackbars",
+      "path": "packs/figma-m3-snackbars",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53977-33571",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "snackbars",
+        "material-3-—-snackbars"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-switch",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Switch",
+      "path": "packs/figma-m3-switch",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51223-4949",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "switch",
+        "material-3-—-switch"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-tabs",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Tabs",
+      "path": "packs/figma-m3-tabs",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51754-4956",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "tabs",
+        "material-3-—-tabs"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-time-picker",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Time picker",
+      "path": "packs/figma-m3-time-picker",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52949-27911",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "time-picker",
+        "material-3-—-time-picker"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-toc",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Table of contents",
+      "path": "packs/figma-m3-toc",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53379-35512",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "toc",
+        "material-3-—-table-of-contents"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-tooltips",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Tooltips",
+      "path": "packs/figma-m3-tooltips",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-33867",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "tooltips",
+        "material-3-—-tooltips"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-top-app-bars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Top app bars",
+      "path": "packs/figma-m3-top-app-bars",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9053",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "top-app-bars",
+        "material-3-—-top-app-bars"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-typography",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Typography",
+      "path": "packs/figma-m3-typography",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49848-6285",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "typography",
+        "material-3-—-typography"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-avatar",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-avatar",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1641",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "avatar",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-badge",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-badge",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1675",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "badge",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-card",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-card",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2778-1195",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "card",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-carousel",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-carousel",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2813-1109",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "carousel",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-components",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Myna UI Tailwind/shadcn components gallery",
+      "path": "packs/figma-myna-components",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=605-1271",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "tailwind-figma",
+        "myna",
+        "shadcn",
+        "components",
+        "myna-ui-tailwind/shadcn-components-gallery"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-hover-card",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-hover-card",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2785-814",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "hover-card",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-scrollbar",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-scrollbar",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2823-2148",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "scrollbar",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-separator",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-separator",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2723-432",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "separator",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-alerts",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Alerts",
+      "path": "packs/figma-tailgrids-alerts",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9802",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "alerts",
+        "danger-alert",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-atoms",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · Tailwind TailGrids atom/molecule board",
+      "path": "packs/figma-tailgrids-atoms",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15453",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "tailwind-figma",
+        "tailgrids",
+        "atoms",
+        "tailwind-tailgrids-atom/molecule-board"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-avatars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Avatars",
+      "path": "packs/figma-tailgrids-avatars",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9876",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "avatars",
+        "avatar",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-badges",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Badges",
+      "path": "packs/figma-tailgrids-badges",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11408",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "badges",
+        "badges",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-banner",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Banner",
+      "path": "packs/figma-tailgrids-banner",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18133",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "banner",
+        "banner",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-blogs",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Blogs",
+      "path": "packs/figma-tailgrids-blogs",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14652",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "blogs",
+        "blogs",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-brands",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Brands",
+      "path": "packs/figma-tailgrids-brands",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16449",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "brands",
+        "brands",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-buttons",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Buttons",
+      "path": "packs/figma-tailgrids-buttons",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-10073",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "buttons",
+        "button",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-calendars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Calendars",
+      "path": "packs/figma-tailgrids-calendars",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20825",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "calendars",
+        "calendars",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-cards",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Cards",
+      "path": "packs/figma-tailgrids-cards",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14711",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "cards",
+        "cards",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-checkout",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Checkout",
+      "path": "packs/figma-tailgrids-checkout",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18317",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "checkout",
+        "checkout",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-colors",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · 🎨 Colors",
+      "path": "packs/figma-tailgrids-colors",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-2860",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "colors",
+        "colors",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-contacts",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Contacts",
+      "path": "packs/figma-tailgrids-contacts",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14964",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "contacts",
+        "contacts",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-cookies",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Cookies",
+      "path": "packs/figma-tailgrids-cookies",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15235",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "cookies",
+        "cookies",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-data-stats",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Data Stats",
+      "path": "packs/figma-tailgrids-data-stats",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20913",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "data-stats",
+        "data-stats",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-drawers",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Drawers",
+      "path": "packs/figma-tailgrids-drawers",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21024",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "drawers",
+        "drawers",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-e-commerce-footers",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- E-Commerce Footers",
+      "path": "packs/figma-tailgrids-e-commerce-footers",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18764",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "e-commerce-footers",
+        "e-commerce-footers",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-e-commerce-headers",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- E-Commerce Headers",
+      "path": "packs/figma-tailgrids-e-commerce-headers",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18722",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "e-commerce-headers",
+        "e-commerce-headers-hero-areas",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-e-commerce-navbars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- E-Commerce Navbars",
+      "path": "packs/figma-tailgrids-e-commerce-navbars",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18678",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "e-commerce-navbars",
+        "ecommerce-navbars",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-featured-products",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Featured Products",
+      "path": "packs/figma-tailgrids-featured-products",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19115",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "featured-products",
+        "featured-products",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-features-services",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Features & Services",
+      "path": "packs/figma-tailgrids-features-services",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16721",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "features-services",
+        "features-services",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-filters",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Filters",
+      "path": "packs/figma-tailgrids-filters",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19236",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "filters",
+        "filters",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-footers",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Footers",
+      "path": "packs/figma-tailgrids-footers",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15309",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "footers",
+        "footers",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-icons",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · ♣️ Icons",
+      "path": "packs/figma-tailgrids-icons",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-4031",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "icons",
+        "icons",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-layout",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · Tailwind TailGrids layout grid",
+      "path": "packs/figma-tailgrids-layout",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3598",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "tailwind-figma",
+        "tailgrids",
+        "layout",
+        "tailwind-tailgrids-layout-grid"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-list",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- List",
+      "path": "packs/figma-tailgrids-list",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-13459",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "list",
+        "list",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-maps",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Maps",
+      "path": "packs/figma-tailgrids-maps",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21385",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "maps",
+        "maps",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-newsletters",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Newsletters",
+      "path": "packs/figma-tailgrids-newsletters",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16909",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "newsletters",
+        "newsletters",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-notifications",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Notifications",
+      "path": "packs/figma-tailgrids-notifications",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21798",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "notifications",
+        "notifications",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-order-summaries",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Order Summaries",
+      "path": "packs/figma-tailgrids-order-summaries",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19352",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "order-summaries",
+        "order-summaries",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-page-titles",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Page Titles",
+      "path": "packs/figma-tailgrids-page-titles",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21862",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "page-titles",
+        "page-title-styles",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-pagination",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Pagination",
+      "path": "packs/figma-tailgrids-pagination",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-13700",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "pagination",
+        "pagination",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-popovers",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Popovers",
+      "path": "packs/figma-tailgrids-popovers",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21901",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "popovers",
+        "popovers",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-portfolio",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Portfolio",
+      "path": "packs/figma-tailgrids-portfolio",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16998",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "portfolio",
+        "portfolios",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-pricing-tables",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Pricing Tables",
+      "path": "packs/figma-tailgrids-pricing-tables",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-17209",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "pricing-tables",
+        "pricing-tables",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-product-carousels",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Product Carousels",
+      "path": "packs/figma-tailgrids-product-carousels",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19525",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "product-carousels",
+        "product-carousels",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-product-categories",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Product Categories",
+      "path": "packs/figma-tailgrids-product-categories",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20067",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "product-categories",
+        "product-categories",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-product-details",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Product Details",
+      "path": "packs/figma-tailgrids-product-details",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19742",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "product-details",
+        "product-details",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-product-grids",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Product Grids",
+      "path": "packs/figma-tailgrids-product-grids",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19974",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "product-grids",
+        "product-grids",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-product-reviews",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Product Reviews",
+      "path": "packs/figma-tailgrids-product-reviews",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=319-28861",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "product-reviews",
+        "product-reviews",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-profiles",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Profiles",
+      "path": "packs/figma-tailgrids-profiles",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21928",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "profiles",
+        "profiles",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-progress-bars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Progress Bars",
+      "path": "packs/figma-tailgrids-progress-bars",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22514",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "progress-bars",
+        "progress-bars",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-quick-views",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Quick Views",
+      "path": "packs/figma-tailgrids-quick-views",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20117",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "quick-views",
+        "quick-views",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-recent-products",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Recent Products",
+      "path": "packs/figma-tailgrids-recent-products",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20215",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "recent-products",
+        "recent-products",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-shadows",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · 🌫️ Shadows",
+      "path": "packs/figma-tailgrids-shadows",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9684",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "shadows",
+        "shadows",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-shopping-carts",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Shopping Carts",
+      "path": "packs/figma-tailgrids-shopping-carts",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20283",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "shopping-carts",
+        "shopping-carts",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-stats",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Stats",
+      "path": "packs/figma-tailgrids-stats",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-17407",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "stats",
+        "stats",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-steps",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Steps",
+      "path": "packs/figma-tailgrids-steps",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21991",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "steps",
+        "steps",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-teams",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Teams",
+      "path": "packs/figma-tailgrids-teams",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-17596",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "teams",
+        "teams",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-testimonials",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Testimonials",
+      "path": "packs/figma-tailgrids-testimonials",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-17986",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "testimonials",
+        "testimonials",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-tooltips",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Tooltips",
+      "path": "packs/figma-tailgrids-tooltips",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14367",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "tooltips",
+        "tooltip",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-typography",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · 📖 Typography",
+      "path": "packs/figma-tailgrids-typography",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3662",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "typography",
+        "typography",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-videos",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Videos",
+      "path": "packs/figma-tailgrids-videos",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18070",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "videos",
+        "videos",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-wishlists",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Wishlists",
+      "path": "packs/figma-tailgrids-wishlists",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20372",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "wishlists",
+        "wishlists",
+        "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
       "id": "figma-heroui-avatar",
       "screen": "catalog",
       "kit": "shadcn-registry",
@@ -3848,7 +6178,7 @@
       "kit": "shadcn-registry",
       "title": "HeroUI Figma · theme",
       "path": "packs/figma-heroui-theme",
-      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-1194",
       "license": "MIT",
       "kind": "blueprint",
       "startFrom": 6,
@@ -6176,6 +8506,31 @@
       }
     },
     {
+      "id": "figma-tailgrids-charts",
+      "screen": "charts",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Charts",
+      "path": "packs/figma-tailgrids-charts",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20481",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "charts",
+        "charts",
+        "charts"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
       "id": "tailadmin-line-chart",
       "screen": "charts",
       "kit": "tailadmin-react",
@@ -6341,6 +8696,56 @@
         "density": "comfortable"
       },
       "scope": "page"
+    },
+    {
+      "id": "figma-tailgrids-chat-boxes",
+      "screen": "chat",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Chat Boxes",
+      "path": "packs/figma-tailgrids-chat-boxes",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20649",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "chat-boxes",
+        "chat-boxes",
+        "chat"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-chat-list",
+      "screen": "chat",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Chat List",
+      "path": "packs/figma-tailgrids-chat-list",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20751",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "chat-list",
+        "chat-lists",
+        "chat"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
     },
     {
       "id": "shadcn-checkout",
@@ -6910,6 +9315,31 @@
       }
     },
     {
+      "id": "figma-tailgrids-error-pages",
+      "screen": "empty",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Error Pages",
+      "path": "packs/figma-tailgrids-error-pages",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15264",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "error-pages",
+        "error-pages",
+        "empty"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "page",
+      "selectable": true
+    },
+    {
       "id": "flowbite-500",
       "screen": "empty",
       "kit": "flowbite-admin",
@@ -7001,74 +9431,6 @@
         "family": "windmill",
         "density": "dense"
       }
-    },
-    {
-      "id": "figma-bootstrap-forms",
-      "screen": "form",
-      "kit": "shadcn-registry",
-      "title": "Bootstrap 5 forms page (Figma community duplicate)",
-      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-350",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "form",
-        "fields",
-        "bootstrap-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-bootstrap-forms",
-      "screen": "form",
-      "kit": "shadcn-registry",
-      "title": "Bootstrap 5 forms page (Figma community duplicate)",
-      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-350",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "form",
-        "fields",
-        "bootstrap-figma"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-text-fields",
-      "screen": "form",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Text Fields (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52805-28110",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "form",
-        "fields",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
     },
     {
       "id": "shadcn-form",
@@ -7265,6 +9627,970 @@
       }
     },
     {
+      "id": "figma-bootstrap-button-group",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Components",
+      "path": "packs/figma-bootstrap-button-group",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3910-1815",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "button-group",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-dropdown",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-dropdown",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1225-0",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "dropdown",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-form-inputs",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Components",
+      "path": "packs/figma-bootstrap-form-inputs",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3819-1218",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "fields",
+        "input",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-forms",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap 5 forms page",
+      "path": "packs/figma-bootstrap-forms",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-350",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "bootstrap-figma",
+        "bootstrap",
+        "forms",
+        "bootstrap-5-forms-page"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-input-group",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-input-group",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1426-0",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "input-group",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-modal",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-modal",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=99-239",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "overlay",
+        "modal",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-popovers",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-popovers",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=114-540",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "overlay",
+        "popover",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-tooltips",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-tooltips",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=114-622",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "tooltip",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-m3-text-fields",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 — Text Fields",
+      "path": "packs/figma-m3-text-fields",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52805-28110",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "text-fields",
+        "material-3-—-text-fields"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-alert-dialog",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-alert-dialog",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1596",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "overlay",
+        "dialog",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-buttons",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-buttons",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-1721",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "button",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-calendar",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-calendar",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2678-261",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "calendar",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-checkbox",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-checkbox",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-1733",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "checkbox",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-combobox",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-combobox",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2764-3067",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "combobox",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-command",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-command",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2761-2754",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "command",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-context-menu",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-context-menu",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2758-2118",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "menu",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-dialog",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-dialog",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2730-1719",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "overlay",
+        "dialog",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-drawer",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-drawer",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2786-829",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "overlay",
+        "drawer",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-dropdown-menu",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-dropdown-menu",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2740-558",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "menu",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-input",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-input",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2127",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "input",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-input-groups",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-input-groups",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2818-1785",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "input",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-input-otp",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-input-otp",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2823-2009",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "input-otp",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-label",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-label",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2135",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "label",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-popover",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-popover",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2780-1666",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "overlay",
+        "popover",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-radio",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-radio",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2166",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "radio",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-select",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-select",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2695-404",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "select",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-sheet",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-sheet",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2774-707",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "overlay",
+        "sheet",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-slider",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-slider",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2172",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "slider",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-switch",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-switch",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2178",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "switch",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-textarea",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-textarea",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2219",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "textarea",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-toggle",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-toggle",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2775-856",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "toggle",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-tooltip",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-tooltip",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2688-401",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "tooltip",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-button-group",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Buttons",
+      "path": "packs/figma-tailgrids-button-group",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-10619",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "button-group",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-check-box",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Check Box",
+      "path": "packs/figma-tailgrids-check-box",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11540",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "check-box",
+        "check-box",
+        "form"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-dropdowns",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Dropdowns",
+      "path": "packs/figma-tailgrids-dropdowns",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11612",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "dropdowns",
+        "dropdown",
+        "form"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-form-elements",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Form Elements",
+      "path": "packs/figma-tailgrids-form-elements",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22282",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "form-elements",
+        "form-elements",
+        "form"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-inputs",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Inputs",
+      "path": "packs/figma-tailgrids-inputs",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11969",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "inputs",
+        "input",
+        "form"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-select-box",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Select Box",
+      "path": "packs/figma-tailgrids-select-box",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22054",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "select-box",
+        "select-box",
+        "form"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-textarea",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Textarea",
+      "path": "packs/figma-tailgrids-textarea",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14405",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "textarea",
+        "textarea",
+        "form"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-toggle-switchers",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Toggle/Switchers",
+      "path": "packs/figma-tailgrids-toggle-switchers",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14021",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "toggle-switchers",
+        "toggle-with-text",
+        "form"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
       "id": "untitled-modals",
       "screen": "form",
       "kit": "untitled-ui-react",
@@ -7441,7 +10767,7 @@
       "kit": "shadcn-registry",
       "title": "HeroUI Figma · components",
       "path": "packs/figma-heroui-components",
-      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+      "preview": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-3550",
       "license": "MIT",
       "kind": "blueprint",
       "startFrom": 6,
@@ -9177,98 +12503,6 @@
       "scope": "page"
     },
     {
-      "id": "figma-m3-cover",
-      "screen": "marketing",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Design Kit cover (MUI / Material UI target)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50538-14622",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "marketing",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-cover",
-      "screen": "marketing",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Design Kit cover (team library file)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50538-14622",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "marketing",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-tailgrids-cover",
-      "screen": "marketing",
-      "kit": "shadcn-registry",
-      "title": "Tailwind TailGrids cover (Figma Copy)",
-      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=102-227",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "marketing",
-        "landing",
-        "tailwind-figma",
-        "tailgrids"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-tailgrids-cover",
-      "screen": "marketing",
-      "kit": "shadcn-registry",
-      "title": "Tailwind TailGrids cover (Figma Copy)",
-      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=102-227",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "marketing",
-        "landing",
-        "tailwind-figma",
-        "tailgrids"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
       "id": "shadcn-marketing",
       "screen": "marketing",
       "kit": "shadcn-registry",
@@ -9291,6 +12525,52 @@
       },
       "note": "corpus/blueprints/shadcn-marketing.md is the region map; reference.html renders it at rest for capture; no consumer TSX is authored because the estate builds no marketing page",
       "scope": "page"
+    },
+    {
+      "id": "figma-bootstrap-thumbnail",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-thumbnail",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=139-171",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "marketing",
+        "cover",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "page",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-welcome",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-welcome",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=114-386",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "marketing",
+        "welcome",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "page",
+      "selectable": true
     },
     {
       "id": "figma-heroui-v3-cover",
@@ -9343,6 +12623,57 @@
       }
     },
     {
+      "id": "figma-m3-cover",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Figma · Material 3 Design Kit cover (MUI / Material UI target)",
+      "path": "packs/figma-m3-cover",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50538-14622",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "figma-kit",
+        "material-figma",
+        "mui",
+        "material3",
+        "cover",
+        "material-3-design-kit-cover-(mui-/-material-ui-target)"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Material 3) — structure only; paint house shadcn for Clearspeed",
+      "scope": "page",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-cover",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · Tailwind TailGrids cover",
+      "path": "packs/figma-tailgrids-cover",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=102-227",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "figma-kit",
+        "tailwind-figma",
+        "tailgrids",
+        "cover",
+        "tailwind-tailgrids-cover"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "page",
+      "selectable": true
+    },
+    {
       "id": "heroui-home",
       "screen": "marketing",
       "kit": "heroui",
@@ -9364,6 +12695,106 @@
         "family": "heroui",
         "density": "comfortable"
       }
+    },
+    {
+      "id": "figma-tailgrids-about",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- About",
+      "path": "packs/figma-tailgrids-about",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16327",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "about",
+        "about",
+        "marketing"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-cta",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- CTA",
+      "path": "packs/figma-tailgrids-cta",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16641",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "cta",
+        "cta",
+        "marketing"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-faq",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- FAQ",
+      "path": "packs/figma-tailgrids-faq",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22214",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "faq",
+        "faq",
+        "marketing"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-header-hero-area",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Header / Hero Area",
+      "path": "packs/figma-tailgrids-header-hero-area",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16807",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "header-hero-area",
+        "header-hero-area",
+        "marketing"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "page",
+      "selectable": true
     },
     {
       "id": "heroui-about",
@@ -9393,7 +12824,7 @@
       "kit": "shadcn-registry",
       "title": "HeroUI Figma · cover",
       "path": "packs/figma-heroui-cover",
-      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261157",
       "license": "MIT",
       "kind": "blueprint",
       "startFrom": 6,
@@ -10939,54 +14370,6 @@
       }
     },
     {
-      "id": "figma-tailgrids-table-stack",
-      "screen": "queue",
-      "kit": "shadcn-registry",
-      "title": "Tailwind TailGrids table stack list (Figma Copy)",
-      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-23249",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "queue",
-        "table",
-        "records",
-        "tailwind-figma",
-        "tailgrids"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
-      "id": "figma-tailgrids-table-stack",
-      "screen": "queue",
-      "kit": "shadcn-registry",
-      "title": "Tailwind TailGrids table stack list (Figma Copy)",
-      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-23249",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "queue",
-        "table",
-        "records",
-        "tailwind-figma",
-        "tailgrids"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
       "id": "shadcn-operate-decide",
       "screen": "queue",
       "kit": "shadcn-registry",
@@ -11149,6 +14532,224 @@
         "family": "windmill",
         "density": "dense"
       }
+    },
+    {
+      "id": "figma-bootstrap-pagination",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Components",
+      "path": "packs/figma-bootstrap-pagination",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4195-1863",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "queue",
+        "pagination",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-bootstrap-tables",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-tables",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=26-2",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "queue",
+        "table",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-data-table",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-data-table",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2814-1420",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "queue",
+        "table",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-pagination",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-pagination",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2154",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "queue",
+        "pagination",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-table",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Components",
+      "path": "packs/figma-myna-table",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2814-1241",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "queue",
+        "table",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-table-grids",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Table Grids",
+      "path": "packs/figma-tailgrids-table-grids",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16124",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "table-grids",
+        "table-grids",
+        "queue"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-table-stack",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · Tailwind TailGrids table stack list",
+      "path": "packs/figma-tailgrids-table-stack",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-23249",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "figma-kit",
+        "tailwind-figma",
+        "tailgrids",
+        "table-stack",
+        "tailwind-tailgrids-table-stack-list"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-table-stacks",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Table Stacks",
+      "path": "packs/figma-tailgrids-table-stacks",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21311",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "table-stacks",
+        "table-stacks",
+        "queue"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-tables",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Tables",
+      "path": "packs/figma-tailgrids-tables",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15889",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "tables",
+        "tables",
+        "queue"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
     },
     {
       "id": "flowbite-users",
@@ -11706,6 +15307,31 @@
         "density": "comfortable"
       },
       "scope": "page"
+    },
+    {
+      "id": "figma-tailgrids-settings-pages",
+      "screen": "settings",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Settings Pages",
+      "path": "packs/figma-tailgrids-settings-pages",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22105",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "tailwind-figma",
+        "tailgrids",
+        "settings-pages",
+        "pro-components",
+        "settings"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "page",
+      "selectable": true
     },
     {
       "id": "untitled-tabs",

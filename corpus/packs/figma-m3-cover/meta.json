@@ -8,5 +8,23 @@
   "title": "Material 3 Design Kit cover (MUI / Material UI target)",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "50538:14622",
-  "discovery": "chrome-history-justin-copy"
+  "discovery": "chrome-history-justin-copy",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 Design Kit cover (MUI / Material UI target)",
+    "headings": "Material 3 Design Kit cover (MUI / Material UI target)",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 Design Kit cover (MUI / Material UI target)",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50538-14622",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50538-14622",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "ba89ab15766aec1539553643f9c9a25afe8e1f4b833a542e63d6128e3b99432f",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "50538:14622"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-shadows",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9684",
+  "harvested": "2026-10-09",
+  "bytes": 67506,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Shadows",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:9684",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Shadows",
+    "headings": "Shadows",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Shadows",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9684",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9684",
+    "capturedAt": "2026-10-09T13:43:56.942Z",
+    "shotSha256": "12ac140ba92ff40d442c35dbcda1d4a47d64f32428e38bd72d5ab19b9872c641",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:9684",
+      "page": "🌫️ Shadows",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

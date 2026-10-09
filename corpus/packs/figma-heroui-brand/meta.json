@@ -5,10 +5,15 @@
   "bytes": 9435,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Brand",
+    "title": "Brand",
+    "headings": "Brand",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Brand",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1004-252",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1004-252",
-    "capturedAt": "2026-10-09T02:56:29.227349Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "f7e20e47beda374ab4959ae9c4af44e5fdefebc9e6d966bd057d44d56a2b7833",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "1004:252",
       "page": "Brand",
       "kind": "brand"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

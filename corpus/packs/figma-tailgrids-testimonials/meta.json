@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-testimonials",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-17986",
+  "harvested": "2026-10-09",
+  "bytes": 369765,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Testimonials",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:17986",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Testimonials",
+    "headings": "Testimonials",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Testimonials",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-17986",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-17986",
+    "capturedAt": "2026-10-09T13:45:46.456Z",
+    "shotSha256": "2dee906b5509b9534b51be0d145594fee43984a7a5ce425d8f086e0efa86728a",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:17986",
+      "page": "-- Testimonials",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

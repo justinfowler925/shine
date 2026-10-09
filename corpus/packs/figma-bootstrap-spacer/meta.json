@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-spacer",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1413",
+  "harvested": "2026-10-09",
+  "bytes": 26079,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Spacer",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "3890:1413",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Spacer",
+    "headings": "Spacer",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Spacer",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1413",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1413",
+    "capturedAt": "2026-10-09T13:47:30.752Z",
+    "shotSha256": "ef41c3d51485bbfba19f1f874dffd3e9b18a91e01d8eb7668c5e457c4e9c8289",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "3890:1413",
+      "page": "Foundations",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

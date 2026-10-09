@@ -5,10 +5,15 @@
   "bytes": 125484,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Divider",
+    "title": "Divider",
+    "headings": "Divider",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Divider",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2584-41429",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2584-41429",
-    "capturedAt": "2026-10-09T02:41:27.564462Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "83e4186139ac6e682456da5c8171eea168a6c8377561b9cbe66935257a87c42c",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2584:41429",
       "page": "Divider",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

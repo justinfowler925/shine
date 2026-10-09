@@ -1,0 +1,18 @@
+{
+  "id": "figma-bootstrap-tooltips",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "tooltip",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-tooltips.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

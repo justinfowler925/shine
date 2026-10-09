@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-page-titles",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21862",
+  "harvested": "2026-10-09",
+  "bytes": 54746,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Page Title Styles",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:21862",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Page Title Styles",
+    "headings": "Page Title Styles",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Page Title Styles",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21862",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21862",
+    "capturedAt": "2026-10-09T13:49:03.128Z",
+    "shotSha256": "15ae7c2ba0829307ab1a37808cd36e384b079929e2c821549d471b522d90ed4d",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:21862",
+      "page": "-- Page Titles",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

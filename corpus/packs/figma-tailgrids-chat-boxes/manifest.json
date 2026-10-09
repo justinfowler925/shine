@@ -1,0 +1,20 @@
+{
+  "id": "figma-tailgrids-chat-boxes",
+  "kind": "blueprint",
+  "screen": "chat",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "chat-boxes",
+    "chat-boxes",
+    "chat"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-chat-boxes.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

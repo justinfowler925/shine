@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-notifications",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21798",
+  "harvested": "2026-10-09",
+  "bytes": 25045,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Notifications",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:21798",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Notifications",
+    "headings": "Notifications",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Notifications",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21798",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21798",
+    "capturedAt": "2026-10-09T13:48:52.544Z",
+    "shotSha256": "4302563c49eede92fb79561cdb81c19b12fa99325b37ae7153270976611e409b",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:21798",
+      "page": "-- Notifications",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Cards",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "52346:27569",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Cards",
+    "headings": "Material 3 \u2014 Cards",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Cards",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52346-27569",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52346-27569",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "94a771fa78e475bea0518f7ddee509667a9330cadc10b0b7f37567246e76a5bb",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "52346:27569"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

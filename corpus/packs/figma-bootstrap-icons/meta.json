@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-icons",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1835-1344",
+  "harvested": "2026-10-09",
+  "bytes": 120276,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Bootstrap Icon",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "1835:1344",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Bootstrap Icon",
+    "headings": "Bootstrap Icon",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Bootstrap Icon",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1835-1344",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1835-1344",
+    "capturedAt": "2026-10-09T13:51:06.214Z",
+    "shotSha256": "586937e7035aeb5ae8e66641889aff16805fc9d90a0637e2a34776666cadd2ba",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "1835:1344",
+      "page": "Bootstrap UI Kit",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

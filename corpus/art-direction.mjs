@@ -234,10 +234,65 @@ export function retrieveDirections(templates, text, constraints = {}) {
       ...ranked.filter((candidate) => !pagePrimary(candidate)),
     ];
   }
+  // Explicit Figma-kit jobs — when the brief names a kit family (heroui-figma,
+  // material-figma, tailwind-figma / tailgrids / myna, bootstrap-figma), prefer
+  // that family's figma-* packs over live kit-walk atoms / other silhouettes.
+  // Does NOT apply under Clearspeed Operate edition (TW gold wins there).
+  const editionEarly = String(constraints.edition || "").trim().toLowerCase();
+  const operateEdition = editionUsesSiblingMap(editionEarly);
+  if (!operateEdition && ranked.length) {
+    // normalizeBrief splits on non-alnum, so "heroui-figma" → ["heroui","figma"].
+    // Match hyphenated job tags against raw brief text as well as tokens.
+    const tokens = brief.tokens || [];
+    const raw = String(brief.text || "").toLowerCase();
+    const has = (s) => tokens.includes(s) || raw.includes(s);
+    const kitPref =
+      has("heroui-figma") || (has("heroui") && has("figma")) || has("figma-kit") ? "figma-heroui-"
+      : has("material-figma") || has("material3") || (has("mui") && has("figma")) ? "figma-m3-"
+      : has("bootstrap-figma") || (has("bootstrap") && has("figma")) ? "figma-bootstrap-"
+      : has("myna") ? "figma-myna-"
+      : has("tailgrids") || has("tailwind-figma") || (has("tailwind") && has("figma")) ? "figma-tailgrids-"
+      : "";
+    if (kitPref) {
+      const isKit = (candidate) => String(candidate.template.id || "").startsWith(kitPref);
+      // Also force kit packs into ranked when natural score was <40.
+      if (!ranked.some(isKit)) {
+        for (const candidate of eligible) {
+          if (isKit(candidate)) {
+            ranked.push({
+              ...candidate,
+              matches: [...new Set([...(candidate.matches || []), "figma-kit"])],
+              score: Math.max(candidate.score, 80) + 40,
+            });
+          }
+        }
+      }
+      if (ranked.some(isKit)) {
+        const slugFit = (candidate) => {
+          const slug = String(candidate.template.id || "").slice(kitPref.length);
+          let fit = 0;
+          for (const token of tokens) {
+            if (slug === token || slug.startsWith(`${token}-`) || slug.endsWith(`-${token}`) || slug.includes(`-${token}-`)) fit += 3;
+            else if (slug.includes(token)) fit += 1;
+          }
+          // Prefer the primary board over *-atoms / cover aliases when not asked for.
+          if (/(?:^|-)atoms(?:-|$)/.test(slug) && !tokens.includes("atoms")) fit -= 4;
+          if (/(?:^|-)cover(?:-|$)/.test(slug) && !tokens.includes("cover")) fit -= 2;
+          return fit;
+        };
+        const kitRanked = ranked.filter(isKit).map((candidate) => (
+          candidate.matches.includes("figma-kit")
+            ? { ...candidate, score: Math.max(candidate.score, 120) + slugFit(candidate) }
+            : { ...candidate, matches: [...candidate.matches, "figma-kit"], score: Math.max(candidate.score, 80) + 40 + slugFit(candidate) }
+        )).sort((a, b) => b.score - a.score || a.template.id.localeCompare(b.template.id));
+        ranked = [...kitRanked, ...ranked.filter((candidate) => !isKit(candidate))];
+      }
+    }
+  }
   // Clearspeed TW gold tier — Flowbite / TailAdmin / Untitled are the primary
   // silhouette for Operate jobs (not HeroUI/M3 atom landfill, not thin TailGrids).
-  const edition = String(constraints.edition || "").trim().toLowerCase();
-  const twGold = constraints.twGold === true || editionUsesSiblingMap(edition);
+  const edition = editionEarly;
+  const twGold = constraints.twGold === true || operateEdition;
   if (twGold && ranked.length) {
     const gold = loadClearspeedTwGoldStandard(
       edition === "clearspeed" ? "clearspeed-operate" : edition || "clearspeed-operate",

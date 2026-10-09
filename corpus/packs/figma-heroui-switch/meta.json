@@ -5,10 +5,15 @@
   "bytes": 114587,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Switch",
+    "title": "Switch",
+    "headings": "Switch",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Switch",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1786-271",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1786-271",
-    "capturedAt": "2026-10-09T02:43:12.775763Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "d7e2dd789ce4f149ad75e80254492290822eefdf1536fd08702c1a0010d91f6b",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "1786:271",
       "page": "Switch",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-context-menu",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2758-2118",
+  "harvested": "2026-10-09",
+  "bytes": 29255,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Context Menu",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2758:2118",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Context Menu",
+    "headings": "Context Menu",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Context Menu",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2758-2118",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2758-2118",
+    "capturedAt": "2026-10-09T13:48:28.475Z",
+    "shotSha256": "699d82917f7045c2e3f957e814d410b500107dabca55c7a38788b9c8be7946e6",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2758:2118",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

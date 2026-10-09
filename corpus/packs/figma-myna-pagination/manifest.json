@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-pagination",
+  "kind": "blueprint",
+  "screen": "queue",
+  "jobs": [
+    "queue",
+    "pagination",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-pagination.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

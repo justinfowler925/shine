@@ -1,0 +1,20 @@
+{
+  "id": "figma-tailgrids-textarea",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "textarea",
+    "textarea",
+    "form"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-textarea.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

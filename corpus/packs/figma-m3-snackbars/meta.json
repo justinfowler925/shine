@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Snackbars",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "53977:33571",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Snackbars",
+    "headings": "Material 3 \u2014 Snackbars",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Snackbars",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53977-33571",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53977-33571",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "5ca35294d11d98bf5664e673c020ec30f0e6561dd8161e7fd4d9cf0f3ba2d7b8",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "53977:33571"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

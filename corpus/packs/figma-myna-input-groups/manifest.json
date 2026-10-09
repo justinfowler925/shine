@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-input-groups",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "input",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-input-groups.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

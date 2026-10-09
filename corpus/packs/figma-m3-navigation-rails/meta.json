@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Navigation rails",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "50721:9303",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Navigation rails",
+    "headings": "Material 3 \u2014 Navigation rails",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Navigation rails",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-9303",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-9303",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "6bc0b4c52f46d684bcdd2ffc164e0de95226326c6af9c791d8b29dc7f5914bf5",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "50721:9303"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

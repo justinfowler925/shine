@@ -8,5 +8,23 @@
   "title": "Tailwind TailGrids atom/molecule board",
   "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
   "nodeId": "310:15453",
-  "discovery": "chrome-history-justin-copy"
+  "discovery": "chrome-history-justin-copy",
+  "capture": {
+    "status": 200,
+    "title": "Tailwind TailGrids atom/molecule board",
+    "headings": "Tailwind TailGrids atom/molecule board",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Tailwind TailGrids atom/molecule board",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15453",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15453",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "a95b79af8bc419ff0dae8325444149393b96b953edfad25a00493d51b36ee71f",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:15453"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

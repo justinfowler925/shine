@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-banner",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18133",
+  "harvested": "2026-10-09",
+  "bytes": 479059,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Banner",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:18133",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Banner",
+    "headings": "Banner",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Banner",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18133",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18133",
+    "capturedAt": "2026-10-09T13:47:32.456Z",
+    "shotSha256": "4076a59ce85ccc3ff28799abf2e94fe1dd853c33e6ea2294d17b38633ae3657a",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:18133",
+      "page": "-- Banner",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

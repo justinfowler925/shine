@@ -1,0 +1,20 @@
+{
+  "id": "figma-tailgrids-features-services",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "features-services",
+    "features-services",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-features-services.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

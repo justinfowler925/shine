@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Lists",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "51964:62981",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Lists",
+    "headings": "Material 3 \u2014 Lists",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Lists",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51964-62981",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51964-62981",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "8b3b1713d9820f77f5562a5e9e403856349fc610aab682517aa16e0642061cd4",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "51964:62981"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

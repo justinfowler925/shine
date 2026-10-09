@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-skeleton",
+  "kind": "blueprint",
+  "screen": "async-state",
+  "jobs": [
+    "async-state",
+    "skeleton",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-skeleton.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

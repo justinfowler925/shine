@@ -1,0 +1,20 @@
+{
+  "id": "figma-tailgrids-testimonials",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "testimonials",
+    "testimonials",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-testimonials.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

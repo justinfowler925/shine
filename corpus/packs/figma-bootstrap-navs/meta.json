@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-navs",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4089-1552",
+  "harvested": "2026-10-09",
+  "bytes": 34946,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Navs",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "4089:1552",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Navs",
+    "headings": "Navs",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Navs",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4089-1552",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4089-1552",
+    "capturedAt": "2026-10-09T13:48:02.164Z",
+    "shotSha256": "28476f81cc5c482d8db5af67391ef44c34e01c8887905cbcd7c6085669b6fbd0",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "4089:1552",
+      "page": "Components",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

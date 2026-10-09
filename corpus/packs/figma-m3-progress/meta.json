@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Progress indicators",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "52872:24830",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Progress indicators",
+    "headings": "Material 3 \u2014 Progress indicators",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Progress indicators",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52872-24830",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52872-24830",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "427eab75ec27895c3d67005f421823d93344ebac6ed3159993684cad8ab24cd7",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "52872:24830"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

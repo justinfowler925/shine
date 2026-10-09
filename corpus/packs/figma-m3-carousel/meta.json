@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Carousel",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "53912:27472",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Carousel",
+    "headings": "Material 3 \u2014 Carousel",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Carousel",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53912-27472",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53912-27472",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "0010191e80433f27cda5bb93749813ac02fabae5f8764e37fe9c4278ded7f602",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "53912:27472"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-slider",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2172",
+  "harvested": "2026-10-09",
+  "bytes": 9162,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Slider",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2674:2172",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Slider",
+    "headings": "Slider",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Slider",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2172",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2172",
+    "capturedAt": "2026-10-09T13:50:36.766Z",
+    "shotSha256": "5e2a918a76411f7faf530a2bbb33234620e4aa6f9c9213fe34518b3b29f0d10e",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2674:2172",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

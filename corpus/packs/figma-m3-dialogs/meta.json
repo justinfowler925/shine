@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Dialogs",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "50723:10916",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Dialogs",
+    "headings": "Material 3 \u2014 Dialogs",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Dialogs",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50723-10916",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50723-10916",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "f9ae0fb0403775b94203a25d6d9763a83bb5e3a15a66bf6c37abf87673fd207d",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "50723:10916"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

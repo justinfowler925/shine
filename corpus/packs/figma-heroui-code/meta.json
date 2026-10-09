@@ -5,10 +5,15 @@
   "bytes": 116890,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Code",
+    "title": "Code",
+    "headings": "Code",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Code",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1542-28623",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1542-28623",
-    "capturedAt": "2026-10-09T02:41:27.304844Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "8a4bd02807e8d47a849463ca32bbddd0b168e96a31fd3a02318dac930490015e",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "1542:28623",
       "page": "Code",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

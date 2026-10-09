@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-accordion",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1922-0",
+  "harvested": "2026-10-09",
+  "bytes": 90758,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Accordion",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "1922:0",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Accordion",
+    "headings": "Accordion",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Accordion",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1922-0",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1922-0",
+    "capturedAt": "2026-10-09T13:48:14.442Z",
+    "shotSha256": "31646c28a7394b6c47fdb7c4e5df3297f1eaecd71dda215b0f52c5d3b2dd3d8a",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "1922:0",
+      "page": "Bootstrap UI Kit",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

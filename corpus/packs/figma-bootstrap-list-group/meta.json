@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-list-group",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4005-2017",
+  "harvested": "2026-10-09",
+  "bytes": 94015,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "List Group",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "4005:2017",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "List Group",
+    "headings": "List Group",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "List Group",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4005-2017",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4005-2017",
+    "capturedAt": "2026-10-09T13:50:39.508Z",
+    "shotSha256": "81b01ba69022a319c8aa9c52205591cddd5f404333f40252bb8a859e428e8984",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "4005:2017",
+      "page": "Bootstrap UI Kit",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

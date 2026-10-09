@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Chips",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "53923:27884",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Chips",
+    "headings": "Material 3 \u2014 Chips",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Chips",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27884",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27884",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "e63d6e44a0863c7fc906cdc9b00e783030d60b8ca2bba80d508badd059284cc3",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "53923:27884"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

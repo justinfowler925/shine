@@ -8,5 +8,23 @@
   "title": "Tailwind TailGrids layout grid",
   "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
   "nodeId": "310:3598",
-  "discovery": "chrome-history-justin-copy"
+  "discovery": "chrome-history-justin-copy",
+  "capture": {
+    "status": 200,
+    "title": "Tailwind TailGrids layout grid",
+    "headings": "Tailwind TailGrids layout grid",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Tailwind TailGrids layout grid",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3598",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3598",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "df5744f9db8e1f094488c7136793e9dad3f6ecde34a33e69a8a0d7f696b09f14",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:3598"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

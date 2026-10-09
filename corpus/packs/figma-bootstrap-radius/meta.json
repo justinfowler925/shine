@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-radius",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4434-893",
+  "harvested": "2026-10-09",
+  "bytes": 25238,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Radius",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "4434:893",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Radius",
+    "headings": "Radius",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Radius",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4434-893",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4434-893",
+    "capturedAt": "2026-10-09T13:48:02.696Z",
+    "shotSha256": "0e0f48fe1977bf91f259458987149c5343f36e44758e65603374549785eb471d",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "4434:893",
+      "page": "Components",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -5,10 +5,15 @@
   "bytes": 121365,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Tabs",
+    "title": "Tabs",
+    "headings": "Tabs",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Tabs",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1975-50564",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1975-50564",
-    "capturedAt": "2026-10-09T02:44:35.010646Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "9156b7b034f1715b1bbbf6d91a3d021502609cf27a1823c855ff6c644e2659f8",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "1975:50564",
       "page": "Tabs",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

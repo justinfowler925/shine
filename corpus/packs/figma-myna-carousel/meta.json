@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-carousel",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2813-1109",
+  "harvested": "2026-10-09",
+  "bytes": 12758,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Carousel",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2813:1109",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Carousel",
+    "headings": "Carousel",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Carousel",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2813-1109",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2813-1109",
+    "capturedAt": "2026-10-09T13:47:48.951Z",
+    "shotSha256": "1132982ae8761416a6f8f9fd8c89a63e9b2448c51ae70ecb46b98d2490e08345",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2813:1109",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

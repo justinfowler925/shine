@@ -5,10 +5,15 @@
   "bytes": 148571,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Toast",
+    "title": "Toast",
+    "headings": "Toast",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Toast",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3592-7896",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3592-7896",
-    "capturedAt": "2026-10-09T02:44:35.958918Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "5d3fb84fad3af0ab8ad86371297fd60706d7f9d1de53aba428bdcd311419230b",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "3592:7896",
       "page": "Toast",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

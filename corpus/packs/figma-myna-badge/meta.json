@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-badge",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1675",
+  "harvested": "2026-10-09",
+  "bytes": 15975,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Badge",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2673:1675",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Badge",
+    "headings": "Badge",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Badge",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1675",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1675",
+    "capturedAt": "2026-10-09T13:47:48.786Z",
+    "shotSha256": "6b421c67ac18f62e8aa7fb2c4c26ee6771e4d2df2110e9c7dc78ce09ec53c3f2",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2673:1675",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

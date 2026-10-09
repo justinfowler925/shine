@@ -5,10 +5,15 @@
   "bytes": 165176,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Accordion",
+    "title": "Accordion",
+    "headings": "Accordion",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Accordion",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2583-5983",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2583-5983",
-    "capturedAt": "2026-10-09T02:41:23.062503Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "26a318691170d10b2ccfb1ca279a067f4556035751b4b35b30ccd421ec0b7d01",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2583:5983",
       "page": "Accordion",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

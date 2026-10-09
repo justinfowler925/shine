@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Search",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "52977:33807",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Search",
+    "headings": "Material 3 \u2014 Search",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Search",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52977-33807",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52977-33807",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "1a3d2496ca516beda51b8774cdeadfe1d1ef52eeef8dfb74b0b74496919cb4da",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "52977:33807"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

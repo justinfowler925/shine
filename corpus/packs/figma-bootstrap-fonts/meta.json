@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-fonts",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1751",
+  "harvested": "2026-10-09",
+  "bytes": 123648,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Fonts",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "3890:1751",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Fonts",
+    "headings": "Fonts",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Fonts",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1751",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1751",
+    "capturedAt": "2026-10-09T13:47:30.161Z",
+    "shotSha256": "1fa48e101c0a6c68e6d13d258813b1d7f645fb17815fc7f1dd06258d13a3a2e7",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "3890:1751",
+      "page": "Foundations",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

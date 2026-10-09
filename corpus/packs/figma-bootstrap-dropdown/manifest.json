@@ -1,0 +1,18 @@
+{
+  "id": "figma-bootstrap-dropdown",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "dropdown",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-dropdown.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

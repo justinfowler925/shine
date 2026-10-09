@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-skeleton",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2824-2174",
+  "harvested": "2026-10-09",
+  "bytes": 91328,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Skeleton",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2824:2174",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Skeleton",
+    "headings": "Skeleton",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Skeleton",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2824-2174",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2824-2174",
+    "capturedAt": "2026-10-09T13:50:36.505Z",
+    "shotSha256": "fbca6ec6f74d5d186c70fa134fab1516e34b2f3508123133d1bffbff51f6d418",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2824:2174",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

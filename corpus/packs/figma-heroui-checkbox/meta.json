@@ -5,10 +5,15 @@
   "bytes": 113773,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Checkbox",
+    "title": "Checkbox",
+    "headings": "Checkbox",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Checkbox",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2433-38083",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2433-38083",
-    "capturedAt": "2026-10-09T02:41:26.409724Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "fe31880bb438362122dbfbed8021bcf0c45c67c74050e77fe4a0ce38e5856277",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2433:38083",
       "page": "Checkbox",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

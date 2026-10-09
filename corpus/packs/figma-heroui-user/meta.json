@@ -5,10 +5,15 @@
   "bytes": 119687,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 User",
+    "title": "User",
+    "headings": "User",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "User",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-33202",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-33202",
-    "capturedAt": "2026-10-09T02:44:35.602070Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "1058b466d53ce8475533e9949bfd8de4300b7a935760b1d95d6d8e24aaa54fce",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2545:33202",
       "page": "User",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

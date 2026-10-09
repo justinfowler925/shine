@@ -5,10 +5,15 @@
   "bytes": 113907,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Chip",
+    "title": "Chip",
+    "headings": "Chip",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Chip",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2291-38171",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2291-38171",
-    "capturedAt": "2026-10-09T02:41:27.066198Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "c0f368914c159d339f699aab53f559d7a30d674c4403b36e39cf25b0590e0837",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2291:38171",
       "page": "Chip",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

@@ -1,0 +1,18 @@
+{
+  "id": "figma-bootstrap-button-group",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "button-group",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-button-group.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

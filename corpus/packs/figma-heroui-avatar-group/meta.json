@@ -5,10 +5,15 @@
   "bytes": 124542,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Avatar Group",
+    "title": "Avatar Group",
+    "headings": "Avatar Group",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Avatar Group",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-33553",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-33553",
-    "capturedAt": "2026-10-09T02:54:11.502226Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "c5dbba148a245424af17317518e52c7f95fa25b822cced8e2185d2aca11d2bd3",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2545:33553",
       "page": "Avatar Group",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

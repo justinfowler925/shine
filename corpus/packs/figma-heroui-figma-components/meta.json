@@ -5,10 +5,15 @@
   "bytes": 33070,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Figma Components",
+    "title": "Figma Components",
+    "headings": "Figma Components",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Figma Components",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2245-10892",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2245-10892",
-    "capturedAt": "2026-10-09T02:45:22.518126Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "0b3632ac766dad9f5c29ab9e00161c378a6ab393eabceaf42dc156125dbbfff2",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2245:10892",
       "page": "Figma Components",
       "kind": "atoms"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

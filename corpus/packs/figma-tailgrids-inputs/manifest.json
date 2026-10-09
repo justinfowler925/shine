@@ -1,0 +1,20 @@
+{
+  "id": "figma-tailgrids-inputs",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "inputs",
+    "input",
+    "form"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-inputs.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

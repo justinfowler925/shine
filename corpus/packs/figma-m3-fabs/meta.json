@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 FABs",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "50717:9243",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 FABs",
+    "headings": "Material 3 \u2014 FABs",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 FABs",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9243",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9243",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "8cb13b3f4b531cd4a895984e6e902d5ecb455f4db149bd8e30c9aea1d675ca28",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "50717:9243"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

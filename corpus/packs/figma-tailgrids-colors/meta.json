@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-colors",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-2860",
+  "harvested": "2026-10-09",
+  "bytes": 103742,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Colors",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:2860",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Colors",
+    "headings": "Colors",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Colors",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-2860",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-2860",
+    "capturedAt": "2026-10-09T13:43:55.951Z",
+    "shotSha256": "19be3304e0b97eb9eaf3eb8f9b43fa2d8236092057b2742ee1a33e054833cac3",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:2860",
+      "page": "🎨 Colors",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

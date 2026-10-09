@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-input-otp",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2823-2009",
+  "harvested": "2026-10-09",
+  "bytes": 127993,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Input OTP",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2823:2009",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Input OTP",
+    "headings": "Input OTP",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Input OTP",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2823-2009",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2823-2009",
+    "capturedAt": "2026-10-09T13:49:21.362Z",
+    "shotSha256": "180714fba3cda02e5854aa4b8aa81b35a6effa870d057f79405b42596039d9c1",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2823:2009",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

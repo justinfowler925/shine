@@ -1,0 +1,20 @@
+{
+  "id": "figma-tailgrids-settings-pages",
+  "kind": "blueprint",
+  "screen": "settings",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "settings-pages",
+    "pro-components",
+    "settings"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-settings-pages.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-docs-elements",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-2299",
+  "harvested": "2026-10-09",
+  "bytes": 36160,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Docs Elements",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "3890:2299",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Docs Elements",
+    "headings": "Docs Elements",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Docs Elements",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-2299",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-2299",
+    "capturedAt": "2026-10-09T13:47:49.455Z",
+    "shotSha256": "75693b42df28094914b4b6e84425ee22e05896d33e1e6235cb70c800cde9972f",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "3890:2299",
+      "page": "Foundations",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

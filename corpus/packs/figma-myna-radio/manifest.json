@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-radio",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "radio",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-radio.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

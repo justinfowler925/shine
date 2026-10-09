@@ -8,5 +8,23 @@
   "title": "HeroUI Figma Components docs canvas",
   "fileKey": "DC4g36xyt4DobtbEa11JFL",
   "nodeId": "5:3550",
-  "discovery": "deep-harvest"
+  "discovery": "deep-harvest",
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma Components docs canvas",
+    "headings": "HeroUI Figma Components docs canvas",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "HeroUI Figma Components docs canvas",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-3550",
+    "finalUrl": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-3550",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "aa61052b46a538f55fed5a2dc8a2427263e83b1e5805d543e38eef43cd7081ee",
+    "figma": {
+      "fileKey": "DC4g36xyt4DobtbEa11JFL",
+      "nodeId": "5:3550"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

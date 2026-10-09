@@ -1,0 +1,20 @@
+{
+  "id": "figma-tailgrids-check-box",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "check-box",
+    "check-box",
+    "form"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-check-box.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

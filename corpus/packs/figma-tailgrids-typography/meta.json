@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-typography",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3662",
+  "harvested": "2026-10-09",
+  "bytes": 189498,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Typography",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:3662",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Typography",
+    "headings": "Typography",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Typography",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3662",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3662",
+    "capturedAt": "2026-10-09T13:43:56.258Z",
+    "shotSha256": "082a83b35e12511ea4c180ad273df7c6c6d47175340987610337d24d073eff0a",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:3662",
+      "page": "📖 Typography",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

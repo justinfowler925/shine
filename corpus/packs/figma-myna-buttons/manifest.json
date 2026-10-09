@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-buttons",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "button",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-buttons.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

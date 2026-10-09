@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-alert-dialog",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1596",
+  "harvested": "2026-10-09",
+  "bytes": 29254,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Alert Dialog",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2673:1596",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Alert Dialog",
+    "headings": "Alert Dialog",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Alert Dialog",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1596",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1596",
+    "capturedAt": "2026-10-09T13:47:48.724Z",
+    "shotSha256": "1d6aecd19f43d29f389c8e3ed65654224ad65a90154444579bba3334b9a8d784",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2673:1596",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

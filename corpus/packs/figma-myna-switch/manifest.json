@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-switch",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "switch",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-switch.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

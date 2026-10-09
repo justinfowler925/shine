@@ -5,10 +5,15 @@
   "bytes": 139305,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Select",
+    "title": "Select",
+    "headings": "Select",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Select",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2943-31581",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2943-31581",
-    "capturedAt": "2026-10-09T02:43:11.883493Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "49ab5efa4d805f09cc9a6ab1f9a95b35082cf483ee4dbe201730223a606193bf",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2943:31581",
       "page": "Select",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

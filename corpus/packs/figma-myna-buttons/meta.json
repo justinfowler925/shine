@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-buttons",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-1721",
+  "harvested": "2026-10-09",
+  "bytes": 42045,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Buttons",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2674:1721",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Buttons",
+    "headings": "Buttons",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Buttons",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-1721",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-1721",
+    "capturedAt": "2026-10-09T13:47:48.854Z",
+    "shotSha256": "52c6dfdb7407dd6445ecec1c406bb868cf52def27f9d587e6907a922ef277fa3",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2674:1721",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-pagination",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2154",
+  "harvested": "2026-10-09",
+  "bytes": 17107,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Pagination",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2674:2154",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Pagination",
+    "headings": "Pagination",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Pagination",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2154",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2154",
+    "capturedAt": "2026-10-09T13:48:46.149Z",
+    "shotSha256": "8102741eaeee75bb23766443142ddb0ccb743ab500f09c2e9d521745cf83a7e2",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2674:2154",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

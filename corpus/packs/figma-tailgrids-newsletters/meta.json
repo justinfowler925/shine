@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-newsletters",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16909",
+  "harvested": "2026-10-09",
+  "bytes": 95461,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Newsletters",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:16909",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Newsletters",
+    "headings": "Newsletters",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Newsletters",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16909",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16909",
+    "capturedAt": "2026-10-09T13:45:44.549Z",
+    "shotSha256": "fa5183ba1014632fb1c933fd6dfe413e486814531b3fa32a1876c2ca89cbf9fc",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:16909",
+      "page": "-- Newsletters",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

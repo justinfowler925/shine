@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-accordion",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2672-1548",
+  "harvested": "2026-10-09",
+  "bytes": 47515,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Accordion",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2672:1548",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Accordion",
+    "headings": "Accordion",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Accordion",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2672-1548",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2672-1548",
+    "capturedAt": "2026-10-09T13:50:09.332Z",
+    "shotSha256": "1cefebd81e9904a21aca1ea36712478eb146b9f4fedf3e07124607a77e3704a0",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2672:1548",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

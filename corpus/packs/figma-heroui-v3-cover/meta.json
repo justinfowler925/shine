@@ -5,10 +5,15 @@
   "bytes": 137497,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Welcome",
+    "title": "Welcome",
+    "headings": "Welcome",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Welcome",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=5011-2637",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=5011-2637",
-    "capturedAt": "2026-10-09T02:41:22.020088Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "4d3e2dbdab279205a14fe2d266d61225e80bb45d44332fe4b121063e71ab4f7e",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "5011:2637",
       "page": "Welcome",
       "kind": "cover"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-cta",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16641",
+  "harvested": "2026-10-09",
+  "bytes": 105241,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "CTA",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:16641",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "CTA",
+    "headings": "CTA",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "CTA",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16641",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16641",
+    "capturedAt": "2026-10-09T13:45:43.500Z",
+    "shotSha256": "092b738d16e43e040db8986e54b890a5db89b9a8d59c762d98ac948e91520dfe",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:16641",
+      "page": "-- CTA",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-product-carousels",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19525",
+  "harvested": "2026-10-09",
+  "bytes": 474974,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Product Carousels",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:19525",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Product Carousels",
+    "headings": "Product Carousels",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Product Carousels",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19525",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19525",
+    "capturedAt": "2026-10-09T13:48:00.879Z",
+    "shotSha256": "2d80efb536dfa954cb91355b8b2b1ae48bcb63be04a2ca9076ca24b41104b48f",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:19525",
+      "page": "-- Product Carousels",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

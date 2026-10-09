@@ -5,10 +5,15 @@
   "bytes": 115733,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 ButtonGroup",
+    "title": "ButtonGroup",
+    "headings": "ButtonGroup",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "ButtonGroup",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2250-37403",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2250-37403",
-    "capturedAt": "2026-10-09T02:41:24.953693Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "48e606cc5eb7db7980d74c2deeede719337ecaccfdecedd8327e675e75836d26",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2250:37403",
       "page": "ButtonGroup",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

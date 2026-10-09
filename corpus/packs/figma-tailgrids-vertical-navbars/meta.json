@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-vertical-navbars",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22132",
+  "harvested": "2026-10-09",
+  "bytes": 73887,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Vertical Navbars",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:22132",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Vertical Navbars",
+    "headings": "Vertical Navbars",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Vertical Navbars",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22132",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22132",
+    "capturedAt": "2026-10-09T13:49:14.984Z",
+    "shotSha256": "86c63875dc54d4e370f42367addff07751addb20eae8c3718255a516d9b0ebfd",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:22132",
+      "page": "-- Vertical Navbars",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

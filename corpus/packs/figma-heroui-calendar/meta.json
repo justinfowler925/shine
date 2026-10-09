@@ -5,10 +5,15 @@
   "bytes": 231166,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Calendar",
+    "title": "Calendar",
+    "headings": "Calendar",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Calendar",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=4492-2681",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=4492-2681",
-    "capturedAt": "2026-10-09T02:41:25.254477Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "e5a02aa5b7400cbd26ee6e668e002c0334c7c10ed607371b0cbba1fb04ab7636",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "4492:2681",
       "page": "Calendar",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

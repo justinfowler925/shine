@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-portfolio",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16998",
+  "harvested": "2026-10-09",
+  "bytes": 1034436,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Portfolios",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:16998",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Portfolios",
+    "headings": "Portfolios",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Portfolios",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16998",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16998",
+    "capturedAt": "2026-10-09T13:45:44.982Z",
+    "shotSha256": "890a42bf5d5d48cbf295fffeeffe4f2076253f83b412262db42f480a2e4bb033",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:16998",
+      "page": "-- Portfolio",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-toggle",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "toggle",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-toggle.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

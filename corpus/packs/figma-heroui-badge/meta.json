@@ -5,10 +5,15 @@
   "bytes": 127766,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Badge",
+    "title": "Badge",
+    "headings": "Badge",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Badge",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2278-445",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2278-445",
-    "capturedAt": "2026-10-09T02:54:11.502957Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "0887ec731028467b700b9dd1e33cf3a8615deb2e7df8e54ccc42536490da897e",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2278:445",
       "page": "Badge",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

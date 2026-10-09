@@ -5,10 +5,15 @@
   "bytes": 124988,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Alert",
+    "title": "Alert",
+    "headings": "Alert",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Alert",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3128-340",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3128-340",
-    "capturedAt": "2026-10-09T02:41:23.399652Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "6e46d89a1566a9b2d3aec8a732578e7ba9e8659e9e3d79f756e2968227d20b7f",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "3128:340",
       "page": "Alert",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

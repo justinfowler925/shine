@@ -1,0 +1,20 @@
+{
+  "id": "figma-tailgrids-dropdowns",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "dropdowns",
+    "dropdown",
+    "form"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-dropdowns.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

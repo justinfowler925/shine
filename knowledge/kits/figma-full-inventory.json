@@ -1,0 +1,43 @@
+{
+  "inventoriedAt": "2026-10-09",
+  "kits": {
+    "heroui": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pages": 38,
+      "emptyDividerPages": 2,
+      "componentPages": 36,
+      "packsBefore": 46,
+      "note": "MCP get_metadata lists Welcome+Icons only; use_figma root.children = 38 pages"
+    },
+    "m3": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "pages": 3,
+      "boards": 38,
+      "packsBefore": 38,
+      "note": "MCP get_metadata lists Getting Started only; use_figma = Styles+Components boards"
+    },
+    "tailgrids": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "pagesViaMcpMetadata": 2,
+      "pagesViaUseFigma": 80,
+      "packsBefore": 4,
+      "targetsNow": 82,
+      "note": "MCP page list was Cover+All Essential only \u2014 false completeness"
+    },
+    "myna": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "pages": 2,
+      "componentBoards": 41,
+      "packsBefore": 1,
+      "targetsNow": 42
+    },
+    "bootstrap": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "pagesViaMcpMetadata": 1,
+      "pagesViaUseFigma": 6,
+      "frames": 39,
+      "packsBefore": 3,
+      "targetsNow": 39
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-command",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2761-2754",
+  "harvested": "2026-10-09",
+  "bytes": 28015,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Command",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2761:2754",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Command",
+    "headings": "Command",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Command",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2761-2754",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2761-2754",
+    "capturedAt": "2026-10-09T13:48:28.443Z",
+    "shotSha256": "647189e7b125f76ad6d31581538a9089d68e307b3116b6e0ecc3e02db163a7dc",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2761:2754",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}
