@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-typography",
+  "screen": "blog",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/typography/typography.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "typography.tsx",
+      "sha256": "e5784ad7b53045c3b95d8ebbeca4df5d22dbd3ac709eea787741866a80dc7aba"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-color-swatch-picker",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/color-swatch-picker/color-swatch-picker.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "color-swatch-picker.tsx",
+      "sha256": "0dbbf28a5a23b73ee820410e184529b37629545971f7ac512c1ba826a802b386"
+    }
+  ]
+}

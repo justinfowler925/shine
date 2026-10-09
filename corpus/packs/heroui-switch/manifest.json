@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-switch",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/switch/switch.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "switch.tsx",
+      "sha256": "7c70e985714a40b73594eedae2268e39d87f7f5ee5e0ef7176328debbc419ac7"
+    }
+  ]
+}

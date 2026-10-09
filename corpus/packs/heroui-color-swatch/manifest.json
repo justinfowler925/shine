@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-color-swatch",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/color-swatch/color-swatch.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "color-swatch.tsx",
+      "sha256": "db26a55c852175e13027333a00fc4e0609ed2e5e539bfe6a80e74749d220d4b3"
+    }
+  ]
+}

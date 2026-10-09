@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-dropdown",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/dropdown/dropdown.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "dropdown.tsx",
+      "sha256": "8408c2ae74023afebb7ebded22aee26c005441d089e8fce2c9019492e7dc5d61"
+    }
+  ]
+}

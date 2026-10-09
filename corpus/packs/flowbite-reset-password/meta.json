@@ -1,0 +1,19 @@
+{
+  "id": "flowbite-reset-password",
+  "source": "https://flowbite-admin-dashboard.vercel.app/authentication/reset-password/",
+  "harvested": "2026-10-09",
+  "bytes": 36813,
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS Reset Password Page - Flowbite",
+    "headings": "\n            Reset your password\n        ",
+    "expectedSelector": "nav, aside, table, form, input, svg, button, h1",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/authentication/reset-password/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/authentication/reset-password/",
+    "capturedAt": "2026-10-09T17:14:42.707Z",
+    "expectedTextMatched": false,
+    "shotSha256": "562adea93d4776d873952eac7e77735f5ad57ead0c595870c3133a437c35ef42"
+  }
+}

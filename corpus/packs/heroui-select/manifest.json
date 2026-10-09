@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-select",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/select/select.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "select.tsx",
+      "sha256": "cee16c36c2884de910a2544ad701bc50fa9d8e7911ee907adbfd804eeacab484"
+    }
+  ]
+}

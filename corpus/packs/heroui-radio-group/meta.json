@@ -1,0 +1,20 @@
+{
+  "id": "heroui-radio-group",
+  "source": "https://www.heroui.com/docs/components/radio-group",
+  "harvested": "2026-10-09",
+  "bytes": 1344280,
+  "capture": {
+    "status": 200,
+    "title": "RadioGroup | HeroUI",
+    "headings": "RadioGroupUpdated\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 359,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/radio-group",
+    "finalUrl": "https://heroui.com/en/docs/react/components/radio-group",
+    "capturedAt": "2026-10-09T17:30:40.492Z",
+    "shotSha256": "02c116a69a7613928753e292e24a6117adbd389cb1130cff2ff42a4a53593474"
+  }
+}

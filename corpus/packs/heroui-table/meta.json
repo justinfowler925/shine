@@ -1,0 +1,20 @@
+{
+  "id": "heroui-table",
+  "source": "https://www.heroui.com/docs/components/table",
+  "harvested": "2026-10-09",
+  "bytes": 1822080,
+  "capture": {
+    "status": 200,
+    "title": "Table | HeroUI",
+    "headings": "TableUpdated\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 706,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/table",
+    "finalUrl": "https://heroui.com/en/docs/react/components/table",
+    "capturedAt": "2026-10-09T17:34:43.927Z",
+    "shotSha256": "d945984861c4eeb26902ea8e32c05ea251910655893ba65e0ca8ea210ee25d45"
+  }
+}

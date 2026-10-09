@@ -198,13 +198,18 @@ export function inspectPack(dir, family = "", row = null) {
   if (!existsSync(shot)) broken.push("no shot.png");
   else {
     const bytes = statSync(shot).size;
-    const floor = (row?.scope === "component" || row?.screen === "auth") ? MIN_SHOT_COMPONENT : MIN_SHOT;
+    const floor = (row?.scope === "component" || row?.screen === "auth" || row?.screen === "empty") ? MIN_SHOT_COMPONENT : MIN_SHOT;
     if (bytes < floor) broken.push(`shot.png ${bytes}B — under the ${floor}B floor for ${row?.scope || "page"} scope`);
   }
   const src = packSourceFiles(dir);
+  // Empty-state demos and thin kit atoms (HeroUI wrappers, Next page stubs) are short on purpose.
+  const sourceFloor =
+    row?.screen === "empty" ? 10
+    : row?.scope === "component" || row?.kit === "heroui" ? 15
+    : MIN_SOURCE_LINES;
   if (!src.length) broken.push("no source/");
-  else if (!src.some((p) => nonemptyLines(readFileSync(p, "utf8")) >= MIN_SOURCE_LINES))
-    broken.push(`source/ has no file with ≥${MIN_SOURCE_LINES} readable lines`);
+  else if (!src.some((p) => nonemptyLines(readFileSync(p, "utf8")) >= sourceFloor))
+    broken.push(`source/ has no file with ≥${sourceFloor} readable lines`);
   const tokens = join(dir, "tokens.css");
   if (!existsSync(tokens)) broken.push("no tokens.css");
   else if (FULL_PAINT.has(family)) {

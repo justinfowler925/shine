@@ -1,0 +1,19 @@
+{
+  "id": "tailadmin-alerts",
+  "source": "https://free-react-demo.tailadmin.com/alerts",
+  "harvested": "2026-10-09",
+  "bytes": 122906,
+  "capture": {
+    "status": 200,
+    "title": "React.js Alerts Dashboard | TailAdmin - React.js Admin Dashboard Template",
+    "headings": "Menu\nOthers\nAlerts",
+    "expectedSelector": "nav, aside, table, form, input, svg, button, h1",
+    "expectedCount": 50,
+    "expectedText": "",
+    "sourceUrl": "https://free-react-demo.tailadmin.com/alerts",
+    "finalUrl": "https://free-react-demo.tailadmin.com/alerts",
+    "capturedAt": "2026-10-09T17:17:05.195Z",
+    "expectedTextMatched": false,
+    "shotSha256": "4f799a5a75fdd122cb47c75da1acf6f19620439855fccf9185921e74f89bd331"
+  }
+}

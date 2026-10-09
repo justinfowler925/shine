@@ -1,0 +1,20 @@
+{
+  "id": "heroui-button",
+  "source": "https://www.heroui.com/docs/components/button",
+  "harvested": "2026-10-09",
+  "bytes": 921608,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Button – Accessible React Button Component",
+    "headings": "Button\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 165,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/button",
+    "finalUrl": "https://heroui.com/en/docs/react/components/button",
+    "capturedAt": "2026-10-09T17:25:24.086Z",
+    "shotSha256": "213ab93fb7e6ddd9bf9ac3783dacd22732828c04508da33d5d35079161259cb3"
+  }
+}

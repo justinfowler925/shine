@@ -1,0 +1,19 @@
+{
+  "id": "tailadmin-images",
+  "source": "https://free-react-demo.tailadmin.com/images",
+  "harvested": "2026-10-09",
+  "bytes": 1065322,
+  "capture": {
+    "status": 200,
+    "title": "React.js Images Dashboard | TailAdmin - React.js Admin Dashboard Template",
+    "headings": "Menu\nOthers\nImages",
+    "expectedSelector": "nav, aside, table, form, input, svg, button, h1",
+    "expectedCount": 42,
+    "expectedText": "",
+    "sourceUrl": "https://free-react-demo.tailadmin.com/images",
+    "finalUrl": "https://free-react-demo.tailadmin.com/images",
+    "capturedAt": "2026-10-09T17:14:53.998Z",
+    "expectedTextMatched": false,
+    "shotSha256": "377cfee85800810a4f0b4fef8eadc2b4b7692e0bf9739d92760fd23819403904"
+  }
+}

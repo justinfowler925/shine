@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-modals",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/modals/modal.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "modal.tsx",
+      "sha256": "d698ac483dcf8e305b5258b0edbb860ea45c1562a82a7fe5717baa6c08272d42"
+    }
+  ]
+}

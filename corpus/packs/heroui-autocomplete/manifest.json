@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-autocomplete",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/autocomplete/autocomplete.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "autocomplete.tsx",
+      "sha256": "eb3d99e0021da54437119eefb62bf1648711abb42f62a93c3049ae655a59b922"
+    }
+  ]
+}

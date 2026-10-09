@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-toast",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/toast/toast.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "toast.tsx",
+      "sha256": "dee13ad0dd3c9356882735a31e8bf8b850e895310d93b612ce2a2b2d030842dd"
+    }
+  ]
+}

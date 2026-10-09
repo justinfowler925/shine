@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-surface",
+  "screen": "catalog",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/surface/surface.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "surface.tsx",
+      "sha256": "451081aa621ba85daf26ce966973953d54e2e28df7b20aa14bbcaea3d1e8294b"
+    }
+  ]
+}

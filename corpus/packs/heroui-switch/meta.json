@@ -1,0 +1,20 @@
+{
+  "id": "heroui-switch",
+  "source": "https://www.heroui.com/docs/components/switch",
+  "harvested": "2026-10-09",
+  "bytes": 1087649,
+  "capture": {
+    "status": 200,
+    "title": "Switch | HeroUI",
+    "headings": "SwitchUpdated\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 262,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/switch",
+    "finalUrl": "https://heroui.com/en/docs/react/components/switch",
+    "capturedAt": "2026-10-09T17:31:12.057Z",
+    "shotSha256": "58a5d68d2f820dc71eeeb1b1add91938c38ba55ba0a588dbbd06c23e46c9e6ab"
+  }
+}

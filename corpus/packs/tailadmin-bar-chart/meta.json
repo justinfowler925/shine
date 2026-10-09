@@ -1,0 +1,19 @@
+{
+  "id": "tailadmin-bar-chart",
+  "source": "https://free-react-demo.tailadmin.com/bar-chart",
+  "harvested": "2026-10-09",
+  "bytes": 66414,
+  "capture": {
+    "status": 200,
+    "title": "React.js Chart Dashboard | TailAdmin - React.js Admin Dashboard Template",
+    "headings": "Menu\nOthers\nBar Chart",
+    "expectedSelector": "nav, aside, table, form, input, svg, button, h1",
+    "expectedCount": 43,
+    "expectedText": "",
+    "sourceUrl": "https://free-react-demo.tailadmin.com/bar-chart",
+    "finalUrl": "https://free-react-demo.tailadmin.com/bar-chart",
+    "capturedAt": "2026-10-09T17:15:06.044Z",
+    "expectedTextMatched": false,
+    "shotSha256": "536c98a2d92f1cf850718e09ce9944e553a7bb4bf1200b9c8eb1eb67930339d8"
+  }
+}

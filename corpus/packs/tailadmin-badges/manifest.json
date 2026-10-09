@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "tailadmin-badges",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "tailadmin-react",
+    "mode": "full",
+    "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard.git",
+    "branch": "main",
+    "sha": "e888dd1716b9803b535c7c2fa4f2c6b7d39b3da9"
+  },
+  "corpusPath": "tailadmin-react/src/pages/UiElements/Badges.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "Badge.tsx",
+      "sha256": "10942e76e43734bfa303eee4c30e8fbe8659b7e7a429e7fab87687522f9749f5"
+    },
+    {
+      "path": "Badges.tsx",
+      "sha256": "75c1659f7e3af52c63164977966424520417eec54a3375b73352caeb3ee79529"
+    },
+    {
+      "path": "PageBreadCrumb.tsx",
+      "sha256": "944a6ea565859bace197020d1894590818c47b6c377579e98e46c29580c54671"
+    }
+  ]
+}

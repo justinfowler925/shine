@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-calendar-year-picker",
+  "screen": "calendar",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/calendar-year-picker/calendar-year-picker.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "calendar-year-picker.tsx",
+      "sha256": "d7a74f48c96b22f9c362f0f7b97b6a81641eb276fa2ad08febaecea101455eb1"
+    }
+  ]
+}

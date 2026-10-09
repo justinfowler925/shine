@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-color-input-group",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/color-input-group/color-input-group.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "color-input-group.tsx",
+      "sha256": "4fd03e3067b41f6f74424b8dacfefea8e275787971627e7f00ad13f6a2c35689"
+    }
+  ]
+}

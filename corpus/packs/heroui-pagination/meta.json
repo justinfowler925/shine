@@ -1,0 +1,20 @@
+{
+  "id": "heroui-pagination",
+  "source": "https://www.heroui.com/docs/components/pagination",
+  "harvested": "2026-10-09",
+  "bytes": 945631,
+  "capture": {
+    "status": 200,
+    "title": "Pagination | HeroUI",
+    "headings": "Pagination\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nNote\nAccessibility\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 278,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/pagination",
+    "finalUrl": "https://heroui.com/en/docs/react/components/pagination",
+    "capturedAt": "2026-10-09T17:34:35.016Z",
+    "shotSha256": "93da700a6d45303d5c82c3a856ba331f6237687fe9b47957e7900e174fe3e008"
+  }
+}

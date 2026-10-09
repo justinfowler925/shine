@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-checkbox",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/checkbox/checkbox.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "checkbox.tsx",
+      "sha256": "e8ed45bce405706804c10d760385e3f20d5ae0696418999bcfa77c68861da62f"
+    }
+  ]
+}

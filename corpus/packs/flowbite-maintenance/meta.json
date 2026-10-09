@@ -1,0 +1,19 @@
+{
+  "id": "flowbite-maintenance",
+  "source": "https://flowbite-admin-dashboard.vercel.app/pages/maintenance/",
+  "harvested": "2026-10-09",
+  "bytes": 165807,
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS Maintenance Page - Flowbite",
+    "headings": "Under Maintenance",
+    "expectedSelector": "main, h1, a, button",
+    "expectedCount": 4,
+    "expectedText": "Maintenance",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/pages/maintenance/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/pages/maintenance/",
+    "capturedAt": "2026-10-09T17:16:54.659Z",
+    "expectedTextMatched": true,
+    "shotSha256": "b43e33760212515ed18189b6ae4d223e309665f00c57bdff22cd8acfb661ac76"
+  }
+}

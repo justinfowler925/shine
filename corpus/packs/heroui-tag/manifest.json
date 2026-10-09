@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-tag",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/tag/tag.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "tag.tsx",
+      "sha256": "83bc8b4b613ac1fdcc02ab07bd309cfdac6660f87afd96623278a12efaf5fda0"
+    }
+  ]
+}

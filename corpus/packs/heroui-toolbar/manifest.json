@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-toolbar",
+  "screen": "app-shell",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/toolbar/toolbar.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "toolbar.tsx",
+      "sha256": "0b17e1d9ce005ea4e4a9acd2c6ed55e862862b55f216ca4ab3cdbe6c529f2e62"
+    }
+  ]
+}

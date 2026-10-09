@@ -1,0 +1,20 @@
+{
+  "id": "heroui-date-input-group",
+  "source": "https://www.heroui.com/docs/components/date-field",
+  "harvested": "2026-10-09",
+  "bytes": 1980370,
+  "capture": {
+    "status": 200,
+    "title": "DateField | HeroUI",
+    "headings": "DateField\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nDateField.Group Styling\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 404,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/date-field",
+    "finalUrl": "https://heroui.com/en/docs/react/components/date-field",
+    "capturedAt": "2026-10-09T17:36:54.935Z",
+    "shotSha256": "f7238f0ed29da847652253604d0fa0c4c07ee79efe9bc012dd86c75fd23e293c"
+  }
+}

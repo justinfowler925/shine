@@ -1,0 +1,20 @@
+{
+  "id": "heroui-number-field",
+  "source": "https://www.heroui.com/docs/components/number-field",
+  "harvested": "2026-10-09",
+  "bytes": 1745789,
+  "capture": {
+    "status": 200,
+    "title": "NumberField | HeroUI",
+    "headings": "NumberField\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 405,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/number-field",
+    "finalUrl": "https://heroui.com/en/docs/react/components/number-field",
+    "capturedAt": "2026-10-09T17:30:18.587Z",
+    "shotSha256": "2a3841f38cdd6a5e68dbaf22d25ed867aaf9bee45c3f936650bc4de1ff407e28"
+  }
+}

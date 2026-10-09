@@ -1,0 +1,20 @@
+{
+  "id": "heroui-avatar",
+  "source": "https://www.heroui.com/docs/components/avatar",
+  "harvested": "2026-10-09",
+  "bytes": 766278,
+  "capture": {
+    "status": 200,
+    "title": "Avatar | HeroUI",
+    "headings": "Avatar\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 140,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/avatar",
+    "finalUrl": "https://heroui.com/en/docs/react/components/avatar",
+    "capturedAt": "2026-10-09T17:34:53.955Z",
+    "shotSha256": "ccc682efa68745909034fa5832c9e6790b2c2288737ff60d04ed258aeed753af"
+  }
+}

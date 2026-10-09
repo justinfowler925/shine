@@ -1,0 +1,20 @@
+{
+  "id": "heroui-header",
+  "source": "https://www.heroui.com/docs/components/navbar",
+  "harvested": "2026-10-09",
+  "bytes": 1325470,
+  "capture": {
+    "status": 200,
+    "title": "Navbar | HeroUI",
+    "headings": "Navbar\nKey Changes\nMigration Examples\nComplete Example\nCreating a Reusable Navbar Component (Recommended)\nAdvanced Features (Custom Implementation Required)\nSummary\nMigration Steps\nCommon Patterns",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 82,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/navbar",
+    "finalUrl": "https://heroui.com/en/docs/react/migration/navbar",
+    "capturedAt": "2026-10-09T17:36:39.375Z",
+    "shotSha256": "dc368002d6981ea7ba101cda469f8f4bd4819f73dcbb52afd5f6fa99cc0dee14"
+  }
+}

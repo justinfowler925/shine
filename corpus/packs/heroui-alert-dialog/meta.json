@@ -1,0 +1,20 @@
+{
+  "id": "heroui-alert-dialog",
+  "source": "https://www.heroui.com/docs/components/alert-dialog",
+  "harvested": "2026-10-09",
+  "bytes": 1362779,
+  "capture": {
+    "status": 200,
+    "title": "AlertDialog | HeroUI",
+    "headings": "AlertDialog\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 173,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/alert-dialog",
+    "finalUrl": "https://heroui.com/en/docs/react/components/alert-dialog",
+    "capturedAt": "2026-10-09T17:25:10.635Z",
+    "shotSha256": "8458c41653bf06058f078b19d4273551024d5712192bad89f810edf661d9317e"
+  }
+}

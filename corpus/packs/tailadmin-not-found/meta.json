@@ -1,0 +1,20 @@
+{
+  "id": "tailadmin-not-found",
+  "source": "https://free-react-demo.tailadmin.com/404",
+  "harvested": "2026-10-09",
+  "bytes": 33891,
+  "capture": {
+    "status": 200,
+    "title": "React.js 404 Dashboard | TailAdmin - React.js Admin Dashboard Template",
+    "headings": "ERROR",
+    "expectedSelector": "h1, main, a, button",
+    "expectedCount": 2,
+    "expectedText": "ERROR",
+    "expectedTextMatched": true,
+    "intentionalErrorPage": true,
+    "sourceUrl": "https://free-react-demo.tailadmin.com/404",
+    "finalUrl": "https://free-react-demo.tailadmin.com/404",
+    "capturedAt": "2026-10-09T17:19:03.239Z",
+    "shotSha256": "cb0db8b13d8bbbabde89f5c4de9da1f81ff00a0c25f6ce98a201fab9c27cbf16"
+  }
+}

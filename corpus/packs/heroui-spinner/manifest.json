@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-spinner",
+  "screen": "async-state",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/spinner/spinner.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "spinner.tsx",
+      "sha256": "23b176ac3987702589da3123aefb17cba1cb2116b1853844db1fe01075b711f8"
+    }
+  ]
+}

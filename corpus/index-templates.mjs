@@ -646,6 +646,9 @@ for (const t of [...buildHeroUiAtomRows(kitWalkCtx), ...buildHeroUiPageRows(kitW
     id: t.id, screen: t.screen, kit: t.kit, title: t.title, path: t.path, preview: t.preview,
     license: t.license, kind: t.kind, startFrom: t.startFrom, jobs: t.jobs, scope: t.scope,
     ...(t.note ? { note: t.note } : {}),
+    ...(t.sources?.length ? { sources: t.sources } : {}),
+    ...(t.entrypoints?.length ? { entrypoints: t.entrypoints } : {}),
+    ...(t.selectable === false ? { selectable: false, retiredReason: t.retiredReason } : {}),
   });
 }
 // Full prefer-copy Figma harvest (38 pages → figma-heroui-* packs with shot.png).

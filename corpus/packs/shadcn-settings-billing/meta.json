@@ -1,12 +1,21 @@
 {
   "id": "shadcn-settings-billing",
   "source": "corpus/blueprints/shadcn-settings-billing/reference.html",
-  "harvested": "2026-10-05",
-  "provenance": "Authored blueprint, expert-track P2",
+  "harvested": "2026-10-09",
+  "bytes": 57290,
+  "provenance": "Authored blueprint, not an upstream component demo",
   "capture": {
     "status": 200,
     "title": "Billing settings",
+    "headings": "Workspace\nBilling",
+    "expectedSelector": "[data-region=\"settings-billing\"] #save",
+    "expectedCount": 1,
+    "expectedText": "",
     "sourceUrl": "corpus/blueprints/shadcn-settings-billing/reference.html",
-    "capturedAt": "2026-10-05T18:38:03.257Z"
+    "finalUrl": "corpus/blueprints/shadcn-settings-billing/reference.html",
+    "capturedAt": "2026-10-09T17:14:01.801Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "7c8ef2e2df30d96b345f3c6451a1fb37bd99371546dde4098620f0909e6b0213",
+    "shotSha256": "abf9951cf676c241d4be1df3df9069a0f0dcb0feb6ac227a664881439779e6b9"
   }
 }

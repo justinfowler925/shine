@@ -1,0 +1,19 @@
+{
+  "id": "tailadmin-avatars",
+  "source": "https://free-react-demo.tailadmin.com/avatars",
+  "harvested": "2026-10-09",
+  "bytes": 146419,
+  "capture": {
+    "status": 200,
+    "title": "React.js Avatars Dashboard | TailAdmin - React.js Admin Dashboard Template",
+    "headings": "Menu\nOthers\nAvatars",
+    "expectedSelector": "nav, aside, table, form, input, svg, button, h1",
+    "expectedCount": 42,
+    "expectedText": "",
+    "sourceUrl": "https://free-react-demo.tailadmin.com/avatars",
+    "finalUrl": "https://free-react-demo.tailadmin.com/avatars",
+    "capturedAt": "2026-10-09T17:17:50.262Z",
+    "expectedTextMatched": false,
+    "shotSha256": "2cd3f052a1ffe0a7a7b617d3c10b76c0f1b6a4b78c16eb3241d124380b94c6bb"
+  }
+}

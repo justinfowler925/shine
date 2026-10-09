@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-calendar",
+  "screen": "calendar",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/calendar/calendar.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "calendar.tsx",
+      "sha256": "5ec9f28f2c2c0162dfdf5c78c46eb829163e2e4f01a5fc20cd716d93feebd58e"
+    }
+  ]
+}

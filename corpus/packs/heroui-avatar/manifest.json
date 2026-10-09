@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-avatar",
+  "screen": "record",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/avatar/avatar.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "avatar.tsx",
+      "sha256": "1bd43215a9a83ee7e8acc1afe0bacea98f0302c7df7273719e43cfcdbe2566a0"
+    }
+  ]
+}

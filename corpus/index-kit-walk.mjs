@@ -28,8 +28,13 @@ export function herouiScreenJobs(name) {
   if (/^(modal|drawer|popover|tooltip|toast|alert-dialog)$/.test(n)) {
     return { screen: "form", jobs: ["overlay", "dialog", "heroui", n] };
   }
-  if (/^(table|list-box|list-box-item|list-box-section|pagination)$/.test(n)) {
+  // table stays queue (worklist affinity). list-box/pagination are collection atoms —
+  // not Operate worklists; avoid queue structural-signature (DataTable/Table) false fails.
+  if (n === "table") {
     return { screen: "queue", jobs: ["queue", "table", "crud", "heroui", n] };
+  }
+  if (/^(list-box|list-box-item|list-box-section|pagination)$/.test(n)) {
+    return { screen: "catalog", jobs: ["catalog", "collection", "list", "heroui", n] };
   }
   if (/^(tabs|breadcrumbs|accordion|disclosure|disclosure-group|link|header|toolbar)$/.test(n)) {
     return { screen: "app-shell", jobs: ["app-shell", "navigation", "heroui", n] };
@@ -59,6 +64,24 @@ export function herouiScreenJobs(name) {
  * @param {{ exists: (rel: string) => boolean, corpus: string }} ctx
  * @returns {object[]}
  */
+/** Docs slug when the component folder name is not a public /docs/components/<slug> page. */
+const HEROUI_DOCS_SLUG = {
+  header: "navbar",
+  "calendar-year-picker": "calendar",
+  "date-input-group": "date-field",
+  "color-input-group": "color-field",
+  menu: "dropdown",
+  "menu-item": "dropdown",
+  "menu-section": "dropdown",
+  "switch-group": "switch",
+  tag: "chip",
+  "list-box-item": "list-box",
+  "list-box-section": "list-box",
+};
+
+/** No public HeroUI docs page and no honest parent demo — retire with reason. */
+const HEROUI_NO_PUBLIC_DOCS = new Set(["empty-state"]);
+
 export function buildHeroUiAtomRows(ctx) {
   const root = join(ctx.corpus, "heroui/packages/react/src/components");
   if (!existsSync(root)) return [];
@@ -78,19 +101,26 @@ export function buildHeroUiAtomRows(ctx) {
     const id = `heroui-${entry}`;
     const { screen, jobs } = herouiScreenJobs(entry);
     const title = `HeroUI ${entry.replace(/-/g, " ")}`;
+    const docsSlug = HEROUI_DOCS_SLUG[entry] || entry;
+    const noDocs = HEROUI_NO_PUBLIC_DOCS.has(entry);
     rows.push({
       id,
       screen,
       kit: "heroui",
       title,
       path: ctx.exists(path) ? path : `heroui/packages/react/src/components/${entry}`,
-      preview: `https://www.heroui.com/docs/components/${entry}`,
+      preview: noDocs ? "" : `https://www.heroui.com/docs/components/${docsSlug}`,
       license: "MIT",
       kind: "source",
       startFrom: 8,
       jobs,
       scope: "component",
-      note: "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      note: noDocs
+        ? "No public HeroUI docs page for this atom; retired — use parent component cite or figma-heroui-*"
+        : docsSlug !== entry
+          ? `Kit-walk atom — docs demo at /${docsSlug} (folder ${entry} has no dedicated page); port to house shadcn`
+          : "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      ...(noDocs ? { selectable: false, retiredReason: "no public HeroUI docs page to harvest a real shot; use parent heroui-* or figma-heroui-*" } : {}),
     });
   }
   return rows.sort((a, b) => a.id.localeCompare(b.id));
@@ -240,20 +270,26 @@ export function buildHeroUiPageRows(ctx) {
   ];
   return pages
     .filter((t) => ctx.exists(t.path))
-    .map((t) => ({
-      id: t.id,
-      screen: t.screen,
-      kit: "heroui",
-      title: t.title,
-      path: t.path,
-      preview: "https://www.heroui.com",
-      license: "MIT",
-      kind: "source",
-      startFrom: t.rank,
-      jobs: t.jobs,
-      scope: "page",
-      note: "Kit-walk page — HeroUI next-app route",
-    }));
+    .map((t) => {
+      const layout = "heroui-next-app/app/layout.tsx";
+      const sources = ctx.exists(layout) ? [t.path, layout] : [t.path];
+      return {
+        id: t.id,
+        screen: t.screen,
+        kit: "heroui",
+        title: t.title,
+        path: t.path,
+        preview: "https://www.heroui.com",
+        license: "MIT",
+        kind: "source",
+        startFrom: t.rank,
+        jobs: t.jobs,
+        scope: "page",
+        sources,
+        entrypoints: sources,
+        note: "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+      };
+    });
 }
 
 /**
@@ -278,7 +314,7 @@ export function missingTailwindPages() {
     { id: "tailadmin-line-chart", kit: "tailadmin-react", screen: "charts", rank: 5, path: "tailadmin-react/src/pages/Charts/LineChart.tsx", preview: "https://free-react-demo.tailadmin.com/line-chart", title: "TailAdmin line chart page", jobs: ["charts", "chart", "line", "analytics", "dataviz"] },
     { id: "tailadmin-alerts", kit: "tailadmin-react", screen: "form", rank: 6, path: "tailadmin-react/src/pages/UiElements/Alerts.tsx", preview: "https://free-react-demo.tailadmin.com/alerts", title: "TailAdmin alerts gallery", jobs: ["component", "alert", "feedback", "banner", "tailadmin"] },
     { id: "tailadmin-avatars", kit: "tailadmin-react", screen: "record", rank: 5, path: "tailadmin-react/src/pages/UiElements/Avatars.tsx", preview: "https://free-react-demo.tailadmin.com/avatars", title: "TailAdmin avatars gallery", jobs: ["component", "avatar", "identity"] },
-    { id: "tailadmin-badges", kit: "tailadmin-react", screen: "form", rank: 7, path: "tailadmin-react/src/pages/UiElements/Badges.tsx", preview: "https://free-react-demo.tailadmin.com/badges", title: "TailAdmin badges gallery", jobs: ["component", "badge", "status", "chip"] },
+    { id: "tailadmin-badges", kit: "tailadmin-react", screen: "form", rank: 7, path: "tailadmin-react/src/pages/UiElements/Badges.tsx", preview: "https://free-react-demo.tailadmin.com/badge", title: "TailAdmin badges gallery", jobs: ["component", "badge", "status", "chip"] },
     { id: "tailadmin-buttons", kit: "tailadmin-react", screen: "form", rank: 8, path: "tailadmin-react/src/pages/UiElements/Buttons.tsx", preview: "https://free-react-demo.tailadmin.com/buttons", title: "TailAdmin buttons gallery", jobs: ["component", "button", "cta", "controls"] },
     { id: "tailadmin-images", kit: "tailadmin-react", screen: "catalog", rank: 7, path: "tailadmin-react/src/pages/UiElements/Images.tsx", preview: "https://free-react-demo.tailadmin.com/images", title: "TailAdmin images gallery", jobs: ["component", "image", "media", "gallery"] },
     { id: "tailadmin-videos", kit: "tailadmin-react", screen: "catalog", rank: 8, path: "tailadmin-react/src/pages/UiElements/Videos.tsx", preview: "https://free-react-demo.tailadmin.com/videos", title: "TailAdmin videos gallery", jobs: ["component", "video", "media", "player"] },
@@ -290,7 +326,7 @@ export function missingTailwindPages() {
     { id: "windmill-cards", kit: "windmill-react", screen: "catalog", rank: 6, path: "windmill-react/src/pages/Cards.js", preview: "https://windmill-dashboard-react.vercel.app/app/cards", title: "Windmill cards gallery", jobs: ["component", "card", "catalog"] },
     { id: "windmill-modals", kit: "windmill-react", screen: "form", rank: 8, path: "windmill-react/src/pages/Modals.js", preview: "https://windmill-dashboard-react.vercel.app/app/modals", title: "Windmill modals gallery", jobs: ["component", "modal", "overlay", "dialog"] },
     // untitled application without demos
-    { id: "untitled-empty-state", kit: "untitled-ui-react", screen: "empty", rank: 3, path: "untitled-ui-react/components/application/empty-state/empty-state.tsx", preview: "https://www.untitledui.com/react/components/empty-state", title: "Untitled UI empty state", jobs: ["empty", "empty-state", "zero"] },
+    { id: "untitled-empty-state", kit: "untitled-ui-react", screen: "empty", rank: 3, path: "untitled-ui-react/components/application/empty-state/empty-state.tsx", preview: "https://www.untitledui.com/react/components/empty-states", title: "Untitled UI empty state", jobs: ["empty", "empty-state", "zero"] },
     { id: "untitled-modals", kit: "untitled-ui-react", screen: "form", rank: 5, path: "untitled-ui-react/components/application/modals/modal.tsx", preview: "https://www.untitledui.com/react/components/modals", title: "Untitled UI modals", jobs: ["overlay", "modal", "dialog"] },
     { id: "untitled-slideout", kit: "untitled-ui-react", screen: "form", rank: 6, path: "untitled-ui-react/components/application/slideout-menus/slideout-menu.tsx", preview: "https://www.untitledui.com/react/components/slideout-menus", title: "Untitled UI slideout menus", jobs: ["overlay", "sheet", "slideout", "drawer"] },
   ];

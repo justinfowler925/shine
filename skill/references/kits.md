@@ -21,8 +21,10 @@ before Wireframe→Build. Prefer kit-walk cites (`flowbite-*`, `tailadmin-*`,
 
 **Clearspeed Operate gold:** Flowbite / TailAdmin / Untitled via
 `--edition clearspeed-operate` (see `knowledge/editions/clearspeed-operate/gold-standard.json`).
-Port structure to house shadcn/TanStack; paint Clearspeed brand tokens. HeroUI is
-secondary; M3/TailGrids Figma rows stay silhouette-only (`selectable:false`).
+Port structure to house shadcn/TanStack; paint Clearspeed brand tokens. HeroUI
+runtime (`heroui-*`) and Figma (`figma-heroui-*`) are secondary. Figma TailGrids /
+M3 / Bootstrap / Myna packs are **selectable structure cites** (full ingest on tip)
+— steal structure, paint house shadcn; they are not Operate TW gold.
 
 HeroUI prefer Figma file: `GAn1SrbKJYiKqz9SmHHCRm`.
 

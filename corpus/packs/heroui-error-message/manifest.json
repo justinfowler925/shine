@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-error-message",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/error-message/error-message.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "error-message.tsx",
+      "sha256": "d79a53332e2dcca762988a697567605dd66207628f68558872f49c7692f33e9d"
+    }
+  ]
+}

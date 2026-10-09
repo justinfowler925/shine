@@ -1,0 +1,19 @@
+{
+  "id": "tailadmin-line-chart",
+  "source": "https://free-react-demo.tailadmin.com/line-chart",
+  "harvested": "2026-10-09",
+  "bytes": 83052,
+  "capture": {
+    "status": 200,
+    "title": "React.js Chart Dashboard | TailAdmin - React.js Admin Dashboard Template",
+    "headings": "Menu\nOthers\nLine Chart",
+    "expectedSelector": "nav, aside, table, form, input, svg, button, h1",
+    "expectedCount": 43,
+    "expectedText": "",
+    "sourceUrl": "https://free-react-demo.tailadmin.com/line-chart",
+    "finalUrl": "https://free-react-demo.tailadmin.com/line-chart",
+    "capturedAt": "2026-10-09T17:15:11.314Z",
+    "expectedTextMatched": false,
+    "shotSha256": "853025367793421c1a77ee0f1585f4dcaa95ad7f277597d49b257b2c6bd43c14"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "heroui-alert",
+  "source": "https://www.heroui.com/docs/components/alert",
+  "harvested": "2026-10-09",
+  "bytes": 621918,
+  "capture": {
+    "status": 200,
+    "title": "Alert | HeroUI",
+    "headings": "Alert\nUsage\nAnatomy\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 146,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/alert",
+    "finalUrl": "https://heroui.com/en/docs/react/components/alert",
+    "capturedAt": "2026-10-09T17:21:31.678Z",
+    "shotSha256": "b13281e3316f953c21c3b33ab1ecf1e87c3b01fb1c629458352b9e09c920b475"
+  }
+}

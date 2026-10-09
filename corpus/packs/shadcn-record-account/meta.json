@@ -1,12 +1,21 @@
 {
   "id": "shadcn-record-account",
   "source": "corpus/blueprints/shadcn-record-account/reference.html",
-  "harvested": "2026-10-05",
-  "provenance": "Authored blueprint, expert-track P2",
+  "harvested": "2026-10-09",
+  "bytes": 42078,
+  "provenance": "Authored blueprint, not an upstream component demo",
   "capture": {
     "status": 200,
     "title": "Account record",
+    "headings": "Accounts\nAcme Corp",
+    "expectedSelector": "[data-region=\"record-decision\"] textarea",
+    "expectedCount": 1,
+    "expectedText": "",
     "sourceUrl": "corpus/blueprints/shadcn-record-account/reference.html",
-    "capturedAt": "2026-10-05T18:38:03.407Z"
+    "finalUrl": "corpus/blueprints/shadcn-record-account/reference.html",
+    "capturedAt": "2026-10-09T17:14:01.734Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "915d2abd6171968fbbedf056b00bbc7fe15f6ca2994e3e0934c71933d56ec8c6",
+    "shotSha256": "425d26e8cd92f5c473c4f0261d91d6cf033bd476af2036e8c1105113d61887ee"
   }
 }

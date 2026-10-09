@@ -11,31 +11,33 @@
   "secondary": ["heroui", "figma-heroui", "shadcn-registry"],
   "notWinner": {
     "figma-tailgrids": {
-      "packs": 4,
-      "why": "Thin Figma harvest (cover/layout/atoms/table-stack); selectable:false silhouette evidence only — not Operate page coverage"
+      "packs": 83,
+      "why": "Full Figma ingest (83 selectable packs) — strong structure silhouettes; still not Operate TW gold. Prefer Flowbite/TailAdmin/Untitled for Clearspeed Operate page density; cite figma-tailgrids-* only for explicit TailGrids/tailwind-figma jobs."
     },
     "figma-myna": {
-      "packs": 1,
-      "why": "Single components gallery; no SaaS page matrix"
+      "packs": 102,
+      "why": "Full Myna ingest (marketing + app boards). Structure-only; not SaaS TW gold density for Operate defaults."
     },
     "figma-bootstrap": {
-      "packs": 3,
-      "why": "Foreign Bootstrap chrome; retired; not Tailwind density"
+      "packs": 40,
+      "why": "Foreign Bootstrap chrome — structure silhouettes only; not Tailwind density for Operate."
     },
     "figma-m3": {
       "packs": 38,
-      "why": "Material chrome; retired for Clearspeed Operate; structure-only when native Android"
+      "why": "Material chrome; structure-only when native Android — not Clearspeed Operate gold."
     },
     "figma-heroui": {
       "packs": 46,
-      "why": "Large atom board; marketing/component landfill — secondary only, not Operate gold"
+      "why": "Large atom board; secondary visual cite only — not Operate gold. Runtime heroui-* packs are secondary too."
     }
   },
   "counts": {
     "flowbite": 15,
     "tailadmin": 17,
     "untitled": 19,
-    "totalSelectable": 51
+    "totalSelectable": 51,
+    "requireHealthPassed": true,
+    "requirePackOnDisk": true
   },
   "pageCoverage": [
     "auth",
@@ -49,6 +51,6 @@
     "empty",
     "pricing"
   ],
-  "citeUsability": "All gold packs pass corpus/reference-health.mjs (HTTP capture + semantic selector). cite.mjs --edition clearspeed-operate promotes sibling preferredCite from this family.",
+  "citeUsability": "Every Flowbite/TailAdmin/Untitled catalog row must have corpus/packs/<id>/{shot.png,meta.json,source/} and referenceHealth passed. Doctor bite verify/gold-standard-truth.test.mjs fails on pack/health drift. cite.mjs --edition clearspeed-operate promotes sibling preferredCite from this family.",
   "why": "Most complete real Tailwind UI density for Clearspeed Operate/SaaS — composed admin pages with shots, not Figma atom landfill. Prefer this family over HeroUI/M3 for Operate jobs. Paint with Clearspeed brand tokens (Signal Orange #ED5925)."
 }

@@ -1,0 +1,20 @@
+{
+  "id": "heroui-combo-box",
+  "source": "https://www.heroui.com/docs/components/combo-box",
+  "harvested": "2026-10-09",
+  "bytes": 1831064,
+  "capture": {
+    "status": 200,
+    "title": "ComboBox | HeroUI",
+    "headings": "ComboBoxNew\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 349,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/combo-box",
+    "finalUrl": "https://heroui.com/en/docs/react/components/combo-box",
+    "capturedAt": "2026-10-09T17:27:13.061Z",
+    "shotSha256": "f36a1fb7182625d49ccbbd9f765a072bd279609a666f91593be0820c5936fd73"
+  }
+}

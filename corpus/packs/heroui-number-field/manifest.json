@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-number-field",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/number-field/number-field.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "number-field.tsx",
+      "sha256": "a614503493856e6ef36a586c09bc511d18d9d3395b73ef2d59384fdd1a62a862"
+    }
+  ]
+}

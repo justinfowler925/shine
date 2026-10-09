@@ -1,0 +1,20 @@
+{
+  "id": "heroui-textfield",
+  "source": "https://www.heroui.com/docs/components/textfield",
+  "harvested": "2026-10-09",
+  "bytes": 1214677,
+  "capture": {
+    "status": 200,
+    "title": "TextField | HeroUI",
+    "headings": "TextField\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 211,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/textfield",
+    "finalUrl": "https://heroui.com/en/docs/react/components/text-field",
+    "capturedAt": "2026-10-09T17:32:31.029Z",
+    "shotSha256": "4085a1eeb23df195a7d6a0f6d5cf072ba753ce9fff75a137c428fbc3bed237fa"
+  }
+}

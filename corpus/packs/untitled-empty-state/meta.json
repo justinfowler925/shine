@@ -1,0 +1,19 @@
+{
+  "id": "untitled-empty-state",
+  "source": "https://www.untitledui.com/react/components/empty-states",
+  "harvested": "2026-10-09",
+  "bytes": 899305,
+  "capture": {
+    "status": 200,
+    "title": "React empty state components | Untitled UI",
+    "headings": "Empty state components\nNo projects found\nInstallation\nEmpty states examples\nNo projects found\nNo projects found\nNo projects found\nNo users found\nInvite your first user\nSorry, no results!\nAPI reference\nFAQs",
+    "expectedSelector": "main h2[id], h2[id]",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/empty-states",
+    "finalUrl": "https://www.untitledui.com/react/components/empty-states",
+    "capturedAt": "2026-10-09T17:15:21.083Z",
+    "expectedTextMatched": false,
+    "shotSha256": "be0e4fdb1c5357fa1cc9553bace97bca0a3303d64c54bbaeceee844129f3c26d"
+  }
+}

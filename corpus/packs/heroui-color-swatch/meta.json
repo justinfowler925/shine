@@ -1,0 +1,20 @@
+{
+  "id": "heroui-color-swatch",
+  "source": "https://www.heroui.com/docs/components/color-swatch",
+  "harvested": "2026-10-09",
+  "bytes": 671079,
+  "capture": {
+    "status": 200,
+    "title": "ColorSwatch | HeroUI",
+    "headings": "ColorSwatch\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 141,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/color-swatch",
+    "finalUrl": "https://heroui.com/en/docs/react/components/color-swatch",
+    "capturedAt": "2026-10-09T17:27:00.394Z",
+    "shotSha256": "0933284e706c76a0232b86b08485438d021be591542acc0145938ec892b1e7c6"
+  }
+}

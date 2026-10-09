@@ -1,0 +1,19 @@
+{
+  "id": "flowbite-sign-up",
+  "source": "https://flowbite-admin-dashboard.vercel.app/authentication/sign-up/",
+  "harvested": "2026-10-09",
+  "bytes": 40007,
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS Sign Up/Register Page - Flowbite",
+    "headings": "\n            Create a Free Account\n        ",
+    "expectedSelector": "nav, aside, table, form, input, svg, button, h1",
+    "expectedCount": 7,
+    "expectedText": "",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/authentication/sign-up/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/authentication/sign-up/",
+    "capturedAt": "2026-10-09T17:14:32.093Z",
+    "expectedTextMatched": false,
+    "shotSha256": "085de365ddaee9ca275e4ee0e58319c58ba6b627f37eea91203df53fe9612d8f"
+  }
+}

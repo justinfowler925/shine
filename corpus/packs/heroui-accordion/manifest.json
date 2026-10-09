@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-accordion",
+  "screen": "app-shell",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/accordion/accordion.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "accordion.tsx",
+      "sha256": "8a25b709c3884d93a5c50be5027030c2b27f767becd2a73ea70bd845b4587d02"
+    }
+  ]
+}

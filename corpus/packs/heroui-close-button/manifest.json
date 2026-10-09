@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-close-button",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/close-button/close-button.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "close-button.tsx",
+      "sha256": "aade7bf3919532740a49e18e62061ec6d33a37699ab6d614cc5be44d0941da87"
+    }
+  ]
+}

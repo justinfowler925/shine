@@ -1,0 +1,20 @@
+{
+  "id": "heroui-description",
+  "source": "https://www.heroui.com/docs/components/description",
+  "harvested": "2026-10-09",
+  "bytes": 440963,
+  "capture": {
+    "status": 200,
+    "title": "Description | HeroUI",
+    "headings": "Description\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 98,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/description",
+    "finalUrl": "https://heroui.com/en/docs/react/components/description",
+    "capturedAt": "2026-10-09T17:27:19.326Z",
+    "shotSha256": "82354dbdb4da53e1d6e1c0772d1309e84be632652862be9a2c70f4b640fa3c51"
+  }
+}

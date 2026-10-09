@@ -1,0 +1,20 @@
+{
+  "id": "heroui-drawer",
+  "source": "https://www.heroui.com/docs/components/drawer",
+  "harvested": "2026-10-09",
+  "bytes": 1130717,
+  "capture": {
+    "status": 200,
+    "title": "Drawer | HeroUI",
+    "headings": "Drawer\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 144,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/drawer",
+    "finalUrl": "https://heroui.com/en/docs/react/components/drawer",
+    "capturedAt": "2026-10-09T17:27:25.469Z",
+    "shotSha256": "0fde65aa6f0ca12ed2bf6deb8c95671a12dc3ce333e5ac081af0d6f6475de3f8"
+  }
+}

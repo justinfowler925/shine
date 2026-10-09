@@ -1,0 +1,20 @@
+{
+  "id": "heroui-badge",
+  "source": "https://www.heroui.com/docs/components/badge",
+  "harvested": "2026-10-09",
+  "bytes": 890534,
+  "capture": {
+    "status": 200,
+    "title": "Badge | HeroUI",
+    "headings": "Badge\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 218,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/badge",
+    "finalUrl": "https://heroui.com/en/docs/react/components/badge",
+    "capturedAt": "2026-10-09T17:34:59.903Z",
+    "shotSha256": "94670e0c7447ec8ddfd716832ad04c6269290f78f06c9143234b3bb2ddfb788d"
+  }
+}

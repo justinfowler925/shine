@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-date-picker",
+  "screen": "calendar",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/date-picker/date-picker.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "date-picker.tsx",
+      "sha256": "260aca87ea003c77854dc4a7f5f48df83c2dc3b4cfe4d79c0d3516178f3bc57d"
+    }
+  ]
+}

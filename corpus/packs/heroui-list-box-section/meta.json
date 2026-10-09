@@ -1,0 +1,20 @@
+{
+  "id": "heroui-list-box-section",
+  "source": "https://www.heroui.com/docs/components/list-box",
+  "harvested": "2026-10-09",
+  "bytes": 1137596,
+  "capture": {
+    "status": 200,
+    "title": "ListBox | HeroUI",
+    "headings": "ListBox\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 296,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/list-box",
+    "finalUrl": "https://heroui.com/en/docs/react/components/list-box",
+    "capturedAt": "2026-10-09T17:37:46.545Z",
+    "shotSha256": "194bc2026eae8e4fc874b5103ebf2393090c2b271d98b4b1abd48335af4e7ed5"
+  }
+}

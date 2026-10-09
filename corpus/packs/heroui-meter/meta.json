@@ -1,0 +1,20 @@
+{
+  "id": "heroui-meter",
+  "source": "https://www.heroui.com/docs/components/meter",
+  "harvested": "2026-10-09",
+  "bytes": 590996,
+  "capture": {
+    "status": 200,
+    "title": "Meter | HeroUI",
+    "headings": "Meter\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 162,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/meter",
+    "finalUrl": "https://heroui.com/en/docs/react/components/meter",
+    "capturedAt": "2026-10-09T17:22:09.152Z",
+    "shotSha256": "e60d631e50be47f23f673e8d89345e7ff39b09eed275c75ecee6e8686cf89f4f"
+  }
+}

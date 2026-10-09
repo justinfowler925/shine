@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-kbd",
+  "screen": "blog",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/kbd/kbd.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "kbd.tsx",
+      "sha256": "7b78ac551188a949d1c11cf765cc52881ea490dcbf6539660d5e315a4dc0dc78"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-color-slider",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/color-slider/color-slider.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "color-slider.tsx",
+      "sha256": "82c4c49292c292510bdfe6c81570db85b806b7cd3834952ae51cb3c3ba3c5fe7"
+    }
+  ]
+}

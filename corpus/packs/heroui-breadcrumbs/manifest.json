@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-breadcrumbs",
+  "screen": "app-shell",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/breadcrumbs/breadcrumbs.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "breadcrumbs.tsx",
+      "sha256": "a8f79a3893e2fd6703d475f173acffab28600e28b57450f32251382140429331"
+    }
+  ]
+}

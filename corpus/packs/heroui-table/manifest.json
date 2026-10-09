@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "heroui-table",
+  "screen": "queue",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/table/table.tsx",
+  "entrypoints": [],
+  "structuralSignature": {
+    "pattern": "\\b(DataTable|ProList|List|Table|table)\\b",
+    "files": [
+      "table.tsx"
+    ]
+  },
+  "files": [
+    {
+      "path": "table.tsx",
+      "sha256": "82a4e21f271aacdefbdabb343404d15fb5c1b357deb4c5a866645c786aa4d212"
+    }
+  ]
+}

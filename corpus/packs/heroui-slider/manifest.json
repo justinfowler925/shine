@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-slider",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/slider/slider.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "slider.tsx",
+      "sha256": "56caaf4e1d595ad6cf82879e2eb2258f8121f8abd0858d05e4e1e2eab2585cde"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-radio-group",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/radio-group/radio-group.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "radio-group.tsx",
+      "sha256": "232d1bcb36d0fda8fa223951e5365986fcf71775f178dfb3470538d623003367"
+    }
+  ]
+}

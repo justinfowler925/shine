@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-popover",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/popover/popover.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "popover.tsx",
+      "sha256": "08a21ccf4e74d793253a86954018e498de6de6e171f2425c3af000628ef852c5"
+    }
+  ]
+}

@@ -1,12 +1,21 @@
 {
   "id": "shadcn-form-invite",
   "source": "corpus/blueprints/shadcn-form-invite/reference.html",
-  "harvested": "2026-10-05",
-  "provenance": "Authored blueprint, expert-track P2",
+  "harvested": "2026-10-09",
+  "bytes": 58524,
+  "provenance": "Authored blueprint, not an upstream component demo",
   "capture": {
     "status": 200,
     "title": "Invite teammate",
+    "headings": "Invite teammate\nBefore you send",
+    "expectedSelector": "[data-region=\"form-app\"] form button[type=\"submit\"]",
+    "expectedCount": 1,
+    "expectedText": "",
     "sourceUrl": "corpus/blueprints/shadcn-form-invite/reference.html",
-    "capturedAt": "2026-10-05T18:38:03.354Z"
+    "finalUrl": "corpus/blueprints/shadcn-form-invite/reference.html",
+    "capturedAt": "2026-10-09T17:14:01.667Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "764869db39013b7fcffe21c2a04f176e1c7f46c778f211f7f3cde69793b7454b",
+    "shotSha256": "964dd09b4e0b522b5e1688ef6c4294157f0434668723e3706503371ee96511ab"
   }
 }

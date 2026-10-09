@@ -1,0 +1,19 @@
+{
+  "id": "untitled-modals",
+  "source": "https://www.untitledui.com/react/components/modals",
+  "harvested": "2026-10-09",
+  "bytes": 1161859,
+  "capture": {
+    "status": 200,
+    "title": "React modal components | Untitled UI",
+    "headings": "Modal components\nInstallation\nModals examples\nAPI reference\nFAQs",
+    "expectedSelector": "main h2[id], h2[id]",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/modals",
+    "finalUrl": "https://www.untitledui.com/react/components/modals",
+    "capturedAt": "2026-10-09T17:16:59.203Z",
+    "expectedTextMatched": false,
+    "shotSha256": "c4ee709cbda0c6bcac65f47e246f4fb6d3fa29456f931569139d8626fdab257e"
+  }
+}

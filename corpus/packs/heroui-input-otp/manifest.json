@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-input-otp",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/input-otp/input-otp.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "input-otp.tsx",
+      "sha256": "b137e5803e68bd8bd1d7e41505892b4b308a3386ee064bf6783b06f5e37ae700"
+    }
+  ]
+}

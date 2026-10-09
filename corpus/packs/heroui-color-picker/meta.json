@@ -1,0 +1,20 @@
+{
+  "id": "heroui-color-picker",
+  "source": "https://www.heroui.com/docs/components/color-picker",
+  "harvested": "2026-10-09",
+  "bytes": 705417,
+  "capture": {
+    "status": 200,
+    "title": "ColorPicker | HeroUI",
+    "headings": "ColorPicker\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 132,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/color-picker",
+    "finalUrl": "https://heroui.com/en/docs/react/components/color-picker",
+    "capturedAt": "2026-10-09T17:26:47.273Z",
+    "shotSha256": "4eecf4551d5fd4cf98fcd071c172a0cbdf9ab0b0e58656439fe3892a0f974120"
+  }
+}

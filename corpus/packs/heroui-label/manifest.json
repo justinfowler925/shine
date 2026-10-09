@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-label",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/label/label.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "label.tsx",
+      "sha256": "42aeefc13897d867b2861c9f924af903bda6d75ef22c2a6454d043a9b71b3e09"
+    }
+  ]
+}

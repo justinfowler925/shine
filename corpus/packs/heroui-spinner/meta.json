@@ -1,0 +1,20 @@
+{
+  "id": "heroui-spinner",
+  "source": "https://www.heroui.com/docs/components/spinner",
+  "harvested": "2026-10-09",
+  "bytes": 462976,
+  "capture": {
+    "status": 200,
+    "title": "Spinner | HeroUI",
+    "headings": "Spinner\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 129,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/spinner",
+    "finalUrl": "https://heroui.com/en/docs/react/components/spinner",
+    "capturedAt": "2026-10-09T17:22:36.633Z",
+    "shotSha256": "af560e1d6bd7bbe5fc4fcc036bbb6e8aad34c98562b206044062469db9996b30"
+  }
+}

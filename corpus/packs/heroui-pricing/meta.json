@@ -1,0 +1,20 @@
+{
+  "id": "heroui-pricing",
+  "source": "https://www.heroui.com",
+  "harvested": "2026-10-09",
+  "bytes": 285465,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI v3 (Previously NextUI) - Beautiful by default, customizable by design.",
+    "headings": "Beautiful by default. Customizable by design.\nBuild accessible products with HeroUI",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 354,
+    "expectedText": "HeroUI",
+    "expectedTextMatched": true,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com",
+    "finalUrl": "https://heroui.com/",
+    "capturedAt": "2026-10-09T17:33:12.312Z",
+    "shotSha256": "907a961715e9c910c2fb167c6c98e4bc7b17bb3ef1c0c318ab8eaa5970204dcd"
+  }
+}

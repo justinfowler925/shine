@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "shadcn-operate-decide",
+  "screen": "queue",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": {
+    "pattern": "\\b(DataTable|ProList|List|Table|table)\\b",
+    "files": [
+      "reference.html"
+    ]
+  },
+  "files": [
+    {
+      "path": "reference.html",
+      "sha256": "96a07545af98ee7189b70ef4256adf4edb170a72817a6a938e1885c9f6061426"
+    },
+    {
+      "path": "shadcn-operate-decide.md",
+      "sha256": "f05a897e863f993a258270a54f8f71984860b0610e85433376768a33e1b792de"
+    }
+  ]
+}
