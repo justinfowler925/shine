@@ -1397,9 +1397,9 @@ if (FULL) {
       const qout = `${queue.stdout || ""}${queue.stderr || ""}`;
       const queuePrimary = (qout.match(/Template: (\S+)/) || [])[1] || "";
       if (queue.status !== 0) fail("cite.mjs queue", `exit ${queue.status}: ${qout.slice(0, 200)}`);
-      else if (/sidebar-07/.test(qout) && !/shadcn-queue|tailadmin-tables|windmill-tables|flowbite-users|untitled-table/.test(qout))
+      else if (/sidebar-07/.test(qout) && !/shadcn-queue|shadcn-operate-decide|tailadmin-tables|windmill-tables|flowbite-users|untitled-table/.test(qout))
         fail("cite.mjs queue", "returned an app-shell instead of a queue page");
-      else if (!/^(shadcn-queue|tailadmin-tables|windmill-tables|flowbite-users|flowbite-products)$/.test(queuePrimary))
+      else if (!/^(shadcn-queue|shadcn-operate-decide|tailadmin-tables|windmill-tables|flowbite-users|flowbite-products)$/.test(queuePrimary))
         fail("cite.mjs queue", `expected a composed queue page primary, got ${queuePrimary || qout.slice(0, 120)}`);
       else ok("cite.mjs queue", queuePrimary || "queue page");
 

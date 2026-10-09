@@ -34,14 +34,14 @@ const beforeErr = `${before.stderr || ""}\n${before.stdout || ""}`;
 writeFileSync(join(RECEIPTS, "before-measure.log"), beforeErr);
 assert.notEqual(before.status, 0, "seeded Nucleus bloat must fail measure");
 assert.match(beforeErr, /cta-pressure:.*competing filled/, beforeErr.slice(-1200));
-assert.match(beforeErr, /composition-slop:/, beforeErr.slice(-1200));
+assert.match(beforeErr, /composition-slop:|card-soup:|filler-empty:/, beforeErr.slice(-1200));
 
 const after = run(measure, [join(FIX, "after.html"), "--cite", "shadcn-catalog", "--lane", "saas"]);
 const afterErr = `${after.stderr || ""}\n${after.stdout || ""}`;
 writeFileSync(join(RECEIPTS, "after-measure.log"), afterErr);
 assert.equal(after.status, 0, `after must PASS measure:\n${afterErr.slice(-1200)}`);
 assert.doesNotMatch(afterErr, /cta-pressure:.*competing filled/);
-assert.doesNotMatch(afterErr, /composition-slop:/);
+assert.doesNotMatch(afterErr, /composition-slop:|card-soup:|filler-empty:/);
 assert.match(afterErr, /MEASURE PASS/);
 
 const use = run(usability, [
