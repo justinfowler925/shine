@@ -575,6 +575,28 @@
       }
     },
     {
+      "id": "heroui-docs",
+      "screen": "app-shell",
+      "kit": "heroui",
+      "title": "HeroUI next-app docs shell",
+      "path": "heroui-next-app/app/docs/page.tsx",
+      "preview": "https://www.heroui.com",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 5,
+      "jobs": [
+        "app-shell",
+        "docs",
+        "heroui"
+      ],
+      "scope": "page",
+      "note": "Kit-walk page \u2014 HeroUI next-app route",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "mantine-appshell",
       "screen": "app-shell",
       "kit": "mantine",
@@ -599,6 +621,81 @@
       "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
     },
     {
+      "id": "figma-heroui-accordion",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Accordion",
+      "path": "packs/figma-heroui-accordion",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2583-5983",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "accordion",
+        "accordion",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-link",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Link",
+      "path": "packs/figma-heroui-link",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2545-31578",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "link",
+        "link",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-tabs",
+      "screen": "app-shell",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Tabs",
+      "path": "packs/figma-heroui-tabs",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1975-50564",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "tabs",
+        "tabs",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "heroui-next-app",
       "screen": "app-shell",
       "kit": "heroui",
@@ -621,6 +718,190 @@
       "scope": "page",
       "selectable": false,
       "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
+    },
+    {
+      "id": "heroui-accordion",
+      "screen": "app-shell",
+      "kit": "heroui",
+      "title": "HeroUI accordion",
+      "path": "heroui/packages/react/src/components/accordion/accordion.tsx",
+      "preview": "https://www.heroui.com/docs/components/accordion",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "app-shell",
+        "navigation",
+        "heroui",
+        "accordion"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-breadcrumbs",
+      "screen": "app-shell",
+      "kit": "heroui",
+      "title": "HeroUI breadcrumbs",
+      "path": "heroui/packages/react/src/components/breadcrumbs/breadcrumbs.tsx",
+      "preview": "https://www.heroui.com/docs/components/breadcrumbs",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "app-shell",
+        "navigation",
+        "heroui",
+        "breadcrumbs"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-disclosure",
+      "screen": "app-shell",
+      "kit": "heroui",
+      "title": "HeroUI disclosure",
+      "path": "heroui/packages/react/src/components/disclosure/disclosure.tsx",
+      "preview": "https://www.heroui.com/docs/components/disclosure",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "app-shell",
+        "navigation",
+        "heroui",
+        "disclosure"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-disclosure-group",
+      "screen": "app-shell",
+      "kit": "heroui",
+      "title": "HeroUI disclosure group",
+      "path": "heroui/packages/react/src/components/disclosure-group/disclosure-group.tsx",
+      "preview": "https://www.heroui.com/docs/components/disclosure-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "app-shell",
+        "navigation",
+        "heroui",
+        "disclosure-group"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-header",
+      "screen": "app-shell",
+      "kit": "heroui",
+      "title": "HeroUI header",
+      "path": "heroui/packages/react/src/components/header/header.tsx",
+      "preview": "https://www.heroui.com/docs/components/header",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "app-shell",
+        "navigation",
+        "heroui",
+        "header"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-link",
+      "screen": "app-shell",
+      "kit": "heroui",
+      "title": "HeroUI link",
+      "path": "heroui/packages/react/src/components/link/link.tsx",
+      "preview": "https://www.heroui.com/docs/components/link",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "app-shell",
+        "navigation",
+        "heroui",
+        "link"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-tabs",
+      "screen": "app-shell",
+      "kit": "heroui",
+      "title": "HeroUI tabs",
+      "path": "heroui/packages/react/src/components/tabs/tabs.tsx",
+      "preview": "https://www.heroui.com/docs/components/tabs",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "app-shell",
+        "navigation",
+        "heroui",
+        "tabs"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-toolbar",
+      "screen": "app-shell",
+      "kit": "heroui",
+      "title": "HeroUI toolbar",
+      "path": "heroui/packages/react/src/components/toolbar/toolbar.tsx",
+      "preview": "https://www.heroui.com/docs/components/toolbar",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "app-shell",
+        "navigation",
+        "heroui",
+        "toolbar"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
     },
     {
       "id": "query-adminlte",
@@ -686,6 +967,274 @@
       "scope": "component",
       "dna": {
         "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-alert",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Alert",
+      "path": "packs/figma-heroui-alert",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3128-340",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "alert",
+        "alert",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-progress",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Progress",
+      "path": "packs/figma-heroui-progress",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2162-16624",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "progress",
+        "progress",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-spinner",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Spinner",
+      "path": "packs/figma-heroui-spinner",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2411-8713",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "spinner",
+        "spinner",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-toast",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Toast",
+      "path": "packs/figma-heroui-toast",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3592-7896",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "toast",
+        "toast",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-alert",
+      "screen": "async-state",
+      "kit": "heroui",
+      "title": "HeroUI alert",
+      "path": "heroui/packages/react/src/components/alert/alert.tsx",
+      "preview": "https://www.heroui.com/docs/components/alert",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "async-state",
+        "loading",
+        "feedback",
+        "heroui",
+        "alert"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-empty-state",
+      "screen": "async-state",
+      "kit": "heroui",
+      "title": "HeroUI empty state",
+      "path": "heroui/packages/react/src/components/empty-state/empty-state.tsx",
+      "preview": "https://www.heroui.com/docs/components/empty-state",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "async-state",
+        "loading",
+        "feedback",
+        "heroui",
+        "empty-state"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-meter",
+      "screen": "async-state",
+      "kit": "heroui",
+      "title": "HeroUI meter",
+      "path": "heroui/packages/react/src/components/meter/meter.tsx",
+      "preview": "https://www.heroui.com/docs/components/meter",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "async-state",
+        "loading",
+        "feedback",
+        "heroui",
+        "meter"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-progress-bar",
+      "screen": "async-state",
+      "kit": "heroui",
+      "title": "HeroUI progress bar",
+      "path": "heroui/packages/react/src/components/progress-bar/progress-bar.tsx",
+      "preview": "https://www.heroui.com/docs/components/progress-bar",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "async-state",
+        "loading",
+        "feedback",
+        "heroui",
+        "progress-bar"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-progress-circle",
+      "screen": "async-state",
+      "kit": "heroui",
+      "title": "HeroUI progress circle",
+      "path": "heroui/packages/react/src/components/progress-circle/progress-circle.tsx",
+      "preview": "https://www.heroui.com/docs/components/progress-circle",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "async-state",
+        "loading",
+        "feedback",
+        "heroui",
+        "progress-circle"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-skeleton",
+      "screen": "async-state",
+      "kit": "heroui",
+      "title": "HeroUI skeleton",
+      "path": "heroui/packages/react/src/components/skeleton/skeleton.tsx",
+      "preview": "https://www.heroui.com/docs/components/skeleton",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "async-state",
+        "loading",
+        "feedback",
+        "heroui",
+        "skeleton"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-spinner",
+      "screen": "async-state",
+      "kit": "heroui",
+      "title": "HeroUI spinner",
+      "path": "heroui/packages/react/src/components/spinner/spinner.tsx",
+      "preview": "https://www.heroui.com/docs/components/spinner",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "async-state",
+        "loading",
+        "feedback",
+        "heroui",
+        "spinner"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
         "density": "comfortable"
       }
     },
@@ -1001,6 +1550,33 @@
       }
     },
     {
+      "id": "tailadmin-signup",
+      "screen": "auth",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin sign-up",
+      "path": "tailadmin-react/src/pages/AuthPages/SignUp.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/signup",
+      "sources": [
+        "tailadmin-react/src/components/auth/SignUpForm.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx",
+        "tailadmin-react/src/pages/AuthPages/AuthPageLayout.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 4,
+      "jobs": [
+        "auth",
+        "signup",
+        "sign-up",
+        "register"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "windmill-login",
       "screen": "auth",
       "kit": "windmill-react",
@@ -1092,6 +1668,119 @@
       }
     },
     {
+      "id": "windmill-forgot-password",
+      "screen": "auth",
+      "kit": "windmill-react",
+      "title": "Windmill forgot password",
+      "path": "windmill-react/src/pages/ForgotPassword.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/forgot-password",
+      "sources": [
+        "windmill-react/src/assets/img/forgot-password-office.jpeg",
+        "windmill-react/src/assets/img/forgot-password-office-dark.jpeg"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 6,
+      "jobs": [
+        "auth",
+        "forgot-password",
+        "recovery"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "windmill",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "flowbite-sign-up",
+      "screen": "auth",
+      "kit": "flowbite-admin",
+      "title": "Flowbite sign-up",
+      "path": "flowbite-admin/content/authentication/sign-up.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/authentication/sign-up/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 7,
+      "jobs": [
+        "auth",
+        "signup",
+        "sign-up",
+        "register"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "flowbite",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "flowbite-forgot-password",
+      "screen": "auth",
+      "kit": "flowbite-admin",
+      "title": "Flowbite forgot password",
+      "path": "flowbite-admin/content/authentication/forgot-password.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/authentication/forgot-password/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "auth",
+        "forgot-password",
+        "reset",
+        "recovery"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "flowbite",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "flowbite-reset-password",
+      "screen": "auth",
+      "kit": "flowbite-admin",
+      "title": "Flowbite reset password",
+      "path": "flowbite-admin/content/authentication/reset-password.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/authentication/reset-password/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 9,
+      "jobs": [
+        "auth",
+        "reset-password",
+        "password",
+        "recovery"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "flowbite",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "flowbite-profile-lock",
+      "screen": "auth",
+      "kit": "flowbite-admin",
+      "title": "Flowbite profile lock",
+      "path": "flowbite-admin/content/authentication/profile-lock.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/authentication/profile-lock/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 10,
+      "jobs": [
+        "auth",
+        "lock-screen",
+        "reauth",
+        "session"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "flowbite",
+        "density": "dense"
+      }
+    },
+    {
       "id": "shadcn-blog",
       "screen": "blog",
       "kit": "shadcn-registry",
@@ -1115,6 +1804,72 @@
       },
       "note": "Authored editorial blueprint with captured source in corpus/blueprints/shadcn-blog/",
       "scope": "page"
+    },
+    {
+      "id": "heroui-blog",
+      "screen": "blog",
+      "kit": "heroui",
+      "title": "HeroUI next-app blog",
+      "path": "heroui-next-app/app/blog/page.tsx",
+      "preview": "https://www.heroui.com",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 4,
+      "jobs": [
+        "blog",
+        "article",
+        "heroui"
+      ],
+      "scope": "page",
+      "note": "Kit-walk page \u2014 HeroUI next-app route",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-kbd",
+      "screen": "blog",
+      "kit": "heroui",
+      "title": "HeroUI kbd",
+      "path": "heroui/packages/react/src/components/kbd/kbd.tsx",
+      "preview": "https://www.heroui.com/docs/components/kbd",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "typography",
+        "heroui",
+        "kbd"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-typography",
+      "screen": "blog",
+      "kit": "heroui",
+      "title": "HeroUI typography",
+      "path": "heroui/packages/react/src/components/typography/typography.tsx",
+      "preview": "https://www.heroui.com/docs/components/typography",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "typography",
+        "heroui",
+        "typography"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
     },
     {
       "id": "shadcn-broadcast",
@@ -1176,6 +1931,198 @@
       },
       "dna": {
         "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-calendar",
+      "screen": "calendar",
+      "kit": "heroui",
+      "title": "HeroUI calendar",
+      "path": "heroui/packages/react/src/components/calendar/calendar.tsx",
+      "preview": "https://www.heroui.com/docs/components/calendar",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "calendar",
+        "form",
+        "date",
+        "heroui",
+        "calendar"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-calendar-year-picker",
+      "screen": "calendar",
+      "kit": "heroui",
+      "title": "HeroUI calendar year picker",
+      "path": "heroui/packages/react/src/components/calendar-year-picker/calendar-year-picker.tsx",
+      "preview": "https://www.heroui.com/docs/components/calendar-year-picker",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "calendar",
+        "form",
+        "date",
+        "heroui",
+        "calendar-year-picker"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-date-field",
+      "screen": "calendar",
+      "kit": "heroui",
+      "title": "HeroUI date field",
+      "path": "heroui/packages/react/src/components/date-field/date-field.tsx",
+      "preview": "https://www.heroui.com/docs/components/date-field",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "calendar",
+        "form",
+        "date",
+        "heroui",
+        "date-field"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-date-input-group",
+      "screen": "calendar",
+      "kit": "heroui",
+      "title": "HeroUI date input group",
+      "path": "heroui/packages/react/src/components/date-input-group/date-input-group.tsx",
+      "preview": "https://www.heroui.com/docs/components/date-input-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "calendar",
+        "form",
+        "date",
+        "heroui",
+        "date-input-group"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-date-picker",
+      "screen": "calendar",
+      "kit": "heroui",
+      "title": "HeroUI date picker",
+      "path": "heroui/packages/react/src/components/date-picker/date-picker.tsx",
+      "preview": "https://www.heroui.com/docs/components/date-picker",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "calendar",
+        "form",
+        "date",
+        "heroui",
+        "date-picker"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-date-range-picker",
+      "screen": "calendar",
+      "kit": "heroui",
+      "title": "HeroUI date range picker",
+      "path": "heroui/packages/react/src/components/date-range-picker/date-range-picker.tsx",
+      "preview": "https://www.heroui.com/docs/components/date-range-picker",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "calendar",
+        "form",
+        "date",
+        "heroui",
+        "date-range-picker"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-range-calendar",
+      "screen": "calendar",
+      "kit": "heroui",
+      "title": "HeroUI range calendar",
+      "path": "heroui/packages/react/src/components/range-calendar/range-calendar.tsx",
+      "preview": "https://www.heroui.com/docs/components/range-calendar",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "calendar",
+        "form",
+        "date",
+        "heroui",
+        "range-calendar"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-time-field",
+      "screen": "calendar",
+      "kit": "heroui",
+      "title": "HeroUI time field",
+      "path": "heroui/packages/react/src/components/time-field/time-field.tsx",
+      "preview": "https://www.heroui.com/docs/components/time-field",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "calendar",
+        "form",
+        "date",
+        "heroui",
+        "time-field"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
         "density": "comfortable"
       }
     },
@@ -1242,7 +2189,7 @@
         "family": "shadcn-zinc",
         "density": "comfortable"
       },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
       "scope": "page",
       "selectable": false
     },
@@ -1264,892 +2211,7 @@
         "family": "shadcn-zinc",
         "density": "comfortable"
       },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-badges",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Badges (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51592-4755",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "badge",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-bottom-app-bars",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Bottom app bars (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51159-4655",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "app-bar",
-        "navigation",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-bottom-sheets",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Bottom sheets (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51827-5847",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "sheet",
-        "overlay",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-buttons",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Buttons (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27456",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "buttons",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-cards",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Cards (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52346-27569",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "cards",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-carousel",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Carousel (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53912-27472",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "carousel",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-checkboxes",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Checkboxes (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51745-4798",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "checkbox",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-chips",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Chips (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27884",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "chips",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-color",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Color Guidance (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49823-12142",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "color",
-        "styles",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-date-picker",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Date picker (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51954-18122",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "date",
-        "picker",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-dialogs",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Dialogs (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50723-10916",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "dialog",
-        "overlay",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-dividers",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Dividers (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51816-5846",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "divider",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-elements",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Elements (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11328",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "elements",
-        "styles",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-elevation",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Elevation (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11342",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "elevation",
-        "styles",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-fabs",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 FABs (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9243",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "fab",
-        "buttons",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-icon-buttons",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Icon buttons (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51525-4722",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "icon-button",
-        "buttons",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-layout",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Layout (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52732-23854",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "layout",
-        "styles",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "component",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-lists",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Lists (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51964-62981",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "list",
-        "records",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-menu",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Menu (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-36958",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "menu",
-        "overlay",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-navigation-bars",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Navigation bars (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-10370",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "navigation",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-navigation-drawer",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Navigation drawer (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51593-5083",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "navigation",
-        "drawer",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-navigation-rails",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Navigation rails (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-9303",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "navigation",
-        "rail",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-progress",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Progress indicators (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52872-24830",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "progress",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-radio",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Radio buttons (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51739-4595",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "radio",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-search",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Search (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52977-33807",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "search",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-segmented-buttons",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Segmented buttons (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-36611",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "segmented",
-        "buttons",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-side-sheets",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Side sheets (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53198-27843",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "sheet",
-        "drawer",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-sliders",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Sliders (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51937-8018",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "slider",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-snackbars",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Snackbars (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53977-33571",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "snackbar",
-        "feedback",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-switch",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Switch (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51223-4949",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "switch",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-tabs",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Tabs (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51754-4956",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "tabs",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-time-picker",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Time picker (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52949-27911",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "time",
-        "picker",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-toc",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Table of contents (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53379-35512",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "navigation",
-        "toc",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-tooltips",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Tooltips (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-33867",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "tooltip",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-top-app-bars",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Top app bars (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9053",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "app-bar",
-        "navigation",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-typography",
-      "screen": "catalog",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Typography (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49848-6285",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "catalog",
-        "typography",
-        "styles",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
       "scope": "page",
       "selectable": false
     },
@@ -2173,7 +2235,7 @@
         "family": "shadcn-zinc",
         "density": "comfortable"
       },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
       "scope": "page",
       "selectable": false
     },
@@ -2197,7 +2259,7 @@
         "family": "shadcn-zinc",
         "density": "comfortable"
       },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
       "scope": "page",
       "selectable": false
     },
@@ -2221,7 +2283,7 @@
         "family": "shadcn-zinc",
         "density": "comfortable"
       },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
       "scope": "page",
       "selectable": false
     },
@@ -2380,6 +2442,615 @@
       },
       "note": "S3 deepen authored Company Tools catalog blueprint",
       "scope": "page"
+    },
+    {
+      "id": "figma-heroui-brand",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Brand",
+      "path": "packs/figma-heroui-brand",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1004-252",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "brand",
+        "brand",
+        "brand"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-button-atoms",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Button (atoms)",
+      "path": "packs/figma-heroui-button-atoms",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=486-54087",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "button-atoms",
+        "button",
+        "atoms"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-figma-components",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Figma Components (atoms)",
+      "path": "packs/figma-heroui-figma-components",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2245-10892",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "figma-components",
+        "figma-components",
+        "atoms"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-icons-essential",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Icons",
+      "path": "packs/figma-heroui-icons-essential",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=10-1851",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "icons-essential",
+        "icons",
+        "icons"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-dark",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Theme (tokens)",
+      "path": "packs/figma-heroui-theme-dark",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=276-20189",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-dark",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-light",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Theme (tokens)",
+      "path": "packs/figma-heroui-theme-light",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=276-20046",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-light",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-radius",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Theme (tokens)",
+      "path": "packs/figma-heroui-theme-radius",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=482-17641",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-radius",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-shadow",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Theme (tokens)",
+      "path": "packs/figma-heroui-theme-shadow",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=482-20449",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-shadow",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-spacing",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Theme (tokens)",
+      "path": "packs/figma-heroui-theme-spacing",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=482-18637",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-spacing",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme-typography",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Theme (tokens)",
+      "path": "packs/figma-heroui-theme-typography",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=482-17745",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 4,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme-typography",
+        "theme",
+        "tokens"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-avatar",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Avatar",
+      "path": "packs/figma-heroui-avatar",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2550-2249",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "avatar",
+        "avatar",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-avatar-group",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Avatar Group",
+      "path": "packs/figma-heroui-avatar-group",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2545-33553",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "avatar-group",
+        "avatar-group",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-badge",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Badge",
+      "path": "packs/figma-heroui-badge",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2278-445",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "badge",
+        "badge",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-card",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Card",
+      "path": "packs/figma-heroui-card",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3350-1558",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "card",
+        "card",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-carousel",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Carousel",
+      "path": "packs/figma-heroui-carousel",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3576-2133",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "carousel",
+        "carousel",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-chip",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Chip",
+      "path": "packs/figma-heroui-chip",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2291-38171",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "chip",
+        "chip",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-theme",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 theme",
+      "path": "packs/figma-heroui-theme",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "theme",
+        "theme",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-user",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 User",
+      "path": "packs/figma-heroui-user",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2545-33202",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "user",
+        "user",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "windmill-cards",
+      "screen": "catalog",
+      "kit": "windmill-react",
+      "title": "Windmill cards gallery",
+      "path": "windmill-react/src/pages/Cards.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/app/cards",
+      "sources": [
+        "windmill-react/src/components/Typography/PageTitle.js",
+        "windmill-react/src/components/Typography/SectionTitle.js",
+        "windmill-react/src/components/CTA.js",
+        "windmill-react/src/components/Cards/InfoCard.js",
+        "windmill-react/src/icons/index.js",
+        "windmill-react/src/components/RoundIcon.js"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 6,
+      "jobs": [
+        "component",
+        "card",
+        "catalog"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "windmill",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "tailadmin-images",
+      "screen": "catalog",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin images gallery",
+      "path": "tailadmin-react/src/pages/UiElements/Images.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/images",
+      "sources": [
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/ui/images/ResponsiveImage.tsx",
+        "tailadmin-react/src/components/ui/images/TwoColumnImageGrid.tsx",
+        "tailadmin-react/src/components/ui/images/ThreeColumnImageGrid.tsx",
+        "tailadmin-react/src/components/common/ComponentCard.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 7,
+      "jobs": [
+        "component",
+        "image",
+        "media",
+        "gallery"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-card",
+      "screen": "catalog",
+      "kit": "heroui",
+      "title": "HeroUI card",
+      "path": "heroui/packages/react/src/components/card/card.tsx",
+      "preview": "https://www.heroui.com/docs/components/card",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "catalog",
+        "layout",
+        "heroui",
+        "card"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-separator",
+      "screen": "catalog",
+      "kit": "heroui",
+      "title": "HeroUI separator",
+      "path": "heroui/packages/react/src/components/separator/separator.tsx",
+      "preview": "https://www.heroui.com/docs/components/separator",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "catalog",
+        "layout",
+        "heroui",
+        "separator"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-surface",
+      "screen": "catalog",
+      "kit": "heroui",
+      "title": "HeroUI surface",
+      "path": "heroui/packages/react/src/components/surface/surface.tsx",
+      "preview": "https://www.heroui.com/docs/components/surface",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "catalog",
+        "layout",
+        "heroui",
+        "surface"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "tailadmin-videos",
+      "screen": "catalog",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin videos gallery",
+      "path": "tailadmin-react/src/pages/UiElements/Videos.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/videos",
+      "sources": [
+        "tailadmin-react/src/components/common/ComponentCard.tsx",
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx",
+        "tailadmin-react/src/components/ui/videos/FourIsToThree.tsx",
+        "tailadmin-react/src/components/ui/videos/OneIsToOne.tsx",
+        "tailadmin-react/src/components/ui/videos/SixteenIsToNine.tsx",
+        "tailadmin-react/src/components/ui/videos/TwentyOneIsToNine.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "component",
+        "video",
+        "media",
+        "player"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
     },
     {
       "id": "shadcn-chart-area-axes",
@@ -4277,7 +4948,7 @@
       "id": "tremor-charts",
       "screen": "charts",
       "kit": "tremor",
-      "title": "Tremor chart + KPI blocks (atoms — compose, don't cite as a page)",
+      "title": "Tremor chart + KPI blocks (atoms \u2014 compose, don't cite as a page)",
       "path": "tremor/src/components",
       "preview": "https://tremor.so",
       "license": "Apache-2.0",
@@ -4477,6 +5148,64 @@
       }
     },
     {
+      "id": "tailadmin-bar-chart",
+      "screen": "charts",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin bar chart page",
+      "path": "tailadmin-react/src/pages/Charts/BarChart.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/bar-chart",
+      "sources": [
+        "tailadmin-react/src/components/charts/bar/BarChartOne.tsx",
+        "tailadmin-react/src/components/common/ComponentCard.tsx",
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 4,
+      "jobs": [
+        "charts",
+        "chart",
+        "bar",
+        "analytics",
+        "dataviz"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "tailadmin-line-chart",
+      "screen": "charts",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin line chart page",
+      "path": "tailadmin-react/src/pages/Charts/LineChart.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/line-chart",
+      "sources": [
+        "tailadmin-react/src/components/charts/line/LineChartOne.tsx",
+        "tailadmin-react/src/components/common/ComponentCard.tsx",
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 5,
+      "jobs": [
+        "charts",
+        "chart",
+        "line",
+        "analytics",
+        "dataviz"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "shadcn-chat",
       "screen": "chat",
       "kit": "shadcn-registry",
@@ -4598,7 +5327,7 @@
       "id": "spectrum-ai-chat",
       "screen": "chat",
       "kit": "react-spectrum",
-      "title": "React Spectrum AI Chat (Thread + PromptField — prompt field is the primary)",
+      "title": "React Spectrum AI Chat (Thread + PromptField \u2014 prompt field is the primary)",
       "path": "react-spectrum/packages/@react-spectrum/ai/src",
       "preview": "https://react-spectrum.adobe.com",
       "license": "Apache-2.0",
@@ -5087,6 +5816,194 @@
       }
     },
     {
+      "id": "tailadmin-blank",
+      "screen": "empty",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin blank page",
+      "path": "tailadmin-react/src/pages/OtherPage/Blank.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/blank",
+      "sources": [
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "empty",
+        "blank",
+        "starter",
+        "canvas"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "untitled-empty-state",
+      "screen": "empty",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI empty state",
+      "path": "untitled-ui-react/components/application/empty-state/empty-state.tsx",
+      "preview": "https://www.untitledui.com/react/components/empty-state",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "empty",
+        "empty-state",
+        "zero"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "flowbite-404",
+      "screen": "empty",
+      "kit": "flowbite-admin",
+      "title": "Flowbite 404",
+      "path": "flowbite-admin/content/pages/404.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/pages/404/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 4,
+      "jobs": [
+        "empty",
+        "404",
+        "not-found",
+        "error"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "flowbite",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "tailadmin-not-found",
+      "screen": "empty",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin not found",
+      "path": "tailadmin-react/src/pages/OtherPage/NotFound.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/404",
+      "sources": [
+        "tailadmin-react/src/components/common/GridShape.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 4,
+      "jobs": [
+        "empty",
+        "404",
+        "not-found",
+        "error"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "flowbite-500",
+      "screen": "empty",
+      "kit": "flowbite-admin",
+      "title": "Flowbite 500",
+      "path": "flowbite-admin/content/pages/500.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/pages/500/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 5,
+      "jobs": [
+        "empty",
+        "500",
+        "server-error",
+        "error"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "flowbite",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "windmill-404",
+      "screen": "empty",
+      "kit": "windmill-react",
+      "title": "Windmill 404",
+      "path": "windmill-react/src/pages/404.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/404",
+      "sources": [
+        "windmill-react/src/icons/index.js"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 5,
+      "jobs": [
+        "empty",
+        "404",
+        "not-found",
+        "error"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "windmill",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "flowbite-maintenance",
+      "screen": "empty",
+      "kit": "flowbite-admin",
+      "title": "Flowbite maintenance",
+      "path": "flowbite-admin/content/pages/maintenance.html",
+      "preview": "https://flowbite-admin-dashboard.vercel.app/pages/maintenance/",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 6,
+      "jobs": [
+        "empty",
+        "maintenance",
+        "downtime",
+        "status"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "flowbite",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "windmill-blank",
+      "screen": "empty",
+      "kit": "windmill-react",
+      "title": "Windmill blank",
+      "path": "windmill-react/src/pages/Blank.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/app/blank",
+      "sources": [
+        "windmill-react/src/components/Typography/PageTitle.js"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 6,
+      "jobs": [
+        "empty",
+        "blank",
+        "starter"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "windmill",
+        "density": "dense"
+      }
+    },
+    {
       "id": "figma-bootstrap-forms",
       "screen": "form",
       "kit": "shadcn-registry",
@@ -5104,31 +6021,7 @@
         "family": "shadcn-zinc",
         "density": "comfortable"
       },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
-      "scope": "page",
-      "selectable": false
-    },
-    {
-      "id": "figma-m3-text-fields",
-      "screen": "form",
-      "kit": "shadcn-registry",
-      "title": "Material 3 Text Fields (MUI / Material UI)",
-      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52805-28110",
-      "license": "n/a",
-      "kind": "blueprint",
-      "startFrom": 1,
-      "jobs": [
-        "form",
-        "fields",
-        "material-figma",
-        "mui",
-        "material3"
-      ],
-      "dna": {
-        "family": "shadcn-zinc",
-        "density": "comfortable"
-      },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
       "scope": "page",
       "selectable": false
     },
@@ -5327,6 +6220,1778 @@
       }
     },
     {
+      "id": "untitled-modals",
+      "screen": "form",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI modals",
+      "path": "untitled-ui-react/components/application/modals/modal.tsx",
+      "preview": "https://www.untitledui.com/react/components/modals",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 5,
+      "jobs": [
+        "overlay",
+        "modal",
+        "dialog"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-button",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Button",
+      "path": "packs/figma-heroui-button",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2210-37799",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "button",
+        "button",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-button-group",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 ButtonGroup",
+      "path": "packs/figma-heroui-button-group",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2250-37403",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "button-group",
+        "buttongroup",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-calendar",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Calendar",
+      "path": "packs/figma-heroui-calendar",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4492-2681",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "calendar",
+        "calendar",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-checkbox",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Checkbox",
+      "path": "packs/figma-heroui-checkbox",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2433-38083",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "checkbox",
+        "checkbox",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-checkbox-group",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Checkbox Group",
+      "path": "packs/figma-heroui-checkbox-group",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2433-41562",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "checkbox-group",
+        "checkbox-group",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-code",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Code",
+      "path": "packs/figma-heroui-code",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1542-28623",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "code",
+        "code",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-components",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 components",
+      "path": "packs/figma-heroui-components",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "components",
+        "components",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-divider",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Divider",
+      "path": "packs/figma-heroui-divider",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2584-41429",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "divider",
+        "divider",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-input",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Input",
+      "path": "packs/figma-heroui-input",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2746-458",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "input",
+        "input",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-input-otp",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Input OTP",
+      "path": "packs/figma-heroui-input-otp",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3377-7557",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "input-otp",
+        "input-otp",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-kbd",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Kbd",
+      "path": "packs/figma-heroui-kbd",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2545-31287",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "kbd",
+        "kbd",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-number-input",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Number Input",
+      "path": "packs/figma-heroui-number-input",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=3638-79039",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "number-input",
+        "number-input",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-radio",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Radio",
+      "path": "packs/figma-heroui-radio",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1552-24473",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "radio",
+        "radio",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-select",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Select",
+      "path": "packs/figma-heroui-select",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2943-31581",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "select",
+        "select",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-slider",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Slider",
+      "path": "packs/figma-heroui-slider",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2123-26021",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "slider",
+        "slider",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-switch",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Switch",
+      "path": "packs/figma-heroui-switch",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1786-271",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "switch",
+        "switch",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-tooltip",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Tooltip",
+      "path": "packs/figma-heroui-tooltip",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=1552-24236",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "tooltip",
+        "tooltip",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "tailadmin-alerts",
+      "screen": "form",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin alerts gallery",
+      "path": "tailadmin-react/src/pages/UiElements/Alerts.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/alerts",
+      "sources": [
+        "tailadmin-react/src/components/common/ComponentCard.tsx",
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx",
+        "tailadmin-react/src/components/ui/alert/Alert.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 6,
+      "jobs": [
+        "component",
+        "alert",
+        "feedback",
+        "banner",
+        "tailadmin"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "untitled-slideout",
+      "screen": "form",
+      "kit": "untitled-ui-react",
+      "title": "Untitled UI slideout menus",
+      "path": "untitled-ui-react/components/application/slideout-menus/slideout-menu.tsx",
+      "preview": "https://www.untitledui.com/react/components/slideout-menus",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 6,
+      "jobs": [
+        "overlay",
+        "sheet",
+        "slideout",
+        "drawer"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "untitled",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "tailadmin-badges",
+      "screen": "form",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin badges gallery",
+      "path": "tailadmin-react/src/pages/UiElements/Badges.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/badges",
+      "sources": [
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx",
+        "tailadmin-react/src/components/ui/badge/Badge.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 7,
+      "jobs": [
+        "component",
+        "badge",
+        "status",
+        "chip"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "windmill-buttons",
+      "screen": "form",
+      "kit": "windmill-react",
+      "title": "Windmill buttons gallery",
+      "path": "windmill-react/src/pages/Buttons.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/app/buttons",
+      "sources": [
+        "windmill-react/src/icons/index.js",
+        "windmill-react/src/components/Typography/PageTitle.js",
+        "windmill-react/src/components/Typography/SectionTitle.js",
+        "windmill-react/src/components/CTA.js"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 7,
+      "jobs": [
+        "component",
+        "button",
+        "cta"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "windmill",
+        "density": "dense"
+      }
+    },
+    {
+      "id": "heroui-alert-dialog",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI alert dialog",
+      "path": "heroui/packages/react/src/components/alert-dialog/alert-dialog.tsx",
+      "preview": "https://www.heroui.com/docs/components/alert-dialog",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "overlay",
+        "dialog",
+        "heroui",
+        "alert-dialog"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-autocomplete",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI autocomplete",
+      "path": "heroui/packages/react/src/components/autocomplete/autocomplete.tsx",
+      "preview": "https://www.heroui.com/docs/components/autocomplete",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "autocomplete"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-button",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI button",
+      "path": "heroui/packages/react/src/components/button/button.tsx",
+      "preview": "https://www.heroui.com/docs/components/button",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "chrome",
+        "button",
+        "heroui",
+        "button"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-button-group",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI button group",
+      "path": "heroui/packages/react/src/components/button-group/button-group.tsx",
+      "preview": "https://www.heroui.com/docs/components/button-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "chrome",
+        "button",
+        "heroui",
+        "button-group"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-checkbox",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI checkbox",
+      "path": "heroui/packages/react/src/components/checkbox/checkbox.tsx",
+      "preview": "https://www.heroui.com/docs/components/checkbox",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "checkbox"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-checkbox-group",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI checkbox group",
+      "path": "heroui/packages/react/src/components/checkbox-group/checkbox-group.tsx",
+      "preview": "https://www.heroui.com/docs/components/checkbox-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "checkbox-group"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-close-button",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI close button",
+      "path": "heroui/packages/react/src/components/close-button/close-button.tsx",
+      "preview": "https://www.heroui.com/docs/components/close-button",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "chrome",
+        "button",
+        "heroui",
+        "close-button"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-color-area",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI color area",
+      "path": "heroui/packages/react/src/components/color-area/color-area.tsx",
+      "preview": "https://www.heroui.com/docs/components/color-area",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "picker",
+        "color",
+        "heroui",
+        "color-area"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-color-field",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI color field",
+      "path": "heroui/packages/react/src/components/color-field/color-field.tsx",
+      "preview": "https://www.heroui.com/docs/components/color-field",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "picker",
+        "color",
+        "heroui",
+        "color-field"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-color-input-group",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI color input group",
+      "path": "heroui/packages/react/src/components/color-input-group/color-input-group.tsx",
+      "preview": "https://www.heroui.com/docs/components/color-input-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "picker",
+        "color",
+        "heroui",
+        "color-input-group"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-color-picker",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI color picker",
+      "path": "heroui/packages/react/src/components/color-picker/color-picker.tsx",
+      "preview": "https://www.heroui.com/docs/components/color-picker",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "picker",
+        "color",
+        "heroui",
+        "color-picker"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-color-slider",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI color slider",
+      "path": "heroui/packages/react/src/components/color-slider/color-slider.tsx",
+      "preview": "https://www.heroui.com/docs/components/color-slider",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "picker",
+        "color",
+        "heroui",
+        "color-slider"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-color-swatch",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI color swatch",
+      "path": "heroui/packages/react/src/components/color-swatch/color-swatch.tsx",
+      "preview": "https://www.heroui.com/docs/components/color-swatch",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "picker",
+        "color",
+        "heroui",
+        "color-swatch"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-color-swatch-picker",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI color swatch picker",
+      "path": "heroui/packages/react/src/components/color-swatch-picker/color-swatch-picker.tsx",
+      "preview": "https://www.heroui.com/docs/components/color-swatch-picker",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "picker",
+        "color",
+        "heroui",
+        "color-swatch-picker"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-combo-box",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI combo box",
+      "path": "heroui/packages/react/src/components/combo-box/combo-box.tsx",
+      "preview": "https://www.heroui.com/docs/components/combo-box",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "combo-box"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-description",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI description",
+      "path": "heroui/packages/react/src/components/description/description.tsx",
+      "preview": "https://www.heroui.com/docs/components/description",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "description"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-drawer",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI drawer",
+      "path": "heroui/packages/react/src/components/drawer/drawer.tsx",
+      "preview": "https://www.heroui.com/docs/components/drawer",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "overlay",
+        "dialog",
+        "heroui",
+        "drawer"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-dropdown",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI dropdown",
+      "path": "heroui/packages/react/src/components/dropdown/dropdown.tsx",
+      "preview": "https://www.heroui.com/docs/components/dropdown",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "menu",
+        "collections",
+        "heroui",
+        "dropdown"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-error-message",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI error message",
+      "path": "heroui/packages/react/src/components/error-message/error-message.tsx",
+      "preview": "https://www.heroui.com/docs/components/error-message",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "error-message"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-field-error",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI field error",
+      "path": "heroui/packages/react/src/components/field-error/field-error.tsx",
+      "preview": "https://www.heroui.com/docs/components/field-error",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "field-error"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-fieldset",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI fieldset",
+      "path": "heroui/packages/react/src/components/fieldset/fieldset.tsx",
+      "preview": "https://www.heroui.com/docs/components/fieldset",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "fieldset"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-form",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI form",
+      "path": "heroui/packages/react/src/components/form/form.tsx",
+      "preview": "https://www.heroui.com/docs/components/form",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "form"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-input",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI input",
+      "path": "heroui/packages/react/src/components/input/input.tsx",
+      "preview": "https://www.heroui.com/docs/components/input",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "input"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-input-group",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI input group",
+      "path": "heroui/packages/react/src/components/input-group/input-group.tsx",
+      "preview": "https://www.heroui.com/docs/components/input-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "input-group"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-input-otp",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI input otp",
+      "path": "heroui/packages/react/src/components/input-otp/input-otp.tsx",
+      "preview": "https://www.heroui.com/docs/components/input-otp",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "input-otp"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-label",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI label",
+      "path": "heroui/packages/react/src/components/label/label.tsx",
+      "preview": "https://www.heroui.com/docs/components/label",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "label"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-menu",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI menu",
+      "path": "heroui/packages/react/src/components/menu/menu.tsx",
+      "preview": "https://www.heroui.com/docs/components/menu",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "menu",
+        "collections",
+        "heroui",
+        "menu"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-menu-item",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI menu item",
+      "path": "heroui/packages/react/src/components/menu-item/menu-item.tsx",
+      "preview": "https://www.heroui.com/docs/components/menu-item",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "menu",
+        "collections",
+        "heroui",
+        "menu-item"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-menu-section",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI menu section",
+      "path": "heroui/packages/react/src/components/menu-section/menu-section.tsx",
+      "preview": "https://www.heroui.com/docs/components/menu-section",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "menu",
+        "collections",
+        "heroui",
+        "menu-section"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-modal",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI modal",
+      "path": "heroui/packages/react/src/components/modal/modal.tsx",
+      "preview": "https://www.heroui.com/docs/components/modal",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "overlay",
+        "dialog",
+        "heroui",
+        "modal"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-number-field",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI number field",
+      "path": "heroui/packages/react/src/components/number-field/number-field.tsx",
+      "preview": "https://www.heroui.com/docs/components/number-field",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "number-field"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-popover",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI popover",
+      "path": "heroui/packages/react/src/components/popover/popover.tsx",
+      "preview": "https://www.heroui.com/docs/components/popover",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "overlay",
+        "dialog",
+        "heroui",
+        "popover"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-radio",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI radio",
+      "path": "heroui/packages/react/src/components/radio/radio.tsx",
+      "preview": "https://www.heroui.com/docs/components/radio",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "radio"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-radio-group",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI radio group",
+      "path": "heroui/packages/react/src/components/radio-group/radio-group.tsx",
+      "preview": "https://www.heroui.com/docs/components/radio-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "radio-group"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-scroll-shadow",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI scroll shadow",
+      "path": "heroui/packages/react/src/components/scroll-shadow/scroll-shadow.tsx",
+      "preview": "https://www.heroui.com/docs/components/scroll-shadow",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "component",
+        "heroui",
+        "scroll-shadow"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-search-field",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI search field",
+      "path": "heroui/packages/react/src/components/search-field/search-field.tsx",
+      "preview": "https://www.heroui.com/docs/components/search-field",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "search-field"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-select",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI select",
+      "path": "heroui/packages/react/src/components/select/select.tsx",
+      "preview": "https://www.heroui.com/docs/components/select",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "select"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-slider",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI slider",
+      "path": "heroui/packages/react/src/components/slider/slider.tsx",
+      "preview": "https://www.heroui.com/docs/components/slider",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "slider"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-switch",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI switch",
+      "path": "heroui/packages/react/src/components/switch/switch.tsx",
+      "preview": "https://www.heroui.com/docs/components/switch",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "switch"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-switch-group",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI switch group",
+      "path": "heroui/packages/react/src/components/switch-group/switch-group.tsx",
+      "preview": "https://www.heroui.com/docs/components/switch-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "switch-group"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-tag",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI tag",
+      "path": "heroui/packages/react/src/components/tag/tag.tsx",
+      "preview": "https://www.heroui.com/docs/components/tag",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "menu",
+        "collections",
+        "heroui",
+        "tag"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-tag-group",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI tag group",
+      "path": "heroui/packages/react/src/components/tag-group/tag-group.tsx",
+      "preview": "https://www.heroui.com/docs/components/tag-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "menu",
+        "collections",
+        "heroui",
+        "tag-group"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-textarea",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI textarea",
+      "path": "heroui/packages/react/src/components/textarea/textarea.tsx",
+      "preview": "https://www.heroui.com/docs/components/textarea",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "textarea"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-textfield",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI textfield",
+      "path": "heroui/packages/react/src/components/textfield/textfield.tsx",
+      "preview": "https://www.heroui.com/docs/components/textfield",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "form-app",
+        "input",
+        "fields",
+        "heroui",
+        "textfield"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-toast",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI toast",
+      "path": "heroui/packages/react/src/components/toast/toast.tsx",
+      "preview": "https://www.heroui.com/docs/components/toast",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "overlay",
+        "dialog",
+        "heroui",
+        "toast"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-toggle-button",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI toggle button",
+      "path": "heroui/packages/react/src/components/toggle-button/toggle-button.tsx",
+      "preview": "https://www.heroui.com/docs/components/toggle-button",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "chrome",
+        "button",
+        "heroui",
+        "toggle-button"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-toggle-button-group",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI toggle button group",
+      "path": "heroui/packages/react/src/components/toggle-button-group/toggle-button-group.tsx",
+      "preview": "https://www.heroui.com/docs/components/toggle-button-group",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "form",
+        "chrome",
+        "button",
+        "heroui",
+        "toggle-button-group"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-tooltip",
+      "screen": "form",
+      "kit": "heroui",
+      "title": "HeroUI tooltip",
+      "path": "heroui/packages/react/src/components/tooltip/tooltip.tsx",
+      "preview": "https://www.heroui.com/docs/components/tooltip",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "overlay",
+        "dialog",
+        "heroui",
+        "tooltip"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "tailadmin-buttons",
+      "screen": "form",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin buttons gallery",
+      "path": "tailadmin-react/src/pages/UiElements/Buttons.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/buttons",
+      "sources": [
+        "tailadmin-react/src/components/common/ComponentCard.tsx",
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx",
+        "tailadmin-react/src/components/ui/button/Button.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "component",
+        "button",
+        "cta",
+        "controls"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "windmill-modals",
+      "screen": "form",
+      "kit": "windmill-react",
+      "title": "Windmill modals gallery",
+      "path": "windmill-react/src/pages/Modals.js",
+      "preview": "https://windmill-dashboard-react.vercel.app/app/modals",
+      "sources": [
+        "windmill-react/src/components/Typography/PageTitle.js",
+        "windmill-react/src/components/CTA.js"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "component",
+        "modal",
+        "overlay",
+        "dialog"
+      ],
+      "scope": "component",
+      "dna": {
+        "family": "windmill",
+        "density": "dense"
+      }
+    },
+    {
       "id": "lex-console",
       "screen": "lex-console",
       "kit": "slds",
@@ -5485,7 +8150,7 @@
         "family": "shadcn-zinc",
         "density": "comfortable"
       },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
       "scope": "page",
       "selectable": false
     },
@@ -5508,7 +8173,7 @@
         "family": "shadcn-zinc",
         "density": "comfortable"
       },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
       "scope": "page",
       "selectable": false
     },
@@ -5535,6 +8200,126 @@
       },
       "note": "corpus/blueprints/shadcn-marketing.md is the region map; reference.html renders it at rest for capture; no consumer TSX is authored because the estate builds no marketing page",
       "scope": "page"
+    },
+    {
+      "id": "figma-heroui-v3-cover",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Welcome",
+      "path": "packs/figma-heroui-v3-cover",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=5011-2637",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "v3-cover",
+        "welcome",
+        "cover"
+      ],
+      "scope": "page",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-welcome",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Welcome",
+      "path": "packs/figma-heroui-welcome",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261157",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "welcome",
+        "welcome",
+        "cover"
+      ],
+      "scope": "page",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-home",
+      "screen": "marketing",
+      "kit": "heroui",
+      "title": "HeroUI next-app home (marketing shell)",
+      "path": "heroui-next-app/app/page.tsx",
+      "preview": "https://www.heroui.com",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 4,
+      "jobs": [
+        "marketing",
+        "landing",
+        "heroui",
+        "home"
+      ],
+      "scope": "page",
+      "note": "Kit-walk page \u2014 HeroUI next-app route",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-about",
+      "screen": "marketing",
+      "kit": "heroui",
+      "title": "HeroUI next-app about",
+      "path": "heroui-next-app/app/about/page.tsx",
+      "preview": "https://www.heroui.com",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "about",
+        "heroui"
+      ],
+      "scope": "page",
+      "note": "Kit-walk page \u2014 HeroUI next-app route",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "figma-heroui-cover",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 cover",
+      "path": "packs/figma-heroui-cover",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "cover",
+        "cover",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
     },
     {
       "id": "magicui-code-comparison-demo",
@@ -7040,6 +9825,29 @@
       }
     },
     {
+      "id": "heroui-pricing",
+      "screen": "pricing",
+      "kit": "heroui",
+      "title": "HeroUI next-app pricing",
+      "path": "heroui-next-app/app/pricing/page.tsx",
+      "preview": "https://www.heroui.com",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 3,
+      "jobs": [
+        "pricing",
+        "plans",
+        "marketing",
+        "heroui"
+      ],
+      "scope": "page",
+      "note": "Kit-walk page \u2014 HeroUI next-app route",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "figma-tailgrids-table-stack",
       "screen": "queue",
       "kit": "shadcn-registry",
@@ -7059,9 +9867,44 @@
         "family": "shadcn-zinc",
         "density": "comfortable"
       },
-      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
       "scope": "component",
       "selectable": false
+    },
+    {
+      "id": "shadcn-operate-decide",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "shadcn Operate decide queue (Summary lead, Pursue + attached More)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "queue",
+        "worklist",
+        "triage",
+        "decide",
+        "decide-queue",
+        "sled",
+        "pursue",
+        "inbox",
+        "datagrid"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "navigation",
+          "table",
+          "summary"
+        ],
+        "captureExpect": "[data-region=\"summary-lead\"]"
+      },
+      "note": "Clearspeed Operate decide/worklist silhouette \u2014 Wireframe\u2192Build from cite; bans accordion-under-lead + detached-overflow",
+      "scope": "page"
     },
     {
       "id": "untitled-table",
@@ -7223,6 +10066,31 @@
       }
     },
     {
+      "id": "figma-heroui-table",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "HeroUI Figma \u00b7 Table",
+      "path": "packs/figma-heroui-table",
+      "preview": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=2611-619",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 6,
+      "jobs": [
+        "heroui-figma",
+        "figma-kit",
+        "table",
+        "table",
+        "component"
+      ],
+      "scope": "component",
+      "selectable": true,
+      "note": "Figma Example/Theme harvest from prefer-copy GAn1Srb\u2026 (full 38-page tree) \u2014 structure only; paint house shadcn for Clearspeed",
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "flowbite-products",
       "screen": "queue",
       "kit": "flowbite-admin",
@@ -7250,6 +10118,126 @@
       "dna": {
         "family": "flowbite",
         "density": "dense"
+      }
+    },
+    {
+      "id": "heroui-list-box",
+      "screen": "queue",
+      "kit": "heroui",
+      "title": "HeroUI list box",
+      "path": "heroui/packages/react/src/components/list-box/list-box.tsx",
+      "preview": "https://www.heroui.com/docs/components/list-box",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "queue",
+        "table",
+        "crud",
+        "heroui",
+        "list-box"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-list-box-item",
+      "screen": "queue",
+      "kit": "heroui",
+      "title": "HeroUI list box item",
+      "path": "heroui/packages/react/src/components/list-box-item/list-box-item.tsx",
+      "preview": "https://www.heroui.com/docs/components/list-box-item",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "queue",
+        "table",
+        "crud",
+        "heroui",
+        "list-box-item"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-list-box-section",
+      "screen": "queue",
+      "kit": "heroui",
+      "title": "HeroUI list box section",
+      "path": "heroui/packages/react/src/components/list-box-section/list-box-section.tsx",
+      "preview": "https://www.heroui.com/docs/components/list-box-section",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "queue",
+        "table",
+        "crud",
+        "heroui",
+        "list-box-section"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-pagination",
+      "screen": "queue",
+      "kit": "heroui",
+      "title": "HeroUI pagination",
+      "path": "heroui/packages/react/src/components/pagination/pagination.tsx",
+      "preview": "https://www.heroui.com/docs/components/pagination",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "queue",
+        "table",
+        "crud",
+        "heroui",
+        "pagination"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-table",
+      "screen": "queue",
+      "kit": "heroui",
+      "title": "HeroUI table",
+      "path": "heroui/packages/react/src/components/table/table.tsx",
+      "preview": "https://www.heroui.com/docs/components/table",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "queue",
+        "table",
+        "crud",
+        "heroui",
+        "table"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
       }
     },
     {
@@ -7343,6 +10331,102 @@
       },
       "dna": {
         "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "tailadmin-avatars",
+      "screen": "record",
+      "kit": "tailadmin-react",
+      "title": "TailAdmin avatars gallery",
+      "path": "tailadmin-react/src/pages/UiElements/Avatars.tsx",
+      "preview": "https://free-react-demo.tailadmin.com/avatars",
+      "sources": [
+        "tailadmin-react/src/components/common/ComponentCard.tsx",
+        "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
+        "tailadmin-react/src/components/common/PageMeta.tsx",
+        "tailadmin-react/src/components/ui/avatar/Avatar.tsx"
+      ],
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 5,
+      "jobs": [
+        "component",
+        "avatar",
+        "identity"
+      ],
+      "scope": "page",
+      "dna": {
+        "family": "tailadmin",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-avatar",
+      "screen": "record",
+      "kit": "heroui",
+      "title": "HeroUI avatar",
+      "path": "heroui/packages/react/src/components/avatar/avatar.tsx",
+      "preview": "https://www.heroui.com/docs/components/avatar",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "record",
+        "data-display",
+        "heroui",
+        "avatar"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-badge",
+      "screen": "record",
+      "kit": "heroui",
+      "title": "HeroUI badge",
+      "path": "heroui/packages/react/src/components/badge/badge.tsx",
+      "preview": "https://www.heroui.com/docs/components/badge",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "record",
+        "data-display",
+        "heroui",
+        "badge"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-chip",
+      "screen": "record",
+      "kit": "heroui",
+      "title": "HeroUI chip",
+      "path": "heroui/packages/react/src/components/chip/chip.tsx",
+      "preview": "https://www.heroui.com/docs/components/chip",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "record",
+        "data-display",
+        "heroui",
+        "chip"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom \u2014 structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
         "density": "comfortable"
       }
     },
@@ -7591,6 +10675,915 @@
       },
       "note": "corpus/blueprints/shadcn-wizard.md is the region map; corpus/blueprints/shadcn-wizard/ is authored shadcn source to copy",
       "scope": "page"
+    },
+    {
+      "id": "figma-m3-badges",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Badges (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51592-4755",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "badge",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "component",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-bottom-app-bars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Bottom app bars (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51159-4655",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "app-bar",
+        "navigation",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-bottom-sheets",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Bottom sheets (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51827-5847",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "sheet",
+        "overlay",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-buttons",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Buttons (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27456",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "buttons",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-cards",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Cards (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52346-27569",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "cards",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-carousel",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Carousel (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53912-27472",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "carousel",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-checkboxes",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Checkboxes (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51745-4798",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "checkbox",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-chips",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Chips (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27884",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "chips",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-color",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Color Guidance (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49823-12142",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "color",
+        "styles",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-date-picker",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Date picker (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51954-18122",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "date",
+        "picker",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-dialogs",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Dialogs (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50723-10916",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "dialog",
+        "overlay",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-dividers",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Dividers (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51816-5846",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "divider",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-elements",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Elements (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11328",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "elements",
+        "styles",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-elevation",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Elevation (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11342",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "elevation",
+        "styles",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-fabs",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 FABs (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9243",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "fab",
+        "buttons",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-icon-buttons",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Icon buttons (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51525-4722",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "icon-button",
+        "buttons",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-layout",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Layout (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52732-23854",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "layout",
+        "styles",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "component",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-lists",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Lists (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51964-62981",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "list",
+        "records",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-menu",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Menu (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-36958",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "menu",
+        "overlay",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-navigation-bars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Navigation bars (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-10370",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "navigation",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-navigation-drawer",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Navigation drawer (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51593-5083",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "navigation",
+        "drawer",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-navigation-rails",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Navigation rails (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50721-9303",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "navigation",
+        "rail",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-progress",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Progress indicators (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52872-24830",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "progress",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-radio",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Radio buttons (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51739-4595",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "radio",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-search",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Search (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52977-33807",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "search",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-segmented-buttons",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Segmented buttons (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-36611",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "segmented",
+        "buttons",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-side-sheets",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Side sheets (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53198-27843",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "sheet",
+        "drawer",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-sliders",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Sliders (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51937-8018",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "slider",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-snackbars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Snackbars (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53977-33571",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "snackbar",
+        "feedback",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-switch",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Switch (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51223-4949",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "switch",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-tabs",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Tabs (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51754-4956",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "tabs",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-time-picker",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Time picker (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52949-27911",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "time",
+        "picker",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-toc",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Table of contents (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53379-35512",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "navigation",
+        "toc",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-tooltips",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Tooltips (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-33867",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "tooltip",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-top-app-bars",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Top app bars (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9053",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "app-bar",
+        "navigation",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-typography",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Typography (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=49848-6285",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "typography",
+        "styles",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-m3-text-fields",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Material 3 Text Fields (MUI / Material UI)",
+      "preview": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52805-28110",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "form",
+        "fields",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette \u2014 steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
     }
   ]
 }

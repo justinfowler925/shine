@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-progress",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2162-16624",
+  "harvested": "2026-10-09",
+  "bytes": 113436,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Progress",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2162-16624",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2162-16624",
+    "capturedAt": "2026-10-09T02:43:11.289349Z",
+    "shotSha256": "1f5d3ff7b939d64e0a6a2b8eb2a79c7736f9df2991b6edf468132dfdcbc8ed58",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "1573:1538",
+      "nodeId": "2162:16624",
+      "page": "Progress",
+      "kind": "component"
+    }
+  }
+}

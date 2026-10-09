@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-slider",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2123-26021",
+  "harvested": "2026-10-09",
+  "bytes": 114616,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Slider",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2123-26021",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2123-26021",
+    "capturedAt": "2026-10-09T02:43:12.271996Z",
+    "shotSha256": "97e37708495bfa35084feef2269c71606e66592c1da41232ca12e296bc963186",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "1118:8",
+      "nodeId": "2123:26021",
+      "page": "Slider",
+      "kind": "component"
+    }
+  }
+}

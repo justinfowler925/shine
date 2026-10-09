@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-spinner",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2411-8713",
+  "harvested": "2026-10-09",
+  "bytes": 112862,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Spinner",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2411-8713",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2411-8713",
+    "capturedAt": "2026-10-09T02:43:12.523819Z",
+    "shotSha256": "05a98b51c5286072bf3a1f81e2fc56fcaf166062361d453fc1a660bb2f3e1de9",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "2411:8712",
+      "nodeId": "2411:8713",
+      "page": "Spinner",
+      "kind": "component"
+    }
+  }
+}

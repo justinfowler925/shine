@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-avatar-group",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-avatar-group",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-avatar-group.md",
+      "sha256": "30265bc7b1df4cfc9e9bef9f80d30063fd27d8cb6f20b9f3dbc34daaf966ee8f"
+    }
+  ]
+}

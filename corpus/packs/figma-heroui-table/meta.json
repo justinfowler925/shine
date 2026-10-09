@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-table",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2611-619",
+  "harvested": "2026-10-09",
+  "bytes": 170601,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Table",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2611-619",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2611-619",
+    "capturedAt": "2026-10-09T02:43:13.049814Z",
+    "shotSha256": "2dbcd7f0484fa6f6c83550e51c7c208ecde28ec0777bfd18a832557ad14a8cfb",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "515:15",
+      "nodeId": "2611:619",
+      "page": "Table",
+      "kind": "component"
+    }
+  }
+}

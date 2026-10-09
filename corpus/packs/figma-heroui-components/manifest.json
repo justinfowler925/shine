@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-components",
+  "screen": "form",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-components",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-components.md",
+      "sha256": "0b48911bdede95e70c6cbef4564470d01654f156de86c54c6ac057daba74262c"
+    }
+  ]
+}

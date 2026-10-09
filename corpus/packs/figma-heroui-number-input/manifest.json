@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-number-input",
+  "screen": "form",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-number-input",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-number-input.md",
+      "sha256": "7951a1082faadc1c34693f3ce06a534bb0cbde0c2b948ecf5855a5e93e582cd5"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-tooltip",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1552-24236",
+  "harvested": "2026-10-09",
+  "bytes": 124395,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Tooltip",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1552-24236",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1552-24236",
+    "capturedAt": "2026-10-09T02:44:35.363500Z",
+    "shotSha256": "defe6234c4319e8e2cb43ab91ad502e9f30741a2b6369b5e0c63869623b5290b",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "740:18259",
+      "nodeId": "1552:24236",
+      "page": "Tooltip",
+      "kind": "component"
+    }
+  }
+}

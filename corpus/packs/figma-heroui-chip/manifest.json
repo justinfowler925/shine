@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-chip",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-chip",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-chip.md",
+      "sha256": "8e42be018103e2cb4479249d71ed50ddbc5ef71e17a958f054fb08fc58178b3a"
+    }
+  ]
+}

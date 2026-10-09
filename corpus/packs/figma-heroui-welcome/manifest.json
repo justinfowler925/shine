@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-welcome",
+  "screen": "marketing",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-welcome",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-welcome.md",
+      "sha256": "c390f89808ac511d5c5efb9a0c7b77ac648e89d34041fadc6f04c3dbcc70f3f9"
+    }
+  ]
+}

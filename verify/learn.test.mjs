@@ -359,7 +359,7 @@ const siblingLearn = commitSiblingLearnFromResolve({
 assert.equal(siblingLearn.skipped, false);
 assert.equal(siblingLearn.bumped, true);
 assert.equal(siblingLearn.siblingPref.siblingId, "sled-capture-queue");
-assert.equal(siblingLearn.siblingPref.preferredCite, "shadcn-queue");
+assert.equal(siblingLearn.siblingPref.preferredCite, "shadcn-operate-decide");
 assert.equal(siblingLearn.episode.failCategory, SIBLING_LEARN_FAIL_CATEGORY);
 assert.equal(siblingLearn.episode.verdict, "done");
 

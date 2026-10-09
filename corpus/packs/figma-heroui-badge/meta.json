@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-badge",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2278-445",
+  "harvested": "2026-10-09",
+  "bytes": 127766,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Badge",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2278-445",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2278-445",
+    "capturedAt": "2026-10-09T02:54:11.502957Z",
+    "shotSha256": "0887ec731028467b700b9dd1e33cf3a8615deb2e7df8e54ccc42536490da897e",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "696:52331",
+      "nodeId": "2278:445",
+      "page": "Badge",
+      "kind": "component"
+    }
+  }
+}

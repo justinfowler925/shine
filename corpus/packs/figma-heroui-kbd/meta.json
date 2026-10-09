@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-kbd",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31287",
+  "harvested": "2026-10-09",
+  "bytes": 113992,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Kbd",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31287",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31287",
+    "capturedAt": "2026-10-09T02:43:10.377941Z",
+    "shotSha256": "6c21c8c908404ed89ad2b990bf0ac63a65dbe870b21dcf6df6f3f5f941a63a6e",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "519:25377",
+      "nodeId": "2545:31287",
+      "page": "Kbd",
+      "kind": "component"
+    }
+  }
+}

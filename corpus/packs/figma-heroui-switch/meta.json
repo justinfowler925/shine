@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-switch",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1786-271",
+  "harvested": "2026-10-09",
+  "bytes": 114587,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Switch",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1786-271",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1786-271",
+    "capturedAt": "2026-10-09T02:43:12.775763Z",
+    "shotSha256": "d7e2dd789ce4f149ad75e80254492290822eefdf1536fd08702c1a0010d91f6b",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "3:33",
+      "nodeId": "1786:271",
+      "page": "Switch",
+      "kind": "component"
+    }
+  }
+}

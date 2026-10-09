@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-badge",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-badge",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-badge.md",
+      "sha256": "0c11fe625606131ca354b06c9e5171dd2b4ae1bd16021a4b3b9fc07fbc95a8ef"
+    }
+  ]
+}

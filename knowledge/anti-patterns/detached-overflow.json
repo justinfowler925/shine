@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "id": "detached-overflow",
+  "title": "Detached / floating More overflow",
+  "kind": "operate-bloat",
+  "domains": ["interaction", "visual-hierarchy"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "worklist", "triage", "app-shell"],
+  "tags": ["overflow", "more", "decide-queue", "operate-slop", "nucleus", "sled"],
+  "aliases": ["floating-more", "orphan-overflow", "detached-more"],
+  "cues": "A More control floating at the far end of a tab/filter row, or a Decision More separated from the filled Pursue primary by a large gap / missing shared action cluster",
+  "ban": "Overflow must share the Decision action cluster with the one filled primary (data-overflow=attached).",
+  "remediation": "Place More immediately beside Pursue inside the same actions group; stamp data-overflow=attached. Filter extras use an attached toolbar control, not a naked floating More on the tab rail.",
+  "examples": [
+    "SLED Capture: naked More text link on the All/Federal/State tab row with huge whitespace",
+    "Decision cell: Pursue then a distant ... More outside the action cluster"
+  ],
+  "restructureOps": ["cta-budget"],
+  "detector": "decide-queue-slop",
+  "measureFailurePrefix": "detached-overflow",
+  "constitutionIds": ["cta-pressure", "decide-queue-silhouette"],
+  "severity": "critical",
+  "fixtures": {
+    "before": "verify/fixtures/decide-queue/accordion-overflow-before.html",
+    "after": "verify/fixtures/decide-queue/accordion-overflow-after.html"
+  },
+  "skillAbCaseIds": ["queue-cta", "queue-sled-bloat"],
+  "source": "docs/operate-redesign.md",
+  "validatedBy": "verify/decide-queue-slop.test.mjs"
+}

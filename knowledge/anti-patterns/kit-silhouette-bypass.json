@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "id": "kit-silhouette-bypass",
+  "title": "Freestyle page when a Figma kit silhouette already maps to a cite",
+  "kind": "operate-bloat",
+  "domains": ["cite", "composition", "information-architecture"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "form", "settings", "app-shell", "dashboard", "record"],
+  "tags": ["cite", "figma-kits", "kit-map", "wireframe", "operate-slop", "silhouette"],
+  "aliases": ["ignore-kit-map", "invented-silhouette", "accordion-instead-of-kit"],
+  "cues": "Wireframe→Build invents accordion stacks, card walls, or novel chrome while knowledge/kits/figma-library-map.json already names a preferCite for the job",
+  "ban": "Do not bypass the brand-agnostic kit map. Lock the brief to preferCite and open the matching figma-kit-silhouettes example before painting.",
+  "remediation": "Open knowledge/kits/figma-library-map.json → silhouetteMap for the job → set data-cite to preferCite → copy regions from corpus/blueprints/figma-kit-silhouettes/ → re-measure. Structure from kits; paint from house shadcn.",
+  "examples": [
+    "Decide job built as KPI accordion landfill instead of shadcn-operate-decide worklist",
+    "Form built as card-per-field gallery instead of SDS field stack → shadcn-form",
+    "App shell with marketing hero instead of shadcn-sidebar-07 + one primary"
+  ],
+  "restructureOps": ["rebind-cite"],
+  "detector": null,
+  "severity": "critical",
+  "source": "skill/references/figma-kits.md",
+  "validatedBy": "verify/figma-kit-map.test.mjs"
+}

@@ -11,11 +11,12 @@ Record. The critic must cite them.
 |---|---|---|
 | 1 | `cta-pressure` | Exactly one filled primary in main |
 | 2 | `dual-focal-ban` | No peer worklists for one job |
-| 3 | `kpi-soup-off-path` | KPI encyclopedia off the decide path |
+| 3 | `kpi-soup-off-path` | KPI encyclopedia off the decide path (≤3 lead chips; no accordion landfill under lead) |
 | 4 | `primary-task-3s` | Stranger starts the job in ~3s |
 | 5 | `cite-honesty` | Page cite matches category |
 | 6 | `prove-mandatory` | Fresh prove receipt linked to `ddrId` |
 | 7 | `restructure-before-repaint` | No polish while structure red |
+| 8 | `decide-queue-silhouette` | Summary lead + attached Pursue/More; Wireframe→Build from `shadcn-operate-decide` |
 
 Anti-pattern library rows (`knowledge/anti-patterns/*.json`) point back via
 `constitutionIds`.

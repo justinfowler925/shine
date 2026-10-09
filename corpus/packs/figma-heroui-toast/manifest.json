@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-toast",
+  "screen": "async-state",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-toast",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-toast.md",
+      "sha256": "51bc5fe6b53de45d714adf8560a0c698c4073861794314bf1d88ba9684b52d72"
+    }
+  ]
+}

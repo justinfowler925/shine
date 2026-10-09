@@ -1,0 +1,61 @@
+<!doctype html>
+<!-- Shine decide-queue BEFORE — accordion under lead + floating More (SLED failure mode). -->
+<html lang="en" data-cite="shadcn-operate-decide" data-shine-probe="app-shell">
+<head>
+<meta charset="utf-8"/>
+<title>Decide queue before — slop</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui;background:#fafafa;color:#18181b}
+main{padding:24px;max-width:1000px}
+.tabs{display:flex;gap:8px;align-items:center;width:100%;border-bottom:1px solid #e4e4e7;margin-bottom:12px}
+.tabs button{border:0;background:transparent;padding:10px 12px;font:inherit}
+.tabs .spacer{flex:1}
+.lead{display:flex;gap:24px;margin:12px 0}
+.lead strong{display:block;font-size:18px}
+details{margin:8px 0;padding:8px 0;border-top:1px solid #eee}
+.grid{margin-top:16px;background:#fff;border:1px solid #e4e4e7;border-radius:8px;padding:16px}
+.btn{min-height:36px;padding:0 14px;border:1px solid #e4e4e7;border-radius:6px;background:#fff;font:inherit}
+.btn.filled{background:#18181b;color:#fff;border-color:#18181b}
+table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid #f4f4f5;text-align:left}
+.float-more{margin-left:auto}
+</style>
+</head>
+<body>
+<main data-shine-main>
+  <h1>SLED Capture</h1>
+  <div class="tabs" role="tablist">
+    <button type="button" aria-selected="true">All</button>
+    <button type="button">Federal</button>
+    <button type="button">State &amp; local</button>
+    <span class="spacer"></span>
+    <button type="button" class="float-more">More</button>
+  </div>
+  <section class="lead" data-region="summary-lead" data-summary>
+    <div><span>Open queue</span><strong>6</strong></div>
+    <div><span>New</span><strong>2</strong></div>
+    <div><span>High score</span><strong>1</strong></div>
+  </section>
+  <details><summary>More summary figures (7)</summary><p>Extra KPIs.</p></details>
+  <details><summary>Open by state (6)</summary><p>CA 2 · TX 1 …</p></details>
+  <details><summary>Feed freshness</summary><p>Synced overnight.</p></details>
+  <details><summary>How each figure is measured</summary><p>Definitions.</p></details>
+  <section class="grid" data-region="focal" data-shine-focal>
+    <table>
+      <thead><tr><th>Notice</th><th>Decision</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Identity Verification Services</td>
+          <td>
+            <button type="button" class="btn filled" data-primary>Pursue</button>
+            <!-- intentionally detached: More outside the decision cluster -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:24px;text-align:right">
+      <button type="button" class="btn">… More</button>
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -12,6 +12,17 @@ code. It detects React/Next/Vite/LEX/native, the package manager, and installed 
 it refuses a second design system and verifies every recipe API against the pinned pack.
 `integrations/scaffold.mjs` writes the verified adapter plus its provenance receipt.
 
+## Figma kits → silhouettes (absorb)
+
+Justin’s Figma libraries + Studio design-corpus are the walking design kit.
+Open `references/figma-kits.md` and `knowledge/kits/figma-library-map.json`
+before Wireframe→Build. Prefer kit-walk cites (`heroui-*`, `flowbite-*`,
+`tailadmin-*`, `untitled-*`) for matching jobs — never accordion landfill.
+Clearspeed Operate still prefers house shadcn via edition siblings / installedKits;
+foreign kits are structure to port.
+
+HeroUI prefer Figma file: `GAn1SrbKJYiKqz9SmHHCRm`.
+
 ## Decision table
 
 | Need | Primary kit | Also | Avoid |
@@ -40,6 +51,7 @@ before locking the brief.
 | App shell | `shadcn-sidebar-07` | shadcn sidebar — § App shell |
 | Dashboard | `shadcn-dashboard-01` | Recharts/D3 + `dashboards.md` — not Tremor atoms |
 | Queue / insight stream | `shadcn-queue` | worklist-first (§ Worklist-first); TanStack + table-quality; `untitled-table` chrome only |
+| Operate decide / SLED worklist | `shadcn-operate-decide` | Summary lead ≤3 chips; Pursue + attached More; bans accordion-under-lead + detached-overflow |
 | Data table | `untitled-table` / `shadcn-dashboard-01` | § DataGrid |
 | Form / settings | `shadcn-settings` | `contracts.md` completeness; Polaris query-only |
 | Landing | `shadcn-marketing` | hero budget; `magicui-hero` for marketing-hero |
@@ -90,17 +102,19 @@ over dashboard chrome when the job is triage / queue / inbox.
    Consumer TSX: when KPI/dashboard chrome precedes the work object, `apply-tsx` AST
    `worklist-first` reorders records/worklist first + stamps focal (see § Worklist-first TSX AST).
 2. **CTA budget = 1** — one filled job verb (e.g. Pursue); peers outline/ghost/segmented.
-3. **KPI encyclopedia off-path** — ≤3 summary chips; rest in `<details data-shine-kpi-rest>`.
+3. **KPI encyclopedia off-path** — ≤3 Summary lead chips; rest **after** the focal worklist
+   or on a secondary tab — never accordion landfill under the lead (`accordion-under-lead`).
 4. **No peer grids** — second ranking (e.g. “David’s 10”) is a saved-view / filter XOR, never
    a second `role="grid"` peer. Detect: `dual-focal`; auto-repair: DOM + TSX AST
    `collapse-peer-grids` (XOR peer→chip). See § Dual-grid XOR / TSX AST below.
-5. **Cite** — `shadcn-queue` (or product sibling). Anti-cites: `shadcn-dashboard-01` as page
-   lead, chart atoms, magicui. Packet `recommendation.restructureHints` must clear before polish.
+5. **Cite** — decide/Pursue: `shadcn-operate-decide`; generic triage: `shadcn-queue`.
+   Anti-cites: `shadcn-dashboard-01` as page lead, chart atoms, magicui. Overflow must be
+   attached (`detached-overflow` fails). Wireframe→Build from cite for wholesale redesign.
 6. **Golden fixture** — `verify/fixtures/denoise/queue-cta-{before,after}.html` +
    `queue-dual-grid-{before,after}.html` + `npm run denoise:eval`. Doctor bites dual-CTA,
-   dual-grid XOR, worklist-first AST, and card/KPI soup.
+   dual-grid XOR, worklist-first AST, card/KPI soup, and decide-queue silhouette.
 
-Kit recipe string (cite v2): `shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts`.
+Kit recipe string (cite v2): `shadcn-operate-decide: Summary lead ≤3 chips; Pursue + attached More` (or generic `shadcn-queue / DataGrid recipe; TanStack state; table-quality contracts`).
 
 ### Dual-grid XOR (D10) — DOM + TSX auto-safe close
 

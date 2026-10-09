@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-button",
+  "screen": "form",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-button",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-button.md",
+      "sha256": "9784f84babcc9af5174b89d3aa4110fd3c9a7cffa60cebdc52d7042bcb839854"
+    }
+  ]
+}

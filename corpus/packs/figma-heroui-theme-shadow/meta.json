@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-theme-shadow",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-20449",
+  "harvested": "2026-10-09",
+  "bytes": 291800,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Theme",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-20449",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-20449",
+    "capturedAt": "2026-10-09T02:44:37.542267Z",
+    "shotSha256": "7a1a1f47a84057c4752c0546dc988af7519a9bb4f6aa1d23c83075ff941a9fa9",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "5:1194",
+      "nodeId": "482:20449",
+      "page": "Theme",
+      "kind": "tokens"
+    }
+  }
+}

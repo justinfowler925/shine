@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-theme-shadow",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-theme-shadow",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-theme-shadow.md",
+      "sha256": "11eb4f2f2be520a854d95f1da46e6f9549be06a58e1a4f1ed377fe801f477b0b"
+    }
+  ]
+}

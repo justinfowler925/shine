@@ -10,7 +10,7 @@
   },
   "inventoryFileKey": "Wnmb79QQ1EjdSG17tIbSyX",
   "inventoryFileUrl": "https://www.figma.com/design/Wnmb79QQ1EjdSG17tIbSyX",
-  "note": "get_libraries on a fresh Design file in Justin's Clearspeed plan. FigJam cannot list libraries. Named kits HeroUI / original Tailwind / Bootstrap were not published as team libraries \u2014 map via Design file copies + Studio design-corpus proxies. Material/MUI target is Material 3 Design Kit fileKey f4TUS9BWk2rSH8Dqrp5Mon + Material libraryKeys; mui-material is on-disk structure proxy only (unpinned). Structure only; house paint stays shadcn/Tailwind. Cancelled misnomer: 'Minor UI' (meant MUI).",
+  "note": "get_libraries on a fresh Design file in Justin's Clearspeed plan. FigJam cannot list libraries. Named kits HeroUI / original Tailwind / Bootstrap were not published as team libraries \u2014 map via community refs + Studio design-corpus proxies. MUI/Material is Material 3 libraryKeys + team file f4TUS9BWk2rSH8Dqrp5Mon (Justin said \u201cMinor UI\u201d \u2014 mishear for MUI). Structure only; house paint stays shadcn/Tailwind. get_libraries on a fresh Design file in Justin's Clearspeed plan. FigJam cannot list libraries. Named kits HeroUI / original Tailwind / Bootstrap were not published as team libraries \u2014 map via Design file copies + Studio design-corpus proxies. Material/MUI target is Material 3 Design Kit fileKey f4TUS9BWk2rSH8Dqrp5Mon + Material libraryKeys; mui-material is on-disk structure proxy only (unpinned). Structure only; house paint stays shadcn/Tailwind. Cancelled misnomer: 'Minor UI' (meant MUI).",
   "librariesSubscribed": [
     {
       "name": "Clearspeed Design System",

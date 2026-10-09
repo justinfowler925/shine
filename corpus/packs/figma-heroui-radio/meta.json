@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-radio",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1552-24473",
+  "harvested": "2026-10-09",
+  "bytes": 135771,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Radio",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1552-24473",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1552-24473",
+    "capturedAt": "2026-10-09T02:43:11.615341Z",
+    "shotSha256": "bb79db36e3c2a9b2b7585ddd1c7b437879e46b63974ed0ef40f08c6501388930",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "3:23",
+      "nodeId": "1552:24473",
+      "page": "Radio",
+      "kind": "component"
+    }
+  }
+}
