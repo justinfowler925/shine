@@ -125,6 +125,11 @@ import {
   evaluateEmptyInsightShells,
   formatEmptyInsightShellFailures,
 } from "./empty-insight-shells.mjs";
+import {
+  decideQueueSlopGateApplies,
+  evaluateDecideQueueSlop,
+  formatDecideQueueSlopFailures,
+} from "./decide-queue-slop.mjs";
 import { scanPreflightSlop } from "./preflight-slop.mjs";
 import { enforceOperateAntiPatternCites } from "../knowledge/retrieve.mjs";
 
@@ -463,6 +468,7 @@ const emptyTriad = await page.evaluate(evaluateEmptyTriad);
 const decorativeChart = await page.evaluate(evaluateDecorativeChart);
 const parallelOwned = await page.evaluate(evaluateParallelOwned);
 const emptyInsightShells = await page.evaluate(evaluateEmptyInsightShells);
+const decideQueueSlop = await page.evaluate(evaluateDecideQueueSlop);
 const formHeuristics = await page.evaluate(evaluateFormHeuristics)
 const copyHeuristics = await page.evaluate(evaluateCopyHeuristics);
 const tableQuality = await auditTables({page,target,contractPath:opt("--table-contract")});
@@ -1094,6 +1100,16 @@ if (compose.filledCount > 2) {
     citeId: dfCiteId,
   });
   for (const f of formatEmptyInsightShellFailures(emptyInsightShells, { gate: emptyShellApplies })) {
+    failures.push(f);
+  }
+  const decideApplies = decideQueueSlopGateApplies({
+    lane: laneWant,
+    citeScreen: dfCiteRow?.screen || "",
+    citeJobs: dfCiteRow?.jobs || [],
+    isWireframe,
+    citeId: dfCiteId,
+  });
+  for (const f of formatDecideQueueSlopFailures(decideQueueSlop, { gate: decideApplies })) {
     failures.push(f);
   }
 }

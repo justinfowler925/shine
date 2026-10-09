@@ -710,6 +710,7 @@ for (const t of [
   { id: "shadcn-form-invite", screen: "form", title: "shadcn invite form (email, role, message, validation)", jobs: ["form", "form-app", "invite", "invite-teammate"], required: ["form"], captureExpect: '[data-region="form-app"] form button[type="submit"]', note: "P2 authored invite form-app blueprint" },
   { id: "shadcn-record-account", screen: "record", title: "shadcn account record (facts, decision, activity table)", jobs: ["record", "account", "detail", "customer"], required: ["form", "table"], captureExpect: '[data-region="record-decision"] textarea', note: "P2 authored account record blueprint" },
   { id: "shadcn-queue", screen: "queue", title: "shadcn work queue (triage grid, no chart)", jobs: ["queue", "worklist", "triage", "inbox", "datagrid"], required: ["navigation", "table"], captureExpect: '[data-region="queue-grid"]', startFrom: 2 },
+  { id: "shadcn-operate-decide", screen: "queue", title: "shadcn Operate decide queue (Summary lead, Pursue + attached More)", jobs: ["queue", "worklist", "triage", "decide", "decide-queue", "sled", "pursue", "inbox", "datagrid"], required: ["navigation", "table", "summary"], captureExpect: '[data-region="summary-lead"]', startFrom: 1, note: "Clearspeed Operate decide/worklist silhouette — Wireframe→Build from cite; bans accordion-under-lead + detached-overflow" },
 ]) {
   // Blueprints live in Shine, not the acquired corpus, so exists() is wrong here.
   const authored = existsSync(join(SHINE, "corpus/blueprints", t.id));

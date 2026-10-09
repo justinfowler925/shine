@@ -23,10 +23,12 @@ separate design system.
 ```sh
 node core/edition-siblings.mjs resolve \
   --category queue --job "Decide Pursue/Review/Dismiss on the next notice"
-node verify/measure.mjs <artifact.html> --cite shadcn-queue --lane saas
+# → preferredCite shadcn-operate-decide (Wireframe→Build from cite; not denoise-stamp)
+node verify/measure.mjs <artifact.html> --cite shadcn-operate-decide --lane saas
+# accordion-under-lead + detached-overflow must FAIL until silhouette matches
 node verify/denoise-loop.mjs \
   --html <artifact.html> [--tsx src/components/revops/SledCapture.tsx] \
-  --cite shadcn-queue --edition clearspeed-operate \
+  --cite shadcn-operate-decide --edition clearspeed-operate \
   --category queue --job "Decide Pursue/Review/Dismiss on the next notice" \
   --out /tmp/shine-operate-denoise --prove
 ```

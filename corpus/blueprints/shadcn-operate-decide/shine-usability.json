@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "cite": "shadcn-operate-decide",
+  "objects": [
+    {
+      "id": "shell_nav",
+      "selector": "[data-testid=shell-nav]",
+      "referenceRole": "navigation",
+      "purpose": "Operate shell; leave the decide queue for sibling surfaces"
+    },
+    {
+      "id": "summary_lead",
+      "selector": "[data-testid=summary-lead]",
+      "referenceRole": "summary",
+      "purpose": "≤3 posture chips above the worklist — never accordion landfill"
+    },
+    {
+      "id": "grid",
+      "selector": "[data-testid=decide-grid]",
+      "referenceRole": "table",
+      "purpose": "Focal open queue where Pursue happens"
+    },
+    {
+      "id": "search",
+      "selector": "[data-testid=search]",
+      "referenceRole": "filter",
+      "purpose": "Narrow notices before deciding"
+    },
+    {
+      "id": "pursue",
+      "selector": "[data-testid=pursue]",
+      "referenceRole": "command",
+      "purpose": "The one filled primary decision action"
+    },
+    {
+      "id": "more",
+      "selector": "[data-testid=more-attached]",
+      "referenceRole": "command",
+      "purpose": "Attached overflow for Review/Dismiss/Copy/Assign"
+    },
+    {
+      "id": "clear",
+      "selector": "[data-testid=clear]",
+      "referenceRole": "control",
+      "purpose": "Restore the full open queue after search"
+    },
+    {
+      "id": "queue_status",
+      "selector": "[data-testid=queue-status]",
+      "referenceRole": "status",
+      "purpose": "Say how much of the queue is showing"
+    }
+  ],
+  "flows": [
+    {
+      "id": "search-and-pursue",
+      "userJob": "Find a notice and start Pursue — the Monday decide job",
+      "steps": [
+        { "action": "visible", "selector": "[data-testid=decide-grid]" },
+        { "action": "fill", "selector": "[data-testid=search]", "value": "Identity" },
+        { "action": "text", "selector": "[data-testid=queue-status]", "value": "1 of 2 match." },
+        { "action": "click", "selector": "[data-testid=pursue]" },
+        { "action": "text", "selector": "#status", "value": "Pursue started" }
+      ]
+    },
+    {
+      "id": "attached-overflow",
+      "userJob": "Open attached More and choose Review without a floating overflow",
+      "steps": [
+        { "action": "visible", "selector": "[data-testid=more-attached]" },
+        { "action": "click", "selector": "[data-testid=more-attached]" },
+        { "action": "click", "selector": "#menu button" },
+        { "action": "text", "selector": "#status", "value": "Review queued" }
+      ]
+    }
+  ]
+}

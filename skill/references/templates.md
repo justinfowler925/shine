@@ -232,6 +232,7 @@ Reasons are listed under the table.
 | onboarding | `cult-intro-disclosure` | cult-ui | source | live | onboarding, intro, whats-new, feature-announcement, disclosure |
 | pagination | `untitled-pagination` | untitled-ui-react | source | live | pagination, paging, page-size, pager |
 | pricing | `flowbite-pricing` | flowbite-admin | source | live | pricing, plans, tiers, marketing, landing |
+| queue | `shadcn-operate-decide` | shadcn-registry | blueprint | live | queue, worklist, triage, decide, decide-queue, sled, pursue, inbox, datagrid |
 | queue | `untitled-table` | untitled-ui-react | source | live | queue, crud, table, records, datagrid |
 | queue | `shadcn-queue` | shadcn-registry | blueprint | live | queue, worklist, triage, inbox, datagrid |
 | queue | `tailadmin-tables` | tailadmin-react | source | live | queue, crud, table, records, datagrid |
@@ -251,7 +252,7 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-236 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+237 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 

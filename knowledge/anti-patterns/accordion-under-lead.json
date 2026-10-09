@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "id": "accordion-under-lead",
+  "title": "Accordion landfill under Summary lead",
+  "kind": "operate-bloat",
+  "domains": ["composition", "information-architecture"],
+  "lanes": ["saas", "internal"],
+  "screens": ["queue", "worklist", "triage", "app-shell"],
+  "tags": ["accordion", "summary-lead", "decide-queue", "operate-slop", "nucleus", "sled"],
+  "aliases": ["accordion-dump", "details-under-lead", "summary-accordion-landfill"],
+  "cues": "≥2 <details> disclosures stacked under the Summary lead (More summary figures / Open by state / Feed freshness / How measured) before the focal worklist",
+  "ban": "Summary lead must stay ≤3 chips with no accordion stack between lead and Open queue.",
+  "remediation": "Delete the accordion dump. Keep ≤3 lead chips. Move encyclopedia after the focal worklist or onto a secondary tab. Re-cite shadcn-operate-decide; re-measure accordion-under-lead.",
+  "examples": [
+    "SLED Capture after denoise: four details under Summary (More summary figures, Open by state, Feed freshness, How each figure is measured) while measure still PASSed",
+    "kpi-collapse / collapse-card-soup parking peers into details immediately under the lead"
+  ],
+  "restructureOps": [],
+  "detector": "decide-queue-slop",
+  "measureFailurePrefix": "accordion-under-lead",
+  "constitutionIds": ["kpi-soup-off-path", "decide-queue-silhouette"],
+  "severity": "critical",
+  "fixtures": {
+    "before": "verify/fixtures/decide-queue/accordion-overflow-before.html",
+    "after": "verify/fixtures/decide-queue/accordion-overflow-after.html"
+  },
+  "skillAbCaseIds": ["queue-sled-bloat"],
+  "source": "docs/operate-redesign.md",
+  "validatedBy": "verify/decide-queue-slop.test.mjs"
+}
