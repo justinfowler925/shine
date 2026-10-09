@@ -8,7 +8,11 @@ separate design system.
 
 - Product UI at `justin-fowler_cspd/nucleus` · live `https://nucleus-clearspeed.vercel.app`
 - Shine attaches as a **Company Tools** package (`distribution.json` → `consumers.nucleus`)
-- House kit: **shadcn / Tailwind** + living TanStack DataGrid — not Mantine/HeroUI
+- **Cite gold standard:** Flowbite / TailAdmin / Untitled (Tailwind SaaS density) —
+  `knowledge/editions/clearspeed-operate/gold-standard.json`. Not HeroUI/M3 landfill.
+  `node corpus/cite.mjs --edition clearspeed-operate "<job>"` must return those packs.
+- Build kit: **shadcn / Tailwind** + living TanStack DataGrid (port structure from TW gold;
+  paint with Clearspeed brand). Not Mantine/HeroUI as Operate primary.
 - Default lane: **`saas`** (or `internal` for dense cockpits). Marketing DNA is wrong here.
 - Brand accent: **Signal Orange `#ED5925`** (hover `#D24A1B`) from `brand.json` in this
   profile — the edition materializes brand tokens; never use placeholder indigo.
@@ -21,14 +25,17 @@ separate design system.
    Edition `clearspeed-operate`; sibling cites before catalog. Do not open an audit pack.
 
 ```sh
+node corpus/cite.mjs --edition clearspeed-operate \
+  "Decide Pursue/Review/Dismiss on the next notice"
+# → Template: tailadmin-tables (TW gold) + Clearspeed brand paint
 node core/edition-siblings.mjs resolve \
   --category queue --job "Decide Pursue/Review/Dismiss on the next notice"
-# → preferredCite shadcn-operate-decide (Wireframe→Build from cite; not denoise-stamp)
-node verify/measure.mjs <artifact.html> --cite shadcn-operate-decide --lane saas
+# → preferredCite tailadmin-tables
+node verify/measure.mjs <artifact.html> --cite tailadmin-tables --lane saas
 # accordion-under-lead + detached-overflow must FAIL until silhouette matches
 node verify/denoise-loop.mjs \
   --html <artifact.html> [--tsx src/components/revops/SledCapture.tsx] \
-  --cite shadcn-operate-decide --edition clearspeed-operate \
+  --cite tailadmin-tables --edition clearspeed-operate \
   --category queue --job "Decide Pursue/Review/Dismiss on the next notice" \
   --out /tmp/shine-operate-denoise --prove
 ```

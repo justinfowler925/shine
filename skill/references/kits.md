@@ -16,10 +16,13 @@ it refuses a second design system and verifies every recipe API against the pinn
 
 Justin’s Figma libraries + Studio design-corpus are the walking design kit.
 Open `references/figma-kits.md` and `knowledge/kits/figma-library-map.json`
-before Wireframe→Build. Prefer kit-walk cites (`heroui-*`, `flowbite-*`,
-`tailadmin-*`, `untitled-*`) for matching jobs — never accordion landfill.
-Clearspeed Operate still prefers house shadcn via edition siblings / installedKits;
-foreign kits are structure to port.
+before Wireframe→Build. Prefer kit-walk cites (`flowbite-*`, `tailadmin-*`,
+`untitled-*`, then `heroui-*`) for matching jobs — never accordion landfill.
+
+**Clearspeed Operate gold:** Flowbite / TailAdmin / Untitled via
+`--edition clearspeed-operate` (see `knowledge/editions/clearspeed-operate/gold-standard.json`).
+Port structure to house shadcn/TanStack; paint Clearspeed brand tokens. HeroUI is
+secondary; M3/TailGrids Figma rows stay silhouette-only (`selectable:false`).
 
 HeroUI prefer Figma file: `GAn1SrbKJYiKqz9SmHHCRm`.
 

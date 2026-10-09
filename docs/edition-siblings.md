@@ -10,17 +10,20 @@ product siblings used for cite + kit selection.
 
 Matching order (plan §3): **product sibling first → kit recipe → cite shot**.
 
-| Sibling id | Route | Preferred cite | Kit |
+**TW gold:** Flowbite / TailAdmin / Untitled — `gold-standard.json`. Cite:
+`node corpus/cite.mjs --edition clearspeed-operate "<job>"`.
+
+| Sibling id | Route | Preferred cite (TW gold) | Kit |
 |---|---|---|---|
-| `sled-capture-queue` | `/revops/sled` | `shadcn-queue` | worklist-first DataGrid (N9) |
-| `sled-capture-sources` | `?sledTab=sources` | `shadcn-settings` | settings / Form MUST |
-| `sled-capture-usul` | `?sledTab=usul` | `shadcn-dashboard-01` | gap worklist focal |
-| `sled-capture-signals` | `?sledTab=signals` | `shadcn-queue` | read-only feed grid |
-| `sled-capture-record` | Capture detail / Pursue | `shadcn-record` | RecordDialog |
-| `sled-capture-goals` | `?sledTab=goals` | `shadcn-dashboard-01` | KPI attrs (not triage) |
-| `nucleus-company-tools` | `/company-tools` | `shadcn-catalog` | Company Tools wins |
-| `nucleus-admin-adoption` | Admin Adoption | `shadcn-dashboard-01` | table-summary |
-| `sled-agent-guide` | `/company-tools/sled-agent` | `shadcn-catalog` | install → one state |
+| `sled-capture-queue` | `/revops/sled` | `tailadmin-tables` | worklist-first DataGrid (N9) |
+| `sled-capture-sources` | `?sledTab=sources` | `flowbite-settings` | settings / Form MUST |
+| `sled-capture-usul` | `?sledTab=usul` | `flowbite-dashboard` | gap worklist focal |
+| `sled-capture-signals` | `?sledTab=signals` | `untitled-table` | read-only feed grid |
+| `sled-capture-record` | Capture detail / Pursue | `tailadmin-profile` | RecordDialog |
+| `sled-capture-goals` | `?sledTab=goals` | `tailadmin-dashboard` | KPI attrs (not triage) |
+| `nucleus-company-tools` | `/company-tools` | `flowbite-products` | Company Tools wins |
+| `nucleus-admin-adoption` | Admin Adoption | `flowbite-dashboard` | table-summary |
+| `sled-agent-guide` | `/company-tools/sled-agent` | `flowbite-products` | install → one state |
 | `sled-agent-overview` | `…/overview` | `shadcn-blog` | reference, not Operate |
 
 Shared owners: `nucleus-datagrid`, `nucleus-record-dialog`, `table-summary`.
