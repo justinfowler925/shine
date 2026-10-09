@@ -1,0 +1,473 @@
+{
+  "version": 1,
+  "id": "figma-library-map",
+  "title": "Brand-agnostic Figma kit \u2192 Shine silhouette map",
+  "inventoriedAt": "2026-10-09",
+  "figmaPlan": {
+    "name": "Clearspeed Product Team",
+    "key": "team::1090678303662912857",
+    "whoamiEmail": "justin.fowler@clearspeed.com"
+  },
+  "inventoryFileKey": "Wnmb79QQ1EjdSG17tIbSyX",
+  "inventoryFileUrl": "https://www.figma.com/design/Wnmb79QQ1EjdSG17tIbSyX",
+  "note": "get_libraries on a fresh Design file in Justin's Clearspeed plan. FigJam cannot list libraries. Named kits HeroUI / original Tailwind / Bootstrap / Minor UI were not published as team libraries \u2014 map them via community refs + Studio design-corpus proxies. Structure only; house paint stays shadcn/Tailwind.",
+  "librariesSubscribed": [
+    {
+      "name": "Clearspeed Design System",
+      "libraryKey": "lk-04d3af75249fe44ece7137d3204f277e3f4c42d5e1db0aad642664d066a7058de6bd715a87e709aee49e76b9c3f51d3eef6c9ba9205e0cf11ce921bc5334917a",
+      "source": "team",
+      "primitivesSeen": [
+        "CTAs",
+        "Header",
+        "Icons"
+      ],
+      "shineCite": [
+        "shadcn-operate-decide",
+        "shadcn-queue"
+      ],
+      "role": "product CTAs + chrome; prefer one filled primary"
+    },
+    {
+      "name": "UI Prep Data Tables (Community)",
+      "libraryKey": "lk-aa3b7b71e4b712510bdbc56f90a8f51afb0ce706ce23fb8b955ea1b2d026fe2d7cd2c68cae44805ef798e29a75c816f5743df07abc3b4c3e5bcc22ea6ee7d1c5",
+      "source": "team",
+      "primitivesSeen": [
+        "Template (Detach me!)",
+        "Columns",
+        "Sort",
+        "More",
+        "Checkbox Icon"
+      ],
+      "shineCite": [
+        "shadcn-operate-decide",
+        "shadcn-queue",
+        "untitled-table"
+      ],
+      "role": "queue/table chrome: toolbar + columns + attached overflow"
+    },
+    {
+      "name": "Simple Design System",
+      "libraryKey": "lk-e0ffcff14368019c4f30f45401cd233d6cbc5f869988484192d04cbbef801fb0064ef68feaa8a2775ee4f1f05d9a4af1a6d07b2658eac4aefb7afb18728c4066",
+      "source": "community",
+      "primitivesSeen": [
+        "Button",
+        "Button Danger",
+        "Button Group",
+        "Icon Button",
+        "Input Field",
+        "Select Field",
+        "Textarea Field",
+        "Checkbox Field",
+        "Radio Field",
+        "Switch Field",
+        "Search",
+        "Date Input Field",
+        "Date Picker Field",
+        "Slider Field",
+        "Table",
+        "Tabs",
+        "Tab",
+        "Navigation Pill",
+        "Navigation Button",
+        "Navigation Pill List",
+        "Navigation Button List",
+        "Sidebar",
+        "AI Sidebar",
+        "Dialog",
+        "Dialog Body",
+        "Card",
+        "Stats Card",
+        "Pricing Card"
+      ],
+      "shineCite": [
+        "shadcn-form",
+        "shadcn-settings",
+        "shadcn-sidebar-07",
+        "shadcn-queue"
+      ],
+      "role": "broad primitive + composition kit; closest subscribed stand-in for Tailwind/HeroUI gallery density"
+    },
+    {
+      "name": "Material 3 Design Kit (Community)",
+      "libraryKey": "lk-0ed47b4a992d98ca20e5243564e1a9f7b3b321b9a4bc3e769c9c349832e23b6d5bc2c529b6cde7b13fcd97f5d697f3942d52e20202fee51b63f30a890b387cd4",
+      "source": "team",
+      "primitivesSeen": [
+        "Button",
+        "Icon button",
+        "Navigation Rail",
+        "Navigation Drawer",
+        "Basic dialog",
+        "Search view"
+      ],
+      "shineCite": [
+        "shadcn-sidebar-07"
+      ],
+      "role": "nav rail / dialog anatomy only \u2014 do not paint Material chrome in Operate"
+    },
+    {
+      "name": "Material 3 Design Kit",
+      "libraryKey": "lk-5a31d104cabc6a74d4edf6425e7bc6575e9c0f18cda7efb746193aef4d915b077d115c985e6cf49d36d97d455a17d5127a2cbbfbc618b8a70a38669dccb61462",
+      "source": "community",
+      "primitivesSeen": [],
+      "shineCite": [
+        "shadcn-sidebar-07"
+      ],
+      "role": "official Material 3 twin of the team Community copy"
+    },
+    {
+      "name": "iOS 18 and iPadOS 18",
+      "libraryKey": "lk-df324a089628d1c7c7b0d29e676b621790cdcac1c725b49a3cfbb974a362f8201ac643e1fbccc855970ab22dabd6897ef20e72a7feda01014ddd59daf3f6ed52",
+      "source": "community",
+      "primitivesSeen": [],
+      "shineCite": [],
+      "role": "native Apple patterns only; out of Operate wireframe scope"
+    }
+  ],
+  "librariesAvailableToAdd": [
+    {
+      "name": "iOS and iPadOS 26",
+      "libraryKey": "lk-a5b98decf0fb24381005421a2986b813149fcf20f37a1169316d44e2802c483494c6fc98ab8e083540a73bd5e45cf892a38123ee61981aee097d5f4eb8487a17",
+      "source": "community"
+    },
+    {
+      "name": "watchOS 26",
+      "libraryKey": "lk-32bda072ec15e732e76d56aa8bd25314051f296f8519a8d868031b46eaabb5ade1290829d0d7deca926b5388f760e9e94aa76d56bfe2ead33d78adeeeb7d15fb",
+      "source": "community"
+    },
+    {
+      "name": "visionOS 26",
+      "libraryKey": "lk-4f44e69da5f723deffc1c2461604f793251559fb3fb0f1f6af7c4fffaa12c05a33c40283401af5f2edf0db0639d516ccef9b73ae6aadff7e6588df60cbd36dd4",
+      "source": "community"
+    },
+    {
+      "name": "macOS 26",
+      "libraryKey": "lk-52492a50a550123b626cdfcd7639929209dc66307681f3f8cf9937770a714f2d76ade248aff2d8a0e42da17e343a440cebc0a04f1800ad34ae6d86e1a7f7aa9a",
+      "source": "community"
+    },
+    {
+      "name": "iOS and iPadOS 27",
+      "libraryKey": "lk-3167e7e1386e96621fc3b20782e2ec1b199754eeceff2ef04bf90d28a124be6414b67982dc8fb71ea1896b0310c316f54d7b9f0ac598cb3111748728c039a567",
+      "source": "community"
+    },
+    {
+      "name": "macOS 27",
+      "libraryKey": "lk-9b6046629e11db2bbe15e5a3fa0443ecd557a34812bc69997a2b8598852d86fb806d4036ca6c146521c7e1cf898a1e3d46dda55a15bf1f86579794b29480aa80",
+      "source": "community"
+    }
+  ],
+  "namedKitsJustinMentioned": [
+    {
+      "name": "HeroUI",
+      "status": "design_copies_found",
+      "communityRefs": [
+        "https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3"
+      ],
+      "corpusProxy": [
+        "heroui",
+        "heroui-next-app"
+      ],
+      "shineCite": [
+        "shadcn-sidebar-07",
+        "shadcn-form",
+        "shadcn-queue"
+      ],
+      "note": "Retired as foreign runtime for build (docs/no-foreign-runtimes.md). Steal navbar/form/overlay silhouette only; paint with house kit.",
+      "designFiles": [
+        {
+          "prefer": true,
+          "name": "HeroUI Figma Kit (Community) (Copy)",
+          "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+          "url": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm"
+        },
+        {
+          "prefer": false,
+          "name": "HeroUI Figma Kit (Community)",
+          "fileKey": "DC4g36xyt4DobtbEa11JFL",
+          "url": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL"
+        }
+      ]
+    },
+    {
+      "name": "original Tailwind",
+      "status": "design_copies_found",
+      "communityRefs": [
+        "https://www.figma.com/community/file/1519320333100677969/tailwind-css-v4-figma-ui-kit",
+        "https://www.figma.com/community/file/1274269619515529174/tailwind-css-ui-design-system-free"
+      ],
+      "corpusProxy": [
+        "flowbite-admin",
+        "tailadmin-react",
+        "untitled-ui-react",
+        "tailwindcss"
+      ],
+      "shineCite": [
+        "flowbite-dashboard",
+        "flowbite-users",
+        "shadcn-dashboard-01",
+        "untitled-table"
+      ],
+      "figmaStandIn": "Simple Design System",
+      "note": "Chrome-history Justin Design copies found 2026-10-09. Prefer TailGrids Copy. SDS remains subscribed stand-in for library primitives. Steal structure; house paint shadcn/Tailwind.",
+      "designFiles": [
+        {
+          "prefer": true,
+          "name": "Tailwind UI Components for Figma | TailGrids (Community) (Copy)",
+          "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+          "url": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9"
+        },
+        {
+          "prefer": false,
+          "name": "Myna UI - TailwindCSS & shadcn/ui & Radix Premium UI Kit (Community) (Copy)",
+          "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+          "url": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO"
+        },
+        {
+          "prefer": false,
+          "name": "shadcn/ui components with variables & Tailwind classes (Community) (Copy) (Copy)",
+          "fileKey": "Ozw4MOEnTe5wgv11t25E5T",
+          "url": "https://www.figma.com/design/Ozw4MOEnTe5wgv11t25E5T"
+        }
+      ],
+      "harvestPacks": [
+        "figma-tailgrids-cover",
+        "figma-tailgrids-layout",
+        "figma-tailgrids-atoms",
+        "figma-tailgrids-table-stack",
+        "figma-myna-components"
+      ]
+    },
+    {
+      "name": "Bootstrap",
+      "status": "design_copies_found",
+      "communityRefs": [
+        "https://www.figma.com/community/file/1044316192441037087/bootstrap-5-design-system-ui-kit",
+        "https://www.figma.com/community/file/1024992794016228272/bootstrap-5"
+      ],
+      "corpusProxy": [
+        "adminlte",
+        "flowbite-admin"
+      ],
+      "shineCite": [
+        "flowbite-sidebar-layout",
+        "flowbite-stacked",
+        "shadcn-sidebar-07"
+      ],
+      "note": "Chrome-history Design fileKey p8B6SUiQDqKFAybsVtfQp9. Prefer Flowbite stacked/sidebar for build cites; never install Bootstrap CSS into Clearspeed consumers.",
+      "designFiles": [
+        {
+          "prefer": true,
+          "name": "Bootstrap 5 UI Kit (Community)",
+          "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+          "url": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9",
+          "note": "community duplicate in Justin history; MCP lists Thumbnail page only but node screenshots work"
+        }
+      ],
+      "harvestPacks": [
+        "figma-bootstrap-buttons",
+        "figma-bootstrap-forms",
+        "figma-bootstrap-components"
+      ]
+    },
+    {
+      "name": "Minor UI",
+      "status": "not_found_chrome_history",
+      "communityRefs": [
+        "https://www.figma.com/community/file/1520749847339774468/minimals-ui-components",
+        "https://www.figma.com/community/file/1503752093673029506/minikit-mini-product-ui-kit"
+      ],
+      "corpusProxy": [],
+      "shineCite": [
+        "shadcn-form",
+        "shadcn-sidebar-07"
+      ],
+      "note": "Still no Design fileKey in Chrome history or plan libraries. Closest community: Minimals UI / MiniKIT. Confirm private draft with Justin. Cite shadcn-form / shadcn-sidebar-07 meanwhile."
+    }
+  ],
+  "silhouetteMap": [
+    {
+      "job": "decide / worklist / queue",
+      "preferCite": "shadcn-operate-decide",
+      "also": [
+        "shadcn-queue",
+        "untitled-table"
+      ],
+      "figmaSources": [
+        "UI Prep Data Tables",
+        "Simple Design System/Table",
+        "Clearspeed CTAs"
+      ],
+      "regions": [
+        "masthead",
+        "summary-lead\u22643",
+        "focal worklist",
+        "Pursue + attached More"
+      ],
+      "ban": [
+        "accordion under lead",
+        "detached More",
+        "KPI card soup",
+        "peer grids"
+      ]
+    },
+    {
+      "job": "form / create-edit",
+      "preferCite": "shadcn-form",
+      "also": [
+        "shadcn-settings"
+      ],
+      "figmaSources": [
+        "Simple Design System Input/Select/Textarea/Checkbox/Radio/Switch",
+        "HeroUI form gallery (corpus)"
+      ],
+      "regions": [
+        "title+purpose",
+        "grouped field sections",
+        "validation summary",
+        "one filled submit"
+      ],
+      "ban": [
+        "card-per-field",
+        "disabled submit with no reason",
+        "wizard when one screen fits"
+      ]
+    },
+    {
+      "job": "app shell / nav",
+      "preferCite": "shadcn-sidebar-07",
+      "also": [
+        "flowbite-sidebar-layout",
+        "flowbite-stacked"
+      ],
+      "figmaSources": [
+        "Simple Design System Sidebar + Navigation Pill/Button",
+        "Material Navigation Rail (structure only)",
+        "HeroUI navbar (corpus)"
+      ],
+      "regions": [
+        "sidebar or top nav",
+        "active state",
+        "page header title+one primary"
+      ],
+      "ban": [
+        "dual chrome actions",
+        "marketing hero inside app shell"
+      ]
+    },
+    {
+      "job": "settings",
+      "preferCite": "shadcn-settings",
+      "also": [
+        "flowbite-settings"
+      ],
+      "figmaSources": [
+        "Simple Design System form fields + Tabs",
+        "Clearspeed Header"
+      ],
+      "regions": [
+        "visible section nav",
+        "per-section save"
+      ],
+      "ban": [
+        "queue cite on settings",
+        "accordion landfill for section findability"
+      ]
+    },
+    {
+      "job": "overlays",
+      "preferCite": "dialog / sheet recipe in kits.md",
+      "also": [
+        "Base UI / Radix Dialog"
+      ],
+      "figmaSources": [
+        "Simple Design System Dialog + Dialog Body (max width 600)",
+        "Material Basic dialog"
+      ],
+      "regions": [
+        "scrim",
+        "title",
+        "body",
+        "primary+secondary",
+        "destructive separate"
+      ],
+      "ban": [
+        "full-bleed interrupt without decision",
+        "popover for destructive confirm"
+      ]
+    },
+    {
+      "job": "admin dashboard (non-Operate)",
+      "preferCite": "flowbite-dashboard",
+      "also": [
+        "shadcn-dashboard-01",
+        "tailadmin"
+      ],
+      "figmaSources": [
+        "Simple Design System Stats Card (structure only)",
+        "Tailwind community kits"
+      ],
+      "regions": [
+        "one focal chart or table",
+        "sparse KPI strip"
+      ],
+      "ban": [
+        "equal KPI card walls",
+        "Operate decide path using dashboard cite"
+      ]
+    }
+  ],
+  "examples": [
+    "corpus/blueprints/figma-kit-silhouettes/worklist.html",
+    "corpus/blueprints/figma-kit-silhouettes/form-stack.html",
+    "corpus/blueprints/figma-kit-silhouettes/app-shell.html"
+  ],
+  "antiPatterns": [
+    "kit-silhouette-bypass",
+    "accordion-under-lead",
+    "detached-overflow",
+    "kpi-soup",
+    "card-soup"
+  ],
+  "skill": "skill/references/figma-kits.md",
+  "heroUiDesignFiles": [
+    {
+      "prefer": true,
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "url": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+      "name": "HeroUI Figma Kit (Community) (Copy)"
+    },
+    {
+      "prefer": false,
+      "fileKey": "DC4g36xyt4DobtbEa11JFL",
+      "url": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL",
+      "name": "HeroUI Figma Kit (Community)"
+    }
+  ],
+  "materialDesignFiles": [
+    {
+      "prefer": true,
+      "name": "Material 3 Design Kit (Community)",
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "url": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon",
+      "libraryKey": "lk-0ed47b4a992d98ca20e5243564e1a9f7b3b321b9a4bc3e769c9c349832e23b6d5bc2c529b6cde7b13fcd97f5d697f3942d52e20202fee51b63f30a890b387cd4"
+    }
+  ],
+  "muiCorpusProxy": [
+    "mui-material"
+  ],
+  "tailwindMuiBootstrapHarvest": {
+    "branch": "cursor_cloud/figma-kits-tailwind-mui-08ed",
+    "agent": "bc-d6d6f8a2-917d-5300-b149-19d1677d08ed",
+    "inventoriedAt": "2026-10-09",
+    "packs": [
+      "figma-tailgrids-cover",
+      "figma-bootstrap-buttons",
+      "figma-bootstrap-components",
+      "figma-m3-cover",
+      "figma-tailgrids-layout",
+      "figma-tailgrids-table-stack",
+      "figma-bootstrap-forms",
+      "figma-myna-components",
+      "figma-tailgrids-atoms"
+    ]
+  }
+}

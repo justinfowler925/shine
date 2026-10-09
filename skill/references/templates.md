@@ -59,6 +59,11 @@ Reasons are listed under the table.
 | calendar | `tailadmin-calendar` | tailadmin-react | source | live | calendar, schedule, events, agenda, month-view |
 | carousel | `untitled-carousel` | untitled-ui-react | source | live | carousel, gallery, slides, slideshow |
 | carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
+| catalog | `figma-bootstrap-buttons` | shadcn-registry | blueprint | **retired** | catalog, buttons, bootstrap-figma |
+| catalog | `figma-bootstrap-components` | shadcn-registry | blueprint | **retired** | catalog, components, bootstrap-figma |
+| catalog | `figma-myna-components` | shadcn-registry | blueprint | **retired** | catalog, components, tailwind-figma, myna, shadcn |
+| catalog | `figma-tailgrids-atoms` | shadcn-registry | blueprint | **retired** | catalog, atoms, components, tailwind-figma, tailgrids |
+| catalog | `figma-tailgrids-layout` | shadcn-registry | blueprint | **retired** | catalog, layout, grid, tailwind-figma, tailgrids |
 | catalog | `shadcn-catalog` | shadcn-registry | blueprint | live | catalog, cards, library, packages, directory, gallery, showcase, tools |
 | catalog | `shadcn-catalog-integrations` | shadcn-registry | blueprint | live | catalog, cards, library, integrations, connectors, plugins, directory |
 | catalog | `shadcn-catalog-skills` | shadcn-registry | blueprint | live | catalog, cards, library, skills, agents, packages, directory |
@@ -162,6 +167,7 @@ Reasons are listed under the table.
 | dashboard | `query-shadcn-blocks` | shadcn-registry | query-only | live | dashboard |
 | dashboard | `query-haze` | haze | query-only | live | dashboard |
 | empty | `shadcn-empty-icon` | shadcn-registry | source | live | empty, ai-generate |
+| form | `figma-bootstrap-forms` | shadcn-registry | blueprint | **retired** | form, fields, bootstrap-figma |
 | form | `shadcn-form` | shadcn-registry | blueprint | live | form, form-app, input, fields, create, edit |
 | form | `shadcn-form-invite` | shadcn-registry | blueprint | live | form, form-app, invite, invite-teammate |
 | form | `untitled-date-picker` | untitled-ui-react | source | live | form, input, date, date-range, calendar, picker |
@@ -175,6 +181,8 @@ Reasons are listed under the table.
 | lex-queue | `lex-queue` | slds | blueprint | live | lex-queue, queue |
 | lex-record | `lex-record` | slds | blueprint | live | lex-record, record, detail, lightning, lwc |
 | lex-record | `lex-record-narrow` | slds | blueprint | live | lex-record-narrow, lex-record |
+| marketing | `figma-m3-cover` | shadcn-registry | blueprint | **retired** | marketing, material-figma, mui, material3 |
+| marketing | `figma-tailgrids-cover` | shadcn-registry | blueprint | **retired** | marketing, landing, tailwind-figma, tailgrids |
 | marketing | `shadcn-marketing` | shadcn-registry | blueprint | live | marketing, landing, pricing |
 | marketing-developer | `magicui-code-comparison-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
 | marketing-developer | `magicui-file-tree-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
@@ -232,6 +240,7 @@ Reasons are listed under the table.
 | onboarding | `cult-intro-disclosure` | cult-ui | source | live | onboarding, intro, whats-new, feature-announcement, disclosure |
 | pagination | `untitled-pagination` | untitled-ui-react | source | live | pagination, paging, page-size, pager |
 | pricing | `flowbite-pricing` | flowbite-admin | source | live | pricing, plans, tiers, marketing, landing |
+| queue | `figma-tailgrids-table-stack` | shadcn-registry | blueprint | **retired** | queue, table, records, tailwind-figma, tailgrids |
 | queue | `untitled-table` | untitled-ui-react | source | live | queue, crud, table, records, datagrid |
 | queue | `shadcn-queue` | shadcn-registry | blueprint | live | queue, worklist, triage, inbox, datagrid |
 | queue | `tailadmin-tables` | tailadmin-react | source | live | queue, crud, table, records, datagrid |
@@ -251,11 +260,20 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-236 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+245 rows, 12 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
 - `mantine-appshell` — shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)
 - `heroui-next-app` — shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)
+- `figma-bootstrap-buttons` — undefined
+- `figma-bootstrap-components` — undefined
+- `figma-myna-components` — undefined
+- `figma-tailgrids-atoms` — undefined
+- `figma-tailgrids-layout` — undefined
 - `tremor-charts` — shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it
+- `figma-bootstrap-forms` — undefined
+- `figma-m3-cover` — undefined
+- `figma-tailgrids-cover` — undefined
+- `figma-tailgrids-table-stack` — undefined
 

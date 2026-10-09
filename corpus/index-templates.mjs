@@ -737,6 +737,30 @@ push({
   scope: "page",
 });
 
+// ---- Figma kit harvest blueprints (Tailwind / Bootstrap / Material) ----------
+// Justin Design copies discovered via Chrome history (not team-published libs).
+// Structure only — house paint stays shadcn/Tailwind. See knowledge/kits/figma-library-map.json.
+for (const t of [
+  { id: "figma-tailgrids-cover", screen: "marketing", title: "Tailwind TailGrids cover (Figma Copy)", jobs: ["marketing", "landing", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=102-227" },
+  { id: "figma-tailgrids-layout", screen: "catalog", title: "Tailwind TailGrids layout grid (Figma Copy)", jobs: ["catalog", "layout", "grid", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-3598" },
+  { id: "figma-tailgrids-atoms", screen: "catalog", title: "Tailwind TailGrids atom/molecule board (Figma Copy)", jobs: ["catalog", "atoms", "components", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15453" },
+  { id: "figma-tailgrids-table-stack", screen: "queue", title: "Tailwind TailGrids table stack list (Figma Copy)", jobs: ["queue", "table", "records", "tailwind-figma", "tailgrids"], preview: "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-23249", scope: "component" },
+  { id: "figma-myna-components", screen: "catalog", title: "Myna UI Tailwind/shadcn component gallery (Figma Copy)", jobs: ["catalog", "components", "tailwind-figma", "myna", "shadcn"], preview: "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=605-1271" },
+  { id: "figma-bootstrap-buttons", screen: "catalog", title: "Bootstrap 5 button strip (Figma community duplicate)", jobs: ["catalog", "buttons", "bootstrap-figma"], preview: "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3787-1014" },
+  { id: "figma-bootstrap-forms", screen: "form", title: "Bootstrap 5 forms page (Figma community duplicate)", jobs: ["form", "fields", "bootstrap-figma"], preview: "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-350" },
+  { id: "figma-bootstrap-components", screen: "catalog", title: "Bootstrap 5 components gallery (Figma community duplicate)", jobs: ["catalog", "components", "bootstrap-figma"], preview: "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1152" },
+  { id: "figma-m3-cover", screen: "marketing", title: "Material 3 Design Kit cover (team library file)", jobs: ["marketing", "material-figma", "mui", "material3"], preview: "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50538-14622" },
+]) {
+  push({
+    id: t.id, screen: t.screen, kit: "shadcn-registry", title: t.title,
+    preview: t.preview || "", license: "n/a", kind: "blueprint",
+    startFrom: 1, jobs: t.jobs, dna: KIT_FAMILY["shadcn-registry"],
+    note: "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+    scope: t.scope || "page",
+    selectable: false,
+  });
+}
+
 // ---- owned (licensed, never republished) -------------------------------------
 // Licensed kits — Tailwind Plus, Untitled UI PRO, a purchased Figma file — may be
 // used in the consumers' end products but not redistributed. Shine is a public

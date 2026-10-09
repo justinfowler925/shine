@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-sidebar-07" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc" data-kit-map="figma-library-map" data-figma-sources="Simple Design System Sidebar;Navigation Pill;HeroUI navbar proxy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kit silhouette — app shell</title>
+  <link rel="stylesheet" href="../../../tokens/voices/shadcn-zinc.css">
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#fafafa;color:#18181b;font:14px/1.45 ui-sans-serif,system-ui}
+    .shell{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+    aside{background:#fff;border-right:1px solid #e4e4e7;padding:16px 12px}
+    .brand{display:block;padding:8px 10px;font-weight:700;letter-spacing:-.02em}
+    nav a{display:block;padding:8px 10px;border-radius:8px;color:inherit;text-decoration:none}
+    nav a[aria-current=page]{background:#f4f4f5;font-weight:600}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 28px 8px}
+    h1{margin:0;font-size:22px;letter-spacing:-.02em}
+    .btn{min-height:36px;padding:0 14px;border:1px solid #e4e4e7;border-radius:8px;background:#18181b;color:#fafafa;font:600 13px/1 ui-sans-serif;cursor:pointer}
+    main{padding:8px 28px 28px;max-width:960px}
+    .panel{background:#fff;border:1px solid #e4e4e7;border-radius:10px;padding:16px}
+    .note{margin:16px 0 0;color:#71717a;font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="shell" data-shine-probe="app-shell">
+    <aside data-region="shell-nav">
+      <span class="brand">Product</span>
+      <nav aria-label="Primary">
+        <a href="#queue" aria-current="page">Queue</a>
+        <a href="#records">Records</a>
+        <a href="#settings">Settings</a>
+      </nav>
+    </aside>
+    <div>
+      <header>
+        <h1 data-page-title>Queue</h1>
+        <button type="button" class="btn">New notice</button>
+      </header>
+      <main data-shine-main>
+        <section class="panel" data-region="focal">
+          <p>SDS sidebar + navigation pill active state · one page primary · work object below the header.</p>
+        </section>
+        <p class="note">Ban: marketing hero inside shell · dual chrome actions · Material paint on Operate</p>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "harvestedAt": "2026-10-09",
+  "packs": [
+    {
+      "id": "figma-tailgrids-cover",
+      "screen": "marketing",
+      "jobs": [
+        "marketing",
+        "landing",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "title": "Tailwind TailGrids cover (Figma Copy)",
+      "cite": "shadcn-marketing",
+      "file": "DUN5DvdK5XnoJyi9N52gu9",
+      "node": "102:227",
+      "kit": "tailgrids"
+    },
+    {
+      "id": "figma-tailgrids-layout",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "layout",
+        "grid",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "title": "Tailwind TailGrids layout grid (Figma Copy)",
+      "cite": "shadcn-sidebar-07",
+      "file": "DUN5DvdK5XnoJyi9N52gu9",
+      "node": "310:3598",
+      "kit": "tailgrids"
+    },
+    {
+      "id": "figma-tailgrids-atoms",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "atoms",
+        "components",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "title": "Tailwind TailGrids atom/molecule board (Figma Copy)",
+      "cite": "shadcn-form",
+      "file": "DUN5DvdK5XnoJyi9N52gu9",
+      "node": "310:15453",
+      "kit": "tailgrids"
+    },
+    {
+      "id": "figma-tailgrids-table-stack",
+      "screen": "queue",
+      "jobs": [
+        "queue",
+        "table",
+        "records",
+        "tailwind-figma",
+        "tailgrids"
+      ],
+      "title": "Tailwind TailGrids table stack list (Figma Copy)",
+      "cite": "shadcn-operate-decide",
+      "file": "DUN5DvdK5XnoJyi9N52gu9",
+      "node": "310:23249",
+      "kit": "tailgrids",
+      "scope": "component"
+    },
+    {
+      "id": "figma-myna-components",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "components",
+        "tailwind-figma",
+        "myna",
+        "shadcn"
+      ],
+      "title": "Myna UI Tailwind/shadcn component gallery (Figma Copy)",
+      "cite": "shadcn-form",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "605:1271",
+      "kit": "myna"
+    },
+    {
+      "id": "figma-bootstrap-buttons",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "buttons",
+        "bootstrap-figma"
+      ],
+      "title": "Bootstrap 5 button strip (Figma community duplicate)",
+      "cite": "shadcn-form",
+      "file": "p8B6SUiQDqKFAybsVtfQp9",
+      "node": "3787:1014",
+      "kit": "bootstrap"
+    },
+    {
+      "id": "figma-bootstrap-forms",
+      "screen": "form",
+      "jobs": [
+        "form",
+        "fields",
+        "bootstrap-figma"
+      ],
+      "title": "Bootstrap 5 forms page (Figma community duplicate)",
+      "cite": "shadcn-form",
+      "file": "p8B6SUiQDqKFAybsVtfQp9",
+      "node": "1101:350",
+      "kit": "bootstrap"
+    },
+    {
+      "id": "figma-bootstrap-components",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "components",
+        "bootstrap-figma"
+      ],
+      "title": "Bootstrap 5 components gallery (Figma community duplicate)",
+      "cite": "flowbite-stacked",
+      "file": "p8B6SUiQDqKFAybsVtfQp9",
+      "node": "3888:1152",
+      "kit": "bootstrap"
+    },
+    {
+      "id": "figma-m3-cover",
+      "screen": "marketing",
+      "jobs": [
+        "marketing",
+        "material-figma",
+        "mui",
+        "material3"
+      ],
+      "title": "Material 3 Design Kit cover (team library file)",
+      "cite": "shadcn-sidebar-07",
+      "file": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "node": "50538:14622",
+      "kit": "material3"
+    }
+  ]
+}
