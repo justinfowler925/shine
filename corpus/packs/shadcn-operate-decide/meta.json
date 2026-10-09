@@ -1,0 +1,21 @@
+{
+  "id": "shadcn-operate-decide",
+  "source": "corpus/blueprints/shadcn-operate-decide/reference.html",
+  "harvested": "2026-10-09",
+  "bytes": 53589,
+  "provenance": "Authored blueprint, not an upstream component demo",
+  "capture": {
+    "status": 200,
+    "title": "Operate decide queue reference",
+    "headings": "SLED Capture\nOpen queue",
+    "expectedSelector": "[data-region=\"summary-lead\"]",
+    "expectedCount": 1,
+    "expectedText": "",
+    "sourceUrl": "corpus/blueprints/shadcn-operate-decide/reference.html",
+    "finalUrl": "corpus/blueprints/shadcn-operate-decide/reference.html",
+    "capturedAt": "2026-10-09T17:14:01.604Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "96a07545af98ee7189b70ef4256adf4edb170a72817a6a938e1885c9f6061426",
+    "shotSha256": "e97cbfdd92a017ba4b6ca4cd2d0f2117ef931d328586c83918d6a80373f1eb42"
+  }
+}

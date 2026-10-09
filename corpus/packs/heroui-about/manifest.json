@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "id": "heroui-about",
+  "screen": "marketing",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui-next-app/app/about/page.tsx",
+  "entrypoints": [
+    "heroui-next-app/app/about/page.tsx",
+    "heroui-next-app/app/layout.tsx"
+  ],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "heroui-next-app/app/layout.tsx",
+      "sha256": "8c8cb8e406284ec0c9a0f26c02a3dd672fd6f2af99c8d400d63ae76eda09cc1d"
+    }
+  ]
+}

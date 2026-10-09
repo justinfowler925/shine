@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-date-field",
+  "screen": "calendar",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/date-field/date-field.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "date-field.tsx",
+      "sha256": "0ec8cf308f81441716ba41601e9367131b0b8267efc5c7d275d8afab6980f0bb"
+    }
+  ]
+}

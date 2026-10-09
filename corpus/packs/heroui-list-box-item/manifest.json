@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-list-box-item",
+  "screen": "catalog",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/list-box-item/list-box-item.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "list-box-item.tsx",
+      "sha256": "ebf2c99e0e5da1794a3ea047a1accb65828d1315ffc4fbd955d7326251515ef7"
+    }
+  ]
+}

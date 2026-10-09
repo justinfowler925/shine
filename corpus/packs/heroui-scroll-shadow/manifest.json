@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-scroll-shadow",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/scroll-shadow/scroll-shadow.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "scroll-shadow.tsx",
+      "sha256": "e9a31630b8303e7cb8121600857221c9afc1e17091d2780ea47ccfe00e1674d7"
+    }
+  ]
+}

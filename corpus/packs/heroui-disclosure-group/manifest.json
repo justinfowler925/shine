@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-disclosure-group",
+  "screen": "app-shell",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/disclosure-group/disclosure-group.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "disclosure-group.tsx",
+      "sha256": "c7257608af422c77c57f4cbb69a0c79dcfcc47b135107f7ba50f91a8f3ef4a34"
+    }
+  ]
+}

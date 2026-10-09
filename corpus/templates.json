@@ -949,7 +949,15 @@
         "heroui"
       ],
       "scope": "page",
-      "note": "Kit-walk page — HeroUI next-app route",
+      "note": "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+      "sources": [
+        "heroui-next-app/app/docs/page.tsx",
+        "heroui-next-app/app/layout.tsx"
+      ],
+      "entrypoints": [
+        "heroui-next-app/app/docs/page.tsx",
+        "heroui-next-app/app/layout.tsx"
+      ],
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -1174,7 +1182,7 @@
       "kit": "heroui",
       "title": "HeroUI header",
       "path": "heroui/packages/react/src/components/header/header.tsx",
-      "preview": "https://www.heroui.com/docs/components/header",
+      "preview": "https://www.heroui.com/docs/components/navbar",
       "license": "MIT",
       "kind": "source",
       "startFrom": 8,
@@ -1185,7 +1193,7 @@
         "header"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "note": "Kit-walk atom — docs demo at /navbar (folder header has no dedicated page); port to house shadcn",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -1669,7 +1677,7 @@
       "kit": "heroui",
       "title": "HeroUI empty state",
       "path": "heroui/packages/react/src/components/empty-state/empty-state.tsx",
-      "preview": "https://www.heroui.com/docs/components/empty-state",
+      "preview": "",
       "license": "MIT",
       "kind": "source",
       "startFrom": 8,
@@ -1681,7 +1689,9 @@
         "empty-state"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "note": "No public HeroUI docs page for this atom; retired — use parent component cite or figma-heroui-*",
+      "selectable": false,
+      "retiredReason": "no public HeroUI docs page to harvest a real shot; use parent heroui-* or figma-heroui-*",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -2487,7 +2497,15 @@
         "heroui"
       ],
       "scope": "page",
-      "note": "Kit-walk page — HeroUI next-app route",
+      "note": "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+      "sources": [
+        "heroui-next-app/app/blog/page.tsx",
+        "heroui-next-app/app/layout.tsx"
+      ],
+      "entrypoints": [
+        "heroui-next-app/app/blog/page.tsx",
+        "heroui-next-app/app/layout.tsx"
+      ],
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -2630,7 +2648,7 @@
       "kit": "heroui",
       "title": "HeroUI calendar year picker",
       "path": "heroui/packages/react/src/components/calendar-year-picker/calendar-year-picker.tsx",
-      "preview": "https://www.heroui.com/docs/components/calendar-year-picker",
+      "preview": "https://www.heroui.com/docs/components/calendar",
       "license": "MIT",
       "kind": "source",
       "startFrom": 8,
@@ -2642,7 +2660,7 @@
         "calendar-year-picker"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "note": "Kit-walk atom — docs demo at /calendar (folder calendar-year-picker has no dedicated page); port to house shadcn",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -2678,7 +2696,7 @@
       "kit": "heroui",
       "title": "HeroUI date input group",
       "path": "heroui/packages/react/src/components/date-input-group/date-input-group.tsx",
-      "preview": "https://www.heroui.com/docs/components/date-input-group",
+      "preview": "https://www.heroui.com/docs/components/date-field",
       "license": "MIT",
       "kind": "source",
       "startFrom": 8,
@@ -2690,7 +2708,7 @@
         "date-input-group"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "note": "Kit-walk atom — docs demo at /date-field (folder date-input-group has no dedicated page); port to house shadcn",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -7008,6 +7026,102 @@
       }
     },
     {
+      "id": "heroui-list-box",
+      "screen": "catalog",
+      "kit": "heroui",
+      "title": "HeroUI list box",
+      "path": "heroui/packages/react/src/components/list-box/list-box.tsx",
+      "preview": "https://www.heroui.com/docs/components/list-box",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "catalog",
+        "collection",
+        "list",
+        "heroui",
+        "list-box"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-list-box-item",
+      "screen": "catalog",
+      "kit": "heroui",
+      "title": "HeroUI list box item",
+      "path": "heroui/packages/react/src/components/list-box-item/list-box-item.tsx",
+      "preview": "https://www.heroui.com/docs/components/list-box",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "catalog",
+        "collection",
+        "list",
+        "heroui",
+        "list-box-item"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom — docs demo at /list-box (folder list-box-item has no dedicated page); port to house shadcn",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-list-box-section",
+      "screen": "catalog",
+      "kit": "heroui",
+      "title": "HeroUI list box section",
+      "path": "heroui/packages/react/src/components/list-box-section/list-box-section.tsx",
+      "preview": "https://www.heroui.com/docs/components/list-box",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "catalog",
+        "collection",
+        "list",
+        "heroui",
+        "list-box-section"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom — docs demo at /list-box (folder list-box-section has no dedicated page); port to house shadcn",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
+      "id": "heroui-pagination",
+      "screen": "catalog",
+      "kit": "heroui",
+      "title": "HeroUI pagination",
+      "path": "heroui/packages/react/src/components/pagination/pagination.tsx",
+      "preview": "https://www.heroui.com/docs/components/pagination",
+      "license": "MIT",
+      "kind": "source",
+      "startFrom": 8,
+      "jobs": [
+        "catalog",
+        "collection",
+        "list",
+        "heroui",
+        "pagination"
+      ],
+      "scope": "component",
+      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "dna": {
+        "family": "heroui",
+        "density": "comfortable"
+      }
+    },
+    {
       "id": "heroui-separator",
       "screen": "catalog",
       "kit": "heroui",
@@ -10074,7 +10188,7 @@
       "kit": "untitled-ui-react",
       "title": "Untitled UI empty state",
       "path": "untitled-ui-react/components/application/empty-state/empty-state.tsx",
-      "preview": "https://www.untitledui.com/react/components/empty-state",
+      "preview": "https://www.untitledui.com/react/components/empty-states",
       "license": "MIT",
       "kind": "source",
       "startFrom": 3,
@@ -11964,7 +12078,7 @@
       "kit": "tailadmin-react",
       "title": "TailAdmin badges gallery",
       "path": "tailadmin-react/src/pages/UiElements/Badges.tsx",
-      "preview": "https://free-react-demo.tailadmin.com/badges",
+      "preview": "https://free-react-demo.tailadmin.com/badge",
       "sources": [
         "tailadmin-react/src/components/common/PageBreadCrumb.tsx",
         "tailadmin-react/src/components/common/PageMeta.tsx",
@@ -12236,7 +12350,7 @@
       "kit": "heroui",
       "title": "HeroUI color input group",
       "path": "heroui/packages/react/src/components/color-input-group/color-input-group.tsx",
-      "preview": "https://www.heroui.com/docs/components/color-input-group",
+      "preview": "https://www.heroui.com/docs/components/color-field",
       "license": "MIT",
       "kind": "source",
       "startFrom": 8,
@@ -12248,7 +12362,7 @@
         "color-input-group"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "note": "Kit-walk atom — docs demo at /color-field (folder color-input-group has no dedicated page); port to house shadcn",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -12653,7 +12767,7 @@
       "kit": "heroui",
       "title": "HeroUI menu",
       "path": "heroui/packages/react/src/components/menu/menu.tsx",
-      "preview": "https://www.heroui.com/docs/components/menu",
+      "preview": "https://www.heroui.com/docs/components/dropdown",
       "license": "MIT",
       "kind": "source",
       "startFrom": 8,
@@ -12665,7 +12779,7 @@
         "menu"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "note": "Kit-walk atom — docs demo at /dropdown (folder menu has no dedicated page); port to house shadcn",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -12677,7 +12791,7 @@
       "kit": "heroui",
       "title": "HeroUI menu item",
       "path": "heroui/packages/react/src/components/menu-item/menu-item.tsx",
-      "preview": "https://www.heroui.com/docs/components/menu-item",
+      "preview": "https://www.heroui.com/docs/components/dropdown",
       "license": "MIT",
       "kind": "source",
       "startFrom": 8,
@@ -12689,7 +12803,7 @@
         "menu-item"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "note": "Kit-walk atom — docs demo at /dropdown (folder menu-item has no dedicated page); port to house shadcn",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -12701,7 +12815,7 @@
       "kit": "heroui",
       "title": "HeroUI menu section",
       "path": "heroui/packages/react/src/components/menu-section/menu-section.tsx",
-      "preview": "https://www.heroui.com/docs/components/menu-section",
+      "preview": "https://www.heroui.com/docs/components/dropdown",
       "license": "MIT",
       "kind": "source",
       "startFrom": 8,
@@ -12713,7 +12827,7 @@
         "menu-section"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "note": "Kit-walk atom — docs demo at /dropdown (folder menu-section has no dedicated page); port to house shadcn",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -12968,7 +13082,7 @@
       "kit": "heroui",
       "title": "HeroUI switch group",
       "path": "heroui/packages/react/src/components/switch-group/switch-group.tsx",
-      "preview": "https://www.heroui.com/docs/components/switch-group",
+      "preview": "https://www.heroui.com/docs/components/switch",
       "license": "MIT",
       "kind": "source",
       "startFrom": 8,
@@ -12981,7 +13095,7 @@
         "switch-group"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "note": "Kit-walk atom — docs demo at /switch (folder switch-group has no dedicated page); port to house shadcn",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -12993,7 +13107,7 @@
       "kit": "heroui",
       "title": "HeroUI tag",
       "path": "heroui/packages/react/src/components/tag/tag.tsx",
-      "preview": "https://www.heroui.com/docs/components/tag",
+      "preview": "https://www.heroui.com/docs/components/chip",
       "license": "MIT",
       "kind": "source",
       "startFrom": 8,
@@ -13005,7 +13119,7 @@
         "tag"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      "note": "Kit-walk atom — docs demo at /chip (folder tag has no dedicated page); port to house shadcn",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -13610,7 +13724,15 @@
         "home"
       ],
       "scope": "page",
-      "note": "Kit-walk page — HeroUI next-app route",
+      "note": "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+      "sources": [
+        "heroui-next-app/app/page.tsx",
+        "heroui-next-app/app/layout.tsx"
+      ],
+      "entrypoints": [
+        "heroui-next-app/app/page.tsx",
+        "heroui-next-app/app/layout.tsx"
+      ],
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -13927,8 +14049,7 @@
       },
       "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
       "scope": "component",
-      "selectable": false,
-      "retiredReason": "referenceHealth failed: error, access or challenge page"
+      "selectable": true
     },
     {
       "id": "figma-myna-mkt-blog-list-block",
@@ -14310,7 +14431,15 @@
         "heroui"
       ],
       "scope": "page",
-      "note": "Kit-walk page — HeroUI next-app route",
+      "note": "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+      "sources": [
+        "heroui-next-app/app/about/page.tsx",
+        "heroui-next-app/app/layout.tsx"
+      ],
+      "entrypoints": [
+        "heroui-next-app/app/about/page.tsx",
+        "heroui-next-app/app/layout.tsx"
+      ],
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -15861,7 +15990,15 @@
         "heroui"
       ],
       "scope": "page",
-      "note": "Kit-walk page — HeroUI next-app route",
+      "note": "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+      "sources": [
+        "heroui-next-app/app/pricing/page.tsx",
+        "heroui-next-app/app/layout.tsx"
+      ],
+      "entrypoints": [
+        "heroui-next-app/app/pricing/page.tsx",
+        "heroui-next-app/app/layout.tsx"
+      ],
       "dna": {
         "family": "heroui",
         "density": "comfortable"
@@ -16328,102 +16465,6 @@
       "dna": {
         "family": "flowbite",
         "density": "dense"
-      }
-    },
-    {
-      "id": "heroui-list-box",
-      "screen": "queue",
-      "kit": "heroui",
-      "title": "HeroUI list box",
-      "path": "heroui/packages/react/src/components/list-box/list-box.tsx",
-      "preview": "https://www.heroui.com/docs/components/list-box",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 8,
-      "jobs": [
-        "queue",
-        "table",
-        "crud",
-        "heroui",
-        "list-box"
-      ],
-      "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
-      "dna": {
-        "family": "heroui",
-        "density": "comfortable"
-      }
-    },
-    {
-      "id": "heroui-list-box-item",
-      "screen": "queue",
-      "kit": "heroui",
-      "title": "HeroUI list box item",
-      "path": "heroui/packages/react/src/components/list-box-item/list-box-item.tsx",
-      "preview": "https://www.heroui.com/docs/components/list-box-item",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 8,
-      "jobs": [
-        "queue",
-        "table",
-        "crud",
-        "heroui",
-        "list-box-item"
-      ],
-      "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
-      "dna": {
-        "family": "heroui",
-        "density": "comfortable"
-      }
-    },
-    {
-      "id": "heroui-list-box-section",
-      "screen": "queue",
-      "kit": "heroui",
-      "title": "HeroUI list box section",
-      "path": "heroui/packages/react/src/components/list-box-section/list-box-section.tsx",
-      "preview": "https://www.heroui.com/docs/components/list-box-section",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 8,
-      "jobs": [
-        "queue",
-        "table",
-        "crud",
-        "heroui",
-        "list-box-section"
-      ],
-      "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
-      "dna": {
-        "family": "heroui",
-        "density": "comfortable"
-      }
-    },
-    {
-      "id": "heroui-pagination",
-      "screen": "queue",
-      "kit": "heroui",
-      "title": "HeroUI pagination",
-      "path": "heroui/packages/react/src/components/pagination/pagination.tsx",
-      "preview": "https://www.heroui.com/docs/components/pagination",
-      "license": "MIT",
-      "kind": "source",
-      "startFrom": 8,
-      "jobs": [
-        "queue",
-        "table",
-        "crud",
-        "heroui",
-        "pagination"
-      ],
-      "scope": "component",
-      "note": "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
-      "dna": {
-        "family": "heroui",
-        "density": "comfortable"
       }
     },
     {

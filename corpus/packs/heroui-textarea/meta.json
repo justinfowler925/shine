@@ -1,0 +1,20 @@
+{
+  "id": "heroui-textarea",
+  "source": "https://www.heroui.com/docs/components/textarea",
+  "harvested": "2026-10-09",
+  "bytes": 694104,
+  "capture": {
+    "status": 200,
+    "title": "TextArea | HeroUI",
+    "headings": "TextArea\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 117,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/textarea",
+    "finalUrl": "https://heroui.com/en/docs/react/components/text-area",
+    "capturedAt": "2026-10-09T17:32:24.675Z",
+    "shotSha256": "8365500c217b344a398c45c94ce3b292ae86a062c6a89653328313856d531adc"
+  }
+}

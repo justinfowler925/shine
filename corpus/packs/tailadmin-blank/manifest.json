@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "tailadmin-blank",
+  "screen": "empty",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "tailadmin-react",
+    "mode": "full",
+    "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard.git",
+    "branch": "main",
+    "sha": "e888dd1716b9803b535c7c2fa4f2c6b7d39b3da9"
+  },
+  "corpusPath": "tailadmin-react/src/pages/OtherPage/Blank.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "PageBreadCrumb.tsx",
+      "sha256": "944a6ea565859bace197020d1894590818c47b6c377579e98e46c29580c54671"
+    }
+  ]
+}

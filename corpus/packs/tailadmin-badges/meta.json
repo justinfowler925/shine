@@ -1,0 +1,20 @@
+{
+  "id": "tailadmin-badges",
+  "source": "https://free-react-demo.tailadmin.com/badge",
+  "harvested": "2026-10-09",
+  "bytes": 120592,
+  "capture": {
+    "status": 200,
+    "title": "React.js Badges Dashboard | TailAdmin - React.js Admin Dashboard Template",
+    "headings": "Menu\nOthers\nBadges",
+    "expectedSelector": "nav, aside, table, form, input, svg, button, h1",
+    "expectedCount": 70,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://free-react-demo.tailadmin.com/badge",
+    "finalUrl": "https://free-react-demo.tailadmin.com/badge",
+    "capturedAt": "2026-10-09T17:19:13.981Z",
+    "shotSha256": "6a39b73474bf3837cab0956ce5ffef0c0c648dbf22103869af502f002b6412a2"
+  }
+}

@@ -3,10 +3,14 @@ import {existsSync,readFileSync} from 'node:fs';
 import {join} from 'node:path';
 export const hash = value => createHash('sha256').update(value).digest('hex');
 const errorPage = /(?:\b(?:404|403|500|502|503)\b|page not found|access denied|just a moment|verify (?:you are|you're) human|checking your browser|enable javascript and cookies)/i;
-export function captureHealth({status,title='',headings='',expectedSelector='',expectedCount=0,expectedText='',expectedTextMatched=false,body='',sourceUrl='',finalUrl=''}) {
+/** True when the pack is an intentional error-page demo (404 block, TailAdmin not-found, Flowbite 500), not a capture that landed on a wall. */
+export function intentionalErrorDemo({expectedText='',expectedTextMatched=false,intentionalErrorPage=false}={}) {
+  return Boolean(intentionalErrorPage) || Boolean(expectedTextMatched && expectedText && errorPage.test(expectedText));
+}
+export function captureHealth({status,title='',headings='',expectedSelector='',expectedCount=0,expectedText='',expectedTextMatched=false,body='',sourceUrl='',finalUrl='',intentionalErrorPage=false}) {
  const reasons=[];
  if(!Number.isFinite(status)||status<200||status>=300)reasons.push(`HTTP ${status}`);
- if(errorPage.test(title+'\n'+headings))reasons.push('error, access or challenge page');
+ if(errorPage.test(title+'\n'+headings) && !intentionalErrorDemo({expectedText,expectedTextMatched,intentionalErrorPage}))reasons.push('error, access or challenge page');
  if(!sourceUrl||!finalUrl)reasons.push('capture URL missing');
  const meaningful=expectedSelector && expectedSelector.split(',').some(s=>! /^(?:body|main|h1|a|header|article)\s*$/.test(s.trim()));
  if(!meaningful&&!expectedText)reasons.push('capture needs a semantic selector or expected page text');
@@ -31,11 +35,12 @@ export function referenceHealth(root,id) {
  }catch{return {status:'failed',reasons:['invalid capture metadata']};}
 }
 /** Run before screenshotting; the caller binds the resulting image hash afterwards. */
-export async function inspectReferencePage(page,response,{url,expect,expectedText=''}) {
+export async function inspectReferencePage(page,response,{url,expect,expectedText='',intentionalErrorPage=false}) {
  const facts=await page.evaluate(()=>({title:document.title,headings:[...document.querySelectorAll('h1,h2')].map(e=>e.textContent).join('\n'),body:document.body.innerText}));
- const evidence={status:response?.status()??(url.startsWith('file:')?200:0),...facts,expectedSelector:expect,expectedCount:await page.locator(expect).count(),expectedText,sourceUrl:url,finalUrl:page.url(),capturedAt:new Date().toISOString()};
+ const expectedTextMatched=expectedText?facts.body.includes(expectedText):false;
+ const evidence={status:response?.status()??(url.startsWith('file:')?200:0),...facts,expectedSelector:expect,expectedCount:await page.locator(expect).count(),expectedText,expectedTextMatched,intentionalErrorPage,sourceUrl:url,finalUrl:page.url(),capturedAt:new Date().toISOString()};
  const health=captureHealth(evidence);if(health.status!=='passed')throw new Error(health.reasons.join('; '));
  // Store only the semantic evidence, not arbitrary full-page contents.
- evidence.expectedTextMatched=expectedText?facts.body.includes(expectedText):false;delete evidence.body;
+ delete evidence.body;
  return evidence;
 }

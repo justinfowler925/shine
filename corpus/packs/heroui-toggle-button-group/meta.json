@@ -1,0 +1,20 @@
+{
+  "id": "heroui-toggle-button-group",
+  "source": "https://www.heroui.com/docs/components/toggle-button-group",
+  "harvested": "2026-10-09",
+  "bytes": 863640,
+  "capture": {
+    "status": 200,
+    "title": "ToggleButtonGroup | HeroUI",
+    "headings": "ToggleButtonGroup\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nNote\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 230,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/toggle-button-group",
+    "finalUrl": "https://heroui.com/en/docs/react/components/toggle-button-group",
+    "capturedAt": "2026-10-09T17:32:49.557Z",
+    "shotSha256": "c67e272f63e7c44153ccc0d22bb1837392d92169f531405a3318c42ee9d512bb"
+  }
+}

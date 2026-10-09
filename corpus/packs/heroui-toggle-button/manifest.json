@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-toggle-button",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/toggle-button/toggle-button.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "toggle-button.tsx",
+      "sha256": "45720b79b5cecea3ad3e997ae6746bc61e083c1d56d6d89acc891b64c0357a42"
+    }
+  ]
+}

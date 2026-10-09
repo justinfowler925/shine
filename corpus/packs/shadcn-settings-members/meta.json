@@ -1,12 +1,21 @@
 {
   "id": "shadcn-settings-members",
   "source": "corpus/blueprints/shadcn-settings-members/reference.html",
-  "harvested": "2026-10-05",
-  "provenance": "Authored blueprint, expert-track P2",
+  "harvested": "2026-10-09",
+  "bytes": 55023,
+  "provenance": "Authored blueprint, not an upstream component demo",
   "capture": {
     "status": 200,
     "title": "Member settings",
+    "headings": "Workspace\nMembers",
+    "expectedSelector": "[data-region=\"settings-members\"] #save",
+    "expectedCount": 1,
+    "expectedText": "",
     "sourceUrl": "corpus/blueprints/shadcn-settings-members/reference.html",
-    "capturedAt": "2026-10-05T18:38:03.303Z"
+    "finalUrl": "corpus/blueprints/shadcn-settings-members/reference.html",
+    "capturedAt": "2026-10-09T17:14:01.866Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "d36c1329d9bcb45b5efd5d08ca24295018c7f8fb0d3745a2e560f252cdf27b87",
+    "shotSha256": "45ec288e827ba6a0eac74845d8df39c75319a8a6d680bed5706236485082725c"
   }
 }

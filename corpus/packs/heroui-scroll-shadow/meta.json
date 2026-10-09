@@ -1,0 +1,20 @@
+{
+  "id": "heroui-scroll-shadow",
+  "source": "https://www.heroui.com/docs/components/scroll-shadow",
+  "harvested": "2026-10-09",
+  "bytes": 1012137,
+  "capture": {
+    "status": 200,
+    "title": "ScrollShadow | HeroUI",
+    "headings": "ScrollShadow\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 186,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/scroll-shadow",
+    "finalUrl": "https://heroui.com/en/docs/react/components/scroll-shadow",
+    "capturedAt": "2026-10-09T17:30:46.845Z",
+    "shotSha256": "54a842b195648abe45d2452dbec4e5775d417d22a42e81260665a4f6a8fe579b"
+  }
+}

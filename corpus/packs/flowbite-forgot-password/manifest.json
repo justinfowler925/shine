@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "flowbite-forgot-password",
+  "screen": "auth",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "flowbite-admin",
+    "mode": "full",
+    "url": "https://github.com/themesberg/flowbite-admin-dashboard.git",
+    "branch": "main",
+    "sha": "229df7ff25808ab2bbda65f03f2397a05f7b4288"
+  },
+  "corpusPath": "flowbite-admin/content/authentication/forgot-password.html",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "forgot-password.html",
+      "sha256": "c0825c8b3f7b03b400be06ba4a388dcc4c7f26ed8805c17e8ae1fc259638f4e3"
+    }
+  ]
+}

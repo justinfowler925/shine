@@ -27,6 +27,10 @@ try{
  const valid={status:200,title:'Broadcast demo',headings:'The broadcast',expectedSelector:'video',expectedCount:1,sourceUrl:'https://example.test/player',finalUrl:'https://example.test/player'};
  assert.equal(captureHealth(valid).status,'passed');
  for(const patch of [{status:404},{title:'Error 404: Page not found'},{title:'Just a moment...'},{expectedSelector:'main, h1'},{expectedCount:0}])assert.equal(captureHealth({...valid,...patch}).status,'failed');
+ // Intentional error-page demos (Myna 404 Block, Flowbite 404/500) must pass when
+ // expectedText itself names the error code and matched on capture.
+ assert.equal(captureHealth({status:200,title:'404 Block',headings:'404 Block',expectedSelector:'[data-figma-node], frame, svg',expectedCount:1,expectedText:'404 Block',expectedTextMatched:true,sourceUrl:'https://www.figma.com/design/x',finalUrl:'https://www.figma.com/design/x'}).status,'passed');
+ assert.equal(captureHealth({status:200,title:'Tailwind CSS 404 Not Found Page',headings:'Page not found',expectedSelector:'main, h1, a',expectedCount:1,expectedText:'404',expectedTextMatched:true,sourceUrl:'https://example.test/404',finalUrl:'https://example.test/404'}).status,'passed');
  const reference=join(temp,'corpus/packs/test');mkdirSync(reference,{recursive:true});writeFileSync(join(reference,'shot.png'),'image fixture');
  const capture={...valid,capturedAt:new Date().toISOString(),shotSha256:hash(readFileSync(join(reference,'shot.png')))};
  writeFileSync(join(reference,'meta.json'),JSON.stringify({capture}));assert.equal(referenceHealth(temp,'test').status,'passed');writeFileSync(join(reference,'shot.png'),'changed image');assert.equal(referenceHealth(temp,'test').status,'failed');

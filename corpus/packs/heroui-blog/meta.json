@@ -1,0 +1,20 @@
+{
+  "id": "heroui-blog",
+  "source": "https://www.heroui.com",
+  "harvested": "2026-10-09",
+  "bytes": 285469,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI v3 (Previously NextUI) - Beautiful by default, customizable by design.",
+    "headings": "Beautiful by default. Customizable by design.\nBuild accessible products with HeroUI",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 354,
+    "expectedText": "HeroUI",
+    "expectedTextMatched": true,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com",
+    "finalUrl": "https://heroui.com/",
+    "capturedAt": "2026-10-09T17:22:42.300Z",
+    "shotSha256": "23feb2b600565fd5b9fb5fb46d2ec87ce081dcbd1c106a87062e29f2e79535fb"
+  }
+}

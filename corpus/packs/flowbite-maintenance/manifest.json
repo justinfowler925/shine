@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "flowbite-maintenance",
+  "screen": "empty",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "flowbite-admin",
+    "mode": "full",
+    "url": "https://github.com/themesberg/flowbite-admin-dashboard.git",
+    "branch": "main",
+    "sha": "229df7ff25808ab2bbda65f03f2397a05f7b4288"
+  },
+  "corpusPath": "flowbite-admin/content/pages/maintenance.html",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "maintenance.html",
+      "sha256": "8aac5de4a960b073506eafc41da38cea972947c5cafdfe5e91fbc93156931203"
+    }
+  ]
+}

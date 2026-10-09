@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "id": "tailadmin-alerts",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "tailadmin-react",
+    "mode": "full",
+    "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard.git",
+    "branch": "main",
+    "sha": "e888dd1716b9803b535c7c2fa4f2c6b7d39b3da9"
+  },
+  "corpusPath": "tailadmin-react/src/pages/UiElements/Alerts.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "Alert.tsx",
+      "sha256": "fe2120adb108c651884aaa623264f8e29e3d83ee59c62e8f38c96500c20e046e"
+    },
+    {
+      "path": "Alerts.tsx",
+      "sha256": "b0ea1ff8372a7d9654349339eb3cfc9d4ceb4edc95beb122d03aaa2adcd5a7b2"
+    },
+    {
+      "path": "ComponentCard.tsx",
+      "sha256": "f7ff1b220a026a9b6a76c3b4acabaea1e3f0d1417f261b8a0f4c00a6b544c18c"
+    },
+    {
+      "path": "PageBreadCrumb.tsx",
+      "sha256": "944a6ea565859bace197020d1894590818c47b6c377579e98e46c29580c54671"
+    }
+  ]
+}

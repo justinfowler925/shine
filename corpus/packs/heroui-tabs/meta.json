@@ -1,0 +1,20 @@
+{
+  "id": "heroui-tabs",
+  "source": "https://www.heroui.com/docs/components/tabs",
+  "harvested": "2026-10-09",
+  "bytes": 1046720,
+  "capture": {
+    "status": 200,
+    "title": "Tabs | HeroUI",
+    "headings": "TabsNew\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 244,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/tabs",
+    "finalUrl": "https://heroui.com/en/docs/react/components/tabs",
+    "capturedAt": "2026-10-09T17:21:19.236Z",
+    "shotSha256": "f90888ccd781a125d122684a2676290f844f10b388671cfb23f1da59ac0b7d4f"
+  }
+}

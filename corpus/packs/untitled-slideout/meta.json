@@ -1,0 +1,19 @@
+{
+  "id": "untitled-slideout",
+  "source": "https://www.untitledui.com/react/components/slideout-menus",
+  "harvested": "2026-10-09",
+  "bytes": 1314959,
+  "capture": {
+    "status": 200,
+    "title": "React drawer components | Untitled UI",
+    "headings": "Drawer components\nInstallation\nDrawers examples\nAPI reference\nFAQs",
+    "expectedSelector": "main h2[id], h2[id]",
+    "expectedCount": 3,
+    "expectedText": "",
+    "sourceUrl": "https://www.untitledui.com/react/components/slideout-menus",
+    "finalUrl": "https://www.untitledui.com/react/components/drawers",
+    "capturedAt": "2026-10-09T17:17:09.862Z",
+    "expectedTextMatched": false,
+    "shotSha256": "447cc5f3d61e761ebce82a754e65e04e5330ffcd6699f605683c94f19bd3f45d"
+  }
+}

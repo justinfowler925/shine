@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-color-area",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/color-area/color-area.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "color-area.tsx",
+      "sha256": "c1b7a27331c5dd432a2391be3cacb22b3c5281c6e15dacc187caa4dedce946a1"
+    }
+  ]
+}

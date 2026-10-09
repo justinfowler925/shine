@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-combo-box",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/combo-box/combo-box.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "combo-box.tsx",
+      "sha256": "8d4226637ffb782b3fb967f898a5b537ea7a306bb8c47285ed14b2bf6fd81b47"
+    }
+  ]
+}

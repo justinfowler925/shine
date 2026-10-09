@@ -1,0 +1,20 @@
+{
+  "id": "heroui-toolbar",
+  "source": "https://www.heroui.com/docs/components/toolbar",
+  "harvested": "2026-10-09",
+  "bytes": 479463,
+  "capture": {
+    "status": 200,
+    "title": "Toolbar | HeroUI",
+    "headings": "Toolbar\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 156,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/toolbar",
+    "finalUrl": "https://heroui.com/en/docs/react/components/toolbar",
+    "capturedAt": "2026-10-09T17:21:25.498Z",
+    "shotSha256": "d49bf10c3758feb57871ac6b458ab1eb4f5890242742e2a135411caa2c902a04"
+  }
+}

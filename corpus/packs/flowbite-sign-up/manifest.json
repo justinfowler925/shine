@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "flowbite-sign-up",
+  "screen": "auth",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "flowbite-admin",
+    "mode": "full",
+    "url": "https://github.com/themesberg/flowbite-admin-dashboard.git",
+    "branch": "main",
+    "sha": "229df7ff25808ab2bbda65f03f2397a05f7b4288"
+  },
+  "corpusPath": "flowbite-admin/content/authentication/sign-up.html",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "sign-up.html",
+      "sha256": "2fd48dc0fa4734f2aab6509942d242e53f0247901133ec848af6a18de8f2dc31"
+    }
+  ]
+}

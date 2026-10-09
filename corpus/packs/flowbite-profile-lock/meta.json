@@ -1,0 +1,19 @@
+{
+  "id": "flowbite-profile-lock",
+  "source": "https://flowbite-admin-dashboard.vercel.app/authentication/profile-lock/",
+  "harvested": "2026-10-09",
+  "bytes": 31452,
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS Profile Lock Page - Flowbite",
+    "headings": "Bonnie Green",
+    "expectedSelector": "nav, aside, table, form, input, svg, button, h1",
+    "expectedCount": 6,
+    "expectedText": "",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/authentication/profile-lock/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/authentication/profile-lock/",
+    "capturedAt": "2026-10-09T17:14:47.972Z",
+    "expectedTextMatched": false,
+    "shotSha256": "159264a95cff9b8e6ae68de3b3a9ee78501bf6e01a9fe8234664a995d887e07a"
+  }
+}

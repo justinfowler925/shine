@@ -1,0 +1,19 @@
+{
+  "id": "tailadmin-blank",
+  "source": "https://free-react-demo.tailadmin.com/blank",
+  "harvested": "2026-10-09",
+  "bytes": 74665,
+  "capture": {
+    "status": 200,
+    "title": "React.js Blank Dashboard | TailAdmin - Next.js Admin Dashboard Template",
+    "headings": "Menu\nOthers\nBlank Page",
+    "expectedSelector": "nav, aside, table, form, input, svg, button, h1",
+    "expectedCount": 42,
+    "expectedText": "",
+    "sourceUrl": "https://free-react-demo.tailadmin.com/blank",
+    "finalUrl": "https://free-react-demo.tailadmin.com/blank",
+    "capturedAt": "2026-10-09T17:15:16.602Z",
+    "expectedTextMatched": false,
+    "shotSha256": "c716240256c51b40269180d322be9edb5a62a1aad72bebbf78c5ced86c1d48e6"
+  }
+}

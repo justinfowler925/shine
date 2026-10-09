@@ -1,0 +1,19 @@
+{
+  "id": "flowbite-forgot-password",
+  "source": "https://flowbite-admin-dashboard.vercel.app/authentication/forgot-password/",
+  "harvested": "2026-10-09",
+  "bytes": 40551,
+  "capture": {
+    "status": 200,
+    "title": "Tailwind CSS Forgot Password Page - Flowbite",
+    "headings": "\n                Forgot your password?\n            ",
+    "expectedSelector": "nav, aside, table, form, input, svg, button, h1",
+    "expectedCount": 5,
+    "expectedText": "",
+    "sourceUrl": "https://flowbite-admin-dashboard.vercel.app/authentication/forgot-password/",
+    "finalUrl": "https://flowbite-admin-dashboard.vercel.app/authentication/forgot-password/",
+    "capturedAt": "2026-10-09T17:14:37.424Z",
+    "expectedTextMatched": false,
+    "shotSha256": "0f1528d6dd1585ddab9fb3fe2719d1c0e6c489a0ebba448cd939b662f4866926"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "heroui-color-area",
+  "source": "https://www.heroui.com/docs/components/color-area",
+  "harvested": "2026-10-09",
+  "bytes": 831615,
+  "capture": {
+    "status": 200,
+    "title": "ColorArea | HeroUI",
+    "headings": "ColorArea\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 143,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/color-area",
+    "finalUrl": "https://heroui.com/en/docs/react/components/color-area",
+    "capturedAt": "2026-10-09T17:25:55.299Z",
+    "shotSha256": "97e8b90da41d9ad54aae258e1b9acbe166c0dd30d0bd90ebd3bc627a099b65f2"
+  }
+}

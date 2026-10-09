@@ -1,0 +1,20 @@
+{
+  "id": "heroui-fieldset",
+  "source": "https://www.heroui.com/docs/components/fieldset",
+  "harvested": "2026-10-09",
+  "bytes": 585868,
+  "capture": {
+    "status": 200,
+    "title": "Fieldset | HeroUI",
+    "headings": "Fieldset\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 148,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/fieldset",
+    "finalUrl": "https://heroui.com/en/docs/react/components/fieldset",
+    "capturedAt": "2026-10-09T17:27:52.501Z",
+    "shotSha256": "e300d7a12e4ef646efda8c1669e0e5a7608814101b1171c226b7bf403b7ec497"
+  }
+}

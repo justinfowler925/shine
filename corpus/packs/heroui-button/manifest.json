@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-button",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/button/button.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "button.tsx",
+      "sha256": "6ce4bd16a45a4a867ac2446423e3332c029098aeed98c10c84ce81918b9989e2"
+    }
+  ]
+}

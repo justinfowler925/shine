@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "flowbite-profile-lock",
+  "screen": "auth",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "flowbite-admin",
+    "mode": "full",
+    "url": "https://github.com/themesberg/flowbite-admin-dashboard.git",
+    "branch": "main",
+    "sha": "229df7ff25808ab2bbda65f03f2397a05f7b4288"
+  },
+  "corpusPath": "flowbite-admin/content/authentication/profile-lock.html",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "profile-lock.html",
+      "sha256": "f309bd2f67de62f50aef50d016b79be9e6cdef49ffeb982378d56cfd1efb4cdc"
+    }
+  ]
+}

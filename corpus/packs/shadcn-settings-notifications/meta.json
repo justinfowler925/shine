@@ -1,12 +1,21 @@
 {
   "id": "shadcn-settings-notifications",
   "source": "corpus/blueprints/shadcn-settings-notifications/reference.html",
-  "harvested": "2026-10-05",
-  "provenance": "Authored blueprint, expert-track P2",
+  "harvested": "2026-10-09",
+  "bytes": 35551,
+  "provenance": "Authored blueprint, not an upstream component demo",
   "capture": {
     "status": 200,
     "title": "Notification settings",
+    "headings": "Workspace\nNotifications",
+    "expectedSelector": "[data-region=\"settings-notifications\"] #save",
+    "expectedCount": 1,
+    "expectedText": "",
     "sourceUrl": "corpus/blueprints/shadcn-settings-notifications/reference.html",
-    "capturedAt": "2026-10-05T18:38:03.194Z"
+    "finalUrl": "corpus/blueprints/shadcn-settings-notifications/reference.html",
+    "capturedAt": "2026-10-09T17:14:01.924Z",
+    "expectedTextMatched": false,
+    "sourceSha256": "e064d37a4d14994d4a2407ecbcc9b8c82484ec58aa80e85abdaf4b2a61369dbd",
+    "shotSha256": "ab6c0aa61453e1626505776ea0111543acad5064185c67d3d1d888b8cf3c974f"
   }
 }

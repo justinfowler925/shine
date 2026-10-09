@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-badge",
+  "screen": "record",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/badge/badge.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "badge.tsx",
+      "sha256": "65f9e9c65285e1639b672aa2132c397ad3fdff067672f9a5f477bcff849d5cb8"
+    }
+  ]
+}

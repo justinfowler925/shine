@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-empty-state",
+  "screen": "empty",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/empty-state/empty-state.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "empty-state.tsx",
+      "sha256": "7ca8e4f7d4bda8edc04b8eefe9a45864271ea826d3bfd063c59286f7870763a9"
+    }
+  ]
+}

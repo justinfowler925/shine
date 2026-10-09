@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-date-input-group",
+  "screen": "calendar",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/date-input-group/date-input-group.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "date-input-group.tsx",
+      "sha256": "eebda16939bd4a95c418ad2d52fc1a809d67c49c9121c5d3d7abd28273ddf769"
+    }
+  ]
+}

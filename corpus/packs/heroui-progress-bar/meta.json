@@ -1,0 +1,20 @@
+{
+  "id": "heroui-progress-bar",
+  "source": "https://www.heroui.com/docs/components/progress-bar",
+  "harvested": "2026-10-09",
+  "bytes": 687509,
+  "capture": {
+    "status": 200,
+    "title": "ProgressBar | HeroUI",
+    "headings": "ProgressBar\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 203,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/progress-bar",
+    "finalUrl": "https://heroui.com/en/docs/react/components/progress-bar",
+    "capturedAt": "2026-10-09T17:22:15.234Z",
+    "shotSha256": "c70fbc828e1d06fdad4f029f10fb2bc5a651dda23c4a41ea826fcb635e5b0692"
+  }
+}

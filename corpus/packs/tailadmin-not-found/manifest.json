@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "tailadmin-not-found",
+  "screen": "empty",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "tailadmin-react",
+    "mode": "full",
+    "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard.git",
+    "branch": "main",
+    "sha": "e888dd1716b9803b535c7c2fa4f2c6b7d39b3da9"
+  },
+  "corpusPath": "tailadmin-react/src/pages/OtherPage/NotFound.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "NotFound.tsx",
+      "sha256": "acbbfbb7ef7a7bd5099652bcb2a77b58147fdcba02477ac4c96f6061602ad8d2"
+    }
+  ]
+}

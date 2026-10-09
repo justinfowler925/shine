@@ -81,7 +81,7 @@ Reasons are listed under the table.
 | async-state | `figma-heroui-spinner` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, spinner, spinner, component |
 | async-state | `figma-heroui-toast` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, toast, toast, component |
 | async-state | `heroui-alert` | heroui | source | live | async-state, loading, feedback, heroui, alert |
-| async-state | `heroui-empty-state` | heroui | source | live | async-state, loading, feedback, heroui, empty-state |
+| async-state | `heroui-empty-state` | heroui | source | **retired** | async-state, loading, feedback, heroui, empty-state |
 | async-state | `heroui-meter` | heroui | source | live | async-state, loading, feedback, heroui, meter |
 | async-state | `heroui-progress-bar` | heroui | source | live | async-state, loading, feedback, heroui, progress-bar |
 | async-state | `heroui-progress-circle` | heroui | source | live | async-state, loading, feedback, heroui, progress-circle |
@@ -293,6 +293,10 @@ Reasons are listed under the table.
 | catalog | `windmill-cards` | windmill-react | source | live | component, card, catalog |
 | catalog | `tailadmin-images` | tailadmin-react | source | live | component, image, media, gallery |
 | catalog | `heroui-card` | heroui | source | live | catalog, layout, heroui, card |
+| catalog | `heroui-list-box` | heroui | source | live | catalog, collection, list, heroui, list-box |
+| catalog | `heroui-list-box-item` | heroui | source | live | catalog, collection, list, heroui, list-box-item |
+| catalog | `heroui-list-box-section` | heroui | source | live | catalog, collection, list, heroui, list-box-section |
+| catalog | `heroui-pagination` | heroui | source | live | catalog, collection, list, heroui, pagination |
 | catalog | `heroui-separator` | heroui | source | live | catalog, layout, heroui, separator |
 | catalog | `heroui-surface` | heroui | source | live | catalog, layout, heroui, surface |
 | catalog | `tailadmin-videos` | tailadmin-react | source | live | component, video, media, player |
@@ -562,7 +566,7 @@ Reasons are listed under the table.
 | marketing | `figma-myna-email-10-community-forum` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
 | marketing | `figma-myna-email-11-account-verified` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
 | marketing | `figma-myna-email-12-guide` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
-| marketing | `figma-myna-mkt-404-block` | shadcn-registry | blueprint | **retired** | marketing, tailwind-figma, myna, 404-block |
+| marketing | `figma-myna-mkt-404-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, 404-block |
 | marketing | `figma-myna-mkt-blog-list-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, blog-list-block |
 | marketing | `figma-myna-mkt-blog-post-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, blog-post-block |
 | marketing | `figma-myna-mkt-call-to-action-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, call-to-action-block |
@@ -654,10 +658,6 @@ Reasons are listed under the table.
 | queue | `flowbite-users` | flowbite-admin | source | live | queue, crud, table, records, users, admin |
 | queue | `figma-heroui-table` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, table, table, component |
 | queue | `flowbite-products` | flowbite-admin | source | live | queue, crud, table, products, inventory, catalog |
-| queue | `heroui-list-box` | heroui | source | live | queue, table, crud, heroui, list-box |
-| queue | `heroui-list-box-item` | heroui | source | live | queue, table, crud, heroui, list-box-item |
-| queue | `heroui-list-box-section` | heroui | source | live | queue, table, crud, heroui, list-box-section |
-| queue | `heroui-pagination` | heroui | source | live | queue, table, crud, heroui, pagination |
 | queue | `heroui-table` | heroui | source | live | queue, table, crud, heroui, table |
 | record | `shadcn-record` | shadcn-registry | blueprint | live | record, detail, account, opportunity |
 | record | `shadcn-record-account` | shadcn-registry | blueprint | live | record, account, detail, customer |
@@ -682,6 +682,6 @@ Reasons are listed under the table.
 ## Retired rows — do not cite
 
 - `mantine-appshell` — shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)
+- `heroui-empty-state` — no public HeroUI docs page to harvest a real shot; use parent heroui-* or figma-heroui-*
 - `tremor-charts` — shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it
-- `figma-myna-mkt-404-block` — referenceHealth failed: error, access or challenge page
 

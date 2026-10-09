@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "untitled-slideout",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "untitled-ui-react",
+    "mode": "sparse",
+    "url": "https://github.com/untitleduico/react.git",
+    "branch": "main",
+    "sha": "d29a2adf6909e5aaeb234bccf82dcffeb67fdb2e"
+  },
+  "corpusPath": "untitled-ui-react/components/application/slideout-menus/slideout-menu.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "slideout-menu.tsx",
+      "sha256": "242c25873ebb543db0d982e1c49b2d8fcca21a595e726c3bd185447497a6d918"
+    }
+  ]
+}

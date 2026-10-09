@@ -78,13 +78,42 @@ const kitTarget = (row) => {
     return { url, mode: "full", expect: "pre" };
   if (row.kit === "cult-ui" && /^https:\/\/www\.cult-ui\.com\/docs\/(components|blocks)\/[a-z0-9-]+$/.test(url))
     return { url, mode: "full", expect: "pre" };
+  // HeroUI docs / component demos — real rendered examples, not empty shells.
+  if (row.kit === "heroui" && /^https:\/\/www\.heroui\.com(\/|$)/.test(url)) {
+    const isHome = url === "https://www.heroui.com" || url === "https://www.heroui.com/";
+    return {
+      url,
+      mode: "full",
+      expect: "main, [data-slot], button, h1, nav",
+      settleMs: 2_500,
+      ...(isHome ? { expectedText: "HeroUI" } : {}),
+    };
+  }
   // Composed Tailwind pages: the live demo is the page itself.
-  if (row.kit === "tailadmin-react" && /^https:\/\/free-react-demo\.tailadmin\.com\//.test(url))
-    return { url, mode: "full", expect: "nav, aside, table, form, input, svg", settleMs: 3_000 };
+  if (row.kit === "tailadmin-react" && /^https:\/\/free-react-demo\.tailadmin\.com\//.test(url)) {
+    const notFound = /\/404\/?$/.test(url) || row.id === "tailadmin-not-found";
+    return {
+      url,
+      mode: "full",
+      expect: notFound ? "h1, main, a, button" : "nav, aside, table, form, input, svg, button, h1",
+      settleMs: 3_000,
+      // Demo 404 page: title contains "404" on purpose — flag intentional, match body "ERROR".
+      ...(notFound ? { expectedText: "ERROR", intentionalErrorPage: true } : {}),
+    };
+  }
   if (row.kit === "windmill-react" && /^https:\/\/windmill-dashboard-react\.vercel\.app\//.test(url))
     return { url, mode: "full", expect: "nav, aside, table, form, input, svg", settleMs: 3_000 };
-  if (row.kit === "flowbite-admin" && /^https:\/\/flowbite-admin-dashboard\.vercel\.app\//.test(url))
-    return { url, mode: "full", expect: "nav, aside, table, form, input, svg", settleMs: 3_000 };
+  if (row.kit === "flowbite-admin" && /^https:\/\/flowbite-admin-dashboard\.vercel\.app\//.test(url)) {
+    // Intentional error / maintenance demos: title contains 404/500 — body often says
+    // "Page not found" without the digits. Flag intentionalErrorPage for health.
+    if (/\/pages\/404\/?/.test(url) || row.id === "flowbite-404")
+      return { url, mode: "full", expect: "main, h1, a", expectedText: "Page not found", intentionalErrorPage: true, settleMs: 3_000 };
+    if (/\/pages\/500\/?/.test(url) || row.id === "flowbite-500")
+      return { url, mode: "full", expect: "main, h1, a", expectedText: "Something has gone seriously wrong", intentionalErrorPage: true, settleMs: 3_000 };
+    if (/\/pages\/maintenance\/?/.test(url) || row.id === "flowbite-maintenance")
+      return { url, mode: "full", expect: "main, h1, a, button", expectedText: "Maintenance", settleMs: 3_000 };
+    return { url, mode: "full", expect: "nav, aside, table, form, input, svg, button, h1", settleMs: 3_000 };
+  }
   return null;
 };
 
@@ -131,7 +160,7 @@ for (const row of wanted) {
         // target may name a lighter load state.
         response = await page.goto(t.url, { waitUntil: t.waitUntil || "networkidle", timeout: 45_000 });
         await page.waitForTimeout(t.settleMs || 1_200); // let charts/fonts (or a slow SPA) settle
-        capture = await inspectReferencePage(page, response, { url: t.url, expect: t.expect, expectedText: t.expectedText });
+        capture = await inspectReferencePage(page, response, { url: t.url, expect: t.expect, expectedText: t.expectedText, intentionalErrorPage: t.intentionalErrorPage });
         lastError = null;
         break;
       } catch (error) {
@@ -161,7 +190,7 @@ for (const row of wanted) {
     }
     await page.close();
     const bytes = statSync(shot).size;
-    const floor = (row.scope === "component" || row.screen === "auth") ? MIN_BYTES_COMPONENT : MIN_BYTES;
+    const floor = (row.scope === "component" || row.screen === "auth" || row.screen === "empty") ? MIN_BYTES_COMPONENT : MIN_BYTES;
     if (bytes < floor) {
       rmSync(shot);
       throw new Error(`shot only ${bytes}B — under the ${floor}B floor for ${row.scope || "page"} scope, not a real screen`);

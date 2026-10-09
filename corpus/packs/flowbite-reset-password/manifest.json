@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "flowbite-reset-password",
+  "screen": "auth",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "flowbite-admin",
+    "mode": "full",
+    "url": "https://github.com/themesberg/flowbite-admin-dashboard.git",
+    "branch": "main",
+    "sha": "229df7ff25808ab2bbda65f03f2397a05f7b4288"
+  },
+  "corpusPath": "flowbite-admin/content/authentication/reset-password.html",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "reset-password.html",
+      "sha256": "a6ed6afb46ce4eda4eed8283882473733ca4fc30c4bdf22b4bb3a70e3c2c5019"
+    }
+  ]
+}

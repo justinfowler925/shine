@@ -1,0 +1,20 @@
+{
+  "id": "heroui-disclosure",
+  "source": "https://www.heroui.com/docs/components/disclosure",
+  "harvested": "2026-10-09",
+  "bytes": 702902,
+  "capture": {
+    "status": 200,
+    "title": "Disclosure | HeroUI",
+    "headings": "Disclosure\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 117,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/disclosure",
+    "finalUrl": "https://heroui.com/en/docs/react/components/disclosure",
+    "capturedAt": "2026-10-09T17:20:21.038Z",
+    "shotSha256": "436ddeb22ec6aa93f76cd885578e6071d99eb3e70a156702b3d4761c6f8d0865"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-switch-group",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/switch-group/switch-group.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "switch-group.tsx",
+      "sha256": "76b27ad1b5a0fb86771dbff2fcb9b1fa52881cac91950f32cb6d80e71d9a094b"
+    }
+  ]
+}

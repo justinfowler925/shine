@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-menu-section",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/menu-section/menu-section.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "menu-section.tsx",
+      "sha256": "e09507b056efbade4e5acb6c8a2196af883d2bd48732fddd9c2a9cbc20ecfa6a"
+    }
+  ]
+}

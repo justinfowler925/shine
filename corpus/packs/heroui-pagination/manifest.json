@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-pagination",
+  "screen": "catalog",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/pagination/pagination.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "pagination.tsx",
+      "sha256": "61cd552990ae961e9332a80969a14c718d3d08aea91b8af61324806f108f3927"
+    }
+  ]
+}

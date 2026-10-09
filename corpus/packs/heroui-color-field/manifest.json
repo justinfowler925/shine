@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-color-field",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/color-field/color-field.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "color-field.tsx",
+      "sha256": "4082f06f27d90652a708b7da83cd9cc73af385756800cef8b764a75a66306529"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "heroui-breadcrumbs",
+  "source": "https://www.heroui.com/docs/components/breadcrumbs",
+  "harvested": "2026-10-09",
+  "bytes": 656396,
+  "capture": {
+    "status": 200,
+    "title": "Breadcrumbs | HeroUI",
+    "headings": "Breadcrumbs\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 179,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/breadcrumbs",
+    "finalUrl": "https://heroui.com/en/docs/react/components/breadcrumbs",
+    "capturedAt": "2026-10-09T17:20:14.501Z",
+    "shotSha256": "db8ec064f81944bc6e3f5d111edf1510e3b93500b09b39c8a09838390e2b650b"
+  }
+}

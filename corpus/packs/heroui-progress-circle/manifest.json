@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-progress-circle",
+  "screen": "async-state",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/progress-circle/progress-circle.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "progress-circle.tsx",
+      "sha256": "be95c11d7219666c769b314caa98494c153b1dac0df34ada94a479863373d5d1"
+    }
+  ]
+}

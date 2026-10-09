@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "heroui-search-field",
+  "screen": "form",
+  "kind": "source",
+  "license": "MIT",
+  "upstream": {
+    "name": "heroui",
+    "mode": "sparse",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "branch": "v3",
+    "sha": "683c8666bbe39f6c93fe712938d0517ae6d58249"
+  },
+  "corpusPath": "heroui/packages/react/src/components/search-field/search-field.tsx",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "search-field.tsx",
+      "sha256": "185b69043294b0eae1e63ab797e17135e63429d257e20e4a27ee87e207d58df1"
+    }
+  ]
+}

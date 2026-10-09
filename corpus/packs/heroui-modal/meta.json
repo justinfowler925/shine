@@ -1,0 +1,20 @@
+{
+  "id": "heroui-modal",
+  "source": "https://www.heroui.com/docs/components/modal",
+  "harvested": "2026-10-09",
+  "bytes": 1237124,
+  "capture": {
+    "status": 200,
+    "title": "Modal | HeroUI",
+    "headings": "Modal\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
+    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedCount": 178,
+    "expectedText": "",
+    "expectedTextMatched": false,
+    "intentionalErrorPage": false,
+    "sourceUrl": "https://www.heroui.com/docs/components/modal",
+    "finalUrl": "https://heroui.com/en/docs/react/components/modal",
+    "capturedAt": "2026-10-09T17:30:12.194Z",
+    "shotSha256": "b3132d8d198affbd9034f404da8ceb4dc5541d3ed58f20f81fd750bdeb4ebb3c"
+  }
+}
