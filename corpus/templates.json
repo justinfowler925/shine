@@ -715,9 +715,7 @@
         "nav",
         "sidebar"
       ],
-      "scope": "page",
-      "selectable": false,
-      "retiredReason": "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)"
+      "scope": "page"
     },
     {
       "id": "heroui-accordion",
