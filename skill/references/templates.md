@@ -61,6 +61,9 @@ Reasons are listed under the table.
 | carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
 | catalog | `figma-bootstrap-buttons` | shadcn-registry | blueprint | **retired** | catalog, buttons, bootstrap-figma |
 | catalog | `figma-bootstrap-components` | shadcn-registry | blueprint | **retired** | catalog, components, bootstrap-figma |
+| catalog | `figma-mobile-ds-atoms` | shadcn-registry | blueprint | **retired** | catalog, atoms, mobile-figma, minor-slot |
+| catalog | `figma-mobile-ds-molecules` | shadcn-registry | blueprint | **retired** | catalog, molecules, mobile-figma, minor-slot |
+| catalog | `figma-mobile-ds-organisms` | shadcn-registry | blueprint | **retired** | catalog, organisms, mobile-figma, minor-slot |
 | catalog | `figma-myna-components` | shadcn-registry | blueprint | **retired** | catalog, components, tailwind-figma, myna, shadcn |
 | catalog | `figma-tailgrids-atoms` | shadcn-registry | blueprint | **retired** | catalog, atoms, components, tailwind-figma, tailgrids |
 | catalog | `figma-tailgrids-layout` | shadcn-registry | blueprint | **retired** | catalog, layout, grid, tailwind-figma, tailgrids |
@@ -260,7 +263,7 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-245 rows, 12 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+248 rows, 15 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
@@ -268,6 +271,9 @@ Reasons are listed under the table.
 - `heroui-next-app` — shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)
 - `figma-bootstrap-buttons` — undefined
 - `figma-bootstrap-components` — undefined
+- `figma-mobile-ds-atoms` — undefined
+- `figma-mobile-ds-molecules` — undefined
+- `figma-mobile-ds-organisms` — undefined
 - `figma-myna-components` — undefined
 - `figma-tailgrids-atoms` — undefined
 - `figma-tailgrids-layout` — undefined

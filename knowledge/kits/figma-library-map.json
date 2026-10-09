@@ -270,17 +270,30 @@
     },
     {
       "name": "Minor UI",
-      "status": "not_found_chrome_history",
+      "status": "stand_in_mobile_ds_chrome",
       "communityRefs": [
         "https://www.figma.com/community/file/1520749847339774468/minimals-ui-components",
         "https://www.figma.com/community/file/1503752093673029506/minikit-mini-product-ui-kit"
+      ],
+      "designFiles": [
+        {
+          "prefer": true,
+          "fileKey": "O1Wf1YgB6E1NVrkd2eaWNL",
+          "url": "https://www.figma.com/design/O1Wf1YgB6E1NVrkd2eaWNL",
+          "note": "Mobile Design System \u2014 AI-ready (Community). Chrome history Design access; interim Minor-slot stand-in until Minimals/MiniKIT Justin Copy exists"
+        }
+      ],
+      "harvestPacks": [
+        "figma-mobile-ds-atoms",
+        "figma-mobile-ds-molecules",
+        "figma-mobile-ds-organisms"
       ],
       "corpusProxy": [],
       "shineCite": [
         "shadcn-form",
         "shadcn-sidebar-07"
       ],
-      "note": "Still no Design fileKey in Chrome history or plan libraries. Closest community: Minimals UI / MiniKIT. Confirm private draft with Justin. Cite shadcn-form / shadcn-sidebar-07 meanwhile."
+      "note": "Exact 'Minor UI' Design fileKey still absent from Chrome/Safari/bookmarks/Drive/Slack. Minimals/MiniKIT community IDs never visited. Packed Mobile DS atoms/molecules/organisms as Chrome-found stand-in. Myna (4SbNh8z\u2026) is a separate Tailwind kit already harvested \u2014 do not equate to Minor."
     }
   ],
   "silhouetteMap": [
@@ -459,15 +472,28 @@
     "agent": "bc-d6d6f8a2-917d-5300-b149-19d1677d08ed",
     "inventoriedAt": "2026-10-09",
     "packs": [
-      "figma-tailgrids-cover",
       "figma-bootstrap-buttons",
       "figma-bootstrap-components",
-      "figma-m3-cover",
-      "figma-tailgrids-layout",
-      "figma-tailgrids-table-stack",
       "figma-bootstrap-forms",
+      "figma-m3-cover",
+      "figma-mobile-ds-atoms",
+      "figma-mobile-ds-molecules",
+      "figma-mobile-ds-organisms",
       "figma-myna-components",
-      "figma-tailgrids-atoms"
-    ]
+      "figma-tailgrids-atoms",
+      "figma-tailgrids-cover",
+      "figma-tailgrids-layout",
+      "figma-tailgrids-table-stack"
+    ],
+    "minorSlot": {
+      "exactMinorUiFileKey": null,
+      "standInFileKey": "O1Wf1YgB6E1NVrkd2eaWNL",
+      "standInName": "Mobile Design System \u2014 AI-ready (Community)",
+      "packs": [
+        "figma-mobile-ds-atoms",
+        "figma-mobile-ds-molecules",
+        "figma-mobile-ds-organisms"
+      ]
+    }
   }
 }

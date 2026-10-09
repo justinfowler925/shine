@@ -138,6 +138,51 @@
       "file": "f4TUS9BWk2rSH8Dqrp5Mon",
       "node": "50538:14622",
       "kit": "material3"
+    },
+    {
+      "id": "figma-mobile-ds-atoms",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "atoms",
+        "mobile-figma",
+        "minor-slot"
+      ],
+      "title": "Mobile Design System atoms (Minor-slot stand-in)",
+      "cite": "shadcn-form",
+      "file": "O1Wf1YgB6E1NVrkd2eaWNL",
+      "node": "4:154",
+      "kit": "mobile-ds"
+    },
+    {
+      "id": "figma-mobile-ds-molecules",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "molecules",
+        "mobile-figma",
+        "minor-slot"
+      ],
+      "title": "Mobile Design System molecules (Minor-slot stand-in)",
+      "cite": "shadcn-form",
+      "file": "O1Wf1YgB6E1NVrkd2eaWNL",
+      "node": "4:155",
+      "kit": "mobile-ds"
+    },
+    {
+      "id": "figma-mobile-ds-organisms",
+      "screen": "catalog",
+      "jobs": [
+        "catalog",
+        "organisms",
+        "mobile-figma",
+        "minor-slot"
+      ],
+      "title": "Mobile Design System organisms (Minor-slot stand-in)",
+      "cite": "shadcn-form",
+      "file": "O1Wf1YgB6E1NVrkd2eaWNL",
+      "node": "4:156",
+      "kit": "mobile-ds"
     }
   ]
 }

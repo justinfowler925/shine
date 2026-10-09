@@ -30,7 +30,8 @@ Named by Justin but **not** published as team libraries: HeroUI, original Tailwi
 Bootstrap, Minor UI. Design *file copies* (Chrome history) are in
 `knowledge/kits/figma-library-map.json` — prefer TailGrids `DUN5DvdK5XnoJyi9N52gu9`,
 Bootstrap `p8B6SUiQDqKFAybsVtfQp9`, Material 3 `f4TUS9BWk2rSH8Dqrp5Mon`. Harvest packs
-`figma-tailgrids-*`, `figma-myna-components`, `figma-bootstrap-*`, `figma-m3-cover`
+`figma-tailgrids-*`, `figma-myna-components`, `figma-bootstrap-*`, `figma-m3-cover`,
+`figma-mobile-ds-*` (Minor-slot stand-in via Mobile DS `O1Wf1YgB6E1NVrkd2eaWNL`)
 are silhouette evidence (`selectable:false`). Proxies: `corpusProxy` + community refs.
 Closest subscribed stand-in for Tailwind/HeroUI library primitives: **Simple Design System**.
 

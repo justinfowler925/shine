@@ -750,6 +750,9 @@ for (const t of [
   { id: "figma-bootstrap-forms", screen: "form", title: "Bootstrap 5 forms page (Figma community duplicate)", jobs: ["form", "fields", "bootstrap-figma"], preview: "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-350" },
   { id: "figma-bootstrap-components", screen: "catalog", title: "Bootstrap 5 components gallery (Figma community duplicate)", jobs: ["catalog", "components", "bootstrap-figma"], preview: "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1152" },
   { id: "figma-m3-cover", screen: "marketing", title: "Material 3 Design Kit cover (team library file)", jobs: ["marketing", "material-figma", "mui", "material3"], preview: "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50538-14622" },
+  { id: "figma-mobile-ds-atoms", screen: "catalog", title: "Mobile Design System atoms (Figma Community; Minor-slot stand-in)", jobs: ["catalog", "atoms", "mobile-figma", "minor-slot"], preview: "https://www.figma.com/design/O1Wf1YgB6E1NVrkd2eaWNL?node-id=4-154" },
+  { id: "figma-mobile-ds-molecules", screen: "catalog", title: "Mobile Design System molecules (Figma Community; Minor-slot stand-in)", jobs: ["catalog", "molecules", "mobile-figma", "minor-slot"], preview: "https://www.figma.com/design/O1Wf1YgB6E1NVrkd2eaWNL?node-id=4-155" },
+  { id: "figma-mobile-ds-organisms", screen: "catalog", title: "Mobile Design System organisms (Figma Community; Minor-slot stand-in)", jobs: ["catalog", "organisms", "mobile-figma", "minor-slot"], preview: "https://www.figma.com/design/O1Wf1YgB6E1NVrkd2eaWNL?node-id=4-156" },
 ]) {
   push({
     id: t.id, screen: t.screen, kit: "shadcn-registry", title: t.title,

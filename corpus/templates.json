@@ -1269,6 +1269,75 @@
       "selectable": false
     },
     {
+      "id": "figma-mobile-ds-atoms",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Mobile Design System atoms (Figma Community; Minor-slot stand-in)",
+      "preview": "https://www.figma.com/design/O1Wf1YgB6E1NVrkd2eaWNL?node-id=4-154",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "atoms",
+        "mobile-figma",
+        "minor-slot"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-mobile-ds-molecules",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Mobile Design System molecules (Figma Community; Minor-slot stand-in)",
+      "preview": "https://www.figma.com/design/O1Wf1YgB6E1NVrkd2eaWNL?node-id=4-155",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "molecules",
+        "mobile-figma",
+        "minor-slot"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
+      "id": "figma-mobile-ds-organisms",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Mobile Design System organisms (Figma Community; Minor-slot stand-in)",
+      "preview": "https://www.figma.com/design/O1Wf1YgB6E1NVrkd2eaWNL?node-id=4-156",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "catalog",
+        "organisms",
+        "mobile-figma",
+        "minor-slot"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Figma kit silhouette — steal structure; paint with shadcn/Tailwind. knowledge/kits/figma-library-map.json",
+      "scope": "page",
+      "selectable": false
+    },
+    {
       "id": "figma-myna-components",
       "screen": "catalog",
       "kit": "shadcn-registry",

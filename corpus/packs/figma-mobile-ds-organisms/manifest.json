@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-mobile-ds-organisms",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-mobile-ds-organisms.md",
+      "sha256": "b6ef15829c254dbedd7bc58ad70e7f1f5eeb127f8f9b87c5f2043866c978c12b"
+    }
+  ]
+}
