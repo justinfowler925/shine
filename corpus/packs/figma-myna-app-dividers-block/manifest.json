@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-app-dividers-block",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "tailwind-figma",
+    "myna",
+    "dividers-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-app-dividers-block.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-01-welcome-confirm-email",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1119",
+  "harvested": "2026-10-09",
+  "bytes": 238219,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Welcome confirm email",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1119",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Welcome confirm email",
+    "headings": "Welcome confirm email",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Welcome confirm email",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1119",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1119",
+    "capturedAt": "2026-10-09T14:06:32.092Z",
+    "shotSha256": "8de31dfcf66183c739edb24d28968375b8e6965994ec309baea66a866e9f73e5",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1119",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

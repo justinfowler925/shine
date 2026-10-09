@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-11-account-verified",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1147",
+  "harvested": "2026-10-09",
+  "bytes": 38856,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Account verified",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1147",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Account verified",
+    "headings": "Account verified",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Account verified",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1147",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1147",
+    "capturedAt": "2026-10-09T14:06:32.447Z",
+    "shotSha256": "3c829ffbc328b196012cd0b6f02c7f799e37c997594e6428539adc4980d05b92",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1147",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

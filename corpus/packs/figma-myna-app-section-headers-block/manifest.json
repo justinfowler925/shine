@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-app-section-headers-block",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "tailwind-figma",
+    "myna",
+    "section-headers-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-app-section-headers-block.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

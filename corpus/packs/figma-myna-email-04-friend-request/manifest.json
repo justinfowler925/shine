@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-email-04-friend-request",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "marketing",
+    "email",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-email-04-friend-request.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-app-section-headers-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5120",
+  "harvested": "2026-10-09",
+  "bytes": 8331,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Section Headers Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2908:5120",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Section Headers Block",
+    "headings": "Section Headers Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Section Headers Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5120",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5120",
+    "capturedAt": "2026-10-09T14:06:32.057Z",
+    "shotSha256": "5eec5cb1317888e1f5aca854ad66abdaad3037099be2e35710ae3d283d8bb55f",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2908:5120",
+      "page": "Application Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

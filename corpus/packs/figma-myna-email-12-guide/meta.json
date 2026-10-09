@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-12-guide",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1271",
+  "harvested": "2026-10-09",
+  "bytes": 33231,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Guide",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1271",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Guide",
+    "headings": "Guide",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Guide",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1271",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1271",
+    "capturedAt": "2026-10-09T14:06:32.481Z",
+    "shotSha256": "9c1c395650d1bb95bcafb8b27465402abf781b53a3cec1c497c07c2c24dc16ec",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1271",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

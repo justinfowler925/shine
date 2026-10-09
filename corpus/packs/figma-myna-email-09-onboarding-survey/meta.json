@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-09-onboarding-survey",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1258",
+  "harvested": "2026-10-09",
+  "bytes": 38629,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Onboarding survey",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1258",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Onboarding survey",
+    "headings": "Onboarding survey",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Onboarding survey",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1258",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1258",
+    "capturedAt": "2026-10-09T14:06:32.378Z",
+    "shotSha256": "b0257bd4c9947aafb69b52c928cfc26f4787352a986f2ae2f71c65841769419b",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1258",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

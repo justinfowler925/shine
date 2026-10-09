@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-03-beta-tester",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1203",
+  "harvested": "2026-10-09",
+  "bytes": 51598,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Beta tester",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1203",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Beta tester",
+    "headings": "Beta tester",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Beta tester",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1203",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1203",
+    "capturedAt": "2026-10-09T14:06:32.165Z",
+    "shotSha256": "5f2ab5dbf8b13ab9965d937bc6254d21df5a6db41a6d4125c87bbd4aeb8df359",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1203",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-app-containers-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5356",
+  "harvested": "2026-10-09",
+  "bytes": 24420,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Containers Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2908:5356",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Containers Block",
+    "headings": "Containers Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Containers Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5356",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5356",
+    "capturedAt": "2026-10-09T14:06:31.951Z",
+    "shotSha256": "4b1a40c912375e91d859e308bba5916939ab83ba78828e8831f2f80a9d76801c",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2908:5356",
+      "page": "Application Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

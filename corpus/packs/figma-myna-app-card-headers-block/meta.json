@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-app-card-headers-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5020",
+  "harvested": "2026-10-09",
+  "bytes": 11615,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Card Headers Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2908:5020",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Card Headers Block",
+    "headings": "Card Headers Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Card Headers Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5020",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5020",
+    "capturedAt": "2026-10-09T14:06:31.916Z",
+    "shotSha256": "2706923e01d72b19e2288e72a012d543de4ecbbcb23819cb24e2b886b4c98987",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2908:5020",
+      "page": "Application Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

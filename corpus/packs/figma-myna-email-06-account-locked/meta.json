@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-06-account-locked",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1187",
+  "harvested": "2026-10-09",
+  "bytes": 45200,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Account locked",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1187",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Account locked",
+    "headings": "Account locked",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Account locked",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1187",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1187",
+    "capturedAt": "2026-10-09T14:06:32.272Z",
+    "shotSha256": "6ed9044e9cb80b12b4e4674961cbef42652e6dab1188b355746aa180f07cb421",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1187",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

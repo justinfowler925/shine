@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-05-password-reset",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1238",
+  "harvested": "2026-10-09",
+  "bytes": 46031,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Password reset",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1238",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Password reset",
+    "headings": "Password reset",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Password reset",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1238",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1238",
+    "capturedAt": "2026-10-09T14:06:32.237Z",
+    "shotSha256": "2579a2f3007f2becd1790d7c62bdceac5bb10e1e7f09c80aa1fbbcbc325e1eeb",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1238",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

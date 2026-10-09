@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-app-cards-block",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "tailwind-figma",
+    "myna",
+    "cards-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-app-cards-block.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-app-empty-states-block",
+  "kind": "blueprint",
+  "screen": "empty",
+  "jobs": [
+    "empty",
+    "tailwind-figma",
+    "myna",
+    "empty-states-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-app-empty-states-block.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

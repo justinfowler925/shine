@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-app-dialog-block",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "tailwind-figma",
+    "myna",
+    "dialog-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-app-dialog-block.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}
