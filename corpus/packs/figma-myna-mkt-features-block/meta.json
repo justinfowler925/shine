@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-mkt-features-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2942",
+  "harvested": "2026-10-09",
+  "bytes": 525089,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Features Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2907:2942",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Features Block",
+    "headings": "Features Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Features Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2942",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2942",
+    "capturedAt": "2026-10-09T14:06:30.593Z",
+    "shotSha256": "7a457bf198d04c54a41eb12dcbed3d44e569bbdb4cf9430bafbdcf2977af8b32",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2907:2942",
+      "page": "Marketing Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

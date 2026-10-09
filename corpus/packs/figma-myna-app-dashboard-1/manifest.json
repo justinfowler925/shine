@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-app-dashboard-1",
+  "kind": "blueprint",
+  "screen": "dashboard",
+  "jobs": [
+    "dashboard",
+    "tailwind-figma",
+    "myna",
+    "dashboard-1"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-app-dashboard-1.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

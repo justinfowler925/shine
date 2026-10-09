@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-ds-theme-colors",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2984-2314",
+  "harvested": "2026-10-09",
+  "bytes": 50588,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Theme Colors",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2984:2314",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Theme Colors",
+    "headings": "Theme Colors",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Theme Colors",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2984-2314",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2984-2314",
+    "capturedAt": "2026-10-09T14:06:45.309Z",
+    "shotSha256": "6ffda572a45135ec985fb36e0b62775f9e943feda01caa9c76a43cfdbcb1c489",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2984:2314",
+      "page": "Design System",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-mkt-cookies-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2206",
+  "harvested": "2026-10-09",
+  "bytes": 20831,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Cookies Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2907:2206",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Cookies Block",
+    "headings": "Cookies Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Cookies Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2206",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2206",
+    "capturedAt": "2026-10-09T14:06:33.362Z",
+    "shotSha256": "98510af27b1eba085c4d263eb13e92a8c13fb58dd3a8affdc3d734e06db159d1",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2907:2206",
+      "page": "Marketing Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

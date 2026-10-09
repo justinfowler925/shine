@@ -1,0 +1,18 @@
+{
+  "id": "figma-bootstrap-media-object",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "media",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-media-object.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

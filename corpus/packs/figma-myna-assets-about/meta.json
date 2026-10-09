@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-assets-about",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=632-2473",
+  "harvested": "2026-10-09",
+  "bytes": 40503,
+  "scope": "component",
+  "kit": "myna",
+  "title": "About",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "632:2473",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "About",
+    "headings": "About",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "About",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=632-2473",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=632-2473",
+    "capturedAt": "2026-10-09T14:06:49.157Z",
+    "shotSha256": "9f735a599dc3aa80d2068408b059a216f471492c72ffed993950522ea7a403e4",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "632:2473",
+      "page": "Assets",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

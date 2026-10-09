@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-ds-blur",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "design-system",
+    "tailwind-figma",
+    "myna",
+    "blur"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-ds-blur.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

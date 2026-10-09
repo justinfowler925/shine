@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-assets-cursor",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2626-1384",
+  "harvested": "2026-10-09",
+  "bytes": 54325,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Cursor",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2626:1384",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Cursor",
+    "headings": "Cursor",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Cursor",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2626-1384",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2626-1384",
+    "capturedAt": "2026-10-09T14:06:49.760Z",
+    "shotSha256": "4f0d66ce3be3829bc6615786e291a8f4848da9572f3d5c891255b03b42b46d0f",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2626:1384",
+      "page": "Assets",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-assets-flag",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2858-7474",
+  "harvested": "2026-10-09",
+  "bytes": 78406,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Flag",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2858:7474",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Flag",
+    "headings": "Flag",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Flag",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2858-7474",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2858-7474",
+    "capturedAt": "2026-10-09T14:06:48.904Z",
+    "shotSha256": "d824534a2dee9763314f80eb972ce0f97bab8f7e6b014405d3dfdf4f9a5c17e9",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2858:7474",
+      "page": "Assets",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

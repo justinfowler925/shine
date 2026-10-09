@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-mkt-404-block",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "marketing",
+    "tailwind-figma",
+    "myna",
+    "404-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-mkt-404-block.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-mkt-faq-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2416",
+  "harvested": "2026-10-09",
+  "bytes": 125308,
+  "scope": "component",
+  "kit": "myna",
+  "title": "FAQ Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2907:2416",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "FAQ Block",
+    "headings": "FAQ Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "FAQ Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2416",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2416",
+    "capturedAt": "2026-10-09T14:06:31.633Z",
+    "shotSha256": "b8d94501dd2eadbe5410c70e943f6da4c632e181bfbf5fd3e850e15f6d4018c4",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2907:2416",
+      "page": "Marketing Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

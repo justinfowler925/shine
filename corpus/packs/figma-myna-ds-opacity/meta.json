@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-ds-opacity",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=418-1338",
+  "harvested": "2026-10-09",
+  "bytes": 590342,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Opacity",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "418:1338",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Opacity",
+    "headings": "Opacity",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Opacity",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=418-1338",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=418-1338",
+    "capturedAt": "2026-10-09T14:06:45.977Z",
+    "shotSha256": "f83b8c8ea01573106f133fd64529730e3fcd9bc6c91f4206ac74e282f422f281",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "418:1338",
+      "page": "Design System",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

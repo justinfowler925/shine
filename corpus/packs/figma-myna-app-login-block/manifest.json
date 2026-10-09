@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-app-login-block",
+  "kind": "blueprint",
+  "screen": "auth",
+  "jobs": [
+    "auth",
+    "tailwind-figma",
+    "myna",
+    "login-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-app-login-block.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

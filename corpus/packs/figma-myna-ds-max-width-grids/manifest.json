@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-ds-max-width-grids",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "design-system",
+    "tailwind-figma",
+    "myna",
+    "max-width-grids"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-ds-max-width-grids.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

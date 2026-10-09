@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-assets-flag",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "assets",
+    "tailwind-figma",
+    "myna",
+    "flag"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-assets-flag.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

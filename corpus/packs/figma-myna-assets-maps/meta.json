@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-assets-maps",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2855-7473",
+  "harvested": "2026-10-09",
+  "bytes": 1248564,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Maps",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2855:7473",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Maps",
+    "headings": "Maps",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Maps",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2855-7473",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2855-7473",
+    "capturedAt": "2026-10-09T14:06:48.037Z",
+    "shotSha256": "b9f3188032601337976da0d193892cd6a81eefd8038e78976ef2bc8b414be2de",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2855:7473",
+      "page": "Assets",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

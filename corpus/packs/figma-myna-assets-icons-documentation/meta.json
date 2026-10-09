@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-assets-icons-documentation",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=606-4941",
+  "harvested": "2026-10-09",
+  "bytes": 21516,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Icons Documentation",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "606:4941",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Icons Documentation",
+    "headings": "Icons Documentation",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Icons Documentation",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=606-4941",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=606-4941",
+    "capturedAt": "2026-10-09T14:06:49.395Z",
+    "shotSha256": "43583723a1d993dcc9952ee8524ab6611cf36272911507e444d956b5bba9abd4",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "606:4941",
+      "page": "Assets",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

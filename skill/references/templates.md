@@ -72,6 +72,7 @@ Reasons are listed under the table.
 | async-state | `figma-bootstrap-spinners` | shadcn-registry | blueprint | live | async-state, spinner, bootstrap-figma |
 | async-state | `figma-bootstrap-toasts` | shadcn-registry | blueprint | live | async-state, toast, bootstrap-figma |
 | async-state | `figma-myna-alert` | shadcn-registry | blueprint | live | async-state, alert, tailwind-figma, myna |
+| async-state | `figma-myna-app-notifications-block` | shadcn-registry | blueprint | live | async-state, tailwind-figma, myna, notifications-block |
 | async-state | `figma-myna-progress` | shadcn-registry | blueprint | live | async-state, progress, tailwind-figma, myna |
 | async-state | `figma-myna-skeleton` | shadcn-registry | blueprint | live | async-state, skeleton, tailwind-figma, myna |
 | async-state | `figma-myna-sonner` | shadcn-registry | blueprint | live | async-state, toast, tailwind-figma, myna |
@@ -99,6 +100,9 @@ Reasons are listed under the table.
 | auth | `tailadmin-signin` | tailadmin-react | source | live | auth, login, signin, sign-in |
 | auth | `tailadmin-signup` | tailadmin-react | source | live | auth, signup, sign-up, register |
 | auth | `windmill-login` | windmill-react | source | live | auth, login, signin, sign-in |
+| auth | `figma-myna-app-forgot-password-block` | shadcn-registry | blueprint | live | auth, tailwind-figma, myna, forgot-password-block |
+| auth | `figma-myna-app-login-block` | shadcn-registry | blueprint | live | auth, tailwind-figma, myna, login-block |
+| auth | `figma-myna-app-registration-block` | shadcn-registry | blueprint | live | auth, tailwind-figma, myna, registration-block |
 | auth | `figma-tailgrids-sign-in-sign-up` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, sign-in-sign-up, sign-in-sign-up, auth |
 | auth | `windmill-create-account` | windmill-react | source | live | auth, signup, sign-up, register |
 | auth | `flowbite-sign-in` | flowbite-admin | source | live | auth, login, signin, sign-in |
@@ -151,6 +155,7 @@ Reasons are listed under the table.
 | catalog | `figma-bootstrap-icons` | shadcn-registry | blueprint | live | catalog, icons, bootstrap-figma |
 | catalog | `figma-bootstrap-list-group` | shadcn-registry | blueprint | live | catalog, list, bootstrap-figma |
 | catalog | `figma-bootstrap-lists-group` | shadcn-registry | blueprint | live | catalog, list, bootstrap-figma |
+| catalog | `figma-bootstrap-media-object` | shadcn-registry | blueprint | live | catalog, media, bootstrap-figma |
 | catalog | `figma-bootstrap-radius` | shadcn-registry | blueprint | live | catalog, radius, bootstrap-figma |
 | catalog | `figma-bootstrap-shadows` | shadcn-registry | blueprint | live | catalog, shadows, bootstrap-figma |
 | catalog | `figma-bootstrap-spacer` | shadcn-registry | blueprint | live | catalog, spacer, bootstrap-figma |
@@ -191,11 +196,34 @@ Reasons are listed under the table.
 | catalog | `figma-m3-tooltips` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, tooltips, material-3-—-tooltips |
 | catalog | `figma-m3-top-app-bars` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, top-app-bars, material-3-—-top-app-bars |
 | catalog | `figma-m3-typography` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, typography, material-3-—-typography |
+| catalog | `figma-myna-app-card-headers-block` | shadcn-registry | blueprint | live | catalog, tailwind-figma, myna, card-headers-block |
+| catalog | `figma-myna-app-cards-block` | shadcn-registry | blueprint | live | catalog, tailwind-figma, myna, cards-block |
+| catalog | `figma-myna-app-containers-block` | shadcn-registry | blueprint | live | catalog, tailwind-figma, myna, containers-block |
+| catalog | `figma-myna-app-dividers-block` | shadcn-registry | blueprint | live | catalog, tailwind-figma, myna, dividers-block |
+| catalog | `figma-myna-app-section-headers-block` | shadcn-registry | blueprint | live | catalog, tailwind-figma, myna, section-headers-block |
+| catalog | `figma-myna-assets-cursor` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, cursor |
+| catalog | `figma-myna-assets-flag` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, flag |
+| catalog | `figma-myna-assets-icon` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, icon |
+| catalog | `figma-myna-assets-icons-documentation` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, icons-documentation |
+| catalog | `figma-myna-assets-maps` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, maps |
+| catalog | `figma-myna-assets-payment-method-credit-cards` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, payment-method-credit-cards |
+| catalog | `figma-myna-assets-store-badges` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, store-badges |
 | catalog | `figma-myna-avatar` | shadcn-registry | blueprint | live | catalog, avatar, tailwind-figma, myna |
 | catalog | `figma-myna-badge` | shadcn-registry | blueprint | live | catalog, badge, tailwind-figma, myna |
 | catalog | `figma-myna-card` | shadcn-registry | blueprint | live | catalog, card, tailwind-figma, myna |
 | catalog | `figma-myna-carousel` | shadcn-registry | blueprint | live | catalog, carousel, tailwind-figma, myna |
 | catalog | `figma-myna-components` | shadcn-registry | blueprint | live | figma-kit, tailwind-figma, myna, shadcn, components, myna-ui-tailwind/shadcn-components-gallery |
+| catalog | `figma-myna-ds-backdrop-blur` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, backdrop-blur |
+| catalog | `figma-myna-ds-blur` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, blur |
+| catalog | `figma-myna-ds-border-radius` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, border-radius |
+| catalog | `figma-myna-ds-box-shadow` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, box-shadow |
+| catalog | `figma-myna-ds-breakpoint-scale` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, breakpoint-scale |
+| catalog | `figma-myna-ds-colors` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, colors |
+| catalog | `figma-myna-ds-max-width-grids` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, max-width-grids |
+| catalog | `figma-myna-ds-opacity` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, opacity |
+| catalog | `figma-myna-ds-spacing-scale` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, spacing-scale |
+| catalog | `figma-myna-ds-theme-colors` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, theme-colors |
+| catalog | `figma-myna-ds-typography` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, typography |
 | catalog | `figma-myna-hover-card` | shadcn-registry | blueprint | live | catalog, hover-card, tailwind-figma, myna |
 | catalog | `figma-myna-scrollbar` | shadcn-registry | blueprint | live | catalog, scrollbar, tailwind-figma, myna |
 | catalog | `figma-myna-separator` | shadcn-registry | blueprint | live | catalog, separator, tailwind-figma, myna |
@@ -247,6 +275,7 @@ Reasons are listed under the table.
 | catalog | `figma-tailgrids-shopping-carts` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, shopping-carts, shopping-carts, catalog |
 | catalog | `figma-tailgrids-stats` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, stats, stats, catalog |
 | catalog | `figma-tailgrids-steps` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, steps, steps, catalog |
+| catalog | `figma-tailgrids-tags` | shadcn-registry | blueprint | live | catalog, tag, tailwind-figma, tailgrids |
 | catalog | `figma-tailgrids-teams` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, teams, teams, catalog |
 | catalog | `figma-tailgrids-testimonials` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, testimonials, testimonials, catalog |
 | catalog | `figma-tailgrids-tooltips` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, tooltips, tooltip, catalog |
@@ -365,6 +394,11 @@ Reasons are listed under the table.
 | dashboard | `tailadmin-dashboard` | tailadmin-react | source | live | dashboard, analytics, kpi, ecommerce, metrics |
 | dashboard | `windmill-dashboard` | windmill-react | source | live | dashboard, analytics, kpi, metrics, dense |
 | dashboard | `flowbite-dashboard` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, sales, dense |
+| dashboard | `figma-myna-app-dashboard-1` | shadcn-registry | blueprint | live | dashboard, tailwind-figma, myna, dashboard-1 |
+| dashboard | `figma-myna-app-dashboard-2` | shadcn-registry | blueprint | live | dashboard, tailwind-figma, myna, dashboard-2 |
+| dashboard | `figma-myna-app-dashboard-3` | shadcn-registry | blueprint | live | dashboard, tailwind-figma, myna, dashboard-3 |
+| dashboard | `figma-myna-app-dashboard-4` | shadcn-registry | blueprint | live | dashboard, tailwind-figma, myna, dashboard-4 |
+| dashboard | `figma-myna-app-dashboard-5` | shadcn-registry | blueprint | live | dashboard, tailwind-figma, myna, dashboard-5 |
 | dashboard | `flowbite-stacked` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, dense, stacked |
 | dashboard | `flowbite-sidebar-layout` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, dense, app-shell |
 | dashboard | `query-shadcn-blocks` | shadcn-registry | query-only | live | dashboard |
@@ -374,6 +408,7 @@ Reasons are listed under the table.
 | empty | `untitled-empty-state` | untitled-ui-react | source | live | empty, empty-state, zero |
 | empty | `flowbite-404` | flowbite-admin | source | live | empty, 404, not-found, error |
 | empty | `tailadmin-not-found` | tailadmin-react | source | live | empty, 404, not-found, error |
+| empty | `figma-myna-app-empty-states-block` | shadcn-registry | blueprint | live | empty, tailwind-figma, myna, empty-states-block |
 | empty | `figma-tailgrids-error-pages` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, error-pages, error-pages, empty |
 | empty | `flowbite-500` | flowbite-admin | source | live | empty, 500, server-error, error |
 | empty | `windmill-404` | windmill-react | source | live | empty, 404, not-found, error |
@@ -395,6 +430,7 @@ Reasons are listed under the table.
 | form | `figma-bootstrap-tooltips` | shadcn-registry | blueprint | live | form, tooltip, bootstrap-figma |
 | form | `figma-m3-text-fields` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, text-fields, material-3-—-text-fields |
 | form | `figma-myna-alert-dialog` | shadcn-registry | blueprint | live | overlay, dialog, tailwind-figma, myna |
+| form | `figma-myna-app-dialog-block` | shadcn-registry | blueprint | live | form, tailwind-figma, myna, dialog-block |
 | form | `figma-myna-buttons` | shadcn-registry | blueprint | live | form, button, tailwind-figma, myna |
 | form | `figma-myna-calendar` | shadcn-registry | blueprint | live | form, calendar, tailwind-figma, myna |
 | form | `figma-myna-checkbox` | shadcn-registry | blueprint | live | form, checkbox, tailwind-figma, myna |
@@ -510,8 +546,34 @@ Reasons are listed under the table.
 | marketing | `figma-heroui-v3-cover` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, v3-cover, welcome, cover |
 | marketing | `figma-heroui-welcome` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, welcome, welcome, cover |
 | marketing | `figma-m3-cover` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, cover, material-3-design-kit-cover-(mui-/-material-ui-target) |
+| marketing | `figma-myna-assets-thumbnail` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, thumbnail |
+| marketing | `figma-myna-email-01-welcome-confirm-email` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
 | marketing | `figma-tailgrids-cover` | shadcn-registry | blueprint | live | figma-kit, tailwind-figma, tailgrids, cover, tailwind-tailgrids-cover |
 | marketing | `heroui-home` | heroui | source | live | marketing, landing, heroui, home |
+| marketing | `figma-myna-assets-about` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, about |
+| marketing | `figma-myna-email-02-add-friends` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-03-beta-tester` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-04-friend-request` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-05-password-reset` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-06-account-locked` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-07-new-device` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-08-secure-account` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-09-onboarding-survey` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-10-community-forum` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-11-account-verified` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-12-guide` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-mkt-404-block` | shadcn-registry | blueprint | **retired** | marketing, tailwind-figma, myna, 404-block |
+| marketing | `figma-myna-mkt-blog-list-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, blog-list-block |
+| marketing | `figma-myna-mkt-blog-post-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, blog-post-block |
+| marketing | `figma-myna-mkt-call-to-action-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, call-to-action-block |
+| marketing | `figma-myna-mkt-cookies-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, cookies-block |
+| marketing | `figma-myna-mkt-faq-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, faq-block |
+| marketing | `figma-myna-mkt-features-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, features-block |
+| marketing | `figma-myna-mkt-footer-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, footer-block |
+| marketing | `figma-myna-mkt-header-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, header-block |
+| marketing | `figma-myna-mkt-hero-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, hero-block |
+| marketing | `figma-myna-mkt-statistics-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, statistics-block |
+| marketing | `figma-myna-mkt-testimonial-logos-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, testimonial-logos-block |
 | marketing | `figma-tailgrids-about` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, about, about, marketing |
 | marketing | `figma-tailgrids-cta` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, cta, cta, marketing |
 | marketing | `figma-tailgrids-faq` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, faq, faq, marketing |
@@ -615,10 +677,11 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-600 rows, 2 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+662 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
 - `mantine-appshell` — shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)
 - `tremor-charts` — shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it
+- `figma-myna-mkt-404-block` — referenceHealth failed: error, access or challenge page
 

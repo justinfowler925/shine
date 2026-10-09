@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-app-dashboard-5",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3232-2385",
+  "harvested": "2026-10-09",
+  "bytes": 128534,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Dashboard 5",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3232:2385",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Dashboard 5",
+    "headings": "Dashboard 5",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Dashboard 5",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3232-2385",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3232-2385",
+    "capturedAt": "2026-10-09T14:06:35.577Z",
+    "shotSha256": "0ae5876887f999dce6076cc79f9f9d7e836e28464f4b1a1ab39a59a7a370b9d8",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3232:2385",
+      "page": "Application Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

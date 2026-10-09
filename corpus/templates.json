@@ -1444,6 +1444,30 @@
       "selectable": true
     },
     {
+      "id": "figma-myna-app-notifications-block",
+      "screen": "async-state",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-notifications-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5883",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "async-state",
+        "tailwind-figma",
+        "myna",
+        "notifications-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
       "id": "figma-myna-progress",
       "screen": "async-state",
       "kit": "shadcn-registry",
@@ -2152,6 +2176,78 @@
         "family": "windmill",
         "density": "dense"
       }
+    },
+    {
+      "id": "figma-myna-app-forgot-password-block",
+      "screen": "auth",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-forgot-password-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3012-2828",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "auth",
+        "tailwind-figma",
+        "myna",
+        "forgot-password-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-app-login-block",
+      "screen": "auth",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-login-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5518",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "auth",
+        "tailwind-figma",
+        "myna",
+        "login-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-app-registration-block",
+      "screen": "auth",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-registration-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4810",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "auth",
+        "tailwind-figma",
+        "myna",
+        "registration-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
     },
     {
       "id": "figma-tailgrids-sign-in-sign-up",
@@ -3451,6 +3547,29 @@
       "selectable": true
     },
     {
+      "id": "figma-bootstrap-media-object",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Bootstrap 5 Figma · Bootstrap UI Kit",
+      "path": "packs/figma-bootstrap-media-object",
+      "preview": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=97-26",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "media",
+        "bootstrap-figma"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Bootstrap 5) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
       "id": "figma-bootstrap-radius",
       "screen": "catalog",
       "kit": "shadcn-registry",
@@ -4479,6 +4598,301 @@
       "selectable": true
     },
     {
+      "id": "figma-myna-app-card-headers-block",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-card-headers-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5020",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "tailwind-figma",
+        "myna",
+        "card-headers-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-app-cards-block",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-cards-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5833",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "tailwind-figma",
+        "myna",
+        "cards-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-app-containers-block",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-containers-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5356",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "tailwind-figma",
+        "myna",
+        "containers-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-app-dividers-block",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-dividers-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5156",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "tailwind-figma",
+        "myna",
+        "dividers-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-app-section-headers-block",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-section-headers-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5120",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "tailwind-figma",
+        "myna",
+        "section-headers-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-assets-cursor",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Assets",
+      "path": "packs/figma-myna-assets-cursor",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2626-1384",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "assets",
+        "tailwind-figma",
+        "myna",
+        "cursor"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-assets-flag",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Assets",
+      "path": "packs/figma-myna-assets-flag",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2858-7474",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "assets",
+        "tailwind-figma",
+        "myna",
+        "flag"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-assets-icon",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Assets",
+      "path": "packs/figma-myna-assets-icon",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=606-1276",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "assets",
+        "tailwind-figma",
+        "myna",
+        "icon"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-assets-icons-documentation",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Assets",
+      "path": "packs/figma-myna-assets-icons-documentation",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=606-4941",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "assets",
+        "tailwind-figma",
+        "myna",
+        "icons-documentation"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-assets-maps",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Assets",
+      "path": "packs/figma-myna-assets-maps",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2855-7473",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "assets",
+        "tailwind-figma",
+        "myna",
+        "maps"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-assets-payment-method-credit-cards",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Assets",
+      "path": "packs/figma-myna-assets-payment-method-credit-cards",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2854-7386",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "assets",
+        "tailwind-figma",
+        "myna",
+        "payment-method-credit-cards"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-assets-store-badges",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Assets",
+      "path": "packs/figma-myna-assets-store-badges",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2860-10109",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "assets",
+        "tailwind-figma",
+        "myna",
+        "store-badges"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
       "id": "figma-myna-avatar",
       "screen": "catalog",
       "kit": "shadcn-registry",
@@ -4591,6 +5005,281 @@
         "shadcn",
         "components",
         "myna-ui-tailwind/shadcn-components-gallery"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-ds-backdrop-blur",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Design System",
+      "path": "packs/figma-myna-ds-backdrop-blur",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=14-19",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "design-system",
+        "tailwind-figma",
+        "myna",
+        "backdrop-blur"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-ds-blur",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Design System",
+      "path": "packs/figma-myna-ds-blur",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=14-2",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "design-system",
+        "tailwind-figma",
+        "myna",
+        "blur"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-ds-border-radius",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Design System",
+      "path": "packs/figma-myna-ds-border-radius",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=418-1249",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "design-system",
+        "tailwind-figma",
+        "myna",
+        "border-radius"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-ds-box-shadow",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Design System",
+      "path": "packs/figma-myna-ds-box-shadow",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3-5823",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "design-system",
+        "tailwind-figma",
+        "myna",
+        "box-shadow"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-ds-breakpoint-scale",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Design System",
+      "path": "packs/figma-myna-ds-breakpoint-scale",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2976-2340",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "design-system",
+        "tailwind-figma",
+        "myna",
+        "breakpoint-scale"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-ds-colors",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Design System",
+      "path": "packs/figma-myna-ds-colors",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2966-2682",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "design-system",
+        "tailwind-figma",
+        "myna",
+        "colors"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-ds-max-width-grids",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Design System",
+      "path": "packs/figma-myna-ds-max-width-grids",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2628-1492",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "design-system",
+        "tailwind-figma",
+        "myna",
+        "max-width-grids"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-ds-opacity",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Design System",
+      "path": "packs/figma-myna-ds-opacity",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=418-1338",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "design-system",
+        "tailwind-figma",
+        "myna",
+        "opacity"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-ds-spacing-scale",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Design System",
+      "path": "packs/figma-myna-ds-spacing-scale",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=20-1530",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "design-system",
+        "tailwind-figma",
+        "myna",
+        "spacing-scale"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-ds-theme-colors",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Design System",
+      "path": "packs/figma-myna-ds-theme-colors",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2984-2314",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "design-system",
+        "tailwind-figma",
+        "myna",
+        "theme-colors"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-ds-typography",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Design System",
+      "path": "packs/figma-myna-ds-typography",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2832-4379",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "design-system",
+        "tailwind-figma",
+        "myna",
+        "typography"
       ],
       "dna": {
         "family": "shadcn-zinc",
@@ -5863,6 +6552,30 @@
         "steps",
         "steps",
         "catalog"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (TailGrids) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-tailgrids-tags",
+      "screen": "catalog",
+      "kit": "shadcn-registry",
+      "title": "TailGrids Figma · -- Tags",
+      "path": "packs/figma-tailgrids-tags",
+      "preview": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14605",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "tag",
+        "tailwind-figma",
+        "tailgrids"
       ],
       "dna": {
         "family": "shadcn-zinc",
@@ -9100,6 +9813,126 @@
       }
     },
     {
+      "id": "figma-myna-app-dashboard-1",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-dashboard-1",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3232-1119",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "dashboard",
+        "tailwind-figma",
+        "myna",
+        "dashboard-1"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-app-dashboard-2",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-dashboard-2",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3232-1810",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "dashboard",
+        "tailwind-figma",
+        "myna",
+        "dashboard-2"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-app-dashboard-3",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-dashboard-3",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3232-2105",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "dashboard",
+        "tailwind-figma",
+        "myna",
+        "dashboard-3"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-app-dashboard-4",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-dashboard-4",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3232-2643",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "dashboard",
+        "tailwind-figma",
+        "myna",
+        "dashboard-4"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-app-dashboard-5",
+      "screen": "dashboard",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-dashboard-5",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3232-2385",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "dashboard",
+        "tailwind-figma",
+        "myna",
+        "dashboard-5"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
       "id": "flowbite-stacked",
       "screen": "dashboard",
       "kit": "flowbite-admin",
@@ -9313,6 +10146,30 @@
         "family": "tailadmin",
         "density": "comfortable"
       }
+    },
+    {
+      "id": "figma-myna-app-empty-states-block",
+      "screen": "empty",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-empty-states-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5376",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "empty",
+        "tailwind-figma",
+        "myna",
+        "empty-states-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
     },
     {
       "id": "figma-tailgrids-error-pages",
@@ -9854,6 +10711,30 @@
         "dialog",
         "tailwind-figma",
         "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-app-dialog-block",
+      "screen": "form",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Application Blocks",
+      "path": "packs/figma-myna-app-dialog-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3141-1081",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "form",
+        "tailwind-figma",
+        "myna",
+        "dialog-block"
       ],
       "dna": {
         "family": "shadcn-zinc",
@@ -12649,6 +13530,55 @@
       "selectable": true
     },
     {
+      "id": "figma-myna-assets-thumbnail",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Assets",
+      "path": "packs/figma-myna-assets-thumbnail",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2705-530",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "catalog",
+        "assets",
+        "tailwind-figma",
+        "myna",
+        "thumbnail"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "page",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-01-welcome-confirm-email",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-01-welcome-confirm-email",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1119",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 2,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "page",
+      "selectable": true
+    },
+    {
       "id": "figma-tailgrids-cover",
       "screen": "marketing",
       "kit": "shadcn-registry",
@@ -12695,6 +13625,584 @@
         "family": "heroui",
         "density": "comfortable"
       }
+    },
+    {
+      "id": "figma-myna-assets-about",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Assets",
+      "path": "packs/figma-myna-assets-about",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=632-2473",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "catalog",
+        "assets",
+        "tailwind-figma",
+        "myna",
+        "about"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-02-add-friends",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-02-add-friends",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1295",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-03-beta-tester",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-03-beta-tester",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1203",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-04-friend-request",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-04-friend-request",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1322",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-05-password-reset",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-05-password-reset",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1238",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-06-account-locked",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-06-account-locked",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1187",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-07-new-device",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-07-new-device",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1162",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-08-secure-account",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-08-secure-account",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1131",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-09-onboarding-survey",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-09-onboarding-survey",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1258",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-10-community-forum",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-10-community-forum",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1277",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-11-account-verified",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-11-account-verified",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1147",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-email-12-guide",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Email Blocks",
+      "path": "packs/figma-myna-email-12-guide",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1271",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "email",
+        "tailwind-figma",
+        "myna"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-mkt-404-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-404-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2898-1112",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "404-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": false,
+      "retiredReason": "referenceHealth failed: error, access or challenge page"
+    },
+    {
+      "id": "figma-myna-mkt-blog-list-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-blog-list-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2899-1245",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "blog-list-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-mkt-blog-post-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-blog-post-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-1786",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "blog-post-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-mkt-call-to-action-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-call-to-action-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2152",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "call-to-action-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-mkt-cookies-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-cookies-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2206",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "cookies-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-mkt-faq-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-faq-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2416",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "faq-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-mkt-features-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-features-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2942",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "features-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-mkt-footer-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-footer-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-3604",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "footer-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-mkt-header-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-header-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-3871",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "header-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-mkt-hero-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-hero-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3049-1143",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "hero-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "page",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-mkt-statistics-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-statistics-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4209",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "statistics-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
+    },
+    {
+      "id": "figma-myna-mkt-testimonial-logos-block",
+      "screen": "marketing",
+      "kit": "shadcn-registry",
+      "title": "Myna UI Figma · Marketing Blocks",
+      "path": "packs/figma-myna-mkt-testimonial-logos-block",
+      "preview": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4331",
+      "license": "n/a",
+      "kind": "blueprint",
+      "startFrom": 5,
+      "jobs": [
+        "marketing",
+        "tailwind-figma",
+        "myna",
+        "testimonial-logos-block"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "note": "Full-kit Figma harvest (Myna UI) — structure only; paint house shadcn for Clearspeed",
+      "scope": "component",
+      "selectable": true
     },
     {
       "id": "figma-tailgrids-about",

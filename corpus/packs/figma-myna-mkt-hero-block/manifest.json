@@ -1,0 +1,19 @@
+{
+  "id": "figma-myna-mkt-hero-block",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "marketing",
+    "tailwind-figma",
+    "myna",
+    "hero-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-mkt-hero-block.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

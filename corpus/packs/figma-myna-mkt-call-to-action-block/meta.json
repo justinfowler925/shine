@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-mkt-call-to-action-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2152",
+  "harvested": "2026-10-09",
+  "bytes": 80112,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Call to Action Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2907:2152",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Call to Action Block",
+    "headings": "Call to Action Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Call to Action Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2152",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-2152",
+    "capturedAt": "2026-10-09T14:06:32.163Z",
+    "shotSha256": "37fd2a7a7c892ca73ed76a14bd5d7450bae01b8d60dedb21de928b98ecf93277",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2907:2152",
+      "page": "Marketing Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

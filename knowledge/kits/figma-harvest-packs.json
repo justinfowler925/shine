@@ -1,126 +1,126 @@
 {
-  "version": 2,
+  "version": 3,
   "harvestedAt": "2026-10-09",
-  "note": "Full-kit ingest \u2014 every distinct cite board, not silhouette samples. Capture stamped for referenceHealth.",
+  "note": "Full-file cite-board ingest after gap close.",
   "counts": {
     "heroui": 46,
     "m3": 38,
-    "tailgrids": 82,
-    "myna": 42,
-    "bootstrap": 39,
-    "total": 247
+    "tailgrids": 83,
+    "myna": 102,
+    "bootstrap": 40,
+    "total": 309
   },
   "packs": [
     {
       "id": "figma-heroui-accordion",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2583:5983",
+      "node": "",
       "title": "figma-heroui-accordion"
     },
     {
       "id": "figma-heroui-alert",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "3128:340",
+      "node": "",
       "title": "figma-heroui-alert"
     },
     {
       "id": "figma-heroui-avatar",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2550:2249",
+      "node": "",
       "title": "figma-heroui-avatar"
     },
     {
       "id": "figma-heroui-avatar-group",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2545:33553",
+      "node": "",
       "title": "figma-heroui-avatar-group"
     },
     {
       "id": "figma-heroui-badge",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2278:445",
+      "node": "",
       "title": "figma-heroui-badge"
     },
     {
       "id": "figma-heroui-brand",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "1004:252",
+      "node": "",
       "title": "figma-heroui-brand"
     },
     {
       "id": "figma-heroui-button",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2210:37799",
+      "node": "",
       "title": "figma-heroui-button"
     },
     {
       "id": "figma-heroui-button-atoms",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "486:54087",
+      "node": "",
       "title": "figma-heroui-button-atoms"
     },
     {
       "id": "figma-heroui-button-group",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2250:37403",
+      "node": "",
       "title": "figma-heroui-button-group"
     },
     {
       "id": "figma-heroui-calendar",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "4492:2681",
+      "node": "",
       "title": "figma-heroui-calendar"
     },
     {
       "id": "figma-heroui-card",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "3350:1558",
+      "node": "",
       "title": "figma-heroui-card"
     },
     {
       "id": "figma-heroui-carousel",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "3576:2133",
+      "node": "",
       "title": "figma-heroui-carousel"
     },
     {
       "id": "figma-heroui-checkbox",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2433:38083",
+      "node": "",
       "title": "figma-heroui-checkbox"
     },
     {
       "id": "figma-heroui-checkbox-group",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2433:41562",
+      "node": "",
       "title": "figma-heroui-checkbox-group"
     },
     {
       "id": "figma-heroui-chip",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2291:38171",
+      "node": "",
       "title": "figma-heroui-chip"
     },
     {
       "id": "figma-heroui-code",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "1542:28623",
+      "node": "",
       "title": "figma-heroui-code"
     },
     {
@@ -141,112 +141,112 @@
       "id": "figma-heroui-divider",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2584:41429",
+      "node": "",
       "title": "figma-heroui-divider"
     },
     {
       "id": "figma-heroui-figma-components",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2245:10892",
+      "node": "",
       "title": "figma-heroui-figma-components"
     },
     {
       "id": "figma-heroui-icons-essential",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "10:1851",
+      "node": "",
       "title": "figma-heroui-icons-essential"
     },
     {
       "id": "figma-heroui-input",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2746:458",
+      "node": "",
       "title": "figma-heroui-input"
     },
     {
       "id": "figma-heroui-input-otp",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "3377:7557",
+      "node": "",
       "title": "figma-heroui-input-otp"
     },
     {
       "id": "figma-heroui-kbd",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2545:31287",
+      "node": "",
       "title": "figma-heroui-kbd"
     },
     {
       "id": "figma-heroui-link",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2545:31578",
+      "node": "",
       "title": "figma-heroui-link"
     },
     {
       "id": "figma-heroui-number-input",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "3638:79039",
+      "node": "",
       "title": "figma-heroui-number-input"
     },
     {
       "id": "figma-heroui-progress",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2162:16624",
+      "node": "",
       "title": "figma-heroui-progress"
     },
     {
       "id": "figma-heroui-radio",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "1552:24473",
+      "node": "",
       "title": "figma-heroui-radio"
     },
     {
       "id": "figma-heroui-select",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2943:31581",
+      "node": "",
       "title": "figma-heroui-select"
     },
     {
       "id": "figma-heroui-slider",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2123:26021",
+      "node": "",
       "title": "figma-heroui-slider"
     },
     {
       "id": "figma-heroui-spinner",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2411:8713",
+      "node": "",
       "title": "figma-heroui-spinner"
     },
     {
       "id": "figma-heroui-switch",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "1786:271",
+      "node": "",
       "title": "figma-heroui-switch"
     },
     {
       "id": "figma-heroui-table",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2611:619",
+      "node": "",
       "title": "figma-heroui-table"
     },
     {
       "id": "figma-heroui-tabs",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "1975:50564",
+      "node": "",
       "title": "figma-heroui-tabs"
     },
     {
@@ -260,77 +260,77 @@
       "id": "figma-heroui-theme-dark",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "276:20189",
+      "node": "",
       "title": "figma-heroui-theme-dark"
     },
     {
       "id": "figma-heroui-theme-light",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "276:20046",
+      "node": "",
       "title": "figma-heroui-theme-light"
     },
     {
       "id": "figma-heroui-theme-radius",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "482:17641",
+      "node": "",
       "title": "figma-heroui-theme-radius"
     },
     {
       "id": "figma-heroui-theme-shadow",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "482:20449",
+      "node": "",
       "title": "figma-heroui-theme-shadow"
     },
     {
       "id": "figma-heroui-theme-spacing",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "482:18637",
+      "node": "",
       "title": "figma-heroui-theme-spacing"
     },
     {
       "id": "figma-heroui-theme-typography",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "482:17745",
+      "node": "",
       "title": "figma-heroui-theme-typography"
     },
     {
       "id": "figma-heroui-toast",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "3592:7896",
+      "node": "",
       "title": "figma-heroui-toast"
     },
     {
       "id": "figma-heroui-tooltip",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "1552:24236",
+      "node": "",
       "title": "figma-heroui-tooltip"
     },
     {
       "id": "figma-heroui-user",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "2545:33202",
+      "node": "",
       "title": "figma-heroui-user"
     },
     {
       "id": "figma-heroui-v3-cover",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "5011:2637",
+      "node": "",
       "title": "figma-heroui-v3-cover"
     },
     {
       "id": "figma-heroui-welcome",
       "kit": "heroui",
       "file": "GAn1SrbKJYiKqz9SmHHCRm",
-      "node": "4281:261157",
+      "node": "",
       "title": "figma-heroui-welcome"
     },
     {
@@ -1111,6 +1111,13 @@
       "title": "Tabs"
     },
     {
+      "id": "figma-tailgrids-tags",
+      "kit": "tailgrids",
+      "file": "DUN5DvdK5XnoJyi9N52gu9",
+      "node": "310:14605",
+      "title": "Tag"
+    },
+    {
       "id": "figma-tailgrids-teams",
       "kit": "tailgrids",
       "file": "DUN5DvdK5XnoJyi9N52gu9",
@@ -1193,6 +1200,181 @@
       "file": "4SbNh8zIj6LYSmLbET45oO",
       "node": "2673:1596",
       "title": "Alert Dialog"
+    },
+    {
+      "id": "figma-myna-app-card-headers-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2908:5020",
+      "title": "Card Headers Block"
+    },
+    {
+      "id": "figma-myna-app-cards-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2908:5833",
+      "title": "Cards Block"
+    },
+    {
+      "id": "figma-myna-app-containers-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2908:5356",
+      "title": "Containers Block"
+    },
+    {
+      "id": "figma-myna-app-dashboard-1",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3232:1119",
+      "title": "Dashboard 1"
+    },
+    {
+      "id": "figma-myna-app-dashboard-2",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3232:1810",
+      "title": "Dashboard 2"
+    },
+    {
+      "id": "figma-myna-app-dashboard-3",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3232:2105",
+      "title": "Dashboard 3"
+    },
+    {
+      "id": "figma-myna-app-dashboard-4",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3232:2643",
+      "title": "Dashboard 4"
+    },
+    {
+      "id": "figma-myna-app-dashboard-5",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3232:2385",
+      "title": "Dashboard 5"
+    },
+    {
+      "id": "figma-myna-app-dialog-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3141:1081",
+      "title": "Dialog Block"
+    },
+    {
+      "id": "figma-myna-app-dividers-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2908:5156",
+      "title": "Dividers Block"
+    },
+    {
+      "id": "figma-myna-app-empty-states-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2908:5376",
+      "title": "Empty States Block"
+    },
+    {
+      "id": "figma-myna-app-forgot-password-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3012:2828",
+      "title": "Forgot Password Block"
+    },
+    {
+      "id": "figma-myna-app-login-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2908:5518",
+      "title": "Login Block"
+    },
+    {
+      "id": "figma-myna-app-notifications-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2908:5883",
+      "title": "Notifications Block"
+    },
+    {
+      "id": "figma-myna-app-registration-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2908:4810",
+      "title": "Registration Block"
+    },
+    {
+      "id": "figma-myna-app-section-headers-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2908:5120",
+      "title": "Section Headers Block"
+    },
+    {
+      "id": "figma-myna-assets-about",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "632:2473",
+      "title": "About"
+    },
+    {
+      "id": "figma-myna-assets-cursor",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2626:1384",
+      "title": "Cursor"
+    },
+    {
+      "id": "figma-myna-assets-flag",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2858:7474",
+      "title": "Flag"
+    },
+    {
+      "id": "figma-myna-assets-icon",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "606:1276",
+      "title": "Icon"
+    },
+    {
+      "id": "figma-myna-assets-icons-documentation",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "606:4941",
+      "title": "Icons Documentation"
+    },
+    {
+      "id": "figma-myna-assets-maps",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2855:7473",
+      "title": "Maps"
+    },
+    {
+      "id": "figma-myna-assets-payment-method-credit-cards",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2854:7386",
+      "title": "Payment Method & Credit Cards"
+    },
+    {
+      "id": "figma-myna-assets-store-badges",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2860:10109",
+      "title": "Store Badges"
+    },
+    {
+      "id": "figma-myna-assets-thumbnail",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2705:530",
+      "title": "Thumbnail"
     },
     {
       "id": "figma-myna-avatar",
@@ -1307,6 +1489,167 @@
       "title": "Dropdown Menu"
     },
     {
+      "id": "figma-myna-ds-backdrop-blur",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "14:19",
+      "title": "Backdrop Blur"
+    },
+    {
+      "id": "figma-myna-ds-blur",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "14:2",
+      "title": "Blur"
+    },
+    {
+      "id": "figma-myna-ds-border-radius",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "418:1249",
+      "title": "Border Radius"
+    },
+    {
+      "id": "figma-myna-ds-box-shadow",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3:5823",
+      "title": "Box Shadow"
+    },
+    {
+      "id": "figma-myna-ds-breakpoint-scale",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2976:2340",
+      "title": "Breakpoint Scale"
+    },
+    {
+      "id": "figma-myna-ds-colors",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2966:2682",
+      "title": "Colors"
+    },
+    {
+      "id": "figma-myna-ds-max-width-grids",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2628:1492",
+      "title": "Max Width Grids"
+    },
+    {
+      "id": "figma-myna-ds-opacity",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "418:1338",
+      "title": "Opacity"
+    },
+    {
+      "id": "figma-myna-ds-spacing-scale",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "20:1530",
+      "title": "Spacing Scale"
+    },
+    {
+      "id": "figma-myna-ds-theme-colors",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2984:2314",
+      "title": "Theme Colors"
+    },
+    {
+      "id": "figma-myna-ds-typography",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2832:4379",
+      "title": "Typography"
+    },
+    {
+      "id": "figma-myna-email-01-welcome-confirm-email",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1119",
+      "title": "Welcome confirm email"
+    },
+    {
+      "id": "figma-myna-email-02-add-friends",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1295",
+      "title": "Add friends"
+    },
+    {
+      "id": "figma-myna-email-03-beta-tester",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1203",
+      "title": "Beta tester"
+    },
+    {
+      "id": "figma-myna-email-04-friend-request",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1322",
+      "title": "Friend request"
+    },
+    {
+      "id": "figma-myna-email-05-password-reset",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1238",
+      "title": "Password reset"
+    },
+    {
+      "id": "figma-myna-email-06-account-locked",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1187",
+      "title": "Account locked"
+    },
+    {
+      "id": "figma-myna-email-07-new-device",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1162",
+      "title": "New device"
+    },
+    {
+      "id": "figma-myna-email-08-secure-account",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1131",
+      "title": "Secure account"
+    },
+    {
+      "id": "figma-myna-email-09-onboarding-survey",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1258",
+      "title": "Onboarding survey"
+    },
+    {
+      "id": "figma-myna-email-10-community-forum",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1277",
+      "title": "Community forum"
+    },
+    {
+      "id": "figma-myna-email-11-account-verified",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1147",
+      "title": "Account verified"
+    },
+    {
+      "id": "figma-myna-email-12-guide",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3000:1271",
+      "title": "Guide"
+    },
+    {
       "id": "figma-myna-hover-card",
       "kit": "myna",
       "file": "4SbNh8zIj6LYSmLbET45oO",
@@ -1347,6 +1690,90 @@
       "file": "4SbNh8zIj6LYSmLbET45oO",
       "node": "2759:2424",
       "title": "Menubar"
+    },
+    {
+      "id": "figma-myna-mkt-404-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2898:1112",
+      "title": "404 Block"
+    },
+    {
+      "id": "figma-myna-mkt-blog-list-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2899:1245",
+      "title": "Blog List Block"
+    },
+    {
+      "id": "figma-myna-mkt-blog-post-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2907:1786",
+      "title": "Blog Post Block"
+    },
+    {
+      "id": "figma-myna-mkt-call-to-action-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2907:2152",
+      "title": "Call to Action Block"
+    },
+    {
+      "id": "figma-myna-mkt-cookies-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2907:2206",
+      "title": "Cookies Block"
+    },
+    {
+      "id": "figma-myna-mkt-faq-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2907:2416",
+      "title": "FAQ Block"
+    },
+    {
+      "id": "figma-myna-mkt-features-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2907:2942",
+      "title": "Features Block"
+    },
+    {
+      "id": "figma-myna-mkt-footer-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2907:3604",
+      "title": "Footer Block"
+    },
+    {
+      "id": "figma-myna-mkt-header-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2907:3871",
+      "title": "Header Block"
+    },
+    {
+      "id": "figma-myna-mkt-hero-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "3049:1143",
+      "title": "Hero Block"
+    },
+    {
+      "id": "figma-myna-mkt-statistics-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2908:4209",
+      "title": "Statistics Block"
+    },
+    {
+      "id": "figma-myna-mkt-testimonial-logos-block",
+      "kit": "myna",
+      "file": "4SbNh8zIj6LYSmLbET45oO",
+      "node": "2908:4331",
+      "title": "Testimonial Logos Block"
     },
     {
       "id": "figma-myna-pagination",
@@ -1620,6 +2047,13 @@
       "file": "p8B6SUiQDqKFAybsVtfQp9",
       "node": "4005:1760",
       "title": "Lists Group"
+    },
+    {
+      "id": "figma-bootstrap-media-object",
+      "kit": "bootstrap",
+      "file": "p8B6SUiQDqKFAybsVtfQp9",
+      "node": "97:26",
+      "title": "Media object (Deprecated)"
     },
     {
       "id": "figma-bootstrap-modal",

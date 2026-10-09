@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-ds-colors",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2966-2682",
+  "harvested": "2026-10-09",
+  "bytes": 297926,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Colors",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2966:2682",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Colors",
+    "headings": "Colors",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Colors",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2966-2682",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2966-2682",
+    "capturedAt": "2026-10-09T14:06:44.239Z",
+    "shotSha256": "ef77578e5f5d4b36328d049a4f64a5d1b287e6569d16e53e41d66f0e5d48399a",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2966:2682",
+      "page": "Design System",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

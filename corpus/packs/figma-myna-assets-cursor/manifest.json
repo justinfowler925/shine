@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-assets-cursor",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "assets",
+    "tailwind-figma",
+    "myna",
+    "cursor"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-assets-cursor.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

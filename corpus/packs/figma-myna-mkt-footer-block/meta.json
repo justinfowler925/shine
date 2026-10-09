@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-mkt-footer-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-3604",
+  "harvested": "2026-10-09",
+  "bytes": 41345,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Footer Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2907:3604",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Footer Block",
+    "headings": "Footer Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Footer Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-3604",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-3604",
+    "capturedAt": "2026-10-09T14:06:32.408Z",
+    "shotSha256": "dcfef6f11d3809bb8bb6f51a2126233af94eb911d90d12c89653c91b2f8f2916",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2907:3604",
+      "page": "Marketing Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

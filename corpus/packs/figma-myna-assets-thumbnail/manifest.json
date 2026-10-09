@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-assets-thumbnail",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "catalog",
+    "assets",
+    "tailwind-figma",
+    "myna",
+    "thumbnail"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-assets-thumbnail.md",
+      "role": "blueprint"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

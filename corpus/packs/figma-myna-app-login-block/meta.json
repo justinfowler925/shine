@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-app-login-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5518",
+  "harvested": "2026-10-09",
+  "bytes": 70149,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Login Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2908:5518",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Login Block",
+    "headings": "Login Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Login Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5518",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5518",
+    "capturedAt": "2026-10-09T14:06:36.675Z",
+    "shotSha256": "81bb28622eddaec5af2f711302ee345361eaac317c3d050a0d7d6fda14c2360d",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2908:5518",
+      "page": "Application Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}
