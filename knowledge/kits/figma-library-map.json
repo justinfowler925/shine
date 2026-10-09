@@ -10,7 +10,7 @@
   },
   "inventoryFileKey": "Wnmb79QQ1EjdSG17tIbSyX",
   "inventoryFileUrl": "https://www.figma.com/design/Wnmb79QQ1EjdSG17tIbSyX",
-  "note": "get_libraries on a fresh Design file in Justin's Clearspeed plan. FigJam cannot list libraries. Named kits HeroUI / original Tailwind / Bootstrap were not published as team libraries \u2014 map via community refs + Studio design-corpus proxies. MUI/Material is Material 3 libraryKeys + team file f4TUS9BWk2rSH8Dqrp5Mon (Justin said \u201cMinor UI\u201d \u2014 mishear for MUI). Structure only; house paint stays shadcn/Tailwind. get_libraries on a fresh Design file in Justin's Clearspeed plan. FigJam cannot list libraries. Named kits HeroUI / original Tailwind / Bootstrap were not published as team libraries \u2014 map via Design file copies + Studio design-corpus proxies. Material/MUI target is Material 3 Design Kit fileKey f4TUS9BWk2rSH8Dqrp5Mon + Material libraryKeys; mui-material is on-disk structure proxy only (unpinned). Structure only; house paint stays shadcn/Tailwind. Cancelled misnomer: 'Minor UI' (meant MUI).",
+  "note": "get_libraries on a fresh Design file in Justin's Clearspeed plan. FigJam cannot list libraries. Named kits HeroUI / original Tailwind / Bootstrap were not published as team libraries \u2014 map via community refs + Studio design-corpus proxies. MUI/Material is Material 3 libraryKeys + team file f4TUS9BWk2rSH8Dqrp5Mon (Justin said \u201cMinor UI\u201d \u2014 mishear for MUI). Structure only; house paint stays shadcn/Tailwind.",
   "librariesSubscribed": [
     {
       "name": "Clearspeed Design System",
@@ -171,21 +171,72 @@
         "shadcn-form",
         "shadcn-queue"
       ],
-      "note": "Retired as foreign runtime for build (docs/no-foreign-runtimes.md). Steal navbar/form/overlay silhouette only; paint with house kit.",
+      "note": "Prefer-copy GAn1Srb\u2026 is COMPLETE (38 pages via use_figma figma.root.children; 2 empty section dividers). MCP get_metadata without nodeId falsely shows Welcome+Icons only. Deep harvest of Example frames + Theme/Brand/Icons/atoms into figma-heroui-* packs. Steal structure; paint house shadcn. Alt DC4g36\u2026 is optional duplicate \u2014 prefer GAn1Srb\u2026",
       "designFiles": [
         {
           "prefer": true,
           "name": "HeroUI Figma Kit (Community) (Copy)",
           "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
-          "url": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm"
+          "url": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
+          "role": "full_kit_38_pages"
         },
         {
           "prefer": false,
           "name": "HeroUI Figma Kit (Community)",
           "fileKey": "DC4g36xyt4DobtbEa11JFL",
-          "url": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL"
+          "url": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL",
+          "role": "alt_duplicate_optional"
         }
-      ]
+      ],
+      "harvestPacks": [
+        "figma-heroui-accordion",
+        "figma-heroui-alert",
+        "figma-heroui-avatar",
+        "figma-heroui-avatar-group",
+        "figma-heroui-badge",
+        "figma-heroui-brand",
+        "figma-heroui-button",
+        "figma-heroui-button-atoms",
+        "figma-heroui-button-group",
+        "figma-heroui-calendar",
+        "figma-heroui-card",
+        "figma-heroui-carousel",
+        "figma-heroui-checkbox",
+        "figma-heroui-checkbox-group",
+        "figma-heroui-chip",
+        "figma-heroui-code",
+        "figma-heroui-components",
+        "figma-heroui-cover",
+        "figma-heroui-divider",
+        "figma-heroui-figma-components",
+        "figma-heroui-icons-essential",
+        "figma-heroui-input",
+        "figma-heroui-input-otp",
+        "figma-heroui-kbd",
+        "figma-heroui-link",
+        "figma-heroui-number-input",
+        "figma-heroui-progress",
+        "figma-heroui-radio",
+        "figma-heroui-select",
+        "figma-heroui-slider",
+        "figma-heroui-spinner",
+        "figma-heroui-switch",
+        "figma-heroui-table",
+        "figma-heroui-tabs",
+        "figma-heroui-theme",
+        "figma-heroui-theme-dark",
+        "figma-heroui-theme-light",
+        "figma-heroui-theme-radius",
+        "figma-heroui-theme-shadow",
+        "figma-heroui-theme-spacing",
+        "figma-heroui-theme-typography",
+        "figma-heroui-toast",
+        "figma-heroui-tooltip",
+        "figma-heroui-user",
+        "figma-heroui-v3-cover",
+        "figma-heroui-welcome"
+      ],
+      "deepHarvestFileKey": "GAn1SrbKJYiKqz9SmHHCRm"
     },
     {
       "name": "original Tailwind",
@@ -269,8 +320,21 @@
       ]
     },
     {
-      "name": "Material UI / MUI / Material 3",
+      "name": "MUI / Material UI",
       "status": "harvested_design_file",
+      "mishear": "Justin said \u201cMinor UI\u201d; he meant MUI / Material UI. Do not hunt Minimals/MiniKIT.",
+      "communityRefs": [
+        "https://www.figma.com/community/file/1035203678047905991/material-3-design-kit"
+      ],
+      "corpusProxy": [
+        "mui-material"
+      ],
+      "shineCite": [
+        "shadcn-form",
+        "shadcn-sidebar-07",
+        "shadcn-operate-decide"
+      ],
+      "note": "Justin meant MUI/Material UI (never 'Minor UI'). Classic MUI-for-Figma preview 9YlB2B0UBLiuHuHFiKykWd is no MCP access \u2014 use Material 3 Design file + libs + on-disk mui-material structure proxy. Do not install @mui/material in consumers.",
       "designFiles": [
         {
           "prefer": true,
@@ -278,10 +342,6 @@
           "url": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon",
           "note": "Material 3 Design Kit \u2014 pages Getting Started / Styles / Components (32 boards). use_figma root.children; MCP get_metadata alone under-lists."
         }
-      ],
-      "libraryKeys": [
-        "lk-0ed47b4a992d98ca20e5243564e1a9f7b3b321b9a4bc3e769c9c349832e23b6d5bc2c529b6cde7b13fcd97f5d697f3942d52e20202fee51b63f30a890b387cd4",
-        "lk-5a31d104cabc6a74d4edf6425e7bc6575e9c0f18cda7efb746193aef4d915b077d115c985e6cf49d36d97d455a17d5127a2cbbfbc618b8a70a38669dccb61462"
       ],
       "harvestPacks": [
         "figma-m3-cover",
@@ -322,17 +382,7 @@
         "figma-m3-layout",
         "figma-m3-elements",
         "figma-m3-elevation"
-      ],
-      "corpusProxy": [
-        "mui-material"
-      ],
-      "shineCite": [
-        "shadcn-form",
-        "shadcn-sidebar-07",
-        "shadcn-operate-decide"
-      ],
-      "note": "Justin meant MUI/Material UI (never 'Minor UI'). Classic MUI-for-Figma preview 9YlB2B0UBLiuHuHFiKykWd is no MCP access \u2014 use Material 3 Design file + libs + on-disk mui-material structure proxy. Do not install @mui/material in consumers.",
-      "cancelledMisnomer": "Minor UI / Minimals / MiniKIT / Mobile DS stand-in \u2014 cancelled 2026-10-09"
+      ]
     },
     {
       "name": "Minor UI",
@@ -614,6 +664,51 @@
       ],
       "corpusProxy": "mui-material",
       "note": "Full Material 3 board harvest; mui-material remains unpinned structure proxy"
+    }
+  },
+  "heroUiDeepHarvest": {
+    "fileKey": "DC4g36xyt4DobtbEa11JFL",
+    "canvasesFound": [
+      {
+        "node": "3:23",
+        "name": "Radio"
+      },
+      {
+        "node": "696:52331",
+        "name": "Badge"
+      },
+      {
+        "node": "2545:33395",
+        "name": "Avatar Group"
+      },
+      {
+        "node": "4208:222",
+        "name": "Calendar"
+      },
+      {
+        "node": "1573:1538",
+        "name": "Progress"
+      },
+      {
+        "node": "5:1194",
+        "name": "Theme"
+      },
+      {
+        "node": "5:3550",
+        "name": "Figma Components"
+      }
+    ],
+    "note": "get_metadata without nodeId only lists Welcome+Icons; Chrome history node-ids reveal additional canvases."
+  },
+  "mishearCorrections": {
+    "Minor UI": {
+      "meant": "MUI / Material UI",
+      "correctedAt": "2026-10-09",
+      "doNotHunt": [
+        "Minimals UI",
+        "MiniKIT",
+        "Mobile DS as Minor stand-in"
+      ]
     }
   }
 }
