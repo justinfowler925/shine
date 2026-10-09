@@ -20,6 +20,8 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   `GAn1Srb…` is complete (38 pages; 2 empty dividers) — not Welcome+Icons only.
   Sibling TailGrids/Myna/Bootstrap/M3 keys folded
   (`DUN5Dvd…`, `4SbNh8…`, `p8B6SU…`, `f4TUS9…`) with `figma-harvest-packs.json`.
+  Justin’s “Minor UI” was a mishear for **MUI / Material** — map no longer
+  tracks Minimals/MiniKIT as an open gap; finish Material 3 deep harvest.
 
 ### Changed
 

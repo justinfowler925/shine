@@ -27,7 +27,9 @@ SSOT inventory + library keys: `knowledge/kits/figma-library-map.json`.
 | iOS 18 | `lk-df32…` | Native only — not Operate |
 
 Named by Justin but **not** published as team libraries: HeroUI, original Tailwind,
-Bootstrap, Minor UI. Design fileKeys + harvest packs live in the kit map
+Bootstrap. **MUI / Material** is subscribed (Material 3 libraryKeys + team file
+`f4TUS9BWk2rSH8Dqrp5Mon`) — Justin’s “Minor UI” was a mishear for MUI; do not hunt
+Minimals/MiniKIT. Design fileKeys + harvest packs live in the kit map
 (`designFiles`, `figma-harvest-packs.json`, `corpusProxy`). Closest subscribed
 stand-in for Tailwind/HeroUI gallery density: **Simple Design System**.
 

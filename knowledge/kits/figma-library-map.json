@@ -10,7 +10,7 @@
   },
   "inventoryFileKey": "Wnmb79QQ1EjdSG17tIbSyX",
   "inventoryFileUrl": "https://www.figma.com/design/Wnmb79QQ1EjdSG17tIbSyX",
-  "note": "get_libraries on a fresh Design file in Justin's Clearspeed plan. FigJam cannot list libraries. Named kits HeroUI / original Tailwind / Bootstrap / Minor UI were not published as team libraries \u2014 map them via community refs + Studio design-corpus proxies. Structure only; house paint stays shadcn/Tailwind.",
+  "note": "get_libraries on a fresh Design file in Justin's Clearspeed plan. FigJam cannot list libraries. Named kits HeroUI / original Tailwind / Bootstrap were not published as team libraries \u2014 map via community refs + Studio design-corpus proxies. MUI/Material is Material 3 libraryKeys + team file f4TUS9BWk2rSH8Dqrp5Mon (Justin said \u201cMinor UI\u201d \u2014 mishear for MUI). Structure only; house paint stays shadcn/Tailwind.",
   "librariesSubscribed": [
     {
       "name": "Clearspeed Design System",
@@ -320,18 +320,32 @@
       ]
     },
     {
-      "name": "Minor UI",
-      "status": "not_found_chrome_history",
+      "name": "MUI / Material UI",
+      "status": "design_copies_found",
+      "mishear": "Justin said \u201cMinor UI\u201d; he meant MUI / Material UI. Do not hunt Minimals/MiniKIT.",
       "communityRefs": [
-        "https://www.figma.com/community/file/1520749847339774468/minimals-ui-components",
-        "https://www.figma.com/community/file/1503752093673029506/minikit-mini-product-ui-kit"
+        "https://www.figma.com/community/file/1035203678047905991/material-3-design-kit"
       ],
-      "corpusProxy": [],
+      "corpusProxy": [
+        "mui-material"
+      ],
       "shineCite": [
-        "shadcn-form",
-        "shadcn-sidebar-07"
+        "shadcn-sidebar-07",
+        "shadcn-form"
       ],
-      "note": "Still no Design fileKey in Chrome history or plan libraries. Closest community: Minimals UI / MiniKIT. Confirm private draft with Justin. Cite shadcn-form / shadcn-sidebar-07 meanwhile."
+      "note": "Finish deep harvest. Prefer Material 3 team file f4TUS9BWk2rSH8Dqrp5Mon + subscribed Material 3 libraryKeys. Cover pack figma-m3-cover landed. Steal nav/dialog/form anatomy only; never paint Material chrome into Clearspeed Operate.",
+      "designFiles": [
+        {
+          "prefer": true,
+          "name": "Material 3 Design Kit (Community)",
+          "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+          "url": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon",
+          "libraryKey": "lk-0ed47b4a992d98ca20e5243564e1a9f7b3b321b9a4bc3e769c9c349832e23b6d5bc2c529b6cde7b13fcd97f5d697f3942d52e20202fee51b63f30a890b387cd4"
+        }
+      ],
+      "harvestPacks": [
+        "figma-m3-cover"
+      ]
     }
   ],
   "silhouetteMap": [
@@ -556,5 +570,16 @@
       }
     ],
     "note": "get_metadata without nodeId only lists Welcome+Icons; Chrome history node-ids reveal additional canvases."
+  },
+  "mishearCorrections": {
+    "Minor UI": {
+      "meant": "MUI / Material UI",
+      "correctedAt": "2026-10-09",
+      "doNotHunt": [
+        "Minimals UI",
+        "MiniKIT",
+        "Mobile DS as Minor stand-in"
+      ]
+    }
   }
 }
