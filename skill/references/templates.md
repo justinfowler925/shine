@@ -160,7 +160,7 @@ Reasons are listed under the table.
 | catalog | `figma-bootstrap-shadows` | shadcn-registry | blueprint | live | catalog, shadows, bootstrap-figma |
 | catalog | `figma-bootstrap-spacer` | shadcn-registry | blueprint | live | catalog, spacer, bootstrap-figma |
 | catalog | `figma-bootstrap-typography` | shadcn-registry | blueprint | live | catalog, typography, bootstrap-figma |
-| catalog | `figma-m3-badges` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, badges, material-3-—-badges |
+| catalog | `figma-m3-badges` | shadcn-registry | blueprint | live | figma-kit |
 | catalog | `figma-m3-bottom-app-bars` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, bottom-app-bars, material-3-—-bottom-app-bars |
 | catalog | `figma-m3-bottom-sheets` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, bottom-sheets, material-3-—-bottom-sheets |
 | catalog | `figma-m3-buttons` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, buttons, material-3-—-buttons |
@@ -176,7 +176,7 @@ Reasons are listed under the table.
 | catalog | `figma-m3-elevation` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, elevation, material-3-—-elevation |
 | catalog | `figma-m3-fabs` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, fabs, material-3-—-fabs |
 | catalog | `figma-m3-icon-buttons` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, icon-buttons, material-3-—-icon-buttons |
-| catalog | `figma-m3-layout` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, layout, material-3-—-layout |
+| catalog | `figma-m3-layout` | shadcn-registry | blueprint | live | figma-kit |
 | catalog | `figma-m3-lists` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, lists, material-3-—-lists |
 | catalog | `figma-m3-menu` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, menu, material-3-—-menu |
 | catalog | `figma-m3-navigation-bars` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, navigation-bars, material-3-—-navigation-bars |
@@ -648,7 +648,7 @@ Reasons are listed under the table.
 | queue | `figma-myna-pagination` | shadcn-registry | blueprint | live | queue, pagination, tailwind-figma, myna |
 | queue | `figma-myna-table` | shadcn-registry | blueprint | live | queue, table, tailwind-figma, myna |
 | queue | `figma-tailgrids-table-grids` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, table-grids, table-grids, queue |
-| queue | `figma-tailgrids-table-stack` | shadcn-registry | blueprint | live | figma-kit, tailwind-figma, tailgrids, table-stack, tailwind-tailgrids-table-stack-list |
+| queue | `figma-tailgrids-table-stack` | shadcn-registry | blueprint | live | figma-kit |
 | queue | `figma-tailgrids-table-stacks` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, table-stacks, table-stacks, queue |
 | queue | `figma-tailgrids-tables` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, tables, tables, queue |
 | queue | `flowbite-users` | flowbite-admin | source | live | queue, crud, table, records, users, admin |

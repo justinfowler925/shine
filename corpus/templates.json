@@ -3672,12 +3672,7 @@
       "kind": "blueprint",
       "startFrom": 5,
       "jobs": [
-        "figma-kit",
-        "material-figma",
-        "mui",
-        "material3",
-        "badges",
-        "material-3-—-badges"
+        "figma-kit"
       ],
       "dna": {
         "family": "shadcn-zinc",
@@ -4088,12 +4083,7 @@
       "kind": "blueprint",
       "startFrom": 5,
       "jobs": [
-        "figma-kit",
-        "material-figma",
-        "mui",
-        "material3",
-        "layout",
-        "material-3-—-layout"
+        "figma-kit"
       ],
       "dna": {
         "family": "shadcn-zinc",
@@ -16195,11 +16185,7 @@
       "kind": "blueprint",
       "startFrom": 5,
       "jobs": [
-        "figma-kit",
-        "tailwind-figma",
-        "tailgrids",
-        "table-stack",
-        "tailwind-tailgrids-table-stack-list"
+        "figma-kit"
       ],
       "dna": {
         "family": "shadcn-zinc",
