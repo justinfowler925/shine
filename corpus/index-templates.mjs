@@ -22,6 +22,11 @@ import { existsSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync 
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
+import {
+  buildHeroUiAtomRows,
+  buildHeroUiPageRows,
+  missingTailwindPages,
+} from "./index-kit-walk.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CORPUS = resolve(process.env.DESIGN_CORPUS || join(homedir(), "design-corpus"));
@@ -146,9 +151,11 @@ const exists = (rel) => existsSync(join(CORPUS, rel));
 // kits earned the hard lane because a retired row is a row an agent can still read
 // and imitate.
 const HOUSE_KIT = "shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against";
+// 2026-10-09 Justin override: HeroUI is a walking design kit again — cite must
+// retrieve HeroUI screens. Clearspeed Operate still prefers house shadcn via
+// installedKits / edition siblings; kit affinity ports foreign structure.
 const RETIRED = {
   "mantine-appshell": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
-  "heroui-next-app": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
   "tremor-charts": "shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it",
 };
 
@@ -610,6 +617,32 @@ for (const t of TAILWIND_PAGES) {
     ...(sources.length ? { sources } : {}),
     license: "MIT", kind: "source", startFrom: t.rank, jobs: t.jobs, scope: "page",
     ...(t.required ? { reference: { required: t.required } } : {}),
+  });
+}
+
+// ---- Kit-walk: missing Tailwind pages + full HeroUI atom/page catalog --------
+// Justin 2026-10-09: absorb HeroUI + Tailwind kits so Wireframe→Build cites
+// proven silhouettes instead of accordion landfill. Inventories live in the
+// Shine Project store (heroui-kit-inventory.md / tailwind-kit-inventory.md).
+for (const t of missingTailwindPages()) {
+  if (!exists(t.path)) continue;
+  const sources = companionSources(t.path);
+  push({
+    id: t.id, screen: t.screen, kit: t.kit, title: t.title, path: t.path, preview: t.preview,
+    ...(sources.length ? { sources } : {}),
+    license: "MIT", kind: "source", startFrom: t.rank, jobs: t.jobs,
+    scope: t.screen === "form" && /gallery|UiElements|Buttons|Cards|Modals|alerts|badges/.test(t.path + t.title)
+      ? "component"
+      : "page",
+  });
+}
+const kitWalkCtx = { exists, corpus: CORPUS };
+for (const t of [...buildHeroUiAtomRows(kitWalkCtx), ...buildHeroUiPageRows(kitWalkCtx)]) {
+  if (!exists(t.path)) continue;
+  push({
+    id: t.id, screen: t.screen, kit: t.kit, title: t.title, path: t.path, preview: t.preview,
+    license: t.license, kind: t.kind, startFrom: t.startFrom, jobs: t.jobs, scope: t.scope,
+    ...(t.note ? { note: t.note } : {}),
   });
 }
 

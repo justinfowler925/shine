@@ -4,6 +4,18 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ## Unreleased
 
+### Added
+
+- **Figma / kit-walk absorb (HeroUI + Tailwind).** Brand-agnostic map
+  `knowledge/kits/figma-library-map.json` + `skill/references/figma-kits.md`.
+  Un-retired `heroui-next-app`; indexed ~82 HeroUI atoms + next-app pages and
+  missing Flowbite/TailAdmin/Windmill/Untitled pages via `corpus/index-kit-walk.mjs`.
+  Catalog ~237→353 rows. Cite retrieves `heroui-button`, `flowbite-sign-up`,
+  Tailwind dashboards. Doctor: `verify/kit-walk-cite.test.mjs`,
+  `verify/figma-kit-map.test.mjs`. Anti-pattern `kit-silhouette-bypass`.
+  Silhouette examples under `corpus/blueprints/figma-kit-silhouettes/`.
+  HeroUI Figma prefer fileKey `GAn1SrbKJYiKqz9SmHHCRm`.
+
 ### Changed
 
 - **Operate redesign is Wireframe→Build from cite, not denoise theater.** Decide /

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-form" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc" data-kit-map="figma-library-map" data-figma-sources="Simple Design System fields;HeroUI form gallery proxy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kit silhouette — form stack</title>
+  <link rel="stylesheet" href="../../../tokens/voices/shadcn-zinc.css">
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#fafafa;color:#18181b;font:14px/1.45 ui-sans-serif,system-ui}
+    main{max-width:720px;margin:0 auto;padding:28px 24px}
+    h1{margin:0 0 6px;font-size:22px;letter-spacing:-.02em}
+    .purpose{margin:0 0 20px;color:#52525b}
+    h2{margin:24px 0 8px;font-size:15px}
+    .stack{background:#fff;border:1px solid #e4e4e7;border-radius:10px;padding:0 16px;divide-y}
+    .row{padding:14px 0;border-top:1px solid #f4f4f5}
+    .row:first-child{border-top:0}
+    label{display:block;font-weight:600;margin:0 0 6px}
+    .help{margin:6px 0 0;color:#71717a;font-size:12px}
+    input,select,textarea{width:100%;min-height:36px;padding:8px 12px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;font:inherit}
+    textarea{min-height:96px;resize:vertical}
+    .actions{display:flex;gap:8px;margin-top:20px}
+    .btn{min-height:36px;padding:0 14px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;font:600 13px/1 ui-sans-serif;cursor:pointer}
+    .btn.filled{background:#18181b;border-color:#18181b;color:#fafafa}
+    #status{margin:12px 0 0;color:#52525b;min-height:1.2em}
+    .note{margin:16px 0 0;color:#71717a;font-size:12px}
+  </style>
+</head>
+<body>
+  <main data-shine-main data-region="form-app">
+    <h1 data-page-title>Create opportunity</h1>
+    <p class="purpose">SDS field stack silhouette · one entity · submit validates together</p>
+
+    <form data-region="form-app">
+      <h2>Basics</h2>
+      <div class="stack">
+        <div class="row">
+          <label for="title">Title <span aria-hidden="true">· Required</span></label>
+          <input id="title" name="title" required aria-required="true">
+          <p class="help">Reader-facing name, not an internal code.</p>
+        </div>
+        <div class="row">
+          <label for="agency">Agency</label>
+          <select id="agency" name="agency">
+            <option>GSA</option>
+            <option>DHS</option>
+          </select>
+        </div>
+      </div>
+
+      <h2>Owner &amp; timing</h2>
+      <div class="stack">
+        <div class="row">
+          <label for="owner">Owner</label>
+          <input id="owner" name="owner" value="Alex Rivera">
+        </div>
+        <div class="row">
+          <label for="due">Due date</label>
+          <input id="due" name="due" type="date">
+        </div>
+      </div>
+
+      <h2>Notes</h2>
+      <div class="stack">
+        <div class="row">
+          <label for="notes">Context</label>
+          <textarea id="notes" name="notes"></textarea>
+          <p class="help">Optional. Keep decision facts, not essays.</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn filled">Create opportunity</button>
+        <button type="button" class="btn">Cancel</button>
+      </div>
+      <p id="status" role="status">Ready to create.</p>
+    </form>
+    <p class="note">Ban: card-per-field · disabled submit with no reason · wizard when one screen fits</p>
+  </main>
+</body>
+</html>

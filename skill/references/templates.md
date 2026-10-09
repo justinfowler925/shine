@@ -35,11 +35,27 @@ Reasons are listed under the table.
 | app-shell | `untitled-sidebar-navigation` | untitled-ui-react | source | live | app-shell, navigation, sidebar |
 | app-shell | `untitled-header-navigation` | untitled-ui-react | source | live | app-shell, navigation, header, topbar, horizontal-nav |
 | app-shell | `untitled-featured-cards` | untitled-ui-react | source | live | app-shell, navigation, featured, usage, upgrade-prompt |
+| app-shell | `heroui-docs` | heroui | source | live | app-shell, docs, heroui |
 | app-shell | `mantine-appshell` | mantine | source | **retired** | app-shell, shell, nav, sidebar |
-| app-shell | `heroui-next-app` | heroui | source | **retired** | app-shell, shell, nav, sidebar |
+| app-shell | `heroui-next-app` | heroui | source | live | app-shell, shell, nav, sidebar |
+| app-shell | `heroui-accordion` | heroui | source | live | app-shell, navigation, heroui, accordion |
+| app-shell | `heroui-breadcrumbs` | heroui | source | live | app-shell, navigation, heroui, breadcrumbs |
+| app-shell | `heroui-disclosure` | heroui | source | live | app-shell, navigation, heroui, disclosure |
+| app-shell | `heroui-disclosure-group` | heroui | source | live | app-shell, navigation, heroui, disclosure-group |
+| app-shell | `heroui-header` | heroui | source | live | app-shell, navigation, heroui, header |
+| app-shell | `heroui-link` | heroui | source | live | app-shell, navigation, heroui, link |
+| app-shell | `heroui-tabs` | heroui | source | live | app-shell, navigation, heroui, tabs |
+| app-shell | `heroui-toolbar` | heroui | source | live | app-shell, navigation, heroui, toolbar |
 | app-shell | `query-adminlte` | adminlte | query-only | live | app-shell, shell, nav, sidebar |
 | app-shell | `query-primeblocks` | primeblocks | query-only | live | app-shell, shell, nav, sidebar |
 | async-state | `untitled-loading-indicator` | untitled-ui-react | source | live | loading, spinner, pending, async, skeleton |
+| async-state | `heroui-alert` | heroui | source | live | async-state, loading, feedback, heroui, alert |
+| async-state | `heroui-empty-state` | heroui | source | live | async-state, loading, feedback, heroui, empty-state |
+| async-state | `heroui-meter` | heroui | source | live | async-state, loading, feedback, heroui, meter |
+| async-state | `heroui-progress-bar` | heroui | source | live | async-state, loading, feedback, heroui, progress-bar |
+| async-state | `heroui-progress-circle` | heroui | source | live | async-state, loading, feedback, heroui, progress-circle |
+| async-state | `heroui-skeleton` | heroui | source | live | async-state, loading, feedback, heroui, skeleton |
+| async-state | `heroui-spinner` | heroui | source | live | async-state, loading, feedback, heroui, spinner |
 | auth | `shadcn-login-01` | shadcn-registry | source | live | auth, login, signin, signup, sign-in |
 | auth | `shadcn-login-02` | shadcn-registry | source | live | auth, login, signin, signup, sign-in |
 | auth | `shadcn-login-03` | shadcn-registry | source | live | auth, login, signin, signup, sign-in |
@@ -51,12 +67,29 @@ Reasons are listed under the table.
 | auth | `shadcn-signup-05` | shadcn-registry | source | live | auth, login, signin, signup, sign-up |
 | auth | `shadcn-login-04` | shadcn-registry | source | live | auth, login, signin, signup |
 | auth | `tailadmin-signin` | tailadmin-react | source | live | auth, login, signin, sign-in |
+| auth | `tailadmin-signup` | tailadmin-react | source | live | auth, signup, sign-up, register |
 | auth | `windmill-login` | windmill-react | source | live | auth, login, signin, sign-in |
 | auth | `windmill-create-account` | windmill-react | source | live | auth, signup, sign-up, register |
 | auth | `flowbite-sign-in` | flowbite-admin | source | live | auth, login, signin, sign-in |
+| auth | `windmill-forgot-password` | windmill-react | source | live | auth, forgot-password, recovery |
+| auth | `flowbite-sign-up` | flowbite-admin | source | live | auth, signup, sign-up, register |
+| auth | `flowbite-forgot-password` | flowbite-admin | source | live | auth, forgot-password, reset, recovery |
+| auth | `flowbite-reset-password` | flowbite-admin | source | live | auth, reset-password, password, recovery |
+| auth | `flowbite-profile-lock` | flowbite-admin | source | live | auth, lock-screen, reauth, session |
 | blog | `shadcn-blog` | shadcn-registry | blueprint | live | blog, article, editorial, post |
+| blog | `heroui-blog` | heroui | source | live | blog, article, heroui |
+| blog | `heroui-kbd` | heroui | source | live | typography, heroui, kbd |
+| blog | `heroui-typography` | heroui | source | live | typography, heroui, typography |
 | broadcast | `shadcn-broadcast` | shadcn-registry | blueprint | live | broadcast, video, media, player, television, presenter |
 | calendar | `tailadmin-calendar` | tailadmin-react | source | live | calendar, schedule, events, agenda, month-view |
+| calendar | `heroui-calendar` | heroui | source | live | calendar, form, date, heroui, calendar |
+| calendar | `heroui-calendar-year-picker` | heroui | source | live | calendar, form, date, heroui, calendar-year-picker |
+| calendar | `heroui-date-field` | heroui | source | live | calendar, form, date, heroui, date-field |
+| calendar | `heroui-date-input-group` | heroui | source | live | calendar, form, date, heroui, date-input-group |
+| calendar | `heroui-date-picker` | heroui | source | live | calendar, form, date, heroui, date-picker |
+| calendar | `heroui-date-range-picker` | heroui | source | live | calendar, form, date, heroui, date-range-picker |
+| calendar | `heroui-range-calendar` | heroui | source | live | calendar, form, date, heroui, range-calendar |
+| calendar | `heroui-time-field` | heroui | source | live | calendar, form, date, heroui, time-field |
 | carousel | `untitled-carousel` | untitled-ui-react | source | live | carousel, gallery, slides, slideshow |
 | carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
 | catalog | `shadcn-catalog` | shadcn-registry | blueprint | live | catalog, cards, library, packages, directory, gallery, showcase, tools |
@@ -64,6 +97,12 @@ Reasons are listed under the table.
 | catalog | `shadcn-catalog-skills` | shadcn-registry | blueprint | live | catalog, cards, library, skills, agents, packages, directory |
 | catalog | `shadcn-catalog-templates` | shadcn-registry | blueprint | live | catalog, cards, library, templates, gallery, showcase, directory |
 | catalog | `shadcn-catalog-tools` | shadcn-registry | blueprint | live | catalog, cards, library, tools, packages, company-tools, directory |
+| catalog | `windmill-cards` | windmill-react | source | live | component, card, catalog |
+| catalog | `tailadmin-images` | tailadmin-react | source | live | component, image, media, gallery |
+| catalog | `heroui-card` | heroui | source | live | catalog, layout, heroui, card |
+| catalog | `heroui-separator` | heroui | source | live | catalog, layout, heroui, separator |
+| catalog | `heroui-surface` | heroui | source | live | catalog, layout, heroui, surface |
+| catalog | `tailadmin-videos` | tailadmin-react | source | live | component, video, media, player |
 | charts | `shadcn-chart-area-axes` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-default` | shadcn-registry | source | live | charts, chart, area, analytics |
 | charts | `shadcn-chart-area-gradient` | shadcn-registry | source | live | charts, chart, area, analytics |
@@ -141,6 +180,8 @@ Reasons are listed under the table.
 | charts | `untitled-progress-circles` | untitled-ui-react | source | live | charts, chart, progress, completion, kpi, dataviz |
 | charts | `untitled-radar-charts` | untitled-ui-react | source | live | charts, chart, radar, profile, comparison, dataviz |
 | charts | `windmill-charts` | windmill-react | source | live | charts, chart, analytics, dataviz |
+| charts | `tailadmin-bar-chart` | tailadmin-react | source | live | charts, chart, bar, analytics, dataviz |
+| charts | `tailadmin-line-chart` | tailadmin-react | source | live | charts, chart, line, analytics, dataviz |
 | chat | `shadcn-chat` | shadcn-registry | blueprint | live | chat, assistant, conversation, thread |
 | chat | `shadcn-chat-inbox` | shadcn-registry | blueprint | live | chat, assistant, inbox, threads, conversation |
 | chat | `shadcn-chat-sidecar` | shadcn-registry | blueprint | live | chat, assistant, sidecar, conversation, copilot |
@@ -162,12 +203,75 @@ Reasons are listed under the table.
 | dashboard | `query-shadcn-blocks` | shadcn-registry | query-only | live | dashboard |
 | dashboard | `query-haze` | haze | query-only | live | dashboard |
 | empty | `shadcn-empty-icon` | shadcn-registry | source | live | empty, ai-generate |
+| empty | `tailadmin-blank` | tailadmin-react | source | live | empty, blank, starter, canvas |
+| empty | `untitled-empty-state` | untitled-ui-react | source | live | empty, empty-state, zero |
+| empty | `flowbite-404` | flowbite-admin | source | live | empty, 404, not-found, error |
+| empty | `tailadmin-not-found` | tailadmin-react | source | live | empty, 404, not-found, error |
+| empty | `flowbite-500` | flowbite-admin | source | live | empty, 500, server-error, error |
+| empty | `windmill-404` | windmill-react | source | live | empty, 404, not-found, error |
+| empty | `flowbite-maintenance` | flowbite-admin | source | live | empty, maintenance, downtime, status |
+| empty | `windmill-blank` | windmill-react | source | live | empty, blank, starter |
 | form | `shadcn-form` | shadcn-registry | blueprint | live | form, form-app, input, fields, create, edit |
 | form | `shadcn-form-invite` | shadcn-registry | blueprint | live | form, form-app, invite, invite-teammate |
 | form | `untitled-date-picker` | untitled-ui-react | source | live | form, input, date, date-range, calendar, picker |
 | form | `tailadmin-form-elements` | tailadmin-react | source | live | form, form-app, input, fields, controls |
 | form | `untitled-file-upload` | untitled-ui-react | source | live | form, input, upload, attachments, dropzone, files |
 | form | `windmill-forms` | windmill-react | source | live | form, form-app, input, fields, validation |
+| form | `untitled-modals` | untitled-ui-react | source | live | overlay, modal, dialog |
+| form | `tailadmin-alerts` | tailadmin-react | source | live | component, alert, feedback, banner, tailadmin |
+| form | `untitled-slideout` | untitled-ui-react | source | live | overlay, sheet, slideout, drawer |
+| form | `tailadmin-badges` | tailadmin-react | source | live | component, badge, status, chip |
+| form | `windmill-buttons` | windmill-react | source | live | component, button, cta |
+| form | `heroui-alert-dialog` | heroui | source | live | overlay, dialog, heroui, alert-dialog |
+| form | `heroui-autocomplete` | heroui | source | live | form, form-app, input, fields, heroui, autocomplete |
+| form | `heroui-button` | heroui | source | live | form, chrome, button, heroui, button |
+| form | `heroui-button-group` | heroui | source | live | form, chrome, button, heroui, button-group |
+| form | `heroui-checkbox` | heroui | source | live | form, form-app, input, fields, heroui, checkbox |
+| form | `heroui-checkbox-group` | heroui | source | live | form, form-app, input, fields, heroui, checkbox-group |
+| form | `heroui-close-button` | heroui | source | live | form, chrome, button, heroui, close-button |
+| form | `heroui-color-area` | heroui | source | live | form, picker, color, heroui, color-area |
+| form | `heroui-color-field` | heroui | source | live | form, picker, color, heroui, color-field |
+| form | `heroui-color-input-group` | heroui | source | live | form, picker, color, heroui, color-input-group |
+| form | `heroui-color-picker` | heroui | source | live | form, picker, color, heroui, color-picker |
+| form | `heroui-color-slider` | heroui | source | live | form, picker, color, heroui, color-slider |
+| form | `heroui-color-swatch` | heroui | source | live | form, picker, color, heroui, color-swatch |
+| form | `heroui-color-swatch-picker` | heroui | source | live | form, picker, color, heroui, color-swatch-picker |
+| form | `heroui-combo-box` | heroui | source | live | form, form-app, input, fields, heroui, combo-box |
+| form | `heroui-description` | heroui | source | live | form, form-app, input, fields, heroui, description |
+| form | `heroui-drawer` | heroui | source | live | overlay, dialog, heroui, drawer |
+| form | `heroui-dropdown` | heroui | source | live | form, menu, collections, heroui, dropdown |
+| form | `heroui-error-message` | heroui | source | live | form, form-app, input, fields, heroui, error-message |
+| form | `heroui-field-error` | heroui | source | live | form, form-app, input, fields, heroui, field-error |
+| form | `heroui-fieldset` | heroui | source | live | form, form-app, input, fields, heroui, fieldset |
+| form | `heroui-form` | heroui | source | live | form, form-app, input, fields, heroui, form |
+| form | `heroui-input` | heroui | source | live | form, form-app, input, fields, heroui, input |
+| form | `heroui-input-group` | heroui | source | live | form, form-app, input, fields, heroui, input-group |
+| form | `heroui-input-otp` | heroui | source | live | form, form-app, input, fields, heroui, input-otp |
+| form | `heroui-label` | heroui | source | live | form, form-app, input, fields, heroui, label |
+| form | `heroui-menu` | heroui | source | live | form, menu, collections, heroui, menu |
+| form | `heroui-menu-item` | heroui | source | live | form, menu, collections, heroui, menu-item |
+| form | `heroui-menu-section` | heroui | source | live | form, menu, collections, heroui, menu-section |
+| form | `heroui-modal` | heroui | source | live | overlay, dialog, heroui, modal |
+| form | `heroui-number-field` | heroui | source | live | form, form-app, input, fields, heroui, number-field |
+| form | `heroui-popover` | heroui | source | live | overlay, dialog, heroui, popover |
+| form | `heroui-radio` | heroui | source | live | form, form-app, input, fields, heroui, radio |
+| form | `heroui-radio-group` | heroui | source | live | form, form-app, input, fields, heroui, radio-group |
+| form | `heroui-scroll-shadow` | heroui | source | live | component, heroui, scroll-shadow |
+| form | `heroui-search-field` | heroui | source | live | form, form-app, input, fields, heroui, search-field |
+| form | `heroui-select` | heroui | source | live | form, form-app, input, fields, heroui, select |
+| form | `heroui-slider` | heroui | source | live | form, form-app, input, fields, heroui, slider |
+| form | `heroui-switch` | heroui | source | live | form, form-app, input, fields, heroui, switch |
+| form | `heroui-switch-group` | heroui | source | live | form, form-app, input, fields, heroui, switch-group |
+| form | `heroui-tag` | heroui | source | live | form, menu, collections, heroui, tag |
+| form | `heroui-tag-group` | heroui | source | live | form, menu, collections, heroui, tag-group |
+| form | `heroui-textarea` | heroui | source | live | form, form-app, input, fields, heroui, textarea |
+| form | `heroui-textfield` | heroui | source | live | form, form-app, input, fields, heroui, textfield |
+| form | `heroui-toast` | heroui | source | live | overlay, dialog, heroui, toast |
+| form | `heroui-toggle-button` | heroui | source | live | form, chrome, button, heroui, toggle-button |
+| form | `heroui-toggle-button-group` | heroui | source | live | form, chrome, button, heroui, toggle-button-group |
+| form | `heroui-tooltip` | heroui | source | live | overlay, dialog, heroui, tooltip |
+| form | `tailadmin-buttons` | tailadmin-react | source | live | component, button, cta, controls |
+| form | `windmill-modals` | windmill-react | source | live | component, modal, overlay, dialog |
 | lex-console | `lex-console` | slds | blueprint | live | lex-console |
 | lex-email | `lex-email` | slds | blueprint | live | lex-email, email |
 | lex-lwr | `lex-lwr` | slds | blueprint | live | lex-lwr |
@@ -176,6 +280,8 @@ Reasons are listed under the table.
 | lex-record | `lex-record` | slds | blueprint | live | lex-record, record, detail, lightning, lwc |
 | lex-record | `lex-record-narrow` | slds | blueprint | live | lex-record-narrow, lex-record |
 | marketing | `shadcn-marketing` | shadcn-registry | blueprint | live | marketing, landing, pricing |
+| marketing | `heroui-home` | heroui | source | live | marketing, landing, heroui, home |
+| marketing | `heroui-about` | heroui | source | live | marketing, about, heroui |
 | marketing-developer | `magicui-code-comparison-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
 | marketing-developer | `magicui-file-tree-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
 | marketing-developer | `magicui-terminal-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
@@ -232,6 +338,7 @@ Reasons are listed under the table.
 | onboarding | `cult-intro-disclosure` | cult-ui | source | live | onboarding, intro, whats-new, feature-announcement, disclosure |
 | pagination | `untitled-pagination` | untitled-ui-react | source | live | pagination, paging, page-size, pager |
 | pricing | `flowbite-pricing` | flowbite-admin | source | live | pricing, plans, tiers, marketing, landing |
+| pricing | `heroui-pricing` | heroui | source | live | pricing, plans, marketing, heroui |
 | queue | `shadcn-operate-decide` | shadcn-registry | blueprint | live | queue, worklist, triage, decide, decide-queue, sled, pursue, inbox, datagrid |
 | queue | `untitled-table` | untitled-ui-react | source | live | queue, crud, table, records, datagrid |
 | queue | `shadcn-queue` | shadcn-registry | blueprint | live | queue, worklist, triage, inbox, datagrid |
@@ -239,9 +346,18 @@ Reasons are listed under the table.
 | queue | `windmill-tables` | windmill-react | source | live | queue, crud, table, records, datagrid |
 | queue | `flowbite-users` | flowbite-admin | source | live | queue, crud, table, records, users, admin |
 | queue | `flowbite-products` | flowbite-admin | source | live | queue, crud, table, products, inventory, catalog |
+| queue | `heroui-list-box` | heroui | source | live | queue, table, crud, heroui, list-box |
+| queue | `heroui-list-box-item` | heroui | source | live | queue, table, crud, heroui, list-box-item |
+| queue | `heroui-list-box-section` | heroui | source | live | queue, table, crud, heroui, list-box-section |
+| queue | `heroui-pagination` | heroui | source | live | queue, table, crud, heroui, pagination |
+| queue | `heroui-table` | heroui | source | live | queue, table, crud, heroui, table |
 | record | `shadcn-record` | shadcn-registry | blueprint | live | record, detail, account, opportunity |
 | record | `shadcn-record-account` | shadcn-registry | blueprint | live | record, account, detail, customer |
 | record | `tailadmin-profile` | tailadmin-react | source | live | record, profile, detail, account, user |
+| record | `tailadmin-avatars` | tailadmin-react | source | live | component, avatar, identity |
+| record | `heroui-avatar` | heroui | source | live | record, data-display, heroui, avatar |
+| record | `heroui-badge` | heroui | source | live | record, data-display, heroui, badge |
+| record | `heroui-chip` | heroui | source | live | record, data-display, heroui, chip |
 | settings | `shadcn-settings` | shadcn-registry | blueprint | live | settings, preferences, account |
 | settings | `shadcn-settings-billing` | shadcn-registry | blueprint | live | settings, billing, plan, seats |
 | settings | `shadcn-settings-members` | shadcn-registry | blueprint | live | settings, members, roles, access |
@@ -252,11 +368,10 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-237 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+353 rows, 2 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
 - `mantine-appshell` — shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)
-- `heroui-next-app` — shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)
 - `tremor-charts` — shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it
 
