@@ -10,7 +10,8 @@
   "files": [
     {
       "path": "figma-bootstrap-pagination.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "b0cb9b5492cc8188613aa0b82145c9b359b9996f58dd2e1d12728508dbd8ee7a"
     }
   ],
   "shot": "shot.png",

@@ -10,7 +10,8 @@
   "files": [
     {
       "path": "figma-bootstrap-navbar.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "4ff119acbd091cfb606f55ca5d0678b5d2f4b9828f6fa9f2014d812bd3bedfaf"
     }
   ],
   "shot": "shot.png",

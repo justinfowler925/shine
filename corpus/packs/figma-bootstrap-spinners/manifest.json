@@ -10,7 +10,8 @@
   "files": [
     {
       "path": "figma-bootstrap-spinners.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "45ded80fbe0ac79cb14d4332fe34a20bf752e54e141fc319b09ee1e93960ff02"
     }
   ],
   "shot": "shot.png",

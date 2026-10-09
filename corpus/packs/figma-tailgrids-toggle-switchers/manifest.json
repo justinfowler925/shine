@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-tailgrids-toggle-switchers.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "861d63252b07f84604d11d33061c88794514dd34bae5d2a14e030c5427e274bc"
     }
   ],
   "shot": "shot.png",

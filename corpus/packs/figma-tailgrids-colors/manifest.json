@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-tailgrids-colors.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "731e9f08ced793a580b510c106c3fcd054f5fb5c98004fd1117af3ca9d355052"
     }
   ],
   "shot": "shot.png",

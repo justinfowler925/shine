@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-mkt-hero-block.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "8ccd6cdb035002176139d5026242a8da4d489e075f0a7340d4d2b5108bc8507a"
     }
   ],
   "shot": "shot.png",

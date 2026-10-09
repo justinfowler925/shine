@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-app-empty-states-block.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "77ca52e75215a3c5482919f29fbfdccc48624840574d2ace37b455f6e141fd4f"
     }
   ],
   "shot": "shot.png",

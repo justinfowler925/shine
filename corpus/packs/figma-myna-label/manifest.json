@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-label.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "65db909b7e6f83b1e6a632cc0524eedee099317d84622f7694d5d31f33c4fa50"
     }
   ],
   "shot": "shot.png",

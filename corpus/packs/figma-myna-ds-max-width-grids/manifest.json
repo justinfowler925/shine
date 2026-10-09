@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-myna-ds-max-width-grids.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "dbc0b47a94e0632e88a748b5879b9ed17f13e21b32c4ce2fb976ed6daee2b664"
     }
   ],
   "shot": "shot.png",

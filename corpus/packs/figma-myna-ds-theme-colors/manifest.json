@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-myna-ds-theme-colors.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "ec59c036a51fdc34c376dcf46ef9bc6380a764e3c3a242add70db5193dd6fc38"
     }
   ],
   "shot": "shot.png",

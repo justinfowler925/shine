@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-app-dividers-block.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "cb71faa4fd60a2feb384f29681495e9f6775c7bb67e198e73e3622fe24962769"
     }
   ],
   "shot": "shot.png",

@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-email-01-welcome-confirm-email.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "e723dc0b939a0c4a5849262c413cecf0004f1dda74b1514233b0f8180c28c162"
     }
   ],
   "shot": "shot.png",

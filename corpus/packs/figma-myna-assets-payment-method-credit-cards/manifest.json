@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-myna-assets-payment-method-credit-cards.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "4310f2423926ad8acb577bf9539e1eca9afaf6392849a5b57f5a46baa2529b3e"
     }
   ],
   "shot": "shot.png",

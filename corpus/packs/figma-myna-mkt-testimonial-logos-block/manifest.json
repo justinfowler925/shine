@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-mkt-testimonial-logos-block.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "4c3f7159c3382fcd777423ce49b200b78d00e0fb49282dd6af8a54e0d52ba031"
     }
   ],
   "shot": "shot.png",

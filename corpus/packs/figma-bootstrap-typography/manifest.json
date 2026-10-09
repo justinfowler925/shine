@@ -10,7 +10,8 @@
   "files": [
     {
       "path": "figma-bootstrap-typography.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "bfaa9e70ac585ca35aa55591d4967c95cdb0d83cf2d284e5b8c5072da1690405"
     }
   ],
   "shot": "shot.png",

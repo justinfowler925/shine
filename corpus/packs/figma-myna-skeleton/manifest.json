@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-skeleton.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "6f9b9228eb812d713767ae40759073067c2a4234d1c648d6a5e75d3498aa6d5f"
     }
   ],
   "shot": "shot.png",

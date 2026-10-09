@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-scrollbar.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "c320eff5dd1fd4d1a09db483010ef7b01bad32023148b0c675418de575441e80"
     }
   ],
   "shot": "shot.png",

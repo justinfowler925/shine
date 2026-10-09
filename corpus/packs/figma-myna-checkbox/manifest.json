@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-checkbox.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "a054cfd6c467765b62ac0670e26c417addc1e342354b4ea3b24fbedfd4ef3103"
     }
   ],
   "shot": "shot.png",

@@ -10,7 +10,8 @@
   "files": [
     {
       "path": "figma-bootstrap-button-group.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "bbf68c399e2f3c45f919a39dcbb9b4cb1deb66645fe9c2281b4183332344228f"
     }
   ],
   "shot": "shot.png",

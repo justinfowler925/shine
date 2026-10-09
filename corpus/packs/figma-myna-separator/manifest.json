@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-separator.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "ed1ae37f27dc788ab6b86ed48e1a055c9335c99bd8e15603fa26d28fbae648b8"
     }
   ],
   "shot": "shot.png",

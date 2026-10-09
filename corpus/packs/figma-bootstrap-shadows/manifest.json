@@ -10,7 +10,8 @@
   "files": [
     {
       "path": "figma-bootstrap-shadows.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "3def4e8280b8c41d0f1056f71d67a44e35fc1a1020a11344bcd258916d163774"
     }
   ],
   "shot": "shot.png",

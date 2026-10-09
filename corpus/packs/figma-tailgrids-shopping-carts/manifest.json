@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-tailgrids-shopping-carts.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "0b8ffa023515df5b8738508775cfa408690861204426adb7fb0b363aea8dd568"
     }
   ],
   "shot": "shot.png",

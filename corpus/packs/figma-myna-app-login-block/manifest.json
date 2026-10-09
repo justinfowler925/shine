@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-app-login-block.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "39f9d8491b33f7605935c800e67b7fe75c8ad4ca2914cd3e60e39d2e660531b8"
     }
   ],
   "shot": "shot.png",

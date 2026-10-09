@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-mkt-blog-post-block.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "1387d956d37010306d18e6ba7ae05fcd45758cbcc0a8affae781f169f79a2b57"
     }
   ],
   "shot": "shot.png",

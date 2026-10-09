@@ -10,7 +10,8 @@
   "files": [
     {
       "path": "figma-bootstrap-progress.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "27a123d6dc7669270b669b984e6c27f343d72fd332df441c5a4ed543acf51a31"
     }
   ],
   "shot": "shot.png",

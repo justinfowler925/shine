@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-myna-assets-maps.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "3b8e18b2020add7d28a615ef68275cf988c8b17a714a558285b9a45fb7b1de75"
     }
   ],
   "shot": "shot.png",

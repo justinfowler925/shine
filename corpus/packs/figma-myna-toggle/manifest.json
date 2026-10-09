@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-toggle.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "0b2ce35a8e533aeaf7d925cd6b491ba9721724a8ebc755cb534c13ebaa756642"
     }
   ],
   "shot": "shot.png",

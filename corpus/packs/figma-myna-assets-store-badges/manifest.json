@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-myna-assets-store-badges.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "de5ca8ef95490999de5359881b4ca31357cfaba14547786e9847be02d8969230"
     }
   ],
   "shot": "shot.png",

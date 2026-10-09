@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-app-dashboard-4.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "d87024cd90f90753cf338ee6ab193cab7ddf16771de69cb7d8ff264f3edf82f2"
     }
   ],
   "shot": "shot.png",

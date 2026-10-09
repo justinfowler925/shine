@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-app-containers-block.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "e80bdec9adf7ff641a053a44cad25bfe2ea705188f95d3034b510bf6c39ba66c"
     }
   ],
   "shot": "shot.png",

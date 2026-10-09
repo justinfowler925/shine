@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-app-notifications-block.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "62c83fa3c99c83b0f07a62a2dde31dc3be018568ee32dfd3cebd63dfcb931253"
     }
   ],
   "shot": "shot.png",

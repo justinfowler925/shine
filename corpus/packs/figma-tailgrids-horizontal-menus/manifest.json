@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-tailgrids-horizontal-menus.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "bf509411ac4b06ffa5d61675fce99136243dd97cc40d7139d3808e273fd7bbea"
     }
   ],
   "shot": "shot.png",

@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-drawer.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "b520c2541b4806dc159b5d3bd5717514f47fafe4ad2cfc32a9a23fe8c2f29e55"
     }
   ],
   "shot": "shot.png",

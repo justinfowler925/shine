@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-myna-ds-border-radius.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "b5d468425357ec6f64da68175d73384eeda924b282e4808e45f09e2edd1d2b42"
     }
   ],
   "shot": "shot.png",

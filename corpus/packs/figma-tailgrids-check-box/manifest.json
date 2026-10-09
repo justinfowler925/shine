@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-tailgrids-check-box.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "6b6b0c85a53cb8cae175a6373c2aafc37a4c709585571b92c95b5baff00e758e"
     }
   ],
   "shot": "shot.png",

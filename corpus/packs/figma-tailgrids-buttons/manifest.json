@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-tailgrids-buttons.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "2099156dc7575374cf991d4c152e11ee1a1e66030f132bd901cbc2c9cb6f2eca"
     }
   ],
   "shot": "shot.png",

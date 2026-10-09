@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-email-07-new-device.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "12ced8022c1f1822d3fdbf1cffe3c2459ddce24247efbaf361c35b1a34e645b5"
     }
   ],
   "shot": "shot.png",

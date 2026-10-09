@@ -1,27 +1,17 @@
 {
-  "version": 1,
   "id": "figma-tailgrids-table-stack",
-  "screen": "queue",
   "kind": "blueprint",
-  "license": "n/a",
-  "upstream": {
-    "name": "shadcn-registry",
-    "mode": "json",
-    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
-    "branch": "main",
-    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
-  },
-  "entrypoints": [],
-  "structuralSignature": {
-    "pattern": "\\b(DataTable|ProList|List|Table|table)\\b",
-    "files": [
-      "figma-tailgrids-table-stack.md"
-    ]
-  },
+  "screen": "queue",
+  "jobs": [
+    "figma-kit"
+  ],
   "files": [
     {
       "path": "figma-tailgrids-table-stack.md",
+      "role": "blueprint",
       "sha256": "b88317a07b3bf82d5d5ecab544612cd19707dcc82a8a511935e4e7481d8cccae"
     }
-  ]
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
 }

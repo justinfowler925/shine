@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-email-02-add-friends.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "0a3a99fed9253ef9d2ea5bf1d46ab2dac3db6c1c8b54459e40bfea4fa9afe962"
     }
   ],
   "shot": "shot.png",

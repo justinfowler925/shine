@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-tailgrids-pricing-tables.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "67a22fa8af2c694ee5d015acf8c9408bd77e0c1afceb36061f8adc80ab2614bf"
     }
   ],
   "shot": "shot.png",

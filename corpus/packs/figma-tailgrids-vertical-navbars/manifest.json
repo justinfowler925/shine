@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-tailgrids-vertical-navbars.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "7187c7db0bd9c6062106f34d7a18231a3e4d1bd7dd0084de814c16a9ab6505b4"
     }
   ],
   "shot": "shot.png",

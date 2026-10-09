@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-email-05-password-reset.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "788460bcc50bf49a6d9305a2b818262ac1a62d28f8cc6f5a857b122d4d773353"
     }
   ],
   "shot": "shot.png",

@@ -10,7 +10,8 @@
   "files": [
     {
       "path": "figma-bootstrap-badges.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "cb575fb70c8cdce56e808138a44584c8fda3d2d2555c27a14e681e7fc4f15ee8"
     }
   ],
   "shot": "shot.png",

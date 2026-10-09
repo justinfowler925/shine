@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-sonner.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "56740fd76034efe2936e180e08f9ea3b250eee7244ff1c35a8950ac43de728e1"
     }
   ],
   "shot": "shot.png",

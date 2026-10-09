@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-avatar.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "18df31b6f1e4e2088a70660d78e7e1787990bf3dafd69974fca35d68c1b3a524"
     }
   ],
   "shot": "shot.png",

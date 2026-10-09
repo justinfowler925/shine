@@ -10,7 +10,8 @@
   "files": [
     {
       "path": "figma-bootstrap-tabs.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "1a7c3ad50fabbe7ea66c922eec1dd2728ab5a32556833b63e93949f119990db1"
     }
   ],
   "shot": "shot.png",

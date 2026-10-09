@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-myna-ds-backdrop-blur.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "8b9c59d69135de2221ccedc583c2945ca692ed17e9643276ffc8c7b752f4c7a1"
     }
   ],
   "shot": "shot.png",

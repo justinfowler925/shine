@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-myna-ds-breakpoint-scale.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "299989b27589148d643b88b721f519e297fa282f03a5827164c61f233d04d484"
     }
   ],
   "shot": "shot.png",

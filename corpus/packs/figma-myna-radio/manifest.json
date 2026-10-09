@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-radio.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "d1959ee56b7be8f8f74391f64b34b45cd772dd7d7b922523dcd3eccdecc0249b"
     }
   ],
   "shot": "shot.png",

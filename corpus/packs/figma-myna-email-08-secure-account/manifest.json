@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-email-08-secure-account.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "1380f88eedc429861d4275f35e6372333f8c58a2bf822514aa16654e689eec9b"
     }
   ],
   "shot": "shot.png",

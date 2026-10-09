@@ -10,7 +10,8 @@
   "files": [
     {
       "path": "figma-bootstrap-color.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "372d73391db23bc8c181b3b319ea635c3e852d023ad222e5c1be0a070bdc7b2e"
     }
   ],
   "shot": "shot.png",

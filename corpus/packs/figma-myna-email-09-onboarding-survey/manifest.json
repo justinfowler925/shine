@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-email-09-onboarding-survey.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "3787076a20c6f1fab506d4c6a6fbcf3d534b8b99d0c7e06a2d4fc900242d873d"
     }
   ],
   "shot": "shot.png",

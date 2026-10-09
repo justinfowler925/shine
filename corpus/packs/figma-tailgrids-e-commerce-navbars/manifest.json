@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-tailgrids-e-commerce-navbars.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "6b61304467a1540b32ca90742aeb46a8ada44604cb2e79f5dc50565cae08feb3"
     }
   ],
   "shot": "shot.png",

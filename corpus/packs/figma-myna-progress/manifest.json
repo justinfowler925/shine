@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-progress.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "cc6f2d17bf2f73b03de2e31e4fc2937e4ff9995bc459c96ba0d2dd7664f9c408"
     }
   ],
   "shot": "shot.png",

@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-tailgrids-chat-boxes.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "b283d087d1aaa8685ad50057118f94dca72d41f8d0ba644493a67cf560315bad"
     }
   ],
   "shot": "shot.png",

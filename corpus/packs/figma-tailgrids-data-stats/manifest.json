@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-tailgrids-data-stats.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "22b6ad4a92e987cd16f52e1ed1b78544e6c1fbeda8c48035f8b6909e6d0f419b"
     }
   ],
   "shot": "shot.png",

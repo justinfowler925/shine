@@ -12,7 +12,8 @@
   "files": [
     {
       "path": "figma-myna-ds-box-shadow.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "afb6965e9a786478f47b8a483afff5c31f74cd0b32d86e28943e6a2f99e5c1b8"
     }
   ],
   "shot": "shot.png",

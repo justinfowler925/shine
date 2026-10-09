@@ -11,7 +11,8 @@
   "files": [
     {
       "path": "figma-myna-combobox.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "0188f696dc2227eb0fe7719481f96d242d6aee4a3c2738dccc3d7183695dc04c"
     }
   ],
   "shot": "shot.png",

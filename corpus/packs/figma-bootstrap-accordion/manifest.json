@@ -10,7 +10,8 @@
   "files": [
     {
       "path": "figma-bootstrap-accordion.md",
-      "role": "blueprint"
+      "role": "blueprint",
+      "sha256": "34c9dd07aabddee6e776523921e22ac248c5a7c841bd11d3daf14c53eea0c5d8"
     }
   ],
   "shot": "shot.png",
