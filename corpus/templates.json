@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-07",
-  "corpus": "/home/ubuntu/design-corpus",
+  "generated": "2026-10-09",
+  "corpus": "/Users/justinfowler/design-corpus",
   "requiredScreenTypes": [
     "dashboard",
     "marketing",
@@ -5945,6 +5945,41 @@
         "family": "flowbite",
         "density": "dense"
       }
+    },
+    {
+      "id": "shadcn-operate-decide",
+      "screen": "queue",
+      "kit": "shadcn-registry",
+      "title": "shadcn Operate decide queue (Summary lead, Pursue + attached More)",
+      "preview": "",
+      "license": "MIT",
+      "kind": "blueprint",
+      "startFrom": 1,
+      "jobs": [
+        "queue",
+        "worklist",
+        "triage",
+        "decide",
+        "decide-queue",
+        "sled",
+        "pursue",
+        "inbox",
+        "datagrid"
+      ],
+      "dna": {
+        "family": "shadcn-zinc",
+        "density": "comfortable"
+      },
+      "reference": {
+        "required": [
+          "navigation",
+          "table",
+          "summary"
+        ],
+        "captureExpect": "[data-region=\"summary-lead\"]"
+      },
+      "note": "Clearspeed Operate decide/worklist silhouette — Wireframe→Build from cite; bans accordion-under-lead + detached-overflow",
+      "scope": "page"
     },
     {
       "id": "untitled-table",

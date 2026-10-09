@@ -10,7 +10,7 @@
   "aliases": ["kpi-soup", "metric-soup", "kpi-encyclopedia"],
   "cues": "≥4 equal KPI tiles or metric cards competing with the primary worklist — dashboard DNA on a triage decide path",
   "ban": "KPI encyclopedia must not own the decide path on triage/queue surfaces.",
-  "remediation": "Collapse to ≤3 chips (kpi-collapse); park the rest in <details>; keep the work object focal; re-measure kpi-soup.",
+  "remediation": "Collapse to ≤3 Summary lead chips (kpi-collapse); move the rest after the focal worklist or to a secondary tab — never accordion landfill under the lead (accordion-under-lead). Keep the work object focal; re-measure kpi-soup.",
   "examples": [
     "SLED Capture: ten equal SledKpiSummary tiles after the triage grid",
     "Usul velocity: seven equal .metric tiles ahead of the pipeline table"

@@ -25,8 +25,8 @@
       "n": 3,
       "id": "kpi-soup-off-path",
       "title": "KPI encyclopedia off the decide path",
-      "rule": "Equal metric cards must not own the Monday decide path; collapse to ≤3 chips or park in details.",
-      "antiPatternIds": ["kpi-soup", "decorative-chart-no-units"]
+      "rule": "Equal metric cards must not own the Monday decide path; collapse to ≤3 Summary lead chips. Park the rest after the focal worklist or on a secondary tab — never as accordion landfill under the lead.",
+      "antiPatternIds": ["kpi-soup", "decorative-chart-no-units", "accordion-under-lead"]
     },
     {
       "n": 4,
@@ -55,6 +55,13 @@
       "title": "Restructure before polish",
       "rule": "No craft polish while structure is red (restructureHints / primaryTaskCheck).",
       "antiPatternIds": []
+    },
+    {
+      "n": 8,
+      "id": "decide-queue-silhouette",
+      "title": "Decide queue: lead + attached overflow",
+      "rule": "Operate decide/worklist: Summary lead ≤3 chips with no accordion stack under it; exactly one filled decision primary with More attached in the same action cluster. Denoise park-in-details is not a redesign.",
+      "antiPatternIds": ["accordion-under-lead", "detached-overflow"]
     }
   ]
 }

@@ -6,6 +6,11 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
 
 ### Changed
 
+- **Operate redesign is Wireframe→Build from cite, not denoise theater.** Decide /
+  worklist jobs cite `shadcn-operate-decide`; denoise-loop is residual cleanup
+  only. Constitution `kpi-soup-off-path` no longer says “park in details” under
+  the Summary lead. Docs: `docs/operate-redesign.md`.
+
 - **Operate redesign is the obvious skill path.** Skill / agent / Clearspeed profile
   lead with cite → measure → denoise-loop → prove for “redesign this Operate
   surface” (edition `clearspeed-operate` + sibling cites). `denoise-loop.mjs` is
@@ -14,6 +19,13 @@ All notable changes to Shine are documented here. Public releases follow [Keep a
   `npm run skill-listing -- --write`.
 
 ### Added
+
+- **Operate decide-queue cite + doctor bites.** New blueprint
+  `shadcn-operate-decide` (Summary lead ≤3 chips, Pursue + attached More).
+  Sibling map `sled-capture-queue` prefers it. Measure/doctor fail
+  `accordion-under-lead` and `detached-overflow` so SLED-style landfill cannot
+  PASS. Constitution n=8 `decide-queue-silhouette`. Doctor:
+  `verify/decide-queue-slop.test.mjs` / `npm run decide-queue:slop`.
 
 - **Denoise deepen: preflight ai-slop-cta-mania clears via cta-budget.** Mania
   hard-failed after `cta-budget` demoted markup peers because `\bfilled-peer\b`

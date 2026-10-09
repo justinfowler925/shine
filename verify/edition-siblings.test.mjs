@@ -49,7 +49,7 @@ const cases = [
     job: "Decide Pursue/Review/Dismiss on the next notice",
     category: "queue",
     id: "sled-capture-queue",
-    cite: "shadcn-queue",
+    cite: "shadcn-operate-decide",
   },
   {
     job: "Fix or pause a matching recipe on Sources",
@@ -126,7 +126,7 @@ const rec = recommendPattern(templates, "Decide Pursue/Review/Dismiss on the nex
   limit: 6,
 });
 assert.ok(rec.productSibling?.id === "sled-capture-queue", "recommend productSibling");
-assert.match(rec.kitRecipe, /worklist-first|DataGrid|shadcn-queue/i);
+assert.match(rec.kitRecipe, /worklist-first|DataGrid|shadcn-operate-decide|shadcn-queue/i);
 assert.ok(
   (rec.antiPatterns || []).some((a) => /edition-sibling:sled-capture-queue/.test(a)),
   "edition sibling anti-cites",
@@ -139,7 +139,7 @@ const applied = applySiblingToRecommendation(
     restructureHints: [],
     kitRecipe: "default",
     shortlist: [
-      { id: "shadcn-queue", screen: "queue", scope: "page", score: 8 },
+      { id: "shadcn-operate-decide", screen: "queue", scope: "page", score: 8 },
       { id: "shadcn-dashboard-01", screen: "dashboard", scope: "page", score: 9 },
     ],
   },
@@ -149,7 +149,7 @@ const applied = applySiblingToRecommendation(
   }),
   { templates },
 );
-assert.equal(applied.primary.id, "shadcn-queue", "promote preferred cite from shortlist");
+assert.equal(applied.primary.id, "shadcn-operate-decide", "promote preferred cite from shortlist");
 assert.match(applied.restructureHints[0], /edition sibling/);
 
 // Packet / DDR bind productSibling from map when --product-reference omitted

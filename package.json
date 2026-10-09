@@ -106,6 +106,7 @@
     "nested-cards:preflight-bite": "node verify/nested-cards-preflight-bite.mjs",
     "card-carnival:preflight-bite": "node verify/card-carnival-preflight-bite.mjs",
     "cta-mania:preflight-bite": "node verify/cta-mania-preflight-bite.mjs",
+    "decide-queue:slop": "node verify/decide-queue-slop.test.mjs",
     "page-title:ast-bite": "node verify/page-title-ast-bite.mjs",
     "chrome-budget:ast-bite": "node verify/chrome-budget-ast-bite.mjs",
     "filter-clearable:ast-bite": "node verify/filter-clearable-ast-bite.mjs",
