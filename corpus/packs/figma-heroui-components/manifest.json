@@ -1,9 +1,9 @@
 {
   "version": 1,
   "id": "figma-heroui-components",
-  "screen": "catalog",
+  "screen": "form",
   "kind": "blueprint",
-  "license": "n/a",
+  "license": "MIT",
   "upstream": {
     "name": "shadcn-registry",
     "mode": "json",
@@ -11,12 +11,13 @@
     "branch": "main",
     "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
   },
+  "corpusPath": "packs/figma-heroui-components",
   "entrypoints": [],
   "structuralSignature": null,
   "files": [
     {
       "path": "figma-heroui-components.md",
-      "sha256": "22e424730ffce0506595a3ee4fc70da218f3feca3bd6874d4b0981eaf844265c"
+      "sha256": "0b48911bdede95e70c6cbef4564470d01654f156de86c54c6ac057daba74262c"
     }
   ]
 }

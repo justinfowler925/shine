@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-code",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1542-28623",
+  "harvested": "2026-10-09",
+  "bytes": 116890,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Code",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1542-28623",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=1542-28623",
+    "capturedAt": "2026-10-09T02:41:27.304844Z",
+    "shotSha256": "8a4bd02807e8d47a849463ca32bbddd0b168e96a31fd3a02318dac930490015e",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "3:31",
+      "nodeId": "1542:28623",
+      "page": "Code",
+      "kind": "component"
+    }
+  }
+}

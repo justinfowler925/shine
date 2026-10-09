@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-link",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31578",
+  "harvested": "2026-10-09",
+  "bytes": 118577,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Link",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31578",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31578",
+    "capturedAt": "2026-10-09T02:43:10.666986Z",
+    "shotSha256": "af3df2c87140d8fb9a31c60eb01b84e4d00c9d74aefa0a458f3228e0cf0ccc8a",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "3:36",
+      "nodeId": "2545:31578",
+      "page": "Link",
+      "kind": "component"
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "id": "figma-heroui-cover",
   "screen": "marketing",
   "kind": "blueprint",
-  "license": "n/a",
+  "license": "MIT",
   "upstream": {
     "name": "shadcn-registry",
     "mode": "json",
@@ -11,12 +11,13 @@
     "branch": "main",
     "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
   },
+  "corpusPath": "packs/figma-heroui-cover",
   "entrypoints": [],
   "structuralSignature": null,
   "files": [
     {
       "path": "figma-heroui-cover.md",
-      "sha256": "dd498f1ecb2dd89002aab71cbfe266e99d15ea59739986388ae23a9b7925f4bc"
+      "sha256": "3b74fb16c8daa2ab518fff1a3c56b27a6f64604478df4c3b474baaca1c5f4ae9"
     }
   ]
 }

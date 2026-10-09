@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-icons-essential",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-icons-essential",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-icons-essential.md",
+      "sha256": "bc0121966acdada7ccfa9457eac599868390f4f4e6328b3f6a214e7d2d4c1cd8"
+    }
+  ]
+}

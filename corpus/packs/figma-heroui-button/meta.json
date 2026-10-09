@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-button",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2210-37799",
+  "harvested": "2026-10-09",
+  "bytes": 114839,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Button",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2210-37799",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2210-37799",
+    "capturedAt": "2026-10-09T02:41:24.568991Z",
+    "shotSha256": "45e46fee87adcbef214f30009e49e7be579b6e1579677b2d846641a66a419f4e",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "3:14",
+      "nodeId": "2210:37799",
+      "page": "Button",
+      "kind": "component"
+    }
+  }
+}

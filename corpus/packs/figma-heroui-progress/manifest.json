@@ -1,9 +1,9 @@
 {
   "version": 1,
   "id": "figma-heroui-progress",
-  "screen": "catalog",
+  "screen": "async-state",
   "kind": "blueprint",
-  "license": "n/a",
+  "license": "MIT",
   "upstream": {
     "name": "shadcn-registry",
     "mode": "json",
@@ -11,12 +11,13 @@
     "branch": "main",
     "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
   },
+  "corpusPath": "packs/figma-heroui-progress",
   "entrypoints": [],
   "structuralSignature": null,
   "files": [
     {
       "path": "figma-heroui-progress.md",
-      "sha256": "588405e3487f53469e73ba8744f135d66967fcc6b789bcc037fa645522deaf5a"
+      "sha256": "8e534800d37f90a1c787c36fa821097b25b35b4f5a28dac144141d2f52c50b3c"
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-number-input",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3638-79039",
+  "harvested": "2026-10-09",
+  "bytes": 129798,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Number Input",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3638-79039",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3638-79039",
+    "capturedAt": "2026-10-09T02:43:10.912737Z",
+    "shotSha256": "f1686f02534fd540c7071298281d4896b11a4a81959da15c470164f2bd0dadd5",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "3606:776",
+      "nodeId": "3638:79039",
+      "page": "Number Input",
+      "kind": "component"
+    }
+  }
+}

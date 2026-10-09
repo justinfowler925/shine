@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-theme-light",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=276-20046",
+  "harvested": "2026-10-09",
+  "bytes": 236548,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Theme",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=276-20046",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=276-20046",
+    "capturedAt": "2026-10-09T02:41:22.363336Z",
+    "shotSha256": "81c14ee04d5cd7b8f0be63b0d9f5b0b816531ccbb14cfe93ce17a4c90c409150",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "5:1194",
+      "nodeId": "276:20046",
+      "page": "Theme",
+      "kind": "tokens"
+    }
+  }
+}

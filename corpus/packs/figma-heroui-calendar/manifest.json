@@ -1,9 +1,9 @@
 {
   "version": 1,
   "id": "figma-heroui-calendar",
-  "screen": "catalog",
+  "screen": "form",
   "kind": "blueprint",
-  "license": "n/a",
+  "license": "MIT",
   "upstream": {
     "name": "shadcn-registry",
     "mode": "json",
@@ -11,12 +11,13 @@
     "branch": "main",
     "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
   },
+  "corpusPath": "packs/figma-heroui-calendar",
   "entrypoints": [],
   "structuralSignature": null,
   "files": [
     {
       "path": "figma-heroui-calendar.md",
-      "sha256": "70a53bdc869c2e0c19cb959fe21f0bb1707b8058b412ac0a67e93a6cdb31353e"
+      "sha256": "32fbd25c51dffdce5384d5d2a999dd6e01685a335dc7822df9b6f5e229191ce6"
     }
   ]
 }

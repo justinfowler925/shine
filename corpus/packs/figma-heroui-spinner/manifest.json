@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-spinner",
+  "screen": "async-state",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-spinner",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-spinner.md",
+      "sha256": "1f25b763bc42d8a26e60dee6ce913d2774b8baef8e11bb2067ddbb774859e103"
+    }
+  ]
+}

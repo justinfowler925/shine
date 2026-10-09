@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-select",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2943-31581",
+  "harvested": "2026-10-09",
+  "bytes": 139305,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Select",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2943-31581",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2943-31581",
+    "capturedAt": "2026-10-09T02:43:11.883493Z",
+    "shotSha256": "49ab5efa4d805f09cc9a6ab1f9a95b35082cf483ee4dbe201730223a606193bf",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "1364:174",
+      "nodeId": "2943:31581",
+      "page": "Select",
+      "kind": "component"
+    }
+  }
+}

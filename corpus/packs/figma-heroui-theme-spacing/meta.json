@@ -1,0 +1,21 @@
+{
+  "id": "figma-heroui-theme-spacing",
+  "source": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-18637",
+  "harvested": "2026-10-09",
+  "bytes": 53570,
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma \u00b7 Theme",
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-18637",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-18637",
+    "capturedAt": "2026-10-09T02:45:22.301016Z",
+    "shotSha256": "61e51113492c3b685025da1699b68bf8fe41e0be75ac97b6045e6b0c35dea28e",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "pageId": "5:1194",
+      "nodeId": "482:18637",
+      "page": "Theme",
+      "kind": "tokens"
+    }
+  }
+}

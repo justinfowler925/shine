@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-v3-cover",
+  "screen": "marketing",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-v3-cover",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-v3-cover.md",
+      "sha256": "5a7a07ed96f0b29255fe74461355920d4b04f4e7fb128a3067d8cbbc6ba6e144"
+    }
+  ]
+}

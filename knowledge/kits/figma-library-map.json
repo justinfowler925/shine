@@ -171,35 +171,72 @@
         "shadcn-form",
         "shadcn-queue"
       ],
-      "note": "Design copies found. Prefer-copy GAn1Srb\u2026 is Welcome+Icons (cover/marketing). Deep atom boards live on alt DC4g36\u2026 (hidden canvases: Radio, Badge, Avatar Group, Calendar, Progress, Theme, Figma Components). Steal navbar/form/overlay silhouette only; paint with house kit. See figma-heroui-* packs.",
+      "note": "Prefer-copy GAn1Srb\u2026 is COMPLETE (38 pages via use_figma figma.root.children; 2 empty section dividers). MCP get_metadata without nodeId falsely shows Welcome+Icons only. Deep harvest of Example frames + Theme/Brand/Icons/atoms into figma-heroui-* packs. Steal structure; paint house shadcn. Alt DC4g36\u2026 is optional duplicate \u2014 prefer GAn1Srb\u2026",
       "designFiles": [
         {
           "prefer": true,
           "name": "HeroUI Figma Kit (Community) (Copy)",
           "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
           "url": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm",
-          "role": "cover_welcome_icons"
+          "role": "full_kit_38_pages"
         },
         {
           "prefer": false,
           "name": "HeroUI Figma Kit (Community)",
           "fileKey": "DC4g36xyt4DobtbEa11JFL",
           "url": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL",
-          "role": "deep_atom_boards"
+          "role": "alt_duplicate_optional"
         }
       ],
       "harvestPacks": [
+        "figma-heroui-accordion",
+        "figma-heroui-alert",
+        "figma-heroui-avatar",
         "figma-heroui-avatar-group",
         "figma-heroui-badge",
+        "figma-heroui-brand",
+        "figma-heroui-button",
+        "figma-heroui-button-atoms",
+        "figma-heroui-button-group",
         "figma-heroui-calendar",
         "figma-heroui-card",
+        "figma-heroui-carousel",
+        "figma-heroui-checkbox",
+        "figma-heroui-checkbox-group",
+        "figma-heroui-chip",
+        "figma-heroui-code",
         "figma-heroui-components",
         "figma-heroui-cover",
+        "figma-heroui-divider",
+        "figma-heroui-figma-components",
+        "figma-heroui-icons-essential",
+        "figma-heroui-input",
+        "figma-heroui-input-otp",
+        "figma-heroui-kbd",
+        "figma-heroui-link",
+        "figma-heroui-number-input",
         "figma-heroui-progress",
         "figma-heroui-radio",
-        "figma-heroui-theme"
+        "figma-heroui-select",
+        "figma-heroui-slider",
+        "figma-heroui-spinner",
+        "figma-heroui-switch",
+        "figma-heroui-table",
+        "figma-heroui-tabs",
+        "figma-heroui-theme",
+        "figma-heroui-theme-dark",
+        "figma-heroui-theme-light",
+        "figma-heroui-theme-radius",
+        "figma-heroui-theme-shadow",
+        "figma-heroui-theme-spacing",
+        "figma-heroui-theme-typography",
+        "figma-heroui-toast",
+        "figma-heroui-tooltip",
+        "figma-heroui-user",
+        "figma-heroui-v3-cover",
+        "figma-heroui-welcome"
       ],
-      "deepHarvestFileKey": "DC4g36xyt4DobtbEa11JFL"
+      "deepHarvestFileKey": "GAn1SrbKJYiKqz9SmHHCRm"
     },
     {
       "name": "original Tailwind",

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-button-atoms",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-button-atoms",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-button-atoms.md",
+      "sha256": "1a26731d3e3d010e1206d3df254b92c6c4688cce222de9543bdb074f10767389"
+    }
+  ]
+}

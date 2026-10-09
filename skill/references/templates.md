@@ -37,6 +37,9 @@ Reasons are listed under the table.
 | app-shell | `untitled-featured-cards` | untitled-ui-react | source | live | app-shell, navigation, featured, usage, upgrade-prompt |
 | app-shell | `heroui-docs` | heroui | source | live | app-shell, docs, heroui |
 | app-shell | `mantine-appshell` | mantine | source | **retired** | app-shell, shell, nav, sidebar |
+| app-shell | `figma-heroui-accordion` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, accordion, accordion, component |
+| app-shell | `figma-heroui-link` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, link, link, component |
+| app-shell | `figma-heroui-tabs` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, tabs, tabs, component |
 | app-shell | `heroui-next-app` | heroui | source | live | app-shell, shell, nav, sidebar |
 | app-shell | `heroui-accordion` | heroui | source | live | app-shell, navigation, heroui, accordion |
 | app-shell | `heroui-breadcrumbs` | heroui | source | live | app-shell, navigation, heroui, breadcrumbs |
@@ -49,6 +52,10 @@ Reasons are listed under the table.
 | app-shell | `query-adminlte` | adminlte | query-only | live | app-shell, shell, nav, sidebar |
 | app-shell | `query-primeblocks` | primeblocks | query-only | live | app-shell, shell, nav, sidebar |
 | async-state | `untitled-loading-indicator` | untitled-ui-react | source | live | loading, spinner, pending, async, skeleton |
+| async-state | `figma-heroui-alert` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, alert, alert, component |
+| async-state | `figma-heroui-progress` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, progress, progress, component |
+| async-state | `figma-heroui-spinner` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, spinner, spinner, component |
+| async-state | `figma-heroui-toast` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, toast, toast, component |
 | async-state | `heroui-alert` | heroui | source | live | async-state, loading, feedback, heroui, alert |
 | async-state | `heroui-empty-state` | heroui | source | live | async-state, loading, feedback, heroui, empty-state |
 | async-state | `heroui-meter` | heroui | source | live | async-state, loading, feedback, heroui, meter |
@@ -94,14 +101,6 @@ Reasons are listed under the table.
 | carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
 | catalog | `figma-bootstrap-buttons` | shadcn-registry | blueprint | **retired** | catalog, buttons, bootstrap-figma |
 | catalog | `figma-bootstrap-components` | shadcn-registry | blueprint | **retired** | catalog, components, bootstrap-figma |
-| catalog | `figma-heroui-avatar-group` | shadcn-registry | blueprint | **retired** | catalog, avatar, people, heroui-figma |
-| catalog | `figma-heroui-badge` | shadcn-registry | blueprint | **retired** | catalog, badge, status, heroui-figma |
-| catalog | `figma-heroui-calendar` | shadcn-registry | blueprint | **retired** | catalog, calendar, date, heroui-figma |
-| catalog | `figma-heroui-card` | shadcn-registry | blueprint | **retired** | catalog, card, heroui-figma |
-| catalog | `figma-heroui-components` | shadcn-registry | blueprint | **retired** | catalog, docs, heroui-figma, components |
-| catalog | `figma-heroui-progress` | shadcn-registry | blueprint | **retired** | catalog, progress, loading, heroui-figma |
-| catalog | `figma-heroui-radio` | shadcn-registry | blueprint | **retired** | catalog, radio, form, heroui-figma |
-| catalog | `figma-heroui-theme` | shadcn-registry | blueprint | **retired** | catalog, theme, tokens, heroui-figma |
 | catalog | `figma-myna-components` | shadcn-registry | blueprint | **retired** | catalog, components, tailwind-figma, myna, shadcn |
 | catalog | `figma-tailgrids-atoms` | shadcn-registry | blueprint | **retired** | catalog, atoms, components, tailwind-figma, tailgrids |
 | catalog | `figma-tailgrids-layout` | shadcn-registry | blueprint | **retired** | catalog, layout, grid, tailwind-figma, tailgrids |
@@ -110,6 +109,24 @@ Reasons are listed under the table.
 | catalog | `shadcn-catalog-skills` | shadcn-registry | blueprint | live | catalog, cards, library, skills, agents, packages, directory |
 | catalog | `shadcn-catalog-templates` | shadcn-registry | blueprint | live | catalog, cards, library, templates, gallery, showcase, directory |
 | catalog | `shadcn-catalog-tools` | shadcn-registry | blueprint | live | catalog, cards, library, tools, packages, company-tools, directory |
+| catalog | `figma-heroui-brand` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, brand, brand, brand |
+| catalog | `figma-heroui-button-atoms` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, button-atoms, button, atoms |
+| catalog | `figma-heroui-figma-components` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, figma-components, figma-components, atoms |
+| catalog | `figma-heroui-icons-essential` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, icons-essential, icons, icons |
+| catalog | `figma-heroui-theme-dark` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, theme-dark, theme, tokens |
+| catalog | `figma-heroui-theme-light` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, theme-light, theme, tokens |
+| catalog | `figma-heroui-theme-radius` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, theme-radius, theme, tokens |
+| catalog | `figma-heroui-theme-shadow` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, theme-shadow, theme, tokens |
+| catalog | `figma-heroui-theme-spacing` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, theme-spacing, theme, tokens |
+| catalog | `figma-heroui-theme-typography` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, theme-typography, theme, tokens |
+| catalog | `figma-heroui-avatar` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, avatar, avatar, component |
+| catalog | `figma-heroui-avatar-group` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, avatar-group, avatar-group, component |
+| catalog | `figma-heroui-badge` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, badge, badge, component |
+| catalog | `figma-heroui-card` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, card, card, component |
+| catalog | `figma-heroui-carousel` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, carousel, carousel, component |
+| catalog | `figma-heroui-chip` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, chip, chip, component |
+| catalog | `figma-heroui-theme` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, theme, theme, component |
+| catalog | `figma-heroui-user` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, user, user, component |
 | catalog | `windmill-cards` | windmill-react | source | live | component, card, catalog |
 | catalog | `tailadmin-images` | tailadmin-react | source | live | component, image, media, gallery |
 | catalog | `heroui-card` | heroui | source | live | catalog, layout, heroui, card |
@@ -232,6 +249,23 @@ Reasons are listed under the table.
 | form | `untitled-file-upload` | untitled-ui-react | source | live | form, input, upload, attachments, dropzone, files |
 | form | `windmill-forms` | windmill-react | source | live | form, form-app, input, fields, validation |
 | form | `untitled-modals` | untitled-ui-react | source | live | overlay, modal, dialog |
+| form | `figma-heroui-button` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, button, button, component |
+| form | `figma-heroui-button-group` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, button-group, buttongroup, component |
+| form | `figma-heroui-calendar` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, calendar, calendar, component |
+| form | `figma-heroui-checkbox` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, checkbox, checkbox, component |
+| form | `figma-heroui-checkbox-group` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, checkbox-group, checkbox-group, component |
+| form | `figma-heroui-code` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, code, code, component |
+| form | `figma-heroui-components` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, components, components, component |
+| form | `figma-heroui-divider` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, divider, divider, component |
+| form | `figma-heroui-input` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, input, input, component |
+| form | `figma-heroui-input-otp` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, input-otp, input-otp, component |
+| form | `figma-heroui-kbd` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, kbd, kbd, component |
+| form | `figma-heroui-number-input` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, number-input, number-input, component |
+| form | `figma-heroui-radio` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, radio, radio, component |
+| form | `figma-heroui-select` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, select, select, component |
+| form | `figma-heroui-slider` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, slider, slider, component |
+| form | `figma-heroui-switch` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, switch, switch, component |
+| form | `figma-heroui-tooltip` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, tooltip, tooltip, component |
 | form | `tailadmin-alerts` | tailadmin-react | source | live | component, alert, feedback, banner, tailadmin |
 | form | `untitled-slideout` | untitled-ui-react | source | live | overlay, sheet, slideout, drawer |
 | form | `tailadmin-badges` | tailadmin-react | source | live | component, badge, status, chip |
@@ -293,12 +327,14 @@ Reasons are listed under the table.
 | lex-queue | `lex-queue` | slds | blueprint | live | lex-queue, queue |
 | lex-record | `lex-record` | slds | blueprint | live | lex-record, record, detail, lightning, lwc |
 | lex-record | `lex-record-narrow` | slds | blueprint | live | lex-record-narrow, lex-record |
-| marketing | `figma-heroui-cover` | shadcn-registry | blueprint | **retired** | marketing, landing, heroui-figma, cover |
 | marketing | `figma-m3-cover` | shadcn-registry | blueprint | **retired** | marketing, material-figma, mui, material3 |
 | marketing | `figma-tailgrids-cover` | shadcn-registry | blueprint | **retired** | marketing, landing, tailwind-figma, tailgrids |
 | marketing | `shadcn-marketing` | shadcn-registry | blueprint | live | marketing, landing, pricing |
+| marketing | `figma-heroui-v3-cover` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, v3-cover, welcome, cover |
+| marketing | `figma-heroui-welcome` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, welcome, welcome, cover |
 | marketing | `heroui-home` | heroui | source | live | marketing, landing, heroui, home |
 | marketing | `heroui-about` | heroui | source | live | marketing, about, heroui |
+| marketing | `figma-heroui-cover` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, cover, cover, component |
 | marketing-developer | `magicui-code-comparison-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
 | marketing-developer | `magicui-file-tree-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
 | marketing-developer | `magicui-terminal-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
@@ -363,6 +399,7 @@ Reasons are listed under the table.
 | queue | `tailadmin-tables` | tailadmin-react | source | live | queue, crud, table, records, datagrid |
 | queue | `windmill-tables` | windmill-react | source | live | queue, crud, table, records, datagrid |
 | queue | `flowbite-users` | flowbite-admin | source | live | queue, crud, table, records, users, admin |
+| queue | `figma-heroui-table` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, table, table, component |
 | queue | `flowbite-products` | flowbite-admin | source | live | queue, crud, table, products, inventory, catalog |
 | queue | `heroui-list-box` | heroui | source | live | queue, table, crud, heroui, list-box |
 | queue | `heroui-list-box-item` | heroui | source | live | queue, table, crud, heroui, list-box-item |
@@ -386,27 +423,18 @@ Reasons are listed under the table.
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-371 rows, 20 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+408 rows, 11 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
 - `mantine-appshell` — shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)
 - `figma-bootstrap-buttons` — undefined
 - `figma-bootstrap-components` — undefined
-- `figma-heroui-avatar-group` — undefined
-- `figma-heroui-badge` — undefined
-- `figma-heroui-calendar` — undefined
-- `figma-heroui-card` — undefined
-- `figma-heroui-components` — undefined
-- `figma-heroui-progress` — undefined
-- `figma-heroui-radio` — undefined
-- `figma-heroui-theme` — undefined
 - `figma-myna-components` — undefined
 - `figma-tailgrids-atoms` — undefined
 - `figma-tailgrids-layout` — undefined
 - `tremor-charts` — shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it
 - `figma-bootstrap-forms` — undefined
-- `figma-heroui-cover` — undefined
 - `figma-m3-cover` — undefined
 - `figma-tailgrids-cover` — undefined
 - `figma-tailgrids-table-stack` — undefined

@@ -8,7 +8,7 @@
  * Inventories: Project store internal/heroui-kit-inventory.md,
  * internal/tailwind-kit-inventory.md.
  */
-import { existsSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const SKIP_HEROUI = new Set(["rac", "icons.tsx", "index.ts"]);
@@ -94,6 +94,64 @@ export function buildHeroUiAtomRows(ctx) {
     });
   }
   return rows.sort((a, b) => a.id.localeCompare(b.id));
+}
+
+/**
+ * Figma-harvested HeroUI packs under corpus/packs/figma-heroui-*.
+ * Prefer-copy fileKey GAn1SrbKJYiKqz9SmHHCRm has the full 38-page tree
+ * (use_figma figma.root.children) — MCP get_metadata without nodeId is incomplete.
+ */
+export function buildHeroUiFigmaPackRows(shineRoot) {
+  const packsDir = join(shineRoot, "corpus/packs");
+  if (!existsSync(packsDir)) return [];
+  const rows = [];
+  for (const entry of readdirSync(packsDir).sort()) {
+    if (!entry.startsWith("figma-heroui-")) continue;
+    const dir = join(packsDir, entry);
+    if (!statSync(dir).isDirectory()) continue;
+    if (!existsSync(join(dir, "shot.png"))) continue;
+    let meta = {};
+    try {
+      meta = JSON.parse(readFileSync(join(dir, "meta.json"), "utf8"));
+    } catch { /* optional */ }
+    const page = meta?.capture?.figma?.page || entry.replace(/^figma-heroui-/, "");
+    const nodeId = meta?.capture?.figma?.nodeId || "";
+    const fileKey = meta?.capture?.figma?.fileKey || "GAn1SrbKJYiKqz9SmHHCRm";
+    const kind = meta?.capture?.figma?.kind || "component";
+    const slug = entry.replace(/^figma-heroui-/, "");
+    const screen =
+      kind === "cover" || /welcome|v3-cover|cover/.test(slug) ? "marketing"
+      : kind === "tokens" || /theme/.test(slug) ? "catalog"
+      : kind === "icons" || kind === "brand" || kind === "atoms" ? "catalog"
+      : /table/.test(slug) ? "queue"
+      : /calendar|date|input|select|checkbox|radio|switch|slider|form|otp|number/.test(slug) ? "form"
+      : /tabs|navbar|link|breadcrumb|accordion/.test(slug) ? "app-shell"
+      : /spinner|progress|skeleton|toast|alert/.test(slug) ? "async-state"
+      : /card|carousel|avatar|badge|chip|user/.test(slug) ? "catalog"
+      : "form";
+    const jobs = ["heroui-figma", "figma-kit", slug, page.toLowerCase().replace(/\s+/g, "-"), kind];
+    rows.push({
+      id: entry,
+      screen,
+      // House paint (shadcn-zinc). Structure affinity still tags jobs with heroui-figma.
+      kit: "shadcn-registry",
+      title: `HeroUI Figma · ${page}${kind === "atoms" ? " (atoms)" : kind === "tokens" ? " (tokens)" : ""}`,
+      // Blueprint source is corpus/blueprints/<id>.md (materialize); path marks the pack dir.
+      path: `packs/${entry}`,
+      preview: nodeId
+        ? `https://www.figma.com/design/${fileKey}?node-id=${nodeId.replace(":", "-")}`
+        : `https://www.figma.com/design/${fileKey}`,
+      license: "MIT",
+      kind: "blueprint",
+      startFrom: kind === "cover" ? 2 : kind === "component" ? 6 : 4,
+      jobs,
+      // Token boards (radius/typography) are small sections — component floor applies.
+      scope: kind === "cover" ? "page" : "component",
+      note: "Figma Example/Theme harvest from prefer-copy GAn1Srb… (full 38-page tree) — structure only; paint house shadcn for Clearspeed",
+      selectable: true,
+    });
+  }
+  return rows;
 }
 
 /** Full-page HeroUI next-app routes (live, not retired). */

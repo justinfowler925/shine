@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "figma-heroui-theme-spacing",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "MIT",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "corpusPath": "packs/figma-heroui-theme-spacing",
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-heroui-theme-spacing.md",
+      "sha256": "9584e447263dbca1b13f1a406e286784e7997a6ed890480955e2d46409d8b090"
+    }
+  ]
+}
