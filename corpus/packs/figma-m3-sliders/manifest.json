@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-m3-sliders",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-m3-sliders.md",
+      "sha256": "2b46fc422ac2f2b5785d6073f48355ff302ee194b30ba9e2aac94ccb8183220f"
+    }
+  ]
+}

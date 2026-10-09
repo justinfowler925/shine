@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-m3-typography",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-m3-typography.md",
+      "sha256": "7eac4c216ad95cb7962a93bdcb8266bd1565c31a2dd138c53a7f7cfbd51a6981"
+    }
+  ]
+}

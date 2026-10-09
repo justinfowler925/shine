@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-m3-checkboxes",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-m3-checkboxes.md",
+      "sha256": "477eb6dd203f14fbcbbba73858bd4507638afcb73f03049468d5f8fa30f0a499"
+    }
+  ]
+}

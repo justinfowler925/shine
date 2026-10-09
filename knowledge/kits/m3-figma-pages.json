@@ -1,0 +1,32 @@
+{
+  "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+  "name": "Material 3 Design Kit (MUI / Material UI target)",
+  "inventoriedAt": "2026-10-09",
+  "discovery": "use_figma figma.root.children — MCP get_metadata alone under-lists pages",
+  "pages": [
+    { "pageId": "11:1833", "name": "Getting Started", "pack": "figma-m3-cover" },
+    {
+      "pageId": "49823:12141",
+      "name": "Styles",
+      "boards": [
+        { "nodeId": "49848:6285", "name": "Typography", "pack": "figma-m3-typography" },
+        { "nodeId": "49823:12142", "name": "Color Guidance", "pack": "figma-m3-color" },
+        { "nodeId": "52732:23854", "name": "Layout", "pack": "figma-m3-layout" },
+        { "nodeId": "50732:11328", "name": "Elements", "pack": "figma-m3-elements" },
+        { "nodeId": "50732:11342", "name": "Elevation", "pack": "figma-m3-elevation" }
+      ]
+    },
+    {
+      "pageId": "47909:2",
+      "name": "Components",
+      "boardCount": 32,
+      "note": "All 32 component boards harvested as figma-m3-* packs"
+    }
+  ],
+  "libraryKeys": [
+    "lk-0ed47b4a992d98ca20e5243564e1a9f7b3b321b9a4bc3e769c9c349832e23b6d5bc2c529b6cde7b13fcd97f5d697f3942d52e20202fee51b63f30a890b387cd4",
+    "lk-5a31d104cabc6a74d4edf6425e7bc6575e9c0f18cda7efb746193aef4d915b077d115c985e6cf49d36d97d455a17d5127a2cbbfbc618b8a70a38669dccb61462"
+  ],
+  "corpusProxy": "mui-material",
+  "cancelledMisnomer": "Minor UI"
+}

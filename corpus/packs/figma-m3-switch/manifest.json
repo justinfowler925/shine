@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "id": "figma-m3-switch",
+  "screen": "catalog",
+  "kind": "blueprint",
+  "license": "n/a",
+  "upstream": {
+    "name": "shadcn-registry",
+    "mode": "json",
+    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
+    "branch": "main",
+    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
+  },
+  "entrypoints": [],
+  "structuralSignature": null,
+  "files": [
+    {
+      "path": "figma-m3-switch.md",
+      "sha256": "37b74007c3b11e43c10c9e9dbc0b1d6d51e0726e68d6459d6e4f3ff2635a781e"
+    }
+  ]
+}
