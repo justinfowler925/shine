@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-badges",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "badges",
+    "badges",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-badges.md",
+      "role": "blueprint",
+      "sha256": "02e87a22fd6659480d7888bbf7f8bc15f2b195700fd316c56b230455e558d3a9"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

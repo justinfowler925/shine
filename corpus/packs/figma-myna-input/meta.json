@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-input",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2127",
+  "harvested": "2026-10-09",
+  "bytes": 16279,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Input",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2674:2127",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Input",
+    "headings": "Input",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Input",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2127",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2127",
+    "capturedAt": "2026-10-09T13:48:46.021Z",
+    "shotSha256": "a7a229ea8cd615ce6db287fe5d456d7eb3ddd114af28c065226c7032fa22d56f",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2674:2127",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

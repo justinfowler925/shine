@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-spinners",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1427-37",
+  "harvested": "2026-10-09",
+  "bytes": 30725,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Spinners",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "1427:37",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Spinners",
+    "headings": "Spinners",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Spinners",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1427-37",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1427-37",
+    "capturedAt": "2026-10-09T13:48:28.439Z",
+    "shotSha256": "91473dec135fae56c98d13e9e7d469af4605a8c23b6c2ef674d0d240a8d586d6",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "1427:37",
+      "page": "Bootstrap UI Kit",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

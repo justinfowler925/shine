@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-charts",
+  "kind": "blueprint",
+  "screen": "charts",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "charts",
+    "charts",
+    "charts"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-charts.md",
+      "role": "blueprint",
+      "sha256": "d40eeb5a4ae0376a16614f6a06c6b5bd97092ee8fdf73c5e7d240110b56b21d2"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

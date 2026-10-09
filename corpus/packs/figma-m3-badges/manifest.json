@@ -1,22 +1,17 @@
 {
-  "version": 1,
   "id": "figma-m3-badges",
-  "screen": "catalog",
   "kind": "blueprint",
-  "license": "n/a",
-  "upstream": {
-    "name": "shadcn-registry",
-    "mode": "json",
-    "url": "https://ui.shadcn.com/r/styles/new-york-v4/{name}.json",
-    "branch": "main",
-    "sha": "d14b6e69a91f0fc99e31a7adb26a48d661df9911"
-  },
-  "entrypoints": [],
-  "structuralSignature": null,
+  "screen": "catalog",
+  "jobs": [
+    "figma-kit"
+  ],
   "files": [
     {
       "path": "figma-m3-badges.md",
+      "role": "blueprint",
       "sha256": "9b602211882d807d753b4b789c32d11be3d7057e78e9dc97caed8fb2eb28a76a"
     }
-  ]
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
 }

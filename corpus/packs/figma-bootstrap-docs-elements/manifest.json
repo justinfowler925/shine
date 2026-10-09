@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-docs-elements",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "docs",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-docs-elements.md",
+      "role": "blueprint",
+      "sha256": "6a2866ac5424ce07f90013702a23942ed50623f784de99c9fb2d7360544eabd4"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

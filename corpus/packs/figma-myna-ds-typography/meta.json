@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-ds-typography",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2832-4379",
+  "harvested": "2026-10-09",
+  "bytes": 162971,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Typography",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2832:4379",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Typography",
+    "headings": "Typography",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Typography",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2832-4379",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2832-4379",
+    "capturedAt": "2026-10-09T14:06:43.872Z",
+    "shotSha256": "44900ae8a9555d775b73fc94d619db05a105311040e8ed4b9dd853376591fe45",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2832:4379",
+      "page": "Design System",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

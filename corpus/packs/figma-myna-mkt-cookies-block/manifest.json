@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-mkt-cookies-block",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "marketing",
+    "tailwind-figma",
+    "myna",
+    "cookies-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-mkt-cookies-block.md",
+      "role": "blueprint",
+      "sha256": "23292b1c1e6d187d22061d9030968d0656d591de864d71f5d0f9b53ebb149422"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

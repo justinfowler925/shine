@@ -154,6 +154,81 @@ export function buildHeroUiFigmaPackRows(shineRoot) {
   return rows;
 }
 
+/**
+ * Full-kit Figma packs (M3 / TailGrids / Myna / Bootstrap) under corpus/packs/figma-*.
+ * Discovers on-disk packs so the catalog tracks the harvest, not a hand list.
+ * Selectability is decided by the caller via referenceHealth.
+ */
+export function buildFigmaKitPackRows(shineRoot, { prefixes = ["figma-m3-", "figma-tailgrids-", "figma-myna-", "figma-bootstrap-"] } = {}) {
+  const packsDir = join(shineRoot, "corpus/packs");
+  if (!existsSync(packsDir)) return [];
+  const familyMeta = {
+    m3: { label: "Material 3", jobTag: "material-figma", extraJobs: ["mui", "material3"] },
+    tailgrids: { label: "TailGrids", jobTag: "tailwind-figma", extraJobs: ["tailgrids"] },
+    myna: { label: "Myna UI", jobTag: "tailwind-figma", extraJobs: ["myna", "shadcn"] },
+    bootstrap: { label: "Bootstrap 5", jobTag: "bootstrap-figma", extraJobs: ["bootstrap"] },
+  };
+  const rows = [];
+  for (const entry of readdirSync(packsDir).sort()) {
+    const prefix = prefixes.find((p) => entry.startsWith(p));
+    if (!prefix) continue;
+    const dir = join(packsDir, entry);
+    if (!statSync(dir).isDirectory()) continue;
+    if (!existsSync(join(dir, "shot.png"))) continue;
+    let meta = {};
+    try {
+      meta = JSON.parse(readFileSync(join(dir, "meta.json"), "utf8"));
+    } catch { /* optional */ }
+    let manifest = {};
+    try {
+      manifest = JSON.parse(readFileSync(join(dir, "manifest.json"), "utf8"));
+    } catch { /* optional */ }
+    const family = prefix.replace(/^figma-/, "").replace(/-$/, "");
+    const fam = familyMeta[family] || { label: family, jobTag: "figma-kit", extraJobs: [] };
+    const slug = entry.slice(prefix.length);
+    const page = meta?.capture?.figma?.page || meta?.title || slug.replace(/-/g, " ");
+    const nodeId = meta?.capture?.figma?.nodeId || meta?.nodeId || "";
+    const fileKey = meta?.capture?.figma?.fileKey || meta?.fileKey || "";
+    const screen =
+      manifest.screen
+      || (/cover|welcome|thumbnail|hero|banner|cta|about|faq|marketing/.test(slug) ? "marketing"
+        : /table|queue|pagination|list-group|data-table/.test(slug) ? "queue"
+        : /sign-in|sign-up|auth|login/.test(slug) ? "auth"
+        : /settings/.test(slug) ? "settings"
+        : /chat/.test(slug) ? "chat"
+        : /chart|stats/.test(slug) ? "charts"
+        : /error|404|empty/.test(slug) ? "empty"
+        : /alert|toast|spinner|progress|skeleton|sonner/.test(slug) ? "async-state"
+        : /nav|tabs|breadcrumb|accordion|menubar|sidebar|drawer/.test(slug) ? "app-shell"
+        : /input|form|button|checkbox|radio|select|switch|slider|modal|dialog|dropdown|textarea|toggle|tooltip|popover|calendar|otp/.test(slug) ? "form"
+        : "catalog");
+    const jobs = Array.isArray(manifest.jobs) && manifest.jobs.length
+      ? manifest.jobs
+      : ["figma-kit", fam.jobTag, ...fam.extraJobs, slug, String(page).toLowerCase().replace(/\s+/g, "-")];
+    rows.push({
+      id: entry,
+      screen,
+      kit: "shadcn-registry",
+      title: `${fam.label} Figma · ${page}`,
+      path: `packs/${entry}`,
+      preview: fileKey && nodeId
+        ? `https://www.figma.com/design/${fileKey}?node-id=${String(nodeId).replace(":", "-")}`
+        : fileKey
+          ? `https://www.figma.com/design/${fileKey}`
+          : "",
+      license: "n/a",
+      kind: "blueprint",
+      startFrom: /cover|welcome|thumbnail/.test(slug) ? 2 : 5,
+      jobs,
+      scope: /cover|welcome|thumbnail|hero|sign-in|settings|error/.test(slug) ? "page" : "component",
+      note: `Full-kit Figma harvest (${fam.label}) — structure only; paint house shadcn for Clearspeed`,
+      selectable: true,
+      family,
+    });
+  }
+  return rows;
+}
+
 /** Full-page HeroUI next-app routes (live, not retired). */
 export function buildHeroUiPageRows(ctx) {
   const pages = [

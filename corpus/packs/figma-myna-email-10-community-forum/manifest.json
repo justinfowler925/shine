@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-email-10-community-forum",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "marketing",
+    "email",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-email-10-community-forum.md",
+      "role": "blueprint",
+      "sha256": "6102b1c34aa71014cff6c8a5582b5144e11502cce2f2f7431517b80b8a58058c"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

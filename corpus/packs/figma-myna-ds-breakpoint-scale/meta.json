@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-ds-breakpoint-scale",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2976-2340",
+  "harvested": "2026-10-09",
+  "bytes": 10974,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Breakpoint Scale",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2976:2340",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Breakpoint Scale",
+    "headings": "Breakpoint Scale",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Breakpoint Scale",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2976-2340",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2976-2340",
+    "capturedAt": "2026-10-09T14:06:45.607Z",
+    "shotSha256": "e904ca0860e9b3294d6c637b3949e3a98e6c2c40b27aac9622254db862c22f37",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2976:2340",
+      "page": "Design System",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

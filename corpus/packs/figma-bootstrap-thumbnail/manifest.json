@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-thumbnail",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "marketing",
+    "cover",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-thumbnail.md",
+      "role": "blueprint",
+      "sha256": "89ff6c0d8546afb7400f414a7673081a46c16a73bb5c7aa188b817905be080c4"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

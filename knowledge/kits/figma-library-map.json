@@ -171,7 +171,7 @@
         "shadcn-form",
         "shadcn-queue"
       ],
-      "note": "Prefer-copy GAn1Srb\u2026 is COMPLETE (38 pages via use_figma figma.root.children; 2 empty section dividers). MCP get_metadata without nodeId falsely shows Welcome+Icons only. Deep harvest of Example frames + Theme/Brand/Icons/atoms into figma-heroui-* packs. Steal structure; paint house shadcn. Alt DC4g36\u2026 is optional duplicate \u2014 prefer GAn1Srb\u2026",
+      "note": "Full prefer-copy ingest; referenceHealth-stamped; cite-selectable",
       "designFiles": [
         {
           "prefer": true,
@@ -236,7 +236,8 @@
         "figma-heroui-v3-cover",
         "figma-heroui-welcome"
       ],
-      "deepHarvestFileKey": "GAn1SrbKJYiKqz9SmHHCRm"
+      "deepHarvestFileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "fullIngest": true
     },
     {
       "name": "original Tailwind",

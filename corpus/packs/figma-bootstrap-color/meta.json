@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-color",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1432",
+  "harvested": "2026-10-09",
+  "bytes": 98590,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Color",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "3890:1432",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Color",
+    "headings": "Color",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Color",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1432",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1432",
+    "capturedAt": "2026-10-09T13:47:29.453Z",
+    "shotSha256": "05d754a6c1b21e42f51dd74a7783b379fc3961e5ab68cc197d25afdf59003b76",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "3890:1432",
+      "page": "Foundations",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-popover",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "overlay",
+    "popover",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-popover.md",
+      "role": "blueprint",
+      "sha256": "1c1c5957f36d0a3b67fac967cba614f3d848d55ff0c1d6267c25d542ff874cec"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-modal",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "overlay",
+    "modal",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-modal.md",
+      "role": "blueprint",
+      "sha256": "81c8ca6ea7915cd5b794b80208f5df74bdb7a649aa6ecbbc853993f5623e98db"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

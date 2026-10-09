@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-breadcrumbs",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11266",
+  "harvested": "2026-10-09",
+  "bytes": 84005,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Breadcrumbs",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:11266",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Breadcrumbs",
+    "headings": "Breadcrumbs",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Breadcrumbs",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11266",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11266",
+    "capturedAt": "2026-10-09T13:43:58.235Z",
+    "shotSha256": "b445be1aae7194d419b3b53a37f8aadc6afb291a69e4044a61292059d069f940",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:11266",
+      "page": "-- Breadcrumbs",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

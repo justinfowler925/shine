@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-navbars",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15397",
+  "harvested": "2026-10-09",
+  "bytes": 19913,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Navbars",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:15397",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Navbars",
+    "headings": "Navbars",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Navbars",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15397",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15397",
+    "capturedAt": "2026-10-09T13:45:10.564Z",
+    "shotSha256": "52bfdc84a33d27b7b5dd1a2b00c5bac46129a1073c6a074de35a94b718791a17",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:15397",
+      "page": "-- Navbars",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

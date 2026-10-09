@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-badges",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11408",
+  "harvested": "2026-10-09",
+  "bytes": 56367,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Badges",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:11408",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Badges",
+    "headings": "Badges",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Badges",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11408",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11408",
+    "capturedAt": "2026-10-09T13:43:58.565Z",
+    "shotSha256": "1deb9c1576ccd4f94ec8bd901889355c20402d1dc2aaaaa649a606e32c2dc697",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:11408",
+      "page": "-- Badges",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

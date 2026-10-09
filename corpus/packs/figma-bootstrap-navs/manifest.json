@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-navs",
+  "kind": "blueprint",
+  "screen": "app-shell",
+  "jobs": [
+    "app-shell",
+    "navs",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-navs.md",
+      "role": "blueprint",
+      "sha256": "02cb855bf2d783d27203f5e14acf3f86621d42df9dbc77382fc7de1df035991f"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

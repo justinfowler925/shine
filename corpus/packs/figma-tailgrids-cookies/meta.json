@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-cookies",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15235",
+  "harvested": "2026-10-09",
+  "bytes": 14895,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Cookies",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:15235",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Cookies",
+    "headings": "Cookies",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Cookies",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15235",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15235",
+    "capturedAt": "2026-10-09T13:45:09.659Z",
+    "shotSha256": "7a38d8f0636be7ac4e9967f110eec5409679e0893e94b68b25111dd3c29ee953",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:15235",
+      "page": "-- Cookies",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

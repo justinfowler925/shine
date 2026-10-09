@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-app-notifications-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5883",
+  "harvested": "2026-10-09",
+  "bytes": 15612,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Notifications Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2908:5883",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Notifications Block",
+    "headings": "Notifications Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Notifications Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5883",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5883",
+    "capturedAt": "2026-10-09T14:06:32.021Z",
+    "shotSha256": "54c14e19772cddae36081fe6db46d17e7c9e2cef2fb14a61d0bf3507df1511ee",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2908:5883",
+      "page": "Application Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-horizontal-menus",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21210",
+  "harvested": "2026-10-09",
+  "bytes": 17826,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Horizontal Menus",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:21210",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Horizontal Menus",
+    "headings": "Horizontal Menus",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Horizontal Menus",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21210",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-21210",
+    "capturedAt": "2026-10-09T13:48:34.692Z",
+    "shotSha256": "41c7ec0136bc1aea21f216a7d8c5f3fc5850765006ea5de3968f30f1407803cd",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:21210",
+      "page": "-- Horizontal Menus",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

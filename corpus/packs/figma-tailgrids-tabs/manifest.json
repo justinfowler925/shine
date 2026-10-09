@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-tabs",
+  "kind": "blueprint",
+  "screen": "app-shell",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "tabs",
+    "tabs",
+    "app-shell"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-tabs.md",
+      "role": "blueprint",
+      "sha256": "fddb283933922048919f2518b3b0b6329238e9c945f4b13bcee4bed21810858d"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

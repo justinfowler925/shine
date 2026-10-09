@@ -8,5 +8,23 @@
   "title": "Myna UI Tailwind/shadcn components gallery",
   "fileKey": "4SbNh8zIj6LYSmLbET45oO",
   "nodeId": "605:1271",
-  "discovery": "chrome-history-justin-copy"
+  "discovery": "chrome-history-justin-copy",
+  "capture": {
+    "status": 200,
+    "title": "Myna UI Tailwind/shadcn components gallery",
+    "headings": "Myna UI Tailwind/shadcn components gallery",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Myna UI Tailwind/shadcn components gallery",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=605-1271",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=605-1271",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "60a7b19be246e145b3644a8639611ff40ea389f6ad25e30b4aa6a4db80dd47a0",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "605:1271"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

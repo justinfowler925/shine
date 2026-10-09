@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-borders",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=121-155",
+  "harvested": "2026-10-09",
+  "bytes": 36330,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Borders",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "121:155",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Borders",
+    "headings": "Borders",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Borders",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=121-155",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=121-155",
+    "capturedAt": "2026-10-09T13:50:43.475Z",
+    "shotSha256": "7d087d34b445142eaf9e6183d9065670404a9a173cfc1cf0c538af1f62d7da78",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "121:155",
+      "page": "Bootstrap UI Kit",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

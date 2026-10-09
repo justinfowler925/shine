@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-menubar",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2759-2424",
+  "harvested": "2026-10-09",
+  "bytes": 50322,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Menubar",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2759:2424",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Menubar",
+    "headings": "Menubar",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Menubar",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2759-2424",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2759-2424",
+    "capturedAt": "2026-10-09T13:48:46.115Z",
+    "shotSha256": "6fe0497e512c923cb4e327ee9a41f7a398a73e0b596cf2bc399fdf8d477df108",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2759:2424",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

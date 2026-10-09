@@ -1,0 +1,21 @@
+{
+  "id": "figma-myna-ds-typography",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "design-system",
+    "tailwind-figma",
+    "myna",
+    "typography"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-ds-typography.md",
+      "role": "blueprint",
+      "sha256": "f13038d9dfad8477caa10ec3a1a0b89a13e6ed5ca992773f9e1cb5adf8201adc"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

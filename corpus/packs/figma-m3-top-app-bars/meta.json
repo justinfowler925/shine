@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Top app bars",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "50717:9053",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Top app bars",
+    "headings": "Material 3 \u2014 Top app bars",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Top app bars",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9053",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50717-9053",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "a2b6d5340d4789e48132a20d4c3994c4adbe59faa6f081be2b03ba4c889991d5",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "50717:9053"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

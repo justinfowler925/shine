@@ -1,0 +1,21 @@
+{
+  "id": "figma-myna-ds-opacity",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "design-system",
+    "tailwind-figma",
+    "myna",
+    "opacity"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-ds-opacity.md",
+      "role": "blueprint",
+      "sha256": "a1766d9cbff21b50dad3c5e88fb47f47e8d2b007a22fa0fac95a41d396929af7"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

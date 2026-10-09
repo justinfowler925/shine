@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-mkt-footer-block",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "marketing",
+    "tailwind-figma",
+    "myna",
+    "footer-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-mkt-footer-block.md",
+      "role": "blueprint",
+      "sha256": "11794cc616287b57b34bd01a820e8c8e0aade1358b546553a1770427d92ad9cb"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

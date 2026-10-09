@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Table of contents",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "53379:35512",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Table of contents",
+    "headings": "Material 3 \u2014 Table of contents",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Table of contents",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53379-35512",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53379-35512",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "68fced5e351318b57f496b64ef62d82643c3feb4b0adcac94f77b79e16985024",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "53379:35512"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

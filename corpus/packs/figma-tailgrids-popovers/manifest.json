@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-popovers",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "popovers",
+    "popovers",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-popovers.md",
+      "role": "blueprint",
+      "sha256": "b3ed0e3e83bfc43a9e45abcde737db8a949706560e203fe0eaa03e799ad8c557"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

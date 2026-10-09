@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-lists-group",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "list",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-lists-group.md",
+      "role": "blueprint",
+      "sha256": "372d3a73c2d8b6c8fc75c4ea6bca5193de586f76608367cf750b178c6dc72f43"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

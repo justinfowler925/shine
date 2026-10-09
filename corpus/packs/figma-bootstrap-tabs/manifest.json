@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-tabs",
+  "kind": "blueprint",
+  "screen": "app-shell",
+  "jobs": [
+    "app-shell",
+    "tabs",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-tabs.md",
+      "role": "blueprint",
+      "sha256": "1a7c3ad50fabbe7ea66c922eec1dd2728ab5a32556833b63e93949f119990db1"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

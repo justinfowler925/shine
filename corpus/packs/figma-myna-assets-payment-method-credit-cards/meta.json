@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-assets-payment-method-credit-cards",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2854-7386",
+  "harvested": "2026-10-09",
+  "bytes": 103412,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Payment Method & Credit Cards",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2854:7386",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Payment Method & Credit Cards",
+    "headings": "Payment Method & Credit Cards",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Payment Method & Credit Cards",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2854-7386",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2854-7386",
+    "capturedAt": "2026-10-09T14:06:48.625Z",
+    "shotSha256": "a49ec69f4d953c029dcb0be1aa92cf176515dc449ed1fd767d246b3fe1889f29",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2854:7386",
+      "page": "Assets",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

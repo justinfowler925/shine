@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-app-forgot-password-block",
+  "kind": "blueprint",
+  "screen": "auth",
+  "jobs": [
+    "auth",
+    "tailwind-figma",
+    "myna",
+    "forgot-password-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-app-forgot-password-block.md",
+      "role": "blueprint",
+      "sha256": "ea2e9f0a48dc93c753c0e6c0a7b3aa3c64379f4d95a0f0a8d61f210f0b7f59d2"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-mkt-testimonial-logos-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4331",
+  "harvested": "2026-10-09",
+  "bytes": 24134,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Testimonial Logos Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2908:4331",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Testimonial Logos Block",
+    "headings": "Testimonial Logos Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Testimonial Logos Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4331",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4331",
+    "capturedAt": "2026-10-09T14:06:33.005Z",
+    "shotSha256": "ef433b6807726a2874e4778cad82a6d61a8b99456ac91639835ae517e2713ab1",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2908:4331",
+      "page": "Marketing Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

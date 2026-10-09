@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-mkt-call-to-action-block",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "marketing",
+    "tailwind-figma",
+    "myna",
+    "call-to-action-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-mkt-call-to-action-block.md",
+      "role": "blueprint",
+      "sha256": "60e6170dceb4e26a80a18490d7b37549cfe5bd22cf78d697bb7025fb7d4236ae"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

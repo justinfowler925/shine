@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-cta",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "cta",
+    "cta",
+    "marketing"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-cta.md",
+      "role": "blueprint",
+      "sha256": "3434242b4ef3a97bd5abacdd12d050e4b8c93cc03831ca43c50b6145cf42b6fc"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

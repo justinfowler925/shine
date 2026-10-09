@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-spacer",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "spacer",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-spacer.md",
+      "role": "blueprint",
+      "sha256": "9571228f7c0a3dd47f3ad85c3f6e5dd1337b844381c801bc9903fe972cd5d45b"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

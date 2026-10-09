@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-features-services",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16721",
+  "harvested": "2026-10-09",
+  "bytes": 130412,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Features & Services",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:16721",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Features & Services",
+    "headings": "Features & Services",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Features & Services",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16721",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16721",
+    "capturedAt": "2026-10-09T13:45:43.834Z",
+    "shotSha256": "935a419c2575d05f29fa1df253be340bce34c751a1a04462c84bc3af70c549f1",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:16721",
+      "page": "-- Features & Services",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

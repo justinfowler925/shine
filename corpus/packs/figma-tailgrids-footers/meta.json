@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-footers",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15309",
+  "harvested": "2026-10-09",
+  "bytes": 49950,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Footers",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:15309",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Footers",
+    "headings": "Footers",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Footers",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15309",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15309",
+    "capturedAt": "2026-10-09T13:45:10.297Z",
+    "shotSha256": "b6be7f6723e2cc2ca2e12890b3a257e7a51507f5b8d3c8df2dbc112fc2fd37e8",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:15309",
+      "page": "-- Footers",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

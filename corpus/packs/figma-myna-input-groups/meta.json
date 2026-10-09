@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-input-groups",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2818-1785",
+  "harvested": "2026-10-09",
+  "bytes": 26199,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Input Groups",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2818:1785",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Input Groups",
+    "headings": "Input Groups",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Input Groups",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2818-1785",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2818-1785",
+    "capturedAt": "2026-10-09T13:48:46.052Z",
+    "shotSha256": "355caf2aee6a7dfd82568b184e0fc7c884648d2fde0b76a8db3a9edc8a2a5cbe",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2818:1785",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Elements",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "50732:11328",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Elements",
+    "headings": "Material 3 \u2014 Elements",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Elements",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11328",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11328",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "1972a05cc60376d624969d3ae66dfc0537b0655a4bad301f91399399a0d71152",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "50732:11328"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

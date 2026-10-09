@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-form-elements",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22282",
+  "harvested": "2026-10-09",
+  "bytes": 52031,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Form Elements",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:22282",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Form Elements",
+    "headings": "Form Elements",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Form Elements",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22282",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22282",
+    "capturedAt": "2026-10-09T13:50:08.798Z",
+    "shotSha256": "b7a2fb7c02498fc5e0c063111f226aa2baef1b4488002de1db4538a098fb5ade",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:22282",
+      "page": "-- Form Elements",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-buttons",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-10073",
+  "harvested": "2026-10-09",
+  "bytes": 106386,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Button",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:10073",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Button",
+    "headings": "Button",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Button",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-10073",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-10073",
+    "capturedAt": "2026-10-09T13:43:57.927Z",
+    "shotSha256": "f919da70c609e8a0630ef1c9c7c7ddacc1a574333555a677b1ce2bcc97b51345",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:10073",
+      "page": "-- Buttons",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

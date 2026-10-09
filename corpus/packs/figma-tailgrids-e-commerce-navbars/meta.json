@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-e-commerce-navbars",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18678",
+  "harvested": "2026-10-09",
+  "bytes": 10683,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Ecommerce Navbars",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:18678",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Ecommerce Navbars",
+    "headings": "Ecommerce Navbars",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Ecommerce Navbars",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18678",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18678",
+    "capturedAt": "2026-10-09T13:47:33.039Z",
+    "shotSha256": "288b4c85c186a628e11edd20e5b0e8bb4125a6cd49d9c27a81c80dcbd0d65293",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:18678",
+      "page": "-- E-Commerce Navbars",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-toasts",
+  "kind": "blueprint",
+  "screen": "async-state",
+  "jobs": [
+    "async-state",
+    "toast",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-toasts.md",
+      "role": "blueprint",
+      "sha256": "66dc087cce3ef3ddd8953f62ac9d6a64c87241be4c867a790e35504bbc5fa3e5"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

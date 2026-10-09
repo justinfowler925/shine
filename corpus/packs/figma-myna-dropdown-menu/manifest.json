@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-dropdown-menu",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "menu",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-dropdown-menu.md",
+      "role": "blueprint",
+      "sha256": "af048e65a71f16d20a48b86ac813c283c3b73768caf50eee57866fc87699dc79"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

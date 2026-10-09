@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-color",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "color",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-color.md",
+      "role": "blueprint",
+      "sha256": "372d73391db23bc8c181b3b319ea635c3e852d023ad222e5c1be0a070bdc7b2e"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

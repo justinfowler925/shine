@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-label",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "label",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-label.md",
+      "role": "blueprint",
+      "sha256": "65db909b7e6f83b1e6a632cc0524eedee099317d84622f7694d5d31f33c4fa50"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-changelog",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "changelog",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-changelog.md",
+      "role": "blueprint",
+      "sha256": "d7b431cd5556ff8e0ca28b45862b9062386c452cef0684238aedacacc58e6419"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

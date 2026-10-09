@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-typography",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "typography",
+    "typography",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-typography.md",
+      "role": "blueprint",
+      "sha256": "ca9afe9d53f39bdeaf5f5853e7b1885a5def43a07faab80371dec11928515ae6"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

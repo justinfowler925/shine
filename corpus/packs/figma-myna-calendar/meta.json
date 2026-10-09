@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-calendar",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2678-261",
+  "harvested": "2026-10-09",
+  "bytes": 45292,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Calendar",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2678:261",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Calendar",
+    "headings": "Calendar",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Calendar",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2678-261",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2678-261",
+    "capturedAt": "2026-10-09T13:47:48.884Z",
+    "shotSha256": "77e23fe0f2d7a567edc21b96cea31b1f1b55c51dc673819a5ac8d92ccd90e72b",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2678:261",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

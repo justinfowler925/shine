@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-sheet",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "overlay",
+    "sheet",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-sheet.md",
+      "role": "blueprint",
+      "sha256": "c314c923d3c392a671e7f4c2e13cfe3bbf205c66f5f627344c4634786461f040"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

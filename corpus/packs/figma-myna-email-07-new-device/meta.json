@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-07-new-device",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1162",
+  "harvested": "2026-10-09",
+  "bytes": 43597,
+  "scope": "component",
+  "kit": "myna",
+  "title": "New device",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1162",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "New device",
+    "headings": "New device",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "New device",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1162",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1162",
+    "capturedAt": "2026-10-09T14:06:32.308Z",
+    "shotSha256": "aae9442603e2450229aa8cefa9205f64c0013d68a08e8f1724216d534e20ae3f",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1162",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

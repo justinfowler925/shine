@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-card",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=53-108",
+  "harvested": "2026-10-09",
+  "bytes": 283331,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Card",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "53:108",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Card",
+    "headings": "Card",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Card",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=53-108",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=53-108",
+    "capturedAt": "2026-10-09T13:50:53.939Z",
+    "shotSha256": "0cda268be5fe1f7b666546055ba32c86113e0b9307f54a625a856f6ca2ebda89",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "53:108",
+      "page": "Bootstrap UI Kit",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

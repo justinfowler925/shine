@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-radio",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2166",
+  "harvested": "2026-10-09",
+  "bytes": 15373,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Radio",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2674:2166",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Radio",
+    "headings": "Radio",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Radio",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2166",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2166",
+    "capturedAt": "2026-10-09T13:48:46.244Z",
+    "shotSha256": "b6e0abb1c33938f4230a47720e18f551c66f33fbdbeb5957206254fd9d9ca912",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2674:2166",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

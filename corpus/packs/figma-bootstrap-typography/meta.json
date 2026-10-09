@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-typography",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1631",
+  "harvested": "2026-10-09",
+  "bytes": 141310,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Typography",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "3890:1631",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Typography",
+    "headings": "Typography",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Typography",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1631",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3890-1631",
+    "capturedAt": "2026-10-09T13:47:29.806Z",
+    "shotSha256": "1ace6c9a16846edd9b407e4a32b6e82c64eff127f4f76f74418f987fc60cee89",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "3890:1631",
+      "page": "Foundations",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

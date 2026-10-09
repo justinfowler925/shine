@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-teams",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-17596",
+  "harvested": "2026-10-09",
+  "bytes": 420405,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Teams",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:17596",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Teams",
+    "headings": "Teams",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Teams",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-17596",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-17596",
+    "capturedAt": "2026-10-09T13:45:46.078Z",
+    "shotSha256": "176e2273e188bf0832075480e8bffee1c871225f0d482ce97eccf1bd1309f5db",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:17596",
+      "page": "-- Teams",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-sign-in-sign-up",
+  "kind": "blueprint",
+  "screen": "auth",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "sign-in-sign-up",
+    "sign-in-sign-up",
+    "auth"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-sign-in-sign-up.md",
+      "role": "blueprint",
+      "sha256": "bb50d4f3bd5df1184bba3604962be531fad1f039dcc52034dbdee750b540d1af"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

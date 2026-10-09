@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-sheet",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2774-707",
+  "harvested": "2026-10-09",
+  "bytes": 50892,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Sheet",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2774:707",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Sheet",
+    "headings": "Sheet",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Sheet",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2774-707",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2774-707",
+    "capturedAt": "2026-10-09T13:50:36.158Z",
+    "shotSha256": "0376b7f85d8fe293b09628af2b7352e9aab7b45bcdf947ac30279fe8ae317076",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2774:707",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

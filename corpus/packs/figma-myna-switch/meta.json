@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-switch",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2178",
+  "harvested": "2026-10-09",
+  "bytes": 14036,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Switch",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2674:2178",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Switch",
+    "headings": "Switch",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Switch",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2178",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2178",
+    "capturedAt": "2026-10-09T13:50:37.314Z",
+    "shotSha256": "8c23ba612735d66d9a542768c9cbb45df9761a1f02a9c566a79b7815d60f98fc",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2674:2178",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

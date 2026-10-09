@@ -5,10 +5,15 @@
   "bytes": 280163,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Button",
+    "title": "Button",
+    "headings": "Button",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Button",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=486-54087",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=486-54087",
-    "capturedAt": "2026-10-09T02:45:22.815877Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "4af47f3f2cfa33453a2060a8164047a3f56066df81e174a86cb76ab50fde109d",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "486:54087",
       "page": "Button",
       "kind": "atoms"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

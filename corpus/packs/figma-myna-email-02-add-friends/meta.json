@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-02-add-friends",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1295",
+  "harvested": "2026-10-09",
+  "bytes": 80445,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Add friends",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1295",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Add friends",
+    "headings": "Add friends",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Add friends",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1295",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1295",
+    "capturedAt": "2026-10-09T14:06:32.126Z",
+    "shotSha256": "f0196a08afd957857ca27e58cbd8f26f04b704d735b442b58130e40fb6700ec6",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1295",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -5,10 +5,15 @@
   "bytes": 356436,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Card",
+    "title": "Card",
+    "headings": "Card",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Card",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3350-1558",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3350-1558",
-    "capturedAt": "2026-10-09T02:41:25.739779Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "bde907f5e342ee05958b94f246801569bda62a43a101df6b6c744724f5153b38",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "3350:1558",
       "page": "Card",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

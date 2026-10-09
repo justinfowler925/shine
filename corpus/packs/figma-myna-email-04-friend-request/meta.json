@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-04-friend-request",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1322",
+  "harvested": "2026-10-09",
+  "bytes": 63076,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Friend request",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1322",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Friend request",
+    "headings": "Friend request",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Friend request",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1322",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1322",
+    "capturedAt": "2026-10-09T14:06:32.201Z",
+    "shotSha256": "1fb8c25a2f66b532c8603c6d7e2992b828ef2331a93180baf2a0746584210219",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1322",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

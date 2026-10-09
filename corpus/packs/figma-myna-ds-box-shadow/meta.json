@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-ds-box-shadow",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3-5823",
+  "harvested": "2026-10-09",
+  "bytes": 41080,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Box Shadow",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3:5823",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Box Shadow",
+    "headings": "Box Shadow",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Box Shadow",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3-5823",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3-5823",
+    "capturedAt": "2026-10-09T14:06:46.951Z",
+    "shotSha256": "b226a6a06fdd2501711dfc5d8965a8c531044f973838c56206f3611c6c8232c2",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3:5823",
+      "page": "Design System",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

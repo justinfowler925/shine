@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-checkbox",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-1733",
+  "harvested": "2026-10-09",
+  "bytes": 127351,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Checkbox",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2674:1733",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Checkbox",
+    "headings": "Checkbox",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Checkbox",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-1733",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-1733",
+    "capturedAt": "2026-10-09T13:49:21.330Z",
+    "shotSha256": "cd3c18f8bb8b5e230697a0186f41a3c43660b3bf1e888c8ac4454b8837889831",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2674:1733",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

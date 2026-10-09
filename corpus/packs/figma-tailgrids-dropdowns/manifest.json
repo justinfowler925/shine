@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-dropdowns",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "dropdowns",
+    "dropdown",
+    "form"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-dropdowns.md",
+      "role": "blueprint",
+      "sha256": "875c1c0373ee240e2dcbdbd5638fe59a9df9f0a50a2f55192f70d847f6e01e0c"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

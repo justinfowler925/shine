@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-app-registration-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4810",
+  "harvested": "2026-10-09",
+  "bytes": 47003,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Registration Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2908:4810",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Registration Block",
+    "headings": "Registration Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Registration Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4810",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4810",
+    "capturedAt": "2026-10-09T14:06:36.311Z",
+    "shotSha256": "5759f2e1f84df2907fd9a72645a9d7d460675d4e3e8feb3a4a87b946690d21cb",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2908:4810",
+      "page": "Application Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

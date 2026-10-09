@@ -5,10 +5,15 @@
   "bytes": 12930,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Theme",
+    "title": "Theme",
+    "headings": "Theme",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Theme",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-17641",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=482-17641",
-    "capturedAt": "2026-10-09T02:44:37.020424Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "9c076a69d7410fc6796ba0bd3cc4e40b88a7124b1fd0278e349e6aeeb804c5ff",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "482:17641",
       "page": "Theme",
       "kind": "tokens"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

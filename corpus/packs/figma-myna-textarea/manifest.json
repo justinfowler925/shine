@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-textarea",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "textarea",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-textarea.md",
+      "role": "blueprint",
+      "sha256": "663b8247aa8fc3692e577875d23318a8c0ac8331d11ee37623c00fb79c5f3d38"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-header-hero-area",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16807",
+  "harvested": "2026-10-09",
+  "bytes": 584336,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Header / Hero Area",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:16807",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Header / Hero Area",
+    "headings": "Header / Hero Area",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Header / Hero Area",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16807",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16807",
+    "capturedAt": "2026-10-09T13:45:44.235Z",
+    "shotSha256": "7f94f44135b64e109ffc71a4b9a69a64a0032e48ab74590e4b699225e12d5676",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:16807",
+      "page": "-- Header / Hero Area",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

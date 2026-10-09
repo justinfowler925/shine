@@ -5,10 +5,15 @@
   "bytes": 129798,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Number Input",
+    "title": "Number Input",
+    "headings": "Number Input",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Number Input",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3638-79039",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=3638-79039",
-    "capturedAt": "2026-10-09T02:43:10.912737Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "f1686f02534fd540c7071298281d4896b11a4a81959da15c470164f2bd0dadd5",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "3638:79039",
       "page": "Number Input",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

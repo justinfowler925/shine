@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Buttons",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "53923:27456",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Buttons",
+    "headings": "Material 3 \u2014 Buttons",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Buttons",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27456",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53923-27456",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "8ec2ecc96f5d8d4a52426026a6b481f13e57a824b55b1417e8b16a89fd0bd1fd",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "53923:27456"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

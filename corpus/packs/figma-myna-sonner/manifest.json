@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-sonner",
+  "kind": "blueprint",
+  "screen": "async-state",
+  "jobs": [
+    "async-state",
+    "toast",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-sonner.md",
+      "role": "blueprint",
+      "sha256": "56740fd76034efe2936e180e08f9ea3b250eee7244ff1c35a8950ac43de728e1"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

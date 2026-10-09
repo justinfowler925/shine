@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-shopping-carts",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "shopping-carts",
+    "shopping-carts",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-shopping-carts.md",
+      "role": "blueprint",
+      "sha256": "0b8ffa023515df5b8738508775cfa408690861204426adb7fb0b363aea8dd568"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

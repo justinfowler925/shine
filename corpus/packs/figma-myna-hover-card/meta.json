@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-hover-card",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2785-814",
+  "harvested": "2026-10-09",
+  "bytes": 12488,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Hover Card",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2785:814",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Hover Card",
+    "headings": "Hover Card",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Hover Card",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2785-814",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2785-814",
+    "capturedAt": "2026-10-09T13:48:45.991Z",
+    "shotSha256": "70426d211a52444e119ffa2ef4fb9f589365234cfec16127f7d2c949ee0e9d68",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2785:814",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

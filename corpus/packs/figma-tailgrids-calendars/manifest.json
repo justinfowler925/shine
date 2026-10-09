@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-calendars",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "calendars",
+    "calendars",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-calendars.md",
+      "role": "blueprint",
+      "sha256": "609f6a5b1fe55075893ca2a3a93c486ff8f9209086deff040bcb6e4c91848fa7"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

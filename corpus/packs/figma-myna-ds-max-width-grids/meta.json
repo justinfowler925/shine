@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-ds-max-width-grids",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2628-1492",
+  "harvested": "2026-10-09",
+  "bytes": 40162,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Max Width Grids",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2628:1492",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Max Width Grids",
+    "headings": "Max Width Grids",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Max Width Grids",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2628-1492",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2628-1492",
+    "capturedAt": "2026-10-09T14:06:44.513Z",
+    "shotSha256": "84a679613df0ad6591f79cd0d12539efe755db50931aeb4ecc698787b111b315",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2628:1492",
+      "page": "Design System",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

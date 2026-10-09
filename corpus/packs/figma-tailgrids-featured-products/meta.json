@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-featured-products",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19115",
+  "harvested": "2026-10-09",
+  "bytes": 565315,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Featured Products",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:19115",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Featured Products",
+    "headings": "Featured Products",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Featured Products",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19115",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19115",
+    "capturedAt": "2026-10-09T13:47:34.208Z",
+    "shotSha256": "0cf9fc2774f9cba1f4453a062496217342621987f4ad5982c2b1ff6e43cbc4b4",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:19115",
+      "page": "-- Featured Products",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

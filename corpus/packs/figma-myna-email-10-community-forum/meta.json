@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-10-community-forum",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1277",
+  "harvested": "2026-10-09",
+  "bytes": 38205,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Community forum",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1277",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Community forum",
+    "headings": "Community forum",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Community forum",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1277",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1277",
+    "capturedAt": "2026-10-09T14:06:32.412Z",
+    "shotSha256": "756989d588a00d555e339f44acbd77a0dd7f130fd25159669201ecdf9f92c8d2",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1277",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,3 +1,11 @@
+## Unreleased
+
+### Figma kits — full ingest (cite USE)
+- Full-kit Figma harvest for HeroUI / Material 3 / TailGrids / Myna / Bootstrap Design fileKeys.
+- Packs: 46 heroui · 38 m3 · 82 tailgrids · 42 myna · 39 bootstrap; all `referenceHealth`-stamped.
+- Cite: explicit kit jobs prefer `figma-*` family packs; Clearspeed Operate edition still TW gold.
+- Index: `buildFigmaKitPackRows` + health-gated `selectable` (retired hardcodes removed).
+
 # Changelog
 
 All notable changes to Shine are documented here. Public releases follow [Keep a Changelog](https://keepachangelog.com/) and [SemVer](https://semver.org/).

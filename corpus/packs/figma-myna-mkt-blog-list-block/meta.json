@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-mkt-blog-list-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2899-1245",
+  "harvested": "2026-10-09",
+  "bytes": 365673,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Blog List Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2899:1245",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Blog List Block",
+    "headings": "Blog List Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Blog List Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2899-1245",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2899-1245",
+    "capturedAt": "2026-10-09T14:06:30.948Z",
+    "shotSha256": "793dde588d11a547ab2239f113b1be4225d3b4cad78beb8cd251f923570076a7",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2899:1245",
+      "page": "Marketing Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

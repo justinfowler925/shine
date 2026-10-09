@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-checkout",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18317",
+  "harvested": "2026-10-09",
+  "bytes": 165801,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Checkout",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:18317",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Checkout",
+    "headings": "Checkout",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Checkout",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18317",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18317",
+    "capturedAt": "2026-10-09T13:47:32.765Z",
+    "shotSha256": "27e574d38b891cbe470279402b631fb2b5d0d861e05353ef55588bb61ae29314",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:18317",
+      "page": "-- Checkout",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

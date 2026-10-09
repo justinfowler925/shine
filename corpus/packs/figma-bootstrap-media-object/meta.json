@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-media-object",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=97-26",
+  "harvested": "2026-10-09",
+  "bytes": 195045,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Media object (Deprecated)",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "97:26",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Media object (Deprecated)",
+    "headings": "Media object (Deprecated)",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Media object (Deprecated)",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=97-26",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=97-26",
+    "capturedAt": "2026-10-09T14:06:43.562Z",
+    "shotSha256": "9b958803082ff23e87910a4cfa140b00f3b1c57cdd9f0e420a60e4473ead5249",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "97:26",
+      "page": "Bootstrap UI Kit",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-assets-store-badges",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2860-10109",
+  "harvested": "2026-10-09",
+  "bytes": 12838,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Store Badges",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2860:10109",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Store Badges",
+    "headings": "Store Badges",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Store Badges",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2860-10109",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2860-10109",
+    "capturedAt": "2026-10-09T14:06:29.703Z",
+    "shotSha256": "54f8675d0fddc2fcaa496bbf866025d063a56b21d7bac637ffc71bb192f22af3",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2860:10109",
+      "page": "Assets",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

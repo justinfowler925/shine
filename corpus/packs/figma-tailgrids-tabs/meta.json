@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-tabs",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14203",
+  "harvested": "2026-10-09",
+  "bytes": 67251,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Tabs",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:14203",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Tabs",
+    "headings": "Tabs",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Tabs",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14203",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14203",
+    "capturedAt": "2026-10-09T13:44:34.386Z",
+    "shotSha256": "c0ac4d1b96817d17f919126ab1e66ebda1ac75be0e3cb0dd808b66814410d1c0",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:14203",
+      "page": "-- Tabs",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

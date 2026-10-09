@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-alert-dialog",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "overlay",
+    "dialog",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-alert-dialog.md",
+      "role": "blueprint",
+      "sha256": "1fafda26251c280773755c5341f2d90c74d27f3683cb701c8b580864c3a5e3d9"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-mkt-404-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2898-1112",
+  "harvested": "2026-10-09",
+  "bytes": 20779,
+  "scope": "component",
+  "kit": "myna",
+  "title": "404 Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2898:1112",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "404 Block",
+    "headings": "404 Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "404 Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2898-1112",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2898-1112",
+    "capturedAt": "2026-10-09T14:06:31.902Z",
+    "shotSha256": "ff34e600c8b82dbbcc40df61b12176f40528be1f7714abe4f9f89c65ddfaea4f",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2898:1112",
+      "page": "Marketing Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

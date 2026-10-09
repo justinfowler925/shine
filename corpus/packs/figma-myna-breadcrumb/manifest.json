@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-breadcrumb",
+  "kind": "blueprint",
+  "screen": "app-shell",
+  "jobs": [
+    "app-shell",
+    "breadcrumb",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-breadcrumb.md",
+      "role": "blueprint",
+      "sha256": "a9e555bb6d6256a7e9a83dc6da08fdc92ab21e1aae8ece1b182e547f534eb227"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

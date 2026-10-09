@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-sonner",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2806-824",
+  "harvested": "2026-10-09",
+  "bytes": 92929,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Sonner / Toast",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2806:824",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Sonner / Toast",
+    "headings": "Sonner / Toast",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Sonner / Toast",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2806-824",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2806-824",
+    "capturedAt": "2026-10-09T13:50:37.036Z",
+    "shotSha256": "c781bc5310d5edc9af632e0092a2f4cae9dafbeb3451abe4f8b9be5867ad7834",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2806:824",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

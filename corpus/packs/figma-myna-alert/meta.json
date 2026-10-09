@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-alert",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1556",
+  "harvested": "2026-10-09",
+  "bytes": 25812,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Alert",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2673:1556",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Alert",
+    "headings": "Alert",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Alert",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1556",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1556",
+    "capturedAt": "2026-10-09T13:50:09.716Z",
+    "shotSha256": "ebb9c3b06ccb676feda7e3b335fb36f122e395acc8325d78a95f578aeefc009a",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2673:1556",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

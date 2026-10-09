@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-tooltip",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "tooltip",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-tooltip.md",
+      "role": "blueprint",
+      "sha256": "70f9d803dfa125070b774391f4e7347f2cfe142fcd06e3fe1697a7574a71c604"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-borders",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "borders",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-borders.md",
+      "role": "blueprint",
+      "sha256": "84dc50aae1e31b0d38165ab12153e4e54763d5bf58e07673c2e444d4b43f1ad1"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-changelog",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-351",
+  "harvested": "2026-10-09",
+  "bytes": 169083,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Changelog",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "1101:351",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Changelog",
+    "headings": "Changelog",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Changelog",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-351",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1101-351",
+    "capturedAt": "2026-10-09T13:51:12.426Z",
+    "shotSha256": "789fcf08465352fa5bf7c8effc8d2465f4ba14459dfd0594a3c37e6c7e44d586",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "1101:351",
+      "page": "Bootstrap UI Kit",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

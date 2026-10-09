@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-dropdown-menu",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2740-558",
+  "harvested": "2026-10-09",
+  "bytes": 54883,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Dropdown Menu",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2740:558",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Dropdown Menu",
+    "headings": "Dropdown Menu",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Dropdown Menu",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2740-558",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2740-558",
+    "capturedAt": "2026-10-09T13:48:28.604Z",
+    "shotSha256": "09d07d7d85171064954de3dbd9bccfd9c69a7dec96db9f8a929023f15d951e43",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2740:558",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-radius",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "radius",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-radius.md",
+      "role": "blueprint",
+      "sha256": "2aa09ef2f01190afdc991ab082e5e326d80639b16782fe735aa98dbee20392cb"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

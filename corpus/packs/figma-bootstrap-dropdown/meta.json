@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-dropdown",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1225-0",
+  "harvested": "2026-10-09",
+  "bytes": 30409,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Dropdown",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "1225:0",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Dropdown",
+    "headings": "Dropdown",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Dropdown",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1225-0",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=1225-0",
+    "capturedAt": "2026-10-09T13:49:16.906Z",
+    "shotSha256": "965b140eb788ee69967f673597e07571c35f296ace7cfdc01f9fd2e1c505895f",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "1225:0",
+      "page": "Bootstrap UI Kit",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

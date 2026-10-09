@@ -1,0 +1,21 @@
+{
+  "id": "figma-myna-ds-spacing-scale",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "design-system",
+    "tailwind-figma",
+    "myna",
+    "spacing-scale"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-ds-spacing-scale.md",
+      "role": "blueprint",
+      "sha256": "e2f0a2b8c96931c77c7c1b01e5a7c925ba9efd50a831f9f1f9933b618e6b2791"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

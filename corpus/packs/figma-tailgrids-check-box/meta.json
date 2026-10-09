@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-check-box",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11540",
+  "harvested": "2026-10-09",
+  "bytes": 19748,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Check Box",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:11540",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Check Box",
+    "headings": "Check Box",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Check Box",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11540",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-11540",
+    "capturedAt": "2026-10-09T13:44:32.227Z",
+    "shotSha256": "0fee5c286329e42ddea41fc303e1d74074d1203d72ea067aa72a08ec64b273ce",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:11540",
+      "page": "-- Check Box",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

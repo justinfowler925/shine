@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-ds-border-radius",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=418-1249",
+  "harvested": "2026-10-09",
+  "bytes": 11089,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Border Radius",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "418:1249",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Border Radius",
+    "headings": "Border Radius",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Border Radius",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=418-1249",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=418-1249",
+    "capturedAt": "2026-10-09T14:06:46.657Z",
+    "shotSha256": "500e9608ddcd64b239dd8a1876d8dbe30b4c8b85bf0a50f46d5241fadeb5cf1d",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "418:1249",
+      "page": "Design System",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

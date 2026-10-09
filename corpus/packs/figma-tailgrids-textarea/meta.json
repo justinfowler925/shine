@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-textarea",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14405",
+  "harvested": "2026-10-09",
+  "bytes": 78279,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Textarea",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:14405",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Textarea",
+    "headings": "Textarea",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Textarea",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14405",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14405",
+    "capturedAt": "2026-10-09T13:44:35.090Z",
+    "shotSha256": "5c756417673f12bf137d93bc2d11197c5046c0ceeec7afcdfc698ececab7171c",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:14405",
+      "page": "-- Textarea",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

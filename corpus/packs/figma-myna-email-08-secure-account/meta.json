@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-email-08-secure-account",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1131",
+  "harvested": "2026-10-09",
+  "bytes": 44088,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Secure account",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3000:1131",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Secure account",
+    "headings": "Secure account",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Secure account",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1131",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3000-1131",
+    "capturedAt": "2026-10-09T14:06:32.342Z",
+    "shotSha256": "bedd674cab4508b96e5532bd72885f9375b5ce983b7199c45f8c27e03c16f9fa",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3000:1131",
+      "page": "Email Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

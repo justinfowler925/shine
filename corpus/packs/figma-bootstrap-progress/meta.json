@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-progress",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=100-59",
+  "harvested": "2026-10-09",
+  "bytes": 29835,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Progress",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "100:59",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Progress",
+    "headings": "Progress",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Progress",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=100-59",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=100-59",
+    "capturedAt": "2026-10-09T13:48:28.690Z",
+    "shotSha256": "04d9a724dc950143c807a155c0613c23d02da2833bcb2c387aa576a1597c1a7e",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "100:59",
+      "page": "Bootstrap UI Kit",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

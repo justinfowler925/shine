@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-tooltip",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2688-401",
+  "harvested": "2026-10-09",
+  "bytes": 11733,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Tooltip",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2688:401",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Tooltip",
+    "headings": "Tooltip",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Tooltip",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2688-401",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2688-401",
+    "capturedAt": "2026-10-09T13:50:38.772Z",
+    "shotSha256": "a8ae87a4cb137ee6ccb8b01d27b3dd61e60a08934245c9ec931325f80878a9f3",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2688:401",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

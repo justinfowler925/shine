@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-scrollbar",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2823-2148",
+  "harvested": "2026-10-09",
+  "bytes": 62431,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Scrollbar",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2823:2148",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Scrollbar",
+    "headings": "Scrollbar",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Scrollbar",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2823-2148",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2823-2148",
+    "capturedAt": "2026-10-09T13:50:35.592Z",
+    "shotSha256": "f093fcfe4c6b8ce5fa7064b0050db1f3456844ee66cfb8b73d9337615b981762",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2823:2148",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

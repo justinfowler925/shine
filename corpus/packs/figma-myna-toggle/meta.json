@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-toggle",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2775-856",
+  "harvested": "2026-10-09",
+  "bytes": 17939,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Toggle",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2775:856",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Toggle",
+    "headings": "Toggle",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Toggle",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2775-856",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2775-856",
+    "capturedAt": "2026-10-09T13:50:38.502Z",
+    "shotSha256": "4c40e10dde89e8dc6a757e5f5638ba0ea93681fde754d7273e696e046c3782b5",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2775:856",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

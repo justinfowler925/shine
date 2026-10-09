@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-textarea",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2219",
+  "harvested": "2026-10-09",
+  "bytes": 18995,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Textarea",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2674:2219",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Textarea",
+    "headings": "Textarea",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Textarea",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2219",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2219",
+    "capturedAt": "2026-10-09T13:50:38.237Z",
+    "shotSha256": "9af67b75b81a4a8ad0f82865ebc5673f7eb6d9fb1c7dd33692459231c857e0a6",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2674:2219",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

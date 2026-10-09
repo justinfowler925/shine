@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-brands",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16449",
+  "harvested": "2026-10-09",
+  "bytes": 72075,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Brands",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:16449",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Brands",
+    "headings": "Brands",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Brands",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16449",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16449",
+    "capturedAt": "2026-10-09T13:45:43.171Z",
+    "shotSha256": "b8c6b01c022b207ae88a7156b2db74c944099a036054787a4f4c755bc82a08a1",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:16449",
+      "page": "-- Brands",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

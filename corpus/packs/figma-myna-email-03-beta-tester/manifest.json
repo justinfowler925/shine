@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-email-03-beta-tester",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "marketing",
+    "email",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-email-03-beta-tester.md",
+      "role": "blueprint",
+      "sha256": "d4e20f6a72d5ce8766f50ffc57d7f4d687833b368f17567e13e75668b760c8cb"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

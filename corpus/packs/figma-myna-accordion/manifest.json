@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-accordion",
+  "kind": "blueprint",
+  "screen": "app-shell",
+  "jobs": [
+    "app-shell",
+    "accordion",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-accordion.md",
+      "role": "blueprint",
+      "sha256": "18a2462630105e2442ad943909f5d9c83e7e1310fd7879bd94aff973a15d5633"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

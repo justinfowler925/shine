@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-email-02-add-friends",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "marketing",
+    "email",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-email-02-add-friends.md",
+      "role": "blueprint",
+      "sha256": "0a3a99fed9253ef9d2ea5bf1d46ab2dac3db6c1c8b54459e40bfea4fa9afe962"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

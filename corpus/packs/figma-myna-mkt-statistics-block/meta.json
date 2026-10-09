@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-mkt-statistics-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4209",
+  "harvested": "2026-10-09",
+  "bytes": 31559,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Statistics Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2908:4209",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Statistics Block",
+    "headings": "Statistics Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Statistics Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4209",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-4209",
+    "capturedAt": "2026-10-09T14:06:32.697Z",
+    "shotSha256": "0c727e4255404cf5629f0c31332d7507141189bd8c91eb16b199414fd373bb1c",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2908:4209",
+      "page": "Marketing Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

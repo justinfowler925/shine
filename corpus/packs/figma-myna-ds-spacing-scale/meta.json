@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-ds-spacing-scale",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=20-1530",
+  "harvested": "2026-10-09",
+  "bytes": 64268,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Spacing Scale",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "20:1530",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Spacing Scale",
+    "headings": "Spacing Scale",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Spacing Scale",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=20-1530",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=20-1530",
+    "capturedAt": "2026-10-09T14:06:44.809Z",
+    "shotSha256": "05088b1cad241d7b54ae6924ffd40dd0795b14d7de493877f2adf0569fd66222",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "20:1530",
+      "page": "Design System",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

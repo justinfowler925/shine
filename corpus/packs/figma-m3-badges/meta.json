@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Badges",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "51592:4755",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Badges",
+    "headings": "Material 3 \u2014 Badges",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Badges",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51592-4755",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51592-4755",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "2aff9b2b3e04d57c2784505099564b6b3cbc9972520fe1c1805a400f0ff3607a",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "51592:4755"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

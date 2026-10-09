@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-hover-card",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "hover-card",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-hover-card.md",
+      "role": "blueprint",
+      "sha256": "90abe69b573fd67e243a87d7ba04e6f6b9a97bad27550d42f767d42a12f5c2e7"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

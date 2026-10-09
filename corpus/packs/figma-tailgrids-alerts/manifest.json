@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-alerts",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "alerts",
+    "danger-alert",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-alerts.md",
+      "role": "blueprint",
+      "sha256": "428215b90f8918b3663ecb53a2411d0a2f58b79fed45d42415f5c1b99112ab95"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-cards",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14711",
+  "harvested": "2026-10-09",
+  "bytes": 381511,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Cards",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:14711",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Cards",
+    "headings": "Cards",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Cards",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14711",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14711",
+    "capturedAt": "2026-10-09T13:43:59.027Z",
+    "shotSha256": "616bfc1beee393c2a798d9a0674355552bd5c1482b5bae65abaa39948e4b6d65",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:14711",
+      "page": "-- Cards",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -5,10 +5,15 @@
   "bytes": 71398,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Icons",
+    "title": "Icons",
+    "headings": "Icons",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Icons",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=10-1851",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=10-1851",
-    "capturedAt": "2026-10-09T02:44:36.777854Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "0221a63f33d8435a8fefb088f1858659b6ae291833b868d2e95c51940f34b4c3",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "10:1851",
       "page": "Icons",
       "kind": "icons"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

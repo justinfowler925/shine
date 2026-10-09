@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-product-categories",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20067",
+  "harvested": "2026-10-09",
+  "bytes": 262619,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Product Categories",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:20067",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Product Categories",
+    "headings": "Product Categories",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Product Categories",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20067",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20067",
+    "capturedAt": "2026-10-09T13:48:02.209Z",
+    "shotSha256": "57fcab8017413169c6eba87fb47a99a60e8ac1202a796f97dbc460ccac5593c3",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:20067",
+      "page": "-- Product Categories",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

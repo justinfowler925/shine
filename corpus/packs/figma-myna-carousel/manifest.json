@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-carousel",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "carousel",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-carousel.md",
+      "role": "blueprint",
+      "sha256": "1e0123671d948e01d749efd1a6eb3acffbcc865528015080b10452b29d5938ef"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

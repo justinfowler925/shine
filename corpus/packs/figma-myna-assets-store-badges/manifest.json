@@ -1,0 +1,21 @@
+{
+  "id": "figma-myna-assets-store-badges",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "assets",
+    "tailwind-figma",
+    "myna",
+    "store-badges"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-assets-store-badges.md",
+      "role": "blueprint",
+      "sha256": "de5ca8ef95490999de5359881b4ca31357cfaba14547786e9847be02d8969230"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

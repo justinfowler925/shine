@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-command",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "command",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-command.md",
+      "role": "blueprint",
+      "sha256": "95216f7ec5fb4505751935bfdcb7bb81f48a38c66af7efa65f6e12258eb3cf15"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

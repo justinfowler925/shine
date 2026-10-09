@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-filters",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19236",
+  "harvested": "2026-10-09",
+  "bytes": 45229,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Filters",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:19236",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Filters",
+    "headings": "Filters",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Filters",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19236",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-19236",
+    "capturedAt": "2026-10-09T13:47:34.509Z",
+    "shotSha256": "8bd2d4ccb0046cfebb23f6f72254728f375091c06335361f3d854ac95ab6e776",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:19236",
+      "page": "-- Filters",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

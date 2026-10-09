@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-app-dividers-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5156",
+  "harvested": "2026-10-09",
+  "bytes": 23691,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Dividers Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2908:5156",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Dividers Block",
+    "headings": "Dividers Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Dividers Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5156",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5156",
+    "capturedAt": "2026-10-09T14:06:31.986Z",
+    "shotSha256": "323e7cc13aeca722d4e6d50dc9a5b53ec58bc94974ec9690bae73e2364d4699b",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2908:5156",
+      "page": "Application Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

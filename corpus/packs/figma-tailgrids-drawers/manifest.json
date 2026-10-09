@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-drawers",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "drawers",
+    "drawers",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-drawers.md",
+      "role": "blueprint",
+      "sha256": "b4365a31afd9d1b2be0229975ad39e1ceb4354bd9be6a8611bda92868a019eb8"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

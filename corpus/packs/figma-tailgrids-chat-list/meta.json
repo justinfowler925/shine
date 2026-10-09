@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-chat-list",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20751",
+  "harvested": "2026-10-09",
+  "bytes": 56421,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Chat Lists",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:20751",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Chat Lists",
+    "headings": "Chat Lists",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Chat Lists",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20751",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20751",
+    "capturedAt": "2026-10-09T13:48:24.308Z",
+    "shotSha256": "94922444aa8bcf006fe90fb42abb911e61d95c3a995be3a46cf29789fd35017e",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:20751",
+      "page": "-- Chat List",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

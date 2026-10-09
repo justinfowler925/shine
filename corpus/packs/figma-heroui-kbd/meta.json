@@ -5,10 +5,15 @@
   "bytes": 113992,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Kbd",
+    "title": "Kbd",
+    "headings": "Kbd",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Kbd",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31287",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31287",
-    "capturedAt": "2026-10-09T02:43:10.377941Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "6c21c8c908404ed89ad2b990bf0ac63a65dbe870b21dcf6df6f3f5f941a63a6e",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2545:31287",
       "page": "Kbd",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

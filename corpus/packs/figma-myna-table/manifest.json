@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-table",
+  "kind": "blueprint",
+  "screen": "queue",
+  "jobs": [
+    "queue",
+    "table",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-table.md",
+      "role": "blueprint",
+      "sha256": "9a0aa182d1fd74ae2b20ee5901fc4dc138d8da37fddd10a9a4aa92b18d0ddab2"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

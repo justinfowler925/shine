@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Text Fields",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "52805:28110",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Text Fields",
+    "headings": "Material 3 \u2014 Text Fields",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Text Fields",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52805-28110",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52805-28110",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "9dce83335a54fb695949a2e9caecbdae7910075cf7fca128ba278b8b84ed18c2",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "52805:28110"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

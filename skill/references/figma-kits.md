@@ -35,9 +35,22 @@ stand-in for Tailwind/HeroUI gallery density: **Simple Design System**.
 
 HeroUI prefer-copy `GAn1SrbKJYiKqz9SmHHCRm` is the full 38-page kit (use_figma
 `figma.root.children`; MCP get_metadata without nodeId falsely shows Welcome+Icons).
-All component/Theme/Brand/Icons Example frames land as `figma-heroui-*` packs.
-Alt `DC4g36…` is an optional duplicate. Tailwind/Bootstrap/M3 Justin copies:
-TailGrids `DUN5Dvd…`, Myna `4SbNh8…`, Bootstrap `p8B6SU…`, Material 3 `f4TUS9…`.
+All component/Theme/Brand/Icons Example frames land as `figma-heroui-*` packs
+(**46**, referenceHealth-stamped, cite-selectable). Alt `DC4g36…` optional.
+
+Full-kit ingest (not silhouette samples) — packs on tip:
+
+| Kit | fileKey | Before | After | Inventory note |
+|---|---|---:|---:|---|
+| HeroUI | `GAn1Srb…` | 46 thin | **46** health-pass | 38 pages via use_figma |
+| Material 3 | `f4TUS9…` | 38 retired | **38** selectable | 3 pages / 38 boards |
+| TailGrids | `DUN5Dvd…` | 4 | **82** | MCP listed 2 pages; use_figma ≈80 |
+| Myna | `4SbNh8…` | 1 | **42** | 41 component boards + gallery |
+| Bootstrap 5 | `p8B6SU…` | 3 | **39** | MCP listed Thumbnail only; 6 pages |
+
+Explicit kit jobs (`heroui-figma`, `material-figma`, `tailwind-figma` / `tailgrids` /
+`myna`, `bootstrap-figma`) prefer that family's `figma-*` packs. Clearspeed Operate
+edition still prefers TW gold (Flowbite/TailAdmin/Untitled).
 
 ## Job → cite (do not freestyle)
 

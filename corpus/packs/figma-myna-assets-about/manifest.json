@@ -1,0 +1,21 @@
+{
+  "id": "figma-myna-assets-about",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "catalog",
+    "assets",
+    "tailwind-figma",
+    "myna",
+    "about"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-assets-about.md",
+      "role": "blueprint",
+      "sha256": "f1be80331067bfe28bbf4b7b5beedbfdd821ca431e7af9fea4d8525475ce7cee"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-table-grids",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16124",
+  "harvested": "2026-10-09",
+  "bytes": 769939,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Table Grids",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:16124",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Table Grids",
+    "headings": "Table Grids",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Table Grids",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16124",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-16124",
+    "capturedAt": "2026-10-09T13:45:11.780Z",
+    "shotSha256": "f6cb9bf50a9742e7430878609b5a530aa7f0bb8e9c2d3aac5303f07abb4fa3e3",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:16124",
+      "page": "-- Table Grids",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

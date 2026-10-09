@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-toggle-switchers",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14021",
+  "harvested": "2026-10-09",
+  "bytes": 23889,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Toggle With Text",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:14021",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Toggle With Text",
+    "headings": "Toggle With Text",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Toggle With Text",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14021",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14021",
+    "capturedAt": "2026-10-09T13:44:34.082Z",
+    "shotSha256": "25075f27a8b9997f8d376ad2292da0fd63a2bf8e77abc4231b3c9a733ce58be3",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:14021",
+      "page": "-- Toggle/Switchers",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

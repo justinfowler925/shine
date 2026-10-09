@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Icon buttons",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "51525:4722",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Icon buttons",
+    "headings": "Material 3 \u2014 Icon buttons",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Icon buttons",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51525-4722",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51525-4722",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "e41d77791c314c25dc92302f0d42d0d2b3e06f859d476c391bf5a0c2972a3144",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "51525:4722"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

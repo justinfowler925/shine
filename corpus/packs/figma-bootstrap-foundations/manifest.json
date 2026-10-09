@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-foundations",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "foundations",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-foundations.md",
+      "role": "blueprint",
+      "sha256": "200303f2394561e0c66a4319d147bf85b82bee0413e1bc2700214e6acd767880"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

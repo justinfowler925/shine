@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-calendar",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "calendar",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-calendar.md",
+      "role": "blueprint",
+      "sha256": "d14cd6250ed4e1678aff002d3a0befc4c5e94cce74137ec19accb32d852ad30f"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

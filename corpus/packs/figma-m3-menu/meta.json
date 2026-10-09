@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Menu",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "54061:36958",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Menu",
+    "headings": "Material 3 \u2014 Menu",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Menu",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-36958",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=54061-36958",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "76511a7fe0fb969b6d7f080a07b7451caa52239130b77b16250040b090964379",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "54061:36958"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

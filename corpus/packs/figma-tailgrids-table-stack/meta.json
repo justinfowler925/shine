@@ -8,5 +8,23 @@
   "title": "Tailwind TailGrids table stack list",
   "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
   "nodeId": "310:23249",
-  "discovery": "chrome-history-justin-copy"
+  "discovery": "chrome-history-justin-copy",
+  "capture": {
+    "status": 200,
+    "title": "Tailwind TailGrids table stack list",
+    "headings": "Tailwind TailGrids table stack list",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Tailwind TailGrids table stack list",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-23249",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-23249",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "0009257f192f1fb2d341731e4ab3b35543432febce03b71e48b51fe2c60a1f44",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:23249"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

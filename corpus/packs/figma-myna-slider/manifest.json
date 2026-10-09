@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-slider",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "slider",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-slider.md",
+      "role": "blueprint",
+      "sha256": "4a71c631814bee6f7694919a90e348f06a93d7397c65b2110789cf24f2baaeb2"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-product-carousels",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "product-carousels",
+    "product-carousels",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-product-carousels.md",
+      "role": "blueprint",
+      "sha256": "dc21bceca19c5342472ba6140354826cb28e16364d0bf1874e2debfe01c23c60"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

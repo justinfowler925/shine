@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Elevation",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "50732:11342",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Elevation",
+    "headings": "Material 3 \u2014 Elevation",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Elevation",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11342",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=50732-11342",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "f886347dd6299b1e2f3e0c403f37d0a28a5207ae8a74bdc788190c8c6b083caa",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "50732:11342"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

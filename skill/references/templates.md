@@ -35,6 +35,21 @@ Reasons are listed under the table.
 | app-shell | `untitled-sidebar-navigation` | untitled-ui-react | source | live | app-shell, navigation, sidebar |
 | app-shell | `untitled-header-navigation` | untitled-ui-react | source | live | app-shell, navigation, header, topbar, horizontal-nav |
 | app-shell | `untitled-featured-cards` | untitled-ui-react | source | live | app-shell, navigation, featured, usage, upgrade-prompt |
+| app-shell | `figma-bootstrap-accordion` | shadcn-registry | blueprint | live | app-shell, accordion, bootstrap-figma |
+| app-shell | `figma-bootstrap-breadcrumb` | shadcn-registry | blueprint | live | app-shell, breadcrumb, bootstrap-figma |
+| app-shell | `figma-bootstrap-links` | shadcn-registry | blueprint | live | app-shell, link, bootstrap-figma |
+| app-shell | `figma-bootstrap-navbar` | shadcn-registry | blueprint | live | app-shell, navbar, bootstrap-figma |
+| app-shell | `figma-bootstrap-navs` | shadcn-registry | blueprint | live | app-shell, navs, bootstrap-figma |
+| app-shell | `figma-bootstrap-tabs` | shadcn-registry | blueprint | live | app-shell, tabs, bootstrap-figma |
+| app-shell | `figma-myna-accordion` | shadcn-registry | blueprint | live | app-shell, accordion, tailwind-figma, myna |
+| app-shell | `figma-myna-breadcrumb` | shadcn-registry | blueprint | live | app-shell, breadcrumb, tailwind-figma, myna |
+| app-shell | `figma-myna-menubar` | shadcn-registry | blueprint | live | app-shell, menubar, tailwind-figma, myna |
+| app-shell | `figma-myna-tabs` | shadcn-registry | blueprint | live | app-shell, tabs, tailwind-figma, myna |
+| app-shell | `figma-tailgrids-breadcrumbs` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, breadcrumbs, breadcrumbs, app-shell |
+| app-shell | `figma-tailgrids-horizontal-menus` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, horizontal-menus, horizontal-menus, app-shell |
+| app-shell | `figma-tailgrids-navbars` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, navbars, navbars, app-shell |
+| app-shell | `figma-tailgrids-tabs` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, tabs, tabs, app-shell |
+| app-shell | `figma-tailgrids-vertical-navbars` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, vertical-navbars, vertical-navbars, app-shell |
 | app-shell | `heroui-docs` | heroui | source | live | app-shell, docs, heroui |
 | app-shell | `mantine-appshell` | mantine | source | **retired** | app-shell, shell, nav, sidebar |
 | app-shell | `figma-heroui-accordion` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, accordion, accordion, component |
@@ -52,6 +67,15 @@ Reasons are listed under the table.
 | app-shell | `query-adminlte` | adminlte | query-only | live | app-shell, shell, nav, sidebar |
 | app-shell | `query-primeblocks` | primeblocks | query-only | live | app-shell, shell, nav, sidebar |
 | async-state | `untitled-loading-indicator` | untitled-ui-react | source | live | loading, spinner, pending, async, skeleton |
+| async-state | `figma-bootstrap-alert` | shadcn-registry | blueprint | live | async-state, alert, bootstrap-figma |
+| async-state | `figma-bootstrap-progress` | shadcn-registry | blueprint | live | async-state, progress, bootstrap-figma |
+| async-state | `figma-bootstrap-spinners` | shadcn-registry | blueprint | live | async-state, spinner, bootstrap-figma |
+| async-state | `figma-bootstrap-toasts` | shadcn-registry | blueprint | live | async-state, toast, bootstrap-figma |
+| async-state | `figma-myna-alert` | shadcn-registry | blueprint | live | async-state, alert, tailwind-figma, myna |
+| async-state | `figma-myna-app-notifications-block` | shadcn-registry | blueprint | live | async-state, tailwind-figma, myna, notifications-block |
+| async-state | `figma-myna-progress` | shadcn-registry | blueprint | live | async-state, progress, tailwind-figma, myna |
+| async-state | `figma-myna-skeleton` | shadcn-registry | blueprint | live | async-state, skeleton, tailwind-figma, myna |
+| async-state | `figma-myna-sonner` | shadcn-registry | blueprint | live | async-state, toast, tailwind-figma, myna |
 | async-state | `figma-heroui-alert` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, alert, alert, component |
 | async-state | `figma-heroui-progress` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, progress, progress, component |
 | async-state | `figma-heroui-spinner` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, spinner, spinner, component |
@@ -76,6 +100,10 @@ Reasons are listed under the table.
 | auth | `tailadmin-signin` | tailadmin-react | source | live | auth, login, signin, sign-in |
 | auth | `tailadmin-signup` | tailadmin-react | source | live | auth, signup, sign-up, register |
 | auth | `windmill-login` | windmill-react | source | live | auth, login, signin, sign-in |
+| auth | `figma-myna-app-forgot-password-block` | shadcn-registry | blueprint | live | auth, tailwind-figma, myna, forgot-password-block |
+| auth | `figma-myna-app-login-block` | shadcn-registry | blueprint | live | auth, tailwind-figma, myna, login-block |
+| auth | `figma-myna-app-registration-block` | shadcn-registry | blueprint | live | auth, tailwind-figma, myna, registration-block |
+| auth | `figma-tailgrids-sign-in-sign-up` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, sign-in-sign-up, sign-in-sign-up, auth |
 | auth | `windmill-create-account` | windmill-react | source | live | auth, signup, sign-up, register |
 | auth | `flowbite-sign-in` | flowbite-admin | source | live | auth, login, signin, sign-in |
 | auth | `windmill-forgot-password` | windmill-react | source | live | auth, forgot-password, recovery |
@@ -99,52 +127,6 @@ Reasons are listed under the table.
 | calendar | `heroui-time-field` | heroui | source | live | calendar, form, date, heroui, time-field |
 | carousel | `untitled-carousel` | untitled-ui-react | source | live | carousel, gallery, slides, slideshow |
 | carousel | `cult-three-d-carousel` | cult-ui | source | live | carousel, gallery, slides, media, 3d |
-| catalog | `figma-bootstrap-buttons` | shadcn-registry | blueprint | **retired** | catalog, buttons, bootstrap-figma |
-| catalog | `figma-bootstrap-buttons` | shadcn-registry | blueprint | **retired** | catalog, buttons, bootstrap-figma |
-| catalog | `figma-bootstrap-components` | shadcn-registry | blueprint | **retired** | catalog, components, bootstrap-figma |
-| catalog | `figma-bootstrap-components` | shadcn-registry | blueprint | **retired** | catalog, components, bootstrap-figma |
-| catalog | `figma-m3-badges` | shadcn-registry | blueprint | **retired** | catalog, badge, material-figma, mui, material3 |
-| catalog | `figma-m3-bottom-app-bars` | shadcn-registry | blueprint | **retired** | catalog, app-bar, navigation, material-figma, mui, material3 |
-| catalog | `figma-m3-bottom-sheets` | shadcn-registry | blueprint | **retired** | catalog, sheet, overlay, material-figma, mui, material3 |
-| catalog | `figma-m3-buttons` | shadcn-registry | blueprint | **retired** | catalog, buttons, material-figma, mui, material3 |
-| catalog | `figma-m3-cards` | shadcn-registry | blueprint | **retired** | catalog, cards, material-figma, mui, material3 |
-| catalog | `figma-m3-carousel` | shadcn-registry | blueprint | **retired** | catalog, carousel, material-figma, mui, material3 |
-| catalog | `figma-m3-checkboxes` | shadcn-registry | blueprint | **retired** | catalog, checkbox, material-figma, mui, material3 |
-| catalog | `figma-m3-chips` | shadcn-registry | blueprint | **retired** | catalog, chips, material-figma, mui, material3 |
-| catalog | `figma-m3-color` | shadcn-registry | blueprint | **retired** | catalog, color, styles, material-figma, mui, material3 |
-| catalog | `figma-m3-date-picker` | shadcn-registry | blueprint | **retired** | catalog, date, picker, material-figma, mui, material3 |
-| catalog | `figma-m3-dialogs` | shadcn-registry | blueprint | **retired** | catalog, dialog, overlay, material-figma, mui, material3 |
-| catalog | `figma-m3-dividers` | shadcn-registry | blueprint | **retired** | catalog, divider, material-figma, mui, material3 |
-| catalog | `figma-m3-elements` | shadcn-registry | blueprint | **retired** | catalog, elements, styles, material-figma, mui, material3 |
-| catalog | `figma-m3-elevation` | shadcn-registry | blueprint | **retired** | catalog, elevation, styles, material-figma, mui, material3 |
-| catalog | `figma-m3-fabs` | shadcn-registry | blueprint | **retired** | catalog, fab, buttons, material-figma, mui, material3 |
-| catalog | `figma-m3-icon-buttons` | shadcn-registry | blueprint | **retired** | catalog, icon-button, buttons, material-figma, mui, material3 |
-| catalog | `figma-m3-layout` | shadcn-registry | blueprint | **retired** | catalog, layout, styles, material-figma, mui, material3 |
-| catalog | `figma-m3-lists` | shadcn-registry | blueprint | **retired** | catalog, list, records, material-figma, mui, material3 |
-| catalog | `figma-m3-menu` | shadcn-registry | blueprint | **retired** | catalog, menu, overlay, material-figma, mui, material3 |
-| catalog | `figma-m3-navigation-bars` | shadcn-registry | blueprint | **retired** | catalog, navigation, material-figma, mui, material3 |
-| catalog | `figma-m3-navigation-drawer` | shadcn-registry | blueprint | **retired** | catalog, navigation, drawer, material-figma, mui, material3 |
-| catalog | `figma-m3-navigation-rails` | shadcn-registry | blueprint | **retired** | catalog, navigation, rail, material-figma, mui, material3 |
-| catalog | `figma-m3-progress` | shadcn-registry | blueprint | **retired** | catalog, progress, material-figma, mui, material3 |
-| catalog | `figma-m3-radio` | shadcn-registry | blueprint | **retired** | catalog, radio, material-figma, mui, material3 |
-| catalog | `figma-m3-search` | shadcn-registry | blueprint | **retired** | catalog, search, material-figma, mui, material3 |
-| catalog | `figma-m3-segmented-buttons` | shadcn-registry | blueprint | **retired** | catalog, segmented, buttons, material-figma, mui, material3 |
-| catalog | `figma-m3-side-sheets` | shadcn-registry | blueprint | **retired** | catalog, sheet, drawer, material-figma, mui, material3 |
-| catalog | `figma-m3-sliders` | shadcn-registry | blueprint | **retired** | catalog, slider, material-figma, mui, material3 |
-| catalog | `figma-m3-snackbars` | shadcn-registry | blueprint | **retired** | catalog, snackbar, feedback, material-figma, mui, material3 |
-| catalog | `figma-m3-switch` | shadcn-registry | blueprint | **retired** | catalog, switch, material-figma, mui, material3 |
-| catalog | `figma-m3-tabs` | shadcn-registry | blueprint | **retired** | catalog, tabs, material-figma, mui, material3 |
-| catalog | `figma-m3-time-picker` | shadcn-registry | blueprint | **retired** | catalog, time, picker, material-figma, mui, material3 |
-| catalog | `figma-m3-toc` | shadcn-registry | blueprint | **retired** | catalog, navigation, toc, material-figma, mui, material3 |
-| catalog | `figma-m3-tooltips` | shadcn-registry | blueprint | **retired** | catalog, tooltip, material-figma, mui, material3 |
-| catalog | `figma-m3-top-app-bars` | shadcn-registry | blueprint | **retired** | catalog, app-bar, navigation, material-figma, mui, material3 |
-| catalog | `figma-m3-typography` | shadcn-registry | blueprint | **retired** | catalog, typography, styles, material-figma, mui, material3 |
-| catalog | `figma-myna-components` | shadcn-registry | blueprint | **retired** | catalog, components, tailwind-figma, myna, shadcn |
-| catalog | `figma-myna-components` | shadcn-registry | blueprint | **retired** | catalog, components, tailwind-figma, myna, shadcn |
-| catalog | `figma-tailgrids-atoms` | shadcn-registry | blueprint | **retired** | catalog, atoms, components, tailwind-figma, tailgrids |
-| catalog | `figma-tailgrids-atoms` | shadcn-registry | blueprint | **retired** | catalog, atoms, components, tailwind-figma, tailgrids |
-| catalog | `figma-tailgrids-layout` | shadcn-registry | blueprint | **retired** | catalog, layout, grid, tailwind-figma, tailgrids |
-| catalog | `figma-tailgrids-layout` | shadcn-registry | blueprint | **retired** | catalog, layout, grid, tailwind-figma, tailgrids |
 | catalog | `shadcn-catalog` | shadcn-registry | blueprint | live | catalog, cards, library, packages, directory, gallery, showcase, tools |
 | catalog | `shadcn-catalog-integrations` | shadcn-registry | blueprint | live | catalog, cards, library, integrations, connectors, plugins, directory |
 | catalog | `shadcn-catalog-skills` | shadcn-registry | blueprint | live | catalog, cards, library, skills, agents, packages, directory |
@@ -160,6 +142,146 @@ Reasons are listed under the table.
 | catalog | `figma-heroui-theme-shadow` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, theme-shadow, theme, tokens |
 | catalog | `figma-heroui-theme-spacing` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, theme-spacing, theme, tokens |
 | catalog | `figma-heroui-theme-typography` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, theme-typography, theme, tokens |
+| catalog | `figma-bootstrap-badges` | shadcn-registry | blueprint | live | catalog, badge, bootstrap-figma |
+| catalog | `figma-bootstrap-borders` | shadcn-registry | blueprint | live | catalog, borders, bootstrap-figma |
+| catalog | `figma-bootstrap-buttons` | shadcn-registry | blueprint | live | figma-kit, bootstrap-figma, bootstrap, buttons, bootstrap-5-button-strip |
+| catalog | `figma-bootstrap-card` | shadcn-registry | blueprint | live | catalog, card, bootstrap-figma |
+| catalog | `figma-bootstrap-changelog` | shadcn-registry | blueprint | live | catalog, changelog, bootstrap-figma |
+| catalog | `figma-bootstrap-color` | shadcn-registry | blueprint | live | catalog, color, bootstrap-figma |
+| catalog | `figma-bootstrap-components` | shadcn-registry | blueprint | live | figma-kit, bootstrap-figma, bootstrap, components, bootstrap-5-components-gallery |
+| catalog | `figma-bootstrap-docs-elements` | shadcn-registry | blueprint | live | catalog, docs, bootstrap-figma |
+| catalog | `figma-bootstrap-fonts` | shadcn-registry | blueprint | live | catalog, fonts, bootstrap-figma |
+| catalog | `figma-bootstrap-foundations` | shadcn-registry | blueprint | live | catalog, foundations, bootstrap-figma |
+| catalog | `figma-bootstrap-icons` | shadcn-registry | blueprint | live | catalog, icons, bootstrap-figma |
+| catalog | `figma-bootstrap-list-group` | shadcn-registry | blueprint | live | catalog, list, bootstrap-figma |
+| catalog | `figma-bootstrap-lists-group` | shadcn-registry | blueprint | live | catalog, list, bootstrap-figma |
+| catalog | `figma-bootstrap-media-object` | shadcn-registry | blueprint | live | catalog, media, bootstrap-figma |
+| catalog | `figma-bootstrap-radius` | shadcn-registry | blueprint | live | catalog, radius, bootstrap-figma |
+| catalog | `figma-bootstrap-shadows` | shadcn-registry | blueprint | live | catalog, shadows, bootstrap-figma |
+| catalog | `figma-bootstrap-spacer` | shadcn-registry | blueprint | live | catalog, spacer, bootstrap-figma |
+| catalog | `figma-bootstrap-typography` | shadcn-registry | blueprint | live | catalog, typography, bootstrap-figma |
+| catalog | `figma-m3-badges` | shadcn-registry | blueprint | live | figma-kit |
+| catalog | `figma-m3-bottom-app-bars` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, bottom-app-bars, material-3-—-bottom-app-bars |
+| catalog | `figma-m3-bottom-sheets` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, bottom-sheets, material-3-—-bottom-sheets |
+| catalog | `figma-m3-buttons` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, buttons, material-3-—-buttons |
+| catalog | `figma-m3-cards` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, cards, material-3-—-cards |
+| catalog | `figma-m3-carousel` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, carousel, material-3-—-carousel |
+| catalog | `figma-m3-checkboxes` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, checkboxes, material-3-—-checkboxes |
+| catalog | `figma-m3-chips` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, chips, material-3-—-chips |
+| catalog | `figma-m3-color` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, color, material-3-—-color-guidance |
+| catalog | `figma-m3-date-picker` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, date-picker, material-3-—-date-picker |
+| catalog | `figma-m3-dialogs` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, dialogs, material-3-—-dialogs |
+| catalog | `figma-m3-dividers` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, dividers, material-3-—-dividers |
+| catalog | `figma-m3-elements` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, elements, material-3-—-elements |
+| catalog | `figma-m3-elevation` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, elevation, material-3-—-elevation |
+| catalog | `figma-m3-fabs` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, fabs, material-3-—-fabs |
+| catalog | `figma-m3-icon-buttons` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, icon-buttons, material-3-—-icon-buttons |
+| catalog | `figma-m3-layout` | shadcn-registry | blueprint | live | figma-kit |
+| catalog | `figma-m3-lists` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, lists, material-3-—-lists |
+| catalog | `figma-m3-menu` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, menu, material-3-—-menu |
+| catalog | `figma-m3-navigation-bars` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, navigation-bars, material-3-—-navigation-bars |
+| catalog | `figma-m3-navigation-drawer` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, navigation-drawer, material-3-—-navigation-drawer |
+| catalog | `figma-m3-navigation-rails` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, navigation-rails, material-3-—-navigation-rails |
+| catalog | `figma-m3-progress` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, progress, material-3-—-progress-indicators |
+| catalog | `figma-m3-radio` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, radio, material-3-—-radio-buttons |
+| catalog | `figma-m3-search` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, search, material-3-—-search |
+| catalog | `figma-m3-segmented-buttons` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, segmented-buttons, material-3-—-segmented-buttons |
+| catalog | `figma-m3-side-sheets` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, side-sheets, material-3-—-side-sheets |
+| catalog | `figma-m3-sliders` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, sliders, material-3-—-sliders |
+| catalog | `figma-m3-snackbars` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, snackbars, material-3-—-snackbars |
+| catalog | `figma-m3-switch` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, switch, material-3-—-switch |
+| catalog | `figma-m3-tabs` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, tabs, material-3-—-tabs |
+| catalog | `figma-m3-time-picker` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, time-picker, material-3-—-time-picker |
+| catalog | `figma-m3-toc` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, toc, material-3-—-table-of-contents |
+| catalog | `figma-m3-tooltips` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, tooltips, material-3-—-tooltips |
+| catalog | `figma-m3-top-app-bars` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, top-app-bars, material-3-—-top-app-bars |
+| catalog | `figma-m3-typography` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, typography, material-3-—-typography |
+| catalog | `figma-myna-app-card-headers-block` | shadcn-registry | blueprint | live | catalog, tailwind-figma, myna, card-headers-block |
+| catalog | `figma-myna-app-cards-block` | shadcn-registry | blueprint | live | catalog, tailwind-figma, myna, cards-block |
+| catalog | `figma-myna-app-containers-block` | shadcn-registry | blueprint | live | catalog, tailwind-figma, myna, containers-block |
+| catalog | `figma-myna-app-dividers-block` | shadcn-registry | blueprint | live | catalog, tailwind-figma, myna, dividers-block |
+| catalog | `figma-myna-app-section-headers-block` | shadcn-registry | blueprint | live | catalog, tailwind-figma, myna, section-headers-block |
+| catalog | `figma-myna-assets-cursor` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, cursor |
+| catalog | `figma-myna-assets-flag` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, flag |
+| catalog | `figma-myna-assets-icon` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, icon |
+| catalog | `figma-myna-assets-icons-documentation` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, icons-documentation |
+| catalog | `figma-myna-assets-maps` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, maps |
+| catalog | `figma-myna-assets-payment-method-credit-cards` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, payment-method-credit-cards |
+| catalog | `figma-myna-assets-store-badges` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, store-badges |
+| catalog | `figma-myna-avatar` | shadcn-registry | blueprint | live | catalog, avatar, tailwind-figma, myna |
+| catalog | `figma-myna-badge` | shadcn-registry | blueprint | live | catalog, badge, tailwind-figma, myna |
+| catalog | `figma-myna-card` | shadcn-registry | blueprint | live | catalog, card, tailwind-figma, myna |
+| catalog | `figma-myna-carousel` | shadcn-registry | blueprint | live | catalog, carousel, tailwind-figma, myna |
+| catalog | `figma-myna-components` | shadcn-registry | blueprint | live | figma-kit, tailwind-figma, myna, shadcn, components, myna-ui-tailwind/shadcn-components-gallery |
+| catalog | `figma-myna-ds-backdrop-blur` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, backdrop-blur |
+| catalog | `figma-myna-ds-blur` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, blur |
+| catalog | `figma-myna-ds-border-radius` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, border-radius |
+| catalog | `figma-myna-ds-box-shadow` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, box-shadow |
+| catalog | `figma-myna-ds-breakpoint-scale` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, breakpoint-scale |
+| catalog | `figma-myna-ds-colors` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, colors |
+| catalog | `figma-myna-ds-max-width-grids` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, max-width-grids |
+| catalog | `figma-myna-ds-opacity` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, opacity |
+| catalog | `figma-myna-ds-spacing-scale` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, spacing-scale |
+| catalog | `figma-myna-ds-theme-colors` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, theme-colors |
+| catalog | `figma-myna-ds-typography` | shadcn-registry | blueprint | live | catalog, design-system, tailwind-figma, myna, typography |
+| catalog | `figma-myna-hover-card` | shadcn-registry | blueprint | live | catalog, hover-card, tailwind-figma, myna |
+| catalog | `figma-myna-scrollbar` | shadcn-registry | blueprint | live | catalog, scrollbar, tailwind-figma, myna |
+| catalog | `figma-myna-separator` | shadcn-registry | blueprint | live | catalog, separator, tailwind-figma, myna |
+| catalog | `figma-tailgrids-alerts` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, alerts, danger-alert, catalog |
+| catalog | `figma-tailgrids-atoms` | shadcn-registry | blueprint | live | figma-kit, tailwind-figma, tailgrids, atoms, tailwind-tailgrids-atom/molecule-board |
+| catalog | `figma-tailgrids-avatars` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, avatars, avatar, catalog |
+| catalog | `figma-tailgrids-badges` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, badges, badges, catalog |
+| catalog | `figma-tailgrids-banner` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, banner, banner, catalog |
+| catalog | `figma-tailgrids-blogs` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, blogs, blogs, catalog |
+| catalog | `figma-tailgrids-brands` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, brands, brands, catalog |
+| catalog | `figma-tailgrids-buttons` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, buttons, button, catalog |
+| catalog | `figma-tailgrids-calendars` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, calendars, calendars, catalog |
+| catalog | `figma-tailgrids-cards` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, cards, cards, catalog |
+| catalog | `figma-tailgrids-checkout` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, checkout, checkout, catalog |
+| catalog | `figma-tailgrids-colors` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, colors, colors, catalog |
+| catalog | `figma-tailgrids-contacts` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, contacts, contacts, catalog |
+| catalog | `figma-tailgrids-cookies` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, cookies, cookies, catalog |
+| catalog | `figma-tailgrids-data-stats` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, data-stats, data-stats, catalog |
+| catalog | `figma-tailgrids-drawers` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, drawers, drawers, catalog |
+| catalog | `figma-tailgrids-e-commerce-footers` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, e-commerce-footers, e-commerce-footers, catalog |
+| catalog | `figma-tailgrids-e-commerce-headers` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, e-commerce-headers, e-commerce-headers-hero-areas, catalog |
+| catalog | `figma-tailgrids-e-commerce-navbars` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, e-commerce-navbars, ecommerce-navbars, catalog |
+| catalog | `figma-tailgrids-featured-products` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, featured-products, featured-products, catalog |
+| catalog | `figma-tailgrids-features-services` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, features-services, features-services, catalog |
+| catalog | `figma-tailgrids-filters` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, filters, filters, catalog |
+| catalog | `figma-tailgrids-footers` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, footers, footers, catalog |
+| catalog | `figma-tailgrids-icons` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, icons, icons, catalog |
+| catalog | `figma-tailgrids-layout` | shadcn-registry | blueprint | live | figma-kit, tailwind-figma, tailgrids, layout, tailwind-tailgrids-layout-grid |
+| catalog | `figma-tailgrids-list` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, list, list, catalog |
+| catalog | `figma-tailgrids-maps` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, maps, maps, catalog |
+| catalog | `figma-tailgrids-newsletters` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, newsletters, newsletters, catalog |
+| catalog | `figma-tailgrids-notifications` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, notifications, notifications, catalog |
+| catalog | `figma-tailgrids-order-summaries` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, order-summaries, order-summaries, catalog |
+| catalog | `figma-tailgrids-page-titles` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, page-titles, page-title-styles, catalog |
+| catalog | `figma-tailgrids-pagination` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, pagination, pagination, catalog |
+| catalog | `figma-tailgrids-popovers` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, popovers, popovers, catalog |
+| catalog | `figma-tailgrids-portfolio` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, portfolio, portfolios, catalog |
+| catalog | `figma-tailgrids-pricing-tables` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, pricing-tables, pricing-tables, catalog |
+| catalog | `figma-tailgrids-product-carousels` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, product-carousels, product-carousels, catalog |
+| catalog | `figma-tailgrids-product-categories` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, product-categories, product-categories, catalog |
+| catalog | `figma-tailgrids-product-details` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, product-details, product-details, catalog |
+| catalog | `figma-tailgrids-product-grids` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, product-grids, product-grids, catalog |
+| catalog | `figma-tailgrids-product-reviews` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, product-reviews, product-reviews, catalog |
+| catalog | `figma-tailgrids-profiles` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, profiles, profiles, catalog |
+| catalog | `figma-tailgrids-progress-bars` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, progress-bars, progress-bars, catalog |
+| catalog | `figma-tailgrids-quick-views` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, quick-views, quick-views, catalog |
+| catalog | `figma-tailgrids-recent-products` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, recent-products, recent-products, catalog |
+| catalog | `figma-tailgrids-shadows` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, shadows, shadows, catalog |
+| catalog | `figma-tailgrids-shopping-carts` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, shopping-carts, shopping-carts, catalog |
+| catalog | `figma-tailgrids-stats` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, stats, stats, catalog |
+| catalog | `figma-tailgrids-steps` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, steps, steps, catalog |
+| catalog | `figma-tailgrids-tags` | shadcn-registry | blueprint | live | catalog, tag, tailwind-figma, tailgrids |
+| catalog | `figma-tailgrids-teams` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, teams, teams, catalog |
+| catalog | `figma-tailgrids-testimonials` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, testimonials, testimonials, catalog |
+| catalog | `figma-tailgrids-tooltips` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, tooltips, tooltip, catalog |
+| catalog | `figma-tailgrids-typography` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, typography, typography, catalog |
+| catalog | `figma-tailgrids-videos` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, videos, videos, catalog |
+| catalog | `figma-tailgrids-wishlists` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, wishlists, wishlists, catalog |
 | catalog | `figma-heroui-avatar` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, avatar, avatar, component |
 | catalog | `figma-heroui-avatar-group` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, avatar-group, avatar-group, component |
 | catalog | `figma-heroui-badge` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, badge, badge, component |
@@ -252,12 +374,15 @@ Reasons are listed under the table.
 | charts | `untitled-radar-charts` | untitled-ui-react | source | live | charts, chart, radar, profile, comparison, dataviz |
 | charts | `windmill-charts` | windmill-react | source | live | charts, chart, analytics, dataviz |
 | charts | `tailadmin-bar-chart` | tailadmin-react | source | live | charts, chart, bar, analytics, dataviz |
+| charts | `figma-tailgrids-charts` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, charts, charts, charts |
 | charts | `tailadmin-line-chart` | tailadmin-react | source | live | charts, chart, line, analytics, dataviz |
 | chat | `shadcn-chat` | shadcn-registry | blueprint | live | chat, assistant, conversation, thread |
 | chat | `shadcn-chat-inbox` | shadcn-registry | blueprint | live | chat, assistant, inbox, threads, conversation |
 | chat | `shadcn-chat-sidecar` | shadcn-registry | blueprint | live | chat, assistant, sidecar, conversation, copilot |
 | chat | `shadcn-chat-support` | shadcn-registry | blueprint | live | chat, assistant, support, triage, ticket, conversation |
 | chat | `spectrum-ai-chat` | react-spectrum | source | live | chat, assistant |
+| chat | `figma-tailgrids-chat-boxes` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, chat-boxes, chat-boxes, chat |
+| chat | `figma-tailgrids-chat-list` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, chat-list, chat-lists, chat |
 | checkout | `shadcn-checkout` | shadcn-registry | blueprint | live | checkout, payment |
 | command-palette | `shadcn-command` | shadcn-registry | source | live | command-palette, palette, cmdk |
 | dashboard | `shadcn-dashboard-01` | shadcn-registry | source | live | crud, dashboard, list, records |
@@ -269,6 +394,11 @@ Reasons are listed under the table.
 | dashboard | `tailadmin-dashboard` | tailadmin-react | source | live | dashboard, analytics, kpi, ecommerce, metrics |
 | dashboard | `windmill-dashboard` | windmill-react | source | live | dashboard, analytics, kpi, metrics, dense |
 | dashboard | `flowbite-dashboard` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, sales, dense |
+| dashboard | `figma-myna-app-dashboard-1` | shadcn-registry | blueprint | live | dashboard, tailwind-figma, myna, dashboard-1 |
+| dashboard | `figma-myna-app-dashboard-2` | shadcn-registry | blueprint | live | dashboard, tailwind-figma, myna, dashboard-2 |
+| dashboard | `figma-myna-app-dashboard-3` | shadcn-registry | blueprint | live | dashboard, tailwind-figma, myna, dashboard-3 |
+| dashboard | `figma-myna-app-dashboard-4` | shadcn-registry | blueprint | live | dashboard, tailwind-figma, myna, dashboard-4 |
+| dashboard | `figma-myna-app-dashboard-5` | shadcn-registry | blueprint | live | dashboard, tailwind-figma, myna, dashboard-5 |
 | dashboard | `flowbite-stacked` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, dense, stacked |
 | dashboard | `flowbite-sidebar-layout` | flowbite-admin | source | live | dashboard, analytics, kpi, metrics, dense, app-shell |
 | dashboard | `query-shadcn-blocks` | shadcn-registry | query-only | live | dashboard |
@@ -278,19 +408,59 @@ Reasons are listed under the table.
 | empty | `untitled-empty-state` | untitled-ui-react | source | live | empty, empty-state, zero |
 | empty | `flowbite-404` | flowbite-admin | source | live | empty, 404, not-found, error |
 | empty | `tailadmin-not-found` | tailadmin-react | source | live | empty, 404, not-found, error |
+| empty | `figma-myna-app-empty-states-block` | shadcn-registry | blueprint | live | empty, tailwind-figma, myna, empty-states-block |
+| empty | `figma-tailgrids-error-pages` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, error-pages, error-pages, empty |
 | empty | `flowbite-500` | flowbite-admin | source | live | empty, 500, server-error, error |
 | empty | `windmill-404` | windmill-react | source | live | empty, 404, not-found, error |
 | empty | `flowbite-maintenance` | flowbite-admin | source | live | empty, maintenance, downtime, status |
 | empty | `windmill-blank` | windmill-react | source | live | empty, blank, starter |
-| form | `figma-bootstrap-forms` | shadcn-registry | blueprint | **retired** | form, fields, bootstrap-figma |
-| form | `figma-bootstrap-forms` | shadcn-registry | blueprint | **retired** | form, fields, bootstrap-figma |
-| form | `figma-m3-text-fields` | shadcn-registry | blueprint | **retired** | form, fields, material-figma, mui, material3 |
 | form | `shadcn-form` | shadcn-registry | blueprint | live | form, form-app, input, fields, create, edit |
 | form | `shadcn-form-invite` | shadcn-registry | blueprint | live | form, form-app, invite, invite-teammate |
 | form | `untitled-date-picker` | untitled-ui-react | source | live | form, input, date, date-range, calendar, picker |
 | form | `tailadmin-form-elements` | tailadmin-react | source | live | form, form-app, input, fields, controls |
 | form | `untitled-file-upload` | untitled-ui-react | source | live | form, input, upload, attachments, dropzone, files |
 | form | `windmill-forms` | windmill-react | source | live | form, form-app, input, fields, validation |
+| form | `figma-bootstrap-button-group` | shadcn-registry | blueprint | live | form, button-group, bootstrap-figma |
+| form | `figma-bootstrap-dropdown` | shadcn-registry | blueprint | live | form, dropdown, bootstrap-figma |
+| form | `figma-bootstrap-form-inputs` | shadcn-registry | blueprint | live | form, fields, input, bootstrap-figma |
+| form | `figma-bootstrap-forms` | shadcn-registry | blueprint | live | figma-kit, bootstrap-figma, bootstrap, forms, bootstrap-5-forms-page |
+| form | `figma-bootstrap-input-group` | shadcn-registry | blueprint | live | form, input-group, bootstrap-figma |
+| form | `figma-bootstrap-modal` | shadcn-registry | blueprint | live | overlay, modal, bootstrap-figma |
+| form | `figma-bootstrap-popovers` | shadcn-registry | blueprint | live | overlay, popover, bootstrap-figma |
+| form | `figma-bootstrap-tooltips` | shadcn-registry | blueprint | live | form, tooltip, bootstrap-figma |
+| form | `figma-m3-text-fields` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, text-fields, material-3-—-text-fields |
+| form | `figma-myna-alert-dialog` | shadcn-registry | blueprint | live | overlay, dialog, tailwind-figma, myna |
+| form | `figma-myna-app-dialog-block` | shadcn-registry | blueprint | live | form, tailwind-figma, myna, dialog-block |
+| form | `figma-myna-buttons` | shadcn-registry | blueprint | live | form, button, tailwind-figma, myna |
+| form | `figma-myna-calendar` | shadcn-registry | blueprint | live | form, calendar, tailwind-figma, myna |
+| form | `figma-myna-checkbox` | shadcn-registry | blueprint | live | form, checkbox, tailwind-figma, myna |
+| form | `figma-myna-combobox` | shadcn-registry | blueprint | live | form, combobox, tailwind-figma, myna |
+| form | `figma-myna-command` | shadcn-registry | blueprint | live | form, command, tailwind-figma, myna |
+| form | `figma-myna-context-menu` | shadcn-registry | blueprint | live | form, menu, tailwind-figma, myna |
+| form | `figma-myna-dialog` | shadcn-registry | blueprint | live | overlay, dialog, tailwind-figma, myna |
+| form | `figma-myna-drawer` | shadcn-registry | blueprint | live | overlay, drawer, tailwind-figma, myna |
+| form | `figma-myna-dropdown-menu` | shadcn-registry | blueprint | live | form, menu, tailwind-figma, myna |
+| form | `figma-myna-input` | shadcn-registry | blueprint | live | form, input, tailwind-figma, myna |
+| form | `figma-myna-input-groups` | shadcn-registry | blueprint | live | form, input, tailwind-figma, myna |
+| form | `figma-myna-input-otp` | shadcn-registry | blueprint | live | form, input-otp, tailwind-figma, myna |
+| form | `figma-myna-label` | shadcn-registry | blueprint | live | form, label, tailwind-figma, myna |
+| form | `figma-myna-popover` | shadcn-registry | blueprint | live | overlay, popover, tailwind-figma, myna |
+| form | `figma-myna-radio` | shadcn-registry | blueprint | live | form, radio, tailwind-figma, myna |
+| form | `figma-myna-select` | shadcn-registry | blueprint | live | form, select, tailwind-figma, myna |
+| form | `figma-myna-sheet` | shadcn-registry | blueprint | live | overlay, sheet, tailwind-figma, myna |
+| form | `figma-myna-slider` | shadcn-registry | blueprint | live | form, slider, tailwind-figma, myna |
+| form | `figma-myna-switch` | shadcn-registry | blueprint | live | form, switch, tailwind-figma, myna |
+| form | `figma-myna-textarea` | shadcn-registry | blueprint | live | form, textarea, tailwind-figma, myna |
+| form | `figma-myna-toggle` | shadcn-registry | blueprint | live | form, toggle, tailwind-figma, myna |
+| form | `figma-myna-tooltip` | shadcn-registry | blueprint | live | form, tooltip, tailwind-figma, myna |
+| form | `figma-tailgrids-button-group` | shadcn-registry | blueprint | live | form, button-group, tailwind-figma, tailgrids |
+| form | `figma-tailgrids-check-box` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, check-box, check-box, form |
+| form | `figma-tailgrids-dropdowns` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, dropdowns, dropdown, form |
+| form | `figma-tailgrids-form-elements` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, form-elements, form-elements, form |
+| form | `figma-tailgrids-inputs` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, inputs, input, form |
+| form | `figma-tailgrids-select-box` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, select-box, select-box, form |
+| form | `figma-tailgrids-textarea` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, textarea, textarea, form |
+| form | `figma-tailgrids-toggle-switchers` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, toggle-switchers, toggle-with-text, form |
 | form | `untitled-modals` | untitled-ui-react | source | live | overlay, modal, dialog |
 | form | `figma-heroui-button` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, button, button, component |
 | form | `figma-heroui-button-group` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, button-group, buttongroup, component |
@@ -370,14 +540,44 @@ Reasons are listed under the table.
 | lex-queue | `lex-queue` | slds | blueprint | live | lex-queue, queue |
 | lex-record | `lex-record` | slds | blueprint | live | lex-record, record, detail, lightning, lwc |
 | lex-record | `lex-record-narrow` | slds | blueprint | live | lex-record-narrow, lex-record |
-| marketing | `figma-m3-cover` | shadcn-registry | blueprint | **retired** | marketing, material-figma, mui, material3 |
-| marketing | `figma-m3-cover` | shadcn-registry | blueprint | **retired** | marketing, material-figma, mui, material3 |
-| marketing | `figma-tailgrids-cover` | shadcn-registry | blueprint | **retired** | marketing, landing, tailwind-figma, tailgrids |
-| marketing | `figma-tailgrids-cover` | shadcn-registry | blueprint | **retired** | marketing, landing, tailwind-figma, tailgrids |
 | marketing | `shadcn-marketing` | shadcn-registry | blueprint | live | marketing, landing, pricing |
+| marketing | `figma-bootstrap-thumbnail` | shadcn-registry | blueprint | live | marketing, cover, bootstrap-figma |
+| marketing | `figma-bootstrap-welcome` | shadcn-registry | blueprint | live | marketing, welcome, bootstrap-figma |
 | marketing | `figma-heroui-v3-cover` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, v3-cover, welcome, cover |
 | marketing | `figma-heroui-welcome` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, welcome, welcome, cover |
+| marketing | `figma-m3-cover` | shadcn-registry | blueprint | live | figma-kit, material-figma, mui, material3, cover, material-3-design-kit-cover-(mui-/-material-ui-target) |
+| marketing | `figma-myna-assets-thumbnail` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, thumbnail |
+| marketing | `figma-myna-email-01-welcome-confirm-email` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-tailgrids-cover` | shadcn-registry | blueprint | live | figma-kit, tailwind-figma, tailgrids, cover, tailwind-tailgrids-cover |
 | marketing | `heroui-home` | heroui | source | live | marketing, landing, heroui, home |
+| marketing | `figma-myna-assets-about` | shadcn-registry | blueprint | live | catalog, assets, tailwind-figma, myna, about |
+| marketing | `figma-myna-email-02-add-friends` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-03-beta-tester` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-04-friend-request` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-05-password-reset` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-06-account-locked` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-07-new-device` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-08-secure-account` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-09-onboarding-survey` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-10-community-forum` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-11-account-verified` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-email-12-guide` | shadcn-registry | blueprint | live | marketing, email, tailwind-figma, myna |
+| marketing | `figma-myna-mkt-404-block` | shadcn-registry | blueprint | **retired** | marketing, tailwind-figma, myna, 404-block |
+| marketing | `figma-myna-mkt-blog-list-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, blog-list-block |
+| marketing | `figma-myna-mkt-blog-post-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, blog-post-block |
+| marketing | `figma-myna-mkt-call-to-action-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, call-to-action-block |
+| marketing | `figma-myna-mkt-cookies-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, cookies-block |
+| marketing | `figma-myna-mkt-faq-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, faq-block |
+| marketing | `figma-myna-mkt-features-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, features-block |
+| marketing | `figma-myna-mkt-footer-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, footer-block |
+| marketing | `figma-myna-mkt-header-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, header-block |
+| marketing | `figma-myna-mkt-hero-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, hero-block |
+| marketing | `figma-myna-mkt-statistics-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, statistics-block |
+| marketing | `figma-myna-mkt-testimonial-logos-block` | shadcn-registry | blueprint | live | marketing, tailwind-figma, myna, testimonial-logos-block |
+| marketing | `figma-tailgrids-about` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, about, about, marketing |
+| marketing | `figma-tailgrids-cta` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, cta, cta, marketing |
+| marketing | `figma-tailgrids-faq` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, faq, faq, marketing |
+| marketing | `figma-tailgrids-header-hero-area` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, header-hero-area, header-hero-area, marketing |
 | marketing | `heroui-about` | heroui | source | live | marketing, about, heroui |
 | marketing | `figma-heroui-cover` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, cover, cover, component |
 | marketing-developer | `magicui-code-comparison-demo` | magicui | source | live | marketing, developer, docs, code, terminal, landing, api |
@@ -437,13 +637,20 @@ Reasons are listed under the table.
 | pagination | `untitled-pagination` | untitled-ui-react | source | live | pagination, paging, page-size, pager |
 | pricing | `flowbite-pricing` | flowbite-admin | source | live | pricing, plans, tiers, marketing, landing |
 | pricing | `heroui-pricing` | heroui | source | live | pricing, plans, marketing, heroui |
-| queue | `figma-tailgrids-table-stack` | shadcn-registry | blueprint | **retired** | queue, table, records, tailwind-figma, tailgrids |
-| queue | `figma-tailgrids-table-stack` | shadcn-registry | blueprint | **retired** | queue, table, records, tailwind-figma, tailgrids |
 | queue | `shadcn-operate-decide` | shadcn-registry | blueprint | live | queue, worklist, triage, decide, decide-queue, sled, pursue, inbox, datagrid |
 | queue | `untitled-table` | untitled-ui-react | source | live | queue, crud, table, records, datagrid |
 | queue | `shadcn-queue` | shadcn-registry | blueprint | live | queue, worklist, triage, inbox, datagrid |
 | queue | `tailadmin-tables` | tailadmin-react | source | live | queue, crud, table, records, datagrid |
 | queue | `windmill-tables` | windmill-react | source | live | queue, crud, table, records, datagrid |
+| queue | `figma-bootstrap-pagination` | shadcn-registry | blueprint | live | queue, pagination, bootstrap-figma |
+| queue | `figma-bootstrap-tables` | shadcn-registry | blueprint | live | queue, table, bootstrap-figma |
+| queue | `figma-myna-data-table` | shadcn-registry | blueprint | live | queue, table, tailwind-figma, myna |
+| queue | `figma-myna-pagination` | shadcn-registry | blueprint | live | queue, pagination, tailwind-figma, myna |
+| queue | `figma-myna-table` | shadcn-registry | blueprint | live | queue, table, tailwind-figma, myna |
+| queue | `figma-tailgrids-table-grids` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, table-grids, table-grids, queue |
+| queue | `figma-tailgrids-table-stack` | shadcn-registry | blueprint | live | figma-kit |
+| queue | `figma-tailgrids-table-stacks` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, table-stacks, table-stacks, queue |
+| queue | `figma-tailgrids-tables` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, tables, tables, queue |
 | queue | `flowbite-users` | flowbite-admin | source | live | queue, crud, table, records, users, admin |
 | queue | `figma-heroui-table` | shadcn-registry | blueprint | live | heroui-figma, figma-kit, table, table, component |
 | queue | `flowbite-products` | flowbite-admin | source | live | queue, crud, table, products, inventory, catalog |
@@ -465,69 +672,16 @@ Reasons are listed under the table.
 | settings | `shadcn-settings-notifications` | shadcn-registry | blueprint | live | settings, notifications, preferences, alerts |
 | settings | `flowbite-settings` | flowbite-admin | source | live | settings, preferences, account, profile |
 | settings | `fluent-nav` | fluentui | source | live | settings |
+| settings | `figma-tailgrids-settings-pages` | shadcn-registry | blueprint | live | tailwind-figma, tailgrids, settings-pages, pro-components, settings |
 | tabs | `untitled-tabs` | untitled-ui-react | source | live | tabs, sections, segmented, workspace-tabs, section-tabs |
 | weekly-board | `shadcn-weekly-board` | shadcn-registry | blueprint | live | weekly-board, board, cadence, report-out, standup, kanban, elt |
 | wizard | `shadcn-wizard` | shadcn-registry | blueprint | live | wizard, stepper, multi-step, onboarding |
 
-454 rows, 57 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
+662 rows, 3 of them retired. Required screen coverage: dashboard, marketing, auth, checkout, app-shell, crud, queue, record, chat, settings, wizard, empty, command-palette, lex-record.
 
 ## Retired rows — do not cite
 
 - `mantine-appshell` — shadcn is the house source: both Clearspeed consumers are shadcn/Tailwind repos, so a reference on another kit's runtime cannot be built against; shadcn covers app-shell (shadcn-sidebar-07)
-- `figma-bootstrap-buttons` — undefined
-- `figma-bootstrap-buttons` — undefined
-- `figma-bootstrap-components` — undefined
-- `figma-bootstrap-components` — undefined
-- `figma-m3-badges` — undefined
-- `figma-m3-bottom-app-bars` — undefined
-- `figma-m3-bottom-sheets` — undefined
-- `figma-m3-buttons` — undefined
-- `figma-m3-cards` — undefined
-- `figma-m3-carousel` — undefined
-- `figma-m3-checkboxes` — undefined
-- `figma-m3-chips` — undefined
-- `figma-m3-color` — undefined
-- `figma-m3-date-picker` — undefined
-- `figma-m3-dialogs` — undefined
-- `figma-m3-dividers` — undefined
-- `figma-m3-elements` — undefined
-- `figma-m3-elevation` — undefined
-- `figma-m3-fabs` — undefined
-- `figma-m3-icon-buttons` — undefined
-- `figma-m3-layout` — undefined
-- `figma-m3-lists` — undefined
-- `figma-m3-menu` — undefined
-- `figma-m3-navigation-bars` — undefined
-- `figma-m3-navigation-drawer` — undefined
-- `figma-m3-navigation-rails` — undefined
-- `figma-m3-progress` — undefined
-- `figma-m3-radio` — undefined
-- `figma-m3-search` — undefined
-- `figma-m3-segmented-buttons` — undefined
-- `figma-m3-side-sheets` — undefined
-- `figma-m3-sliders` — undefined
-- `figma-m3-snackbars` — undefined
-- `figma-m3-switch` — undefined
-- `figma-m3-tabs` — undefined
-- `figma-m3-time-picker` — undefined
-- `figma-m3-toc` — undefined
-- `figma-m3-tooltips` — undefined
-- `figma-m3-top-app-bars` — undefined
-- `figma-m3-typography` — undefined
-- `figma-myna-components` — undefined
-- `figma-myna-components` — undefined
-- `figma-tailgrids-atoms` — undefined
-- `figma-tailgrids-atoms` — undefined
-- `figma-tailgrids-layout` — undefined
-- `figma-tailgrids-layout` — undefined
 - `tremor-charts` — shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it
-- `figma-bootstrap-forms` — undefined
-- `figma-bootstrap-forms` — undefined
-- `figma-m3-text-fields` — undefined
-- `figma-m3-cover` — undefined
-- `figma-m3-cover` — undefined
-- `figma-tailgrids-cover` — undefined
-- `figma-tailgrids-cover` — undefined
-- `figma-tailgrids-table-stack` — undefined
-- `figma-tailgrids-table-stack` — undefined
+- `figma-myna-mkt-404-block` — referenceHealth failed: error, access or challenge page
 

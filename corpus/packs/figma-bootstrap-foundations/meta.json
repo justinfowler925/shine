@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-foundations",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1155",
+  "harvested": "2026-10-09",
+  "bytes": 38811,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Foundations",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "3888:1155",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Foundations",
+    "headings": "Foundations",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Foundations",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1155",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=3888-1155",
+    "capturedAt": "2026-10-09T13:50:39.018Z",
+    "shotSha256": "ccff0bb468d184149621696fdeec3fef39c8b9dd0bd0fd3d530992ef2fea1dd4",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "3888:1155",
+      "page": "Foundations",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

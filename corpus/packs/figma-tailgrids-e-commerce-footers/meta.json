@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-e-commerce-footers",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18764",
+  "harvested": "2026-10-09",
+  "bytes": 114762,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "E-Commerce Footers",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:18764",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "E-Commerce Footers",
+    "headings": "E-Commerce Footers",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "E-Commerce Footers",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18764",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18764",
+    "capturedAt": "2026-10-09T13:47:33.722Z",
+    "shotSha256": "13d437d74dfe4b09007259f97b32cd1d184384c667ceebaf8374052fa76410ac",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:18764",
+      "page": "-- E-Commerce Footers",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

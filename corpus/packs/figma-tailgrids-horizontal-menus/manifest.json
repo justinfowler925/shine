@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-horizontal-menus",
+  "kind": "blueprint",
+  "screen": "app-shell",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "horizontal-menus",
+    "horizontal-menus",
+    "app-shell"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-horizontal-menus.md",
+      "role": "blueprint",
+      "sha256": "bf509411ac4b06ffa5d61675fce99136243dd97cc40d7139d3808e273fd7bbea"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

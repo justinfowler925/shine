@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Date picker",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "51954:18122",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Date picker",
+    "headings": "Material 3 \u2014 Date picker",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Date picker",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51954-18122",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51954-18122",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "39b6cd643735e4a37a61df897409b58cd13f03533b30f91cd8921aa9f11649c7",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "51954:18122"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

@@ -5,10 +5,15 @@
   "bytes": 131769,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Checkbox Group",
+    "title": "Checkbox Group",
+    "headings": "Checkbox Group",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Checkbox Group",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2433-41562",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2433-41562",
-    "capturedAt": "2026-10-09T02:41:26.748949Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "e4a6a9006610ad525da0744ec403cb0ea3b845e1075657e26fe3c8d340854b0b",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2433:41562",
       "page": "Checkbox Group",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

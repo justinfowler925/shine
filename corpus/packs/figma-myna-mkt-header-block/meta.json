@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-mkt-header-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-3871",
+  "harvested": "2026-10-09",
+  "bytes": 8736,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Header Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2907:3871",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Header Block",
+    "headings": "Header Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Header Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-3871",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2907-3871",
+    "capturedAt": "2026-10-09T14:06:33.663Z",
+    "shotSha256": "e4e3f363963d0a37982e2a3f39f4196461bee2e6d3fd4c8acd64eab001af3fda",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2907:3871",
+      "page": "Marketing Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

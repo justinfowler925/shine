@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-avatar",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1641",
+  "harvested": "2026-10-09",
+  "bytes": 16351,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Avatar",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2673:1641",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Avatar",
+    "headings": "Avatar",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Avatar",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1641",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2673-1641",
+    "capturedAt": "2026-10-09T13:47:48.755Z",
+    "shotSha256": "2c2b0219c5301734c931f70923232cab32f0bc3c2a400c663db23f125be5c634",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2673:1641",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

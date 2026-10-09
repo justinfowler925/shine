@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Time picker",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "52949:27911",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Time picker",
+    "headings": "Material 3 \u2014 Time picker",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Time picker",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52949-27911",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=52949-27911",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "5b7798e1929f7d87c0a7ba2914173b80bf1226de00091488107bcc30ea999f2c",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "52949:27911"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

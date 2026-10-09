@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-assets-thumbnail",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2705-530",
+  "harvested": "2026-10-09",
+  "bytes": 93192,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Thumbnail",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2705:530",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Thumbnail",
+    "headings": "Thumbnail",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Thumbnail",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2705-530",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2705-530",
+    "capturedAt": "2026-10-09T14:06:48.351Z",
+    "shotSha256": "2cad73f4740deea817fbe62dc70bfa25e3ee0746ba373783ba3ea6202556a91b",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2705:530",
+      "page": "Assets",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

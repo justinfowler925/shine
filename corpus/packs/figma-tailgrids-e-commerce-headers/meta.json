@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-e-commerce-headers",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18722",
+  "harvested": "2026-10-09",
+  "bytes": 858890,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "E-Commerce Headers / Hero Areas",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:18722",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "E-Commerce Headers / Hero Areas",
+    "headings": "E-Commerce Headers / Hero Areas",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "E-Commerce Headers / Hero Areas",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18722",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18722",
+    "capturedAt": "2026-10-09T13:47:33.421Z",
+    "shotSha256": "107f377e30f0bca12915f99680d320b9932ab328705c550b61f4bb309b62f571",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:18722",
+      "page": "-- E-Commerce Headers",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-links",
+  "kind": "blueprint",
+  "screen": "app-shell",
+  "jobs": [
+    "app-shell",
+    "link",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-links.md",
+      "role": "blueprint",
+      "sha256": "1aa97a7b4a3791388624a83762e31fd60cdd9dee6f8a72e9771785aceb0e24d5"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

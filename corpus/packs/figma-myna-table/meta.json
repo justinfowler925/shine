@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-table",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2814-1241",
+  "harvested": "2026-10-09",
+  "bytes": 51487,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Table",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2814:1241",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Table",
+    "headings": "Table",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Table",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2814-1241",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2814-1241",
+    "capturedAt": "2026-10-09T13:50:37.672Z",
+    "shotSha256": "177c3c4f49781678d0052ebe14528045e7709bedbb55fc47c847bcf6c5553079",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2814:1241",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-settings-pages",
+  "kind": "blueprint",
+  "screen": "settings",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "settings-pages",
+    "pro-components",
+    "settings"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-settings-pages.md",
+      "role": "blueprint",
+      "sha256": "0d2107688e17db57aa1170e107dd92b6b537dddbd83267e0bba53fb4aeab33fe"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

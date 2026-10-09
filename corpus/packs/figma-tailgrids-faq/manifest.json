@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-faq",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "faq",
+    "faq",
+    "marketing"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-faq.md",
+      "role": "blueprint",
+      "sha256": "f8509f143978799b972beb370aabf6954c54c36884203c6f4ddae67cec30bfb6"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

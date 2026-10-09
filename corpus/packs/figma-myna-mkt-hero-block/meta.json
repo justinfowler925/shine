@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-mkt-hero-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3049-1143",
+  "harvested": "2026-10-09",
+  "bytes": 296931,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Hero Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3049:1143",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Hero Block",
+    "headings": "Hero Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Hero Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3049-1143",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3049-1143",
+    "capturedAt": "2026-10-09T14:06:31.304Z",
+    "shotSha256": "9d413a5653ef6bee22b003dcc6d64d9714664d445155b7fa649bf6832f46f98d",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3049:1143",
+      "page": "Marketing Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

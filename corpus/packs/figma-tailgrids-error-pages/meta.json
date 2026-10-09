@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-error-pages",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15264",
+  "harvested": "2026-10-09",
+  "bytes": 253832,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Error Pages",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:15264",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Error Pages",
+    "headings": "Error Pages",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Error Pages",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15264",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-15264",
+    "capturedAt": "2026-10-09T13:45:10.006Z",
+    "shotSha256": "038ea8607524df6e92bd390e161ecd6e25676ac1fdea0332fefd562e7b75f7b0",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:15264",
+      "page": "-- Error Pages",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

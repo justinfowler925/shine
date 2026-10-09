@@ -1,0 +1,33 @@
+{
+  "id": "figma-bootstrap-pagination",
+  "source": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4195-1863",
+  "harvested": "2026-10-09",
+  "bytes": 21731,
+  "scope": "component",
+  "kit": "bootstrap",
+  "title": "Pagination",
+  "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+  "nodeId": "4195:1863",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Pagination",
+    "headings": "Pagination",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Pagination",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4195-1863",
+    "finalUrl": "https://www.figma.com/design/p8B6SUiQDqKFAybsVtfQp9?node-id=4195-1863",
+    "capturedAt": "2026-10-09T13:48:02.448Z",
+    "shotSha256": "9be70ce549c43c7d9ef763ce2a880f8348e2439104ec341b89e87c10213f4d93",
+    "figma": {
+      "fileKey": "p8B6SUiQDqKFAybsVtfQp9",
+      "nodeId": "4195:1863",
+      "page": "Components",
+      "kind": "component",
+      "family": "bootstrap"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

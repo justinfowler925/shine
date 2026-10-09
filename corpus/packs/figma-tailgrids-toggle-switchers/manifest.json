@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-toggle-switchers",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "toggle-switchers",
+    "toggle-with-text",
+    "form"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-toggle-switchers.md",
+      "role": "blueprint",
+      "sha256": "861d63252b07f84604d11d33061c88794514dd34bae5d2a14e030c5427e274bc"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

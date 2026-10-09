@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-email-06-account-locked",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "marketing",
+    "email",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-email-06-account-locked.md",
+      "role": "blueprint",
+      "sha256": "188847d30e2e963ea1a991ba957a553f1f3fd4b71cb4b9ef081b82c7a270d5c1"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

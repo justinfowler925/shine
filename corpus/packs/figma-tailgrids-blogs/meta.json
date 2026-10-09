@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-blogs",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14652",
+  "harvested": "2026-10-09",
+  "bytes": 494855,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Blogs",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:14652",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Blogs",
+    "headings": "Blogs",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Blogs",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14652",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-14652",
+    "capturedAt": "2026-10-09T13:45:09.066Z",
+    "shotSha256": "006402ff6079db72b218a989af464c33cc6e8bc8a44b3feb060d917c588d693d",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:14652",
+      "page": "-- Blogs",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

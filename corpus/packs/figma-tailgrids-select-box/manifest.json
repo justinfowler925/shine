@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-select-box",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "select-box",
+    "select-box",
+    "form"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-select-box.md",
+      "role": "blueprint",
+      "sha256": "ca68df87978323672c8324aec7a77d3030efd4b82c5c456d29d431f5c8e97af9"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

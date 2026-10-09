@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-ds-backdrop-blur",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=14-19",
+  "harvested": "2026-10-09",
+  "bytes": 417285,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Backdrop Blur",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "14:19",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Backdrop Blur",
+    "headings": "Backdrop Blur",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Backdrop Blur",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=14-19",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=14-19",
+    "capturedAt": "2026-10-09T14:06:46.353Z",
+    "shotSha256": "3a25e5eef1b31b5a82dd5d0ed75c08d1c95110b5c5e5e8f398a3506a3ea59a64",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "14:19",
+      "page": "Design System",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

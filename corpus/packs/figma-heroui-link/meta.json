@@ -5,10 +5,15 @@
   "bytes": 118577,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Link",
+    "title": "Link",
+    "headings": "Link",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Link",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31578",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2545-31578",
-    "capturedAt": "2026-10-09T02:43:10.666986Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "af3df2c87140d8fb9a31c60eb01b84e4d00c9d74aefa0a458f3228e0cf0ccc8a",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2545:31578",
       "page": "Link",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

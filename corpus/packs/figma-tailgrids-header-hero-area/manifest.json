@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-header-hero-area",
+  "kind": "blueprint",
+  "screen": "marketing",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "header-hero-area",
+    "header-hero-area",
+    "marketing"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-header-hero-area.md",
+      "role": "blueprint",
+      "sha256": "82a99907ebd0cdd2aba6eefea3f2529e688ec6d21a2d16a87995f240b64b237d"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

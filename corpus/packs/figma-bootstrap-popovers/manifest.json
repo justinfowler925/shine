@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-popovers",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "overlay",
+    "popover",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-popovers.md",
+      "role": "blueprint",
+      "sha256": "6ea0629153b67282dcc6f80da45b0182bd31495c4ff4be563f5088b317b472b9"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

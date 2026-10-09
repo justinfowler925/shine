@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Side sheets",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "53198:27843",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Side sheets",
+    "headings": "Material 3 \u2014 Side sheets",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Side sheets",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53198-27843",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=53198-27843",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "b87c5fb5fbe8ae6dd3110f6fd9432417e078b2f09be76914c48c57e8bd8bc2fc",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "53198:27843"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

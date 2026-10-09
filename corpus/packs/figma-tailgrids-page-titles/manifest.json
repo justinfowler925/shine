@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-page-titles",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "page-titles",
+    "page-title-styles",
+    "catalog"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-page-titles.md",
+      "role": "blueprint",
+      "sha256": "9d69e6d799cab32510fe8087d6f431091f36bb2a75253e6bf977af07e0723509"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

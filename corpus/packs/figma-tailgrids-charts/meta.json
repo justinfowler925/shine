@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-charts",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20481",
+  "harvested": "2026-10-09",
+  "bytes": 129456,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Charts",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:20481",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Charts",
+    "headings": "Charts",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Charts",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20481",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-20481",
+    "capturedAt": "2026-10-09T13:48:23.689Z",
+    "shotSha256": "526e1989f7c80e2fcb344fb109ed24690169e0996f06adf9b307bb29c837e2aa",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:20481",
+      "page": "-- Charts",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

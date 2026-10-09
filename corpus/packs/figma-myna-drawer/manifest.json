@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-drawer",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "overlay",
+    "drawer",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-drawer.md",
+      "role": "blueprint",
+      "sha256": "b520c2541b4806dc159b5d3bd5717514f47fafe4ad2cfc32a9a23fe8c2f29e55"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

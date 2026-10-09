@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-videos",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18070",
+  "harvested": "2026-10-09",
+  "bytes": 567259,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Videos",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:18070",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Videos",
+    "headings": "Videos",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Videos",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18070",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-18070",
+    "capturedAt": "2026-10-09T13:47:32.013Z",
+    "shotSha256": "b2297599af61662469e81c9f24a0d8f5d588af31ecb64cdfb2f8846e0ff07140",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:18070",
+      "page": "-- Videos",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

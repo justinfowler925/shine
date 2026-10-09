@@ -8,5 +8,23 @@
   "title": "HeroUI Theme color sets",
   "fileKey": "DC4g36xyt4DobtbEa11JFL",
   "nodeId": "5:1194",
-  "discovery": "chrome-history-hidden-canvases"
+  "discovery": "chrome-history-hidden-canvases",
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Theme color sets",
+    "headings": "HeroUI Theme color sets",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "HeroUI Theme color sets",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-1194",
+    "finalUrl": "https://www.figma.com/design/DC4g36xyt4DobtbEa11JFL?node-id=5-1194",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "17b752b5e9dfe5f6112362c45625d4ff4ff3f38efee06f16ddba70b9327a7938",
+    "figma": {
+      "fileKey": "DC4g36xyt4DobtbEa11JFL",
+      "nodeId": "5:1194"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

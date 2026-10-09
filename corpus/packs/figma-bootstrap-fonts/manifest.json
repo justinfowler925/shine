@@ -1,0 +1,19 @@
+{
+  "id": "figma-bootstrap-fonts",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "fonts",
+    "bootstrap-figma"
+  ],
+  "files": [
+    {
+      "path": "figma-bootstrap-fonts.md",
+      "role": "blueprint",
+      "sha256": "edf871318052336310adbb41a65f84a5bc0de50b45ee911bb975d48225e59a18"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

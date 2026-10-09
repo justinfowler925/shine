@@ -8,5 +8,23 @@
   "title": "Material 3 \u2014 Sliders",
   "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
   "nodeId": "51937:8018",
-  "discovery": "material3-design-kit-full-page-tree"
+  "discovery": "material3-design-kit-full-page-tree",
+  "capture": {
+    "status": 200,
+    "title": "Material 3 \u2014 Sliders",
+    "headings": "Material 3 \u2014 Sliders",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Material 3 \u2014 Sliders",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51937-8018",
+    "finalUrl": "https://www.figma.com/design/f4TUS9BWk2rSH8Dqrp5Mon?node-id=51937-8018",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "99485204a73f3c18d72a191ea9bdcd296c5262943cb4389db582a24c333dc1aa",
+    "figma": {
+      "fileKey": "f4TUS9BWk2rSH8Dqrp5Mon",
+      "nodeId": "51937:8018"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

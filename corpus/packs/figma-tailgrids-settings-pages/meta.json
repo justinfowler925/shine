@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-settings-pages",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22105",
+  "harvested": "2026-10-09",
+  "bytes": 389285,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Pro Components",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:22105",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Pro Components",
+    "headings": "Pro Components",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Pro Components",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22105",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22105",
+    "capturedAt": "2026-10-09T13:49:14.680Z",
+    "shotSha256": "c2d72a01b452233e50f26f2fa56cdd49cb433147cb920791a39498ee2ef71aa0",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:22105",
+      "page": "-- Settings Pages",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

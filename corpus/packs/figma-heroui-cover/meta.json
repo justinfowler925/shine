@@ -8,5 +8,23 @@
   "title": "HeroUI Figma Kit cover",
   "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
   "nodeId": "4281:261157",
-  "discovery": "prefer-copy-cover"
+  "discovery": "prefer-copy-cover",
+  "capture": {
+    "status": 200,
+    "title": "HeroUI Figma Kit cover",
+    "headings": "HeroUI Figma Kit cover",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "HeroUI Figma Kit cover",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261157",
+    "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm?node-id=4281-261157",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
+    "shotSha256": "599908bcd5c5b906b9161eb61c196f7046c326f276f785e46d861d5d51872629",
+    "figma": {
+      "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
+      "nodeId": "4281:261157"
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
+  }
 }

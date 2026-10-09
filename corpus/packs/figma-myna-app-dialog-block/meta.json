@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-app-dialog-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3141-1081",
+  "harvested": "2026-10-09",
+  "bytes": 57088,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Dialog Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "3141:1081",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Dialog Block",
+    "headings": "Dialog Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Dialog Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3141-1081",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=3141-1081",
+    "capturedAt": "2026-10-09T14:06:31.808Z",
+    "shotSha256": "684a7d8481f161df3857ed22f05a70e854380a0987a47fa895eda2d7f2ef46d9",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "3141:1081",
+      "page": "Application Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

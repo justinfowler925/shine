@@ -1,0 +1,21 @@
+{
+  "id": "figma-tailgrids-error-pages",
+  "kind": "blueprint",
+  "screen": "empty",
+  "jobs": [
+    "tailwind-figma",
+    "tailgrids",
+    "error-pages",
+    "error-pages",
+    "empty"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-error-pages.md",
+      "role": "blueprint",
+      "sha256": "b1ea9b40127c6273dfff516a465c64aad681a4a1859b59183455a052da82b933"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

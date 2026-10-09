@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-app-registration-block",
+  "kind": "blueprint",
+  "screen": "auth",
+  "jobs": [
+    "auth",
+    "tailwind-figma",
+    "myna",
+    "registration-block"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-app-registration-block.md",
+      "role": "blueprint",
+      "sha256": "bd287b9e86a01c8ae0ef0a5c0965c6e2f5c0b1bf68663c69a93af58f13d3dd3e"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

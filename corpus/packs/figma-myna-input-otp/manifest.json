@@ -1,0 +1,20 @@
+{
+  "id": "figma-myna-input-otp",
+  "kind": "blueprint",
+  "screen": "form",
+  "jobs": [
+    "form",
+    "input-otp",
+    "tailwind-figma",
+    "myna"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-input-otp.md",
+      "role": "blueprint",
+      "sha256": "87e133139876cd1a3a394f0db6517b7250b4a71679c7f5535b2296c5bacad702"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

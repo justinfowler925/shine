@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-alerts",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9802",
+  "harvested": "2026-10-09",
+  "bytes": 41514,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Danger Alert",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:9802",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Danger Alert",
+    "headings": "Danger Alert",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Danger Alert",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9802",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-9802",
+    "capturedAt": "2026-10-09T13:43:57.244Z",
+    "shotSha256": "d008a1dd2e2a6e092af3bf2af6f5422f43bbec6761d91d39ab7f4f1fe77cebb2",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:9802",
+      "page": "-- Alerts",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-icons",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-4031",
+  "harvested": "2026-10-09",
+  "bytes": 525290,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Icons",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:4031",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Icons",
+    "headings": "Icons",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Icons",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-4031",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-4031",
+    "capturedAt": "2026-10-09T13:43:56.622Z",
+    "shotSha256": "9d63368b6a468f71b08b5d935c5087af009c86479fd578bd844416ff17a7467c",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:4031",
+      "page": "♣️ Icons",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-progress",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2160",
+  "harvested": "2026-10-09",
+  "bytes": 8285,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Progress",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2674:2160",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Progress",
+    "headings": "Progress",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Progress",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2160",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2674-2160",
+    "capturedAt": "2026-10-09T13:48:46.213Z",
+    "shotSha256": "edb02bb8a5108e4a851e6caa8f29880297203c30d4b42cdb18d3ec48b3d1d73b",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2674:2160",
+      "page": "Components",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

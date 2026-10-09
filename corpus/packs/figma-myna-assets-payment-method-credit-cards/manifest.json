@@ -1,0 +1,21 @@
+{
+  "id": "figma-myna-assets-payment-method-credit-cards",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "assets",
+    "tailwind-figma",
+    "myna",
+    "payment-method-credit-cards"
+  ],
+  "files": [
+    {
+      "path": "figma-myna-assets-payment-method-credit-cards.md",
+      "role": "blueprint",
+      "sha256": "4310f2423926ad8acb577bf9539e1eca9afaf6392849a5b57f5a46baa2529b3e"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

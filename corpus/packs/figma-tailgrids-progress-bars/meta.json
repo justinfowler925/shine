@@ -1,0 +1,33 @@
+{
+  "id": "figma-tailgrids-progress-bars",
+  "source": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22514",
+  "harvested": "2026-10-09",
+  "bytes": 34772,
+  "scope": "component",
+  "kit": "tailgrids",
+  "title": "Progress Bars",
+  "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+  "nodeId": "310:22514",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Progress Bars",
+    "headings": "Progress Bars",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Progress Bars",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22514",
+    "finalUrl": "https://www.figma.com/design/DUN5DvdK5XnoJyi9N52gu9?node-id=310-22514",
+    "capturedAt": "2026-10-09T13:44:33.777Z",
+    "shotSha256": "35ed7544a2196ab987854f043be2a1a5b2a76391e56ba9c7c3e96c9e7930c510",
+    "figma": {
+      "fileKey": "DUN5DvdK5XnoJyi9N52gu9",
+      "nodeId": "310:22514",
+      "page": "-- Progress Bars",
+      "kind": "component",
+      "family": "tailgrids"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

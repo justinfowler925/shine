@@ -1,0 +1,20 @@
+{
+  "id": "figma-tailgrids-tags",
+  "kind": "blueprint",
+  "screen": "catalog",
+  "jobs": [
+    "catalog",
+    "tag",
+    "tailwind-figma",
+    "tailgrids"
+  ],
+  "files": [
+    {
+      "path": "figma-tailgrids-tags.md",
+      "role": "blueprint",
+      "sha256": "ed013d73a70874d94fbcf1a3938b40a25953711c10765c6da778446855890117"
+    }
+  ],
+  "shot": "shot.png",
+  "tokens": "tokens.css"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-app-empty-states-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5376",
+  "harvested": "2026-10-09",
+  "bytes": 21352,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Empty States Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2908:5376",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Empty States Block",
+    "headings": "Empty States Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Empty States Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5376",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5376",
+    "capturedAt": "2026-10-09T14:06:31.880Z",
+    "shotSha256": "24b5fbbb79efbacd705839672f06482861551b57b47f52090b6ea29cc50d9fbd",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2908:5376",
+      "page": "Application Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}

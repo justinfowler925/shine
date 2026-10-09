@@ -5,10 +5,15 @@
   "bytes": 114616,
   "capture": {
     "status": 200,
-    "title": "HeroUI Figma \u00b7 Slider",
+    "title": "Slider",
+    "headings": "Slider",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Slider",
+    "expectedTextMatched": true,
     "sourceUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2123-26021",
     "finalUrl": "https://www.figma.com/design/GAn1SrbKJYiKqz9SmHHCRm/?node-id=2123-26021",
-    "capturedAt": "2026-10-09T02:43:12.271996Z",
+    "capturedAt": "2026-10-09T13:40:20.744Z",
     "shotSha256": "97e37708495bfa35084feef2269c71606e66592c1da41232ca12e296bc963186",
     "figma": {
       "fileKey": "GAn1SrbKJYiKqz9SmHHCRm",
@@ -16,6 +21,7 @@
       "nodeId": "2123:26021",
       "page": "Slider",
       "kind": "component"
-    }
+    },
+    "provenance": "figma-kit-full-ingest-stamp"
   }
 }

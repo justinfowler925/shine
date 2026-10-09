@@ -1,0 +1,33 @@
+{
+  "id": "figma-myna-app-cards-block",
+  "source": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5833",
+  "harvested": "2026-10-09",
+  "bytes": 52382,
+  "scope": "component",
+  "kit": "myna",
+  "title": "Cards Block",
+  "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+  "nodeId": "2908:5833",
+  "discovery": "figma-full-ingest",
+  "capture": {
+    "status": 200,
+    "title": "Cards Block",
+    "headings": "Cards Block",
+    "expectedSelector": "[data-figma-node], frame, svg",
+    "expectedCount": 1,
+    "expectedText": "Cards Block",
+    "expectedTextMatched": true,
+    "sourceUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5833",
+    "finalUrl": "https://www.figma.com/design/4SbNh8zIj6LYSmLbET45oO?node-id=2908-5833",
+    "capturedAt": "2026-10-09T14:06:31.845Z",
+    "shotSha256": "7672cb0aaa60fb3a11a3402f7b05facdf91eed82c82432d174bda826c20fb157",
+    "figma": {
+      "fileKey": "4SbNh8zIj6LYSmLbET45oO",
+      "nodeId": "2908:5833",
+      "page": "Application Blocks",
+      "kind": "component",
+      "family": "myna"
+    },
+    "provenance": "figma-kit-full-ingest"
+  }
+}
