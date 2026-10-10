@@ -1,6 +1,6 @@
 {
   "id": "heroui-pricing",
-  "source": "https://www.heroui.com",
+  "source": "https://www.heroui.com/pricing",
   "harvested": "2026-10-09",
   "bytes": 285465,
   "capture": {
@@ -19,6 +19,6 @@
   },
   "review": {
     "status": "failed",
-    "reason": "homepage clone theater — shared heroui.com PNG sold as distinct page cite; retired"
+    "reason": "no public HeroUI pricing page (heroui.com/pricing → 404); honest named-kit gap until a real page exists"
   }
 }

@@ -296,21 +296,19 @@ export function buildFigmaKitPackRows(shineRoot, { prefixes = ["figma-m3-", "fig
 }
 
 /**
- * Full-page HeroUI next-app routes.
- * Marketing clones (home/about/docs/pricing) were harvested as one heroui.com
- * homepage PNG — retired until page-true unique shots exist. Blog kept only if
- * it has a distinct shot (not the homepage clone group).
+ * Full-page HeroUI routes. home/about/docs/blog harvest from unique heroui.com
+ * URLs (page-true shots). Pricing stays retired — public /pricing is 404.
  */
-const HEROUI_MARKETING_CLONE_REASON =
-  "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested";
+const HEROUI_PRICING_GAP_REASON =
+  "no public HeroUI pricing page (heroui.com/pricing → 404); honest named-kit gap until a real page exists";
 
 export function buildHeroUiPageRows(ctx) {
   const pages = [
-    { id: "heroui-home", screen: "marketing", path: "heroui-next-app/app/page.tsx", title: "HeroUI next-app home (marketing shell)", jobs: ["marketing", "landing", "heroui", "home"], rank: 4, clone: true },
-    { id: "heroui-about", screen: "marketing", path: "heroui-next-app/app/about/page.tsx", title: "HeroUI next-app about", jobs: ["marketing", "about", "heroui"], rank: 5, clone: true },
-    { id: "heroui-blog", screen: "blog", path: "heroui-next-app/app/blog/page.tsx", title: "HeroUI next-app blog", jobs: ["blog", "article", "heroui"], rank: 4, clone: false },
-    { id: "heroui-docs", screen: "app-shell", path: "heroui-next-app/app/docs/page.tsx", title: "HeroUI next-app docs shell", jobs: ["app-shell", "docs", "heroui"], rank: 5, clone: true },
-    { id: "heroui-pricing", screen: "pricing", path: "heroui-next-app/app/pricing/page.tsx", title: "HeroUI next-app pricing", jobs: ["pricing", "plans", "marketing", "heroui"], rank: 3, clone: true },
+    { id: "heroui-home", screen: "marketing", path: "heroui-next-app/app/page.tsx", title: "HeroUI home (marketing)", jobs: ["marketing", "landing", "heroui", "home"], rank: 4, preview: "https://www.heroui.com/", gap: false },
+    { id: "heroui-about", screen: "marketing", path: "heroui-next-app/app/about/page.tsx", title: "HeroUI about", jobs: ["marketing", "about", "heroui"], rank: 5, preview: "https://www.heroui.com/about", gap: false },
+    { id: "heroui-blog", screen: "blog", path: "heroui-next-app/app/blog/page.tsx", title: "HeroUI blog", jobs: ["blog", "article", "heroui"], rank: 4, preview: "https://www.heroui.com/blog", gap: false },
+    { id: "heroui-docs", screen: "app-shell", path: "heroui-next-app/app/docs/page.tsx", title: "HeroUI docs shell", jobs: ["app-shell", "docs", "heroui"], rank: 5, preview: "https://www.heroui.com/docs", gap: false },
+    { id: "heroui-pricing", screen: "pricing", path: "heroui-next-app/app/pricing/page.tsx", title: "HeroUI pricing", jobs: ["pricing", "plans", "marketing", "heroui"], rank: 3, preview: "https://www.heroui.com/pricing", gap: true },
   ];
   return pages
     .filter((t) => ctx.exists(t.path))
@@ -323,7 +321,7 @@ export function buildHeroUiPageRows(ctx) {
         kit: "heroui",
         title: t.title,
         path: t.path,
-        preview: "https://www.heroui.com",
+        preview: t.preview,
         license: "MIT",
         kind: "source",
         startFrom: t.rank,
@@ -331,11 +329,11 @@ export function buildHeroUiPageRows(ctx) {
         scope: "page",
         sources,
         entrypoints: sources,
-        note: t.clone
-          ? HEROUI_MARKETING_CLONE_REASON
-          : "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
-        ...(t.clone
-          ? { selectable: false, retiredReason: HEROUI_MARKETING_CLONE_REASON }
+        note: t.gap
+          ? HEROUI_PRICING_GAP_REASON
+          : `Page-true HeroUI harvest from ${t.preview}`,
+        ...(t.gap
+          ? { selectable: false, retiredReason: HEROUI_PRICING_GAP_REASON }
           : {}),
       };
     });

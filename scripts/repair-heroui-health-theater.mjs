@@ -31,10 +31,9 @@ const ALIAS_IDS = new Set([
   "heroui-empty-state",
 ]);
 
+// Pricing stays failed (no public page). home/about/docs are page-true keepers
+// after harvest-heroui-marketing-pagetrue.mjs — do not re-retire by id.
 const MARKETING_CLONE_IDS = new Set([
-  "heroui-home",
-  "heroui-about",
-  "heroui-docs",
   "heroui-pricing",
 ]);
 

@@ -1,22 +1,22 @@
 {
   "id": "heroui-blog",
-  "source": "https://www.heroui.com",
-  "harvested": "2026-10-09",
-  "bytes": 285469,
+  "source": "https://www.heroui.com/blog",
+  "harvested": "2026-10-10",
+  "bytes": 203526,
   "capture": {
     "status": 200,
-    "title": "HeroUI v3 (Previously NextUI) - Beautiful by default, customizable by design.",
-    "headings": "Beautiful by default. Customizable by design.\nBuild accessible products with HeroUI",
-    "expectedSelector": "main h1, article h1, h1",
-    "expectedCount": 354,
-    "expectedText": "Beautiful by default. Customizable by design.",
+    "title": "Blog | HeroUI",
+    "headings": "Blog\nLatest Posts",
+    "expectedSelector": "main h1, h1",
+    "expectedCount": 1,
+    "expectedText": "Blog",
     "expectedTextMatched": true,
     "intentionalErrorPage": false,
-    "sourceUrl": "https://www.heroui.com",
-    "finalUrl": "https://heroui.com/",
-    "capturedAt": "2026-10-09T17:22:42.300Z",
-    "shotSha256": "23feb2b600565fd5b9fb5fb46d2ec87ce081dcbd1c106a87062e29f2e79535fb",
-    "sourcePath": "corpus/packs/heroui-blog/source/heroui-next-app/app/layout.tsx",
-    "sourceSha256": "8c8cb8e406284ec0c9a0f26c02a3dd672fd6f2af99c8d400d63ae76eda09cc1d"
+    "sourceUrl": "https://www.heroui.com/blog",
+    "finalUrl": "https://heroui.com/en/blog",
+    "capturedAt": "2026-10-10T12:02:43.454Z",
+    "sourcePath": "corpus/packs/heroui-blog/source/page.tsx",
+    "sourceSha256": "fa97f86f6a4c21f3e162b198c63d9496b5d7a3e90842e46fe69e1e3f7ee8fd73",
+    "shotSha256": "68e94f85dd7a3bf9546337c5f493a1e8f69922f6fe4f961f76d59efea993b506"
   }
 }

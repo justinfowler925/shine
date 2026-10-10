@@ -1,24 +1,22 @@
 {
   "id": "heroui-about",
-  "source": "https://www.heroui.com",
-  "harvested": "2026-10-09",
-  "bytes": 285465,
+  "source": "https://www.heroui.com/about",
+  "harvested": "2026-10-10",
+  "bytes": 114142,
   "capture": {
     "status": 200,
-    "title": "HeroUI v3 (Previously NextUI) - Beautiful by default, customizable by design.",
-    "headings": "Beautiful by default. Customizable by design.\nBuild accessible products with HeroUI",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
-    "expectedCount": 354,
-    "expectedText": "HeroUI",
+    "title": "About HeroUI",
+    "headings": "About HeroUI\nWhat HeroUI publishes\nOpen source and developer tools\nCompany and founder",
+    "expectedSelector": "main h1, h1",
+    "expectedCount": 1,
+    "expectedText": "About HeroUI",
     "expectedTextMatched": true,
     "intentionalErrorPage": false,
-    "sourceUrl": "https://www.heroui.com",
-    "finalUrl": "https://heroui.com/",
-    "capturedAt": "2026-10-09T17:33:06.871Z",
-    "shotSha256": "907a961715e9c910c2fb167c6c98e4bc7b17bb3ef1c0c318ab8eaa5970204dcd"
-  },
-  "review": {
-    "status": "failed",
-    "reason": "homepage clone theater — shared heroui.com PNG sold as distinct page cite; retired"
+    "sourceUrl": "https://www.heroui.com/about",
+    "finalUrl": "https://heroui.com/about",
+    "capturedAt": "2026-10-10T12:02:28.360Z",
+    "sourcePath": "corpus/packs/heroui-about/source/page.tsx",
+    "sourceSha256": "10c89aaaf096776c756f28ece360af299ed4bfa423e2fb9bbcf6c3c45d7c6c96",
+    "shotSha256": "7c6bda26ab1fa5b5063363fd4fa8250c4daf2f0d57a68ed5e389a1ac12015a3c"
   }
 }

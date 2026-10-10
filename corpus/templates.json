@@ -939,7 +939,7 @@
       "kit": "heroui",
       "title": "HeroUI next-app docs shell",
       "path": "heroui-next-app/app/docs/page.tsx",
-      "preview": "https://www.heroui.com",
+      "preview": "https://www.heroui.com/docs",
       "license": "MIT",
       "kind": "source",
       "startFrom": 5,
@@ -949,7 +949,7 @@
         "heroui"
       ],
       "scope": "page",
-      "note": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested",
+      "note": "Page-true HeroUI harvest from https://www.heroui.com/docs — unique shot + local source/page.tsx",
       "sources": [
         "heroui-next-app/app/docs/page.tsx",
         "heroui-next-app/app/layout.tsx"
@@ -961,9 +961,7 @@
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      },
-      "selectable": false,
-      "retiredReason": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested"
+      }
     },
     {
       "id": "mantine-appshell",
@@ -2491,7 +2489,7 @@
       "kit": "heroui",
       "title": "HeroUI next-app blog",
       "path": "heroui-next-app/app/blog/page.tsx",
-      "preview": "https://www.heroui.com",
+      "preview": "https://www.heroui.com/blog",
       "license": "MIT",
       "kind": "source",
       "startFrom": 4,
@@ -2501,7 +2499,7 @@
         "heroui"
       ],
       "scope": "page",
-      "note": "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+      "note": "Page-true HeroUI harvest from https://www.heroui.com/blog — unique shot + local source/page.tsx",
       "sources": [
         "heroui-next-app/app/blog/page.tsx",
         "heroui-next-app/app/layout.tsx"
@@ -13737,7 +13735,7 @@
       "kit": "heroui",
       "title": "HeroUI next-app home (marketing shell)",
       "path": "heroui-next-app/app/page.tsx",
-      "preview": "https://www.heroui.com",
+      "preview": "https://www.heroui.com/",
       "license": "MIT",
       "kind": "source",
       "startFrom": 4,
@@ -13748,7 +13746,7 @@
         "home"
       ],
       "scope": "page",
-      "note": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested",
+      "note": "Page-true HeroUI harvest from https://www.heroui.com/ — unique shot + local source/page.tsx",
       "sources": [
         "heroui-next-app/app/page.tsx",
         "heroui-next-app/app/layout.tsx"
@@ -13760,9 +13758,7 @@
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      },
-      "selectable": false,
-      "retiredReason": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested"
+      }
     },
     {
       "id": "figma-myna-assets-about",
@@ -14447,7 +14443,7 @@
       "kit": "heroui",
       "title": "HeroUI next-app about",
       "path": "heroui-next-app/app/about/page.tsx",
-      "preview": "https://www.heroui.com",
+      "preview": "https://www.heroui.com/about",
       "license": "MIT",
       "kind": "source",
       "startFrom": 5,
@@ -14457,7 +14453,7 @@
         "heroui"
       ],
       "scope": "page",
-      "note": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested",
+      "note": "Page-true HeroUI harvest from https://www.heroui.com/about — unique shot + local source/page.tsx",
       "sources": [
         "heroui-next-app/app/about/page.tsx",
         "heroui-next-app/app/layout.tsx"
@@ -14469,9 +14465,7 @@
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      },
-      "selectable": false,
-      "retiredReason": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested"
+      }
     },
     {
       "id": "figma-heroui-cover",
@@ -16007,7 +16001,7 @@
       "kit": "heroui",
       "title": "HeroUI next-app pricing",
       "path": "heroui-next-app/app/pricing/page.tsx",
-      "preview": "https://www.heroui.com",
+      "preview": "https://www.heroui.com/pricing",
       "license": "MIT",
       "kind": "source",
       "startFrom": 3,
@@ -16018,7 +16012,7 @@
         "heroui"
       ],
       "scope": "page",
-      "note": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested",
+      "note": "no public HeroUI pricing page (heroui.com/pricing → 404); honest named-kit gap until a real page exists",
       "sources": [
         "heroui-next-app/app/pricing/page.tsx",
         "heroui-next-app/app/layout.tsx"
@@ -16032,7 +16026,7 @@
         "density": "comfortable"
       },
       "selectable": false,
-      "retiredReason": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested"
+      "retiredReason": "no public HeroUI pricing page (heroui.com/pricing → 404); honest named-kit gap until a real page exists"
     },
     {
       "id": "shadcn-operate-decide",

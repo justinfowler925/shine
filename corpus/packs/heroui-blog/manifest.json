@@ -19,6 +19,10 @@
   "structuralSignature": null,
   "files": [
     {
+      "path": "page.tsx",
+      "sha256": "fa97f86f6a4c21f3e162b198c63d9496b5d7a3e90842e46fe69e1e3f7ee8fd73"
+    },
+    {
       "path": "heroui-next-app/app/layout.tsx",
       "sha256": "8c8cb8e406284ec0c9a0f26c02a3dd672fd6f2af99c8d400d63ae76eda09cc1d"
     }
