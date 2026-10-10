@@ -41,6 +41,12 @@ const TARGETS = {
   "magicui-hero": { url: "https://magicui.design/docs/components/hero-video-dialog", mode: "full", expect: "pre, h1", expectedText: "Hero Video Dialog" },
   "tremor-charts": { url: "https://blocks.tremor.so/blocks", mode: "full", expect: "h1, main, [class*='tremor']" },
   "heroui-next-app": { url: "https://www.heroui.com/docs/components/navbar", mode: "full", expect: "nav, header, main" },
+  // Page-true marketing / docs (unique URLs — never the shared homepage clone).
+  "heroui-home": { url: "https://www.heroui.com/", mode: "viewport", expect: "main h1, h1", expectedText: "Beautiful by default", settleMs: 2500 },
+  "heroui-about": { url: "https://www.heroui.com/about", mode: "full", expect: "main h1, h1", expectedText: "About HeroUI", settleMs: 2500 },
+  "heroui-docs": { url: "https://www.heroui.com/docs", mode: "full", expect: "main h1, h1", expectedText: "Introduction", settleMs: 3000 },
+  "heroui-blog": { url: "https://www.heroui.com/blog", mode: "full", expect: "main h1, h1", expectedText: "Blog", settleMs: 2500 },
+  // heroui-pricing intentionally omitted — heroui.com/pricing is 404.
   "spectrum-ai-chat": { url: "https://react-spectrum.adobe.com/s2/index.html", mode: "full", expect: "main, h1, nav", expectedText: "Spectrum" },
   "lex-record": { url: "https://www.lightningdesignsystem.com/components/page-headers/", mode: "full", expect: "h1, main, .slds-page-header, article", expectedText: "Page Header" },
   "lex-record-narrow": { url: "https://www.lightningdesignsystem.com/components/page-headers/", mode: "viewport", expect: "h1, main, .slds-page-header, article", expectedText: "Page Header", viewport: { width: 494, height: 900 } },
@@ -80,9 +86,12 @@ const kitTarget = (row) => {
     return { url, mode: "full", expect: "pre" };
   // HeroUI docs / component demos — component-specific expect + text (no theater OR-list).
   if (row.kit === "heroui" && /^https:\/\/www\.heroui\.com(\/|$)/.test(url)) {
-    const isHome = url === "https://www.heroui.com" || url === "https://www.heroui.com/";
-    // Marketing homepage clones are not harvestable as distinct pages — skip.
-    if (isHome || /heroui-(home|about|docs|pricing)$/.test(row.id)) return null;
+    // Pricing has no public page (404) — never harvest a 404 as a cite pack.
+    if (row.id === "heroui-pricing") return null;
+    // Page-true marketing rows are in TARGETS with unique URLs; if preview still
+    // points at the bare homepage for a non-home id, refuse clone theater.
+    const isBareHome = url === "https://www.heroui.com" || url === "https://www.heroui.com/";
+    if (isBareHome && row.id !== "heroui-home") return null;
     const slug = String(row.id || "").replace(/^heroui-/, "").replace(/^header$/, "navbar");
     const label = slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
     return {

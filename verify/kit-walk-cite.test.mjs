@@ -29,10 +29,11 @@ assert.ok(byId["tailadmin-signup"], "tailadmin-signup missing");
 assert.ok(byId["heroui-table"], "heroui-table missing");
 assert.ok(byId["heroui-modal"], "heroui-modal missing");
 
-// Marketing clones + alias packs must not be selectable cite inventory.
-for (const id of ["heroui-home", "heroui-about", "heroui-docs", "heroui-pricing"]) {
-  assert.equal(byId[id]?.selectable, false, `${id} must be retired (homepage clone theater)`);
+// Page-true marketing keepers must be live; pricing + aliases stay retired.
+for (const id of ["heroui-home", "heroui-about", "heroui-docs", "heroui-blog"]) {
+  assert.notEqual(byId[id]?.selectable, false, `${id} must be live after page-true harvest`);
 }
+assert.equal(byId["heroui-pricing"]?.selectable, false, "heroui-pricing must stay retired (404 gap)");
 for (const id of [
   "heroui-menu",
   "heroui-menu-item",
@@ -70,12 +71,25 @@ assert.equal(
   `selectable HeroUI packs must not share shot SHA: ${shared.map(([sha, ids]) => `${sha.slice(0, 12)}→${ids.join(",")}`).join("; ")}`,
 );
 
+// Page-true marketing packs must have distinct shot SHAs from each other.
+const mktIds = ["heroui-home", "heroui-about", "heroui-docs", "heroui-blog"];
+const mktShas = mktIds.map((id) => {
+  const shot = join(SHINE, "corpus/packs", id, "shot.png");
+  assert.ok(existsSync(shot), `${id} shot missing`);
+  return createHash("sha256").update(readFileSync(shot)).digest("hex");
+});
+assert.equal(new Set(mktShas).size, mktIds.length, `marketing shots must be unique: ${mktShas.map((s) => s.slice(0, 12)).join(",")}`);
+
 // Keeper health must bind real selector/text/source — not theater.
 const buttonHealth = referenceHealth(SHINE, "heroui-button");
 assert.equal(buttonHealth.status, "passed", `heroui-button health: ${buttonHealth.reasons?.join("; ")}`);
-for (const id of ["heroui-home", "heroui-pricing", "heroui-menu-item"]) {
+for (const id of mktIds) {
   const h = referenceHealth(SHINE, id);
-  assert.equal(h.status, "failed", `${id} health must fail (clone/alias theater), got ${h.status}`);
+  assert.equal(h.status, "passed", `${id} health must pass after page-true harvest: ${h.reasons?.join("; ")}`);
+}
+for (const id of ["heroui-pricing", "heroui-menu-item"]) {
+  const h = referenceHealth(SHINE, id);
+  assert.equal(h.status, "failed", `${id} health must fail (gap/alias), got ${h.status}`);
 }
 
 const mapPath = join(SHINE, "knowledge/kits/figma-library-map.json");
@@ -102,6 +116,9 @@ function assertPrimaryCite(job, idPattern, label = job) {
 
 assertPrimaryCite("heroui button", "heroui-button");
 assertPrimaryCite("heroui navbar", "heroui-header");
+assertPrimaryCite("heroui about", "heroui-about");
+assertPrimaryCite("heroui docs", "heroui-docs");
+assertPrimaryCite("heroui home", "heroui-home");
 assertPrimaryCite("tailgrids forms", "figma-tailgrids-form-elements");
 assertPrimaryCite("flowbite sign up", "flowbite-sign-up");
 
@@ -116,6 +133,7 @@ assert.match(
 // Named-kit gaps — refuse silent steal.
 for (const [job, ban] of [
   ["heroui empty state", /Template: shadcn-empty-icon/],
+  ["heroui pricing", /Template: (heroui-home|heroui-about|flowbite-|untitled-|tailadmin-)/],
   ["untitled dashboard", /Template: (tailadmin-dashboard|flowbite-dashboard)/],
   ["untitled settings", /Template: flowbite-settings/],
 ]) {

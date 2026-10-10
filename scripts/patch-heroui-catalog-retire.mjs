@@ -13,8 +13,8 @@ const path = join(SHINE, "corpus/templates.json");
 const catalog = JSON.parse(readFileSync(path, "utf8"));
 const templates = catalog.templates || [];
 
-const CLONE_REASON =
-  "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested";
+const PRICING_GAP_REASON =
+  "no public HeroUI pricing page (heroui.com/pricing → 404); honest named-kit gap until a real page exists";
 
 const ALIAS = {
   "heroui-menu": "heroui-dropdown",
@@ -29,14 +29,29 @@ const ALIAS = {
   "heroui-date-input-group": "heroui-date-field",
 };
 
-const CLONES = new Set(["heroui-home", "heroui-about", "heroui-docs", "heroui-pricing"]);
+// home/about/docs un-retired after page-true harvest; pricing stays gap.
+const PAGE_TRUE_PREVIEWS = {
+  "heroui-home": "https://www.heroui.com/",
+  "heroui-about": "https://www.heroui.com/about",
+  "heroui-docs": "https://www.heroui.com/docs",
+  "heroui-blog": "https://www.heroui.com/blog",
+};
 
 let n = 0;
 for (const row of templates) {
-  if (CLONES.has(row.id)) {
+  if (row.id === "heroui-pricing") {
     row.selectable = false;
-    row.retiredReason = CLONE_REASON;
-    row.note = CLONE_REASON;
+    row.retiredReason = PRICING_GAP_REASON;
+    row.note = PRICING_GAP_REASON;
+    row.preview = "https://www.heroui.com/pricing";
+    n++;
+    continue;
+  }
+  if (PAGE_TRUE_PREVIEWS[row.id]) {
+    row.preview = PAGE_TRUE_PREVIEWS[row.id];
+    delete row.selectable;
+    delete row.retiredReason;
+    row.note = `Page-true HeroUI harvest from ${PAGE_TRUE_PREVIEWS[row.id]}`;
     n++;
     continue;
   }
