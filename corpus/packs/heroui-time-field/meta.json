@@ -7,14 +7,16 @@
     "status": 200,
     "title": "TimeField | HeroUI",
     "headings": "TimeField\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nTimeField.Group Styling\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 405,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "TimeField",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/time-field",
     "finalUrl": "https://heroui.com/en/docs/react/components/time-field",
     "capturedAt": "2026-10-09T17:24:45.167Z",
-    "shotSha256": "bdb3d9bf7dcb4915a88dcf4b67321ffdf7ff37319ec93b0ee928ec00c297c6c5"
+    "shotSha256": "bdb3d9bf7dcb4915a88dcf4b67321ffdf7ff37319ec93b0ee928ec00c297c6c5",
+    "sourcePath": "corpus/packs/heroui-time-field/source/time-field.tsx",
+    "sourceSha256": "c5542e7c1f2cb131067da68c616bc3ff6fdeb4ea9e8a7f5a05875f049f78e4d4"
   }
 }

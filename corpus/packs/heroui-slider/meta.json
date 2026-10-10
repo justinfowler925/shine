@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Slider | HeroUI",
     "headings": "Slider\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 176,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Slider",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/slider",
     "finalUrl": "https://heroui.com/en/docs/react/components/slider",
     "capturedAt": "2026-10-09T17:31:05.879Z",
-    "shotSha256": "a0e93f5d16ea72b9c97c68c42d0c51049576b34bc62c0c058497f6f151600d46"
+    "shotSha256": "a0e93f5d16ea72b9c97c68c42d0c51049576b34bc62c0c058497f6f151600d46",
+    "sourcePath": "corpus/packs/heroui-slider/source/slider.tsx",
+    "sourceSha256": "56caaf4e1d595ad6cf82879e2eb2258f8121f8abd0858d05e4e1e2eab2585cde"
   }
 }

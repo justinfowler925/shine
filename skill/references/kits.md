@@ -27,6 +27,10 @@ M3 / Bootstrap / Myna packs are **selectable structure cites** (full ingest on t
 — steal structure, paint house shadcn; they are not Operate TW gold.
 
 HeroUI prefer Figma file: `GAn1SrbKJYiKqz9SmHHCRm`.
+HeroUI marketing pages (`heroui-home|about|docs|pricing`) and alias atoms that
+shared a parent demo shot are **retired** — cite must gap or hit the primary
+(`heroui-header` for navbar, `heroui-dropdown` for menu*, etc.), never clone theater.
+Named-kit jobs (`untitled dashboard`, `heroui empty state`) gap instead of silent steal.
 
 ## Decision table
 

@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Radio | HeroUI",
     "headings": "Radio\nStructure Changes\nKey Changes\nMigration Examples\nComponent Anatomy\nSummary",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 77,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Radio",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/radio",
     "finalUrl": "https://heroui.com/en/docs/react/migration/radio",
     "capturedAt": "2026-10-09T17:30:31.429Z",
-    "shotSha256": "3a0b68d50e3cd8b381728397616c9ad282d2e229fb2e3bce3ab4dc51d48f893f"
+    "shotSha256": "3a0b68d50e3cd8b381728397616c9ad282d2e229fb2e3bce3ab4dc51d48f893f",
+    "sourcePath": "corpus/packs/heroui-radio/source/radio.tsx",
+    "sourceSha256": "c27ac1d7293b369bf3db6f97d16759fbf9050c51735fd4dab6ed572266781f80"
   }
 }

@@ -16,5 +16,9 @@
     "finalUrl": "https://heroui.com/en/docs/react/components/list-box",
     "capturedAt": "2026-10-09T17:37:46.545Z",
     "shotSha256": "194bc2026eae8e4fc874b5103ebf2393090c2b271d98b4b1abd48335af4e7ed5"
+  },
+  "review": {
+    "status": "failed",
+    "reason": "alias pack shares parent demo shot; cite primary instead (retired heroui-list-box-section)"
   }
 }

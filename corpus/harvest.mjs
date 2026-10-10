@@ -78,15 +78,20 @@ const kitTarget = (row) => {
     return { url, mode: "full", expect: "pre" };
   if (row.kit === "cult-ui" && /^https:\/\/www\.cult-ui\.com\/docs\/(components|blocks)\/[a-z0-9-]+$/.test(url))
     return { url, mode: "full", expect: "pre" };
-  // HeroUI docs / component demos — real rendered examples, not empty shells.
+  // HeroUI docs / component demos — component-specific expect + text (no theater OR-list).
   if (row.kit === "heroui" && /^https:\/\/www\.heroui\.com(\/|$)/.test(url)) {
     const isHome = url === "https://www.heroui.com" || url === "https://www.heroui.com/";
+    // Marketing homepage clones are not harvestable as distinct pages — skip.
+    if (isHome || /heroui-(home|about|docs|pricing)$/.test(row.id)) return null;
+    const slug = String(row.id || "").replace(/^heroui-/, "").replace(/^header$/, "navbar");
+    const label = slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
     return {
       url,
       mode: "full",
-      expect: "main, [data-slot], button, h1, nav",
+      // Prefer the docs H1 / component heading over a universal shell selector.
+      expect: "main h1, article h1, h1",
+      expectedText: label.split(" ")[0] || "HeroUI",
       settleMs: 2_500,
-      ...(isHome ? { expectedText: "HeroUI" } : {}),
     };
   }
   // Composed Tailwind pages: the live demo is the page itself.

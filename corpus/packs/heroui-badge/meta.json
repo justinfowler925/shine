@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Badge | HeroUI",
     "headings": "Badge\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 218,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Badge",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/badge",
     "finalUrl": "https://heroui.com/en/docs/react/components/badge",
     "capturedAt": "2026-10-09T17:34:59.903Z",
-    "shotSha256": "94670e0c7447ec8ddfd716832ad04c6269290f78f06c9143234b3bb2ddfb788d"
+    "shotSha256": "94670e0c7447ec8ddfd716832ad04c6269290f78f06c9143234b3bb2ddfb788d",
+    "sourcePath": "corpus/packs/heroui-badge/source/badge.tsx",
+    "sourceSha256": "65f9e9c65285e1639b672aa2132c397ad3fdff067672f9a5f477bcff849d5cb8"
   }
 }

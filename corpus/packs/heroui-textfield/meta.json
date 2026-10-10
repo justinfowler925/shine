@@ -7,14 +7,16 @@
     "status": 200,
     "title": "TextField | HeroUI",
     "headings": "TextField\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, input, textarea",
     "expectedCount": 211,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "TextField",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/textfield",
     "finalUrl": "https://heroui.com/en/docs/react/components/text-field",
     "capturedAt": "2026-10-09T17:32:31.029Z",
-    "shotSha256": "4085a1eeb23df195a7d6a0f6d5cf072ba753ce9fff75a137c428fbc3bed237fa"
+    "shotSha256": "4085a1eeb23df195a7d6a0f6d5cf072ba753ce9fff75a137c428fbc3bed237fa",
+    "sourcePath": "corpus/packs/heroui-textfield/source/textfield.tsx",
+    "sourceSha256": "f48087fd6be877574aa03e5c6b8191507c0c6ff6309a1a77c2f4d27bc7c6e754"
   }
 }

@@ -7,14 +7,16 @@
     "status": 200,
     "title": "ErrorMessage | HeroUI",
     "headings": "ErrorMessage\nUsage\nAnatomy\nWhen to Use\nErrorMessage vs FieldError\nCustomization\nStyling Reference\nAPI Reference\nNote\nAccessibility\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 110,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "ErrorMessage",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/error-message",
     "finalUrl": "https://heroui.com/en/docs/react/components/error-message",
     "capturedAt": "2026-10-09T17:27:40.172Z",
-    "shotSha256": "f73eddf0e7e0b72b59705b1222d06c5b848f0af96f4a071500abcab6cc1240eb"
+    "shotSha256": "f73eddf0e7e0b72b59705b1222d06c5b848f0af96f4a071500abcab6cc1240eb",
+    "sourcePath": "corpus/packs/heroui-error-message/source/error-message.tsx",
+    "sourceSha256": "d79a53332e2dcca762988a697567605dd66207628f68558872f49c7692f33e9d"
   }
 }

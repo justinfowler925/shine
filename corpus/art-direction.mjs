@@ -240,6 +240,18 @@ export function retrieveDirections(templates, text, constraints = {}) {
   // Does NOT apply under Clearspeed Operate edition (TW gold wins there).
   const editionEarly = String(constraints.edition || "").trim().toLowerCase();
   const operateEdition = editionUsesSiblingMap(editionEarly);
+  /** Plural/singular + forms↔form-elements so "tailgrids forms" hits form-elements. */
+  const tokenMatchesSlug = (token, slug) => {
+    if (!token || !slug) return false;
+    if (slug === token || slug.startsWith(`${token}-`) || slug.endsWith(`-${token}`) || slug.includes(`-${token}-`)) return true;
+    if (slug.includes(token)) return true;
+    if (token.endsWith("s") && token.length > 3) {
+      const stem = token.slice(0, -1);
+      if (slug === stem || slug.startsWith(`${stem}-`) || slug.includes(`-${stem}-`) || slug.includes(stem)) return true;
+    }
+    if (token === "forms" && /form/.test(slug)) return true;
+    return false;
+  };
   if (!operateEdition && ranked.length) {
     // normalizeBrief splits on non-alnum, so "heroui-figma" → ["heroui","figma"].
     // Match hyphenated job tags against raw brief text as well as tokens.
@@ -272,12 +284,15 @@ export function retrieveDirections(templates, text, constraints = {}) {
           const slug = String(candidate.template.id || "").slice(kitPref.length);
           let fit = 0;
           for (const token of tokens) {
-            if (slug === token || slug.startsWith(`${token}-`) || slug.endsWith(`-${token}`) || slug.includes(`-${token}-`)) fit += 3;
-            else if (slug.includes(token)) fit += 1;
+            // Kit family tokens are not slug evidence ("tailgrids" matches every pack).
+            if (token === "tailgrids" || token === "heroui" || token === "myna" || token === "bootstrap" || token === "figma" || token === "tailwind") continue;
+            if (tokenMatchesSlug(token, slug)) fit += 3;
           }
           // Prefer the primary board over *-atoms / cover aliases when not asked for.
           if (/(?:^|-)atoms(?:-|$)/.test(slug) && !tokens.includes("atoms")) fit -= 4;
           if (/(?:^|-)cover(?:-|$)/.test(slug) && !tokens.includes("cover")) fit -= 2;
+          // Demote marketing pages when the brief asks for a component job.
+          if (/^(about|home|hero|banner|faq|pricing)$/.test(slug) && tokens.some((t) => t === "forms" || t === "form" || t === "inputs" || t === "button")) fit -= 6;
           return fit;
         };
         const kitRanked = ranked.filter(isKit).map((candidate) => (
@@ -286,6 +301,114 @@ export function retrieveDirections(templates, text, constraints = {}) {
             : { ...candidate, matches: [...candidate.matches, "figma-kit"], score: Math.max(candidate.score, 80) + 40 + slugFit(candidate) }
         )).sort((a, b) => b.score - a.score || a.template.id.localeCompare(b.template.id));
         ranked = [...kitRanked, ...ranked.filter((candidate) => !isKit(candidate))];
+      }
+    }
+  }
+
+  // Named-kit hard gate — a single kit name in the brief must not silently steal
+  // to another family (heroui empty→shadcn, untitled dashboard→tailadmin).
+  // When two kits are named (e.g. "Untitled UI shadcn …"), skip — hybrid visual+house.
+  {
+    const tokens = brief.tokens || [];
+    const named = [];
+    if (tokens.includes("heroui") && !tokens.includes("figma")) {
+      named.push({
+        id: "heroui",
+        match: (t) => t.kit === "heroui" || (/^heroui-/.test(t.id) && !/^figma-heroui-/.test(t.id)),
+      });
+    }
+    // "Untitled UI shadcn …" is a hybrid visual+house brief — skip hard untitled gate.
+    if (tokens.includes("untitled") && !tokens.includes("shadcn")) {
+      named.push({
+        id: "untitled",
+        match: (t) => t.kit === "untitled-ui-react" || /^untitled-/.test(t.id),
+      });
+    }
+    if (tokens.includes("tailgrids")) {
+      named.push({
+        id: "tailgrids",
+        match: (t) => /^figma-tailgrids-/.test(t.id),
+      });
+    }
+    if (tokens.includes("flowbite")) {
+      named.push({ id: "flowbite", match: (t) => t.kit === "flowbite-admin" || /^flowbite-/.test(t.id) });
+    }
+    if (tokens.includes("tailadmin")) {
+      named.push({ id: "tailadmin", match: (t) => t.kit === "tailadmin-react" || /^tailadmin-/.test(t.id) });
+    }
+    // Bare "tailwind" (not tailgrids/figma) → TW SaaS kits, not house shadcn steal.
+    if (
+      tokens.includes("tailwind")
+      && !tokens.includes("figma")
+      && !tokens.includes("tailgrids")
+      && !tokens.includes("shadcn")
+    ) {
+      named.push({
+        id: "tailwind",
+        match: (t) =>
+          ["flowbite-admin", "tailadmin-react", "windmill-react", "untitled-ui-react"].includes(t.kit)
+          || /^(flowbite|tailadmin|windmill|untitled)-/.test(t.id),
+      });
+    }
+    if (tokens.includes("shadcn") && !tokens.includes("untitled") && !tokens.includes("heroui") && !tokens.includes("tailgrids")) {
+      named.push({
+        id: "shadcn",
+        match: (t) => t.kit === "shadcn-registry" && !/^figma-/.test(t.id),
+      });
+    }
+    if (named.length === 1 && ranked.length) {
+      const kit = named[0];
+      const kitStop = new Set([kit.id, "ui", "kit", "figma", "react", "component", "components", "page", "pages"]);
+      const jobTokens = tokens.filter((t) => !kitStop.has(t));
+      const matchesKit = (c) => kit.match(c.template);
+      const preciseJob = (c) => {
+        if (!jobTokens.length) return true;
+        const jobs = (c.template.jobs || []).map((j) => String(j).toLowerCase());
+        const id = String(c.template.id || "").toLowerCase();
+        const title = String(c.template.title || "").toLowerCase();
+        const screen = String(c.template.screen || "").toLowerCase();
+        return jobTokens.some((t) =>
+          jobs.includes(t)
+          || screen === t
+          || id === `${kit.id}-${t}`
+          || id.endsWith(`-${t}`)
+          || id.includes(`-${t}-`)
+          || title.split(/[^a-z0-9]+/).includes(t)
+          || (t === "forms" && (jobs.includes("form") || jobs.includes("form-elements") || id.includes("form")))
+          || (t === "navbar" && (jobs.includes("navbar") || jobs.includes("header") || id.includes("header") || id.includes("navbar")))
+          || (t === "empty" && (screen === "empty" || jobs.includes("empty") || jobs.includes("empty-state") || id.includes("empty")))
+        );
+      };
+      const kitPrecise = ranked.filter((c) => matchesKit(c) && preciseJob(c));
+      const kitAny = ranked.filter(matchesKit);
+      if (jobTokens.length && !kitPrecise.length) {
+        // Named kit + specific job, no honest hit — gap, do not steal.
+        for (const c of ranked) {
+          exclusions.push({
+            ...c,
+            reasons: [`named-kit: ${kit.id} has no selectable pack for ${JSON.stringify(brief.text)}; refusing silent steal`],
+          });
+        }
+        ranked = [];
+        kitGaps.push(`kit: named ${kit.id} has no selectable primary for ${JSON.stringify(brief.text)} — harvest or retire the job, do not steal`);
+      } else if (kitPrecise.length) {
+        ranked = [
+          ...kitPrecise.map((c) => (
+            c.matches.includes("named-kit")
+              ? c
+              : { ...c, matches: [...c.matches, "named-kit"] }
+          )),
+          ...ranked.filter((c) => !kitPrecise.includes(c)),
+        ];
+      } else if (kitAny.length) {
+        ranked = [
+          ...kitAny.map((c) => (
+            c.matches.includes("named-kit")
+              ? c
+              : { ...c, matches: [...c.matches, "named-kit"] }
+          )),
+          ...ranked.filter((c) => !kitAny.includes(c)),
+        ];
       }
     }
   }

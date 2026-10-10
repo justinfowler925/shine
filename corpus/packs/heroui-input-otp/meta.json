@@ -7,14 +7,16 @@
     "status": 200,
     "title": "InputOTP | HeroUI",
     "headings": "InputOTP\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 268,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "InputOTP",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/input-otp",
     "finalUrl": "https://heroui.com/en/docs/react/components/input-otp",
     "capturedAt": "2026-10-09T17:28:21.160Z",
-    "shotSha256": "15f02aac348899ad585764deb0a26fe4a8b71c4774d9883fbc95b212a7c9e1bf"
+    "shotSha256": "15f02aac348899ad585764deb0a26fe4a8b71c4774d9883fbc95b212a7c9e1bf",
+    "sourcePath": "corpus/packs/heroui-input-otp/source/input-otp.tsx",
+    "sourceSha256": "b137e5803e68bd8bd1d7e41505892b4b308a3386ee064bf6783b06f5e37ae700"
   }
 }

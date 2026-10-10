@@ -16,5 +16,9 @@
     "finalUrl": "https://heroui.com/en/docs/react/components/date-field",
     "capturedAt": "2026-10-09T17:36:54.935Z",
     "shotSha256": "f7238f0ed29da847652253604d0fa0c4c07ee79efe9bc012dd86c75fd23e293c"
+  },
+  "review": {
+    "status": "failed",
+    "reason": "alias pack shares parent demo shot; cite primary instead (retired heroui-date-input-group)"
   }
 }

@@ -7,14 +7,16 @@
     "status": 200,
     "title": "CloseButton | HeroUI",
     "headings": "CloseButton\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 105,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "CloseButton",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/close-button",
     "finalUrl": "https://heroui.com/en/docs/react/components/close-button",
     "capturedAt": "2026-10-09T17:25:49.292Z",
-    "shotSha256": "47cdb45079d35d440624a26968f8f3c59a9af11b8d142ca3500428c0bacae954"
+    "shotSha256": "47cdb45079d35d440624a26968f8f3c59a9af11b8d142ca3500428c0bacae954",
+    "sourcePath": "corpus/packs/heroui-close-button/source/close-button.tsx",
+    "sourceSha256": "aade7bf3919532740a49e18e62061ec6d33a37699ab6d614cc5be44d0941da87"
   }
 }

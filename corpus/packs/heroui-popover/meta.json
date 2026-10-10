@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Popover | HeroUI",
     "headings": "Popover\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 116,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Popover",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/popover",
     "finalUrl": "https://heroui.com/en/docs/react/components/popover",
     "capturedAt": "2026-10-09T17:30:25.079Z",
-    "shotSha256": "283ed3fd8a65b9bd396777e736fb1b794879e027ba3e1441572080628a572c7d"
+    "shotSha256": "283ed3fd8a65b9bd396777e736fb1b794879e027ba3e1441572080628a572c7d",
+    "sourcePath": "corpus/packs/heroui-popover/source/popover.tsx",
+    "sourceSha256": "08a21ccf4e74d793253a86954018e498de6de6e171f2425c3af000628ef852c5"
   }
 }

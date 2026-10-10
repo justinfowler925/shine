@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Chip | HeroUI",
     "headings": "Chip\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 267,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Chip",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/chip",
     "finalUrl": "https://heroui.com/en/docs/react/components/chip",
     "capturedAt": "2026-10-09T17:35:06.250Z",
-    "shotSha256": "62f3ee8e7ec5c3924470e62c235517d0ce9a8a9a6ab7a0d4bf85d2db2a4ff3a6"
+    "shotSha256": "62f3ee8e7ec5c3924470e62c235517d0ce9a8a9a6ab7a0d4bf85d2db2a4ff3a6",
+    "sourcePath": "corpus/packs/heroui-chip/source/chip.tsx",
+    "sourceSha256": "4b933885d596fc05e608c84359bb982075a02897ebe6b4015224bcb5a00eb291"
   }
 }

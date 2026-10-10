@@ -7,14 +7,16 @@
     "status": 200,
     "title": "TagGroup | HeroUI",
     "headings": "TagGroup\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 292,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "TagGroup",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/tag-group",
     "finalUrl": "https://heroui.com/en/docs/react/components/tag-group",
     "capturedAt": "2026-10-09T17:32:18.409Z",
-    "shotSha256": "cdcaa2a347fa045ae5595f737cc8cc03082217c982fc96fc794ddbe53d281723"
+    "shotSha256": "cdcaa2a347fa045ae5595f737cc8cc03082217c982fc96fc794ddbe53d281723",
+    "sourcePath": "corpus/packs/heroui-tag-group/source/tag-group.tsx",
+    "sourceSha256": "8593a783102b5775b99be1a06b038b7eeb11d67e23eea8d2e76ddf931ff67ee7"
   }
 }

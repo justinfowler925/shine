@@ -37,7 +37,9 @@ export function herouiScreenJobs(name) {
     return { screen: "catalog", jobs: ["catalog", "collection", "list", "heroui", n] };
   }
   if (/^(tabs|breadcrumbs|accordion|disclosure|disclosure-group|link|header|toolbar)$/.test(n)) {
-    return { screen: "app-shell", jobs: ["app-shell", "navigation", "heroui", n] };
+    // header is the HeroUI navbar atom (docs slug /navbar) — cite "heroui navbar" must hit it.
+    const navJobs = n === "header" ? ["navbar", "nav", "header"] : [n];
+    return { screen: "app-shell", jobs: ["app-shell", "navigation", "heroui", ...navJobs] };
   }
   if (/^(spinner|skeleton|progress-bar|progress-circle|meter|alert|empty-state)$/.test(n)) {
     return { screen: "async-state", jobs: ["async-state", "loading", "feedback", "heroui", n] };
@@ -82,6 +84,24 @@ const HEROUI_DOCS_SLUG = {
 /** No public HeroUI docs page and no honest parent demo — retire with reason. */
 const HEROUI_NO_PUBLIC_DOCS = new Set(["empty-state"]);
 
+/**
+ * Alias folders that share a parent docs demo shot — keep the primary selectable,
+ * retire aliases so cite inventory is not inflated with clone packs.
+ * Primary kept: dropdown, list-box, chip, switch, calendar, color-field, date-field.
+ */
+const HEROUI_ALIAS_PARENT = {
+  menu: "dropdown",
+  "menu-item": "dropdown",
+  "menu-section": "dropdown",
+  "list-box-item": "list-box",
+  "list-box-section": "list-box",
+  tag: "chip",
+  "switch-group": "switch",
+  "calendar-year-picker": "calendar",
+  "color-input-group": "color-field",
+  "date-input-group": "date-field",
+};
+
 export function buildHeroUiAtomRows(ctx) {
   const root = join(ctx.corpus, "heroui/packages/react/src/components");
   if (!existsSync(root)) return [];
@@ -103,6 +123,13 @@ export function buildHeroUiAtomRows(ctx) {
     const title = `HeroUI ${entry.replace(/-/g, " ")}`;
     const docsSlug = HEROUI_DOCS_SLUG[entry] || entry;
     const noDocs = HEROUI_NO_PUBLIC_DOCS.has(entry);
+    const aliasOf = HEROUI_ALIAS_PARENT[entry];
+    const retired = noDocs || Boolean(aliasOf);
+    const retiredReason = noDocs
+      ? "no public HeroUI docs page to harvest a real shot; use parent heroui-* or figma-heroui-*"
+      : aliasOf
+        ? `alias of heroui-${aliasOf} — shared parent docs demo shot; cite heroui-${aliasOf} instead`
+        : undefined;
     rows.push({
       id,
       screen,
@@ -117,10 +144,12 @@ export function buildHeroUiAtomRows(ctx) {
       scope: "component",
       note: noDocs
         ? "No public HeroUI docs page for this atom; retired — use parent component cite or figma-heroui-*"
-        : docsSlug !== entry
-          ? `Kit-walk atom — docs demo at /${docsSlug} (folder ${entry} has no dedicated page); port to house shadcn`
-          : "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
-      ...(noDocs ? { selectable: false, retiredReason: "no public HeroUI docs page to harvest a real shot; use parent heroui-* or figma-heroui-*" } : {}),
+        : aliasOf
+          ? `Retired alias — shared /${docsSlug} demo with heroui-${aliasOf}; do not cite as a distinct pack`
+          : docsSlug !== entry
+            ? `Kit-walk atom — docs demo at /${docsSlug} (folder ${entry} has no dedicated page); port to house shadcn`
+            : "Kit-walk atom — structure from HeroUI; Clearspeed consumers port to house shadcn via kit affinity",
+      ...(retired ? { selectable: false, retiredReason } : {}),
     });
   }
   return rows.sort((a, b) => a.id.localeCompare(b.id));
@@ -232,9 +261,16 @@ export function buildFigmaKitPackRows(shineRoot, { prefixes = ["figma-m3-", "fig
         : /nav|tabs|breadcrumb|accordion|menubar|sidebar|drawer/.test(slug) ? "app-shell"
         : /input|form|button|checkbox|radio|select|switch|slider|modal|dialog|dropdown|textarea|toggle|tooltip|popover|calendar|otp/.test(slug) ? "form"
         : "catalog");
-    const jobs = Array.isArray(manifest.jobs) && manifest.jobs.length
-      ? manifest.jobs
+    const baseJobs = Array.isArray(manifest.jobs) && manifest.jobs.length
+      ? [...manifest.jobs]
       : ["figma-kit", fam.jobTag, ...fam.extraJobs, slug, String(page).toLowerCase().replace(/\s+/g, "-")];
+    // "tailgrids forms" must hit form-elements — include plural job tag.
+    if (slug === "form-elements" || /form-elements/.test(slug)) {
+      for (const j of ["forms", "form", "form-elements"]) {
+        if (!baseJobs.includes(j)) baseJobs.push(j);
+      }
+    }
+    const jobs = baseJobs;
     rows.push({
       id: entry,
       screen,
@@ -259,14 +295,22 @@ export function buildFigmaKitPackRows(shineRoot, { prefixes = ["figma-m3-", "fig
   return rows;
 }
 
-/** Full-page HeroUI next-app routes (live, not retired). */
+/**
+ * Full-page HeroUI next-app routes.
+ * Marketing clones (home/about/docs/pricing) were harvested as one heroui.com
+ * homepage PNG — retired until page-true unique shots exist. Blog kept only if
+ * it has a distinct shot (not the homepage clone group).
+ */
+const HEROUI_MARKETING_CLONE_REASON =
+  "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested";
+
 export function buildHeroUiPageRows(ctx) {
   const pages = [
-    { id: "heroui-home", screen: "marketing", path: "heroui-next-app/app/page.tsx", title: "HeroUI next-app home (marketing shell)", jobs: ["marketing", "landing", "heroui", "home"], rank: 4 },
-    { id: "heroui-about", screen: "marketing", path: "heroui-next-app/app/about/page.tsx", title: "HeroUI next-app about", jobs: ["marketing", "about", "heroui"], rank: 5 },
-    { id: "heroui-blog", screen: "blog", path: "heroui-next-app/app/blog/page.tsx", title: "HeroUI next-app blog", jobs: ["blog", "article", "heroui"], rank: 4 },
-    { id: "heroui-docs", screen: "app-shell", path: "heroui-next-app/app/docs/page.tsx", title: "HeroUI next-app docs shell", jobs: ["app-shell", "docs", "heroui"], rank: 5 },
-    { id: "heroui-pricing", screen: "pricing", path: "heroui-next-app/app/pricing/page.tsx", title: "HeroUI next-app pricing", jobs: ["pricing", "plans", "marketing", "heroui"], rank: 3 },
+    { id: "heroui-home", screen: "marketing", path: "heroui-next-app/app/page.tsx", title: "HeroUI next-app home (marketing shell)", jobs: ["marketing", "landing", "heroui", "home"], rank: 4, clone: true },
+    { id: "heroui-about", screen: "marketing", path: "heroui-next-app/app/about/page.tsx", title: "HeroUI next-app about", jobs: ["marketing", "about", "heroui"], rank: 5, clone: true },
+    { id: "heroui-blog", screen: "blog", path: "heroui-next-app/app/blog/page.tsx", title: "HeroUI next-app blog", jobs: ["blog", "article", "heroui"], rank: 4, clone: false },
+    { id: "heroui-docs", screen: "app-shell", path: "heroui-next-app/app/docs/page.tsx", title: "HeroUI next-app docs shell", jobs: ["app-shell", "docs", "heroui"], rank: 5, clone: true },
+    { id: "heroui-pricing", screen: "pricing", path: "heroui-next-app/app/pricing/page.tsx", title: "HeroUI next-app pricing", jobs: ["pricing", "plans", "marketing", "heroui"], rank: 3, clone: true },
   ];
   return pages
     .filter((t) => ctx.exists(t.path))
@@ -287,7 +331,12 @@ export function buildHeroUiPageRows(ctx) {
         scope: "page",
         sources,
         entrypoints: sources,
-        note: "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+        note: t.clone
+          ? HEROUI_MARKETING_CLONE_REASON
+          : "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+        ...(t.clone
+          ? { selectable: false, retiredReason: HEROUI_MARKETING_CLONE_REASON }
+          : {}),
       };
     });
 }

@@ -16,5 +16,9 @@
     "finalUrl": "https://heroui.com/en/docs/react/components/color-field",
     "capturedAt": "2026-10-09T17:37:01.383Z",
     "shotSha256": "e69361bac5e1dd0d666b3f5586179aefe785c1196ece29bd90e893fa7d1c6e00"
+  },
+  "review": {
+    "status": "failed",
+    "reason": "alias pack shares parent demo shot; cite primary instead (retired heroui-color-input-group)"
   }
 }

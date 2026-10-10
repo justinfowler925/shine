@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Separator | HeroUI",
     "headings": "Separator\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 127,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Separator",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/separator",
     "finalUrl": "https://heroui.com/en/docs/react/components/separator",
     "capturedAt": "2026-10-09T17:24:58.139Z",
-    "shotSha256": "c137908b6371e68a443d79ed1c3a8e60ff2f7eb9f612d9ce3e6602a2a7ba06a1"
+    "shotSha256": "c137908b6371e68a443d79ed1c3a8e60ff2f7eb9f612d9ce3e6602a2a7ba06a1",
+    "sourcePath": "corpus/packs/heroui-separator/source/separator.tsx",
+    "sourceSha256": "f94ac0a1a676787147bf0cf9eb21f303b3f17805a81a00e74a140f63b91760da"
   }
 }

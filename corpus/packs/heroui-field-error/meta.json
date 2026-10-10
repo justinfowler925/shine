@@ -7,14 +7,16 @@
     "status": 200,
     "title": "FieldError | HeroUI",
     "headings": "FieldError\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 104,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "FieldError",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/field-error",
     "finalUrl": "https://heroui.com/en/docs/react/components/field-error",
     "capturedAt": "2026-10-09T17:27:46.288Z",
-    "shotSha256": "4bfb31593788eedc67b22460e007da35d51e8bcc76a750a5f3c834640f1a1eed"
+    "shotSha256": "4bfb31593788eedc67b22460e007da35d51e8bcc76a750a5f3c834640f1a1eed",
+    "sourcePath": "corpus/packs/heroui-field-error/source/field-error.tsx",
+    "sourceSha256": "10d6eb9964864b46f14e2698960aca66d5624f2058fbcb477941e571955c1771"
   }
 }

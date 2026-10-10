@@ -949,7 +949,7 @@
         "heroui"
       ],
       "scope": "page",
-      "note": "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+      "note": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested",
       "sources": [
         "heroui-next-app/app/docs/page.tsx",
         "heroui-next-app/app/layout.tsx"
@@ -961,7 +961,9 @@
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested"
     },
     {
       "id": "mantine-appshell",
@@ -1190,7 +1192,9 @@
         "app-shell",
         "navigation",
         "heroui",
-        "header"
+        "header",
+        "navbar",
+        "nav"
       ],
       "scope": "component",
       "note": "Kit-walk atom — docs demo at /navbar (folder header has no dedicated page); port to house shadcn",
@@ -2660,11 +2664,13 @@
         "calendar-year-picker"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — docs demo at /calendar (folder calendar-year-picker has no dedicated page); port to house shadcn",
+      "note": "Retired alias — shared demo with heroui-calendar; do not cite as a distinct pack",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "alias of heroui-calendar — shared parent docs demo shot; cite heroui-calendar instead"
     },
     {
       "id": "heroui-date-field",
@@ -2708,11 +2714,13 @@
         "date-input-group"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — docs demo at /date-field (folder date-input-group has no dedicated page); port to house shadcn",
+      "note": "Retired alias — shared demo with heroui-date-field; do not cite as a distinct pack",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "alias of heroui-date-field — shared parent docs demo shot; cite heroui-date-field instead"
     },
     {
       "id": "heroui-date-picker",
@@ -7067,11 +7075,13 @@
         "list-box-item"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — docs demo at /list-box (folder list-box-item has no dedicated page); port to house shadcn",
+      "note": "Retired alias — shared demo with heroui-list-box; do not cite as a distinct pack",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "alias of heroui-list-box — shared parent docs demo shot; cite heroui-list-box instead"
     },
     {
       "id": "heroui-list-box-section",
@@ -7091,11 +7101,13 @@
         "list-box-section"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — docs demo at /list-box (folder list-box-section has no dedicated page); port to house shadcn",
+      "note": "Retired alias — shared demo with heroui-list-box; do not cite as a distinct pack",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "alias of heroui-list-box — shared parent docs demo shot; cite heroui-list-box instead"
     },
     {
       "id": "heroui-pagination",
@@ -11464,8 +11476,8 @@
         "tailwind-figma",
         "tailgrids",
         "form-elements",
-        "form-elements",
-        "form"
+        "form",
+        "forms"
       ],
       "dna": {
         "family": "shadcn-zinc",
@@ -12362,11 +12374,13 @@
         "color-input-group"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — docs demo at /color-field (folder color-input-group has no dedicated page); port to house shadcn",
+      "note": "Retired alias — shared demo with heroui-color-field; do not cite as a distinct pack",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "alias of heroui-color-field — shared parent docs demo shot; cite heroui-color-field instead"
     },
     {
       "id": "heroui-color-picker",
@@ -12779,11 +12793,13 @@
         "menu"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — docs demo at /dropdown (folder menu has no dedicated page); port to house shadcn",
+      "note": "Retired alias — shared demo with heroui-dropdown; do not cite as a distinct pack",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "alias of heroui-dropdown — shared parent docs demo shot; cite heroui-dropdown instead"
     },
     {
       "id": "heroui-menu-item",
@@ -12803,11 +12819,13 @@
         "menu-item"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — docs demo at /dropdown (folder menu-item has no dedicated page); port to house shadcn",
+      "note": "Retired alias — shared demo with heroui-dropdown; do not cite as a distinct pack",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "alias of heroui-dropdown — shared parent docs demo shot; cite heroui-dropdown instead"
     },
     {
       "id": "heroui-menu-section",
@@ -12827,11 +12845,13 @@
         "menu-section"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — docs demo at /dropdown (folder menu-section has no dedicated page); port to house shadcn",
+      "note": "Retired alias — shared demo with heroui-dropdown; do not cite as a distinct pack",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "alias of heroui-dropdown — shared parent docs demo shot; cite heroui-dropdown instead"
     },
     {
       "id": "heroui-modal",
@@ -13095,11 +13115,13 @@
         "switch-group"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — docs demo at /switch (folder switch-group has no dedicated page); port to house shadcn",
+      "note": "Retired alias — shared demo with heroui-switch; do not cite as a distinct pack",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "alias of heroui-switch — shared parent docs demo shot; cite heroui-switch instead"
     },
     {
       "id": "heroui-tag",
@@ -13119,11 +13141,13 @@
         "tag"
       ],
       "scope": "component",
-      "note": "Kit-walk atom — docs demo at /chip (folder tag has no dedicated page); port to house shadcn",
+      "note": "Retired alias — shared demo with heroui-chip; do not cite as a distinct pack",
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "alias of heroui-chip — shared parent docs demo shot; cite heroui-chip instead"
     },
     {
       "id": "heroui-tag-group",
@@ -13724,7 +13748,7 @@
         "home"
       ],
       "scope": "page",
-      "note": "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+      "note": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested",
       "sources": [
         "heroui-next-app/app/page.tsx",
         "heroui-next-app/app/layout.tsx"
@@ -13736,7 +13760,9 @@
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested"
     },
     {
       "id": "figma-myna-assets-about",
@@ -14431,7 +14457,7 @@
         "heroui"
       ],
       "scope": "page",
-      "note": "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+      "note": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested",
       "sources": [
         "heroui-next-app/app/about/page.tsx",
         "heroui-next-app/app/layout.tsx"
@@ -14443,7 +14469,9 @@
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested"
     },
     {
       "id": "figma-heroui-cover",
@@ -15990,7 +16018,7 @@
         "heroui"
       ],
       "scope": "page",
-      "note": "Kit-walk page — HeroUI next-app route (page + app layout for pack source floor)",
+      "note": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested",
       "sources": [
         "heroui-next-app/app/pricing/page.tsx",
         "heroui-next-app/app/layout.tsx"
@@ -16002,7 +16030,9 @@
       "dna": {
         "family": "heroui",
         "density": "comfortable"
-      }
+      },
+      "selectable": false,
+      "retiredReason": "homepage clone theater — docs/home/about/pricing shared one heroui.com PNG; retired until page-true unique shots are harvested"
     },
     {
       "id": "shadcn-operate-decide",

@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Accordion | HeroUI",
     "headings": "Accordion\nUsage\nAnatomy\nExamples\nFrequently Asked Questions\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 400,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Accordion",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/accordion",
     "finalUrl": "https://heroui.com/en/docs/react/components/accordion",
     "capturedAt": "2026-10-09T17:20:08.381Z",
-    "shotSha256": "8d9383818a5a00dd3c0bb7542d6db6e0141e468f3264b681d5a9aee7db329f4b"
+    "shotSha256": "8d9383818a5a00dd3c0bb7542d6db6e0141e468f3264b681d5a9aee7db329f4b",
+    "sourcePath": "corpus/packs/heroui-accordion/source/accordion.tsx",
+    "sourceSha256": "8a25b709c3884d93a5c50be5027030c2b27f767becd2a73ea70bd845b4587d02"
   }
 }

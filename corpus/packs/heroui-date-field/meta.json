@@ -7,14 +7,16 @@
     "status": 200,
     "title": "DateField | HeroUI",
     "headings": "DateField\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nDateField.Group Styling\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 404,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "DateField",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/date-field",
     "finalUrl": "https://heroui.com/en/docs/react/components/date-field",
     "capturedAt": "2026-10-09T17:23:45.720Z",
-    "shotSha256": "f7238f0ed29da847652253604d0fa0c4c07ee79efe9bc012dd86c75fd23e293c"
+    "shotSha256": "f7238f0ed29da847652253604d0fa0c4c07ee79efe9bc012dd86c75fd23e293c",
+    "sourcePath": "corpus/packs/heroui-date-field/source/date-field.tsx",
+    "sourceSha256": "0ec8cf308f81441716ba41601e9367131b0b8267efc5c7d275d8afab6980f0bb"
   }
 }

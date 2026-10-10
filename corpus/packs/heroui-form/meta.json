@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Form | HeroUI",
     "headings": "Form\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Showcases\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 121,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Form",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/form",
     "finalUrl": "https://heroui.com/en/docs/react/components/form",
     "capturedAt": "2026-10-09T17:27:58.555Z",
-    "shotSha256": "84fade280546cacadcbaa13a1888af1f1db15936488f02774d976f6d9cb3ff0c"
+    "shotSha256": "84fade280546cacadcbaa13a1888af1f1db15936488f02774d976f6d9cb3ff0c",
+    "sourcePath": "corpus/packs/heroui-form/source/form.tsx",
+    "sourceSha256": "e4a4cbc119659185a9f18153868e3b698d2ef7c45504239005f922f279b600f4"
   }
 }

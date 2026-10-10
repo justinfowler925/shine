@@ -16,5 +16,9 @@
     "finalUrl": "https://heroui.com/",
     "capturedAt": "2026-10-09T17:33:12.312Z",
     "shotSha256": "907a961715e9c910c2fb167c6c98e4bc7b17bb3ef1c0c318ab8eaa5970204dcd"
+  },
+  "review": {
+    "status": "failed",
+    "reason": "homepage clone theater — shared heroui.com PNG sold as distinct page cite; retired"
   }
 }

@@ -7,14 +7,16 @@
     "status": 200,
     "title": "InputGroup | HeroUI",
     "headings": "InputGroup\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 314,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "InputGroup",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/input-group",
     "finalUrl": "https://heroui.com/en/docs/react/components/input-group",
     "capturedAt": "2026-10-09T17:28:10.847Z",
-    "shotSha256": "8b17e1947878ae44e3effe1eefbb14ed466f9c2d8b0ab4b0f47610bda16288e4"
+    "shotSha256": "8b17e1947878ae44e3effe1eefbb14ed466f9c2d8b0ab4b0f47610bda16288e4",
+    "sourcePath": "corpus/packs/heroui-input-group/source/input-group.tsx",
+    "sourceSha256": "8bee002dd718eac400c5376b537b08c911b0c8a855db7115f04e9ae616a9107a"
   }
 }

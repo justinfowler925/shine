@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Calendar | HeroUI",
     "headings": "CalendarUpdated\nUsage\nEvent date, October 2026\nOctober 2026\nAnatomy\nExamples\nEvent date, October 2026\nOctober 2026\nEvent date, October 2026\nOctober 2026\nEvent date, February 2025\nFebruary 2025\nEvent date, October 2026\nEvent date, December 2025\nDecember 2025\nAppointment date, October 2026\nOctober 2026\nAppointment date, October 2026\nOctober 2026\nEvent date, October 2026\nOctober 2026\nWeek view, October 4 to 10, 2026\nOctober 4 – 10, 2026\nDay view, October 7 to 11, 2026\nOctober 7 – 11, 2026\nEvent dates, January 1900\nJanuary 1900\nEvent date, June 2025\nJune 2025\nEvent date, October 2026\nOctober 2026\nEvent date, October 2026\nOctober 2026\nTrip dates, October to November 2026\nOctober 2026\nNovember 2026\nBooking date, October 2026\nOctober 2026\nEvent date, शक 1948 अश्विन\nCustomization\nCustom styled calendar, October 2026\nOctober 2026\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 1591,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "CalendarUpdated",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/calendar",
     "finalUrl": "https://heroui.com/en/docs/react/components/calendar",
     "capturedAt": "2026-10-09T17:23:03.625Z",
-    "shotSha256": "f5d936ff7e561939d6535c57b8e12d08762e8fa4914711ecbe8cabaa18ba24d7"
+    "shotSha256": "f5d936ff7e561939d6535c57b8e12d08762e8fa4914711ecbe8cabaa18ba24d7",
+    "sourcePath": "corpus/packs/heroui-calendar/source/calendar.tsx",
+    "sourceSha256": "5ec9f28f2c2c0162dfdf5c78c46eb829163e2e4f01a5fc20cd716d93feebd58e"
   }
 }

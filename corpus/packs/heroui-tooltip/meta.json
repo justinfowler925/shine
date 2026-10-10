@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Tooltip | HeroUI",
     "headings": "TooltipUpdated\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 123,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "TooltipUpdated",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/tooltip",
     "finalUrl": "https://heroui.com/en/docs/react/components/tooltip",
     "capturedAt": "2026-10-09T17:32:55.799Z",
-    "shotSha256": "2198859db619040dd7de5a50f22ac70cb928de750d14513958ccaf131e52e42e"
+    "shotSha256": "2198859db619040dd7de5a50f22ac70cb928de750d14513958ccaf131e52e42e",
+    "sourcePath": "corpus/packs/heroui-tooltip/source/tooltip.tsx",
+    "sourceSha256": "5fc03b4406ffdb67d268492c5e3c0572c61a18535b4f7e4aef6a1a3015f8d41a"
   }
 }

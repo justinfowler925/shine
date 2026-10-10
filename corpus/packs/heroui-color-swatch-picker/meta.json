@@ -7,14 +7,16 @@
     "status": 200,
     "title": "ColorSwatchPicker | HeroUI",
     "headings": "ColorSwatchPicker\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 549,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "ColorSwatchPicker",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/color-swatch-picker",
     "finalUrl": "https://heroui.com/en/docs/react/components/color-swatch-picker",
     "capturedAt": "2026-10-09T17:27:06.623Z",
-    "shotSha256": "96486d55c4fb88995cd9b0e9eb8e63cf0c4f74b38fb58158a83991f8cdb8742f"
+    "shotSha256": "96486d55c4fb88995cd9b0e9eb8e63cf0c4f74b38fb58158a83991f8cdb8742f",
+    "sourcePath": "corpus/packs/heroui-color-swatch-picker/source/color-swatch-picker.tsx",
+    "sourceSha256": "0dbbf28a5a23b73ee820410e184529b37629545971f7ac512c1ba826a802b386"
   }
 }

@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Dropdown | HeroUI",
     "headings": "Dropdown\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 168,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Dropdown",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/dropdown",
     "finalUrl": "https://heroui.com/en/docs/react/components/dropdown",
     "capturedAt": "2026-10-09T17:27:33.961Z",
-    "shotSha256": "318c8e097ff5c4e5462d764b00973675d2a5b7cdc0fd410fd191262f5e8f2a5b"
+    "shotSha256": "318c8e097ff5c4e5462d764b00973675d2a5b7cdc0fd410fd191262f5e8f2a5b",
+    "sourcePath": "corpus/packs/heroui-dropdown/source/dropdown.tsx",
+    "sourceSha256": "8408c2ae74023afebb7ebded22aee26c005441d089e8fce2c9019492e7dc5d61"
   }
 }

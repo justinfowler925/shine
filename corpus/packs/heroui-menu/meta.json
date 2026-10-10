@@ -16,5 +16,9 @@
     "finalUrl": "https://heroui.com/en/docs/react/components/dropdown",
     "capturedAt": "2026-10-09T17:37:07.807Z",
     "shotSha256": "318c8e097ff5c4e5462d764b00973675d2a5b7cdc0fd410fd191262f5e8f2a5b"
+  },
+  "review": {
+    "status": "failed",
+    "reason": "alias pack shares parent demo shot; cite primary instead (retired heroui-menu)"
   }
 }

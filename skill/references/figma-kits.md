@@ -1,9 +1,10 @@
-# Figma kits → Shine silhouettes (brand-agnostic)
+# Figma kits → Shine structure cites (brand-agnostic)
 
-Stop inventing accordion landfill. Justin's Figma libraries + Studio design-corpus
-already solved buttons, forms, queues, nav, and overlays. **Steal structure; paint
-with the house kit** (shadcn/Tailwind). Foreign runtimes (HeroUI build, Material
-chrome, Bootstrap CSS) stay out of consumers — see `docs/no-foreign-runtimes.md`.
+Stop inventing accordion landfill. Justin's Figma libraries + full-kit ingest packs
+already cover buttons, forms, queues, nav, and overlays. **Cite the pack shot +
+blueprint; paint with the house kit** (shadcn/Tailwind). Foreign runtimes (HeroUI
+build, Material chrome, Bootstrap CSS) stay out of consumers — see
+`docs/no-foreign-runtimes.md`.
 
 SSOT inventory + library keys: `knowledge/kits/figma-library-map.json`.
 

@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Surface | HeroUI",
     "headings": "Surface\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nContext API\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 106,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Surface",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/surface",
     "finalUrl": "https://heroui.com/en/docs/react/components/surface",
     "capturedAt": "2026-10-09T17:25:04.592Z",
-    "shotSha256": "c988ecf356ecf0aee195ffc6da155efcacf7fb462a3e3084afe5ddb826feb71c"
+    "shotSha256": "c988ecf356ecf0aee195ffc6da155efcacf7fb462a3e3084afe5ddb826feb71c",
+    "sourcePath": "corpus/packs/heroui-surface/source/surface.tsx",
+    "sourceSha256": "451081aa621ba85daf26ce966973953d54e2e28df7b20aa14bbcaea3d1e8294b"
   }
 }

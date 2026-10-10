@@ -16,5 +16,9 @@
     "finalUrl": "https://heroui.com/en/docs/react/components/chip",
     "capturedAt": "2026-10-09T17:37:34.170Z",
     "shotSha256": "62f3ee8e7ec5c3924470e62c235517d0ce9a8a9a6ab7a0d4bf85d2db2a4ff3a6"
+  },
+  "review": {
+    "status": "failed",
+    "reason": "alias pack shares parent demo shot; cite primary instead (retired heroui-tag)"
   }
 }
