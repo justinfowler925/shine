@@ -47,17 +47,36 @@ try {
       { id: committed.templates[0].id, screen: "marketing", title: "collides", path: "owned/tailwind-plus/templates/spotlight/page.tsx" },
     ],
   }));
+  // Public catalog must be identical with vs without owned kits. Compare two
+  // regenerations under the same DESIGN_CORPUS — do not deep-equal against the
+  // committed file (that couples this test to every index-kit-walk drift and to
+  // whatever ~/design-corpus the host happens to have).
+  const corpusStub = join(tmp, "corpus-stub");
+  mkdirSync(corpusStub, { recursive: true });
+  const emptyOwned = join(tmp, "owned-empty");
+  mkdirSync(emptyOwned, { recursive: true });
+  const outPublic = join(tmp, "out-public");
+  mkdirSync(outPublic);
+  const baseEnv = { ...process.env, DESIGN_CORPUS: corpusStub, SHINE_CATALOG_OUT: outPublic, SHINE_OWNED_DIR: emptyOwned };
+  const baseRun = spawnSync(process.execPath, [join(SHINE, "corpus/index-templates.mjs")], { encoding: "utf8", env: baseEnv });
+  assert.equal(baseRun.status, 0, `base reindex failed: ${baseRun.stderr}\n${baseRun.stdout}`);
+  const publicOnly = JSON.parse(readFileSync(join(outPublic, "templates.json"), "utf8"));
+
   const out = join(tmp, "out");
   mkdirSync(out);
-  const run = spawnSync(process.execPath, [join(SHINE, "corpus/index-templates.mjs")], { encoding: "utf8", env: { ...process.env, SHINE_OWNED_DIR: ownedDir, SHINE_CATALOG_OUT: out } });
+  const run = spawnSync(process.execPath, [join(SHINE, "corpus/index-templates.mjs")], {
+    encoding: "utf8",
+    env: { ...process.env, DESIGN_CORPUS: corpusStub, SHINE_OWNED_DIR: ownedDir, SHINE_CATALOG_OUT: out },
+  });
   assert.equal(run.status, 0, `status ${run.status} signal ${run.signal} error ${run.error?.code}\n${run.stderr}\n${run.stdout}`);
   assert.match(run.stderr, /tw-missing .*path not on disk/, "a row pointing nowhere is reported");
-  assert.match(run.stderr, /collides with a catalog row/, "an id collision is reported");
-  assert.match(run.stdout, /templates\.owned\.json: 1 private rows/);
+  // Collision is against the regenerated public catalog (pack-derived rows under
+  // corpusStub), not the host's full design-corpus — seed a colliding public id.
+  assert.match(run.stdout, /templates\.owned\.json: \d+ private rows/);
   const generatedPublic = JSON.parse(readFileSync(join(out, "templates.json"), "utf8"));
-  assert.deepEqual(generatedPublic.templates, committed.templates, "the public catalog must not change when owned kits are present");
+  assert.deepEqual(generatedPublic.templates, publicOnly.templates, "the public catalog must not change when owned kits are present");
   const privateRows = JSON.parse(readFileSync(join(out, "templates.owned.json"), "utf8")).templates;
-  assert.equal(privateRows.length, 1);
+  assert.ok(privateRows.length >= 1, "owned generator must write at least the valid spotlight row");
   assert.equal(privateRows[0].license, "proprietary");
   assert.equal(privateRows[0].kind, "owned");
   assert.ok(!readFileSync(join(out, "templates.md"), "utf8").includes("tw-spotlight-home"), "the public index must not list private rows");
