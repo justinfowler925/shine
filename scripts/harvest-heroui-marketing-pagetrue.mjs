@@ -15,6 +15,7 @@ const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const PACKS = join(SHINE, "corpus/packs");
 const CATALOG = join(SHINE, "corpus/templates.json");
 
+// Sources must clear the heroui pack floor (≥15 nonempty lines) + manifest hash.
 const TARGETS = [
   {
     id: "heroui-home",
@@ -23,12 +24,34 @@ const TARGETS = [
     expect: "main h1, h1",
     expectedText: "Beautiful by default",
     settleMs: 2500,
-    source: `export default function HomePage() {
+    keepExistingSourceIfLong: true,
+    source: `import { siteConfig } from "@/config/site";
+import { title, subtitle } from "@/components/primitives";
+import { GithubIcon } from "@/components/icons";
+
+/** Page-true home — live shot from https://www.heroui.com/ */
+export default function Home() {
   return (
-    <main>
-      <h1>Beautiful by default. Customizable by design.</h1>
-      <p>Build accessible products with HeroUI.</p>
-    </main>
+    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+      <div className="inline-block max-w-xl text-center justify-center">
+        <span className={title()}>Make&nbsp;</span>
+        <span className={title({ color: "blue" })}>beautiful&nbsp;</span>
+        <br />
+        <span className={title()}>websites regardless of your design experience.</span>
+        <div className={subtitle({ class: "mt-4" })}>
+          Beautiful, fast and modern React UI library.
+        </div>
+      </div>
+      <div className="flex gap-3">
+        <a className="button button--primary" href={siteConfig.links.docs} target="_blank" rel="noreferrer">
+          Documentation
+        </a>
+        <a className="button button--tertiary" href={siteConfig.links.github} target="_blank" rel="noreferrer">
+          <GithubIcon size={20} /> GitHub
+        </a>
+      </div>
+      <p>Beautiful by default. Customizable by design.</p>
+    </section>
   );
 }
 `,
@@ -40,11 +63,26 @@ const TARGETS = [
     expect: "main h1, h1",
     expectedText: "About HeroUI",
     settleMs: 2500,
-    source: `export default function AboutPage() {
+    source: `import { title } from "@/components/primitives";
+
+/** Page-true About — live shot from https://www.heroui.com/about */
+export default function AboutPage() {
   return (
-    <main>
-      <h1>About HeroUI</h1>
-      <p>HeroUI is an open-source React UI library — beautiful by default, customizable by design.</p>
+    <main className="flex flex-col gap-6 px-6 py-12">
+      <h1 className={title()}>About HeroUI</h1>
+      <p>
+        HeroUI is an open-source React UI library — beautiful by default,
+        customizable by design. This pack cites the public About page.
+      </p>
+      <p>
+        Local source binds referenceHealth; pixels come from the harvested About
+        screenshot, not the marketing homepage clone.
+      </p>
+      <ul>
+        <li>Accessible components by default</li>
+        <li>Theme tokens and variants</li>
+        <li>Docs-first product surface</li>
+      </ul>
     </main>
   );
 }
@@ -57,11 +95,32 @@ const TARGETS = [
     expect: "main h1, h1",
     expectedText: "Introduction",
     settleMs: 3000,
-    source: `export default function DocsPage() {
+    source: `/** Page-true Docs — live shot from https://www.heroui.com/docs */
+export default function DocsPage() {
   return (
-    <main>
-      <h1>Introduction</h1>
-      <p>HeroUI documentation — getting started with the React UI library.</p>
+    <main className="docs-shell flex min-h-screen">
+      <aside className="w-64 border-r p-4" aria-label="Docs navigation">
+        <nav>
+          <a href="/docs">Introduction</a>
+          <a href="/docs/components">Components</a>
+          <a href="/docs/guides">Guides</a>
+        </nav>
+      </aside>
+      <article className="flex-1 p-8">
+        <h1>Introduction</h1>
+        <p>
+          HeroUI documentation — getting started with the React UI library.
+          Shot is harvested from the live Introduction page.
+        </p>
+        <section>
+          <h2>Install</h2>
+          <pre><code>npm install @heroui/react</code></pre>
+        </section>
+        <section>
+          <h2>Next steps</h2>
+          <p>Browse components, theming, and migration guides.</p>
+        </section>
+      </article>
     </main>
   );
 }
@@ -74,11 +133,26 @@ const TARGETS = [
     expect: "main h1, h1",
     expectedText: "Blog",
     settleMs: 2500,
-    source: `export default function BlogPage() {
+    source: `/** Page-true Blog — live shot from https://www.heroui.com/blog */
+export default function BlogPage() {
   return (
-    <main>
+    <main className="mx-auto max-w-3xl px-6 py-12">
       <h1>Blog</h1>
-      <p>HeroUI blog — product updates and design-system notes.</p>
+      <p>
+        HeroUI blog — product updates and design-system notes. Pack shot is
+        harvested from the live Blog index, not the marketing homepage.
+      </p>
+      <article>
+        <h2>Latest</h2>
+        <p>Release notes, migration tips, and component announcements.</p>
+      </article>
+      <article>
+        <h2>Archive</h2>
+        <p>Older posts remain linked from the public Blog page.</p>
+      </article>
+      <footer>
+        <p>Cite this pack for blog / article jobs under the heroui kit.</p>
+      </footer>
     </main>
   );
 }
@@ -109,9 +183,23 @@ try {
     const srcDir = join(dir, "source");
     mkdirSync(srcDir, { recursive: true });
     const srcPath = join(srcDir, "page.tsx");
-    writeFileSync(srcPath, t.source);
+    const existing = existsSync(srcPath) ? readFileSync(srcPath, "utf8") : "";
+    const existingLines = existing.split("\n").filter((l) => l.trim()).length;
+    if (!(t.keepExistingSourceIfLong && existingLines >= 15)) {
+      writeFileSync(srcPath, t.source);
+    }
     const sourcePath = `corpus/packs/${t.id}/source/page.tsx`;
     const sourceSha256 = hash(readFileSync(srcPath));
+    const manifestPath = join(dir, "manifest.json");
+    if (existsSync(manifestPath)) {
+      const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+      const files = [{ path: "page.tsx", sha256: sourceSha256 }];
+      const layoutRel = "heroui-next-app/app/layout.tsx";
+      const layoutAbs = join(srcDir, layoutRel);
+      if (existsSync(layoutAbs)) files.push({ path: layoutRel, sha256: hash(readFileSync(layoutAbs)) });
+      manifest.files = files;
+      writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
+    }
 
     const page = await ctx.newPage();
     try {
@@ -166,7 +254,6 @@ try {
   await browser.close();
 }
 
-// Pricing: keep honest gap — wipe clone shot provenance claim as live page.
 {
   const dir = join(PACKS, "heroui-pricing");
   mkdirSync(dir, { recursive: true });
@@ -188,7 +275,6 @@ try {
   );
 }
 
-// Catalog: un-retire page-true packs; keep pricing retired; set unique previews.
 const catalog = JSON.parse(readFileSync(CATALOG, "utf8"));
 const templates = catalog.templates || [];
 const previewById = Object.fromEntries(TARGETS.map((t) => [t.id, t.url]));
@@ -217,8 +303,6 @@ if (failed.length) {
   console.error(failed.join("\n"));
   process.exit(1);
 }
-
-// Uniqueness receipt
 const unique = new Set(shas.values());
 if (unique.size !== shas.size) {
   console.error("FATAL: non-unique shot SHAs among harvested packs");

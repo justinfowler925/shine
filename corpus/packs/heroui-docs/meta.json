@@ -5,7 +5,7 @@
   "bytes": 404924,
   "capture": {
     "status": 200,
-    "title": "Introduction to HeroUI v3 – React UI Library",
+    "title": "Introduction to HeroUI v3 \u2013 React UI Library",
     "headings": "Introduction\nWhy HeroUI?\nA Living Library, Not Copy-Paste\nHeroUI Ecosystem\nFAQ\nGet Involved",
     "expectedSelector": "main h1, h1",
     "expectedCount": 1,
@@ -16,7 +16,7 @@
     "finalUrl": "https://heroui.com/en/docs/react/getting-started",
     "capturedAt": "2026-10-10T12:02:37.301Z",
     "sourcePath": "corpus/packs/heroui-docs/source/page.tsx",
-    "sourceSha256": "8ef7efab16c4cfc2ab699dd20da01c4f1f0f6a104e777412a810a77d53eb1925",
+    "sourceSha256": "9bce88526ad8cac67aae95a4b2cd7fe9505a9859f79f7de10fc79dccc1a71631",
     "shotSha256": "7d71a584475b6ab4a513cfd3b324d17b285c2402f54d6995b65cdbd421235ce0"
   }
 }
