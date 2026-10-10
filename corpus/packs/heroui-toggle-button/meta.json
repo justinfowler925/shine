@@ -7,14 +7,16 @@
     "status": 200,
     "title": "ToggleButton | HeroUI",
     "headings": "ToggleButton\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 121,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "ToggleButton",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/toggle-button",
     "finalUrl": "https://heroui.com/en/docs/react/components/toggle-button",
     "capturedAt": "2026-10-09T17:32:43.533Z",
-    "shotSha256": "b3a6bde464a39b1893bc2ae5a783473334835aae45b1afc1a1a8607b121f65f7"
+    "shotSha256": "b3a6bde464a39b1893bc2ae5a783473334835aae45b1afc1a1a8607b121f65f7",
+    "sourcePath": "corpus/packs/heroui-toggle-button/source/toggle-button.tsx",
+    "sourceSha256": "45720b79b5cecea3ad3e997ae6746bc61e083c1d56d6d89acc891b64c0357a42"
   }
 }

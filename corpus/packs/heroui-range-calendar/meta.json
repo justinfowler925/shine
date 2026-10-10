@@ -7,14 +7,16 @@
     "status": 200,
     "title": "RangeCalendar | HeroUI",
     "headings": "RangeCalendar\nUsage\nTrip dates, October 2026\nOctober 2026\nAnatomy\nExamples\nTrip dates, October 2026\nOctober 2026\nTrip dates, October 2026\nTrip dates, February 2025\nFebruary 2025\nTrip dates, December 2025\nDecember 2025\nTrip dates, October 2026\nOctober 2026\nTrip dates, October 2026\nOctober 2026\nTrip dates, October 2026\nOctober 2026\nTrip dates, October 2026\nOctober 2026\nTrip dates, October 4 to 10, 2026\nOctober 4 – 10, 2026\nTrip dates, October 7 to 11, 2026\nOctober 7 – 11, 2026\nTrip dates, October 2026\nOctober 2026\nTrip dates, October 2026\nOctober 2026\nTrip dates, October 2026\nOctober 2026\nTrip dates, June 2025\nJune 2025\nTrip dates, October 2026\nOctober 2026\nBooking range, October 2026\nOctober 2026\nTrip dates, October to November 2026\nOctober 2026\nNovember 2026\nTrip dates, शक 1948 अश्विन\nCustomization\nHotel stay, February 2025\nFebruary 2025\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 2346,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "RangeCalendar",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/range-calendar",
     "finalUrl": "https://heroui.com/en/docs/react/components/range-calendar",
     "capturedAt": "2026-10-09T17:24:38.372Z",
-    "shotSha256": "8bb28f672b0c76f3ac0a23fea61b38b624c7aaa2131d131c1bfb271dcf662788"
+    "shotSha256": "8bb28f672b0c76f3ac0a23fea61b38b624c7aaa2131d131c1bfb271dcf662788",
+    "sourcePath": "corpus/packs/heroui-range-calendar/source/range-calendar.tsx",
+    "sourceSha256": "186a5e26797be0b7431a6e7044e4da0971add6d2851787023c211b98713e0462"
   }
 }

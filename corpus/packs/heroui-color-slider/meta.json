@@ -7,14 +7,16 @@
     "status": 200,
     "title": "ColorSlider | HeroUI",
     "headings": "ColorSlider\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 189,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "ColorSlider",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/color-slider",
     "finalUrl": "https://heroui.com/en/docs/react/components/color-slider",
     "capturedAt": "2026-10-09T17:26:54.276Z",
-    "shotSha256": "785e07ba713c2a0b1f123e4a6d28363e8b3579183bf42f04fed09e3376227fbc"
+    "shotSha256": "785e07ba713c2a0b1f123e4a6d28363e8b3579183bf42f04fed09e3376227fbc",
+    "sourcePath": "corpus/packs/heroui-color-slider/source/color-slider.tsx",
+    "sourceSha256": "82c4c49292c292510bdfe6c81570db85b806b7cd3834952ae51cb3c3ba3c5fe7"
   }
 }

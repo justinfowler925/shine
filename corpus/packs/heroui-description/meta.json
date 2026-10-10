@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Description | HeroUI",
     "headings": "Description\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 98,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Description",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/description",
     "finalUrl": "https://heroui.com/en/docs/react/components/description",
     "capturedAt": "2026-10-09T17:27:19.326Z",
-    "shotSha256": "82354dbdb4da53e1d6e1c0772d1309e84be632652862be9a2c70f4b640fa3c51"
+    "shotSha256": "82354dbdb4da53e1d6e1c0772d1309e84be632652862be9a2c70f4b640fa3c51",
+    "sourcePath": "corpus/packs/heroui-description/source/description.tsx",
+    "sourceSha256": "99d6976a006d74cc36e3081545286ee2ae981d0166ab287d588f587151779a16"
   }
 }

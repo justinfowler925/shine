@@ -7,14 +7,16 @@
     "status": 200,
     "title": "DateRangePicker | HeroUI",
     "headings": "DateRangePicker\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 361,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "DateRangePicker",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/date-range-picker",
     "finalUrl": "https://heroui.com/en/docs/react/components/date-range-picker",
     "capturedAt": "2026-10-09T17:24:30.282Z",
-    "shotSha256": "7e1827cdc77a17348ba1cc175eab1a9950192c2d9981dcdd7ede6e78633b554a"
+    "shotSha256": "7e1827cdc77a17348ba1cc175eab1a9950192c2d9981dcdd7ede6e78633b554a",
+    "sourcePath": "corpus/packs/heroui-date-range-picker/source/date-range-picker.tsx",
+    "sourceSha256": "804c7184e8b871c2c0325bfa3f68f6aef75b1dc81dca499affb52e4391e856fc"
   }
 }

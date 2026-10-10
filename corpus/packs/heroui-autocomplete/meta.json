@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Autocomplete | HeroUI",
     "headings": "Autocomplete\nUsage\nAnatomy\nExamples\nAdvanced Examples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 418,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Autocomplete",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/autocomplete",
     "finalUrl": "https://heroui.com/en/docs/react/components/autocomplete",
     "capturedAt": "2026-10-09T17:25:17.875Z",
-    "shotSha256": "07ea95e5e4f039e4ceb899a03002d5ab9af8b0f20e95df65d4274909386e2bc6"
+    "shotSha256": "07ea95e5e4f039e4ceb899a03002d5ab9af8b0f20e95df65d4274909386e2bc6",
+    "sourcePath": "corpus/packs/heroui-autocomplete/source/autocomplete.tsx",
+    "sourceSha256": "eb3d99e0021da54437119eefb62bf1648711abb42f62a93c3049ae655a59b922"
   }
 }

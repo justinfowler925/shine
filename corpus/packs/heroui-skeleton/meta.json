@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Skeleton | HeroUI",
     "headings": "Skeleton\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 116,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Skeleton",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/skeleton",
     "finalUrl": "https://heroui.com/en/docs/react/components/skeleton",
     "capturedAt": "2026-10-09T17:22:30.501Z",
-    "shotSha256": "3702f0d252db33080dd7147d925f66ccb4456989331c8d9ce6d55a864a50bad0"
+    "shotSha256": "3702f0d252db33080dd7147d925f66ccb4456989331c8d9ce6d55a864a50bad0",
+    "sourcePath": "corpus/packs/heroui-skeleton/source/skeleton.tsx",
+    "sourceSha256": "48d076c8fc883d7465bda5615be8819c813152be744573620327c0a04defcedb"
   }
 }

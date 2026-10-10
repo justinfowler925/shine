@@ -27,6 +27,8 @@ try{
  const valid={status:200,title:'Broadcast demo',headings:'The broadcast',expectedSelector:'video',expectedCount:1,sourceUrl:'https://example.test/player',finalUrl:'https://example.test/player'};
  assert.equal(captureHealth(valid).status,'passed');
  for(const patch of [{status:404},{title:'Error 404: Page not found'},{title:'Just a moment...'},{expectedSelector:'main, h1'},{expectedCount:0}])assert.equal(captureHealth({...valid,...patch}).status,'failed');
+ // HeroUI universal theater selector must never pass as component proof.
+ assert.equal(captureHealth({...valid,expectedSelector:'main, [data-slot], button, h1, nav',expectedText:'HeroUI',expectedTextMatched:true}).status,'failed');
  // Intentional error-page demos (Myna 404 Block, Flowbite 404/500) must pass when
  // expectedText itself names the error code and matched on capture.
  assert.equal(captureHealth({status:200,title:'404 Block',headings:'404 Block',expectedSelector:'[data-figma-node], frame, svg',expectedCount:1,expectedText:'404 Block',expectedTextMatched:true,sourceUrl:'https://www.figma.com/design/x',finalUrl:'https://www.figma.com/design/x'}).status,'passed');

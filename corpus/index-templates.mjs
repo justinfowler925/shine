@@ -160,6 +160,11 @@ const HOUSE_KIT = "shadcn is the house source: both Clearspeed consumers are sha
 const RETIRED = {
   "mantine-appshell": `${HOUSE_KIT}; shadcn covers app-shell (shadcn-sidebar-07)`,
   "tremor-charts": "shadcn is the house kit; shadcn-chart-area-interactive is the chart-led page reference and the corpus carries 70 shadcn chart component packs alongside it",
+  // Belt-and-suspenders with index-kit-walk page/alias retirements (Sergii kit-dial).
+  "heroui-home": "homepage clone theater — shared heroui.com PNG; retired until page-true unique shots",
+  "heroui-about": "homepage clone theater — shared heroui.com PNG; retired until page-true unique shots",
+  "heroui-docs": "homepage clone theater — shared heroui.com PNG; retired until page-true unique shots",
+  "heroui-pricing": "homepage clone theater — shared heroui.com PNG; retired until page-true unique shots",
 };
 
 const templates = [];

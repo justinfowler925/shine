@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Toast | HeroUI",
     "headings": "ToastUpdated\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 172,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "ToastUpdated",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/toast",
     "finalUrl": "https://heroui.com/en/docs/react/components/toast",
     "capturedAt": "2026-10-09T17:32:37.242Z",
-    "shotSha256": "8b0dc01ad020b346194e054bdd1e8a293f4980ac8523bfd537d32286ac389f05"
+    "shotSha256": "8b0dc01ad020b346194e054bdd1e8a293f4980ac8523bfd537d32286ac389f05",
+    "sourcePath": "corpus/packs/heroui-toast/source/toast.tsx",
+    "sourceSha256": "dee13ad0dd3c9356882735a31e8bf8b850e895310d93b612ce2a2b2d030842dd"
   }
 }

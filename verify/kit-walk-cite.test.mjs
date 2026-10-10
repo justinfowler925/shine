@@ -1,18 +1,20 @@
 #!/usr/bin/env node
 /**
  * Kit-walk cite proof — HeroUI + Tailwind pages must be selectable and
- * retrievable for representative jobs (Justin absorb override 2026-10-09).
+ * retrievable for representative jobs. Doctor-gated against green theater:
+ * Shot paths, no clone packs, primary cite for critical jobs, named-kit gaps.
  */
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { readFileSync, existsSync } from "node:fs";
+import { referenceHealth } from "../corpus/reference-health.mjs";
 
 const SHINE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(readFileSync(join(SHINE, "corpus/templates.json"), "utf8"));
 const templates = catalog.templates || catalog;
-
 const byId = Object.fromEntries(templates.map((t) => [t.id, t]));
 
 assert.ok(byId["heroui-button"], "heroui-button atom missing from catalog");
@@ -27,32 +29,111 @@ assert.ok(byId["tailadmin-signup"], "tailadmin-signup missing");
 assert.ok(byId["heroui-table"], "heroui-table missing");
 assert.ok(byId["heroui-modal"], "heroui-modal missing");
 
-const herouiCount = templates.filter((t) => t.kit === "heroui" && t.selectable !== false).length;
-assert.ok(herouiCount >= 80, `expected ≥80 live HeroUI rows, got ${herouiCount}`);
+// Marketing clones + alias packs must not be selectable cite inventory.
+for (const id of ["heroui-home", "heroui-about", "heroui-docs", "heroui-pricing"]) {
+  assert.equal(byId[id]?.selectable, false, `${id} must be retired (homepage clone theater)`);
+}
+for (const id of [
+  "heroui-menu",
+  "heroui-menu-item",
+  "heroui-menu-section",
+  "heroui-list-box-item",
+  "heroui-list-box-section",
+  "heroui-tag",
+  "heroui-switch-group",
+]) {
+  assert.equal(byId[id]?.selectable, false, `${id} must be retired (alias shared-shot pack)`);
+}
+assert.equal(byId["heroui-empty-state"]?.selectable, false, "heroui-empty-state stays retired");
+assert.ok(
+  (byId["heroui-header"]?.jobs || []).includes("navbar"),
+  "heroui-header must carry navbar job for cite",
+);
+
+const herouiLive = templates.filter((t) => t.kit === "heroui" && t.selectable !== false);
+assert.ok(herouiLive.length >= 60, `expected ≥60 live HeroUI rows after retirements, got ${herouiLive.length}`);
+
+// No two selectable heroui packs may share a shot SHA (clone / alias landfill).
+const shaToIds = new Map();
+for (const row of herouiLive) {
+  const shot = join(SHINE, "corpus/packs", row.id, "shot.png");
+  if (!existsSync(shot)) continue;
+  const sha = createHash("sha256").update(readFileSync(shot)).digest("hex");
+  const list = shaToIds.get(sha) || [];
+  list.push(row.id);
+  shaToIds.set(sha, list);
+}
+const shared = [...shaToIds.entries()].filter(([, ids]) => ids.length > 1);
+assert.equal(
+  shared.length,
+  0,
+  `selectable HeroUI packs must not share shot SHA: ${shared.map(([sha, ids]) => `${sha.slice(0, 12)}→${ids.join(",")}`).join("; ")}`,
+);
+
+// Keeper health must bind real selector/text/source — not theater.
+const buttonHealth = referenceHealth(SHINE, "heroui-button");
+assert.equal(buttonHealth.status, "passed", `heroui-button health: ${buttonHealth.reasons?.join("; ")}`);
+for (const id of ["heroui-home", "heroui-pricing", "heroui-menu-item"]) {
+  const h = referenceHealth(SHINE, id);
+  assert.equal(h.status, "failed", `${id} health must fail (clone/alias theater), got ${h.status}`);
+}
 
 const mapPath = join(SHINE, "knowledge/kits/figma-library-map.json");
 assert.ok(existsSync(mapPath), "figma-library-map.json missing");
 const map = JSON.parse(readFileSync(mapPath, "utf8"));
 assert.ok(map.heroUiDesignFiles?.some((f) => f.fileKey === "GAn1SrbKJYiKqz9SmHHCRm"), "HeroUI prefer fileKey missing from map");
 
-function cite(job) {
-  const r = spawnSync(process.execPath, [join(SHINE, "corpus/cite.mjs"), job], {
+function cite(job, extraArgs = []) {
+  const r = spawnSync(process.execPath, [join(SHINE, "corpus/cite.mjs"), ...extraArgs, job], {
     encoding: "utf8",
     cwd: SHINE,
     env: process.env,
   });
-  return `${r.stdout || ""}\n${r.stderr || ""}`;
+  return { code: r.status ?? 1, out: `${r.stdout || ""}\n${r.stderr || ""}` };
 }
 
-const buttonOut = cite("heroui button");
-assert.match(buttonOut, /heroui-button/, `cite "heroui button" should hit heroui-button:\n${buttonOut.slice(0, 800)}`);
+function assertPrimaryCite(job, idPattern, label = job) {
+  const { code, out } = cite(job);
+  assert.equal(code, 0, `cite ${JSON.stringify(label)} exit ${code}:\n${out.slice(0, 800)}`);
+  assert.match(out, new RegExp(`Template: ${idPattern}`), `cite ${JSON.stringify(label)} primary Template:\n${out.slice(0, 800)}`);
+  assert.match(out, /Shot: \S+shot\.png/, `cite ${JSON.stringify(label)} must emit Shot path:\n${out.slice(0, 800)}`);
+  assert.doesNotMatch(out, /Shot: none/, `cite ${JSON.stringify(label)} must not be Shot:none`);
+}
 
-const twOut = cite("flowbite sign up");
-assert.match(twOut, /flowbite-sign-up/, `cite "flowbite sign up" should hit flowbite-sign-up:\n${twOut.slice(0, 800)}`);
+assertPrimaryCite("heroui button", "heroui-button");
+assertPrimaryCite("heroui navbar", "heroui-header");
+assertPrimaryCite("tailgrids forms", "figma-tailgrids-form-elements");
+assertPrimaryCite("flowbite sign up", "flowbite-sign-up");
 
 const dashOut = cite("tailwind dashboard");
-assert.match(dashOut, /flowbite-dashboard|tailadmin-dashboard|windmill-dashboard/, `cite "tailwind dashboard" should hit a Tailwind kit page:\n${dashOut.slice(0, 800)}`);
+assert.equal(dashOut.code, 0, dashOut.out.slice(0, 400));
+assert.match(
+  dashOut.out,
+  /Template: (flowbite-dashboard|tailadmin-dashboard|windmill-dashboard)/,
+  `cite "tailwind dashboard" should hit a Tailwind kit page:\n${dashOut.out.slice(0, 800)}`,
+);
+
+// Named-kit gaps — refuse silent steal.
+for (const [job, ban] of [
+  ["heroui empty state", /Template: shadcn-empty-icon/],
+  ["untitled dashboard", /Template: (tailadmin-dashboard|flowbite-dashboard)/],
+  ["untitled settings", /Template: flowbite-settings/],
+]) {
+  const { code, out } = cite(job);
+  assert.notEqual(code, 0, `cite ${JSON.stringify(job)} must gap (exit≠0), got ${code}`);
+  assert.doesNotMatch(out, ban, `cite ${JSON.stringify(job)} must not steal:\n${out.slice(0, 800)}`);
+  assert.match(out, /named|gap|nothing matches|no selectable/i, `cite ${JSON.stringify(job)} must explain gap:\n${out.slice(0, 800)}`);
+}
+
+// Clearspeed Operate edition still hits TW gold for decide jobs.
+const operate = cite("Decide Pursue/Review/Dismiss", ["--edition", "clearspeed-operate"]);
+assert.equal(operate.code, 0, operate.out.slice(0, 400));
+assert.match(
+  operate.out,
+  /Template: (tailadmin-tables|flowbite-|untitled-|tailadmin-)/,
+  `Operate decide must stay on TW gold:\n${operate.out.slice(0, 800)}`,
+);
 
 console.log(
-  `kit-walk-cite.test.mjs: ok (${herouiCount} live HeroUI rows · button+signup+dashboard cites)`,
+  `kit-walk-cite.test.mjs: ok (${herouiLive.length} live HeroUI · shot-unique · navbar/forms/named-kit gaps · Operate TW gold)`,
 );

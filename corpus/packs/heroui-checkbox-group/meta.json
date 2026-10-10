@@ -7,14 +7,16 @@
     "status": 200,
     "title": "CheckboxGroup | HeroUI",
     "headings": "CheckboxGroupUpdated\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 304,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "CheckboxGroupUpdated",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/checkbox-group",
     "finalUrl": "https://heroui.com/en/docs/react/components/checkbox-group",
     "capturedAt": "2026-10-09T17:25:43.074Z",
-    "shotSha256": "bd13ccb7756822593edadd941764c11bbc53840b855f12953e3d49293164edc8"
+    "shotSha256": "bd13ccb7756822593edadd941764c11bbc53840b855f12953e3d49293164edc8",
+    "sourcePath": "corpus/packs/heroui-checkbox-group/source/checkbox-group.tsx",
+    "sourceSha256": "c2d605849c464235b8a24f942fd22eef105ad338c8251a47f1b5c22a96da849c"
   }
 }

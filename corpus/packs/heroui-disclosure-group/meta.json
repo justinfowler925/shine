@@ -7,14 +7,16 @@
     "status": 200,
     "title": "DisclosureGroup | HeroUI",
     "headings": "DisclosureGroup\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 143,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "DisclosureGroup",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/disclosure-group",
     "finalUrl": "https://heroui.com/en/docs/react/components/disclosure-group",
     "capturedAt": "2026-10-09T17:20:34.438Z",
-    "shotSha256": "3c60962e07a208d537987954edab889346c2d1b86914be74fb28ef9ad878bd6c"
+    "shotSha256": "3c60962e07a208d537987954edab889346c2d1b86914be74fb28ef9ad878bd6c",
+    "sourcePath": "corpus/packs/heroui-disclosure-group/source/disclosure-group.tsx",
+    "sourceSha256": "c7257608af422c77c57f4cbb69a0c79dcfcc47b135107f7ba50f91a8f3ef4a34"
   }
 }

@@ -16,5 +16,9 @@
     "finalUrl": "https://heroui.com/en/docs/react/components/switch",
     "capturedAt": "2026-10-09T17:37:27.924Z",
     "shotSha256": "58a5d68d2f820dc71eeeb1b1add91938c38ba55ba0a588dbbd06c23e46c9e6ab"
+  },
+  "review": {
+    "status": "failed",
+    "reason": "alias pack shares parent demo shot; cite primary instead (retired heroui-switch-group)"
   }
 }

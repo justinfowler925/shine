@@ -7,14 +7,16 @@
     "status": 200,
     "title": "ColorField | HeroUI",
     "headings": "ColorField\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nColorField.Group Styling\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 256,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "ColorField",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/color-field",
     "finalUrl": "https://heroui.com/en/docs/react/components/color-field",
     "capturedAt": "2026-10-09T17:26:01.574Z",
-    "shotSha256": "e69361bac5e1dd0d666b3f5586179aefe785c1196ece29bd90e893fa7d1c6e00"
+    "shotSha256": "e69361bac5e1dd0d666b3f5586179aefe785c1196ece29bd90e893fa7d1c6e00",
+    "sourcePath": "corpus/packs/heroui-color-field/source/color-field.tsx",
+    "sourceSha256": "4082f06f27d90652a708b7da83cd9cc73af385756800cef8b764a75a66306529"
   }
 }

@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Label | HeroUI",
     "headings": "Label\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 99,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Label",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/label",
     "finalUrl": "https://heroui.com/en/docs/react/components/label",
     "capturedAt": "2026-10-09T17:28:29.274Z",
-    "shotSha256": "aeca7a207bd571d56335f574f5662e8a089db68d347f4ade51f8e8f5b09a255a"
+    "shotSha256": "aeca7a207bd571d56335f574f5662e8a089db68d347f4ade51f8e8f5b09a255a",
+    "sourcePath": "corpus/packs/heroui-label/source/label.tsx",
+    "sourceSha256": "42aeefc13897d867b2861c9f924af903bda6d75ef22c2a6454d043a9b71b3e09"
   }
 }

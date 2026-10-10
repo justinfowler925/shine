@@ -16,5 +16,9 @@
     "finalUrl": "https://heroui.com/en/docs/react/components/calendar",
     "capturedAt": "2026-10-09T17:36:48.135Z",
     "shotSha256": "f5d936ff7e561939d6535c57b8e12d08762e8fa4914711ecbe8cabaa18ba24d7"
+  },
+  "review": {
+    "status": "failed",
+    "reason": "alias pack shares parent demo shot; cite primary instead (retired heroui-calendar-year-picker)"
   }
 }

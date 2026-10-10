@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Input | HeroUI",
     "headings": "Input\nUsage\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, input, textarea",
     "expectedCount": 117,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Input",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/input",
     "finalUrl": "https://heroui.com/en/docs/react/components/input",
     "capturedAt": "2026-10-09T17:28:04.642Z",
-    "shotSha256": "352063b7002d658dfd93515f18ab7e87166c8bcde99d2f9931a31491e5be9689"
+    "shotSha256": "352063b7002d658dfd93515f18ab7e87166c8bcde99d2f9931a31491e5be9689",
+    "sourcePath": "corpus/packs/heroui-input/source/input.tsx",
+    "sourceSha256": "6844377889263a137f7212d95305d073e348e88b6127f2529c1dcf4ba6f3eae2"
   }
 }

@@ -7,14 +7,16 @@
     "status": 200,
     "title": "HeroUI Select – Accessible React Select Component",
     "headings": "Select\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 288,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Select",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/select",
     "finalUrl": "https://heroui.com/en/docs/react/components/select",
     "capturedAt": "2026-10-09T17:30:59.560Z",
-    "shotSha256": "8fd9ae0ccf49c96f4ad7b9e3d837fcc8c3299c1784a96f1afe583e89b3c48d92"
+    "shotSha256": "8fd9ae0ccf49c96f4ad7b9e3d837fcc8c3299c1784a96f1afe583e89b3c48d92",
+    "sourcePath": "corpus/packs/heroui-select/source/select.tsx",
+    "sourceSha256": "cee16c36c2884de910a2544ad701bc50fa9d8e7911ee907adbfd804eeacab484"
   }
 }

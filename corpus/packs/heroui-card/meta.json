@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Card | HeroUI",
     "headings": "Card\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nAccessibility\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 224,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Card",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/card",
     "finalUrl": "https://heroui.com/en/docs/react/components/card",
     "capturedAt": "2026-10-09T17:24:51.892Z",
-    "shotSha256": "dec36d39fdc11a8e87fdac0c644ce8ff311ff7d2c532caef1f7f4ef5dbceba9a"
+    "shotSha256": "dec36d39fdc11a8e87fdac0c644ce8ff311ff7d2c532caef1f7f4ef5dbceba9a",
+    "sourcePath": "corpus/packs/heroui-card/source/card.tsx",
+    "sourceSha256": "e68cfddd04247fd99ac49617ac1770f9691eb9723916764608572b3e40ddf2d0"
   }
 }

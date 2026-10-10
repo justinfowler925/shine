@@ -7,14 +7,16 @@
     "status": 200,
     "title": "SearchField | HeroUI",
     "headings": "SearchField\nUsage\nAnatomy\nExamples\nCustomization\nStyling Reference\nAPI Reference\nRelated Showcases\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 309,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "SearchField",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/search-field",
     "finalUrl": "https://heroui.com/en/docs/react/components/search-field",
     "capturedAt": "2026-10-09T17:30:53.240Z",
-    "shotSha256": "2a1506980e5742ee519ab0b5b9cbb43c5b6060a2e43fba5058922ee071a043db"
+    "shotSha256": "2a1506980e5742ee519ab0b5b9cbb43c5b6060a2e43fba5058922ee071a043db",
+    "sourcePath": "corpus/packs/heroui-search-field/source/search-field.tsx",
+    "sourceSha256": "185b69043294b0eae1e63ab797e17135e63429d257e20e4a27ee87e207d58df1"
   }
 }

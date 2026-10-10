@@ -7,14 +7,16 @@
     "status": 200,
     "title": "Typography | HeroUI",
     "headings": "Typography\nUsage\nBuild better interfaces\nTypography that stays semantic\nAnatomy\nExamples\nBuild better interfaces\nBuilt for the intelligence age\nDashboard\nProse title\nSection title\nH1 visual style, h2 semantic element\nCustomization\nStyling Reference\nAPI Reference\nRelated Components",
-    "expectedSelector": "main, [data-slot], button, h1, nav",
+    "expectedSelector": "main h1, article h1, h1",
     "expectedCount": 131,
-    "expectedText": "",
-    "expectedTextMatched": false,
+    "expectedText": "Typography",
+    "expectedTextMatched": true,
     "intentionalErrorPage": false,
     "sourceUrl": "https://www.heroui.com/docs/components/typography",
     "finalUrl": "https://heroui.com/en/docs/react/components/typography",
     "capturedAt": "2026-10-09T17:22:57.518Z",
-    "shotSha256": "9ee29eccc27e2949893ca369f3c570466cd4ff40662fa937692ff73fe2dbc038"
+    "shotSha256": "9ee29eccc27e2949893ca369f3c570466cd4ff40662fa937692ff73fe2dbc038",
+    "sourcePath": "corpus/packs/heroui-typography/source/typography.tsx",
+    "sourceSha256": "e5784ad7b53045c3b95d8ebbeca4df5d22dbd3ac709eea787741866a80dc7aba"
   }
 }
